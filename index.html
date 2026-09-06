@@ -3,307 +3,425 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carpet Phylogeny — Прототип</title>
+    <title>Carpet DB — Филогения орнамента</title>
     <style>
-        /* === СТИЛИ (CSS) === */
         :root {
-            --bg: #1e1e2f;
-            --card: #2a2a40;
-            --accent: #e9a23b;
-            --text: #eee;
-            --muted: #a0a0b0;
+            --bg: #121212;
+            --panel: #1e1e1e;
+            --border: #333;
+            --text: #e0e0e0;
+            --accent: #d4a373;
+            --accent2: #9b5de5;
             --flourishing: #2ecc71;
             --active: #f1c40f;
             --extinct: #e74c3c;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Georgia', 'Times New Roman', serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        header {
-            text-align: center;
-            padding: 30px 0;
-            border-bottom: 2px solid var(--accent);
-            margin-bottom: 30px;
-        }
-        h1 { font-size: 2.5em; color: var(--accent); margin-bottom: 10px; }
-        .subtitle { color: var(--muted); font-size: 1.1em; }
-        
-        .controls {
+            height: 100vh;
             display: flex;
-            gap: 15px;
-            margin: 30px 0;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        header {
+            padding: 15px 30px;
+            background: var(--panel);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
-            justify-content: center;
+            gap: 15px;
+            z-index: 10;
         }
-        .btn {
-            padding: 10px 20px;
-            border: 2px solid var(--accent);
+        .logo { font-size: 1.5em; color: var(--accent); font-weight: bold; letter-spacing: 2px; }
+        .tabs { display: flex; gap: 10px; }
+        .tab {
+            padding: 8px 20px;
             background: transparent;
+            border: 1px solid var(--border);
             color: var(--text);
             cursor: pointer;
-            border-radius: 25px;
+            font-family: 'Segoe UI', sans-serif;
             font-size: 14px;
-            transition: all 0.3s;
+            transition: 0.3s;
+            border-radius: 4px;
         }
-        .btn:hover, .btn.active { background: var(--accent); color: #1e1e2f; font-weight: bold; }
-        
-        .motif-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .motif-card {
-            background: var(--card);
-            border-radius: 12px;
+        .tab.active { background: var(--accent); color: #121212; border-color: var(--accent); font-weight: bold; }
+        .main-container { flex: 1; display: flex; position: relative; }
+
+        /* Стили для вкладки СЕТЬ */
+        #networkView, #generatorView { display: none; width: 100%; height: 100%; }
+        #networkView.active, #generatorView.active { display: flex; }
+        .node circle { fill: var(--accent); stroke: #fff; stroke-width: 1px; cursor: pointer; }
+        .node text { fill: #aaa; font-size: 12px; font-family: 'Segoe UI', sans-serif; }
+        .link { stroke: #555; stroke-opacity: 0.6; stroke-width: 2px; }
+        .link-label { fill: #777; font-size: 10px; }
+
+        /* Стили для вкладки КАРТОЧКИ */
+        #cardsView { display: none; padding: 30px; overflow-y: auto; width: 100%; }
+        #cardsView.active { display: block; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
             padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            position: relative;
-        }
-        .motif-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-        }
-        .status-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .status-flourishing { background: var(--flourishing); box-shadow: 0 0 10px var(--flourishing); }
-        .status-active { background: var(--active); box-shadow: 0 0 10px var(--active); }
-        .status-extinct { background: var(--extinct); box-shadow: 0 0 10px var(--extinct); }
-        
-        .motif-name { font-size: 1.4em; font-weight: bold; margin-bottom: 8px; color: var(--accent); }
-        .motif-info { font-size: 0.9em; color: var(--muted); }
-        
-        .detail-panel {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #1a1a2e;
-            border-radius: 15px;
-            padding: 30px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            z-index: 1000;
-            border: 2px solid var(--accent);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
-        }
-        .detail-panel.visible { display: block; }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: var(--text);
-            font-size: 1.5em;
-            cursor: pointer;
-        }
-        .evolution-item {
-            background: rgba(255,255,255,0.05);
-            padding: 12px;
-            margin: 10px 0;
             border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
         }
-        h3 { color: var(--accent); margin: 15px 0 10px; }
-        
-        @media (max-width: 768px) {
-            h1 { font-size: 1.8em; }
-        }
+        .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .status { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+
+        /* Стили для Генератора */
+        #generatorView { flex-direction: column; align-items: center; justify-content: center; background: #1a1a1a; }
+        .gen-controls { margin-top: 30px; display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+        .gen-group { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        input[type=range] { width: 200px; cursor: pointer; }
+        .label { font-family: 'Segoe UI', sans-serif; font-size: 12px; color: #aaa; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🧶 Carpet Phylogeny</h1>
-            <p class="subtitle">Эволюция ковровых мотивов: от древности до наших дней</p>
-        </header>
+    <header>
+        <div class="logo">CARPET PHYLOGENY</div>
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('network', this)">🌐 Сеть (Эволюция)</button>
+            <button class="tab" onclick="switchTab('cards', this)">📚 Каталог</button>
+            <button class="tab" onclick="switchTab('generator', this)">🎨 Генератор</button>
+        </div>
+    </header>
 
-        <div class="controls">
-            <button class="btn active" onclick="filterMotifs('all', this)">Все мотивы</button>
-            <button class="btn" onclick="filterMotifs('flourishing', this)">🟢 Процветающие</button>
-            <button class="btn" onclick="filterMotifs('active', this)">🟡 Активные</button>
-            <button class="btn" onclick="filterMotifs('extinct', this)">🔴 Вымершие</button>
+    <div class="main-container">
+        <!-- Вкладка 1: Сеть -->
+        <div id="networkView" class="active"></div>
+
+        <!-- Вкладка 2: Карточки -->
+        <div id="cardsView">
+            <div class="grid" id="cardsGrid"></div>
         </div>
 
-        <div class="motif-grid" id="motifGrid"></div>
-    </div>
-
-    <!-- Модальное окно -->
-    <div class="detail-panel" id="detailPanel">
-        <button class="close-btn" onclick="closeDetails()">✕</button>
-        <div id="detailContent"></div>
+        <!-- Вкладка 3: Генератор -->
+        <div id="generatorView">
+            <h2 style="color: var(--accent); margin-bottom: 20px;">Песочница: Генератор Гёля</h2>
+            <svg id="svgCanvas" width="400" height="400" style="background: #0d0d0d; border: 1px solid #333; border-radius: 8px;"></svg>
+            <div class="gen-controls">
+                <div class="gen-group">
+                    <span class="label">Сложность узора</span>
+                    <input type="range" min="1" max="5" value="3" id="complexity" oninput="drawGol()">
+                </div>
+                <div class="gen-group">
+                    <span class="label">Крюки (Туркменский стиль)</span>
+                    <input type="range" min="0" max="1" value="1" id="hooks" oninput="drawGol()">
+                </div>
+                <div class="gen-group">
+                    <span class="label">Вытянутость (Персидский стиль)</span>
+                    <input type="range" min="1" max="2" value="1" step="0.1" id="elongation" oninput="drawGol()">
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // === ДАННЫЕ (JSON в JS) ===
+        // ==================== ДАННЫЕ (АРХИВАРИУС) ====================
         const motifs = [
             {
-                id: "gol",
-                name: "Гёль (Ромб)",
-                type: "Геометрический",
-                firstAppearance: "-400",
-                origin: "Центральная Азия",
-                status: "active",
-                symbolism: ["Защита", "Плодородие", "Родовая тамга"],
-                evolution: [
-                    { name: "Туркменский гёль", period: "400 BC - наст.", status: "flourishing", changes: "Классическая форма с крюками" },
-                    { name: "Анатолийский гёль", period: "1100 - наст.", status: "active", changes: "Упрощение, убраны крюки" },
-                    { name: "Гёль с орлиными когтями", period: "1400-1700", status: "extinct", changes: "Зооморфные добавления (вымер)" }
+                id: "gol", name: "Гёль", origin: "Центральная Азия", first: "-400", status: "active",
+                symbolism: "Защита, Плодородие",
+                variants: [
+                    { name: "Туркменский гёль", period: "-400-наст.", status: "flourishing" },
+                    { name: "Анатолийский гёль", period: "1100-наст.", status: "active" },
+                    { name: "Гёль с когтями", period: "1400-1700", status: "extinct" }
                 ]
             },
             {
-                id: "palmette",
-                name: "Пальметта",
-                type: "Растительный",
-                firstAppearance: "-2000",
-                origin: "Месопотамия",
-                status: "flourishing",
-                symbolism: ["Жизнь", "Рай", "Божественность"],
-                evolution: [
-                    { name: "Ассирийская пальметта", period: "2000-600 BC", status: "extinct", changes: "Исходная форма" },
-                    { name: "Шах-Аббаси", period: "1550 - наст.", status: "flourishing", changes: "Полная флорализация" },
-                    { name: "Османская пальметта", period: "1500 - наст.", status: "active", changes: "Крупная, с золотом" }
+                id: "palmette", name: "Пальметта", origin: "Месопотамия", first: "-2000", status: "flourishing",
+                symbolism: "Рай, Жизнь",
+                variants: [
+                    { name: "Ассирийская", period: "-2000--600", status: "extinct" },
+                    { name: "Шах-Аббаси", period: "1550-наст.", status: "flourishing" },
+                    { name: "Османская", period: "1500-наст.", status: "active" }
                 ]
             },
             {
-                id: "mihrab",
-                name: "Михраб",
-                type: "Архитектурный",
-                firstAppearance: "700",
-                origin: "Аравия",
-                status: "flourishing",
-                symbolism: ["Молитва", "Врата рая"],
-                evolution: [
-                    { name: "Ранний михраб", period: "700-1000", status: "extinct", changes: "Простая арка" },
-                    { name: "Персидский михраб", period: "1300 - наст.", status: "flourishing", changes: "Добавлены цветы и лампа" },
-                    { name: "Кавказский михраб", period: "1600 - наст.", status: "active", changes: "Ступенчатая геометрия" }
+                id: "mihrab", name: "Михраб", origin: "Аравия", first: "700", status: "flourishing",
+                symbolism: "Молитва, Врата",
+                variants: [
+                    { name: "Ранний", period: "700-1000", status: "extinct" },
+                    { name: "Персидский", period: "1300-наст.", status: "flourishing" },
+                    { name: "Кавказский", period: "1600-наст.", status: "active" }
                 ]
             },
             {
-                id: "boteh",
-                name: "Ботех (Пейсли)",
-                type: "Растительный",
-                firstAppearance: "224",
-                origin: "Персия",
-                status: "flourishing",
-                symbolism: ["Кипарис", "Вечность", "Пламя"],
-                evolution: [
-                    { name: "Сасанидский ботех", period: "224-651", status: "extinct", changes: "Прямой кипарис" },
-                    { name: "Кашмирский ботех", period: "1700 - наст.", status: "flourishing", changes: "Изогнутый, плотный" },
-                    { name: "Европейский пейсли", period: "1800 - наст.", status: "flourishing", changes: "Индустриальный дизайн" }
+                id: "boteh", name: "Ботех", origin: "Персия", first: "224", status: "flourishing",
+                symbolism: "Кипарис, Пламя",
+                variants: [
+                    { name: "Сасанидский", period: "224-651", status: "extinct" },
+                    { name: "Кашмирский", period: "1700-наст.", status: "flourishing" }
                 ]
             },
             {
-                id: "dragon",
-                name: "Дракон",
-                type: "Зооморфный",
-                firstAppearance: "-2000",
-                origin: "Китай",
-                status: "extinct",
-                symbolism: ["Власть", "Император", "Удача"],
-                evolution: [
-                    { name: "Китайский дракон", period: "2000 BC - наст.", status: "flourishing", changes: "Исходная форма" },
-                    { name: "Монгольский дракон", period: "1200-1400", status: "extinct", changes: "Более агрессивный стиль" },
-                    { name: "Персидский дракон", period: "1300-1700", status: "extinct", changes: "Превратился в цветочный орнамент" }
+                id: "dragon", name: "Дракон", origin: "Китай", first: "-2000", status: "extinct",
+                symbolism: "Власть, Удача",
+                variants: [
+                    { name: "Китайский", period: "-2000-наст.", status: "flourishing" },
+                    { name: "Персидский", period: "1300-1700", status: "extinct" }
                 ]
             },
             {
-                id: "tree",
-                name: "Древо жизни",
-                type: "Символический",
-                firstAppearance: "-3000",
-                origin: "Месопотамия",
-                status: "active",
-                symbolism: ["Жизнь", "Плодородие", "Связь миров"],
-                evolution: [
-                    { name: "Шумерское древо", period: "3000-500 BC", status: "extinct", changes: "Стилизованное" },
-                    { name: "Персидское древо", period: "1500 - наст.", status: "flourishing", changes: "Растительное, с птицами" },
-                    { name: "Анатолийское древо", period: "1400 - наст.", status: "active", changes: "Геометрическое, в арке" }
+                id: "tree", name: "Древо жизни", origin: "Месопотамия", first: "-3000", status: "active",
+                symbolism: "Плодородие, Связь",
+                variants: [
+                    { name: "Шумерское", period: "-3000--500", status: "extinct" },
+                    { name: "Персидское", period: "1500-наст.", status: "flourishing" }
                 ]
             }
         ];
 
-        // === ЛОГИКА ===
-        function filterMotifs(filter, btn) {
-            // Обновляем активную кнопку
-            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+        // Связи для графа (Ноды -> Линки)
+        const graphData = {
+            nodes: [
+                { id: "china", label: "Китай", type: "region" },
+                { id: "persia", label: "Персия", type: "region" },
+                { id: "central_asia", label: "Ц. Азия", type: "region" },
+                { id: "anatolia", label: "Анатолия", type: "region" },
+                { id: "mesopotamia", label: "Месопотамия", type: "region" },
+                { id: "arabia", label: "Аравия", type: "region" },
+                { id: "gol", label: "Гёль", type: "motif", status: "active" },
+                { id: "palmette", label: "Пальметта", type: "motif", status: "flourishing" },
+                { id: "mihrab", label: "Михраб", type: "motif", status: "flourishing" },
+                { id: "boteh", label: "Ботех", type: "motif", status: "flourishing" },
+                { id: "dragon", label: "Дракон", type: "motif", status: "extinct" },
+                { id: "tree", label: "Древо", type: "motif", status: "active" }
+            ],
+            links: [
+                { source: "china", target: "persia", motif: "dragon", label: "Монголы 13в" },
+                { source: "central_asia", target: "anatolia", motif: "gol", label: "Сельджуки 11в" },
+                { source: "mesopotamia", target: "persia", motif: "palmette", label: "Культ. обмен" },
+                { source: "arabia", target: "persia", motif: "mihrab", label: "Ислам 7в" },
+                { source: "persia", target: "anatolia", motif: "boteh", label: "Османы 16в" },
+                { source: "mesopotamia", target: "anatolia", motif: "tree", label: "Миграции" }
+            ]
+        };
+
+        // ==================== ЛОГИКА ВКЛАДОК ====================
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             btn.classList.add('active');
             
-            // Фильтруем
-            const filtered = filter === 'all' ? motifs : motifs.filter(m => m.status === filter);
-            renderMotifs(filtered);
+            ['networkView', 'cardsView', 'generatorView'].forEach(id => document.getElementById(id).classList.remove('active'));
+            
+            if (tab === 'network') {
+                document.getElementById('networkView').classList.add('active');
+                initNetwork();
+            } else if (tab === 'cards') {
+                document.getElementById('cardsView').classList.add('active');
+                initCards();
+            } else if (tab === 'generator') {
+                document.getElementById('generatorView').classList.add('active');
+                drawGol();
+            }
         }
 
-        function renderMotifs(list) {
-            const grid = document.getElementById('motifGrid');
+        // ==================== 1. ВИЗУАЛИЗАЦИЯ СЕТИ ====================
+        function initNetwork() {
+            const container = document.getElementById('networkView');
+            container.innerHTML = '';
+            
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", width);
+            svg.setAttribute("height", height);
+            svg.style.background = "radial-gradient(circle, #1a1a1a 0%, #0d0d0d 100%)";
+            container.appendChild(svg);
+
+            // Позиции (вручную для простоты)
+            const positions = {
+                china: {x: width*0.85, y: height*0.2},
+                persia: {x: width*0.6, y: height*0.4},
+                central_asia: {x: width*0.7, y: height*0.2},
+                anatolia: {x: width*0.3, y: height*0.3},
+                mesopotamia: {x: width*0.5, y: height*0.65},
+                arabia: {x: width*0.7, y: height*0.75},
+                gol: {x: width*0.45, y: height*0.2},
+                palmette: {x: width*0.5, y: height*0.5},
+                mihrab: {x: width*0.6, y: height*0.6},
+                boteh: {x: width*0.35, y: height*0.5},
+                dragon: {x: width*0.75, y: height*0.15},
+                tree: {x: width*0.4, y: height*0.7}
+            };
+
+            // Линки
+            graphData.links.forEach(link => {
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", positions[link.source].x);
+                line.setAttribute("y1", positions[link.source].y);
+                line.setAttribute("x2", positions[link.target].x);
+                line.setAttribute("y2", positions[link.target].y);
+                line.setAttribute("class", "link");
+                line.style.stroke = "#555";
+                svg.appendChild(line);
+            });
+
+            // Ноды
+            graphData.nodes.forEach(node => {
+                const pos = positions[node.id];
+                const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                group.setAttribute("transform", `translate(${pos.x}, ${pos.y})`);
+                
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("r", node.type === 'region' ? 20 : 12);
+                circle.setAttribute("fill", getNodeColor(node));
+                circle.setAttribute("stroke", "#fff");
+                circle.style.cursor = "pointer";
+                
+                circle.addEventListener('click', () => {
+                    if (node.type === 'motif') {
+                        const found = motifs.find(m => m.id === node.id);
+                        if (found) showDetails(found);
+                    }
+                });
+
+                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                text.setAttribute("text-anchor", "middle");
+                text.setAttribute("dy", node.type === 'region' ? 35 : 25);
+                text.textContent = node.label;
+                text.setAttribute("fill", "#aaa");
+
+                group.appendChild(circle);
+                group.appendChild(text);
+                svg.appendChild(group);
+            });
+        }
+
+        function getNodeColor(node) {
+            if (node.type === 'region') return '#555';
+            if (node.status === 'flourishing') return '#2ecc71';
+            if (node.status === 'active') return '#f1c40f';
+            if (node.status === 'extinct') return '#e74c3c';
+            return '#d4a373';
+        }
+
+        // ==================== 2. КАРТОЧКИ ====================
+        function initCards() {
+            const grid = document.getElementById('cardsGrid');
             grid.innerHTML = '';
             
-            list.forEach(motif => {
+            motifs.forEach(motif => {
                 const card = document.createElement('div');
-                card.className = 'motif-card';
+                card.className = 'card';
                 card.onclick = () => showDetails(motif);
                 
                 card.innerHTML = `
-                    <div class="status-badge status-${motif.status}"></div>
-                    <div class="motif-name">${motif.name}</div>
-                    <div class="motif-info">
-                        <p><strong>Происхождение:</strong> ${motif.origin}</p>
-                        <p><strong>Появление:</strong> ${motif.firstAppearance} год</p>
-                        <p><strong>Символы:</strong> ${motif.symbolism.join(', ')}</p>
-                    </div>
+                    <h3 style="color: var(--accent);">${motif.name}</h3>
+                    <p><span class="status" style="background: ${getStatusColor(motif.status)}"></span> ${getStatusText(motif.status)}</p>
+                    <p><strong>Регион:</strong> ${motif.origin}</p>
+                    <p><strong>Появление:</strong> ${motif.first} г.</p>
+                    <p><strong>Смысл:</strong> ${motif.symbolism}</p>
                 `;
                 grid.appendChild(card);
             });
         }
 
+        function getStatusColor(status) {
+            return { flourishing: '#2ecc71', active: '#f1c40f', extinct: '#e74c3c' }[status] || '#fff';
+        }
+        function getStatusText(status) {
+            return { flourishing: 'Процветает', active: 'Активен', extinct: 'Вымер' }[status] || status;
+        }
+
         function showDetails(motif) {
-            const panel = document.getElementById('detailPanel');
-            const content = document.getElementById('detailContent');
-            panel.classList.add('visible');
+            alert(`${motif.name}\nПроисхождение: ${motif.origin}\nПервое появление: ${motif.first}\nСимволика: ${motif.symbolism}\n\nВариации:\n${motif.variants.map(v => `- ${v.name} (${v.period}) [${getStatusText(v.status)}]`).join('\n')}`);
+        }
+
+        // ==================== 3. ГЕНЕРАТОР УЗОРОВ (SVG) ====================
+        function drawGol() {
+            const svg = document.getElementById('svgCanvas');
+            const complexity = parseInt(document.getElementById('complexity').value);
+            const hooks = document.getElementById('hooks').value === '1';
+            const elongation = parseFloat(document.getElementById('elongation').value);
             
-            content.innerHTML = `
-                <h2 style="color: #e9a23b;">${motif.name}</h2>
-                <p><strong>Тип:</strong> ${motif.type}</p>
-                <p><strong>Происхождение:</strong> ${motif.origin}</p>
-                <p><strong>Первое появление:</strong> ${motif.firstAppearance} год</p>
-                
-                <h3>🔄 Эволюция</h3>
-                ${motif.evolution.map(ev => `
-                    <div class="evolution-item">
-                        <h4>
-                            <span class="status-badge status-${ev.status}" style="position: static; display: inline-block; margin-right: 10px;"></span>
-                            ${ev.name}
-                        </h4>
-                        <p><strong>Период:</strong> ${ev.period}</p>
-                        <p><strong>Изменения:</strong> ${ev.changes}</p>
-                    </div>
-                `).join('')}
-            `;
+            svg.innerHTML = '';
+            
+            const cx = 200, cy = 200;
+            const baseSize = 100;
+            
+            // Рисуем ромб (основной элемент)
+            const points = [];
+            const steps = 4; // ромб
+            for (let i = 0; i < steps; i++) {
+                const angle = (Math.PI / 2) * i - Math.PI / 4;
+                const x = cx + Math.cos(angle) * baseSize * elongation;
+                const y = cy + Math.sin(angle) * baseSize;
+                points.push(`${x},${y}`);
+            }
+            
+            const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+            polygon.setAttribute("points", points.join(' '));
+            polygon.setAttribute("fill", "none");
+            polygon.setAttribute("stroke", "#d4a373");
+            polygon.setAttribute("stroke-width", "3");
+            svg.appendChild(polygon);
+            
+            // Внутренние уровни (сложность)
+            for (let c = 1; c <= complexity; c++) {
+                const scale = 1 - (c * 0.15);
+                const innerPoints = [];
+                for (let i = 0; i < steps; i++) {
+                    const angle = (Math.PI / 2) * i - Math.PI / 4;
+                    const x = cx + Math.cos(angle) * baseSize * scale * elongation;
+                    const y = cy + Math.sin(angle) * baseSize * scale;
+                    innerPoints.push(`${x},${y}`);
+                }
+                const innerPoly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+                innerPoly.setAttribute("points", innerPoints.join(' '));
+                innerPoly.setAttribute("fill", "none");
+                innerPoly.setAttribute("stroke", "#9b5de5");
+                innerPoly.setAttribute("stroke-width", "1.5");
+                svg.appendChild(innerPoly);
+            }
+            
+            // Крюки (Туркменский стиль)
+            if (hooks) {
+                const hookLength = 20;
+                const hookAngles = [Math.PI/4, 3*Math.PI/4, 5*Math.PI/4, 7*Math.PI/4];
+                hookAngles.forEach(angle => {
+                    const x1 = cx + Math.cos(angle) * baseSize * elongation;
+                    const y1 = cy + Math.sin(angle) * baseSize;
+                    const x2 = cx + Math.cos(angle) * (baseSize + hookLength) * elongation;
+                    const y2 = cy + Math.sin(angle) * (baseSize + hookLength);
+                    
+                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    line.setAttribute("x1", x1);
+                    line.setAttribute("y1", y1);
+                    line.setAttribute("x2", x2);
+                    line.setAttribute("y2", y2);
+                    line.setAttribute("stroke", "#e74c3c");
+                    line.setAttribute("stroke-width", "2");
+                    svg.appendChild(line);
+                    
+                    // Крюк вбок
+                    const x3 = x2 + 10;
+                    const line2 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    line2.setAttribute("x1", x2);
+                    line2.setAttribute("y1", y2);
+                    line2.setAttribute("x2", x3);
+                    line2.setAttribute("y2", y2);
+                    line2.setAttribute("stroke", "#e74c3c");
+                    line2.setAttribute("stroke-width", "2");
+                    svg.appendChild(line2);
+                });
+            }
         }
 
-        function closeDetails() {
-            document.getElementById('detailPanel').classList.remove('visible');
-        }
-
-        // Запуск при загрузке
-        renderMotifs(motifs);
+        // Запуск
+        window.onload = function() {
+            initNetwork();
+        };
     </script>
 </body>
 </html>
