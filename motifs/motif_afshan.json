@@ -1,0 +1,59 @@
+{
+  "id": "motif_afshan",
+  "kerimov_id": "KB-JB-001",
+  "school": "tabriz",
+  "subgroup": "islimi_khatai",
+  "names": {
+    "az": [
+      "Əfşan",
+      "Əfşan naxışı",
+      "Əfşan-Xətai"
+    ],
+    "ru": [
+      "Афшан",
+      "Рассыпной узор",
+      "Узор Афшан"
+    ],
+    "en": [
+      "Afshan",
+      "Afshan design",
+      "Scattered pattern"
+    ]
+  },
+  "description": "Композиция бесконечной раппортной сетки, образуемая волнистыми и спиралевидными ветвями (ислими), украшенными крупными пальметтами (хатаи), розетками «Шах-Аббаси» и зубчатыми листьями. Мотив характеризуется отсутствием центрального медальона и равномерным «рассыпанным» распределением элементов по всему полю.",
+  "synonyms": [
+    "Afshan-Khatai",
+    "Overall Floral Scroll",
+    "Рассыпной узор"
+  ],
+  "origin": [
+    {
+      "version": "Мотив сформировался в придворных мануфактурах Сефевидского государства в Тебризе в XVI веке под влиянием искусства миниатюры и каллиграфии. Название происходит от персидско-азербайджанского слова 'afshan' (рассыпанный, рассеянный).",
+      "conf": "high"
+    }
+  ],
+  "contains_elements": [
+    "elem_khatai_palmette",
+    "elem_islimi_scroll",
+    "elem_shah_abbas_flower",
+    "elem_serrated_leaf"
+  ],
+  "related_motifs": [
+    "motif_islimi",
+    "motif_khatai",
+    "motif_shah_abbasi"
+  ],
+  "evolution": {
+    "16-17th": "Сложный тонко вырисованный спиралевидный узор придворных Тебризских и Исфаханских ковров с высоким числом узлов и изящными пальметтами.",
+    "18th": "Постепенная геометризация мотива при его распространении в городских и деревенских центрах ткачества Северо-Западного Ирана и Кавказа.",
+    "19th": "Закрепление каноничной раппортной сетки, четкое разделение на тебризскую (ажурно-растительную) и губинско-карабахскую (более геометризованную) интерпретации."
+  },
+  "attribution_conflict": null,
+  "sources": [
+    "Керимов Л. Азербайджанский ковер. Том II, III. Баку: Гянджлик, 1983.",
+    "Eiland M., Eiland M. Oriental Carpets: A Complete Guide. Boston, 1998.",
+    "Pope A. U. Survey of Persian Art. Oxford University Press, 1938.",
+    "Victoria and Albert Museum Collections Research Database.",
+    "The Metropolitan Museum of Art Collection Online."
+  ]
+}
