@@ -9,9 +9,16 @@
 - `/schools` — школы (Губа-Ширван, Карабах и т.д.)
 
 ## API (через CDN)
-Все файлы доступны через jsDelivr CDN:
-](https://cdn.jsdelivr.net/gh/YOUR_USERNAME/kovrovoe-dnk@main/index.json
-https://cdn.jsdelivr.net/gh/YOUR_USERNAME/kovrovoe-dnk@main/motifs/motif_gasymushagy.json)
+
+Все JSON-файлы доступны через jsDelivr CDN:
+
+\`\`\`
+https://cdn.jsdelivr.net/gh/22adolgikh-pixel/carpevo@main/index.json
+https://cdn.jsdelivr.net/gh/22adolgikh-pixel/carpevo@main/motifs/[filename].json
+https://cdn.jsdelivr.net/gh/22adolgikh-pixel/carpevo@main/elements/[filename].json
+\`\`\`
+
+CDN кэширует файлы. Обновления появляются через 1-2 минуты после push.
 
 ## Лицензия
 MIT
