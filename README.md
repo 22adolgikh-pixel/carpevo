@@ -1,4 +1,4 @@
-# Ковровое ДНК (Carpet DNA)
+[# Ковровое ДНК (Carpet DNA)
 
 База данных ковровых мотивов Кавказа на основе классификации Лятифа Керимова.
 
@@ -10,3 +10,8 @@
 
 ## API (через CDN)
 Все файлы доступны через jsDelivr CDN:
+](https://cdn.jsdelivr.net/gh/YOUR_USERNAME/kovrovoe-dnk@main/index.json
+https://cdn.jsdelivr.net/gh/YOUR_USERNAME/kovrovoe-dnk@main/motifs/motif_gasymushagy.json)
+
+## Лицензия
+MIT
