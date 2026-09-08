@@ -14,5 +14,7 @@
   "provenance": "Musée du Louvre, Paris",
   "inv_number": "OA 7595",
   "reliability": "high",
-  "source_url": "https://collections.louvre.fr/en/ark:/53355/cl010118534"
+  "source_url": "https://collections.louvre.fr/en/ark:/53355/cl010118534",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
