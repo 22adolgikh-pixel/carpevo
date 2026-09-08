@@ -14,5 +14,7 @@
   "provenance": "Metropolitan Museum of Art, New York",
   "inv_number": "MET-1984.423.1",
   "reliability": "high",
-  "source_url": "https://www.metmuseum.org/art/collection/search/452109"
+  "source_url": "https://www.metmuseum.org/art/collection/search/452109",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
