@@ -14,5 +14,7 @@
   "provenance": "Российский этнографический музей, Санкт-Петербург",
   "inv_number": "REM-8762-12",
   "reliability": "high",
-  "source_url": "https://ethnomuseum.ru"
+  "source_url": "https://ethnomuseum.ru",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
