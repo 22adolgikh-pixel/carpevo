@@ -14,5 +14,7 @@
   "provenance": "Музей изящных искусств, Бостон",
   "inv_number": "MFA-77.241",
   "reliability": "high",
-  "source_url": "https://mfa.org"
+  "source_url": "https://mfa.org",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
