@@ -14,5 +14,7 @@
   "provenance": "Национальный музей искусств Азербайджана",
   "inv_number": "NMIA-C-342",
   "reliability": "high",
-  "source_url": "https://nationalmuseum.az"
+  "source_url": "https://nationalmuseum.az",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
