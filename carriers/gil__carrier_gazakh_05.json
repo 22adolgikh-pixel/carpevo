@@ -14,5 +14,7 @@
   "provenance": "Textile Museum, Washington D.C.",
   "inv_number": "R36.2.1",
   "reliability": "high",
-  "source_url": "https://museum.gwu.edu/collection"
+  "source_url": "https://museum.gwu.edu/collection",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
