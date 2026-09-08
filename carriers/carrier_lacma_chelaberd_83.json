@@ -14,5 +14,7 @@
   "provenance": "Los Angeles County Museum of Art (LACMA)",
   "inv_number": "M.83.220.1",
   "reliability": "high",
-  "source_url": "https://collections.lacma.org"
+  "source_url": "https://collections.lacma.org",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
