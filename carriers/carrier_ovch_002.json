@@ -14,5 +14,7 @@
   "provenance": "Museo Poldi Pezzoli, Milan",
   "inv_number": "Inv. 1542",
   "reliability": "high",
-  "source_url": "https://museopoldipezzoli.it/"
+  "source_url": "https://museopoldipezzoli.it/",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
