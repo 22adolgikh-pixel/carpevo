@@ -14,5 +14,7 @@
   "provenance": "Частная коллекция (представлен на выставке ковров Карабаха)",
   "inv_number": "COLL-KAR-089",
   "reliability": "mid",
-  "source_url": "https://azcarpetmuseum.az"
+  "source_url": "https://azcarpetmuseum.az",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
