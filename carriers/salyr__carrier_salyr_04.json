@@ -14,5 +14,7 @@
   "provenance": "Частная коллекция (Sotheby's Auction)",
   "inv_number": "SOTH-1998-LOT42",
   "reliability": "mid",
-  "source_url": "https://www.sothebys.com/en/auctions/ecatalogue/1998/lot42"
+  "source_url": "https://www.sothebys.com/en/auctions/ecatalogue/1998/lot42",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
