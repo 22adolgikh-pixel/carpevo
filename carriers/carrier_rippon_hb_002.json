@@ -14,5 +14,7 @@
   "provenance": "Коллекция аукционного дома Rippon Boswell & Co.",
   "inv_number": "RB-2018-9241",
   "reliability": "high",
-  "source_url": "https://www.rippon-boswell-wiesbaden.de/en/archive/"
+  "source_url": "https://www.rippon-boswell-wiesbaden.de/en/archive/",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
