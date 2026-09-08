@@ -14,5 +14,7 @@
   "provenance": "Indianapolis Museum of Art (Newfields)",
   "inv_number": "1988.38",
   "reliability": "high",
-  "source_url": "https://collection.discovernewfields.org"
+  "source_url": "https://collection.discovernewfields.org",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
