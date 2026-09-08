@@ -14,5 +14,7 @@
   "provenance": "Государственный Эрмитаж, Санкт-Петербург",
   "inv_number": "HERM-RM-2019",
   "reliability": "high",
-  "source_url": "https://www.hermitagemuseum.org"
+  "source_url": "https://www.hermitagemuseum.org",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
