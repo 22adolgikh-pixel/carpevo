@@ -14,5 +14,7 @@
   "provenance": "Sotheby's Fine Rugs and Carpets",
   "inv_number": "SOTH-2018-LOT112",
   "reliability": "mid",
-  "source_url": "https://www.sothebys.com/en/auctions/ecatalogue/2018/carpets-l18871/lot.112.html"
+  "source_url": "https://www.sothebys.com/en/auctions/ecatalogue/2018/carpets-l18871/lot.112.html",
+  "verification_status": "unverified_llm_generated",
+  "verification_note": "Собрано прямым запросом к Gemini по названию мотива, без привязки к странице первоисточника (Керимов и др.). Требует проверки/переизвлечения через постраничный разбор PDF (Pass 1/Pass 2)."
 }
