@@ -1,42 +1,42 @@
 {
- "id": "t28_f01",
- "sheet": "kerimov_vol1_patterns/page_147.jpg",
- "table": 28,
+ "id": "t21_f01",
+ "sheet": "kerimov_vol1_patterns/page_140.jpg",
+ "table": 21,
  "fig": 1,
  "crop_origin": [
-  161,
-  108
+  193,
+  120
  ],
  "frame": [
-  14,
   9,
-  177,
-  115
+  10,
+  124,
+  128
  ],
  "difficulty": null,
  "quad": [
   [
-   20.11,
-   11.99
+   11.83,
+   15.17
   ],
   [
-   184.24,
-   11.99
+   129.73,
+   15.17
   ],
   [
-   184.24,
-   120.56
+   129.73,
+   133.16
   ],
   [
-   20.11,
-   120.56
+   11.83,
+   133.16
   ]
  ],
  "meta": {
   "section": "",
-  "name_az": "Daraq",
-  "name": "Дараг",
-  "translation": "Гребень",
+  "name_az": "Fərə",
+  "name": "Фәрә",
+  "translation": "Цыпленок",
   "carpet": "Карабах",
   "type": "Кар.",
   "note": "",
@@ -45,37 +45,43 @@
   "name_az_auto": true
  },
  "grid": {
-  "pw": 4.9697,
-  "ph": 4.9545,
+  "pw": 4.9167,
+  "ph": 4.9167,
   "ox": 0,
   "oy": 0,
-  "cols": 33,
-  "rows": 22,
+  "cols": 24,
+  "rows": 24,
   "square": true
  },
  "classify": {
   "tones": 1,
   "inner": 55,
   "thr": [
-   134
+   130
   ],
   "centers": [
-   201,
-   90
+   203,
+   81
   ]
  },
  "matrix": {
-  "w": 15,
-  "h": 4,
+  "w": 8,
+  "h": 10,
   "origin": [
-   9,
-   5
+   8,
+   7
   ],
   "rows": [
-   "111111111111111",
-   "1.1.1.1.1.1.1.1",
-   "1.1.1.1.1.1.1.1",
-   "1.1.1.1.1.1.1.1"
+   ".....1..",
+   "....1.1.",
+   ".....1..",
+   "....1.1.",
+   "...1.111",
+   "..1..1..",
+   ".1...1..",
+   "111111..",
+   ".1..1...",
+   ".11.11.."
   ]
  },
  "palette": [
@@ -89,11 +95,11 @@
  "palette_touched": false,
  "auto": {
   "version": 1,
-  "confidence": 1.0,
+  "confidence": 0.95,
   "flags": [],
   "pitch": [
-   4.974,
-   4.935
+   4.912,
+   4.916
   ],
   "angle": 0.0,
   "reviewed": true
@@ -105,7 +111,7 @@
   "gamma": 1,
   "invert": false
  },
- "saved_at": "2026-09-26 19:14:35",
+ "saved_at": "2026-09-26 19:07:03",
  "review": false,
  "transparent_bg": true
 }

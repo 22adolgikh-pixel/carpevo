@@ -1,0 +1,119 @@
+{
+ "id": "t21_f03",
+ "sheet": "kerimov_vol1_patterns/page_140.jpg",
+ "table": 21,
+ "fig": 3,
+ "crop_origin": [
+  847,
+  115
+ ],
+ "frame": [
+  10,
+  10,
+  127,
+  129
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   15.23,
+   13.53
+  ],
+  [
+   133.67,
+   13.53
+  ],
+  [
+   133.67,
+   136.95
+  ],
+  [
+   15.23,
+   136.95
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Cucə",
+  "name": "Джуджә",
+  "translation": "Цыпленок",
+  "carpet": "Гырыз",
+  "type": "К.-Ш",
+  "note": "",
+  "site_id": "",
+  "source": "",
+  "name_az_auto": true
+ },
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "grid": {
+  "pw": 4.9167,
+  "ph": 4.92,
+  "ox": 0,
+  "oy": 0,
+  "cols": 24,
+  "rows": 25,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   132
+  ],
+  "centers": [
+   201,
+   85
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "done": true,
+ "review": false,
+ "transparent_bg": true,
+ "saved_at": "2026-09-26 19:08:27",
+ "matrix": {
+  "w": 12,
+  "h": 12,
+  "origin": [
+   6,
+   6
+  ],
+  "rows": [
+   ".........1..",
+   "........1.1.",
+   ".......1.111",
+   ".......111..",
+   "1......1.1..",
+   ".1.....111..",
+   "..111111.1..",
+   "..1.....11..",
+   "..11111111..",
+   "....1..1....",
+   "....1..1....",
+   "....11.11..."
+  ]
+ },
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.935,
+   4.937
+  ],
+  "angle": 0.0,
+  "reviewed": true
+ }
+}
