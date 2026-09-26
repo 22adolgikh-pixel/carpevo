@@ -675,6 +675,7 @@ async function openFigure(id){
 function autoGridSync(F){estimateGrid(F);}
 function autoTonesSync(F){const v=sampleCells(F);const c=toneCenters(v,F.cls.tones+1,true);F.cls.tones=c.length-1;F.cls.thr=[];for(let k=0;k<c.length-1;k++)F.cls.thr.push(Math.round((c[k]+c[k+1])/2));F.cls.centers=c.map(Math.round);
   fitPalette(F,c);}
+const SYM_C='#b07cff';   // ось зеркала — фиолетовый пунктир, чтобы не путать с сеткой и рамкой
 const GRID_THIN='rgba(150,198,240,.55)',GRID_BOLD='rgba(74,146,214,.9)',GRID_MID='#4a92d6';
 const FIXED_PALETTE=['#ffffff','#1a1a1a','#b8b8b8','#dedede','#4f7cd1','#d98f2e','#4caf6b','#c74f66','#8e5fd1','#2fb3b3'];
 const FIXED_NAMES=['фон','обводка','тело 1','тело 2','тело 3','тело 4','тело 5','тело 6','тело 7','тело 8'];
@@ -893,9 +894,9 @@ MODES.pix={
       c.moveTo(-k*1.4,cy-k);c.lineTo(-k*1.4,cy+k);c.lineTo(0,cy);c.closePath();c.moveTo(M.w+k*1.4,cy-k);c.lineTo(M.w+k*1.4,cy+k);c.lineTo(M.w,cy);c.closePath();c.fill();}
     }
     if(F.sym.x||F.sym.y||F.sym.rot){const[ax,ay]=mirrorAxis(F.sym,M);
-      if(F.sym.x){c.strokeStyle='#e06c75';c.lineWidth=(this.symHit==='x'?2.6:1.5)*px1();c.beginPath();c.moveTo(ax,-1);c.lineTo(ax,M.h+1);c.stroke();}
-      if(F.sym.y){c.strokeStyle='#e06c75';c.lineWidth=(this.symHit==='y'?2.6:1.5)*px1();c.beginPath();c.moveTo(-1,ay);c.lineTo(M.w+1,ay);c.stroke();}
-      if(F.sym.rot){c.fillStyle='#e06c75';c.beginPath();c.arc(ax,ay,3*px1(),0,7);c.fill();}}
+      if(F.sym.x){c.strokeStyle=SYM_C;c.setLineDash([5*px1(),3*px1()]);c.lineWidth=(this.symHit==='x'?2.6:1.6)*px1();c.beginPath();c.moveTo(ax,-1);c.lineTo(ax,M.h+1);c.stroke();c.setLineDash([]);}
+      if(F.sym.y){c.strokeStyle=SYM_C;c.setLineDash([5*px1(),3*px1()]);c.lineWidth=(this.symHit==='y'?2.6:1.6)*px1();c.beginPath();c.moveTo(-1,ay);c.lineTo(M.w+1,ay);c.stroke();c.setLineDash([]);}
+      if(F.sym.rot){c.fillStyle=SYM_C;c.beginPath();c.arc(ax,ay,3*px1(),0,7);c.fill();}}
     if(F.tool==='copy'&&this.drag&&this.drag.t==='copy'){const d=this.drag,x0=Math.min(d.a[0],d.b[0]),x1=Math.max(d.a[0],d.b[0]),y0=Math.min(d.a[1],d.b[1]),y1=Math.max(d.a[1],d.b[1]);
       c.lineWidth=1.6*px1();c.strokeStyle='#6cb6ff';c.setLineDash([4*px1(),3*px1()]);c.strokeRect(x0,y0,x1-x0+1,y1-y0+1);c.setLineDash([]);}
     if(F.tool==='paste'&&F.clip&&this.hover){const[hi,hj]=this.hover,cw=F.clip.w,ch=F.clip.h;
@@ -1009,7 +1010,7 @@ function renderRightPix(){
     <div class="eg v">${E('R',1,'▶','Добавить столбец справа')}${E('R',-1,'◀','Убрать столбец справа')}</div>
     <span></span><div class="eg">${E('B',-1,'▲','Убрать ряд снизу')}${E('B',1,'▼','Добавить ряд снизу')}</div><span></span>
   </div>
-  <div style="margin:6px 0">${HT('Инструменты — слева от холста. <kbd>Пробел</kbd> (удерживать) — подглядеть скан, <kbd>Пробел</kbd>+тянуть — сдвиг, <kbd>U</kbd> — подложка вкл/выкл.<br>Зеркала: рисуете одну часть, остальное повторяется само. <kbd>Alt</kbd>+тянуть по красной линии — сдвинуть ось.<br>Копирование (<kbd>C</kbd>): выделите область, дальше клики вставляют её (<kbd>Esc</kbd> — отмена).<br>Всё сохраняется само через секунду после правки. <kbd>[</kbd> <kbd>]</kbd> — предыдущий / следующий рисунок.')} Сетка: жирная линия — каждые 10 узлов от левого верхнего угла, маленькие ▸ на краях — середина; скрыть — «▦ сетка» внизу или <kbd>⌘'</kbd>.</div>
+  <div style="margin:6px 0">${HT('Инструменты — слева от холста. <kbd>Пробел</kbd> (удерживать) — подглядеть скан, <kbd>Пробел</kbd>+тянуть — сдвиг, <kbd>U</kbd> — подложка вкл/выкл.<br>Зеркала: рисуете одну часть, остальное повторяется само. <kbd>Alt</kbd>+тянуть по фиолетовой пунктирной линии — сдвинуть ось.<br>Копирование (<kbd>C</kbd>): выделите область, дальше клики вставляют её (<kbd>Esc</kbd> — отмена).<br>Всё сохраняется само через секунду после правки. <kbd>[</kbd> <kbd>]</kbd> — предыдущий / следующий рисунок.')} Сетка: жирная линия — каждые 10 узлов от левого верхнего угла, маленькие ▸ на краях — середина; скрыть — «▦ сетка» внизу или <kbd>⌘'</kbd>.</div>
   <div class="hint" id="outLinks"></div>
   <div class="rfoot">
     ${F.done||F.review?`<div class="hint" style="margin:0">${F.done?'<span style="color:var(--ok)">✓ уже отмечен готовым</span>':'<span style="color:var(--bad)">⚠ отмечен на пересмотр</span>'} · <span class="suggest" id="backToWork">вернуть в работу</span></div>`:''}
