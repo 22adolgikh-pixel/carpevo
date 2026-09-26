@@ -40,6 +40,8 @@
   "carpet": "Гаджигаиб",
   "type": "К.-Ш",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -63,22 +65,20 @@
   ]
  },
  "matrix": {
-  "w": 7,
-  "h": 9,
+  "w": 5,
+  "h": 7,
   "origin": [
-   8,
-   6
+   9,
+   7
   ],
   "rows": [
-   ".......",
-   ".11111.",
-   ".....1.",
-   ".....1.",
-   ".11111.",
-   ".1.....",
-   ".1.....",
-   ".11111.",
-   "......."
+   "11111",
+   "....1",
+   "....1",
+   "11111",
+   "1....",
+   "1....",
+   "11111"
   ]
  },
  "palette": [
@@ -99,14 +99,16 @@
    4.975
   ],
   "angle": -1.04,
-  "reviewed": false
+  "reviewed": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
   "gamma": 1,
   "invert": false
  },
- "saved_at": "2026-09-27 00:26:21"
+ "saved_at": "2026-09-27 00:26:48",
+ "review": false,
+ "transparent_bg": true
 }
