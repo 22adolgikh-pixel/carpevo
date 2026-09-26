@@ -30,7 +30,7 @@ IMG_EXT = {".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".bmp"}
 CROP_PAD = 0.08          # запас вокруг рамки рисунка (доля), чтобы было куда тянуть углы
 META_KEYS = ("section", "name_az", "name", "translation", "carpet", "type", "note")
 DIFFICULTY = ("simple", "medium", "complex", "ultra")   # простой / средний / сложный / ультра
-OUT_SUFFIXES = (".png", "_x12.png", "_grid.png", ".svg")   # что лежит в data/out на каждый рисунок
+OUT_SUFFIXES = (".png", "_x12.png", "_grid.png", "_bg.png", ".svg")   # что лежит в data/out на каждый рисунок
 
 app = FastAPI(title="Carpet Pattern Studio")
 cloud.install(app)    # пароль для входа по ссылке (share.command), если задан CPS_PASSWORD
@@ -322,6 +322,7 @@ def api_figures():
                     "auto": bool(w.get("auto")) and not (w.get("auto") or {}).get("reviewed"),
                     "auto_conf": (w.get("auto") or {}).get("confidence"),
                     "size": [w["matrix"]["w"], w["matrix"]["h"]] if w.get("matrix") else None,
+                    "colors": len(set("".join(w["matrix"]["rows"])) - {"."}) if w.get("matrix") else None,
                     "t": os.path.getmtime(os.path.join(D_WORK, fn))})
     def k(f):
         try: return (0, int(f["table"] or 0), int(f["fig"] or 0), f["id"])
@@ -342,44 +343,67 @@ def api_work_get(fid: str):
     return w
 
 GRID_S = 12        # масштаб PNG ×12
+GRID_THIN = (236, 150, 186, 90)     # RGBA: светло-розовая линия каждого узла
+GRID_BOLD = (214, 64, 124, 200)     # каждые 10 узлов (от левого верхнего угла рисунка)
+GRID_MID = (214, 64, 124, 255)      # метки середины на краях
+
 def render_grid_layer(w, h, S=GRID_S):
-    """Сетка отдельным слоем: прозрачный PNG того же размера, что и ×12 (каждая 10-я линия жирнее)."""
+    """Сетка отдельным слоем (PNG той же величины, что ×12): одинаковая у всех рисунков —
+    тонкая розовая линия на каждый узел, жирная каждые 10 от левого верхнего угла, треугольные метки середины."""
     g = np.zeros((h * S, w * S, 4), np.uint8)
-    thin, bold = (0, 0, 0, 46), (0, 0, 0, 110)
+    thin = GRID_THIN[2::-1] + GRID_THIN[3:]; bold = GRID_BOLD[2::-1] + GRID_BOLD[3:]; mid = GRID_MID[2::-1] + GRID_MID[3:]
     for i in range(w + 1):
-        x = min(i * S, w * S - 1); g[:, x] = bold if i % 10 == 0 else thin
+        x = min(i * S, w * S - 1); g[:, x] = bold if i % 10 == 0 or i == w else thin
+        if i % 10 == 0 or i == w: g[:, max(0, x - 1)] = bold
     for j in range(h + 1):
-        y = min(j * S, h * S - 1); g[y, :] = bold if j % 10 == 0 else thin
+        y = min(j * S, h * S - 1); g[y, :] = bold if j % 10 == 0 or j == h else thin
+        if j % 10 == 0 or j == h: g[max(0, y - 1), :] = bold
+    cx, cy, k = w * S // 2, h * S // 2, max(4, S // 2)       # ▼▲◀▶ метки середины снаружи сетки не помещаются — рисуем по краям внутрь
+    for d in range(k):
+        g[d, max(0, cx - (k - d)):cx + (k - d)] = mid; g[h * S - 1 - d, max(0, cx - (k - d)):cx + (k - d)] = mid
+        g[max(0, cy - (k - d)):cy + (k - d), d] = mid; g[max(0, cy - (k - d)):cy + (k - d), w * S - 1 - d] = mid
     return g
 
 def render_outputs(fid, mat, palette, transparent_bg=True):
-    """PNG 1 узел = 1 px, PNG ×12 без сетки, сетка отдельным прозрачным слоем (_grid.png) и SVG."""
+    """Выгрузки для любых дальнейших задач (v6):
+    .png — 1 узел = 1 px, фон прозрачный; _x12.png — то же ×12, без сетки; _grid.png — сетка отдельным слоем;
+    _bg.png — ×12 с заливкой фона (для предпросмотра/печати); .svg — по слою на каждый цвет (<g id="color-N">),
+    фон — отдельный слой (скрыт), сетка — отдельный скрытый слой. Источник правды — матрица в data/work."""
     w, h, rows = int(mat["w"]), int(mat["h"]), mat["rows"]
     pal = [tuple(int(c.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)) for c in palette]
-    rgba = np.zeros((h, w, 4), np.uint8)
+    K = np.zeros((h, w), np.int16)
     for j, row in enumerate(rows[:h]):
-        for i, ch in enumerate(row[:w]):
-            k = 0 if ch == "." else int(ch, 36)
-            r, g, b = pal[k] if k < len(pal) else (255, 0, 255)
-            rgba[j, i] = (b, g, r, 0 if (k == 0 and transparent_bg) else 255)
+        for i, ch in enumerate(row[:w]): K[j, i] = 0 if ch == "." else int(ch, 36)
+    rgba = np.zeros((h, w, 4), np.uint8)
+    for k in np.unique(K):
+        r, g, b = pal[k] if k < len(pal) else (255, 0, 255)
+        rgba[K == k] = (b, g, r, 0 if k == 0 else 255)
     imwrite_any(os.path.join(D_OUT, fid + ".png"), rgba)
     S = GRID_S
     big = cv2.resize(rgba, (w * S, h * S), interpolation=cv2.INTER_NEAREST)
     imwrite_any(os.path.join(D_OUT, fid + "_x12.png"), big)          # чистый рисунок, без сетки
     imwrite_any(os.path.join(D_OUT, fid + "_grid.png"), render_grid_layer(w, h, S))
-    rects = []
-    for j, row in enumerate(rows[:h]):
-        i = 0
-        while i < w:
-            ch = row[i] if i < len(row) else "."
-            k = 0 if ch == "." else int(ch, 36)
-            n = 1
-            while i + n < w and (row[i + n] if i + n < len(row) else ".") == ch: n += 1
-            if k != 0 or not transparent_bg:
-                rects.append(f'<rect x="{i}" y="{j}" width="{n}" height="1" fill="{palette[k] if k < len(palette) else "#f0f"}"/>')
-            i += n
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w * 10}" height="{h * 10}" '
-           f'shape-rendering="crispEdges">' + "".join(rects) + "</svg>")
+    bgc = pal[0] if pal else (255, 255, 255)
+    solid = big.copy(); solid[big[..., 3] == 0] = (bgc[2], bgc[1], bgc[0], 255)
+    imwrite_any(os.path.join(D_OUT, fid + "_bg.png"), solid)
+    layers = []
+    for k in sorted(int(x) for x in np.unique(K) if x != 0):
+        rects = []
+        for j in range(h):
+            i = 0
+            while i < w:
+                if K[j, i] != k: i += 1; continue
+                n = 1
+                while i + n < w and K[j, i + n] == k: n += 1
+                rects.append(f'<rect x="{i}" y="{j}" width="{n}" height="1"/>'); i += n
+        col = palette[k] if k < len(palette) else "#f0f"
+        layers.append(f'<g id="color-{k}" data-color="{col}" fill="{col}">' + "".join(rects) + "</g>")
+    gl = "".join(f'<line x1="{i}" y1="0" x2="{i}" y2="{h}" stroke-width="{0.12 if i % 10 == 0 or i == w else 0.04}"/>' for i in range(w + 1)) + \
+         "".join(f'<line x1="0" y1="{j}" x2="{w}" y2="{j}" stroke-width="{0.12 if j % 10 == 0 or j == h else 0.04}"/>' for j in range(h + 1))
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w * 10}" height="{h * 10}" shape-rendering="crispEdges">'
+           f'<g id="background" fill="{palette[0] if palette else "#fff"}" display="none"><rect width="{w}" height="{h}"/></g>'
+           + "".join(layers) +
+           f'<g id="grid" stroke="#d6407c" stroke-opacity=".6" display="none">{gl}</g></svg>')
     open(os.path.join(D_OUT, fid + ".svg"), "w", encoding="utf-8").write(svg)
 
 @app.post("/api/work/{fid}")
@@ -447,9 +471,10 @@ def run_auto(fid, force=False, dark_only=True):
 @app.post("/api/auto/{fid}")
 def api_auto(fid: str, body: dict = Body(default={})):
     """Автоматически натянуть сетку и перевести рисунок в пиксели (черновик — проверить на экране «Пиксели»).
-    По умолчанию только тёмный контур (fill=false) — серая заливка часто даёт мусор, проще докрасить вручную."""
+    v6: по умолчанию контур + серая заливка (замер на 134 готовых рисунках: 95.6% клеток верно против 87% у «только контура»);
+    fill=false — только тёмный контур."""
     if not _fid_ok(fid): return JSONResponse({"error": "bad id"}, 400)
-    return run_auto(fid, bool((body or {}).get("force", True)), dark_only=not bool((body or {}).get("fill")))
+    return run_auto(fid, bool((body or {}).get("force", True)), dark_only=not bool((body or {}).get("fill", True)))
 
 @app.post("/api/auto_sheet")
 def api_auto_sheet(body: dict = Body(...)):
@@ -457,7 +482,7 @@ def api_auto_sheet(body: dict = Body(...)):
     meta = jload(os.path.join(D_SHEETS, _sheet_key(body["path"]) + ".json"), {}) or {}
     figs = meta.get("figures", [])
     if not figs: return JSONResponse({"error": "лист ещё не нарезан — сначала «Сохранить и нарезать»"}, 400)
-    dark_only = not bool(body.get("fill"))
+    dark_only = not bool(body.get("fill", True))
     return {"results": [run_auto(f, bool(body.get("force")), dark_only=dark_only) for f in figs]}
 
 # ---------------- легенда / индекс сайта ----------------
@@ -533,7 +558,7 @@ def api_bundle(all: int = 0):
                       "section": m.get("section", ""),
                       "name": m.get("name_az") or m.get("name", ""),        # основное имя — азербайджанское (латиница)
                       "name_az": m.get("name_az", ""), "name_book": m.get("name", ""),
-                      "difficulty": norm_diff(w.get("difficulty")), "translation": m.get("translation", ""),
+                      "difficulty": norm_diff(w.get("difficulty")), "colors": len(set("".join(w["matrix"]["rows"])) - {"."}), "translation": m.get("translation", ""),
                       "carpet": m.get("carpet", ""), "type": m.get("type", ""), "note": m.get("note", ""),
                       "site_ids": [s.strip() for s in (m.get("site_id") or "").split(",") if s.strip()],
                       "source": m.get("source", "") or (f"Табл. {w.get('table')}, рис. {w.get('fig')}" if w.get("table") else ""),
@@ -557,6 +582,22 @@ def api_backup(): return backup.state
 
 @app.post("/api/backup")
 def api_backup_now(): return backup.backup_once(HERE, DATA, "вручную")
+
+@app.on_event("startup")
+def migrate_v6():
+    """v6: старый серый цвет 2 (#8a8a8a) → светлее (#b8b8b8); картинки перерисовываются (новая сетка, слои SVG)."""
+    flag = os.path.join(DATA, ".v6_migrated")
+    if os.path.exists(flag): return
+    for fn in os.listdir(D_WORK):
+        if not fn.endswith(".json"): continue
+        p = os.path.join(D_WORK, fn); w = jload(p, {}) or {}
+        pal = w.get("palette") or []
+        if any(str(c).lower() == "#8a8a8a" for c in pal):
+            w["palette"] = ["#b8b8b8" if str(c).lower() == "#8a8a8a" else c for c in pal]; jsave(p, w)
+        if w.get("matrix") and w.get("palette"):
+            try: render_outputs(fn[:-5], w["matrix"], w["palette"])
+            except Exception as e: print("migrate v6", fn, e)
+    open(flag, "w").write(time.strftime("%Y-%m-%d %H:%M"))
 
 @app.on_event("startup")
 def migrate_outputs():

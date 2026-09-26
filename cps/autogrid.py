@@ -204,6 +204,11 @@ def classify(v):
     return M, {"bg": bg, "dark": dk, "t": t}
 
 
+SOLID_MIN = 8        # v6: минимальная площадь сплошного серого пятна без контура
+SOLID_T = 0.80       # v6: …и насколько оно должно быть серее фона
+SOLID_STD = 0.15     # v6: пятно ровное (тени и грязь бумаги — пёстрые)
+SOLID_EDGE = 0.02    # v6: тени и грязь по краям кадра прилегают к краю матрицы, настоящая заливка — нет
+SOLID_CORE = 0.25    # v6: доля «толстой» части (после эрозии) — отсекает ореолы вдоль линий
 REGION_T = 0.86      # замкнутая контуром область — заливка, если её типичная яркость ниже
 
 def clean(M, t):
@@ -240,6 +245,10 @@ def clean(M, t):
         inner = comp & ~near
         tm = float(np.median(tc[inner])) if inner.sum() >= 2 else float(np.median(tc[comp]))
         if area >= 3 and encl >= 0.45 and tm < MID_FILL: M[comp] = 2
+        # v6: сплошная серая фигура без тёмного контура (напр. табл. 4) — толстое (не ореол линии) и заметно серое пятно
+        elif area >= SOLID_MIN and tm < SOLID_T and edge_cells <= SOLID_EDGE * area and float(np.std(tc[comp])) < SOLID_STD:
+            core = cv2.erode(comp.astype(np.uint8), k4, borderType=cv2.BORDER_CONSTANT, borderValue=0) > 0
+            if core.sum() >= max(2, SOLID_CORE * area) and float(near[comp].mean()) < 0.8: M[comp] = 2
     return M
 
 
@@ -252,7 +261,7 @@ def trim(M, margin=1):
     return M[y0:y1 + 1, x0:x1 + 1], (int(x0), int(y0))
 
 
-def auto_figure(g, frame, dark_only=True):
+def auto_figure(g, frame, dark_only=False):
     """dark_only=True (по умолчанию): только тёмный контур, без попытки угадать серую заливку —
     заливка чаще даёт «мусор», чем пользу, и её проще дорисовать вручную."""
     G = detect_grid(g, frame)
@@ -301,7 +310,7 @@ def to_work(G, M, info, margin=1):
         "classify": {"tones": 1, "inner": 55, "thr": [int(round(info["dark"] + DARK_T * span))],
                      "centers": [int(round(info["bg"])), int(round(info["dark"]))]},
         "matrix": {"w": int(Mt.shape[1]), "h": int(Mt.shape[0]), "origin": [int(ox), int(oy)], "rows": rows_s},
-        "palette": ["#ffffff", "#1a1a1a", "#8a8a8a"] if has_mid else ["#ffffff", "#1a1a1a"],
+        "palette": ["#ffffff", "#1a1a1a", "#b8b8b8"] if has_mid else ["#ffffff", "#1a1a1a"],
         "palette_names": ["фон", "обводка", "тело 1"] if has_mid else ["фон", "обводка"],
         "palette_touched": False,
         "auto": {"version": 1, "confidence": info["confidence"], "flags": info["flags"],
