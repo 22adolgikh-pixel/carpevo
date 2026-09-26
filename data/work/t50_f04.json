@@ -1,0 +1,112 @@
+{
+ "id": "t50_f04",
+ "sheet": "kerimov_vol1_patterns/page_169.jpg",
+ "table": 50,
+ "fig": 4,
+ "crop_origin": [
+  689,
+  122
+ ],
+ "frame": [
+  9,
+  9,
+  122,
+  121
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   12.9,
+   14.85
+  ],
+  [
+   126.67,
+   12.79
+  ],
+  [
+   128.65,
+   122.21
+  ],
+  [
+   14.88,
+   124.28
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Qaynaq",
+  "name": "Гайнаг",
+  "translation": "Коготь",
+  "carpet": "Гаджигаиб",
+  "type": "К.-Ш",
+  "note": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.9565,
+  "ph": 4.9545,
+  "ox": 0,
+  "oy": 0,
+  "cols": 23,
+  "rows": 22,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   138
+  ],
+  "centers": [
+   199,
+   97
+  ]
+ },
+ "matrix": {
+  "w": 7,
+  "h": 9,
+  "origin": [
+   8,
+   6
+  ],
+  "rows": [
+   ".......",
+   ".11111.",
+   ".....1.",
+   ".....1.",
+   ".11111.",
+   ".1.....",
+   ".1.....",
+   ".11111.",
+   "......."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.947,
+   4.975
+  ],
+  "angle": -1.04,
+  "reviewed": false
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "saved_at": "2026-09-27 00:26:21"
+}

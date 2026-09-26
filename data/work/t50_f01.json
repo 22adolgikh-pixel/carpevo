@@ -1,0 +1,123 @@
+{
+ "id": "t50_f01",
+ "sheet": "kerimov_vol1_patterns/page_169.jpg",
+ "table": 50,
+ "fig": 1,
+ "crop_origin": [
+  176,
+  124
+ ],
+ "frame": [
+  9,
+  9,
+  122,
+  123
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   13.82,
+   15.78
+  ],
+  [
+   127.76,
+   15.78
+  ],
+  [
+   127.76,
+   129.76
+  ],
+  [
+   13.82,
+   129.76
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Tilov",
+  "name": "Тилов",
+  "translation": "Удочка",
+  "carpet": "Бакы",
+  "type": "К.-Ш",
+  "note": "Элементы формы «S» являются признаком воды, источника.",
+  "site_id": "",
+  "source": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.9565,
+  "ph": 4.9565,
+  "ox": 0,
+  "oy": 0,
+  "cols": 23,
+  "rows": 23,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   130
+  ],
+  "centers": [
+   201,
+   83
+  ]
+ },
+ "matrix": {
+  "w": 8,
+  "h": 16,
+  "origin": [
+   7,
+   3
+  ],
+  "rows": [
+   "...1....",
+   "..1.1...",
+   ".1...1..",
+   "1.....1.",
+   "1111...1",
+   "111...1.",
+   "11...1..",
+   "1...1...",
+   "...1...1",
+   "..1...11",
+   ".1...111",
+   "1...1111",
+   ".1.....1",
+   "..1...1.",
+   "...1.1..",
+   "....1..."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.954,
+   4.956
+  ],
+  "angle": 0.0,
+  "reviewed": true
+ },
+ "done": true,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "saved_at": "2026-09-27 00:26:28",
+ "review": false,
+ "transparent_bg": true
+}
