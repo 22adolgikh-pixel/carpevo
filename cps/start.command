@@ -59,6 +59,28 @@ echo "Устанавливаю зависимости (один раз, може
 # Папка со сканами: по умолчанию ./scans. Для Google Drive раскомментируйте и поправьте путь:
 # export CPS_SCANS="$HOME/Library/CloudStorage/GoogleDrive-ИМЯ@gmail.com/My Drive/scans"
 
+# ---- порт 8000 уже занят? ----
+if lsof -nP -iTCP:8000 -sTCP:LISTEN >/dev/null 2>&1; then
+  if curl -s -m 3 http://localhost:8000/api/config 2>/dev/null | grep -q '"scans"'; then
+    if [ "$CPS_SHARE" != "1" ]; then
+      echo "Студия уже запущена (в другом окне) — просто открываю её."
+      open http://localhost:8000
+      exit 0
+    fi
+    # для ссылки нужен сервер с паролем — перезапускаем уже открытую студию
+    echo "Студия уже запущена в другом окне — перезапускаю её с паролем для ссылки…"
+    lsof -nP -tiTCP:8000 -sTCP:LISTEN | xargs kill 2>/dev/null
+    for i in $(seq 1 10); do lsof -nP -iTCP:8000 -sTCP:LISTEN >/dev/null 2>&1 || break; sleep 1; done
+  else
+    echo
+    echo "⚠️ Порт 8000 занят другой программой:"
+    lsof -nP -iTCP:8000 -sTCP:LISTEN | tail -n +2
+    echo "Закройте её и запустите ещё раз."
+    read -n1 -r -p "Нажмите любую клавишу для выхода..."
+    exit 1
+  fi
+fi
+
 RUN=()
 if [ "$CPS_SHARE" = "1" ]; then
   # ---- доступ по ссылке (share.command): пароль + туннель Cloudflare ----
