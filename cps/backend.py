@@ -9,6 +9,7 @@ from fastapi import FastAPI, UploadFile, File, Body, Query
 from fastapi.responses import FileResponse, JSONResponse, Response
 from az_names import az_draft, site_suggest
 import autogrid
+import cloud
 try:
     import pymupdf as fitz  # PyMuPDF (new import name; falls back to legacy)
 except Exception:
@@ -21,6 +22,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SCANS = os.path.abspath(os.environ.get("CPS_SCANS", os.path.join(HERE, "scans")))
 DATA = os.path.join(HERE, "data")
 D_SHEETS, D_CROPS, D_WORK, D_OUT = (os.path.join(DATA, d) for d in ("sheets", "crops", "work", "out"))
+cloud.restore(HERE)   # в Space: вернуть сохранённую работу из датасета HF (локально — ничего)
 for d in (SCANS, DATA, D_SHEETS, D_CROPS, D_WORK, D_OUT): os.makedirs(d, exist_ok=True)
 LEGEND = os.path.join(DATA, "legend.csv")
 SITE_INDEX = os.path.join(DATA, "site_index.json")
@@ -31,6 +33,7 @@ DIFFICULTY = ("simple", "medium", "complex", "ultra")   # простой / ср�
 OUT_SUFFIXES = (".png", "_x12.png", "_grid.png", ".svg")   # что лежит в data/out на каждый рисунок
 
 app = FastAPI(title="Carpet Pattern Studio")
+cloud.install(app)    # пароль на вход, если задан CPS_PASSWORD
 
 # ---------------- утилиты ----------------
 def _safe_rel(rel):
@@ -511,6 +514,12 @@ def api_bundle(all: int = 0):
                        "items": items}, ensure_ascii=False)
     return Response(data, media_type="application/json",
                     headers={"Content-Disposition": 'attachment; filename="pixel_schemes_bundle.json"'})
+
+@app.on_event("startup")
+def cloud_sync(): cloud.start_sync(DATA, SCANS)
+
+@app.on_event("shutdown")
+def cloud_flush(): cloud.flush()
 
 @app.on_event("startup")
 def migrate_outputs():

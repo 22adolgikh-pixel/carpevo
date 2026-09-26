@@ -30,3 +30,9 @@
 
 Результаты: `data/out/` (PNG 1:1, PNG ×12, SVG), `data/work/` (настройки и матрицы).
 Легенда подписей: `data/legend.csv` (табл. 13–17 уже внесены). Индекс страниц сайта: `data/site_index.json`.
+
+## По ссылке (Hugging Face Space)
+Папка `cps/` выкладывается в Space автоматически при каждом пуше (`.github/workflows/deploy-cps.yml`). Локальный запуск от этого не меняется.
+- **GitHub** → Settings → Secrets and variables → Actions: секрет `HF_TOKEN` (токен HF с правом записи), переменная `HF_SPACE` (например `user/carpet-pattern-studio`).
+- **Space** → Settings → Variables and secrets: секрет `CPS_PASSWORD` — общий пароль на вход; секрет `HF_TOKEN` и переменная `CPS_DATA_REPO` (например `user/cps-data`) — где хранить работу.
+- Диск Space стирается при перезапуске, поэтому `data/` и `scans/` каждые 2 минуты выгружаются в приватный датасет `CPS_DATA_REPO` и при старте скачиваются обратно (`cloud.py`). Правки, сделанные онлайн, живут в датасете, а не в GitHub.
