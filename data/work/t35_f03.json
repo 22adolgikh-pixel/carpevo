@@ -1,0 +1,122 @@
+{
+ "id": "t35_f03",
+ "sheet": "kerimov_vol1_patterns/page_154.jpg",
+ "table": 35,
+ "fig": 3,
+ "crop_origin": [
+  643,
+  130
+ ],
+ "frame": [
+  10,
+  11,
+  128,
+  147
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   12.22,
+   13.48
+  ],
+  [
+   134.18,
+   13.48
+  ],
+  [
+   134.18,
+   154.55
+  ],
+  [
+   12.22,
+   154.55
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Qab",
+  "name": "Габ",
+  "translation": "Посуда",
+  "carpet": "Куба",
+  "type": "К.-Ш",
+  "note": "Ваза с яблоками.",
+  "site_id": "",
+  "source": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.88,
+  "ph": 4.8621,
+  "ox": 0,
+  "oy": 0,
+  "cols": 25,
+  "rows": 29,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   125
+  ],
+  "centers": [
+   207,
+   69
+  ]
+ },
+ "matrix": {
+  "w": 15,
+  "h": 11,
+  "origin": [
+   5,
+   9
+  ],
+  "rows": [
+   ".....11.11.....",
+   "....1221221....",
+   "..11222122211..",
+   "112212212212211",
+   "122221111122221",
+   "112221...122211",
+   "..1221...1221..",
+   "...111111111...",
+   ".......1.......",
+   "......1.1......",
+   ".....11111....."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": true,
+ "auto": {
+  "version": 1,
+  "confidence": 0.14,
+  "flags": [
+   "много полутонов — проверьте сетку"
+  ],
+  "pitch": [
+   4.878,
+   4.865
+  ],
+  "angle": 0.0,
+  "reviewed": true
+ },
+ "done": true,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "saved_at": "2026-09-26 23:40:49",
+ "review": false,
+ "transparent_bg": true
+}
