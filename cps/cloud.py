@@ -1,13 +1,10 @@
-# cloud.py — режим «по ссылке» (Hugging Face Space).
-# Локально ничего не меняет: всё включается только переменными окружения.
+# cloud.py — пароль для доступа к студии по ссылке (share.command → туннель Cloudflare).
 #
-#   CPS_PASSWORD   — общий пароль на вход (если пусто — вход без пароля)
-#   HF_TOKEN       — токен Hugging Face с правом записи (секрет Space)
-#   CPS_DATA_REPO  — датасет HF для хранения работы, например "user/cps-data".
-#                    Диск Space стирается при каждом перезапуске, поэтому
-#                    data/ и scans/ при старте скачиваются оттуда, а изменения
-#                    выгружаются обратно каждые CPS_SYNC_MIN минут (по умолчанию 2).
-import os, hmac, hashlib, html
+# Пароль спрашивается только у тех, кто пришёл через туннель: такие запросы
+# Cloudflare помечает заголовком Cf-Connecting-Ip. На самом Mac
+# (http://localhost:8000) студия открывается без пароля, как раньше.
+# Без переменной CPS_PASSWORD ничего не включается.
+import os, hmac, hashlib
 from fastapi import Request
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 
@@ -27,12 +24,16 @@ button{margin-top:12px;width:100%;padding:10px;font-size:16px;border:0;border-ra
 <button>Войти</button>%ERR%</form></body></html>"""
 
 
+def _remote(request: Request) -> bool:
+    return "cf-connecting-ip" in request.headers or "cf-ray" in request.headers
+
+
 def _ok(request: Request) -> bool:
-    return (not PASSWORD) or hmac.compare_digest(request.cookies.get(COOKIE, ""), _TOKEN)
+    return (not PASSWORD) or (not _remote(request)) or \
+        hmac.compare_digest(request.cookies.get(COOKIE, ""), _TOKEN)
 
 
 def install(app):
-    """Пароль на вход + вход через /login. Без CPS_PASSWORD — ничего не делает."""
     if not PASSWORD:
         return
 
@@ -40,7 +41,7 @@ def install(app):
     async def _auth(request: Request, call_next):
         if request.url.path == "/login" or _ok(request):
             return await call_next(request)
-        if request.url.path.startswith("/api/"):
+        if request.url.path.startswith("/api/") or request.url.path.startswith("/out/"):
             return JSONResponse({"error": "auth"}, status_code=401)
         return HTMLResponse(LOGIN_HTML.replace("%ERR%", ""), status_code=401)
 
@@ -49,51 +50,8 @@ def install(app):
         form = await request.form()
         if hmac.compare_digest(str(form.get("password", "")), PASSWORD):
             r = RedirectResponse("/", status_code=303)
-            # SameSite=None — чтобы вход работал и внутри окна huggingface.co/spaces
-            r.set_cookie(COOKIE, _TOKEN, max_age=60 * 60 * 24 * 90, httponly=True,
-                         secure=True, samesite="none")
+            r.set_cookie(COOKIE, _TOKEN, max_age=60 * 60 * 24 * 30, httponly=True,
+                         secure=True, samesite="lax")
             return r
         return HTMLResponse(LOGIN_HTML.replace("%ERR%", '<div class="err">Неверный пароль</div>'),
                             status_code=401)
-
-
-# ---------------- хранение работы в датасете HF ----------------
-_schedulers = []
-
-
-def restore(base_dir: str):
-    """Скачать сохранённые data/ и scans/ из датасета в base_dir (при старте Space)."""
-    repo, token = os.environ.get("CPS_DATA_REPO"), os.environ.get("HF_TOKEN")
-    if not (repo and token):
-        return
-    try:
-        from huggingface_hub import HfApi, snapshot_download
-        HfApi(token=token).create_repo(repo, repo_type="dataset", private=True, exist_ok=True)
-        snapshot_download(repo, repo_type="dataset", token=token,
-                          allow_patterns=["data/**", "scans/**"], local_dir=base_dir)
-        print("cloud: restored from", repo)
-    except Exception as e:
-        print("cloud: restore failed:", e)
-
-
-def start_sync(data_dir: str, scans_dir: str):
-    """Каждые N минут выгружать изменения data/ и scans/ в датасет."""
-    repo, token = os.environ.get("CPS_DATA_REPO"), os.environ.get("HF_TOKEN")
-    if not (repo and token):
-        return
-    from huggingface_hub import CommitScheduler
-    os.makedirs(data_dir, exist_ok=True); os.makedirs(scans_dir, exist_ok=True)
-    every = float(os.environ.get("CPS_SYNC_MIN", "2"))
-    for sub, path in (("data", data_dir), ("scans", scans_dir)):
-        _schedulers.append(CommitScheduler(repo_id=repo, repo_type="dataset", folder_path=path,
-                                           path_in_repo=sub, every=every, token=token,
-                                           private=True, squash_history=False))
-    print(f"cloud: syncing to {repo} every {every} min")
-
-
-def flush():
-    for s in _schedulers:
-        try:
-            s.trigger().result()
-        except Exception as e:
-            print("cloud: flush failed:", e)

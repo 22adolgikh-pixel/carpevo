@@ -59,7 +59,58 @@ echo "Устанавливаю зависимости (один раз, може
 # Папка со сканами: по умолчанию ./scans. Для Google Drive раскомментируйте и поправьте путь:
 # export CPS_SCANS="$HOME/Library/CloudStorage/GoogleDrive-ИМЯ@gmail.com/My Drive/scans"
 
+RUN=()
+if [ "$CPS_SHARE" = "1" ]; then
+  # ---- доступ по ссылке (share.command): пароль + туннель Cloudflare ----
+  [ -f .env ] && set -a && . ./.env && set +a
+  if [ -z "$CPS_PASSWORD" ]; then
+    echo
+    read -r -s -p "Придумайте пароль для входа по ссылке (сохранится в .env): " CPS_PASSWORD; echo
+    [ -z "$CPS_PASSWORD" ] && { echo "⚠️ Пароль пустой — отмена."; read -n1 -r -p "Нажмите любую клавишу..."; exit 1; }
+    printf 'CPS_PASSWORD=%q\n' "$CPS_PASSWORD" >> .env; chmod 600 .env
+  fi
+  export CPS_PASSWORD
+
+  CF="$(command -v cloudflared || true)"
+  if [ -z "$CF" ]; then
+    CF=".bin/cloudflared"
+    if [ ! -x "$CF" ]; then
+      case "$(uname -m)" in arm64) A=arm64 ;; *) A=amd64 ;; esac
+      echo "Скачиваю cloudflared (один раз)…"
+      mkdir -p .bin
+      curl -fsSL "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-darwin-$A.tgz" | tar -xz -C .bin \
+        && chmod +x "$CF" || { echo "⚠️ Не удалось скачать cloudflared. Можно поставить вручную: brew install cloudflared"; read -n1 -r -p "Нажмите любую клавишу..."; exit 1; }
+    fi
+  fi
+
+  echo "Открываю туннель…"
+  "$CF" tunnel --no-autoupdate --url http://localhost:8000 > .tunnel.log 2>&1 &
+  TPID=$!
+  trap 'kill $TPID 2>/dev/null' EXIT
+  URL=""
+  for i in $(seq 1 40); do
+    URL="$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' .tunnel.log | head -1)"
+    [ -n "$URL" ] && break
+    kill -0 $TPID 2>/dev/null || break
+    sleep 1
+  done
+  if [ -z "$URL" ]; then
+    echo "⚠️ Туннель не открылся. Последние строки лога:"; tail -5 .tunnel.log
+    read -n1 -r -p "Нажмите любую клавишу..."; exit 1
+  fi
+  printf '%s' "$URL" | pbcopy 2>/dev/null
+  echo
+  echo "============================================================"
+  echo "  Ссылка на студию (уже скопирована):"
+  echo "     $URL"
+  echo "  Вход — по паролю из .env. На этом Mac пароль не нужен."
+  echo "  Ссылка работает, пока открыто это окно и Mac не спит."
+  echo "============================================================"
+  echo
+  RUN=(caffeinate -i)   # не давать Mac уснуть, пока идёт раздача
+fi
+
 (sleep 2; open http://localhost:8000) &
 echo "Запускаю сервер на http://localhost:8000 (это окно должно остаться открытым)…"
-"$VPY" -m uvicorn backend:app --port 8000
+"${RUN[@]}" "$VPY" -m uvicorn backend:app --port 8000
 read -n1 -r -p "Сервер остановлен. Нажмите любую клавишу для выхода..."
