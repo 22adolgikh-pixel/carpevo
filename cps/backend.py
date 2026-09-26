@@ -343,13 +343,13 @@ def api_work_get(fid: str):
     return w
 
 GRID_S = 12        # масштаб PNG ×12
-GRID_THIN = (236, 150, 186, 90)     # RGBA: светло-розовая линия каждого узла
-GRID_BOLD = (214, 64, 124, 200)     # каждые 10 узлов (от левого верхнего угла рисунка)
-GRID_MID = (214, 64, 124, 255)      # метки середины на краях
+GRID_THIN = (150, 198, 240, 110)    # RGBA: светло-голубая линия каждого узла
+GRID_BOLD = (74, 146, 214, 220)     # каждые 10 узлов (от левого верхнего угла рисунка)
+GRID_MID = (74, 146, 214, 255)      # маленькие метки середины на краях
 
 def render_grid_layer(w, h, S=GRID_S):
     """Сетка отдельным слоем (PNG той же величины, что ×12): одинаковая у всех рисунков —
-    тонкая розовая линия на каждый узел, жирная каждые 10 от левого верхнего угла, треугольные метки середины."""
+    тонкая светло-голубая линия на каждый узел, жирная каждые 10 от левого верхнего угла, треугольные метки середины."""
     g = np.zeros((h * S, w * S, 4), np.uint8)
     thin = GRID_THIN[2::-1] + GRID_THIN[3:]; bold = GRID_BOLD[2::-1] + GRID_BOLD[3:]; mid = GRID_MID[2::-1] + GRID_MID[3:]
     for i in range(w + 1):
@@ -358,7 +358,7 @@ def render_grid_layer(w, h, S=GRID_S):
     for j in range(h + 1):
         y = min(j * S, h * S - 1); g[y, :] = bold if j % 10 == 0 or j == h else thin
         if j % 10 == 0 or j == h: g[max(0, y - 1), :] = bold
-    cx, cy, k = w * S // 2, h * S // 2, max(4, S // 2)       # ▼▲◀▶ метки середины снаружи сетки не помещаются — рисуем по краям внутрь
+    cx, cy, k = w * S // 2, h * S // 2, max(3, S // 3)       # ▼▲◀▶ метки середины снаружи сетки не помещаются — рисуем по краям внутрь
     for d in range(k):
         g[d, max(0, cx - (k - d)):cx + (k - d)] = mid; g[h * S - 1 - d, max(0, cx - (k - d)):cx + (k - d)] = mid
         g[max(0, cy - (k - d)):cy + (k - d), d] = mid; g[max(0, cy - (k - d)):cy + (k - d), w * S - 1 - d] = mid
@@ -403,7 +403,7 @@ def render_outputs(fid, mat, palette, transparent_bg=True):
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w * 10}" height="{h * 10}" shape-rendering="crispEdges">'
            f'<g id="background" fill="{palette[0] if palette else "#fff"}" display="none"><rect width="{w}" height="{h}"/></g>'
            + "".join(layers) +
-           f'<g id="grid" stroke="#d6407c" stroke-opacity=".6" display="none">{gl}</g></svg>')
+           f'<g id="grid" stroke="#4a92d6" stroke-opacity=".6" display="none">{gl}</g></svg>')
     open(os.path.join(D_OUT, fid + ".svg"), "w", encoding="utf-8").write(svg)
 
 @app.post("/api/work/{fid}")
@@ -584,6 +584,19 @@ def api_backup(): return backup.state
 def api_backup_now(): return backup.backup_once(HERE, DATA, "вручную")
 
 @app.on_event("startup")
+def migrate_v7():
+    """v7: сетка светло-голубая, метки середины меньше — перерисовать _grid.png и SVG один раз (после migrate_v6)."""
+    migrate_v6()
+    flag = os.path.join(DATA, ".v7_rendered")
+    if os.path.exists(flag): return
+    for fn in os.listdir(D_WORK):
+        if not fn.endswith(".json"): continue
+        w = jload(os.path.join(D_WORK, fn), {}) or {}
+        if w.get("matrix") and w.get("palette"):
+            try: render_outputs(fn[:-5], w["matrix"], w["palette"])
+            except Exception as e: print("migrate v7", fn, e)
+    open(flag, "w").write(time.strftime("%Y-%m-%d %H:%M"))
+
 def migrate_v6():
     """v6: старый серый цвет 2 (#8a8a8a) → светлее (#b8b8b8); картинки перерисовываются (новая сетка, слои SVG)."""
     flag = os.path.join(DATA, ".v6_migrated")
