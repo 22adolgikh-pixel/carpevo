@@ -491,14 +491,44 @@ def api_az_draft(text: str = ""):
     return {"text": text, "az": az_draft(text)}
 
 # ---------------- пакет для сайта ----------------
+
+# ---------------- три языка для сайта «Ковровое ДНК» ----------------
+SCHOOL_BY_TYPE = {"Кар.": "karabakh", "Г.-К.": "ganja-gazakh", "Г.-К": "ganja-gazakh", "Г.—К": "ganja-gazakh",
+                  "К.-Ш.": "guba-shirvan", "К.-Ш": "guba-shirvan", "К.—Ш": "guba-shirvan"}
+I18N_FILE = os.path.join(DATA, "i18n.json")   # словарь переводов (значения, ковры, примечания) — пополняется
+
+def i18n_fields(w, m, sids, site):
+    """names az/ru/en: az — canonical_az первой привязанной страницы сайта, ru — перевод из книги,
+    en — из словаря data/i18n.json или en_meaning страницы. Непереведённое остаётся пустым."""
+    d = jload(I18N_FILE, {}) or {}
+    prim = site.get(sids[0]) if sids else None
+    tr = re.split(r"\s+(Карабах|Казах|Кубин|Губ|Гянд|Ширв|Баку|Бакин)", m.get("translation", ""))[0].strip(" .")
+    tr = "" if tr == "?" else tr
+    ru = tr or (prim or {}).get("ru_meaning") or ""
+    en = (d.get("meaning_en") or {}).get(ru) or ((prim or {}).get("en_meaning") if prim and not tr else "") or ""
+    az = (prim or {}).get("canonical_az") or m.get("name_az", "")
+    carpet = (m.get("carpet") or "").strip().rstrip(" |")
+    c3 = (d.get("carpet") or {}).get(carpet)
+    note = (m.get("note") or "").strip(); n3 = (d.get("notes") or {}).get(note)
+    t, f = w.get("table"), w.get("fig")
+    return {"names": {"az": az, "ru": ru, "en": en},
+            "carpet_i18n": ({"ru": carpet, "az": c3[0], "en": c3[1]} if c3 else ({"ru": carpet} if carpet else None)),
+            "note_i18n": ({"ru": note, **n3} if n3 else ({"ru": note} if note else None)),
+            "source_i18n": ({"ru": f"Табл. {t}, рис. {f}", "az": f"Cədvəl {t}, şəkil {f}", "en": f"Table {t}, fig. {f}"} if t else None),
+            "school": SCHOOL_BY_TYPE.get(m.get("type", "")), "grid_origin": "hand_drawn",
+            "i18n_status": "az/en: машинный перевод, человеком не проверен"}
+
 @app.get("/api/bundle")
 def api_bundle(all: int = 0):
     items = []
+    site = {x["id"]: x for x in jload(SITE_INDEX, [])}
     for fn in sorted(os.listdir(D_WORK)):
         w = jload(os.path.join(D_WORK, fn), {}) or {}
         if not w.get("matrix") or not (w.get("done") or all): continue
         m = with_az(w.get("meta", {}))
-        items.append({"id": w["id"], "table": w.get("table"), "fig": w.get("fig"),
+        sids = [s.strip() for s in (m.get("site_id") or "").split(",") if s.strip()]
+        items.append(i18n_fields(w, m, sids, site))
+        items[-1].update({"id": w["id"], "table": w.get("table"), "fig": w.get("fig"),
                       "section": m.get("section", ""),
                       "name": m.get("name_az") or m.get("name", ""),        # основное имя — азербайджанское (латиница)
                       "name_az": m.get("name_az", ""), "name_book": m.get("name", ""),

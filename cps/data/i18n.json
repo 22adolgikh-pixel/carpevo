@@ -1,0 +1,520 @@
+{
+ "_about": "Переводы для пакета сайта: значение (ru→en), ковры (ru→[az,en]), примечания книги (ru→{az,en}). Машинный перевод Claude 2026-09-26, человеком не проверен. Пополнять по мере новых рисунков.",
+ "meaning_en": {
+  "Бабочка": "Butterfly",
+  "Баран": "Ram",
+  "Бута": "Buta",
+  "Верблюд": "Camel",
+  "Вертушка": "Pinwheel",
+  "Веточка с цветком": "Twig with a flower",
+  "Вилы": "Pitchfork",
+  "Глаз": "Eye",
+  "Голова": "Head",
+  "Гусь": "Goose",
+  "Дерево": "Tree",
+  "Див. Сказочное существо": "Div, a fairy-tale creature",
+  "Железный наконечник": "Iron tip",
+  "Животное": "Animal",
+  "Звезда": "Star",
+  "Значок": "Badge",
+  "Килимовый цветок": "Kilim flower",
+  "Кирпич": "Brick",
+  "Клеймо": "Brand mark",
+  "Книга": "Book",
+  "Коза": "Goat",
+  "Козел": "Billy goat",
+  "Козлиная пятка": "Goat's heel",
+  "Корова": "Cow",
+  "Кошка": "Cat",
+  "Крюк": "Hook",
+  "Курица": "Hen",
+  "Лапа кошки": "Cat's paw",
+  "Лист": "Leaf",
+  "Лоза виноградная": "Grapevine",
+  "Лошадь": "Horse",
+  "Лягушка": "Frog",
+  "Мужчина": "Man",
+  "Музыкальный инструмент": "Musical instrument",
+  "Овца": "Sheep",
+  "Окно": "Window",
+  "Олень": "Deer",
+  "Охотничья собака": "Hunting dog",
+  "Павлин": "Peacock",
+  "Парная птица": "Paired bird",
+  "Парные": "Paired",
+  "Парный": "Paired",
+  "Петух": "Rooster",
+  "Подкова": "Horseshoe",
+  "Подсвечник": "Candlestick",
+  "Птица": "Bird",
+  "Пуговица": "Button",
+  "Рак": "Crayfish",
+  "Ребенок": "Child",
+  "Ребро": "Rib",
+  "Рука": "Hand",
+  "Рука об руку": "Hand in hand",
+  "Рыба": "Fish",
+  "Серна": "Chamois",
+  "Снежный узор": "Snow pattern",
+  "Собака": "Dog",
+  "Тополь": "Poplar",
+  "Узор": "Pattern",
+  "Узор зили": "Zili pattern",
+  "Украшение": "Ornament",
+  "Усы": "Moustache",
+  "Утка": "Duck",
+  "Цветок": "Flower",
+  "Человек": "Human figure",
+  "Человек и лошадь": "Man and horse",
+  "Черепаха": "Turtle",
+  "Чурек": "Chorek (bread)",
+  "Щенок": "Puppy",
+  "Щипцы": "Tongs",
+  "Яблоко": "Apple",
+  "Ягненок": "Lamb"
+ },
+ "carpet": {
+  "Килим": [
+   "kilim",
+   "kilim"
+  ],
+  "верни": [
+   "vərni",
+   "verni"
+  ],
+  "зили": [
+   "zili",
+   "zili"
+  ],
+  "Карабахский зили": [
+   "Qarabağ zilisi",
+   "Karabakh zili"
+  ],
+  "сумах": [
+   "sumax",
+   "sumakh"
+  ],
+  "Ширван": [
+   "Şirvan",
+   "Shirvan"
+  ],
+  "Джек": [
+   "Cek",
+   "Jek"
+  ],
+  "Казах": [
+   "Qazax",
+   "Gazakh"
+  ],
+  "Карабах": [
+   "Qarabağ",
+   "Karabakh"
+  ],
+  "Караязы": [
+   "Qarayazı",
+   "Garayazi"
+  ],
+  "Мугань": [
+   "Muğan",
+   "Mughan"
+  ],
+  "Шахназарли": [
+   "Şahnəzərli",
+   "Shahnazarli"
+  ],
+  "Леджеди": [
+   "Lecədi",
+   "Lejedi"
+  ],
+  "Сураханы": [
+   "Suraxanı",
+   "Surakhani"
+  ],
+  "Мараза": [
+   "Marazə",
+   "Maraza"
+  ],
+  "Салахлы": [
+   "Salahlı",
+   "Salakhli"
+  ],
+  "Биджо": [
+   "Bico",
+   "Bijo"
+  ],
+  "Гашед": [
+   "Qaşed",
+   "Gashed"
+  ],
+  "Гасымушагы": [
+   "Qasımuşağı",
+   "Gasimushaghi"
+  ],
+  "Ханлыг": [
+   "Xanlıq",
+   "Khanlig"
+  ],
+  "Карагаплы": [
+   "Qaraqaplı",
+   "Garagapli"
+  ],
+  "Баку": [
+   "Bakı",
+   "Baku"
+  ],
+  "Фатмаи": [
+   "Fatmayı",
+   "Fatmai"
+  ],
+  "Карагашлы": [
+   "Qaraqaşlı",
+   "Garagashli"
+  ],
+  "Гянджа": [
+   "Gəncə",
+   "Ganja"
+  ],
+  "Конахкенд": [
+   "Qonaqkənd",
+   "Gonagkend"
+  ],
+  "Малыбейли": [
+   "Malıbəyli",
+   "Malibeyli"
+  ],
+  "Салмесоюд": [
+   "Salmesoyud",
+   "Salmesoyud"
+  ],
+  "Куба": [
+   "Quba",
+   "Guba"
+  ],
+  "Арсалан": [
+   "Arsalan",
+   "Arsalan"
+  ],
+  "Ордудж": [
+   "Orduc",
+   "Orduj"
+  ],
+  "Гымыл": [
+   "Qımıl",
+   "Gimil"
+  ],
+  "Сор-сор": [
+   "Sor-sor",
+   "Sor-sor"
+  ],
+  "Зейва": [
+   "Zeyvə",
+   "Zeyva"
+  ],
+  "Алпан": [
+   "Alpan",
+   "Alpan"
+  ],
+  "Хила": [
+   "Xilə",
+   "Khila"
+  ],
+  "Фындыган": [
+   "Fındıqan",
+   "Findigan"
+  ],
+  "Пиребедиль": [
+   "Pirəbədil",
+   "Pirebedil"
+  ],
+  "Талыш": [
+   "Talış",
+   "Talish"
+  ],
+  "Гаджигаиб": [
+   "Hacıqayıb",
+   "Hajigayib"
+  ],
+  "Герат-Пиребедиль": [
+   "Herat-Pirəbədil",
+   "Herat-Pirebedil"
+  ],
+  "Угах": [
+   "Uğah",
+   "Ughah"
+  ],
+  "Кабала": [
+   "Qəbələ",
+   "Gabala"
+  ]
+ },
+ "notes": {
+  "Этот элемент, изображающий индейку, встречается на попоне для лошади.": {
+   "az": "Bu hinduşka təsvir edən element at çulunda rast gəlinir.",
+   "en": "This element, depicting a turkey, is found on a horse blanket."
+  },
+  "Больше похож на изображение животного.": {
+   "az": "Daha çox heyvan təsvirinə bənzəyir.",
+   "en": "It looks more like an image of an animal."
+  },
+  "Изображен на узоре попоны лошади.": {
+   "az": "At çulunun naxışında təsvir olunub.",
+   "en": "Depicted in the pattern of a horse blanket."
+  },
+  "Возможно это изображение индейки.": {
+   "az": "Ola bilsin ki, bu hinduşka təsviridir.",
+   "en": "This may be an image of a turkey."
+  },
+  "Встречается также в карабахском зили.": {
+   "az": "Qarabağ zilisində də rast gəlinir.",
+   "en": "Also found in the Karabakh zili."
+  },
+  "Видимо, это изображение зайца.": {
+   "az": "Görünür, bu dovşan təsviridir.",
+   "en": "This is apparently an image of a hare."
+  },
+  "Изображение гуся спереди, с изогнутой шеей.": {
+   "az": "Qazın öndən, əyilmiş boyunla təsviri.",
+   "en": "A goose seen from the front, with a curved neck."
+  },
+  "Напоминает стаю гусей.": {
+   "az": "Qaz sürüsünə bənzəyir.",
+   "en": "Resembles a flock of geese."
+  },
+  "Взято из карабахского зили (таблица 7, рисунок 2).": {
+   "az": "Qarabağ zilisindən götürülüb (cədvəl 7, şəkil 2).",
+   "en": "Taken from the Karabakh zili (table 7, figure 2)."
+  },
+  "Этот элемент, напоминающий индейку, встречается в узоре попоны для лошади.": {
+   "az": "Hinduşkaya bənzəyən bu element at çulunun naxışında rast gəlinir.",
+   "en": "This turkey-like element is found in the pattern of a horse blanket."
+  },
+  "Напоминает летящего журавля спереди": {
+   "az": "Öndən görünən uçan durnaya bənzəyir.",
+   "en": "Resembles a flying crane seen from the front."
+  },
+  "Скорее всего, это изображение ветки.": {
+   "az": "Çox güman ki, bu budaq təsviridir.",
+   "en": "Most likely an image of a branch."
+  },
+  "Напоминает восточный музыкальный инструмент.": {
+   "az": "Şərq musiqi alətinə bənzəyir.",
+   "en": "Resembles an oriental musical instrument."
+  },
+  "Элементы, данные в этой таблице, в основном взяты из ворсных ковров.": {
+   "az": "Bu cədvəldə verilən elementlər əsasən xovlu xalçalardan götürülüb.",
+   "en": "The elements in this table are taken mainly from pile carpets."
+  },
+  "Круглые элементы кубинские мастера называют «яблоком».": {
+   "az": "Dairəvi elementləri Quba ustaları «alma» adlandırırlar.",
+   "en": "Guba weavers call the round elements «apple»."
+  },
+  "Это восьмилепестковый цветок.": {
+   "az": "Bu, səkkizləçəkli güldür.",
+   "en": "This is an eight-petalled flower."
+  },
+  "Напоминает пугало (чучело).": {
+   "az": "Müqəvvaya bənzəyir.",
+   "en": "Resembles a scarecrow."
+  },
+  "Изображение сельскохозяйственной работы.": {
+   "az": "Kənd təsərrüfatı işinin təsviri.",
+   "en": "A depiction of farm work."
+  },
+  "Изображен танцующий человек с платочком в руке.": {
+   "az": "Əlində yaylıq olan rəqs edən adam təsvir olunub.",
+   "en": "A dancing person holding a kerchief."
+  },
+  "Знак солнца.": {
+   "az": "Günəş işarəsi.",
+   "en": "A sun sign."
+  },
+  "«намазлык».": {
+   "az": "«namazlıq».",
+   "en": "«namazlyq» (prayer rug)."
+  },
+  "Иногда называют бусинкой, которую носят против дурного глаза.": {
+   "az": "Bəzən nəzərə qarşı taxılan muncuq adlandırırlar.",
+   "en": "Sometimes called a bead worn against the evil eye."
+  },
+  "Изображение нескольких таких элементов вместе напоминает азербайджанский народный танец «яллы».": {
+   "az": "Bir neçə belə elementin bir yerdə təsviri Azərbaycan xalq rəqsi «yallı»nı xatırladır.",
+   "en": "Several such elements together resemble the Azerbaijani folk dance «yally»."
+  },
+  "Вместе с тем можно предположить, что это изображение могилы.": {
+   "az": "Bununla yanaşı, bunun qəbir təsviri olduğunu güman etmək olar.",
+   "en": "It may also be assumed that this is an image of a grave."
+  },
+  "Считается одним из основных элементов ковра «Биджо»": {
+   "az": "«Bico» xalçasının əsas elementlərindən biri sayılır.",
+   "en": "Considered one of the main elements of the «Bijo» carpet."
+  },
+  "Изображение сидящего животного.": {
+   "az": "Oturmuş heyvan təsviri.",
+   "en": "An image of a sitting animal."
+  },
+  "Летящая птица.": {
+   "az": "Uçan quş.",
+   "en": "A flying bird."
+  },
+  "Напоминает летящую птицу.": {
+   "az": "Uçan quşa bənzəyir.",
+   "en": "Resembles a flying bird."
+  },
+  "Встречается также в верни и зили. Этот элемент напоминает летящую птицу.": {
+   "az": "Vərni və zilidə də rast gəlinir. Bu element uçan quşa bənzəyir.",
+   "en": "Also found in verni and zili. This element resembles a flying bird."
+  },
+  "Встречается также в китайских миниатюрах.": {
+   "az": "Çin miniatürlərində də rast gəlinir.",
+   "en": "Also found in Chinese miniatures."
+  },
+  "Элемент «гоша» встречается в ковре Карагаплы в различных формах.": {
+   "az": "«Qoşa» elementi Qaraqaplı xalçasında müxtəlif formalarda rast gəlinir.",
+   "en": "The «gosha» element appears in various forms in the Garagapli carpet."
+  },
+  "Встречается также в бакинских коврах.": {
+   "az": "Bakı xalçalarında da rast gəlinir.",
+   "en": "Also found in Baku carpets."
+  },
+  "Можно предположить, что это изображение рака.": {
+   "az": "Bunun xərçəng təsviri olduğunu güman etmək olar.",
+   "en": "This may be assumed to be an image of a crayfish."
+  },
+  "Изредка встречается также в бакинских коврах.": {
+   "az": "Bakı xalçalarında da nadir hallarda rast gəlinir.",
+   "en": "Occasionally also found in Baku carpets."
+  },
+  "Встречается в бордюре ковра «Кабала».": {
+   "az": "«Qəbələ» xalçasının haşiyəsində rast gəlinir.",
+   "en": "Found in the border of the «Gabala» carpet."
+  },
+  "Встречается также в вышивках Карабаха.": {
+   "az": "Qarabağ tikmələrində də rast gəlinir.",
+   "en": "Also found in Karabakh embroidery."
+  },
+  "Этот элемент относится к XIX веку.": {
+   "az": "Bu element XIX əsrə aiddir.",
+   "en": "This element dates to the 19th century."
+  },
+  "это птица.": {
+   "az": "bu quşdur.",
+   "en": "this is a bird."
+  },
+  "Встречается и в карабахских коврах.": {
+   "az": "Qarabağ xalçalarında da rast gəlinir.",
+   "en": "Also found in Karabakh carpets."
+  },
+  "Элементы, данные в рис. 14, 15, 16, взяты из карабахских узоров. Изображение семиног у этих птиц когда-то носило символический смысл.": {
+   "az": "Şəkil 14, 15, 16-da verilən elementlər Qarabağ naxışlarından götürülüb. Bu quşların yeddiayaqlı təsviri vaxtilə simvolik məna daşıyırdı.",
+   "en": "The elements in figs. 14, 15, 16 are taken from Karabakh patterns. The seven-legged depiction of these birds once carried a symbolic meaning."
+  },
+  "Больше напоминает пасущуюся овцу.": {
+   "az": "Daha çox otlayan qoyuna bənzəyir.",
+   "en": "It more closely resembles a grazing sheep."
+  },
+  "Больше напоминает оленя.": {
+   "az": "Daha çox marala bənzəyir.",
+   "en": "It more closely resembles a deer."
+  },
+  "Означает след животного.": {
+   "az": "Heyvan izi deməkdir.",
+   "en": "Means an animal's track."
+  },
+  "Предполагается, что это голова животного.": {
+   "az": "Güman edilir ki, bu heyvan başıdır.",
+   "en": "It is thought to be an animal's head."
+  },
+  "Скорее всего это изображение утки.": {
+   "az": "Çox güman ki, bu ördək təsviridir.",
+   "en": "Most likely an image of a duck."
+  },
+  "Изображение утки характерно для конахкендских ковров.": {
+   "az": "Ördək təsviri Qonaqkənd xalçaları üçün səciyyəvidir.",
+   "en": "The duck image is characteristic of Gonagkend carpets."
+  },
+  "Симметричное изображение двухголовой птицы.": {
+   "az": "İkibaşlı quşun simmetrik təsviri.",
+   "en": "A symmetrical image of a two-headed bird."
+  },
+  "Напоминает плавающую утку.": {
+   "az": "Üzən ördəyə bənzəyir.",
+   "en": "Resembles a swimming duck."
+  },
+  "Больше напоминает изображение гуся.": {
+   "az": "Daha çox qaz təsvirinə bənzəyir.",
+   "en": "It more closely resembles a goose."
+  },
+  "Парное изображение птицы. Взято из карабахских зили и верни.": {
+   "az": "Quşun qoşa təsviri. Qarabağ zili və vərnilərindən götürülüb.",
+   "en": "A paired image of a bird. Taken from Karabakh zili and verni."
+  },
+  "Взято из бакинского зили.": {
+   "az": "Bakı zilisindən götürülüb.",
+   "en": "Taken from a Baku zili."
+  },
+  "Подкова в народе является символом изобилия.": {
+   "az": "Xalq arasında nal bolluq rəmzidir.",
+   "en": "In folk belief the horseshoe is a symbol of abundance."
+  },
+  "Возможно это рехиль, т. е. деревянная подставка для книг.": {
+   "az": "Ola bilsin ki, bu rehildir, yəni kitab üçün taxta altlıq.",
+   "en": "Possibly a rehil, i.e. a wooden book stand."
+  },
+  "По форме своей напоминает ветряную мельницу.": {
+   "az": "Forma etibarilə yel dəyirmanına bənzəyir.",
+   "en": "Its shape resembles a windmill."
+  },
+  "Головка топора или секиры.": {
+   "az": "Balta və ya teşə başlığı.",
+   "en": "The head of an axe or poleaxe."
+  },
+  "Можно предполагать, что это шкура животного.": {
+   "az": "Bunun heyvan dərisi olduğunu güman etmək olar.",
+   "en": "This may be assumed to be an animal hide."
+  },
+  "В ювелирном искусстве рельефные кружочки на поясе называются пуговицей.": {
+   "az": "Zərgərlik sənətində kəmər üzərindəki qabarıq dairəciklərə düymə deyilir.",
+   "en": "In jewellery, the raised roundels on a belt are called buttons."
+  },
+  "Ступенчатые элементы наиболее древние из ковровых мотивов.": {
+   "az": "Pilləli elementlər xalça motivlərinin ən qədimlərindəndir.",
+   "en": "Stepped elements are among the most ancient carpet motifs."
+  },
+  "Встречается и в ширванских коврах.": {
+   "az": "Şirvan xalçalarında da rast gəlinir.",
+   "en": "Also found in Shirvan carpets."
+  },
+  "Можно считать, что это «кетебә».": {
+   "az": "Bunun «kətəbə» olduğunu hesab etmək olar.",
+   "en": "This can be considered a «ketebe»."
+  },
+  "Взят из килимового узора.": {
+   "az": "Kilim naxışından götürülüb.",
+   "en": "Taken from a kilim pattern."
+  },
+  "Напоминает форму сдобного хлебца.": {
+   "az": "Şirin çörək formasına bənzəyir.",
+   "en": "Resembles the shape of a sweet bun."
+  },
+  "Встречается также в ковре «Кюрд»": {
+   "az": "«Kürd» xalçasında da rast gəlinir.",
+   "en": "Also found in the «Kurd» carpet."
+  },
+  "Встречается в древнегреческом архитектурном декоре.": {
+   "az": "Qədim yunan memarlıq bəzəyində rast gəlinir.",
+   "en": "Found in ancient Greek architectural decoration."
+  },
+  "Называется также «железными щипцами».": {
+   "az": "«Dəmir kəlbətin» də adlanır.",
+   "en": "Also called «iron tongs»."
+  },
+  "Это изображение шпината.": {
+   "az": "Bu, ispanaq təsviridir.",
+   "en": "This is an image of spinach."
+  },
+  "Встречается в серединной кайме композиции «Гадим минарэ».": {
+   "az": "«Qədim minarə» kompozisiyasının orta haşiyəsində rast gəlinir.",
+   "en": "Found in the middle border of the «Gadim minare» composition."
+  }
+ }
+}
