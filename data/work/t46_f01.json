@@ -1,0 +1,121 @@
+{
+ "id": "t46_f01",
+ "sheet": "kerimov_vol1_patterns/page_165.jpg",
+ "table": 46,
+ "fig": 1,
+ "crop_origin": [
+  195,
+  118
+ ],
+ "frame": [
+  9,
+  9,
+  120,
+  117
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   12.41,
+   11.48
+  ],
+  [
+   125.79,
+   11.48
+  ],
+  [
+   125.79,
+   124.04
+  ],
+  [
+   12.41,
+   124.04
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Xal",
+  "name": "Хал",
+  "translation": "Пятно",
+  "carpet": "Гянджа",
+  "type": "Г.-К",
+  "note": "",
+  "site_id": "",
+  "source": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.913,
+  "ph": 4.913,
+  "ox": 0,
+  "oy": 0,
+  "cols": 23,
+  "rows": 23,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   137
+  ],
+  "centers": [
+   210,
+   89
+  ]
+ },
+ "matrix": {
+  "w": 9,
+  "h": 9,
+  "origin": [
+   7,
+   6
+  ],
+  "rows": [
+   "...111...",
+   "..1.121..",
+   ".1..1221.",
+   "1...12221",
+   "111111111",
+   "12221...1",
+   ".1221..1.",
+   "..121.1..",
+   "...111..."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.52,
+  "flags": [
+   "много полутонов — проверьте сетку",
+   "серую заливку стоит проверить"
+  ],
+  "pitch": [
+   4.929,
+   4.894
+  ],
+  "angle": 0.0,
+  "reviewed": true
+ },
+ "done": true,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "saved_at": "2026-09-27 00:46:13",
+ "review": false,
+ "transparent_bg": true
+}
