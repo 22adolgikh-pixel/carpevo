@@ -1,0 +1,110 @@
+{
+ "id": "t70_f02",
+ "sheet": "kerimov_vol1_patterns/page_189.jpg",
+ "table": 70,
+ "fig": 2,
+ "crop_origin": [
+  645,
+  181
+ ],
+ "frame": [
+  12,
+  11,
+  159,
+  138
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   14.55,
+   17.2
+  ],
+  [
+   162.16,
+   17.2
+  ],
+  [
+   162.16,
+   141.2
+  ],
+  [
+   14.55,
+   141.2
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Darağcik",
+  "name": "Дарагджик",
+  "translation": "Гребешочек",
+  "carpet": "Фахралы",
+  "type": "Г.-К",
+  "note": "",
+  "site_id": "",
+  "source": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 7.7895,
+  "ph": 7.75,
+  "ox": 0,
+  "oy": 0,
+  "cols": 19,
+  "rows": 16,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   120
+  ],
+  "centers": [
+   205,
+   64
+  ]
+ },
+ "matrix": {
+  "w": 5,
+  "h": 3,
+  "origin": [
+   8,
+   6
+  ],
+  "rows": [
+   "1.1.1",
+   "11111",
+   "1.1.1"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   7.769,
+   7.75
+  ],
+  "angle": 0.0,
+  "reviewed": true
+ },
+ "done": true,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "saved_at": "2026-09-26 23:56:56",
+ "review": false,
+ "transparent_bg": true
+}

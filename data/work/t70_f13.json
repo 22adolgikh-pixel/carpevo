@@ -1,0 +1,120 @@
+{
+ "id": "t70_f13",
+ "sheet": "kerimov_vol1_patterns/page_189.jpg",
+ "table": 70,
+ "fig": 13,
+ "crop_origin": [
+  303,
+  1405
+ ],
+ "frame": [
+  20,
+  15,
+  258,
+  198
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   23.91,
+   26.2
+  ],
+  [
+   272.65,
+   21.86
+  ],
+  [
+   275.91,
+   208.73
+  ],
+  [
+   27.18,
+   213.07
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Çengel",
+  "name": "Ченгель",
+  "translation": "Крюк",
+  "carpet": "Казах",
+  "type": "Г.-К",
+  "note": "",
+  "site_id": "",
+  "source": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 7.7812,
+  "ph": 7.7917,
+  "ox": 0,
+  "oy": 0,
+  "cols": 32,
+  "rows": 24,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   112
+  ],
+  "centers": [
+   206,
+   50
+  ]
+ },
+ "matrix": {
+  "w": 19,
+  "h": 9,
+  "origin": [
+   6,
+   7
+  ],
+  "rows": [
+   "11111....1....11111",
+   "1...1...121...1...1",
+   "1...1..12221..1...1",
+   "1.....1221221.....1",
+   "111111221.122111111",
+   "1.....1221221.....1",
+   "1...1..12221..1...1",
+   "1...1...121...1...1",
+   "11111....1....11111"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.97,
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
+  "pitch": [
+   7.774,
+   7.787
+  ],
+  "angle": -1.0,
+  "reviewed": true
+ },
+ "done": true,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "saved_at": "2026-09-26 23:57:23",
+ "review": false,
+ "transparent_bg": true
+}
