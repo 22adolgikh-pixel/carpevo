@@ -1,0 +1,107 @@
+{
+ "id": "t27_f03",
+ "sheet": "kerimov_vol1_patterns/page_146.jpg",
+ "table": 27,
+ "fig": 3,
+ "crop_origin": [
+  642,
+  112
+ ],
+ "frame": [
+  9,
+  9,
+  120,
+  114
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   0,
+   0
+  ],
+  [
+   138,
+   0
+  ],
+  [
+   138,
+   132
+  ],
+  [
+   0,
+   132
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Kitab",
+  "name": "Китаб",
+  "translation": "Книга",
+  "carpet": "Карабах",
+  "type": "Кар.",
+  "note": "Возможно это рехиль, т. е. деревянная подставка для книг.",
+  "site_id": "",
+  "source": "",
+  "name_az_auto": true
+ },
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "grid": {
+  "pw": 5.07,
+  "ph": 5.01,
+  "ox": 2.87,
+  "oy": 2.04,
+  "cols": 23,
+  "rows": 22,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   149
+  ],
+  "centers": [
+   204,
+   93
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "done": true,
+ "review": false,
+ "transparent_bg": true,
+ "matrix": {
+  "w": 15,
+  "h": 11,
+  "origin": [
+   4,
+   5
+  ],
+  "rows": [
+   "11111.....11111",
+   ".1...1...1...1.",
+   "..1...1.1...1..",
+   "...1...1...1...",
+   "....1.....1....",
+   ".....1...1.....",
+   "....1.....1....",
+   "...1...1...1...",
+   "..1...1.1...1..",
+   ".1...1...1...1.",
+   "11111.....11111"
+  ]
+ },
+ "saved_at": "2026-09-26 15:10:59"
+}

@@ -1,0 +1,113 @@
+{
+ "id": "t28_f03",
+ "sheet": "kerimov_vol1_patterns/page_147.jpg",
+ "table": 28,
+ "fig": 3,
+ "crop_origin": [
+  764,
+  103
+ ],
+ "frame": [
+  14,
+  9,
+  176,
+  114
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   20.94,
+   15.03
+  ],
+  [
+   185.63,
+   15.03
+  ],
+  [
+   185.63,
+   118.59
+  ],
+  [
+   20.94,
+   118.59
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Daraq",
+  "name": "Дараг",
+  "translation": "Гребень",
+  "carpet": "Карагоюнлу",
+  "type": "Кар.",
+  "note": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 5.0,
+  "ph": 4.9524,
+  "ox": 0,
+  "oy": 0,
+  "cols": 33,
+  "rows": 21,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   140
+  ],
+  "centers": [
+   211,
+   92
+  ]
+ },
+ "matrix": {
+  "w": 15,
+  "h": 10,
+  "origin": [
+   10,
+   4
+  ],
+  "rows": [
+   "...............",
+   ".1111111111111.",
+   ".1..11..11..11.",
+   ".11..11..11..1.",
+   ".1111111111111.",
+   ".1.1.1.1.1.1.1.",
+   ".1.1.1.1.1.1.1.",
+   ".1.1.1.1.1.1.1.",
+   ".1.1.1.1.1.1.1.",
+   "..............."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.97,
+  "flags": [],
+  "pitch": [
+   4.991,
+   4.931
+  ],
+  "angle": 0.0,
+  "reviewed": false
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "saved_at": "2026-09-26 14:31:02"
+}

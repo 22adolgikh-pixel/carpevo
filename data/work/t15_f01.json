@@ -1,0 +1,101 @@
+{
+ "id": "t15_f01",
+ "sheet": "kerimov_vol1_patterns/page_134.jpg",
+ "table": 15,
+ "fig": 1,
+ "crop_origin": [
+  210,
+  116
+ ],
+ "frame": [
+  10,
+  12,
+  130,
+  154
+ ],
+ "quad": [
+  [
+   10,
+   12
+  ],
+  [
+   140,
+   12
+  ],
+  [
+   140,
+   166
+  ],
+  [
+   10,
+   166
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name": "Быг",
+  "translation": "Усы",
+  "carpet": "Карабах",
+  "type": "Кар.",
+  "note": "",
+  "site_id": "elem_бығ",
+  "source": ""
+ },
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "grid": {
+  "pw": 4.888,
+  "ph": 4.888,
+  "ox": 2.96,
+  "oy": 2.01,
+  "cols": 26,
+  "rows": 31,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   149
+  ],
+  "centers": [
+   222,
+   76
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "done": true,
+ "transparent_bg": true,
+ "matrix": {
+  "w": 11,
+  "h": 9,
+  "origin": [
+   7,
+   9
+  ],
+  "rows": [
+   ".....1.....",
+   "....111....",
+   "...11.11...",
+   "..11...11..",
+   "....111....",
+   "....1.1....",
+   "1..11.11..1",
+   "1111...1111",
+   ".11.....11."
+  ]
+ },
+ "saved_at": "2026-09-25 18:06:18"
+}

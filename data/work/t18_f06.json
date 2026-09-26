@@ -1,0 +1,103 @@
+{
+ "id": "t18_f06",
+ "sheet": "kerimov_vol1_patterns/page_137.jpg",
+ "table": 18,
+ "fig": 6,
+ "crop_origin": [
+  455,
+  308
+ ],
+ "frame": [
+  15,
+  13,
+  198,
+  166
+ ],
+ "quad": [
+  [
+   15,
+   13
+  ],
+  [
+   213,
+   13
+  ],
+  [
+   213,
+   179
+  ],
+  [
+   15,
+   179
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name": "Гузу",
+  "translation": "Ягненок",
+  "carpet": "Ширван",
+  "type": "К.-Ш",
+  "note": "Встречается в бордюре ковра «Кабала».",
+  "site_id": "motif_гузу,elem_ягненок",
+  "source": ""
+ },
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "grid": {
+  "pw": 4.928,
+  "ph": 4.928,
+  "ox": 2.4,
+  "oy": 1.54,
+  "cols": 39,
+  "rows": 33,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   158
+  ],
+  "centers": [
+   213,
+   102
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "done": true,
+ "transparent_bg": true,
+ "matrix": {
+  "w": 10,
+  "h": 11,
+  "origin": [
+   13,
+   11
+  ],
+  "rows": [
+   "..1.......",
+   ".1.1......",
+   "1111....11",
+   "..11...11.",
+   "..11..11..",
+   "..11111111",
+   "..11111111",
+   "..11....11",
+   "..11....11",
+   "..11....11",
+   "..11....11"
+  ]
+ },
+ "saved_at": "2026-09-25 19:01:13"
+}
