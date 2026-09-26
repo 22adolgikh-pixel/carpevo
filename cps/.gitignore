@@ -1,0 +1,11 @@
+# локальное окружение и тяжёлые/производные данные — в репозиторий не идут
+.venv/
+__pycache__/
+.DS_Store
+.env
+users.json
+scans/
+uploads/
+data/crops/
+data/out/
+_backup_*/

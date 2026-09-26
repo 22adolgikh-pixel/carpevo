@@ -1,0 +1,107 @@
+{
+ "id": "t13_f04",
+ "sheet": "kerimov_vol1_patterns/page_131.jpg",
+ "table": 13,
+ "fig": 4,
+ "crop_origin": [
+  497,
+  406
+ ],
+ "frame": [
+  11,
+  7,
+  139,
+  94
+ ],
+ "quad": [
+  [
+   11,
+   7
+  ],
+  [
+   150,
+   7
+  ],
+  [
+   150,
+   101
+  ],
+  [
+   11,
+   101
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "",
+  "name": "Пишикаагы",
+  "translation": "Лапа кошки Кубинский",
+  "carpet": "сумах",
+  "type": "К.-Ш",
+  "note": "Это восьмилепестковый цветок.",
+  "site_id": "",
+  "source": ""
+ },
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "grid": {
+  "pw": 7.658,
+  "ph": 5.168,
+  "ox": 3.14,
+  "oy": 3.24,
+  "cols": 26,
+  "rows": 17,
+  "square": false
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   169
+  ],
+  "centers": [
+   221,
+   117
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#8a8a8a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": true,
+ "done": true,
+ "transparent_bg": true,
+ "difficulty": "simple",
+ "matrix": {
+  "w": 11,
+  "h": 11,
+  "origin": [
+   3,
+   3
+  ],
+  "rows": [
+   "...11.11...",
+   "..1221221..",
+   ".112212211.",
+   "12212121221",
+   "12221.12221",
+   ".111...111.",
+   "12221.12221",
+   "12212121221",
+   ".112212211.",
+   "..1221221..",
+   "...11.11..."
+  ]
+ },
+ "saved_at": "2026-09-25 19:47:17"
+}
