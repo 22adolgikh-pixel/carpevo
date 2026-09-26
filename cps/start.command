@@ -81,6 +81,10 @@ if lsof -nP -iTCP:8000 -sTCP:LISTEN >/dev/null 2>&1; then
   fi
 fi
 
+# настройки из .env (пароль для ссылки, токен GitHub для автокопии)
+[ -f .env ] && set -a && . ./.env && set +a
+if [ -n "$CPS_GITHUB_TOKEN" ]; then echo "Автокопия в GitHub включена (ветка cps-data, каждые ${CPS_BACKUP_MIN:-10} мин)."; fi
+
 RUN=()
 if [ "$CPS_SHARE" = "1" ]; then
   # ---- доступ по ссылке (share.command): пароль + туннель Cloudflare ----

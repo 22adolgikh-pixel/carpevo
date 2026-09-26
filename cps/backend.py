@@ -10,6 +10,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 from az_names import az_draft, site_suggest
 import autogrid
 import cloud
+import backup
 try:
     import pymupdf as fitz  # PyMuPDF (new import name; falls back to legacy)
 except Exception:
@@ -543,6 +544,19 @@ def api_bundle(all: int = 0):
                        "items": items}, ensure_ascii=False)
     return Response(data, media_type="application/json",
                     headers={"Content-Disposition": 'attachment; filename="pixel_schemes_bundle.json"'})
+
+@app.on_event("startup")
+def backup_start(): backup.start(HERE, DATA)
+
+@app.on_event("shutdown")
+def backup_stop():
+    if backup.state["enabled"]: backup.backup_once(HERE, DATA, "остановка студии")
+
+@app.get("/api/backup")
+def api_backup(): return backup.state
+
+@app.post("/api/backup")
+def api_backup_now(): return backup.backup_once(HERE, DATA, "вручную")
 
 @app.on_event("startup")
 def migrate_outputs():
