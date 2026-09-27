@@ -33,13 +33,15 @@
  ],
  "meta": {
   "section": "",
+  "name_az": "Keçi",
   "name": "Кечи",
   "translation": "Козел Бакинский",
   "carpet": "зили",
   "type": "К.-Ш.",
   "note": "",
   "site_id": "kechi",
-  "source": ""
+  "source": "",
+  "name_az_auto": true
  },
  "adjust": {
   "brightness": 0,
@@ -50,8 +52,8 @@
  "grid": {
   "pw": 4.927,
   "ph": 4.927,
-  "ox": 4.06,
-  "oy": 0.7,
+  "ox": 49.37,
+  "oy": 22.52,
   "cols": 47,
   "rows": 46,
   "square": true
@@ -76,7 +78,7 @@
   "обводка"
  ],
  "palette_touched": false,
- "done": true,
+ "done": false,
  "transparent_bg": true,
  "matrix": {
   "w": 25,
@@ -109,5 +111,7 @@
    "..........111....111..111"
   ]
  },
- "saved_at": "2026-09-24 22:52:08"
+ "saved_at": "2026-09-27 23:18:11",
+ "review": true,
+ "difficulty": null
 }

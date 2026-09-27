@@ -33,13 +33,15 @@
  ],
  "meta": {
   "section": "",
+  "name_az": "Quş",
   "name": "Гуш",
   "translation": "Птица Бакинский",
   "carpet": "зили",
   "type": "К.-Ш.",
   "note": "Возможно это изображение индейки.",
   "site_id": "qush",
-  "source": ""
+  "source": "",
+  "name_az_auto": true
  },
  "adjust": {
   "brightness": 0,
@@ -76,7 +78,7 @@
   "обводка"
  ],
  "palette_touched": false,
- "done": true,
+ "done": false,
  "transparent_bg": true,
  "matrix": {
   "w": 82,
@@ -151,5 +153,7 @@
    ".......11111...................................11111.............................."
   ]
  },
- "saved_at": "2026-09-24 22:52:24"
+ "saved_at": "2026-09-27 23:17:14",
+ "review": true,
+ "difficulty": null
 }
