@@ -33,13 +33,15 @@
  ],
  "meta": {
   "section": "Изображение людей",
+  "name_az": "Adam",
   "name": "Адам",
   "translation": "Человек",
   "carpet": "Казах",
   "type": "Г.—К",
   "note": "",
   "site_id": "adam,insan",
-  "source": ""
+  "source": "",
+  "name_az_auto": true
  },
  "adjust": {
   "brightness": 29,
@@ -48,10 +50,10 @@
   "invert": false
  },
  "grid": {
-  "pw": 5.302,
-  "ph": 5.302,
-  "ox": 2.72,
-  "oy": 2.73,
+  "pw": 5.002,
+  "ph": 5.002,
+  "ox": 6.2,
+  "oy": 5.63,
   "cols": 29,
   "rows": 34,
   "square": true
@@ -76,14 +78,14 @@
   "обводка"
  ],
  "palette_touched": false,
- "done": true,
+ "done": false,
  "transparent_bg": true,
  "matrix": {
   "w": 15,
   "h": 20,
   "origin": [
-   7,
-   7
+   6,
+   6
   ],
   "rows": [
    "......111......",
@@ -108,6 +110,7 @@
    "....11...11...."
   ]
  },
- "saved_at": "2026-09-24 22:56:34",
- "difficulty": null
+ "saved_at": "2026-09-27 23:35:55",
+ "difficulty": null,
+ "review": false
 }
