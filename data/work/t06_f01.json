@@ -155,14 +155,16 @@
  "palette": [
   "#ffffff",
   "#1a1a1a",
-  "#b8b8b8"
+  "#b8b8b8",
+  "#dedede"
  ],
  "palette_names": [
   "фон",
   "обводка",
-  "тело 1"
+  "тело 1",
+  "тело 2"
  ],
- "palette_touched": false,
+ "palette_touched": true,
  "auto": {
   "version": 1,
   "confidence": 0.27,
@@ -184,7 +186,7 @@
   "gamma": 1,
   "invert": false
  },
- "saved_at": "2026-09-26 19:30:40",
+ "saved_at": "2026-09-27 23:08:02",
  "transparent_bg": true,
  "review": false
 }
