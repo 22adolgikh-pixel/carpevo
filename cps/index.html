@@ -94,12 +94,7 @@ main{grid-column:2;grid-row:2;min-width:0;min-height:0}#right{grid-column:3;grid
 #tip{position:fixed;z-index:200;pointer-events:none;background:#2b303b;color:var(--tx);border:1px solid var(--ln);border-radius:6px;padding:4px 8px;font-size:12px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.45);display:none}
 #tip kbd{font:11px ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--ln);border-radius:3px;padding:0 4px;margin-left:6px;color:var(--mut)}
 /* сложность */
-.dseg{display:inline-flex;gap:2px}
-.dseg button{width:20px;height:20px;padding:0;border-radius:4px;font-size:11px;font-weight:700;color:var(--mut);background:var(--pan2)}
-.dseg button.on{color:#15171c;border-color:transparent}
 .dchip{display:inline-block;min-width:16px;padding:0 4px;border-radius:4px;font-size:10.5px;font-weight:700;color:#15171c;text-align:center;line-height:15px}
-.dsum{display:inline-flex;gap:3px;margin-left:4px;vertical-align:1px}
-.dsum i{font-style:normal;font-size:10px;font-weight:700;color:#15171c;border-radius:3px;padding:0 3px;line-height:13px}
 /* схема краёв матрицы */
 .edges{display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:auto 64px auto;gap:4px;align-items:center;justify-items:center;width:230px;margin:6px 0}
 .edges .ec{width:100%;height:100%;border:2px dashed var(--acc);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--tx);font:12px ui-monospace,Menlo,monospace}
@@ -179,7 +174,6 @@ aside{min-height:0}
   <div id="sbInfo"></div>
   <span id="stat"></span>
   <span id="hud"></span>
-  <button class="sm" id="gridTog" data-tip="показать / скрыть сетку" data-key="⌘'">▦ сетка</button>
   <div id="vpbar"><button class="sm" id="zOut" data-tip="уменьшить" data-key="−">−</button><span id="zLbl">100%</span><button class="sm" id="zIn" data-tip="увеличить" data-key="+">+</button><button class="sm" id="zFit" data-tip="вписать в окно" data-key="0">вписать</button></div>
 </footer>
 <span id="cur" hidden></span>
@@ -237,13 +231,10 @@ const ICON={
   save:SV('<path d="M4 4h9.5L16 6.5V16H4z"/><path d="M7 4v4h6V4"/><rect x="7" y="11" width="6" height="5"/>'),
   copy:SV('<rect x="3" y="7" width="8" height="10" rx="1"/><path d="M7 7V4.5a1 1 0 0 1 1-1H16a1 1 0 0 1 1 1V13a1 1 0 0 1-1 1H14.5"/>'),
   paste:SV('<rect x="4" y="4" width="12" height="13" rx="1"/><path d="M7.5 4V3h5v1"/><path d="M6.5 9h7M6.5 12h7M6.5 15h4"/>'),
+  grid:SV('<rect x="3" y="3" width="14" height="14" rx="1"/><path d="M3 8h14M3 13h14M8 3v14M13 3v14"/>'),
 };
 const IB=(ic,tip,key,attrs,on)=>`<button class="ib ${on?'on':''}" data-tip="${esc(tip)}" ${key?`data-key="${esc(key)}"`:''} ${attrs||''}>${ICON[ic]}</button>`;
 /* сложность узора — выставляется при первичном просмотре листа */
-const DIFF=[{k:'simple',l:'простой',c:'#7ec96b'},{k:'medium',l:'средний',c:'#6cb6ff'},{k:'complex',l:'сложный',c:'#ffb454'},{k:'ultra',l:'ультра‑сложный',c:'#e06c75'}];
-const DIFFI=k=>DIFF.findIndex(d=>d.k===k);
-const dchip=k=>'';   // v7: сложность не используется
-const dseg=(cur,attr)=>'<span class="dseg">'+DIFF.map((d,i)=>`<button class="${cur===d.k?'on':''}" style="${cur===d.k?'background:'+d.c:''}" data-tip="${d.l}" data-key="${i+1}" ${attr}="${d.k}">${i+1}</button>`).join('')+'</span>';
 const dispName=f=>f.name_az||f.name||'';
 
 /* ============================ состояние ============================ */
@@ -281,8 +272,7 @@ cv.addEventListener('pointermove',ev=>{
   const w=toWorld(ev);const h=H();if(h&&h.move)h.move(w,ev);if(h&&h.hud)$('hud').textContent=h.hud(w);
 });
 cv.addEventListener('pointerup',ev=>{if(panning){panning=null;cv.style.cursor='';return;}const h=H();if(h&&h.up)h.up(toWorld(ev),ev);});
-function toggleGrid(){S.showGrid=!S.showGrid;try{localStorage.setItem('cpsGrid',S.showGrid?'1':'0');}catch(e){}$('gridTog').classList.toggle('on',S.showGrid);redraw();}
-$('gridTog').onclick=toggleGrid;$('gridTog').classList.toggle('on',S.showGrid);
+function toggleGrid(){S.showGrid=!S.showGrid;try{localStorage.setItem('cpsGrid',S.showGrid?'1':'0');}catch(e){}const el=$('gridTog');if(el)el.classList.toggle('on',S.showGrid);redraw();}
 $('zIn').onclick=()=>zoomAt(1.25,V.w/2,V.h/2);$('zOut').onclick=()=>zoomAt(0.8,V.w/2,V.h/2);$('zFit').onclick=()=>{const h=H();if(h&&h.fit)h.fit();};
 let rafPending=false;
 function redraw(){if(rafPending)return;rafPending=true;requestAnimationFrame(()=>{rafPending=false;draw();});}
@@ -307,7 +297,6 @@ function setMode(m){
   $('catalog').style.display=m==='cat'?'block':'none';
   $('vpbar').style.display=$('hud').style.display=m==='cat'?'none':'';
   $('toolcol').style.display=m==='pix'?'flex':'none';
-  $('gridTog').style.display=m==='pix'?'':'none';
   renderLeft();renderRight();renderNav();renderSbInfo();
   requestAnimationFrame(()=>{resize();const h=H();if(h&&h.fit)h.fit();else redraw();});
 }
@@ -345,7 +334,7 @@ function renderLeft(){
       (sources.length>1?`<div class="srcbar">${[['','все источники']].concat(sources.map(s=>[s,s])).map(([k,l])=>`<button class="${cur===k?'on':''}" data-src="${esc(k)}">${esc(l)}</button>`).join('')}</div>`:'')+
       '<div class="flex" style="margin-bottom:6px"><button id="upSheets" class="sm">+ загрузить сканы</button><button id="rfSheets" class="sm">обновить</button></div>'+
       '<input type="file" id="upFile" multiple accept="image/*" hidden>'+
-      (list.length?list.map(s=>`<div class="item ${S.sheet&&S.sheet.path===s.path?'sel':''}" data-p="${esc(s.path)}"><span class="dot ${s.n?(s.done===s.n?'done':'mid'):''}"></span><div>${esc(s.name)}<small>${s.table?('Табл. '+esc(s.table)+' · '):''}${s.n?(s.n+' рис., готово '+s.done):'не размечен'}${diffSum(s.diff)}</small></div></div>`).join(''):'<div class="hint">в этом источнике сканов нет</div>')+
+      (list.length?list.map(s=>`<div class="item ${S.sheet&&S.sheet.path===s.path?'sel':''}" data-p="${esc(s.path)}" style="${s.no_figures?'opacity:.5':''}"><span class="dot ${s.no_figures?'':(s.n?(s.done===s.n?'done':'mid'):'')}"></span><div>${esc(s.name)}<small>${s.no_figures?'пусто (без рисунков)':(s.table?('Табл. '+esc(s.table)+' · '):'')+(s.n?(s.n+' рис., готово '+s.done):'не размечен')}</small></div></div>`).join(''):'<div class="hint">в этом источнике сканов нет</div>')+
       '<div class="hint">Папка сканов задаётся переменной <kbd>CPS_SCANS</kbd> при запуске (можно указать папку Google Drive). Подпапки внутри неё = разные источники (книги/журналы) — фильтр выше.<br><span id="scDir"></span></div>'+
       '<h4>Книги (PDF)</h4><div id="pdfSec" class="hint">ищу PDF…</div>';
     L.querySelectorAll('.item').forEach(e=>e.onclick=()=>openSheet(e.dataset.p).catch(fail));
@@ -356,7 +345,6 @@ function renderLeft(){
     refreshPdfs().catch(()=>{const e=$('pdfSec');if(e)e.textContent='PDF не найдены или на сервере нет pymupdf.';});
   }else{L.innerHTML='';}   // на экранах 2–4 левой панели нет: навигация — в шапке, список — в «Каталоге»
 }
-function diffSum(d){return'';const parts=DIFF.map((x,i)=>d[x.k]?`<i style="background:${x.c}" title="${x.l}">${i+1}·${d[x.k]}</i>`:'').join('');return parts?'<span class="dsum">'+parts+'</span>':'';}
 async function uploadFiles(url,files){
   files=files.filter(f=>/^image\//.test(f.type)||/\.(png|jpe?g|webp|tiff?|bmp)$/i.test(f.name));
   if(!files.length){stat('нет картинок в выборе','err');return;}
@@ -389,18 +377,14 @@ async function refreshPdfs(){
 async function openSheet(path){
   stat('открываю лист…','busy');
   const [img,meta]=await Promise.all([loadImg('/api/sheet_image?path='+encodeURIComponent(path)),api('/api/sheet?path='+encodeURIComponent(path))]);
-  S.sheet={path,img,table:meta.table??guessTable(path),boxes:(meta.boxes||[]).map(b=>({...b})),sel:-1,saved:!!(meta.boxes||[]).length};
-  if(!S.sheet.boxes.length)await autoSegment();
+  S.sheet={path,img,table:meta.table??guessTable(path),boxes:(meta.boxes||[]).map(b=>({...b})),sel:-1,saved:!!(meta.boxes||[]).length,noFigures:!!meta.no_figures};
+  if(!S.sheet.boxes.length&&!S.sheet.noFigures)await autoSegment();
   S.sheet.sel=-1;
   stat('');renderLeft();renderRight();MODES.sheet.fit();
 }
 const KERIMOV_PLATE_TABLE={"kerimov_vol1_patterns/page_119.jpg":1,"kerimov_vol1_patterns/page_120.jpg":2,"kerimov_vol1_patterns/page_121.jpg":3,"kerimov_vol1_patterns/page_122.jpg":4,"kerimov_vol1_patterns/page_123.jpg":5,"kerimov_vol1_patterns/page_124.jpg":6,"kerimov_vol1_patterns/page_125.jpg":7,"kerimov_vol1_patterns/page_126.jpg":8,"kerimov_vol1_patterns/page_127.jpg":9,"kerimov_vol1_patterns/page_128.jpg":10,"kerimov_vol1_patterns/page_129.jpg":11,"kerimov_vol1_patterns/page_130.jpg":12,"kerimov_vol1_patterns/page_131.jpg":13,"kerimov_vol1_patterns/page_133.jpg":14,"kerimov_vol1_patterns/page_134.jpg":15,"kerimov_vol1_patterns/page_135.jpg":16,"kerimov_vol1_patterns/page_136.jpg":17,"kerimov_vol1_patterns/page_137.jpg":18,"kerimov_vol1_patterns/page_138.jpg":19,"kerimov_vol1_patterns/page_139.jpg":20,"kerimov_vol1_patterns/page_140.jpg":21,"kerimov_vol1_patterns/page_141.jpg":22,"kerimov_vol1_patterns/page_142.jpg":23,"kerimov_vol1_patterns/page_143.jpg":24,"kerimov_vol1_patterns/page_144.jpg":25,"kerimov_vol1_patterns/page_145.jpg":26,"kerimov_vol1_patterns/page_146.jpg":27,"kerimov_vol1_patterns/page_147.jpg":28,"kerimov_vol1_patterns/page_148.jpg":29,"kerimov_vol1_patterns/page_149.jpg":30,"kerimov_vol1_patterns/page_150.jpg":31,"kerimov_vol1_patterns/page_151.jpg":32,"kerimov_vol1_patterns/page_152.jpg":33,"kerimov_vol1_patterns/page_153.jpg":34,"kerimov_vol1_patterns/page_154.jpg":35,"kerimov_vol1_patterns/page_155.jpg":36,"kerimov_vol1_patterns/page_156.jpg":37,"kerimov_vol1_patterns/page_157.jpg":38,"kerimov_vol1_patterns/page_158.jpg":39,"kerimov_vol1_patterns/page_159.jpg":40,"kerimov_vol1_patterns/page_160.jpg":41,"kerimov_vol1_patterns/page_161.jpg":42,"kerimov_vol1_patterns/page_162.jpg":43,"kerimov_vol1_patterns/page_163.jpg":44,"kerimov_vol1_patterns/page_164.jpg":45,"kerimov_vol1_patterns/page_165.jpg":46,"kerimov_vol1_patterns/page_166.jpg":47,"kerimov_vol1_patterns/page_167.jpg":48,"kerimov_vol1_patterns/page_168.jpg":49,"kerimov_vol1_patterns/page_169.jpg":50,"kerimov_vol1_patterns/page_170.jpg":51,"kerimov_vol1_patterns/page_171.jpg":52,"kerimov_vol1_patterns/page_172.jpg":53,"kerimov_vol1_patterns/page_173.jpg":54,"kerimov_vol1_patterns/page_174.jpg":55,"kerimov_vol1_patterns/page_175.jpg":56,"kerimov_vol1_patterns/page_176.jpg":57,"kerimov_vol1_patterns/page_177.jpg":58,"kerimov_vol1_patterns/page_178.jpg":59,"kerimov_vol1_patterns/page_179.jpg":60,"kerimov_vol1_patterns/page_180.jpg":61,"kerimov_vol1_patterns/page_181.jpg":62,"kerimov_vol1_patterns/page_182.jpg":63};
 function guessTable(p){if(KERIMOV_PLATE_TABLE[p]!=null)return KERIMOV_PLATE_TABLE[p];const kp=/kerimov_vol1_patterns\/page_(\d+)\./.exec(p);if(kp&&+kp[1]>=133)return +kp[1]-119;const m=/(?:t|табл|tabl|table)[ ._-]?(\d{1,3})/i.exec(p);return m?+m[1]:'';}
 function figOrder(sh){return sh.boxes.map((b,i)=>i).sort((a,c)=>(+sh.boxes[a].fig||0)-(+sh.boxes[c].fig||0));}
-function setDifficulty(i,k,advance){const sh=S.sheet;const b=sh.boxes[i];if(!b)return;
-  b.difficulty=b.difficulty===k&&!advance?null:k;sh.saved=false;
-  if(advance){const ord=figOrder(sh),pos=ord.indexOf(i);const nxt=ord.slice(pos+1).find(j=>!sh.boxes[j].difficulty);sh.sel=nxt??(ord[pos+1]??i);}
-  renderRight();redraw();}
 async function autoSegment(){
   const r=await api('/api/segment',{path:S.sheet.path});
   S.sheet.boxes=r.boxes;S.sheet.sel=-1;S.sheet.saved=false;
@@ -462,17 +446,24 @@ function renderRightSheet(){
   R.innerHTML=`<h4>Лист</h4><div class="hint" style="margin-top:0">${esc(sh.path)}</div>
   <div class="row"><label>№ таблицы</label><input type="number" id="shTable" value="${esc(sh.table)}"><span class="hint" style="margin:0">«Табл. 14»</span></div>
   <div class="flex"><button id="shAuto">🔎 найти рамки заново</button><button id="shRenum">↻ нумерация</button></div>
+  <div class="flex" style="margin-top:2px"><button id="shEmpty" class="sm ${sh.noFigures?'on':''}" data-tip="Страница без нужных рисунков (текст, обложка, реклама) — не искать на ней рамки">${sh.noFigures?'☑':'☐'} не содержит искомых изображений</button></div>
+  ${sh.noFigures?'<div class="hint">Лист помечен как пустой — рамки на нём не ищутся. Снимите отметку, чтобы разметить рисунки вручную.</div>':''}
   <h4>Рисунки на листе (${sh.boxes.length})</h4>
   <div class="boxlist">${sh.boxes.map((b,i)=>`<div class="bx ${i===sh.sel?'sel':''}" data-i="${i}"><span data-tip="номер рисунка">№</span><input type="number" data-f="fig" value="${esc(b.fig)}" style="width:44px"><span data-tip="таблица, если отличается от листа">т.</span><input type="number" data-f="table" placeholder="${esc(sh.table)}" value="${esc(b.table||'')}" style="width:44px"><span class="sp"></span><button class="sm" data-del data-tip="удалить рамку" data-key="Del">✕</button></div>`).join('')}</div>
   <div class="hint"><kbd>Tab</kbd> — следующая рамка, <kbd>Esc</kbd> — снять выделение.</div>
   <div style="margin:6px 0">${HT('Мышь: клик — выбрать рамку, тянуть — двигать, за точки — менять размер, тянуть по пустому месту — новая рамка.<br><kbd>Del</kbd> удалить · стрелки — сдвиг (<kbd>Shift</kbd> ×10, <kbd>Alt</kbd> — размер)<br>Зум: щипок на трекпаде или <kbd>⌘</kbd>+колесо, прокрутка двумя пальцами — сдвиг, <kbd>Пробел</kbd>+тянуть — сдвиг.<br>Номер рисунка и таблицы задают id (<kbd>t14_f01</kbd>) и подтягивают подписи из легенды.')}</div>
   <div class="rfoot">
-    <button id="shAutoPix" class="big pri" data-tip="Нарезать (если нужно), натянуть сетку и перевести в пиксели все рисунки листа. Рисунки, где пиксели уже есть, не трогаются (Shift — пересчитать все)">⚡ Авто: сетка и пиксели</button>
-    <label style="display:flex;gap:6px;align-items:center;color:var(--mut);font-size:12px;cursor:pointer" data-tip="снимите — только тёмный контур"><input type="checkbox" id="shAutoFill" ${S.autoFill?'checked':''}>с серой заливкой</label>
+    <div class="flex" style="gap:6px;align-items:stretch">
+      <button id="shAutoPix" class="big pri" style="flex:1" data-tip="Нарезать (если нужно), натянуть сетку и перевести в пиксели все рисунки листа. Рисунки, где пиксели уже есть, не трогаются (Shift — пересчитать все)">⚡ Авто: сетка и пиксели</button>
+      <button id="shAutoFill" class="sm ${S.autoFill?'on':''}" style="white-space:nowrap" data-tip="снимите — только тёмный контур">${S.autoFill?'☑':'☐'} заливка</button>
+    </div>
     <button id="shSave" class="big ${sh.saved?'pri':'on'}">💾 Сохранить и нарезать</button>
   </div>`;
   $('shTable').oninput=e=>{sh.table=e.target.value;sh.saved=false;redraw();};
   $('shAuto').onclick=()=>autoSegment().catch(fail);
+  $('shEmpty').onclick=async()=>{
+    try{await api('/api/sheet_empty',{path:sh.path,value:!sh.noFigures});sh.noFigures=!sh.noFigures;renderRight();await refreshSheets();}catch(err){fail(err);}
+  };
   $('shRenum').onclick=()=>{
     // группируем в 'ряды' по вертикальному ПЕРЕСЕЧЕНИЮ рамок (не по фиксированному порогу в px) —
     // так большая и маленькая рамка в одном ряду не разъезжаются по номерам.
@@ -491,10 +482,9 @@ function renderRightSheet(){
     el.onclick=e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='BUTTON')return;sh.sel=i;renderRight();redraw();};
     el.querySelectorAll('input').forEach(inp=>inp.oninput=()=>{sh.boxes[i][inp.dataset.f]=inp.value===''?null:+inp.value;sh.saved=false;redraw();});
     el.querySelector('[data-del]').onclick=()=>{sh.boxes.splice(i,1);sh.sel=-1;sh.saved=false;renderRight();redraw();};
-    el.querySelectorAll('[data-d]').forEach(btn=>btn.onclick=()=>{sh.sel=i;setDifficulty(i,btn.dataset.d,false);});
   });
   $('shSave').onclick=()=>saveSheet().catch(fail);
-  $('shAutoFill').onchange=e=>{S.autoFill=e.target.checked;};
+  $('shAutoFill').onclick=()=>{S.autoFill=!S.autoFill;renderRight();};
   $('shAutoPix').onclick=e=>{if(e.shiftKey&&!confirm('Пересчитать ВСЕ рисунки листа? Ручные правки пикселей будут заменены.'))return;autoSheet(e.shiftKey).catch(fail);};
 }
 async function saveSheet(nav){
@@ -662,7 +652,7 @@ async function openFigure(id){
     palette:(w.palette||FIXED_PALETTE.slice(0,3)).map(c=>String(c).toLowerCase()==='#8a8a8a'?'#b8b8b8':c),palNames:w.palette_names||FIXED_NAMES.slice(0,3),palTouched:!!w.palette_touched,
     meta:Object.assign({section:'',name_az:'',name:'',translation:'',carpet:'',type:'',note:'',site_id:'',source:''},w.meta||{}),
     done:!!w.done,review:!!w.review,transparent:w.transparent_bg!==false,difficulty:w.difficulty||null,
-    M:null,cur:1,tool:'pen',sym:{x:false,y:false,rot:false,ax:null,ay:null},under:0.35,undo:[],redo:[],clip:null};
+    M:null,cur:1,tool:'line',sym:{x:false,y:false,rot:false,ax:null,ay:null},under:0.35,undo:[],redo:[],clip:null};
   if(w.matrix){const m=w.matrix;F.M={w:m.w,h:m.h,ox:(m.origin||[0,0])[0],oy:(m.origin||[0,0])[1],d:new Uint8Array(m.w*m.h)};
     m.rows.forEach((r,j)=>{for(let i=0;i<m.w;i++){const ch=r[i]||'.';F.M.d[j*m.w+i]=ch==='.'?0:parseInt(ch,36);}});}
   S.fig=F;S.dirty=false;warp(F);adjust(F);
@@ -788,8 +778,10 @@ function renderRightGrid(){
   <div class="row"><label>превью</label><input type="checkbox" id="pv" ${F.preview?'checked':''}><input type="range" id="pvA" min="0.1" max="1" step="0.05" value="${F.previewAlpha||0.6}"></div>
   <label class="flex" style="color:var(--mut);font-size:12px;margin-top:6px"><input type="checkbox" id="blankEx" ${F.blankExtract?'checked':''}>чистый лист (без авто-заливки по порогу)</label>
   <div class="rfoot">
-    <button id="autoFig" class="big pri" data-tip="Сетка и пиксели автоматически (углы, шаг, наклон, контур и заливка)">⚡ Авто: сетка и пиксели</button>
-    <label style="display:flex;gap:6px;align-items:center;color:var(--mut);font-size:12px;cursor:pointer" data-tip="снимите — только тёмный контур"><input type="checkbox" id="gAutoFill" ${S.autoFill?'checked':''}>с серой заливкой</label>
+    <div class="flex" style="gap:6px;align-items:stretch">
+      <button id="autoFig" class="big pri" style="flex:1" data-tip="Сетка и пиксели автоматически (углы, шаг, наклон, контур и заливка)">⚡ Авто: сетка и пиксели</button>
+      <button id="gAutoFill" class="sm ${S.autoFill?'on':''}" style="white-space:nowrap" data-tip="снимите — только тёмный контур">${S.autoFill?'☑':'☐'} заливка</button>
+    </div>
     <button id="toPix" class="big on" data-tip="Перевести клетки в пиксели по текущей сетке и порогам${F.M?' — ручные правки пикселей будут заменены':''}">▦ Извлечь в пиксели ${G.cols}×${G.rows} →</button>
   </div>`;
   $('vQuad').onclick=()=>{S.gridView='quad';renderRight();MODES.quad.fit();};
@@ -823,7 +815,7 @@ function renderRightGrid(){
   F.previewAlpha=F.previewAlpha||0.6;
   $('blankEx').onchange=e=>{F.blankExtract=e.target.checked;};
   $('toPix').onclick=extractToPixels;
-  $('autoFig').onclick=()=>autoFigure().catch(fail);$('gAutoFill').onchange=e=>{S.autoFill=e.target.checked;};
+  $('autoFig').onclick=()=>autoFigure().catch(fail);$('gAutoFill').onclick=()=>{S.autoFill=!S.autoFill;renderRight();};
   renderThr();drawHist();histEvents();
 }
 function renderThr(){const F=S.fig,C=F.cls,b=$('thrBox');if(!b)return;
@@ -1070,11 +1062,12 @@ function renderToolcol(){
   const T=(t,ic,tip,key)=>IB(t==='rect'&&F.tool==='rectf'?'rectf':ic,tip,key,`data-tool="${t}"`,F.tool===t||(t==='rect'&&F.tool==='rectf')||(t==='copy'&&F.tool==='paste'));
   TC.innerHTML=`${T('pen','pen','Карандаш','B')}${T('eraser','eraser','Ластик','E')}${T('fill','fill','Заливка','G')}${T('line','line','Линия','L')}${T('rect','rect',F.tool==='rectf'?'Прямоугольник залитый':'Прямоугольник (ещё раз R — залитый)','R')}${T('copy',F.tool==='paste'?'paste':'copy',F.tool==='paste'?'Вставить скопированное (клик) · Esc — отмена':'Скопировать область (потом — клик, чтобы вставить)','C')}
 
-  <hr>${IB('symX','Зеркало по вертикали — рисуете половину, вторая повторяется. Alt+тянуть по линии — сдвинуть ось','', 'id="syX"',F.sym.x)}${IB('symY','Зеркало по горизонтали. Alt+тянуть по линии — сдвинуть ось','','id="syY"',F.sym.y)}${IB('rot','Поворот 180° вокруг центра (розетки, вертушки)','','id="syR"',F.sym.rot)}`;
+  <hr>${IB('symX','Зеркало по вертикали — рисуете половину, вторая повторяется. Alt+тянуть по линии — сдвинуть ось','', 'id="syX"',F.sym.x)}${IB('symY','Зеркало по горизонтали. Alt+тянуть по линии — сдвинуть ось','','id="syY"',F.sym.y)}${IB('rot','Поворот 180° вокруг центра (розетки, вертушки)','','id="syR"',F.sym.rot)}${IB('grid',"Показать / скрыть сетку","⌘'",'id="gridTog"',S.showGrid)}`;
   TC.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{const t=b.dataset.tool;F.tool=t==='rect'&&F.tool==='rect'?'rectf':t;renderRight();});
   $('syX').onclick=()=>{F.sym.x=!F.sym.x;if(F.sym.x)F.sym.ax=F.M.w/2;renderRight();redraw();};
   $('syY').onclick=()=>{F.sym.y=!F.sym.y;if(F.sym.y)F.sym.ay=F.M.h/2;renderRight();redraw();};
   $('syR').onclick=()=>{F.sym.rot=!F.sym.rot;if(F.sym.rot){F.sym.ax=F.M.w/2;F.sym.ay=F.M.h/2;}renderRight();redraw();};
+  $('gridTog').onclick=toggleGrid;
 }
 function outLinks(){const F=S.fig,e=$('outLinks');if(!e)return;const t=Date.now(),L=(suf,lbl,tip)=>`<a href="/out/${F.id}${suf}?t=${t}" target="_blank" style="color:var(--blue)" ${tip?`data-tip="${tip}"`:''}>${lbl}</a>`;
   e.innerHTML=F.work.saved_at?`Файлы: ${L('.png','PNG 1:1','1 узел = 1 пиксель, фон прозрачный')} · ${L('_x12.png','PNG ×12','крупно, фон прозрачный, без сетки')} · ${L('_bg.png','×12 с фоном','крупно, с цветом фона — для просмотра и печати')} · ${L('_grid.png','сетка','сетка отдельным прозрачным слоем того же размера, что ×12')} · ${L('.svg','SVG','векторный: каждый цвет — свой слой, фон и сетка — отдельные скрытые слои')}`:'';}
@@ -1122,12 +1115,11 @@ function renderCatalog(){
     <input type="text" id="catQ" placeholder="поиск: id, ad, название, site_id…" value="${esc(S.catQ)}" style="width:220px">
     <label class="flex" style="color:var(--mut)"><input type="checkbox" id="catOnly" ${S.catOnly?'checked':''}> только готовые</label></div>
   <div class="cards">${figs.filter(f=>!S.catOnly||f.done).map(f=>`<div class="card" data-id="${esc(f.id)}"><div class="im"><img loading="lazy" src="${f.size?('/out/'+encodeURIComponent(f.id)+'_x12.png'):('/api/crop/'+encodeURIComponent(f.id))}?t=${Math.round(f.t)}"></div>
-    <div class="t"><span class="dot ${f.done?'done':(f.size?'mid':'')}" style="display:inline-block;margin-right:5px"></span>${esc(dispName(f)||f.id)}${f.name_az_auto?'<small data-tip="черновик из кириллицы — проверьте">черн.</small>':''} ${dchip(f.difficulty)}${f.auto?` <span class="dchip" style="background:var(--acc)" data-tip="автооцифровка, ещё не проверена · уверенность ${Math.round((f.auto_conf??0)*100)}%">⚡</span>`:''}${f.review?' <span class="dchip rev" data-tip="отмечено на пересмотр">⚠</span>':''}</div>
+    <div class="t"><span class="dot ${f.done?'done':(f.size?'mid':'')}" style="display:inline-block;margin-right:5px"></span>${esc(dispName(f)||f.id)}${f.name_az_auto?'<small data-tip="черновик из кириллицы — проверьте">черн.</small>':''}${f.auto?` <span class="dchip" style="background:var(--acc)" data-tip="автооцифровка, ещё не проверена · уверенность ${Math.round((f.auto_conf??0)*100)}%">⚡</span>`:''}${f.review?' <span class="dchip rev" data-tip="отмечено на пересмотр">⚠</span>':''}</div>
     <div class="m">${esc(f.id)}${f.translation?' · '+esc(f.translation):''}${f.carpet?' · '+esc(f.carpet):''}${f.size?' · '+f.size[0]+'×'+f.size[1]:''}${f.colors?' · '+f.colors+' цв.':''}</div>
     <div class="m">${f.site_id?'→ '+esc(f.site_id):'<span style="color:var(--bad)">нет привязки к сайту</span>'}</div></div>`).join('')}</div>`;
   $('catOnly').onchange=e=>{S.catOnly=e.target.checked;renderCatalog();};
   $('catRev').onchange=e=>{S.catRev=e.target.checked;renderCatalog();};
-  C.querySelectorAll('[data-cd]').forEach(b=>b.onclick=()=>{S.catDiff=b.dataset.cd;renderCatalog();});
   C.querySelectorAll('[data-cc]').forEach(b=>b.onclick=()=>{S.catCol=b.dataset.cc;renderCatalog();});
   $('catQ').oninput=e=>{S.catQ=e.target.value;renderCatalog();};
   if(fq){const el=$('catQ');el.focus();el.setSelectionRange(cpos,cpos);}

@@ -152,7 +152,7 @@ def api_sheets():
                 d = norm_diff(w.get("difficulty"))
                 if d: diff[d] = diff.get(d, 0) + 1
             src = rel.replace("\\", "/").split("/")[0] if "/" in rel.replace("\\", "/") else "(без папки)"
-            out.append({"path": rel, "name": fn, "source": src, "table": meta.get("table"), "n": len(figs), "done": done, "diff": diff})
+            out.append({"path": rel, "name": fn, "source": src, "table": meta.get("table"), "n": len(figs), "done": done, "diff": diff, "no_figures": bool(meta.get("no_figures"))})
     out.sort(key=lambda s: s["path"])
     return out
 
@@ -219,6 +219,17 @@ def api_sheet_save(body: dict = Body(...)):
         figs.append(fid)
     jsave(os.path.join(D_SHEETS, key + ".json"), {"path": rel, "table": table, "boxes": boxes, "figures": figs})
     return {"figures": figs}
+
+@app.post("/api/sheet_empty")
+def api_sheet_empty(body: dict = Body(...)):
+    """Отмечает лист как «не содержит искомых изображений» (например, текстовая
+    страница, обложка, реклама) — чтобы не пытаться на нём искать рамки рисунков."""
+    rel = body["path"]; key = _sheet_key(rel)
+    p = os.path.join(D_SHEETS, key + ".json")
+    sh = jload(p, {"path": rel, "table": None, "boxes": [], "figures": []}) or {}
+    sh["no_figures"] = bool(body.get("value", True))
+    jsave(p, sh)
+    return {"ok": True, "no_figures": sh["no_figures"]}
 
 # ---------------- API: PDF-книги (раскладка страниц на сканы) ----------------
 PDF_MAX_PAGES_PER_CALL = 80
