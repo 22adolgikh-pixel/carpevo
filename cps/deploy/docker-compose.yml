@@ -1,0 +1,36 @@
+# CPS на VPS (например, Hostkey). Постоянный диск — том cps_data, поэтому
+# restore.py при обычных перезапусках ничего не тянет заново (данные уже на месте);
+# он полезен только при первом запуске на чистой машине или если том потеряется.
+services:
+  cps:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - PORT=8000
+    volumes:
+      - cps_data:/app/data
+      - cps_scans:/app/scans
+    expose:
+      - "8000"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - cps
+
+volumes:
+  cps_data:
+  cps_scans:
+  caddy_data:
+  caddy_config:
