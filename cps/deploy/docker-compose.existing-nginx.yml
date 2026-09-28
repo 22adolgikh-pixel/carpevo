@@ -1,0 +1,32 @@
+# CPS на VPS, где УЖЕ есть свой nginx + certbot под другие домены (как у вас,
+# upriver-server): без Caddy, без своих портов 80/443 — просто подключаемся
+# к существующей docker-сети их nginx, а проксирование и HTTPS делает он сам
+# (см. cps/deploy/NGINX_EXISTING.md — конфиг для их nginx + команда certbot).
+#
+# Если сервер "чистый" (своего nginx/сертификатов ещё нет) — используйте
+# вместо этого docker-compose.yml (там свой Caddy с авто-HTTPS).
+services:
+  cps:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - PORT=8000
+    volumes:
+      - cps_data:/app/data
+      - cps_scans:/app/scans
+    networks:
+      existing_nginx_net:
+        aliases:
+          - cps   # так nginx сможет проксировать на http://cps:8000
+
+networks:
+  existing_nginx_net:
+    external: true
+    name: upriver-server_default   # имя сети существующего nginx — замените, если другое
+
+volumes:
+  cps_data:
+  cps_scans:
