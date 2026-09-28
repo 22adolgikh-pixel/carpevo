@@ -9,6 +9,15 @@ _backup_before_site_ids_2026-09-26
 .backup_repo
 scans
 uploads
-data
+# рабочее состояние — на хостинге восстанавливается из ветки cps-data при
+# старте (restore.py); site_index.json НЕ исключаем — это статический
+# справочник (соответствие рисунков страницам сайта), edет вместе с кодом,
+# в автобэкап не входит (см. backup.py ITEMS)
+data/work
+data/sheets
+data/crops
+data/out
+data/legend.csv
+data/i18n.json
 *.zip
 .DS_Store

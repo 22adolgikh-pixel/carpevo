@@ -3,7 +3,7 @@
 # Включается, если в .env есть CPS_GITHUB_TOKEN (fine-grained токен GitHub
 # с правом Contents: Read and write на репозиторий carpevo). Раз в CPS_BACKUP_MIN
 # минут (по умолчанию 10) и при остановке студии копирует в ветку cps-data:
-#   data/work/  data/sheets/  data/legend.csv  data/i18n.json
+#   data/work/  data/sheets/  data/legend.csv  data/i18n.json  data/site_index.json
 # и делает коммит, только если что-то изменилось. История изменений — в GitHub.
 # Сканы, кропы и картинки data/out в GitHub НЕ идут: репозиторий публичный,
 # а сканы книг защищены авторским правом (кропы и out пересобираются из work).
@@ -12,7 +12,7 @@ import os, shutil, subprocess, threading, time
 REPO = os.environ.get("CPS_BACKUP_REPO", "22adolgikh-pixel/carpevo")
 BRANCH = os.environ.get("CPS_BACKUP_BRANCH", "cps-data")
 EVERY = float(os.environ.get("CPS_BACKUP_MIN", "10"))
-ITEMS = ("work", "sheets", "legend.csv", "i18n.json")
+ITEMS = ("work", "sheets", "legend.csv", "i18n.json", "site_index.json")
 
 state = {"enabled": False, "last_ok": None, "last_commit": None, "last_error": None, "running": False}
 _lock = threading.Lock()

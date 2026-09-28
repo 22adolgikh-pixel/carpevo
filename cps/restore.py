@@ -3,9 +3,9 @@
 # Локально на Mac это не нужно: данные и так лежат на диске между запусками.
 # На хостинге (Render/Fly/Cloud Run и т.п.) диск контейнера пропадает при
 # каждом перезапуске/деплое, поэтому при старте студия сама:
-#   1) подтягивает последний бэкап data/work, data/sheets, legend.csv, i18n.json
-#      из ветки cps-data репозитория carpevo (то, что раз в CPS_BACKUP_MIN
-#      минут туда пишет backup.py) — если локальной папки data/work ещё нет;
+#   1) подтягивает последний бэкап data/work, data/sheets, legend.csv, i18n.json,
+#      site_index.json из ветки cps-data репозитория carpevo (то, что раз в
+#      CPS_BACKUP_MIN минут туда пишет backup.py) — если data/work ещё нет;
 #   2) скачивает архив сканов со страницы Google Drive (см. CPS_SCANS_ZIP_ID)
 #      и распаковывает его в SCANS — если локальной папки scans ещё нет.
 #
@@ -30,7 +30,7 @@ def _git_restore(here, data):
                             capture_output=True, text=True, timeout=300)
         if r.returncode != 0:
             return {"ok": False, "error": (r.stderr or r.stdout).strip()[-400:].replace(token, "***")}
-        for item in ("work", "sheets", "legend.csv", "i18n.json"):
+        for item in ("work", "sheets", "legend.csv", "i18n.json", "site_index.json"):
             s, d = os.path.join(tmp, "data", item), os.path.join(data, item)
             if not os.path.exists(s):
                 continue
