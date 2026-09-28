@@ -11,7 +11,7 @@
 #
 # Ничего не делает, если данные уже на месте (например, при обычном запуске
 # на Mac через start.command) — так что скрипт безопасно вызывать всегда.
-import os, io, shutil, subprocess, urllib.request, zipfile, re
+import os, io, shutil, subprocess, urllib.request, zipfile, re, http.cookiejar
 
 REPO = os.environ.get("CPS_BACKUP_REPO", "22adolgikh-pixel/carpevo")
 BRANCH = os.environ.get("CPS_BACKUP_BRANCH", "cps-data")
@@ -46,18 +46,40 @@ def _git_restore(here, data):
 
 def _drive_download(file_id, dest_zip):
     """Скачивает публичный (viewer-по-ссылке) файл с Google Drive по его id,
-    обходя страницу-предупреждение антивируса для больших файлов."""
+    обходя страницу-предупреждение антивируса для больших файлов. Использует
+    один opener с cookiejar на оба запроса — иначе Google не узнаёт вторый
+    запрос как продолжение первого и опять отдаёт HTML-страницу вместо файла."""
+    cj = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; cps-restore/1.0)"}
     base = "https://drive.google.com/uc?export=download"
-    req = urllib.request.Request(f"{base}&id={file_id}", headers={"User-Agent": "curl/8"})
-    with urllib.request.urlopen(req, timeout=120) as r:
+
+    req = urllib.request.Request(f"{base}&id={file_id}", headers=headers)
+    with opener.open(req, timeout=120) as r:
         data = r.read()
         ctype = r.headers.get("Content-Type", "")
+
     if "text/html" in ctype:
-        m = re.search(rb'confirm=([0-9A-Za-z_-]+)', data) or re.search(rb'name="confirm" value="([0-9A-Za-z_-]+)"', data)
-        token = m.group(1).decode() if m else "t"
-        req2 = urllib.request.Request(f"{base}&confirm={token}&id={file_id}", headers={"User-Agent": "curl/8"})
-        with urllib.request.urlopen(req2, timeout=300) as r2:
+        token = None
+        for c in cj:
+            if c.name.startswith("download_warning"):
+                token = c.value
+        if not token:
+            m = re.search(rb'confirm=([0-9A-Za-z_-]+)', data) or re.search(rb'name="confirm"\s+value="([0-9A-Za-z_-]+)"', data)
+            token = m.group(1).decode() if m else "t"
+        # современный endpoint для подтверждённого скачивания — не всегда
+        # требует cookies, но передаём тот же opener на случай, если требует
+        url2 = f"https://drive.usercontent.google.com/download?id={file_id}&export=download&confirm={token}"
+        req2 = urllib.request.Request(url2, headers=headers)
+        with opener.open(req2, timeout=300) as r2:
             data = r2.read()
+            ctype2 = r2.headers.get("Content-Type", "")
+        if "text/html" in ctype2:
+            # запасной вариант — тот же трюк, но на старом домене
+            req3 = urllib.request.Request(f"{base}&confirm={token}&id={file_id}", headers=headers)
+            with opener.open(req3, timeout=300) as r3:
+                data = r3.read()
+
     with open(dest_zip, "wb") as f:
         f.write(data)
 
@@ -70,9 +92,16 @@ def _scans_restore(scans_dir):
     zpath = scans_dir + "_download.zip"
     try:
         _drive_download(SCANS_ZIP_ID, zpath)
+        size = os.path.getsize(zpath)
+        with open(zpath, "rb") as f:
+            head = f.read(4)
+        if head != b"PK\x03\x04":
+            with open(zpath, "rb") as f:
+                preview = f.read(200)
+            return {"ok": False, "error": f"скачался не zip ({size} байт), похоже на HTML/ошибку Drive: {preview[:200]!r}"}
         with zipfile.ZipFile(zpath) as z:
             z.extractall(os.path.dirname(scans_dir))
-        return {"ok": True, "restored_from": f"drive:{SCANS_ZIP_ID}"}
+        return {"ok": True, "restored_from": f"drive:{SCANS_ZIP_ID}", "bytes": size}
     except Exception as e:
         return {"ok": False, "error": str(e)}
     finally:
