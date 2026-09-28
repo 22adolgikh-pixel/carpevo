@@ -571,9 +571,46 @@ def api_bundle(all: int = 0):
     return Response(data, media_type="application/json",
                     headers={"Content-Disposition": 'attachment; filename="pixel_schemes_bundle.json"'})
 
+def regen_missing_crops():
+    """data/crops не бэкапится и не восстанавливается (в git не идёт — сканы под
+    авторским правом) — пересобирается из data/sheets (рамки) + scans (сам скан),
+    той же логикой, что и «Сохранить и нарезать». Вызывается один раз при
+    старте на хостинге, где после restore.py есть sheets+scans, но нет crops."""
+    n_ok = n_missing_scan = n_err = 0
+    for fn in os.listdir(D_SHEETS):
+        if not fn.endswith(".json"):
+            continue
+        sh = jload(os.path.join(D_SHEETS, fn), {}) or {}
+        rel = sh.get("path")
+        boxes = sh.get("boxes") or []
+        need = [b for b in boxes if b.get("id") and not os.path.exists(os.path.join(D_CROPS, b["id"] + ".png"))]
+        if not need or not rel:
+            continue
+        try:
+            col = imread_any(_safe_rel(rel))
+        except Exception:
+            col = None
+        if col is None:
+            n_missing_scan += len(need)
+            continue
+        H, W = col.shape[:2]
+        for b in need:
+            try:
+                x, y, w, h = int(b["x"]), int(b["y"]), int(b["w"]), int(b["h"])
+                px, py = int(w * CROP_PAD), int(h * CROP_PAD)
+                x0, y0, x1, y1 = max(0, x - px), max(0, y - py), min(W, x + w + px), min(H, y + h + py)
+                imwrite_any(os.path.join(D_CROPS, b["id"] + ".png"), col[y0:y1, x0:x1])
+                n_ok += 1
+            except Exception:
+                n_err += 1
+    if n_ok or n_missing_scan or n_err:
+        print(f"regen_crops: восстановлено {n_ok}, скан не найден для {n_missing_scan}, ошибок {n_err}")
+
+
 @app.on_event("startup")
 def backup_start():
     restore.restore_all(HERE, DATA, SCANS)  # на «чистом» хостинге — подтянуть данные и сканы; на Mac — no-op
+    regen_missing_crops()
     backup.start(HERE, DATA)
 
 @app.on_event("shutdown")
@@ -582,6 +619,14 @@ def backup_stop():
 
 @app.get("/api/backup")
 def api_backup(): return backup.state
+
+@app.post("/api/regen_crops")
+def api_regen_crops():
+    """Ручной запуск пересборки недостающих data/crops из data/sheets+scans
+    (обычно не нужен — делается сам при старте; пригодится, если сканы
+    подложили уже после старта студии)."""
+    regen_missing_crops()
+    return {"ok": True}
 
 @app.post("/api/backup")
 def api_backup_now(): return backup.backup_once(HERE, DATA, "вручную")
