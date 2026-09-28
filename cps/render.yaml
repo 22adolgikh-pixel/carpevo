@@ -1,0 +1,34 @@
+# Render.com Blueprint — деплой Carpet Pattern Studio одной кнопкой.
+#
+# Как задеплоить (без диска, бесплатный план Render):
+#   1. github.com → создать fine-grained токен на carpevo (Contents: Read and write) → это CPS_GITHUB_TOKEN.
+#   2. render.com → New → Blueprint → выбрать репозиторий 22adolgikh-pixel/carpevo, ветку cps-v5, папку cps/.
+#   3. Render найдёт этот файл и предложит завести сервис carpet-pattern-studio — подтвердить.
+#   4. В Environment сервиса вписать секреты (ниже помечены sync:false — Render попросит их при первом деплое):
+#        CPS_GITHUB_TOKEN, CPS_SCANS_ZIP_ID, CPS_PASSWORD.
+#   5. Открыть выданный Render URL (https://carpet-pattern-studio.onrender.com) — пароль см. CPS_PASSWORD.
+#
+# Бесплатный план "усыпляет" сервис после ~15 мин без запросов и будит по первому
+# заходу (10–30 сек); диск контейнера каждый раз новый, поэтому все правки должны
+# успеть уйти в GitHub (CPS_BACKUP_MIN) до заморозки/передеплоя.
+services:
+  - type: web
+    name: carpet-pattern-studio
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    rootDir: cps
+    plan: free
+    autoDeployTrigger: commit
+    envVars:
+      - key: CPS_GITHUB_TOKEN
+        sync: false
+      - key: CPS_SCANS_ZIP_ID
+        sync: false
+      - key: CPS_PASSWORD
+        sync: false
+      - key: CPS_BACKUP_MIN
+        value: "2"
+      - key: CPS_BACKUP_REPO
+        value: 22adolgikh-pixel/carpevo
+      - key: CPS_BACKUP_BRANCH
+        value: cps-data

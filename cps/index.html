@@ -1038,7 +1038,7 @@ function openDescModal(){
   <div class="azsub" id="azSub">${m.name_az_auto?`черновик из «${esc(m.name)}» — проверьте и поправьте`:''}${m.name?` <span class="suggest" id="azRe" data-tip="пересобрать черновик из кириллицы книги">↻ из книги</span>`:''}</div>
   ${[['name','в книге (кир.)'],['translation','перевод (ru)'],['carpet','ковёр'],['type','тип ковра'],['section','раздел'],['source','источник']].map(([k,l])=>`<div class="row"><label>${l}</label><input type="text" data-m="${k}" value="${esc(m[k])}"></div>`).join('')}
   <div class="row"><label>примечание</label><textarea data-m="note">${esc(m.note)}</textarea></div>
-  <div class="row"><label>страница сайта</label><input type="text" data-m="site_id" list="siteList" value="${esc(m.site_id)}" placeholder="elem_… или motif_…, через запятую"></div>
+  <div class="row"><label>страница сайта</label><input type="text" data-m="site_id" list="siteList" value="${esc(m.site_id)}" placeholder="id статьи (латиница), например buta, через запятую"></div>
   <div id="sugg" class="hint"></div><datalist id="siteList"></datalist>
   <div class="row"><label>id</label><input type="text" id="mId" value="${esc(F.id)}"><button class="sm" id="mRen">переименовать</button></div></div>`;
   W.hidden=false;

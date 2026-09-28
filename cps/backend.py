@@ -11,6 +11,7 @@ from az_names import az_draft, site_suggest
 import autogrid
 import cloud
 import backup
+import restore
 try:
     import pymupdf as fitz  # PyMuPDF (new import name; falls back to legacy)
 except Exception:
@@ -571,7 +572,9 @@ def api_bundle(all: int = 0):
                     headers={"Content-Disposition": 'attachment; filename="pixel_schemes_bundle.json"'})
 
 @app.on_event("startup")
-def backup_start(): backup.start(HERE, DATA)
+def backup_start():
+    restore.restore_all(HERE, DATA, SCANS)  # на «чистом» хостинге — подтянуть данные и сканы; на Mac — no-op
+    backup.start(HERE, DATA)
 
 @app.on_event("shutdown")
 def backup_stop():
