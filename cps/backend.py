@@ -9,6 +9,8 @@ from fastapi import FastAPI, UploadFile, File, Body, Query
 from fastapi.responses import FileResponse, JSONResponse, Response
 from az_names import az_draft, site_suggest
 import autogrid
+import autocolor
+import rapport
 import cloud
 import backup
 import restore
@@ -31,7 +33,7 @@ IMG_EXT = {".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".bmp"}
 CROP_PAD = 0.08          # запас вокруг рамки рисунка (доля), чтобы было куда тянуть углы
 META_KEYS = ("section", "name_az", "name", "translation", "carpet", "type", "note")
 DIFFICULTY = ("simple", "medium", "complex", "ultra")   # простой / средний / сложный / ультра
-OUT_SUFFIXES = (".png", "_x12.png", "_grid.png", "_bg.png", ".svg")   # что лежит в data/out на каждый рисунок
+OUT_SUFFIXES = (".png", "_x12.png", "_grid.png", "_bg.png", ".svg", "_unit.png")   # что лежит в data/out на каждый рисунок
 
 app = FastAPI(title="Carpet Pattern Studio")
 cloud.install(app)    # пароль для входа по ссылке (share.command), если задан CPS_PASSWORD
@@ -376,7 +378,7 @@ def render_grid_layer(w, h, S=GRID_S):
         g[max(0, cy - (k - d)):cy + (k - d), d] = mid; g[max(0, cy - (k - d)):cy + (k - d), w * S - 1 - d] = mid
     return g
 
-def render_outputs(fid, mat, palette, transparent_bg=True):
+def render_outputs(fid, mat, palette, transparent_bg=True, rap=None):
     """Выгрузки для любых дальнейших задач (v6):
     .png — 1 узел = 1 px, фон прозрачный; _x12.png — то же ×12, без сетки; _grid.png — сетка отдельным слоем;
     _bg.png — ×12 с заливкой фона (для предпросмотра/печати); .svg — по слою на каждый цвет (<g id="color-N">),
@@ -417,6 +419,15 @@ def render_outputs(fid, mat, palette, transparent_bg=True):
            + "".join(layers) +
            f'<g id="grid" stroke="#4a92d6" stroke-opacity=".6" display="none">{gl}</g></svg>')
     open(os.path.join(D_OUT, fid + ".svg"), "w", encoding="utf-8").write(svg)
+    up = os.path.join(D_OUT, fid + "_unit.png")
+    if rap and rap.get("found") and rap.get("unit"):          # раппорт каймы: один повтор, ×12, фон залит
+        U = rapport.matrix_to_array(rap["unit"])
+        img = np.zeros(U.shape + (3,), np.uint8)
+        for k in np.unique(U):
+            r_, g_, b_ = pal[k] if k < len(pal) else (255, 0, 255); img[U == k] = (b_, g_, r_)
+        imwrite_any(up, cv2.resize(img, (U.shape[1] * S, U.shape[0] * S), interpolation=cv2.INTER_NEAREST))
+    elif os.path.exists(up):
+        os.remove(up)
 
 @app.post("/api/work/{fid}")
 def api_work_save(fid: str, body: dict = Body(...)):
@@ -427,8 +438,10 @@ def api_work_save(fid: str, body: dict = Body(...)):
     if work.get("done") and isinstance(work.get("auto"), dict): work["auto"]["reviewed"] = True
     jsave(wp, work)
     if work.get("matrix") and work.get("palette"):
-        render_outputs(fid, work["matrix"], work["palette"], work.get("transparent_bg", True))
-    return {"ok": True, "saved_at": work["saved_at"]}
+        if "matrix" in body:                                   # пиксели правили — раппорт каймы пересчитать
+            work["rapport"] = rapport.for_work(work); jsave(wp, work)
+        render_outputs(fid, work["matrix"], work["palette"], work.get("transparent_bg", True), work.get("rapport"))
+    return {"ok": True, "saved_at": work["saved_at"], "rapport": work.get("rapport")}
 
 @app.post("/api/rename/{fid}")
 def api_rename(fid: str, body: dict = Body(...)):
@@ -455,47 +468,124 @@ def api_out(name: str):
     return FileResponse(p, headers={"Cache-Control": "no-store"}) if os.path.exists(p) else JSONResponse({"error": "nf"}, 404)
 
 # ---------------- авто-оцифровка: сетка + пиксели ----------------
-def run_auto(fid, force=False, dark_only=True):
+def _auto_mode(crop_bgr, frame, mode):
+    if mode in ("bw", "color"): return mode
+    return "color" if autocolor.is_colorful(crop_bgr, frame) else "bw"
+
+
+def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, ncolors=None):
+    """mode: auto (цвет определяется сам) / bw (ЧБ-тушь: контур + серая заливка) / color (цветная схема)."""
     wp = os.path.join(D_WORK, fid + ".json")
     work = jload(wp, {}) or {}
     if work.get("matrix") and not force:
         return {"id": fid, "skipped": "уже есть пиксели"}
-    crop = imread_any(os.path.join(D_CROPS, fid + ".png"), cv2.IMREAD_GRAYSCALE)
-    if crop is None: return {"id": fid, "error": "нет кропа"}
-    frame = work.get("frame") or [0, 0, crop.shape[1], crop.shape[0]]
+    crop_c = imread_any(os.path.join(D_CROPS, fid + ".png"), cv2.IMREAD_COLOR)
+    if crop_c is None: return {"id": fid, "error": "нет кропа"}
+    frame = work.get("frame") or [0, 0, crop_c.shape[1], crop_c.shape[0]]
+    mode = _auto_mode(crop_c, frame, mode)
     try:
-        G, C, M, info = autogrid.auto_figure(crop, frame, dark_only=dark_only)
+        if mode == "color":
+            G, C, M, info = autocolor.auto_figure_color(crop_c, frame, pitch_hint=pitch_hint, ncolors=ncolors)
+        else:
+            G, C, M, info = autogrid.auto_figure(cv2.cvtColor(crop_c, cv2.COLOR_BGR2GRAY), frame, dark_only=dark_only)
     except Exception as e:
         return {"id": fid, "error": f"сетка не найдена: {e}"}
-    upd = autogrid.to_work(G, M, info)
-    if work.get("palette_touched") and work.get("palette"):      # свою палитру не трогаем, только дополняем
+    if mode == "color" and min(G.get("R", [1, 1])) < autocolor.PHOTO_R:
+        # сетки нет: это фото ковра (напр. табл. 204 «Джек»), а не схема — пиксели не делаем, помечаем
+        work["kind"] = "photo"; work["auto"] = {"mode": "color", "photo": True, "R": G.get("R"), "reviewed": False,
+                                                "flags": ["похоже на фото ковра, а не на схему — оцифровка не делалась"]}
+        work["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S"); jsave(wp, work)
+        return {"id": fid, "photo": True, "R": G.get("R"), "mode": mode}
+    upd = autocolor.to_work_color(G, M, info) if mode == "color" else autogrid.to_work(G, M, info)
+    if mode != "color" and work.get("palette_touched") and work.get("palette"):   # свою палитру не трогаем (ЧБ), только дополняем
         pal, names = list(work["palette"]), list(work.get("palette_names") or [])
         while len(pal) < len(upd["palette"]): pal.append(upd["palette"][len(pal)]); names.append(upd["palette_names"][len(names)])
         upd["palette"], upd["palette_names"] = pal, names; upd.pop("palette_touched")
+    if mode != "color":
+        for k in ("color_mode", "palette_names_ru"): work.pop(k, None)
+    work.pop("kind", None)
     work.update(upd); work["id"] = fid; work["done"] = False
     work["adjust"] = {"brightness": 0, "contrast": 1, "gamma": 1, "invert": False}
+    work["rapport"] = rapport.for_work(work)
     work["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
     jsave(wp, work)
-    render_outputs(fid, work["matrix"], work["palette"], work.get("transparent_bg", True))
-    return {"id": fid, "size": [work["matrix"]["w"], work["matrix"]["h"]],
-            "confidence": work["auto"]["confidence"], "flags": work["auto"]["flags"]}
+    render_outputs(fid, work["matrix"], work["palette"], work.get("transparent_bg", True), work.get("rapport"))
+    return {"id": fid, "size": [work["matrix"]["w"], work["matrix"]["h"]], "mode": mode,
+            "pitch": [round(G["px"], 3), round(G["py"], 3)], "R": G.get("R"),
+            "confidence": work["auto"]["confidence"], "flags": work["auto"]["flags"],
+            "rapport": _rapport_brief(work.get("rapport"))}
+
+
+def _rapport_brief(r):
+    if not r: return None
+    if not r.get("found"): return {"found": False}
+    return {k: r[k] for k in ("found", "axis", "period", "match", "repeats", "check", "is_mirror", "is_glide")}
+
 
 @app.post("/api/auto/{fid}")
 def api_auto(fid: str, body: dict = Body(default={})):
     """Автоматически натянуть сетку и перевести рисунок в пиксели (черновик — проверить на экране «Пиксели»).
     v6: по умолчанию контур + серая заливка (замер на 134 готовых рисунках: 95.6% клеток верно против 87% у «только контура»);
-    fill=false — только тёмный контур."""
+    fill=false — только тёмный контур. v7: mode = auto | bw | color (цветные схемы, см. autocolor.py);
+    ncolors — оставить столько цветов (если авто разделило один цвет на два)."""
     if not _fid_ok(fid): return JSONResponse({"error": "bad id"}, 400)
-    return run_auto(fid, bool((body or {}).get("force", True)), dark_only=not bool((body or {}).get("fill", True)))
+    b = body or {}
+    hint = None
+    w = jload(os.path.join(D_WORK, fid + ".json"), {}) or {}
+    if w.get("sheet"):                                  # шаг, уже уверенно найденный на других рисунках листа
+        hint = _sheet_pitch_hint(w["sheet"], exclude=fid)
+    nc = b.get("ncolors")
+    return run_auto(fid, bool(b.get("force", True)), dark_only=not bool(b.get("fill", True)),
+                    mode=b.get("mode", "auto"), pitch_hint=hint, ncolors=int(nc) if nc else None)
+
+
+def _sheet_pitch_hint(sheet_rel, exclude=None):
+    meta = jload(os.path.join(D_SHEETS, _sheet_key(sheet_rel) + ".json"), {}) or {}
+    ps = []
+    for f in meta.get("figures", []):
+        if f == exclude: continue
+        a = (jload(os.path.join(D_WORK, f + ".json"), {}) or {}).get("auto") or {}
+        if a.get("mode") == "color" and a.get("R") and min(a["R"]) >= autocolor.GOOD_R and a.get("pitch"): ps.append(a["pitch"])
+    if not ps: return None
+    return (float(np.median([p[0] for p in ps])), float(np.median([p[1] for p in ps])))
+
 
 @app.post("/api/auto_sheet")
 def api_auto_sheet(body: dict = Body(...)):
-    """Все рисунки листа. По умолчанию пропускает те, где пиксели уже есть (force — пересчитать всё)."""
+    """Все рисунки листа. По умолчанию пропускает те, где пиксели уже есть (force — пересчитать всё).
+    Цветные листы — в два прохода: сначала все рисунки сами по себе, затем неуверенные (узкие каймы)
+    пересчитываются с шагом, найденным на уверенных рисунках того же листа."""
     meta = jload(os.path.join(D_SHEETS, _sheet_key(body["path"]) + ".json"), {}) or {}
     figs = meta.get("figures", [])
     if not figs: return JSONResponse({"error": "лист ещё не нарезан — сначала «Сохранить и нарезать»"}, 400)
-    dark_only = not bool(body.get("fill", True))
-    return {"results": [run_auto(f, bool(body.get("force")), dark_only=dark_only) for f in figs]}
+    dark_only = not bool(body.get("fill", True)); mode = body.get("mode", "auto"); force = bool(body.get("force"))
+    res = [run_auto(f, force, dark_only=dark_only, mode=mode) for f in figs]
+    good = [r for r in res if r.get("mode") == "color" and r.get("R") and min(r["R"]) >= autocolor.GOOD_R]
+    if good:
+        hint = (float(np.median([r["pitch"][0] for r in good])), float(np.median([r["pitch"][1] for r in good])))
+        for i, r in enumerate(res):
+            if r.get("mode") == "color" and r.get("R") and min(r["R"]) < autocolor.GOOD_R:
+                r2 = run_auto(figs[i], True, mode="color", pitch_hint=hint)
+                if r2.get("R") and (r.get("photo") or sum(r2["R"]) > sum(r["R"])):
+                    res[i] = r2
+                elif not r.get("photo"):
+                    res[i] = run_auto(figs[i], True, mode="color")      # первый вариант был лучше — вернуть его
+    return {"results": res}
+
+
+@app.post("/api/rapport/{fid}")
+def api_rapport(fid: str):
+    """Пересчитать раппорт каймы по текущей матрице (после ручных правок)."""
+    if not _fid_ok(fid): return JSONResponse({"error": "bad id"}, 400)
+    wp = os.path.join(D_WORK, fid + ".json"); work = jload(wp, {}) or {}
+    if not work.get("matrix"): return JSONResponse({"error": "нет пикселей"}, 400)
+    m = work["matrix"]; K = rapport.matrix_to_array(m)
+    r = rapport.find_rapport(K)
+    if r is not None: r["computed_at_matrix"] = [int(m["w"]), int(m["h"])]
+    work["rapport"] = r; jsave(wp, work)
+    render_outputs(fid, work["matrix"], work["palette"], work.get("transparent_bg", True), r)
+    return r or {"found": False}
+
 
 # ---------------- легенда / индекс сайта ----------------
 @app.get("/api/legend")

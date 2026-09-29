@@ -243,7 +243,7 @@ const S={
   sheets:[],figures:[],siteIndex:[],legend:[],
   sheet:null,            // {path,img,table,boxes:[],sel}
   fig:null,              // рабочие данные рисунка (см. loadFigure)
-  dirty:false,autoFill:true,showGrid:(()=>{try{return localStorage.getItem('cpsGrid')!=='0';}catch(e){return true;}})(),
+  dirty:false,autoFill:true,autoMode:(()=>{try{return localStorage.getItem('cpsMode')||'auto';}catch(e){return 'auto';}})(),showGrid:(()=>{try{return localStorage.getItem('cpsGrid')!=='0';}catch(e){return true;}})(),
   catQ:'',
 };
 
@@ -455,7 +455,8 @@ function renderRightSheet(){
   <div class="rfoot">
     <div class="flex" style="gap:6px;align-items:stretch">
       <button id="shAutoPix" class="big pri" style="flex:1" data-tip="Нарезать (если нужно), натянуть сетку и перевести в пиксели все рисунки листа. Рисунки, где пиксели уже есть, не трогаются (Shift — пересчитать все)">⚡ Авто: сетка и пиксели</button>
-      <button id="shAutoFill" class="sm ${S.autoFill?'on':''}" style="white-space:nowrap" data-tip="снимите — только тёмный контур">${S.autoFill?'☑':'☐'} заливка</button>
+      ${S.autoMode==='color'?'':`<button id="shAutoFill" class="sm ${S.autoFill?'on':''}" style="white-space:nowrap" data-tip="снимите — только тёмный контур (для ЧБ)">${S.autoFill?'☑':'☐'} заливка</button>`}
+      ${modeSel('shMode')}
     </div>
     <button id="shSave" class="big ${sh.saved?'pri':'on'}">💾 Сохранить и нарезать</button>
   </div>`;
@@ -484,9 +485,12 @@ function renderRightSheet(){
     el.querySelector('[data-del]').onclick=()=>{sh.boxes.splice(i,1);sh.sel=-1;sh.saved=false;renderRight();redraw();};
   });
   $('shSave').onclick=()=>saveSheet().catch(fail);
-  $('shAutoFill').onclick=()=>{S.autoFill=!S.autoFill;renderRight();};
+  if($('shAutoFill'))$('shAutoFill').onclick=()=>{S.autoFill=!S.autoFill;renderRight();};bindModeSel('shMode');
   $('shAutoPix').onclick=e=>{if(e.shiftKey&&!confirm('Пересчитать ВСЕ рисунки листа? Ручные правки пикселей будут заменены.'))return;autoSheet(e.shiftKey).catch(fail);};
 }
+/* v7: режим автооцифровки — авто (цвет определяется сам) / ЧБ / цвет */
+function modeSel(id){return `<select id="${id}" class="sm" data-tip="Авто — цветные схемы распознаются сами; ЧБ — тушь на миллиметровке (контур + серая заливка); Цвет — цветные схемы (палитра и названия красителей)" style="width:auto">${[['auto','авто'],['bw','ЧБ'],['color','цвет']].map(([v,l])=>`<option value="${v}" ${S.autoMode===v?'selected':''}>${l}</option>`).join('')}</select>`;}
+function bindModeSel(id){const e=$(id);if(e)e.onchange=()=>{S.autoMode=e.value;try{localStorage.setItem('cpsMode',S.autoMode);}catch(_){}renderRight();};}
 async function saveSheet(nav){
   if(nav===undefined)nav=true;
   const sh=S.sheet;const figs=sh.boxes.map(b=>(b.table||sh.table||'x')+'/'+b.fig);
@@ -504,13 +508,14 @@ async function autoSheet(force){
   const sh=S.sheet;if(!sh)return;
   if(!sh.saved){const r=await saveSheet(false);if(!r)return;}
   stat('оцифровываю рисунки листа…','busy');
-  const r=await api('/api/auto_sheet',{path:sh.path,force:!!force,fill:!!S.autoFill});
-  const res=r.results||[];const ok=res.filter(x=>x.size),skip=res.filter(x=>x.skipped),bad=res.filter(x=>x.error);
+  const r=await api('/api/auto_sheet',{path:sh.path,force:!!force,fill:!!S.autoFill,mode:S.autoMode});
+  const res=r.results||[];const ok=res.filter(x=>x.size),skip=res.filter(x=>x.skipped),bad=res.filter(x=>x.error),photo=res.filter(x=>x.photo);
+  const nCol=ok.filter(x=>x.mode==='color').length,nRap=ok.filter(x=>x.rapport&&x.rapport.found).length;
   const warn=ok.filter(x=>(x.confidence??1)<0.8||(x.flags||[]).some(f=>!/заливку/.test(f)));
   await Promise.all([refreshSheets(),refreshFigures()]);
   const first=(ok[0]||skip[0]||{}).id;
   if(first){await openFigure(first);if(S.mode!=='pix')setMode(S.fig.M?'pix':'grid');}
-  const msg=`⚡ готово ${ok.length}`+(skip.length?`, пропущено ${skip.length} (уже есть пиксели)`:'')+(bad.length?`, ошибок ${bad.length}`:'')+(warn.length?` · проверить внимательно: ${warn.map(x=>x.id).join(', ')}`:'');
+  const msg=`⚡ готово ${ok.length}`+(skip.length?`, пропущено ${skip.length} (уже есть пиксели)`:'')+(bad.length?`, ошибок ${bad.length}`:'')+(nCol?` · цветных ${nCol}`:'')+(nRap?` · кайм с раппортом ${nRap}`:'')+(photo.length?` · фото (не схема): ${photo.map(x=>x.id).join(', ')}`:'')+(warn.length?` · проверить внимательно: ${warn.map(x=>x.id).join(', ')}`:'');
   stat(msg,bad.length?'err':'ok');
 }
 
@@ -657,7 +662,7 @@ async function openFigure(id){
     m.rows.forEach((r,j)=>{for(let i=0;i<m.w;i++){const ch=r[i]||'.';F.M.d[j*m.w+i]=ch==='.'?0:parseInt(ch,36);}});}
   S.fig=F;S.dirty=false;warp(F);adjust(F);
   if(!w.grid)autoGridSync(F);
-  if(!w.classify||!w.classify.thr)autoTonesSync(F);
+  if(!w.color_mode&&(!w.classify||!w.classify.thr))autoTonesSync(F);   // цветные схемы: палитра из ⚡ цвет, пороги яркости не нужны
   $('cur').textContent=id+(dispName(F.meta)?' — '+dispName(F.meta):'');
   stat('');
   if(S.mode==='sheet'||S.mode==='cat'||(S.mode==='pix'&&!F.M))setMode(F.M?'pix':'grid');else{renderRight();renderNav();const h=H();h&&h.fit&&h.fit();}
@@ -780,8 +785,10 @@ function renderRightGrid(){
   <div class="rfoot">
     <div class="flex" style="gap:6px;align-items:stretch">
       <button id="autoFig" class="big pri" style="flex:1" data-tip="Сетка и пиксели автоматически (углы, шаг, наклон, контур и заливка)">⚡ Авто: сетка и пиксели</button>
-      <button id="gAutoFill" class="sm ${S.autoFill?'on':''}" style="white-space:nowrap" data-tip="снимите — только тёмный контур">${S.autoFill?'☑':'☐'} заливка</button>
+      ${S.autoMode==='color'?'':`<button id="gAutoFill" class="sm ${S.autoFill?'on':''}" style="white-space:nowrap" data-tip="снимите — только тёмный контур (для ЧБ)">${S.autoFill?'☑':'☐'} заливка</button>`}
+      ${modeSel('gMode')}
     </div>
+    ${F.work.color_mode?`<div class="flex" style="gap:6px;align-items:center"><span class="mut" style="font-size:12px" data-tip="если авто разделило один цвет на два оттенка (или склеило два) — задайте число цветов и пересчитайте">цветов</span><input type="number" id="gNcol" min="2" max="12" value="${(F.work.palette||[]).length||''}" style="width:52px"><button id="gNcolGo" class="sm" data-tip="пересчитать цвета с этим числом цветов (сетка та же)">↻ цвета</button></div>`:''}
     <button id="toPix" class="big on" data-tip="Перевести клетки в пиксели по текущей сетке и порогам${F.M?' — ручные правки пикселей будут заменены':''}">▦ Извлечь в пиксели ${G.cols}×${G.rows} →</button>
   </div>`;
   $('vQuad').onclick=()=>{S.gridView='quad';renderRight();MODES.quad.fit();};
@@ -815,7 +822,8 @@ function renderRightGrid(){
   F.previewAlpha=F.previewAlpha||0.6;
   $('blankEx').onchange=e=>{F.blankExtract=e.target.checked;};
   $('toPix').onclick=extractToPixels;
-  $('autoFig').onclick=()=>autoFigure().catch(fail);$('gAutoFill').onclick=()=>{S.autoFill=!S.autoFill;renderRight();};
+  $('autoFig').onclick=()=>autoFigure().catch(fail);if($('gAutoFill'))$('gAutoFill').onclick=()=>{S.autoFill=!S.autoFill;renderRight();};bindModeSel('gMode');
+  if($('gNcolGo'))$('gNcolGo').onclick=()=>autoFigure({mode:'color',ncolors:+$('gNcol').value||null}).catch(fail);
   renderThr();drawHist();histEvents();
 }
 function renderThr(){const F=S.fig,C=F.cls,b=$('thrBox');if(!b)return;
@@ -833,19 +841,20 @@ function histEvents(){const c=$('hist');let dragI=-1;const pos=e=>{const r=c.get
   c.onpointermove=e=>{if(dragI<0)return;const F=S.fig;F.cls.thr[dragI]=Math.round(pos(e));markDirty();drawHist();renderThr();redraw();};
   c.onpointerup=()=>{dragI=-1;};}
 function extractToPixels(){
-  const F=S.fig;if(F.M&&F.M.edited&&!confirm('Заменить вручную исправленные пиксели новым извлечением?'))return;
+  const F=S.fig;if(F.work.color_mode&&!confirm('Это цветная схема. «Извлечь в пиксели» смотрит только на яркость — цвета пропадут. Для цветных есть «⚡ Авто» и «↻ цвета». Всё равно извлечь по яркости?'))return;if(F.M&&F.M.edited&&!confirm('Заменить вручную исправленные пиксели новым извлечением?'))return;
   const G=F.grid,k=F.blankExtract?new Uint8Array(G.cols*G.rows):classify(F);pushUndo();F.M={w:G.cols,h:G.rows,ox:0,oy:0,d:k};
   markDirty();setMode('pix');stat('матрица '+G.cols+'×'+G.rows+(F.blankExtract?' — чистый лист, обводите контур и заливайте':' — доводите карандашом'),'ok');}
 
-async function autoFigure(){
-  const F=S.fig;if(!F)return;
+async function autoFigure(opt){
+  const F=S.fig;if(!F)return;opt=opt||{};
   if(F.M&&F.M.edited&&!confirm('Заменить вручную исправленные пиксели автоматическим результатом?'))return;
   if(S.dirty)await saveFigure(true);
   stat('⚡ ищу сетку и пиксели…','busy');
-  const r=await api('/api/auto/'+encodeURIComponent(F.id),{force:true,fill:!!S.autoFill});
+  const r=await api('/api/auto/'+encodeURIComponent(F.id),{force:true,fill:!!S.autoFill,mode:opt.mode||S.autoMode,ncolors:opt.ncolors||null});
   if(r.error){stat('⚡ '+r.error,'err');return;}
+  if(r.photo){S.dirty=false;await openFigure(F.id);await refreshFigures();stat('⚡ сетка не найдена — похоже на фото ковра, а не на схему; пиксели не делались','err');return;}
   S.dirty=false;await openFigure(F.id);setMode('pix');await refreshFigures();
-  stat(`⚡ ${r.size[0]}×${r.size[1]} · уверенность ${Math.round(r.confidence*100)}%`+(r.flags.length?' · '+r.flags.join('; '):''),r.confidence<0.8?'err':'ok');
+  stat(`⚡ ${r.size[0]}×${r.size[1]} · уверенность ${Math.round(r.confidence*100)}%`+(r.flags.length?' · '+r.flags.join('; '):'')+(r.rapport&&r.rapport.found?` · раппорт каймы: ${r.rapport.period} ${r.rapport.axis==='v'?'рядов':'столбцов'}`:''),r.confidence<0.8?'err':'ok');
 }
 
 /* ============================ 3. ПИКСЕЛИ ============================ */
@@ -1051,6 +1060,9 @@ function renderSbInfo(){const e=$('sbInfo');if(!e)return;const F=S.fig;
   if(F.done)b.push('<span style="color:var(--ok)">✓ готово</span>');else if(F.review)b.push('<span class="bad">⚠ на пересмотр</span>');
   if(au)b.push(`<span class="warn">⚡ автооцифровка · уверенность ${Math.round((au.confidence??0)*100)}%</span>${(au.flags||[]).length?' <span class="mut">· '+au.flags.map(esc).join(' · ')+'</span>':''}`);
   if(F.M)b.push(`<span class="mut">${F.M.w}×${F.M.h} · цветов ${usedColors(F)}</span>`);
+  const rp=F.work.rapport;
+  if(rp&&rp.found)b.push(`<span class="${rp.check?'warn':'mut'}" data-tip="кайма: повторяющийся фрагмент найден автоматически (голосование по ${rp.repeats} повторам). Файл _unit.png — один повтор. ${(rp.suspect_cells||[]).length?(rp.suspect_cells.length+' клеток расходятся с большинством повторов — возможно, ошибки оцифровки'):''}">↻ раппорт ${rp.period} ${rp.axis==='v'?'рядов':'столбцов'} · совпадение ${Math.round(rp.match*100)}%${rp.is_mirror?' · зеркальный':''}${rp.is_glide?' · со сдвигом-отражением':''}${rp.check?' · проверить':''}</span>`);
+  if(F.work.kind==='photo')b.push('<span class="warn">фото ковра, не схема</span>');
   b.push(S.saving?'<span class="mut">сохраняю…</span>':(S.dirty?'<span class="mut">изменено</span>':(F.work.saved_at?`<span class="mut">сохранено ${esc(String(F.work.saved_at).slice(11,16))}</span>`:'')));
   e.innerHTML=b.filter(Boolean).join(' <span class="mut">·</span> ');renderUndo();}
 function renderUndo(){const U=$('undoBox');if(!U)return;
@@ -1070,7 +1082,7 @@ function renderToolcol(){
   $('gridTog').onclick=toggleGrid;
 }
 function outLinks(){const F=S.fig,e=$('outLinks');if(!e)return;const t=Date.now(),L=(suf,lbl,tip)=>`<a href="/out/${F.id}${suf}?t=${t}" target="_blank" style="color:var(--blue)" ${tip?`data-tip="${tip}"`:''}>${lbl}</a>`;
-  e.innerHTML=F.work.saved_at?`Файлы: ${L('.png','PNG 1:1','1 узел = 1 пиксель, фон прозрачный')} · ${L('_x12.png','PNG ×12','крупно, фон прозрачный, без сетки')} · ${L('_bg.png','×12 с фоном','крупно, с цветом фона — для просмотра и печати')} · ${L('_grid.png','сетка','сетка отдельным прозрачным слоем того же размера, что ×12')} · ${L('.svg','SVG','векторный: каждый цвет — свой слой, фон и сетка — отдельные скрытые слои')}`:'';}
+  e.innerHTML=F.work.saved_at?`Файлы: ${L('.png','PNG 1:1','1 узел = 1 пиксель, фон прозрачный')} · ${L('_x12.png','PNG ×12','крупно, фон прозрачный, без сетки')} · ${L('_bg.png','×12 с фоном','крупно, с цветом фона — для просмотра и печати')} · ${L('_grid.png','сетка','сетка отдельным прозрачным слоем того же размера, что ×12')} · ${L('.svg','SVG','векторный: каждый цвет — свой слой, фон и сетка — отдельные скрытые слои')}${F.work.rapport&&F.work.rapport.found?' · '+L('_unit.png','раппорт','один повтор каймы, ×12'):''}`:'';}
 function norm(s){return String(s||'').toLowerCase().replace(/ё/g,'е').replace(/[ә]/g,'э').replace(/[^a-zа-яəğıöüşç0-9]+/g,' ').trim();}
 let suggT=0,suggSeq=0;
 function suggestSiteSoon(){clearTimeout(suggT);suggT=setTimeout(suggestSite,250);}
@@ -1097,7 +1109,7 @@ function trimSilent(){ // автообрезка по рамке рисунка 
 async function saveFigure(silent,opt){const F=S.fig;if(!F)return;opt=opt||{};
   if(F.M&&opt.trim){trimSilent();if(S.mode==='pix'){renderRight();redraw();}}
   const payload=workPayload();S.dirty=false;S.saving=true;renderSbInfo();
-  try{const r=await api('/api/work/'+encodeURIComponent(F.id),payload);if(S.fig===F){F.work.saved_at=r.saved_at;F.work.done=F.done;outLinks();}}
+  try{const r=await api('/api/work/'+encodeURIComponent(F.id),payload);if(S.fig===F){F.work.saved_at=r.saved_at;F.work.done=F.done;if('rapport' in r)F.work.rapport=r.rapport;outLinks();}}
   catch(e){S.dirty=true;throw e;}finally{S.saving=false;renderSbInfo();}
   if(opt.refresh||!silent)await refreshFigures();if(!silent)stat('сохранено ✓','ok');}
 async function renameFigure(nid){const F=S.fig;if(!nid||nid===F.id)return;if(!/^[\w\-]+$/.test(nid)){stat('id: только латиница, цифры, _ и -','err');return;}
