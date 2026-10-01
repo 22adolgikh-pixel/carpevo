@@ -40,6 +40,8 @@
   "carpet": "Куба",
   "type": "К.—Ш",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -54,7 +56,10 @@
  "classify": {
   "tones": 7,
   "inner": 45,
-  "mode": "color"
+  "thr": [
+   200,
+   110
+  ]
  },
  "matrix": {
   "w": 73,
@@ -215,5 +220,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-01 20:05:58"
+ "saved_at": "2026-10-01 20:41:50",
+ "review": false,
+ "transparent_bg": true
 }
