@@ -614,6 +614,11 @@ def api_site_suggest(body: dict = Body(...)):
     names = [n for n in body.get("names", []) if n]
     return site_suggest(SITE_INDEX, names, body.get("translation", ""), int(body.get("limit", 8)))
 
+@app.get("/api/dyes")
+def api_dyes():
+    """Библиотека красителей (dyes.json): одни и те же названия и опорные цвета для всех рисунков."""
+    return {"dyes": [{"id": i, "az": a, "ru": r, "hex": h} for a, r, h, i in autocolor.DYES]}
+
 @app.get("/api/az_draft")
 def api_az_draft(text: str = ""):
     return {"text": text, "az": az_draft(text)}

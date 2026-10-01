@@ -18,24 +18,17 @@ GOOD_R = 0.60          # выше — шаг надёжный, им можно �
 
 # ---------------------------------------------------------------- словарь красителей
 # опорные цвета — как они выглядят в печати книги (выцветшие), не «идеальные» красители
-DYES = [
-    ("qırmızı", "красный", "#b8402f"),
-    ("zoğalı", "тёмно-красный (кизиловый)", "#7a2a2a"),
-    ("narıncı", "оранжевый", "#d8773a"),
-    ("çəhrayı", "розовый", "#dfa092"),
-    ("sarı", "жёлтый", "#dcb54c"),
-    ("krem", "кремовый", "#eadcb4"),
-    ("ağ", "белый", "#f3efe4"),
-    ("lacivərd", "тёмно-синий", "#27305a"),
-    ("göy", "синий", "#3f5f9e"),
-    ("mavi", "голубой", "#86a6cc"),
-    ("yaşıl", "зелёный", "#3d6b48"),
-    ("açıq yaşıl", "светло-зелёный", "#93ad6c"),
-    ("qəhvəyi", "коричневый", "#6d4a30"),
-    ("qara", "чёрный", "#1e1c1f"),
-    ("boz", "серый", "#8c8a86"),
-    ("bənövşəyi", "фиолетовый", "#5b3f68"),
-]
+def _load_dyes():
+    """Библиотека красителей — файл dyes.json рядом (общая для студии и автооцифровки)."""
+    import json, os
+    try:
+        d = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "dyes.json"), encoding="utf-8"))["dyes"]
+        return [(x["az"], x["ru"], x["hex"], x["id"]) for x in d]
+    except Exception:
+        return [("qırmızı", "красный", "#b8402f", "qirmizi"), ("qara", "чёрный", "#1e1c1f", "qara"), ("ağ", "белый", "#f3efe4", "ag")]
+
+
+DYES = _load_dyes()
 
 
 def _hex2lab(h):
@@ -49,13 +42,13 @@ def _lab8_to_ref(lab8):
     return np.stack([lab8[..., 0] * 100 / 255, lab8[..., 1] - 128, lab8[..., 2] - 128], -1)
 
 
-_DYE_LAB = _lab8_to_ref(np.array([_hex2lab(h) for _, _, h in DYES]))
+_DYE_LAB = _lab8_to_ref(np.array([_hex2lab(h) for _, _, h, _ in DYES]))
 
 
 def dye_name(lab8):
     d = np.linalg.norm(_DYE_LAB - _lab8_to_ref(lab8), axis=1)
     i = int(np.argmin(d))
-    return DYES[i][0], DYES[i][1], float(d[i])
+    return DYES[i][0], DYES[i][1], float(d[i]), DYES[i][3]
 
 
 def _lab2hex(lab8):
@@ -322,11 +315,11 @@ def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None):
     lab8 = np.stack([Cen[:, 0] * 255 / 100, Cen[:, 1] + 128, Cen[:, 2] + 128], -1)
     names = [dye_name(c) for c in lab8]
     seen, uaz, uru = {}, [], []
-    for az, ru, _ in names:                                     # «zoğalı», «zoğalı 2» — два оттенка одного красителя
+    for az, ru, _, _ in names:                                  # «zoğalı», «zoğalı 2» — два оттенка одного красителя
         seen[az] = seen.get(az, 0) + 1
         uaz.append(az if seen[az] == 1 else f"{az} {seen[az]}"); uru.append(ru if seen[az] == 1 else f"{ru} {seen[az]}")
     info = {"palette_hex": [_lab2hex(c) for c in lab8],
-            "names_az": uaz, "names_ru": uru,
+            "names_az": uaz, "names_ru": uru, "dye_ids": [n[3] for n in names],
             "dye_dist": [round(n[2], 1) for n in names],
             "counts": [int((M == k).sum()) for k in range(len(Cen))], "despeckled": int(fixed)}
     flags = []
@@ -357,6 +350,7 @@ def to_work_color(G, M, info, margin=0):
         "palette": info["palette_hex"],
         "palette_names": info["names_az"],
         "palette_names_ru": info["names_ru"],
+        "palette_dyes": info["dye_ids"],
         "palette_touched": False,
         "color_mode": True,
         "auto": {"version": 1, "mode": "color", "confidence": info["confidence"], "flags": info["flags"],

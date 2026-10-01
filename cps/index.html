@@ -6,8 +6,9 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{margin:0;font:13px/1.4 -apple-system,system-ui,sans-serif;background:var(--bg);color:var(--tx);display:grid;grid-template-columns:230px 1fr 310px;grid-template-rows:auto 1fr auto;height:100vh;overflow:hidden}
-header{grid-column:1/4;display:flex;gap:8px;align-items:center;padding:7px 12px;background:var(--pan);border-bottom:1px solid var(--ln)}
-header b{color:var(--acc);margin-right:8px}
+header{grid-column:1/4;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;padding:7px 12px;background:var(--pan);border-bottom:1px solid var(--ln)}
+header b{color:var(--acc);margin-right:8px;justify-self:start}
+header .tabs{justify-self:center}
 .sp{flex:1}
 .btn{text-decoration:none;display:inline-block}
 button,.btn{background:var(--pan2);color:var(--tx);border:1px solid var(--ln);border-radius:6px;padding:5px 9px;cursor:pointer;font:inherit;white-space:nowrap}
@@ -121,6 +122,17 @@ input.draft{border-style:dashed;border-color:var(--acc)}
 .palgrid .sq .k{font-size:12px;font-weight:700;pointer-events:none}
 .palgrid .sq .bgl{position:absolute;bottom:-15px;left:0;right:0;text-align:center;font-size:9.5px;color:var(--mut);pointer-events:none}
 .palgrid{padding-bottom:12px}
+.palnames{display:flex;flex-direction:column;gap:2px;margin-top:2px}
+.palnames .pn{display:flex;align-items:center;gap:6px;padding:2px 4px;border-radius:5px;font-size:12px;cursor:pointer}
+.palnames .pn:hover,.palnames .pn.on{background:var(--pan2)}
+.palnames .pn .sw{width:12px;height:12px;border-radius:3px;border:1px solid #0006;flex:none}
+.palnames .pn .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.palnames .pn .mut{color:var(--mut);font-size:11px}
+.dyegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin:8px 0}
+.dyegrid .dy{display:flex;gap:8px;align-items:center;padding:5px 7px;border:1px solid var(--ln);border-radius:7px;cursor:pointer;background:var(--pan2)}
+.dyegrid .dy:hover,.dyegrid .dy.on{border-color:var(--acc)}
+.dyegrid .dy i{width:22px;height:22px;border-radius:5px;border:1px solid #0006;flex:none}
+.dyegrid .dy small{display:block;color:var(--mut);font-size:11px}
 .palgrid .sq input[type=color]{position:absolute;left:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;border:0;padding:0}
 .palgrid .sq .del{position:absolute;right:-7px;top:-7px;width:18px;height:18px;border-radius:50%;background:var(--bad);color:#fff;font-size:10px;line-height:18px;text-align:center;display:none;cursor:pointer;box-shadow:0 1px 3px #0008}
 .palgrid .sq:hover .del{display:block}
@@ -130,6 +142,10 @@ input.draft{border-style:dashed;border-color:var(--acc)}
 .rfoot{position:sticky;bottom:-10px;margin:auto -10px -10px;margin-top:auto;padding:10px;background:var(--pan);border-top:1px solid var(--ln);display:flex;flex-direction:column;gap:7px;z-index:3}
 .rfoot{margin-top:auto!important;padding-top:12px}
 button.big{width:100%;padding:9px 12px;font-size:13.5px;font-weight:600;text-align:left}
+.opts{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-size:12px;color:var(--mut)}
+.opts label{display:inline-flex;gap:5px;align-items:center;cursor:pointer}
+.opts input[type=number]{width:52px}
+.opts .grp{display:inline-flex;gap:8px;align-items:center}
 .actions{display:flex;flex-direction:column;gap:6px;margin-bottom:6px}
 .actions button{padding:9px 10px;font-size:13.5px;font-weight:600;text-align:left}
 button.bigok{background:#2f5a2a;border-color:var(--ok);color:#e8f7e3}button.bigok:hover{background:#3b7234}
@@ -240,7 +256,7 @@ const dispName=f=>f.name_az||f.name||'';
 /* ============================ состояние ============================ */
 const S={
   mode:'sheet',
-  sheets:[],figures:[],siteIndex:[],legend:[],
+  sheets:[],figures:[],siteIndex:[],legend:[],dyes:[],
   sheet:null,            // {path,img,table,boxes:[],sel}
   fig:null,              // рабочие данные рисунка (см. loadFigure)
   dirty:false,autoFill:true,autoMode:(()=>{try{return localStorage.getItem('cpsMode')||'auto';}catch(e){return 'auto';}})(),showGrid:(()=>{try{return localStorage.getItem('cpsGrid')!=='0';}catch(e){return true;}})(),
@@ -272,7 +288,7 @@ cv.addEventListener('pointermove',ev=>{
   const w=toWorld(ev);const h=H();if(h&&h.move)h.move(w,ev);if(h&&h.hud)$('hud').textContent=h.hud(w);
 });
 cv.addEventListener('pointerup',ev=>{if(panning){panning=null;cv.style.cursor='';return;}const h=H();if(h&&h.up)h.up(toWorld(ev),ev);});
-function toggleGrid(){S.showGrid=!S.showGrid;try{localStorage.setItem('cpsGrid',S.showGrid?'1':'0');}catch(e){}const el=$('gridTog');if(el)el.classList.toggle('on',S.showGrid);redraw();}
+function toggleGrid(){S.showGrid=!S.showGrid;try{localStorage.setItem('cpsGrid',S.showGrid?'1':'0');}catch(e){}const el=$('gridTog');if(el)el.classList.toggle('on',S.showGrid);const c=$('vGridTog');if(c)c.checked=S.showGrid;redraw();}
 $('zIn').onclick=()=>zoomAt(1.25,V.w/2,V.h/2);$('zOut').onclick=()=>zoomAt(0.8,V.w/2,V.h/2);$('zFit').onclick=()=>{const h=H();if(h&&h.fit)h.fit();};
 let rafPending=false;
 function redraw(){if(rafPending)return;rafPending=true;requestAnimationFrame(()=>{rafPending=false;draw();});}
@@ -453,12 +469,9 @@ function renderRightSheet(){
   <div class="hint"><kbd>Tab</kbd> — следующая рамка, <kbd>Esc</kbd> — снять выделение.</div>
   <div style="margin:6px 0">${HT('Мышь: клик — выбрать рамку, тянуть — двигать, за точки — менять размер, тянуть по пустому месту — новая рамка.<br><kbd>Del</kbd> удалить · стрелки — сдвиг (<kbd>Shift</kbd> ×10, <kbd>Alt</kbd> — размер)<br>Зум: щипок на трекпаде или <kbd>⌘</kbd>+колесо, прокрутка двумя пальцами — сдвиг, <kbd>Пробел</kbd>+тянуть — сдвиг.<br>Номер рисунка и таблицы задают id (<kbd>t14_f01</kbd>) и подтягивают подписи из легенды.')}</div>
   <div class="rfoot">
-    <div class="flex" style="gap:6px;align-items:stretch">
-      <button id="shAutoPix" class="big pri" style="flex:1" data-tip="Нарезать (если нужно), натянуть сетку и перевести в пиксели все рисунки листа. Рисунки, где пиксели уже есть, не трогаются (Shift — пересчитать все)">⚡ Авто: сетка и пиксели</button>
-      ${S.autoMode==='color'?'':`<button id="shAutoFill" class="sm ${S.autoFill?'on':''}" style="white-space:nowrap" data-tip="снимите — только тёмный контур (для ЧБ)">${S.autoFill?'☑':'☐'} заливка</button>`}
-      ${modeSel('shMode')}
-    </div>
     <button id="shSave" class="big ${sh.saved?'pri':'on'}">💾 Сохранить и нарезать</button>
+    <button id="shAutoPix" class="big pri" data-tip="Нарезать (если нужно), натянуть сетку и перевести в пиксели все рисунки листа. Рисунки, где пиксели уже есть, не трогаются (Shift — пересчитать все)">⚡ Авто: сетка и пиксели</button>
+    <div class="opts">${autoOpts('sh')}</div>
   </div>`;
   $('shTable').oninput=e=>{sh.table=e.target.value;sh.saved=false;redraw();};
   $('shAuto').onclick=()=>autoSegment().catch(fail);
@@ -485,12 +498,21 @@ function renderRightSheet(){
     el.querySelector('[data-del]').onclick=()=>{sh.boxes.splice(i,1);sh.sel=-1;sh.saved=false;renderRight();redraw();};
   });
   $('shSave').onclick=()=>saveSheet().catch(fail);
-  if($('shAutoFill'))$('shAutoFill').onclick=()=>{S.autoFill=!S.autoFill;renderRight();};bindModeSel('shMode');
+  bindAutoOpts('sh');
   $('shAutoPix').onclick=e=>{if(e.shiftKey&&!confirm('Пересчитать ВСЕ рисунки листа? Ручные правки пикселей будут заменены.'))return;autoSheet(e.shiftKey).catch(fail);};
 }
 /* v7: режим автооцифровки — авто (цвет определяется сам) / ЧБ / цвет */
-function modeSel(id){return `<select id="${id}" class="sm" data-tip="Авто — цветные схемы распознаются сами; ЧБ — тушь на миллиметровке (контур + серая заливка); Цвет — цветные схемы (палитра и названия красителей)" style="width:auto">${[['auto','авто'],['bw','ЧБ'],['color','цвет']].map(([v,l])=>`<option value="${v}" ${S.autoMode===v?'selected':''}>${l}</option>`).join('')}</select>`;}
-function bindModeSel(id){const e=$(id);if(e)e.onchange=()=>{S.autoMode=e.value;try{localStorage.setItem('cpsMode',S.autoMode);}catch(_){}renderRight();};}
+function autoOpts(p,withGrid){
+  const F=S.fig,col=S.autoMode==='color';
+  return `<span class="grp" data-tip="Режим автооцифровки. Авто — цветные схемы распознаются сами; ЧБ — тушь на миллиметровке (контур + серая заливка); Цвет — цветные схемы (палитра и красители)">${[['auto','авто'],['bw','ЧБ'],['color','цвет']].map(([v,l])=>`<label><input type="radio" name="${p}Mode" value="${v}" ${S.autoMode===v?'checked':''}> ${l}</label>`).join('')}</span>`
+   +(col?'':`<label data-tip="снимите — только тёмный контур (для ЧБ)"><input type="checkbox" id="${p}Fill" ${S.autoFill?'checked':''}> заливка</label>`)
+   +(withGrid?`<label><input type="checkbox" id="blankEx" ${F&&F.blankExtract?'checked':''}> чистый лист (без авто-заливки по порогу)</label>`:'')
+   +(withGrid&&F&&F.work.color_mode?`<span class="grp" data-tip="если авто разделило один цвет на два оттенка (или склеило два) — задайте число цветов и пересчитайте">цветов <input type="number" id="gNcol" min="2" max="12" value="${(F.work.palette||[]).length||''}"><button id="gNcolGo" class="sm">↻ пересчитать</button></span>`:'');
+}
+function bindAutoOpts(p){
+  document.querySelectorAll(`input[name="${p}Mode"]`).forEach(r=>r.onchange=()=>{S.autoMode=r.value;try{localStorage.setItem('cpsMode',S.autoMode);}catch(_){}renderRight();});
+  const f=$(p+'Fill');if(f)f.onchange=()=>{S.autoFill=f.checked;};
+}
 async function saveSheet(nav){
   if(nav===undefined)nav=true;
   const sh=S.sheet;const figs=sh.boxes.map(b=>(b.table||sh.table||'x')+'/'+b.fig);
@@ -654,7 +676,7 @@ async function openFigure(id){
     adj:Object.assign({brightness:0,contrast:1,gamma:1,invert:false},w.adjust||{}),
     grid:Object.assign({pw:8,ph:8,ox:0,oy:0,cols:10,rows:10,square:true},w.grid||{}),
     cls:Object.assign({tones:2,inner:55,thr:[200,110]},w.classify||{}),
-    palette:(w.palette||FIXED_PALETTE.slice(0,3)).map(c=>String(c).toLowerCase()==='#8a8a8a'?'#b8b8b8':c),palNames:w.palette_names||FIXED_NAMES.slice(0,3),palTouched:!!w.palette_touched,
+    palette:(w.palette||FIXED_PALETTE.slice(0,3)).map(c=>String(c).toLowerCase()==='#8a8a8a'?'#b8b8b8':c),palNames:w.palette_names||FIXED_NAMES.slice(0,3),palDyes:(w.palette||[]).map((_,i)=>{const id=(w.palette_dyes||[])[i];if(id)return id;const nm=String((w.palette_names||[])[i]||'').replace(/ \d+$/,'');const d=S.dyes.find(x=>x.az===nm);return d?d.id:null;}),palTouched:!!w.palette_touched,
     meta:Object.assign({section:'',name_az:'',name:'',translation:'',carpet:'',type:'',note:'',site_id:'',source:''},w.meta||{}),
     done:!!w.done,review:!!w.review,transparent:w.transparent_bg!==false,difficulty:w.difficulty||null,
     M:null,cur:1,tool:'line',sym:{x:false,y:false,rot:false,ax:null,ay:null},under:0.35,undo:[],redo:[],clip:null};
@@ -723,7 +745,15 @@ MODES.grid={
   fit(){const F=S.fig;if(F)fitTo(F.W,F.H);},
   draw(c){const F=S.fig;if(!F)return;const G=F.grid;
     c.drawImage(F.wcan,0,0);
-    if(F.preview){const k=classify(F);for(let j=0;j<G.rows;j++)for(let i=0;i<G.cols;i++){const v=k[j*G.cols+i];if(!v)continue;
+    if(S.peek&&(F.M||F.cls)){   // пробел: цветная версия (пиксели в цветах палитры) поверх скана
+      c.fillStyle=F.palette[0]||'#fff';c.globalAlpha=0.93;
+      c.fillRect(G.ox,G.oy,G.cols*G.pw,G.rows*G.ph);
+      if(F.M){const M=F.M;for(let j=0;j<M.h;j++)for(let i=0;i<M.w;i++){const v=M.d[j*M.w+i];if(!v)continue;
+        c.fillStyle=F.palette[v]||'#f0f';c.fillRect(G.ox+(i+M.ox)*G.pw,G.oy+(j+M.oy)*G.ph,G.pw+0.5,G.ph+0.5);}}
+      else{const k=classify(F);for(let j=0;j<G.rows;j++)for(let i=0;i<G.cols;i++){const v=k[j*G.cols+i];if(!v)continue;
+        c.fillStyle=F.palette[v]||'#f0f';c.fillRect(G.ox+i*G.pw,G.oy+j*G.ph,G.pw+0.5,G.ph+0.5);}}
+      c.globalAlpha=1;}
+    else if(F.preview){const k=classify(F);for(let j=0;j<G.rows;j++)for(let i=0;i<G.cols;i++){const v=k[j*G.cols+i];if(!v)continue;
         c.fillStyle=F.palette[v]||'#f0f';c.globalAlpha=F.previewAlpha;c.fillRect(G.ox+i*G.pw,G.oy+j*G.ph,G.pw,G.ph);}c.globalAlpha=1;}
     const x1=G.ox+G.cols*G.pw,y1=G.oy+G.rows*G.ph;
     c.lineWidth=px1();c.strokeStyle='rgba(255,180,84,.75)';c.beginPath();
@@ -780,16 +810,12 @@ function renderRightGrid(){
   <canvas class="hist" id="hist" width="580" height="120" data-tip="тяните вертикальные линии-пороги мышью"></canvas>
   <div class="flex" style="justify-content:space-between;font-size:11px;color:var(--mut);margin-top:2px"><span>← тёмные (тушь)</span><span>светлые (бумага) →</span></div>
   <div id="thrBox"></div>
-  <div class="row"><label>превью</label><input type="checkbox" id="pv" ${F.preview?'checked':''}><input type="range" id="pvA" min="0.1" max="1" step="0.05" value="${F.previewAlpha||0.6}"></div>
-  <label class="flex" style="color:var(--mut);font-size:12px;margin-top:6px"><input type="checkbox" id="blankEx" ${F.blankExtract?'checked':''}>чистый лист (без авто-заливки по порогу)</label>
+  <h4>Вид ${HT('<b>Показать пиксели</b> — поверх скана рисуются клетки в цветах палитры (как получатся после «Извлечь»). Ту же цветную версию можно <b>подглядеть</b>, удерживая <kbd>Пробел</kbd>, — не переключая вкладку.')}</h4>
+  <div class="opts"><label><input type="checkbox" id="pv" ${F.preview?'checked':''}> показать пиксели</label><input type="range" id="pvA" min="0.1" max="1" step="0.05" value="${F.previewAlpha||0.6}" style="width:110px"><span class="mut">· пробел — подглядеть</span></div>
   <div class="rfoot">
-    <div class="flex" style="gap:6px;align-items:stretch">
-      <button id="autoFig" class="big pri" style="flex:1" data-tip="Сетка и пиксели автоматически (углы, шаг, наклон, контур и заливка)">⚡ Авто: сетка и пиксели</button>
-      ${S.autoMode==='color'?'':`<button id="gAutoFill" class="sm ${S.autoFill?'on':''}" style="white-space:nowrap" data-tip="снимите — только тёмный контур (для ЧБ)">${S.autoFill?'☑':'☐'} заливка</button>`}
-      ${modeSel('gMode')}
-    </div>
-    ${F.work.color_mode?`<div class="flex" style="gap:6px;align-items:center"><span class="mut" style="font-size:12px" data-tip="если авто разделило один цвет на два оттенка (или склеило два) — задайте число цветов и пересчитайте">цветов</span><input type="number" id="gNcol" min="2" max="12" value="${(F.work.palette||[]).length||''}" style="width:52px"><button id="gNcolGo" class="sm" data-tip="пересчитать цвета с этим числом цветов (сетка та же)">↻ цвета</button></div>`:''}
     <button id="toPix" class="big on" data-tip="Перевести клетки в пиксели по текущей сетке и порогам${F.M?' — ручные правки пикселей будут заменены':''}">▦ Извлечь в пиксели ${G.cols}×${G.rows} →</button>
+    <button id="autoFig" class="big pri" data-tip="Сетка и пиксели автоматически (углы, шаг, наклон, контур и заливка)">⚡ Авто: сетка и пиксели</button>
+    <div class="opts">${autoOpts('g',true)}</div>
   </div>`;
   $('vQuad').onclick=()=>{S.gridView='quad';renderRight();MODES.quad.fit();};
   $('vGrid').onclick=()=>{S.gridView='grid';renderRight();MODES.grid.fit();};
@@ -822,7 +848,7 @@ function renderRightGrid(){
   F.previewAlpha=F.previewAlpha||0.6;
   $('blankEx').onchange=e=>{F.blankExtract=e.target.checked;};
   $('toPix').onclick=extractToPixels;
-  $('autoFig').onclick=()=>autoFigure().catch(fail);if($('gAutoFill'))$('gAutoFill').onclick=()=>{S.autoFill=!S.autoFill;renderRight();};bindModeSel('gMode');
+  $('autoFig').onclick=()=>autoFigure().catch(fail);bindAutoOpts('g');
   if($('gNcolGo'))$('gNcolGo').onclick=()=>autoFigure({mode:'color',ncolors:+$('gNcol').value||null}).catch(fail);
   renderThr();drawHist();histEvents();
 }
@@ -970,12 +996,48 @@ function renderPal(){const F=S.fig,b=$('palBox');if(!b)return;
     `<div class="sq add" id="palAdd" title="добавить цвет">+</div>`;
   b.querySelectorAll('.sq[data-i]').forEach(el=>{const i=+el.dataset.i;const inp=el.querySelector('input[type=color]');
     el.onclick=e=>{if(e.target.hasAttribute('data-del'))return;setCur(i);};
-    el.ondblclick=e=>{if(e.target.hasAttribute('data-del'))return;inp.click();};
+    el.ondblclick=e=>{if(e.target.hasAttribute('data-del'))return;openDyePicker(i);};
     inp.oninput=e=>{F.palette[i]=e.target.value;F.palTouched=true;el.style.background=e.target.value;markDirty();redraw();};
     const del=el.querySelector('[data-del]');if(del)del.onclick=()=>{if(!confirm('Удалить цвет '+(i+1)+'? Его клетки станут фоном.'))return;pushUndo();const M=F.M;
       if(M)for(let k=0;k<M.d.length;k++){if(M.d[k]===i)M.d[k]=0;else if(M.d[k]>i)M.d[k]--;}
-      F.palette.splice(i,1);F.palNames.splice(i,1);F.cls.thr.splice(i-1,1);F.cur=Math.min(F.cur,F.palette.length-1);F.palTouched=true;markDirty();renderPal();renderSbInfo();redraw();};});
-  $('palAdd').onclick=()=>{const i=F.palette.length;F.palette.push(FIXED_PALETTE[i]||'#b22222');F.palNames.push(FIXED_NAMES[i]||'');F.cur=F.palette.length-1;F.palTouched=true;markDirty();renderPal();};}
+      F.palette.splice(i,1);F.palNames.splice(i,1);F.palDyes.splice(i,1);F.cls.thr.splice(i-1,1);F.cur=Math.min(F.cur,F.palette.length-1);F.palTouched=true;markDirty();renderPal();renderSbInfo();redraw();};});
+  renderPalNames();
+  $('palAdd').onclick=()=>{const i=F.palette.length;F.palette.push(FIXED_PALETTE[i]||'#b22222');F.palNames.push(FIXED_NAMES[i]||'');F.palDyes.push(null);F.cur=F.palette.length-1;F.palTouched=true;markDirty();renderPal();};}
+function hex2lab(h){const[r0,g0,b0]=hex2rgb(h).map(v=>{v/=255;return v<=0.04045?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
+  const f=t=>t>0.008856?Math.cbrt(t):7.787*t+16/116;
+  const fx=f((0.4124*r0+0.3576*g0+0.1805*b0)/0.95047),fy=f(0.2126*r0+0.7152*g0+0.0722*b0),fz=f((0.0193*r0+0.1192*g0+0.9505*b0)/1.08883);
+  return[116*fy-16,500*(fx-fy),200*(fy-fz)];}
+function nearestDye(hex){const L=hex2lab(hex);let best=null,bd=1e9;
+  for(const d of S.dyes){const q=hex2lab(d.hex),e=Math.hypot(L[0]-q[0],L[1]-q[1],L[2]-q[2]);if(e<bd){bd=e;best=d;}}
+  return best?{dye:best,dist:bd}:null;}
+function dyeById(id){return S.dyes.find(d=>d.id===id)||null;}
+function dyeLabel(F,i,dye){   // «zoğalı», «zoğalı 2» — два оттенка одного красителя в одном рисунке
+  const n=F.palDyes.filter((x,j)=>j!==i&&x===dye.id).length;return n?dye.az+' '+(n+1):dye.az;}
+function applyDye(F,i,dye){F.palette[i]=dye.hex;F.palDyes[i]=dye.id;F.palNames[i]=dyeLabel(F,i,dye);F.palTouched=true;markDirty();}
+function renderPalNames(){const F=S.fig,b=$('palNames');if(!b||!F)return;
+  while(F.palDyes.length<F.palette.length)F.palDyes.push(null);
+  b.innerHTML=F.palette.map((c,i)=>{const d=dyeById(F.palDyes[i]);
+    return `<div class="pn ${i===F.cur?'on':''}" data-i="${i}"><span class="sw" style="background:${c}"></span><b>${i+1}</b><span class="nm">${esc(F.palNames[i]||(i?'без названия':'фон'))}</span><span class="mut">${d?esc(d.ru):((i&&F.work.color_mode)?'краситель не выбран':'')}</span></div>`;}).join('');
+  b.querySelectorAll('.pn').forEach(el=>{const i=+el.dataset.i;el.onclick=()=>setCur(i);el.ondblclick=()=>openDyePicker(i);});
+  const sn=$('palSnap');if(sn)sn.onclick=()=>{if(!S.dyes.length){stat('библиотека красителей не загрузилась','err');return;}
+    if(!confirm('Заменить цвета палитры ближайшими красителями из библиотеки? Пиксели не меняются, только цвета и названия.'))return;
+    F.palDyes=[];F.palette.forEach((c,i)=>{const r=nearestDye(c);F.palDyes[i]=r?r.dye.id:null;});
+    F.palette.forEach((c,i)=>{const d=dyeById(F.palDyes[i]);if(d){F.palette[i]=d.hex;F.palNames[i]=dyeLabel(F,i,d);}});
+    F.palTouched=true;markDirty();renderPal();redraw();};}
+function openDyePicker(i){
+  const F=S.fig,W=$('modal');if(!F||!W)return;
+  const cur=F.palDyes[i];
+  W.innerHTML=`<div class="mbox"><div class="flex" style="margin-bottom:6px"><b style="font-size:14px">Цвет ${i+1}${i?'':' (фон)'} — краситель</b><span class="sp"></span><button class="sm" id="dyClose">Закрыть</button></div>
+  <div class="hint" style="margin:0">Выберите краситель из библиотеки — название и цвет будут одинаковыми во всех рисунках. Нового красителя нет в списке — добавьте строку в <code>dyes.json</code>.</div>
+  <div class="dyegrid">${S.dyes.map(d=>`<div class="dy ${d.id===cur?'on':''}" data-id="${esc(d.id)}"><i style="background:${d.hex}"></i><span>${esc(d.az)}<small>${esc(d.ru)}</small></span></div>`).join('')}</div>
+  <div class="flex"><button class="sm" id="dyOwn">свой цвет…</button><input type="color" id="dyIn" value="${F.palette[i]}" style="width:1px;height:1px;opacity:0;border:0;padding:0"></div></div>`;
+  W.hidden=false;
+  const close=()=>{W.hidden=true;W.innerHTML='';renderPal();redraw();};
+  $('dyClose').onclick=close;W.onclick=e=>{if(e.target===W)close();};
+  W.querySelectorAll('.dy').forEach(el=>el.onclick=()=>{applyDye(F,i,dyeById(el.dataset.id));close();});
+  $('dyOwn').onclick=()=>$('dyIn').click();
+  $('dyIn').oninput=e=>{F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;markDirty();redraw();};
+}
 function setCur(i){const F=S.fig;if(!F)return;if(i!==F.cur){F.prevCur=F.cur;F.cur=i;}renderPal();}
 function lum(h){const[r,g,b]=hex2rgb(h);return 0.299*r+0.587*g+0.114*b;}
 function usedColors(F){if(!F.M)return 0;const s=new Set();for(const v of F.M.d)if(v)s.add(v);return s.size;}
@@ -990,7 +1052,12 @@ function renderRightPix(){
   const ids=(m.site_id||'').split(',').map(x=>x.trim()).filter(Boolean);
   R.innerHTML=`  <h4>Палитра <span class="hintbox">?<span class="htxt">Клик — выбрать цвет для рисования, двойной клик — сменить цвет, ✕ при наведении — удалить. <kbd>1</kbd> — фон, <kbd>2</kbd>–<kbd>9</kbd> — цвета. <kbd>X</kbd> — переключиться на предыдущий цвет (как в Illustrator). <kbd>Alt</kbd>+клик по клетке — взять её цвет. Левая кнопка мыши рисует выбранным цветом, правая — фоном.</span></span></h4>
   <div class="palgrid" id="palBox"></div>
-  <div class="ibar" style="margin-top:8px">${IB('under','Подложка скана вкл/выкл · удерживайте пробел — подглядеть','U','id="uTog"',F.under>0)}<input type="range" id="uA" min="0" max="1" step="0.05" value="${F.under}" style="flex:1;min-width:40px" data-tip="прозрачность подложки"></div>
+  <div id="palNames" class="palnames"></div>
+  <div class="opts" style="margin-top:6px"><button class="sm" id="palSnap" data-tip="Заменить цвета палитры ближайшими красителями из библиотеки (dyes.json) — названия и цвета будут одинаковыми во всех рисунках">↻ привести к красителям</button></div>
+  <h4>Вид</h4>
+  <div class="ibar">${IB('under','Подложка скана вкл/выкл · удерживайте пробел — подглядеть','U','id="uTog"',F.under>0)}<input type="range" id="uA" min="0" max="1" step="0.05" value="${F.under}" style="flex:1;min-width:40px" data-tip="прозрачность подложки">
+   <span class="gap"></span>${IB('flipH','Отразить матрицу по горизонтали','','id="mFH"')}${IB('flipV','Отразить матрицу по вертикали','','id="mFV"')}</div>
+  <div class="opts" style="margin-top:6px"><label><input type="checkbox" id="vGridTog" ${S.showGrid?'checked':''}> сетка узлов</label></div>
   <h4>Описание</h4>
   <div class="descbox" id="descBox">
     <div class="dn">${esc(m.name_az||'—')}${m.name_az_auto?' <span class="dchip" style="background:var(--acc)" data-tip="черновик из кириллицы — проверьте">черн.</span>':''}</div>
@@ -1003,7 +1070,7 @@ function renderRightPix(){
   </div>
   <h4>Матрица</h4>
   <div class="ibar">${IB('trim','Обрезать пустые поля (запас — число справа)','','id="mTrim"')}<input type="number" id="mTM" min="0" max="10" value="${F.trimMargin|0}" style="width:44px" data-tip="запас при обрезке, узлов">
-   <span class="gap"></span>${IB('flipH','Отразить матрицу по горизонтали','','id="mFH"')}${IB('flipV','Отразить матрицу по вертикали','','id="mFV"')}<span class="gap"></span>${IB('clear','Очистить все пиксели','','id="mClr"')}</div>
+   <span class="gap"></span>${IB('clear','Очистить все пиксели','','id="mClr"')}</div>
   <div class="edges">
     <span></span><div class="eg">${E('T',1,'▲','Добавить ряд сверху')}${E('T',-1,'▼','Убрать ряд сверху')}</div><span></span>
     <div class="eg v">${E('L',1,'◀','Добавить столбец слева')}${E('L',-1,'▶','Убрать столбец слева')}</div>
@@ -1020,6 +1087,7 @@ function renderRightPix(){
   </div>`;
   $('uTog').onclick=()=>{F.under=F.under>0?0:(F.underLast||0.35);renderRight();redraw();};
   $('uA').oninput=e=>{F.under=+e.target.value;if(F.under>0)F.underLast=F.under;$('uTog').classList.toggle('on',F.under>0);redraw();};
+  $('vGridTog').onchange=()=>toggleGrid();
   $('mTrim').onclick=()=>matOp('trim');$('mTM').oninput=e=>F.trimMargin=+e.target.value;
   $('mFH').onclick=()=>matOp('flipH');$('mFV').onclick=()=>matOp('flipV');$('mClr').onclick=()=>{if(confirm('Очистить все пиксели?'))matOp('clear');};
   R.querySelectorAll('[data-op]').forEach(b=>b.onclick=e=>{const[side,d]=b.dataset.op.split(':');matOp(side+':'+(+d*(e.shiftKey?5:1)));});
@@ -1097,7 +1165,7 @@ async function suggestSite(){const F=S.fig,e=$('sugg');if(!e||!F)return;const m=
 
 /* ============================ сохранение ============================ */
 function workPayload(){const F=S.fig;const p={quad:F.quad.map(q=>q.map(v=>+v.toFixed(2))),adjust:F.adj,grid:F.grid,classify:{tones:F.cls.tones,inner:F.cls.inner,thr:F.cls.thr,centers:F.cls.centers},
-  palette:F.palette,palette_names:F.palNames,palette_touched:F.palTouched,meta:F.meta,done:F.done,review:!!F.review,transparent_bg:F.transparent,difficulty:F.difficulty||null};
+  palette:F.palette,palette_names:F.palNames,palette_dyes:F.palDyes,palette_touched:F.palTouched,meta:F.meta,done:F.done,review:!!F.review,transparent_bg:F.transparent,difficulty:F.difficulty||null};
   if(F.M){const M=F.M,rows=[];for(let j=0;j<M.h;j++){let r='';for(let i=0;i<M.w;i++){const v=M.d[j*M.w+i];r+=v?v.toString(36):'.';}rows.push(r);}p.matrix={w:M.w,h:M.h,origin:[M.ox,M.oy],rows};}
   return p;}
 function trimSilent(){ // автообрезка по рамке рисунка перед сохранением — не нужно жать «обрезать» руками каждый раз
@@ -1171,8 +1239,9 @@ function renderRight(){
 
 /* ============================ клавиатура ============================ */
 window.addEventListener('keydown',e=>{
-  if(e.code==='Space'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();if(e.repeat)return;spaceDown=true;cv.style.cursor='grab';
-    if(S.mode==='pix'&&S.fig&&S.fig.M){S.peek=true;$('peek').style.display='block';redraw();}return;}
+  const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','range','button'].includes(ae.type)));
+  if(e.code==='Space'&&!typing){e.preventDefault();if(ae&&ae!==document.body&&ae.blur)ae.blur();if(e.repeat)return;spaceDown=true;cv.style.cursor='grab';
+    if(S.fig&&((S.mode==='pix'&&S.fig.M)||(S.mode==='grid'&&(S.gridView||'grid')==='grid'))){S.peek=true;$('peek').textContent=S.mode==='grid'?'цветная версия · пока держите пробел':'подложка скана · пробел';$('peek').style.display='block';redraw();}return;}
   if((e.metaKey||e.ctrlKey)&&e.key==="'"){e.preventDefault();toggleGrid();return;}
   if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='s'){e.preventDefault();if(S.fig)saveFigure().catch(fail);return;}
   if((e.metaKey||e.ctrlKey)&&e.key==='Enter'&&S.mode==='pix'&&S.fig&&S.fig.M&&$('modal').hidden){e.preventDefault();finishFigure('done');return;}
@@ -1199,6 +1268,7 @@ window.addEventListener('resize',resize);
   resize();
   try{
     [S.sheets,S.figures,S.siteIndex,S.legend]=await Promise.all([api('/api/sheets'),api('/api/figures'),api('/api/site_index'),api('/api/legend')]);
+    try{S.dyes=(await api('/api/dyes')).dyes||[];}catch(_){S.dyes=[];}
     stat('бэкенд на связи · листов '+S.sheets.length+' · рисунков '+S.figures.length,'ok');
   }catch(e){stat('⚠ бэкенд не отвечает — запустите uvicorn backend:app --port 8000','err');}
   // deep-link с сайта: ?fid=t14_f02 — открыть конкретный рисунок; ?site_id=elem_адам — показать все рисунки, привязанные к странице сайта
