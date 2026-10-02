@@ -1027,26 +1027,26 @@ function nearestDye(hex){const L=hex2lab(hex);let best=null,bd=1e9;
 function dyeById(id){return S.dyes.find(d=>d.id===id)||null;}
 function dyeLabel(F,i,dye){   // «zoğalı», «zoğalı 2» — два оттенка одного красителя в одном рисунке
   const n=F.palDyes.filter((x,j)=>j!==i&&x===dye.id).length;return n?dye.az+' '+(n+1):dye.az;}
-function applyDye(F,i,dye){F.palette[i]=dye.hex;F.palDyes[i]=dye.id;F.palNames[i]=dyeLabel(F,i,dye);F.palTouched=true;markDirty();}
+function applyDye(F,i,dye,recolor){if(recolor)F.palette[i]=dye.hex;F.palDyes[i]=dye.id;F.palNames[i]=dyeLabel(F,i,dye);F.palTouched=true;markDirty();}
 function renderPalNames(){const F=S.fig;if(!F)return;
   while(F.palDyes.length<F.palette.length)F.palDyes.push(null);
   const pd=$('palDye');if(pd)pd.onclick=()=>openDyePicker(F.cur);
   const sn=$('palSnap');if(sn)sn.onclick=()=>{if(!S.dyes.length){stat('библиотека красителей не загрузилась','err');return;}
-    if(!confirm('Заменить цвета палитры ближайшими красителями из библиотеки? Пиксели не меняются, только цвета и названия.'))return;
     F.palDyes=[];F.palette.forEach((c,k)=>{const r=nearestDye(c);F.palDyes[k]=r?r.dye.id:null;});
-    F.palette.forEach((c,k)=>{const d2=dyeById(F.palDyes[k]);if(d2){F.palette[k]=d2.hex;F.palNames[k]=dyeLabel(F,k,d2);}});
+    F.palette.forEach((c,k)=>{const d2=dyeById(F.palDyes[k]);if(d2)F.palNames[k]=dyeLabel(F,k,d2);});   // только подписи: измеренные цвета остаются как на скане
     F.palTouched=true;markDirty();renderPal();redraw();};}
 function openDyePicker(i){
   const F=S.fig,W=$('modal');if(!F||!W)return;
   const cur=F.palDyes[i];
   W.innerHTML=`<div class="mbox"><div class="flex" style="margin-bottom:6px"><b style="font-size:14px">Цвет ${i+1}${i?'':' (фон)'} — краситель</b><span class="sp"></span><button class="sm" id="dyClose">Закрыть</button></div>
-  <div class="hint" style="margin:0">Выберите краситель из библиотеки — название и цвет будут одинаковыми во всех рисунках. Нового красителя нет в списке — добавьте строку в <code>dyes.json</code>.</div>
+  <div class="hint" style="margin:0">Выберите краситель — название будет одинаковым во всех рисунках. Цвет по умолчанию остаётся как на скане (печать выцвела и сдвинута); галочка ниже заменит его эталонным. Нового красителя нет в списке — добавьте строку в <code>dyes.json</code>.</div>
   <div class="dyegrid">${S.dyes.map(d=>`<div class="dy ${d.id===cur?'on':''}" data-id="${esc(d.id)}"><i style="background:${d.hex}"></i><span>${esc(d.az)}<small>${esc(d.ru)}</small></span></div>`).join('')}</div>
+  <label class="flex" style="gap:6px;margin:6px 0;font-size:12px"><input type="checkbox" id="dyRe"> заменить цвет на эталонный цвет красителя</label>
   <div class="flex"><button class="sm" id="dyOwn">свой цвет…</button><input type="color" id="dyIn" value="${F.palette[i]}" style="width:1px;height:1px;opacity:0;border:0;padding:0"></div></div>`;
   W.hidden=false;
   const close=()=>{W.hidden=true;W.innerHTML='';renderPal();redraw();};
   $('dyClose').onclick=close;W.onclick=e=>{if(e.target===W)close();};
-  W.querySelectorAll('.dy').forEach(el=>el.onclick=()=>{applyDye(F,i,dyeById(el.dataset.id));close();});
+  W.querySelectorAll('.dy').forEach(el=>el.onclick=()=>{applyDye(F,i,dyeById(el.dataset.id),$('dyRe').checked);close();});
   $('dyOwn').onclick=()=>$('dyIn').click();
   $('dyIn').oninput=e=>{F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;markDirty();redraw();};
 }
@@ -1064,7 +1064,7 @@ function renderRightPix(){
   const ids=(m.site_id||'').split(',').map(x=>x.trim()).filter(Boolean);
   R.innerHTML=`  <h4>Палитра <span class="hintbox">?<span class="htxt">Клик — выбрать цвет для рисования, двойной клик — сменить цвет, ✕ при наведении — удалить. <kbd>1</kbd> — фон, <kbd>2</kbd>–<kbd>9</kbd> — цвета. <kbd>X</kbd> — переключиться на предыдущий цвет (как в Illustrator). <kbd>Alt</kbd>+клик по клетке — взять её цвет. Левая кнопка мыши рисует выбранным цветом, правая — фоном.</span></span></h4>
   <div class="palgrid" id="palBox"></div>
-  <div class="opts" style="margin-top:2px"><button class="sm" id="palDye" data-tip="Выбрать краситель для выбранного цвета (или двойной клик по плитке)">краситель…</button><button class="sm" id="palSnap" data-tip="Заменить цвета палитры ближайшими красителями из библиотеки (dyes.json)">↻ к красителям</button></div>
+  <div class="opts" style="margin-top:2px"><button class="sm" id="palDye" data-tip="Выбрать краситель для выбранного цвета (или двойной клик по плитке)">краситель…</button><button class="sm" id="palSnap" data-tip="Подписать цвета ближайшими красителями из библиотеки. Сами цвета не меняются — остаются как на скане">↻ подписать красителями</button></div>
   <h4>Вид</h4>
   <div class="ibar">${IB('under','Подложка скана вкл/выкл · держите Пробел — оригинал скана','U','id="uTog"',F.under>0)}<input type="range" id="uA" min="0" max="1" step="0.05" value="${F.under}" style="flex:1;min-width:40px" data-tip="прозрачность подложки">
    <span class="gap"></span>${IB('flipH','Отразить матрицу по горизонтали','','id="mFH"')}${IB('flipV','Отразить матрицу по вертикали','','id="mFV"')}<span class="gap"></span>${IB('grid','Сетка узлов (скрыть/показать)',"⌘'",'id="vGridTog"',S.showGrid)}</div>

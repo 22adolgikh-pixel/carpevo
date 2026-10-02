@@ -252,7 +252,42 @@ def clean(M, t):
     return M
 
 
-def trim(M, margin=1):
+def _strip_noise_edges(M, frac=0.06):
+    """Снимаем с краёв линии из единичных клеток, не связанных с рисунком (шум печати / обрезки соседних фигур).
+    Линия снимается, если в ней мало закрашенных клеток И ни одна не касается (8-соседство) закрашенного в следующей линии."""
+    M = (M > 0)
+    y0, y1, x0, x1 = 0, M.shape[0], 0, M.shape[1]
+    changed = True
+    while changed and y1 - y0 > 2 and x1 - x0 > 2:
+        changed = False
+        for side in "tblr":
+            sub = M[y0:y1, x0:x1]
+            if min(sub.shape) <= 2: break
+            if side == "t": a, b = sub[0], sub[1]
+            elif side == "b": a, b = sub[-1], sub[-2]
+            elif side == "l": a, b = sub[:, 0], sub[:, 1]
+            else: a, b = sub[:, -1], sub[:, -2]
+            n = int(a.sum())
+            span = sub.shape[1] if side in "tb" else sub.shape[0]
+            if n == 0 or (n <= max(1, frac * span) and not (np.convolve(b.astype(int), [1, 1, 1], "same")[a] > 0).any()):
+                if side == "t": y0 += 1
+                elif side == "b": y1 -= 1
+                elif side == "l": x0 += 1
+                else: x1 -= 1
+                changed = True
+    return y0, y1, x0, x1
+
+
+def trim(M, margin=1, robust=True):
+    if robust and (M > 0).any():
+        y0, y1, x0, x1 = _strip_noise_edges(M)
+        Z = np.zeros_like(M); Z[y0:y1, x0:x1] = M[y0:y1, x0:x1]
+        ys, xs = np.nonzero(Z)
+        if len(xs):
+            x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
+            x0 = max(0, x0 - margin); y0 = max(0, y0 - margin)
+            x1 = min(M.shape[1] - 1, x1 + margin); y1 = min(M.shape[0] - 1, y1 + margin)
+            return M[y0:y1 + 1, x0:x1 + 1], (int(x0), int(y0))
     ys, xs = np.nonzero(M)
     if not len(xs): return M, (0, 0)
     x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
@@ -295,7 +330,7 @@ def quad_size(q):
     return (max(1, round(max(d(q[0], q[1]), d(q[3], q[2])))), max(1, round(max(d(q[0], q[3]), d(q[1], q[2])))))
 
 
-def to_work(G, M, info, margin=1):
+def to_work(G, M, info, margin=0):
     """Поля work-файла CPS: четырёхугольник = углы блока клеток, сетка ровно по нему, матрица с полями margin."""
     q = [[round(float(x), 2), round(float(y), 2)] for x, y in G["corners"]]
     W, H = quad_size(q); cols, rows = G["cols"], G["rows"]
