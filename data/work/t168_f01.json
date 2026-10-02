@@ -40,21 +40,26 @@
   "carpet": "Мараза",
   "type": "К.—Ш",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
-  "pw": 5.0,
-  "ph": 19.0,
-  "ox": 0,
-  "oy": 0,
-  "cols": 21,
-  "rows": 5,
+  "pw": 4.13,
+  "ph": 4.18,
+  "ox": 0.4,
+  "oy": 3.26,
+  "cols": 25,
+  "rows": 23,
   "square": false
  },
  "classify": {
   "tones": 3,
   "inner": 45,
-  "mode": "color"
+  "thr": [
+   200,
+   110
+  ]
  },
  "matrix": {
   "w": 18,
@@ -146,5 +151,7 @@
    5
   ]
  },
- "saved_at": "2026-10-02 19:54:55"
+ "saved_at": "2026-10-02 20:00:12",
+ "review": false,
+ "transparent_bg": true
 }
