@@ -296,6 +296,17 @@ def trim(M, margin=1, robust=True):
     return M[y0:y1 + 1, x0:x1 + 1], (int(x0), int(y0))
 
 
+MODEL_GATE = 0.6      # модель клеток включается, если уверенность порогов ниже
+
+
+def learn_model():
+    try:
+        import learn
+        return learn.load_model()
+    except Exception:
+        return None
+
+
 def auto_figure(g, frame, dark_only=False, use_model=True):
     """dark_only=True (по умолчанию): только тёмный контур, без попытки угадать серую заливку —
     заливка чаще даёт «мусор», чем пользу, и её проще дорисовать вручную."""
@@ -303,13 +314,14 @@ def auto_figure(g, frame, dark_only=False, use_model=True):
     C = cell_centers(G)
     v = cell_means(g, C, min(G["px"], G["py"]))
     M, info = classify(v)
-    P = None
-    if use_model:
-        try:
+    P = learn_model() if use_model else None
+    if P is not None:
+        # модель — «второе мнение» только там, где пороги неуверенны (на 150 готовых рисунках: ошибка 19.8% → 15.0%, медиана та же)
+        c0, _ = confidence(G, clean(M.copy(), info["t"]), info["t"])
+        if c0 < MODEL_GATE:
             import learn
-            P = learn.load_model()
-            if P is not None: M = learn.classify_cells(P, learn.cell_features(g, C, min(G["px"], G["py"]))); info["model"] = True
-        except Exception:
+            M = learn.classify_cells(P, learn.cell_features(g, C, min(G["px"], G["py"]))); info["model"] = True
+        else:
             P = None
     if dark_only: M[M == 2] = 0
     elif P is None: M = clean(M, info["t"])

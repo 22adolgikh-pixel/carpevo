@@ -154,6 +154,19 @@ def cross_val(ex, k=5, **kw):
     return res
 
 
+def gated(ex, res, gate=0.6):
+    """Как работает в «Авто»: модель только там, где уверенность порогов < gate. → (ошибка порогов, ошибка с моделью, доля рисунков с моделью)"""
+    import autogrid
+    eb, eg, used = [], [], 0
+    byid = {r[0]: r for r in res}
+    for e in ex:
+        r = byid[e[0]]
+        v = autogrid.cell_means(e[3], e[4], e[5]); M, info = autogrid.classify(v); M = autogrid.clean(M, info["t"])
+        c, _ = autogrid.confidence({"px": 1, "py": 1, "angle": 0, "quad_resid": 0}, M, info["t"])
+        eb.append(r[2]); eg.append(r[1] if c < gate else r[2]); used += c < gate
+    return np.mean(eb), np.mean(eg), used / max(1, len(ex))
+
+
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "eval"
     ex = load_examples()
@@ -163,12 +176,15 @@ def main():
     a = np.array([[r[1], r[2]] for r in res])
     print("ошибка на клетках с чернилами (кросс-проверка по рисункам, меньше — лучше):")
     print("  модель %.2f%%  пороги %.2f%%  | лучше у модели: %d из %d" % (100 * a[:, 0].mean(), 100 * a[:, 1].mean(), int((a[:, 0] < a[:, 1]).sum()), len(a)))
+    import autogrid
+    eb, eg, share = gated(ex, res, autogrid.MODEL_GATE)
+    print("в работе (модель только при низкой уверенности порогов <%.2f, это %.0f%% рисунков): ошибка %.2f%% вместо %.2f%%" % (autogrid.MODEL_GATE, 100 * share, 100 * eg, 100 * eb))
     if cmd == "train":
-        if a[:, 0].mean() >= a[:, 1].mean() or (a[:, 0] < a[:, 1]).mean() < 0.5:
-            print("модель не лучше порогов на большинстве рисунков — НЕ сохраняю (останутся пороги). Нужно больше готовых рисунков."); return
+        if eg >= eb:
+            print("с моделью не лучше, чем без неё — НЕ сохраняю (останутся пороги). Нужно больше готовых рисунков."); return
         X = np.concatenate([e[1].reshape(-1, e[1].shape[-1]) for e in ex]); y = np.concatenate([e[2].ravel() for e in ex])
         P = fit(X, y, class_w=np.array([1.0, 2.0, 1.5]))
-        save_model(P, meta={"n_figures": len(ex), "cv_model": float(a[:, 0].mean()), "cv_threshold": float(a[:, 1].mean())})
+        save_model(P, meta={"n_figures": len(ex), "cv_model": float(eg), "cv_threshold": float(eb)})
         print("модель сохранена:", MODEL_PATH)
 
 
