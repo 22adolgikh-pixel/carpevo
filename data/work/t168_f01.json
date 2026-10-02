@@ -1,0 +1,150 @@
+{
+ "id": "t168_f01",
+ "sheet": "kerimov_vol1_patterns/page_287.jpg",
+ "table": 168,
+ "fig": 1,
+ "crop_origin": [
+  179,
+  108
+ ],
+ "frame": [
+  9,
+  8,
+  115,
+  112
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   13.66,
+   23.51
+  ],
+  [
+   118.59,
+   24.33
+  ],
+  [
+   117.84,
+   119.45
+  ],
+  [
+   12.91,
+   118.63
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Alağapı",
+  "name": "Алагапы",
+  "translation": "Ворота",
+  "carpet": "Мараза",
+  "type": "К.—Ш",
+  "note": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 5.0,
+  "ph": 19.0,
+  "ox": 0,
+  "oy": 0,
+  "cols": 21,
+  "rows": 5,
+  "square": false
+ },
+ "classify": {
+  "tones": 3,
+  "inner": 45,
+  "mode": "color"
+ },
+ "matrix": {
+  "w": 18,
+  "h": 5,
+  "origin": [
+   3,
+   0
+  ],
+  "rows": [
+   "...1131133112...22",
+   "133331111133311..2",
+   "133331111133311.22",
+   "...133311111222222",
+   ".........222222222"
+  ]
+ },
+ "palette": [
+  "#c1ab94",
+  "#96615a",
+  "#d3ba93",
+  "#5b5053"
+ ],
+ "palette_names": [
+  "çəhrayı",
+  "qəhvəyi",
+  "krem",
+  "qəhvəyi 2"
+ ],
+ "palette_names_ru": [
+  "розовый",
+  "коричневый",
+  "кремовый",
+  "коричневый 2"
+ ],
+ "palette_dyes": [
+  "cehrayi",
+  "qehveyi",
+  "krem",
+  "qehveyi"
+ ],
+ "palette_touched": false,
+ "color_mode": true,
+ "auto": {
+  "version": 1,
+  "mode": "color",
+  "confidence": 0.22,
+  "flags": [
+   "проверьте сетку (границы цвета не везде совпали с ней)",
+   "16% клеток между двумя цветами — проверьте похожие цвета",
+   "названия цветов приблизительные: qəhvəyi 2",
+   "цвета и их названия — подтвердить"
+  ],
+  "pitch": [
+   4.997,
+   19.025
+  ],
+  "angle": 0.45,
+  "R": [
+   0.521,
+   0.512
+  ],
+  "counts": [
+   36,
+   28,
+   21,
+   20
+  ],
+  "dye_dist": [
+   17.5,
+   18.2,
+   12.3,
+   22.1
+  ],
+  "reviewed": false
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": false,
+  "axis": "h",
+  "best_mismatch": 0.246,
+  "computed_at_matrix": [
+   18,
+   5
+  ]
+ },
+ "saved_at": "2026-10-02 19:54:55"
+}

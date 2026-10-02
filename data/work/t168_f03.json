@@ -1,0 +1,149 @@
+{
+ "id": "t168_f03",
+ "sheet": "kerimov_vol1_patterns/page_287.jpg",
+ "table": 168,
+ "fig": 3,
+ "crop_origin": [
+  832,
+  116
+ ],
+ "frame": [
+  9,
+  9,
+  123,
+  123
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   16.1,
+   10.45
+  ],
+  [
+   126.03,
+   11.31
+  ],
+  [
+   125.13,
+   126.24
+  ],
+  [
+   15.2,
+   125.37
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Şebekenaşış",
+  "name": "Шебекенашыш",
+  "translation": "Узор шебекэ",
+  "carpet": "Ширван",
+  "type": "К.—Ш",
+  "note": "",
+  "site_id": "",
+  "source": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 5,
+  "ph": 5,
+  "ox": 0,
+  "oy": 0,
+  "cols": 22,
+  "rows": 23,
+  "square": true
+ },
+ "classify": {
+  "tones": 2,
+  "inner": 45,
+  "thr": [
+   200,
+   110
+  ]
+ },
+ "matrix": {
+  "w": 11,
+  "h": 11,
+  "origin": [
+   5,
+   7
+  ],
+  "rows": [
+   "...11.11...",
+   "..1221221..",
+   ".112212211.",
+   "12212121221",
+   "12221112221",
+   ".111131111.",
+   "12221112221",
+   "12212121221",
+   ".112212211.",
+   "..1221221..",
+   "...11.11..."
+  ]
+ },
+ "palette": [
+  "#a1a9a9",
+  "#9a6d5f",
+  "#878870",
+  "#dcb54c"
+ ],
+ "palette_names": [
+  "boz",
+  "qəhvəyi",
+  "boz 2",
+  "sarı"
+ ],
+ "palette_names_ru": [
+  "серый",
+  "коричневый",
+  "серый 2"
+ ],
+ "palette_dyes": [
+  "boz",
+  "qehveyi",
+  "boz",
+  "sari"
+ ],
+ "palette_touched": true,
+ "color_mode": true,
+ "auto": {
+  "version": 1,
+  "mode": "color",
+  "confidence": 0.89,
+  "flags": [
+   "цвета и их названия — подтвердить"
+  ],
+  "pitch": [
+   4.997,
+   4.997
+  ],
+  "angle": 0.45,
+  "R": [
+   0.9,
+   0.759
+  ],
+  "counts": [
+   413,
+   53,
+   40
+  ],
+  "dye_dist": [
+   11.7,
+   17.6,
+   12.9
+  ],
+  "reviewed": true
+ },
+ "done": true,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-02 19:56:26",
+ "review": false,
+ "transparent_bg": true
+}
