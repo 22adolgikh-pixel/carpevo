@@ -134,9 +134,10 @@ def load_examples(work_dir=None, crops_dir=None, limit=None):
 
 
 def baseline_labels(g, C, pitch):
+    """Текущие пороги ровно как «Авто» по умолчанию: контур + серая заливка (classify + clean)."""
     import autogrid
-    v = autogrid.cell_means(g, C, pitch); M, info = autogrid.classify(v); M[M == 2] = 0     # как dark_only
-    return M
+    v = autogrid.cell_means(g, C, pitch); M, info = autogrid.classify(v)
+    return autogrid.clean(M, info["t"])
 
 
 def cross_val(ex, k=5, **kw):
@@ -163,8 +164,8 @@ def main():
     print("ошибка на клетках с чернилами (кросс-проверка по рисункам, меньше — лучше):")
     print("  модель %.2f%%  пороги %.2f%%  | лучше у модели: %d из %d" % (100 * a[:, 0].mean(), 100 * a[:, 1].mean(), int((a[:, 0] < a[:, 1]).sum()), len(a)))
     if cmd == "train":
-        if a[:, 0].mean() >= a[:, 1].mean():
-            print("модель не лучше порогов — НЕ сохраняю (останутся пороги). Нужно больше готовых рисунков."); return
+        if a[:, 0].mean() >= a[:, 1].mean() or (a[:, 0] < a[:, 1]).mean() < 0.5:
+            print("модель не лучше порогов на большинстве рисунков — НЕ сохраняю (останутся пороги). Нужно больше готовых рисунков."); return
         X = np.concatenate([e[1].reshape(-1, e[1].shape[-1]) for e in ex]); y = np.concatenate([e[2].ravel() for e in ex])
         P = fit(X, y, class_w=np.array([1.0, 2.0, 1.5]))
         save_model(P, meta={"n_figures": len(ex), "cv_model": float(a[:, 0].mean()), "cv_threshold": float(a[:, 1].mean())})
