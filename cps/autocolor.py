@@ -291,6 +291,31 @@ def despeckle(M, V, C):
     return out, n
 
 
+BG_GROW_DE = 14.0
+
+
+def grow_background(M, V, Cen, de=None):
+    """Фон на сканах — градиент (тень, неравномерная заливка), и k-means режет его на 2–3 близких цвета.
+    Клетка, достижимая от края по цепочке клеток с цветом, близким к фону (ΔE < de), тоже фон.
+    Пользователи вручную вырезают такой фон (напр. синее поле вокруг медальона)."""
+    de = BG_GROW_DE if de is None else de
+    if de <= 0: return M
+    H, W = M.shape; X = _lab8_to_ref(V).reshape(H, W, 3)
+    close = np.linalg.norm(X - Cen[0][None, None, :], axis=2) < de
+    close |= (M == 0)
+    seen = np.zeros((H, W), bool); st = []
+    for j in range(H):
+        for i in range(W):
+            if (j in (0, H - 1) or i in (0, W - 1)) and close[j, i] and not seen[j, i]: seen[j, i] = True; st.append((j, i))
+    while st:
+        j, i = st.pop()
+        for dj, di in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            jj, ii = j + dj, i + di
+            if 0 <= jj < H and 0 <= ii < W and close[jj, ii] and not seen[jj, ii]: seen[jj, ii] = True; st.append((jj, ii))
+    out = M.copy(); out[seen] = 0
+    return out
+
+
 def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None):
     G = detect_grid_color(bgr, frame, pitch_hint=pitch_hint)
     if pitch_hint and abs(pitch_hint[0] - pitch_hint[1]) / min(pitch_hint) > 0.08:
@@ -312,6 +337,7 @@ def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None):
     remap = np.zeros(len(Cen), int); remap[order] = np.arange(len(order))
     M = remap[M]; Cen = Cen[order]
     M, fixed = despeckle(M, V, Cen)
+    if max(M.shape) / max(1, min(M.shape)) < 1.9: M = grow_background(M, V, Cen)   # каймы (узкие) — фон не вырезаем: поле в них часть узора
     lab8 = np.stack([Cen[:, 0] * 255 / 100, Cen[:, 1] + 128, Cen[:, 2] + 128], -1)
     names = [dye_name(c) for c in lab8]
     seen, uaz, uru = {}, [], []
