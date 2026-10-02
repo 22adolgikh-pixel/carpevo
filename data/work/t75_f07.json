@@ -1,0 +1,127 @@
+{
+ "id": "t75_f07",
+ "sheet": "kerimov_vol1_patterns/page_194.jpg",
+ "table": 75,
+ "fig": 7,
+ "crop_origin": [
+  627,
+  335
+ ],
+ "frame": [
+  11,
+  11,
+  144,
+  145
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   17.8,
+   15.56
+  ],
+  [
+   150.66,
+   15.56
+  ],
+  [
+   150.66,
+   153.41
+  ],
+  [
+   17.8,
+   153.41
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "",
+  "name": "",
+  "translation": "",
+  "carpet": "Карабах",
+  "type": "Кар.",
+  "note": ""
+ },
+ "grid": {
+  "pw": 4.9259,
+  "ph": 4.9286,
+  "ox": 0,
+  "oy": 0,
+  "cols": 27,
+  "rows": 28,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   127
+  ],
+  "centers": [
+   218,
+   67
+  ]
+ },
+ "matrix": {
+  "w": 11,
+  "h": 13,
+  "origin": [
+   8,
+   7
+  ],
+  "rows": [
+   "...11.11...",
+   "..1221221..",
+   ".112212211.",
+   "12212121221",
+   "12221.12221",
+   ".111...111.",
+   "12221.12221",
+   "1221.1.1221",
+   ".11..1..11.",
+   "....1.1....",
+   "...1...1...",
+   "..1.....1..",
+   ".1.......1."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.89,
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
+  "pitch": [
+   4.921,
+   4.923
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_v",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.19
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-02 20:44:05"
+}
