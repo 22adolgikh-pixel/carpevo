@@ -40,6 +40,8 @@
   "carpet": "Хилаафшан",
   "type": "К.—Ш",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -54,7 +56,10 @@
  "classify": {
   "tones": 9,
   "inner": 45,
-  "mode": "color"
+  "thr": [
+   200,
+   110
+  ]
  },
  "matrix": {
   "w": 88,
@@ -1463,5 +1468,7 @@
    41
   ]
  },
- "saved_at": "2026-10-01 20:05:46"
+ "saved_at": "2026-10-02 14:22:30",
+ "review": false,
+ "transparent_bg": true
 }
