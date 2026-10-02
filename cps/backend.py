@@ -11,6 +11,9 @@ from az_names import az_draft, site_suggest
 import autogrid
 import autocolor
 import rapport
+import risk
+import learn
+import threading
 import cloud
 import backup
 import restore
@@ -343,6 +346,9 @@ def api_figures():
                     "review": bool(w.get("review")),
                     "auto": bool(w.get("auto")) and not (w.get("auto") or {}).get("reviewed"),
                     "auto_conf": (w.get("auto") or {}).get("confidence"),
+                    "risk": (w.get("auto") or {}).get("risk"),
+                    "sym": ((w.get("auto") or {}).get("symmetry") or {}).get("kind"),
+                    "n_sus": ((w.get("auto") or {}).get("symmetry") or {}).get("n_suspects"),
                     "size": [w["matrix"]["w"], w["matrix"]["h"]] if w.get("matrix") else None,
                     "colors": len(set("".join(w["matrix"]["rows"])) - {"."}) if w.get("matrix") else None,
                     "color": bool(w.get("color_mode")), "photo": w.get("kind") == "photo",
@@ -483,6 +489,21 @@ def _auto_mode(crop_bgr, frame, mode):
     return "color" if autocolor.is_colorful(crop_bgr, frame) else "bw"
 
 
+def _apply_risk(work):
+    """Симметрия + риск-скор → work['auto'] (подозрительные клетки в координатах матрицы)."""
+    a = work.get("auto")
+    if not isinstance(a, dict) or not work.get("matrix"): return
+    try:
+        sym = risk.symmetry(rapport.matrix_to_array(work["matrix"]))
+    except Exception:
+        sym = None
+    if sym:
+        a["symmetry"] = {"kind": sym["kind"], "score": sym["score"], "suspects": sym["suspects"][:200], "n_suspects": len(sym["suspects"])}
+        if sym["kind"] and sym["suspects"]:
+            a["flags"] = [f for f in a.get("flags", []) if not f.startswith("симметрия")] + [f"симметрия ({sym['kind']}): {len(sym['suspects'])} клеток нарушают — см. подсветку"]
+    a["risk"] = risk.risk_score(a, sym)
+
+
 def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, ncolors=None):
     """mode: auto (цвет определяется сам) / bw (ЧБ-тушь: контур + серая заливка) / color (цветная схема)."""
     wp = os.path.join(D_WORK, fid + ".json")
@@ -517,10 +538,11 @@ def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, nco
     work.update(upd); work["id"] = fid; work["done"] = False
     work["adjust"] = {"brightness": 0, "contrast": 1, "gamma": 1, "invert": False}
     work["rapport"] = rapport.for_work(work)
+    _apply_risk(work)
     work["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
     jsave(wp, work)
     render_outputs(fid, work["matrix"], work["palette"], work.get("transparent_bg", True), work.get("rapport"))
-    return {"id": fid, "size": [work["matrix"]["w"], work["matrix"]["h"]], "mode": mode,
+    return {"id": fid, "risk": work["auto"].get("risk"), "size": [work["matrix"]["w"], work["matrix"]["h"]], "mode": mode,
             "pitch": [round(G["px"], 3), round(G["py"], 3)], "R": G.get("R"),
             "confidence": work["auto"]["confidence"], "flags": work["auto"]["flags"],
             "rapport": _rapport_brief(work.get("rapport"))}
@@ -581,6 +603,109 @@ def api_auto_sheet(body: dict = Body(...)):
                 elif not r.get("photo"):
                     res[i] = run_auto(figs[i], True, mode="color")      # первый вариант был лучше — вернуть его
     return {"results": res}
+
+
+@app.get("/api/model")
+def api_model():
+    p = learn.MODEL_PATH
+    if not os.path.exists(p): return {"present": False}
+    meta = (jload(p, {}) or {}).get("meta", {})
+    return {"present": True, "trained": time.strftime("%Y-%m-%d %H:%M", time.localtime(os.path.getmtime(p))), **meta}
+
+
+@app.post("/api/model/train")
+def api_model_train():
+    """Обучить классификатор клеток на готовых ЧБ-рисунках (может занять минуты)."""
+    import subprocess, sys
+    r = subprocess.run([sys.executable, os.path.join(HERE, "learn.py"), "train"], capture_output=True, text=True, timeout=1800,
+                       env={**os.environ, "CPS_DATA": DATA})
+    return {"ok": r.returncode == 0, "out": (r.stdout or "")[-1500:], "err": (r.stderr or "")[-500:]}
+
+
+@app.post("/api/accept")
+def api_accept(body: dict = Body(...)):
+    """Массово принять авто-результаты (done + reviewed) — для очереди проверки."""
+    n = 0
+    for fid in body.get("ids", []):
+        if not _fid_ok(fid): continue
+        wp = os.path.join(D_WORK, fid + ".json"); w = jload(wp, {}) or {}
+        if not w.get("matrix"): continue
+        w["done"] = True
+        if isinstance(w.get("auto"), dict): w["auto"]["reviewed"] = True
+        w["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S"); jsave(wp, w); n += 1
+    return {"accepted": n}
+
+
+@app.post("/api/risk_backfill")
+def api_risk_backfill(body: dict = Body(default={})):
+    """Посчитать симметрию и риск для авто-рисунков, у которых их ещё нет."""
+    n = 0
+    for fn in os.listdir(D_WORK):
+        if not fn.endswith(".json"): continue
+        wp = os.path.join(D_WORK, fn); w = jload(wp, {}) or {}
+        a = w.get("auto")
+        if isinstance(a, dict) and w.get("matrix") and ("risk" not in a or (body or {}).get("force", True)):
+            if sum(c != "." for r in w["matrix"]["rows"] for c in r) < 3:
+                a["confidence"] = 0.0; a["flags"] = [f for f in a.get("flags", []) if "не найден" not in f] + ["рисунок не найден"]
+            _apply_risk(w); jsave(wp, w); n += 1
+    return {"updated": n}
+
+
+# ---------------- ночной прогон («разведчик») ----------------
+PROWL = {"running": False, "stop": False, "total": 0, "done": 0, "errors": 0, "current": "", "started": None, "finished": None, "log": []}
+
+
+def _prowl_targets(only_sheets=None):
+    """Рисунки без пикселей на нарезанных листах (в порядке листов)."""
+    out = []
+    for fn in sorted(os.listdir(D_SHEETS)):
+        if not fn.endswith(".json"): continue
+        meta = jload(os.path.join(D_SHEETS, fn), {}) or {}
+        if only_sheets and meta.get("path") not in only_sheets: continue
+        for f in meta.get("figures", []):
+            w = jload(os.path.join(D_WORK, f + ".json"), {}) or {}
+            if not w.get("matrix") and w.get("kind") != "photo" and os.path.exists(os.path.join(D_CROPS, f + ".png")):
+                out.append((meta.get("path"), f))
+    return out
+
+
+def _prowl_run(targets):
+    P = PROWL; P.update(running=True, stop=False, total=len(targets), done=0, errors=0, started=time.strftime("%Y-%m-%d %H:%M:%S"), finished=None, log=[])
+    sheets = {}
+    try:
+        for path, f in targets:
+            if P["stop"]: break
+            P["current"] = f
+            try:
+                hint = _sheet_pitch_hint(path, exclude=f) if path else None
+                r = run_auto(f, False, mode="auto", pitch_hint=hint)
+                if r.get("error"): P["errors"] += 1; P["log"].append(f"{f}: {r['error']}"); P["log"] = P["log"][-50:]
+            except Exception as e:
+                P["errors"] += 1; P["log"].append(f"{f}: {e}"); P["log"] = P["log"][-50:]
+            P["done"] += 1
+    finally:
+        P.update(running=False, current="", finished=time.strftime("%Y-%m-%d %H:%M:%S"))
+
+
+@app.post("/api/prowl/start")
+def api_prowl_start(body: dict = Body(default={})):
+    if PROWL["running"]: return JSONResponse({"error": "уже идёт"}, 409)
+    t = _prowl_targets((body or {}).get("sheets"))
+    if not t: return {"started": False, "total": 0}
+    threading.Thread(target=_prowl_run, args=(t,), daemon=True).start()
+    return {"started": True, "total": len(t)}
+
+
+@app.post("/api/prowl/stop")
+def api_prowl_stop():
+    PROWL["stop"] = True
+    return {"ok": True}
+
+
+@app.get("/api/prowl")
+def api_prowl():
+    d = dict(PROWL); d["pending"] = len(_prowl_targets()) if not PROWL["running"] else None
+    return d
 
 
 @app.post("/api/rapport/{fid}")

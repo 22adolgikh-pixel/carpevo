@@ -70,7 +70,8 @@ textarea{width:100%;min-height:60px;resize:vertical}
 @keyframes sp{to{transform:rotate(360deg)}}
 #catalog{position:absolute;inset:0;overflow:auto;padding:14px;display:none;background:var(--bg)}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
-.card{background:var(--pan);border:1px solid var(--ln);border-radius:8px;padding:8px;cursor:pointer}
+.qchk{position:absolute;top:10px;left:10px;z-index:2;background:rgba(0,0,0,.55);border-radius:5px;padding:3px 5px;display:flex}
+.card{position:relative;background:var(--pan);border:1px solid var(--ln);border-radius:8px;padding:8px;cursor:pointer}
 .card:hover{border-color:var(--acc)}
 .card .im{height:130px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:4px;overflow:hidden}
 .card img{max-width:100%;max-height:100%;image-rendering:pixelated}
@@ -173,7 +174,7 @@ aside{min-height:0}
 <header>
   <b>🧶 Carpet Pattern Studio</b>
   <div class="tabs">
-    <button id="tab-sheet" class="on">1 · Листы</button><button id="tab-grid">2 · Геометрия и сетка</button><button id="tab-pix">3 · Пиксели</button><button id="tab-cat">4 · Каталог</button>
+    <button id="tab-sheet" class="on">1 · Листы</button><button id="tab-grid">2 · Геометрия и сетка</button><button id="tab-pix">3 · Пиксели</button><button id="tab-cat">4 · Каталог</button><button id="tab-queue">5 · Очередь</button>
   </div>
   <span class="sp"></span>
 </header>
@@ -310,12 +311,12 @@ function near(a,b,r){return Math.hypot(a.x-b.x,a.y-b.y)<=r*px1();}
 const MODES={};
 function H(){return MODES[S.mode==='grid'?(S.gridView||'grid'):S.mode];}
 function setMode(m){
-  if(m!=='sheet'&&m!=='cat'&&!S.fig){stat('сначала откройте рисунок в «Каталоге» (или нарежьте лист)','err');m=S.fig?m:(S.mode==='sheet'?'sheet':'cat');}
+  if(m!=='sheet'&&m!=='cat'&&m!=='queue'&&!S.fig){stat('сначала откройте рисунок в «Каталоге» (или нарежьте лист)','err');m=S.fig?m:(S.mode==='sheet'?'sheet':'cat');}
   S.mode=m;S.peek=false;$('peek').style.display='none';
   document.body.classList.toggle('noleft',m!=='sheet');
-  ['sheet','grid','pix','cat'].forEach(k=>$('tab-'+k).classList.toggle('on',k===m));
-  $('catalog').style.display=m==='cat'?'block':'none';
-  $('vpbar').style.display=$('hud').style.display=m==='cat'?'none':'';
+  ['sheet','grid','pix','cat','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===m));
+  $('catalog').style.display=(m==='cat'||m==='queue')?'block':'none';
+  $('vpbar').style.display=$('hud').style.display=(m==='cat'||m==='queue')?'none':'';
   $('toolcol').style.display=m==='pix'?'flex':'none';
   renderLeft();renderRight();renderNav();renderSbInfo();
   requestAnimationFrame(()=>{resize();const h=H();if(h&&h.fit)h.fit();else redraw();});
@@ -323,7 +324,7 @@ function setMode(m){
 /* навигация по рисункам в шапке (вместо левого списка на экранах 2–3) */
 function renderNav(){
   const N=$('nav');
-  if(S.mode==='sheet'||S.mode==='cat'||!S.fig){N.innerHTML='';return;}
+  if(S.mode==='sheet'||S.mode==='cat'||S.mode==='queue'||!S.fig){N.innerHTML='';return;}
   const list=S.figures,i=list.findIndex(f=>f.id===S.fig.id);
   N.innerHTML=`<button class="ib" id="navPrev" data-tip="предыдущий рисунок" data-key="[">‹</button>`+
     `<select id="navSel" data-tip="перейти к рисунку">${list.map(f=>`<option value="${esc(f.id)}" ${f.id===S.fig.id?'selected':''}>${f.done?'✓ ':(f.auto?'⚡ ':(f.size?'◐ ':'○ '))}${esc(f.id)}${dispName(f)?' — '+esc(dispName(f)):''}</option>`).join('')}</select>`+
@@ -340,7 +341,7 @@ async function gotoFig(delta,todo){
   await openFigure(list[i].id);
   const want=S.fig.M?'pix':'grid';if(S.mode!==want)setMode(want);   // готовые — сразу в пиксели, новые — в сетку
 }
-['sheet','grid','pix','cat'].forEach(k=>$('tab-'+k).onclick=()=>setMode(k));
+['sheet','grid','pix','cat','queue'].forEach(k=>$('tab-'+k).onclick=()=>setMode(k));
 
 /* ============================ левая панель ============================ */
 function renderLeft(){
@@ -376,7 +377,7 @@ async function uploadFiles(url,files){
   stat('загружено '+files.length,'ok');
 }
 async function refreshSheets(){S.sheets=await api('/api/sheets');if(S.mode==='sheet')renderLeft();}
-async function refreshFigures(){S.figures=await api('/api/figures');renderNav();if(S.mode==='cat')renderCatalog();}
+async function refreshFigures(){S.figures=await api('/api/figures');renderNav();if(S.mode==='cat')renderCatalog();if(S.mode==='queue')renderQueue();}
 async function refreshPdfs(){
   const list=await api('/api/pdfs');
   const e=$('pdfSec');if(!e)return;
@@ -706,7 +707,7 @@ async function openFigure(id){
   if(!w.color_mode&&(!w.classify||!w.classify.thr))autoTonesSync(F);   // цветные схемы: палитра из ⚡ цвет, пороги яркости не нужны
   $('cur').textContent=id+(dispName(F.meta)?' — '+dispName(F.meta):'');
   stat('');
-  if(S.mode==='sheet'||S.mode==='cat'||(S.mode==='pix'&&!F.M))setMode(F.M?'pix':'grid');else{renderRight();renderNav();const h=H();h&&h.fit&&h.fit();}
+  if(S.mode==='sheet'||S.mode==='cat'||S.mode==='queue'||(S.mode==='pix'&&!F.M))setMode(F.M?'pix':'grid');else{renderRight();renderNav();const h=H();h&&h.fit&&h.fit();}
 }
 function autoGridSync(F){estimateGrid(F);}
 function autoTonesSync(F){const v=sampleCells(F);const c=toneCenters(v,F.cls.tones+1,true);F.cls.tones=c.length-1;F.cls.thr=[];for(let k=0;k<c.length-1;k++)F.cls.thr.push(Math.round((c[k]+c[k+1])/2));F.cls.centers=c.map(Math.round);
@@ -924,6 +925,9 @@ MODES.pix={
     const a=F.under>0?Math.max(0.25,1-F.under):1;c.globalAlpha=a;
     if(!S.peek)for(let j=0;j<M.h;j++)for(let i=0;i<M.w;i++){const v=M.d[j*M.w+i];if(!v)continue;c.fillStyle=F.palette[v]||'#f0f';c.fillRect(i,j,1,1);}
     c.globalAlpha=1;
+    {const sy=F.work&&F.work.auto&&F.work.auto.symmetry;
+     if(S.showSus!==false&&sy&&sy.suspects&&sy.suspects.length&&!M.edited&&!S.peek){c.lineWidth=Math.max(1.4*px1(),0.12);c.strokeStyle='#ff9f1c';
+       sy.suspects.forEach(([i,j])=>c.strokeRect(i+0.08,j+0.08,0.84,0.84));}}
     if(this.prev){c.globalAlpha=0.7;c.fillStyle=this.prev.v?F.palette[this.prev.v]:'#ff4d6d';this.prev.cells.forEach(([i,j])=>c.fillRect(i,j,1,1));c.globalAlpha=1;}
     // v6: единая сетка для всех рисунков — светло-розовая, жирная каждые 10 узлов от левого верхнего угла, метки середины
     if(S.showGrid){
@@ -1132,16 +1136,18 @@ function openDescModal(){
 }
 /* ---- статус-бар внизу ---- */
 function renderSbInfo(){const e=$('sbInfo');if(!e)return;const F=S.fig;
-  if(!F||S.mode==='sheet'||S.mode==='cat'){e.innerHTML='';renderUndo();return;}
+  if(!F||S.mode==='sheet'||S.mode==='cat'||S.mode==='queue'){e.innerHTML='';renderUndo();return;}
   const b=[];const au=F.work.auto&&!F.work.auto.reviewed?F.work.auto:null;
   if(F.done)b.push('<span style="color:var(--ok)">✓ готово</span>');else if(F.review)b.push('<span class="bad">⚠ на пересмотр</span>');
   if(au)b.push(`<span class="warn">⚡ автооцифровка · уверенность ${Math.round((au.confidence??0)*100)}%</span>${(au.flags||[]).length?' <span class="mut">· '+au.flags.map(esc).join(' · ')+'</span>':''}`);
   if(F.M)b.push(`<span class="mut">${F.M.w}×${F.M.h} · цветов ${usedColors(F)}</span>`);
+  {const sy=F.work.auto&&F.work.auto.symmetry;if(sy&&sy.kind&&sy.n_suspects)b.push(`<a href="#" id="susTog" class="warn" data-tip="Рисунок почти симметричен (${esc(sy.kind)}, ${Math.round(sy.score*100)}%). Оранжевые рамки — клетки, нарушающие симметрию: возможные ошибки оцифровки. Клик — показать/скрыть.">◇ симметрия: ${sy.n_suspects} подозр.</a>`);}
   const rp=F.work.rapport;
   if(rp&&rp.found)b.push(`<span class="${rp.check?'warn':'mut'}" data-tip="кайма: повторяющийся фрагмент найден автоматически (голосование по ${rp.repeats} повторам). Файл _unit.png — один повтор. ${(rp.suspect_cells||[]).length?(rp.suspect_cells.length+' клеток расходятся с большинством повторов — возможно, ошибки оцифровки'):''}">↻ раппорт ${rp.period} ${rp.axis==='v'?'рядов':'столбцов'} · совпадение ${Math.round(rp.match*100)}%${rp.is_mirror?' · зеркальный':''}${rp.is_glide?' · со сдвигом-отражением':''}${rp.check?' · проверить':''}</span>`);
   if(F.work.kind==='photo')b.push('<span class="warn">фото ковра, не схема</span>');
   b.push(S.saving?'<span class="mut">сохраняю…</span>':(S.dirty?'<span class="mut">изменено</span>':(F.work.saved_at?`<span class="mut">сохранено ${esc(String(F.work.saved_at).slice(11,16))}</span>`:'')));
-  e.innerHTML=b.filter(Boolean).join(' <span class="mut">·</span> ');renderUndo();}
+  e.innerHTML=b.filter(Boolean).join(' <span class="mut">·</span> ');renderUndo();
+  const st=$('susTog');if(st)st.onclick=ev=>{ev.preventDefault();S.showSus=S.showSus===false;redraw();};}
 function renderUndo(){const U=$('undoBox');if(!U)return;
   if(S.mode!=='pix'||!S.fig||!S.fig.M){U.innerHTML='';return;}
   U.innerHTML=IB('undo','Отменить','⌘Z','id="uUndo"')+IB('redo','Повторить','⇧⌘Z','id="uRedo"');
@@ -1222,6 +1228,62 @@ function renderCatalog(){
   if(fq){const el=$('catQ');el.focus();el.setSelectionRange(cpos,cpos);}
   C.querySelectorAll('.card').forEach(el=>el.onclick=()=>openFigure(el.dataset.id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail));
 }
+
+/* ---- 5 · Очередь проверки: авто-результаты, ещё не принятые человеком, от надёжных к рискованным ---- */
+const QSORT={risk_asc:['надёжные сначала',(a,b)=>qrisk(a)-qrisk(b)],risk_desc:['рискованные сначала',(a,b)=>qrisk(b)-qrisk(a)],id:['по номеру',(a,b)=>0]};
+function qrisk(f){return f.risk!=null?f.risk:(1-(f.auto_conf??0));}
+function qItems(){return S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo&&TYPEF[S.qType||''](f)).sort((QSORT[S.qSort||'risk_asc']||QSORT.risk_asc)[1]);}
+function renderQueue(){
+  const C=$('catalog');S.qSel=S.qSel||new Set();const thr=S.qThr??0.25;
+  const all=S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo),items=qItems(),sure=items.filter(f=>qrisk(f)<=thr);
+  [...S.qSel].forEach(id=>{if(!items.some(f=>f.id===id))S.qSel.delete(id);});
+  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px"><b style="font-size:15px">Очередь проверки</b><span style="color:var(--mut)">${items.length} из ${all.length} ждут проверки</span><span class="sp"></span>
+    <span class="dfilter" data-tip="тип рисунка">${TYPEL.map(([k,l])=>`<button class="${(S.qType||'')===k?'on':''}" data-qt="${k}">${l} <small>${all.filter(TYPEF[k]).length}</small></button>`).join('')}</span>
+    <select id="qSort" style="flex:none">${Object.entries(QSORT).map(([k,v])=>`<option value="${k}" ${(S.qSort||'risk_asc')===k?'selected':''}>${v[0]}</option>`).join('')}</select></div>
+  <div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">
+    <label class="flex" style="color:var(--mut)" data-tip="Риск = 1 − уверенность + флаги + нарушения симметрии. Ниже порога — рисунок, скорее всего, верен.">порог риска ≤ <b id="qThrV">${thr.toFixed(2)}</b><input type="range" id="qThr" min="0.05" max="0.8" step="0.05" value="${thr}" style="width:140px"></label>
+    <button class="sm" id="qPickSure">выбрать надёжные (${sure.length})</button><button class="sm" id="qPickNone">снять выбор</button><span class="sp"></span>
+    <button id="qAccept" ${S.qSel.size?'':'disabled'}>✓ принять выбранные (${S.qSel.size})</button></div>
+  <div class="hint" style="margin-bottom:10px">Принять = «готово»: рисунок уйдёт из очереди и попадёт в пакет для сайта. Клик по картинке открывает рисунок для правки; галочка — для массового принятия.</div>
+  <div class="cards">${items.map(f=>{const r=qrisk(f),col=r<=thr?'var(--ok)':(r<0.55?'var(--warn,#e0a030)':'var(--bad)');
+    return `<div class="card" data-id="${esc(f.id)}"><label class="qchk" data-tip="выбрать для массового принятия"><input type="checkbox" data-sel="${esc(f.id)}" ${S.qSel.has(f.id)?'checked':''}></label><div class="im"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_bg.png?t=${Math.round(f.t)}"></div>
+    <div class="t"><span class="dot" style="display:inline-block;margin-right:5px;background:${col}"></span>${esc(dispName(f)||f.id)}</div>
+    <div class="m">${esc(f.id)} · ${f.size[0]}×${f.size[1]}${f.colors?' · '+f.colors+' цв.':''} · риск ${r.toFixed(2)}${f.sym&&f.n_sus?` · <span style="color:#ff9f1c" data-tip="клеток нарушает симметрию (${esc(f.sym)})">◇${f.n_sus}</span>`:''}${f.border?' · кайма':''}</div></div>`;}).join('')||'<div class="hint">Очередь пуста — все авто-результаты проверены.</div>'}</div>`;
+  C.querySelectorAll('[data-qt]').forEach(b=>b.onclick=()=>{S.qType=b.dataset.qt;renderQueue();});
+  $('qSort').onchange=e=>{S.qSort=e.target.value;renderQueue();};
+  $('qThr').oninput=e=>{S.qThr=+e.target.value;$('qThrV').textContent=S.qThr.toFixed(2);};
+  $('qThr').onchange=()=>renderQueue();
+  $('qPickSure').onclick=()=>{sure.forEach(f=>S.qSel.add(f.id));renderQueue();};
+  $('qPickNone').onclick=()=>{S.qSel.clear();renderQueue();};
+  C.querySelectorAll('[data-sel]').forEach(cb=>{cb.onclick=e=>e.stopPropagation();cb.onchange=()=>{cb.checked?S.qSel.add(cb.dataset.sel):S.qSel.delete(cb.dataset.sel);const b=$('qAccept');b.disabled=!S.qSel.size;b.textContent='✓ принять выбранные ('+S.qSel.size+')';};});
+  C.querySelectorAll('.qchk').forEach(l=>l.onclick=e=>e.stopPropagation());
+  $('qAccept').onclick=async()=>{if(!S.qSel.size)return;if(!confirm('Принять '+S.qSel.size+' рисунков как готовые?'))return;
+    try{const r=await api('/api/accept',{ids:[...S.qSel]});S.qSel.clear();await refreshFigures();stat('принято: '+r.accepted,'ok');}catch(e){fail(e);}};
+  C.querySelectorAll('.card').forEach(el=>el.onclick=()=>openFigure(el.dataset.id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail));
+}
+function renderRightQueue(){
+  const R=$('right');
+  R.innerHTML=`<h4>Ночной прогон</h4>
+  <div style="margin:6px 0">${HT('Сервер сам нарезает уже размеченные листы и запускает «Авто» на всех рисунках без пикселей — пока вы не смотрите. Утром здесь готова очередь. Уже оцифрованное не трогает.')}</div>
+  <div class="flex"><button id="pwGo" class="sm">▶ запустить</button><button id="pwStop" class="sm">■ стоп</button></div>
+  <div class="hint" id="pwInfo">…</div>
+  <h4>Модель клеток (ЧБ)</h4>
+  <div style="margin:6px 0">${HT('Небольшая нейросеть учится на ваших готовых ЧБ-рисунках: как вы исправили автомат. Сохраняется, только если в кросс-проверке по рисункам ошибается реже порогов. Тогда «Авто» использует её сам.')}</div>
+  <div class="flex"><button id="mdTrain" class="sm">обучить на готовых</button></div>
+  <div class="hint" id="mdInfo">…</div>
+  <h4>Риск</h4>
+  <div style="margin:6px 0">${HT('Риск считается при автооцифровке. Для старых рисунков его можно досчитать.')}</div>
+  <div class="flex"><button id="rkBack" class="sm">досчитать риск и симметрию</button></div>`;
+  const upd=async()=>{if(S.mode!=='queue')return;try{const p=await api('/api/prowl');const e=$('pwInfo');if(!e)return;
+    e.textContent=p.running?`идёт: ${p.done}/${p.total}${p.current?' · '+p.current:''}${p.errors?' · ошибок '+p.errors:''}`:(p.finished?`завершено ${p.finished}: ${p.done}/${p.total}${p.errors?', ошибок '+p.errors:''}. `:'')+(p.pending!=null?`Ждут авто: ${p.pending}`:'');
+    if(p.running){clearTimeout(S.pwT);S.pwT=setTimeout(()=>{upd();refreshFigures();},4000);}}catch(e){}};
+  api('/api/model').then(m=>{const e=$('mdInfo');if(e)e.textContent=m.present?`обучена ${m.trained} · рисунков ${m.n_figures??'?'} · ошибка ${(100*m.cv_model).toFixed(1)}% против ${(100*m.cv_threshold).toFixed(1)}% у порогов`:'модели нет — работают пороги';}).catch(()=>{});
+  $('mdTrain').onclick=async()=>{const e=$('mdInfo');e.textContent='обучаю… (до нескольких минут)';try{const r=await api('/api/model/train',{});e.textContent=r.out||r.err||'готово';}catch(x){e.textContent=String(x.message||x);}};
+  $('pwGo').onclick=async()=>{try{const r=await api('/api/prowl/start',{});stat(r.started?'прогон запущен: '+r.total+' рис.':'нечего обрабатывать — все нарезанные рисунки уже оцифрованы','ok');upd();}catch(e){fail(e);}};
+  $('pwStop').onclick=async()=>{await api('/api/prowl/stop',{});upd();};
+  $('rkBack').onclick=async()=>{try{const r=await api('/api/risk_backfill',{});await refreshFigures();stat('досчитано: '+r.updated,'ok');}catch(e){fail(e);}};
+  upd();
+}
 function renderRightCat(){
   const R=$('right');
   R.innerHTML=`<h4>На сайт</h4>
@@ -1251,6 +1313,7 @@ function renderRight(){
   if(S.mode==='sheet')renderRightSheet();
   else if(S.mode==='grid')renderRightGrid();
   else if(S.mode==='pix')renderRightPix();
+  else if(S.mode==='queue'){renderRightQueue();renderQueue();}
   else{renderRightCat();renderCatalog();}
 }
 
@@ -1267,7 +1330,7 @@ window.addEventListener('keydown',e=>{
   if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='z'){e.preventDefault();e.shiftKey?redo():undo();return;}
   if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='y'){e.preventDefault();redo();return;}
   const sheetSel=false;
-  if(!e.metaKey&&!e.ctrlKey&&!e.altKey&&['1','2','3','4'].includes(e.key)&&S.mode!=='pix'&&!sheetSel){setMode(['sheet','grid','pix','cat'][+e.key-1]);return;}
+  if(!e.metaKey&&!e.ctrlKey&&!e.altKey&&['1','2','3','4','5'].includes(e.key)&&S.mode!=='pix'&&!sheetSel){setMode(['sheet','grid','pix','cat','queue'][+e.key-1]);return;}
   if((e.key==='['||e.key===']')&&S.fig&&(S.mode==='grid'||S.mode==='pix')){gotoFig(e.key===']'?1:-1).catch(fail);return;}
   if(e.key==='='||e.key==='+'){zoomAt(1.25,V.w/2,V.h/2);return;}
   if(e.key==='-'){zoomAt(0.8,V.w/2,V.h/2);return;}

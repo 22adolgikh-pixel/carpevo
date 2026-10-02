@@ -296,15 +296,23 @@ def trim(M, margin=1, robust=True):
     return M[y0:y1 + 1, x0:x1 + 1], (int(x0), int(y0))
 
 
-def auto_figure(g, frame, dark_only=False):
+def auto_figure(g, frame, dark_only=False, use_model=True):
     """dark_only=True (по умолчанию): только тёмный контур, без попытки угадать серую заливку —
     заливка чаще даёт «мусор», чем пользу, и её проще дорисовать вручную."""
     G = detect_grid(g, frame)
     C = cell_centers(G)
     v = cell_means(g, C, min(G["px"], G["py"]))
     M, info = classify(v)
+    P = None
+    if use_model:
+        try:
+            import learn
+            P = learn.load_model()
+            if P is not None: M = learn.classify_cells(P, learn.cell_features(g, C, min(G["px"], G["py"]))); info["model"] = True
+        except Exception:
+            P = None
     if dark_only: M[M == 2] = 0
-    else: M = clean(M, info["t"])
+    elif P is None: M = clean(M, info["t"])
     info["confidence"], info["flags"] = confidence(G, M, info["t"])
     return G, C, M, info
 
@@ -321,6 +329,7 @@ def confidence(G, M, t):
     if (M > 0).sum() < 3: flags.append("рисунок не найден")
     if (M == 2).any(): flags.append("серую заливку стоит проверить")
     conf = float(np.clip(1 - 2.5 * amb, 0, 1))
+    if (M > 0).sum() < 3: conf = 0.0
     return round(conf, 2), flags
 
 
