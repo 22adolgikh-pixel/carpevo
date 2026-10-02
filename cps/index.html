@@ -111,6 +111,10 @@ input.draft{border-style:dashed;border-color:var(--acc)}
 .card .t small{color:var(--mut);font-weight:400;margin-left:4px}
 .dfilter{display:inline-flex;gap:3px}
 .dfilter button{padding:2px 7px;font-size:11.5px}
+.dfilter button small{color:var(--mut);margin-left:2px}
+.dfilter button.on small{color:inherit}
+.card .files a{color:var(--blue);font-size:11px;text-decoration:none}
+.card .files a:hover{text-decoration:underline}
 /* вертикальная колонка инструментов слева от холста (экран «Пиксели») */
 #toolcol{position:absolute;top:10px;left:10px;z-index:5;display:none;flex-direction:column;gap:3px;background:rgba(20,22,27,.9);padding:5px;border-radius:8px;border:1px solid var(--ln)}
 #toolcol .ib{width:32px;height:30px}
@@ -120,14 +124,15 @@ input.draft{border-style:dashed;border-color:var(--acc)}
 .palgrid .sq{position:relative;width:40px;height:40px;border-radius:7px;border:1px solid #0006;box-shadow:0 0 0 2px transparent;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .palgrid .sq.on{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--acc)}
 .palgrid .sq .k{font-size:12px;font-weight:700;pointer-events:none}
-.palgrid .sq .bgl{position:absolute;bottom:-15px;left:0;right:0;text-align:center;font-size:9.5px;color:var(--mut);pointer-events:none}
-.palgrid{padding-bottom:12px}
+.palgrid .sq .bgl{position:absolute;bottom:-16px;left:-8px;right:-8px;text-align:center;font-size:9.5px;color:var(--mut);pointer-events:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.palgrid{padding-bottom:18px;row-gap:22px}
 .palcur{margin-top:2px;font-size:12.5px;min-height:18px;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
 .palcur b{color:var(--tx)}.palcur .mut{color:var(--mut);font-size:11.5px}
-.dyelib{display:flex;flex-wrap:wrap;gap:6px}
-.dyelib .dy{width:30px;height:30px;border-radius:7px;border:1px solid #0006;cursor:pointer;box-shadow:0 0 0 2px transparent}
-.dyelib .dy:hover{box-shadow:0 0 0 2px var(--mut)}
-.dyelib .dy.on{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--acc)}
+.dyegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin:8px 0}
+.dyegrid .dy{display:flex;gap:8px;align-items:center;padding:5px 7px;border:1px solid var(--ln);border-radius:7px;cursor:pointer;background:var(--pan2)}
+.dyegrid .dy:hover,.dyegrid .dy.on{border-color:var(--acc)}
+.dyegrid .dy i{width:22px;height:22px;border-radius:5px;border:1px solid #0006;flex:none}
+.dyegrid .dy small{display:block;color:var(--mut);font-size:11px}
 .vcard{display:flex;flex-direction:column;gap:6px}
 .vcard .vrow{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 
@@ -237,6 +242,7 @@ const ICON={
   symX:SV('<path d="M10 2.5v15" stroke-dasharray="2 2"/><path d="M8 6L3.5 10 8 14z"/><path d="M12 6l4.5 4-4.5 4z" fill="currentColor"/>'),
   symY:SV('<path d="M2.5 10h15" stroke-dasharray="2 2"/><path d="M6 8l4-4.5L14 8z"/><path d="M6 12l4 4.5 4-4.5z" fill="currentColor"/>'),
   rot:SV('<circle cx="10" cy="10" r="1.3" fill="currentColor"/><path d="M4.5 7.5A6 6 0 0 1 15 6"/><path d="M15.5 12.5A6 6 0 0 1 5 14"/><path d="M15 3v3h-3"/><path d="M5 17v-3h3"/>'),
+  pixels:SV('<rect x="3" y="3" width="6" height="6" fill="currentColor"/><rect x="11" y="3" width="6" height="6"/><rect x="3" y="11" width="6" height="6"/><rect x="11" y="11" width="6" height="6" fill="currentColor"/>'),
   under:SV('<path d="M2.5 10s2.8-5 7.5-5 7.5 5 7.5 5-2.8 5-7.5 5-7.5-5-7.5-5z"/><circle cx="10" cy="10" r="2.3"/>'),
   trim:SV('<circle cx="5.5" cy="5.5" r="2"/><circle cx="5.5" cy="14.5" r="2"/><path d="M7 7l10 8"/><path d="M7 13l10-8"/>'),
   flipH:SV('<path d="M10 3v14"/><path d="M7.5 5.5L3 10l4.5 4.5z"/><path d="M12.5 5.5L17 10l-4.5 4.5z"/>'),
@@ -286,7 +292,7 @@ cv.addEventListener('pointermove',ev=>{
   const w=toWorld(ev);const h=H();if(h&&h.move)h.move(w,ev);if(h&&h.hud)$('hud').textContent=h.hud(w);
 });
 cv.addEventListener('pointerup',ev=>{if(panning){panning=null;cv.style.cursor='';return;}const h=H();if(h&&h.up)h.up(toWorld(ev),ev);});
-function toggleGrid(){S.showGrid=!S.showGrid;try{localStorage.setItem('cpsGrid',S.showGrid?'1':'0');}catch(e){}const el=$('gridTog');if(el)el.classList.toggle('on',S.showGrid);const c=$('vGridTog');if(c)c.checked=S.showGrid;redraw();}
+function toggleGrid(){S.showGrid=!S.showGrid;try{localStorage.setItem('cpsGrid',S.showGrid?'1':'0');}catch(e){}const el=$('gridTog');if(el)el.classList.toggle('on',S.showGrid);const c=$('vGridTog');if(c)c.classList.toggle('on',S.showGrid);redraw();}
 $('zIn').onclick=()=>zoomAt(1.25,V.w/2,V.h/2);$('zOut').onclick=()=>zoomAt(0.8,V.w/2,V.h/2);$('zFit').onclick=()=>{const h=H();if(h&&h.fit)h.fit();};
 let rafPending=false;
 function redraw(){if(rafPending)return;rafPending=true;requestAnimationFrame(()=>{rafPending=false;draw();});}
@@ -796,9 +802,7 @@ function renderRightGrid(){
   R.innerHTML=`<div class="seg" style="margin-bottom:8px"><button id="vQuad" class="${S.gridView==='quad'?'on':''}">① углы на скане</button><button id="vGrid" class="${S.gridView==='grid'?'on':''}">② сетка</button></div>
   <h4>Вид ${HT('<b>Показать пиксели</b> — поверх скана рисуются клетки в цветах палитры (как получатся после «Извлечь»). Ту же цветную версию можно <b>подглядеть</b>, удерживая <kbd>Пробел</kbd>, — не переключая вкладку.')}</h4>
   <div class="vcard">
-    <label class="opts"><input type="checkbox" id="pv" ${F.preview?'checked':''}> показать пиксели</label>
-    <div class="vrow"><span class="mut">прозрачность</span><input type="range" id="pvA" min="0.1" max="1" step="0.05" value="${F.previewAlpha||0.6}" style="flex:1"></div>
-    <div class="mut">Держите <kbd>Пробел</kbd> — оригинал скана в цвете.</div>
+    <div class="ibar">${IB('pixels','Показать пиксели поверх скана · держите Пробел — оригинал скана в цвете','','id="pv"',F.preview)}<input type="range" id="pvA" min="0.1" max="1" step="0.05" value="${F.previewAlpha||0.6}" style="flex:1;min-width:40px" data-tip="прозрачность пикселей"></div>
   </div>
   <h4>Геометрия</h4>
   <div class="flex"><button id="qReset" class="sm">углы = рамка</button><button id="qFull" class="sm">весь кроп</button><button id="qRot" class="sm">⟳ 90°</button><button id="qFlip" class="sm">⇋</button></div>
@@ -854,7 +858,7 @@ function renderRightGrid(){
   $('cAuto').onclick=()=>{F.samples=null;sampleCells(F);autoTones();};
   $('cIn').oninput=e=>{C.inner=+e.target.value;$('cInv').textContent=C.inner+'%';F.samples=null;markDirty();drawHist();redraw();};
   $('cShowIn').onchange=e=>{F.showInner=e.target.checked;redraw();};
-  $('pv').onchange=e=>{F.preview=e.target.checked;redraw();};$('pvA').oninput=e=>{F.previewAlpha=+e.target.value;redraw();};
+  $('pv').onclick=e=>{F.preview=!F.preview;$('pv').classList.toggle('on',F.preview);redraw();};$('pvA').oninput=e=>{F.previewAlpha=+e.target.value;redraw();};
   F.previewAlpha=F.previewAlpha||0.6;
   $('blankEx').onchange=e=>{F.blankExtract=e.target.checked;};
   $('toPix').onclick=extractToPixels;
@@ -1002,12 +1006,12 @@ function resizeM(x0,y0,w,h){const F=S.fig,M=F.M;if(w<1||h<1)return;const d=new U
   F.M={w,h,ox:M.ox+x0,oy:M.oy+y0,d,edited:true};}
 function renderPal(){const F=S.fig,b=$('palBox');if(!b)return;
   // крупные квадраты: клик — выбрать, двойной клик — сменить цвет, ✕ (при наведении) — удалить; «+» — новый цвет
-  b.innerHTML=F.palette.map((c,i)=>`<div class="sq ${i===F.cur?'on':''}" data-i="${i}" style="background:${c}"><span class="k" style="color:${lum(c)>150?'#15171c':'#fff'}">${i+1}</span>${i?'':'<span class="bgl">фон</span>'}${i?'<span class="del" data-del title="удалить цвет">✕</span>':''}<input type="color" value="${c}" tabindex="-1"></div>`).join('')+
+  b.innerHTML=F.palette.map((c,i)=>`<div class="sq ${i===F.cur?'on':''}" data-i="${i}" style="background:${c}"><span class="k" style="color:${lum(c)>150?'#15171c':'#fff'}">${i+1}</span><span class="bgl">${esc(F.palNames[i]||(i?'':'фон'))}</span>${i?'<span class="del" data-del title="удалить цвет">✕</span>':''}<input type="color" value="${c}" tabindex="-1"></div>`).join('')+
     `<div class="sq add" id="palAdd" title="добавить цвет">+</div>`;
   b.querySelectorAll('.sq[data-i]').forEach(el=>{const i=+el.dataset.i;const inp=el.querySelector('input[type=color]');
     el.onclick=e=>{if(e.target.hasAttribute('data-del'))return;setCur(i);};
-    el.ondblclick=e=>{if(e.target.hasAttribute('data-del'))return;inp.click();};
-    inp.oninput=e=>{F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;el.style.background=e.target.value;markDirty();redraw();renderPalNames();};
+    el.ondblclick=e=>{if(e.target.hasAttribute('data-del'))return;openDyePicker(i);};
+    inp.oninput=e=>{F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;el.style.background=e.target.value;markDirty();redraw();};
     const del=el.querySelector('[data-del]');if(del)del.onclick=()=>{if(!confirm('Удалить цвет '+(i+1)+'? Его клетки станут фоном.'))return;pushUndo();const M=F.M;
       if(M)for(let k=0;k<M.d.length;k++){if(M.d[k]===i)M.d[k]=0;else if(M.d[k]>i)M.d[k]--;}
       F.palette.splice(i,1);F.palNames.splice(i,1);F.palDyes.splice(i,1);F.cls.thr.splice(i-1,1);F.cur=Math.min(F.cur,F.palette.length-1);F.palTouched=true;markDirty();renderPal();renderSbInfo();redraw();};});
@@ -1026,18 +1030,26 @@ function dyeLabel(F,i,dye){   // «zoğalı», «zoğalı 2» — два отт�
 function applyDye(F,i,dye){F.palette[i]=dye.hex;F.palDyes[i]=dye.id;F.palNames[i]=dyeLabel(F,i,dye);F.palTouched=true;markDirty();}
 function renderPalNames(){const F=S.fig;if(!F)return;
   while(F.palDyes.length<F.palette.length)F.palDyes.push(null);
-  const i=F.cur,d=dyeById(F.palDyes[i]),cu=$('palCur');
-  if(cu)cu.innerHTML=`<b>${i+1}${i?'':' · фон'}</b> ${F.palNames[i]?esc(F.palNames[i]):'<span class="mut">без названия</span>'} <span class="mut">${d?esc(d.ru):((F.work.color_mode&&i)?'краситель не выбран — кликните ниже':'')}</span>`;
-  const lib=$('dyeLib');if(lib){const q=norm(($('dyeQ')||{}).value||'');
-    lib.innerHTML=S.dyes.filter(x=>!q||norm(x.az+' '+x.ru).includes(q)).map(x=>`<div class="dy ${x.id===F.palDyes[i]?'on':''}" data-id="${esc(x.id)}" style="background:${x.hex}" data-tip="${esc(x.az+' — '+x.ru)}"></div>`).join('')||'<span class="mut">ничего не найдено</span>';
-    lib.querySelectorAll('.dy').forEach(el=>el.onclick=()=>{applyDye(F,F.cur,dyeById(el.dataset.id));renderPal();redraw();});}
-  const qi=$('dyeQ');if(qi)qi.oninput=()=>renderPalNames();
-  const ow=$('palOwn');if(ow)ow.onclick=()=>{const inp=document.querySelector('#palBox .sq.on input[type=color]');if(inp)inp.click();};
+  const pd=$('palDye');if(pd)pd.onclick=()=>openDyePicker(F.cur);
   const sn=$('palSnap');if(sn)sn.onclick=()=>{if(!S.dyes.length){stat('библиотека красителей не загрузилась','err');return;}
     if(!confirm('Заменить цвета палитры ближайшими красителями из библиотеки? Пиксели не меняются, только цвета и названия.'))return;
     F.palDyes=[];F.palette.forEach((c,k)=>{const r=nearestDye(c);F.palDyes[k]=r?r.dye.id:null;});
     F.palette.forEach((c,k)=>{const d2=dyeById(F.palDyes[k]);if(d2){F.palette[k]=d2.hex;F.palNames[k]=dyeLabel(F,k,d2);}});
     F.palTouched=true;markDirty();renderPal();redraw();};}
+function openDyePicker(i){
+  const F=S.fig,W=$('modal');if(!F||!W)return;
+  const cur=F.palDyes[i];
+  W.innerHTML=`<div class="mbox"><div class="flex" style="margin-bottom:6px"><b style="font-size:14px">Цвет ${i+1}${i?'':' (фон)'} — краситель</b><span class="sp"></span><button class="sm" id="dyClose">Закрыть</button></div>
+  <div class="hint" style="margin:0">Выберите краситель из библиотеки — название и цвет будут одинаковыми во всех рисунках. Нового красителя нет в списке — добавьте строку в <code>dyes.json</code>.</div>
+  <div class="dyegrid">${S.dyes.map(d=>`<div class="dy ${d.id===cur?'on':''}" data-id="${esc(d.id)}"><i style="background:${d.hex}"></i><span>${esc(d.az)}<small>${esc(d.ru)}</small></span></div>`).join('')}</div>
+  <div class="flex"><button class="sm" id="dyOwn">свой цвет…</button><input type="color" id="dyIn" value="${F.palette[i]}" style="width:1px;height:1px;opacity:0;border:0;padding:0"></div></div>`;
+  W.hidden=false;
+  const close=()=>{W.hidden=true;W.innerHTML='';renderPal();redraw();};
+  $('dyClose').onclick=close;W.onclick=e=>{if(e.target===W)close();};
+  W.querySelectorAll('.dy').forEach(el=>el.onclick=()=>{applyDye(F,i,dyeById(el.dataset.id));close();});
+  $('dyOwn').onclick=()=>$('dyIn').click();
+  $('dyIn').oninput=e=>{F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;markDirty();redraw();};
+}
 function setCur(i){const F=S.fig;if(!F)return;if(i!==F.cur){F.prevCur=F.cur;F.cur=i;}renderPal();}
 function lum(h){const[r,g,b]=hex2rgb(h);return 0.299*r+0.587*g+0.114*b;}
 function usedColors(F){if(!F.M)return 0;const s=new Set();for(const v of F.M.d)if(v)s.add(v);return s.size;}
@@ -1052,17 +1064,10 @@ function renderRightPix(){
   const ids=(m.site_id||'').split(',').map(x=>x.trim()).filter(Boolean);
   R.innerHTML=`  <h4>Палитра <span class="hintbox">?<span class="htxt">Клик — выбрать цвет для рисования, двойной клик — сменить цвет, ✕ при наведении — удалить. <kbd>1</kbd> — фон, <kbd>2</kbd>–<kbd>9</kbd> — цвета. <kbd>X</kbd> — переключиться на предыдущий цвет (как в Illustrator). <kbd>Alt</kbd>+клик по клетке — взять её цвет. Левая кнопка мыши рисует выбранным цветом, правая — фоном.</span></span></h4>
   <div class="palgrid" id="palBox"></div>
-  <div id="palCur" class="palcur"></div>
-  <h4>Библиотека красителей ${HT('Как стили в Figma: выберите цвет в палитре рисунка (плитки выше) и кликните краситель — цвет и название заменятся. Названия и цвета одинаковы во всех рисунках. Нужного красителя нет — добавьте строку в <code>dyes.json</code>.')}</h4>
-  <input type="search" id="dyeQ" placeholder="поиск: qırmızı, красный…" style="width:100%;margin-bottom:6px">
-  <div id="dyeLib" class="dyelib"></div>
-  <div class="opts" style="margin-top:6px"><button class="sm" id="palOwn" data-tip="любой цвет без привязки к библиотеке">свой цвет…</button><button class="sm" id="palSnap" data-tip="Заменить цвета палитры ближайшими красителями из библиотеки">↻ привести палитру к красителям</button></div>
+  <div class="opts" style="margin-top:2px"><button class="sm" id="palDye" data-tip="Выбрать краситель для выбранного цвета (или двойной клик по плитке)">краситель…</button><button class="sm" id="palSnap" data-tip="Заменить цвета палитры ближайшими красителями из библиотеки (dyes.json)">↻ к красителям</button></div>
   <h4>Вид</h4>
-  <div class="vcard">
-    <div class="vrow">${IB('under','Подложка скана вкл/выкл','U','id="uTog"',F.under>0)}<span class="mut">подложка скана</span><input type="range" id="uA" min="0" max="1" step="0.05" value="${F.under}" style="flex:1;min-width:40px" data-tip="прозрачность подложки"></div>
-    <div class="vrow"><button class="sm" id="mFH" data-tip="Отразить матрицу зеркально по горизонтали (меняет пиксели)">⇋ отразить по горизонтали</button><button class="sm" id="mFV" data-tip="Отразить матрицу зеркально по вертикали (меняет пиксели)">⇅ отразить по вертикали</button></div>
-    <div class="vrow"><label class="opts"><input type="checkbox" id="vGridTog" ${S.showGrid?'checked':''}> сетка узлов</label><span class="mut">пробел — оригинал скана</span></div>
-  </div>
+  <div class="ibar">${IB('under','Подложка скана вкл/выкл · держите Пробел — оригинал скана','U','id="uTog"',F.under>0)}<input type="range" id="uA" min="0" max="1" step="0.05" value="${F.under}" style="flex:1;min-width:40px" data-tip="прозрачность подложки">
+   <span class="gap"></span>${IB('flipH','Отразить матрицу по горизонтали','','id="mFH"')}${IB('flipV','Отразить матрицу по вертикали','','id="mFV"')}<span class="gap"></span>${IB('grid','Сетка узлов (скрыть/показать)',"⌘'",'id="vGridTog"',S.showGrid)}</div>
   <h4>Описание</h4>
   <div class="descbox" id="descBox">
     <div class="dn">${esc(m.name_az||'—')}${m.name_az_auto?' <span class="dchip" style="background:var(--acc)" data-tip="черновик из кириллицы — проверьте">черн.</span>':''}</div>
@@ -1083,8 +1088,7 @@ function renderRightPix(){
     <div class="eg v">${E('R',1,'▶','Добавить столбец справа')}${E('R',-1,'◀','Убрать столбец справа')}</div>
     <span></span><div class="eg">${E('B',-1,'▲','Убрать ряд снизу')}${E('B',1,'▼','Добавить ряд снизу')}</div><span></span>
   </div>
-  <div style="margin:6px 0">${HT('Инструменты — слева от холста. <kbd>Пробел</kbd> (удерживать) — подглядеть скан, <kbd>Пробел</kbd>+тянуть — сдвиг, <kbd>U</kbd> — подложка вкл/выкл.<br>Зеркала: рисуете одну часть, остальное повторяется само. <kbd>Alt</kbd>+тянуть по фиолетовой пунктирной линии — сдвинуть ось.<br>Копирование (<kbd>C</kbd>): выделите область, дальше клики вставляют её (<kbd>Esc</kbd> — отмена).<br>Всё сохраняется само через секунду после правки. <kbd>[</kbd> <kbd>]</kbd> — предыдущий / следующий рисунок.')} Сетка: жирная линия — каждые 10 узлов от левого верхнего угла, маленькие ▸ на краях — середина; скрыть — «▦ сетка» внизу или <kbd>⌘'</kbd>.</div>
-  <div class="hint" id="outLinks"></div>
+  <div style="margin:6px 0">${HT('Инструменты — слева от холста. <kbd>Пробел</kbd> (удерживать) — подглядеть скан, <kbd>Пробел</kbd>+тянуть — сдвиг, <kbd>U</kbd> — подложка вкл/выкл.<br>Зеркала: рисуете одну часть, остальное повторяется само. <kbd>Alt</kbd>+тянуть по фиолетовой пунктирной линии — сдвинуть ось.<br>Копирование (<kbd>C</kbd>): выделите область, дальше клики вставляют её (<kbd>Esc</kbd> — отмена).<br>Всё сохраняется само через секунду после правки. <kbd>[</kbd> <kbd>]</kbd> — предыдущий / следующий рисунок.<br>Сетка: жирная линия — каждые 10 узлов от левого верхнего угла, маленькие ▸ на краях — середина; скрыть — кнопка сетки в «Виде» или <kbd>⌘\'</kbd>.')}</div>
   <div class="rfoot">
     ${F.done||F.review?`<div class="hint" style="margin:0">${F.done?'<span style="color:var(--ok)">✓ уже отмечен готовым</span>':'<span style="color:var(--bad)">⚠ отмечен на пересмотр</span>'} · <span class="suggest" id="backToWork">вернуть в работу</span></div>`:''}
     <button id="reviewNext" class="big pri" data-tip="Отложить сложный рисунок (не идёт на сайт, легко найти в каталоге) и открыть следующий">⚠ На пересмотр → след.</button>
@@ -1092,7 +1096,7 @@ function renderRightPix(){
   </div>`;
   $('uTog').onclick=()=>{F.under=F.under>0?0:(F.underLast||0.35);renderRight();redraw();};
   $('uA').oninput=e=>{F.under=+e.target.value;if(F.under>0)F.underLast=F.under;$('uTog').classList.toggle('on',F.under>0);redraw();};
-  $('vGridTog').onchange=()=>toggleGrid();
+  $('vGridTog').onclick=()=>toggleGrid();
   $('mTrim').onclick=()=>matOp('trim');$('mTM').oninput=e=>F.trimMargin=+e.target.value;
   $('mFH').onclick=()=>matOp('flipH');$('mFV').onclick=()=>matOp('flipV');$('mClr').onclick=()=>{if(confirm('Очистить все пиксели?'))matOp('clear');};
   R.querySelectorAll('[data-op]').forEach(b=>b.onclick=e=>{const[side,d]=b.dataset.op.split(':');matOp(side+':'+(+d*(e.shiftKey?5:1)));});
@@ -1189,23 +1193,31 @@ async function renameFigure(nid){const F=S.fig;if(!nid||nid===F.id)return;if(!/^
   await saveFigure(true);await api('/api/rename/'+encodeURIComponent(F.id),{new_id:nid});F.id=nid;await refreshFigures();$('cur').textContent=nid;stat('переименовано','ok');}
 
 /* ============================ 4. КАТАЛОГ ============================ */
+const TYPEF={'':()=>true,bw:f=>!f.color&&!f.photo,color:f=>!!f.color&&!f.photo,border:f=>!!f.border&&!f.photo,photo:f=>!!f.photo};
+const TYPEL=[['','все'],['bw','узор ЧБ'],['color','узор цветной'],['border','бордюр'],['photo','фото']];
 function renderCatalog(){
   const C=$('catalog');const q=norm(S.catQ);
   const fq=document.activeElement&&document.activeElement.id==='catQ',cpos=fq?document.activeElement.selectionStart:0;
-  const figs=S.figures.filter(f=>(!q||[f.id,f.name_az,f.name,f.translation,f.site_id].some(v=>norm(v).includes(q)))&&(!S.catRev||f.review)&&(!S.catCol||(S.catCol==='4'?(f.colors||0)>=4:String(f.colors||0)===S.catCol)));
+  const figs=S.figures.filter(f=>(!q||[f.id,f.name_az,f.name,f.translation,f.site_id].some(v=>norm(v).includes(q)))&&(!S.catRev||f.review)&&(!S.catAuto||f.auto)&&(!S.catNoSite||!f.site_id)&&TYPEF[S.catType||''](f));
   const done=figs.filter(f=>f.done).length,rev=S.figures.filter(f=>f.review).length;
-  C.innerHTML=`<div class="flex" style="margin-bottom:12px"><b style="font-size:15px">Каталог рисунков</b><span style="color:var(--mut)">${figs.length}${q?(' из '+S.figures.length):''} · ${done} готово</span><span class="sp"></span>
-    <span class="dfilter" data-tip="сколько цветов в готовой схеме (считается само)">${[['','цветов: все'],['1','1'],['2','2'],['3','3'],['4','4+']].map(([k,l])=>`<button class="${(S.catCol||'')===k?'on':''}" data-cc="${k}">${l}</button>`).join('')}</span>
+  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px"><b style="font-size:15px">Каталог рисунков</b><span style="color:var(--mut)">${figs.length}${q?(' из '+S.figures.length):''} · ${done} готово</span><span class="sp"></span>
+    <span class="dfilter" data-tip="тип рисунка">${TYPEL.map(([k,l])=>`<button class="${(S.catType||'')===k?'on':''}" data-ct="${k}">${l} <small>${S.figures.filter(TYPEF[k]).length}</small></button>`).join('')}</span>
     <label class="flex" style="color:var(--mut)"><input type="checkbox" id="catRev" ${S.catRev?'checked':''}>⚠ на пересмотр (${rev})</label>
-    <input type="text" id="catQ" placeholder="поиск: id, ad, название, site_id…" value="${esc(S.catQ)}" style="width:220px">
+    <label class="flex" style="color:var(--mut)" data-tip="автооцифровка, ещё не проверена человеком"><input type="checkbox" id="catAuto" ${S.catAuto?'checked':''}>⚡ не проверены (${S.figures.filter(f=>f.auto).length})</label>
+    <label class="flex" style="color:var(--mut)"><input type="checkbox" id="catNoSite" ${S.catNoSite?'checked':''}>без привязки к сайту</label>
+    <input type="text" id="catQ" placeholder="поиск: id, ad, название, site_id…" value="${esc(S.catQ)}" style="width:220px;flex:none">
     <label class="flex" style="color:var(--mut)"><input type="checkbox" id="catOnly" ${S.catOnly?'checked':''}> только готовые</label></div>
   <div class="cards">${figs.filter(f=>!S.catOnly||f.done).map(f=>`<div class="card" data-id="${esc(f.id)}"><div class="im"><img loading="lazy" src="${f.size?('/out/'+encodeURIComponent(f.id)+'_x12.png'):('/api/crop/'+encodeURIComponent(f.id))}?t=${Math.round(f.t)}"></div>
     <div class="t"><span class="dot ${f.done?'done':(f.size?'mid':'')}" style="display:inline-block;margin-right:5px"></span>${esc(dispName(f)||f.id)}${f.name_az_auto?'<small data-tip="черновик из кириллицы — проверьте">черн.</small>':''}${f.auto?` <span class="dchip" style="background:var(--acc)" data-tip="автооцифровка, ещё не проверена · уверенность ${Math.round((f.auto_conf??0)*100)}%">⚡</span>`:''}${f.review?' <span class="dchip rev" data-tip="отмечено на пересмотр">⚠</span>':''}</div>
     <div class="m">${esc(f.id)}${f.translation?' · '+esc(f.translation):''}${f.carpet?' · '+esc(f.carpet):''}${f.size?' · '+f.size[0]+'×'+f.size[1]:''}${f.colors?' · '+f.colors+' цв.':''}</div>
-    <div class="m">${f.site_id?'→ '+esc(f.site_id):'<span style="color:var(--bad)">нет привязки к сайту</span>'}</div></div>`).join('')}</div>`;
+    <div class="m">${f.site_id?'→ '+esc(f.site_id):'<span style="color:var(--bad)">нет привязки к сайту</span>'}</div>
+    ${f.size?`<div class="m files">${[['.png','PNG','1 узел = 1 пиксель, фон прозрачный'],['_x12.png','×12','крупно, фон прозрачный, без сетки'],['_bg.png','×12 фон','крупно, с цветом фона'],['_grid.png','сетка','сетка отдельным прозрачным слоем'],['.svg','SVG','векторный']].map(([suf,l,tp])=>`<a href="/out/${encodeURIComponent(f.id)}${suf}?t=${Math.round(f.t)}" target="_blank" data-tip="${tp}">${l}</a>`).join(' · ')}</div>`:''}</div>`).join('')}</div>`;
   $('catOnly').onchange=e=>{S.catOnly=e.target.checked;renderCatalog();};
   $('catRev').onchange=e=>{S.catRev=e.target.checked;renderCatalog();};
-  C.querySelectorAll('[data-cc]').forEach(b=>b.onclick=()=>{S.catCol=b.dataset.cc;renderCatalog();});
+  $('catAuto').onchange=e=>{S.catAuto=e.target.checked;renderCatalog();};
+  $('catNoSite').onchange=e=>{S.catNoSite=e.target.checked;renderCatalog();};
+  C.querySelectorAll('[data-ct]').forEach(b=>b.onclick=()=>{S.catType=b.dataset.ct;renderCatalog();});
+  C.querySelectorAll('.card .files a').forEach(a=>a.onclick=e=>e.stopPropagation());
   $('catQ').oninput=e=>{S.catQ=e.target.value;renderCatalog();};
   if(fq){const el=$('catQ');el.focus();el.setSelectionRange(cpos,cpos);}
   C.querySelectorAll('.card').forEach(el=>el.onclick=()=>openFigure(el.dataset.id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail));

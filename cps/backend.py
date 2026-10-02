@@ -321,6 +321,14 @@ async def api_figure_upload(files: list[UploadFile] = File(...)):
         jsave(wp, work); saved.append(stem)
     return {"saved": saved}
 
+def _is_border(w):
+    """кайма / бордюр: раздел в подписи, найденный раппорт или вытянутая полоса"""
+    sect = ((w.get("meta") or {}).get("section") or "").lower()
+    if any(k in sect for k in ("кайм", "бордюр", "haşiy", "border")): return True
+    if (w.get("rapport") or {}).get("found"): return True
+    m = w.get("matrix")
+    return bool(m and max(m["w"], m["h"]) >= 1.9 * max(1, min(m["w"], m["h"])))
+
 @app.get("/api/figures")
 def api_figures():
     out = []
@@ -337,6 +345,8 @@ def api_figures():
                     "auto_conf": (w.get("auto") or {}).get("confidence"),
                     "size": [w["matrix"]["w"], w["matrix"]["h"]] if w.get("matrix") else None,
                     "colors": len(set("".join(w["matrix"]["rows"])) - {"."}) if w.get("matrix") else None,
+                    "color": bool(w.get("color_mode")), "photo": w.get("kind") == "photo",
+                    "border": _is_border(w), "rapport": bool((w.get("rapport") or {}).get("found")),
                     "t": os.path.getmtime(os.path.join(D_WORK, fn))})
     def k(f):
         try: return (0, int(f["table"] or 0), int(f["fig"] or 0), f["id"])
