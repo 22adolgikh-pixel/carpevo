@@ -40,6 +40,8 @@
   "carpet": "К.",
   "type": "-",
   "note": "Ш Изредка встречается в карабахских коврах.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -120,7 +122,7 @@
    4.898
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": "mirror_v",
    "score": 1.0,
@@ -130,7 +132,7 @@
   "risk": 0.03,
   "difficulty_est": "simple"
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -146,5 +148,11 @@
    30
   ]
  },
- "saved_at": "2026-10-03 12:07:24"
+ "saved_at": "2026-10-03 12:31:01",
+ "palette_dyes": [
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }

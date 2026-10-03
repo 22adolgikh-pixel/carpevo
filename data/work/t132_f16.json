@@ -40,6 +40,8 @@
   "carpet": "К.",
   "type": "-",
   "note": "Ш См. таблицу 153, рис. 5.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -147,7 +149,7 @@
    4.923
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": null,
    "score": 0.417,
@@ -156,7 +158,7 @@
   },
   "risk": 0.1
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -172,5 +174,12 @@
    53
   ]
  },
- "saved_at": "2026-10-03 10:33:09"
+ "saved_at": "2026-10-03 12:30:34",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }
