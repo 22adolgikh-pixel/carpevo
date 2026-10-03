@@ -112,12 +112,16 @@ def matrix_labels(work):
     return np.array([[0 if c == "." else min(int(c, 36), 2) for c in r] for r in m["rows"]], np.uint8)
 
 
+SKIPPED = []     # битые json (обрыв записи) — пропускаем, не падаем
+
+
 def load_examples(work_dir=None, crops_dir=None, limit=None):
     work_dir = work_dir or os.path.join(DATA, "work"); crops_dir = crops_dir or os.path.join(DATA, "crops")
     ex = []
     for fn in sorted(os.listdir(work_dir)):
         if not fn.endswith(".json"): continue
-        w = json.load(open(os.path.join(work_dir, fn)))
+        try: w = json.load(open(os.path.join(work_dir, fn)))
+        except Exception: SKIPPED.append(fn); continue
         if not (w.get("done") and w.get("matrix") and w.get("quad") and not w.get("color_mode") and w.get("kind") != "photo"): continue
         p = os.path.join(crops_dir, fn[:-5] + ".png")
         if not os.path.exists(p): continue
@@ -171,6 +175,7 @@ def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "eval"
     ex = load_examples()
     print("примеров (готовые ЧБ с кропом):", len(ex))
+    if SKIPPED: print("пропущено битых файлов:", len(SKIPPED), SKIPPED[:5], "— список: /api/broken")
     if len(ex) < 10: print("мало данных"); return
     res = cross_val(ex)
     a = np.array([[r[1], r[2]] for r in res])

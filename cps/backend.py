@@ -66,7 +66,11 @@ def jload(p, default=None):
     try: return json.load(open(p, encoding="utf-8"))
     except Exception: return default
 
-def jsave(p, obj): json.dump(obj, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+def jsave(p, obj):
+    """Атомарная запись: пишем во временный файл и подменяем — оборванная запись (перезапуск, параллельное чтение) не оставит битый json."""
+    tmp = f"{p}.tmp{os.getpid()}_{threading.get_ident()}"
+    with open(tmp, "w", encoding="utf-8") as f: json.dump(obj, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, p)
 
 # ---------------- легенда (таблица из книги) ----------------
 def legend_rows():
@@ -506,6 +510,7 @@ def api_work_save(fid: str, body: dict = Body(...)):
     wp = os.path.join(D_WORK, fid + ".json")
     work = jload(wp, {}) or {}
     work.update(body); work["id"] = fid; work["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    if "matrix" in body and isinstance(work.get("auto"), dict): work["auto"]["edited"] = True      # человек правил — перепрогон это не тронет
     if work.get("done") and isinstance(work.get("auto"), dict): work["auto"]["reviewed"] = True
     jsave(wp, work)
     if work.get("matrix") and work.get("palette"):
@@ -691,13 +696,49 @@ def api_model():
     return {"present": True, "trained": time.strftime("%Y-%m-%d %H:%M", time.localtime(os.path.getmtime(p))), **meta}
 
 
+MODEL_JOB = {"running": False, "started": None, "finished": None, "ok": None, "out": "", "err": ""}
+
+
+def _model_train_run():
+    import subprocess, sys
+    J = MODEL_JOB; J.update(running=True, started=time.strftime("%Y-%m-%d %H:%M:%S"), finished=None, ok=None, out="", err="")
+    try:
+        r = subprocess.run([sys.executable, os.path.join(HERE, "learn.py"), "train"], capture_output=True, text=True, timeout=3600,
+                           env={**os.environ, "CPS_DATA": DATA})
+        J.update(ok=r.returncode == 0, out=(r.stdout or "")[-1500:], err=(r.stderr or "")[-600:])
+    except Exception as e:
+        J.update(ok=False, err=str(e))
+    finally:
+        J.update(running=False, finished=time.strftime("%Y-%m-%d %H:%M:%S"))
+
+
 @app.post("/api/model/train")
 def api_model_train():
-    """Обучить классификатор клеток на готовых ЧБ-рисунках (может занять минуты)."""
-    import subprocess, sys
-    r = subprocess.run([sys.executable, os.path.join(HERE, "learn.py"), "train"], capture_output=True, text=True, timeout=1800,
-                       env={**os.environ, "CPS_DATA": DATA})
-    return {"ok": r.returncode == 0, "out": (r.stdout or "")[-1500:], "err": (r.stderr or "")[-500:]}
+    """Обучить классификатор клеток на готовых ЧБ-рисунках — в фоне (минуты); ход виден в статус-баре."""
+    if MODEL_JOB["running"]: return JSONResponse({"error": "уже обучается"}, 409)
+    threading.Thread(target=_model_train_run, daemon=True).start()
+    return {"started": True}
+
+
+@app.get("/api/model/job")
+def api_model_job():
+    return MODEL_JOB
+
+
+@app.get("/api/broken")
+def api_broken(fix: int = 0):
+    """Битые json в data/work и data/sheets (обрыв записи). fix=1 — убрать их в data/broken, чтобы не мешали обучению и спискам."""
+    out = []
+    for d in (D_WORK, D_SHEETS):
+        for fn in sorted(os.listdir(d)):
+            if not fn.endswith(".json"): continue
+            p = os.path.join(d, fn)
+            try: json.load(open(p, encoding="utf-8"))
+            except Exception as e:
+                out.append({"file": os.path.relpath(p, DATA), "error": str(e)[:80]})
+                if fix:
+                    os.makedirs(os.path.join(DATA, "broken"), exist_ok=True); os.replace(p, os.path.join(DATA, "broken", fn))
+    return {"broken": out, "fixed": bool(fix)}
 
 
 @app.post("/api/accept")
@@ -773,6 +814,19 @@ def _regray_targets():
     return out
 
 
+def _redo_targets():
+    """Автоматы, которых человек не касался (не принят, не правился, палитра не тронута): их можно пересчитать свежим алгоритмом."""
+    out = []
+    for fn in sorted(os.listdir(D_WORK)):
+        if not fn.endswith(".json"): continue
+        w = jload(os.path.join(D_WORK, fn), {}) or {}
+        a = w.get("auto") or {}
+        if not (w.get("matrix") and a and not a.get("reviewed") and not a.get("edited") and not w.get("done") and not w.get("palette_touched") and w.get("kind") != "photo" and not a.get("photo")): continue
+        if a.get("mode") == "color" and w.get("source_kind") == "photo": continue
+        if os.path.exists(os.path.join(D_CROPS, fn[:-5] + ".png")): out.append((w.get("sheet"), fn[:-5], bool(w.get("color_mode"))))
+    return out
+
+
 def _segment_pending():
     """Листы без разметки (нет файла в data/sheets)."""
     out = []
@@ -809,6 +863,17 @@ def _prowl_run(stages, only_sheets=None):
                 try: _segment_one(rel)
                 except Exception as e: err(f"{rel}: {e}")
                 P["done"] += 1
+        if "redo" in stages and not P["stop"]:
+            t = _redo_targets(); P.update(stage="redo", done=0, total=len(t))
+            for path, f, is_color in t:
+                if P["stop"]: break
+                P["current"] = f
+                try:
+                    hint = _sheet_pitch_hint(path, exclude=f) if (path and is_color) else None
+                    r = run_auto(f, True, dark_only=False, mode="color" if is_color else "bw", pitch_hint=hint)
+                    if r.get("error"): err(f"{f}: {r['error']}")
+                except Exception as e: err(f"{f}: {e}")
+                P["done"] += 1
         if "regray" in stages and not P["stop"]:
             t = _regray_targets(); P.update(stage="auto", done=0, total=len(t))
             for path, f in t:
@@ -837,9 +902,9 @@ def _prowl_run(stages, only_sheets=None):
 @app.post("/api/prowl/start")
 def api_prowl_start(body: dict = Body(default={})):
     if PROWL["running"]: return JSONResponse({"error": "уже идёт"}, 409)
-    stages = [s for s in ((body or {}).get("stages") or ["segment", "auto"]) if s in ("segment", "auto", "regray")]
+    stages = [s for s in ((body or {}).get("stages") or ["segment", "auto"]) if s in ("segment", "auto", "regray", "redo")]
     only = (body or {}).get("sheets")
-    n = (len(_segment_pending()) if "segment" in stages else 0) + (len(_prowl_targets(only)) if "auto" in stages else 0) + (len(_regray_targets()) if "regray" in stages else 0)
+    n = (len(_segment_pending()) if "segment" in stages else 0) + (len(_prowl_targets(only)) if "auto" in stages else 0) + (len(_regray_targets()) if "regray" in stages else 0) + (len(_redo_targets()) if "redo" in stages else 0)
     if not n: return {"started": False, "total": 0}
     threading.Thread(target=_prowl_run, args=(stages, only), daemon=True).start()
     return {"started": True, "total": n}
@@ -852,10 +917,13 @@ def api_prowl_stop():
 
 
 @app.get("/api/prowl")
-def api_prowl():
-    d = dict(PROWL); d["pending"] = len(_prowl_targets()) if not PROWL["running"] else None
+def api_prowl(light: int = 0):
+    d = dict(PROWL)
+    if light: return d
+    d["pending"] = len(_prowl_targets()) if not PROWL["running"] else None
     d["pending_segment"] = len(_segment_pending()) if not PROWL["running"] else None
     d["pending_regray"] = len(_regray_targets()) if not PROWL["running"] else None
+    d["pending_redo"] = len(_redo_targets()) if not PROWL["running"] else None
     return d
 
 

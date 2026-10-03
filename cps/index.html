@@ -70,6 +70,9 @@ textarea{width:100%;min-height:60px;resize:vertical}
 .boxlist .bx{display:flex;gap:6px;align-items:center;padding:3px 4px;border-radius:5px}
 .boxlist .bx.sel{background:#2a3140}
 .boxlist input{width:52px}
+#act{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--acc);white-space:nowrap;flex:none}#act .bar{width:90px;height:6px;background:#2a2f3a;border-radius:3px;overflow:hidden;display:inline-block}#act .bar i{display:block;height:100%;background:var(--acc)}#act .mut{color:var(--mut)}#act .bad{color:var(--bad)}
+#stat{max-width:36vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#stat.old{opacity:.55}
+#logPanel{position:fixed;right:10px;bottom:46px;width:min(620px,94vw);max-height:55vh;overflow:auto;background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:8px 10px;z-index:80;box-shadow:0 12px 40px rgba(0,0,0,.6);font-size:12px}#logPanel div{padding:2px 0;border-bottom:1px solid rgba(255,255,255,.05)}#logPanel .t{color:var(--mut);margin-right:8px}#logPanel .err{color:var(--bad)}#logPanel .ok{color:var(--ok)}
 #stat{font-size:12px;color:var(--mut)}#stat.err{color:var(--bad)}#stat.ok{color:var(--ok)}
 .spin{display:inline-block;width:10px;height:10px;border:2px solid var(--acc);border-top-color:transparent;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-1px;margin-right:6px}
 @keyframes sp{to{transform:rotate(360deg)}}
@@ -210,7 +213,8 @@ aside{min-height:0}
   <div id="nav"></div>
   <span class="sep"></span>
   <div id="sbInfo"></div>
-  <span id="stat"></span>
+  <div id="act" hidden></div>
+  <span id="stat"></span><button class="sm" id="logBtn" data-tip="История сообщений и ход фоновых задач">☰</button>
   <span id="hud"></span>
   <div id="vpbar"><button class="sm" id="zOut" data-tip="уменьшить" data-key="−">−</button><span id="zLbl">100%</span><button class="sm" id="zIn" data-tip="увеличить" data-key="+">+</button><button class="sm" id="zFit" data-tip="вписать в окно" data-key="0">вписать</button></div>
 </footer>
@@ -231,7 +235,12 @@ async function api(path,body,method){
   if(!r.ok){const t=await r.text();throw new Error(path+' → '+r.status+' '+t.slice(0,200));}
   return r.json();
 }
-function stat(t,kind){const e=$('stat');e.className=kind||'';e.innerHTML=kind==='busy'?'<span class="spin"></span>'+esc(t):esc(t);if(kind==='ok')setTimeout(()=>{if(e.textContent===t)e.textContent='';},t.length>60?9000:3500);}
+/* строка состояния: последнее сообщение остаётся на месте (тускнеет), вся история — по кнопке ☰ */
+function stat(t,kind){const e=$('stat');e.className=kind||'';e.title=t;e.innerHTML=kind==='busy'?'<span class="spin"></span>'+esc(t):esc(t);
+  if(t){S.log=S.log||[];const l=S.log[S.log.length-1];if(!l||l.t!==t)S.log.push({ts:new Date(),t,kind:kind||''});if(S.log.length>200)S.log.shift();if($('logPanel'))logRender();}
+  if(kind==='ok'||!kind)setTimeout(()=>{if(e.title===t)e.classList.add('old');},t.length>60?9000:4000);}
+function logRender(){const p=$('logPanel');if(!p)return;p.innerHTML=(S.log||[]).slice().reverse().map(l=>`<div class="${l.kind}"><span class="t">${l.ts.toTimeString().slice(0,8)}</span>${esc(l.t)}</div>`).join('')||'<div class="t">пока пусто</div>';}
+function logToggle(){let p=$('logPanel');if(p){p.remove();return;}p=document.createElement('div');p.id='logPanel';document.body.appendChild(p);logRender();}
 function fail(e){console.error(e);stat('⚠ '+(e.message||e),'err');}
 const clamp=(v,a,b)=>v<a?a:v>b?b:v;
 function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error('не загрузилась картинка '+src));i.src=src;});}
@@ -1449,6 +1458,7 @@ function renderRightQueue(){
   R.innerHTML=`<h4>Ночной прогон</h4>
   <div style="margin:6px 0">${HT('Сервер сам нарезает уже размеченные листы и запускает «Авто» на всех рисунках без пикселей — пока вы не смотрите. Утром здесь готова очередь. Уже оцифрованное не трогает.')}</div>
   <div class="flex"><button id="pwGo" class="sm">▶ запустить</button><button id="pwStop" class="sm">■ стоп</button></div>
+  <div class="flex" style="margin-top:6px"><button id="pwRedo" class="sm" data-tip="Пересчитать новым алгоритмом все автоматы, которых вы не касались (не принятые, не правленные). Лучше после «обучить на готовых».">↻ перепрогнать непроверенные</button></div>
   <div class="flex" style="margin-top:6px"><button id="pwGray" class="sm" data-tip="Ночной/пакетный прогон какое-то время считал ЧБ без серой заливки. Пересчитать с заливкой непроверенные автоматы, где серого нет (проверенные и готовые не трогаются)">↺ вернуть серую заливку</button></div>
   <div class="hint" id="pwInfo">…</div>
   <h4>Модель клеток (ЧБ)</h4>
@@ -1462,7 +1472,8 @@ function renderRightQueue(){
     e.textContent=p.running?`идёт: ${p.done}/${p.total}${p.current?' · '+p.current:''}${p.errors?' · ошибок '+p.errors:''}`:(p.finished?`завершено ${p.finished}: ${p.done}/${p.total}${p.errors?', ошибок '+p.errors:''}. `:'')+(p.pending!=null?`Ждут авто: ${p.pending}`:'');
     if(p.running){clearTimeout(S.pwT);S.pwT=setTimeout(()=>{upd();refreshFigures();},4000);}}catch(e){}};
   api('/api/model').then(m=>{const e=$('mdInfo');if(e)e.textContent=m.present?`обучена ${m.trained} · рисунков ${m.n_figures??'?'} · ошибка ${(100*m.cv_model).toFixed(1)}% против ${(100*m.cv_threshold).toFixed(1)}% у порогов`:'модели нет — работают пороги';}).catch(()=>{});
-  $('mdTrain').onclick=async()=>{const e=$('mdInfo');e.textContent='обучаю… (до нескольких минут)';try{const r=await api('/api/model/train',{});e.textContent=r.out||r.err||'готово';}catch(x){e.textContent=String(x.message||x);}};
+  $('mdTrain').onclick=async()=>{const e=$('mdInfo');try{await api('/api/model/train',{});e.textContent='обучение идёт в фоне — ход в строке состояния внизу';stat('обучение модели запущено','busy');pollAct();}catch(x){e.textContent=String(x.message||x);}};
+  $('pwRedo').onclick=async()=>{if(!confirm('Пересчитать непроверенные автоматы новым алгоритмом? Принятые и правленные не изменятся.'))return;try{const r=await api('/api/prowl/start',{stages:['redo']});stat(r.started?'перепрогон: '+r.total+' рис.':'нечего пересчитывать','ok');pollAct();}catch(e){fail(e);}};
   $('pwGray').onclick=async()=>{try{const r=await api('/api/prowl/start',{stages:['regray']});stat(r.started?'пересчёт с серой заливкой: '+r.total+' рис.':'нечего пересчитывать','ok');upd();}catch(e){fail(e);}};
   $('pwGo').onclick=async()=>{try{const r=await api('/api/prowl/start',{});stat(r.started?'прогон запущен: '+r.total+' рис.':'нечего обрабатывать — все нарезанные рисунки уже оцифрованы','ok');upd();}catch(e){fail(e);}};
   $('pwStop').onclick=async()=>{await api('/api/prowl/stop',{});upd();};
@@ -1485,7 +1496,7 @@ async function renderPipe(){
   ${step(1,'Листы → разметка рамок',`Листов: ${sh.total} · размечено ${sh.cut}${sh.auto_cut?` (из них автоматически, не проверено глазами: ${sh.auto_cut})`:''} · без рисунков ${sh.empty} · <b>без разметки ${sh.uncut}</b>. Рамки ищутся автоматически, номер таблицы — по номеру страницы.`,
      `<button class="sm" id="pSeg" ${run||!sh.uncut?'disabled':''}>▶ разметить ${sh.uncut} листов</button><button class="sm" id="pToSheets">открыть листы</button>`)}
   ${step(2,'Оцифровка и оценка узора',`Рисунков: ${f.total} · не оцифровано <b>${f.undigitized}</b> · фото (не схемы) ${f.photo}. Для каждого определяется ЧБ/цвет, сетка, пиксели, симметрия, раппорт каймы, оценка сложности и риск ошибок.`,
-     `<button class="sm" id="pAuto" ${run||!f.undigitized?'disabled':''}>▶ оцифровать ${f.undigitized} рисунков</button>`)}
+     `<button class="sm" id="pAuto" ${run||!f.undigitized?'disabled':''}>▶ оцифровать ${f.undigitized} рисунков</button><button class="sm" id="pRedo" ${run||!pr.pending_redo?'disabled':''} data-tip="Пересчитать свежим алгоритмом (серая заливка, раппорт кайм, модель) все автоматы, которых вы не касались: не принятые, не правленные, с нетронутой палитрой. Принятые и правленные не меняются.">↻ перепрогнать ${pr.pending_redo??'…'} непроверенных</button>`)}
   ${step(3,'Проверка списка',`Ждут проверки <b>${f.queue}</b>: надёжных ${f.queue_low} · средних ${f.queue_mid} · рискованных ${f.queue_high}.${Object.keys(P.queue_difficulty||{}).filter(k=>k!=='null').length?' По сложности (оценка): '+Object.entries(P.queue_difficulty).filter(([k])=>k!=='null').map(([k,v])=>v+' '+(dl[k]||k)).join(' · ')+'.':''}`,
      `<button class="sm" id="pQueue">открыть очередь</button><button class="sm" id="pLow" ${f.queue_low?'':'disabled'}>✓ принять ${f.queue_low} надёжных</button>`)}
   ${step('≈','Повторы узоров',`Один узор у Керимова бывает и в ЧБ, и в цвете (и дважды на разных листах). Сравнивается силуэт «не фон» во всех поворотах/отражениях; найденные пары — только кандидаты.<div id="dupBox" class="mut" style="margin-top:6px"></div>`,
@@ -1493,9 +1504,9 @@ async function renderPipe(){
   ${step(4,'Ручная доработка сложных',`Рискованных (риск > 0,55): <b>${f.queue_high}</b> · отмечено на пересмотр: ${f.review}. В очереди они идут сверху при сортировке «рискованные сначала»; оранжевые рамки в «Пикселях» показывают клетки, нарушающие симметрию.`,
      `<button class="sm" id="pHard" ${f.queue_high?'':'disabled'}>открыть рискованные</button>`)}
   ${step(5,'Дообучение модели',`Готовых: ${f.done} (ЧБ ${f.done_bw}). ${md.present?`Модель обучена ${esc(md.trained||'')}${md.n_figures?' на '+md.n_figures+' рисунках':''}${md.cv_model!=null?` · ошибка ${(100*md.cv_model).toFixed(1)}% против ${(100*md.cv_threshold).toFixed(1)}% у порогов`:''}. Изменено после обучения: ${f.new_done_bw}.`:'Модели ещё нет — работают пороги.'} Модель учится на ваших готовых ЧБ-рисунках и подключается к «Авто» там, где пороги неуверенны.`,
-     `<button class="sm" id="pTrain" ${f.done_bw<30?'disabled':''}>обучить на готовых</button><span class="mut" id="pTrainInfo"></span>`)}`;
+     `<button class="sm" id="pTrain" ${f.done_bw<30?'disabled':''}>обучить на готовых</button><button class="sm" id="pBroken" data-tip="Найти повреждённые файлы данных (обрыв записи) — они ломают обучение">проверить файлы</button><span class="mut" id="pTrainInfo"></span>`)}`;
   const go=async(stages)=>{try{const r=await api('/api/prowl/start',{stages});stat(r.started?'прогон запущен: '+r.total+' шагов':'нечего обрабатывать','ok');}catch(e){fail(e);}renderPipe();};
-  $('pAll').onclick=()=>go(['segment','auto']);$('pSeg').onclick=()=>go(['segment']);$('pAuto').onclick=()=>go(['auto']);
+  $('pAll').onclick=()=>go(['segment','auto']);$('pRedo').onclick=()=>{if(confirm('Пересчитать '+(pr.pending_redo||0)+' непроверенных автоматов новым алгоритмом? Принятые и правленные вами не изменятся.'))go(['redo']);};$('pSeg').onclick=()=>go(['segment']);$('pAuto').onclick=()=>go(['auto']);
   $('pStop').onclick=async()=>{await api('/api/prowl/stop',{});renderPipe();};
   $('pDup').onclick=async()=>{const b=$('dupBox');b.textContent='ищу…';try{const r=await fetch('/api/dupes').then(x=>x.json());
     b.innerHTML=r.pairs.length?'Пар: <b>'+r.pairs.length+'</b> (ЧБ↔цвет: '+r.pairs.filter(p=>p.cross).length+')<div style="max-height:220px;overflow:auto;margin-top:4px">'+r.pairs.slice(0,80).map(p=>`<div><a href="#" data-a="${p.a}">${p.a}</a> ↔ <a href="#" data-a="${p.b}">${p.b}</a> · ${(100*p.iou).toFixed(0)}%${p.cross?' · <b>ЧБ↔цвет</b>':''} ${esc(p.name_a||p.name_b||'')}</div>`).join('')+'</div>':'повторов не найдено (проверено рисунков: '+r.n+')';
@@ -1506,7 +1517,8 @@ async function renderPipe(){
   $('pLow').onclick=async()=>{const ids=S.figures.filter(x=>x.auto&&x.size&&!x.done&&!x.photo&&(x.risk!=null?x.risk:(1-(x.auto_conf??0)))<=0.25).map(x=>x.id);
     if(!ids.length||!confirm('Принять '+ids.length+' надёжных рисунков как готовые? Их можно будет открыть и поправить позже.'))return;
     try{const r=await api('/api/accept',{ids});await refreshFigures();stat('принято: '+r.accepted,'ok');}catch(e){fail(e);}renderPipe();};
-  $('pTrain').onclick=async()=>{const e=$('pTrainInfo');e.textContent=' обучаю… (до нескольких минут)';try{const r=await api('/api/model/train',{});e.textContent=' '+(r.out||r.err||'готово');}catch(x){e.textContent=' '+(x.message||x);}};
+  $('pTrain').onclick=async()=>{const e=$('pTrainInfo');try{await api('/api/model/train',{});e.textContent=' идёт в фоне — ход в строке состояния внизу';stat('обучение модели запущено','busy');pollAct();}catch(x){e.textContent=' '+(x.message||x);}};
+  $('pBroken')&&($('pBroken').onclick=async()=>{const r=await fetch('/api/broken').then(x=>x.json());const e=$('pTrainInfo');e.textContent=r.broken.length?(' битых файлов: '+r.broken.length+' ('+r.broken.slice(0,3).map(b=>b.file).join(', ')+'…)'):' битых файлов нет';if(r.broken.length&&confirm('Убрать '+r.broken.length+' битых файлов в data/broken? (прежняя версия есть в бэкапе cps-data)')){await fetch('/api/broken?fix=1').then(x=>x.json());stat('битые файлы убраны в data/broken','ok');}});
   clearTimeout(S.pipeT);if(run)S.pipeT=setTimeout(()=>{refreshFigures();renderPipe();},3000);
 }
 function renderRightCat(){
@@ -1579,6 +1591,21 @@ window.addEventListener('blur',()=>{spaceDown=false;if(S.peek){S.peek=false;$('p
 window.addEventListener('beforeunload',e=>{if(S.dirty){e.preventDefault();e.returnValue='';}});
 window.addEventListener('resize',resize);
 
+/* ---- фоновые задачи (прогон, обучение модели): ход виден в строке состояния на любом экране ---- */
+async function pollAct(){
+  const a=$('act');
+  try{
+    const [p,m]=await Promise.all([fetch('/api/prowl?light=1').then(r=>r.json()),fetch('/api/model/job').then(r=>r.json())]);
+    const parts=[];
+    if(p.running){const stg={segment:'разметка листов',auto:'оцифровка',regray:'серая заливка',redo:'перепрогон'}[p.stage]||'прогон';const pc=p.total?Math.round(100*p.done/p.total):0;
+      parts.push(`<span class="spin"></span>${stg} ${p.done}/${p.total} <span class="bar"><i style="width:${pc}%"></i></span> <span class="mut">${esc(p.current||'')}</span>${p.errors?` <span class="bad">ошибок ${p.errors}</span>`:''}`);S.wasRun=true;}
+    else if(S.wasRun){S.wasRun=false;stat(`прогон завершён: ${p.done} из ${p.total}`+(p.errors?`, ошибок ${p.errors}`:''),p.errors?'err':'ok');refreshFigures().catch(()=>{});if(S.mode==='pipe')renderPipe();}
+    if(m.running){parts.push('<span class="spin"></span>обучение модели…');S.wasTrain=true;}
+    else if(S.wasTrain){S.wasTrain=false;stat(m.ok?'модель обучена и сохранена':('⚠ обучение модели: '+(m.err||m.out||'ошибка').slice(-200)),m.ok?'ok':'err');if(m.out)(S.log=S.log||[]).push({ts:new Date(),t:m.out.slice(-600),kind:m.ok?'ok':'err'});if(S.mode==='pipe')renderPipe();}
+    a.hidden=!parts.length;a.innerHTML=parts.join(' · ');
+  }catch(e){}
+}
+setInterval(pollAct,3000);$('logBtn').onclick=logToggle;
 /* ============================ старт ============================ */
 (async()=>{
   resize();
