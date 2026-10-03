@@ -40,6 +40,8 @@
   "carpet": "кайма",
   "type": "Кар.",
   "note": "См. таблицу 149, рис. 1.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -76,8 +78,8 @@
    "12212121221",
    "12221.12221",
    ".111...111.",
-   "1...1.12221",
-   "1..1.1.1221",
+   "12221.12221",
+   "1221.1.1221",
    ".11.....11."
   ]
  },
@@ -103,7 +105,7 @@
    4.837
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": null,
    "score": 0.857,
@@ -112,7 +114,7 @@
   },
   "risk": 0.11
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -120,5 +122,12 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 10:33:06"
+ "saved_at": "2026-10-03 12:28:33",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }

@@ -40,6 +40,8 @@
   "carpet": "Г.",
   "type": "-",
   "note": "К См. таблицу 151, рис. 6.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -72,7 +74,7 @@
   "rows": [
    "...111...",
    "..1...1..",
-   ".12111.1.",
+   ".1.111.1.",
    "1.1...1.1",
    "1.1...1.1",
    "1.111.1.1",
@@ -101,7 +103,7 @@
   "обводка",
   "тело 1"
  ],
- "palette_touched": false,
+ "palette_touched": true,
  "auto": {
   "version": 1,
   "confidence": 1.0,
@@ -113,7 +115,7 @@
    4.846
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": null,
    "score": 0.458,
@@ -122,7 +124,7 @@
   },
   "risk": 0.08
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -138,5 +140,12 @@
    19
   ]
  },
- "saved_at": "2026-10-03 10:33:07"
+ "saved_at": "2026-10-03 12:29:33",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }
