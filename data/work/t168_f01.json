@@ -72,8 +72,8 @@
    0
   ],
   "rows": [
-   "..1..",
-   "1111.",
+   ".11..",
+   "11111",
    "11211",
    "11111",
    ".111."
@@ -102,14 +102,32 @@
   "confidence": 0.05,
   "flags": [
    "много полутонов — проверьте сетку",
-   "серую заливку стоит проверить"
+   "серую заливку стоит проверить",
+   "симметрия (mirror_v): 2 клеток нарушают — см. подсветку"
   ],
   "pitch": [
    15.338,
    15.374
   ],
   "angle": 1.2,
-  "reviewed": false
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_v",
+   "score": 0.905,
+   "suspects": [
+    [
+     1,
+     0
+    ],
+    [
+     3,
+     0
+    ]
+   ],
+   "n_suspects": 2
+  },
+  "risk": 1.24,
+  "difficulty_est": "simple"
  },
  "done": false,
  "adjust": {
@@ -119,7 +137,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-02 20:01:02",
+ "saved_at": "2026-10-03 18:43:39",
  "review": false,
  "transparent_bg": true
 }
