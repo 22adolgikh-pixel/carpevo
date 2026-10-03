@@ -1,0 +1,31 @@
+{
+ "path": "kerimov_vol1_patterns/page_247.jpg",
+ "table": 128,
+ "boxes": [
+  {
+   "x": 350,
+   "y": 134,
+   "w": 465,
+   "h": 512,
+   "fig": 1,
+   "table": null,
+   "id": "t128_f01",
+   "difficulty": null
+  },
+  {
+   "x": 195,
+   "y": 873,
+   "w": 773,
+   "h": 477,
+   "fig": 2,
+   "table": null,
+   "id": "t128_f02",
+   "difficulty": null
+  }
+ ],
+ "figures": [
+  "t128_f01",
+  "t128_f02"
+ ],
+ "auto_segmented": true
+}
