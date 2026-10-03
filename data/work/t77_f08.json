@@ -39,7 +39,9 @@
   "translation": "",
   "carpet": "Хан-Карабах",
   "type": "Кар.",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.9184,
@@ -133,7 +135,7 @@
    4.934
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": "diag",
    "score": 0.963,
@@ -239,7 +241,7 @@
   },
   "risk": 0.56
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -247,5 +249,12 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 10:34:03"
+ "saved_at": "2026-10-03 18:02:30",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }
