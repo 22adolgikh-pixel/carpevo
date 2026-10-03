@@ -525,16 +525,37 @@ function renderRightSheet(){
   $('shAutoPix').onclick=e=>{if(e.shiftKey&&!confirm('Пересчитать ВСЕ рисунки листа? Ручные правки пикселей будут заменены.'))return;autoSheet(e.shiftKey).catch(fail);};
 }
 /* v7: режим автооцифровки — авто (цвет определяется сам) / ЧБ / цвет */
+S.autoDyes=(()=>{try{return JSON.parse(localStorage.getItem('cpsDyes')||'[]');}catch(e){return [];}})();
+S.autoCanon=(()=>{try{return localStorage.getItem('cpsCanon')==='1';}catch(e){return false;}})();
+function saveDyeSel(){try{localStorage.setItem('cpsDyes',JSON.stringify(S.autoDyes));localStorage.setItem('cpsCanon',S.autoCanon?'1':'0');}catch(e){}}
+function openDyeSet(){
+  const W=$('modal');if(!W)return;const F=S.fig;
+  const sel=new Set(S.autoDyes),fromFig=F&&F.palDyes?[...new Set(F.palDyes.filter(Boolean))]:[];
+  const draw=()=>{W.innerHTML=`<div class="mbox"><div class="flex" style="margin-bottom:6px"><b style="font-size:14px">Красители этого рисунка</b><span class="sp"></span><button class="sm" id="dsOk">Готово</button></div>
+  <div class="hint" style="margin:0">Отметьте красители, которые есть на узоре. «Авто» тогда не придумывает палитру, а раскладывает клетки именно по ним (цвета ищутся на скане, названия — ваши). Ничего не отмечено — палитра подбирается автоматически.</div>
+  <div class="dyegrid">${S.dyes.map(d=>`<div class="dy ${sel.has(d.id)?'on':''}" data-id="${esc(d.id)}"><i style="background:${d.hex}"></i><span>${esc(d.az)}<small>${esc(d.ru)}</small></span></div>`).join('')}</div>
+  <div class="flex" style="gap:8px;margin:8px 0;flex-wrap:wrap"><button class="sm" id="dsClr">авто (сбросить)</button>${fromFig.length?`<button class="sm" id="dsFig" data-tip="красители из палитры открытого рисунка">взять с текущего рисунка (${fromFig.length})</button>`:''}
+  <label class="flex" style="gap:6px;font-size:12px" data-tip="По умолчанию цвета в палитре — как на скане (печать выцвела). Галочка — взять эталонные цвета красителей."><input type="checkbox" id="dsCanon" ${S.autoCanon?'checked':''}> эталонные цвета вместо цветов скана</label></div>
+  <div class="hint">Выбрано: ${sel.size||'нет — авто'}. Нужен краситель, которого нет в списке, — добавьте строку в <code>dyes.json</code>.</div></div>`;
+    W.hidden=false;
+    W.querySelectorAll('.dy').forEach(el=>el.onclick=()=>{const id=el.dataset.id;sel.has(id)?sel.delete(id):sel.add(id);draw();});
+    $('dsClr').onclick=()=>{sel.clear();draw();};const f=$('dsFig');if(f)f.onclick=()=>{fromFig.forEach(i=>sel.add(i));draw();};
+    $('dsCanon').onchange=e=>{S.autoCanon=e.target.checked;};
+    const close=()=>{S.autoDyes=[...sel];saveDyeSel();W.hidden=true;W.innerHTML='';renderRight();};
+    $('dsOk').onclick=close;W.onclick=e=>{if(e.target===W)close();};};
+  draw();}
 function autoOpts(p,withGrid){
   const F=S.fig,col=S.autoMode==='color';
   return `<span class="grp" data-tip="Режим автооцифровки. Авто — цветные схемы распознаются сами; ЧБ — тушь на миллиметровке (контур + серая заливка); Цвет — цветные схемы (палитра и красители)">${[['auto','авто'],['bw','ЧБ'],['color','цвет']].map(([v,l])=>`<label><input type="radio" name="${p}Mode" value="${v}" ${S.autoMode===v?'checked':''}> ${l}</label>`).join('')}</span>`
    +(col?'':`<label data-tip="снимите — только тёмный контур (для ЧБ)"><input type="checkbox" id="${p}Fill" ${S.autoFill?'checked':''}> заливка</label>`)
    +(withGrid?`<label><input type="checkbox" id="blankEx" ${F&&F.blankExtract?'checked':''}> чистый лист (без авто-заливки по порогу)</label>`:'')
+   +(S.autoMode!=='bw'?`<span class="grp"><button id="${p}Dyes" class="sm" data-tip="Выбрать красители вручную вместо автоподбора палитры. Относится к цветным схемам.">красители: ${S.autoDyes.length?S.autoDyes.length+' выбрано':'авто'}</button></span>`:'')
    +(withGrid&&F&&F.work.color_mode?`<span class="grp" data-tip="если авто разделило один цвет на два оттенка (или склеило два) — задайте число цветов и пересчитайте">цветов <input type="number" id="gNcol" min="2" max="12" value="${(F.work.palette||[]).length||''}"><button id="gNcolGo" class="sm">↻ пересчитать</button></span>`:'');
 }
 function bindAutoOpts(p){
   document.querySelectorAll(`input[name="${p}Mode"]`).forEach(r=>r.onchange=()=>{S.autoMode=r.value;try{localStorage.setItem('cpsMode',S.autoMode);}catch(_){}renderRight();});
   const f=$(p+'Fill');if(f)f.onchange=()=>{S.autoFill=f.checked;};
+  const dd=$(p+'Dyes');if(dd)dd.onclick=openDyeSet;
 }
 async function saveSheet(nav){
   if(nav===undefined)nav=true;
@@ -553,7 +574,7 @@ async function autoSheet(force){
   const sh=S.sheet;if(!sh)return;
   if(!sh.saved){const r=await saveSheet(false);if(!r)return;}
   stat('оцифровываю рисунки листа…','busy');
-  const r=await api('/api/auto_sheet',{path:sh.path,force:!!force,fill:!!S.autoFill,mode:S.autoMode});
+  const r=await api('/api/auto_sheet',{path:sh.path,force:!!force,fill:!!S.autoFill,mode:S.autoMode,dyes:S.autoDyes.length?S.autoDyes:null,canon:!!S.autoCanon});
   const res=r.results||[];const ok=res.filter(x=>x.size),skip=res.filter(x=>x.skipped),bad=res.filter(x=>x.error),photo=res.filter(x=>x.photo);
   const nCol=ok.filter(x=>x.mode==='color').length,nRap=ok.filter(x=>x.rapport&&x.rapport.found).length;
   const warn=ok.filter(x=>(x.confidence??1)<0.8||(x.flags||[]).some(f=>!/заливку/.test(f)));
@@ -909,7 +930,7 @@ async function autoFigure(opt){
   if(F.M&&F.M.edited&&!confirm('Заменить вручную исправленные пиксели автоматическим результатом?'))return;
   if(S.dirty)await saveFigure(true);
   stat('⚡ ищу сетку и пиксели…','busy');
-  const r=await api('/api/auto/'+encodeURIComponent(F.id),{force:true,fill:!!S.autoFill,mode:opt.mode||S.autoMode,ncolors:opt.ncolors||null});
+  const r=await api('/api/auto/'+encodeURIComponent(F.id),{force:true,fill:!!S.autoFill,mode:opt.mode||S.autoMode,ncolors:opt.ncolors||null,dyes:S.autoDyes.length?S.autoDyes:null,canon:!!S.autoCanon});
   if(r.error){stat('⚡ '+r.error,'err');return;}
   if(r.photo){S.dirty=false;await openFigure(F.id);await refreshFigures();stat('⚡ сетка не найдена — похоже на фото ковра, а не на схему; пиксели не делались','err');return;}
   S.dirty=false;await openFigure(F.id);setMode('pix');await refreshFigures();

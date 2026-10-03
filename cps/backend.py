@@ -524,7 +524,7 @@ def _apply_risk(work):
     a["risk"] = risk.risk_score(a, sym)
 
 
-def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, ncolors=None):
+def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, ncolors=None, dyes=None, canon=False):
     """mode: auto (цвет определяется сам) / bw (ЧБ-тушь: контур + серая заливка) / color (цветная схема)."""
     wp = os.path.join(D_WORK, fid + ".json")
     work = jload(wp, {}) or {}
@@ -536,7 +536,7 @@ def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, nco
     mode = _auto_mode(crop_c, frame, mode)
     try:
         if mode == "color":
-            G, C, M, info = autocolor.auto_figure_color(crop_c, frame, pitch_hint=pitch_hint, ncolors=ncolors)
+            G, C, M, info = autocolor.auto_figure_color(crop_c, frame, pitch_hint=pitch_hint, ncolors=ncolors, dyes=dyes or None, canon=bool(canon))
         else:
             G, C, M, info = autogrid.auto_figure(cv2.cvtColor(crop_c, cv2.COLOR_BGR2GRAY), frame, dark_only=dark_only)
     except Exception as e:
@@ -588,7 +588,8 @@ def api_auto(fid: str, body: dict = Body(default={})):
         hint = _sheet_pitch_hint(w["sheet"], exclude=fid)
     nc = b.get("ncolors")
     return run_auto(fid, bool(b.get("force", True)), dark_only=not bool(b.get("fill", True)),
-                    mode=b.get("mode", "auto"), pitch_hint=hint, ncolors=int(nc) if nc else None)
+                    mode=b.get("mode", "auto"), pitch_hint=hint, ncolors=int(nc) if nc else None,
+                    dyes=b.get("dyes") or None, canon=b.get("canon", False))
 
 
 def _sheet_pitch_hint(sheet_rel, exclude=None):
@@ -611,17 +612,18 @@ def api_auto_sheet(body: dict = Body(...)):
     figs = meta.get("figures", [])
     if not figs: return JSONResponse({"error": "лист ещё не нарезан — сначала «Сохранить и нарезать»"}, 400)
     dark_only = not bool(body.get("fill", True)); mode = body.get("mode", "auto"); force = bool(body.get("force"))
-    res = [run_auto(f, force, dark_only=dark_only, mode=mode) for f in figs]
+    dyes = body.get("dyes") or None; canon = bool(body.get("canon"))
+    res = [run_auto(f, force, dark_only=dark_only, mode=mode, dyes=dyes, canon=canon) for f in figs]
     good = [r for r in res if r.get("mode") == "color" and r.get("R") and min(r["R"]) >= autocolor.GOOD_R]
     if good:
         hint = (float(np.median([r["pitch"][0] for r in good])), float(np.median([r["pitch"][1] for r in good])))
         for i, r in enumerate(res):
             if r.get("mode") == "color" and r.get("R") and min(r["R"]) < autocolor.GOOD_R:
-                r2 = run_auto(figs[i], True, mode="color", pitch_hint=hint)
+                r2 = run_auto(figs[i], True, mode="color", pitch_hint=hint, dyes=dyes, canon=canon)
                 if r2.get("R") and (r.get("photo") or sum(r2["R"]) > sum(r["R"])):
                     res[i] = r2
                 elif not r.get("photo"):
-                    res[i] = run_auto(figs[i], True, mode="color")      # первый вариант был лучше — вернуть его
+                    res[i] = run_auto(figs[i], True, mode="color", dyes=dyes, canon=canon)      # первый вариант был лучше — вернуть его
     return {"results": res}
 
 

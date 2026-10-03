@@ -316,7 +316,34 @@ def grow_background(M, V, Cen, de=None):
     return out
 
 
-def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None):
+DYE_MAXSHIFT = 38.0     # якорь красителя, найденный на скане, не может уйти от библиотечного цвета дальше (иначе это другой цвет)
+
+
+def dye_anchors(X, dye_ids, iters=6):
+    """Палитра по красителям, выбранным человеком. Для каждого красителя ищем его цвет НА СКАНЕ: старт — библиотечный цвет,
+    дальше k-means с якорями (клетки → ближайший якорь, якорь → среднее своих клеток, но не дальше DYE_MAXSHIFT от библиотеки).
+    Красители без клеток выпадают. → (метки по X, якоря Lab-ref, список использованных dye id)"""
+    lib = {d[3]: d for d in DYES}
+    ids = [i for i in dye_ids if i in lib]
+    if not ids: return None
+    L = np.array([_DYE_LAB[[d[3] for d in DYES].index(i)] for i in ids], np.float32)
+    Wt = np.array([1.0, CHROMA_W, CHROMA_W], np.float32)
+    A = L.copy()
+    for _ in range(iters):
+        a = np.linalg.norm((X[:, None, :] - A[None]) * Wt, axis=2).argmin(1)
+        for k in range(len(ids)):
+            m = a == k
+            if m.sum() >= max(3, MIN_SHARE * len(X)):
+                c = X[m].mean(0)
+                A[k] = c if np.linalg.norm(c - L[k]) <= DYE_MAXSHIFT else L[k] + (c - L[k]) * DYE_MAXSHIFT / np.linalg.norm(c - L[k])
+    a = np.linalg.norm((X[:, None, :] - A[None]) * Wt, axis=2).argmin(1)
+    keep = [k for k in range(len(ids)) if (a == k).sum() >= max(3, MIN_SHARE * len(X))]
+    if not keep: return None
+    remap = np.full(len(ids), -1); remap[keep] = np.arange(len(keep))
+    return remap[a], A[keep], [ids[k] for k in keep]
+
+
+def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None, dyes=None, canon=False):
     G = detect_grid_color(bgr, frame, pitch_hint=pitch_hint)
     if pitch_hint and abs(pitch_hint[0] - pitch_hint[1]) / min(pitch_hint) > 0.08:
         # клетки прямоугольные: вертикальные полосы кайм в книге часто напечатаны повёрнутыми на 90°
@@ -325,8 +352,17 @@ def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None):
     C = autogrid.cell_centers(G)
     V = cell_colors(bgr, C, min(G["px"], G["py"]))
     rows, cols = V.shape[:2]
-    a, Cen, _ = palette_kmeans(V.reshape(-1, 3), ncolors)
-    M, Cen = merge_scattered(a.reshape(rows, cols), V, np.array(Cen, np.float32)) if not ncolors else (a.reshape(rows, cols), np.array(Cen, np.float32))
+    guided = None
+    if dyes:
+        guided = dye_anchors(_lab8_to_ref(V).reshape(-1, 3), dyes)
+    if guided is not None:
+        a, Cen, used = guided
+        M, Cen = a.reshape(rows, cols), np.array(Cen, np.float32)
+        if canon:
+            Cen = np.array([_DYE_LAB[[d[3] for d in DYES].index(i)] for i in used], np.float32)
+    else:
+        a, Cen, _ = palette_kmeans(V.reshape(-1, 3), ncolors)
+        M, Cen = merge_scattered(a.reshape(rows, cols), V, np.array(Cen, np.float32)) if not ncolors else (a.reshape(rows, cols), np.array(Cen, np.float32))
     X = _lab8_to_ref(V).reshape(-1, 3)
     d = np.sort(np.linalg.norm(X[:, None, :] - Cen[None], axis=2), 1)
     amb = (d[:, 1] - d[:, 0]) < 4.0 if len(Cen) > 1 else np.zeros(len(X), bool)
@@ -339,7 +375,11 @@ def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None):
     M, fixed = despeckle(M, V, Cen)
     if max(M.shape) / max(1, min(M.shape)) < 1.9: M = grow_background(M, V, Cen)   # каймы (узкие) — фон не вырезаем: поле в них часть узора
     lab8 = np.stack([Cen[:, 0] * 255 / 100, Cen[:, 1] + 128, Cen[:, 2] + 128], -1)
-    names = [dye_name(c) for c in lab8]
+    if guided is not None:
+        lib = {d[3]: d for d in DYES}
+        names = [(lib[i][0], lib[i][1], float(np.linalg.norm(_DYE_LAB[[d[3] for d in DYES].index(i)] - Cen[k])), i) for k, i in enumerate([used[o] for o in order])]
+    else:
+        names = [dye_name(c) for c in lab8]
     seen, uaz, uru = {}, [], []
     for az, ru, _, _ in names:                                  # «zoğalı», «zoğalı 2» — два оттенка одного красителя
         seen[az] = seen.get(az, 0) + 1
@@ -355,8 +395,12 @@ def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None):
     amb_share = float(amb.mean())
     if amb_share > 0.05: flags.append(f"{amb_share:.0%} клеток между двумя цветами — проверьте похожие цвета")
     far = [info["names_az"][k] for k in range(len(Cen)) if info["dye_dist"][k] > 22]
-    if far: flags.append("названия цветов приблизительные: " + ", ".join(far))
-    flags.append("цвета и их названия — подтвердить")
+    if far and guided is None: flags.append("названия цветов приблизительные: " + ", ".join(far))
+    if guided is not None:
+        miss = [i for i in dyes if i not in used]
+        flags.append("палитра по выбранным красителям" + (f"; не найдены на скане: {', '.join(miss)}" if miss else ""))
+    else:
+        flags.append("цвета и их названия — подтвердить")
     info["confidence"] = round(float(np.clip((R - 0.3) / 0.5, 0, 1) * (1 - min(amb_share * 3, 0.5))), 2)
     info["flags"] = flags
     return G, C, M, info
