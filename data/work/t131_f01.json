@@ -40,6 +40,8 @@
   "carpet": "Куба",
   "type": "К.—Ш",
   "note": "См. табл. № 141, рис. 1.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -71,23 +73,25 @@
   ],
   "rows": [
    "11111.......11111..",
-   "...1.1.....1...1.1.",
-   "..1...1...1...1...1",
-   ".1.1...1.1...1.1...",
-   "1...1...1...1...1..",
-   ".....1.1...1.....1.",
+   "2221.1.....12221.1.",
+   "221...1...12221...1",
+   "21.1...1.12221.1...",
+   "1...1...12221...1..",
+   ".....1.12221.....1.",
    "......11111.......1"
   ]
  },
  "palette": [
   "#ffffff",
-  "#1a1a1a"
+  "#1a1a1a",
+  "#b8b8b8"
  ],
  "palette_names": [
   "фон",
-  "обводка"
+  "обводка",
+  "тело 1"
  ],
- "palette_touched": false,
+ "palette_touched": true,
  "auto": {
   "version": 1,
   "confidence": 1.0,
@@ -97,7 +101,7 @@
    4.865
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": null,
    "score": 0.302,
@@ -107,7 +111,7 @@
   "risk": 0.0,
   "difficulty_est": "simple"
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -123,5 +127,12 @@
    7
   ]
  },
- "saved_at": "2026-10-03 12:07:21"
+ "saved_at": "2026-10-03 12:39:33",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }

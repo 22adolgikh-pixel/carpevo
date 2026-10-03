@@ -40,6 +40,8 @@
   "carpet": "Афшан",
   "type": "Теб.",
   "note": "См. табл. № 141, рис. 3.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -71,7 +73,7 @@
   ],
   "rows": [
    "11111111..11111111",
-   "1..1..1..1..122221",
+   "1..1..1..1..1....1",
    "1...11..1..1.....1",
    "1......1..1......1",
    "1.....1..1..11...1",
@@ -101,7 +103,7 @@
    4.887
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": null,
    "score": 0.882,
@@ -111,7 +113,7 @@
   "risk": 0.17,
   "difficulty_est": "simple"
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -121,11 +123,18 @@
  "rapport": {
   "found": false,
   "axis": "h",
-  "best_mismatch": 0.424,
+  "best_mismatch": 0.444,
   "computed_at_matrix": [
    18,
    7
   ]
  },
- "saved_at": "2026-10-03 12:07:21"
+ "saved_at": "2026-10-03 12:40:12",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }
