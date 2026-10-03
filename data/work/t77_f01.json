@@ -1,0 +1,127 @@
+{
+ "id": "t77_f01",
+ "sheet": "kerimov_vol1_patterns/page_196.jpg",
+ "table": 77,
+ "fig": 1,
+ "crop_origin": [
+  208,
+  121
+ ],
+ "frame": [
+  12,
+  11,
+  162,
+  148
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   15.47,
+   17.53
+  ],
+  [
+   168.41,
+   17.53
+  ],
+  [
+   168.41,
+   155.83
+  ],
+  [
+   15.47,
+   155.83
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Yarpaq",
+  "name": "Ярпаг",
+  "translation": "Листочек",
+  "carpet": "Хилаафшан",
+  "type": "К.-Ш",
+  "note": "В Карабахе этот элемент называют «куриными ножками».",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.9355,
+  "ph": 4.9286,
+  "ox": 0,
+  "oy": 0,
+  "cols": 31,
+  "rows": 28,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   129
+  ],
+  "centers": [
+   207,
+   76
+  ]
+ },
+ "matrix": {
+  "w": 11,
+  "h": 12,
+  "origin": [
+   11,
+   7
+  ],
+  "rows": [
+   "........1..",
+   ".....1..11.",
+   "....11.121.",
+   "...12112221",
+   "..12212221.",
+   "..1222221..",
+   "..122221111",
+   "..12222221.",
+   "..1222221..",
+   "..111111...",
+   ".1.........",
+   "1.........."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
+  "pitch": [
+   4.933,
+   4.939
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": null,
+   "score": 0.457,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.08
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-03 10:34:00"
+}
