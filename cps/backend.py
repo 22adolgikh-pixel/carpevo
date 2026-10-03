@@ -13,6 +13,7 @@ import autocolor
 import rapport
 import risk
 import learn
+import dupes
 import threading
 import cloud
 import backup
@@ -548,7 +549,7 @@ def _apply_risk(work):
     a["difficulty_est"] = _difficulty_est(work)
 
 
-def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, ncolors=None, dyes=None, canon=False):
+def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, ncolors=None, dyes=None, canon=False, cols=None, rows=None):
     """mode: auto (цвет определяется сам) / bw (ЧБ-тушь: контур + серая заливка) / color (цветная схема)."""
     wp = os.path.join(D_WORK, fid + ".json")
     work = jload(wp, {}) or {}
@@ -557,10 +558,10 @@ def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, nco
     crop_c = imread_any(os.path.join(D_CROPS, fid + ".png"), cv2.IMREAD_COLOR)
     if crop_c is None: return {"id": fid, "error": "нет кропа"}
     frame = work.get("frame") or [0, 0, crop_c.shape[1], crop_c.shape[0]]
-    mode = _auto_mode(crop_c, frame, mode)
+    mode = "color" if cols else _auto_mode(crop_c, frame, mode)     # cols — режим «фото»: сетку задаёт человек
     try:
         if mode == "color":
-            G, C, M, info = autocolor.auto_figure_color(crop_c, frame, pitch_hint=pitch_hint, ncolors=ncolors, dyes=dyes or None, canon=bool(canon))
+            G, C, M, info = autocolor.auto_figure_color(crop_c, frame, pitch_hint=pitch_hint, ncolors=ncolors, dyes=dyes or None, canon=bool(canon), force_cols=cols, force_rows=rows)
         else:
             G, C, M, info = autogrid.auto_figure(cv2.cvtColor(crop_c, cv2.COLOR_BGR2GRAY), frame, dark_only=dark_only)
     except Exception as e:
@@ -579,6 +580,7 @@ def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, nco
     if mode != "color":
         for k in ("color_mode", "palette_names_ru"): work.pop(k, None)
     work.pop("kind", None)
+    if cols: work["source_kind"] = "photo"
     work.update(upd); work["id"] = fid; work["done"] = False
     work["adjust"] = {"brightness": 0, "contrast": 1, "gamma": 1, "invert": False}
     work["rapport"] = rapport.for_work(work)
@@ -613,7 +615,8 @@ def api_auto(fid: str, body: dict = Body(default={})):
     nc = b.get("ncolors")
     return run_auto(fid, bool(b.get("force", True)), dark_only=not bool(b.get("fill", True)),
                     mode=b.get("mode", "auto"), pitch_hint=hint, ncolors=int(nc) if nc else None,
-                    dyes=b.get("dyes") or None, canon=b.get("canon", False))
+                    dyes=b.get("dyes") or None, canon=b.get("canon", False),
+                    cols=int(b["cols"]) if b.get("cols") else None, rows=int(b["rows"]) if b.get("rows") else None)
 
 
 def _sheet_pitch_hint(sheet_rel, exclude=None):
@@ -800,6 +803,13 @@ def api_prowl():
     d = dict(PROWL); d["pending"] = len(_prowl_targets()) if not PROWL["running"] else None
     d["pending_segment"] = len(_segment_pending()) if not PROWL["running"] else None
     return d
+
+
+@app.get("/api/dupes")
+def api_dupes(min_score: float = 0.93):
+    """Повторы узоров (ЧБ-схема и цветная того же узора, дубли между листами). Только кандидаты — решает человек."""
+    items = dupes.load(D_WORK)
+    return {"n": len(items), "pairs": dupes.find(items, min_score=min_score)[:300]}
 
 
 @app.get("/api/pipeline")

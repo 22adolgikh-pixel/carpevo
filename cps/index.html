@@ -933,7 +933,12 @@ async function autoFigure(opt){
   stat('⚡ ищу сетку и пиксели…','busy');
   const r=await api('/api/auto/'+encodeURIComponent(F.id),{force:true,fill:!!S.autoFill,mode:opt.mode||S.autoMode,ncolors:opt.ncolors||null,dyes:S.autoDyes.length?S.autoDyes:null,canon:!!S.autoCanon});
   if(r.error){stat('⚡ '+r.error,'err');return;}
-  if(r.photo){S.dirty=false;await openFigure(F.id);await refreshFigures();stat('⚡ сетка не найдена — похоже на фото ковра, а не на схему; пиксели не делались','err');return;}
+  if(r.photo){
+    const c=parseInt(prompt('Похоже на фото ковра: печатной сетки нет.\nСколько узлов (клеток) по ширине рамки? Оставьте пусто, чтобы не оцифровывать.',''),10);
+    if(c>=4){stat('⚡ из фото: усредняю по сетке '+c+' клеток…','busy');const r2=await api('/api/auto/'+encodeURIComponent(F.id),{force:true,mode:'color',cols:c,ncolors:opt.ncolors||null,dyes:S.autoDyes.length?S.autoDyes:null,canon:!!S.autoCanon});
+      if(r2.error){stat('⚡ '+r2.error,'err');return;}
+      S.dirty=false;await openFigure(F.id);setMode('pix');await refreshFigures();stat(`⚡ из фото: ${r2.size[0]}×${r2.size[1]} · проверьте глазами; палитра и фон — по умолчанию`,'ok');return;}
+    S.dirty=false;await openFigure(F.id);await refreshFigures();stat('⚡ сетка не найдена — фото ковра; пиксели не делались','err');return;}
   S.dirty=false;await openFigure(F.id);setMode('pix');await refreshFigures();
   stat(`⚡ ${r.size[0]}×${r.size[1]} · уверенность ${Math.round(r.confidence*100)}%`+(r.flags.length?' · '+r.flags.join('; '):'')+(r.rapport&&r.rapport.found?` · раппорт каймы: ${r.rapport.period} ${r.rapport.axis==='v'?'рядов':'столбцов'}`:''),r.confidence<0.8?'err':'ok');
 }
@@ -1351,6 +1356,8 @@ async function renderPipe(){
      `<button class="sm" id="pAuto" ${run||!f.undigitized?'disabled':''}>▶ оцифровать ${f.undigitized} рисунков</button>`)}
   ${step(3,'Проверка списка',`Ждут проверки <b>${f.queue}</b>: надёжных ${f.queue_low} · средних ${f.queue_mid} · рискованных ${f.queue_high}.${Object.keys(P.queue_difficulty||{}).filter(k=>k!=='null').length?' По сложности (оценка): '+Object.entries(P.queue_difficulty).filter(([k])=>k!=='null').map(([k,v])=>v+' '+(dl[k]||k)).join(' · ')+'.':''}`,
      `<button class="sm" id="pQueue">открыть очередь</button><button class="sm" id="pLow" ${f.queue_low?'':'disabled'}>✓ принять ${f.queue_low} надёжных</button>`)}
+  ${step('≈','Повторы узоров',`Один узор у Керимова бывает и в ЧБ, и в цвете (и дважды на разных листах). Сравнивается силуэт «не фон» во всех поворотах/отражениях; найденные пары — только кандидаты.<div id="dupBox" class="mut" style="margin-top:6px"></div>`,
+     `<button class="sm" id="pDup">найти повторы</button>`)}
   ${step(4,'Ручная доработка сложных',`Рискованных (риск > 0,55): <b>${f.queue_high}</b> · отмечено на пересмотр: ${f.review}. В очереди они идут сверху при сортировке «рискованные сначала»; оранжевые рамки в «Пикселях» показывают клетки, нарушающие симметрию.`,
      `<button class="sm" id="pHard" ${f.queue_high?'':'disabled'}>открыть рискованные</button>`)}
   ${step(5,'Дообучение модели',`Готовых: ${f.done} (ЧБ ${f.done_bw}). ${md.present?`Модель обучена ${esc(md.trained||'')}${md.n_figures?' на '+md.n_figures+' рисунках':''}${md.cv_model!=null?` · ошибка ${(100*md.cv_model).toFixed(1)}% против ${(100*md.cv_threshold).toFixed(1)}% у порогов`:''}. Изменено после обучения: ${f.new_done_bw}.`:'Модели ещё нет — работают пороги.'} Модель учится на ваших готовых ЧБ-рисунках и подключается к «Авто» там, где пороги неуверенны.`,
@@ -1358,6 +1365,9 @@ async function renderPipe(){
   const go=async(stages)=>{try{const r=await api('/api/prowl/start',{stages});stat(r.started?'прогон запущен: '+r.total+' шагов':'нечего обрабатывать','ok');}catch(e){fail(e);}renderPipe();};
   $('pAll').onclick=()=>go(['segment','auto']);$('pSeg').onclick=()=>go(['segment']);$('pAuto').onclick=()=>go(['auto']);
   $('pStop').onclick=async()=>{await api('/api/prowl/stop',{});renderPipe();};
+  $('pDup').onclick=async()=>{const b=$('dupBox');b.textContent='ищу…';try{const r=await fetch('/api/dupes').then(x=>x.json());
+    b.innerHTML=r.pairs.length?'Пар: <b>'+r.pairs.length+'</b> (ЧБ↔цвет: '+r.pairs.filter(p=>p.cross).length+')<div style="max-height:220px;overflow:auto;margin-top:4px">'+r.pairs.slice(0,80).map(p=>`<div><a href="#" data-a="${p.a}">${p.a}</a> ↔ <a href="#" data-a="${p.b}">${p.b}</a> · ${(100*p.iou).toFixed(0)}%${p.cross?' · <b>ЧБ↔цвет</b>':''} ${esc(p.name_a||p.name_b||'')}</div>`).join('')+'</div>':'повторов не найдено (проверено рисунков: '+r.n+')';
+    b.querySelectorAll('a[data-a]').forEach(a=>a.onclick=async e=>{e.preventDefault();try{await openFigure(a.dataset.a);setMode(S.fig.M?'pix':'grid');}catch(x){fail(x);}});}catch(e){b.textContent='ошибка: '+e;}};
   $('pToSheets').onclick=()=>setMode('sheet');
   $('pQueue').onclick=()=>{S.qSort='risk_asc';setMode('queue');};
   $('pHard').onclick=()=>{S.qSort='risk_desc';setMode('queue');};

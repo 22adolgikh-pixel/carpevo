@@ -343,9 +343,22 @@ def dye_anchors(X, dye_ids, iters=6):
     return remap[a], A[keep], [ids[k] for k in keep]
 
 
-def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None, dyes=None, canon=False):
-    G = detect_grid_color(bgr, frame, pitch_hint=pitch_hint)
-    if pitch_hint and abs(pitch_hint[0] - pitch_hint[1]) / min(pitch_hint) > 0.08:
+def forced_grid(frame, cols, rows=None):
+    """Сетка задана человеком (фото ковра: печатной сетки нет). Рамка → cols×rows клеток; rows по умолчанию — квадратные клетки."""
+    x, y, w, h = [float(v) for v in frame]
+    cols = max(2, int(cols)); rows = max(2, int(rows)) if rows else max(2, int(round(cols * h / w)))
+    px, py = w / cols, h / rows
+    u = x + px * (np.arange(cols) + 0.5); v = y + py * (np.arange(rows) + 0.5)
+    U, V = np.meshgrid(u, v)
+    centers = np.stack([U, V], -1)
+    cq = [[x, y], [x + w, y], [x + w, y + h], [x, y + h]]
+    return {"angle": 0.0, "px": px, "py": py, "ox": 0.0, "oy": 0.0, "cols": cols, "rows": rows, "corners": cq,
+            "centers": centers, "quad_resid": 0.0, "strength": 1.0, "R": [1.0, 1.0], "forced": True}
+
+
+def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None, dyes=None, canon=False, force_cols=None, force_rows=None):
+    G = forced_grid(frame, force_cols, force_rows) if force_cols else detect_grid_color(bgr, frame, pitch_hint=pitch_hint)
+    if not force_cols and pitch_hint and abs(pitch_hint[0] - pitch_hint[1]) / min(pitch_hint) > 0.08:
         # клетки прямоугольные: вертикальные полосы кайм в книге часто напечатаны повёрнутыми на 90°
         G2 = detect_grid_color(bgr, frame, pitch_hint=(pitch_hint[1], pitch_hint[0]))
         if sum(G2["R"]) > sum(G["R"]): G = G2; G["rotated_cells"] = True
@@ -402,6 +415,9 @@ def auto_figure_color(bgr, frame, pitch_hint=None, ncolors=None, dyes=None, cano
     else:
         flags.append("цвета и их названия — подтвердить")
     info["confidence"] = round(float(np.clip((R - 0.3) / 0.5, 0, 1) * (1 - min(amb_share * 3, 0.5))), 2)
+    if G.get("forced"):
+        info["confidence"] = round(min(0.5, info["confidence"]), 2)       # по фото уверенность всегда низкая: сетку задал человек, а не бумага
+        flags.insert(0, f"из фото: сетка задана вручную ({G['cols']}×{G['rows']}) — клетки усреднены, проверьте глазами")
     info["flags"] = flags
     return G, C, M, info
 
