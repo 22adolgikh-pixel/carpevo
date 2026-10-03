@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   64,
-   42
+   72.53,
+   56.86
   ],
   [
-   868,
-   42
+   856.65,
+   56.86
   ],
   [
-   868,
-   578
+   856.65,
+   556.17
   ],
   [
-   64,
-   578
+   72.53,
+   556.17
   ]
  ],
  "meta": {
@@ -39,5 +39,70 @@
   "carpet": "",
   "type": "",
   "note": ""
- }
+ },
+ "grid": {
+  "pw": 10.8889,
+  "ph": 22.6818,
+  "ox": 0,
+  "oy": 0,
+  "cols": 72,
+  "rows": 22,
+  "square": false
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   95
+  ],
+  "centers": [
+   141,
+   64
+  ]
+ },
+ "matrix": {
+  "w": 4,
+  "h": 1,
+  "origin": [
+   30,
+   10
+  ],
+  "rows": [
+   "1111"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.62,
+  "flags": [
+   "много полутонов — проверьте сетку",
+   "клетки не квадратные"
+  ],
+  "pitch": [
+   10.891,
+   22.696
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "risk": 0.54,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-03 11:22:40"
 }
