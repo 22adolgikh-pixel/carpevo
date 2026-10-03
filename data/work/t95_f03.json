@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "Тебриз",
   "type": "Теб.",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.9259,
@@ -150,7 +152,7 @@
    4.914
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": null,
    "score": 0.558,
@@ -158,9 +160,10 @@
    "n_suspects": 0
   },
   "risk": 0.14,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -168,5 +171,13 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 18:47:44"
+ "saved_at": "2026-10-03 18:50:18",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
