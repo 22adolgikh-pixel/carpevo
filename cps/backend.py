@@ -136,6 +136,17 @@ def fig_id(table, fig, sheet_key):
     t = str(table).strip() if table not in (None, "") else ""
     return (f"t{int(t):02d}_f{int(fig):02d}" if t.isdigit() else f"{sheet_key}_f{int(fig):02d}")
 
+def _guess_table(rel):
+    """Номер таблицы по имени файла листа (как guessTable в интерфейсе)."""
+    rel = rel.replace("\\", "/")
+    try: pt = json.load(open(os.path.join(HERE, "plate_tables.json"), encoding="utf-8"))
+    except Exception: pt = {}
+    if rel in pt: return pt[rel]
+    kp = re.search(r"kerimov_vol1_patterns/page_(\d+)\.", rel)
+    if kp and int(kp.group(1)) >= 133: return int(kp.group(1)) - 119
+    m = re.search(r"(?:t|табл|tabl|table)[ ._-]?(\d{1,3})", rel, re.I)
+    return int(m.group(1)) if m else ""
+
 # ---------------- API: листы ----------------
 @app.get("/api/config")
 def api_config():
@@ -367,6 +378,7 @@ def api_figures():
                     "auto": bool(w.get("auto")) and not (w.get("auto") or {}).get("reviewed"),
                     "auto_conf": (w.get("auto") or {}).get("confidence"),
                     "risk": (w.get("auto") or {}).get("risk"),
+                    "diff_est": (w.get("auto") or {}).get("difficulty_est"),
                     "sym": ((w.get("auto") or {}).get("symmetry") or {}).get("kind"),
                     "n_sus": ((w.get("auto") or {}).get("symmetry") or {}).get("n_suspects"),
                     "size": [w["matrix"]["w"], w["matrix"]["h"]] if w.get("matrix") else None,
@@ -509,6 +521,17 @@ def _auto_mode(crop_bgr, frame, mode):
     return "color" if autocolor.is_colorful(crop_bgr, frame) else "bw"
 
 
+def _difficulty_est(work):
+    """Оценка сложности по числу закрашенных клеток и цветов (не заменяет ручную пометку difficulty).
+    simple < 400 клеток, medium < 1500, complex < 5000, иначе ultra; много цветов (≥6) — на ступень выше."""
+    m = work.get("matrix")
+    if not m: return None
+    ink = sum(c != "." for r in m["rows"] for c in r)
+    lvl = 0 if ink < 400 else 1 if ink < 1500 else 2 if ink < 5000 else 3
+    if len(set("".join(m["rows"])) - {"."}) >= 6 and lvl < 3: lvl += 1
+    return DIFFICULTY[lvl]
+
+
 def _apply_risk(work):
     """Симметрия + риск-скор → work['auto'] (подозрительные клетки в координатах матрицы)."""
     a = work.get("auto")
@@ -522,6 +545,7 @@ def _apply_risk(work):
         if sym["kind"] and sym["suspects"]:
             a["flags"] = [f for f in a.get("flags", []) if not f.startswith("симметрия")] + [f"симметрия ({sym['kind']}): {len(sym['suspects'])} клеток нарушают — см. подсветку"]
     a["risk"] = risk.risk_score(a, sym)
+    a["difficulty_est"] = _difficulty_est(work)
 
 
 def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, ncolors=None, dyes=None, canon=False):
@@ -658,6 +682,18 @@ def api_accept(body: dict = Body(...)):
     return {"accepted": n}
 
 
+@app.post("/api/review_mark")
+def api_review_mark(body: dict = Body(...)):
+    """Массово отметить рисунки «на доработку» (review) или снять отметку."""
+    n = 0; val = bool(body.get("value", True))
+    for fid in body.get("ids", []):
+        if not _fid_ok(fid): continue
+        wp = os.path.join(D_WORK, fid + ".json"); w = jload(wp, {}) or {}
+        if not w: continue
+        w["review"] = val; jsave(wp, w); n += 1
+    return {"marked": n}
+
+
 @app.post("/api/risk_backfill")
 def api_risk_backfill(body: dict = Body(default={})):
     """Посчитать симметрию и риск для авто-рисунков, у которых их ещё нет."""
@@ -691,31 +727,66 @@ def _prowl_targets(only_sheets=None):
     return out
 
 
-def _prowl_run(targets):
-    P = PROWL; P.update(running=True, stop=False, total=len(targets), done=0, errors=0, started=time.strftime("%Y-%m-%d %H:%M:%S"), finished=None, log=[])
-    sheets = {}
+def _segment_pending():
+    """Листы без разметки (нет файла в data/sheets)."""
+    out = []
+    for root, _, files in os.walk(SCANS):
+        for fn in sorted(files):
+            if os.path.splitext(fn)[1].lower() not in IMG_EXT: continue
+            rel = os.path.relpath(os.path.join(root, fn), SCANS)
+            if not os.path.exists(os.path.join(D_SHEETS, _sheet_key(rel) + ".json")): out.append(rel)
+    return sorted(out)
+
+
+def _segment_one(rel):
+    img = imread_any(_safe_rel(rel), cv2.IMREAD_GRAYSCALE)
+    if img is None: raise RuntimeError("не читается")
+    boxes = segment_sheet(img)
+    key = _sheet_key(rel)
+    if not boxes:
+        jsave(os.path.join(D_SHEETS, key + ".json"), {"path": rel, "table": _guess_table(rel), "boxes": [], "figures": [], "no_figures": True, "auto_segmented": True})
+        return 0
+    r = api_sheet_save({"path": rel, "table": _guess_table(rel), "boxes": boxes})
+    mp = os.path.join(D_SHEETS, key + ".json"); meta = jload(mp, {}) or {}; meta["auto_segmented"] = True; jsave(mp, meta)
+    return len(boxes)
+
+
+def _prowl_run(stages, only_sheets=None):
+    P = PROWL; P.update(running=True, stop=False, stage="", total=0, done=0, errors=0, started=time.strftime("%Y-%m-%d %H:%M:%S"), finished=None, log=[])
+    def err(msg): P["errors"] += 1; P["log"] = (P["log"] + [msg])[-50:]
     try:
-        for path, f in targets:
-            if P["stop"]: break
-            P["current"] = f
-            try:
-                hint = _sheet_pitch_hint(path, exclude=f) if path else None
-                r = run_auto(f, False, mode="auto", pitch_hint=hint)
-                if r.get("error"): P["errors"] += 1; P["log"].append(f"{f}: {r['error']}"); P["log"] = P["log"][-50:]
-            except Exception as e:
-                P["errors"] += 1; P["log"].append(f"{f}: {e}"); P["log"] = P["log"][-50:]
-            P["done"] += 1
+        if "segment" in stages:
+            P.update(stage="segment", done=0, total=0); t = _segment_pending(); P["total"] = len(t)
+            for rel in t:
+                if P["stop"]: break
+                P["current"] = rel
+                try: _segment_one(rel)
+                except Exception as e: err(f"{rel}: {e}")
+                P["done"] += 1
+        if "auto" in stages and not P["stop"]:
+            t = _prowl_targets(only_sheets); P.update(stage="auto", done=0, total=len(t))
+            for path, f in t:
+                if P["stop"]: break
+                P["current"] = f
+                try:
+                    hint = _sheet_pitch_hint(path, exclude=f) if path else None
+                    r = run_auto(f, False, mode="auto", pitch_hint=hint)
+                    if r.get("error"): err(f"{f}: {r['error']}")
+                except Exception as e: err(f"{f}: {e}")
+                P["done"] += 1
     finally:
-        P.update(running=False, current="", finished=time.strftime("%Y-%m-%d %H:%M:%S"))
+        P.update(running=False, current="", stage="", finished=time.strftime("%Y-%m-%d %H:%M:%S"))
 
 
 @app.post("/api/prowl/start")
 def api_prowl_start(body: dict = Body(default={})):
     if PROWL["running"]: return JSONResponse({"error": "уже идёт"}, 409)
-    t = _prowl_targets((body or {}).get("sheets"))
-    if not t: return {"started": False, "total": 0}
-    threading.Thread(target=_prowl_run, args=(t,), daemon=True).start()
-    return {"started": True, "total": len(t)}
+    stages = [s for s in ((body or {}).get("stages") or ["segment", "auto"]) if s in ("segment", "auto")]
+    only = (body or {}).get("sheets")
+    n = (len(_segment_pending()) if "segment" in stages else 0) + (len(_prowl_targets(only)) if "auto" in stages else 0)
+    if not n: return {"started": False, "total": 0}
+    threading.Thread(target=_prowl_run, args=(stages, only), daemon=True).start()
+    return {"started": True, "total": n}
 
 
 @app.post("/api/prowl/stop")
@@ -727,7 +798,45 @@ def api_prowl_stop():
 @app.get("/api/prowl")
 def api_prowl():
     d = dict(PROWL); d["pending"] = len(_prowl_targets()) if not PROWL["running"] else None
+    d["pending_segment"] = len(_segment_pending()) if not PROWL["running"] else None
     return d
+
+
+@app.get("/api/pipeline")
+def api_pipeline():
+    """Сводка по конвейеру: листы → оцифровка → очередь проверки → готово → модель."""
+    sheets = {"total": 0, "cut": 0, "empty": 0, "uncut": 0, "auto_cut": 0}
+    for root, _, files in os.walk(SCANS):
+        for fn in files:
+            if os.path.splitext(fn)[1].lower() not in IMG_EXT: continue
+            rel = os.path.relpath(os.path.join(root, fn), SCANS); sheets["total"] += 1
+            mp = os.path.join(D_SHEETS, _sheet_key(rel) + ".json")
+            if not os.path.exists(mp): sheets["uncut"] += 1; continue
+            m = jload(mp, {}) or {}
+            if m.get("no_figures"): sheets["empty"] += 1
+            elif m.get("figures"):
+                sheets["cut"] += 1; sheets["auto_cut"] += bool(m.get("auto_segmented"))
+    f = {"total": 0, "undigitized": 0, "photo": 0, "queue": 0, "queue_low": 0, "queue_mid": 0, "queue_high": 0, "done": 0, "review": 0, "done_bw": 0, "new_done_bw": 0}
+    diff = {}
+    mp = learn.MODEL_PATH; mt = os.path.getmtime(mp) if os.path.exists(mp) else 0
+    for fn in os.listdir(D_WORK):
+        if not fn.endswith(".json"): continue
+        w = jload(os.path.join(D_WORK, fn), {}) or {}; f["total"] += 1
+        a = w.get("auto") or {}
+        if w.get("kind") == "photo": f["photo"] += 1; continue
+        if not w.get("matrix"): f["undigitized"] += 1; continue
+        if w.get("done"):
+            f["done"] += 1
+            if not w.get("color_mode"):
+                f["done_bw"] += 1; f["new_done_bw"] += os.path.getmtime(os.path.join(D_WORK, fn)) > mt
+        elif a and not a.get("reviewed"):
+            f["queue"] += 1; r = a.get("risk"); r = (1 - (a.get("confidence") or 0)) if r is None else r
+            f["queue_low" if r <= 0.25 else "queue_mid" if r <= 0.55 else "queue_high"] += 1
+            d = a.get("difficulty_est"); diff[d] = diff.get(d, 0) + 1
+        if w.get("review"): f["review"] += 1
+    model = {"present": bool(mt)}
+    if mt: model.update({"trained": time.strftime("%Y-%m-%d %H:%M", time.localtime(mt)), **((jload(mp, {}) or {}).get("meta") or {})})
+    return {"sheets": sheets, "figures": f, "queue_difficulty": diff, "model": model, "prowl": api_prowl()}
 
 
 @app.post("/api/rapport/{fid}")

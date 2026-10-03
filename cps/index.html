@@ -75,6 +75,7 @@ textarea{width:100%;min-height:60px;resize:vertical}
 @keyframes sp{to{transform:rotate(360deg)}}
 #catalog{position:absolute;inset:0;overflow:auto;padding:14px;display:none;background:var(--bg)}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.pstep{display:flex;gap:12px;padding:12px;margin-bottom:10px;border:1px solid var(--ln);border-radius:10px;background:var(--pan)}.pn{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#1a1405;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}.pb{flex:1;min-width:0}.pt{color:var(--mut);margin-top:4px;line-height:1.45}.mut{color:var(--mut)}
 .qchk{position:absolute;top:10px;left:10px;z-index:2;background:rgba(0,0,0,.55);border-radius:5px;padding:3px 5px;display:flex}
 .card{position:relative;background:var(--pan);border:1px solid var(--ln);border-radius:8px;padding:8px;cursor:pointer}
 .card:hover{border-color:var(--acc)}
@@ -179,7 +180,7 @@ aside{min-height:0}
 <header>
   <b>🧶 Carpet Pattern Studio</b>
   <div class="tabs">
-    <button id="tab-sheet" class="on">1 · Листы</button><button id="tab-grid">2 · Геометрия и сетка</button><button id="tab-pix">3 · Пиксели</button><button id="tab-cat">4 · Каталог</button><button id="tab-queue">5 · Очередь</button>
+    <button id="tab-pipe">⚙ Конвейер</button><button id="tab-sheet">1 · Листы</button><button id="tab-grid">2 · Геометрия и сетка</button><button id="tab-pix">3 · Пиксели</button><button id="tab-cat">4 · Каталог</button><button id="tab-queue">5 · Очередь</button>
   </div>
   <span class="sp"></span>
 </header>
@@ -316,12 +317,12 @@ function near(a,b,r){return Math.hypot(a.x-b.x,a.y-b.y)<=r*px1();}
 const MODES={};
 function H(){return MODES[S.mode==='grid'?(S.gridView||'grid'):S.mode];}
 function setMode(m){
-  if(m!=='sheet'&&m!=='cat'&&m!=='queue'&&!S.fig){stat('сначала откройте рисунок в «Каталоге» (или нарежьте лист)','err');m=S.fig?m:(S.mode==='sheet'?'sheet':'cat');}
+  if(m!=='sheet'&&m!=='cat'&&m!=='queue'&&m!=='pipe'&&!S.fig){stat('сначала откройте рисунок в «Каталоге» (или нарежьте лист)','err');m=S.fig?m:(S.mode==='sheet'?'sheet':'cat');}
   S.mode=m;S.peek=false;$('peek').style.display='none';
   document.body.classList.toggle('noleft',m!=='sheet');
-  ['sheet','grid','pix','cat','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===m));
-  $('catalog').style.display=(m==='cat'||m==='queue')?'block':'none';
-  $('vpbar').style.display=$('hud').style.display=(m==='cat'||m==='queue')?'none':'';
+  ['pipe','sheet','grid','pix','cat','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===m));
+  $('catalog').style.display=(m==='cat'||m==='queue'||m==='pipe')?'block':'none';
+  $('vpbar').style.display=$('hud').style.display=(m==='cat'||m==='queue'||m==='pipe')?'none':'';
   $('toolcol').style.display=m==='pix'?'flex':'none';
   renderLeft();renderRight();renderNav();renderSbInfo();
   requestAnimationFrame(()=>{resize();const h=H();if(h&&h.fit)h.fit();else redraw();});
@@ -329,7 +330,7 @@ function setMode(m){
 /* навигация по рисункам в шапке (вместо левого списка на экранах 2–3) */
 function renderNav(){
   const N=$('nav');
-  if(S.mode==='sheet'||S.mode==='cat'||S.mode==='queue'||!S.fig){N.innerHTML='';return;}
+  if(S.mode==='sheet'||S.mode==='cat'||S.mode==='queue'||S.mode==='pipe'||!S.fig){N.innerHTML='';return;}
   const list=S.figures,i=list.findIndex(f=>f.id===S.fig.id);
   N.innerHTML=`<button class="ib" id="navPrev" data-tip="предыдущий рисунок" data-key="[">‹</button>`+
     `<select id="navSel" data-tip="перейти к рисунку">${list.map(f=>`<option value="${esc(f.id)}" ${f.id===S.fig.id?'selected':''}>${f.done?'✓ ':(f.auto?'⚡ ':(f.size?'◐ ':'○ '))}${esc(f.id)}${dispName(f)?' — '+esc(dispName(f)):''}</option>`).join('')}</select>`+
@@ -346,7 +347,7 @@ async function gotoFig(delta,todo){
   await openFigure(list[i].id);
   const want=S.fig.M?'pix':'grid';if(S.mode!==want)setMode(want);   // готовые — сразу в пиксели, новые — в сетку
 }
-['sheet','grid','pix','cat','queue'].forEach(k=>$('tab-'+k).onclick=()=>setMode(k));
+['pipe','sheet','grid','pix','cat','queue'].forEach(k=>$('tab-'+k).onclick=()=>setMode(k));
 
 /* ============================ левая панель ============================ */
 /* дерево источников: папка → подпапка → листы (до двух уровней) */
@@ -395,7 +396,7 @@ async function uploadFiles(url,files){
   stat('загружено '+files.length,'ok');
 }
 async function refreshSheets(){S.sheets=await api('/api/sheets');if(S.mode==='sheet')renderLeft();}
-async function refreshFigures(){S.figures=await api('/api/figures');renderNav();if(S.mode==='cat')renderCatalog();if(S.mode==='queue')renderQueue();}
+async function refreshFigures(){S.figures=await api('/api/figures');renderNav();if(S.mode==='cat')renderCatalog();if(S.mode==='queue')renderQueue();if(S.mode==='pipe')renderPipe();}
 async function refreshPdfs(){
   const list=await api('/api/pdfs');
   const e=$('pdfSec');if(!e)return;
@@ -746,7 +747,7 @@ async function openFigure(id){
   if(!w.color_mode&&(!w.classify||!w.classify.thr))autoTonesSync(F);   // цветные схемы: палитра из ⚡ цвет, пороги яркости не нужны
   $('cur').textContent=id+(dispName(F.meta)?' — '+dispName(F.meta):'');
   stat('');
-  if(S.mode==='sheet'||S.mode==='cat'||S.mode==='queue'||(S.mode==='pix'&&!F.M))setMode(F.M?'pix':'grid');else{renderRight();renderNav();const h=H();h&&h.fit&&h.fit();}
+  if(S.mode==='sheet'||S.mode==='cat'||S.mode==='queue'||S.mode==='pipe'||(S.mode==='pix'&&!F.M))setMode(F.M?'pix':'grid');else{renderRight();renderNav();const h=H();h&&h.fit&&h.fit();}
 }
 function autoGridSync(F){estimateGrid(F);}
 function autoTonesSync(F){const v=sampleCells(F);const c=toneCenters(v,F.cls.tones+1,true);F.cls.tones=c.length-1;F.cls.thr=[];for(let k=0;k<c.length-1;k++)F.cls.thr.push(Math.round((c[k]+c[k+1])/2));F.cls.centers=c.map(Math.round);
@@ -1183,7 +1184,7 @@ function openDescModal(){
 }
 /* ---- статус-бар внизу ---- */
 function renderSbInfo(){const e=$('sbInfo');if(!e)return;const F=S.fig;
-  if(!F||S.mode==='sheet'||S.mode==='cat'||S.mode==='queue'){e.innerHTML='';renderUndo();return;}
+  if(!F||S.mode==='sheet'||S.mode==='cat'||S.mode==='queue'||S.mode==='pipe'){e.innerHTML='';renderUndo();return;}
   const b=[];const au=F.work.auto&&!F.work.auto.reviewed?F.work.auto:null;
   if(F.done)b.push('<span style="color:var(--ok)">✓ готово</span>');else if(F.review)b.push('<span class="bad">⚠ на пересмотр</span>');
   if(au)b.push(`<span class="warn">⚡ автооцифровка · уверенность ${Math.round((au.confidence??0)*100)}%</span>${(au.flags||[]).length?' <span class="mut">· '+au.flags.map(esc).join(' · ')+'</span>':''}`);
@@ -1289,22 +1290,23 @@ function renderQueue(){
   <div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">
     <label class="flex" style="color:var(--mut)" data-tip="Риск = 1 − уверенность + флаги + нарушения симметрии. Ниже порога — рисунок, скорее всего, верен.">порог риска ≤ <b id="qThrV">${thr.toFixed(2)}</b><input type="range" id="qThr" min="0.05" max="0.8" step="0.05" value="${thr}" style="width:140px"></label>
     <button class="sm" id="qPickSure">выбрать надёжные (${sure.length})</button><button class="sm" id="qPickNone">снять выбор</button><span class="sp"></span>
-    <button id="qAccept" ${S.qSel.size?'':'disabled'}>✓ принять выбранные (${S.qSel.size})</button></div>
+    <button id="qRev" class="sm" ${S.qSel.size?'':'disabled'}>⚠ на доработку выбранные</button><button id="qAccept" ${S.qSel.size?'':'disabled'}>✓ принять выбранные (${S.qSel.size})</button></div>
   <div class="hint" style="margin-bottom:10px">Принять = «готово»: рисунок уйдёт из очереди и попадёт в пакет для сайта. Клик по картинке открывает рисунок для правки; галочка — для массового принятия.</div>
   <div class="cards">${items.map(f=>{const r=qrisk(f),col=r<=thr?'var(--ok)':(r<0.55?'var(--warn,#e0a030)':'var(--bad)');
     return `<div class="card" data-id="${esc(f.id)}"><label class="qchk" data-tip="выбрать для массового принятия"><input type="checkbox" data-sel="${esc(f.id)}" ${S.qSel.has(f.id)?'checked':''}></label><div class="im"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_bg.png?t=${Math.round(f.t)}"></div>
     <div class="t"><span class="dot" style="display:inline-block;margin-right:5px;background:${col}"></span>${esc(dispName(f)||f.id)}</div>
-    <div class="m">${esc(f.id)} · ${f.size[0]}×${f.size[1]}${f.colors?' · '+f.colors+' цв.':''} · риск ${r.toFixed(2)}${f.sym&&f.n_sus?` · <span style="color:#ff9f1c" data-tip="клеток нарушает симметрию (${esc(f.sym)})">◇${f.n_sus}</span>`:''}${f.border?' · кайма':''}</div></div>`;}).join('')||'<div class="hint">Очередь пуста — все авто-результаты проверены.</div>'}</div>`;
+    <div class="m">${esc(f.id)} · ${f.size[0]}×${f.size[1]}${f.colors?' · '+f.colors+' цв.':''} · риск ${r.toFixed(2)}${f.sym&&f.n_sus?` · <span style="color:#ff9f1c" data-tip="клеток нарушает симметрию (${esc(f.sym)})">◇${f.n_sus}</span>`:''}${f.border?' · кайма':''}${f.diff_est?' · '+({simple:'простой',medium:'средний',complex:'сложный',ultra:'ультра'}[f.diff_est]||f.diff_est):''}</div></div>`;}).join('')||'<div class="hint">Очередь пуста — все авто-результаты проверены.</div>'}</div>`;
   C.querySelectorAll('[data-qt]').forEach(b=>b.onclick=()=>{S.qType=b.dataset.qt;renderQueue();});
   $('qSort').onchange=e=>{S.qSort=e.target.value;renderQueue();};
   $('qThr').oninput=e=>{S.qThr=+e.target.value;$('qThrV').textContent=S.qThr.toFixed(2);};
   $('qThr').onchange=()=>renderQueue();
   $('qPickSure').onclick=()=>{sure.forEach(f=>S.qSel.add(f.id));renderQueue();};
   $('qPickNone').onclick=()=>{S.qSel.clear();renderQueue();};
-  C.querySelectorAll('[data-sel]').forEach(cb=>{cb.onclick=e=>e.stopPropagation();cb.onchange=()=>{cb.checked?S.qSel.add(cb.dataset.sel):S.qSel.delete(cb.dataset.sel);const b=$('qAccept');b.disabled=!S.qSel.size;b.textContent='✓ принять выбранные ('+S.qSel.size+')';};});
+  C.querySelectorAll('[data-sel]').forEach(cb=>{cb.onclick=e=>e.stopPropagation();cb.onchange=()=>{cb.checked?S.qSel.add(cb.dataset.sel):S.qSel.delete(cb.dataset.sel);const b=$('qAccept');b.disabled=!S.qSel.size;b.textContent='✓ принять выбранные ('+S.qSel.size+')';$('qRev').disabled=!S.qSel.size;};});
   C.querySelectorAll('.qchk').forEach(l=>l.onclick=e=>e.stopPropagation());
   $('qAccept').onclick=async()=>{if(!S.qSel.size)return;if(!confirm('Принять '+S.qSel.size+' рисунков как готовые?'))return;
     try{const r=await api('/api/accept',{ids:[...S.qSel]});S.qSel.clear();await refreshFigures();stat('принято: '+r.accepted,'ok');}catch(e){fail(e);}};
+  $('qRev').onclick=async()=>{if(!S.qSel.size)return;try{const r=await api('/api/review_mark',{ids:[...S.qSel],value:true});S.qSel.clear();await refreshFigures();stat('отмечено на доработку: '+r.marked+' (фильтр «на пересмотр» в каталоге)','ok');}catch(e){fail(e);}};
   C.querySelectorAll('.card').forEach(el=>el.onclick=()=>openFigure(el.dataset.id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail));
 }
 function renderRightQueue(){
@@ -1329,6 +1331,41 @@ function renderRightQueue(){
   $('pwStop').onclick=async()=>{await api('/api/prowl/stop',{});upd();};
   $('rkBack').onclick=async()=>{try{const r=await api('/api/risk_backfill',{});await refreshFigures();stat('досчитано: '+r.updated,'ok');}catch(e){fail(e);}};
   upd();
+}
+
+/* ---- ⚙ Конвейер: разметка листов → оцифровка → проверка → доработка → дообучение ---- */
+async function renderPipe(){
+  const C=$('catalog');if(S.mode!=='pipe')return;
+  let P;try{P=await api('/api/pipeline');}catch(e){C.innerHTML='<div class="hint">не удалось получить сводку: '+esc(e.message||e)+'</div>';return;}
+  if(S.mode!=='pipe')return;
+  const sh=P.sheets,f=P.figures,pr=P.prowl,md=P.model,run=pr.running;
+  const stage={segment:'разметка листов',auto:'оцифровка'}[pr.stage]||'';
+  const step=(n,title,body,btns)=>`<div class="pstep"><div class="pn">${n}</div><div class="pb"><b>${title}</b><div class="pt">${body}</div><div class="flex" style="gap:8px;margin-top:8px;flex-wrap:wrap">${btns}</div></div></div>`;
+  const dl={simple:'простых',medium:'средних',complex:'сложных',ultra:'ультра'};
+  C.innerHTML=`<div class="flex" style="margin-bottom:10px;flex-wrap:wrap;row-gap:8px"><b style="font-size:15px">Конвейер</b><span class="sp"></span>
+    <button id="pAll" ${run?'disabled':''}>▶ Запустить весь конвейер (шаги 1–2)</button><button id="pStop" class="sm" ${run?'':'disabled'}>■ стоп</button></div>
+  <div class="hint" id="pRun" style="margin-bottom:12px">${run?`идёт: ${stage} ${pr.done}/${pr.total}${pr.current?' · '+esc(pr.current):''}${pr.errors?' · ошибок '+pr.errors:''}`:(pr.finished?`последний прогон завершён ${esc(pr.finished)}: ${pr.done}/${pr.total}${pr.errors?', ошибок '+pr.errors:''}`:'прогон не запускался')}</div>
+  ${step(1,'Листы → разметка рамок',`Листов: ${sh.total} · размечено ${sh.cut}${sh.auto_cut?` (из них автоматически, не проверено глазами: ${sh.auto_cut})`:''} · без рисунков ${sh.empty} · <b>без разметки ${sh.uncut}</b>. Рамки ищутся автоматически, номер таблицы — по номеру страницы.`,
+     `<button class="sm" id="pSeg" ${run||!sh.uncut?'disabled':''}>▶ разметить ${sh.uncut} листов</button><button class="sm" id="pToSheets">открыть листы</button>`)}
+  ${step(2,'Оцифровка и оценка узора',`Рисунков: ${f.total} · не оцифровано <b>${f.undigitized}</b> · фото (не схемы) ${f.photo}. Для каждого определяется ЧБ/цвет, сетка, пиксели, симметрия, раппорт каймы, оценка сложности и риск ошибок.`,
+     `<button class="sm" id="pAuto" ${run||!f.undigitized?'disabled':''}>▶ оцифровать ${f.undigitized} рисунков</button>`)}
+  ${step(3,'Проверка списка',`Ждут проверки <b>${f.queue}</b>: надёжных ${f.queue_low} · средних ${f.queue_mid} · рискованных ${f.queue_high}.${Object.keys(P.queue_difficulty||{}).filter(k=>k!=='null').length?' По сложности (оценка): '+Object.entries(P.queue_difficulty).filter(([k])=>k!=='null').map(([k,v])=>v+' '+(dl[k]||k)).join(' · ')+'.':''}`,
+     `<button class="sm" id="pQueue">открыть очередь</button><button class="sm" id="pLow" ${f.queue_low?'':'disabled'}>✓ принять ${f.queue_low} надёжных</button>`)}
+  ${step(4,'Ручная доработка сложных',`Рискованных (риск > 0,55): <b>${f.queue_high}</b> · отмечено на пересмотр: ${f.review}. В очереди они идут сверху при сортировке «рискованные сначала»; оранжевые рамки в «Пикселях» показывают клетки, нарушающие симметрию.`,
+     `<button class="sm" id="pHard" ${f.queue_high?'':'disabled'}>открыть рискованные</button>`)}
+  ${step(5,'Дообучение модели',`Готовых: ${f.done} (ЧБ ${f.done_bw}). ${md.present?`Модель обучена ${esc(md.trained||'')}${md.n_figures?' на '+md.n_figures+' рисунках':''}${md.cv_model!=null?` · ошибка ${(100*md.cv_model).toFixed(1)}% против ${(100*md.cv_threshold).toFixed(1)}% у порогов`:''}. Изменено после обучения: ${f.new_done_bw}.`:'Модели ещё нет — работают пороги.'} Модель учится на ваших готовых ЧБ-рисунках и подключается к «Авто» там, где пороги неуверенны.`,
+     `<button class="sm" id="pTrain" ${f.done_bw<30?'disabled':''}>обучить на готовых</button><span class="mut" id="pTrainInfo"></span>`)}`;
+  const go=async(stages)=>{try{const r=await api('/api/prowl/start',{stages});stat(r.started?'прогон запущен: '+r.total+' шагов':'нечего обрабатывать','ok');}catch(e){fail(e);}renderPipe();};
+  $('pAll').onclick=()=>go(['segment','auto']);$('pSeg').onclick=()=>go(['segment']);$('pAuto').onclick=()=>go(['auto']);
+  $('pStop').onclick=async()=>{await api('/api/prowl/stop',{});renderPipe();};
+  $('pToSheets').onclick=()=>setMode('sheet');
+  $('pQueue').onclick=()=>{S.qSort='risk_asc';setMode('queue');};
+  $('pHard').onclick=()=>{S.qSort='risk_desc';setMode('queue');};
+  $('pLow').onclick=async()=>{const ids=S.figures.filter(x=>x.auto&&x.size&&!x.done&&!x.photo&&(x.risk!=null?x.risk:(1-(x.auto_conf??0)))<=0.25).map(x=>x.id);
+    if(!ids.length||!confirm('Принять '+ids.length+' надёжных рисунков как готовые? Их можно будет открыть и поправить позже.'))return;
+    try{const r=await api('/api/accept',{ids});await refreshFigures();stat('принято: '+r.accepted,'ok');}catch(e){fail(e);}renderPipe();};
+  $('pTrain').onclick=async()=>{const e=$('pTrainInfo');e.textContent=' обучаю… (до нескольких минут)';try{const r=await api('/api/model/train',{});e.textContent=' '+(r.out||r.err||'готово');}catch(x){e.textContent=' '+(x.message||x);}};
+  clearTimeout(S.pipeT);if(run)S.pipeT=setTimeout(()=>{refreshFigures();renderPipe();},3000);
 }
 function renderRightCat(){
   const R=$('right');
@@ -1360,6 +1397,7 @@ function renderRight(){
   else if(S.mode==='grid')renderRightGrid();
   else if(S.mode==='pix')renderRightPix();
   else if(S.mode==='queue'){renderRightQueue();renderQueue();}
+  else if(S.mode==='pipe'){$('right').innerHTML='<h4>Как это работает</h4><div class="hint">Слева направо: разметка листов → оцифровка → проверка → ручная доработка → дообучение. Каждый шаг можно запускать отдельно; «весь конвейер» делает шаги 1–2 подряд, пока вы заняты другим.</div>';renderPipe();}
   else{renderRightCat();renderCatalog();}
 }
 
@@ -1411,6 +1449,6 @@ window.addEventListener('resize',resize);
     const matches=S.figures.filter(f=>(f.site_id||'').split(',').map(x=>x.trim()).includes(qSite));
     if(matches.length===1){try{await openFigure(matches[0].id);setMode(S.fig.M?'pix':'grid');stat('открыт по привязке к '+qSite,'ok');}catch(e){fail(e);setMode('sheet');}}
     else{S.catQ=qSite;setMode('cat');stat(matches.length?('найдено рисунков: '+matches.length):('рисунков с привязкой к '+qSite+' не найдено'),matches.length?'ok':'err');}
-  }else{setMode('sheet');}
+  }else{setMode('pipe');}
 })();
 </script></body></html>
