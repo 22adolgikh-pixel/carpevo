@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "",
   "type": "",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.9054,
@@ -92,7 +94,7 @@
    4.912
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": null,
    "score": 0.8,
@@ -102,7 +104,7 @@
   "risk": 0.0,
   "difficulty_est": "simple"
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -138,5 +140,12 @@
    4
   ]
  },
- "saved_at": "2026-10-03 12:07:30"
+ "saved_at": "2026-10-03 13:13:39",
+ "palette_dyes": [
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": false,
+ "difficulty": null
 }
