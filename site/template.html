@@ -1,0 +1,1290 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Ковровое ДНК — вики черновика Pass 2</title>
+<style>
+  :root {
+    --bg: #ffffff; --bg-alt: #f8f9fa; --text: #141414; --text-soft: #54595d;
+    --border: #a2a9b1; --border-light: #c8ccd1; --link: #141414;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --bg: #101112; --bg-alt: #18191a; --text: #eaecef; --text-soft: #a2a9b1;
+      --border: #54595d; --border-light: #36383a; --link: #eaecef;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101112; --bg-alt: #18191a; --text: #eaecef; --text-soft: #a2a9b1;
+    --border: #54595d; --border-light: #36383a; --link: #eaecef;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.6; }
+  a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  header.masthead { border-bottom: 1px solid var(--border); padding: 10px 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header.masthead .site-title { font-family: Georgia, "Times New Roman", serif; font-size: 21px; font-weight: 400; white-space: nowrap; }
+  header.masthead .site-title small { display: block; font-family: -apple-system,sans-serif; font-size: 11px; color: var(--text-soft); }
+  header.masthead form { flex: 1; display: flex; max-width: 420px; margin-left: auto; }
+  header.masthead input[type="search"] { flex: 1; font: inherit; font-size: 14px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 2px 0 0 2px; background: var(--bg); color: var(--text); }
+  header.masthead button.search-btn { font: inherit; font-size: 13px; padding: 6px 12px; border: 1px solid var(--border); border-left: none; border-radius: 0 2px 2px 0; background: var(--bg-alt); color: var(--text); cursor: pointer; }
+
+  .layout { display: flex; max-width: 1200px; margin: 0 auto; align-items: flex-start; }
+  nav.side { width: 190px; flex-shrink: 0; padding: 18px 14px; border-right: 1px solid var(--border-light); font-size: 13px; position: sticky; top: 0; }
+  nav.side h5 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-soft); margin: 0 0 6px; font-weight: 600; }
+  nav.side ul { list-style: none; margin: 0 0 20px; padding: 0; }
+  nav.side li { margin-bottom: 4px; }
+  nav.side button.navlink { background: none; border: none; padding: 3px 0; font: inherit; font-size: 13.5px; color: var(--link); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+  nav.side button.navlink.active { font-weight: 700; text-decoration: none; }
+  nav.side .stat-line { color: var(--text-soft); font-size: 12px; margin-bottom: 3px; }
+  nav.side .lang-btn { display: block; width: 100%; text-align: left; }
+
+  main { flex: 1; min-width: 0; padding: 22px 26px 80px; }
+
+  .disclaimer { border: 1px solid var(--border); background: var(--bg-alt); padding: 10px 14px; font-size: 13px; margin-bottom: 18px; line-height: 1.55; }
+  .disclaimer.warn { border-style: dashed; }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-bottom: 16px; font-size: 13px; }
+  .filters select { font: inherit; font-size: 13px; padding: 4px 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+  .filters label { color: var(--text-soft); }
+
+  h1.page-title { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 30px; border-bottom: 1px solid var(--border-light); padding-bottom: 8px; margin: 0 0 4px; }
+  .subtitle-count { color: var(--text-soft); font-size: 13px; margin-bottom: 18px; }
+
+  .index-letter { font-family: Georgia, serif; font-size: 20px; border-bottom: 1px solid var(--border-light); margin: 22px 0 8px; padding-bottom: 3px; }
+  .index-letter:first-child { margin-top: 0; }
+  ul.index-list { column-width: 260px; column-gap: 30px; list-style: none; margin: 0; padding: 0; }
+  ul.index-list li { break-inside: avoid; margin-bottom: 5px; font-size: 14px; }
+  ul.index-list .meta { color: var(--text-soft); font-size: 12px; }
+
+  .article-wrap { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+  .article-body { flex: 1; min-width: 280px; }
+  .infobox { width: 240px; flex-shrink: 0; border: 1px solid var(--border); font-size: 12.5px; background: var(--bg-alt); }
+  .infobox .ib-title { font-family: Georgia, serif; font-size: 16px; text-align: center; padding: 8px; border-bottom: 1px solid var(--border); font-weight: 700; }
+  .infobox table { width: 100%; border-collapse: collapse; }
+  .infobox th, .infobox td { padding: 5px 8px; text-align: left; vertical-align: top; border-top: 1px solid var(--border-light); }
+  .infobox th { font-weight: 600; width: 40%; color: var(--text-soft); }
+
+  .article-body p { margin: 0 0 14px; }
+  sup.cite { font-size: 11px; }
+  sup.cite a { text-decoration: none; }
+
+  h2.section-h { font-size: 19px; font-weight: 600; border-bottom: 1px solid var(--border-light); margin: 26px 0 10px; padding-bottom: 3px; }
+
+  ol.refs { padding-left: 26px; font-size: 12.5px; color: var(--text-soft); }
+  ol.refs li { margin-bottom: 8px; }
+  ol.refs .ref-quote { color: var(--text); font-style: italic; }
+
+  .categories { margin-top: 30px; border-top: 1px solid var(--border-light); padding-top: 10px; font-size: 12.5px; }
+  h2.section-h + .categories { border-top: none; margin-top: 0; padding-top: 0; }
+  .categories .cat { border: 1px solid var(--border-light); padding: 2px 8px; margin-right: 6px; display: inline-block; margin-bottom: 6px; text-decoration: none; }
+  a.cat:hover { border-color: var(--text); }
+
+  .back-link { display: inline-block; margin-bottom: 14px; font-size: 13px; }
+
+  table.carrier-list { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.carrier-list th, table.carrier-list td { border: 1px solid var(--border-light); padding: 6px 8px; text-align: left; vertical-align: top; }
+  table.carrier-list th { background: var(--bg-alt); font-weight: 600; }
+  table.carrier-list .q { font-style: italic; color: var(--text-soft); }
+
+  .report-box { margin-top: 30px; border-top: 1px solid var(--border-light); padding-top: 14px; }
+  .report-toggle { font: inherit; font-size: 13px; background: var(--bg-alt); border: 1px solid var(--border); padding: 6px 12px; cursor: pointer; color: var(--text); }
+  .report-form { margin-top: 10px; display: none; }
+  .report-form.open { display: block; }
+  .report-form textarea { width: 100%; min-height: 70px; font: inherit; font-size: 13.5px; padding: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+  .report-form .row { margin-top: 8px; display: flex; gap: 8px; }
+  .report-form button { font: inherit; font-size: 13px; padding: 6px 14px; border: 1px solid var(--border); background: var(--bg-alt); color: var(--text); cursor: pointer; }
+  .report-form .status { font-size: 12.5px; color: var(--text-soft); margin-top: 6px; }
+
+  @media (max-width: 760px) {
+    nav.side { display: none; }
+    .article-wrap { flex-direction: column; }
+    .infobox { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="site-title" id="siteTitle">Ковровое ДНК<small id="siteSubtitle">черновик Pass 2 — не проверено человеком</small></div>
+  <form id="searchForm" onsubmit="return false;">
+    <input type="search" id="search" placeholder="Поиск…" />
+    <button class="search-btn" type="button" id="searchBtn">Найти</button>
+  </form>
+</header>
+
+<div class="layout">
+  <nav class="side">
+    <h5 id="navSectionsH">Разделы</h5>
+    <ul id="tabList">
+      <li><button class="navlink active" data-tab="motifs" id="tabMotifsBtn">Мотивы</button></li>
+      <li><button class="navlink" data-tab="elements" id="tabElementsBtn">Элементы</button></li>
+      <li><button class="navlink" data-tab="borders" id="tabBordersBtn">Каймы</button></li>
+      <li><button class="navlink" data-tab="carpets" id="tabCarpetsBtn">Ковры</button></li>
+      <li><button class="navlink" data-tab="carriers" id="tabCarriersBtn">Носители</button></li>
+      <li><button class="navlink" data-tab="sources" id="tabSourcesBtn">Источники</button></li>
+      <li><button class="navlink" data-tab="illustrations" id="tabIllBtn">Иллюстрации</button></li>
+    </ul>
+    <h5 id="navSchoolsH" style="margin-top:20px">Школы</h5>
+    <ul id="schoolNav"></ul>
+    <h5 id="navStatsH">Статистика</h5>
+    <div class="stat-line" id="statLine1"></div>
+    <div class="stat-line" id="statLine2"></div>
+    <div class="stat-line" id="statLine3"></div>
+    <h5 id="navLangH" style="margin-top:20px">Языки</h5>
+    <ul id="langList">
+      <li><button class="navlink lang-btn active" data-lang="ru">Русский</button></li>
+      <li><button class="navlink lang-btn" data-lang="az">Azərbaycan</button></li>
+      <li><button class="navlink lang-btn" data-lang="en">English</button></li>
+    </ul>
+    <h5 id="navSourceH" style="margin-top:20px">Источник</h5>
+    <div class="stat-line" id="repoLinkWrap"><a href="https://github.com/22adolgikh-pixel/carpevo" target="_blank" rel="noopener">Репозиторий на GitHub</a></div>
+  </nav>
+
+  <main id="main"></main>
+</div>
+
+<script>
+const VISUAL_DATA = /*@@VISUAL_DATA@@*/{};
+
+function normalizeElementLabel(s){
+  // Лёгкая нормализация для группировки: "ислими" и "ислими (растительная
+  // вязь)" — одно и то же, поясняющая скобка не должна плодить дубли.
+  return (s||'').replace(/\s*\([^)]*\)\s*$/, '').trim().toLowerCase();
+}
+const CONFIDENCE_RANK = {high: 3, medium: 2, low: 1};
+
+// Явный порядок азербайджанского алфавита — НЕ полагаемся на localeCompare('az'),
+// потому что поддержка этой локали в Intl у браузеров непредсказуема (в Node.js
+// с полным ICU всё сортируется верно, а в реальном браузере может незаметно
+// откатиться на "общую" коллацию, где Ş воспринимается как вариант S — из-за
+// этого буквы чередуются вместо группировки). Явная таблица работает одинаково
+// везде, без зависимости от того, что у браузера есть в комплекте.
+const AZ_ALPHABET = 'aAbBcCçÇdDeEəƏfFgGğĞhHxXıIiİjJkKqQlLmMnNoOöÖpPrRsSşŞtTuUüÜvVyYzZ';
+const AZ_ORDER = {};
+for (let i = 0; i < AZ_ALPHABET.length; i += 2) {
+  AZ_ORDER[AZ_ALPHABET[i]] = i / 2;
+  AZ_ORDER[AZ_ALPHABET[i+1]] = i / 2;
+}
+function azCompare(a, b){
+  a = a || ''; b = b || '';
+  const len = Math.max(a.length, b.length);
+  for (let i = 0; i < len; i++) {
+    const ca = a[i], cb = b[i];
+    if (ca === undefined) return -1;
+    if (cb === undefined) return 1;
+    if (ca === cb) continue;
+    const oa = AZ_ORDER[ca], ob = AZ_ORDER[cb];
+    if (oa !== undefined && ob !== undefined) { if (oa !== ob) return oa - ob; continue; }
+    // символы вне алфавита (пробел, дефис, цифры) — обычное сравнение как запасной путь
+    if (ca < cb) return -1;
+    if (ca > cb) return 1;
+  }
+  return 0;
+}
+
+// Собирает уникальные визуальные элементы со всех страниц-источников этой
+// записи (мотива/элемента) — данные отдельного, более дорогого прохода
+// моделью-зрением (см. visual_pass1.py), не того же извлечения, что текст.
+// pagesOf() определена ниже вместе с sourceKey() (используется также для
+// перекрёстных ссылок мотив<->элемент по совпадению страниц).
+function visualElementsForItem(item){
+  const pages = pagesOf(item);
+  const byLabel = new Map();
+  pages.forEach(pageKey => {
+    const pageData = VISUAL_DATA[pageKey];
+    if (!pageData) return;
+    (pageData.elements_seen || []).forEach(e => {
+      const norm = normalizeElementLabel(e.element);
+      if (!norm) return;
+      const existing = byLabel.get(norm);
+      if (!existing || CONFIDENCE_RANK[e.confidence] > CONFIDENCE_RANK[existing.confidence]) {
+        byLabel.set(norm, { element: e.element, confidence: e.confidence || 'medium', page: pageKey });
+      }
+    });
+  });
+  return [...byLabel.values()].sort((a,b) => (CONFIDENCE_RANK[b.confidence]||0) - (CONFIDENCE_RANK[a.confidence]||0));
+}
+
+const SCAN_LINKS = /*@@SCAN_LINKS@@*/{};
+
+const DATA = /*@@DATA@@*/{};
+
+/* ===== Словарь терминов (сверено с Керимовым 2026-09-27) =====
+   Одна запись = один термин. Роли (мотив / элемент / кайма / ковёр) — поле, а не отдельные записи.
+   id — латиница ASCII; старые id (motif_…, elem_…) продолжают работать через ALIASES. */
+const TERMS = DATA.terms;
+const ALIASES = DATA.aliases || {};
+const TERM_BY_ID = {};
+TERMS.forEach(t => { t.elem_id = t.id; TERM_BY_ID[t.id] = t; });
+function resolveId(id){ return TERM_BY_ID[id] ? id : (ALIASES[id] || id); }
+function findTerm(id){ return TERM_BY_ID[resolveId(id)] || null; }
+const TAB_KEYS = ['motifs','elements','borders','carpets'];
+TAB_KEYS.forEach(k => { DATA[k] = TERMS.filter(t => (t.tabs||[]).includes(k)); });
+function isTermTab(t){ return TAB_KEYS.includes(t); }
+const SOURCES = DATA.sources || [];
+const SOURCE_BY_ID = {}; SOURCES.forEach(s => SOURCE_BY_ID[s.id] = s);
+function srcTitle(s){ return (s.title && (s.title[state.lang] || s.title.ru)) || s.short; }
+function srcNote(s){ return s.note ? (s.note[state.lang] || s.note.ru || '') : ''; }
+function cf(c, f){ const d=c[f+'_i18n']; if (d && typeof d==='object') return d[state.lang] || d.ru || d.az || d.en || c[f]; return c[f]; }
+function carrierUrl(c){ return c.url_tpl ? c.url_tpl.replace('{lang}', state.lang) : (c.url || null); }
+function cleanSource(t){ return String(t||'').replace(/\s*\(файл[^)]*\)/g,''); }
+DATA.carriers.forEach((c,i) => { c._i = i; });
+
+const ROLE_LABEL = {
+  ru:{element:'элемент',motif:'мотив',border:'кайма',composition:'ковёр (композиция)',object:'изделие',place:'место',group:'группа',school:'школа',generic:'общее слово',other:'другое'},
+  az:{element:'element',motif:'motiv',border:'haşiyə',composition:'xalça (kompozisiya)',object:'məmulat',place:'yer',group:'qrup',school:'məktəb',generic:'ümumi söz',other:'digər'},
+  en:{element:'element',motif:'motif',border:'border',composition:'carpet (composition)',object:'product type',place:'place',group:'group',school:'school',generic:'generic word',other:'other'}
+};
+function termsOnSamePages(item){
+  const pages = pagesOf(item); if (!pages.size) return [];
+  return TERMS.filter(t => t !== item && [...pagesOf(t)].some(p => pages.has(p)));
+}
+function setTab(t){
+  state.tab = t;
+  document.querySelectorAll('#tabList button').forEach(b=>b.classList.toggle('active', b.dataset.tab===t));
+}
+
+const SCHOOL_LABEL = {
+  ru: {'guba-shirvan':'Губа-Ширван','karabakh':'Карабах','ganja-gazakh':'Гянджа-Газах','tabriz':'Тебриз','baku':'Баку'},
+  az: {'guba-shirvan':'Quba-Şirvan','karabakh':'Qarabağ','ganja-gazakh':'Gəncə-Qazax','tabriz':'Təbriz','baku':'Bakı'},
+  en: {'guba-shirvan':'Guba-Shirvan','karabakh':'Karabakh','ganja-gazakh':'Ganja-Gazakh','tabriz':'Tabriz','baku':'Baku'}
+};
+
+const I18N = {
+  ru: {
+    siteTitle: 'Ковровое ДНК', subtitle: 'черновик Pass 2 — не проверено человеком',
+    searchPlaceholder: 'Поиск…', searchBtn: 'Найти',
+    navSections: 'Разделы', tabMotifs: 'Мотивы', tabElements: 'Элементы', tabCarriers: 'Носители',
+    navStats: 'Статистика', navSource: 'Источник', repoLink: 'Репозиторий на GitHub', navLang: 'Языки',
+    statMotifs: n=>`${n} мотивов`, statElements: n=>`${n} элементов`, statCarriers: n=>`${n} упом. носителей`,
+    disclaimer1: 'Цитаты собраны постраничным чтением тома I–III Керимова (548 страниц), но связный текст статей ещё не написан человеком — каждая запись это список сырых цитат с адресом «том, страница».',
+    disclaimer2: 'Встречаются рассинхроны цитата↔название (Pass 1 иногда путает, к какому слову на странице относится цитата) — читайте саму цитату, а не только заголовок.',
+    listTitle: {motifs:'Мотивы', elements:'Элементы орнамента', borders:'Каймы', carpets:'Ковры (композиции) и изделия', carriers:'Список носителей'},
+    tabBorders:'Каймы', tabCarpets:'Ковры', statTerms:n=>`${n} терминов`, statCarpets:n=>`${n} ковров и изделий`,
+    infoRoles:'Роль по Керимову', infoKerTr:'Перевод Керимова', infoId:'ID', relOrn:'Орнамент на тех же страницах', relCarpets:'Ковры на тех же страницах', altMeanings:'другие переводы в данных',
+    recordsCount: n=>`${n} записей`, schoolLabel: 'Школа:', schoolAll: 'все', notFound: 'Ничего не найдено.',
+    colMotif: 'Мотив', colDate: 'Дата', colPlace: 'Место', colSource: 'Источник',
+    backLink: '← Назад к списку', sectionNotes: 'Примечания', noNotes: 'нет', noQuoteMentions: 'Упоминаний с цитатой нет.',
+    infoType: 'Тип', infoMotif: 'Мотив', infoElement: 'Элемент', infoMentions: 'Упоминаний',
+    infoDepth: 'Глубина', infoSchool: 'Школа', infoElemType: 'Тип элемента', infoStatus: 'Статус',
+    statusUnverified: 'не проверено человеком', depthSubst: 'развёрнуто', depthPassing: 'мимоходом', depthMixed: 'смешанно',
+    quoteNone: 'цитаты нет', infoDateL: 'Дата', infoSizeL: 'Размер', infoPlaceL: 'Место',
+    infoCollectionL: 'Собрание', infoInvL: 'Инв. №', infoTechL: 'Техника', infoFigL: 'Ссылка на рисунок', infoSourceSection: 'Источник', infoDetails: 'Сведения',
+    reportBtn: '⚑ Сообщить об ошибке', reportPlaceholder: 'Что не так на этой странице?',
+    reportSend: 'Отправить', reportSent: 'Спасибо, отправлено.', reportCancel: 'Отмена', reportUnavailable: 'Недоступно в этом окружении.',
+  },
+  az: {
+    siteTitle: 'Xalça DNA-sı', subtitle: 'Pass 2 qaralaması — insan tərəfindən yoxlanılmayıb',
+    searchPlaceholder: 'Axtar…', searchBtn: 'Tap',
+    navSections: 'Bölmələr', tabMotifs: 'Motivlər', tabElements: 'Elementlər', tabCarriers: 'Daşıyıcılar',
+    navStats: 'Statistika', navSource: 'Mənbə', repoLink: 'GitHub-da repozitoriya', navLang: 'Dillər',
+    statMotifs: n=>`${n} motiv`, statElements: n=>`${n} element`, statCarriers: n=>`${n} daşıyıcı qeydi`,
+    disclaimer1: 'Sitatlar Kərimovun I–III cildinin (548 səhifə) səhifə-səhifə oxunması ilə toplanıb, insan tərəfindən yazılmış bağlı mətn hələ yoxdur — hər qeyd "cild, səhifə" ünvanlı xam sitatlar siyahısıdır.',
+    disclaimer2: 'Sitat↔ad uyğunsuzluğu rast gəlinir (Pass 1 bəzən sitatın hansı sözə aid olduğunu qarışdırır) — yalnız başlığa deyil, sitatın özünə baxın.',
+    listTitle: {motifs:'Motivlər', elements:'Ornament elementləri', borders:'Haşiyələr', carpets:'Xalçalar (kompozisiyalar) və məmulatlar', carriers:'Daşıyıcıların siyahısı'},
+    tabBorders:'Haşiyələr', tabCarpets:'Xalçalar', statTerms:n=>`${n} termin`, statCarpets:n=>`${n} xalça və məmulat`,
+    infoRoles:'Kərimova görə rolu', infoKerTr:'Kərimovun tərcüməsi', infoId:'ID', relOrn:'Eyni səhifələrdəki ornament', relCarpets:'Eyni səhifələrdəki xalçalar', altMeanings:'verilənlərdə digər tərcümələr',
+    recordsCount: n=>`${n} qeyd`, schoolLabel: 'Məktəb:', schoolAll: 'hamısı', notFound: 'Heç nə tapılmadı.',
+    colMotif: 'Motiv', colDate: 'Tarix', colPlace: 'Yer', colSource: 'Mənbə',
+    backLink: '← Siyahıya qayıt', sectionNotes: 'Qeydlər', noNotes: 'yoxdur', noQuoteMentions: 'Sitatlı qeyd yoxdur.',
+    infoType: 'Növ', infoMotif: 'Motiv', infoElement: 'Element', infoMentions: 'Qeyd sayı',
+    infoDepth: 'Dərinlik', infoSchool: 'Məktəb', infoElemType: 'Element növü', infoStatus: 'Status',
+    statusUnverified: 'insan tərəfindən yoxlanılmayıb', depthSubst: 'ətraflı', depthPassing: 'keçərkən', depthMixed: 'qarışıq',
+    quoteNone: 'sitat yoxdur', infoDateL: 'Tarix', infoSizeL: 'Ölçü', infoPlaceL: 'Yer',
+    infoCollectionL: 'Kolleksiya', infoInvL: 'İnv. №', infoTechL: 'Texnika', infoFigL: 'Şəkil istinadı', infoSourceSection: 'Mənbə', infoDetails: 'Məlumat',
+    reportBtn: '⚑ Xəta bildir', reportPlaceholder: 'Bu səhifədə nə səhvdir?',
+    reportSend: 'Göndər', reportSent: 'Təşəkkürlər, göndərildi.', reportCancel: 'Ləğv et', reportUnavailable: 'Bu mühitdə əlçatan deyil.',
+  },
+  en: {
+    siteTitle: 'Carpet DNA', subtitle: 'Pass 2 draft — not reviewed by a human',
+    searchPlaceholder: 'Search…', searchBtn: 'Search',
+    navSections: 'Sections', tabMotifs: 'Motifs', tabElements: 'Elements', tabCarriers: 'Carriers',
+    navStats: 'Statistics', navSource: 'Source', repoLink: 'Repository on GitHub', navLang: 'Languages',
+    statMotifs: n=>`${n} motifs`, statElements: n=>`${n} elements`, statCarriers: n=>`${n} carrier mentions`,
+    disclaimer1: 'Quotes were collected by reading volumes I–III of Kerimov page by page (548 pages); no human-written connected text exists yet — each entry is a list of raw quotes with a "volume, page" address.',
+    disclaimer2: 'Quote↔name mismatches occur (Pass 1 sometimes confuses which word on a page a quote belongs to) — read the quote itself, not just the title.',
+    listTitle: {motifs:'Motifs', elements:'Ornament elements', borders:'Borders', carpets:'Carpets (compositions) and product types', carriers:'List of carriers'},
+    tabBorders:'Borders', tabCarpets:'Carpets', statTerms:n=>`${n} terms`, statCarpets:n=>`${n} carpets and product types`,
+    infoRoles:'Role per Kerimov', infoKerTr:'Kerimov\'s translation', infoId:'ID', relOrn:'Ornament on the same pages', relCarpets:'Carpets on the same pages', altMeanings:'other translations in the data',
+    recordsCount: n=>`${n} entries`, schoolLabel: 'School:', schoolAll: 'all', notFound: 'Nothing found.',
+    colMotif: 'Motif', colDate: 'Date', colPlace: 'Place', colSource: 'Source',
+    backLink: '← Back to list', sectionNotes: 'Notes', noNotes: 'none', noQuoteMentions: 'No mentions with a quote.',
+    infoType: 'Type', infoMotif: 'Motif', infoElement: 'Element', infoMentions: 'Mentions',
+    infoDepth: 'Depth', infoSchool: 'School', infoElemType: 'Element type', infoStatus: 'Status',
+    statusUnverified: 'not reviewed by a human', depthSubst: 'substantive', depthPassing: 'passing', depthMixed: 'mixed',
+    quoteNone: 'no quote', infoDateL: 'Date', infoSizeL: 'Size', infoPlaceL: 'Place',
+    infoCollectionL: 'Collection', infoInvL: 'Inv. no.', infoTechL: 'Technique', infoFigL: 'Figure reference', infoSourceSection: 'Source', infoDetails: 'Details',
+    reportBtn: '⚑ Report an error', reportPlaceholder: "What's wrong on this page?",
+    reportSend: 'Send', reportSent: 'Thanks, sent.', reportCancel: 'Cancel', reportUnavailable: 'Unavailable in this environment.',
+  }
+};
+
+let state = { tab: 'motifs', lang: 'ru', school: '', subgroup: '', query: '', source: '' };
+function T(){ return I18N[state.lang]; }
+function SL(){ return SCHOOL_LABEL[state.lang]; }
+
+// Азербайджанская кириллица (алфавит 1958–1991, тот же, что в книге Керимова) ->
+// современная латиница. Таблица сверена по BGN/PCGN и историческому алфавиту;
+// перепроверено на реальном примере из наших же данных: "Гарабағ" по этой таблице
+// даёт "Qarabağ" — настоящее современное название Карабаха, сходится.
+const AZ_CYR_TO_LATIN_MAP = {
+  'а':'a','б':'b','в':'v','г':'q','ғ':'ğ','д':'d','е':'e','ә':'ə','ж':'j','з':'z',
+  'и':'i','ы':'ı','й':'y','ј':'y','к':'k','ҝ':'g','л':'l','м':'m','н':'n','о':'o',
+  'ө':'ö','п':'p','р':'r','с':'s','т':'t','у':'u','ү':'ü','ф':'f','х':'x','һ':'h',
+  'ч':'ç','ҹ':'c','ш':'ş','ъ':"'",'ь':'','ҟ':'q',
+  'ю':'yu','я':'ya' // утечки русских букв в текст, помеченный как азербайджанский — не идеально фонетически, но убирает сырую кириллицу из результата
+};
+// Буквы, которых нет в обычном русском алфавите — по ним надёжно отличаем
+// азербайджанскую кириллицу от русской там, где язык явно не помечен (элементы).
+const AZ_ONLY_LETTERS = /[әғөүҝҹһјҟ]/i;
+
+function transliterateAzCyrillic(s){
+  if (!s) return s;
+  // "дж" — русская запись звука, для которого в азерб. есть отдельная буква ҹ (c).
+  // Обрабатываем как диграф ДО посимвольной замены, иначе д и ж уйдут по отдельности.
+  s = s.replace(/дж/gi, m => m === m.toUpperCase() ? 'C' : 'c').replace(/Дж/g, 'C');
+  let out = '';
+  for (const ch of s) {
+    const lower = ch.toLowerCase();
+    const mapped = AZ_CYR_TO_LATIN_MAP[lower];
+    if (mapped === undefined) { out += ch; continue; }
+    // "Турецкая I-проблема": заглавная İ (с точкой) и I (без точки) — РАЗНЫЕ буквы в
+    // азербайджанском, обычный .toUpperCase() их путает (даёт I вместо İ для "и").
+    out += (ch === ch.toLocaleUpperCase('az') && ch !== lower)
+      ? (mapped.charAt(0).toLocaleUpperCase('az') + mapped.slice(1))
+      : mapped;
+  }
+  return out;
+}
+function looksAzCyrillic(s){ return !!s && AZ_ONLY_LETTERS.test(s); }
+// Приводит любое имя к единому виду: Первая заглавная, остальные строчные —
+// локале-осознанно (иначе латинское i/İ/ı/I в азербайджанском ломается).
+function titleCase(s, locale){
+  if (!s) return s;
+  const lower = s.toLocaleLowerCase(locale);
+  return lower.charAt(0).toLocaleUpperCase(locale) + lower.slice(1);
+}
+// Для полей без явной языковой метки (носители: motif_name, location и т.п.) —
+// то же решение, что уже применяется к элементам: если похоже на азербайджанскую
+// кириллицу, показываем латиницей. Цитаты (quote) через это НЕ пропускаем —
+// это дословная выдержка, её менять нельзя.
+function displayAzAware(s){ return looksAzCyrillic(s) ? transliterateAzCyrillic(s) : s; }
+
+// Перекрёстные ссылки мотив<->элемент. Поле found_in_motifs у элементов почти
+// всегда пустое (пробел в постраничном извлечении, не наша проблема) — поэтому
+// связываем по более надёжному признаку, который у нас точно есть: упоминание
+// на ОДНОЙ И ТОЙ ЖЕ странице книги (source есть у каждого mention).
+function sourceKey(source){
+  if (!source) return null;
+  const m = source.match(/файл\s+([^)]+)/);
+  return m ? m[1].trim() : source.trim();
+}
+function pagesOf(item){
+  return new Set((item.mentions||[]).map(m => sourceKey(m.source)).filter(Boolean));
+}
+function findMotifByName(name){
+  if (!name) return null;
+  const norm = name.trim().toLowerCase();
+  // сначала точное название (canonical_az / names), и только потом псевдонимы; среди равных — термин с большим числом упоминаний
+  const byMentions = TERMS.slice().sort((a,b)=>b.mention_count-a.mention_count);
+  const eq = n => n && n.trim().toLowerCase() === norm;
+  return byMentions.find(m => eq(m.canonical_az) || [].concat(m.names.ru||[], m.names.az||[], m.names.en||[]).some(eq))
+      || byMentions.find(m => (m.aliases||[]).some(eq)) || null;
+}
+// Если у носителя находится точное совпадение с уже переведённым мотивом —
+// берём каноническое название ОТТУДА (надёжно), а не гадаем транслитерацией
+// заново по сырому motif_name носителя.
+function carrierDisplayName(c){
+  if (c.trade_name) return titleCase(c.trade_name.replace(/^(A|AN)\s+/,''), 'en');
+  if (c.names && (c.names.az || c.names.en)) return c.names.az || c.names.en;
+  if (c.term_id && TERM_BY_ID[c.term_id]) return displayName(TERM_BY_ID[c.term_id]);
+  const m = findMotifByName(c.motif_name);
+  if (m) return displayName(m);
+  return titleCase(displayAzAware(c.motif_name), 'ru') || '—';
+}
+function elementsOnSamePages(motif){
+  const pages = pagesOf(motif);
+  if (!pages.size) return [];
+  return DATA.elements.filter(e => [...pagesOf(e)].some(p => pages.has(p)));
+}
+function motifsOnSamePages(element){
+  const pages = pagesOf(element);
+  if (!pages.size) return [];
+  return DATA.motifs.filter(m => [...pagesOf(m)].some(p => pages.has(p)));
+}
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// Работает и для мотивов (есть .names/.id), и для элементов (только .elem_id) —
+// раньше падало на элементах и роняло весь рендер (см. фикс displayName ниже).
+// Азербайджанское название всегда транслитерируется в латиницу для показа —
+// исходная кириллица остаётся доступна только для поиска (см. searchHaystack).
+// Азербайджанская латиница — канонический заголовок ВЕЗДЕ, независимо от языка
+// интерфейса (решение проекта: мультиязычность, не мультиверсионность — один
+// список, один канонический заголовок, перевод показывается рядом отдельно).
+function displayName(item){
+  if (item.canonical_az) return titleCase(item.canonical_az, 'az');
+  if (item.names) {
+    // запасной путь для записей без перевода (не должно быть у мотивов после
+    // прогона модели, но элементы пока не переведены)
+    const raw = (item.names.az&&item.names.az[0]&&transliterateAzCyrillic(item.names.az[0])) ||
+      (item.names.ru&&item.names.ru[0]) || (item.names.en&&item.names.en[0]) || item.id;
+    return titleCase(raw, 'az');
+  }
+  if (item.elem_id) {
+    if (item.canonical_az) return titleCase(item.canonical_az, 'az');
+    const raw = item.elem_id.replace('elem_','');
+    const az = looksAzCyrillic(raw);
+    return titleCase(az ? transliterateAzCyrillic(raw) : raw, az ? 'az' : 'ru');
+  }
+  return item.id || item.elem_id || '?';
+}
+// Перевод-подпись под заголовком, для текущего языка интерфейса. Возвращает
+// null, если перевода нет ИЛИ это имя собственное без смыслового перевода
+// (тогда используем транскрипцию, если она есть) — никогда не подставляет
+// заголовок как "перевод самого себя".
+// Индекс "название -> запись" для превращения упоминаний мотивов/элементов
+// в ссылки ГДЕ УГОДНО в тексте сайта (описания школ, связанные узоры и т.п.) —
+// общее правило, а не точечное решение. Построен один раз по canonical_az
+// (он уникален и уже везде используется как заголовок).
+let NAME_LINK_INDEX = null;
+let NAME_LINK_REGEX = null;
+function buildNameLinkIndex(){
+  const map = new Map();
+  // сначала термины с большим числом упоминаний — при совпадении названий ссылка ведёт на основной
+  TERMS.slice().sort((a,b)=>a.mention_count-b.mention_count).forEach(m => { if (m.canonical_az) map.set(m.canonical_az.toLowerCase(), {kind:'term', id:m.id}); });
+  NAME_LINK_INDEX = map;
+  // самые длинные названия — первыми, чтобы "buta" не перехватывал "badam buta"
+  const names = [...map.keys()].filter(n => n.length >= 3).sort((a,b) => b.length - a.length);
+  const escaped = names.map(n => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  NAME_LINK_REGEX = new RegExp('\\b(' + escaped.join('|') + ')\\b', 'gi');
+}
+// Оборачивает найденные названия в кликабельные ссылки. text уже должен быть
+// экранирован (esc()) ДО вызова — сама функция ничего не экранирует, только
+// расставляет теги <a> вокруг совпадений.
+function linkifyMentions(escapedText){
+  if (!NAME_LINK_INDEX) buildNameLinkIndex();
+  if (!escapedText) return escapedText;
+  return escapedText.replace(NAME_LINK_REGEX, (match) => {
+    const hit = NAME_LINK_INDEX.get(match.toLowerCase());
+    if (!hit) return match;
+    return `<a data-open="${hit.kind}" data-id="${esc(hit.id)}">${match}</a>`;
+  });
+}
+
+function getMeaning(item){
+  if (!item.canonical_az) return null;
+  if (state.lang === 'az') return null; // заголовок уже на этом языке
+  const meaning = state.lang === 'ru' ? item.ru_meaning : state.lang === 'en' ? item.en_meaning : null;
+  if (meaning) return meaning;
+  const translit = state.lang === 'ru' ? item.ru_translit : state.lang === 'en' ? item.en_translit : null;
+  return translit || null;
+}
+function firstLetter(s){ const c=(s||'?').trim()[0]; return c ? c.toUpperCase() : '?'; }
+function depthClass(item){
+  const depths = new Set((item.mentions||[]).map(m=>m.mention_depth).filter(Boolean));
+  if (depths.has('substantive')) return depths.has('passing') ? 'mixed' : 'substantive';
+  return 'passing';
+}
+function depthWord(cls){ return cls==='substantive'?T().depthSubst:cls==='mixed'?T().depthMixed:T().depthPassing; }
+
+function renderSchoolNav(){
+  const nav = document.getElementById('schoolNav');
+  const counts = {};
+  Object.keys(SL()).forEach(s => counts[s] = 0);
+  TERMS.forEach(m => (m.schools_mentioned_canonical||[]).forEach(s => { if (s in counts) counts[s]++; }));
+  let html = '';
+  html += `<li><button class="navlink ${!state.school?'active':''}" data-school-nav="">${state.lang==='ru'?'Все':state.lang==='az'?'Hamısı':'All'}</button></li>`;
+  Object.keys(SL()).forEach(s => {
+    if (!counts[s]) return;
+    const active = state.school===s;
+    html += `<li><button class="navlink ${active?'active':''}" data-school-nav="${esc(s)}">${esc(SL()[s])} <span style="color:var(--text-soft)">(${counts[s]})</span></button></li>`;
+    if (active) {
+      const subs = subgroupsForSchool(s).slice(0, 20);
+      subs.forEach(([sg,cnt]) => {
+        html += `<li style="padding-left:12px"><button class="navlink ${state.subgroup===sg?'active':''}" data-subgroup-nav="${esc(sg)}" style="font-size:12.5px">${esc(sg)} <span style="color:var(--text-soft)">(${cnt})</span></button></li>`;
+      });
+    }
+  });
+  nav.innerHTML = html;
+}
+
+function renderChrome(){
+  document.getElementById('siteTitle').firstChild.textContent = T().siteTitle;
+  document.getElementById('siteSubtitle').textContent = T().subtitle;
+  document.getElementById('search').placeholder = T().searchPlaceholder;
+  document.getElementById('searchBtn').textContent = T().searchBtn;
+  document.getElementById('navSectionsH').textContent = T().navSections;
+  document.getElementById('tabMotifsBtn').textContent = T().tabMotifs;
+  document.getElementById('tabElementsBtn').textContent = T().tabElements;
+  document.getElementById('tabBordersBtn').textContent = T().tabBorders;
+  document.getElementById('tabCarpetsBtn').textContent = T().tabCarpets;
+  document.getElementById('tabCarriersBtn').textContent = T().tabCarriers;
+  document.getElementById('tabSourcesBtn').textContent = ({ru:'Источники',az:'Mənbələr',en:'Sources'})[state.lang];
+  document.getElementById('tabIllBtn').textContent = PT().tab;
+  document.getElementById('navStatsH').textContent = T().navStats;
+  document.getElementById('navLangH').textContent = T().navLang;
+  document.getElementById('navSourceH').textContent = T().navSource;
+  document.getElementById('navSchoolsH').textContent = state.lang==='ru'?'Школы':state.lang==='az'?'Məktəblər':'Schools';
+  document.getElementById('repoLinkWrap').innerHTML = `<a href="https://github.com/22adolgikh-pixel/carpevo" target="_blank" rel="noopener">${T().repoLink}</a>`;
+  document.getElementById('statLine1').textContent = T().statTerms(TERMS.filter(t=>t.kind==='ornament').length);
+  document.getElementById('statLine2').textContent = T().statCarpets(DATA.carpets.length);
+  document.getElementById('statLine3').textContent = T().statCarriers(DATA.carriers.length);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===state.lang));
+}
+
+function getList(){
+  if (isTermTab(state.tab)) return DATA[state.tab];
+  return DATA.carriers;
+}
+
+// Проверка «есть ли у записи название именно на этом языке» — для списка,
+// в отличие от displayName(), которая при показе статьи всё ещё подстраховывается
+// запасным вариантом, чтобы не показывать пустоту, если КОНКРЕТНУЮ статью открыли
+// напрямую (например, по ссылке из другого места).
+function itemHasLang(item, lang){
+  if (item.names) {
+    return !!(item.names[lang] && item.names[lang].length);
+  }
+  if (item.elem_id) {
+    const isAz = looksAzCyrillic(item.elem_id.replace('elem_',''));
+    if (lang === 'az') return isAz;
+    if (lang === 'ru') return !isAz;
+    return false; // английских названий элементов у нас нет вообще
+  }
+  return true;
+}
+
+function filteredSorted(){
+  const q = state.query.trim().toLowerCase();
+  let list = getList();
+  if (state.source) list = list.filter(it => isTermTab(state.tab) ? ((it.source_counts||{})[state.source]) : it.source_id === state.source);
+  if (state.tab !== 'carriers') {
+    if (state.school) list = list.filter(m => (m.schools_mentioned_canonical||[]).includes(state.school));
+    if (state.subgroup) list = list.filter(m => (m.subgroups_mentioned||[]).includes(state.subgroup));
+    if (q) list = list.filter(item => {
+      const hay = [item.id, ...(item.old_ids||[]), ...(item.canonical_az_variants||[]), item.canonical_az, item.ru_meaning, item.en_meaning, item.ru_translit, item.en_translit,
+        ...(item.names?[].concat(item.names.ru||[],item.names.az||[],item.names.en||[]):[]), ...(item.mentions||[]).map(x=>x.quote)].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+    return list.slice().sort((a,b)=> azCompare(displayName(a), displayName(b)));
+  } else {
+    if (q) list = list.filter(item => [item.motif_name,item.trade_name,item.quote,item.description,item.location,item.museum_or_collection].join(' ').toLowerCase().includes(q));
+    return list;
+  }
+}
+
+function disclaimerHtml(){
+  const v = state.lang==='az' ? 'Kərimovun mətni ilə tutuşdurulub (27.09.2026): rollar (motiv / element / haşiyə / xalça) və dublikatlar kitaba görə düzəldilib; adların və tərcümələrin düzəlişləri hələ tətbiq edilməyib.'
+    : state.lang==='en' ? 'Checked against Kerimov\'s text (27 Sep 2026): roles (motif / element / border / carpet) and duplicates follow the book; name and translation corrections are not applied yet.'
+    : 'Сверено с текстом Керимова (27.09.2026): роли (мотив / элемент / кайма / ковёр) и дубли приведены по книге; исправления названий и переводов пока не внесены.';
+  return `<div class="disclaimer">${esc(T().disclaimer1)}</div><div class="disclaimer warn">${esc(T().disclaimer2)}</div><div class="disclaimer">${esc(v)}</div>`;
+}
+
+const SCHOOL_DYES = {
+  ru: 'Красный — марена (корень Rubia tinctorum) и кошениль (насекомое); синий — индиго; жёлтый — шафран, гранатовая кожура, куркума, луковая шелуха; коричневый/чёрный — грецкий орех, дубовые орешки. Зелёный получали, перекрашивая жёлтую нить индиго.',
+  az: 'Qırmızı — boyaqotu kökü (Rubia tinctorum) və koşenil; mavi — indiqo; sarı — zəfəran, nar qabığı, sarıkök, soğan qabığı; qəhvəyi/qara — qoz, palıd fındığı.',
+  en: 'Red — madder root (Rubia tinctorum) and cochineal insects; blue — indigo; yellow — saffron, pomegranate rind, turmeric, onion skins; brown/black — walnut hulls, oak galls. Green came from over-dyeing yellow thread with indigo.',
+  refs: [{source:'Carpet Museum Baku (обзор)', url:'https://www.wonderfulmuseums.com/museum/carpet-museum-baku-azerbaijan/'}],
+};
+
+const SCHOOL_INFO = {
+  'guba-shirvan': {
+    ru: 'Сдержанный, строгий рисунок: вместо цветочных лепестков — медальоны, они «визитная карточка» этой школы. Мотивы Кубы часто геометризированные стилизации растительных и зооморфных форм.',
+    az: 'Təmkinli, sərt naxış: gül ləçəkləri əvəzinə medalyonlar — bu məktəbin "vizit kartı"dır.',
+    en: 'Restrained, strict patterns: instead of flower petals, medallions — the calling-card of this school. Quba motifs are often geometricised stylisations of vegetal and zoomorphic forms.',
+    refs: [{source:'jam-news.net', url:'https://jam-news.net/everything-you-didnt-know-about-azerbaijani-carpets/'}, {source:'advantour.com', url:'https://www.advantour.com/azerbaijan/handcrafts/carpets.htm'}],
+    colors: [{name:{ru:'сдержанные, холодные тона',az:'təmkinli, soyuq tonlar',en:'restrained, cool tones'}, hex:'#4a5a6b'}, {name:{ru:'кремовый фон',az:'krem fon',en:'cream ground'}, hex:'#e8dcc0'}],
+    facts: {
+      ru: ['Центр — северо-восток Азербайджана, три зоны: горная, предгорная, равнинная.', 'Горные сёла: Гонагкенд, Хашы, Джими, Афурджа, Джек, Салмасоюд.'],
+      az: ['Mərkəz — Azərbaycanın şimal-şərqi, üç zona: dağlıq, ətəkdağı, düzənlik.', 'Dağ kəndləri: Qonaqkənd, Xaşı, Cimi, Afurca, Cek, Salmasoyud.'],
+      en: ['Centre — northeast Azerbaijan, three zones: mountainous, foothill, lowland.', 'Mountain villages: Gonagkand, Khashi, Jimi, Afurja, Jek, Salmasoyud.'],
+    },
+    photo: {source:'Wikipedia: Chukhanlu carpets', url:'https://en.wikipedia.org/wiki/Chukhanlu_carpets'},
+  },
+  'karabakh': {
+    ru: 'Яркие цвета и растительный орнамент, шерсть как основной материал. Насчитывает около 33 разных композиций, часть заимствована у тебризской и иранской школ. Делится на равнинную и горную (шушинская группа) части.',
+    az: 'Parlaq rənglər və bitki ornamenti, əsas material yun. Təxminən 33 fərqli kompozisiya, bəziləri Təbriz və İran məktəblərindən götürülüb.',
+    en: 'Bright colors and floral ornament, wool as the main material. About 33 different compositions, some borrowed from the Tabriz and Iranian schools. Divided into lowland and mountainous (Shusha group) parts.',
+    refs: [{source:'karabakh.org', url:'https://karabakh.org/karabakh-culture/carpets/karabakh-carpets/'}, {source:'jam-news.net', url:'https://jam-news.net/everything-you-didnt-know-about-azerbaijani-carpets/'}],
+    colors: [{name:{ru:'насыщенный красный',az:'tünd qırmızı',en:'rich red'}, hex:'#8b2e2e'}, {name:{ru:'золотистый',az:'qızılı',en:'golden'}, hex:'#c9962c'}, {name:{ru:'глубокий зелёный',az:'tünd yaşıl',en:'deep green'}, hex:'#3d5c3a'}],
+    facts: {
+      ru: ['~33 композиции — больше, чем в любой другой школе.', 'Горная часть известна как «шушинская группа».', 'Сёла: Дашбулаг, Довшанлы, Малыбейли, Гасымушагы, Ханлыг.'],
+      az: ['~33 kompozisiya — digər məktəblərdən çox.', 'Dağlıq hissə "Şuşa qrupu" adlanır.', 'Kəndlər: Daşbulaq, Dovşanlı, Malıbəyli, Qasımuşağı, Xanlıq.'],
+      en: ['~33 compositions — more than any other school.', 'The mountainous part is known as the "Shusha group".', 'Villages: Dashbulag, Dovshanly, Malibayli, Gasimushagi, Khanlig.'],
+    },
+    photo: {source:'Wikipedia: Karabakh carpet', url:'https://en.wikipedia.org/wiki/Karabakh_carpet'},
+  },
+  'ganja-gazakh': {
+    ru: 'Гармоничная палитра из ограниченного числа цветов. Узоры этой школы ещё в Средние века привлекали внимание европейских художников.',
+    az: 'Məhdud rəng sayından ibarət ahəngdar palitra. Bu məktəbin naxışları hələ Orta əsrlərdə Avropa rəssamlarının diqqətini cəlb edib.',
+    en: 'A harmonious palette from a limited number of colors. This school\'s patterns attracted the attention of European artists as early as the Middle Ages.',
+    refs: [{source:'eurasia.travel', url:'https://eurasia.travel/azerbaijan/handicrafts/carpets/'}],
+    colors: [{name:{ru:'терракотовый',az:'terrakot',en:'terracotta'}, hex:'#b5573a'}, {name:{ru:'тёмно-синий',az:'tünd mavi',en:'dark blue'}, hex:'#233a5e'}, {name:{ru:'слоновая кость',az:'fil sümüyü',en:'ivory'}, hex:'#ece0c8'}],
+    facts: {
+      ru: ['Узоры повлияли на европейское искусство ещё в Средние века (см. картину Ганса Мемлинга «Мария с младенцем», где изображён азербайджанский ковёр «Ширван»).', 'Сёла: Шыхлы, Фахралы, Борчалы, Гарайазы.'],
+      az: ['Naxışlar hələ Orta əsrlərdə Avropa incəsənətinə təsir edib (Hans Memlinqin "Məryəm öz körpəsi ilə" əsərindəki "Şirvan" xalçasına bax).', 'Kəndlər: Şıxlı, Fəxralı, Borçalı, Qarayazı.'],
+      en: ['Patterns influenced European art as early as the Middle Ages (see Hans Memling\'s "Mary with the Child", depicting an Azerbaijani "Shirvan" carpet).', 'Villages: Shikhly, Fakhraly, Borchaly, Garayazy.'],
+    },
+    photo: {source:'Wikipedia: Garagoyunlu carpets', url:'https://en.wikipedia.org/wiki/Garagoyunlu_carpets'},
+  },
+  'tabriz': {
+    ru: 'Одна из старейших школ (расцвет с XI–XII века, зенит в XVI–XVII вв.). Пастельные тона, обильный растительный декор; фоновые цвета — кремовый, красный, тёмно-синий. Самая характерная композиция — ləçək-turunc.',
+    az: 'Ən qədim məktəblərdən biri (XI–XII əsrlərdən inkişaf, zirvəsi XVI–XVII əsrlər). Pastel tonlar, bol bitki dekoru; fon rəngləri — krem, qırmızı, tünd-mavi. Ən xarakterik kompozisiya — "ləçək-turunc".',
+    en: 'One of the oldest schools (flourishing from the 11th–12th centuries, peaking in the 16th–17th). Pastel tones, rich floral decoration; background colors of cream, red or navy blue. The most typical composition is "lachak-turanj".',
+    refs: [{source:'eurasia.travel', url:'https://eurasia.travel/azerbaijan/handicrafts/carpets/'}, {source:'Wikipedia: Tabriz rug', url:'https://en.wikipedia.org/wiki/Tabriz_rug'}],
+    colors: [{name:{ru:'кремовый',az:'krem',en:'cream'}, hex:'#efe3c8'}, {name:{ru:'красный',az:'qırmızı',en:'red'}, hex:'#a23a2c'}, {name:{ru:'тёмно-синий',az:'tünd mavi',en:'navy blue'}, hex:'#1c3f6e'}],
+    facts: {
+      ru: ['Расцвет пришёлся на XVI–XVII века, вместе с расцветом миниатюрной живописи.', 'Ткали и шёлковые ковры.', 'Центры: Тебриз, Ардебиль (южный, иранский Азербайджан).'],
+      az: ['Çiçəklənmə XVI–XVII əsrlərə, miniatür rəssamlığın inkişafı ilə eyni vaxta düşür.', 'İpək xalçalar da toxunub.', 'Mərkəzlər: Təbriz, Ərdəbil (Cənubi Azərbaycan).'],
+      en: ['The peak coincided with the 16th–17th centuries, alongside the flourishing of miniature painting.', 'Silk carpets were also woven here.', 'Centres: Tabriz, Ardabil (South, Iranian Azerbaijan).'],
+    },
+    photo: {source:'Wikipedia: Tabriz rug', url:'https://en.wikipedia.org/wiki/Tabriz_rug'},
+  },
+  'baku': {
+    ru: 'Мягкость и насыщенность цвета, самобытные художественные элементы. Преобладают овалы («гёли») геометрической формы и криволинейные растительные элементы, в основном на глубоком синем фоне, реже — красном и жёлтом.',
+    az: 'Rəngin yumşaqlığı və intensivliyi, özünəməxsus bədii elementlər. Həndəsi formalı ovallar ("göllər") və əyri xətli bitki elementləri üstünlük təşkil edir, əsasən tünd mavi fonda.',
+    en: 'Softness and intensity of color, original artistic elements. Geometric ovals ("gyoly") and curvilinear vegetal elements predominate, mostly on a deep blue background, occasionally red and yellow.',
+    refs: [{source:'advantour.com', url:'https://www.advantour.com/azerbaijan/handcrafts/carpets.htm'}, {source:'eurasia.travel', url:'https://eurasia.travel/azerbaijan/handicrafts/carpets/'}],
+    colors: [{name:{ru:'глубокий синий',az:'tünd mavi',en:'deep blue'}, hex:'#1b3a5c'}, {name:{ru:'красный',az:'qırmızı',en:'red'}, hex:'#a23a2c'}, {name:{ru:'жёлтый',az:'sarı',en:'yellow'}, hex:'#d4a017'}],
+    facts: {
+      ru: ['Национальный музей ковра открыт в Баку в 1967 году — первый в мире музей, посвящённый коврам.', 'Другое название школы — Апшеронская.'],
+      az: ['Milli Xalça Muzeyi Bakıda 1967-ci ildə açılıb — xalçalara həsr olunmuş dünyada ilk muzey.', 'Məktəbin başqa adı — Abşeron.'],
+      en: ['The National Carpet Museum opened in Baku in 1967 — the world\'s first museum dedicated to carpets.', 'Alternative name for this school — Absheron.'],
+    },
+    photo: {source:'Wikipedia: Azerbaijan Carpet Museum', url:'https://en.wikipedia.org/wiki/Azerbaijan_Carpet_Museum'},
+  },
+};
+
+function subgroupsForSchool(school){
+  const counts = new Map();
+  TERMS.forEach(m => {
+    const schools = m.schools_mentioned_canonical || [];
+    // Берём подшколы ТОЛЬКО у мотивов с ОДНОЙ школой. У мотивов с несколькими
+    // школами подшколы и школы слиты в общие списки без постраничной привязки
+    // (см. Pass 2) — невозможно честно сказать, какая подшкола к какой школе
+    // относится, поэтому не гадаем и не показываем (иначе Гарабағ всплывает
+    // под Губа-Ширван и т.п.)
+    if (schools.length !== 1 || schools[0] !== school) return;
+    (m.subgroups_mentioned||[]).forEach(sg => counts.set(sg, (counts.get(sg)||0)+1));
+  });
+  return [...counts.entries()].sort((a,b)=>b[1]-a[1]);
+}
+
+function sectionDescription(){
+  if (state.tab === 'motifs') return state.lang==='ru'
+    ? 'Крупные самостоятельные фигуры орнамента (бута, гёль, лячек-турундж, дерево жизни). Роль определена по тексту Керимова; термин, который встречается и как мотив, и как элемент, есть в обоих списках — это одна и та же статья. Число в скобках — упоминаний в книге.'
+    : state.lang==='az' ? 'Ornamentin böyük müstəqil fiqurları (buta, göl, ləçək-turunc, həyat ağacı). Rol Kərimovun mətninə görə müəyyən edilib. Mötərizədəki rəqəm — kitabda neçə dəfə xatırlanıb.'
+    : 'Large self-contained ornament figures (buta, göl, lechek-turunj, tree of life). Roles follow Kerimov\'s text. The number in brackets is how many times the book mentions it.';
+  if (state.tab === 'borders') return state.lang==='ru'
+    ? 'Каймы и полосы каймы (хашия, су, мядахиль, сичандиши и т.п.) — по тексту и таблицам Керимова.'
+    : state.lang==='az' ? 'Haşiyələr və haşiyə zolaqları (su, mədaxil, siçandişi və s.) — Kərimovun mətni və cədvəllərinə görə.'
+    : 'Borders and border stripes (hashiye, su, medakhil, sichandishi, etc.) per Kerimov\'s text and tables.';
+  if (state.tab === 'carpets') return state.lang==='ru'
+    ? 'Названия ковров и композиций (чаще всего по селу: Пирабедиль, Зейва, Годжа), а также типы изделий (килим, сумах, верни, намазлык). У Керимова — колонка «Для какого ковра характерен» и перечни в тексте. Это не мотивы: ковёр может называться по мотиву, но это отдельная статья.'
+    : state.lang==='az' ? 'Xalça və kompozisiya adları (əsasən kəndə görə: Pirəbədil, Zeyvə, Qoca) və məmulat növləri (kilim, sumax, vərni, namazlıq). Motiv deyil: xalça motivin adını daşıya bilər, amma ayrıca məqalədir.'
+    : 'Carpet and composition names (mostly after villages: Pirebedil, Zeyva, Gyoja) and product types (kilim, sumakh, verni, namazlyk). Not motifs: a carpet may be named after a motif, but it is a separate article.';
+  if (state.tab === 'elements') return state.lang==='ru'
+    ? 'Отдельные декоративные формы (крюк, розетка, звезда и т.п.), из которых складываются мотивы. Одна форма может входить во много разных мотивов.'
+    : state.lang==='az' ? 'Motivləri təşkil edən ayrı-ayrı bəzək formaları (qarmaq, rozet, ulduz və s.).'
+    : 'Individual decorative shapes (hook, rosette, star, etc.) that make up motifs.';
+  return state.lang==='ru'
+    ? 'Конкретные реальные ковры, описанные в книге с датой, местом или собранием — не абстрактные мотивы, а физические образцы.'
+    : state.lang==='az' ? 'Kitabda tarix, yer və ya kolleksiya ilə təsvir olunan konkret xalçalar.'
+    : 'Specific physical carpets described in the book with a date, place or collection.';
+}
+
+function renderSources(){
+  const L = state.lang;
+  let html = `<h1 class="page-title">${({ru:'Источники',az:'Mənbələr',en:'Sources'})[L]}</h1>`;
+  html += `<p style="color:var(--text-soft);font-size:13.5px;margin:0 0 14px">${({ru:'Каждое упоминание на сайте ссылается на источник и страницу. Нажмите на число, чтобы увидеть записи из этого источника.',az:'Saytdakı hər qeyd mənbəyə və səhifəyə istinad edir.',en:'Every mention on the site cites a source and page. Click a number to see the entries from that source.'})[L]}</p>`;
+  const TYPE = {museum_collection:{ru:'музейное собрание',az:'muzey kolleksiyası',en:'museum collection'},monograph:{ru:'монография',az:'monoqrafiya',en:'monograph'},journal:{ru:'журнал',az:'jurnal',en:'journal'},auction_catalogue:{ru:'аукционный каталог',az:'hərrac kataloqu',en:'auction catalogue'}};
+  html += `<table class="carrier-list"><tr><th>${({ru:'Источник',az:'Mənbə',en:'Source'})[L]}</th><th>${({ru:'Тип',az:'Növ',en:'Type'})[L]}</th><th>${({ru:'Термины',az:'Terminlər',en:'Terms'})[L]}</th><th>${({ru:'Упоминания',az:'Qeydlər',en:'Mentions'})[L]}</th><th>${({ru:'Носители',az:'Daşıyıcılar',en:'Carriers'})[L]}</th></tr>`;
+  SOURCES.forEach(s => {
+    const nt = TERMS.filter(t=>(t.source_counts||{})[s.id]).length;
+    const nm = TERMS.reduce((a,t)=>a+((t.source_counts||{})[s.id]||0),0);
+    const nc = DATA.carriers.filter(c=>c.source_id===s.id).length;
+    const tt = (TYPE[s.type]||{})[L] || s.type;
+    html += `<tr><td><strong>${esc(s.author)}</strong>. ${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(srcTitle(s))}</a>`:esc(srcTitle(s))}. ${esc(s.publisher||'')}, ${s.year}.${srcNote(s)?`<div class="q">${esc(srcNote(s))}</div>`:''}</td><td>${esc(tt)}</td>
+      <td>${nt?`<a data-src-go="${s.id}" data-src-tab="elements">${nt}</a>`:'—'}</td><td>${nm||'—'}</td><td>${nc?`<a data-src-go="${s.id}" data-src-tab="carriers">${nc}</a>`:'—'}</td></tr>`;
+  });
+  html += `</table>`;
+  document.getElementById('main').innerHTML = html;
+}
+function renderIndex(){
+  if (state.tab === 'illustrations') { renderIllustrations(); return; }
+  if (state.tab === 'sources') { renderSources(); return; }
+  const list = filteredSorted();
+  let html = disclaimerHtml();
+  html += `<h1 class="page-title">${esc(T().listTitle[state.tab])}</h1>`;
+  html += `<p style="color:var(--text-soft);font-size:13.5px;margin:0 0 10px">${esc(sectionDescription())}</p>`;
+  const untransN = isTermTab(state.tab) ? list.filter(i=>!i.canonical_az).length : 0;
+  const untransNote = untransN ? (state.lang==='az' ? ` · ${untransN} element hələ AZ dilinə tərcümə edilməyib (RU işarəli, siyahının sonunda)` : state.lang==='en' ? ` · ${untransN} not yet translated to Azerbaijani (marked RU, listed at the end)` : ` · ${untransN} ещё не переведены на азербайджанский (помечены RU, идут в конце списка)`) : '';
+  html += `<div class="subtitle-count">${T().recordsCount(list.length)}${state.source&&SOURCE_BY_ID[state.source]?` · ${esc(SOURCE_BY_ID[state.source].short)}`:''}${state.school?` · ${esc(SL()[state.school]||state.school)}`:''}${state.subgroup?` · ${esc(state.subgroup)}`:''}${state.query?` · «${esc(state.query)}»`:''}${untransNote}</div>`;
+
+  html += `<div class="filters">`;
+  html += `<label>${({ru:'Источник:',az:'Mənbə:',en:'Source:'})[state.lang]} <select id="sourceFilter"><option value="">${esc(T().schoolAll)}</option>${SOURCES.filter(s => isTermTab(state.tab) ? TERMS.some(t=>(t.source_counts||{})[s.id]) : DATA.carriers.some(c=>c.source_id===s.id)).map(s=>`<option value="${s.id}" ${state.source===s.id?'selected':''}>${esc(s.short)}</option>`).join('')}</select></label>`;
+  if (state.tab !== 'carriers') {
+    html += `<label>${esc(T().schoolLabel)} <select id="schoolFilter"><option value="">${esc(T().schoolAll)}</option>${Object.keys(SL()).map(s=>`<option value="${s}" ${state.school===s?'selected':''}>${esc(SL()[s])}</option>`).join('')}</select></label>`;
+  }
+  html += `</div>`;
+
+  if (isTermTab(state.tab) && state.school && SCHOOL_INFO[state.school]) {
+    const info = SCHOOL_INFO[state.school];
+    const desc = info[state.lang] || info.ru;
+    const L = state.lang;
+    const factsLabel = L==='ru'?'Дополнительно':L==='az'?'Əlavə':'Additional';
+    const dyesLabel = L==='ru'?'Красители':L==='az'?'Boyalar':'Dyes';
+    const photoLabel = L==='ru'?'Фото':L==='az'?'Foto':'Photo';
+    html += `<div class="disclaimer" style="border-left:3px solid var(--border);margin-bottom:16px">
+      <strong>${esc(SL()[state.school]||state.school)}</strong><br/>
+      ${linkifyMentions(esc(desc))}
+      ${info.colors ? `<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">${info.colors.map(c=>`<span style="display:inline-flex;align-items:center;gap:5px;font-size:12px"><span style="width:14px;height:14px;border-radius:3px;background:${c.hex};border:1px solid var(--border);display:inline-block"></span>${esc(c.name[L]||c.name.ru)}</span>`).join('')}</div>` : ''}
+      ${info.facts ? `<div style="margin-top:10px;font-size:13px"><strong style="font-size:11.5px;color:var(--text-soft);text-transform:uppercase">${factsLabel}</strong><ul class="plain" style="margin-top:4px">${(info.facts[L]||info.facts.ru).map(f=>`<li>${linkifyMentions(esc(f))}</li>`).join('')}</ul></div>` : ''}
+      <div style="margin-top:10px;font-size:13px"><strong style="font-size:11.5px;color:var(--text-soft);text-transform:uppercase">${dyesLabel}</strong><p style="margin:4px 0 0">${esc(SCHOOL_DYES[L]||SCHOOL_DYES.ru)}</p></div>
+      ${info.photo ? `<div style="margin-top:8px;font-size:12.5px">${photoLabel}: <a href="${esc(info.photo.url)}" target="_blank" rel="noopener">${esc(info.photo.source)}</a> <span style="color:var(--text-soft)">(${L==='ru'?'внешняя ссылка — встроить нельзя, только внешние источники разрешены':L==='az'?'xarici keçid':'external link'})</span></div>` : ''}
+      <div style="margin-top:6px;font-size:11.5px;color:var(--text-soft)">${L==='ru'?'Источники':L==='az'?'Mənbələr':'Sources'}: ${info.refs.map(r=>`<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source)}</a>`).join(', ')}, <a href="${esc(SCHOOL_DYES.refs[0].url)}" target="_blank" rel="noopener">${esc(SCHOOL_DYES.refs[0].source)}</a></div>
+    </div>`;
+  }
+
+  if (isTermTab(state.tab) && state.school) {
+    const subs = subgroupsForSchool(state.school);
+    if (subs.length) {
+      const sLabel = state.lang==='ru'?'Подшколы (по Керимову):':state.lang==='az'?'Alt məktəblər (Kərimova görə):':'Sub-schools (per Kerimov):';
+      html += `<div style="margin-bottom:14px"><span style="font-size:12.5px;color:var(--text-soft)">${sLabel}</span> <div class="categories" style="display:inline">${subs.map(([sg,cnt])=>`<a class="cat ${state.subgroup===sg?'':''}" href="javascript:void(0)" data-goto-subgroup="${esc(sg)}" style="${state.subgroup===sg?'font-weight:700;border-color:var(--text)':''}">${esc(sg)} (${cnt})</a>`).join('')}${state.subgroup?` <a href="javascript:void(0)" data-clear-subgroup style="text-decoration:underline">✕</a>`:''}</div></div>`;
+    }
+  }
+
+  if (!list.length) {
+    html += `<p><em>${esc(T().notFound)}</em></p>`;
+    document.getElementById('main').innerHTML = html;
+    attachIndexHandlers();
+    return;
+  }
+
+  if (state.tab === 'carriers') {
+    html += `<table class="carrier-list"><tr><th>${esc(T().colMotif)}</th><th>${esc(T().colDate)}</th><th>${esc(T().colPlace)}</th><th>${esc(T().colSource)}</th></tr>`;
+    list.forEach((c,i) => {
+      html += `<tr>
+        <td><a data-open-carrier="${c._i}">${esc(carrierDisplayName(c)||'—')}</a>${(c.quote||c.description)?`<div class="q">«${esc((c.quote||c.description).slice(0,90))}${(c.quote||c.description).length>90?'…':''}»</div>`:''}</td>
+        <td>${esc(cf(c,'date')||'—')}</td><td>${esc(displayAzAware(cf(c,'location'))||'—')}</td><td>${esc(cleanSource(c.source)||'—')}</td>
+      </tr>`;
+    });
+    html += `</table>`;
+  } else {
+    let body = '<div>', currentLetter = null, openUl = false;
+    list.forEach(item => {
+      const n = displayName(item), L = firstLetter(n);
+      if (L !== currentLetter) {
+        if (openUl) body += '</ul>';
+        body += `<div class="index-letter">${esc(L)}</div><ul class="index-list">`;
+        currentLetter = L; openUl = true;
+      }
+      const kind = 'term';
+      const idAttr = item.id;
+      const meaning = getMeaning(item);
+      const hasPix = (PIX.bySite[idAttr]||[]).length > 0;
+      const untranslated = !item.canonical_az;
+      const untransLabel = state.lang==='az' ? 'AZ tərcüməsi yoxdur' : state.lang==='en' ? 'no Azerbaijani translation yet' : 'нет азерб. перевода — показано по русскому названию';
+      body += `<li><a data-open="${kind}" data-id="${esc(idAttr)}">${esc(n)}</a>${untranslated?` <span class="meta" title="${esc(untransLabel)}" style="border:1px solid var(--border-light);border-radius:3px;padding:0 3px">RU</span>`:''}${hasPix?` <span class="meta" title="${esc(PT().hasPix)}">★</span>`:''} <span class="meta">(${item.mention_count})</span>${meaning?` <span class="meta">— ${esc(meaning)}</span>`:''}</li>`;
+    });
+    if (openUl) body += '</ul>';
+    body += '</div>';
+    html += body;
+  }
+
+  document.getElementById('main').innerHTML = html;
+  attachIndexHandlers();
+}
+
+function attachIndexHandlers(){
+  const sf = document.getElementById('schoolFilter');
+  if (sf) sf.addEventListener('change', e => { state.school = e.target.value; state.subgroup=''; renderSchoolNav(); renderIndex(); });
+  const srf = document.getElementById('sourceFilter');
+  if (srf) srf.addEventListener('change', e => { state.source = e.target.value; renderIndex(); });
+}
+
+// Один делегированный обработчик на весь документ — работает и для ссылок в
+// списке, и для ссылок внутри статьи (перекрёстные ссылки мотив<->элемент,
+// категории школ), без необходимости перепривязывать после каждого рендера.
+document.addEventListener('click', e => {
+  const openEl = e.target.closest('[data-open]');
+  if (openEl) { openArticle(openEl.dataset.open, openEl.dataset.id); return; }
+  const carrierEl = e.target.closest('[data-open-carrier]');
+  if (carrierEl) { openArticle('carrier', carrierEl.dataset.openCarrier); return; }
+  const schoolEl = e.target.closest('[data-goto-school]');
+  if (schoolEl) {
+    setTab(isTermTab(state.tab) ? state.tab : 'carpets'); state.school = schoolEl.dataset.gotoSchool; state.subgroup=''; state.query = '';
+    document.getElementById('search').value = '';
+    renderSchoolNav(); renderIndex();
+    return;
+  }
+  const subEl = e.target.closest('[data-goto-subgroup]');
+  if (subEl) {
+    setTab(isTermTab(state.tab) ? state.tab : 'carpets'); state.subgroup = subEl.dataset.gotoSubgroup; state.query = '';
+    document.getElementById('search').value = '';
+    renderSchoolNav(); renderIndex();
+    return;
+  }
+  const srcGo = e.target.closest('[data-src-go]');
+  if (srcGo) { state.source = srcGo.dataset.srcGo; setTab(srcGo.dataset.srcTab === 'carriers' ? 'carriers' : (TERMS.some(t=>(t.source_counts||{})[state.source] && t.tabs.includes('borders')) && state.source==='huseynov_2012' ? 'borders' : 'elements')); state.school=''; renderIndex(); return; }
+  const clearSubEl = e.target.closest('[data-clear-subgroup]');
+  if (clearSubEl) { state.subgroup=''; renderIndex(); return; }
+  const schoolNavEl = e.target.closest('[data-school-nav]');
+  if (schoolNavEl) {
+    setTab(isTermTab(state.tab) ? state.tab : 'carpets'); state.school = schoolNavEl.dataset.schoolNav; state.subgroup=''; state.query='';
+    document.getElementById('search').value = '';
+    renderSchoolNav(); renderIndex();
+    return;
+  }
+  const subgroupNavEl = e.target.closest('[data-subgroup-nav]');
+  if (subgroupNavEl) {
+    setTab(isTermTab(state.tab) ? state.tab : 'carpets'); state.subgroup = subgroupNavEl.dataset.subgroupNav; state.query='';
+    document.getElementById('search').value = '';
+    renderSchoolNav(); renderIndex();
+    return;
+  }
+});
+
+function mentionsToArticle(mentions){
+  let body = '', refs = '';
+  (mentions||[]).forEach((m,i) => {
+    const n = i+1;
+    const scanUrl = SCAN_LINKS[sourceKey(m.source)];
+    const scanLink = scanUrl ? ` <a href="${esc(scanUrl)}" target="_blank" rel="noopener">[скан]</a>` : '';
+    body += `<p>${m.origin_notes?esc(m.origin_notes)+' ':''}${m.quote?`«${esc(m.quote)}»`:''}<sup class="cite">[<a href="#ref${n}">${n}</a>]</sup></p>`;
+    refs += `<li id="ref${n}">${esc(cleanSource(m.source))}${m.form?` <span style="color:var(--text)">— «${esc(m.form)}»</span>`:''}${scanLink}${m.quote?` — <span class="ref-quote">«${esc(m.quote)}»</span>`:''}${m.mention_depth?` <em>(${depthWord(m.mention_depth==='substantive'?'substantive':'passing')})</em>`:''}</li>`;
+  });
+  return { body, refs };
+}
+
+function reportBoxHtml(pageType, pageId, pageTitle){
+  return `
+    <div class="report-box">
+      <button class="report-toggle" id="reportToggleBtn">${esc(T().reportBtn)}</button>
+      <div class="report-form" id="reportForm">
+        <textarea id="reportNote" placeholder="${esc(T().reportPlaceholder)}"></textarea>
+        <div class="row">
+          <button id="reportSendBtn">${esc(T().reportSend)}</button>
+          <button id="reportCancelBtn">${esc(T().reportCancel)}</button>
+        </div>
+        <div class="status" id="reportStatus"></div>
+      </div>
+    </div>
+    <input type="hidden" id="reportPageType" value="${esc(pageType)}">
+    <input type="hidden" id="reportPageId" value="${esc(pageId)}">
+    <input type="hidden" id="reportPageTitle" value="${esc(pageTitle)}">
+  `;
+}
+
+function attachReportHandlers(){
+  const toggleBtn = document.getElementById('reportToggleBtn');
+  const form = document.getElementById('reportForm');
+  if (!toggleBtn) return;
+  toggleBtn.addEventListener('click', () => form.classList.toggle('open'));
+  document.getElementById('reportCancelBtn').addEventListener('click', () => form.classList.remove('open'));
+  document.getElementById('reportSendBtn').addEventListener('click', async () => {
+    const statusEl = document.getElementById('reportStatus');
+    const note = document.getElementById('reportNote').value.trim();
+    statusEl.textContent = '…';
+    try {
+      const db = await (window.claude ? window.claude.use('db') : Promise.resolve(null));
+      if (!db) { statusEl.textContent = T().reportUnavailable; return; }
+      await db.collection('error_reports').add({
+        pageType: document.getElementById('reportPageType').value,
+        pageId: document.getElementById('reportPageId').value,
+        pageTitle: document.getElementById('reportPageTitle').value,
+        note, lang: state.lang, reportedAt: new Date().toISOString()
+      });
+      statusEl.textContent = T().reportSent;
+      document.getElementById('reportNote').value = '';
+    } catch (e) {
+      statusEl.textContent = T().reportUnavailable;
+    }
+  });
+}
+
+function openArticle(kind, id){
+  let html = `<a class="back-link" href="javascript:void(0)" id="backLink">${esc(T().backLink)}</a>`;
+
+  if (kind === 'carrier') {
+    const c = DATA.carriers[+id];
+    const title = carrierDisplayName(c) || '—';
+    const matchedMotif = (c.term_id && TERM_BY_ID[c.term_id]) || findMotifByName(c.motif_name);
+    const cPage = c.source_id && c.source_id.startsWith('kerimov') ? sourceKey(c.source) : (String(c.source||'').match(/файл\s+([^)]+)/)||[])[1] || null;
+    const sameMotifs = cPage ? TERMS.filter(m => pagesOf(m).has(cPage)) : [];
+    const sameElements = [];
+    const scanUrl = cPage ? SCAN_LINKS[cPage] : null;
+
+    html += `<h1 class="page-title">${esc(title)}</h1>`;
+    html += `<div class="article-wrap"><div class="article-body">`;
+    if (matchedMotif) {
+      const meaning = getMeaning(matchedMotif);
+      if (meaning) html += `<p style="font-size:16px;font-style:italic;margin:0 0 6px">«${esc(meaning)}»</p>`;
+    }
+    html += `<p>${c.quote?`«${esc(c.quote)}»`:((c.description||!(c.source_id||'kerimov').startsWith('kerimov'))?'':`<em>${esc(T().quoteNone)}</em>`)}</p>`;
+    if (c.description) html += `<p>${esc(c.description)}</p>`;
+    if (c.attribution === 'auction') html += `<div class="disclaimer warn">${({ru:'Название и датировка — из аукционного каталога (торговая атрибуция), не из научной публикации.',az:'Ad və tarix hərrac kataloqundandır (ticarət atributsiyası), elmi nəşrdən deyil.',en:'Name and dating come from an auction catalogue (trade attribution), not a scholarly publication.'})[state.lang]}</div>`;
+    if (carrierUrl(c)) html += `<p><a href="${esc(carrierUrl(c))}" target="_blank" rel="noopener">${({ru:'Карточка в собрании музея ↗',az:'Muzey kolleksiyasında kart ↗',en:'Record in the museum collection ↗'})[state.lang]}</a>${c.image_url?` · <a href="${esc(c.image_url)}" target="_blank" rel="noopener">${({ru:'фото ↗',az:'foto ↗',en:'photo ↗'})[state.lang]}</a>`:''}${c.public_domain?` <span style="font-size:11.5px;color:var(--text-soft)">(public domain)</span>`:''}</p>`;
+    if (c.article) html += `<p style="font-size:12.5px;color:var(--text-soft)">${({ru:'Статья',az:'Məqalə',en:'Article'})[state.lang]}: ${esc(c.article)}</p>`;
+    html += `<h2 class="section-h">${esc(T().infoDetails)}</h2><table class="carrier-list">`;
+    [[T().infoDateL,cf(c,'date')],[T().infoSchool, c.school ? (SL()[c.school]||c.school) : null],[T().infoSizeL,c.size_cm&&(c.size_cm.width||c.size_cm.height)?`${c.size_cm.width||'?'}×${c.size_cm.height||'?'}`:null],
+     [T().infoPlaceL,displayAzAware(cf(c,'location'))],[({ru:'Материал',az:'Material',en:'Material'})[state.lang], cf(c,'materials')],[({ru:'Тип',az:'Növ',en:'Type'})[state.lang], c.technique && c.technique!=='ворсовый ковёр' ? c.technique : null],[T().infoCollectionL,displayAzAware(cf(c,'collection')||c.museum_or_collection)],[T().infoInvL,c.inv_number],[T().infoTechL,displayAzAware(cf(c,'technique'))],[T().infoFigL,c.figure_ref]]
+      .filter(([,v])=>v).forEach(([k,v])=>{ html += `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`; });
+    html += `</table>`;
+
+    if (matchedMotif) {
+      const isCar = matchedMotif.kind !== 'ornament';
+      const mTitle = isCar ? ({ru:'Статья о ковре',az:'Xalça haqqında məqalə',en:'Carpet article'})[state.lang] : (state.lang==='ru'?'Соответствующий мотив':state.lang==='az'?'Uyğun motiv':'Matching motif');
+      html += `<h2 class="section-h">${mTitle}</h2><div class="categories"><a class="cat" data-open="term" data-id="${esc(matchedMotif.id)}">${esc(displayName(matchedMotif))}</a></div>`;
+    }
+    if (sameMotifs.length || sameElements.length) {
+      const sTitle = state.lang==='ru'?'На той же странице':state.lang==='az'?'Eyni səhifədə':'On the same page';
+      html += `<h2 class="section-h">${sTitle}</h2><div class="categories">`;
+      sameMotifs.forEach(m => html += `<a class="cat" data-open="term" data-id="${esc(m.id)}">${esc(displayName(m))}</a>`);
+      sameElements.forEach(e => html += `<a class="cat" data-open="element" data-id="${esc(e.elem_id)}">${esc(displayName(e))}</a>`);
+      html += `</div>`;
+    }
+
+    html += `<h2 class="section-h">${esc(T().infoSourceSection)}</h2><p style="font-size:13px;color:var(--text-soft)">${c.source_id&&SOURCE_BY_ID[c.source_id]?`${esc(SOURCE_BY_ID[c.source_id].author)}. ${esc(srcTitle(SOURCE_BY_ID[c.source_id]))}. — `:''}${esc(cleanSource(c.source))}${scanUrl?` <a href="${esc(scanUrl)}" target="_blank" rel="noopener">[скан]</a>`:''}</p>`;
+    html += reportBoxHtml('carrier', id, title);
+    html += `</div></div>`;
+    document.getElementById('main').innerHTML = html;
+    document.getElementById('backLink').addEventListener('click', renderIndex);
+    attachReportHandlers();
+    return;
+  }
+
+  const item = findTerm(id);
+  if (!item) { renderIndex(); return; }
+  id = item.id; kind = 'term';
+  const title = displayName(item);
+  const { body, refs } = mentionsToArticle(item.mentions);
+  const schools = item.schools_mentioned_canonical || [];
+  const altNames = [].concat(item.canonical_az_variants||[], (item.names.az||[]).map(transliterateAzCyrillic), item.names.ru||[]).filter((v,i,a)=>v && a.findIndex(x=>x.toLowerCase()===v.toLowerCase())===i && v.toLowerCase()!==title.toLowerCase());
+  const meaning = getMeaning(item);
+
+  html += `<h1 class="page-title">${esc(title)}</h1>`;
+  html += `<div class="article-wrap"><div class="article-body">`;
+  if (meaning) html += `<p style="font-size:16px;font-style:italic;margin:0 0 6px">«${esc(meaning)}»${item.is_proper_noun?` <span style="font-size:12px;color:var(--text-soft);font-style:normal">(${state.lang==='ru'?'имя собственное':'proper noun'})</span>`:''}</p>`;
+  if (altNames.length) html += `<p style="color:var(--text-soft);font-size:12.5px">${state.lang==='ru'?'варианты написания в источнике':'source spelling variants'}: ${altNames.map(esc).join(' · ')}</p>`;
+  html += `<div id="pixSlot" data-id="${esc(id)}"></div>`;
+  html += body || `<p><em>${esc(T().noQuoteMentions)}</em></p>`;
+  html += `<h2 class="section-h">${esc(T().sectionNotes)}</h2>`;
+  html += refs ? `<ol class="refs">${refs}</ol>` : `<p><em>${esc(T().noNotes)}</em></p>`;
+
+  if (schools.length) {
+    html += `<div class="categories">${schools.map(s=>`<a class="cat" href="javascript:void(0)" data-goto-school="${esc(s)}">${esc(SL()[s]||s)}</a>`).join('')}</div>`;
+  }
+  if ((item.subgroups_mentioned||[]).length) {
+    const subLabel = state.lang==='ru'?'Подшкола:':state.lang==='az'?'Alt məktəb:':'Sub-school:';
+    html += `<p style="font-size:12.5px;color:var(--text-soft);margin:6px 0 0">${subLabel}</p>`;
+    html += `<div class="categories">${item.subgroups_mentioned.map(sg=>`<a class="cat" href="javascript:void(0)" data-goto-subgroup="${esc(sg)}">${esc(sg)}</a>`).join('')}</div>`;
+  }
+  {
+    const related = termsOnSamePages(item);
+    const relOrn = related.filter(t=>t.kind==='ornament'), relCar = related.filter(t=>t.kind!=='ornament');
+    const catLinks = arr => `<div class="categories">${arr.slice().sort((a,b)=>azCompare(displayName(a),displayName(b))).map(m=>`<a class="cat" href="javascript:void(0)" data-open="term" data-id="${esc(m.id)}">${esc(displayName(m))}</a>`).join('')}</div>`;
+    if (relOrn.length) html += `<h2 class="section-h">${esc(T().relOrn)}</h2>` + catLinks(relOrn);
+    if (relCar.length) html += `<h2 class="section-h">${esc(T().relCarpets)}</h2>` + catLinks(relCar);
+    const motifNamesSet = new Set([].concat(item.names.ru||[], item.names.az||[], item.names.en||[], item.aliases||[]).filter(Boolean).map(n=>n.trim().toLowerCase()));
+    const itemPages = pagesOf(item);
+    const relatedCarriers = DATA.carriers
+      .map((c,i)=>({c,i}))
+      .filter(({c}) => c.term_id === item.id || (c.motif_name && motifNamesSet.has(c.motif_name.trim().toLowerCase())) || (c.source_id && c.source_id.startsWith('kerimov') && sourceKey(c.source) && itemPages.has(sourceKey(c.source))));
+    if (relatedCarriers.length) {
+      const cTitle = state.lang==='ru'?'Известные образцы (носители)':state.lang==='az'?'Bilinən nümunələr (daşıyıcılar)':'Known examples (carriers)';
+      html += `<h2 class="section-h">${cTitle}</h2><div class="categories">${relatedCarriers.map(({c,i})=>`<a class="cat" data-open-carrier="${i}">${esc(carrierDisplayName(c)||'—')}${c.date?' · '+esc(c.date):''}</a>`).join('')}</div>`;
+    }
+  }
+  const visualEls = visualElementsForItem(item);
+  if (visualEls.length) {
+    const vTitle = state.lang==='ru'?'Видно на скане (модель-зрение)':state.lang==='az'?'Skanda görünür (görmə modeli)':'Seen on the scan (vision model)';
+    html += `<h2 class="section-h">${vTitle}</h2>`;
+    html += `<div class="categories">${visualEls.map(v=>{
+      const url = SCAN_LINKS[v.page];
+      const label = `${esc(v.element)}${v.confidence==='low'?' ?':''}`;
+      return url ? `<a class="cat" href="${esc(url)}" target="_blank" rel="noopener" title="${esc(v.page)}">${label}</a>` : `<span class="cat" title="${esc(v.page)}">${label}</span>`;
+    }).join('')}</div>`;
+  }
+
+  if ((item.related_pattern_mentions||[]).length) {
+    const rTitle = state.lang==='ru'?'Связанные узоры (упомянуты рядом)':state.lang==='az'?'Əlaqəli naxışlar':'Related patterns';
+    html += `<h2 class="section-h">${rTitle}</h2><div class="categories">${item.related_pattern_mentions.map(p=>{
+      if (!NAME_LINK_INDEX) buildNameLinkIndex();
+      const hit = NAME_LINK_INDEX.get(p.toLowerCase());
+      return hit ? `<a class="cat" data-open="term" data-id="${esc(hit.id)}">${esc(p)}</a>` : `<span class="cat">${esc(p)}</span>`;
+    }).join('')}</div>`;
+  }
+
+  if ((item.external_references||[]).length) {
+    const extTitle = state.lang==='ru'?'Внешние источники':state.lang==='az'?'Xarici mənbələr':'External sources';
+    html += `<h2 class="section-h">${extTitle}</h2><ul class="plain">`;
+    item.external_references.forEach(ref => {
+      html += `<li><a href="${esc(ref.url)}" target="_blank" rel="noopener">${esc(ref.source)}</a>${ref.license?` <span style="font-size:11px;color:var(--text-soft)">(${esc(ref.license)})</span>`:''}${ref.note?`<div style="color:var(--text-soft);font-size:12.5px;margin:2px 0 8px">${esc(ref.note)}${ref.note.length>=300?'…':''}</div>`:''}</li>`;
+    });
+    html += `</ul>`;
+  }
+
+  html += reportBoxHtml(kind, id, title);
+  html += `</div>`;
+
+  html += `<div class="infobox">
+    <div class="ib-title">${esc(title)}</div>
+    <div id="pixIb"></div>
+    <table>
+      <tr><th>${esc(T().infoType)}</th><td>${esc((item.tabs||[]).map(t=>({motifs:T().tabMotifs,elements:T().tabElements,borders:T().tabBorders,carpets:T().tabCarpets})[t]).join(', '))}</td></tr>
+      ${item.book && Object.keys(item.book.roles||{}).length ? `<tr><th>${esc(T().infoRoles)}</th><td>${Object.entries(item.book.roles).sort((a,b)=>b[1]-a[1]).map(([r,n])=>`${esc((ROLE_LABEL[state.lang]||ROLE_LABEL.ru)[r]||r)} (${n})`).join(', ')}</td></tr>` : ''}
+      ${item.book && item.book.kerimov_translation && state.lang!=='az' ? `<tr><th>${esc(T().infoKerTr)}</th><td>«${esc(item.book.kerimov_translation)}»</td></tr>` : ''}
+      ${(item.alt_meanings||[]).length && state.lang==='ru' ? `<tr><th>${esc(T().altMeanings)}</th><td>${item.alt_meanings.map(esc).join('; ')}</td></tr>` : ''}
+      <tr><th>${esc(T().infoMentions)}</th><td>${item.mention_count}</td></tr>
+      ${Object.keys(item.source_counts||{}).length ? `<tr><th>${({ru:'Источники',az:'Mənbələr',en:'Sources'})[state.lang]}</th><td>${Object.entries(item.source_counts).map(([s,n])=>`${esc((SOURCE_BY_ID[s]||{}).short||s)} (${n})`).join('<br>')}</td></tr>` : ''}
+      <tr><th>${esc(T().infoDepth)}</th><td>${depthWord(depthClass(item))}</td></tr>
+      ${schools.length?`<tr><th>${esc(T().infoSchool)}</th><td>${schools.map(s=>esc(SL()[s]||s)).join(', ')}${item.school_inferred?` <span style="color:var(--text-soft);font-size:11px">(${state.lang==='ru'?'выведено по соседним страницам':state.lang==='az'?'qonşu səhifələrdən çıxarılıb':'inferred from nearby pages'})</span>`:''}</td></tr>`:''}
+      ${(item.types_mentioned||[]).length?`<tr><th>${esc(T().infoElemType)}</th><td>${item.types_mentioned.map(esc).join(', ')}</td></tr>`:''}
+      <tr><th>${esc(T().infoStatus)}</th><td>${esc(T().statusUnverified)}${item.canonical_source==='machine_translation'?`<br><span style="font-size:11px">${state.lang==='az'?'ad maşın tərcüməsidir (Kərimovda yalnız rusca təsvir var)':state.lang==='en'?'name is a machine translation (Kerimov gives only a Russian description)':'название — машинный перевод (у Керимова только русское описание)'}</span>`:item.canonical_source==='kerimov_reading'?`<br><span style="font-size:11px">${state.lang==='az'?'ad Kərimovun mətnindən oxunub':state.lang==='en'?'name read from Kerimov\'s text':'название прочитано по тексту Керимова'}</span>`:''}</td></tr>
+      <tr><th>${esc(T().infoId)}</th><td style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px;word-break:break-all">${esc(item.id)}</td></tr>
+    </table>
+  </div>`;
+  html += `</div>`;
+
+  document.getElementById('main').innerHTML = html;
+  document.getElementById('backLink').addEventListener('click', renderIndex);
+  attachReportHandlers();
+  fillPixSlots();
+}
+
+document.getElementById('tabList').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-tab]'); if (!btn) return;
+  state.tab = btn.dataset.tab; state.school=''; state.subgroup=''; state.query=''; if (btn.dataset.tab==='sources') state.source='';
+  document.querySelectorAll('#tabList button').forEach(b=>b.classList.toggle('active', b===btn));
+  document.getElementById('search').value = '';
+  renderIndex();
+});
+document.getElementById('langList').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-lang]'); if (!btn) return;
+  state.lang = btn.dataset.lang;
+  renderChrome();
+  renderSchoolNav();
+  renderIndex();
+});
+document.getElementById('searchBtn').addEventListener('click', () => { state.query = document.getElementById('search').value; renderIndex(); });
+document.getElementById('search').addEventListener('keydown', e => { if (e.key==='Enter') { state.query = e.target.value; renderIndex(); } });
+
+/* ===================== Пиксельные схемы (из Carpet Pattern Studio) ===================== */
+const PIX = { items: [], byId: {}, bySite: {}, loaded: false, db: null, canEdit: null, err: '' };
+function cpsBase(){ try{ return (localStorage.getItem('cpsBaseUrl') || 'http://localhost:8000').replace(/\/$/,''); }catch(e){ return 'http://localhost:8000'; } }
+function cpsSetBase(){ let cur=''; try{ cur=localStorage.getItem('cpsBaseUrl')||''; }catch(e){} const v=prompt('Адрес Carpet Pattern Studio (для кнопки «редактировать»):', cur||cpsBase()); if(v===null) return; try{ localStorage.setItem('cpsBaseUrl', v.trim()); }catch(e){} pixRefreshView(); }
+function pixEditLink(it){ if(!PIX.canEdit) return ''; return `<a href="${esc(cpsBase())}/?fid=${encodeURIComponent(it.id)}" target="_blank" rel="noopener">✎ ${esc(PT().edit)}</a>`; }
+const PIX_T = {
+  ru: { tab:'Иллюстрации', title:'Иллюстрации: пиксельные схемы', desc:'Схемы элементов, перерисованные по узлам с таблиц книги. 1 клетка = 1 узел.',
+        none:'Схем пока нет.', import:'Импорт пакета…', importHint:'Файл pixel_schemes_bundle.json из Carpet Pattern Studio («Каталог» → «Пакет для сайта»).',
+        imported:n=>`Загружено схем: ${n}`, onPage:'Схема из книги', knots:'узлов', carpet:'Ковёр', source:'Источник', del:'удалить', edit:'редактировать', cpsSettings:'адрес CPS', hasPix:'есть пиксельная схема',
+        loading:'загрузка схем…', noAccess:'Нет прав на запись (нужен доступ «может редактировать»).', unavailable:'Хранилище недоступно в этом просмотре.', pages:'Страницы', unlinked:'без привязки', png:'PNG' },
+  az: { tab:'İllüstrasiyalar', title:'İllüstrasiyalar: piksel sxemləri', desc:'Kitabın cədvəllərindən ilmə-ilmə köçürülmüş element sxemləri. 1 xana = 1 ilmə.',
+        none:'Hələ sxem yoxdur.', import:'Paketi yüklə…', importHint:'Carpet Pattern Studio-dan pixel_schemes_bundle.json faylı.',
+        imported:n=>`Yüklənən sxem: ${n}`, onPage:'Kitabdan sxem', knots:'ilmə', carpet:'Xalça', source:'Mənbə', del:'sil', edit:'redaktə et', cpsSettings:'CPS ünvanı', hasPix:'piksel sxemi var',
+        loading:'sxemlər yüklənir…', noAccess:'Yazmaq hüququ yoxdur.', unavailable:'Yaddaş bu baxışda əlçatan deyil.', pages:'Səhifələr', unlinked:'bağlantısız', png:'PNG' },
+  en: { tab:'Illustrations', title:'Illustrations: pixel charts', desc:'Element charts redrawn knot by knot from the book plates. 1 cell = 1 knot.',
+        none:'No charts yet.', import:'Import bundle…', importHint:'pixel_schemes_bundle.json from Carpet Pattern Studio.',
+        imported:n=>`Imported charts: ${n}`, onPage:'Chart from the book', knots:'knots', carpet:'Carpet', source:'Source', del:'delete', edit:'edit', cpsSettings:'CPS address', hasPix:'has a pixel chart',
+        loading:'loading charts…', noAccess:'No write access (edit permission required).', unavailable:'Storage unavailable in this view.', pages:'Pages', unlinked:'unlinked', png:'PNG' }
+};
+function PT(){ return PIX_T[state.lang] || PIX_T.ru; }
+
+function pixIndex(){
+  PIX.byId = {}; PIX.bySite = {};
+  PIX.items.sort((a,b)=> (+a.table||999)-(+b.table||999) || (+a.fig||0)-(+b.fig||0) || String(a.id).localeCompare(String(b.id)));
+  for (const it of PIX.items) {
+    PIX.byId[it.id] = it;
+    for (const s0 of (it.site_ids||[])) { const s = resolveId(s0); const L = (PIX.bySite[s] = PIX.bySite[s] || []); if (!L.includes(it)) L.push(it); }
+  }
+}
+function pixCanvas(it, maxW, maxH, opts){
+  opts = opts || {};
+  const w = +it.w, h = +it.h, rows = it.rows || [], pal = it.palette || ['#ffffff','#222222'];
+  const cs = Math.max(1, Math.floor(Math.min(maxW / w, maxH / h)));
+  const c = document.createElement('canvas');
+  const dpr = window.devicePixelRatio || 1;
+  c.width = w * cs * dpr; c.height = h * cs * dpr; c.style.width = (w*cs)+'px'; c.style.height = (h*cs)+'px';
+  c.style.imageRendering = 'pixelated'; c.style.display = 'block';
+  const x = c.getContext('2d'); x.scale(dpr, dpr);
+  x.fillStyle = pal[0] || '#fff'; x.fillRect(0, 0, w*cs, h*cs);
+  for (let j = 0; j < h; j++) { const r = rows[j] || ''; for (let i = 0; i < w; i++) {
+    const ch = r[i] || '.'; if (ch === '.') continue; const k = parseInt(ch, 36);
+    x.fillStyle = pal[k] || '#f0f'; x.fillRect(i*cs, j*cs, cs, cs); } }
+  if (cs >= 5 && opts.grid !== false && pixGridOn()) {   // единая сетка CPS: светло-голубая, жирная каждые 10 узлов от левого верхнего угла
+    x.strokeStyle = 'rgba(150,198,240,.55)'; x.lineWidth = 1; x.beginPath();
+    for (let i = 0; i <= w; i++) { x.moveTo(i*cs+0.5, 0); x.lineTo(i*cs+0.5, h*cs); }
+    for (let j = 0; j <= h; j++) { x.moveTo(0, j*cs+0.5); x.lineTo(w*cs, j*cs+0.5); }
+    x.stroke();
+    x.strokeStyle = 'rgba(74,146,214,.9)'; x.beginPath();
+    for (let i = 0; i <= w; i += 10) { x.moveTo(i*cs+0.5, 0); x.lineTo(i*cs+0.5, h*cs); }
+    for (let j = 0; j <= h; j += 10) { x.moveTo(0, j*cs+0.5); x.lineTo(w*cs, j*cs+0.5); }
+    x.stroke();
+  }
+  c.title = it.name || it.id;
+  return c;
+}
+function pixGridOn(){ try { return localStorage.getItem('pixGrid') !== '0'; } catch(e) { return true; } }
+function pixL(o, fb){ if (o && typeof o === 'object') { const L = state.lang; return o[L] || (L==='az' ? '' : o.ru) || fb || ''; } return fb || ''; }
+function pixCaption(it){
+  const bits = [], L = state.lang, nm = it.names || {};
+  const title = nm.az || it.name;
+  const mean = L === 'az' ? '' : (nm[L] || (L === 'ru' ? it.translation : ''));
+  if (title) bits.push(`<b>${esc(titleCase(title, 'az'))}</b>${mean?` — «${esc(mean)}»`:''}`);
+  const school = it.school && SCHOOL_LABEL[L] && SCHOOL_LABEL[L][it.school];
+  const src = pixL(it.source_i18n, it.source || (it.table?`Табл. ${it.table}, рис. ${it.fig}`:''));
+  const sub = [pixL(it.carpet_i18n, it.carpet), school || it.type, src, `${it.w}×${it.h} ${PT().knots}`].filter(Boolean).map(esc).join(' · ');
+  const note = pixL(it.note_i18n, it.note);
+  return bits.join('') + `<div style="color:var(--text-soft);font-size:12px">${sub}</div>` + (note?`<div style="font-size:12.5px;margin-top:3px">${esc(note)}</div>`:'');
+}
+function pixFrame(it, maxW, maxH){
+  const fig = document.createElement('figure');
+  fig.style.cssText = 'margin:0 0 14px;display:inline-block;vertical-align:top;max-width:100%';
+  const box = document.createElement('div');
+  box.style.cssText = 'border:1px solid var(--border-light);background:#fff;padding:6px;display:inline-block;cursor:zoom-in;max-width:100%;overflow:auto';
+  box.appendChild(pixCanvas(it, maxW, maxH));
+  box.addEventListener('click', () => pixZoom(it));
+  const cap = document.createElement('figcaption'); cap.style.cssText = 'font-size:13px;margin-top:5px;max-width:'+Math.max(220,maxW)+'px';
+  cap.innerHTML = pixCaption(it);
+  fig.appendChild(box); fig.appendChild(cap);
+  return fig;
+}
+function pixZoom(it){
+  const ov = document.createElement('div');
+  ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;cursor:zoom-out';
+  const card = document.createElement('div');
+  card.style.cssText = 'background:var(--bg);color:var(--text);padding:14px;max-width:100%;max-height:100%;overflow:auto;border:1px solid var(--border);cursor:default';
+  const holder = document.createElement('div'); holder.style.cssText = 'background:#fff;padding:8px;display:inline-block';
+  const cv = pixCanvas(it, Math.min(window.innerWidth-80, 1100), Math.min(window.innerHeight-200, 800)); holder.appendChild(cv);
+  const cap = document.createElement('div'); cap.style.marginTop = '8px'; cap.innerHTML = pixCaption(it);
+  card.appendChild(holder); card.appendChild(cap);
+  card.addEventListener('click', e => e.stopPropagation());
+  ov.appendChild(card); ov.addEventListener('click', () => ov.remove());
+  document.addEventListener('keydown', function k(e){ if (e.key==='Escape'){ ov.remove(); document.removeEventListener('keydown', k);} });
+  document.body.appendChild(ov);
+}
+/* вставка в статью элемента/мотива */
+function fillPixSlots(){
+  const slot = document.getElementById('pixSlot'); if (!slot) return;
+  const key = slot.dataset.id; const list = PIX.bySite[key] || [];
+  slot.innerHTML = ''; const ib = document.getElementById('pixIb'); if (ib) ib.innerHTML = '';
+  if (!list.length) return;
+  const h = document.createElement('h2'); h.className = 'section-h'; h.textContent = PT().onPage + (list.length>1?` (${list.length})`:'');
+  slot.appendChild(h);
+  const wrap = document.createElement('div'); wrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:18px';
+  list.forEach(it => {
+    const fig = pixFrame(it, 300, 300);
+    if (PIX.canEdit) {
+      const links = document.createElement('div'); links.style.cssText = 'font-size:12.5px;margin-top:3px';
+      links.innerHTML = [pixEditLink(it), `<a data-pix-del="${esc(it.id)}" style="color:var(--text-soft)">${esc(PT().del)}</a>`].filter(Boolean).join(' · ');
+      fig.querySelector('figcaption').appendChild(links);
+    }
+    wrap.appendChild(fig);
+  });
+  slot.appendChild(wrap);
+  slot.addEventListener('click', e => {
+    const d = e.target.closest('[data-pix-del]'); if (d && PIX.db && confirm('Удалить схему ' + d.dataset.pixDel + '?')) PIX.db.collection('pixel_schemes').doc(d.dataset.pixDel).delete().catch(er => alert(er.message||er));
+  });
+  if (ib) { const b = document.createElement('div'); b.style.cssText = 'background:#fff;padding:8px;display:flex;justify-content:center;border-bottom:1px solid var(--border);cursor:zoom-in';
+    b.appendChild(pixCanvas(list[0], 220, 220, {grid:false})); b.addEventListener('click', () => pixZoom(list[0])); ib.appendChild(b); }
+}
+/* страница «Иллюстрации» */
+function siteTitleFor(id){
+  const it = findTerm(id);
+  return it ? displayName(it) : id;
+}
+function renderIllustrations(){
+  const main = document.getElementById('main'); const t = PT();
+  let html = `<h1 class="page-title">${esc(t.title)}</h1><p style="color:var(--text-soft);font-size:13.5px;margin:0 0 10px">${esc(t.desc)}</p>`;
+  html += `<div class="subtitle-count">${PIX.loaded ? T().recordsCount(PIX.items.length) : esc(PIX.err || t.loading)}</div>`;
+  html += `<div id="pixAdmin" style="margin-bottom:16px;display:none"><label class="report-toggle" style="display:inline-block">${esc(t.import)}<input type="file" id="pixFile" accept=".json,application/json" hidden></label> <button class="report-toggle" id="pixCpsBtn" type="button">⚙ ${esc(t.cpsSettings)}</button> <span id="pixStatus" style="font-size:12.5px;color:var(--text-soft)"></span><div style="font-size:12px;color:var(--text-soft);margin-top:4px">${esc(t.importHint)}</div></div>`;
+  html += `<div style="margin:0 0 10px"><label style="font-size:13px;cursor:pointer"><input type="checkbox" id="pixGridT" ${pixGridOn()?'checked':''}> ${esc(({ru:'сетка',az:'tor',en:'grid'})[state.lang]||'сетка')}</label></div>`;
+  html += `<div id="pixGallery"></div>`;
+  main.innerHTML = html;
+  const gal = document.getElementById('pixGallery');
+  document.getElementById('pixGridT').onchange = e => { try { localStorage.setItem('pixGrid', e.target.checked ? '1' : '0'); } catch(er) {} renderIllustrations(); };
+  if (PIX.loaded && !PIX.items.length) gal.innerHTML = `<p><em>${esc(t.none)}</em></p>`;
+  let lastSec = null, grid = null;
+  for (const it of PIX.items) {
+    const sec = pixL(it.section_i18n, it.section || '') + (it.table ? ` — ${({ru:'Табл.',az:'Cədvəl',en:'Table'})[state.lang]||'Табл.'} ${it.table}` : '');
+    if (sec !== lastSec) { lastSec = sec; const h = document.createElement('div'); h.className = 'index-letter'; h.textContent = sec || '—'; gal.appendChild(h);
+      grid = document.createElement('div'); grid.style.cssText = 'display:flex;flex-wrap:wrap;gap:14px 22px'; gal.appendChild(grid); }
+    const fig = pixFrame(it, 200, 200);
+    const links = document.createElement('div'); links.style.cssText = 'font-size:12.5px;margin-top:3px';
+    const ids = it.site_ids || [];
+    links.innerHTML = ids.length ? ids.map(s => `<a data-pix-open="${esc(s)}">${esc(siteTitleFor(s))}</a>`).join(' · ') : `<span style="color:var(--text-soft)">${esc(t.unlinked)}</span>`;
+    if (PIX.canEdit) links.innerHTML += ` · ${pixEditLink(it)} · <a data-pix-del="${esc(it.id)}" style="color:var(--text-soft)">${esc(t.del)}</a>`;
+    fig.querySelector('figcaption').appendChild(links);
+    grid.appendChild(fig);
+  }
+  gal.addEventListener('click', e => {
+    const o = e.target.closest('[data-pix-open]'); if (o) { const id = o.dataset.pixOpen; openArticle('term', id); window.scrollTo(0,0); return; }
+    const d = e.target.closest('[data-pix-del]'); if (d && PIX.db && confirm('Удалить схему ' + d.dataset.pixDel + '?')) PIX.db.collection('pixel_schemes').doc(d.dataset.pixDel).delete().catch(er => alert(er.message||er));
+  });
+  pixAdminUi();
+}
+function pixAdminUi(){
+  const box = document.getElementById('pixAdmin'); if (!box) return;
+  if (!PIX.db || PIX.canEdit === false) { box.style.display = 'none'; return; }
+  box.style.display = '';
+  const cpsBtn = document.getElementById('pixCpsBtn'); if (cpsBtn) cpsBtn.addEventListener('click', cpsSetBase);
+  document.getElementById('pixFile').addEventListener('change', async e => {
+    const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+    const st = document.getElementById('pixStatus'); st.textContent = '…';
+    try {
+      const j = JSON.parse(await f.text());
+      const items = Array.isArray(j) ? j : (j.items || []);
+      if (!items.length) throw new Error('в файле нет схем');
+      let n = 0;
+      for (const it of items) {
+        if (!it.id || !it.rows || !it.w || !it.h) continue;
+        const doc = { id:String(it.id), table:it.table??null, fig:it.fig??null, section:it.section||'', name:it.name||'', translation:it.translation||'',
+          carpet:it.carpet||'', type:it.type||'', note:it.note||'', source:it.source||'', site_ids:(it.site_ids||[]).map(String),
+          w:+it.w, h:+it.h, rows:it.rows.map(String), palette:(it.palette||[]).map(String), palette_names:(it.palette_names||[]).map(String),
+          updated:it.updated||'', imported_at:new Date().toISOString() };
+        for (const k of ['names','name_book','carpet_i18n','note_i18n','source_i18n','section_i18n','school','grid_origin','i18n_status','difficulty','source_ref']) if (it[k] != null) doc[k] = it[k];
+        await PIX.db.collection('pixel_schemes').doc(doc.id).set(doc); n++;
+        st.textContent = PT().imported(n) + ' / ' + items.length;
+      }
+      st.textContent = PT().imported(n);
+    } catch (er) {
+      st.textContent = (er && er.code === 'invalid_argument') ? PT().noAccess : ('⚠ ' + (er.message || er));
+    }
+  });
+}
+function pixRefreshView(){
+  if (state.tab === 'illustrations') { renderIllustrations(); return; }
+  if (document.getElementById('pixSlot')) { fillPixSlots(); return; }
+  renderIndex();
+}
+(async function initPix(){
+  try {
+    const db = await (window.claude ? window.claude.use('db') : Promise.resolve(null));
+    if (!db) { PIX.err = PT().unavailable; PIX.loaded = true; pixRefreshView(); return; }
+    PIX.db = db;
+    try { const u = await window.claude.use('user'); PIX.canEdit = u ? (u.canEdit ? !!u.canEdit() : null) : null; } catch(e) { PIX.canEdit = null; }
+    db.collection('pixel_schemes').onSnapshot(snap => {
+      PIX.items = snap.docs.map(d => d.data()).filter(Boolean).map(x => Object.assign({}, x));
+      PIX.loaded = true; pixIndex(); pixRefreshView();
+    }, err => { PIX.err = String(err && err.message || err); PIX.loaded = true; pixRefreshView(); });
+  } catch (e) { PIX.err = String(e.message || e); PIX.loaded = true; }
+})();
+
+renderChrome();
+renderSchoolNav();
+renderIndex();
+</script>
+</body>
+</html>
+
+</body></html>
