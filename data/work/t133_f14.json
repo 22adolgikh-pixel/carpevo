@@ -39,7 +39,9 @@
   "translation": "",
   "carpet": "",
   "type": "",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.8718,
@@ -112,13 +114,15 @@
  },
  "palette": [
   "#ffffff",
-  "#1a1a1a"
+  "#1a1a1a",
+  "#b8b8b8"
  ],
  "palette_names": [
   "фон",
-  "обводка"
+  "обводка",
+  "тело 1"
  ],
- "palette_touched": false,
+ "palette_touched": true,
  "auto": {
   "version": 1,
   "confidence": 1.0,
@@ -154,5 +158,12 @@
    39
   ]
  },
- "saved_at": "2026-10-03 12:07:25"
+ "saved_at": "2026-10-03 12:38:49",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }
