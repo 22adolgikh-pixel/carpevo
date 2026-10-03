@@ -173,6 +173,19 @@ button.bigrev{background:transparent;border-color:#8a3c44;color:#f0b3b9}button.b
 aside{min-height:0}
 .dchip.rev{background:var(--bad)}
 #right .hintbox .htxt{left:auto;right:-6px}
+#tab-grid{background:#1c2a3d;border:1px solid var(--ln);border-radius:6px;padding:4px 12px;margin-right:6px}
+body.geom #tab-grid{background:var(--acc);color:#111}
+.seg{display:inline-flex;border:1px solid var(--ln);border-radius:7px;overflow:hidden}.seg button{border:0;border-radius:0;background:transparent;font-weight:600}.seg button.on{background:var(--acc);color:#111}.seg small{opacity:.7;margin-left:3px}
+.card.kf{outline:2px solid var(--acc);outline-offset:1px}
+#pv{position:fixed;top:56px;bottom:46px;z-index:50;display:none;gap:10px;align-items:stretch;background:rgba(14,16,22,.97);border:1px solid var(--ln);border-radius:10px;padding:10px;box-shadow:0 12px 40px rgba(0,0,0,.6);pointer-events:none;max-width:58vw;flex-wrap:wrap;overflow:hidden}
+#pv .pvc{display:flex;flex-direction:column;flex:1;min-width:0}#pv .pvl,.rvp .pvl{color:var(--mut);font-size:11px;margin-bottom:4px}
+#pv img{flex:1;min-height:0;max-width:27vw;max-height:calc(100vh - 170px);object-fit:contain;background:#fff;border-radius:4px}#pv .pvt{width:100%;font-weight:600}
+#pv img.px,.rvp img.px{image-rendering:pixelated}
+#rv{position:fixed;inset:0;z-index:70;background:rgba(8,10,14,.98);display:flex;flex-direction:column;padding:12px 18px;gap:10px}
+#rv .rvh,#rv .rvf{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#rv .rvb{flex:1;min-height:0;display:flex;gap:14px}.rvp{flex:1;min-width:0;display:flex;flex-direction:column}.rvp img{flex:1;min-height:0;object-fit:contain;background:#fff;border-radius:6px;width:100%}
+#rv .rvf button{padding:10px 18px;font-size:14px}#rv kbd{background:rgba(0,0,0,.25);border-radius:3px;padding:0 5px;margin-left:4px;font-size:12px}
+#rv .rvdone{margin:auto;text-align:center}
 .srcbar{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:8px}
 .srcbar button{padding:2px 7px;font-size:11.5px}
 </style></head><body>
@@ -180,9 +193,9 @@ aside{min-height:0}
 <header>
   <b>🧶 Carpet Pattern Studio</b>
   <div class="tabs">
-    <button id="tab-pipe">⚙ Конвейер</button><button id="tab-sheet">1 · Листы</button><button id="tab-grid">2 · Геометрия и сетка</button><button id="tab-pix">3 · Пиксели</button><button id="tab-cat">4 · Каталог</button><button id="tab-queue">5 · Очередь</button>
+    <button id="tab-pipe">⚙ Конвейер</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button><button id="tab-pix">3 · Пиксели</button>
   </div>
-  <span class="sp"></span>
+  <button id="tab-grid" style="justify-self:end" data-tip="Геометрия и сетка открывается поверх любого экрана; Esc или повторный клик — вернуться (клавиша G)">▦ Геометрия</button>
 </header>
 
 <aside id="left"></aside>
@@ -316,11 +329,14 @@ function near(a,b,r){return Math.hypot(a.x-b.x,a.y-b.y)<=r*px1();}
 /* ============================ режимы ============================ */
 const MODES={};
 function H(){return MODES[S.mode==='grid'?(S.gridView||'grid'):S.mode];}
-function setMode(m){
+function setMode(m,opt){
+  opt=opt||{};
+  if(m==='grid'&&S.mode!=='grid')S.geomBack=opt.back||(S.mode==='cat'?'queue':S.mode);
   if(m!=='sheet'&&m!=='cat'&&m!=='queue'&&m!=='pipe'&&!S.fig){stat('сначала откройте рисунок в «Каталоге» (или нарежьте лист)','err');m=S.fig?m:(S.mode==='sheet'?'sheet':'cat');}
-  S.mode=m;S.peek=false;$('peek').style.display='none';
+  S.mode=m;S.peek=false;if(typeof pvHide==='function')pvHide();$('peek').style.display='none';
   document.body.classList.toggle('noleft',m!=='sheet');
-  ['pipe','sheet','grid','pix','cat','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===m));
+  ['pipe','sheet','grid','pix','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===m||(k==='queue'&&m==='cat')));
+  $('tab-grid').textContent=m==='grid'?'✕ Закрыть геометрию (Esc)':'▦ Геометрия';document.body.classList.toggle('geom',m==='grid');
   $('catalog').style.display=(m==='cat'||m==='queue'||m==='pipe')?'block':'none';
   $('vpbar').style.display=$('hud').style.display=(m==='cat'||m==='queue'||m==='pipe')?'none':'';
   $('toolcol').style.display=m==='pix'?'flex':'none';
@@ -347,7 +363,9 @@ async function gotoFig(delta,todo){
   await openFigure(list[i].id);
   const want=S.fig.M?'pix':'grid';if(S.mode!==want)setMode(want);   // готовые — сразу в пиксели, новые — в сетку
 }
-['pipe','sheet','grid','pix','cat','queue'].forEach(k=>$('tab-'+k).onclick=()=>setMode(k));
+['pipe','sheet','pix','queue'].forEach(k=>$('tab-'+k).onclick=()=>setMode(k));
+function geomToggle(){if(S.mode==='grid'){const b=S.geomBack||'pix';setMode(b==='grid'?'pix':b);}else if(S.fig)setMode('grid');else stat('сначала откройте рисунок','err');}
+$('tab-grid').onclick=geomToggle;
 
 /* ============================ левая панель ============================ */
 /* дерево источников: папка → подпапка → листы (до двух уровней) */
@@ -1253,12 +1271,18 @@ async function renameFigure(nid){const F=S.fig;if(!nid||nid===F.id)return;if(!/^
 /* ============================ 4. КАТАЛОГ ============================ */
 const TYPEF={'':()=>true,bw:f=>!f.color&&!f.photo,color:f=>!!f.color&&!f.photo,border:f=>!!f.border&&!f.photo,photo:f=>!!f.photo};
 const TYPEL=[['','все'],['bw','узор ЧБ'],['color','узор цветной'],['border','бордюр'],['photo','фото']];
+function viewSwitch(){
+  const nq=S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo).length;
+  return `<span class="seg" data-tip="Один экран — два взгляда: очередь проверки (авто-результаты, ещё не принятые) и весь каталог рисунков"><button data-vs="queue" class="${S.mode==='queue'?'on':''}">✓ Очередь проверки <small>${nq}</small></button><button data-vs="cat" class="${S.mode==='cat'?'on':''}">▦ Все рисунки <small>${S.figures.length}</small></button></span>`;
+}
+function bindViewSwitch(C){C.querySelectorAll('[data-vs]').forEach(b=>b.onclick=()=>{if(S.mode!==b.dataset.vs)setMode(b.dataset.vs);});}
 function renderCatalog(){
+  pvHide();
   const C=$('catalog');const q=norm(S.catQ);
   const fq=document.activeElement&&document.activeElement.id==='catQ',cpos=fq?document.activeElement.selectionStart:0;
   const figs=S.figures.filter(f=>(!q||[f.id,f.name_az,f.name,f.translation,f.site_id].some(v=>norm(v).includes(q)))&&(!S.catRev||f.review)&&(!S.catAuto||f.auto)&&(!S.catNoSite||!f.site_id)&&TYPEF[S.catType||''](f));
   const done=figs.filter(f=>f.done).length,rev=S.figures.filter(f=>f.review).length;
-  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px"><b style="font-size:15px">Каталог рисунков</b><span style="color:var(--mut)">${figs.length}${q?(' из '+S.figures.length):''} · ${done} готово</span><span class="sp"></span>
+  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">${viewSwitch()}<span style="color:var(--mut)">${figs.length}${q?(' из '+S.figures.length):''} · ${done} готово</span><span class="sp"></span>
     <span class="dfilter" data-tip="тип рисунка">${TYPEL.map(([k,l])=>`<button class="${(S.catType||'')===k?'on':''}" data-ct="${k}">${l} <small>${S.figures.filter(TYPEF[k]).length}</small></button>`).join('')}</span>
     <label class="flex" style="color:var(--mut)"><input type="checkbox" id="catRev" ${S.catRev?'checked':''}>⚠ на пересмотр (${rev})</label>
     <label class="flex" style="color:var(--mut)" data-tip="автооцифровка, ещё не проверена человеком"><input type="checkbox" id="catAuto" ${S.catAuto?'checked':''}>⚡ не проверены (${S.figures.filter(f=>f.auto).length})</label>
@@ -1270,6 +1294,7 @@ function renderCatalog(){
     <div class="m">${esc(f.id)}${f.translation?' · '+esc(f.translation):''}${f.carpet?' · '+esc(f.carpet):''}${f.size?' · '+f.size[0]+'×'+f.size[1]:''}${f.colors?' · '+f.colors+' цв.':''}</div>
     <div class="m">${f.site_id?'→ '+esc(f.site_id):'<span style="color:var(--bad)">нет привязки к сайту</span>'}</div>
     ${f.size?`<div class="m files">${[['.png','PNG','1 узел = 1 пиксель, фон прозрачный'],['_x12.png','×12','крупно, фон прозрачный, без сетки'],['_bg.png','×12 фон','крупно, с цветом фона'],['_grid.png','сетка','сетка отдельным прозрачным слоем'],['.svg','SVG','векторный']].map(([suf,l,tp])=>`<a href="/out/${encodeURIComponent(f.id)}${suf}?t=${Math.round(f.t)}" target="_blank" data-tip="${tp}">${l}</a>`).join(' · ')}</div>`:''}</div>`).join('')}</div>`;
+  bindViewSwitch(C);bindPreview(C);
   $('catOnly').onchange=e=>{S.catOnly=e.target.checked;renderCatalog();};
   $('catRev').onchange=e=>{S.catRev=e.target.checked;renderCatalog();};
   $('catAuto').onchange=e=>{S.catAuto=e.target.checked;renderCatalog();};
@@ -1286,10 +1311,11 @@ const QSORT={risk_asc:['надёжные сначала',(a,b)=>qrisk(a)-qrisk(b
 function qrisk(f){return f.risk!=null?f.risk:(1-(f.auto_conf??0));}
 function qItems(){return S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo&&TYPEF[S.qType||''](f)).sort((QSORT[S.qSort||'risk_asc']||QSORT.risk_asc)[1]);}
 function renderQueue(){
+  pvHide();
   const C=$('catalog');S.qSel=S.qSel||new Set();const thr=S.qThr??0.25;
   const all=S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo),items=qItems(),sure=items.filter(f=>qrisk(f)<=thr);
   [...S.qSel].forEach(id=>{if(!items.some(f=>f.id===id))S.qSel.delete(id);});
-  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px"><b style="font-size:15px">Очередь проверки</b><span style="color:var(--mut)">${items.length} из ${all.length} ждут проверки</span><span class="sp"></span>
+  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">${viewSwitch()}<span style="color:var(--mut)">${items.length} из ${all.length} ждут проверки</span><button id="qFast" class="sm" ${items.length?'':'disabled'} data-tip="Рисунки по одному: слева оригинал, справа результат. A — принять, X — на доработку, → — пропустить">▶ быстрая проверка</button><span class="sp"></span>
     <span class="dfilter" data-tip="тип рисунка">${TYPEL.map(([k,l])=>`<button class="${(S.qType||'')===k?'on':''}" data-qt="${k}">${l} <small>${all.filter(TYPEF[k]).length}</small></button>`).join('')}</span>
     <select id="qSort" style="flex:none">${Object.entries(QSORT).map(([k,v])=>`<option value="${k}" ${(S.qSort||'risk_asc')===k?'selected':''}>${v[0]}</option>`).join('')}</select></div>
   <div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">
@@ -1301,6 +1327,7 @@ function renderQueue(){
     return `<div class="card" data-id="${esc(f.id)}"><label class="qchk" data-tip="выбрать для массового принятия"><input type="checkbox" data-sel="${esc(f.id)}" ${S.qSel.has(f.id)?'checked':''}></label><div class="im"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_bg.png?t=${Math.round(f.t)}"></div>
     <div class="t"><span class="dot" style="display:inline-block;margin-right:5px;background:${col}"></span>${esc(dispName(f)||f.id)}</div>
     <div class="m">${esc(f.id)} · ${f.size[0]}×${f.size[1]}${f.colors?' · '+f.colors+' цв.':''} · риск ${r.toFixed(2)}${f.sym&&f.n_sus?` · <span style="color:#ff9f1c" data-tip="клеток нарушает симметрию (${esc(f.sym)})">◇${f.n_sus}</span>`:''}${f.border?' · кайма':''}${f.diff_est?' · '+({simple:'простой',medium:'средний',complex:'сложный',ultra:'ультра'}[f.diff_est]||f.diff_est):''}</div></div>`;}).join('')||'<div class="hint">Очередь пуста — все авто-результаты проверены.</div>'}</div>`;
+  bindViewSwitch(C);bindPreview(C);bindQueueKeys(C);$('qFast').onclick=()=>openReview();
   C.querySelectorAll('[data-qt]').forEach(b=>b.onclick=()=>{S.qType=b.dataset.qt;renderQueue();});
   $('qSort').onchange=e=>{S.qSort=e.target.value;renderQueue();};
   $('qThr').oninput=e=>{S.qThr=+e.target.value;$('qThrV').textContent=S.qThr.toFixed(2);};
@@ -1313,6 +1340,82 @@ function renderQueue(){
     try{const r=await api('/api/accept',{ids:[...S.qSel]});S.qSel.clear();await refreshFigures();stat('принято: '+r.accepted,'ok');}catch(e){fail(e);}};
   $('qRev').onclick=async()=>{if(!S.qSel.size)return;try{const r=await api('/api/review_mark',{ids:[...S.qSel],value:true});S.qSel.clear();await refreshFigures();stat('отмечено на доработку: '+r.marked+' (фильтр «на пересмотр» в каталоге)','ok');}catch(e){fail(e);}};
   C.querySelectorAll('.card').forEach(el=>el.onclick=()=>openFigure(el.dataset.id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail));
+}
+
+/* ---- предпросмотр при наведении: оригинал рядом с результатом ---- */
+function pvEl(){let e=$('pv');if(!e){e=document.createElement('div');e.id='pv';document.body.appendChild(e);}return e;}
+function pvShow(id,x){
+  const f=S.figures.find(v=>v.id===id);if(!f)return;const e=pvEl(),t=Math.round(f.t||0);
+  const right=x<innerWidth/2;e.style.cssText=`display:flex;${right?'right':'left'}:14px`;
+  e.innerHTML=`<div class="pvc"><div class="pvl">оригинал</div><img src="/api/crop/${encodeURIComponent(id)}?t=${t}"></div>`+
+    (f.size?`<div class="pvc"><div class="pvl">результат · ${f.size[0]}×${f.size[1]}${f.risk!=null?' · риск '+(+f.risk).toFixed(2):''}</div><img class="px" src="/out/${encodeURIComponent(id)}_bg.png?t=${t}"></div>`:'')+
+    `<div class="pvt">${esc(dispName(f)||id)} · ${esc(id)}</div>`;
+}
+function pvHide(){const e=$('pv');if(e)e.style.display='none';}
+function bindPreview(C){C.querySelectorAll('.card').forEach(el=>{el.addEventListener('mouseenter',ev=>pvShow(el.dataset.id,ev.clientX));el.addEventListener('mouseleave',pvHide);});}
+
+/* ---- клавиатура в очереди: стрелки — по карточкам, пробел — отметить, A — принять, X — на доработку, Enter — открыть ---- */
+function qCards(){return [...document.querySelectorAll('#catalog .card')];}
+function qFocus(i,scroll){const cs=qCards();if(!cs.length)return;i=Math.max(0,Math.min(cs.length-1,i));cs.forEach(c=>c.classList.remove('kf'));const c=cs[i];c.classList.add('kf');S.qFocus=c.dataset.id;if(scroll!==false)c.scrollIntoView({block:'nearest'});const r=c.getBoundingClientRect();pvShow(c.dataset.id,r.left+r.width/2);}
+function bindQueueKeys(C){const k=S.qFocus;if(k){const i=qCards().findIndex(c=>c.dataset.id===k);if(i>=0)qCards()[i].classList.add('kf');}}
+async function qKey(e){
+  if(S.mode!=='queue'||S.rv||!$('modal').hidden)return false;
+  const cs=qCards();if(!cs.length)return false;let i=cs.findIndex(c=>c.dataset.id===S.qFocus);const k=kk(e);
+  const cols=(()=>{const t=cs[0].offsetTop;let n=0;for(const c of cs){if(c.offsetTop!==t)break;n++;}return Math.max(1,n);})();
+  if(e.key==='ArrowRight'){qFocus(i<0?0:i+1);return true;}
+  if(e.key==='ArrowLeft'){qFocus(i<0?0:i-1);return true;}
+  if(e.key==='ArrowDown'){qFocus(i<0?0:i+cols);return true;}
+  if(e.key==='ArrowUp'){qFocus(i<0?0:i-cols);return true;}
+  if(i<0)return false;
+  const id=cs[i].dataset.id;
+  if(e.code==='Space'){const cb=cs[i].querySelector('[data-sel]');if(cb){cb.checked=!cb.checked;cb.onchange();}qFocus(i+1);return true;}
+  if(k==='a'){try{await api('/api/accept',{ids:[id]});await refreshFigures();qFocus(i);stat('принят '+id,'ok');}catch(x){fail(x);}return true;}
+  if(k==='x'){try{await api('/api/review_mark',{ids:[id],value:true});await refreshFigures();qFocus(i);stat('на доработку: '+id,'ok');}catch(x){fail(x);}return true;}
+  if(e.key==='Enter'){openFigure(id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail);return true;}
+  return false;
+}
+
+/* ---- быстрая проверка: один рисунок на весь экран ---- */
+function openReview(){
+  const list=qItems();if(!list.length){stat('очередь пуста','ok');return;}
+  pvHide();S.rv={list:list.map(f=>f.id),i:0,acc:0,rev:0,log:[]};rvRender();
+}
+function rvClose(){S.rv=null;const e=$('rv');if(e)e.remove();refreshFigures();}
+function rvImgs(id){const f=S.figures.find(v=>v.id===id)||{},t=Math.round(f.t||0);return [`/api/crop/${encodeURIComponent(id)}?t=${t}`,`/out/${encodeURIComponent(id)}_bg.png?t=${t}`];}
+function rvRender(){
+  const R=S.rv;let el=$('rv');if(!R){if(el)el.remove();return;}
+  if(!el){el=document.createElement('div');el.id='rv';document.body.appendChild(el);}
+  if(R.i>=R.list.length){el.innerHTML=`<div class="rvdone"><div style="font-size:20px;margin-bottom:8px">Очередь просмотрена</div><div>принято: <b>${R.acc}</b> · на доработку: <b>${R.rev}</b></div><div style="margin-top:14px"><button id="rvX">закрыть</button></div></div>`;$('rvX').onclick=rvClose;return;}
+  const id=R.list[R.i],f=S.figures.find(v=>v.id===id)||{id,size:[0,0]},r=qrisk(f),[a,b]=rvImgs(id);
+  el.innerHTML=`<div class="rvh"><b>${esc(dispName(f)||id)}</b><span class="mut">${esc(id)} · ${f.size?f.size[0]+'×'+f.size[1]:''}${f.colors?' · '+f.colors+' цв.':''} · риск <b style="color:${r<=0.25?'var(--ok)':(r<0.55?'var(--warn,#e0a030)':'var(--bad)')}">${r.toFixed(2)}</b>${f.sym&&f.n_sus?' · ◇'+f.n_sus+' подозрит.':''}${f.diff_est?' · '+f.diff_est:''}</span><span class="sp"></span><span class="mut">${R.i+1} / ${R.list.length} · принято ${R.acc}</span><button class="sm" id="rvX">✕ закрыть (Esc)</button></div>
+  <div class="rvb"><div class="rvp"><div class="pvl">оригинал</div><img src="${a}"></div><div class="rvp"><div class="pvl">результат</div><img class="px" src="${b}"></div></div>
+  <div class="rvf"><button id="rvBack" class="sm" ${R.i?'':'disabled'}>← назад</button><button id="rvGeo" class="sm" data-tip="Геометрия и сетка этого рисунка (G)">▦ сетка</button><button id="rvEdit" class="sm" data-tip="открыть в «Пикселях» (Enter)">✎ править</button><span class="sp"></span>
+    <button id="rvRev" style="background:var(--bad)">✗ на доработку <kbd>X</kbd></button><button id="rvSkip">→ пропустить</button><button id="rvAcc" style="background:var(--ok)">✓ принять <kbd>A</kbd></button></div>`;
+  [R.list[R.i+1],R.list[R.i+2]].filter(Boolean).forEach(n=>rvImgs(n).forEach(u=>{const im=new Image();im.src=u;}));
+  $('rvX').onclick=rvClose;$('rvAcc').onclick=()=>rvAct('acc');$('rvRev').onclick=()=>rvAct('rev');$('rvSkip').onclick=()=>rvAct('skip');$('rvBack').onclick=()=>rvAct('back');
+  $('rvEdit').onclick=()=>{rvClose();openFigure(id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail);};
+  $('rvGeo').onclick=()=>{rvClose();openFigure(id).then(()=>setMode('grid',{back:'queue'})).catch(fail);};
+}
+function rvAct(a){
+  const R=S.rv;if(!R)return;
+  if(a==='back'){if(!R.i)return;const p=R.log.pop();R.i--;if(p&&p.a==='acc'){R.acc--;api('/api/accept',{ids:[p.id],value:false}).catch(fail);const f=S.figures.find(v=>v.id===p.id);if(f)f.done=false;}
+    if(p&&p.a==='rev'){R.rev--;api('/api/review_mark',{ids:[p.id],value:false}).catch(fail);}rvRender();return;}
+  const id=R.list[R.i];
+  if(a==='acc'){api('/api/accept',{ids:[id]}).catch(fail);R.acc++;const f=S.figures.find(v=>v.id===id);if(f)f.done=true;}
+  if(a==='rev'){api('/api/review_mark',{ids:[id],value:true}).catch(fail);R.rev++;}
+  R.log.push({a,id});R.i++;rvRender();
+}
+function rvKey(e){
+  const R=S.rv;if(!R)return false;const k=kk(e);
+  if(e.key==='Escape'){rvClose();return true;}
+  if(R.i>=R.list.length)return false;
+  if(k==='a'||e.key==='Enter'&&false){rvAct('acc');return true;}
+  if(k==='x'){rvAct('rev');return true;}
+  if(e.key==='ArrowRight'||e.code==='Space'){rvAct('skip');return true;}
+  if(e.key==='ArrowLeft'||e.key==='Backspace'){rvAct('back');return true;}
+  if(e.key==='Enter'){$('rvEdit').click();return true;}
+  if(k==='g'){$('rvGeo').click();return true;}
+  return true;   // остальные клавиши не трогаем интерфейс под окном
 }
 function renderRightQueue(){
   const R=$('right');
@@ -1420,6 +1523,8 @@ function kk(e){const c=e.code||'';
   return m[c]||String(e.key||'').toLowerCase();}
 window.addEventListener('keydown',e=>{
   const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','range','button'].includes(ae.type)));
+  if(!typing&&S.rv){if(rvKey(e)){e.preventDefault();return;}}
+  if(!typing&&S.mode==='queue'&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Enter'].includes(e.key)||e.code==='Space'||['a','x'].includes(kk(e)))){qKey(e).then(ok=>{});if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)||e.code==='Space'||['a','x'].includes(kk(e))||e.key==='Enter')e.preventDefault();return;}
   if(e.code==='Space'&&!typing){e.preventDefault();if(ae&&ae!==document.body&&ae.blur)ae.blur();if(e.repeat)return;spaceDown=true;cv.style.cursor='grab';
     if(S.fig&&((S.mode==='pix'&&S.fig.M)||(S.mode==='grid'&&(S.gridView||'grid')==='grid'))){S.peek=true;$('peek').textContent='оригинал скана · пока держите пробел';$('peek').style.display='block';redraw();}return;}
   if((e.metaKey||e.ctrlKey)&&kk(e)==="'"){e.preventDefault();toggleGrid();return;}
@@ -1430,7 +1535,9 @@ window.addEventListener('keydown',e=>{
   if((e.metaKey||e.ctrlKey)&&kk(e)==='z'){e.preventDefault();e.shiftKey?redo():undo();return;}
   if((e.metaKey||e.ctrlKey)&&kk(e)==='y'){e.preventDefault();redo();return;}
   const sheetSel=false;
-  if(!e.metaKey&&!e.ctrlKey&&!e.altKey&&['1','2','3','4','5'].includes(kk(e))&&S.mode!=='pix'&&!sheetSel){setMode(['sheet','grid','pix','cat','queue'][+kk(e)-1]);return;}
+  if(!e.metaKey&&!e.ctrlKey&&!e.altKey&&['1','2','3'].includes(kk(e))&&S.mode!=='pix'&&!sheetSel){setMode(['sheet','queue','pix'][+kk(e)-1]);return;}
+  if(kk(e)==='g'&&!e.metaKey&&!e.ctrlKey&&!e.altKey){geomToggle();return;}
+  if(e.key==='Escape'&&S.mode==='grid'){geomToggle();return;}
   if((kk(e)==='['||kk(e)===']')&&S.fig&&(S.mode==='grid'||S.mode==='pix')){gotoFig(kk(e)===']'?1:-1).catch(fail);return;}
   if(kk(e)==='='||kk(e)==='+'){zoomAt(1.25,V.w/2,V.h/2);return;}
   if(kk(e)==='-'){zoomAt(0.8,V.w/2,V.h/2);return;}

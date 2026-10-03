@@ -679,8 +679,9 @@ def api_accept(body: dict = Body(...)):
         if not _fid_ok(fid): continue
         wp = os.path.join(D_WORK, fid + ".json"); w = jload(wp, {}) or {}
         if not w.get("matrix"): continue
-        w["done"] = True
-        if isinstance(w.get("auto"), dict): w["auto"]["reviewed"] = True
+        val = bool(body.get("value", True))                 # value=false — отменить принятие (быстрая проверка: «↶»)
+        w["done"] = val
+        if isinstance(w.get("auto"), dict): w["auto"]["reviewed"] = val
         w["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S"); jsave(wp, w); n += 1
     return {"accepted": n}
 
