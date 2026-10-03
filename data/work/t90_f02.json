@@ -1,0 +1,129 @@
+{
+ "id": "t90_f02",
+ "sheet": "kerimov_vol1_patterns/page_209.jpg",
+ "table": 90,
+ "fig": 2,
+ "crop_origin": [
+  385,
+  117
+ ],
+ "frame": [
+  10,
+  11,
+  135,
+  146
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   14.56,
+   16.99
+  ],
+  [
+   142.41,
+   16.99
+  ],
+  [
+   142.41,
+   152.74
+  ],
+  [
+   14.56,
+   152.74
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Gilas",
+  "name": "Гилас",
+  "translation": "Черешня",
+  "carpet": "Афшан",
+  "type": "Теб.",
+  "note": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.7407,
+  "ph": 4.6897,
+  "ox": 0,
+  "oy": 0,
+  "cols": 27,
+  "rows": 29,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   143
+  ],
+  "centers": [
+   213,
+   96
+  ]
+ },
+ "matrix": {
+  "w": 16,
+  "h": 14,
+  "origin": [
+   5,
+   7
+  ],
+  "rows": [
+   "........11111...",
+   ".......1222221..",
+   "......122222221.",
+   ".....12222222221",
+   ".....12222222221",
+   ".....12222222221",
+   ".....12222222221",
+   ".....12222222221",
+   "......122222221.",
+   ".......1222221..",
+   "........11111...",
+   "...........1....",
+   ".......1111.....",
+   "1111111........."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.98,
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
+  "pitch": [
+   4.735,
+   4.681
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": null,
+   "score": 0.333,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.1
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-03 10:38:30"
+}

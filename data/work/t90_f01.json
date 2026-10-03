@@ -1,0 +1,143 @@
+{
+ "id": "t90_f01",
+ "sheet": "kerimov_vol1_patterns/page_209.jpg",
+ "table": 90,
+ "fig": 1,
+ "crop_origin": [
+  172,
+  118
+ ],
+ "frame": [
+  10,
+  11,
+  136,
+  147
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   16.68,
+   15.93
+  ],
+  [
+   139.65,
+   15.93
+  ],
+  [
+   139.65,
+   151.67
+  ],
+  [
+   16.68,
+   151.67
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "İstot",
+  "name": "Истот",
+  "translation": "Перец",
+  "carpet": "Афшан",
+  "type": "Теб.",
+  "note": "",
+  "site_id": "",
+  "source": "",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.7308,
+  "ph": 4.6897,
+  "ox": 0,
+  "oy": 0,
+  "cols": 26,
+  "rows": 29,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   147
+  ],
+  "centers": [
+   210,
+   104
+  ]
+ },
+ "matrix": {
+  "w": 14,
+  "h": 19,
+  "origin": [
+   6,
+   6
+  ],
+  "rows": [
+   ".......1111111",
+   ".....11222221.",
+   "...1122222221.",
+   "..1222222221..",
+   ".12222222221..",
+   ".12222222221..",
+   "122222222221..",
+   "122222222221..",
+   "122222222221..",
+   ".12222222221..",
+   ".12221222221..",
+   "..1111222221..",
+   "....1.12221...",
+   "....1..111....",
+   "....1.........",
+   "....1.........",
+   ".....1........",
+   ".....1........",
+   "......1......."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.91,
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
+  "pitch": [
+   4.73,
+   4.68
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": null,
+   "score": 0.43,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.17
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-03 10:38:38",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
+}
