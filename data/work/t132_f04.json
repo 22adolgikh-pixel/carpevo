@@ -1,72 +1,73 @@
 {
- "id": "t75_f07",
- "sheet": "kerimov_vol1_patterns/page_194.jpg",
- "table": 75,
- "fig": 7,
+ "id": "t132_f04",
+ "sheet": "kerimov_vol1_patterns/page_251.jpg",
+ "table": 132,
+ "fig": 4,
  "crop_origin": [
-  627,
-  335
+  833,
+  131
  ],
  "frame": [
-  11,
-  11,
-  144,
-  145
+  10,
+  10,
+  130,
+  129
  ],
  "difficulty": null,
  "quad": [
   [
-   17.8,
-   15.56
+   13.84,
+   14.19
   ],
   [
-   150.66,
-   15.56
+   135.55,
+   14.19
   ],
   [
-   150.66,
-   153.41
+   135.55,
+   135.12
   ],
   [
-   17.8,
-   153.41
+   13.84,
+   135.12
   ]
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "",
-  "translation": "",
-  "carpet": "Карабах",
+  "name_az": "Ara",
+  "name": "Ара",
+  "translation": "хашийе Серединная",
+  "carpet": "кайма",
   "type": "Кар.",
-  "note": ""
+  "note": "См. таблицу 149, рис. 1.",
+  "name_az_auto": true
  },
  "grid": {
-  "pw": 4.9259,
-  "ph": 4.9286,
+  "pw": 4.88,
+  "ph": 4.84,
   "ox": 0,
   "oy": 0,
-  "cols": 27,
-  "rows": 28,
+  "cols": 25,
+  "rows": 25,
   "square": true
  },
  "classify": {
   "tones": 1,
   "inner": 55,
   "thr": [
-   127
+   135
   ],
   "centers": [
-   218,
-   67
+   215,
+   82
   ]
  },
  "matrix": {
   "w": 11,
-  "h": 13,
+  "h": 9,
   "origin": [
-   8,
-   7
+   7,
+   8
   ],
   "rows": [
    "...11.11...",
@@ -75,13 +76,9 @@
    "12212121221",
    "12221.12221",
    ".111...111.",
-   "12221.12221",
-   "1221.1.1221",
-   ".11..1..11.",
-   "....1.1....",
-   "...1...1...",
-   "..1.....1..",
-   ".1.......1."
+   "1...1.12221",
+   "1..1.1.1221",
+   ".11.....11."
   ]
  },
  "palette": [
@@ -97,25 +94,25 @@
  "palette_touched": false,
  "auto": {
   "version": 1,
-  "confidence": 0.89,
+  "confidence": 0.97,
   "flags": [
    "серую заливку стоит проверить"
   ],
   "pitch": [
-   4.921,
-   4.923
+   4.868,
+   4.837
   ],
   "angle": 0.0,
-  "reviewed": true,
+  "reviewed": false,
   "symmetry": {
-   "kind": "mirror_v",
-   "score": 1.0,
+   "kind": null,
+   "score": 0.857,
    "suspects": [],
    "n_suspects": 0
   },
-  "risk": 0.19
+  "risk": 0.11
  },
- "done": true,
+ "done": false,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -123,5 +120,5 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 10:32:14"
+ "saved_at": "2026-10-03 10:33:06"
 }

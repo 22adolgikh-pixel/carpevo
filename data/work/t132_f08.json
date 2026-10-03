@@ -1,0 +1,142 @@
+{
+ "id": "t132_f08",
+ "sheet": "kerimov_vol1_patterns/page_251.jpg",
+ "table": 132,
+ "fig": 8,
+ "crop_origin": [
+  802,
+  355
+ ],
+ "frame": [
+  12,
+  12,
+  159,
+  151
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   16.91,
+   14.81
+  ],
+  [
+   167.96,
+   14.81
+  ],
+  [
+   167.96,
+   160.2
+  ],
+  [
+   16.91,
+   160.2
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Ara",
+  "name": "Ара",
+  "translation": "хашийе Серединная кайма Казах",
+  "carpet": "Г.",
+  "type": "-",
+  "note": "К См. таблицу 151, рис. 6.",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.871,
+  "ph": 4.8333,
+  "ox": 0,
+  "oy": 0,
+  "cols": 31,
+  "rows": 30,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   129
+  ],
+  "centers": [
+   217,
+   70
+  ]
+ },
+ "matrix": {
+  "w": 9,
+  "h": 19,
+  "origin": [
+   10,
+   6
+  ],
+  "rows": [
+   "...111...",
+   "..1...1..",
+   ".12111.1.",
+   "1.1...1.1",
+   "1.1...1.1",
+   "1.111.1.1",
+   "1...1.1.1",
+   ".1.1..1.1",
+   "..1...1.1",
+   "......1.1",
+   ".....11.1",
+   "....1.1.1",
+   "...1.11.1",
+   "..1.1.1.1",
+   "..1.1.1.1",
+   "..1.1.1.1",
+   "..1.111.1",
+   "...1...1.",
+   "....111.."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
+  "pitch": [
+   4.873,
+   4.846
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": null,
+   "score": 0.458,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.08
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": false,
+  "axis": "v",
+  "best_mismatch": 0.563,
+  "computed_at_matrix": [
+   9,
+   19
+  ]
+ },
+ "saved_at": "2026-10-03 10:33:07"
+}

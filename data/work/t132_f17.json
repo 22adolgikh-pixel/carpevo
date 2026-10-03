@@ -1,0 +1,129 @@
+{
+ "id": "t132_f17",
+ "sheet": "kerimov_vol1_patterns/page_251.jpg",
+ "table": 132,
+ "fig": 17,
+ "crop_origin": [
+  174,
+  1105
+ ],
+ "frame": [
+  34,
+  17,
+  425,
+  224
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   52.96,
+   20.81
+  ],
+  [
+   440.83,
+   24.06
+  ],
+  [
+   439.13,
+   227.29
+  ],
+  [
+   51.25,
+   224.04
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "",
+  "name": "",
+  "translation": "",
+  "carpet": "",
+  "type": "",
+  "note": ""
+ },
+ "grid": {
+  "pw": 19.4,
+  "ph": 20.3,
+  "ox": 0,
+  "oy": 0,
+  "cols": 20,
+  "rows": 10,
+  "square": false
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   135
+  ],
+  "centers": [
+   201,
+   90
+  ]
+ },
+ "matrix": {
+  "w": 18,
+  "h": 6,
+  "origin": [
+   1,
+   3
+  ],
+  "rows": [
+   ".22222211...22222.",
+   "2222222.....222222",
+   "222222....22222222",
+   ".222221..12222222.",
+   ".11111....111111..",
+   ".........1........"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.56,
+  "flags": [
+   "много полутонов — проверьте сетку",
+   "серую заливку стоит проверить"
+  ],
+  "pitch": [
+   19.394,
+   20.323
+  ],
+  "angle": 0.48,
+  "reviewed": false,
+  "symmetry": {
+   "kind": null,
+   "score": 0.667,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.6
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": false,
+  "axis": "h",
+  "best_mismatch": 0.507,
+  "computed_at_matrix": [
+   18,
+   6
+  ]
+ },
+ "saved_at": "2026-10-03 10:33:10"
+}

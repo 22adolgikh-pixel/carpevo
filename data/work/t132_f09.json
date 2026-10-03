@@ -1,0 +1,138 @@
+{
+ "id": "t132_f09",
+ "sheet": "kerimov_vol1_patterns/page_251.jpg",
+ "table": 132,
+ "fig": 9,
+ "crop_origin": [
+  193,
+  596
+ ],
+ "frame": [
+  13,
+  11,
+  167,
+  142
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   16.29,
+   15.16
+  ],
+  [
+   175.89,
+   15.16
+  ],
+  [
+   175.89,
+   146.34
+  ],
+  [
+   16.29,
+   146.34
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Ara",
+  "name": "Ара",
+  "translation": "хашийе Серединная кайма Карачоп",
+  "carpet": "Г.",
+  "type": "-",
+  "note": "К См. таблицу 156, рис. 6.",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.8485,
+  "ph": 4.8519,
+  "ox": 0,
+  "oy": 0,
+  "cols": 33,
+  "rows": 27,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   113
+  ],
+  "centers": [
+   197,
+   57
+  ]
+ },
+ "matrix": {
+  "w": 7,
+  "h": 19,
+  "origin": [
+   12,
+   3
+  ],
+  "rows": [
+   ".11111.",
+   ".1.1.1.",
+   "...1...",
+   "...1...",
+   "...1...",
+   "...1...",
+   "...1...",
+   "..1.1..",
+   ".1...1.",
+   "1.....1",
+   ".1...1.",
+   "..1.1..",
+   "...1...",
+   "...1...",
+   "...1...",
+   "...1...",
+   "...1...",
+   ".1.1.1.",
+   ".11111."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.836,
+   4.859
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_v",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.0
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": false,
+  "axis": "v",
+  "best_mismatch": 0.722,
+  "computed_at_matrix": [
+   7,
+   19
+  ]
+ },
+ "saved_at": "2026-10-03 10:33:07"
+}

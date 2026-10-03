@@ -1,0 +1,128 @@
+{
+ "id": "t132_f03",
+ "sheet": "kerimov_vol1_patterns/page_251.jpg",
+ "table": 132,
+ "fig": 3,
+ "crop_origin": [
+  623,
+  129
+ ],
+ "frame": [
+  10,
+  10,
+  126,
+  129
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   15.11,
+   13.43
+  ],
+  [
+   132.01,
+   13.43
+  ],
+  [
+   132.01,
+   134.63
+  ],
+  [
+   15.11,
+   134.63
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Ara",
+  "name": "Ара",
+  "translation": "хашийе Серединная",
+  "carpet": "кайма",
+  "type": "Кар.",
+  "note": "См. таблицу 149, рис. 1.",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.875,
+  "ph": 4.84,
+  "ox": 0,
+  "oy": 0,
+  "cols": 24,
+  "rows": 25,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   133
+  ],
+  "centers": [
+   212,
+   79
+  ]
+ },
+ "matrix": {
+  "w": 13,
+  "h": 13,
+  "origin": [
+   6,
+   6
+  ],
+  "rows": [
+   ".....111.....",
+   "....12221....",
+   ".11122222111.",
+   "1222122212221",
+   "1222211122221",
+   "12221...12221",
+   ".1111...1111.",
+   "12221...12221",
+   "1222211122221",
+   "1222122212221",
+   ".11122222111.",
+   "....12221....",
+   ".....111....."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.92,
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
+  "pitch": [
+   4.871,
+   4.848
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_v",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.16
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-03 10:33:05"
+}

@@ -1,0 +1,126 @@
+{
+ "id": "t132_f12",
+ "sheet": "kerimov_vol1_patterns/page_251.jpg",
+ "table": 132,
+ "fig": 12,
+ "crop_origin": [
+  789,
+  598
+ ],
+ "frame": [
+  13,
+  11,
+  171,
+  142
+ ],
+ "difficulty": null,
+ "quad": [
+  [
+   16.92,
+   16.2
+  ],
+  [
+   181.3,
+   18.15
+  ],
+  [
+   179.74,
+   149.61
+  ],
+  [
+   15.35,
+   147.66
+  ]
+ ],
+ "meta": {
+  "section": "",
+  "name_az": "Ara",
+  "name": "Ара",
+  "translation": "хашийе Серединная кайма Для бакинских ковров",
+  "carpet": "К.",
+  "type": "-",
+  "note": "Ш См. таблицу 154, рис. 2.",
+  "name_az_auto": true
+ },
+ "grid": {
+  "pw": 4.8235,
+  "ph": 4.8519,
+  "ox": 0,
+  "oy": 0,
+  "cols": 34,
+  "rows": 27,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   121
+  ],
+  "centers": [
+   209,
+   63
+  ]
+ },
+ "matrix": {
+  "w": 15,
+  "h": 11,
+  "origin": [
+   9,
+   8
+  ],
+  "rows": [
+   "....1.....1....",
+   "...1.1...1.1...",
+   "..12121.12121..",
+   ".121.12121.121.",
+   "1221..121..1221",
+   "12221.121.12221",
+   ".121..121..121.",
+   "..1...121...1..",
+   "......121......",
+   "......121......",
+   ".......1......."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.77,
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
+  "pitch": [
+   4.835,
+   4.869
+  ],
+  "angle": 0.68,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_v",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.31
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-03 10:33:08"
+}
