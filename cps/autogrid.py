@@ -351,6 +351,15 @@ def auto_figure(g, frame, dark_only=False, use_model=True):
     if dark_only: M[M == 2] = 0
     elif P is None: M = clean(M, info["t"])
     info["confidence"], info["flags"] = confidence(G, M, info["t"])
+    try:                                                         # мера искажения листа (distortion.py): только отметка, сетку не двигаем
+        import distortion
+        a = distortion.assess(g, G)
+        if a:
+            info["distortion"] = {k: round(v, 3) for k, v in a.items()}
+            if a["dist"] > 0.2 or max(a["drift_x"], a["drift_y"]) > 0.45:
+                info["flags"] = list(info["flags"]) + ["возможно искажение листа — проверьте края сетки"]
+    except Exception:
+        pass
     return G, C, M, info
 
 
@@ -396,5 +405,5 @@ def to_work(G, M, info, margin=0):
         "palette_touched": False,
         "auto": {"version": 1, "confidence": info["confidence"], "flags": info["flags"],
                  "pitch": [round(G["px"], 3), round(G["py"], 3)], "angle": round(G["angle"], 2),
-                 "reviewed": False},
+                 "reviewed": False, **({"distortion": info["distortion"]} if info.get("distortion") else {})},
     }
