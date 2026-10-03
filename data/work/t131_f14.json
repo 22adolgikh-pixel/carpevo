@@ -40,6 +40,8 @@
   "carpet": "Губа",
   "type": "К.—Ш",
   "note": "См. таблицу 140, рис. 6.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -89,9 +91,9 @@
    ".1...1.",
    "..1.1..",
    "...1...",
-   "..121..",
-   ".12221.",
-   "1221221"
+   "..1.1..",
+   ".1...1.",
+   "1..1..1"
   ]
  },
  "palette": [
@@ -116,7 +118,7 @@
    4.909
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": "mirror_v",
    "score": 1.0,
@@ -126,7 +128,7 @@
   "risk": 0.08,
   "difficulty_est": "simple"
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -136,11 +138,18 @@
  "rapport": {
   "found": false,
   "axis": "v",
-  "best_mismatch": 0.639,
+  "best_mismatch": 0.667,
   "computed_at_matrix": [
    7,
    22
   ]
  },
- "saved_at": "2026-10-03 12:07:23"
+ "saved_at": "2026-10-03 18:04:06",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }
