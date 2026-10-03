@@ -92,23 +92,27 @@
    ".1111",
    ".1111",
    ".1111",
-   ".1111",
+   "21111",
    ".1111"
   ]
  },
  "palette": [
   "#ffffff",
-  "#1a1a1a"
+  "#1a1a1a",
+  "#b8b8b8"
  ],
  "palette_names": [
   "фон",
-  "обводка"
+  "обводка",
+  "тело 1"
  ],
  "palette_touched": false,
  "auto": {
   "version": 1,
   "confidence": 1.0,
-  "flags": [],
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
   "pitch": [
    18.724,
    19.483
@@ -117,11 +121,11 @@
   "reviewed": false,
   "symmetry": {
    "kind": null,
-   "score": 0.857,
+   "score": 0.844,
    "suspects": [],
    "n_suspects": 0
   },
-  "risk": 0.0,
+  "risk": 0.08,
   "difficulty_est": "simple"
  },
  "done": false,
@@ -204,5 +208,5 @@
    26
   ]
  },
- "saved_at": "2026-10-03 11:04:01"
+ "saved_at": "2026-10-03 12:07:41"
 }

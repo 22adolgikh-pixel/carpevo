@@ -71,7 +71,7 @@
   ],
   "rows": [
    "11111111..11111111",
-   "1..1..1..1..1....1",
+   "1..1..1..1..122221",
    "1...11..1..1.....1",
    "1......1..1......1",
    "1.....1..1..11...1",
@@ -81,17 +81,21 @@
  },
  "palette": [
   "#ffffff",
-  "#1a1a1a"
+  "#1a1a1a",
+  "#b8b8b8"
  ],
  "palette_names": [
   "фон",
-  "обводка"
+  "обводка",
+  "тело 1"
  ],
  "palette_touched": false,
  "auto": {
   "version": 1,
   "confidence": 0.91,
-  "flags": [],
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
   "pitch": [
    4.911,
    4.887
@@ -99,12 +103,13 @@
   "angle": 0.0,
   "reviewed": false,
   "symmetry": {
-   "kind": "rot180",
-   "score": 1.0,
+   "kind": null,
+   "score": 0.882,
    "suspects": [],
    "n_suspects": 0
   },
-  "risk": 0.09
+  "risk": 0.17,
+  "difficulty_est": "simple"
  },
  "done": false,
  "adjust": {
@@ -116,11 +121,11 @@
  "rapport": {
   "found": false,
   "axis": "h",
-  "best_mismatch": 0.444,
+  "best_mismatch": 0.424,
   "computed_at_matrix": [
    18,
    7
   ]
  },
- "saved_at": "2026-10-03 10:39:20"
+ "saved_at": "2026-10-03 12:07:21"
 }
