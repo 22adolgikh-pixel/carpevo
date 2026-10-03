@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   12,
-   8
+   14.89,
+   13.59
   ],
   [
-   163,
-   8
+   156.66,
+   9.73
   ],
   [
-   163,
-   118
+   159.46,
+   112.61
   ],
   [
-   12,
-   118
+   17.7,
+   116.48
   ]
  ],
  "meta": {
@@ -40,5 +40,89 @@
   "type": "Теб.",
   "note": "",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 4.8966,
+  "ph": 4.9048,
+  "ox": 0,
+  "oy": 0,
+  "cols": 29,
+  "rows": 21,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   137
+  ],
+  "centers": [
+   210,
+   89
+  ]
+ },
+ "matrix": {
+  "w": 15,
+  "h": 7,
+  "origin": [
+   7,
+   7
+  ],
+  "rows": [
+   "...111111111...",
+   "..1.........1..",
+   ".1..11...11..1.",
+   "1..11...1..1..1",
+   ".1..11...11..1.",
+   "..1.........1..",
+   "...111111111..."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.57,
+  "flags": [
+   "много полутонов — проверьте сетку"
+  ],
+  "pitch": [
+   4.89,
+   4.901
+  ],
+  "angle": -1.56,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_h",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.51,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": false,
+  "axis": "h",
+  "best_mismatch": 0.627,
+  "computed_at_matrix": [
+   15,
+   7
+  ]
+ },
+ "saved_at": "2026-10-03 11:02:04"
 }

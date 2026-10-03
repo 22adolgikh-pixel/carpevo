@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   12,
-   8
+   14.32,
+   10.3
   ],
   [
-   168,
-   8
+   162.63,
+   10.3
   ],
   [
-   168,
-   116
+   162.63,
+   113.48
   ],
   [
-   12,
-   116
+   14.32,
+   113.48
   ]
  ],
  "meta": {
@@ -40,5 +40,87 @@
   "type": "К.—Ш",
   "note": "В Казахе называют «извилистый кетебә».",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 4.9333,
+  "ph": 4.9048,
+  "ox": 0,
+  "oy": 0,
+  "cols": 30,
+  "rows": 21,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   129
+  ],
+  "centers": [
+   207,
+   77
+  ]
+ },
+ "matrix": {
+  "w": 15,
+  "h": 7,
+  "origin": [
+   8,
+   7
+  ],
+  "rows": [
+   "...111111111...",
+   "..11..11...11..",
+   ".11..11.....11.",
+   "11..11...11..11",
+   ".11.....11..11.",
+   "..11...11..11..",
+   "...111111111..."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.944,
+   4.913
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "rot180",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.0,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": false,
+  "axis": "h",
+  "best_mismatch": 0.727,
+  "computed_at_matrix": [
+   15,
+   7
+  ]
+ },
+ "saved_at": "2026-10-03 11:02:01"
 }

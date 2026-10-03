@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   9,
-   10
+   13.97,
+   14.65
   ],
   [
-   133,
-   10
+   128.57,
+   16.65
   ],
   [
-   133,
-   147
+   126.32,
+   145.6
   ],
   [
-   9,
-   147
+   11.72,
+   143.6
   ]
  ],
  "meta": {
@@ -40,5 +40,83 @@
   "type": "Кар.",
   "note": "Символ мечты.",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 5.0,
+  "ph": 4.9615,
+  "ox": 0,
+  "oy": 0,
+  "cols": 23,
+  "rows": 26,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   150
+  ],
+  "centers": [
+   230,
+   96
+  ]
+ },
+ "matrix": {
+  "w": 14,
+  "h": 11,
+  "origin": [
+   4,
+   7
+  ],
+  "rows": [
+   ".....111......",
+   "....11111.....",
+   "...1111111....",
+   "..11..11111...",
+   ".11..1111111..",
+   "11..1...1...1.",
+   "...1....1....1",
+   "...11111111111",
+   "...1....1....1",
+   "...1....1....1",
+   "...11111111111"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.983,
+   4.961
+  ],
+  "angle": 1.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": null,
+   "score": 0.426,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.0,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-03 11:01:46"
 }
