@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   29,
-   5
+   33.55,
+   7.42
   ],
   [
-   403,
-   5
+   400.46,
+   7.42
   ],
   [
-   403,
-   69
+   400.46,
+   66.38
   ],
   [
-   29,
-   69
+   33.55,
+   66.38
   ]
  ],
  "meta": {
@@ -40,5 +40,102 @@
   "type": "—",
   "note": "К Этот «медахил» взят из греческого архитектурного декора, иногда его считают изображением протекающего ручейка.",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 4.8933,
+  "ph": 4.9167,
+  "ox": 0,
+  "oy": 0,
+  "cols": 75,
+  "rows": 12,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   147
+  ],
+  "centers": [
+   218,
+   99
+  ]
+ },
+ "matrix": {
+  "w": 72,
+  "h": 3,
+  "origin": [
+   1,
+   4
+  ],
+  "rows": [
+   "111111111111111111111111111111111111111111111111111111111111111111111111",
+   "1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.",
+   "111111111111111111111111111111111111111111111111111111111111111111111111"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.892,
+   4.914
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_h",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.0,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": true,
+  "axis": "h",
+  "period": 4,
+  "offset": 3,
+  "match": 1.0,
+  "repeats": 16.5,
+  "agreement": 1.0,
+  "mirror_across": 1.0,
+  "is_mirror": true,
+  "glide": 0.667,
+  "is_glide": false,
+  "check": false,
+  "unit": {
+   "w": 4,
+   "h": 3,
+   "rows": [
+    "1111",
+    ".1.1",
+    "1111"
+   ]
+  },
+  "suspect_cells": [],
+  "computed_at_matrix": [
+   72,
+   3
+  ]
+ },
+ "saved_at": "2026-10-03 11:03:49"
 }

@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   61,
-   7
+   67.58,
+   9.9
   ],
   [
-   834,
-   7
+   831.21,
+   15.76
   ],
   [
-   834,
-   95
+   830.61,
+   94.56
   ],
   [
-   61,
-   95
+   66.97,
+   88.69
   ]
  ],
  "meta": {
@@ -40,5 +40,98 @@
   "type": "Кар.",
   "note": "",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 4.929,
+  "ph": 4.9375,
+  "ox": 0,
+  "oy": 0,
+  "cols": 155,
+  "rows": 16,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   123
+  ],
+  "centers": [
+   211,
+   65
+  ]
+ },
+ "matrix": {
+  "w": 138,
+  "h": 1,
+  "origin": [
+   11,
+   7
+  ],
+  "rows": [
+   "111111......111111......111111......111111......111111......111111......111111......111111......111111......111111......111111......111111"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.87,
+  "flags": [],
+  "pitch": [
+   4.927,
+   4.925
+  ],
+  "angle": 0.44,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_v",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.13,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": true,
+  "axis": "h",
+  "period": 12,
+  "offset": 6,
+  "match": 1.0,
+  "repeats": 10.5,
+  "agreement": 1.0,
+  "mirror_across": 1.0,
+  "is_mirror": true,
+  "glide": 0.0,
+  "is_glide": false,
+  "check": false,
+  "unit": {
+   "w": 12,
+   "h": 1,
+   "rows": [
+    "......111111"
+   ]
+  },
+  "suspect_cells": [],
+  "computed_at_matrix": [
+   138,
+   1
+  ]
+ },
+ "saved_at": "2026-10-03 11:03:48"
 }

@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   9,
-   42
+   20.97,
+   47.71
   ],
   [
-   131,
-   42
+   114.59,
+   47.97
   ],
   [
-   131,
-   573
+   113.17,
+   554.52
   ],
   [
-   9,
-   573
+   19.55,
+   554.26
   ]
  ],
  "meta": {
@@ -39,5 +39,170 @@
   "carpet": "",
   "type": "",
   "note": ""
- }
+ },
+ "grid": {
+  "pw": 18.8,
+  "ph": 19.5,
+  "ox": 0,
+  "oy": 0,
+  "cols": 5,
+  "rows": 26,
+  "square": false
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   72
+  ],
+  "centers": [
+   107,
+   48
+  ]
+ },
+ "matrix": {
+  "w": 5,
+  "h": 26,
+  "origin": [
+   0,
+   0
+  ],
+  "rows": [
+   ".1.1.",
+   ".1111",
+   "11111",
+   "11111",
+   "11111",
+   "11111",
+   "111.1",
+   "11111",
+   "11111",
+   "11111",
+   "11111",
+   "11111",
+   "11111",
+   "11111",
+   "11111",
+   "11111",
+   "11111",
+   "11111",
+   ".1111",
+   ".1111",
+   ".1111",
+   ".1111",
+   ".1111",
+   ".1111",
+   ".1111",
+   ".1111"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   18.724,
+   19.483
+  ],
+  "angle": 0.16,
+  "reviewed": false,
+  "symmetry": {
+   "kind": null,
+   "score": 0.857,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.0,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": true,
+  "axis": "v",
+  "period": 3,
+  "offset": 0,
+  "match": 0.897,
+  "repeats": 8.7,
+  "agreement": 0.908,
+  "mirror_across": 1.0,
+  "is_mirror": true,
+  "glide": null,
+  "is_glide": false,
+  "check": true,
+  "unit": {
+   "w": 5,
+   "h": 3,
+   "rows": [
+    "11111",
+    "11111",
+    "11111"
+   ]
+  },
+  "suspect_cells": [
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    2
+   ],
+   [
+    0,
+    4
+   ],
+   [
+    1,
+    0
+   ],
+   [
+    6,
+    3
+   ],
+   [
+    18,
+    0
+   ],
+   [
+    19,
+    0
+   ],
+   [
+    20,
+    0
+   ],
+   [
+    21,
+    0
+   ],
+   [
+    22,
+    0
+   ],
+   [
+    23,
+    0
+   ]
+  ],
+  "computed_at_matrix": [
+   5,
+   26
+  ]
+ },
+ "saved_at": "2026-10-03 11:04:01"
 }

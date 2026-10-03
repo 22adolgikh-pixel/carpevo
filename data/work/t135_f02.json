@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   29,
-   5
+   35.49,
+   10.66
   ],
   [
-   400,
-   5
+   393.79,
+   10.66
   ],
   [
-   400,
-   68
+   393.79,
+   64.85
   ],
   [
-   29,
-   68
+   35.49,
+   64.85
   ]
  ],
  "meta": {
@@ -40,5 +40,102 @@
   "type": "—",
   "note": "К В Казахе называют «бурум».",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 4.9041,
+  "ph": 4.9091,
+  "ox": 0,
+  "oy": 0,
+  "cols": 73,
+  "rows": 11,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   144
+  ],
+  "centers": [
+   219,
+   93
+  ]
+ },
+ "matrix": {
+  "w": 72,
+  "h": 3,
+  "origin": [
+   0,
+   3
+  ],
+  "rows": [
+   "111111111111111111111111111111111111111111111111111111111111111111111111",
+   "..11..11..11..11..11..11..11..11..11..11..11..11..11..11..11..11..11..11",
+   "111111111111111111111111111111111111111111111111111111111111111111111111"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.99,
+  "flags": [],
+  "pitch": [
+   4.908,
+   4.926
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_h",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.01,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": true,
+  "axis": "h",
+  "period": 4,
+  "offset": 4,
+  "match": 1.0,
+  "repeats": 16.5,
+  "agreement": 1.0,
+  "mirror_across": 1.0,
+  "is_mirror": true,
+  "glide": 0.667,
+  "is_glide": false,
+  "check": false,
+  "unit": {
+   "w": 4,
+   "h": 3,
+   "rows": [
+    "1111",
+    "..11",
+    "1111"
+   ]
+  },
+  "suspect_cells": [],
+  "computed_at_matrix": [
+   72,
+   3
+  ]
+ },
+ "saved_at": "2026-10-03 11:03:49"
 }

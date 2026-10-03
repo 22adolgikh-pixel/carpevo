@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   30,
-   4
+   35.98,
+   7.31
   ],
   [
-   406,
-   4
+   404.08,
+   7.31
   ],
   [
-   406,
-   65
+   404.08,
+   60.75
   ],
   [
-   30,
-   65
+   35.98,
+   60.75
   ]
  ],
  "meta": {
@@ -39,5 +39,104 @@
   "carpet": "",
   "type": "",
   "note": ""
- }
+ },
+ "grid": {
+  "pw": 4.9067,
+  "ph": 4.8182,
+  "ox": 0,
+  "oy": 0,
+  "cols": 75,
+  "rows": 11,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   130
+  ],
+  "centers": [
+   215,
+   74
+  ]
+ },
+ "matrix": {
+  "w": 72,
+  "h": 4,
+  "origin": [
+   1,
+   3
+  ],
+  "rows": [
+   "111111111111111111111111111111111111111111111111111111111111111111111111",
+   "..1...1...1...1...1...1...1...1...1...1...1...1...1...1...1...1...1...1.",
+   ".111.111.111.111.111.111.111.111.111.111.111.111.111.111.111.111.111.111",
+   "111111111111111111111111111111111111111111111111111111111111111111111111"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.91,
+  "flags": [],
+  "pitch": [
+   4.908,
+   4.858
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": null,
+   "score": 0.714,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.09,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": true,
+  "axis": "h",
+  "period": 4,
+  "offset": 4,
+  "match": 1.0,
+  "repeats": 16.5,
+  "agreement": 1.0,
+  "mirror_across": 0.714,
+  "is_mirror": false,
+  "glide": 0.714,
+  "is_glide": false,
+  "check": false,
+  "unit": {
+   "w": 4,
+   "h": 4,
+   "rows": [
+    "1111",
+    "..1.",
+    ".111",
+    "1111"
+   ]
+  },
+  "suspect_cells": [],
+  "computed_at_matrix": [
+   72,
+   4
+  ]
+ },
+ "saved_at": "2026-10-03 11:03:51"
 }
