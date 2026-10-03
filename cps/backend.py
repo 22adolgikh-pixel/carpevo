@@ -741,6 +741,30 @@ def api_broken(fix: int = 0):
     return {"broken": out, "fixed": bool(fix)}
 
 
+@app.get("/api/lostgray")
+def api_lostgray(fix: int = 0):
+    """Принятые ч/б рисунки без серого, где автомат уверенно видит заливку (старый прогон без заливки её стирал).
+    fix=1 — вернуть серое (контур и сетка человека сохраняются) и отправить рисунок обратно в проверку."""
+    import lostgray
+    out = []
+    for fn in sorted(os.listdir(D_WORK)):
+        if not fn.endswith(".json"): continue
+        wp = os.path.join(D_WORK, fn); w = jload(wp, {}) or {}
+        a = w.get("auto") or {}
+        if not (w.get("matrix") and w.get("done") and a.get("reviewed") and not w.get("color_mode") and w.get("kind") != "photo" and w.get("quad") and w.get("grid")): continue
+        if "2" in "".join(w["matrix"]["rows"]) or a.get("gray_restored"): continue
+        cp = os.path.join(D_CROPS, fn[:-5] + ".png")
+        g = cv2.imread(cp, 0) if os.path.exists(cp) else None
+        if g is None: continue
+        try: r = lostgray.propose(w, g)
+        except Exception: continue
+        if not r: continue
+        out.append({"id": fn[:-5], "sheet": w.get("sheet"), "share": round(r[1], 3)})
+        if fix:
+            jsave(wp, lostgray.apply(w, r[0], r[1]))
+    return {"count": len(out), "fixed": bool(fix), "items": out}
+
+
 @app.post("/api/accept")
 def api_accept(body: dict = Body(...)):
     """Массово принять авто-результаты (done + reviewed) — для очереди проверки."""
