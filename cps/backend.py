@@ -156,10 +156,30 @@ def api_sheets():
             for w in works:
                 d = norm_diff(w.get("difficulty"))
                 if d: diff[d] = diff.get(d, 0) + 1
-            src = rel.replace("\\", "/").split("/")[0] if "/" in rel.replace("\\", "/") else "(без папки)"
-            out.append({"path": rel, "name": fn, "source": src, "table": meta.get("table"), "n": len(figs), "done": done, "diff": diff, "no_figures": bool(meta.get("no_figures"))})
+            parts = rel.replace("\\", "/").split("/")
+            src = parts[0] if len(parts) > 1 else "(без папки)"
+            sub = parts[1] if len(parts) > 2 else ""          # второй уровень папок (глубже — внутри него)
+            out.append({"path": rel, "name": fn, "source": src, "sub": sub, "table": meta.get("table"), "n": len(figs), "done": done, "diff": diff, "no_figures": bool(meta.get("no_figures"))})
     out.sort(key=lambda s: s["path"])
     return out
+
+@app.get("/api/sheet_thumb")
+def api_sheet_thumb(path: str = Query(...), w: int = Query(160)):
+    """Маленькое превью скана для списка листов (кэш в data/thumbs)."""
+    try: p = _safe_rel(path)
+    except ValueError: return JSONResponse({"error": "bad path"}, 400)
+    if not os.path.exists(p): return JSONResponse({"error": "nf"}, 404)
+    w = max(60, min(int(w), 400))
+    td = os.path.join(DATA, "thumbs"); os.makedirs(td, exist_ok=True)
+    tp = os.path.join(td, f"{_sheet_key(path)}_{w}_{int(os.path.getmtime(p))}.jpg")
+    if not os.path.exists(tp):
+        img = imread_any(p, cv2.IMREAD_REDUCED_COLOR_4 if p.lower().endswith((".jpg", ".jpeg")) else cv2.IMREAD_COLOR)
+        if img is None: return JSONResponse({"error": "decode"}, 415)
+        h = max(1, round(img.shape[0] * w / img.shape[1]))
+        small = cv2.resize(img, (w, h), interpolation=cv2.INTER_AREA)
+        ok, buf = cv2.imencode(".jpg", small, [cv2.IMWRITE_JPEG_QUALITY, 70])
+        if ok: buf.tofile(tp)
+    return FileResponse(tp, headers={"Cache-Control": "public, max-age=86400"})
 
 @app.get("/api/sheet_image")
 def api_sheet_image(path: str = Query(...)):

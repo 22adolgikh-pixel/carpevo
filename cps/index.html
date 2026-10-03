@@ -32,6 +32,11 @@ main canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 #sbInfo{font-size:12px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
 #sbInfo .warn{color:var(--acc)}#sbInfo .bad{color:var(--bad)}#sbInfo .mut{color:var(--mut)}
 #undoBox{display:flex;gap:4px}
+.thumb{width:44px;height:58px;object-fit:cover;border-radius:3px;background:#0003;flex:none}
+.fld{display:flex;gap:6px;align-items:center;padding:5px 4px;cursor:pointer;font-weight:600;font-size:12.5px;border-radius:6px}
+.fld:hover{background:#ffffff0d}.fld small{color:var(--mut);font-weight:400;margin-left:auto;font-size:11px}
+.fld.sub{padding-left:16px;font-weight:500}.chev{width:10px;color:var(--mut);flex:none}.fld .fn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}.fld small{white-space:nowrap;flex:none}
+.fbody{margin-left:6px;border-left:1px solid var(--ln);padding-left:4px}.fbody.sub{margin-left:14px}
 .item{padding:5px 7px;border-radius:6px;cursor:pointer;display:flex;gap:7px;align-items:center;line-height:1.25}
 .item:hover{background:var(--pan2)}
 .item.sel{background:#2a3140;outline:1px solid var(--acc)}
@@ -344,22 +349,35 @@ async function gotoFig(delta,todo){
 ['sheet','grid','pix','cat','queue'].forEach(k=>$('tab-'+k).onclick=()=>setMode(k));
 
 /* ============================ левая панель ============================ */
+/* дерево источников: папка → подпапка → листы (до двух уровней) */
+function foldLoad(){try{return new Set(JSON.parse(localStorage.getItem('cpsFold')||'[]'));}catch(e){return new Set();}}
+function foldSave(){try{localStorage.setItem('cpsFold',JSON.stringify([...(S.fopen||[])]));}catch(e){}}
+function sheetItem(s){return `<div class="item ${S.sheet&&S.sheet.path===s.path?'sel':''}" data-p="${esc(s.path)}" style="${s.no_figures?'opacity:.5':''}"><img class="thumb" loading="lazy" src="/api/sheet_thumb?path=${encodeURIComponent(s.path)}" alt=""><div>${esc(s.name)}<small>${s.no_figures?'пусто (без рисунков)':(s.table?('Табл. '+esc(s.table)+' · '):'')+(s.n?(s.n+' рис., готово '+s.done):'не размечен')}</small><span class="dot ${s.no_figures?'':(s.n?(s.done===s.n?'done':'mid'):'')}" style="display:inline-block;margin-top:3px"></span></div></div>`;}
+function sheetTree(){
+  S.fopen=S.fopen||foldLoad();
+  if(!S.sheets.length)return '<div class="hint">сканов нет</div>';
+  const tree={};S.sheets.forEach(s=>{const a=s.source||'(без папки)',b=s.sub||'';((tree[a]=tree[a]||{})[b]=tree[a][b]||[]).push(s);});
+  const cur=S.sheet&&S.sheets.find(x=>x.path===S.sheet.path),stat_=l=>{const n=l.reduce((t,s)=>t+s.n,0),d=l.reduce((t,s)=>t+s.done,0);return `${l.length} л.${n?` · ${d}/${n}`:''}`;};
+  const srcs=Object.keys(tree).sort(),single=srcs.length===1&&Object.keys(tree[srcs[0]]).length===1;
+  return srcs.map(a=>{
+    const subs=Object.keys(tree[a]).sort(),all=subs.flatMap(b=>tree[a][b]);
+    const ka='a|'+a,openA=S.fopen.has('x|'+ka)?false:true;
+    const body=subs.map(b=>{
+      if(!b)return tree[a][b].map(sheetItem).join('');
+      const kb='b|'+a+'|'+b,openB=S.fopen.has('x|'+kb)?false:(S.fopen.has(kb)||!!(cur&&cur.source===a&&cur.sub===b));
+      return `<div class="fld sub" data-f="${esc(kb)}" data-open="${openB?1:0}"><span class="chev">${openB?'▾':'▸'}</span><span class="fn">${esc(b)}</span><small>${stat_(tree[a][b])}</small></div>`+(openB?`<div class="fbody sub">${tree[a][b].map(sheetItem).join('')}</div>`:'');}).join('');
+    return `<div class="fld" data-f="${esc(ka)}" data-open="${openA?1:0}"><span class="chev">${openA?'▾':'▸'}</span><span class="fn">${esc(a)}</span><small>${stat_(all)}</small></div>`+(openA?`<div class="fbody">${body}</div>`:'');
+  }).join('');}
 function renderLeft(){
   const L=$('left');
   if(S.mode==='sheet'){
-    // источники (книги/журналы) — разные подпапки в scans/, чтобы можно было идти по одной книге за раз
-    const sources=[...new Set(S.sheets.map(s=>s.source||''))].sort();
-    const cur=S.srcFilter&&sources.includes(S.srcFilter)?S.srcFilter:'';
-    const list=S.sheets.filter(s=>!cur||s.source===cur);
     L.innerHTML='<h4>Сканы листов</h4>'+
-      (sources.length>1?`<div class="srcbar">${[['','все источники']].concat(sources.map(s=>[s,s])).map(([k,l])=>`<button class="${cur===k?'on':''}" data-src="${esc(k)}">${esc(l)}</button>`).join('')}</div>`:'')+
       '<div class="flex" style="margin-bottom:6px"><button id="upSheets" class="sm">+ загрузить сканы</button><button id="rfSheets" class="sm">обновить</button></div>'+
-      '<input type="file" id="upFile" multiple accept="image/*" hidden>'+
-      (list.length?list.map(s=>`<div class="item ${S.sheet&&S.sheet.path===s.path?'sel':''}" data-p="${esc(s.path)}" style="${s.no_figures?'opacity:.5':''}"><span class="dot ${s.no_figures?'':(s.n?(s.done===s.n?'done':'mid'):'')}"></span><div>${esc(s.name)}<small>${s.no_figures?'пусто (без рисунков)':(s.table?('Табл. '+esc(s.table)+' · '):'')+(s.n?(s.n+' рис., готово '+s.done):'не размечен')}</small></div></div>`).join(''):'<div class="hint">в этом источнике сканов нет</div>')+
-      '<div class="hint">Папка сканов задаётся переменной <kbd>CPS_SCANS</kbd> при запуске (можно указать папку Google Drive). Подпапки внутри неё = разные источники (книги/журналы) — фильтр выше.<br><span id="scDir"></span></div>'+
+      '<input type="file" id="upFile" multiple accept="image/*" hidden>'+sheetTree()+
+      '<div class="hint">Папка сканов задаётся переменной <kbd>CPS_SCANS</kbd> при запуске. Подпапки (до двух уровней) = источники: книга → раздел.<br><span id="scDir"></span></div>'+
       '<h4>Книги (PDF)</h4><div id="pdfSec" class="hint">ищу PDF…</div>';
+    L.querySelectorAll('.fld').forEach(e=>e.onclick=()=>{const k=e.dataset.f;S.fopen=S.fopen||foldLoad();if(e.dataset.open==='1'){S.fopen.delete(k);S.fopen.add('x|'+k);}else{S.fopen.add(k);S.fopen.delete('x|'+k);}foldSave();renderLeft();});
     L.querySelectorAll('.item').forEach(e=>e.onclick=()=>openSheet(e.dataset.p).catch(fail));
-    L.querySelectorAll('[data-src]').forEach(b=>b.onclick=()=>{S.srcFilter=b.dataset.src;renderLeft();});
     $('upSheets').onclick=()=>$('upFile').click();$('rfSheets').onclick=()=>refreshSheets().catch(fail);
     $('upFile').onchange=e=>uploadFiles('/api/upload',[...e.target.files]).then(refreshSheets).catch(fail);
     api('/api/config').then(c=>{const e=$('scDir');if(e)e.textContent='Сейчас: '+c.scans;}).catch(()=>{});
@@ -899,9 +917,11 @@ async function autoFigure(opt){
 }
 
 /* ============================ 3. ПИКСЕЛИ ============================ */
-function pushUndo(){const F=S.fig;if(!F.M)return;F.undo.push({w:F.M.w,h:F.M.h,ox:F.M.ox,oy:F.M.oy,d:F.M.d.slice()});if(F.undo.length>300)F.undo.shift();F.redo=[];}
-function undo(){const F=S.fig;if(!F||!F.undo.length)return;F.redo.push({...F.M,d:F.M.d.slice()});F.M=F.undo.pop();markDirty();renderRight();redraw();}
-function redo(){const F=S.fig;if(!F||!F.redo.length)return;F.undo.push({...F.M,d:F.M.d.slice()});F.M=F.redo.pop();markDirty();renderRight();redraw();}
+function snap(F){return {w:F.M.w,h:F.M.h,ox:F.M.ox,oy:F.M.oy,d:F.M.d.slice(),pal:F.palette.slice(),names:F.palNames.slice(),dyes:(F.palDyes||[]).slice(),thr:F.cls&&F.cls.thr?F.cls.thr.slice():null,cur:F.cur};}
+function restore(F,z){F.M={w:z.w,h:z.h,ox:z.ox,oy:z.oy,d:z.d.slice(),edited:true};if(z.pal){F.palette=z.pal.slice();F.palNames=z.names.slice();F.palDyes=z.dyes.slice();if(z.thr&&F.cls)F.cls.thr=z.thr.slice();F.cur=Math.min(z.cur,F.palette.length-1);F.palTouched=true;}}
+function pushUndo(){const F=S.fig;if(!F.M)return;F.undo.push(snap(F));if(F.undo.length>300)F.undo.shift();F.redo=[];}
+function undo(){const F=S.fig;if(!F||!F.M||!F.undo.length)return;F.redo.push(snap(F));restore(F,F.undo.pop());markDirty();renderRight();redraw();}
+function redo(){const F=S.fig;if(!F||!F.M||!F.redo.length)return;F.undo.push(snap(F));restore(F,F.redo.pop());markDirty();renderRight();redraw();}
 function mirrorAxis(sy,M){return[sy.ax==null?M.w/2:sy.ax,sy.ay==null?M.h/2:sy.ay];}
 function mirrorOf(sy,M,i,j){const[ax,ay]=mirrorAxis(sy,M);return[Math.round(2*ax)-1-i,Math.round(2*ay)-1-j];}
 function mirrorPts(sy,M,i,j){const[mi,mj]=mirrorOf(sy,M,i,j);const seen=new Set([i+','+j]),pts=[];
@@ -984,11 +1004,11 @@ MODES.pix={
     if(d&&d.t!=='pen'&&d.t!=='symaxis'&&this.prev){this.prev.cells.forEach(([a,b])=>setCell(a,b,d.v));markDirty();}
     this.prev=null;renderInfo();redraw();},
   hud(w){const F=S.fig;if(!F||!F.M)return'';const[i,j]=this.cell(w);return(i>=0&&j>=0&&i<F.M.w&&j<F.M.h)?('x '+(i+1)+'  y '+(j+1)+'  '+F.M.w+'×'+F.M.h):F.M.w+'×'+F.M.h;},
-  key(e){const F=S.fig;const k=e.key.toLowerCase();
+  key(e){const F=S.fig;const k=kk(e);
     const tools={b:'pen',p:'pen',e:'eraser',g:'fill',f:'fill',l:'line',r:'rect',c:'copy'};
     if(k==='escape'&&(F.tool==='paste'||F.tool==='copy')){F.tool='pen';renderRight();return true;}
     if(!e.metaKey&&!e.ctrlKey&&tools[k]){F.tool=tools[k]==='rect'&&F.tool==='rect'?'rectf':tools[k];renderRight();return true;}
-    if(/^[0-9]$/.test(e.key)&&!e.metaKey&&!e.ctrlKey){const n=e.key==='0'?9:+e.key-1;if(n<F.palette.length)setCur(n);return true;}   // v7: 1 — фон, 2… — цвета
+    if(/^[0-9]$/.test(k)&&!e.metaKey&&!e.ctrlKey){const n=k==='0'?9:+k-1;if(n<F.palette.length)setCur(n);return true;}   // v7: 1 — фон, 2… — цвета
     if(k==='x'&&!e.metaKey&&!e.ctrlKey){if(F.prevCur!=null&&F.prevCur<F.palette.length)setCur(F.prevCur);return true;}   // как в Illustrator: два последних цвета
     if(k==='u'&&!e.metaKey&&!e.ctrlKey){F.under=F.under>0?0:(F.underLast||0.35);renderRight();redraw();return true;}
     return false;}
@@ -1015,12 +1035,12 @@ function renderPal(){const F=S.fig,b=$('palBox');if(!b)return;
   b.querySelectorAll('.sq[data-i]').forEach(el=>{const i=+el.dataset.i;const inp=el.querySelector('input[type=color]');
     el.onclick=e=>{if(e.target.hasAttribute('data-del'))return;setCur(i);};
     el.ondblclick=e=>{if(e.target.hasAttribute('data-del'))return;openDyePicker(i);};
-    inp.oninput=e=>{F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;el.style.background=e.target.value;markDirty();redraw();};
+    inp.onfocus=()=>{inp._u=false;};inp.oninput=e=>{if(!inp._u){pushUndo();inp._u=true;}F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;el.style.background=e.target.value;markDirty();redraw();};inp.onchange=()=>{inp._u=false;inp.blur();};
     const del=el.querySelector('[data-del]');if(del)del.onclick=()=>{if(!confirm('Удалить цвет '+(i+1)+'? Его клетки станут фоном.'))return;pushUndo();const M=F.M;
       if(M)for(let k=0;k<M.d.length;k++){if(M.d[k]===i)M.d[k]=0;else if(M.d[k]>i)M.d[k]--;}
       F.palette.splice(i,1);F.palNames.splice(i,1);F.palDyes.splice(i,1);F.cls.thr.splice(i-1,1);F.cur=Math.min(F.cur,F.palette.length-1);F.palTouched=true;markDirty();renderPal();renderSbInfo();redraw();};});
   renderPalNames();
-  $('palAdd').onclick=()=>{const i=F.palette.length;F.palette.push(FIXED_PALETTE[i]||'#b22222');F.palNames.push(FIXED_NAMES[i]||'');F.palDyes.push(null);F.cur=F.palette.length-1;F.palTouched=true;markDirty();renderPal();};}
+  $('palAdd').onclick=()=>{pushUndo();const i=F.palette.length;F.palette.push(FIXED_PALETTE[i]||'#b22222');F.palNames.push(FIXED_NAMES[i]||'');F.palDyes.push(null);F.cur=F.palette.length-1;F.palTouched=true;markDirty();renderPal();};}
 function hex2lab(h){const[r0,g0,b0]=hex2rgb(h).map(v=>{v/=255;return v<=0.04045?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
   const f=t=>t>0.008856?Math.cbrt(t):7.787*t+16/116;
   const fx=f((0.4124*r0+0.3576*g0+0.1805*b0)/0.95047),fy=f(0.2126*r0+0.7152*g0+0.0722*b0),fz=f((0.0193*r0+0.1192*g0+0.9505*b0)/1.08883);
@@ -1031,11 +1051,16 @@ function nearestDye(hex){const L=hex2lab(hex);let best=null,bd=1e9;
 function dyeById(id){return S.dyes.find(d=>d.id===id)||null;}
 function dyeLabel(F,i,dye){   // «zoğalı», «zoğalı 2» — два оттенка одного красителя в одном рисунке
   const n=F.palDyes.filter((x,j)=>j!==i&&x===dye.id).length;return n?dye.az+' '+(n+1):dye.az;}
-function applyDye(F,i,dye,recolor){if(recolor)F.palette[i]=dye.hex;F.palDyes[i]=dye.id;F.palNames[i]=dyeLabel(F,i,dye);F.palTouched=true;markDirty();}
+function applyDye(F,i,dye,recolor){if(F.M)pushUndo();if(recolor)F.palette[i]=dye.hex;F.palDyes[i]=dye.id;F.palNames[i]=dyeLabel(F,i,dye);F.palTouched=true;markDirty();}
 function renderPalNames(){const F=S.fig;if(!F)return;
   while(F.palDyes.length<F.palette.length)F.palDyes.push(null);
+  const bc=$('bgCol');if(bc){bc.value=F.palette[0];bc.onfocus=()=>{bc._u=false;};
+    bc.oninput=e=>{if(!bc._u){if(F.M)pushUndo();bc._u=true;}F.palette[0]=e.target.value;F.palDyes[0]=null;F.palTouched=true;markDirty();const t=document.querySelector('#palBox .sq[data-i="0"]');if(t)t.style.background=e.target.value;redraw();};
+    bc.onchange=()=>{bc._u=false;bc.blur();renderPal();};}
+  const bt=$('bgTr');if(bt){bt.checked=!!F.transparent;bt.onchange=()=>{F.transparent=bt.checked;markDirty();};}
   const pd=$('palDye');if(pd)pd.onclick=()=>openDyePicker(F.cur);
   const sn=$('palSnap');if(sn)sn.onclick=()=>{if(!S.dyes.length){stat('библиотека красителей не загрузилась','err');return;}
+    if(F.M)pushUndo();
     F.palDyes=[];F.palette.forEach((c,k)=>{const r=nearestDye(c);F.palDyes[k]=r?r.dye.id:null;});
     F.palette.forEach((c,k)=>{const d2=dyeById(F.palDyes[k]);if(d2)F.palNames[k]=dyeLabel(F,k,d2);});   // только подписи: измеренные цвета остаются как на скане
     F.palTouched=true;markDirty();renderPal();redraw();};}
@@ -1052,7 +1077,7 @@ function openDyePicker(i){
   $('dyClose').onclick=close;W.onclick=e=>{if(e.target===W)close();};
   W.querySelectorAll('.dy').forEach(el=>el.onclick=()=>{applyDye(F,i,dyeById(el.dataset.id),$('dyRe').checked);close();});
   $('dyOwn').onclick=()=>$('dyIn').click();
-  $('dyIn').oninput=e=>{F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;markDirty();redraw();};
+  $('dyIn').oninput=e=>{if(!$('dyIn')._u){if(F.M)pushUndo();$('dyIn')._u=true;}F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;markDirty();redraw();};
 }
 function setCur(i){const F=S.fig;if(!F)return;if(i!==F.cur){F.prevCur=F.cur;F.cur=i;}renderPal();}
 function lum(h){const[r,g,b]=hex2rgb(h);return 0.299*r+0.587*g+0.114*b;}
@@ -1068,6 +1093,7 @@ function renderRightPix(){
   const ids=(m.site_id||'').split(',').map(x=>x.trim()).filter(Boolean);
   R.innerHTML=`  <h4>Палитра <span class="hintbox">?<span class="htxt">Клик — выбрать цвет для рисования, двойной клик — сменить цвет, ✕ при наведении — удалить. <kbd>1</kbd> — фон, <kbd>2</kbd>–<kbd>9</kbd> — цвета. <kbd>X</kbd> — переключиться на предыдущий цвет (как в Illustrator). <kbd>Alt</kbd>+клик по клетке — взять её цвет. Левая кнопка мыши рисует выбранным цветом, правая — фоном.</span></span></h4>
   <div class="palgrid" id="palBox"></div>
+  <div class="flex" style="gap:10px;margin:4px 0 2px;font-size:12px;color:var(--mut)"><label class="flex" style="gap:6px" data-tip="Цвет фона (клетки без цвета). Тот же цвет можно сменить двойным кликом по плитке 1."><input type="color" id="bgCol" value="${F.palette[0]}" style="width:26px;height:22px;padding:0;border:1px solid var(--ln);background:none"> цвет фона</label><label class="flex" style="gap:5px" data-tip="Выключено — файлы «PNG» и «×12» тоже получат цвет фона. «×12 с фоном» всегда с фоном."><input type="checkbox" id="bgTr" ${F.transparent?'checked':''}> прозрачный в PNG</label></div>
   <div class="opts" style="margin-top:2px"><button class="sm" id="palDye" data-tip="Выбрать краситель для выбранного цвета (или двойной клик по плитке)">краситель…</button><button class="sm" id="palSnap" data-tip="Подписать цвета ближайшими красителями из библиотеки. Сами цвета не меняются — остаются как на скане">↻ подписать красителями</button></div>
   <h4>Вид</h4>
   <div class="ibar">${IB('under','Подложка скана вкл/выкл · держите Пробел — оригинал скана','U','id="uTog"',F.under>0)}<input type="range" id="uA" min="0" max="1" step="0.05" value="${F.under}" style="flex:1;min-width:40px" data-tip="прозрачность подложки">
@@ -1157,12 +1183,11 @@ function renderToolcol(){
   const T=(t,ic,tip,key)=>IB(t==='rect'&&F.tool==='rectf'?'rectf':ic,tip,key,`data-tool="${t}"`,F.tool===t||(t==='rect'&&F.tool==='rectf')||(t==='copy'&&F.tool==='paste'));
   TC.innerHTML=`${T('pen','pen','Карандаш','B')}${T('eraser','eraser','Ластик','E')}${T('fill','fill','Заливка','G')}${T('line','line','Линия','L')}${T('rect','rect',F.tool==='rectf'?'Прямоугольник залитый':'Прямоугольник (ещё раз R — залитый)','R')}${T('copy',F.tool==='paste'?'paste':'copy',F.tool==='paste'?'Вставить скопированное (клик) · Esc — отмена':'Скопировать область (потом — клик, чтобы вставить)','C')}
 
-  <hr>${IB('symX','Зеркало по вертикали — рисуете половину, вторая повторяется. Alt+тянуть по линии — сдвинуть ось','', 'id="syX"',F.sym.x)}${IB('symY','Зеркало по горизонтали. Alt+тянуть по линии — сдвинуть ось','','id="syY"',F.sym.y)}${IB('rot','Поворот 180° вокруг центра (розетки, вертушки)','','id="syR"',F.sym.rot)}${IB('grid',"Показать / скрыть сетку","⌘'",'id="gridTog"',S.showGrid)}`;
+  <hr>${IB('symX','Зеркало по вертикали — рисуете половину, вторая повторяется. Alt+тянуть по линии — сдвинуть ось','', 'id="syX"',F.sym.x)}${IB('symY','Зеркало по горизонтали. Alt+тянуть по линии — сдвинуть ось','','id="syY"',F.sym.y)}${IB('rot','Поворот 180° вокруг центра (розетки, вертушки)','','id="syR"',F.sym.rot)}`;
   TC.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{const t=b.dataset.tool;F.tool=t==='rect'&&F.tool==='rect'?'rectf':t;renderRight();});
   $('syX').onclick=()=>{F.sym.x=!F.sym.x;if(F.sym.x)F.sym.ax=F.M.w/2;renderRight();redraw();};
   $('syY').onclick=()=>{F.sym.y=!F.sym.y;if(F.sym.y)F.sym.ay=F.M.h/2;renderRight();redraw();};
   $('syR').onclick=()=>{F.sym.rot=!F.sym.rot;if(F.sym.rot){F.sym.ax=F.M.w/2;F.sym.ay=F.M.h/2;}renderRight();redraw();};
-  $('gridTog').onclick=toggleGrid;
 }
 function outLinks(){const F=S.fig,e=$('outLinks');if(!e)return;const t=Date.now(),L=(suf,lbl,tip)=>`<a href="/out/${F.id}${suf}?t=${t}" target="_blank" style="color:var(--blue)" ${tip?`data-tip="${tip}"`:''}>${lbl}</a>`;
   e.innerHTML=F.work.saved_at?`Файлы: ${L('.png','PNG 1:1','1 узел = 1 пиксель, фон прозрачный')} · ${L('_x12.png','PNG ×12','крупно, фон прозрачный, без сетки')} · ${L('_bg.png','×12 с фоном','крупно, с цветом фона — для просмотра и печати')} · ${L('_grid.png','сетка','сетка отдельным прозрачным слоем того же размера, что ×12')} · ${L('.svg','SVG','векторный: каждый цвет — свой слой, фон и сетка — отдельные скрытые слои')}${F.work.rapport&&F.work.rapport.found?' · '+L('_unit.png','раппорт','один повтор каймы, ×12'):''}`:'';}
@@ -1318,24 +1343,30 @@ function renderRight(){
 }
 
 /* ============================ клавиатура ============================ */
+/* Хоткеи привязаны к физической клавише (e.code), а не к символу: работают в любой раскладке (рус., азерб. и т.д.) */
+function kk(e){const c=e.code||'';
+  if(/^Key[A-Z]$/.test(c))return c.slice(3).toLowerCase();
+  if(/^(Digit|Numpad)\d$/.test(c))return c.slice(-1);
+  const m={BracketLeft:'[',BracketRight:']',Minus:'-',Equal:'=',Quote:"'",NumpadAdd:'+',NumpadSubtract:'-'};
+  return m[c]||String(e.key||'').toLowerCase();}
 window.addEventListener('keydown',e=>{
   const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','range','button'].includes(ae.type)));
   if(e.code==='Space'&&!typing){e.preventDefault();if(ae&&ae!==document.body&&ae.blur)ae.blur();if(e.repeat)return;spaceDown=true;cv.style.cursor='grab';
     if(S.fig&&((S.mode==='pix'&&S.fig.M)||(S.mode==='grid'&&(S.gridView||'grid')==='grid'))){S.peek=true;$('peek').textContent='оригинал скана · пока держите пробел';$('peek').style.display='block';redraw();}return;}
-  if((e.metaKey||e.ctrlKey)&&e.key==="'"){e.preventDefault();toggleGrid();return;}
-  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='s'){e.preventDefault();if(S.fig)saveFigure().catch(fail);return;}
+  if((e.metaKey||e.ctrlKey)&&kk(e)==="'"){e.preventDefault();toggleGrid();return;}
+  if((e.metaKey||e.ctrlKey)&&kk(e)==='s'){e.preventDefault();if(S.fig)saveFigure().catch(fail);return;}
   if((e.metaKey||e.ctrlKey)&&e.key==='Enter'&&S.mode==='pix'&&S.fig&&S.fig.M&&$('modal').hidden){e.preventDefault();finishFigure('done');return;}
   if(e.key==='Escape'&&!$('modal').hidden){$('modal').hidden=true;$('modal').innerHTML='';renderRight();return;}
-  if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;
-  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='z'){e.preventDefault();e.shiftKey?redo():undo();return;}
-  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='y'){e.preventDefault();redo();return;}
+  if(typing)return;
+  if((e.metaKey||e.ctrlKey)&&kk(e)==='z'){e.preventDefault();e.shiftKey?redo():undo();return;}
+  if((e.metaKey||e.ctrlKey)&&kk(e)==='y'){e.preventDefault();redo();return;}
   const sheetSel=false;
-  if(!e.metaKey&&!e.ctrlKey&&!e.altKey&&['1','2','3','4','5'].includes(e.key)&&S.mode!=='pix'&&!sheetSel){setMode(['sheet','grid','pix','cat','queue'][+e.key-1]);return;}
-  if((e.key==='['||e.key===']')&&S.fig&&(S.mode==='grid'||S.mode==='pix')){gotoFig(e.key===']'?1:-1).catch(fail);return;}
-  if(e.key==='='||e.key==='+'){zoomAt(1.25,V.w/2,V.h/2);return;}
-  if(e.key==='-'){zoomAt(0.8,V.w/2,V.h/2);return;}
-  if(e.key==='0'&&S.mode!=='pix'&&!sheetSel){const h=H();h&&h.fit&&h.fit();return;}
-  if(S.mode==='grid'&&e.key.toLowerCase()==='q'){S.gridView=S.gridView==='quad'?'grid':'quad';renderRight();H().fit();return;}
+  if(!e.metaKey&&!e.ctrlKey&&!e.altKey&&['1','2','3','4','5'].includes(kk(e))&&S.mode!=='pix'&&!sheetSel){setMode(['sheet','grid','pix','cat','queue'][+kk(e)-1]);return;}
+  if((kk(e)==='['||kk(e)===']')&&S.fig&&(S.mode==='grid'||S.mode==='pix')){gotoFig(kk(e)===']'?1:-1).catch(fail);return;}
+  if(kk(e)==='='||kk(e)==='+'){zoomAt(1.25,V.w/2,V.h/2);return;}
+  if(kk(e)==='-'){zoomAt(0.8,V.w/2,V.h/2);return;}
+  if(kk(e)==='0'&&S.mode!=='pix'&&!sheetSel){const h=H();h&&h.fit&&h.fit();return;}
+  if(S.mode==='grid'&&kk(e)==='q'){S.gridView=S.gridView==='quad'?'grid':'quad';renderRight();H().fit();return;}
   const h=H();if(h&&h.key&&h.key(e))e.preventDefault();
 });
 window.addEventListener('keyup',e=>{if(e.code==='Space'){spaceDown=false;cv.style.cursor='';if(S.peek){S.peek=false;$('peek').style.display='none';redraw();}}});
