@@ -135,3 +135,19 @@ def for_work(work):
     res = find_rapport(K)
     if res is not None: res["computed_at_matrix"] = [w, h]
     return res
+
+
+def tile(K, rap):
+    """Размножить найденный фрагмент по всей полосе (кроме 5% по краям — там концы/углы кайм): клетки, где оцифровка
+    разошлась с большинством повторов, исправляются; пропущенная серая заливка появляется на всех повторах."""
+    if not rap or not rap.get("found"): return K, 0
+    T, off, axis = int(rap["period"]), int(rap["offset"]), rap["axis"]
+    U = matrix_to_array(rap["unit"])
+    out = K.copy(); h, w = K.shape
+    n = h if axis == "v" else w
+    trim = int(n * 0.05) if n >= 60 else 0
+    for p in range(trim, n - trim):
+        u = (p - off) % T
+        if axis == "v": out[p, :] = U[u, :w]
+        else: out[:, p] = U[:h, u]
+    return out, int((out != K).sum())

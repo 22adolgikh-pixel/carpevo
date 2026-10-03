@@ -1066,7 +1066,7 @@ MODES.pix={
   hud(w){const F=S.fig;if(!F||!F.M)return'';const[i,j]=this.cell(w);return(i>=0&&j>=0&&i<F.M.w&&j<F.M.h)?('x '+(i+1)+'  y '+(j+1)+'  '+F.M.w+'×'+F.M.h):F.M.w+'×'+F.M.h;},
   key(e){const F=S.fig;const k=kk(e);
     const tools={b:'pen',p:'pen',e:'eraser',g:'fill',f:'fill',l:'line',r:'rect',c:'copy'};
-    if(k==='escape'&&(F.tool==='paste'||F.tool==='copy')){F.tool='pen';renderRight();return true;}
+    if(k==='escape'&&(F.tool==='paste'||F.tool==='copy')){F.tool='line';renderRight();return true;}
     if(!e.metaKey&&!e.ctrlKey&&tools[k]){F.tool=tools[k]==='rect'&&F.tool==='rect'?'rectf':tools[k];renderRight();return true;}
     if(/^[0-9]$/.test(k)&&!e.metaKey&&!e.ctrlKey){const n=k==='0'?9:+k-1;if(n<F.palette.length)setCur(n);return true;}   // v7: 1 — фон, 2… — цвета
     if(k==='x'&&!e.metaKey&&!e.ctrlKey){if(F.prevCur!=null&&F.prevCur<F.palette.length)setCur(F.prevCur);return true;}   // как в Illustrator: два последних цвета
@@ -1230,10 +1230,21 @@ function renderSbInfo(){const e=$('sbInfo');if(!e)return;const F=S.fig;
   {const sy=F.work.auto&&F.work.auto.symmetry;if(sy&&sy.kind&&sy.n_suspects)b.push(`<a href="#" id="susTog" class="warn" data-tip="Рисунок почти симметричен (${esc(sy.kind)}, ${Math.round(sy.score*100)}%). Оранжевые рамки — клетки, нарушающие симметрию: возможные ошибки оцифровки. Клик — показать/скрыть.">◇ симметрия: ${sy.n_suspects} подозр.</a>`);}
   const rp=F.work.rapport;
   if(rp&&rp.found)b.push(`<span class="${rp.check?'warn':'mut'}" data-tip="кайма: повторяющийся фрагмент найден автоматически (голосование по ${rp.repeats} повторам). Файл _unit.png — один повтор. ${(rp.suspect_cells||[]).length?(rp.suspect_cells.length+' клеток расходятся с большинством повторов — возможно, ошибки оцифровки'):''}">↻ раппорт ${rp.period} ${rp.axis==='v'?'рядов':'столбцов'} · совпадение ${Math.round(rp.match*100)}%${rp.is_mirror?' · зеркальный':''}${rp.is_glide?' · со сдвигом-отражением':''}${rp.check?' · проверить':''}</span>`);
+  if(rp&&rp.found&&rp.unit)b.push('<a href="#" id="rapApply" data-tip="Размножить найденный фрагмент по всей кайме: исправит клетки, расходящиеся с большинством повторов, и дорисует пропущенную серую заливку на всех повторах (можно отменить ⌘Z)">↻ по раппорту</a>');
   if(F.work.kind==='photo')b.push('<span class="warn">фото ковра, не схема</span>');
   b.push(S.saving?'<span class="mut">сохраняю…</span>':(S.dirty?'<span class="mut">изменено</span>':(F.work.saved_at?`<span class="mut">сохранено ${esc(String(F.work.saved_at).slice(11,16))}</span>`:'')));
   e.innerHTML=b.filter(Boolean).join(' <span class="mut">·</span> ');renderUndo();
+  const ra=$('rapApply');if(ra)ra.onclick=ev=>{ev.preventDefault();applyRapport();};
   const st=$('susTog');if(st)st.onclick=ev=>{ev.preventDefault();S.showSus=S.showSus===false;redraw();};}
+function applyRapport(){
+  const F=S.fig,rp=F&&F.work.rapport;if(!rp||!rp.found||!rp.unit||!F.M)return;
+  const T=rp.period,off=rp.offset,M=F.M,rows=rp.unit.rows.map(r=>[...r].map(c=>c==='.'?0:parseInt(c,36)));
+  const len=rp.axis==='v'?M.h:M.w,trim=len>=60?Math.floor(len*0.05):0;let n=0;pushUndo();
+  for(let p=trim;p<len-trim;p++){const u=(((p-off)%T)+T)%T;
+    if(rp.axis==='v'){for(let i=0;i<M.w;i++){const v=rows[u][i]||0;if(M.d[p*M.w+i]!==v){M.d[p*M.w+i]=v;n++;}}}
+    else{for(let j=0;j<M.h;j++){const v=rows[j][u]||0;if(M.d[j*M.w+p]!==v){M.d[j*M.w+p]=v;n++;}}}}
+  markDirty();redraw();renderInfo();stat('по раппорту исправлено клеток: '+n,'ok');
+}
 function renderUndo(){const U=$('undoBox');if(!U)return;
   if(S.mode!=='pix'||!S.fig||!S.fig.M){U.innerHTML='';return;}
   U.innerHTML=IB('undo','Отменить','⌘Z','id="uUndo"')+IB('redo','Повторить','⇧⌘Z','id="uRedo"');
@@ -1555,7 +1566,6 @@ window.addEventListener('keydown',e=>{
   const sheetSel=false;
   if(!e.metaKey&&!e.ctrlKey&&!e.altKey&&['1','2'].includes(kk(e))&&S.mode!=='pix'&&S.mode!=='grid'&&!sheetSel){setMode(['sheet','queue'][+kk(e)-1]);return;}
   if(e.key==='Tab'&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&(S.mode==='pix'||S.mode==='grid')){e.preventDefault();ovSwitch();return;}
-  if(kk(e)==='g'&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&(S.mode==='pix'||S.mode==='grid')){toggleGrid();redraw();return;}
   if((kk(e)==='['||kk(e)===']')&&S.fig&&(S.mode==='grid'||S.mode==='pix')){gotoFig(kk(e)===']'?1:-1).catch(fail);return;}
   if(kk(e)==='='||kk(e)==='+'){zoomAt(1.25,V.w/2,V.h/2);return;}
   if(kk(e)==='-'){zoomAt(0.8,V.w/2,V.h/2);return;}

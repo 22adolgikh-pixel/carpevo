@@ -606,6 +606,13 @@ def run_auto(fid, force=False, dark_only=False, mode="auto", pitch_hint=None, nc
     work.update(upd); work["id"] = fid; work["done"] = False
     work["adjust"] = {"brightness": 0, "contrast": 1, "gamma": 1, "invert": False}
     work["rapport"] = rapport.for_work(work)
+    rp = work["rapport"]
+    if rp and rp.get("found") and not rp.get("check") and rp.get("agreement", 0) >= 0.9:      # кайма = повторяющийся узор: исправляем все повторы по большинству
+        K2, nch = rapport.tile(rapport.matrix_to_array(work["matrix"]), rp)
+        if nch:
+            work["matrix"]["rows"] = rapport._rows_to_str(K2)
+            work["rapport"] = rapport.for_work(work)
+            work["auto"]["flags"] = list(work["auto"].get("flags") or []) + [f"кайма: раппорт применён ко всей полосе (исправлено клеток: {nch})"]
     _apply_risk(work)
     work["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
     jsave(wp, work)

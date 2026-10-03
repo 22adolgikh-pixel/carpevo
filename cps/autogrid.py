@@ -211,6 +211,21 @@ SOLID_EDGE = 0.02    # v6: тени и грязь по краям кадра п�
 SOLID_CORE = 0.25    # v6: доля «толстой» части (после эрозии) — отсекает ореолы вдоль линий
 REGION_T = 0.86      # замкнутая контуром область — заливка, если её типичная яркость ниже
 
+REF_DELTA, OTSU_LO, OTSU_HI, OTSU_SEP = 0.14, 0.20, 0.06, 0.06
+
+
+def _otsu_w(vals, w):
+    vals = np.array(vals, float); w = np.array(w, float); o = np.argsort(vals); vals, w = vals[o], w[o]
+    best = None; tot = w.sum()
+    for k in range(1, len(vals)):
+        w0 = w[:k].sum(); w1 = tot - w0
+        if w0 == 0 or w1 == 0: continue
+        m0 = (vals[:k] * w[:k]).sum() / w0; m1 = (vals[k:] * w[k:]).sum() / w1
+        s = w0 * w1 * (m0 - m1) ** 2
+        if best is None or s > best[0]: best = (s, (vals[k - 1] + vals[k]) / 2, m1 - m0)
+    return best
+
+
 def clean(M, t):
     """Заливка — это области внутри контура.
     1) Каждая замкнутая тёмным контуром область решается целиком: по медиане яркости (с поправкой на ореол у линий).
@@ -225,14 +240,24 @@ def clean(M, t):
     near = cv2.dilate(dark, np.ones((3, 3), np.uint8)) > 0
     k4 = np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]], np.uint8)
     n, lab, stats, _ = cv2.connectedComponentsWithStats((1 - dark).astype(np.uint8), connectivity=4)
-    outside = np.zeros_like(dark, bool)
+    outside = np.zeros_like(dark, bool); regs = []
     for i in range(1, n):
         x, y, w, h, area = stats[i]; comp = lab == i
         if x == 0 or y == 0 or x + w == W or y + h == H:
             outside |= comp; continue
         inner = comp & ~near
         tm = float(np.median(tc[inner])) if inner.sum() >= 3 else float(np.median(tc[comp]))
-        M[comp] = 2 if tm < REGION_T else 0
+        regs.append((comp, tm, int(area)))
+    # порог «серое / белое» — относительно бумаги этого же рисунка (у светлой заливки контраст всего 5–15%, абсолютный порог её терял);
+    # если замкнутые области явно делятся на две группы — режем между ними (Оцу по площади). Подбор на 150 готовых ЧБ: ошибка 25.5% → 21.1%.
+    o = outside & ~near
+    ref = float(np.median(tc[o])) if o.sum() >= 15 else 1.0
+    thr = ref - REF_DELTA
+    if len(regs) >= 2:
+        b = _otsu_w([r[1] for r in regs], [r[2] for r in regs])
+        if b and b[2] >= OTSU_SEP: thr = float(np.clip(b[1], ref - OTSU_LO, ref - OTSU_HI))
+    if ref - thr < 0.0 or o.sum() < 15: thr = REGION_T
+    for comp, tm, _ in regs: M[comp] = 2 if tm < thr else 0
     # внешняя область: только явные серые пятна, прижатые к контуру
     cand = outside & (tc < MID_CAND - 0.03)
     M[outside] = 0
