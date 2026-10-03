@@ -16,20 +16,20 @@
  "difficulty": null,
  "quad": [
   [
-   9,
-   9
+   14.7,
+   13.02
   ],
   [
-   127,
-   9
+   123.45,
+   13.02
   ],
   [
-   127,
-   123
+   123.45,
+   120.21
   ],
   [
-   9,
-   123
+   14.7,
+   120.21
   ]
  ],
  "meta": {
@@ -41,5 +41,78 @@
   "type": "Кар.",
   "note": "См. табл. № 141, рис. 2.",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 4.9545,
+  "ph": 4.8636,
+  "ox": 0,
+  "oy": 0,
+  "cols": 22,
+  "rows": 22,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   138
+  ],
+  "centers": [
+   220,
+   84
+  ]
+ },
+ "matrix": {
+  "w": 7,
+  "h": 7,
+  "origin": [
+   8,
+   7
+  ],
+  "rows": [
+   "..1.1..",
+   "..111..",
+   "111.111",
+   ".1...1.",
+   "111.111",
+   "..111..",
+   "..1.1.."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.943,
+   4.872
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_v",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.0
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-03 10:39:19"
 }

@@ -16,20 +16,20 @@
  "difficulty": null,
  "quad": [
   [
-   12,
-   12
+   15.58,
+   14.59
   ],
   [
-   166,
-   12
+   162.25,
+   14.59
   ],
   [
-   166,
-   166
+   162.25,
+   161.86
   ],
   [
-   12,
-   166
+   15.58,
+   161.86
   ]
  ],
  "meta": {
@@ -41,5 +41,101 @@
   "type": "К.—Ш",
   "note": "См. таблицу 140, рис. 6.",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 4.9,
+  "ph": 4.9,
+  "ox": 0,
+  "oy": 0,
+  "cols": 30,
+  "rows": 30,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   129
+  ],
+  "centers": [
+   222,
+   67
+  ]
+ },
+ "matrix": {
+  "w": 7,
+  "h": 22,
+  "origin": [
+   11,
+   4
+  ],
+  "rows": [
+   "1..1..1",
+   ".1...1.",
+   "..1.1..",
+   "...1...",
+   "..1.1..",
+   ".1...1.",
+   "1.....1",
+   "1..1..1",
+   "1..1..1",
+   "1..1..1",
+   "1..1..1",
+   "1..1..1",
+   "1..1..1",
+   "1..1..1",
+   "1..1..1",
+   "1..1..1",
+   ".1...1.",
+   "..1.1..",
+   "...1...",
+   "..1.1..",
+   ".1...1.",
+   "1..1..1"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.889,
+   4.909
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "mirror_v",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.0
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": false,
+  "axis": "v",
+  "best_mismatch": 0.667,
+  "computed_at_matrix": [
+   7,
+   22
+  ]
+ },
+ "saved_at": "2026-10-03 10:39:21"
 }

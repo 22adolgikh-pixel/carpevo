@@ -40,6 +40,8 @@
   "carpet": "К.",
   "type": "-",
   "note": "Ш См. таблицу 149, рис. 3.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -99,7 +101,7 @@
   "обводка",
   "тело 1"
  ],
- "palette_touched": false,
+ "palette_touched": true,
  "auto": {
   "version": 1,
   "confidence": 1.0,
@@ -128,5 +130,12 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 10:33:06"
+ "saved_at": "2026-10-03 10:40:00",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }

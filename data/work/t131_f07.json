@@ -16,20 +16,20 @@
  "difficulty": null,
  "quad": [
   [
-   9,
-   9
+   15.6,
+   11.49
   ],
   [
-   127,
-   9
+   123.82,
+   11.49
   ],
   [
-   127,
-   122
+   123.82,
+   119.27
   ],
   [
-   9,
-   122
+   15.6,
+   119.27
   ]
  ],
  "meta": {
@@ -41,5 +41,78 @@
   "type": "Г.-К",
   "note": "См. табл. № 144, рис. 1.",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 4.9091,
+  "ph": 4.9091,
+  "ox": 0,
+  "oy": 0,
+  "cols": 22,
+  "rows": 22,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   144
+  ],
+  "centers": [
+   225,
+   90
+  ]
+ },
+ "matrix": {
+  "w": 7,
+  "h": 7,
+  "origin": [
+   7,
+   7
+  ],
+  "rows": [
+   "......1",
+   ".....11",
+   "....1.1",
+   "...1..1",
+   "..1...1",
+   ".1....1",
+   "1111111"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.919,
+   4.899
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "diag",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.0
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-03 10:39:20"
 }

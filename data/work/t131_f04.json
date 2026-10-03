@@ -16,20 +16,20 @@
  "difficulty": null,
  "quad": [
   [
-   13,
-   8
+   15.3,
+   10.1
   ],
   [
-   181,
-   8
+   177.37,
+   10.1
   ],
   [
-   181,
-   120
+   177.37,
+   117.62
   ],
   [
-   13,
-   120
+   15.3,
+   117.62
   ]
  ],
  "meta": {
@@ -41,5 +41,86 @@
   "type": "Теб.",
   "note": "См. табл. № 141, рис. 3.",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 4.9091,
+  "ph": 4.9091,
+  "ox": 0,
+  "oy": 0,
+  "cols": 33,
+  "rows": 22,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   148
+  ],
+  "centers": [
+   234,
+   90
+  ]
+ },
+ "matrix": {
+  "w": 18,
+  "h": 7,
+  "origin": [
+   8,
+   8
+  ],
+  "rows": [
+   "11111111..11111111",
+   "1..1..1..1..1....1",
+   "1...11..1..1.....1",
+   "1......1..1......1",
+   "1.....1..1..11...1",
+   "1....1..1..1..1..1",
+   "11111111..11111111"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.91,
+  "flags": [],
+  "pitch": [
+   4.911,
+   4.887
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "rot180",
+   "score": 1.0,
+   "suspects": [],
+   "n_suspects": 0
+  },
+  "risk": 0.09
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": {
+  "found": false,
+  "axis": "h",
+  "best_mismatch": 0.444,
+  "computed_at_matrix": [
+   18,
+   7
+  ]
+ },
+ "saved_at": "2026-10-03 10:39:20"
 }

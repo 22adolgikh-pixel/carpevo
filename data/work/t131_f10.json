@@ -16,20 +16,20 @@
  "difficulty": null,
  "quad": [
   [
-   9,
-   8
+   14.76,
+   13.4
   ],
   [
-   125,
-   8
+   121.83,
+   13.4
   ],
   [
-   125,
-   114
+   121.83,
+   111.56
   ],
   [
-   9,
-   114
+   14.76,
+   111.56
   ]
  ],
  "meta": {
@@ -41,5 +41,93 @@
   "type": "К.—Ш",
   "note": "См. табл. № 144, рис. 6.",
   "name_az_auto": true
- }
+ },
+ "grid": {
+  "pw": 4.8636,
+  "ph": 4.9,
+  "ox": 0,
+  "oy": 0,
+  "cols": 22,
+  "rows": 20,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   126
+  ],
+  "centers": [
+   214,
+   68
+  ]
+ },
+ "matrix": {
+  "w": 11,
+  "h": 11,
+  "origin": [
+   5,
+   5
+  ],
+  "rows": [
+   "..11...11..",
+   ".1..1.1..1.",
+   "1....1....1",
+   "1....1....1",
+   ".1..1.1..1.",
+   "..11...11..",
+   "....1.1..1.",
+   "...1.1....1",
+   "..1..1....1",
+   "..1...1..1.",
+   ".......11.."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [
+   "симметрия (antidiag): 2 клеток нарушают — см. подсветку"
+  ],
+  "pitch": [
+   4.867,
+   4.908
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "symmetry": {
+   "kind": "antidiag",
+   "score": 0.946,
+   "suspects": [
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     9
+    ]
+   ],
+   "n_suspects": 2
+  },
+  "risk": 0.13
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "saved_at": "2026-10-03 10:39:21"
 }
