@@ -173,14 +173,13 @@ button.bigrev{background:transparent;border-color:#8a3c44;color:#f0b3b9}button.b
 aside{min-height:0}
 .dchip.rev{background:var(--bad)}
 #right .hintbox .htxt{left:auto;right:-6px}
-#tab-grid{background:#1c2a3d;border:1px solid var(--ln);border-radius:6px;padding:4px 12px;margin-right:6px}
-body.geom #tab-grid{background:var(--acc);color:#111}
+#ovbar{justify-self:end;display:flex;gap:4px}#ovbar button{padding:4px 12px}#ovbar button.on{background:var(--acc);color:#111}#tab-close{background:#3a2326}
 .seg{display:inline-flex;border:1px solid var(--ln);border-radius:7px;overflow:hidden}.seg button{border:0;border-radius:0;background:transparent;font-weight:600}.seg button.on{background:var(--acc);color:#111}.seg small{opacity:.7;margin-left:3px}
 .card.kf{outline:2px solid var(--acc);outline-offset:1px}
-#pv{position:fixed;top:56px;bottom:46px;z-index:50;display:none;gap:10px;align-items:stretch;background:rgba(14,16,22,.97);border:1px solid var(--ln);border-radius:10px;padding:10px;box-shadow:0 12px 40px rgba(0,0,0,.6);pointer-events:none;max-width:58vw;flex-wrap:wrap;overflow:hidden}
-#pv .pvc{display:flex;flex-direction:column;flex:1;min-width:0}#pv .pvl,.rvp .pvl{color:var(--mut);font-size:11px;margin-bottom:4px}
-#pv img{flex:1;min-height:0;max-width:27vw;max-height:calc(100vh - 170px);object-fit:contain;background:#fff;border-radius:4px}#pv .pvt{width:100%;font-weight:600}
-#pv img.px,.rvp img.px{image-rendering:pixelated}
+.cards.q{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}.cards.q .im{height:210px}
+.card .im{position:relative}.card.showorig .im::after{content:'оригинал';position:absolute;left:4px;bottom:4px;background:rgba(0,0,0,.65);color:#fff;font-size:10.5px;padding:1px 6px;border-radius:3px}
+.card .im img.orig{image-rendering:auto}
+.rvp .pvl{color:var(--mut);font-size:11px;margin-bottom:4px}.rvp img.px{image-rendering:pixelated}
 #rv{position:fixed;inset:0;z-index:70;background:rgba(8,10,14,.98);display:flex;flex-direction:column;padding:12px 18px;gap:10px}
 #rv .rvh,#rv .rvf{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 #rv .rvb{flex:1;min-height:0;display:flex;gap:14px}.rvp{flex:1;min-width:0;display:flex;flex-direction:column}.rvp img{flex:1;min-height:0;object-fit:contain;background:#fff;border-radius:6px;width:100%}
@@ -193,9 +192,9 @@ body.geom #tab-grid{background:var(--acc);color:#111}
 <header>
   <b>🧶 Carpet Pattern Studio</b>
   <div class="tabs">
-    <button id="tab-pipe">⚙ Конвейер</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button><button id="tab-pix">3 · Пиксели</button>
+    <button id="tab-pipe">⚙ Конвейер</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button>
   </div>
-  <button id="tab-grid" style="justify-self:end" data-tip="Геометрия и сетка открывается поверх любого экрана; Esc или повторный клик — вернуться (клавиша G)">▦ Геометрия</button>
+  <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (клавиша G переключает с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (клавиша G переключает с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
 
 <aside id="left"></aside>
@@ -331,12 +330,16 @@ const MODES={};
 function H(){return MODES[S.mode==='grid'?(S.gridView||'grid'):S.mode];}
 function setMode(m,opt){
   opt=opt||{};
-  if(m==='grid'&&S.mode!=='grid')S.geomBack=opt.back||(S.mode==='cat'?'queue':S.mode);
-  if(m!=='sheet'&&m!=='cat'&&m!=='queue'&&m!=='pipe'&&!S.fig){stat('сначала откройте рисунок в «Каталоге» (или нарежьте лист)','err');m=S.fig?m:(S.mode==='sheet'?'sheet':'cat');}
+  const ov=m==='grid'||m==='pix',wasOv=S.mode==='grid'||S.mode==='pix';
+  if(ov&&!wasOv){S.back=opt.back||S.mode||'queue';S.backScroll=$('catalog').scrollTop;}
+  if(m!=='sheet'&&m!=='cat'&&m!=='queue'&&m!=='pipe'&&!S.fig){stat('сначала откройте рисунок в «Каталоге» (или нарежьте лист)','err');m=S.fig?m:(S.mode==='sheet'?'sheet':'queue');}
   S.mode=m;S.peek=false;if(typeof pvHide==='function')pvHide();$('peek').style.display='none';
   document.body.classList.toggle('noleft',m!=='sheet');
-  ['pipe','sheet','grid','pix','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===m||(k==='queue'&&m==='cat')));
-  $('tab-grid').textContent=m==='grid'?'✕ Закрыть геометрию (Esc)':'▦ Геометрия';document.body.classList.toggle('geom',m==='grid');
+  const under=ov?(S.back||'queue'):m;
+  ['pipe','sheet','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===under||(k==='queue'&&under==='cat')));
+  $('tab-edit').style.display=!ov&&S.fig&&m!=='pipe'?'':'none';
+  ['grid','pix','close'].forEach(k=>$('tab-'+k).style.display=ov?'':'none');
+  $('tab-grid').classList.toggle('on',m==='grid');$('tab-pix').classList.toggle('on',m==='pix');
   $('catalog').style.display=(m==='cat'||m==='queue'||m==='pipe')?'block':'none';
   $('vpbar').style.display=$('hud').style.display=(m==='cat'||m==='queue'||m==='pipe')?'none':'';
   $('toolcol').style.display=m==='pix'?'flex':'none';
@@ -363,9 +366,21 @@ async function gotoFig(delta,todo){
   await openFigure(list[i].id);
   const want=S.fig.M?'pix':'grid';if(S.mode!==want)setMode(want);   // готовые — сразу в пиксели, новые — в сетку
 }
-['pipe','sheet','pix','queue'].forEach(k=>$('tab-'+k).onclick=()=>setMode(k));
-function geomToggle(){if(S.mode==='grid'){const b=S.geomBack||'pix';setMode(b==='grid'?'pix':b);}else if(S.fig)setMode('grid');else stat('сначала откройте рисунок','err');}
-$('tab-grid').onclick=geomToggle;
+['pipe','sheet','queue'].forEach(k=>$('tab-'+k).onclick=()=>{if(S.mode==='grid'||S.mode==='pix'){ovClose(k);}else setMode(k);});
+/* редактор (геометрия/пиксели) — окно поверх экрана, из которого открыли; закрытие возвращает туда же и на то же место списка */
+async function ovClose(to){
+  const back=to||S.back||'queue',sc=S.backScroll||0;
+  if(S.dirty){try{await saveFigure(true);}catch(e){fail(e);}}
+  setMode(back);
+  try{await refreshFigures();}catch(e){}
+  if(!to){const c=$('catalog');if(c)c.scrollTop=sc;}
+}
+function ovSwitch(){
+  if(S.mode==='grid'||S.mode==='pix'){if(S.mode==='grid'){if(S.fig&&S.fig.M)setMode('pix');else stat('пикселей ещё нет — сначала сетка','err');}else setMode('grid');}
+  else if(S.fig)setMode(S.fig.M?'pix':'grid');else stat('сначала откройте рисунок','err');
+}
+$('tab-grid').onclick=()=>setMode('grid');$('tab-pix').onclick=()=>setMode('pix');$('tab-close').onclick=()=>ovClose();
+$('tab-edit').onclick=()=>ovSwitch();
 
 /* ============================ левая панель ============================ */
 /* дерево источников: папка → подпапка → листы (до двух уровней) */
@@ -1323,7 +1338,7 @@ function renderQueue(){
     <button class="sm" id="qPickSure">выбрать надёжные (${sure.length})</button><button class="sm" id="qPickNone">снять выбор</button><span class="sp"></span>
     <button id="qRev" class="sm" ${S.qSel.size?'':'disabled'}>⚠ на доработку выбранные</button><button id="qAccept" ${S.qSel.size?'':'disabled'}>✓ принять выбранные (${S.qSel.size})</button></div>
   <div class="hint" style="margin-bottom:10px">Принять = «готово»: рисунок уйдёт из очереди и попадёт в пакет для сайта. Клик по картинке открывает рисунок для правки; галочка — для массового принятия.</div>
-  <div class="cards">${items.map(f=>{const r=qrisk(f),col=r<=thr?'var(--ok)':(r<0.55?'var(--warn,#e0a030)':'var(--bad)');
+  <div class="cards q">${items.map(f=>{const r=qrisk(f),col=r<=thr?'var(--ok)':(r<0.55?'var(--warn,#e0a030)':'var(--bad)');
     return `<div class="card" data-id="${esc(f.id)}"><label class="qchk" data-tip="выбрать для массового принятия"><input type="checkbox" data-sel="${esc(f.id)}" ${S.qSel.has(f.id)?'checked':''}></label><div class="im"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_bg.png?t=${Math.round(f.t)}"></div>
     <div class="t"><span class="dot" style="display:inline-block;margin-right:5px;background:${col}"></span>${esc(dispName(f)||f.id)}</div>
     <div class="m">${esc(f.id)} · ${f.size[0]}×${f.size[1]}${f.colors?' · '+f.colors+' цв.':''} · риск ${r.toFixed(2)}${f.sym&&f.n_sus?` · <span style="color:#ff9f1c" data-tip="клеток нарушает симметрию (${esc(f.sym)})">◇${f.n_sus}</span>`:''}${f.border?' · кайма':''}${f.diff_est?' · '+({simple:'простой',medium:'средний',complex:'сложный',ultra:'ультра'}[f.diff_est]||f.diff_est):''}</div></div>`;}).join('')||'<div class="hint">Очередь пуста — все авто-результаты проверены.</div>'}</div>`;
@@ -1342,21 +1357,21 @@ function renderQueue(){
   C.querySelectorAll('.card').forEach(el=>el.onclick=()=>openFigure(el.dataset.id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail));
 }
 
-/* ---- предпросмотр при наведении: оригинал рядом с результатом ---- */
-function pvEl(){let e=$('pv');if(!e){e=document.createElement('div');e.id='pv';document.body.appendChild(e);}return e;}
-function pvShow(id,x){
-  const f=S.figures.find(v=>v.id===id);if(!f)return;const e=pvEl(),t=Math.round(f.t||0);
-  const right=x<innerWidth/2;e.style.cssText=`display:flex;${right?'right':'left'}:14px`;
-  e.innerHTML=`<div class="pvc"><div class="pvl">оригинал</div><img src="/api/crop/${encodeURIComponent(id)}?t=${t}"></div>`+
-    (f.size?`<div class="pvc"><div class="pvl">результат · ${f.size[0]}×${f.size[1]}${f.risk!=null?' · риск '+(+f.risk).toFixed(2):''}</div><img class="px" src="/out/${encodeURIComponent(id)}_bg.png?t=${t}"></div>`:'')+
-    `<div class="pvt">${esc(dispName(f)||id)} · ${esc(id)}</div>`;
+/* ---- предпросмотр: на карточке результат; при наведении картинка меняется на оригинал (клавиша O — то же с клавиатуры) ---- */
+function pvHide(){}
+function cardSwap(c,orig){
+  const im=c.querySelector('.im img');if(!im)return;const id=c.dataset.id,f=S.figures.find(v=>v.id===id);if(!f||!f.size)return;
+  if(!im.dataset.r)im.dataset.r=im.getAttribute('src');
+  if(orig){im.src='/api/crop/'+encodeURIComponent(id)+'?t='+Math.round(f.t||0);im.classList.add('orig');c.classList.add('showorig');}
+  else{im.src=im.dataset.r;im.classList.remove('orig');c.classList.remove('showorig');}
 }
-function pvHide(){const e=$('pv');if(e)e.style.display='none';}
-function bindPreview(C){C.querySelectorAll('.card').forEach(el=>{el.addEventListener('mouseenter',ev=>pvShow(el.dataset.id,ev.clientX));el.addEventListener('mouseleave',pvHide);});}
+function bindPreview(C){C.querySelectorAll('.card').forEach(el=>{
+  const hold=()=>el.dataset.hold==='1';
+  el.addEventListener('mouseenter',()=>cardSwap(el,true));el.addEventListener('mouseleave',()=>{if(!hold())cardSwap(el,false);});});}
 
 /* ---- клавиатура в очереди: стрелки — по карточкам, пробел — отметить, A — принять, X — на доработку, Enter — открыть ---- */
 function qCards(){return [...document.querySelectorAll('#catalog .card')];}
-function qFocus(i,scroll){const cs=qCards();if(!cs.length)return;i=Math.max(0,Math.min(cs.length-1,i));cs.forEach(c=>c.classList.remove('kf'));const c=cs[i];c.classList.add('kf');S.qFocus=c.dataset.id;if(scroll!==false)c.scrollIntoView({block:'nearest'});const r=c.getBoundingClientRect();pvShow(c.dataset.id,r.left+r.width/2);}
+function qFocus(i,scroll){const cs=qCards();if(!cs.length)return;i=Math.max(0,Math.min(cs.length-1,i));cs.forEach(c=>{c.classList.remove('kf');if(c.dataset.hold==='1'){c.dataset.hold='0';cardSwap(c,false);}});const c=cs[i];c.classList.add('kf');S.qFocus=c.dataset.id;if(scroll!==false)c.scrollIntoView({block:'nearest'});}
 function bindQueueKeys(C){const k=S.qFocus;if(k){const i=qCards().findIndex(c=>c.dataset.id===k);if(i>=0)qCards()[i].classList.add('kf');}}
 async function qKey(e){
   if(S.mode!=='queue'||S.rv||!$('modal').hidden)return false;
@@ -1369,6 +1384,7 @@ async function qKey(e){
   if(i<0)return false;
   const id=cs[i].dataset.id;
   if(e.code==='Space'){const cb=cs[i].querySelector('[data-sel]');if(cb){cb.checked=!cb.checked;cb.onchange();}qFocus(i+1);return true;}
+  if(k==='o'){const on=cs[i].dataset.hold!=='1';cs[i].dataset.hold=on?'1':'0';cardSwap(cs[i],on);return true;}
   if(k==='a'){try{await api('/api/accept',{ids:[id]});await refreshFigures();qFocus(i);stat('принят '+id,'ok');}catch(x){fail(x);}return true;}
   if(k==='x'){try{await api('/api/review_mark',{ids:[id],value:true});await refreshFigures();qFocus(i);stat('на доработку: '+id,'ok');}catch(x){fail(x);}return true;}
   if(e.key==='Enter'){openFigure(id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail);return true;}
@@ -1524,7 +1540,7 @@ function kk(e){const c=e.code||'';
 window.addEventListener('keydown',e=>{
   const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','range','button'].includes(ae.type)));
   if(!typing&&S.rv){if(rvKey(e)){e.preventDefault();return;}}
-  if(!typing&&S.mode==='queue'&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Enter'].includes(e.key)||e.code==='Space'||['a','x'].includes(kk(e)))){qKey(e).then(ok=>{});if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)||e.code==='Space'||['a','x'].includes(kk(e))||e.key==='Enter')e.preventDefault();return;}
+  if(!typing&&S.mode==='queue'&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Enter'].includes(e.key)||e.code==='Space'||['a','x','o'].includes(kk(e)))){qKey(e).then(ok=>{});if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)||e.code==='Space'||['a','x','o'].includes(kk(e))||e.key==='Enter')e.preventDefault();return;}
   if(e.code==='Space'&&!typing){e.preventDefault();if(ae&&ae!==document.body&&ae.blur)ae.blur();if(e.repeat)return;spaceDown=true;cv.style.cursor='grab';
     if(S.fig&&((S.mode==='pix'&&S.fig.M)||(S.mode==='grid'&&(S.gridView||'grid')==='grid'))){S.peek=true;$('peek').textContent='оригинал скана · пока держите пробел';$('peek').style.display='block';redraw();}return;}
   if((e.metaKey||e.ctrlKey)&&kk(e)==="'"){e.preventDefault();toggleGrid();return;}
@@ -1535,15 +1551,15 @@ window.addEventListener('keydown',e=>{
   if((e.metaKey||e.ctrlKey)&&kk(e)==='z'){e.preventDefault();e.shiftKey?redo():undo();return;}
   if((e.metaKey||e.ctrlKey)&&kk(e)==='y'){e.preventDefault();redo();return;}
   const sheetSel=false;
-  if(!e.metaKey&&!e.ctrlKey&&!e.altKey&&['1','2','3'].includes(kk(e))&&S.mode!=='pix'&&!sheetSel){setMode(['sheet','queue','pix'][+kk(e)-1]);return;}
-  if(kk(e)==='g'&&!e.metaKey&&!e.ctrlKey&&!e.altKey){geomToggle();return;}
-  if(e.key==='Escape'&&S.mode==='grid'){geomToggle();return;}
+  if(!e.metaKey&&!e.ctrlKey&&!e.altKey&&['1','2'].includes(kk(e))&&S.mode!=='pix'&&S.mode!=='grid'&&!sheetSel){setMode(['sheet','queue'][+kk(e)-1]);return;}
+  if(kk(e)==='g'&&!e.metaKey&&!e.ctrlKey&&!e.altKey){ovSwitch();return;}
   if((kk(e)==='['||kk(e)===']')&&S.fig&&(S.mode==='grid'||S.mode==='pix')){gotoFig(kk(e)===']'?1:-1).catch(fail);return;}
   if(kk(e)==='='||kk(e)==='+'){zoomAt(1.25,V.w/2,V.h/2);return;}
   if(kk(e)==='-'){zoomAt(0.8,V.w/2,V.h/2);return;}
   if(kk(e)==='0'&&S.mode!=='pix'&&!sheetSel){const h=H();h&&h.fit&&h.fit();return;}
   if(S.mode==='grid'&&kk(e)==='q'){S.gridView=S.gridView==='quad'?'grid':'quad';renderRight();H().fit();return;}
-  const h=H();if(h&&h.key&&h.key(e))e.preventDefault();
+  const h=H();if(h&&h.key&&h.key(e)){e.preventDefault();return;}
+  if(e.key==='Escape'&&(S.mode==='pix'||S.mode==='grid')){ovClose();return;}
 });
 window.addEventListener('keyup',e=>{if(e.code==='Space'){spaceDown=false;cv.style.cursor='';if(S.peek){S.peek=false;$('peek').style.display='none';redraw();}}});
 window.addEventListener('blur',()=>{spaceDown=false;if(S.peek){S.peek=false;$('peek').style.display='none';redraw();}});
