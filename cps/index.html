@@ -194,7 +194,7 @@ aside{min-height:0}
   <div class="tabs">
     <button id="tab-pipe">⚙ Конвейер</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button>
   </div>
-  <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (клавиша G переключает с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (клавиша G переключает с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
+  <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
 
 <aside id="left"></aside>
@@ -1362,7 +1362,7 @@ function pvHide(){}
 function cardSwap(c,orig){
   const im=c.querySelector('.im img');if(!im)return;const id=c.dataset.id,f=S.figures.find(v=>v.id===id);if(!f||!f.size)return;
   if(!im.dataset.r)im.dataset.r=im.getAttribute('src');
-  if(orig){im.src='/api/crop/'+encodeURIComponent(id)+'?t='+Math.round(f.t||0);im.classList.add('orig');c.classList.add('showorig');}
+  if(orig){im.src='/api/orig_aligned/'+encodeURIComponent(id)+'?t='+Math.round(f.t||0);im.classList.add('orig');c.classList.add('showorig');}
   else{im.src=im.dataset.r;im.classList.remove('orig');c.classList.remove('showorig');}
 }
 function bindPreview(C){C.querySelectorAll('.card').forEach(el=>{
@@ -1438,6 +1438,7 @@ function renderRightQueue(){
   R.innerHTML=`<h4>Ночной прогон</h4>
   <div style="margin:6px 0">${HT('Сервер сам нарезает уже размеченные листы и запускает «Авто» на всех рисунках без пикселей — пока вы не смотрите. Утром здесь готова очередь. Уже оцифрованное не трогает.')}</div>
   <div class="flex"><button id="pwGo" class="sm">▶ запустить</button><button id="pwStop" class="sm">■ стоп</button></div>
+  <div class="flex" style="margin-top:6px"><button id="pwGray" class="sm" data-tip="Ночной/пакетный прогон какое-то время считал ЧБ без серой заливки. Пересчитать с заливкой непроверенные автоматы, где серого нет (проверенные и готовые не трогаются)">↺ вернуть серую заливку</button></div>
   <div class="hint" id="pwInfo">…</div>
   <h4>Модель клеток (ЧБ)</h4>
   <div style="margin:6px 0">${HT('Небольшая нейросеть учится на ваших готовых ЧБ-рисунках: как вы исправили автомат. Сохраняется, только если в кросс-проверке по рисункам ошибается реже порогов. Тогда «Авто» использует её сам.')}</div>
@@ -1451,6 +1452,7 @@ function renderRightQueue(){
     if(p.running){clearTimeout(S.pwT);S.pwT=setTimeout(()=>{upd();refreshFigures();},4000);}}catch(e){}};
   api('/api/model').then(m=>{const e=$('mdInfo');if(e)e.textContent=m.present?`обучена ${m.trained} · рисунков ${m.n_figures??'?'} · ошибка ${(100*m.cv_model).toFixed(1)}% против ${(100*m.cv_threshold).toFixed(1)}% у порогов`:'модели нет — работают пороги';}).catch(()=>{});
   $('mdTrain').onclick=async()=>{const e=$('mdInfo');e.textContent='обучаю… (до нескольких минут)';try{const r=await api('/api/model/train',{});e.textContent=r.out||r.err||'готово';}catch(x){e.textContent=String(x.message||x);}};
+  $('pwGray').onclick=async()=>{try{const r=await api('/api/prowl/start',{stages:['regray']});stat(r.started?'пересчёт с серой заливкой: '+r.total+' рис.':'нечего пересчитывать','ok');upd();}catch(e){fail(e);}};
   $('pwGo').onclick=async()=>{try{const r=await api('/api/prowl/start',{});stat(r.started?'прогон запущен: '+r.total+' рис.':'нечего обрабатывать — все нарезанные рисунки уже оцифрованы','ok');upd();}catch(e){fail(e);}};
   $('pwStop').onclick=async()=>{await api('/api/prowl/stop',{});upd();};
   $('rkBack').onclick=async()=>{try{const r=await api('/api/risk_backfill',{});await refreshFigures();stat('досчитано: '+r.updated,'ok');}catch(e){fail(e);}};
@@ -1552,7 +1554,8 @@ window.addEventListener('keydown',e=>{
   if((e.metaKey||e.ctrlKey)&&kk(e)==='y'){e.preventDefault();redo();return;}
   const sheetSel=false;
   if(!e.metaKey&&!e.ctrlKey&&!e.altKey&&['1','2'].includes(kk(e))&&S.mode!=='pix'&&S.mode!=='grid'&&!sheetSel){setMode(['sheet','queue'][+kk(e)-1]);return;}
-  if(kk(e)==='g'&&!e.metaKey&&!e.ctrlKey&&!e.altKey){ovSwitch();return;}
+  if(e.key==='Tab'&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&(S.mode==='pix'||S.mode==='grid')){e.preventDefault();ovSwitch();return;}
+  if(kk(e)==='g'&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&(S.mode==='pix'||S.mode==='grid')){toggleGrid();redraw();return;}
   if((kk(e)==='['||kk(e)===']')&&S.fig&&(S.mode==='grid'||S.mode==='pix')){gotoFig(kk(e)===']'?1:-1).catch(fail);return;}
   if(kk(e)==='='||kk(e)==='+'){zoomAt(1.25,V.w/2,V.h/2);return;}
   if(kk(e)==='-'){zoomAt(0.8,V.w/2,V.h/2);return;}

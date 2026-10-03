@@ -29,6 +29,7 @@ except Exception:
 HERE = os.path.dirname(os.path.abspath(__file__))
 SCANS = os.path.abspath(os.environ.get("CPS_SCANS", os.path.join(HERE, "scans")))
 DATA = os.path.join(HERE, "data")
+D_THUMBS = os.path.join(DATA, "thumbs")
 D_SHEETS, D_CROPS, D_WORK, D_OUT = (os.path.join(DATA, d) for d in ("sheets", "crops", "work", "out"))
 for d in (SCANS, DATA, D_SHEETS, D_CROPS, D_WORK, D_OUT): os.makedirs(d, exist_ok=True)
 LEGEND = os.path.join(DATA, "legend.csv")
@@ -392,6 +393,27 @@ def api_figures():
         except Exception: return (1, 0, 0, f["id"])
     return sorted(out, key=k)
 
+@app.get("/api/orig_aligned/{fid}")
+def api_orig_aligned(fid: str, s: int = 12):
+    """Оригинал, выпрямленный по сетке и обрезанный ровно по матрице — как «подложка» при пробеле: 1 узел = s px, совпадает с _bg.png."""
+    wp = os.path.join(D_WORK, fid + ".json"); cp = os.path.join(D_CROPS, fid + ".png")
+    if not _fid_ok(fid) or not os.path.exists(wp) or not os.path.exists(cp): return JSONResponse({"error": "nf"}, 404)
+    w = jload(wp, {}) or {}
+    if not (w.get("matrix") and w.get("quad") and w.get("grid")): return JSONResponse({"error": "no grid"}, 404)
+    cache = os.path.join(D_THUMBS, f"orig_{fid}_{s}.png")
+    if os.path.exists(cache) and os.path.getmtime(cache) >= max(os.path.getmtime(wp), os.path.getmtime(cp)):
+        return FileResponse(cache, headers={"Cache-Control": "no-store"})
+    img = imread_any(cp, cv2.IMREAD_COLOR)
+    g, m = w["grid"], w["matrix"]; cols, rows = int(g["cols"]), int(g["rows"])
+    Wd, Hd = cols * s, rows * s
+    Hm = cv2.getPerspectiveTransform(np.array(w["quad"], np.float32), np.array([[0, 0], [Wd, 0], [Wd, Hd], [0, Hd]], np.float32))
+    warp = cv2.warpPerspective(img, Hm, (Wd, Hd), flags=cv2.INTER_AREA, borderValue=(255, 255, 255))
+    ox, oy = (m.get("origin") or [0, 0])[:2]
+    out = warp[max(0, oy * s):(oy + m["h"]) * s, max(0, ox * s):(ox + m["w"]) * s]
+    os.makedirs(D_THUMBS, exist_ok=True); cv2.imwrite(cache, out)
+    return FileResponse(cache, headers={"Cache-Control": "no-store"})
+
+
 @app.get("/api/crop/{fid}")
 def api_crop(fid: str):
     p = os.path.join(D_CROPS, fid + ".png")
@@ -549,7 +571,7 @@ def _apply_risk(work):
     a["difficulty_est"] = _difficulty_est(work)
 
 
-def run_auto(fid, force=False, dark_only=True, mode="auto", pitch_hint=None, ncolors=None, dyes=None, canon=False, cols=None, rows=None):
+def run_auto(fid, force=False, dark_only=False, mode="auto", pitch_hint=None, ncolors=None, dyes=None, canon=False, cols=None, rows=None):
     """mode: auto (цвет определяется сам) / bw (ЧБ-тушь: контур + серая заливка) / color (цветная схема)."""
     wp = os.path.join(D_WORK, fid + ".json")
     work = jload(wp, {}) or {}
@@ -731,6 +753,19 @@ def _prowl_targets(only_sheets=None):
     return out
 
 
+def _regray_targets():
+    """ЧБ-автоматы, не проверенные человеком, где нет серой заливки (прогон без заливки терял её) — их можно пересчитать без потерь."""
+    out = []
+    for fn in sorted(os.listdir(D_WORK)):
+        if not fn.endswith(".json"): continue
+        w = jload(os.path.join(D_WORK, fn), {}) or {}
+        a = w.get("auto") or {}
+        if not (w.get("matrix") and a and not a.get("reviewed") and not w.get("done") and not w.get("color_mode") and w.get("kind") != "photo"): continue
+        if "2" in "".join(w["matrix"]["rows"]): continue
+        if os.path.exists(os.path.join(D_CROPS, fn[:-5] + ".png")): out.append((w.get("sheet"), fn[:-5]))
+    return out
+
+
 def _segment_pending():
     """Листы без разметки (нет файла в data/sheets)."""
     out = []
@@ -767,6 +802,16 @@ def _prowl_run(stages, only_sheets=None):
                 try: _segment_one(rel)
                 except Exception as e: err(f"{rel}: {e}")
                 P["done"] += 1
+        if "regray" in stages and not P["stop"]:
+            t = _regray_targets(); P.update(stage="auto", done=0, total=len(t))
+            for path, f in t:
+                if P["stop"]: break
+                P["current"] = f
+                try:
+                    r = run_auto(f, True, dark_only=False, mode="bw")
+                    if r.get("error"): err(f"{f}: {r['error']}")
+                except Exception as e: err(f"{f}: {e}")
+                P["done"] += 1
         if "auto" in stages and not P["stop"]:
             t = _prowl_targets(only_sheets); P.update(stage="auto", done=0, total=len(t))
             for path, f in t:
@@ -774,7 +819,7 @@ def _prowl_run(stages, only_sheets=None):
                 P["current"] = f
                 try:
                     hint = _sheet_pitch_hint(path, exclude=f) if path else None
-                    r = run_auto(f, False, mode="auto", pitch_hint=hint)
+                    r = run_auto(f, False, dark_only=False, mode="auto", pitch_hint=hint)
                     if r.get("error"): err(f"{f}: {r['error']}")
                 except Exception as e: err(f"{f}: {e}")
                 P["done"] += 1
@@ -785,9 +830,9 @@ def _prowl_run(stages, only_sheets=None):
 @app.post("/api/prowl/start")
 def api_prowl_start(body: dict = Body(default={})):
     if PROWL["running"]: return JSONResponse({"error": "уже идёт"}, 409)
-    stages = [s for s in ((body or {}).get("stages") or ["segment", "auto"]) if s in ("segment", "auto")]
+    stages = [s for s in ((body or {}).get("stages") or ["segment", "auto"]) if s in ("segment", "auto", "regray")]
     only = (body or {}).get("sheets")
-    n = (len(_segment_pending()) if "segment" in stages else 0) + (len(_prowl_targets(only)) if "auto" in stages else 0)
+    n = (len(_segment_pending()) if "segment" in stages else 0) + (len(_prowl_targets(only)) if "auto" in stages else 0) + (len(_regray_targets()) if "regray" in stages else 0)
     if not n: return {"started": False, "total": 0}
     threading.Thread(target=_prowl_run, args=(stages, only), daemon=True).start()
     return {"started": True, "total": n}
@@ -803,6 +848,7 @@ def api_prowl_stop():
 def api_prowl():
     d = dict(PROWL); d["pending"] = len(_prowl_targets()) if not PROWL["running"] else None
     d["pending_segment"] = len(_segment_pending()) if not PROWL["running"] else None
+    d["pending_regray"] = len(_regray_targets()) if not PROWL["running"] else None
     return d
 
 
