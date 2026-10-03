@@ -77,24 +77,28 @@
    "11..1...1...1.",
    "...1....1....1",
    "...11111111111",
-   "...1....1....1",
-   "...1....1....1",
+   "...12222122221",
+   "...12222122221",
    "...11111111111"
   ]
  },
  "palette": [
   "#ffffff",
-  "#1a1a1a"
+  "#1a1a1a",
+  "#b8b8b8"
  ],
  "palette_names": [
   "фон",
-  "обводка"
+  "обводка",
+  "тело 1"
  ],
  "palette_touched": false,
  "auto": {
   "version": 1,
   "confidence": 1.0,
-  "flags": [],
+  "flags": [
+   "серую заливку стоит проверить"
+  ],
   "pitch": [
    4.983,
    4.961
@@ -103,11 +107,11 @@
   "reviewed": false,
   "symmetry": {
    "kind": null,
-   "score": 0.426,
+   "score": 0.436,
    "suspects": [],
    "n_suspects": 0
   },
-  "risk": 0.0,
+  "risk": 0.08,
   "difficulty_est": "simple"
  },
  "done": false,
@@ -118,5 +122,5 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 11:01:46"
+ "saved_at": "2026-10-03 12:10:43"
 }
