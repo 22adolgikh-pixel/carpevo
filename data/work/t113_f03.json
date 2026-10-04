@@ -39,6 +39,8 @@
   "carpet": "Чичи",
   "type": "К.-Ш",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -146,7 +148,16 @@
    4.928
   ],
   "angle": 0.4,
-  "reviewed": false,
+  "reviewed": true,
+  "distortion": {
+   "dist_x": 0.079,
+   "dist_y": 0.031,
+   "dist": 0.079,
+   "drift_x": 0.202,
+   "drift_y": 0.078,
+   "strength": 0.687,
+   "windows": 16
+  },
   "symmetry": {
    "kind": "mirror_v",
    "score": 1.0,
@@ -154,9 +165,10 @@
    "n_suspects": 0
   },
   "risk": 0.11,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -164,5 +176,13 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 18:40:35"
+ "saved_at": "2026-10-04 12:43:03",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }

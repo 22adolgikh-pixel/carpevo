@@ -39,7 +39,9 @@
   "translation": "",
   "carpet": "Хан-Карабах",
   "type": "Кар.",
-  "note": "Встречается в ковре «Гиордас»."
+  "note": "Встречается в ковре «Гиордас».",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.6667,
@@ -71,7 +73,7 @@
   "rows": [
    "........111111111111",
    ".......1222222222221",
-   ".....212222222222221",
+   "......12222222222221",
    ".....111111111111221",
    "11111...........1221",
    "12221...........1221",
@@ -87,7 +89,7 @@
    "..11111111111111....",
    ".1..122222222221....",
    "1..1.12222222221....",
-   ".21...1222222221....",
+   "..1...1222222221....",
    ".1.....111111111...."
   ]
  },
@@ -101,7 +103,7 @@
   "обводка",
   "тело 1"
  ],
- "palette_touched": false,
+ "palette_touched": true,
  "auto": {
   "version": 1,
   "confidence": 0.12,
@@ -115,7 +117,7 @@
    4.708
   ],
   "angle": -0.72,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": "antidiag",
    "score": 0.948,
@@ -180,9 +182,10 @@
    "n_suspects": 14
   },
   "risk": 1.47,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -190,5 +193,12 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 18:47:09"
+ "saved_at": "2026-10-03 22:50:34",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }

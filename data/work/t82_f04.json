@@ -21,7 +21,7 @@
   ],
   [
    210.32,
-   17.0
+   17
   ],
   [
    212.75,
@@ -40,6 +40,8 @@
   "carpet": "Ханлыг",
   "type": "Кар.",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -119,7 +121,7 @@
    4.706
   ],
   "angle": -0.72,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": null,
    "score": 0.41,
@@ -127,9 +129,10 @@
    "n_suspects": 0
   },
   "risk": 0.56,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -137,5 +140,12 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 18:47:09"
+ "saved_at": "2026-10-03 22:51:46",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }

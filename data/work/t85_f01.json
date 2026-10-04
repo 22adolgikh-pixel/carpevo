@@ -40,6 +40,8 @@
   "carpet": "Хан-Карабах",
   "type": "Кар.",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -79,8 +81,8 @@
    ".......1..122221..1.......",
    ".......1..122221..1.......",
    "11111111..122221..11111111",
-   "12222221..121221..12222221",
-   "12222221...1211...12222221",
+   "12222221..122221..12222221",
+   "12222221...1221...12222221",
    "122222221...11...122222221",
    "1222222221.1..1.1222222221",
    ".1222222221....1222222221.",
@@ -127,7 +129,7 @@
    4.912
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": "mirror_v",
    "score": 0.989,
@@ -152,9 +154,10 @@
    "n_suspects": 4
   },
   "risk": 0.4,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -162,5 +165,12 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 18:47:17"
+ "saved_at": "2026-10-03 23:05:52",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }

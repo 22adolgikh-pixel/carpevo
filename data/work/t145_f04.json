@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "Зейва",
   "type": "К.-Ш",
-  "note": "Иногда встречается в коврах «Афурджа» и «Пиребедиль»."
+  "note": "Иногда встречается в коврах «Афурджа» и «Пиребедиль».",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.875,
@@ -181,7 +183,16 @@
    4.907
   ],
   "angle": -0.32,
-  "reviewed": false,
+  "reviewed": true,
+  "distortion": {
+   "dist_x": 0.048,
+   "dist_y": 0.044,
+   "dist": 0.048,
+   "drift_x": 0.055,
+   "drift_y": 0.029,
+   "strength": 0.584,
+   "windows": 16
+  },
   "symmetry": {
    "kind": null,
    "score": 0.685,
@@ -189,9 +200,10 @@
    "n_suspects": 0
   },
   "risk": 0.09,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -207,5 +219,13 @@
    89
   ]
  },
- "saved_at": "2026-10-03 18:42:17"
+ "saved_at": "2026-10-04 15:04:45",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }

@@ -40,6 +40,8 @@
   "carpet": "Герат-Пиребедиль",
   "type": "К.-Ш",
   "note": "Ковроткачи называют этот ковер «Россией».",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -140,7 +142,7 @@
    4.918
   ],
   "angle": -0.44,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": null,
    "score": 0.591,
@@ -148,9 +150,10 @@
    "n_suspects": 0
   },
   "risk": 0.26,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -158,5 +161,12 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 18:47:23"
+ "saved_at": "2026-10-03 23:15:57",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }

@@ -40,6 +40,8 @@
   "carpet": "Фахралы",
   "type": "Г.—К",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -83,8 +85,8 @@
    ".1222111122211112221.",
    "122221..12221..122221",
    "121121..11111..121121",
-   "11..1111221..1111..11",
-   "...12221221..12221...",
+   "11..1111..1..1111..11",
+   "...12221..1..12221...",
    "..12222111111122221..",
    "...12221.121.12221...",
    "....121.12221.121....",
@@ -116,7 +118,7 @@
    4.925
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": "mirror_v",
    "score": 0.969,
@@ -157,9 +159,10 @@
    "n_suspects": 8
   },
   "risk": 0.57,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -167,5 +170,12 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 18:47:18"
+ "saved_at": "2026-10-03 23:06:23",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }

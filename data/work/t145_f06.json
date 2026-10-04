@@ -39,6 +39,8 @@
   "carpet": "Казах",
   "type": "Г.-К",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -182,7 +184,16 @@
    4.911
   ],
   "angle": -0.52,
-  "reviewed": false,
+  "reviewed": true,
+  "distortion": {
+   "dist_x": 0.057,
+   "dist_y": 0.087,
+   "dist": 0.087,
+   "drift_x": 0.123,
+   "drift_y": 0.23,
+   "strength": 0.543,
+   "windows": 16
+  },
   "symmetry": {
    "kind": null,
    "score": 0.56,
@@ -190,9 +201,10 @@
    "n_suspects": 0
   },
   "risk": 0.09,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -268,5 +280,13 @@
    89
   ]
  },
- "saved_at": "2026-10-03 18:42:18"
+ "saved_at": "2026-10-04 15:06:47",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }

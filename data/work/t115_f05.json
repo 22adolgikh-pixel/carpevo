@@ -39,6 +39,8 @@
   "carpet": "Казах",
   "type": "Г.-К",
   "note": "Ковровый мешок для перевозки клади.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -162,7 +164,16 @@
    4.916
   ],
   "angle": -0.4,
-  "reviewed": false,
+  "reviewed": true,
+  "distortion": {
+   "dist_x": 0.091,
+   "dist_y": 0.099,
+   "dist": 0.099,
+   "drift_x": 0.221,
+   "drift_y": 0.221,
+   "strength": 0.662,
+   "windows": 16
+  },
   "symmetry": {
    "kind": null,
    "score": 0.344,
@@ -170,9 +181,10 @@
    "n_suspects": 0
   },
   "risk": 0.12,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -180,5 +192,13 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 18:40:42"
+ "saved_at": "2026-10-04 12:56:01",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }

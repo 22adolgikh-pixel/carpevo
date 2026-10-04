@@ -93,7 +93,12 @@
   ],
   "angle": 0.0,
   "reviewed": false,
-  "risk": 0.54,
+  "agree": {
+   "mismatch": 818,
+   "ink": 824,
+   "share": 0.9927
+  },
+  "risk": 0.86,
   "difficulty_est": "simple"
  },
  "done": false,
@@ -104,5 +109,44 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 18:48:51"
+ "saved_at": "2026-10-04 16:38:01",
+ "auto_matrix": {
+  "w": 4,
+  "h": 1,
+  "origin": [
+   30,
+   10
+  ],
+  "rows": [
+   "1111"
+  ]
+ },
+ "hard": {
+  "sig": "fed77dafc9d7",
+  "tiles": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 4,
+    "h": 1,
+    "n": 3,
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      3,
+      0
+     ]
+    ]
+   }
+  ],
+  "ntiles": 1,
+  "verified": []
+ }
 }
