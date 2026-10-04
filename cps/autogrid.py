@@ -337,19 +337,27 @@ def auto_figure(g, frame, dark_only=False, use_model=True):
     заливка чаще даёт «мусор», чем пользу, и её проще дорисовать вручную."""
     G = detect_grid(g, frame)
     C = cell_centers(G)
-    v = cell_means(g, C, min(G["px"], G["py"]))
+    pitch = min(G["px"], G["py"])
+    v = cell_means(g, C, pitch)
     M, info = classify(v)
+    Mt = clean(M.copy(), info["t"])                           # пороги (итог) — нужен и как финал, и для сверки с моделью
     P = learn_model() if use_model else None
+    Mm = None
     if P is not None:
-        # модель — «второе мнение» только там, где пороги неуверенны (на 150 готовых рисунках: ошибка 19.8% → 15.0%, медиана та же)
-        c0, _ = confidence(G, clean(M.copy(), info["t"]), info["t"])
+        import learn
+        Mm = learn.classify_cells(P, learn.cell_features(g, C, pitch))
+        # модель — «второе мнение», подменяет итог только там, где пороги неуверенны (на 150 готовых рисунках: ошибка 19.8% → 15.0%, медиана та же)
+        c0, _ = confidence(G, Mt, info["t"])
         if c0 < MODEL_GATE:
-            import learn
-            M = learn.classify_cells(P, learn.cell_features(g, C, min(G["px"], G["py"]))); info["model"] = True
+            M = Mm; info["model"] = True
         else:
             P = None
     if dark_only: M[M == 2] = 0
-    elif P is None: M = clean(M, info["t"])
+    elif P is None: M = Mt
+    if Mm is not None and not dark_only:
+        # согласие порогов и модели — независимый сигнал надёжности (v10.12): расходятся редко там, где оба правы и не сходятся там, где рисунок спорный
+        ink = int(((Mt > 0) | (Mm > 0)).sum()); mism = int((Mt != Mm).sum())
+        info["agree"] = {"mismatch": mism, "ink": ink, "share": round(mism / max(1, ink), 4)}
     info["confidence"], info["flags"] = confidence(G, M, info["t"])
     try:                                                         # мера искажения листа (distortion.py): только отметка, сетку не двигаем
         import distortion
@@ -400,10 +408,14 @@ def to_work(G, M, info, margin=0):
         "classify": {"tones": 1, "inner": 55, "thr": [int(round(info["dark"] + DARK_T * span))],
                      "centers": [int(round(info["bg"])), int(round(info["dark"]))]},
         "matrix": {"w": int(Mt.shape[1]), "h": int(Mt.shape[0]), "origin": [int(ox), int(oy)], "rows": rows_s},
+        # v10.12: сырой результат автомата этого прогона, до правок человека — отдельно от "matrix", который дальше редактируют руками.
+        # Нужен, чтобы напрямую мерить ошибку автомата и дообучать модель на разнице (сейчас это можно только оценить по edited=true).
+        "auto_matrix": {"w": int(Mt.shape[1]), "h": int(Mt.shape[0]), "origin": [int(ox), int(oy)], "rows": rows_s},
         "palette": ["#ffffff", "#1a1a1a", "#b8b8b8"] if has_mid else ["#ffffff", "#1a1a1a"],
         "palette_names": ["фон", "обводка", "тело 1"] if has_mid else ["фон", "обводка"],
         "palette_touched": False,
         "auto": {"version": 1, "confidence": info["confidence"], "flags": info["flags"],
                  "pitch": [round(G["px"], 3), round(G["py"], 3)], "angle": round(G["angle"], 2),
-                 "reviewed": False, **({"distortion": info["distortion"]} if info.get("distortion") else {})},
+                 "reviewed": False, **({"distortion": info["distortion"]} if info.get("distortion") else {}),
+                 **({"agree": info["agree"]} if info.get("agree") else {})},
     }

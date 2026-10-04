@@ -44,4 +44,9 @@ def risk_score(auto, sym):
     r += 0.08 * min(len([f for f in flags if "подтвердить" not in f]), 4)
     if sym and sym.get("kind"):
         r += min(len(sym["suspects"]) / 40.0, 0.4)
+    ag = (auto or {}).get("agree")
+    if ag and ag.get("ink", 0) >= 5:
+        # v10.12: пороги и модель клеток — два независимых метода; совпали целиком — сильный сигнал «верно»,
+        # разошлись заметно — сигнал «стоит проверить» (независимо от того, какой из двух пошёл в итог)
+        r += min(ag["share"] * 3.0, 0.4) - 0.08
     return round(float(min(r, 1.5)), 3)
