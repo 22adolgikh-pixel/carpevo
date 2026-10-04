@@ -114,7 +114,8 @@
    "n_suspects": 0
   },
   "risk": 1.06,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "grid_strength": 3.268
  },
  "done": false,
  "adjust": {
@@ -723,5 +724,6 @@
   ],
   "ntiles": 13,
   "verified": []
- }
+ },
+ "review": true
 }
