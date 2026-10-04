@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "Херис",
   "type": "Теб.",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.8333,
@@ -154,7 +156,7 @@
    4.884
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "distortion": {
    "dist_x": 0.052,
    "dist_y": 0.092,
@@ -180,7 +182,7 @@
   "grid_strength": 5.447,
   "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -188,7 +190,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-04 18:35:25",
+ "saved_at": "2026-10-04 18:59:30",
  "auto_matrix": {
   "w": 55,
   "h": 62,
@@ -575,5 +577,13 @@
     0
    ]
   ]
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
