@@ -168,7 +168,9 @@
    "n_suspects": 0
   },
   "risk": 1.33,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "grid_strength": 0.726,
+  "scheme_ok": true
  },
  "done": false,
  "adjust": {
@@ -186,7 +188,7 @@
    61
   ]
  },
- "saved_at": "2026-10-04 16:33:45",
+ "saved_at": "2026-10-04 18:34:09",
  "auto_matrix": {
   "w": 18,
   "h": 61,
@@ -2914,5 +2916,6 @@
   ],
   "ntiles": 14,
   "verified": []
- }
+ },
+ "review": true
 }
