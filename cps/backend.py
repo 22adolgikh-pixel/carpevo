@@ -13,6 +13,7 @@ import autocolor
 import rapport
 import risk
 import learn
+import hard
 import dupes
 import threading
 import cloud
@@ -369,6 +370,16 @@ def _is_border(w):
     m = w.get("matrix")
     return bool(m and max(m["w"], m["h"]) >= 1.9 * max(1, min(m["w"], m["h"])))
 
+def _hard_left(w):
+    """Сколько трудных кусков осталось проверить (по кэшу; None — ещё не считалось или сетка менялась)."""
+    if not w.get("hard"): return None
+    try:
+        r = hard.remaining(w)
+        return None if r is None else len(r)
+    except Exception:
+        return None
+
+
 @app.get("/api/figures")
 def api_figures():
     out = []
@@ -391,6 +402,7 @@ def api_figures():
                     "colors": len(set("".join(w["matrix"]["rows"])) - {"."}) if w.get("matrix") else None,
                     "color": bool(w.get("color_mode")), "photo": w.get("kind") == "photo",
                     "border": _is_border(w), "rapport": bool((w.get("rapport") or {}).get("found")),
+                    "hard_left": _hard_left(w),
                     "t": os.path.getmtime(os.path.join(D_WORK, fn))})
     def k(f):
         try: return (0, int(f["table"] or 0), int(f["fig"] or 0), f["id"])
@@ -619,6 +631,12 @@ def run_auto(fid, force=False, dark_only=False, mode="auto", pitch_hint=None, nc
             work["rapport"] = rapport.for_work(work)
             work["auto"]["flags"] = list(work["auto"].get("flags") or []) + [f"кайма: раппорт применён ко всей полосе (исправлено клеток: {nch})"]
     _apply_risk(work)
+    work.pop("hard", None)
+    if mode != "color":                                           # v10.13: трудные куски сразу (сетка новая — старые отметки недействительны)
+        P = learn.load_model()
+        if P is not None:
+            try: hard.ensure(work, cv2.cvtColor(crop_c, cv2.COLOR_BGR2GRAY), P)
+            except Exception: pass
     work["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
     jsave(wp, work)
     render_outputs(fid, work["matrix"], work["palette"], work.get("transparent_bg", True), work.get("rapport"))
@@ -792,6 +810,59 @@ def api_review_mark(body: dict = Body(...)):
     return {"marked": n}
 
 
+# ---------------- v10.13: «трудные места» — проверка только кусков, где пороги и модель расходятся ----------------
+def _hard_load(fid):
+    wp = os.path.join(D_WORK, fid + ".json"); w = jload(wp, {}) or {}
+    if not hard.eligible(w): return wp, w, None, "рисунок не подходит (нужен ЧБ-автомат с сеткой)"
+    P = learn.load_model()
+    if P is None: return wp, w, None, "модель клеток не обучена — сначала «обучить на готовых» (конвейер, шаг 5)"
+    g = imread_any(os.path.join(D_CROPS, fid + ".png"), cv2.IMREAD_GRAYSCALE)
+    if g is None: return wp, w, None, "нет кропа"
+    try:
+        if hard.ensure(w, g, P): jsave(wp, w)
+    except Exception as e:
+        return wp, w, None, f"не удалось посчитать: {e}"
+    return wp, w, hard.remaining(w) or [], None
+
+
+@app.get("/api/hard/{fid}")
+def api_hard(fid: str):
+    """Непроверенные трудные куски рисунка (самые спорные первыми) + матрица и палитра для экрана проверки."""
+    if not _fid_ok(fid): return JSONResponse({"error": "bad id"}, 400)
+    wp, w, rem, err = _hard_load(fid)
+    if err: return JSONResponse({"error": err}, 400)
+    hd = w["hard"]
+    return {"id": fid, "tiles": rem, "total": len(hd["tiles"]), "verified": len(hd.get("verified", [])),
+            "too_many": hard.too_many(w), "ntiles": hd.get("ntiles"), "tile": hard.TILE, "done": bool(w.get("done")),
+            "matrix": w["matrix"], "palette": w.get("palette"), "t": os.path.getmtime(wp)}
+
+
+@app.post("/api/hard/{fid}/verify")
+def api_hard_verify(fid: str, body: dict = Body(default={})):
+    """Отметить кусок {x,y} проверенным; cells — правки [[x,y,v]] (0 фон, 1 контур, 2 серое).
+    Когда непроверенных кусков не осталось — рисунок принимается (done), остальное подтверждено согласием двух методов."""
+    if not _fid_ok(fid): return JSONResponse({"error": "bad id"}, 400)
+    wp, w, rem, err = _hard_load(fid)
+    if err: return JSONResponse({"error": err}, 400)
+    b = body or {}
+    changed = hard.apply_cells(w, b.get("cells") or [])
+    t = b.get("tile")
+    if t is not None:
+        key = [int(t["x"]), int(t["y"])]
+        if key not in w["hard"].setdefault("verified", []): w["hard"]["verified"].append(key)
+    if changed and isinstance(w.get("auto"), dict): w["auto"]["edited"] = True
+    left = hard.remaining(w) or []
+    accepted = False
+    if not left and not w.get("done"):
+        w["done"] = True; accepted = True
+        if isinstance(w.get("auto"), dict): w["auto"]["reviewed"] = True; w["auto"]["accepted_via"] = "hard"
+    w["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S"); jsave(wp, w)
+    if changed:
+        w["rapport"] = rapport.for_work(w); jsave(wp, w)
+        render_outputs(fid, w["matrix"], w["palette"], w.get("transparent_bg", True), w.get("rapport"))
+    return {"left": len(left), "changed": changed, "accepted": accepted}
+
+
 @app.post("/api/risk_backfill")
 def api_risk_backfill(body: dict = Body(default={})):
     """Посчитать симметрию и риск для авто-рисунков, у которых их ещё нет."""
@@ -848,6 +919,18 @@ def _redo_targets():
         if not (w.get("matrix") and a and not a.get("reviewed") and not a.get("edited") and not w.get("done") and not w.get("palette_touched") and w.get("kind") != "photo" and not a.get("photo")): continue
         if a.get("mode") == "color" and w.get("source_kind") == "photo": continue
         if os.path.exists(os.path.join(D_CROPS, fn[:-5] + ".png")): out.append((w.get("sheet"), fn[:-5], bool(w.get("color_mode"))))
+    return out
+
+
+def _hard_targets():
+    """ЧБ-автоматы в очереди (не приняты), у которых трудные куски ещё не посчитаны или устарели (сетка менялась)."""
+    out = []
+    for fn in sorted(os.listdir(D_WORK)):
+        if not fn.endswith(".json"): continue
+        w = jload(os.path.join(D_WORK, fn), {}) or {}
+        if w.get("done") or not hard.eligible(w): continue
+        if (w.get("hard") or {}).get("sig") == hard.sig(w): continue
+        if os.path.exists(os.path.join(D_CROPS, fn[:-5] + ".png")): out.append((w.get("sheet"), fn[:-5]))
     return out
 
 
@@ -919,6 +1002,15 @@ def _prowl_run(stages, only_sheets=None):
                     if r.get("error"): err(f"{f}: {r['error']}")
                 except Exception as e: err(f"{f}: {e}")
                 P["done"] += 1
+        if "hard" in stages and not P["stop"]:
+            t = _hard_targets(); P.update(stage="hard", done=0, total=len(t))
+            if t and learn.load_model() is None: err("модель клеток не обучена — трудные места не посчитать"); t = []
+            for path, f in t:
+                if P["stop"]: break
+                P["current"] = f
+                _, _, _, e = _hard_load(f)
+                if e: err(f"{f}: {e}")
+                P["done"] += 1
     finally:
         P.update(running=False, current="", stage="", finished=time.strftime("%Y-%m-%d %H:%M:%S"))
 
@@ -926,9 +1018,9 @@ def _prowl_run(stages, only_sheets=None):
 @app.post("/api/prowl/start")
 def api_prowl_start(body: dict = Body(default={})):
     if PROWL["running"]: return JSONResponse({"error": "уже идёт"}, 409)
-    stages = [s for s in ((body or {}).get("stages") or ["segment", "auto"]) if s in ("segment", "auto", "regray", "redo")]
+    stages = [s for s in ((body or {}).get("stages") or ["segment", "auto"]) if s in ("segment", "auto", "regray", "redo", "hard")]
     only = (body or {}).get("sheets")
-    n = (len(_segment_pending()) if "segment" in stages else 0) + (len(_prowl_targets(only)) if "auto" in stages else 0) + (len(_regray_targets()) if "regray" in stages else 0) + (len(_redo_targets()) if "redo" in stages else 0)
+    n = (len(_segment_pending()) if "segment" in stages else 0) + (len(_prowl_targets(only)) if "auto" in stages else 0) + (len(_regray_targets()) if "regray" in stages else 0) + (len(_redo_targets()) if "redo" in stages else 0) + (len(_hard_targets()) if "hard" in stages else 0)
     if not n: return {"started": False, "total": 0}
     threading.Thread(target=_prowl_run, args=(stages, only), daemon=True).start()
     return {"started": True, "total": n}
@@ -948,6 +1040,7 @@ def api_prowl(light: int = 0):
     d["pending_segment"] = len(_segment_pending()) if not PROWL["running"] else None
     d["pending_regray"] = len(_regray_targets()) if not PROWL["running"] else None
     d["pending_redo"] = len(_redo_targets()) if not PROWL["running"] else None
+    d["pending_hard"] = len(_hard_targets()) if not PROWL["running"] else None
     return d
 
 
@@ -972,7 +1065,7 @@ def api_pipeline():
             if m.get("no_figures"): sheets["empty"] += 1
             elif m.get("figures"):
                 sheets["cut"] += 1; sheets["auto_cut"] += bool(m.get("auto_segmented"))
-    f = {"total": 0, "undigitized": 0, "photo": 0, "queue": 0, "queue_low": 0, "queue_mid": 0, "queue_high": 0, "done": 0, "review": 0, "done_bw": 0, "new_done_bw": 0}
+    f = {"total": 0, "undigitized": 0, "photo": 0, "queue": 0, "queue_low": 0, "queue_mid": 0, "queue_high": 0, "done": 0, "review": 0, "done_bw": 0, "new_done_bw": 0, "hard_ready": 0, "hard_tiles": 0, "hard_zero": 0}
     diff = {}
     mp = learn.MODEL_PATH; mt = os.path.getmtime(mp) if os.path.exists(mp) else 0
     for fn in os.listdir(D_WORK):
@@ -988,6 +1081,9 @@ def api_pipeline():
         elif a and not a.get("reviewed"):
             f["queue"] += 1; r = a.get("risk"); r = (1 - (a.get("confidence") or 0)) if r is None else r
             f["queue_low" if r <= 0.25 else "queue_mid" if r <= 0.55 else "queue_high"] += 1
+            hl = _hard_left(w)
+            if hl is not None:
+                f["hard_ready"] += 1; f["hard_tiles"] += hl; f["hard_zero"] += hl == 0
             d = a.get("difficulty_est"); diff[d] = diff.get(d, 0) + 1
         if w.get("review"): f["review"] += 1
     model = {"present": bool(mt)}

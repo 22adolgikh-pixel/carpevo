@@ -122,7 +122,16 @@ def load_examples(work_dir=None, crops_dir=None, limit=None):
         if not fn.endswith(".json"): continue
         try: w = json.load(open(os.path.join(work_dir, fn)))
         except Exception: SKIPPED.append(fn); continue
-        if not (w.get("done") and w.get("matrix") and w.get("quad") and not w.get("color_mode") and w.get("kind") != "photo"): continue
+        if not (w.get("matrix") and w.get("quad") and not w.get("color_mode") and w.get("kind") != "photo"): continue
+        mask = None
+        if not w.get("done"):
+            # v10.13: не принятый рисунок даёт примеры только из кусков, проверенных человеком в «трудных местах»
+            try:
+                import hard
+                mask = hard.verified_mask(w)
+            except Exception:
+                mask = None
+            if mask is None: continue
         p = os.path.join(crops_dir, fn[:-5] + ".png")
         if not os.path.exists(p): continue
         g = cv2.imread(p, cv2.IMREAD_GRAYSCALE)
@@ -132,9 +141,21 @@ def load_examples(work_dir=None, crops_dir=None, limit=None):
         except Exception:
             continue
         if X.shape[:2] != y.shape: continue
-        ex.append((fn[:-5], X, y, g, C, pitch))
+        if mask is not None and mask.shape != y.shape: continue
+        ex.append((fn[:-5], X, y, g, C, pitch, mask))
         if limit and len(ex) >= limit: break
     return ex
+
+
+def _xy(ex):
+    """Обучающие строки: принятые рисунки целиком, частично проверенные — только проверенные куски."""
+    Xs, ys = [], []
+    for e in ex:
+        X = e[1].reshape(-1, e[1].shape[-1]); y = e[2].ravel()
+        if e[6] is not None:
+            k = e[6].ravel(); X, y = X[k], y[k]
+        Xs.append(X); ys.append(y)
+    return np.concatenate(Xs), np.concatenate(ys)
 
 
 def baseline_labels(g, C, pitch):
@@ -148,8 +169,8 @@ def cross_val(ex, k=5, **kw):
     n = len(ex); folds = np.arange(n) % k; res = []
     cw = np.array([1.0, 2.0, 1.5])
     for f in range(k):
-        tr = [e for e, fl in zip(ex, folds) if fl != f]; te = [e for e, fl in zip(ex, folds) if fl == f]
-        X = np.concatenate([e[1].reshape(-1, e[1].shape[-1]) for e in tr]); y = np.concatenate([e[2].ravel() for e in tr])
+        tr = [e for e, fl in zip(ex, folds) if fl != f]; te = [e for e, fl in zip(ex, folds) if fl == f and e[6] is None]   # оценка — только на принятых
+        X, y = _xy(tr)
         P = fit(X, y, class_w=cw, **kw)
         for e in te:
             pm = classify_cells(P, e[1]); bl = baseline_labels(e[3], e[4], e[5]); y = e[2]
@@ -164,6 +185,7 @@ def gated(ex, res, gate=0.6):
     eb, eg, used = [], [], 0
     byid = {r[0]: r for r in res}
     for e in ex:
+        if e[0] not in byid: continue
         r = byid[e[0]]
         v = autogrid.cell_means(e[3], e[4], e[5]); M, info = autogrid.classify(v); M = autogrid.clean(M, info["t"])
         c, _ = autogrid.confidence({"px": 1, "py": 1, "angle": 0, "quad_resid": 0}, M, info["t"])
@@ -174,7 +196,8 @@ def gated(ex, res, gate=0.6):
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "eval"
     ex = load_examples()
-    print("примеров (готовые ЧБ с кропом):", len(ex))
+    npart = sum(e[6] is not None for e in ex)
+    print("примеров (готовые ЧБ с кропом):", len(ex) - npart, "+ частично проверенных («трудные места»):", npart)
     if SKIPPED: print("пропущено битых файлов:", len(SKIPPED), SKIPPED[:5], "— список: /api/broken")
     if len(ex) < 10: print("мало данных"); return
     res = cross_val(ex)
@@ -187,9 +210,9 @@ def main():
     if cmd == "train":
         if eg >= eb:
             print("с моделью не лучше, чем без неё — НЕ сохраняю (останутся пороги). Нужно больше готовых рисунков."); return
-        X = np.concatenate([e[1].reshape(-1, e[1].shape[-1]) for e in ex]); y = np.concatenate([e[2].ravel() for e in ex])
+        X, y = _xy(ex)
         P = fit(X, y, class_w=np.array([1.0, 2.0, 1.5]))
-        save_model(P, meta={"n_figures": len(ex), "cv_model": float(eg), "cv_threshold": float(eb)})
+        save_model(P, meta={"n_figures": len(ex) - npart, "n_partial": npart, "cv_model": float(eg), "cv_threshold": float(eb)})
         print("модель сохранена:", MODEL_PATH)
 
 

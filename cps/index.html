@@ -188,6 +188,11 @@ aside{min-height:0}
 #rv .rvb{flex:1;min-height:0;display:flex;gap:14px}.rvp{flex:1;min-width:0;display:flex;flex-direction:column}.rvp img{flex:1;min-height:0;object-fit:contain;background:#fff;border-radius:6px;width:100%}
 #rv .rvf button{padding:10px 18px;font-size:14px}#rv kbd{background:rgba(0,0,0,.25);border-radius:3px;padding:0 5px;margin-left:4px;font-size:12px}
 #rv .rvdone{margin:auto;text-align:center}
+#hv{position:fixed;inset:0;z-index:70;background:rgba(8,10,14,.98);display:flex;flex-direction:column;padding:12px 18px;gap:10px}
+#hv .rvh,#hv .rvf{display:flex;align-items:center;gap:12px;flex-wrap:wrap}#hv .rvf button{padding:10px 18px;font-size:14px}#hv .rvf button.sm{padding:6px 10px;font-size:12px}
+#hv kbd{background:rgba(0,0,0,.25);border-radius:3px;padding:0 5px;margin-left:4px;font-size:12px}#hv .rvdone{margin:auto;text-align:center;max-width:560px}
+#hv .rvb{flex:1;min-height:0;display:flex;gap:14px}#hv .rvp{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center}#hv .rvp .pvl{align-self:stretch}
+#hv canvas{border-radius:6px;cursor:crosshair;max-width:100%}#hv .rvp:first-child canvas{cursor:default}
 .srcbar{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:8px}
 .srcbar button{padding:2px 7px;font-size:11.5px}
 </style></head><body>
@@ -1350,7 +1355,7 @@ function renderQueue(){
   const C=$('catalog');S.qSel=S.qSel||new Set();const thr=S.qThr??0.25;
   const all=S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo),items=qItems(),sure=items.filter(f=>qrisk(f)<=thr);
   [...S.qSel].forEach(id=>{if(!items.some(f=>f.id===id))S.qSel.delete(id);});
-  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">${viewSwitch()}<span style="color:var(--mut)">${items.length} из ${all.length} ждут проверки</span><button id="qFast" class="sm" ${items.length?'':'disabled'} data-tip="Рисунки по одному: слева оригинал, справа результат. A — принять, X — на доработку, → — пропустить">▶ быстрая проверка</button><span class="sp"></span>
+  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">${viewSwitch()}<span style="color:var(--mut)">${items.length} из ${all.length} ждут проверки</span><button id="qFast" class="sm" ${items.length?'':'disabled'} data-tip="Рисунки по одному: слева оригинал, справа результат. A — принять, X — на доработку, → — пропустить">▶ быстрая проверка</button><button id="qHard" class="sm" ${items.some(f=>!f.color)?'':'disabled'} data-tip="Только спорные куски 10×10, где пороги и модель расходятся (в них ~98% ошибок). Все куски проверены — рисунок принят. Проверенные куски учат модель.">🎯 трудные места</button><span class="sp"></span>
     <span class="dfilter" data-tip="тип рисунка">${TYPEL.map(([k,l])=>`<button class="${(S.qType||'')===k?'on':''}" data-qt="${k}">${l} <small>${all.filter(TYPEF[k]).length}</small></button>`).join('')}</span>
     <select id="qSort" style="flex:none">${Object.entries(QSORT).map(([k,v])=>`<option value="${k}" ${(S.qSort||'risk_asc')===k?'selected':''}>${v[0]}</option>`).join('')}</select></div>
   <div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">
@@ -1362,7 +1367,7 @@ function renderQueue(){
     return `<div class="card" data-id="${esc(f.id)}"><label class="qchk" data-tip="выбрать для массового принятия"><input type="checkbox" data-sel="${esc(f.id)}" ${S.qSel.has(f.id)?'checked':''}></label><div class="im"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_bg.png?t=${Math.round(f.t)}"></div>
     <div class="t"><span class="dot" style="display:inline-block;margin-right:5px;background:${col}"></span>${esc(dispName(f)||f.id)}</div>
     <div class="m">${esc(f.id)} · ${f.size[0]}×${f.size[1]}${f.colors?' · '+f.colors+' цв.':''} · риск ${r.toFixed(2)}${f.sym&&f.n_sus?` · <span style="color:#ff9f1c" data-tip="клеток нарушает симметрию (${esc(f.sym)})">◇${f.n_sus}</span>`:''}${f.border?' · кайма':''}${f.diff_est?' · '+({simple:'простой',medium:'средний',complex:'сложный',ultra:'ультра'}[f.diff_est]||f.diff_est):''}</div></div>`;}).join('')||'<div class="hint">Очередь пуста — все авто-результаты проверены.</div>'}</div>`;
-  bindViewSwitch(C);bindPreview(C);bindQueueKeys(C);$('qFast').onclick=()=>openReview();
+  bindViewSwitch(C);bindPreview(C);bindQueueKeys(C);$('qFast').onclick=()=>openReview();$('qHard').onclick=()=>openHard();
   C.querySelectorAll('[data-qt]').forEach(b=>b.onclick=()=>{S.qType=b.dataset.qt;renderQueue();});
   $('qSort').onchange=e=>{S.qSort=e.target.value;renderQueue();};
   $('qThr').oninput=e=>{S.qThr=+e.target.value;$('qThrV').textContent=S.qThr.toFixed(2);};
@@ -1394,7 +1399,7 @@ function qCards(){return [...document.querySelectorAll('#catalog .card')];}
 function qFocus(i,scroll){const cs=qCards();if(!cs.length)return;i=Math.max(0,Math.min(cs.length-1,i));cs.forEach(c=>{c.classList.remove('kf');if(c.dataset.hold==='1'){c.dataset.hold='0';cardSwap(c,false);}});const c=cs[i];c.classList.add('kf');S.qFocus=c.dataset.id;if(scroll!==false)c.scrollIntoView({block:'nearest'});}
 function bindQueueKeys(C){const k=S.qFocus;if(k){const i=qCards().findIndex(c=>c.dataset.id===k);if(i>=0)qCards()[i].classList.add('kf');}}
 async function qKey(e){
-  if(S.mode!=='queue'||S.rv||!$('modal').hidden)return false;
+  if(S.mode!=='queue'||S.rv||S.hv||!$('modal').hidden)return false;
   const cs=qCards();if(!cs.length)return false;let i=cs.findIndex(c=>c.dataset.id===S.qFocus);const k=kk(e);
   const cols=(()=>{const t=cs[0].offsetTop;let n=0;for(const c of cs){if(c.offsetTop!==t)break;n++;}return Math.max(1,n);})();
   if(e.key==='ArrowRight'){qFocus(i<0?0:i+1);return true;}
@@ -1453,6 +1458,118 @@ function rvKey(e){
   if(k==='g'){$('rvGeo').click();return true;}
   return true;   // остальные клавиши не трогаем интерфейс под окном
 }
+/* ---- 🎯 трудные места (v10.13): проверяются только куски 10×10, где пороги и модель клеток расходятся ----
+   Остальное подтверждено согласием двух независимых методов. Все куски проверены — рисунок принят.
+   Проверенные куски сразу идут в обучение модели, даже если рисунок не принят до конца. */
+const HV_CTX=3,HV_S=16;
+function hvList(){return S.figures.filter(f=>f.auto&&f.size&&f.size[0]>=5&&f.size[1]>=5&&!f.done&&!f.photo&&!f.color&&!(f.risk>=1.5))
+  .sort((a,b)=>(a.hard_left??999)-(b.hard_left??999)||qrisk(a)-qrisk(b));}
+function openHard(){const list=hvList();if(!list.length){stat('в очереди нет ЧБ-рисунков','ok');return;}
+  pvHide();S.hv={list:list.map(f=>f.id),i:0,acc:0,tiles:0,fixed:0,cur:null,busy:false};hvLoad();}
+function hvClose(){S.hv=null;const e=$('hv');if(e)e.remove();refreshFigures();}
+function hvEl(){let el=$('hv');if(!el){el=document.createElement('div');el.id='hv';document.body.appendChild(el);}return el;}
+async function hvLoad(){
+  const H=S.hv;if(!H)return;
+  while(H.i<H.list.length){
+    const id=H.list[H.i];hvEl().innerHTML=`<div class="rvdone mut"><span class="spin"></span> ${esc(id)} — ищу трудные места…</div>`;
+    let d;try{d=await api('/api/hard/'+encodeURIComponent(id));}catch(e){if(S.hv!==H)return;H.cur={id,error:String(e.message||e)};return hvRender();}
+    if(S.hv!==H)return;
+    if(d.done){H.i++;continue;}
+    if(!d.tiles.length){     // два метода согласны везде — принимаем без показа
+      try{const r=await api('/api/hard/'+encodeURIComponent(id)+'/verify',{});if(r.accepted){H.acc++;stat(id+': трудных мест нет — принят','ok');}}catch(e){fail(e);}
+      H.i++;continue;}
+    const img=new Image();img.src='/api/orig_aligned/'+encodeURIComponent(id)+'?s='+HV_S+'&t='+Math.round(d.t||0);
+    await new Promise(r=>{img.onload=r;img.onerror=r;});if(S.hv!==H)return;
+    H.cur={id,d,img,k:0,M:d.matrix.rows.map(r=>[...r]),orig:d.matrix.rows.map(r=>[...r]),edits:new Map(),hover:null,overlay:false};
+    return hvRender();
+  }
+  H.cur=null;hvRender();
+}
+function hvNext(){const H=S.hv;if(!H)return;H.i++;hvLoad();}
+function hvRender(){
+  const H=S.hv;if(!H){const e=$('hv');if(e)e.remove();return;}
+  const el=hvEl(),c=H.cur;
+  if(!c){el.innerHTML=`<div class="rvdone"><div style="font-size:20px;margin-bottom:8px">Трудные места просмотрены</div><div>принято рисунков: <b>${H.acc}</b> · проверено кусков: <b>${H.tiles}</b> · исправлено клеток: <b>${H.fixed}</b></div><div class="mut" style="margin-top:8px">Проверенные куски уже годятся для обучения: «обучить на готовых» в конвейере (шаг 5).</div><div style="margin-top:14px"><button id="hvX">закрыть</button></div></div>`;$('hvX').onclick=hvClose;return;}
+  const f=S.figures.find(v=>v.id===c.id)||{};
+  const head=`<div class="rvh"><b>🎯 ${esc(dispName(f)||c.id)}</b><span class="mut">${esc(c.id)}${f.size?' · '+f.size[0]+'×'+f.size[1]:''}</span><span class="sp"></span><span class="mut">рисунок ${H.i+1} / ${H.list.length} · принято ${H.acc} · кусков ${H.tiles} · исправлено клеток ${H.fixed}</span><button class="sm" id="hvX">✕ закрыть (Esc)</button></div>`;
+  const tail=(extra)=>`<button class="sm" id="hvGeo" data-tip="геометрия и сетка этого рисунка">▦ сетка</button><button class="sm" id="hvEdit" data-tip="открыть в «Пикселях» целиком">✎ целиком <kbd>E</kbd></button><span class="sp"></span>${extra||''}<button id="hvRev" style="background:var(--bad)">✗ на доработку <kbd>X</kbd></button><button id="hvSkip">→ пропустить рисунок</button>`;
+  if(c.error){el.innerHTML=head+`<div class="rvdone">${esc(c.error)}</div><div class="rvf">${tail()}</div>`;}
+  else if(c.d.too_many){el.innerHTML=head+`<div class="rvdone"><div style="font-size:17px;margin-bottom:8px">Спорных кусков ${c.d.tiles.length} из ${c.d.ntiles} — почти весь рисунок</div><div class="mut">Кусками это дольше, чем открыть рисунок целиком. Часто причина — сбитая сетка или бледная серая заливка: откройте «▦ сетка» или «✎ целиком».</div></div><div class="rvf">${tail()}</div>`;}
+  else{
+    const t=c.d.tiles[c.k];
+    el.innerHTML=head+`<div class="rvb"><div class="rvp"><div class="pvl">оригинал (выпрямлен по сетке)</div><canvas id="hvA"></canvas></div><div class="rvp"><div class="pvl">результат · клик: фон → контур → серое, можно вести мышью · правый клик — фон</div><canvas id="hvB"></canvas></div></div>
+    <div class="rvf"><span class="mut">кусок <b>${c.k+1}</b> из ${c.d.tiles.length} · спорных клеток ${t.n} (оранжевые) · правок здесь <b id="hvNe">${c.edits.size}</b></span><button class="sm" id="hvOv" data-tip="наложить скан на результат (пока держите пробел)">скан поверх <kbd>Пробел</kbd></button>${tail(`<button id="hvOk" style="background:var(--ok)">✓ верно <kbd>A</kbd></button>`)}</div>`;
+    $('hvOk').onclick=hvOk;
+    const B=$('hvB'),A=$('hvA');
+    const hov=(e,cv)=>{const p=hvCell(e,cv);const h=c.hover;c.hover=p;if(String(h)!==String(p))hvDraw();};
+    A.onmousemove=e=>hov(e,A);B.onmousemove=e=>{hov(e,B);if(c.paint!=null&&e.buttons){const p=hvCell(e,B,true);if(p)hvSet(c,p,c.paint);}};
+    A.onmouseleave=B.onmouseleave=()=>{c.hover=null;hvDraw();};
+    B.oncontextmenu=e=>e.preventDefault();
+    B.onmousedown=e=>{const p=hvCell(e,B,true);if(!p)return;const ch=c.M[p[1]][p[0]],v=ch==='.'?0:parseInt(ch,36);c.paint=e.button===2?0:(v+1)%3;hvSet(c,p,c.paint);};
+    $('hvOv').onmousedown=()=>{c.overlay=true;hvDraw();};$('hvOv').onmouseup=$('hvOv').onmouseleave=()=>{c.overlay=false;hvDraw();};
+    requestAnimationFrame(hvDraw);
+  }
+  $('hvX').onclick=hvClose;$('hvSkip').onclick=hvNext;
+  $('hvRev').onclick=async()=>{try{await api('/api/review_mark',{ids:[c.id],value:true});stat('на доработку: '+c.id,'ok');}catch(e){fail(e);}hvNext();};
+  $('hvEdit').onclick=()=>{const id=c.id;hvClose();openFigure(id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail);};
+  $('hvGeo').onclick=()=>{const id=c.id;hvClose();openFigure(id).then(()=>setMode('grid',{back:'queue'})).catch(fail);};
+}
+function hvGeom(c){const t=c.d.tiles[c.k],W=c.M[0].length,Hh=c.M.length;
+  return {t,x0:Math.max(0,t.x-HV_CTX),y0:Math.max(0,t.y-HV_CTX),x1:Math.min(W,t.x+t.w+HV_CTX),y1:Math.min(Hh,t.y+t.h+HV_CTX)};}
+function hvCell(e,cv,inTile){const c=S.hv&&S.hv.cur;if(!c||!c.cs)return null;const g=hvGeom(c),r=cv.getBoundingClientRect(),sc=cv.width/r.width;
+  const x=g.x0+Math.floor((e.clientX-r.left)*sc/c.cs),y=g.y0+Math.floor((e.clientY-r.top)*sc/c.cs);
+  if(x<g.x0||x>=g.x1||y<g.y0||y>=g.y1)return null;
+  if(inTile&&(x<g.t.x||x>=g.t.x+g.t.w||y<g.t.y||y>=g.t.y+g.t.h))return null;     // править можно только внутри куска — его и подтверждаете
+  return [x,y];}
+function hvSet(c,[x,y],v){const ch=v===0?'.':String(v);if(c.M[y][x]===ch)return;c.M[y][x]=ch;const k=x+','+y;
+  if(c.orig[y][x]===ch)c.edits.delete(k);else c.edits.set(k,v);const n=$('hvNe');if(n)n.textContent=c.edits.size;hvDraw();}
+function hvDraw(){
+  const c=S.hv&&S.hv.cur;if(!c||!c.d||c.d.too_many)return;const A=$('hvA'),B=$('hvB');if(!A||!B)return;
+  const g=hvGeom(c),nw=g.x1-g.x0,nh=g.y1-g.y0,box=A.parentElement.getBoundingClientRect();
+  const cs=Math.max(8,Math.floor(Math.min(box.width/nw,(box.height-22)/nh)));c.cs=cs;
+  for(const cv of [A,B]){if(cv.width!==nw*cs||cv.height!==nh*cs){cv.width=nw*cs;cv.height=nh*cs;}}
+  const pal=c.d.palette||['#ffffff','#1a1a1a','#b8b8b8'],a=A.getContext('2d'),b=B.getContext('2d');
+  const scan=(ctx,alpha)=>{if(c.img&&c.img.naturalWidth){ctx.globalAlpha=alpha;ctx.imageSmoothingEnabled=true;ctx.drawImage(c.img,g.x0*HV_S,g.y0*HV_S,nw*HV_S,nh*HV_S,0,0,nw*cs,nh*cs);ctx.globalAlpha=1;}};
+  a.fillStyle='#fff';a.fillRect(0,0,A.width,A.height);scan(a,1);
+  for(let y=0;y<nh;y++)for(let x=0;x<nw;x++){const ch=c.M[g.y0+y][g.x0+x],v=ch==='.'?0:parseInt(ch,36);b.fillStyle=pal[v]||'#f0f';b.fillRect(x*cs,y*cs,cs,cs);}
+  if(c.overlay)scan(b,.55);
+  const tx=(g.t.x-g.x0)*cs,ty=(g.t.y-g.y0)*cs,tw=g.t.w*cs,th=g.t.h*cs;
+  for(const ctx of [a,b]){
+    ctx.strokeStyle='rgba(74,146,214,.35)';ctx.lineWidth=1;ctx.beginPath();
+    for(let x=0;x<=nw;x++){ctx.moveTo(x*cs+.5,0);ctx.lineTo(x*cs+.5,nh*cs);}for(let y=0;y<=nh;y++){ctx.moveTo(0,y*cs+.5);ctx.lineTo(nw*cs,y*cs+.5);}ctx.stroke();
+    ctx.fillStyle='rgba(8,10,14,.45)';ctx.fillRect(0,0,nw*cs,ty);ctx.fillRect(0,ty+th,nw*cs,nh*cs-ty-th);ctx.fillRect(0,ty,tx,th);ctx.fillRect(tx+tw,ty,nw*cs-tx-tw,th);
+    ctx.strokeStyle='#4a92d6';ctx.lineWidth=2;ctx.strokeRect(tx+1,ty+1,tw-2,th-2);
+    ctx.strokeStyle='#ff9f1c';ctx.lineWidth=Math.max(2,Math.round(cs/10));for(const [x,y] of g.t.cells)ctx.strokeRect((x-g.x0)*cs+2,(y-g.y0)*cs+2,cs-4,cs-4);
+    ctx.fillStyle='#2bd576';for(const k of c.edits.keys()){const [x,y]=k.split(',').map(Number);ctx.beginPath();ctx.arc((x-g.x0+1)*cs-5,(y-g.y0)*cs+5,3,0,7);ctx.fill();}
+    if(c.hover){const [x,y]=c.hover;ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.strokeRect((x-g.x0)*cs+1,(y-g.y0)*cs+1,cs-2,cs-2);}
+  }
+}
+async function hvOk(){
+  const H=S.hv,c=H&&H.cur;if(!c||!c.d||H.busy)return;const t=c.d.tiles[c.k];H.busy=true;
+  const cells=[...c.edits].map(([k,v])=>[...k.split(',').map(Number),v]);
+  try{const r=await api('/api/hard/'+encodeURIComponent(c.id)+'/verify',{tile:{x:t.x,y:t.y},cells});
+    H.tiles++;H.fixed+=r.changed||0;cells.forEach(([x,y])=>{c.orig[y][x]=c.M[y][x];});c.edits.clear();
+    if(r.accepted){H.acc++;stat(c.id+' принят: все трудные места проверены','ok');H.busy=false;return hvNext();}
+    c.k++;if(c.k>=c.d.tiles.length){H.busy=false;return hvNext();}
+    c.hover=null;hvRender();}catch(e){fail(e);}
+  H.busy=false;
+}
+function hvKey(e){
+  const H=S.hv;if(!H)return false;const k=kk(e),c=H.cur;
+  if(e.key==='Escape'){hvClose();return true;}
+  if(!c){if(e.key==='Enter')hvClose();return true;}
+  if(e.key==='ArrowRight'){$('hvSkip')&&$('hvSkip').click();return true;}
+  if(k==='x'){$('hvRev')&&$('hvRev').click();return true;}
+  if(k==='e'){$('hvEdit')&&$('hvEdit').click();return true;}
+  if(c.d&&!c.d.too_many){
+    if(k==='a'||e.key==='Enter'){if(!e.repeat)hvOk();return true;}
+    if(e.code==='Space'){if(!e.repeat){c.overlay=true;hvDraw();}return true;}
+  }
+  return true;
+}
+window.addEventListener('keyup',e=>{if(e.code==='Space'&&S.hv&&S.hv.cur){S.hv.cur.overlay=false;hvDraw();}});
+window.addEventListener('resize',()=>{if(S.hv)hvDraw();});
+window.addEventListener('mouseup',()=>{if(S.hv&&S.hv.cur)S.hv.cur.paint=null;});
 function renderRightQueue(){
   const R=$('right');
   R.innerHTML=`<h4>Ночной прогон</h4>
@@ -1487,7 +1604,7 @@ async function renderPipe(){
   let P;try{P=await api('/api/pipeline');}catch(e){C.innerHTML='<div class="hint">не удалось получить сводку: '+esc(e.message||e)+'</div>';return;}
   if(S.mode!=='pipe')return;
   const sh=P.sheets,f=P.figures,pr=P.prowl,md=P.model,run=pr.running;
-  const stage={segment:'разметка листов',auto:'оцифровка'}[pr.stage]||'';
+  const stage={segment:'разметка листов',auto:'оцифровка',hard:'трудные места',redo:'перепрогон',regray:'серая заливка'}[pr.stage]||'';
   const step=(n,title,body,btns)=>`<div class="pstep"><div class="pn">${n}</div><div class="pb"><b>${title}</b><div class="pt">${body}</div><div class="flex" style="gap:8px;margin-top:8px;flex-wrap:wrap">${btns}</div></div></div>`;
   const dl={simple:'простых',medium:'средних',complex:'сложных',ultra:'ультра'};
   C.innerHTML=`<div class="flex" style="margin-bottom:10px;flex-wrap:wrap;row-gap:8px"><b style="font-size:15px">Конвейер</b><span class="sp"></span>
@@ -1498,7 +1615,7 @@ async function renderPipe(){
   ${step(2,'Оцифровка и оценка узора',`Рисунков: ${f.total} · не оцифровано <b>${f.undigitized}</b> · фото (не схемы) ${f.photo}. Для каждого определяется ЧБ/цвет, сетка, пиксели, симметрия, раппорт каймы, оценка сложности и риск ошибок.`,
      `<button class="sm" id="pAuto" ${run||!f.undigitized?'disabled':''}>▶ оцифровать ${f.undigitized} рисунков</button><button class="sm" id="pRedo" ${run||!pr.pending_redo?'disabled':''} data-tip="Пересчитать свежим алгоритмом (серая заливка, раппорт кайм, модель) все автоматы, которых вы не касались: не принятые, не правленные, с нетронутой палитрой. Принятые и правленные не меняются.">↻ перепрогнать ${pr.pending_redo??'…'} непроверенных</button>`)}
   ${step(3,'Проверка списка',`Ждут проверки <b>${f.queue}</b>: надёжных ${f.queue_low} · средних ${f.queue_mid} · рискованных ${f.queue_high}.${Object.keys(P.queue_difficulty||{}).filter(k=>k!=='null').length?' По сложности (оценка): '+Object.entries(P.queue_difficulty).filter(([k])=>k!=='null').map(([k,v])=>v+' '+(dl[k]||k)).join(' · ')+'.':''}`,
-     `<button class="sm" id="pQueue">открыть очередь</button><button class="sm" id="pLow" ${f.queue_low?'':'disabled'}>✓ принять ${f.queue_low} надёжных</button>`)}
+     `<button class="sm" id="pQueue">открыть очередь</button><button class="sm" id="pLow" ${f.queue_low?'':'disabled'}>✓ принять ${f.queue_low} надёжных</button><button class="sm" id="pHardGo" ${f.queue?'':'disabled'} data-tip="Проверять только спорные куски 10×10 (пороги и модель расходятся). Все куски проверены — рисунок принят. Проверенные куски сразу учат модель.">🎯 трудные места</button><button class="sm" id="pHardCalc" ${run||!pr.pending_hard?'disabled':''} data-tip="Посчитать трудные куски заранее для всей очереди (в фоне), чтобы проверка шла без ожидания и в начале шли рисунки с малым числом кусков">посчитать трудные места (${pr.pending_hard??'…'})</button><div class="mut" style="width:100%">${f.hard_ready?`Посчитано для ${f.hard_ready} рисунков: осталось кусков ${f.hard_tiles}${f.hard_zero?`, у ${f.hard_zero} спорных мест нет — примутся сразу`:''}.`:''}</div>`)}
   ${step('≈','Повторы узоров',`Один узор у Керимова бывает и в ЧБ, и в цвете (и дважды на разных листах). Сравнивается силуэт «не фон» во всех поворотах/отражениях; найденные пары — только кандидаты.<div id="dupBox" class="mut" style="margin-top:6px"></div>`,
      `<button class="sm" id="pDup">найти повторы</button>`)}
   ${step(4,'Ручная доработка сложных',`Рискованных (риск > 0,55): <b>${f.queue_high}</b> · отмечено на пересмотр: ${f.review}. В очереди они идут сверху при сортировке «рискованные сначала»; оранжевые рамки в «Пикселях» показывают клетки, нарушающие симметрию.`,
@@ -1513,6 +1630,7 @@ async function renderPipe(){
     b.querySelectorAll('a[data-a]').forEach(a=>a.onclick=async e=>{e.preventDefault();try{await openFigure(a.dataset.a);setMode(S.fig.M?'pix':'grid');}catch(x){fail(x);}});}catch(e){b.textContent='ошибка: '+e;}};
   $('pToSheets').onclick=()=>setMode('sheet');
   $('pQueue').onclick=()=>{S.qSort='risk_asc';setMode('queue');};
+  $('pHardGo').onclick=()=>openHard();$('pHardCalc').onclick=()=>go(['hard']);
   $('pHard').onclick=()=>{S.qSort='risk_desc';setMode('queue');};
   $('pLow').onclick=async()=>{const ids=S.figures.filter(x=>x.auto&&x.size&&!x.done&&!x.photo&&(x.risk!=null?x.risk:(1-(x.auto_conf??0)))<=0.25).map(x=>x.id);
     if(!ids.length||!confirm('Принять '+ids.length+' надёжных рисунков как готовые? Их можно будет открыть и поправить позже.'))return;
@@ -1566,6 +1684,7 @@ function kk(e){const c=e.code||'';
 window.addEventListener('keydown',e=>{
   const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','range','button'].includes(ae.type)));
   if(!typing&&S.rv){if(rvKey(e)){e.preventDefault();return;}}
+  if(!typing&&S.hv){if(hvKey(e)){e.preventDefault();return;}}
   if(!typing&&S.mode==='queue'&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Enter'].includes(e.key)||e.code==='Space'||['a','x','o'].includes(kk(e)))){qKey(e).then(ok=>{});if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)||e.code==='Space'||['a','x','o'].includes(kk(e))||e.key==='Enter')e.preventDefault();return;}
   if(e.code==='Space'&&!typing){e.preventDefault();if(ae&&ae!==document.body&&ae.blur)ae.blur();if(e.repeat)return;spaceDown=true;cv.style.cursor='grab';
     if(S.fig&&((S.mode==='pix'&&S.fig.M)||(S.mode==='grid'&&(S.gridView||'grid')==='grid'))){S.peek=true;$('peek').textContent='оригинал скана · пока держите пробел';$('peek').style.display='block';redraw();}return;}
@@ -1598,7 +1717,7 @@ async function pollAct(){
   try{
     const [p,m]=await Promise.all([fetch('/api/prowl?light=1').then(r=>r.json()),fetch('/api/model/job').then(r=>r.json())]);
     const parts=[];
-    if(p.running){const stg={segment:'разметка листов',auto:'оцифровка',regray:'серая заливка',redo:'перепрогон'}[p.stage]||'прогон';const pc=p.total?Math.round(100*p.done/p.total):0;
+    if(p.running){const stg={segment:'разметка листов',auto:'оцифровка',regray:'серая заливка',redo:'перепрогон',hard:'трудные места'}[p.stage]||'прогон';const pc=p.total?Math.round(100*p.done/p.total):0;
       parts.push(`<span class="spin"></span>${stg} ${p.done}/${p.total} <span class="bar"><i style="width:${pc}%"></i></span> <span class="mut">${esc(p.current||'')}</span>${p.errors?` <span class="bad">ошибок ${p.errors}</span>`:''}`);S.wasRun=true;}
     else if(S.wasRun){S.wasRun=false;stat(`прогон завершён: ${p.done} из ${p.total}`+(p.errors?`, ошибок ${p.errors}`:''),p.errors?'err':'ok');refreshFigures().catch(()=>{});if(S.mode==='pipe')renderPipe();}
     if(m.running){parts.push('<span class="spin"></span>обучение модели…');S.wasTrain=true;}
