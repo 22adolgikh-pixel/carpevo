@@ -275,7 +275,8 @@
    "n_suspects": 28
   },
   "risk": 1.418,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "grid_strength": 8.817
  },
  "done": false,
  "adjust": {
@@ -285,7 +286,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-04 16:32:20",
+ "saved_at": "2026-10-04 17:42:18",
  "auto_matrix": {
   "w": 41,
   "h": 45,
@@ -602,6 +603,15 @@
    }
   ],
   "ntiles": 25,
-  "verified": []
+  "verified": [
+   [
+    10,
+    20
+   ],
+   [
+    20,
+    20
+   ]
+  ]
  }
 }
