@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   33.57,
-   54.36
+   33.01,
+   54.6
   ],
   [
-   320.42,
-   60.57
+   319.87,
+   60.31
   ],
   [
-   306.68,
-   695.44
+   307.24,
+   695.2
   ],
   [
-   19.83,
-   689.23
+   20.38,
+   689.49
   ]
  ],
  "meta": {
@@ -39,16 +39,18 @@
   "carpet": "Демирчилер",
   "type": "Г.—К.",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
-  "pw": 4.1594,
-  "ph": 4.8473,
-  "ox": 0,
-  "oy": 0,
+  "pw": 4.7773,
+  "ph": 4.7773,
+  "ox": -6.37,
+  "oy": -8.02,
   "cols": 69,
   "rows": 131,
-  "square": false
+  "square": true
  },
  "classify": {
   "tones": 1,
@@ -234,7 +236,8 @@
    "n_suspects": 0
   },
   "risk": 1.04,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -252,7 +255,7 @@
    126
   ]
  },
- "saved_at": "2026-10-04 16:34:18",
+ "saved_at": "2026-10-04 23:14:11",
  "auto_matrix": {
   "w": 64,
   "h": 126,
@@ -5505,5 +5508,13 @@
   ],
   "ntiles": 91,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
