@@ -207,7 +207,7 @@
    4.849
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "distortion": {
    "dist_x": 0.05,
    "dist_y": 0.038,
@@ -230,9 +230,11 @@
   },
   "risk": 0.647,
   "difficulty_est": "medium",
-  "edited": true
+  "edited": true,
+  "grid_strength": 6.014,
+  "accepted_via": "hard"
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -292,7 +294,7 @@
    112
   ]
  },
- "saved_at": "2026-10-04 16:53:10",
+ "saved_at": "2026-10-04 17:33:33",
  "auto_matrix": {
   "w": 20,
   "h": 112,
@@ -671,6 +673,14 @@
    [
     0,
     90
+   ],
+   [
+    0,
+    110
+   ],
+   [
+    10,
+    100
    ]
   ]
  }

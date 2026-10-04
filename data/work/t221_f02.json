@@ -125,7 +125,10 @@
    "n_suspects": 0
   },
   "risk": 0.48,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "grid_strength": 0.581,
+  "photo": true,
+  "marked_photo": true
  },
  "done": false,
  "adjust": {
@@ -135,7 +138,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-04 16:37:22",
+ "saved_at": "2026-10-04 17:33:59",
  "auto_matrix": {
   "w": 30,
   "h": 19,
@@ -1594,5 +1597,6 @@
   "ntiles": 6,
   "verified": []
  },
- "review": true
+ "review": true,
+ "kind": "photo"
 }
