@@ -64,6 +64,14 @@ def backup_once(here, data, reason="авто"):
             _mirror(os.path.join(data, it), os.path.join(repo, "data", it))
         _git(repo, "add", "-A")
         if _git(repo, "diff", "--cached", "--quiet", check=False).returncode == 0:
+            # изменений нет, но могли остаться коммиты, которые раньше не ушли (например, токен был недействителен)
+            ahead = _git(repo, "rev-list", "--count", f"origin/{BRANCH}..HEAD", check=False)
+            if ahead.returncode == 0 and ahead.stdout.strip() not in ("", "0"):
+                if _git(repo, "push", "-q", "origin", BRANCH, check=False).returncode != 0:
+                    _git(repo, "pull", "-q", "--rebase", "origin", BRANCH)
+                    _git(repo, "push", "-q", "origin", BRANCH)
+                state.update(last_ok=time.strftime("%Y-%m-%d %H:%M:%S"), last_commit=f"дослано коммитов: {ahead.stdout.strip()}", last_error=None)
+                return {"ok": True, "changed": 0, "pushed_pending": int(ahead.stdout.strip())}
             state.update(last_ok=time.strftime("%Y-%m-%d %H:%M:%S"), last_error=None)
             return {"ok": True, "changed": 0}
         n = len(_git(repo, "diff", "--cached", "--name-only").stdout.split())
