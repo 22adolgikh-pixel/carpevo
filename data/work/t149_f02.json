@@ -39,6 +39,8 @@
   "carpet": "Салмесоюд",
   "type": "К.—Ш",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -212,7 +214,7 @@
    4.904
   ],
   "angle": -0.4,
-  "reviewed": false,
+  "reviewed": true,
   "distortion": {
    "dist_x": 0.047,
    "dist_y": 0.093,
@@ -234,9 +236,10 @@
    "n_suspects": 0
   },
   "risk": 1.21,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -324,7 +327,7 @@
    118
   ]
  },
- "saved_at": "2026-10-04 16:33:46",
+ "saved_at": "2026-10-04 19:57:55",
  "auto_matrix": {
   "w": 38,
   "h": 118,
@@ -2309,5 +2312,13 @@
   ],
   "ntiles": 48,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
