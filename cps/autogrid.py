@@ -358,6 +358,7 @@ def auto_figure(g, frame, dark_only=False, use_model=True):
         # согласие порогов и модели — независимый сигнал надёжности (v10.12): расходятся редко там, где оба правы и не сходятся там, где рисунок спорный
         ink = int(((Mt > 0) | (Mm > 0)).sum()); mism = int((Mt != Mm).sum())
         info["agree"] = {"mismatch": mism, "ink": ink, "share": round(mism / max(1, ink), 4)}
+    info["strength"] = round(float(G.get("strength", 0.0)), 3)   # v10.14: сила линий сетки; <2 — обычно фото ковра, а не схема
     info["confidence"], info["flags"] = confidence(G, M, info["t"])
     try:                                                         # мера искажения листа (distortion.py): только отметка, сетку не двигаем
         import distortion
@@ -416,6 +417,7 @@ def to_work(G, M, info, margin=0):
         "palette_touched": False,
         "auto": {"version": 1, "confidence": info["confidence"], "flags": info["flags"],
                  "pitch": [round(G["px"], 3), round(G["py"], 3)], "angle": round(G["angle"], 2),
-                 "reviewed": False, **({"distortion": info["distortion"]} if info.get("distortion") else {}),
+                 "reviewed": False, **({"grid_strength": info["strength"]} if info.get("strength") is not None else {}),
+                 **({"distortion": info["distortion"]} if info.get("distortion") else {}),
                  **({"agree": info["agree"]} if info.get("agree") else {})},
     }

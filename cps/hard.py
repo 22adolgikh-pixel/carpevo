@@ -12,6 +12,28 @@ TOO_MANY = 25      # «слишком много»: больше стольки�
 TOO_MANY_SHARE = 0.7   # тогда кусками дольше, чем открыть целиком (в очереди 2026-10-04: 123 из 402 рисунков; остальные — ~19 кусков)
 
 
+WEAK = 2.0         # сила линий сетки (autogrid.detect_grid, strength) ниже — подозрение «это фото ковра, а не схема»:
+                   # в очереди 2026-10-04 таких 48 из 277 ЧБ, среди принятых 1 из 748 (из 12 просмотренных: 8 фото, 4 настоящие схемы)
+
+
+def weak(w):
+    """Рисунок со слабой сеткой, который человек ещё не подтвердил как схему."""
+    a = w.get("auto") or {}
+    s = a.get("grid_strength")
+    return s is not None and s < WEAK and not a.get("scheme_ok")
+
+
+def ensure_strength(w, g):
+    """Досчитать auto.grid_strength для старых рисунков. → True, если записали."""
+    a = w.get("auto")
+    if not isinstance(a, dict) or a.get("grid_strength") is not None: return False
+    import autogrid
+    fr = w.get("frame") or [0, 0, g.shape[1], g.shape[0]]
+    try: a["grid_strength"] = round(float(autogrid.detect_grid(g, fr)["strength"]), 3)
+    except Exception: return False
+    return True
+
+
 def too_many(w):
     hd = w.get("hard") or {}; rem = remaining(w) or []
     return len(rem) > TOO_MANY and len(hd.get("tiles", [])) > TOO_MANY_SHARE * max(1, hd.get("ntiles", 1))

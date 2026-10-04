@@ -1475,6 +1475,10 @@ async function hvLoad(){
     let d;try{d=await api('/api/hard/'+encodeURIComponent(id));}catch(e){if(S.hv!==H)return;H.cur={id,error:String(e.message||e)};return hvRender();}
     if(S.hv!==H)return;
     if(d.done){H.i++;continue;}
+    if(d.weak){          // слабая сетка: сначала один клик «фото / схема», автоматически не принимаем
+      const img=new Image();img.src='/api/orig_aligned/'+encodeURIComponent(id)+'?s=12&t='+Math.round(d.t||0);
+      await new Promise(r=>{img.onload=r;img.onerror=r;});if(S.hv!==H)return;
+      H.cur={id,d,img,weak:true};return hvRender();}
     if(!d.tiles.length){     // два метода согласны везде — принимаем без показа
       try{const r=await api('/api/hard/'+encodeURIComponent(id)+'/verify',{});if(r.accepted){H.acc++;stat(id+': трудных мест нет — принят','ok');}}catch(e){fail(e);}
       H.i++;continue;}
@@ -1494,6 +1498,16 @@ function hvRender(){
   const head=`<div class="rvh"><b>🎯 ${esc(dispName(f)||c.id)}</b><span class="mut">${esc(c.id)}${f.size?' · '+f.size[0]+'×'+f.size[1]:''}</span><span class="sp"></span><span class="mut">рисунок ${H.i+1} / ${H.list.length} · принято ${H.acc} · кусков ${H.tiles} · исправлено клеток ${H.fixed}</span><button class="sm" id="hvX">✕ закрыть (Esc)</button></div>`;
   const tail=(extra)=>`<button class="sm" id="hvGeo" data-tip="геометрия и сетка этого рисунка">▦ сетка</button><button class="sm" id="hvEdit" data-tip="открыть в «Пикселях» целиком">✎ целиком <kbd>E</kbd></button><span class="sp"></span>${extra||''}<button id="hvRev" style="background:var(--bad)">✗ на доработку <kbd>X</kbd></button><button id="hvSkip">→ пропустить рисунок</button>`;
   if(c.error){el.innerHTML=head+`<div class="rvdone">${esc(c.error)}</div><div class="rvf">${tail()}</div>`;}
+  else if(c.weak){
+    el.innerHTML=head+`<div class="rvdone"><div style="font-size:17px;margin-bottom:6px">Сетка слабая (сила ${(+c.d.strength).toFixed(2)}) — это фото ковра или схема?</div><div class="mut" style="margin-bottom:8px">Обычно слабая сетка — фото/рисунок без миллиметровки (из 12 проверенных: 8 фото, 4 схемы с узкой каймой). Один клик решает, показывать ли куски.</div><img id="hvWi" style="width:min(70vw,760px);max-height:52vh;object-fit:contain;background:#fff;border:1px solid var(--line,#444)" src="${c.img.src}"></div>
+    <div class="rvf"><button id="hvPh" style="background:var(--bad)">📷 это фото <kbd>F</kbd></button><button id="hvSc" style="background:var(--ok)">▦ это схема — показать куски <kbd>S</kbd></button><span class="sp"></span><button id="hvEdit" class="sm">✎ целиком <kbd>E</kbd></button><button id="hvSkip">→ пропустить</button></div>`;
+    const mk=async k=>{try{await api('/api/hard/'+encodeURIComponent(c.id)+'/kind',{kind:k});
+      if(k==='photo'){H.photos=(H.photos||0)+1;const f=S.figures.find(v=>v.id===c.id);if(f)f.photo=true;stat(c.id+': отмечено как фото','ok');return hvNext();}
+      hvLoad();}catch(e){fail(e);}};
+    $('hvPh').onclick=()=>mk('photo');$('hvSc').onclick=()=>mk('scheme');
+    $('hvX').onclick=hvClose;$('hvSkip').onclick=hvNext;
+    $('hvEdit').onclick=()=>{const id=c.id;hvClose();openFigure(id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail);};
+    return;}
   else if(c.d.too_many){el.innerHTML=head+`<div class="rvdone"><div style="font-size:17px;margin-bottom:8px">Спорных кусков ${c.d.tiles.length} из ${c.d.ntiles} — почти весь рисунок</div><div class="mut">Кусками это дольше, чем открыть рисунок целиком. Часто причина — сбитая сетка или бледная серая заливка: откройте «▦ сетка» или «✎ целиком».</div></div><div class="rvf">${tail()}</div>`;}
   else{
     const t=c.d.tiles[c.k];
@@ -1558,6 +1572,8 @@ function hvKey(e){
   const H=S.hv;if(!H)return false;const k=kk(e),c=H.cur;
   if(e.key==='Escape'){hvClose();return true;}
   if(!c){if(e.key==='Enter')hvClose();return true;}
+  if(c.weak){if(k==='f'){$('hvPh')&&$('hvPh').click();return true;}if(k==='s'){$('hvSc')&&$('hvSc').click();return true;}
+    if(k==='e'){$('hvEdit')&&$('hvEdit').click();return true;}if(e.key==='ArrowRight'){$('hvSkip')&&$('hvSkip').click();}return true;}
   if(e.key==='ArrowRight'){$('hvSkip')&&$('hvSkip').click();return true;}
   if(k==='x'){$('hvRev')&&$('hvRev').click();return true;}
   if(k==='e'){$('hvEdit')&&$('hvEdit').click();return true;}

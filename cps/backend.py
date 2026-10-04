@@ -819,7 +819,8 @@ def _hard_load(fid):
     g = imread_any(os.path.join(D_CROPS, fid + ".png"), cv2.IMREAD_GRAYSCALE)
     if g is None: return wp, w, None, "нет кропа"
     try:
-        if hard.ensure(w, g, P): jsave(wp, w)
+        ch = hard.ensure_strength(w, g)
+        if hard.ensure(w, g, P) or ch: jsave(wp, w)
     except Exception as e:
         return wp, w, None, f"не удалось посчитать: {e}"
     return wp, w, hard.remaining(w) or [], None
@@ -833,8 +834,27 @@ def api_hard(fid: str):
     if err: return JSONResponse({"error": err}, 400)
     hd = w["hard"]
     return {"id": fid, "tiles": rem, "total": len(hd["tiles"]), "verified": len(hd.get("verified", [])),
-            "too_many": hard.too_many(w), "ntiles": hd.get("ntiles"), "tile": hard.TILE, "done": bool(w.get("done")),
+            "too_many": hard.too_many(w), "weak": hard.weak(w), "strength": (w.get("auto") or {}).get("grid_strength"), "ntiles": hd.get("ntiles"), "tile": hard.TILE, "done": bool(w.get("done")),
             "matrix": w["matrix"], "palette": w.get("palette"), "t": os.path.getmtime(wp)}
+
+
+@app.post("/api/hard/{fid}/kind")
+def api_hard_kind(fid: str, body: dict = Body(default={})):
+    """Один клик по карточке «фото / схема» (слабая сетка): photo — убрать из очереди схем как фото ковра;
+    scheme — подтвердить, что это схема (карточка больше не показывается, дальше трудные места)."""
+    if not _fid_ok(fid): return JSONResponse({"error": "bad id"}, 400)
+    wp = os.path.join(D_WORK, fid + ".json"); w = jload(wp, {}) or {}
+    if not w: return JSONResponse({"error": "нет рисунка"}, 404)
+    k = (body or {}).get("kind")
+    if k == "photo":
+        w["kind"] = "photo"; w["done"] = False
+        if isinstance(w.get("auto"), dict): w["auto"]["photo"] = True; w["auto"]["marked_photo"] = True
+    elif k == "scheme":
+        if not isinstance(w.get("auto"), dict): w["auto"] = {}
+        w["auto"]["scheme_ok"] = True
+    else: return JSONResponse({"error": "kind: photo | scheme"}, 400)
+    w["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S"); jsave(wp, w)
+    return {"kind": k}
 
 
 @app.post("/api/hard/{fid}/verify")
