@@ -138,7 +138,7 @@
    4.915
   ],
   "angle": -0.36,
-  "reviewed": false,
+  "reviewed": true,
   "symmetry": {
    "kind": "mirror_v",
    "score": 0.965,
@@ -316,9 +316,11 @@
   },
   "risk": 0.81,
   "difficulty_est": "medium",
-  "edited": true
+  "edited": true,
+  "grid_strength": 5.255,
+  "accepted_via": "hard"
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -326,7 +328,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 23:22:17",
+ "saved_at": "2026-10-04 17:59:00",
  "palette_dyes": [
   null,
   null,
@@ -526,6 +528,51 @@
    }
   ],
   "ntiles": 30,
-  "verified": []
+  "verified": [
+   [
+    40,
+    20
+   ],
+   [
+    20,
+    30
+   ],
+   [
+    20,
+    20
+   ],
+   [
+    40,
+    10
+   ],
+   [
+    10,
+    30
+   ],
+   [
+    30,
+    0
+   ],
+   [
+    20,
+    10
+   ],
+   [
+    30,
+    10
+   ],
+   [
+    10,
+    20
+   ],
+   [
+    30,
+    30
+   ],
+   [
+    10,
+    40
+   ]
+  ]
  }
 }

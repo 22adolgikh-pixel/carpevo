@@ -146,7 +146,7 @@
    4.946
   ],
   "angle": -0.56,
-  "reviewed": false,
+  "reviewed": true,
   "distortion": {
    "dist_x": 0.051,
    "dist_y": 0.053,
@@ -168,9 +168,11 @@
    "n_suspects": 0
   },
   "risk": 0.87,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "grid_strength": 8.813,
+  "accepted_via": "hard"
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -178,7 +180,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-04 16:38:25",
+ "saved_at": "2026-10-04 18:00:04",
  "auto_matrix": {
   "w": 34,
   "h": 53,
@@ -1271,6 +1273,55 @@
    }
   ],
   "ntiles": 24,
-  "verified": []
+  "verified": [
+   [
+    10,
+    20
+   ],
+   [
+    20,
+    20
+   ],
+   [
+    10,
+    10
+   ],
+   [
+    10,
+    0
+   ],
+   [
+    0,
+    20
+   ],
+   [
+    20,
+    10
+   ],
+   [
+    10,
+    30
+   ],
+   [
+    30,
+    20
+   ],
+   [
+    20,
+    30
+   ],
+   [
+    0,
+    30
+   ],
+   [
+    20,
+    40
+   ],
+   [
+    20,
+    50
+   ]
+  ]
  }
 }
