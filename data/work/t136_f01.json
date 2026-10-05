@@ -39,6 +39,8 @@
   "carpet": "Г.",
   "type": "—",
   "note": "К",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -128,7 +130,8 @@
    "n_suspects": 0
   },
   "risk": 1.09,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -147,7 +150,7 @@
    18
   ]
  },
- "saved_at": "2026-10-05 08:19:49",
+ "saved_at": "2026-10-05 08:57:53",
  "auto_matrix": {
   "w": 112,
   "h": 18,
@@ -6918,5 +6921,13 @@
   ],
   "ntiles": 24,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": true,
+ "transparent_bg": true,
+ "difficulty": null
 }

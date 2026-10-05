@@ -39,6 +39,8 @@
   "carpet": "К.",
   "type": "—",
   "note": "Ш",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -112,7 +114,7 @@
    4.882
   ],
   "angle": 0.88,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 4.345,
   "distortion": {
@@ -136,9 +138,10 @@
    "n_suspects": 0
   },
   "risk": 1.5,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -187,7 +190,7 @@
    17
   ]
  },
- "saved_at": "2026-10-05 08:19:50",
+ "saved_at": "2026-10-05 08:58:13",
  "auto_matrix": {
   "w": 112,
   "h": 17,
@@ -6017,5 +6020,13 @@
   ],
   "ntiles": 24,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }

@@ -39,6 +39,8 @@
   "carpet": "Джебраиль",
   "type": "Кар.",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -62,14 +64,14 @@
   ]
  },
  "matrix": {
-  "w": 139,
+  "w": 138,
   "h": 1,
   "origin": [
-   10,
+   11,
    7
   ],
   "rows": [
-   "1111111.....2111111......111111......111111......111111......11111122...2111111.....2111111......111111......111111......111111......111111"
+   "111111......111111......111111......111111......111111......111111......111111......111111......111111......111111......111111......111111"
   ]
  },
  "palette": [
@@ -94,7 +96,7 @@
    4.925
   ],
   "angle": 0.44,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 6.558,
   "distortion": {
@@ -118,9 +120,10 @@
    "n_suspects": 0
   },
   "risk": 0.53,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -130,30 +133,30 @@
  "rapport": {
   "found": true,
   "axis": "h",
-  "period": 72,
-  "offset": 7,
+  "period": 12,
+  "offset": 6,
   "match": 1.0,
-  "repeats": 1.8,
+  "repeats": 10.5,
   "agreement": 1.0,
   "mirror_across": 1.0,
   "is_mirror": true,
   "glide": 0.0,
   "is_glide": false,
-  "check": true,
+  "check": false,
   "unit": {
-   "w": 72,
+   "w": 12,
    "h": 1,
    "rows": [
-    ".....2111111......111111......111111......111111......11111122...2111111"
+    "......111111"
    ]
   },
   "suspect_cells": [],
   "computed_at_matrix": [
-   139,
+   138,
    1
   ]
  },
- "saved_at": "2026-10-05 08:19:44",
+ "saved_at": "2026-10-05 08:55:50",
  "auto_matrix": {
   "w": 139,
   "h": 1,
@@ -609,5 +612,13 @@
   ],
   "ntiles": 14,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
