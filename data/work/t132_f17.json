@@ -44,12 +44,12 @@
   "source": ""
  },
  "grid": {
-  "pw": 19.4,
-  "ph": 20.3,
+  "pw": 5,
+  "ph": 5,
   "ox": 0,
   "oy": 0,
-  "cols": 20,
-  "rows": 10,
+  "cols": 31,
+  "rows": 35,
   "square": false
  },
  "classify": {
@@ -115,7 +115,8 @@
    "n_suspects": 0
   },
   "risk": 0.92,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -133,7 +134,7 @@
    4
   ]
  },
- "saved_at": "2026-10-05 08:19:41",
+ "saved_at": "2026-10-05 22:22:21",
  "palette_dyes": [
   null,
   null,
