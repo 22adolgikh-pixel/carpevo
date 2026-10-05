@@ -1,0 +1,5415 @@
+{
+ "_about": "Смысловые классы, назначенные ИИ по переводу Керимова и значениям (2026-10-05/06). Перекрывают автоклассы classify.py.",
+ "items": {
+  "abbasi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "кайма «Аббаси» — рисунок не ясен"
+  },
+  "adam": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "adam-ve-at": {
+   "classes": [
+    "anthropomorphic",
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "aftafa": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "alamuncuk": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "кайма; значение не ясно (вероятно = alamunduq)"
+  },
+  "alamunduq": {
+   "classes": [
+    "structure",
+    "geometric",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "кайма из точек/мелких цветочков"
+  },
+  "alaqapi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "ворота"
+  },
+  "alma": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "alma-eleme": {
+   "classes": [
+    "structure",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "almagulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "almahashiye": {
+   "classes": [
+    "structure",
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "almakashi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "almalar": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "almaelem": {
+   "classes": [
+    "structure",
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "alti-qulle": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "«гулла» у Керимова неясно: башни/цветы"
+  },
+  "alchagulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "alin": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": "лоб"
+  },
+  "ana-gul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "anaxashi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "anakuz": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "материнские цветы"
+  },
+  "ana-xett": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "ara-hashiye": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ara-hashiyeler": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "orta-sahe-elementleri": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "элементы среднего поля"
+  },
+  "arvad-ushaqli-buta": {
+   "classes": [
+    "buta",
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ari": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": "пчела"
+  },
+  "at": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "atdili": {
+   "classes": [
+    "structure",
+    "zoomorphic"
+   ],
+   "confidence": "low",
+   "note": "кайма «конский язык»; часть тела животного"
+  },
+  "ayaq": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": "нога/подножие"
+  },
+  "aynabend": {
+   "classes": [
+    "structure",
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "кайма «стеклянная галерея» — постройка"
+  },
+  "aypara": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "azerbaycan-ssr-dovlet-gerbi": {
+   "classes": [
+    "tamga"
+   ],
+   "confidence": "high",
+   "note": "герб"
+  },
+  "azerbaycan-ssr-nin-dovlet-gerbi": {
+   "classes": [
+    "tamga"
+   ],
+   "confidence": "high",
+   "note": "герб"
+  },
+  "achma-yuma-bendi-rumi": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "agac": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "agac-kolu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "agbilek": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "aggul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ag-chichek": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "agchichekli": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "agiz": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": "полоса по краю ковра"
+  },
+  "ashiq": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "кайма «бабка/ашуг» — смысл неясен"
+  },
+  "baba-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "baca": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "дымоход"
+  },
+  "badam-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "badamli-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "badambuta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "baftalikul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "baki-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bala-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bala-hashiye": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bala-hashiyeler": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "balaketebe": {
+   "classes": [
+    "epigraphic",
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "balali-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "balaqivrim": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "завиток"
+  },
+  "baliq": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": "рыба"
+  },
+  "batiqtag": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "арка"
+  },
+  "bayram-gulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bayraq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "знамя"
+  },
+  "bazibend": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "браслет-украшение"
+  },
+  "bash": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": "голова"
+  },
+  "bashdash": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "надгробный камень"
+  },
+  "bashliq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "навершие/головной убор"
+  },
+  "bashliq-ve-qubpa": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bashmaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "туфля"
+  },
+  "beshbarmaq": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": "пятипалая (рука)"
+  },
+  "beshik": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "beshlik": {
+   "classes": [
+    "structure",
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "кайма «пятак» (монета)"
+  },
+  "bilerzik": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bitki-elementleri": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "borani": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "тыква"
+  },
+  "bordur-hisselerinin-rapportlarini-emele-getiren-elementler": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "boshqab-2": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "budaq": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "budaqbashi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "budaqlar": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "butaqli": {
+   "classes": [
+    "structure",
+    "buta"
+   ],
+   "confidence": "medium",
+   "note": "кайма с бута (budaqlı — с ветками?)"
+  },
+  "bulud": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "medium",
+   "note": "облако; у Керимова «дуб» — спорно"
+  },
+  "burma": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "burmahoruk": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "витая плетенка"
+  },
+  "buruq": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "butali-islimi": {
+   "classes": [
+    "arabesque",
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "buta-qarmaq": {
+   "classes": [
+    "buta",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "buynuz": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "buynuzlu-heyvan": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bolme": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "boyukxal": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "большое пятно"
+  },
+  "bukme": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "low",
+   "note": "«свернутый» — форма неясна"
+  },
+  "bulbul": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "buzmeli": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "лячаки в сборку — рисунок неясен"
+  },
+  "big": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bebe-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "behli": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bend": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bendi-rumi": {
+   "classes": [
+    "arabesque",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "bezek": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "украшение"
+  },
+  "beshir-qizi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "кайма «дочь Башира» — смысл неясен"
+  },
+  "namaz-sufresi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "canlilarin-tesvirleri": {
+   "classes": [
+    "zoomorphic",
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": "обобщённо: живые существа"
+  },
+  "caga": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "cagami": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "cagi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "ceyran": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "cincilim": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "звездчатка — растение"
+  },
+  "cuce": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "cuce-gozu": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "medium",
+   "note": "глаз цыпленка"
+  },
+  "cucezu": {
+   "classes": [
+    "structure",
+    "bird"
+   ],
+   "confidence": "medium",
+   "note": "кайма «цыплячий глаз»"
+  },
+  "cutbuynuz": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "cutqosha-su": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "cut-qosha-sular": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ciqqa": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "джигга — ювелирное украшение (султан)"
+  },
+  "ciqqa-buta-4": {
+   "classes": [
+    "buta",
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ciga-buta": {
+   "classes": [
+    "buta",
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qapi-qarmagi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ceferi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "петрушка"
+  },
+  "yumru-elementler": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "damga": {
+   "classes": [
+    "tamga"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "daraq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "daraqciq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "daraqchiq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "гребешок"
+  },
+  "dayaz-otaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "арка"
+  },
+  "dik-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dilik": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dilek-dilek-naxishlar": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dilerekli": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dilerekli-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dilerekli-itibucaq": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dilili-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dinshi": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "low",
+   "note": "самка — вероятно животного"
+  },
+  "dirsek": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "div": {
+   "classes": [
+    "mythical"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "divar-gulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dish-dish": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dishli-formalar": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dishli-iti-bucaqli": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dishli-iti-bucaqli-elementler": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dishli-medahillar": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dishlipere": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "dolama": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dolama-hashiye": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dolamaqarmaq": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "витой крючок"
+  },
+  "dolamaquyruq": {
+   "classes": [
+    "structure",
+    "zoomorphic"
+   ],
+   "confidence": "low",
+   "note": "«витой хвост»? неясно"
+  },
+  "dolamaqiynaq": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "витой крючок/коготь"
+  },
+  "dolangac": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "меандр"
+  },
+  "dordtomaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "четыре колотушки"
+  },
+  "duyme": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "пуговица"
+  },
+  "duymeli": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "duyun": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "dirnaq": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "medium",
+   "note": "коготь"
+  },
+  "dirnaqli": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "demir": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "железо"
+  },
+  "dere-qurdaxana": {
+   "classes": [],
+   "confidence": "low",
+   "note": "название по месту; не ясно"
+  },
+  "destegul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "deve": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "develeperi": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "deyirmi": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "deyirmiler": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "enli-su": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "erkek": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "low",
+   "note": "самец — вероятно животного"
+  },
+  "evli-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "fatir-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "findiq-shabalid": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "fir": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "firfira": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "fere": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "fetir": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "лепешка"
+  },
+  "fetir-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "geychibaliq": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "gilas": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gobelek": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "гриб"
+  },
+  "gol": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": "медальон"
+  },
+  "golbendlik": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "вероятно сетка гёлей"
+  },
+  "qelichi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kuller": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gol-ortasi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kul-ve-ya-kichik-xoncha": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "golche": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "golu": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "гёли"
+  },
+  "gorush-noqtesi": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "goyek": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "goz": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "koz": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "low",
+   "note": "угли (огонь); возможно = göz"
+  },
+  "gozlu": {
+   "classes": [
+    "anthropomorphic",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "«с глазками»"
+  },
+  "gul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gulabdan": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "флакон"
+  },
+  "gulabdanbuta": {
+   "classes": [
+    "buta",
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gulabgulu-2": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gulbutag": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "guldan": {
+   "classes": [
+    "objects",
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gulduyme": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "guldeste": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "guludasmal": {
+   "classes": [
+    "objects",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "gullucme": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "low",
+   "note": "не ясно; по корню «гюль»"
+  },
+  "gullu-yayliq": {
+   "classes": [
+    "objects",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "gulu-desmal": {
+   "classes": [
+    "objects",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "gulu-yayliq": {
+   "classes": [
+    "objects",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "gulebgul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "low",
+   "note": "вероятно = güləbgülü (роза)"
+  },
+  "gulabgulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gulebetin": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "парча/канитель — материал"
+  },
+  "gunebaxan": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "guzgu": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gusheppeyi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "gelin-cehizi": {
+   "classes": [
+    "objects",
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": "приданое невесты"
+  },
+  "gelinchiyez": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "deneler": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "low",
+   "note": "зернышки"
+  },
+  "gence": {
+   "classes": [],
+   "confidence": "low",
+   "note": "топоним; не ясно"
+  },
+  "gence-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gerdekbashi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "gerdest": {
+   "classes": [],
+   "confidence": "low",
+   "note": "техника ткачества, не мотив"
+  },
+  "xamli-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "xachali-islimi": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "hashiye": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "herati": {
+   "classes": [
+    "structure",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "кайма «герати» — растительная"
+  },
+  "hersin": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "heykel": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": "статуя"
+  },
+  "heykelbashi": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "heyva": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "heyvagulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "heyvan": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "heyvanbashi": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "heyvanlepiri": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "heyvan-tesvirleri": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nilbuta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "hoqqa": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "horme": {
+   "classes": [
+    "geometric",
+    "arabesque"
+   ],
+   "confidence": "medium",
+   "note": "плетение / плетёный ислими"
+  },
+  "horme-dairevi-rozet": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "xorme-islimi": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "horuk": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "horuk-buruq": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "horumchek": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "hemli-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "hemenkemenchi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "hendeseleshdirilmish-elementler": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "her-iki-elin-tesviri": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "herme": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "heve": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "ткацкий инструмент"
+  },
+  "heshterxan-toyugu": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "iki-qush": {
+   "classes": [
+    "structure",
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "iki-qush-arasinda-agac-tesviri": {
+   "classes": [
+    "bird",
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ikiqushlu": {
+   "classes": [
+    "structure",
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ilangach": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "low",
+   "note": "вероятно «змея» (ilan)"
+  },
+  "shimshek": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "insan-tesvirleri": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "inek": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "islimi": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "islimibendlik": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "islmi-ilan": {
+   "classes": [
+    "arabesque",
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "istot": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "перец"
+  },
+  "it": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "yirmi-dord-qulla": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "«гулла» неясно"
+  },
+  "ichiqaynaq": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ichli-su": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kaman": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kamandar": {
+   "classes": [
+    "anthropomorphic",
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "quvan": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "караван? неясно"
+  },
+  "kasa": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kashi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "майолика/изразец"
+  },
+  "qashi-kerpic": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kechi": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kechidagbani": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "chechdagez": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "арка"
+  },
+  "kechirtme": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "low",
+   "note": "«продетый»"
+  },
+  "kilim-elementleri": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "low",
+   "note": "обобщённо"
+  },
+  "kilim-gulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "kise": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kichik-gol": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kichik-hashiye": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kichik-medalyonlar": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kishi": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kotan": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "плуг"
+  },
+  "kufi": {
+   "classes": [
+    "epigraphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kufi-hashiye": {
+   "classes": [
+    "structure",
+    "epigraphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "quvan-2": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "караван — неясно что изображено"
+  },
+  "kvadratlar-ve-duzbucaqlilar": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kvadrat-ve-duzbucaqli": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kohne-naxish": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«старый узор» — не ясно"
+  },
+  "kohne-su": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "koke": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "лепешка"
+  },
+  "kone-su": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "kordekbashi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно (ср. gərdəkbaşı)"
+  },
+  "koynek": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kufi-2": {
+   "classes": [
+    "epigraphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kunc": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kupe": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kure": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "печь"
+  },
+  "kusulu-buta-2": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gucu": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "ткацкий инструмент (ремиз)"
+  },
+  "kuchuq": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "keklik": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kelbetin": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kemendar": {
+   "classes": [
+    "anthropomorphic",
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "лучник"
+  },
+  "kemer": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kemerbezeyi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "kepenek": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": "бабочка"
+  },
+  "kerdekbashi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно (ср. gərdəkbaşı)"
+  },
+  "kerpich": {
+   "classes": [
+    "objects",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "кирпич"
+  },
+  "kesme-su": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ketebe": {
+   "classes": [
+    "epigraphic",
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ketebe-hashiye": {
+   "classes": [
+    "structure",
+    "epigraphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ketebeli": {
+   "classes": [
+    "structure",
+    "epigraphic"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "ketebeler": {
+   "classes": [
+    "epigraphic"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "lale": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "lenin-ordeni": {
+   "classes": [
+    "tamga"
+   ],
+   "confidence": "medium",
+   "note": "орден (знак)"
+  },
+  "lobya": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "lobya-yarpagi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "lozu": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "ромб"
+  },
+  "lelek-buta": {
+   "classes": [
+    "buta",
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "lempe": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "«лямпа» — лампа? неясно"
+  },
+  "lepir": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "lechek": {
+   "classes": [
+    "objects",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "у Керимова арка; иначе лепесток"
+  },
+  "lechek-turunc": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": "медальон с углами"
+  },
+  "man-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "manqal": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "maral": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "meandr": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mehrab": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "meris": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "meym": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "meshekul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "low",
+   "note": "вероятно = meşə gülü"
+  },
+  "meshe-gulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "meshegozu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mesheyarpagi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mil": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "спица"
+  },
+  "minarebashi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mir-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mismar": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "гвоздь"
+  },
+  "mishar": {
+   "classes": [
+    "objects",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "пила (зубчатая)"
+  },
+  "mollabashi": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "muncuq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "muska": {
+   "classes": [
+    "tamga",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "амулет"
+  },
+  "mugan-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mohur": {
+   "classes": [
+    "tamga"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mujeler": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "muje-muje": {
+   "classes": [
+    "anthropomorphic",
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mebed-ara-hashiyesi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "medahil": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mefresh": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "meheccer": {
+   "classes": [
+    "objects",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "решетка"
+  },
+  "meishet-eshyalarinin-tesviri": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mereze": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "mexmergul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mexmerikul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "mexezi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "кайма «Махази»"
+  },
+  "meshel": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "факел"
+  },
+  "nal": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "подкова"
+  },
+  "nalekepek": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "nagqash": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«узор»/художник — обобщённо"
+  },
+  "nar": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nar-agaclari": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nargul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "naxish-2": {
+   "classes": [],
+   "confidence": "low",
+   "note": "обобщённо «узор»"
+  },
+  "naxishli-zolaqlar": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "neft-buruqlari": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nilufer": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nishan": {
+   "classes": [
+    "tamga"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nebati-hendesileshdirilmish-elementler": {
+   "classes": [
+    "vegetal",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nebati-naxishlar": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nebati-eyrixetli-elementler": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nelbeki": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nelbekigul": {
+   "classes": [
+    "vegetal",
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "nazik-naxish": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«тонкий узор» — обобщённо"
+  },
+  "ocaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "on-alti-qulla": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "«гулла» неясно (ср. altı qulla)"
+  },
+  "on-iki-qulla": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "«гулла» неясно"
+  },
+  "oraq-ve-chekic": {
+   "classes": [
+    "tamga",
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "советская эмблема"
+  },
+  "orta-hashiye": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "orta-hashiyeler": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "otayli": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "otuz-iki-gulle": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "«гулла» неясно"
+  },
+  "oxbashi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "oxchuoglu": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "surgu": {
+   "classes": [
+    "objects",
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "поднос; у Керимова медальон"
+  },
+  "paqi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "инструмент"
+  },
+  "palaz-zolaqlari": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "palmet": {
+   "classes": [
+    "vegetal",
+    "arabesque"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "palid": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "palid-yarpagi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "pambiq-qozalari": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "paqon": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "paxlava": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "ромб"
+  },
+  "pashali-gulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "pilleli": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "pilleleler": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "pilek": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "pirecedil": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "pitik": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "pitikli": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "low",
+   "note": "вероятно «с черточками»"
+  },
+  "piyale": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "pichek": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "завитки"
+  },
+  "pishik": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "pishikayagi": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": "лапа кошки"
+  },
+  "pul": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "монета"
+  },
+  "puta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "medium",
+   "note": "вариант написания buta"
+  },
+  "pushqu": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "ручная пила"
+  },
+  "pence": {
+   "classes": [
+    "zoomorphic",
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": "лапа / кисть руки"
+  },
+  "pencere": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "окно — элемент постройки"
+  },
+  "pervane": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": "ночная бабочка"
+  },
+  "pete": {
+   "classes": [
+    "zoomorphic",
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "пчелиные соты"
+  },
+  "netek": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "улей"
+  },
+  "qab": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "посуда"
+  },
+  "qab-qabi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "производное от qab «посуда»; значение не дано"
+  },
+  "qabirga": {
+   "classes": [
+    "anthropomorphic",
+    "zoomorphic"
+   ],
+   "confidence": "medium",
+   "note": "ребро"
+  },
+  "qanad": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "medium",
+   "note": "крыло"
+  },
+  "qanadli": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "medium",
+   "note": "по Керимову — крылатый ислими"
+  },
+  "qanadli-islimi": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qanraqli-golche": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "вид gölçə; первое слово не ясно"
+  },
+  "qapi-naxishi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "дверной узор"
+  },
+  "qaraqoz": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "low",
+   "note": "«черный глаз»"
+  },
+  "qarakalpak": {
+   "classes": [],
+   "confidence": "low",
+   "note": "этноним/название ковра; класс не ясен"
+  },
+  "qarapapaq": {
+   "classes": [],
+   "confidence": "low",
+   "note": "этноним; не ясно"
+  },
+  "qarmaq": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "крючок"
+  },
+  "qarmaqli": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qarmaqli-buta": {
+   "classes": [
+    "buta",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "крючкообразная бута"
+  },
+  "qarmaqli-bichaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "нож с крючком (ткацкий инструмент)"
+  },
+  "qarmaqli-damga": {
+   "classes": [
+    "tamga",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "крючкообразное клеймо"
+  },
+  "qarmaqli-hashiye": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "крючкообразная кайма"
+  },
+  "ketebe-qarmaqli": {
+   "classes": [
+    "epigraphic",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "кетебе"
+  },
+  "qarmaqli-ketebe": {
+   "classes": [
+    "epigraphic",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "кетебе"
+  },
+  "qarnaxish": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "medium",
+   "note": "снежный узор"
+  },
+  "qargidali": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "кукуруза"
+  },
+  "qarish": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "раппорт"
+  },
+  "qarishnaz": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "элементы между раппортами"
+  },
+  "qarishortasi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "центр раппорта"
+  },
+  "qarishyani": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "боковой элемент раппорта"
+  },
+  "qaychi-ve-ya-qizil-gul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "Керимов: роза; альтернатива — ножницы"
+  },
+  "qaz": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qazaxcha": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«казахский»; не ясно"
+  },
+  "qashqai": {
+   "classes": [],
+   "confidence": "low",
+   "note": "этноним; не ясно"
+  },
+  "qashi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "изразец"
+  },
+  "qeyri-mueyyen-formali": {
+   "classes": [],
+   "confidence": "low",
+   "note": "неопределенной формы"
+  },
+  "mueyyen-olmayan-forma-elementleri": {
+   "classes": [],
+   "confidence": "low",
+   "note": "элементы неопределенной формы"
+  },
+  "qaysi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "абрикос"
+  },
+  "qeysi-beshax": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "видимо = qeysibişax, абрикос с веточкой"
+  },
+  "qeysibishah": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qeychi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "ножницы"
+  },
+  "qeychibaliq": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "medium",
+   "note": "рыба"
+  },
+  "qovgalqa": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "qol": {
+   "classes": [
+    "vegetal",
+    "anthropomorphic"
+   ],
+   "confidence": "medium",
+   "note": "рукава/ветки"
+  },
+  "qollu": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "low",
+   "note": "«с рукавами»"
+  },
+  "qoluq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "браслет"
+  },
+  "qotaz": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "кисточка"
+  },
+  "qotazli": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "с кисточками"
+  },
+  "qotazli-buta": {
+   "classes": [
+    "buta",
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "chanta": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "сумка"
+  },
+  "qovushan-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qovushqan-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "medium",
+   "note": "вариант qovuşan buta"
+  },
+  "qoyun": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qoz": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "орех"
+  },
+  "qoza": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "коробочка хлопка"
+  },
+  "qozali-islimi": {
+   "classes": [
+    "arabesque",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "qoch": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": "баран"
+  },
+  "qogal": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "выпечка"
+  },
+  "qosha": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«двойной» — модификатор"
+  },
+  "qoshaarvadli-buta": {
+   "classes": [
+    "buta",
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qosha-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qoshabuynuz": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "medium",
+   "note": "двойные рога"
+  },
+  "qosha-islimi": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qosha-ich": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«двойное нутро»; не ясно"
+  },
+  "qoshakaman-2": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "пара луков"
+  },
+  "qoshakaman": {
+   "classes": [
+    "objects",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "двойной лук/арка"
+  },
+  "qoshalar": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«парные»; не ясно"
+  },
+  "iki-ciziq": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "две черточки"
+  },
+  "qoshaqarmaq": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qoshaqaynaq": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "low",
+   "note": "двойной ручей/источник; возможно ошибка вместо qoşaqıynaq"
+  },
+  "qoshaqush": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "medxil-2": {
+   "classes": [
+    "zoomorphic",
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "парные когти; mədaxil — полоса"
+  },
+  "qosha-su": {
+   "classes": [
+    "structure",
+    "astral"
+   ],
+   "confidence": "medium",
+   "note": "двойное су — полосы"
+  },
+  "qoshauc": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "low",
+   "note": "парные обведенные линии"
+  },
+  "qubba": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "Керимов: небольшой медальон"
+  },
+  "qubna": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "вероятно = qubba"
+  },
+  "qurbaga": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qutu": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "guyum": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "кувшин"
+  },
+  "quyu": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "колодец"
+  },
+  "quyu-charxi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "quzu": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qush": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qushbashi": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qushqezeyi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "пастушья сумка (растение)"
+  },
+  "qonche": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "бутон"
+  },
+  "qubbe": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "купол; также основной элемент-медальон"
+  },
+  "quyruq": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "Керимов: завиток; буквально хвост"
+  },
+  "qif": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "воронка"
+  },
+  "qifilqah": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "замок"
+  },
+  "qirqovul": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qirxayaq": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": "сороконожка"
+  },
+  "qivrim-2": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "завиток"
+  },
+  "qivrim-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qaynagi": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "medium",
+   "note": "коготь"
+  },
+  "qiynagi": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "low",
+   "note": "вариант qıynaq «коготь»"
+  },
+  "qizilbuta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qizilgul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "роза"
+  },
+  "qizil-ketebe": {
+   "classes": [
+    "epigraphic"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "qizil-ulduz": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "high",
+   "note": "звезда"
+  },
+  "qebir": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "могила"
+  },
+  "qecele": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "low",
+   "note": "гəjələ — сорока? не ясно"
+  },
+  "qedim-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qedimheykel": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "low",
+   "note": "старинная статуя"
+  },
+  "qalambash": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "qelemdan": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "пенал"
+  },
+  "qatdan": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "сахарница"
+  },
+  "qendil": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "лампада"
+  },
+  "qarele": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": "жаворонок"
+  },
+  "qerenfil": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "гвоздика"
+  },
+  "qettan": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "сахарница/масленка"
+  },
+  "rombshekilli-dishli-goller": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "ромбовидные гёли"
+  },
+  "rombshekilli-medalyonlar": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "uchayaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "треножник"
+  },
+  "sade": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "medium",
+   "note": "Керимов: простой ислими"
+  },
+  "saya-buta-2": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sade-islimi": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sade-zolaqlar": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "полосы"
+  },
+  "sallama": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«висячий»"
+  },
+  "sallanan-soyud": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "плакучая ива"
+  },
+  "salma": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "salur-ara-hashiyesi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "salxim": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "гроздь; Керимов — кисточка"
+  },
+  "sandiq-golu": {
+   "classes": [
+    "structure",
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "гёль «сундук»"
+  },
+  "saqqal-daragi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "гребень для бороды"
+  },
+  "sarabi-buta-2": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": "по месту"
+  },
+  "sarmashiq-2": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "вьюн"
+  },
+  "sari-bulbul": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sarigul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "saya-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sachalilar": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "с бахромой"
+  },
+  "sachaqlilar-ve-ya-tikanlilar": {
+   "classes": [],
+   "confidence": "low",
+   "note": "бахромчатые или колючие; не ясно"
+  },
+  "sachaqli-ve-ya-nalshekilli": {
+   "classes": [],
+   "confidence": "low",
+   "note": "бахромчатые или подковообразные; не ясно"
+  },
+  "sachaqli-ve-ya-tikanli": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "sachayaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "тренога"
+  },
+  "sachmaoma": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "s-formali-element": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "S-образный"
+  },
+  "samavar-2": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sini": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "поднос"
+  },
+  "sinoagaci": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "low",
+   "note": "«…ağacı» — дерево; не ясно"
+  },
+  "sichandishi": {
+   "classes": [
+    "geometric",
+    "zoomorphic"
+   ],
+   "confidence": "medium",
+   "note": "мышиный зуб — зубчатый мотив"
+  },
+  "sonluq": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "Керимов: листья на концах"
+  },
+  "stilize-edilmish-ejdaha-shekli": {
+   "classes": [
+    "mythical"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "stilleshmish-heyvan-shekilleri": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "su": {
+   "classes": [
+    "structure",
+    "astral"
+   ],
+   "confidence": "medium",
+   "note": "су — полоса/вода"
+  },
+  "sulu-zolaqlar": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "полосы с обводкой"
+  },
+  "sumax-elementleri": {
+   "classes": [],
+   "confidence": "low",
+   "note": "элементы сумаха — техника; не ясно"
+  },
+  "sumaxgulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "«цветок сумаха»"
+  },
+  "sumax-hashiye": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "suraxani-ara-hashiyesi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sunbul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "колос"
+  },
+  "sunbuldaraq": {
+   "classes": [
+    "vegetal",
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "гребень-колос"
+  },
+  "surmedan": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "сосуд для сурьмы"
+  },
+  "suzenininaxish": {
+   "classes": [],
+   "confidence": "low",
+   "note": "узор сюзени; не ясно"
+  },
+  "suzeni-naxishi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "узор сюзени; не ясно"
+  },
+  "sirga": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "серьга"
+  },
+  "siriq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "стеганка"
+  },
+  "sigir": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sigir-sidiyi": {
+   "classes": [
+    "zoomorphic",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "след мочи — зигзаг"
+  },
+  "secegah": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "место молитвы/алтарь"
+  },
+  "sekkizbucaqli": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sekkizbucaqli-ulduzlar": {
+   "classes": [
+    "astral",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sekkizdirnaq": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "medium",
+   "note": "восьмикоготный"
+  },
+  "sekkizgusheli-ulduzlar": {
+   "classes": [
+    "astral",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sekkizkunceli-ulduz": {
+   "classes": [
+    "astral",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sekkiz-qulla": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "башни"
+  },
+  "selyani": {
+   "classes": [],
+   "confidence": "low",
+   "note": "название по месту; не ясно"
+  },
+  "sarabi-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "serme": {
+   "classes": [],
+   "confidence": "low",
+   "note": "покрытие; общий термин"
+  },
+  "naxish": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«узор» — общий термин"
+  },
+  "serv": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "кипарис"
+  },
+  "tahanq-uzum-yarpagi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "виноградный лист"
+  },
+  "perde-naxishi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "занавесочный узор"
+  },
+  "taxt": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "трон"
+  },
+  "taxtadash": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "taxtamuje": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«деревянные ресницы»; не ясно"
+  },
+  "tay": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "стог"
+  },
+  "taya": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "стог"
+  },
+  "tazi": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "tag": {
+   "classes": [
+    "objects",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "арка"
+  },
+  "tagalaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "деталь прялки"
+  },
+  "tagaraligi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "видимо = tağarası, межсводие"
+  },
+  "tagarasi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "межсводие"
+  },
+  "taglar-ve-lechekler": {
+   "classes": [
+    "objects",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "арки"
+  },
+  "tagustu": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "надсводие"
+  },
+  "tikanli": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "low",
+   "note": "колючий"
+  },
+  "tilov": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "удочка"
+  },
+  "tirmesangi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "вероятно = tirmə sayağı"
+  },
+  "tirme-sayagi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«как тирме» (ткань); не ясно"
+  },
+  "tonqal-kosheter": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "medium",
+   "note": "костёр — огонь"
+  },
+  "toqqaqabagi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "пряжка"
+  },
+  "tovuz": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": "павлин"
+  },
+  "toxmaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "колотушка"
+  },
+  "toy-bezeyi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "свадебное украшение"
+  },
+  "toyuq": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "toyuq-ayaqlari": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": "куриные лапы"
+  },
+  "toyuq-ayagi": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "tula": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": "собака"
+  },
+  "turunc": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "горький апельсин"
+  },
+  "tutbashi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "tutuqushu": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "tug": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "хоругвь"
+  },
+  "tugbashi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "навершие туга"
+  },
+  "tokme": {
+   "classes": [],
+   "confidence": "low",
+   "note": "ткацкий термин"
+  },
+  "turkbaf": {
+   "classes": [],
+   "confidence": "low",
+   "note": "техника/тип ковра"
+  },
+  "tisbaga": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "tebrizgul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "= təbrizgülü"
+  },
+  "tebrizgulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "tehenk": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "low",
+   "note": "вероятно = tahanq, виноградный лист"
+  },
+  "tehenk-yarpagi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "лист"
+  },
+  "tekgol": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "с одним гёлем"
+  },
+  "tekke": {
+   "classes": [],
+   "confidence": "low",
+   "note": "этноним"
+  },
+  "tekme": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "tek-su": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": "одиночное су"
+  },
+  "tendir": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "тандыр"
+  },
+  "tenek": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "uzum-yarpagi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "terezi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "весы"
+  },
+  "tesbeh": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "четки"
+  },
+  "teshnek": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "ulduz": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ulduzlu": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "urusu": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«русский узор»"
+  },
+  "ushaq": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "vag": {
+   "classes": [
+    "anthropomorphic",
+    "zoomorphic"
+   ],
+   "confidence": "medium",
+   "note": "стилизованная голова"
+  },
+  "vaqvaq": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "vaq-vaq": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "vel": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "молотильная доска"
+  },
+  "xal": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "пятно"
+  },
+  "xalcha-hashiyesi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "gulxetmi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "просвирняк"
+  },
+  "xanali": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "клетчатый"
+  },
+  "xankezidi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "xantip": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "xaribulbul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "цветок"
+  },
+  "xach": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "крест"
+  },
+  "xachali-islimi-2": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "high",
+   "note": "вилообразный ислими"
+  },
+  "xile-ara-hashiyesi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "xile-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "xoncha": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": "Керимов: медальон"
+  },
+  "xoncha-gulu": {
+   "classes": [
+    "structure",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "xonchaqiragi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": "обводка медальона"
+  },
+  "xoruk-burma": {
+   "classes": [
+    "geometric",
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "xoruz": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "xoruz-burma": {
+   "classes": [
+    "geometric",
+    "bird"
+   ],
+   "confidence": "medium",
+   "note": "петушиный завиток"
+  },
+  "xorukburuq": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "low",
+   "note": "вероятно «петуший…»; не ясно"
+  },
+  "xirdagul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "xitan-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "xelbir": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "решето"
+  },
+  "xercheng": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": "рак"
+  },
+  "xetai": {
+   "classes": [
+    "arabesque"
+   ],
+   "confidence": "high",
+   "note": "хатаи"
+  },
+  "yadeli-gul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "yanar-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "yarpaq": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "yayliq-gulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "yazili-buta": {
+   "classes": [
+    "buta",
+    "epigraphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "yazili-ketebe": {
+   "classes": [
+    "epigraphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "yagdan": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "yelken": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "парус"
+  },
+  "yelpik": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "веер"
+  },
+  "yelpinchi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "видимо от yelpik «веер»"
+  },
+  "yalan": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": "Керимов: средняя кайма"
+  },
+  "yomud": {
+   "classes": [],
+   "confidence": "low",
+   "note": "этноним"
+  },
+  "yomud-ara-hashiyesi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "yonca": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "люцерна"
+  },
+  "yuruk": {
+   "classes": [],
+   "confidence": "low",
+   "note": "этноним/не ясно"
+  },
+  "ovruk": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "люлька"
+  },
+  "ulduzlu-2": {
+   "classes": [
+    "astral"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "zanbaq": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "zenbek-gulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "zanbagi": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "zili-elementleri": {
+   "classes": [],
+   "confidence": "low",
+   "note": "зили — техника"
+  },
+  "zili-naxishi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "зили — техника"
+  },
+  "ziver": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "zorxana": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "постройка"
+  },
+  "zulfu-elem": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "= zülfələm, кайма-локон"
+  },
+  "culeali-alem": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "вероятно вариант zülfələm"
+  },
+  "zulfelem": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": "кайма-локон"
+  },
+  "ziq": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "zig": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "лист шпината"
+  },
+  "zenbekgulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "= zənbək gülü"
+  },
+  "zencir": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "цепь"
+  },
+  "zencire": {
+   "classes": [
+    "geometric",
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "цепочка/галун"
+  },
+  "zerkeret-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "zerxara-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "chadir": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "шатер"
+  },
+  "chadiyelen": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "chalagan": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": "коршун"
+  },
+  "chalnaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "диадема"
+  },
+  "chalgi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "муз. инструмент"
+  },
+  "chalichali": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "chanaqli-baga": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "chanaqqala-ara-hashiyesi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "cherxouz": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "бассейн"
+  },
+  "charkezi": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "крест-на-крест"
+  },
+  "cherkezi": {
+   "classes": [],
+   "confidence": "low",
+   "note": "«черкесский»"
+  },
+  "charx": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "колесо"
+  },
+  "chaxmaq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "огниво/курок"
+  },
+  "chagmati-gilandar": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "chaxmaxi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "от çaxmaq"
+  },
+  "chaxmagi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "от çaxmaq"
+  },
+  "chatmagi-kelender": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "куркообразная кайма"
+  },
+  "chaynik": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "chag": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "ceynamaz": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "молитвенный коврик"
+  },
+  "chirachira": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "люстра"
+  },
+  "chinar": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "chincilim": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "low",
+   "note": "вероятно = çinçilim, портулак"
+  },
+  "chinchilim": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "портулак"
+  },
+  "chichek": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "chichekli": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "chichekli-buta": {
+   "classes": [
+    "buta",
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "chicheklenen-agac": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "choxayaq": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "high",
+   "note": "многоножка"
+  },
+  "choxbucaqli": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "choxbucaqlilar": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "choxzolaq": {
+   "classes": [
+    "geometric",
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "многополосный"
+  },
+  "chol-otu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "chomche": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "ковш"
+  },
+  "chorek": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "хлеб"
+  },
+  "chorekgulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "хлебный узор/цветок"
+  },
+  "chigga": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "chigqabuta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "medium",
+   "note": "бута"
+  },
+  "chiraq": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "светильник"
+  },
+  "chefte": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "засов"
+  },
+  "chahar-cherxi": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "ткацкий инструмент"
+  },
+  "chelotu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "low",
+   "note": "вероятно = çölotu"
+  },
+  "cheng": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "арфа"
+  },
+  "chengel": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "крюк"
+  },
+  "chengelli": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "chep-zolaqli-hashiye": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "cheper": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "изгородь"
+  },
+  "ordek": {
+   "classes": [
+    "bird"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ortuk": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "покрывало"
+  },
+  "uzum": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "uzum-salximlari": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "uzum-yarpaqlari": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "uchbucaqli-hashiye": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "qirim": {
+   "classes": [],
+   "confidence": "low",
+   "note": "Крым — топоним"
+  },
+  "qiynaq": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "medium",
+   "note": "клык/коготь"
+  },
+  "qiynagi-2": {
+   "classes": [
+    "zoomorphic"
+   ],
+   "confidence": "low",
+   "note": "вариант qıynaq"
+  },
+  "shabalidbuta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "shaha": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "shahsever-ara-hashiyesi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "shamdan": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "shamdanli": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "shamdani": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "shami-2": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "кайма-шами"
+  },
+  "shami-zencir": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": "цепь"
+  },
+  "shami-zencire": {
+   "classes": [
+    "structure",
+    "geometric"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "shami": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "видимо кайма-шами"
+  },
+  "shana": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "гребень/вилы"
+  },
+  "shanakotan": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "sharlama": {
+   "classes": [],
+   "confidence": "low",
+   "note": "не ясно"
+  },
+  "shaxe": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "shaxegulu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "shirni": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "low",
+   "note": "леденец"
+  },
+  "shirvanbuta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "shukufe": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "shebeke": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": "сетка"
+  },
+  "shebekebendlik": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "low",
+   "note": "от şəbəkə"
+  },
+  "shebekenaxish": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "shedde-ve-verni-elementleri-2": {
+   "classes": [],
+   "confidence": "low",
+   "note": "техники шедде/верни"
+  },
+  "efshan": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": "композиция афшан — разбросанные цветы"
+  },
+  "efshankul": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "medium",
+   "note": ""
+  },
+  "afshan-gullu": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "efshar": {
+   "classes": [],
+   "confidence": "low",
+   "note": "этноним"
+  },
+  "efshar-ara-hashiyesi": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "drakon": {
+   "classes": [
+    "mythical"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "ejdahali-xetai": {
+   "classes": [
+    "arabesque",
+    "mythical"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "el-2": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "elibelinde": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "elibeyli": {
+   "classes": [],
+   "confidence": "low",
+   "note": "название по месту"
+  },
+  "el-ele": {
+   "classes": [
+    "anthropomorphic"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "elem": {
+   "classes": [
+    "structure",
+    "objects"
+   ],
+   "confidence": "medium",
+   "note": "знамя; Керимов: средняя кайма"
+  },
+  "eriputa": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "low",
+   "note": "возможно вариант əyributa"
+  },
+  "ersalan": {
+   "classes": [],
+   "confidence": "low",
+   "note": "имя/название"
+  },
+  "ersari": {
+   "classes": [],
+   "confidence": "low",
+   "note": "этноним"
+  },
+  "ersin": {
+   "classes": [
+    "objects"
+   ],
+   "confidence": "high",
+   "note": "лопаточка"
+  },
+  "esas": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "основной элемент"
+  },
+  "esas-elementler-ana-guller": {
+   "classes": [
+    "vegetal",
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "материнские цветы"
+  },
+  "esas-elementler-quba": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "medium",
+   "note": "основные элементы-медальоны"
+  },
+  "etek": {
+   "classes": [
+    "structure"
+   ],
+   "confidence": "low",
+   "note": "подол"
+  },
+  "evelik": {
+   "classes": [
+    "vegetal"
+   ],
+   "confidence": "high",
+   "note": "щавель"
+  },
+  "eyri-buta": {
+   "classes": [
+    "buta"
+   ],
+   "confidence": "high",
+   "note": ""
+  },
+  "eri-xetli-elementler": {
+   "classes": [
+    "geometric"
+   ],
+   "confidence": "low",
+   "note": "криволинейные"
+  }
+ }
+}

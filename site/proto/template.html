@@ -115,10 +115,13 @@ const TH = {};
 function schemeCanvas(id, max, cellMax) {
   const s = DATA.schemes[id]; if (!s) return null;
   const pal = s.pal || ['#ffffff', '#1a1a1a', '#b8b8b8'];
-  const cs = Math.max(1, Math.min(cellMax || 99, Math.floor(max / Math.max(s.w, s.h))));
-  const c = document.createElement('canvas'); c.width = s.w * cs; c.height = s.h * cs;
+  // ka — пропорция узла ковра (ширина / высота узла); у схем Керимова узел квадратный (ka = 1)
+  const ka = s.ka && s.ka > 0.3 && s.ka < 3 ? s.ka : 1;
+  const cs = Math.max(1, Math.min(cellMax || 99, Math.floor(max / Math.max(s.w * Math.max(ka, 1), s.h * Math.max(1 / ka, 1)))));
+  const cw = ka >= 1 ? cs * ka : cs, ch_ = ka >= 1 ? cs : cs / ka;
+  const c = document.createElement('canvas'); c.width = Math.round(s.w * cw); c.height = Math.round(s.h * ch_);
   const x = c.getContext('2d'); x.fillStyle = pal[0] || '#fff'; x.fillRect(0, 0, c.width, c.height);
-  for (let j = 0; j < s.h; j++) { const r = s.rows[j] || ''; for (let i = 0; i < s.w; i++) { const ch = r[i]; if (!ch || ch === '.') continue; x.fillStyle = pal[parseInt(ch, 36)] || '#f0f'; x.fillRect(i * cs, j * cs, cs, cs); } }
+  for (let j = 0; j < s.h; j++) { const r = s.rows[j] || ''; for (let i = 0; i < s.w; i++) { const ch = r[i]; if (!ch || ch === '.') continue; x.fillStyle = pal[parseInt(ch, 36)] || '#f0f'; const x0 = Math.round(i * cw), y0 = Math.round(j * ch_); x.fillRect(x0, y0, Math.round((i + 1) * cw) - x0, Math.round((j + 1) * ch_) - y0); } }
   return c;
 }
 function thumb(id, S) {           // миниатюра S×S как dataURL, плавное уменьшение
@@ -147,7 +150,7 @@ function thHTML(c, z) {
 }
 function cardHTML(c, extra, cls) {
   const roles = Object.keys(c.r || {}).sort((a, b) => (c.r[b] || 0) - (c.r[a] || 0)).slice(0, 2).map(r => `<span class="tag">${ROLE[r] || r}</span>`).join('');
-  const cl = (c.cl || []).slice(0, 2).map(k => `<span class="tag auto" title="класс поставлен машиной">${CLS[k].ru}</span>`).join('');
+  const cl = (c.cl || []).slice(0, 2).map(k => `<span class="tag auto" title="${c.cq === 'ai' ? 'класс по значению (ИИ)' : 'класс поставлен машиной по ключевым словам'}">${CLS[k].ru}</span>`).join('');
   return `<a class="card ${cls || ''}" href="#/c/${encodeURIComponent(c.id)}">${thHTML(c, extra && extra.z)}<span><span class="hw">${esc(cap(c.h))}</span>${c.m.ru ? `<div class="mn">${esc(c.m.ru)}</div>` : ''}${extra && extra.why ? `<div class="mn" style="font-size:11.5px">${esc(extra.why)}</div>` : ''}<div class="tags">${c.ds ? '<span class="tag" style="color:var(--accent);border-color:var(--accent)">описание</span>' : ''}${roles}${cl}</div></span></a>`;
 }
 
@@ -156,6 +159,7 @@ const F = {cls: new Set(), role: new Set(), school: new Set(), src: new Set(), w
 let SHOWN = 120;
 function norm(s) { return (s || '').toLowerCase().replace(/[^0-9a-zа-яёəıöüğşç]/g, ''); }
 function fold(s) { return norm(s).replace(/ə/g, 'e').replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ğ/g, 'g').replace(/ş/g, 's').replace(/ç/g, 'c'); }
+const MQ = {kerimov: 'значение: Керимов / легенда таблицы', book: 'значение: текст книги Керимова', ai_language: 'значение: разбор слова (ИИ)', place_name: 'название по месту (ИИ)', unknown: 'значение не установлено', machine: 'машинный перевод'};
 DATA.concepts.forEach(c => { c._s = c.nm.map(n => fold(n[0])).concat([fold(c.h), fold(c.m.ru), fold(c.m.en)]).join('|'); });
 function match(c, q) { return !q || c._s.includes(q); }
 function filtered(type) {
@@ -261,8 +265,8 @@ function renderConcept(id) {
   const merged = c.rec.length > 1 ? `<div class="note">Собрано из ${c.rec.length} записей старого сайта: ${c.rec.map(esc).join(', ')}. <span class="pill auto">${c.mg.status === 'checked_ai' ? 'проверено ИИ по книге' : (c.mg.rule === 'renamed_by_reading' ? 'слито по чтению сверки с Керимовым' : 'слито: одно написание')}</span>${c.mg.renamed && c.mg.renamed.length ? ` Переименованы сверкой: ${c.mg.renamed.map(esc).join(', ')}.` : ''}</div>` : '';
   $('#app').innerHTML = `<div style="max-width:1050px">
     <div class="muted" style="font-size:13px"><a href="#/${c.t === 'ornament' ? '' : 'compositions'}">${c.t === 'ornament' ? 'Узоры' : 'Ковры и композиции'}</a> · ${TYPE[c.t]}</div>
-    <h1>${esc(cap(c.h))}</h1><div class="sub1">${esc(c.m.ru || '')}${c.m.en ? ` · <i>${esc(c.m.en)}</i>` : ''}</div>
-    <div class="tags" style="margin-top:8px">${(c.cl || []).map(k => `<a class="tag auto" href="#/" data-cls="${k}" title="класс поставлен машиной">${CLS[k].ru}</a>`).join('')}</div>
+    <h1>${esc(cap(c.h))}</h1><div class="sub1">${esc(c.m.ru || '')}${c.m.en ? ` · <i>${esc(c.m.en)}</i>` : ''}<span class="muted" style="font-size:12px;margin-left:8px">${esc(MQ[c.mq] || '')}</span>${c.mo ? `<div class="muted" style="font-size:12px">прежний машинный перевод: «${esc(c.mo)}»</div>` : ''}</div>
+    <div class="tags" style="margin-top:8px">${(c.cl || []).map(k => `<a class="tag auto" href="#/" data-cls="${k}" title="${c.cq === 'ai' ? 'класс по значению (ИИ)' : 'класс поставлен машиной'}">${CLS[k].ru}</a>`).join('')}${c.cl && c.cl.length ? `<span class="muted" style="font-size:12px;margin-left:6px">${c.cq === 'ai' ? 'классы по значению (ИИ)' : 'классы по ключевым словам (машина)'}</span>` : ''}</div>
     ${merged}
     ${c.ds ? `<h2>Описание <span class="pill auto" title="пересказ составлен ИИ по тексту книги, человеком не проверен">черновик ИИ · не проверено</span></h2>
       <div class="desc">${c.ds.sections.map(s => `<h3>${esc(s.title)}</h3><p>${esc(s.text)} <span class="muted" style="font-size:12px">— ${esc(c.ds.src)}, с. ${s.pages.map(esc).join(', ')}${s.figs && s.figs.length ? ' · в книге: ' + s.figs.map(esc).join(', ') : ''}</span></p>`).join('')}</div>` : ''}
@@ -270,6 +274,7 @@ function renderConcept(id) {
     ${carHTML}
     ${onCarpets.length ? `<div class="note" style="margin-top:10px">Встречается на коврах (по таблицам Керимова): ${onCarpets.map(x => `<a href="#/c/${x}">${esc(cap(C[x].h))}</a>`).join(', ')}</div>` : ''}
     ${relBlocks(c)}
+    ${c.w && c.w.length ? `<h2>В западной литературе</h2><table class="t">${c.w.map(w => `<tr><th>${esc(w[0])}</th><td>${esc(w[1] || '')} <span class="muted" style="font-size:12px">— ${esc((SRC[w[2]] || {}).short || w[2])}${w[3] && w[3] !== 'high' ? ' · сопоставление ' + (w[3] === 'medium' ? 'вероятное' : 'под вопросом') : ''}</span></td></tr>`).join('')}</table>` : ''}
     <h2>Названия</h2><table class="t">${names}</table>
     ${hid.length ? `<details style="margin-top:6px"><summary>Ошибочные чтения и отклонённые значения (${hid.length}) — нужны только для поиска</summary><table class="t">${hid.map(n => `<tr><td>${esc(n[0])}</td><td class="muted">${LANG[n[1]] || n[1]} · ${NAMEKIND[n[2]]}</td></tr>`).join('')}</table></details>` : ''}
     <h2>Где встречается</h2><table class="t">
@@ -285,6 +290,17 @@ function renderConcept(id) {
 }
 
 /* ---------- школы ---------- */
+function westOpenHTML() {
+  const W = DATA.west_open || {terms: [], types: [], borders: []};
+  if (!W.terms.length && !W.types.length && !W.borders.length) return '';
+  const sn = id => { const S = DATA.sources[id] || Object.values(DATA.sources).find(x => (x.id || '').startsWith(id.split('_')[0])) || {}; const t = S.short || S.title; return typeof t === 'string' ? t : (t && (t.ru || t.en || t.az)) || 'Gans-Ruedin 1986'; };
+  return `<h2>Кандидаты из западной литературы</h2>
+  <div class="note">Названия из книг западных авторов, которым пока нет пары в словаре Керимова. Это не новые понятия, а заготовки: каждое нужно сопоставить с азербайджанским названием или завести отдельно, со ссылкой на источник.</div>
+  ${W.types.length ? `<h3>Типы ковров (сорта по месту)</h3><ul>${W.types.map(([x, s]) => `<li>${esc(x)} <span class="muted">— ${esc(sn(s))}</span></li>`).join('')}</ul>` : ''}
+  ${W.terms.length ? `<h3>Мотивы</h3><table class="t">${W.terms.map(([t, d, s]) => `<tr><td><b>${esc(t)}</b></td><td>${esc(d || '')}</td><td class="muted">${esc(sn(s))}</td></tr>`).join('')}</table>` : ''}
+  ${W.borders.length ? `<h3>Каймы</h3><table class="t">${W.borders.map(([t, w, s]) => `<tr><td><b>${esc(t)}</b></td><td>${esc(w || '')}</td><td class="muted">${esc(sn(s))}</td></tr>`).join('')}</table>` : ''}`;
+}
+
 function renderSchools() {
   const cnt = (k) => DATA.concepts.filter(c => Object.keys(c.sc).some(x => x === k || x.startsWith(k + '/'))).length;
   const scnt = (k) => Object.values(DATA.schemes).filter(s => s.sc === k || (s.sc || '').startsWith(k + '/')).length;
@@ -296,7 +312,8 @@ function renderSchools() {
   <tr><td>Губа-Ширван</td><td>Губа · Ширван · Баку</td><td>Kuba/Shirvan</td><td>Kuba · Shirvan · Baku (+Moghan, Talish)</td></tr>
   <tr><td>Гянджа-Газах</td><td>Гянджа · Газах</td><td>Ganja/Karabakh · Kazakh/Borchaly</td><td>Gendje · Kazak</td></tr>
   <tr><td>Карабах</td><td>Карабах</td><td>Ganja/Karabakh</td><td>Karabagh</td></tr><tr><td>Тебриз</td><td>Тебриз</td><td>—</td><td>Tabriz, Heriz (Персия)</td></tr></table>
-  <p class="muted" style="font-size:13px">Нахчыван и Шуша — кандидаты в группы; спорные отнесения (например, Зейва: Губа у одних авторов, Ширван у других) будут храниться как два утверждения с источниками. Пока большинство понятий без школы: школы в старых данных указаны редко.</p></div>`;
+  <p class="muted" style="font-size:13px">Нахчыван и Шуша — кандидаты в группы; спорные отнесения (например, Зейва: Губа у одних авторов, Ширван у других) будут храниться как два утверждения с источниками. Пока большинство понятий без школы: школы в старых данных указаны редко.</p>
+  ${westOpenHTML()}</div>`;
   document.querySelectorAll('a[data-school]').forEach(a => a.onclick = () => { F.school.clear(); F.school.add(a.dataset.school); });
 }
 

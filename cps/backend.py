@@ -39,7 +39,7 @@ IMG_EXT = {".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".bmp"}
 CROP_PAD = 0.08          # запас вокруг рамки рисунка (доля), чтобы было куда тянуть углы
 META_KEYS = ("section", "name_az", "name", "translation", "carpet", "type", "note")
 DIFFICULTY = ("simple", "medium", "complex", "ultra")   # простой / средний / сложный / ультра
-OUT_SUFFIXES = (".png", "_x12.png", "_grid.png", "_bg.png", ".svg", "_unit.png")   # что лежит в data/out на каждый рисунок
+OUT_SUFFIXES = (".png", "_x12.png", "_grid.png", "_bg.png", ".svg", "_unit.png", "_knot.png")   # что лежит в data/out на каждый рисунок
 
 app = FastAPI(title="Carpet Pattern Studio")
 cloud.install(app)    # пароль для входа по ссылке (share.command), если задан CPS_PASSWORD
@@ -572,6 +572,16 @@ def render_outputs(fid, mat, palette, transparent_bg=True, rap=None):
            + "".join(layers) +
            f'<g id="grid" stroke="#4a92d6" stroke-opacity=".6" display="none">{gl}</g></svg>')
     open(os.path.join(D_OUT, fid + ".svg"), "w", encoding="utf-8").write(svg)
+    # _knot.png — как _bg.png, но клетка в пропорции узла ковра (ширина/высота = узлов на 10 см по длине / по ширине);
+    # пишется, только если плотность ковра известна (grid.knot в data/work) и узел заметно не квадратный
+    kp = os.path.join(D_OUT, fid + "_knot.png")
+    kn = ((jload(os.path.join(D_WORK, fid + ".json"), {}) or {}).get("grid") or {}).get("knot") or {}
+    try: ka = float(kn["l"]) / float(kn["w"]) if kn.get("l") and kn.get("w") else 1.0
+    except (TypeError, ValueError, ZeroDivisionError): ka = 1.0
+    if abs(ka - 1) > 0.03 and 0.3 < ka < 3:
+        imwrite_any(kp, cv2.resize(solid, (max(1, round(w * S * ka)), h * S), interpolation=cv2.INTER_NEAREST))
+    elif os.path.exists(kp):
+        os.remove(kp)
     up = os.path.join(D_OUT, fid + "_unit.png")
     if rap and rap.get("found") and rap.get("unit"):          # раппорт каймы: один повтор, ×12, фон залит
         U = rapport.matrix_to_array(rap["unit"])

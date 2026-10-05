@@ -1,0 +1,423 @@
+{
+ "_about": "Западные термины глоссария Gans-Ruedin 1986 ↔ понятия словаря (сопоставлено Claude по значению; Керимов т. II прямо отождествляет «бегущую собаку» с долангачем, «кетебе» с картушем). new_candidate — понятия в словаре нет.",
+ "terms": [
+  {
+   "term": "'BARBER'S-POLE' BORDER",
+   "definition_en": "Border pattern formed of diagonal bars, resembling the stripes on a barber's pole",
+   "definition_ru": "Кайма из косых полос, похожих на полосы цирюльничьего столба.",
+   "concept": "chep-zolaqli-hashiye",
+   "confidence": "medium",
+   "new_candidate": false
+  },
+  {
+   "term": "BORDER",
+   "definition_en": "Frame for the field of a carpet, properly applied to the widest element in the framing as opposed to the guard bands or stripes",
+   "definition_ru": "Рамка вокруг поля ковра; собственно — самая широкая её полоса, в отличие от узких бордюров.",
+   "concept": "hashiye",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "BOTEH",
+   "definition_en": "Motif in stylized form resembling a jagged leaf and representing, according to various interpretations, either a pine cone, a palmette, leaves or the sacred flame of Zoroaster",
+   "definition_ru": "Стилизованный мотив в виде зубчатого листа; толкуется как шишка, пальметта, листья или священное пламя Зороастра.",
+   "concept": "buta",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "BOTEH-MIRI",
+   "definition_en": "Variation of the boteh combining leaves and flowers in a cluster",
+   "definition_ru": "Вариант бота: листья и цветы, собранные в пучок.",
+   "concept": "mir-buta",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "BUSTARD",
+   "definition_en": "Motif commonly featured by the Turkomen tribes, symbolizing protection; may assume the form of a 'V' or the shape of an anchor",
+   "definition_ru": "Мотив туркменских племён, символ защиты; в форме «V» или якоря.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": true
+  },
+  {
+   "term": "CARTOUCHE",
+   "definition_en": "Ornamental tablet intended to contain an inscription",
+   "definition_ru": "Декоративная табличка для надписи.",
+   "concept": "ketebe",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "CLOUD-BAND (CHI)",
+   "definition_en": "A small, shell-like ornament in various forms that resembles the conventional Chinese 'cloud-band' motif; a symbol of immortality",
+   "definition_ru": "Небольшой раковинообразный орнамент, похожий на китайское «облако»; символ бессмертия.",
+   "concept": "bulud",
+   "confidence": "medium",
+   "new_candidate": false
+  },
+  {
+   "term": "CRAB",
+   "definition_en": "Motif featured on the border of Caucasian rugs; the claws of the 'crab' may be conventionalized arabesques, and its body is a large oval similar to a palmette",
+   "definition_ru": "Мотив каймы кавказских ковров; «клешни» — условные арабески, «тело» — крупный овал, похожий на пальметту.",
+   "concept": "xercheng",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "CROSS",
+   "definition_en": "A common motif with no religious significance, except perhaps for Christian Armenian weavers. There is a type of Turkomen prayer rug that has a field divided into four parts by a cross (katchli); the mihrab at the top of such rugs is often very small; however, katchli rugs are not always prayer rugs.",
+   "definition_ru": "Распространённый мотив без религиозного смысла (кроме, возможно, у армян-христиан); у туркмен есть ковры katchli с полем, разделённым крестом на четыре части, — не всегда молитвенные.",
+   "concept": "xach",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "DRAGON",
+   "definition_en": "Motif symbolizing good fortune; often the dragon is rendered as a mere geometrical form to which a dragon's head is the only clue.",
+   "definition_ru": "Мотив удачи; дракон часто передан чисто геометрически, и узнать его можно лишь по голове.",
+   "concept": "drakon",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "EWER",
+   "definition_en": "Water jug often featured on prayer rugs as a reminder to the believer of the obligatory ritual ablutions before prayer",
+   "definition_ru": "Кувшин для воды на молитвенных коврах — напоминание об омовении перед молитвой.",
+   "concept": "aftafa",
+   "confidence": "medium",
+   "new_candidate": false
+  },
+  {
+   "term": "FIELD",
+   "definition_en": "The central part of the carpet within the border frame",
+   "definition_ru": "Центральная часть ковра внутри каймы.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": false
+  },
+  {
+   "term": "GOBLET",
+   "definition_en": "See: wine glass",
+   "definition_ru": "См. «бокал».",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": false
+  },
+  {
+   "term": "GUARD BAND OR STRIPE",
+   "definition_en": "Narrow border flanking the principal border in the framing of a carpet",
+   "definition_ru": "Узкий бордюр по сторонам главной каймы.",
+   "concept": "su",
+   "confidence": "medium",
+   "new_candidate": false
+  },
+  {
+   "term": "GUL",
+   "definition_en": "Octagonal motif—usually elongated and divided into four—employed by Turkomen tribes; the word means 'rose' or 'flower'",
+   "definition_ru": "Восьмиугольный мотив туркменских племён, обычно вытянутый и разделённый на четыре части; слово значит «роза», «цветок».",
+   "concept": "gol",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "HEGIRA",
+   "definition_en": "The flight of the prophet Mohammed from Mecca in A.D. 622; the date when the Mohammedan era begins",
+   "definition_ru": "Бегство Мухаммеда из Мекки в 622 г.; начало мусульманского летоисчисления.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": false
+  },
+  {
+   "term": "KNOT: SYMMETRICAL OR TURKISH (GHIORDES)",
+   "definition_en": "Type of pile knot tied around two adjacent threads of the warp, both being encircled by the strand of wool, with the ends reappearing between; this knot can be either level or ridged.",
+   "definition_ru": "Ворсовый узел на двух соседних нитях основы, обе охвачены шерстинкой, концы выходят между ними; бывает ровным или с выступом.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": false
+  },
+  {
+   "term": "KOCHAK",
+   "definition_en": "See: ram's horns",
+   "definition_ru": "См. «бараньи рога».",
+   "concept": "cutbuynuz",
+   "confidence": "medium",
+   "new_candidate": false
+  },
+  {
+   "term": "'KUFIC' BORDER",
+   "definition_en": "Kufic is the ancient form of Arabic script used for the calligraphy of the Koran. This purely decorative and meaningless border pattern is composed of rosettes alternating with pairs of double latch-hooks",
+   "definition_ru": "Куфи — древнее арабское письмо Корана; «куфическая» кайма чисто декоративна: розетки чередуются с парами двойных крючков.",
+   "concept": "kufi-hashiye",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "LATCH-HOOKS; DOUBLE LATCH-HOOKS",
+   "definition_en": "Motif derived from the swastika and featured commonly on Caucasian rugs; symbolizes happiness",
+   "definition_ru": "Мотив, восходящий к свастике, частый на кавказских коврах; символ счастья.",
+   "concept": "qarmaq",
+   "confidence": "medium",
+   "new_candidate": false
+  },
+  {
+   "term": "LESGHI STAR",
+   "definition_en": "A star-shaped motif whose original symbolic meaning is to be found in antiquity when stars were worshipped as goddesses of light; a typical motif on Lesghi rugs, hence the name of the motif.",
+   "definition_ru": "Звездообразный мотив, восходящий к древнему почитанию звёзд как богинь света; типичен для лезгинских ковров, отсюда название.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": true
+  },
+  {
+   "term": "MEDAHIL",
+   "definition_en": "Reciprocal motif, commonly used on narrow borders and representing a trefoil or stylized arrow-head",
+   "definition_ru": "Взаимообратный мотив узких бордюров — трилистник или стилизованный наконечник стрелы.",
+   "concept": "medahil",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "MIHRAB",
+   "definition_en": "Typical design of a prayer rug derived from the niche or chamber in a mosque that indicates the direction of Mecca. The upper part of the design terminates in a point or a circular arch; the apex of the arch must be orientated towards Mecca at the moment of prayer",
+   "definition_ru": "Типичный рисунок молитвенного ковра — ниша мечети, указывающая на Мекку; верх заострён или в виде арки, при молитве обращён к Мекке.",
+   "concept": "mehrab",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "OCTAGON",
+   "definition_en": "Motif symbolizing the universe; the shape of most guls (q.v.)",
+   "definition_ru": "Мотив, символ вселенной; форма большинства гюлей.",
+   "concept": "sekkizbucaqli",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "PILE",
+   "definition_en": "The mass of raised tufts formed from the strands of knotted wool that have been cut at the carpet's surface; the pile produces the rug's soft, compact, furry surface",
+   "definition_ru": "Масса срезанных на поверхности концов завязанной шерсти, дающая мягкую плотную поверхность ковра.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": false
+  },
+  {
+   "term": "RAM'S HORNS (KOCHAK)",
+   "definition_en": "Motif in the shape of a pair of ram's horns, especially featured by the Turkomen tribes; symbolizes affinity with things earthly and spiritual (see also wurma)",
+   "definition_ru": "Мотив в виде пары бараньих рогов, особенно у туркмен; символ связи земного и духовного (см. также wurma).",
+   "concept": "cutbuynuz",
+   "confidence": "medium",
+   "new_candidate": false
+  },
+  {
+   "term": "'RUNNING-DOG' BORDER",
+   "definition_en": "A border pattern of Caucasian origin with running-dog design, a variation of the Greek key fret",
+   "definition_ru": "Кайма кавказского происхождения — «бегущая собака», вариант греческого меандра.",
+   "concept": "dolangac",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "'S' MOTIF",
+   "definition_en": "Motif of very early origins assumed to have some connection with sun worship; symbolizes light, divinity and wisdom",
+   "definition_ru": "Очень древний мотив, предположительно связанный с культом солнца; символ света, божественности и мудрости.",
+   "concept": "s-formali-element",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "SHIRAZI",
+   "definition_en": "Warp-wrapping, a process in which wool or cotton is wrapped around (usually four) lateral warp threads to form a firm edge; the narrow border performs the same function as a side cord",
+   "definition_ru": "Обмотка крайних (обычно четырёх) нитей основы шерстью или хлопком для прочного края; работает как боковой шнур.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": false
+  },
+  {
+   "term": "STAR OF SOLOMON; STAR OF THE MEDES",
+   "definition_en": "Motif of Jewish origin in the form of an eight-pointed star; symbol of divinity; adopted by Muslim weavers under the name of 'jewel of Mohammed'",
+   "definition_ru": "Восьмиконечная звезда еврейского происхождения, символ божественности; у мусульман — «драгоценность Мухаммеда».",
+   "concept": "sekkizgusheli-ulduzlar",
+   "confidence": "medium",
+   "new_candidate": false
+  },
+  {
+   "term": "SWASTIKA",
+   "definition_en": "Motif of Chinese origin, a symbolic representation of the heart of the Buddha which therefore constitutes a lucky charm",
+   "definition_ru": "Мотив китайского происхождения, символ сердца Будды и потому оберег.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": true
+  },
+  {
+   "term": "TREE-OF-LIFE",
+   "definition_en": "Motif representing a stylized tree, one of mankind's oldest symbols of life; a religious symbol of Islam",
+   "definition_ru": "Стилизованное дерево, один из древнейших символов жизни; религиозный символ ислама.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": true
+  },
+  {
+   "term": "TULIP",
+   "definition_en": "Motif especially prevalent on Turkish carpets, where it is depicted in highly stylized form; also popular with nomadic Turkomen tribes",
+   "definition_ru": "Мотив, особенно частый на турецких коврах, сильно стилизованный; популярен и у туркмен-кочевников.",
+   "concept": "lale",
+   "confidence": "high",
+   "new_candidate": false
+  },
+  {
+   "term": "WARP",
+   "definition_en": "Threads of yarn that extend over the entire length of the carpet and on to which the weaver ties the knots",
+   "definition_ru": "Нити, идущие по всей длине ковра, на которые завязывают узлы (основа).",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": false
+  },
+  {
+   "term": "WEFT",
+   "definition_en": "Threads of yarn passed by the weaver across the width of the carpet between the warp threads to hold the knots in place",
+   "definition_ru": "Нити, прокладываемые поперёк ковра между нитями основы для закрепления узлов (уток).",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": false
+  },
+  {
+   "term": "WINE GLASS; GOBLET",
+   "definition_en": "Border device especially prevalent in the Caucasus, representing a stylized wine glass arranged in conjunction with a leaf",
+   "definition_ru": "Мотив каймы, особенно частый на Кавказе: стилизованный бокал в сочетании с листом.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": true
+  },
+  {
+   "term": "WURMA",
+   "definition_en": "Caucasian name for the motif representing a pair of ram's horns (q.v.)",
+   "definition_ru": "Кавказское название мотива пары бараньих рогов.",
+   "concept": "cutbuynuz",
+   "confidence": "low",
+   "new_candidate": false
+  },
+  {
+   "term": "'Z' MOTIF",
+   "definition_en": "Motif symbolizing light",
+   "definition_ru": "Мотив, символизирующий свет.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": true
+  },
+  {
+   "term": "ZIGZAG",
+   "definition_en": "Border motif in common usage in the Caucasus and Anatolia; symbolizes water or eternity",
+   "definition_ru": "Мотив каймы, распространённый на Кавказе и в Анатолии; символ воды или вечности.",
+   "concept": null,
+   "confidence": null,
+   "new_candidate": true
+  }
+ ],
+ "borders": [
+  {
+   "name_en": "'Eagle's-beak' border",
+   "where": "Kazak",
+   "printed_pages": "78-[9] (OCR: '78 =')",
+   "concept": null
+  },
+  {
+   "name_en": "Border typical of Lambalo Kazak rugs",
+   "where": "Lambalo Kazak",
+   "printed_pages": "110-11",
+   "concept": null
+  },
+  {
+   "name_en": "Oak-leaf border",
+   "where": "Sevan Kazak",
+   "printed_pages": "120-1",
+   "concept": "palid-yarpagi"
+  },
+  {
+   "name_en": "Tarantula border",
+   "where": "Sevan Kazak",
+   "printed_pages": "126-[7] (OCR: '126 =f')",
+   "concept": null
+  },
+  {
+   "name_en": "'Crab' border",
+   "where": "Karabakh Chelaberd",
+   "printed_pages": "144-5",
+   "concept": "xercheng"
+  },
+  {
+   "name_en": "Stepped or 'eagle's-beak' border",
+   "where": "Chondzoresk",
+   "printed_pages": "146-7",
+   "concept": null
+  },
+  {
+   "name_en": "Border typical of Talish rugs",
+   "where": "Talish",
+   "printed_pages": "152-3",
+   "concept": null
+  },
+  {
+   "name_en": "Wine-glass border",
+   "where": "Chayly",
+   "printed_pages": "160-1",
+   "concept": null
+  },
+  {
+   "name_en": "Border with a chain of rosettes, a variant of the 'crab' border",
+   "where": "Genje",
+   "printed_pages": "172-3",
+   "concept": null
+  },
+  {
+   "name_en": "Border of notched octagons",
+   "where": "Genje",
+   "printed_pages": "184-5",
+   "concept": null
+  },
+  {
+   "name_en": "Border with double latch-hooks",
+   "where": "Akstafa Shirvan",
+   "printed_pages": "208-9",
+   "concept": "qarmaq"
+  },
+  {
+   "name_en": "'Barber's-pole' border",
+   "where": "Baku",
+   "printed_pages": "222-3",
+   "concept": "chep-zolaqli-hashiye"
+  },
+  {
+   "name_en": "'Kufic' border",
+   "where": "Afshan Kuba",
+   "printed_pages": "[2]52-3 (OCR: '52-3')",
+   "concept": "kufi-hashiye"
+  },
+  {
+   "name_en": "'Running-dog' border",
+   "where": "Kuba",
+   "printed_pages": "256-7",
+   "concept": "dolangac"
+  },
+  {
+   "name_en": "Border with [white?] flowers between diagonal [bars], typical of Chichi rugs",
+   "where": "Chichi",
+   "printed_pages": "288-[9] (OCR: '288 =o')",
+   "concept": null
+  }
+ ],
+ "type_candidates": [
+  "Sevan (Kazak)",
+  "Lambalo (Kazak)",
+  "Lori-Pambak (Kazak)",
+  "Shulaver (Kazak)",
+  "Seichur / Zeyxur (Kuba)",
+  "Lesghi (Dagestan/Kuba)",
+  "Akstafa / Ağstafa (Shirvan)",
+  "Chondzoresk (Karabakh)",
+  "Lenkoran / Lənkəran (Talish)",
+  "Shusha (Karabakh)",
+  "Derbent",
+  "Sileh (flat-woven)"
+ ]
+}

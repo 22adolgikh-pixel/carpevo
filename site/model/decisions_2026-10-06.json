@@ -1,0 +1,117 @@
+[
+ {
+  "n": "s1",
+  "decision": "merge",
+  "primary": "ciqqa-buta-4",
+  "concepts": [
+   "ciqqa-buta-4",
+   "chigqabuta"
+  ],
+  "reason_ru": "Чыггабута и джыггабута — одно слово в разных чтениях (п. 79 и 160 очереди прямо говорят слить).",
+  "confidence": "high"
+ },
+ {
+  "n": "s2",
+  "decision": "merge",
+  "primary": "chigga",
+  "concepts": [
+   "chigga",
+   "ciqqa"
+  ],
+  "reason_ru": "çıqqa и cıqqa — одно слово, обе записи ведут к одной схеме t39_f04.",
+  "confidence": "medium"
+ },
+ {
+  "n": "s3",
+  "decision": "detach",
+  "schemes": [
+   "t27_f03"
+  ],
+  "reason_ru": "Схема t27_f03 подписана «Китаб — Книга»: это не кетебе (п. 23, 112). Отвязана; своего понятия «книга» пока нет.",
+  "confidence": "medium"
+ },
+ {
+  "n": "s4",
+  "decision": "reattach",
+  "schemes": [
+   "t52_f05"
+  ],
+  "target": "qivrim-2",
+  "reason_ru": "Схема t52_f05 «Гыврым» — понятие qıvrım, не долама (п. 12, 191).",
+  "confidence": "high"
+ },
+ {
+  "n": "s5",
+  "decision": "reattach",
+  "schemes": [
+   "t50_f04"
+  ],
+  "target": "qaynagi",
+  "reason_ru": "Схема t50_f04 «Гайнаг» — отдельная фигура табл. 50, не «дырнаглы» (п. 14, 192).",
+  "confidence": "high"
+ },
+ {
+  "n": "s6",
+  "decision": "reattach",
+  "schemes": [
+   "t18_f08"
+  ],
+  "target": "tazi",
+  "reason_ru": "Схема t18_f08 «Тазы» (борзая) — своё понятие, не «тула» (п. 42).",
+  "confidence": "high"
+ },
+ {
+  "n": "s7",
+  "decision": "reattach",
+  "schemes": [
+   "t15_f03"
+  ],
+  "target": "goz",
+  "reason_ru": "Схема t15_f03 «Гёз» — понятие göz, не производное gözlü (п. 193).",
+  "confidence": "high"
+ },
+ {
+  "n": "s8",
+  "decision": "reattach",
+  "schemes": [
+   "t25_f01"
+  ],
+  "target": "shaxegulu",
+  "reason_ru": "Схема t25_f01 подписана «Şaxəgülü — веточка с цветком» (п. 91, 164).",
+  "confidence": "high"
+ },
+ {
+  "n": "s9",
+  "decision": "set_meaning",
+  "target": "qiynaq",
+  "meaning": {
+   "ru": "коготь",
+   "en": "claw"
+  },
+  "reason_ru": "Перевод Керимова в легенде таблицы — «Коготь»; «Клык» был машинным (п. 272).",
+  "confidence": "high"
+ },
+ {
+  "n": "s10",
+  "decision": "set_meaning",
+  "target": "qiynagi-2",
+  "meaning": {
+   "ru": "коготь",
+   "en": "claw"
+  },
+  "reason_ru": "Легенда схемы t157_f02 «Гыйнагы» — «Коготь» (п. 303); ğıynağı — форма слова ğıynaq.",
+  "confidence": "medium"
+ },
+ {
+  "n": "s11",
+  "decision": "related",
+  "primary": "qiynaq",
+  "concepts": [
+   "qiynaq",
+   "qiynagi-2"
+  ],
+  "relation": "derived_from",
+  "reason_ru": "ğıynağı — форма слова ğıynaq («коготь»); не слиты, т. к. у Керимова это подписи разных таблиц.",
+  "confidence": "medium"
+ }
+]

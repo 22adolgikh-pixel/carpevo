@@ -2,7 +2,9 @@
 # python3 apply_decisions.py DECISIONS.json OUT_DIR
 # Решения (decisions_*.json) приняты по данным сверки с Керимовым и тексту книги (ИИ, со ссылками), статус «checked_ai»:
 #   merge — слить понятия пункта в primary; separate — снять предложенную связь; related — связь relation (checked_ai);
-#   attach/reattach — схема → target; detach — отвязать; keep — слияние подтверждено; unsure — остаётся в очереди.
+#   attach/reattach — схема → target; detach — отвязать; keep — слияние подтверждено; unsure — остаётся в очереди;
+#   set_meaning — заменить значение понятия target на meaning {ru, en} (по легенде/переводу Керимова).
+# Несколько файлов решений применяются по очереди: python3 apply_decisions.py A.json out && python3 apply_decisions.py B.json out
 # Пишет обратно concepts.json, relations.json, term_map.json, review_queue.csv (+ колонки «решение», «обоснование»), decisions_log.json.
 import json, sys, os, csv, collections as C
 
@@ -59,6 +61,10 @@ def main(dec_path, out):
                 if k in ('attach', 'reattach') and d.get('target') and res(d['target']) in cs:
                     t = cs[res(d['target'])]; t['schemes'] = list(dict.fromkeys((t.get('schemes') or []) + [sid]))
             log[k] += 1
+        elif k == 'set_meaning' and d.get('target') and res(d['target']) in cs:
+            t = cs[res(d['target'])]
+            t['meaning'] = {**(t.get('meaning') or {}), **(d.get('meaning') or {}), 'status': 'checked_ai', 'why': d.get('reason_ru')}
+            log[k] += 1
         else:
             log[k] += 1
     # связи и term_map — на выжившие id; дубли связей и петли убрать; предложенные связи внутри слитого — убрать
@@ -73,21 +79,27 @@ def main(dec_path, out):
     for x, p in alias.items(): tm.setdefault(x, p)
     # очередь: решённые пункты помечаются, unsure остаются открытыми
     qp = os.path.join(out, 'review_queue.csv')
-    Q = list(csv.DictReader(open(qp)))
+    # дополнительные решения (n = 's1'…) очередь не трогают
+    Q = list(csv.DictReader(open(qp))) if any(isinstance(d.get('n'), int) for d in decs) else None
     byn = {d['n']: d for d in decs}
-    for i, q in enumerate(Q):
+    for i, q in enumerate(Q or []):
         d = byn.get(i)
         q['решение'] = (d['decision'] + ((' → ' + (d.get('primary') or d.get('target') or '')) if (d.get('primary') or d.get('target')) else '')) if d else ''
         q['обоснование'] = (d.get('reason_ru') or '') + (' [' + '; '.join(d.get('evidence') or []) + ']' if d and d.get('evidence') else '') if d else ''
         q['уверенность'] = d.get('confidence', '') if d else ''
         q['статус'] = 'открыт' if (not d or d['decision'] == 'unsure') else 'решено ИИ, ждёт подтверждения'
-    with open(qp, 'w', newline='') as f:
+    if Q is not None:
+      with open(qp, 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=['тип', 'что', 'почему', 'предложение', 'решение', 'обоснование', 'уверенность', 'статус'])
         w.writeheader()
         for q in Q: w.writerow({k: q.get(k, '') for k in w.fieldnames})
     J = lambda n, o: json.dump(o, open(os.path.join(out, n), 'w'), ensure_ascii=False, indent=1)
     J('concepts.json', list(cs.values())); J('relations.json', rel2); J('term_map.json', tm)
-    J('decisions_log.json', {'applied': dict(log), 'merged_away': alias})
+    lp = os.path.join(out, 'decisions_log.json')
+    prev = json.load(open(lp)) if os.path.exists(lp) and Q is None else {}
+    prev = prev if 'files' in prev else {'files': {}}
+    prev['files'][os.path.basename(dec_path)] = {'applied': dict(log), 'merged_away': alias}
+    J('decisions_log.json', prev)
     print('применено:', dict(log), '| понятий:', len(cs), '| слито:', len(alias))
 
 
