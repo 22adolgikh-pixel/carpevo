@@ -2,7 +2,7 @@
 # python3 build_proto.py SITE_DATA.json SCHEMES.json OUT.html [метка_версии]
 # Берёт site/model/out/* (понятия, связи, очередь), site/model/classify.py (смысловые классы),
 # данные сайта (источники, носители) и выгрузку pixel_schemes; всё вшивается в один HTML.
-import json, sys, os, csv, re, subprocess, datetime, collections as C
+import json, sys, os, csv, re, glob, subprocess, datetime, collections as C
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODEL = os.path.join(HERE, '..', 'model')
@@ -81,8 +81,18 @@ def main(site_data, schemes_path, out_html, label=None):
         commit = '?'
     meta = {'label': label or 'прототип', 'built': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'commit': commit,
             'unlinked': len([s for s in S if s['id'] not in linked])}
+    plates, extra_src = [], []
+    sdir = os.path.join(MODEL, 'sources')
+    for f in sorted(glob.glob(os.path.join(sdir, '*', 'plates.json'))):
+        pj = json.load(open(f)); extra_src.append(pj['source'])
+        for pl in pj['plates']:
+            plates.append({k: pl.get(k) for k in ('id', 'pdf_page', 'printed_page', 'section', 'title_raw', 'type_name', 'group', 'attribution_note',
+                           'date', 'inscribed_date', 'collection', 'inv_no', 'dimensions_cm', 'knots_per_m2', 'is_detail', 'design_ru', 'borders_ru',
+                           'motifs_en', 'concept', 'link_status', 'school')} | {'src': pj['source']['id']})
+    srcs = {s['id']: s for s in D['sources']}
+    for s in extra_src: srcs[s['id']] = s
     DATA = {'concepts': concepts, 'rel': rel, 'tmap': tmap, 'queue': queue, 'schemes': sch,
-            'sources': {s['id']: s for s in D['sources']}, 'carriers': carriers,
+            'sources': srcs, 'carriers': carriers, 'plates': plates,
             'classes': CLASSES, 'school_types': SCHOOL_TYPES, 'meta': meta}
     tpl = open(os.path.join(HERE, 'template.html')).read()
     js = json.dumps(DATA, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')

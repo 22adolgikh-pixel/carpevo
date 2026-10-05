@@ -68,6 +68,7 @@
   .qf { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; } .qf button { font:inherit; font-size:13px; padding:3px 9px; border:1px solid var(--border); background:var(--bg); color:var(--text); border-radius:12px; cursor:pointer; } .qf button.on { background:var(--bg-alt); font-weight:600; }
   .more { margin-top:12px; } .more button { font:inherit; padding:5px 14px; border:1px solid var(--border); background:var(--bg-alt); color:var(--text); cursor:pointer; }
   .desc { max-width:760px; } .desc h3 { font-size:15px; margin:14px 0 2px; } .desc p { margin:0 0 6px; }
+  .plate { border-bottom:1px solid var(--line); padding:10px 0; } .plate p { margin:4px 0; max-width:760px; }
   footer { color:var(--soft); font-size:12px; padding:20px; text-align:center; }
 </style>
 </head>
@@ -79,6 +80,7 @@
     <a href="#/compositions" data-r="compositions">Ковры и композиции</a>
     <a href="#/schools" data-r="schools">Школы</a>
     <a href="#/review" data-r="review">Проверка</a>
+    <a href="#/plates" data-r="plates">Ковры из книг</a>
     <a href="#/about" data-r="about">О модели</a>
   </nav>
   <input id="q" type="search" placeholder="Поиск: слово, значение, старое название…">
@@ -226,6 +228,16 @@ function relBlocks(c) {
   });
   return h ? `<h2>Связи</h2><div class="rels">${h}</div>` : '';
 }
+function plateLink(pl) { const S = SRC[pl.src] || {}; return S.archive ? `${S.archive}/page/${pl.printed_page}/` : ''; }
+function plateHTML(pl, withConcept) {
+  const S = SRC[pl.src] || {}; const c = pl.concept && C[pl.concept];
+  const meta = [pl.date, pl.inscribed_date && 'вытканная дата: ' + pl.inscribed_date, pl.collection && pl.collection + (pl.inv_no ? ' (' + pl.inv_no + ')' : ''), pl.dimensions_cm && pl.dimensions_cm + ' см', pl.knots_per_m2 && pl.knots_per_m2 + ' узлов/м²'].filter(Boolean).map(esc).join(' · ');
+  return `<div class="plate"><div class="pt"><b>${esc(pl.title_raw || pl.type_name || 'без названия')}</b>${pl.is_detail ? ' <span class="muted">(деталь)</span>' : ''}
+    ${withConcept && c ? ` → <a href="#/c/${c.id}">${esc(cap(c.h))}</a>${pl.link_status === 'proposed' ? ' <span class="pill prop">предложено</span>' : ''}` : ''}</div>
+    <div class="muted" style="font-size:12.5px">${meta}</div>
+    ${pl.design_ru ? `<p>${esc(pl.design_ru)}</p>` : ''}${pl.borders_ru ? `<p class="muted">Каймы: ${esc(pl.borders_ru)}</p>` : ''}
+    <div class="muted" style="font-size:12px">${esc(S.short || pl.src)}, с. ${pl.printed_page}${plateLink(pl) ? ` · <a href="${plateLink(pl)}" target="_blank" rel="noopener">фото в книге (Internet Archive)</a>` : ''}</div></div>`;
+}
 function renderConcept(id) {
   const c = C[id] || C[DATA.tmap[id]];
   if (!c) { $('#app').innerHTML = `<p>Понятие «${esc(id)}» не найдено.</p>`; return; }
@@ -240,6 +252,7 @@ function renderConcept(id) {
   const figs = c.sch.map(sid => { const s = DATA.schemes[sid]; return `<figure><div class="box" data-fig="${sid}"></div><figcaption><b>${esc(s.n || '')}</b>${s.tr ? ' — «' + esc(s.tr) + '»' : ''}<br>Керимов, табл. ${s.tb}, рис. ${s.fg}${s.sc ? ' · ' + (SCHOOL[s.sc] || s.sc) : ''} · ${s.w}×${s.h} узлов${s.nt ? '<br>' + esc(s.nt) : ''}</figcaption></figure>`; }).join('');
   const atts = c.at.map(a => `<tr><td>${esc((SRC[a[0]] || {}).short || a[0] || '')}</td><td>${esc(pageOf(a))}</td><td>${a[5] ? ROLE[a[5]] || a[5] : ''}</td><td>${a[3] ? '«' + esc(a[3]) + '»' : ''}${a[4] ? `<div class="muted">${esc(a[4])}</div>` : ''}<div class="muted" style="font-size:11px">${esc(a[1] || '')}</div></td></tr>`);
   const car = DATA.carriers.filter(k => k[0] === c.id);
+  const pls = DATA.plates.filter(pl => pl.concept === c.id);
   const merged = c.rec.length > 1 ? `<div class="note">Собрано из ${c.rec.length} записей старого сайта: ${c.rec.map(esc).join(', ')}. <span class="pill auto">${c.mg.rule === 'renamed_by_reading' ? 'слито по чтению сверки с Керимовым' : 'слито: одно написание'}</span>${c.mg.renamed && c.mg.renamed.length ? ` Переименованы сверкой: ${c.mg.renamed.map(esc).join(', ')}.` : ''}</div>` : '';
   $('#app').innerHTML = `<div style="max-width:1050px">
     <div class="muted" style="font-size:13px"><a href="#/${c.t === 'ornament' ? '' : 'compositions'}">${c.t === 'ornament' ? 'Узоры' : 'Ковры и композиции'}</a> · ${TYPE[c.t]}</div>
@@ -255,6 +268,7 @@ function renderConcept(id) {
     <h2>Где встречается</h2><table class="t">
       ${roles ? `<tr><th>Роль</th><td>${roles}</td></tr>` : ''}${schools ? `<tr><th>Школы</th><td>${schools}</td></tr>` : ''}${srcs ? `<tr><th>Источники</th><td>${srcs}</td></tr>` : ''}
       ${car.length ? `<tr><th>Ковры-носители</th><td>${car.slice(0, 12).map(k => esc([k[1], k[2], k[3], k[4]].filter(Boolean).join(', '))).join('<br>')}${car.length > 12 ? `<br><span class="muted">и ещё ${car.length - 12}</span>` : ''}</td></tr>` : ''}</table>
+    ${pls.length ? `<h2>Ковры в книгах (${pls.length})</h2>${pls.map(pl => plateHTML(pl, false)).join('')}` : ''}
     ${atts.length ? `<h2>Упоминания в источниках (${atts.length})</h2><table class="t"><tr><th>Источник</th><th>Стр.</th><th>Роль</th><th>Цитата / заметка</th></tr>${atts.slice(0, 15).join('')}</table>${atts.length > 15 ? `<details><summary>ещё ${atts.length - 15}</summary><table class="t">${atts.slice(15).join('')}</table></details>` : ''}` : ''}
     ${c.x.length ? `<h2>Внешние источники</h2>${c.x.map(([t, u]) => `<div><a href="${esc(u)}" target="_blank" rel="noopener">${esc(t || u)}</a></div>`).join('')}` : ''}
   </div>`;
@@ -291,6 +305,16 @@ function renderReview() {
   document.querySelectorAll('.qf button').forEach(b => b.onclick = () => { QF = b.dataset.q; renderReview(); });
 }
 
+let PG = '';
+function renderPlates() {
+  const groups = {}; DATA.plates.forEach(p => { const g = p.group || p.section || '—'; groups[g] = (groups[g] || 0) + 1; });
+  const L = DATA.plates.filter(p => !PG || (p.group || p.section || '—') === PG);
+  $('#app').innerHTML = `<div style="max-width:980px"><h1>Ковры из книг</h1>
+    <div class="note">Ковры, описанные в книгах-каталогах: шапка (собрание, размер, плотность), описание поля и кайм — пересказ по-русски (ИИ, не проверено). Фото не копируются на сайт (авторские права): ссылка ведёт на страницу книги в Internet Archive. Группы — в атрибуции автора книги (западная классификация), рядом — понятие из нашего словаря, если оно найдено.</div>
+    <div class="qf"><button data-g="" class="${PG ? '' : 'on'}">все (${DATA.plates.length})</button>${Object.entries(groups).map(([g, n]) => `<button data-g="${esc(g)}" class="${PG === g ? 'on' : ''}">${esc(g)} (${n})</button>`).join('')}</div>
+    ${L.map(pl => plateHTML(pl, true)).join('')}</div>`;
+  document.querySelectorAll('.qf button').forEach(b => b.onclick = () => { PG = b.dataset.g; renderPlates(); });
+}
 function renderAbout() {
   const n = t => DATA.concepts.filter(c => c.t === t).length;
   const rc = {}; DATA.rel.forEach(r => rc[r.type] = (rc[r.type] || 0) + 1);
@@ -314,6 +338,7 @@ function route() {
   else if (p === 'schools') renderSchools();
   else if (p === 'review') renderReview();
   else if (p === 'about') renderAbout();
+  else if (p === 'plates') renderPlates();
   else renderCatalog('ornament');
 }
 let qt; $('#q').oninput = e => { clearTimeout(qt); qt = setTimeout(() => { F.q = e.target.value; SHOWN = 120; const p = location.hash.slice(2).split('/')[0]; if (p === 'compositions') renderCatalog('composition'); else { if (location.hash && location.hash !== '#/') location.hash = '#/'; else renderCatalog('ornament'); } }, 200); };
