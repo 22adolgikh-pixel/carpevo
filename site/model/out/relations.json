@@ -112,13 +112,6 @@
   "why": "«butalı islimi»: главное слово «islimi»"
  },
  {
-  "from": "butali-islimi",
-  "type": "related",
-  "to": "butali",
-  "status": "auto",
-  "why": "«butalı islimi»: содержит «butalı»"
- },
- {
   "from": "buta-qarmaq",
   "type": "kind_of",
   "to": "qarmaq",
@@ -238,20 +231,6 @@
   "why": "«dolama haşiyə»: содержит «dolama»"
  },
  {
-  "from": "spiral-hashiye",
-  "type": "kind_of",
-  "to": "hashiye",
-  "status": "auto",
-  "why": "«dolama haşiyə»: главное слово «haşiyə»"
- },
- {
-  "from": "spiral-hashiye",
-  "type": "related",
-  "to": "dolama",
-  "status": "auto",
-  "why": "«dolama haşiyə»: содержит «dolama»"
- },
- {
   "from": "enli-su",
   "type": "kind_of",
   "to": "su",
@@ -329,13 +308,6 @@
   "why": "«haçalı islimi»: главное слово «islimi»"
  },
  {
-  "from": "xachali-islimi",
-  "type": "related",
-  "to": "xachali",
-  "status": "auto",
-  "why": "«haçalı islimi»: содержит «haçalı»"
- },
- {
   "from": "heyvan-tesvirleri",
   "type": "related",
   "to": "heyvan",
@@ -358,20 +330,6 @@
  },
  {
   "from": "xorme-islimi",
-  "type": "related",
-  "to": "horme",
-  "status": "auto",
-  "why": "«hörmə islimi»: содержит «hörmə»"
- },
- {
-  "from": "xurma-islimi",
-  "type": "kind_of",
-  "to": "islimi",
-  "status": "auto",
-  "why": "«hörmə islimi»: главное слово «islimi»"
- },
- {
-  "from": "xurma-islimi",
   "type": "related",
   "to": "horme",
   "status": "auto",
@@ -448,7 +406,7 @@
   "why": "«kaşı kərpic»: содержит «kaşı»"
  },
  {
-  "from": "kechi-dirnagi",
+  "from": "kechidagbani",
   "type": "related",
   "to": "kechi",
   "status": "auto",
@@ -588,20 +546,6 @@
   "why": "«muğan buta»: главное слово «buta»"
  },
  {
-  "from": "muje-muje",
-  "type": "kind_of",
-  "to": "muje",
-  "status": "auto",
-  "why": "«müjə-müjə»: главное слово «müjə»"
- },
- {
-  "from": "muje-muje",
-  "type": "related",
-  "to": "muje",
-  "status": "auto",
-  "why": "«müjə-müjə»: содержит «müjə»"
- },
- {
   "from": "mebed-ara-hashiyesi",
   "type": "kind_of",
   "to": "hashiye",
@@ -637,14 +581,14 @@
   "why": "«palıd yarpağı»: содержит «palıd»"
  },
  {
-  "from": "pishik-lepesi",
+  "from": "pishikayagi",
   "type": "kind_of",
   "to": "ayaq",
   "status": "auto",
   "why": "«pişik ayağı»: главное слово «ayağı»"
  },
  {
-  "from": "pishik-lepesi",
+  "from": "pishikayagi",
   "type": "related",
   "to": "pishik",
   "status": "auto",
@@ -751,7 +695,7 @@
  {
   "from": "qaychi-ve-ya-qizil-gul",
   "type": "alt_name_of",
-  "to": "qaychi-2",
+  "to": "qeychi",
   "status": "proposed",
   "why": "«qayçı və ya qızıl gül»: «или» — другое название"
  },
@@ -973,7 +917,7 @@
   "why": "«saçaqlı və ya tikanlı»: «или» — другое название"
  },
  {
-  "from": "stilize-edilmish-heyvan-shekilleri",
+  "from": "stilleshmish-heyvan-shekilleri",
   "type": "related",
   "to": "heyvan",
   "status": "auto",
@@ -985,13 +929,6 @@
   "to": "drakon",
   "status": "auto",
   "why": "«stilize edilmiş əjdaha şəkli»: содержит «əjdaha»"
- },
- {
-  "from": "stilleshmish-heyvan-shekilleri",
-  "type": "related",
-  "to": "heyvan",
-  "status": "auto",
-  "why": "«stilləşmiş heyvan şəkilləri»: содержит «heyvan»"
  },
  {
   "from": "suraxani-ara-hashiyesi",
@@ -1141,13 +1078,6 @@
   "why": "«yazılı kətəbə»: главное слово «kətəbə»"
  },
  {
-  "from": "ketebe-yazili",
-  "type": "kind_of",
-  "to": "ketebe",
-  "status": "auto",
-  "why": "«yazılı kətəbə»: главное слово «kətəbə»"
- },
- {
   "from": "yomud-ara-hashiyesi",
   "type": "kind_of",
   "to": "hashiye",
@@ -1192,7 +1122,7 @@
  {
   "from": "chanaqli-baga",
   "type": "kind_of",
-  "to": "baga",
+  "to": "tisbaga",
   "status": "auto",
   "why": "«çanaqlı-bağa»: главное слово «bağa»"
  },
@@ -1393,7 +1323,7 @@
   "why": "budaqlı = budaq + -lı"
  },
  {
-  "from": "butali",
+  "from": "butali-islimi",
   "type": "derived_from",
   "to": "buta",
   "status": "auto",
@@ -1458,7 +1388,7 @@
  {
   "from": "mujeler",
   "type": "derived_from",
-  "to": "muje",
+  "to": "muje-muje",
   "status": "auto",
   "why": "müjələr = müjə + -lər"
  },
@@ -1482,13 +1412,6 @@
   "to": "qarmaq",
   "status": "auto",
   "why": "qarmaqlı = qarmaq + -lı"
- },
- {
-  "from": "qarmaqlilar",
-  "type": "derived_from",
-  "to": "qarmaqli",
-  "status": "auto",
-  "why": "qarmaqlılar = qarmaqlı + -lar"
  },
  {
   "from": "qollu",
@@ -1577,7 +1500,7 @@
  {
   "from": "butali-carpet",
   "type": "named_after",
-  "to": "butali",
+  "to": "butali-islimi",
   "status": "auto",
   "why": "то же слово"
  },
@@ -1708,34 +1631,6 @@
   "why": "то же слово"
  },
  {
-  "from": "alcha-gul",
-  "type": "spelling_variant",
-  "to": "alchagulu",
-  "status": "proposed",
-  "why": "одно значение «цветок алычи», сходство написания 0.93"
- },
- {
-  "from": "ana-guller",
-  "type": "synonym",
-  "to": "anakuz",
-  "status": "proposed",
-  "why": "одно значение «материнские цветы», сходство написания 0.40"
- },
- {
-  "from": "ana-guller",
-  "type": "synonym",
-  "to": "ana-chichekleri",
-  "status": "proposed",
-  "why": "одно значение «материнские цветы», сходство написания 0.57"
- },
- {
-  "from": "anakuz",
-  "type": "synonym",
-  "to": "ana-chichekleri",
-  "status": "proposed",
-  "why": "одно значение «материнские цветы», сходство написания 0.44"
- },
- {
   "from": "aggul",
   "type": "synonym",
   "to": "ag-chichek",
@@ -1743,81 +1638,11 @@
   "why": "одно значение «белый цветок», сходство написания 0.33"
  },
  {
-  "from": "bala-hashiyeler",
-  "type": "synonym",
-  "to": "malye-kaymy",
-  "status": "proposed",
-  "why": "одно значение «малые каймы», сходство написания 0.67"
- },
- {
-  "from": "bayraq",
-  "type": "synonym",
-  "to": "elem",
-  "status": "proposed",
-  "why": "одно значение «знамя», сходство написания 0.00"
- },
- {
-  "from": "bazibend",
-  "type": "synonym",
-  "to": "bilerzik",
-  "status": "proposed",
-  "why": "одно значение «браслет», сходство написания 0.25"
- },
- {
-  "from": "baga",
-  "type": "synonym",
-  "to": "tisbaga",
-  "status": "proposed",
-  "why": "одно значение «черепаха», сходство написания 0.73"
- },
- {
-  "from": "baga",
-  "type": "synonym",
-  "to": "chanaqli-baga",
-  "status": "proposed",
-  "why": "одно значение «черепаха», сходство написания 0.53"
- },
- {
   "from": "tisbaga",
   "type": "synonym",
   "to": "chanaqli-baga",
   "status": "proposed",
-  "why": "одно значение «черепаха», сходство написания 0.56"
- },
- {
-  "from": "belbagi",
-  "type": "synonym",
-  "to": "kemer",
-  "status": "proposed",
-  "why": "одно значение «пояс», сходство написания 0.00"
- },
- {
-  "from": "belbagi",
-  "type": "synonym",
-  "to": "toqqa-poqas",
-  "status": "proposed",
-  "why": "одно значение «пояс», сходство написания 0.17"
- },
- {
-  "from": "kemer",
-  "type": "synonym",
-  "to": "toqqa-poqas",
-  "status": "proposed",
-  "why": "одно значение «пояс», сходство написания 0.00"
- },
- {
-  "from": "beshik",
-  "type": "synonym",
-  "to": "ovruk",
-  "status": "proposed",
-  "why": "одно значение «люлька», сходство написания 0.18"
- },
- {
-  "from": "butali",
-  "type": "synonym",
-  "to": "butali-islimi",
-  "status": "proposed",
-  "why": "одно значение «миндалевидный ислими», сходство написания 0.67"
+  "why": "одно значение «черепаха», сходство написания 0.53"
  },
  {
   "from": "behli",
@@ -1827,20 +1652,6 @@
   "why": "одно значение «черешня», сходство написания 0.20"
  },
  {
-  "from": "cucgoz",
-  "type": "synonym",
-  "to": "cucezu",
-  "status": "proposed",
-  "why": "одно значение «цыплячий глаз», сходство написания 0.67"
- },
- {
-  "from": "daraq",
-  "type": "synonym",
-  "to": "shana",
-  "status": "proposed",
-  "why": "одно значение «гребень», сходство написания 0.44"
- },
- {
   "from": "dilik",
   "type": "spelling_variant",
   "to": "dilerekli",
@@ -1848,32 +1659,11 @@
   "why": "одно значение «зубчатый», сходство написания 0.83"
  },
  {
-  "from": "dilik",
-  "type": "synonym",
-  "to": "dish-dish",
-  "status": "proposed",
-  "why": "одно значение «зубчатый», сходство написания 0.55"
- },
- {
-  "from": "dilerekli",
-  "type": "synonym",
-  "to": "dish-dish",
-  "status": "proposed",
-  "why": "одно значение «зубчатый», сходство написания 0.46"
- },
- {
-  "from": "qivrim",
+  "from": "dolama",
   "type": "synonym",
   "to": "qivrim-2",
   "status": "proposed",
   "why": "одно значение «завиток», сходство написания 0.17"
- },
- {
-  "from": "dirnaqli",
-  "type": "synonym",
-  "to": "qaynagi",
-  "status": "proposed",
-  "why": "одно значение «коготь», сходство написания 0.57"
  },
  {
   "from": "goz",
@@ -1883,34 +1673,6 @@
   "why": "одно значение «глаз», сходство написания 0.75"
  },
  {
-  "from": "gubbe",
-  "type": "spelling_variant",
-  "to": "qubbe",
-  "status": "proposed",
-  "why": "одно значение «купол», сходство написания 0.80"
- },
- {
-  "from": "gul",
-  "type": "synonym",
-  "to": "chichek",
-  "status": "proposed",
-  "why": "одно значение «цветок», сходство написания 0.00"
- },
- {
-  "from": "gulabgulu-2",
-  "type": "synonym",
-  "to": "qaychi-ve-ya-qizil-gul",
-  "status": "proposed",
-  "why": "одно значение «роза», сходство написания 0.23"
- },
- {
-  "from": "gulabgulu-2",
-  "type": "synonym",
-  "to": "qizilgul",
-  "status": "proposed",
-  "why": "одно значение «роза», сходство написания 0.35"
- },
- {
   "from": "qaychi-ve-ya-qizil-gul",
   "type": "synonym",
   "to": "qizilgul",
@@ -1918,137 +1680,11 @@
   "why": "одно значение «роза», сходство написания 0.64"
  },
  {
-  "from": "erik",
-  "type": "synonym",
-  "to": "qaysi",
-  "status": "proposed",
-  "why": "одно значение «абрикос», сходство написания 0.60"
- },
- {
-  "from": "qaysibishaq",
-  "type": "spelling_variant",
-  "to": "qeysibishah",
-  "status": "proposed",
-  "why": "одно значение «абрикос с веточкой», сходство написания 0.80"
- },
- {
-  "from": "xachali",
-  "type": "synonym",
-  "to": "xachali-islimi",
-  "status": "proposed",
-  "why": "одно значение «раздвоенный ислими», сходство написания 0.67"
- },
- {
-  "from": "inek",
-  "type": "synonym",
-  "to": "sigir",
-  "status": "proposed",
-  "why": "одно значение «корова», сходство написания 0.00"
- },
- {
-  "from": "biber",
-  "type": "spelling_variant",
-  "to": "istot",
-  "status": "proposed",
-  "why": "одно значение «перец», сходство написания 0.91"
- },
- {
-  "from": "qashi-2",
+  "from": "kashi",
   "type": "synonym",
   "to": "qashi-kerpic",
   "status": "proposed",
   "why": "одно значение «глазурованный кирпич», сходство написания 0.57"
- },
- {
-  "from": "kilim-gul",
-  "type": "spelling_variant",
-  "to": "kilim-gulu",
-  "status": "proposed",
-  "why": "одно значение «цветок килима», сходство написания 0.94"
- },
- {
-  "from": "kvadratlar-ve-duzbucaqlilar",
-  "type": "spelling_variant",
-  "to": "kvadrat-ve-duzbucaqlilar",
-  "status": "proposed",
-  "why": "одно значение «квадраты и прямоугольники», сходство написания 0.94"
- },
- {
-  "from": "kuchuq",
-  "type": "synonym",
-  "to": "tula",
-  "status": "proposed",
-  "why": "одно значение «щенок», сходство написания 0.00"
- },
- {
-  "from": "muje",
-  "type": "synonym",
-  "to": "muje-muje",
-  "status": "proposed",
-  "why": "одно значение «ресница», сходство написания 0.67"
- },
- {
-  "from": "meshel",
-  "type": "synonym",
-  "to": "shamal",
-  "status": "proposed",
-  "why": "одно значение «факел», сходство написания 0.40"
- },
- {
-  "from": "nagqash",
-  "type": "synonym",
-  "to": "naxish",
-  "status": "proposed",
-  "why": "одно значение «узор», сходство написания 0.00"
- },
- {
-  "from": "nargul",
-  "type": "spelling_variant",
-  "to": "nar-chicheyi",
-  "status": "proposed",
-  "why": "одно значение «гранатовый цветок», сходство написания 0.92"
- },
- {
-  "from": "surgu",
-  "type": "synonym",
-  "to": "sini",
-  "status": "proposed",
-  "why": "одно значение «поднос», сходство написания 0.20"
- },
- {
-  "from": "qarmaqli",
-  "type": "spelling_variant",
-  "to": "qarmaqlilar",
-  "status": "proposed",
-  "why": "одно значение «крючкообразные», сходство написания 0.84"
- },
- {
-  "from": "qaychi-2",
-  "type": "synonym",
-  "to": "qeychi",
-  "status": "proposed",
-  "why": "одно значение «ножницы», сходство написания 0.60"
- },
- {
-  "from": "qaychibaliq",
-  "type": "spelling_variant",
-  "to": "qeychibaliq",
-  "status": "proposed",
-  "why": "одно значение «рыба-ножницы», сходство написания 0.80"
- },
- {
-  "from": "samavar",
-  "type": "synonym",
-  "to": "samavar-2",
-  "status": "proposed",
-  "why": "одно значение «самовар», сходство написания 0.71"
- },
- {
-  "from": "stilize-edilmish-heyvan-shekilleri",
-  "type": "spelling_variant",
-  "to": "stilleshmish-heyvan-shekilleri",
-  "status": "proposed",
-  "why": "одно значение «стилизованные изображения животных», сходство написания 0.85"
  },
  {
   "from": "tahanq-uzum-yarpagi",
@@ -2058,14 +1694,7 @@
   "why": "одно значение «виноградный лист», сходство написания 0.33"
  },
  {
-  "from": "tavus",
-  "type": "synonym",
-  "to": "tovuz",
-  "status": "proposed",
-  "why": "одно значение «павлин», сходство написания 0.60"
- },
- {
-  "from": "toqqa",
+  "from": "kemer",
   "type": "synonym",
   "to": "toqqaqabagi",
   "status": "proposed",
@@ -2079,17 +1708,38 @@
   "why": "одно значение «звездный», сходство написания 0.53"
  },
  {
-  "from": "xarxovuz",
-  "type": "spelling_variant",
-  "to": "cherxouz",
-  "status": "proposed",
-  "why": "одно значение «бассейн», сходство написания 0.75"
+  "from": "behli",
+  "type": "related",
+  "to": "gilas",
+  "status": "checked_ai",
+  "why": "Керимов прямо пишет: «по местной терминологии бәһли означает гилас (черешня)». Но bəhli — кайма, а gilas — элемент поля (табл. 90), то есть название одно по смыслу, узоры разные. Связать."
  },
  {
-  "from": "chalgi",
-  "type": "synonym",
-  "to": "cheng",
-  "status": "proposed",
-  "why": "одно значение «музыкальный инструмент», сходство написания 0.22"
+  "from": "qaychi-ve-ya-qizil-gul",
+  "type": "related",
+  "to": "qizilgul",
+  "status": "checked_ai",
+  "why": "Кайма «гейчи» имеет второе народное имя «гызыл гюль» — то же слово, что элемент qızılgül. Но кайма и элемент — разные узоры. Связать. Заметка: в т. I qeyçi «также называют „чахмаглы гызылгюль“» — кайма, вероятно, то же, что qeyçi (п. 214), проверить."
+ },
+ {
+  "from": "kashi",
+  "type": "derived_from",
+  "to": "qashi-kerpic",
+  "status": "checked_ai",
+  "why": "Kaşı — кайма («Кашы», она же «Башир кызы», бакинские «Хиле»), kaşı kərpic — элемент поля «глазурованный кирпич» (табл. 46). Второе название содержит первое, но узоры разные — связь, не слияние."
+ },
+ {
+  "from": "toqqaqabagi",
+  "type": "derived_from",
+  "to": "kemer",
+  "status": "checked_ai",
+  "why": "В табл. 30 это разные фигуры: «Тогга» (рис. 5, 6, 9, 10 — «Пояс») и «Тоггагабагы» (рис. 1, 7, 8 — «Пряжка»). Второе название образовано от первого («передняя часть пряжки») — связь, не слияние. Значение «пряжка» у понятия toqqa на сайте противоречит легенде («Пояс»)."
+ },
+ {
+  "from": "ulduzlu",
+  "type": "related",
+  "to": "ulduzlu-2",
+  "status": "checked_ai",
+  "why": "Одно слово «звезда» в двух написаниях (ылдыз/улдуз), но у Керимова это разные узоры: «Ылдызлы» — кайма (перевод «Звездочка»), «Улдузлу» — элемент табл. 41 («Звездный»). Связать, не сливать."
  }
 ]

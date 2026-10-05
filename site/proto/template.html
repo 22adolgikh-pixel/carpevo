@@ -222,7 +222,7 @@ function relBlocks(c) {
     const L = groups[k]; if (!L) return;
     const [dir, t] = k.split(':'); const title = REL[t][dir === 'o' ? 0 : 1];
     const proposed = L.some(([, r]) => r.status === 'proposed');
-    h += `<div class="rel${L.length > 6 ? ' wide' : ''}"><h5>${title} (${L.length}) ${proposed ? '<span class="pill prop">предложено машиной</span>' : '<span class="pill auto">авто</span>'}</h5><div class="list">`
+    h += `<div class="rel${L.length > 6 ? ' wide' : ''}"><h5>${title} (${L.length}) ${proposed ? '<span class="pill prop">предложено машиной</span>' : (L.every(([, r]) => r.status === 'checked_ai') ? '<span class="pill auto">проверено ИИ по книге</span>' : '<span class="pill auto">авто</span>')}</h5><div class="list">`
       + L.slice(0, 60).map(([id, r]) => C[id] ? cardHTML(C[id], {z: 36, why: r.why}, r.status === 'proposed' ? 'proposed' : '') : '').join('')
       + '</div>' + (L.length > 60 ? `<div class="muted">и ещё ${L.length - 60}</div>` : '') + '</div>';
   });
@@ -253,7 +253,7 @@ function renderConcept(id) {
   const atts = c.at.map(a => `<tr><td>${esc((SRC[a[0]] || {}).short || a[0] || '')}</td><td>${esc(pageOf(a))}</td><td>${a[5] ? ROLE[a[5]] || a[5] : ''}</td><td>${a[3] ? '«' + esc(a[3]) + '»' : ''}${a[4] ? `<div class="muted">${esc(a[4])}</div>` : ''}<div class="muted" style="font-size:11px">${esc(a[1] || '')}</div></td></tr>`);
   const car = DATA.carriers.filter(k => k[0] === c.id);
   const pls = DATA.plates.filter(pl => pl.concept === c.id);
-  const merged = c.rec.length > 1 ? `<div class="note">Собрано из ${c.rec.length} записей старого сайта: ${c.rec.map(esc).join(', ')}. <span class="pill auto">${c.mg.rule === 'renamed_by_reading' ? 'слито по чтению сверки с Керимовым' : 'слито: одно написание'}</span>${c.mg.renamed && c.mg.renamed.length ? ` Переименованы сверкой: ${c.mg.renamed.map(esc).join(', ')}.` : ''}</div>` : '';
+  const merged = c.rec.length > 1 ? `<div class="note">Собрано из ${c.rec.length} записей старого сайта: ${c.rec.map(esc).join(', ')}. <span class="pill auto">${c.mg.status === 'checked_ai' ? 'проверено ИИ по книге' : (c.mg.rule === 'renamed_by_reading' ? 'слито по чтению сверки с Керимовым' : 'слито: одно написание')}</span>${c.mg.renamed && c.mg.renamed.length ? ` Переименованы сверкой: ${c.mg.renamed.map(esc).join(', ')}.` : ''}</div>` : '';
   $('#app').innerHTML = `<div style="max-width:1050px">
     <div class="muted" style="font-size:13px"><a href="#/${c.t === 'ornament' ? '' : 'compositions'}">${c.t === 'ornament' ? 'Узоры' : 'Ковры и композиции'}</a> · ${TYPE[c.t]}</div>
     <h1>${esc(cap(c.h))}</h1><div class="sub1">${esc(c.m.ru || '')}${c.m.en ? ` · <i>${esc(c.m.en)}</i>` : ''}</div>
@@ -295,14 +295,23 @@ function renderSchools() {
 
 /* ---------- проверка ---------- */
 let QF = '';
+let QS = 'open';
 function renderReview() {
-  const types = {}; DATA.queue.forEach(q => types[q['тип']] = (types[q['тип']] || 0) + 1);
-  const L = DATA.queue.filter(q => !QF || q['тип'] === QF);
-  const link = s => esc(s).replace(/\b([a-z0-9][a-z0-9-]*[a-z0-9])\b(?= «)/g, m => (C[m] || C[DATA.tmap[m]]) ? `<a href="#/c/${m}">${m}</a>` : m);
-  $('#app').innerHTML = `<h1>Очередь проверки</h1><div class="note">То, что машина не решилась решить сама. В прототипе — только просмотр; дальше здесь будут кнопки «слить / разные / связать», а решения — сохраняться и учитываться при следующей сборке.</div>
-    <div class="qf"><button data-q="" class="${QF ? '' : 'on'}">все (${DATA.queue.length})</button>${Object.entries(types).map(([t, n]) => `<button data-q="${esc(t)}" class="${QF === t ? 'on' : ''}">${esc(t)} (${n})</button>`).join('')}</div>
-    <table class="t"><tr><th>Тип</th><th>Что</th><th>Почему</th><th>Предложение</th></tr>${L.map(q => `<tr><td>${esc(q['тип'])}</td><td>${link(q['что'])}</td><td>${esc(q['почему'])}</td><td>${esc(q['предложение'])}</td></tr>`).join('')}</table>`;
-  document.querySelectorAll('.qf button').forEach(b => b.onclick = () => { QF = b.dataset.q; renderReview(); });
+  const st = q => q['статус'] || 'открыт';
+  const L0 = DATA.queue.filter(q => QS === 'all' || (QS === 'open' ? st(q) === 'открыт' : st(q) !== 'открыт'));
+  const types = {}; L0.forEach(q => types[q['тип']] = (types[q['тип']] || 0) + 1);
+  const L = L0.filter(q => !QF || q['тип'] === QF);
+  const nOpen = DATA.queue.filter(q => st(q) === 'открыт').length, nDone = DATA.queue.length - nOpen;
+  const link = s => esc(s).replace(/\b([a-z0-9][a-z0-9-]*[a-z0-9])\b(?= «| \[|$)/g, m => (C[m] || C[DATA.tmap[m]]) ? `<a href="#/c/${m}">${m}</a>` : m);
+  const conf = {high: 'высокая', medium: 'средняя', low: 'низкая'};
+  const DEC = {merge: 'слить', keep: 'слияние верно', separate: 'разные понятия', related: 'связать', attach: 'привязать схему', reattach: 'перепривязать схему', detach: 'отвязать схему', split: 'разделить', unsure: 'не ясно — нужен скан'};
+  const decTxt = t => { const [k, rest] = String(t || '').split(' → '); return (DEC[k] || k || '—') + (rest ? ' → ' + rest : ''); };
+  $('#app').innerHTML = `<h1>Очередь проверки</h1><div class="note">Спорные места, которые машина не решилась решить сама. <b>${nDone}</b> из ${DATA.queue.length} уже разобраны ИИ по данным сверки с Керимовым и тексту книги — у каждого решение, обоснование и ссылки; они применены на сайте с пометкой «проверено ИИ по книге» и ждут подтверждения человеком. Открытыми остались ${nOpen}: для них нужен скан страницы.</div>
+    <div class="qf"><button data-s="open" class="${QS === 'open' ? 'on' : ''}">открытые (${nOpen})</button><button data-s="done" class="${QS === 'done' ? 'on' : ''}">решённые ИИ (${nDone})</button><button data-s="all" class="${QS === 'all' ? 'on' : ''}">все</button></div>
+    <div class="qf"><button data-q="" class="${QF ? '' : 'on'}">все типы (${L0.length})</button>${Object.entries(types).map(([t, n]) => `<button data-q="${esc(t)}" class="${QF === t ? 'on' : ''}">${esc(t)} (${n})</button>`).join('')}</div>
+    <table class="t"><tr><th>Тип</th><th>Что</th><th>Решение</th><th>Обоснование</th></tr>${L.map(q => `<tr><td>${esc(q['тип'])}<div class="muted" style="font-size:11.5px">${esc(st(q))}</div></td><td>${link(q['что'])}</td><td><b>${link(decTxt(q['решение']))}</b>${q['уверенность'] ? `<div class="muted" style="font-size:11.5px">уверенность: ${conf[q['уверенность']] || esc(q['уверенность'])}</div>` : ''}</td><td>${esc(q['обоснование'] || q['почему'])}</td></tr>`).join('')}</table>`;
+  document.querySelectorAll('.qf button[data-q]').forEach(b => b.onclick = () => { QF = b.dataset.q; renderReview(); });
+  document.querySelectorAll('.qf button[data-s]').forEach(b => b.onclick = () => { QS = b.dataset.s; QF = ''; renderReview(); });
 }
 
 let PG = '';

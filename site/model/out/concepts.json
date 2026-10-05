@@ -1847,9 +1847,10 @@
    }
   ],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 0
   }
  },
  {
@@ -3017,11 +3018,12 @@
    }
   ],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "bahmanli"
-   ]
+   ],
+   "decision_n": 50
   }
  },
  {
@@ -3904,11 +3906,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "camcamli"
-   ]
+   ],
+   "decision_n": 51
   }
  },
  {
@@ -7619,11 +7622,12 @@
    }
   ],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "lyacedi"
-   ]
+   ],
+   "decision_n": 52
   }
  },
  {
@@ -8171,11 +8175,12 @@
    }
   ],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "torenc-lechenc"
-   ]
+   ],
+   "decision_n": 53
   }
  },
  {
@@ -9306,11 +9311,12 @@
    }
   ],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "maraza"
-   ]
+   ],
+   "decision_n": 54
   }
  },
  {
@@ -10074,11 +10080,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "ordudj"
-   ]
+   ],
+   "decision_n": 55
   }
  },
  {
@@ -11613,11 +11620,12 @@
    }
   ],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qargashiq"
-   ]
+   ],
+   "decision_n": 56
   }
  },
  {
@@ -15456,11 +15464,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "salmasobet"
-   ]
+   ],
+   "decision_n": 57
   }
  },
  {
@@ -15847,11 +15856,12 @@
    }
   ],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "saxsaqaya-guller"
-   ]
+   ],
+   "decision_n": 58
   }
  },
  {
@@ -18930,11 +18940,12 @@
    }
   ],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "xide-afshan"
-   ]
+   ],
+   "decision_n": 59
   }
  },
  {
@@ -23018,11 +23029,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "ejdaha-ile-simurq-qushunun-doyushmesi"
-   ]
+   ],
+   "decision_n": 60
   }
  },
  {
@@ -25644,11 +25656,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "palaz-sade-zolaqlarla"
-   ]
+   ],
+   "decision_n": 61
   }
  },
  {
@@ -27301,11 +27314,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "insan"
-   ]
+   ],
+   "decision_n": 62
   },
   "schemes": [
    "t14_f02",
@@ -27390,11 +27404,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "insan-ve-at"
-   ]
+   ],
+   "decision_n": 63
   },
   "schemes": [
    "t14_f05"
@@ -27732,12 +27747,13 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "agalapi",
     "qapi"
-   ]
+   ],
+   "decision_n": 64
   }
  },
  {
@@ -28144,11 +28160,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "alma-chicheyi"
-   ]
+   ],
+   "decision_n": 65
   },
   "schemes": [
    "t166_f03",
@@ -28495,12 +28512,13 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "alma-element",
     "almahali"
-   ]
+   ],
+   "decision_n": 66
   }
  },
  {
@@ -28574,79 +28592,6 @@
   }
  },
  {
-  "id": "alcha-gul",
-  "type": "ornament",
-  "key": "alçagül",
-  "headword": "alçagül",
-  "meaning": {
-   "ru": "цветок алычи",
-   "en": "plum blossom"
-  },
-  "names": [
-   {
-    "v": "alçagül",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "alça gül",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "алчагюль",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "цветок алычи",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "plum blossom",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 2
-  },
-  "attestations": [
-   {
-    "term": "alcha-gul",
-    "source_id": "kerimov_v2",
-    "where": "том II, стр. 143 (файл kerimov_vol2/page_071.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "alcha-gul",
-    "source_id": "kerimov_v2",
-    "where": "том II, стр. 144 (файл kerimov_vol2/page_072.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "alcha-gul"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
   "id": "alchagulu",
   "type": "ornament",
   "key": "alçagülü",
@@ -28690,17 +28635,38 @@
     "v": "алчакүлү",
     "lang": "az-cyrl",
     "kind": "attested"
+   },
+   {
+    "v": "alçagül",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "alça gül",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "алчагюль",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "plum blossom",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
    "motif": 1,
-   "element": 1
+   "element": 3
   },
   "schools": {
    "guba-shirvan": 1
   },
   "sources": {
-   "kerimov_v1": 2
+   "kerimov_v1": 2,
+   "kerimov_v2": 2
   },
   "attestations": [
    {
@@ -28720,17 +28686,37 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "alcha-gul",
+    "source_id": "kerimov_v2",
+    "where": "том II, стр. 143 (файл kerimov_vol2/page_071.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "alcha-gul",
+    "source_id": "kerimov_v2",
+    "where": "том II, стр. 144 (файл kerimov_vol2/page_072.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
    "alchagulu",
-   "alchakulu"
+   "alchakulu",
+   "alcha-gul"
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 169
   },
   "schemes": [
    "t50_f08"
@@ -28884,114 +28870,6 @@
   }
  },
  {
-  "id": "ana-guller",
-  "type": "ornament",
-  "key": "anagüllər",
-  "headword": "ana güllər",
-  "meaning": {
-   "ru": "материнские цветы",
-   "en": "mother flowers"
-  },
-  "names": [
-   {
-    "v": "ana güllər",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "материнские цветы",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "mother flowers",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "motif": 7
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 7
-  },
-  "attestations": [
-   {
-    "term": "ana-guller",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 224 (файл kerimov_vol1/page_224.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "ana-guller",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 58* (файл kerimov_vol1/page_225.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "ana-guller",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 226 (файл kerimov_vol1/page_226.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "ana-guller",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 59 (файл kerimov_vol1/page_227.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "ana-guller",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 228 (файл kerimov_vol1/page_228.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "ana-guller",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 59* (файл kerimov_vol1/page_229.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "ana-guller",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 61 (файл kerimov_vol1/page_235.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "ana-guller"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
   "id": "anaxashi",
   "type": "ornament",
   "key": "anahaşiyə",
@@ -29071,14 +28949,34 @@
     "lang": "ru",
     "kind": "kerimov_translation",
     "src": "kerimov"
+   },
+   {
+    "v": "ana güllər",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "mother flowers",
+    "lang": "en",
+    "kind": "meaning"
+   },
+   {
+    "v": "ana çiçəkləri",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "Mother's flowers",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "motif": 1
+   "motif": 17
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 17
   },
   "attestations": [
    {
@@ -29089,122 +28987,70 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "anakuz"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "ana-xett",
-  "type": "ornament",
-  "key": "anaxətt",
-  "headword": "ana xətt",
-  "meaning": {
-   "ru": "основная линия",
-   "en": "main line"
-  },
-  "names": [
-   {
-    "v": "ana xətt",
-    "lang": "az",
-    "kind": "headword"
    },
    {
-    "v": "ана хэтт",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "основная линия",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   },
-   {
-    "v": "main line",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 2
-  },
-  "attestations": [
-   {
-    "term": "ana-xett",
-    "source_id": "kerimov_v2",
-    "where": "том II, стр. 108 (файл kerimov_vol2/page_054.json)",
+    "term": "ana-guller",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 224 (файл kerimov_vol1/page_224.json)",
     "page": null,
     "role": null,
     "quote": null,
     "note": null
    },
    {
-    "term": "ana-xett-2",
-    "source_id": "kerimov_v2",
-    "where": "том II, стр. 114 (файл kerimov_vol2/page_057.json)",
+    "term": "ana-guller",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 58* (файл kerimov_vol1/page_225.json)",
     "page": null,
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "ana-xett",
-   "ana-xett-2"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "same_word",
-   "renamed": []
-  }
- },
- {
-  "id": "ana-chichekleri",
-  "type": "ornament",
-  "key": "anaçiçəkləri",
-  "headword": "ana çiçəkləri",
-  "meaning": {
-   "ru": "Материнские цветы",
-   "en": "Mother's flowers"
-  },
-  "names": [
-   {
-    "v": "ana çiçəkləri",
-    "lang": "az",
-    "kind": "headword"
    },
    {
-    "v": "МАТЕРИНСКИЕ ЦВЕТЫ",
-    "lang": "ru",
-    "kind": "attested"
+    "term": "ana-guller",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 226 (файл kerimov_vol1/page_226.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    },
    {
-    "v": "Mother's flowers",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "motif": 9
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 9
-  },
-  "attestations": [
+    "term": "ana-guller",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 59 (файл kerimov_vol1/page_227.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "ana-guller",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 228 (файл kerimov_vol1/page_228.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "ana-guller",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 59* (файл kerimov_vol1/page_229.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "ana-guller",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 61 (файл kerimov_vol1/page_235.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "ana-chichekleri",
     "source_id": "kerimov_v1",
@@ -29288,12 +29134,86 @@
    }
   ],
   "records": [
+   "anakuz",
+   "ana-guller",
    "ana-chichekleri"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
+   "renamed": [],
+   "decision_n": 172
+  },
+  "schemes": []
+ },
+ {
+  "id": "ana-xett",
+  "type": "ornament",
+  "key": "anaxətt",
+  "headword": "ana xətt",
+  "meaning": {
+   "ru": "основная линия",
+   "en": "main line"
+  },
+  "names": [
+   {
+    "v": "ana xətt",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "ана хэтт",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "основная линия",
+    "lang": "ru",
+    "kind": "kerimov_translation",
+    "src": "kerimov"
+   },
+   {
+    "v": "main line",
+    "lang": "en",
+    "kind": "meaning"
+   }
+  ],
+  "roles": {
+   "element": 2
+  },
+  "schools": {},
+  "sources": {
+   "kerimov_v2": 2
+  },
+  "attestations": [
+   {
+    "term": "ana-xett",
+    "source_id": "kerimov_v2",
+    "where": "том II, стр. 108 (файл kerimov_vol2/page_054.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "ana-xett-2",
+    "source_id": "kerimov_v2",
+    "where": "том II, стр. 114 (файл kerimov_vol2/page_057.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   }
+  ],
+  "records": [
+   "ana-xett",
+   "ana-xett-2"
+  ],
+  "external_references": [],
+  "merge": {
+   "status": "auto",
+   "rule": "same_word",
    "renamed": []
   }
  },
@@ -30374,11 +30294,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "dere"
-   ]
+   ],
+   "decision_n": 67
   },
   "schemes": [
    "t07_f02",
@@ -30592,7 +30513,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t93_f04"
+  ]
  },
  {
   "id": "ag-chichek",
@@ -31114,11 +31038,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "baci"
-   ]
+   ],
+   "decision_n": 68
   },
   "schemes": [
    "t37_f05",
@@ -31221,11 +31146,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "buta-badam"
-   ]
+   ],
+   "decision_n": 69
   },
   "schemes": [
    "t96_f02"
@@ -31443,11 +31369,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qalunlu-gul"
-   ]
+   ],
+   "decision_n": 70
   },
   "schemes": [
    "t43_f03"
@@ -31724,16 +31651,32 @@
     "v": "small border",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "balahaşiyə",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "balaxaşı",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "a small border",
+    "lang": "ru",
+    "kind": "kerimov_translation",
+    "src": "kerimov"
    }
   ],
   "roles": {
-   "border": 8
+   "border": 9
   },
   "schools": {},
   "sources": {
    "kerimov_v1": 7,
    "huseynov_2012": 1,
-   "kerimov_v2": 1
+   "kerimov_v2": 2
   },
   "attestations": [
    {
@@ -31816,54 +31759,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "bala-hashiye",
-   "bala-hashiye-2"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "same_word",
-   "renamed": []
-  }
- },
- {
-  "id": "balaxashi",
-  "type": "ornament",
-  "key": "balahaşiyə",
-  "headword": "balahaşiyə",
-  "meaning": {
-   "ru": "a small border",
-   "en": null
-  },
-  "names": [
-   {
-    "v": "balahaşiyə",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "balaxaşı",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "a small border",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   }
-  ],
-  "roles": {
-   "border": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 1
-  },
-  "attestations": [
    {
     "term": "balaxashi",
     "source_id": "kerimov_v2",
@@ -31875,14 +31771,18 @@
    }
   ],
   "records": [
+   "bala-hashiye",
+   "bala-hashiye-2",
    "balaxashi"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
+   "status": "checked_ai",
+   "rule": "same_word",
+   "renamed": [],
+   "decision_n": 1
+  },
+  "schemes": []
  },
  {
   "id": "bala-hashiyeler",
@@ -31909,14 +31809,24 @@
     "lang": "ru",
     "kind": "kerimov_translation",
     "src": "kerimov"
+   },
+   {
+    "v": "kiçik haşiyələr",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "Small borders",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "border": 1
+   "border": 9
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 9
   },
   "attestations": [
    {
@@ -31927,17 +31837,93 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "kichik-hashiyeler",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 68 (файл kerimov_vol1/page_262.json)",
+    "page": null,
+    "role": null,
+    "quote": "«МАЛЫЕ КАЙМЫ»",
+    "note": null
+   },
+   {
+    "term": "kichik-hashiyeler",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 264 (файл kerimov_vol1/page_264.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "malye-kaymy",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 68 (файл kerimov_vol1/page_262.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "malye-kaymy",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 263 (файл kerimov_vol1/page_263.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "malye-kaymy",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 264 (файл kerimov_vol1/page_264.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "malye-kaymy",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 265 (файл kerimov_vol1/page_265.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "malye-kaymy",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 69 (файл kerimov_vol1/page_266.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "malye-kaymy",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 267 (файл kerimov_vol1/page_267.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "bala-hashiyeler"
+   "bala-hashiyeler",
+   "kichik-hashiyeler",
+   "malye-kaymy"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 174
+  },
+  "schemes": []
  },
  {
   "id": "balaketebe",
@@ -32018,7 +32004,12 @@
    "status": "auto",
    "rule": "same_word",
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t102_f01",
+   "t101_f01",
+   "t101_f02"
+  ]
  },
  {
   "id": "balali-buta",
@@ -32385,9 +32376,10 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 2
   }
  },
  {
@@ -32507,11 +32499,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "bayramqulu"
-   ]
+   ],
+   "decision_n": 71
   }
  },
  {
@@ -32666,113 +32659,15 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "kishi-bilerzik"
-   ]
+   ],
+   "decision_n": 72
   },
   "schemes": [
    "t71_f04"
-  ]
- },
- {
-  "id": "baga",
-  "type": "ornament",
-  "key": "bağa",
-  "headword": "bağa",
-  "meaning": {
-   "ru": "черепаха",
-   "en": "frog"
-  },
-  "names": [
-   {
-    "v": "bağa",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "баға",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "черепаха",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   },
-   {
-    "v": "лягушка",
-    "lang": "ru",
-    "kind": "meaning_rejected"
-   },
-   {
-    "v": "frog",
-    "lang": "en",
-    "kind": "meaning_rejected"
-   },
-   {
-    "v": "tısbağa",
-    "lang": "az",
-    "kind": "misreading"
-   },
-   {
-    "v": "Бага",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "Turtle",
-    "lang": "en",
-    "kind": "meaning_rejected"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {
-   "baku": 1
-  },
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
-   {
-    "term": "baga",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 10 (файл kerimov_vol1/page_035.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "tisbaga-2",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 25 (файл kerimov_vol1/page_095.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "baga",
-   "tisbaga-2"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "renamed_by_reading",
-   "renamed": [
-    "tisbaga-2"
-   ]
-  },
-  "schemes": [
-   "t17_f04",
-   "t17_f05",
-   "t54_f04"
   ]
  },
  {
@@ -33216,9 +33111,10 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 3
   },
   "schemes": [
    "t27_f11"
@@ -33387,76 +33283,15 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "alshamaq"
-   ]
+   ],
+   "decision_n": 74
   },
   "schemes": [
    "t29_f06"
-  ]
- },
- {
-  "id": "belbagi",
-  "type": "ornament",
-  "key": "belbağı",
-  "headword": "belbağı",
-  "meaning": {
-   "ru": "пояс",
-   "en": "belt"
-  },
-  "names": [
-   {
-    "v": "belbağı",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "Белбағы",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "пояс",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "belt",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "belbagi",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 030 (файл kerimov_vol1/page_030.json)",
-    "page": null,
-    "role": null,
-    "quote": "Зәргәрликдә бу элемент „гызыл кәтәбә“ адланыр.",
-    "note": null
-   }
-  ],
-  "records": [
-   "belbagi"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t30_f04"
   ]
  },
  {
@@ -33649,7 +33484,6 @@
   },
   "schemes": [
    "t44_f08",
-   "t45_f05",
    "t102_f05"
   ]
  },
@@ -33781,7 +33615,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t138_f06"
+  ]
  },
  {
   "id": "bitki-elementleri",
@@ -33881,14 +33718,19 @@
     "v": "pumpkin",
     "lang": "en",
     "kind": "meaning_rejected"
+   },
+   {
+    "v": "balqabaq",
+    "lang": "az",
+    "kind": "record"
    }
   ],
   "roles": {
-   "element": 3
+   "element": 4
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 3
+   "kerimov_v1": 4
   },
   "attestations": [
    {
@@ -33917,60 +33759,7 @@
     "role": null,
     "quote": "",
     "note": ""
-   }
-  ],
-  "records": [
-   "borani"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t88_f04"
-  ]
- },
- {
-  "id": "balqabaq",
-  "type": "ornament",
-  "key": "boranı",
-  "headword": "boranı",
-  "meaning": {
-   "ru": "тыква",
-   "en": "pumpkin"
-  },
-  "names": [
-   {
-    "v": "boranı",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "balqabaq",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "тыква",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "pumpkin",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
    {
     "term": "balqabaq",
     "source_id": "kerimov_v1",
@@ -33982,14 +33771,19 @@
    }
   ],
   "records": [
+   "borani",
    "balqabaq"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 4
+  },
+  "schemes": [
+   "t88_f04"
+  ]
  },
  {
   "id": "bordur-hisselerinin-rapportlarini-emele-getiren-elementler",
@@ -34106,7 +33900,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t166_f09"
+  ]
  },
  {
   "id": "budaq",
@@ -34157,10 +33954,25 @@
     "v": "branch, twig",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "budaqcıq",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "веточка",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "Twig",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 7,
+   "element": 9,
    "motif": 1,
    "border": 1
   },
@@ -34169,7 +33981,7 @@
    "karabakh": 1
   },
   "sources": {
-   "kerimov_v1": 13,
+   "kerimov_v1": 15,
    "kerimov_v3": 1
   },
   "attestations": [
@@ -34298,64 +34110,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "budaq"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t75_f02",
-   "t76_f01",
-   "t82_f03",
-   "t82_f01",
-   "t79_f02"
-  ]
- },
- {
-  "id": "budaqciq",
-  "type": "ornament",
-  "key": "budaq",
-  "headword": "budaq",
-  "meaning": {
-   "ru": "Веточка",
-   "en": "Twig"
-  },
-  "names": [
-   {
-    "v": "budaq",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "budaqcıq",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "веточка",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "Twig",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
    {
     "term": "budaqciq",
     "source_id": "kerimov_v1",
@@ -34376,14 +34131,23 @@
    }
   ],
   "records": [
+   "budaq",
    "budaqciq"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 5
+  },
+  "schemes": [
+   "t75_f02",
+   "t76_f01",
+   "t82_f03",
+   "t82_f01",
+   "t79_f02"
+  ]
  },
  {
   "id": "budaqbashi",
@@ -34454,12 +34218,16 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "budaq-ucu"
-   ]
-  }
+   ],
+   "decision_n": 75
+  },
+  "schemes": [
+   "t76_f03"
+  ]
  },
  {
   "id": "budaqlar",
@@ -34667,9 +34435,10 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 6
   }
  },
  {
@@ -34818,9 +34587,10 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 7
   },
   "schemes": [
    "t134_f05"
@@ -34855,52 +34625,6 @@
     "v": "twisted braid",
     "lang": "en",
     "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "border": 1
-  },
-  "schools": {
-   "guba-shirvan": 1
-  },
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "burmahoruk",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 056 (файл kerimov_vol1/page_056.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "burmahoruk"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "qivrim-horguler",
-  "type": "ornament",
-  "key": "burmahörük",
-  "headword": "burmahörük",
-  "meaning": {
-   "ru": "кудрявые косы",
-   "en": "curly braids"
-  },
-  "names": [
-   {
-    "v": "burmahörük",
-    "lang": "az",
-    "kind": "headword"
    },
    {
     "v": "qıvrım hörgülər",
@@ -34919,13 +34643,25 @@
    }
   ],
   "roles": {
+   "border": 1,
    "element": 1
   },
-  "schools": {},
+  "schools": {
+   "guba-shirvan": 1
+  },
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
+   {
+    "term": "burmahoruk",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 056 (файл kerimov_vol1/page_056.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "qivrim-horguler",
     "source_id": "kerimov_v1",
@@ -34937,14 +34673,17 @@
    }
   ],
   "records": [
+   "burmahoruk",
    "qivrim-horguler"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 8
+  },
+  "schemes": []
  },
  {
   "id": "buruq",
@@ -35459,74 +35198,6 @@
   ]
  },
  {
-  "id": "butali",
-  "type": "ornament",
-  "key": "butalı",
-  "headword": "butalı",
-  "meaning": {
-   "ru": "миндалевидный ислими",
-   "en": null
-  },
-  "names": [
-   {
-    "v": "butalı",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "буталы",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "миндалевидный ислими",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 1,
-   "huseynov_2012": 1
-  },
-  "attestations": [
-   {
-    "term": "butali",
-    "source_id": "kerimov_v2",
-    "where": "том II, стр. 228 (файл kerimov_vol2/page_118.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "butali",
-    "source_id": "huseynov_2012",
-    "where": "Hüseynov 2012, s. 74-75 (файл huseynov_hashiye/page_038.json)",
-    "page": "74-75",
-    "role": "border",
-    "quote": null,
-    "note": "Бута попеременно вправо-влево, разделены лентовидной линией — динамика. · тип каймы: zəncirə · Казах · fig. Şəkil 45"
-   }
-  ],
-  "records": [
-   "butali"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t139_f05"
-  ]
- },
- {
   "id": "butali-islimi",
   "type": "ornament",
   "key": "butalıislimi",
@@ -35561,14 +35232,25 @@
     "v": "Islimi with buta",
     "lang": "en",
     "kind": "meaning_rejected"
+   },
+   {
+    "v": "butalı",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "буталы",
+    "lang": "ru",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "element": 2
+   "element": 3
   },
   "schools": {},
   "sources": {
-   "kerimov_v2": 2
+   "kerimov_v2": 3,
+   "huseynov_2012": 1
   },
   "attestations": [
    {
@@ -35588,17 +35270,40 @@
     "role": null,
     "quote": "In the shape of almond [Fig. 48-4]. Differs from the above mentioned Islimi by the original form and by the place it takes in the composition.",
     "note": null
+   },
+   {
+    "term": "butali",
+    "source_id": "kerimov_v2",
+    "where": "том II, стр. 228 (файл kerimov_vol2/page_118.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "butali",
+    "source_id": "huseynov_2012",
+    "where": "Hüseynov 2012, s. 74-75 (файл huseynov_hashiye/page_038.json)",
+    "page": "74-75",
+    "role": "border",
+    "quote": null,
+    "note": "Бута попеременно вправо-влево, разделены лентовидной линией — динамика. · тип каймы: zəncirə · Казах · fig. Şəkil 45"
    }
   ],
   "records": [
-   "butali-islimi"
+   "butali-islimi",
+   "butali"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 184
+  },
+  "schemes": [
+   "t139_f05"
+  ]
  },
  {
   "id": "buta-qarmaq",
@@ -35866,11 +35571,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "deleni"
-   ]
+   ],
+   "decision_n": 76
   },
   "schemes": [
    "t11_f07"
@@ -35951,11 +35657,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "boyuk-leke"
-   ]
+   ],
+   "decision_n": 77
   },
   "schemes": [
    "t41_f05"
@@ -36382,11 +36089,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "gilas-2"
-   ]
+   ],
+   "decision_n": 78
   }
  },
  {
@@ -37101,54 +36809,6 @@
     "v": "Goitered gazelle",
     "lang": "en",
     "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "ceyran",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 8 (файл kerimov_vol1/page_027.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "ceyran"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t19_f01",
-   "t19_f02"
-  ]
- },
- {
-  "id": "serna",
-  "type": "ornament",
-  "key": "ceyran",
-  "headword": "ceyran",
-  "meaning": {
-   "ru": "серна",
-   "en": "chamois"
-  },
-  "names": [
-   {
-    "v": "ceyran",
-    "lang": "az",
-    "kind": "headword"
    },
    {
     "v": "serna",
@@ -37167,13 +36827,22 @@
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
+   {
+    "term": "ceyran",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 8 (файл kerimov_vol1/page_027.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "serna",
     "source_id": "kerimov_v1",
@@ -37185,13 +36854,15 @@
    }
   ],
   "records": [
+   "ceyran",
    "serna"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 9
   },
   "schemes": [
    "t19_f01",
@@ -37266,55 +36937,6 @@
    "t53_f04",
    "t83_f05"
   ]
- },
- {
-  "id": "cucgoz",
-  "type": "ornament",
-  "key": "cücgöz",
-  "headword": "Cücgöz",
-  "meaning": {
-   "ru": "Цыплячий глаз",
-   "en": null
-  },
-  "names": [
-   {
-    "v": "Cücgöz",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "Цыплячий глаз",
-    "lang": "ru",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "border": 0
-  },
-  "schools": {},
-  "sources": {
-   "huseynov_2012": 1
-  },
-  "attestations": [
-   {
-    "term": "cucgoz",
-    "source_id": "huseynov_2012",
-    "where": "Hüseynov 2012, s. 84-85 (файл huseynov_hashiye/page_043.json)",
-    "page": "84-85",
-    "role": "border",
-    "quote": null,
-    "note": "тип каймы: siçandişi · Ширван · fig. Şəkil 56.a"
-   }
-  ],
-  "records": [
-   "cucgoz"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
  },
  {
   "id": "cuce",
@@ -37458,7 +37080,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t134_f01"
+  ]
  },
  {
   "id": "cucezu",
@@ -37490,6 +37115,11 @@
     "lang": "ru",
     "kind": "kerimov_translation",
     "src": "kerimov"
+   },
+   {
+    "v": "Cücgöz",
+    "lang": "az",
+    "kind": "headword"
    }
   ],
   "roles": {
@@ -37497,7 +37127,8 @@
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 1,
+   "huseynov_2012": 1
   },
   "attestations": [
    {
@@ -37508,17 +37139,29 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "cucgoz",
+    "source_id": "huseynov_2012",
+    "where": "Hüseynov 2012, s. 84-85 (файл huseynov_hashiye/page_043.json)",
+    "page": "84-85",
+    "role": "border",
+    "quote": null,
+    "note": "тип каймы: siçandişi · Ширван · fig. Şəkil 56.a"
    }
   ],
   "records": [
-   "cucezu"
+   "cucezu",
+   "cucgoz"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 186
+  },
+  "schemes": []
  },
  {
   "id": "cutbuynuz",
@@ -37603,12 +37246,14 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 10
   },
   "schemes": [
-   "t51_f01"
+   "t51_f01",
+   "t43_f05"
   ]
  },
  {
@@ -37658,7 +37303,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t133_f06"
+  ]
  },
  {
   "id": "cut-qosha-sular",
@@ -37967,11 +37615,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "buta-ciga"
-   ]
+   ],
+   "decision_n": 79
   },
   "schemes": [
    "t96_f04",
@@ -39039,9 +38688,10 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 11
   }
  },
  {
@@ -39185,11 +38835,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "dishli-2"
-   ]
+   ],
+   "decision_n": 80
   }
  },
  {
@@ -40072,18 +39723,44 @@
     "v": "winding",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "qıvrım",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "Гыврым",
+    "lang": "az-cyrl",
+    "kind": "attested"
+   },
+   {
+    "v": "Доламагүйрум",
+    "lang": "az-cyrl",
+    "kind": "attested"
+   },
+   {
+    "v": "Завиток",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "Curl",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
    "border": 1,
-   "element": 1
+   "element": 5
   },
   "schools": {
    "ganja-gazakh": 1,
-   "guba-shirvan": 1
+   "guba-shirvan": 2,
+   "karabakh": 1
   },
   "sources": {
-   "kerimov_v1": 2,
+   "kerimov_v1": 7,
    "huseynov_2012": 1
   },
   "attestations": [
@@ -40113,80 +39790,7 @@
     "role": "border",
     "quote": null,
     "note": "Вода; самая распространённая простая mədaxil. · тип каймы: mədaxil · Ширван, Карабах · fig. Şəkil 50"
-   }
-  ],
-  "records": [
-   "dolama"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t51_f05",
-   "t138_f05",
-   "t136_f09"
-  ]
- },
- {
-  "id": "qivrim",
-  "type": "ornament",
-  "key": "dolama",
-  "headword": "dolama",
-  "meaning": {
-   "ru": "Завиток",
-   "en": "Curl"
-  },
-  "names": [
-   {
-    "v": "dolama",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "qıvrım",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "Гыврым",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "Долама",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "Доламагүйрум",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "Завиток",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "Curl",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 4
-  },
-  "schools": {
-   "guba-shirvan": 1,
-   "karabakh": 1
-  },
-  "sources": {
-   "kerimov_v1": 5
-  },
-  "attestations": [
    {
     "term": "qivrim",
     "source_id": "kerimov_v1",
@@ -40234,16 +39838,20 @@
    }
   ],
   "records": [
+   "dolama",
    "qivrim"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 12
   },
   "schemes": [
    "t51_f05",
+   "t138_f05",
+   "t136_f09",
    "t52_f05"
   ]
  },
@@ -40276,53 +39884,6 @@
     "v": "wrapping border",
     "lang": "en",
     "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "border": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "dolama-hashiye",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 7* (файл kerimov_vol1/page_025.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "dolama-hashiye"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t12_f01"
-  ]
- },
- {
-  "id": "spiral-hashiye",
-  "type": "ornament",
-  "key": "dolamahaşiyə",
-  "headword": "dolama haşiyə",
-  "meaning": {
-   "ru": "Спиральная кайма",
-   "en": "Spiral border"
-  },
-  "names": [
-   {
-    "v": "dolama haşiyə",
-    "lang": "az",
-    "kind": "headword"
    },
    {
     "v": "spiral haşiyə",
@@ -40341,13 +39902,22 @@
    }
   ],
   "roles": {
-   "border": 1
+   "border": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
+   {
+    "term": "dolama-hashiye",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 7* (файл kerimov_vol1/page_025.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "spiral-hashiye",
     "source_id": "kerimov_v1",
@@ -40359,14 +39929,19 @@
    }
   ],
   "records": [
+   "dolama-hashiye",
    "spiral-hashiye"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 13
+  },
+  "schemes": [
+   "t12_f01"
+  ]
  },
  {
   "id": "dolamaqarmaq",
@@ -40591,7 +40166,10 @@
    "status": "auto",
    "rule": "same_word",
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t138_f03"
+  ]
  },
  {
   "id": "dolangac",
@@ -40765,12 +40343,16 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "dord-zirve"
-   ]
-  }
+   ],
+   "decision_n": 81
+  },
+  "schemes": [
+   "t48_f05"
+  ]
  },
  {
   "id": "duyme",
@@ -41256,15 +40838,17 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "dirnaq-formali"
-   ]
+   ],
+   "decision_n": 82
   },
   "schemes": [
    "t50_f04",
-   "t50_f06"
+   "t50_f06",
+   "t117_f03"
   ]
  },
  {
@@ -41495,11 +41079,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "buket"
-   ]
+   ],
+   "decision_n": 83
   },
   "schemes": [
    "t108_f02"
@@ -41739,11 +41324,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "develapiri"
-   ]
+   ],
+   "decision_n": 84
   },
   "schemes": [
    "t120_f02"
@@ -41956,12 +41542,16 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "genish-xett"
-   ]
-  }
+   ],
+   "decision_n": 85
+  },
+  "schemes": [
+   "t133_f07"
+  ]
  },
  {
   "id": "erkek",
@@ -42348,11 +41938,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "yula"
-   ]
+   ],
+   "decision_n": 86
   },
   "schemes": [
    "t45_f02"
@@ -43425,12 +43016,13 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "kul",
     "medalyon"
-   ]
+   ],
+   "decision_n": 87
   },
   "schemes": [
    "t113_f01",
@@ -43591,12 +43183,16 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qelichi"
-   ]
-  }
+   ],
+   "decision_n": 88
+  },
+  "schemes": [
+   "t123_f02"
+  ]
  },
  {
   "id": "kuller",
@@ -43780,11 +43376,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "kul-ortasi"
-   ]
+   ],
+   "decision_n": 89
   }
  },
  {
@@ -44118,11 +43715,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "gerush-noqtasi"
-   ]
+   ],
+   "decision_n": 90
   }
  },
  {
@@ -44433,65 +44031,6 @@
   "schemes": [
    "t15_f03"
   ]
- },
- {
-  "id": "gubbe",
-  "type": "ornament",
-  "key": "gübbə",
-  "headword": "gübbə",
-  "meaning": {
-   "ru": "Купол",
-   "en": "Dome"
-  },
-  "names": [
-   {
-    "v": "gübbə",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "ҝүбба",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "Купол",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "Dome",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "gubbe",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 6 (файл kerimov_vol1/page_019.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "gubbe"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
  },
  {
   "id": "gul",
@@ -45189,14 +44728,16 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "chichekli-budaqciq"
-   ]
+   ],
+   "decision_n": 91
   },
   "schemes": [
-   "t25_f01"
+   "t25_f01",
+   "t108_f03"
   ]
  },
  {
@@ -46137,11 +45678,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "kuncu"
-   ]
+   ],
+   "decision_n": 92
   },
   "schemes": [
    "t44_f01",
@@ -46304,12 +45846,16 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "gelinchecik"
-   ]
-  }
+   ],
+   "decision_n": 93
+  },
+  "schemes": [
+   "t112_f03"
+  ]
  },
  {
   "id": "gelinchiyez",
@@ -46630,7 +46176,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t167_f01"
+  ]
  },
  {
   "id": "gerdest",
@@ -46679,126 +46228,6 @@
   ],
   "records": [
    "gerdest"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "erik",
-  "type": "ornament",
-  "key": "gəysi",
-  "headword": "gəysi",
-  "meaning": {
-   "ru": "абрикос",
-   "en": "apricot"
-  },
-  "names": [
-   {
-    "v": "gəysi",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "ərik",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "абрикос",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "apricot",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "erik",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 26 (файл kerimov_vol1/page_099.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "erik"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "qaysibishaq",
-  "type": "ornament",
-  "key": "gəysibişax",
-  "headword": "gəysibişax",
-  "meaning": {
-   "ru": "Абрикос с веточкой",
-   "en": null
-  },
-  "names": [
-   {
-    "v": "gəysibişax",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "qaysıbışaq",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "Гейсибишах",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "Абрикос с веточкой",
-    "lang": "ru",
-    "kind": "attested"
-   }
-  ],
-  "roles": {
-   "border": 1
-  },
-  "schools": {
-   "guba-shirvan": 1
-  },
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "qaysibishaq",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 110 (файл kerimov_vol1/page_110.json)",
-    "page": null,
-    "role": null,
-    "quote": "Эта «зенджире» встречается и в ширванских коврах.",
-    "note": ""
-   }
-  ],
-  "records": [
-   "qaysibishaq"
   ],
   "external_references": [],
   "merge": {
@@ -46887,81 +46316,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "xemeli-buta"
-   ]
-  }
- },
- {
-  "id": "xachali",
-  "type": "ornament",
-  "key": "haçalı",
-  "headword": "haçalı",
-  "meaning": {
-   "ru": "раздвоенный ислими",
-   "en": "Cross-shaped"
-  },
-  "names": [
-   {
-    "v": "haçalı",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "xaçalı",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "хачалы",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "раздвоенный ислими",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   },
-   {
-    "v": "Крестообразный",
-    "lang": "ru",
-    "kind": "meaning_rejected"
-   },
-   {
-    "v": "Cross-shaped",
-    "lang": "en",
-    "kind": "meaning_rejected"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 1
-  },
-  "attestations": [
-   {
-    "term": "xachali",
-    "source_id": "kerimov_v2",
-    "where": "том II, стр. 228 (файл kerimov_vol2/page_118.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "xachali"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
+   ],
+   "decision_n": 94
   }
  },
  {
@@ -47004,14 +46364,39 @@
     "v": "Cross-shaped islimi",
     "lang": "en",
     "kind": "meaning_rejected"
+   },
+   {
+    "v": "haçalı",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "xaçalı",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "хачалы",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "Крестообразный",
+    "lang": "ru",
+    "kind": "meaning_rejected"
+   },
+   {
+    "v": "Cross-shaped",
+    "lang": "en",
+    "kind": "meaning_rejected"
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v2": 1
+   "kerimov_v2": 2
   },
   "attestations": [
    {
@@ -47022,17 +46407,29 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "xachali",
+    "source_id": "kerimov_v2",
+    "where": "том II, стр. 228 (файл kerimov_vol2/page_118.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "xachali-islimi"
+   "xachali-islimi",
+   "xachali"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 201
+  },
+  "schemes": []
  },
  {
   "id": "hashiye",
@@ -47268,14 +46665,15 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "bordur",
     "bordur-zolaqlari",
     "qayma",
     "xashiyo"
-   ]
+   ],
+   "decision_n": 95
   }
  },
  {
@@ -47626,11 +47024,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "ayva"
-   ]
+   ],
+   "decision_n": 96
   }
  },
  {
@@ -47969,7 +47368,11 @@
    "t16_f03",
    "t16_f04",
    "t17_f02",
-   "t18_f10"
+   "t18_f10",
+   "t55_f04",
+   "t56_f03",
+   "t167_f03",
+   "t157_f01"
   ]
  },
  {
@@ -48113,7 +47516,10 @@
    "status": "auto",
    "rule": "same_word",
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t113_f02"
+  ]
  },
  {
   "id": "heyvan-tesvirleri",
@@ -48293,11 +47699,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "buta-kardamon"
-   ]
+   ],
+   "decision_n": 97
   }
  },
  {
@@ -48369,11 +47776,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "fokuschu-atributu"
-   ]
+   ],
+   "decision_n": 98
   }
  },
  {
@@ -48539,50 +47947,6 @@
     "lang": "ru",
     "kind": "kerimov_translation",
     "src": "kerimov"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 1
-  },
-  "attestations": [
-   {
-    "term": "xorme-islimi",
-    "source_id": "kerimov_v2",
-    "where": "том II, стр. 75 (файл kerimov_vol2/page_037.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "xorme-islimi"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "xurma-islimi",
-  "type": "ornament",
-  "key": "hörməislimi",
-  "headword": "hörmə islimi",
-  "meaning": {
-   "ru": "финиковый исслими",
-   "en": "date palm islimi"
-  },
-  "names": [
-   {
-    "v": "hörmə islimi",
-    "lang": "az",
-    "kind": "headword"
    },
    {
     "v": "xurma islimi",
@@ -48607,13 +47971,22 @@
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v2": 1
+   "kerimov_v2": 2
   },
   "attestations": [
+   {
+    "term": "xorme-islimi",
+    "source_id": "kerimov_v2",
+    "where": "том II, стр. 75 (файл kerimov_vol2/page_037.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "xurma-islimi",
     "source_id": "kerimov_v2",
@@ -48625,14 +47998,17 @@
    }
   ],
   "records": [
+   "xorme-islimi",
    "xurma-islimi"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 16
+  },
+  "schemes": []
  },
  {
   "id": "horuk",
@@ -48679,65 +48055,6 @@
     "lang": "ru",
     "kind": "kerimov_translation",
     "src": "kerimov"
-   }
-  ],
-  "roles": {
-   "border": 2
-  },
-  "schools": {
-   "guba-shirvan": 1
-  },
-  "sources": {
-   "kerimov_v1": 1,
-   "kerimov_v3": 1
-  },
-  "attestations": [
-   {
-    "term": "horuk",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 052 (файл kerimov_vol1/page_052.json)",
-    "page": null,
-    "role": null,
-    "quote": "Јухарыда кестәрилән һашијәнин дәјишдирилмиш формасыдыр.",
-    "note": null
-   },
-   {
-    "term": "xoruk-kosa",
-    "source_id": "kerimov_v3",
-    "where": "том III, стр. 40 (файл kerimov_vol3/page_020.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "horuk",
-   "xoruk-kosa"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "renamed_by_reading",
-   "renamed": [
-    "xoruk-kosa"
-   ]
-  }
- },
- {
-  "id": "xoruk",
-  "type": "ornament",
-  "key": "hörük",
-  "headword": "hörük",
-  "meaning": {
-   "ru": "сплетение",
-   "en": "braiding"
-  },
-  "names": [
-   {
-    "v": "hörük",
-    "lang": "az",
-    "kind": "headword"
    },
    {
     "v": "xoruk",
@@ -48767,17 +48084,35 @@
    }
   ],
   "roles": {
-   "border": 3
+   "border": 5
   },
   "schools": {
-   "guba-shirvan": 1
+   "guba-shirvan": 2
   },
   "sources": {
-   "kerimov_v1": 1,
-   "kerimov_v2": 1,
-   "kerimov_v3": 1
+   "kerimov_v1": 2,
+   "kerimov_v3": 2,
+   "kerimov_v2": 1
   },
   "attestations": [
+   {
+    "term": "horuk",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 052 (файл kerimov_vol1/page_052.json)",
+    "page": null,
+    "role": null,
+    "quote": "Јухарыда кестәрилән һашијәнин дәјишдирилмиш формасыдыр.",
+    "note": null
+   },
+   {
+    "term": "xoruk-kosa",
+    "source_id": "kerimov_v3",
+    "where": "том III, стр. 40 (файл kerimov_vol3/page_020.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "xoruk",
     "source_id": "kerimov_v1",
@@ -48807,13 +48142,18 @@
    }
   ],
   "records": [
+   "horuk",
+   "xoruk-kosa",
    "xoruk"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
+   "status": "checked_ai",
+   "rule": "renamed_by_reading",
+   "renamed": [
+    "xoruk-kosa"
+   ],
+   "decision_n": 99
   },
   "schemes": [
    "t150_f04"
@@ -48941,11 +48281,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "xoruk-buruq"
-   ]
+   ],
+   "decision_n": 100
   }
  },
  {
@@ -49014,7 +48355,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t26_f04"
+  ]
  },
  {
   "id": "hemli-buta",
@@ -49169,11 +48513,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "hamile-buta"
-   ]
+   ],
+   "decision_n": 101
   },
   "schemes": [
    "t96_f08"
@@ -49493,61 +48838,6 @@
     "v": "Astrakhan chicken",
     "lang": "en",
     "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {
-   "karabakh": 1
-  },
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
-   {
-    "term": "heshterxan-toyugu",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 028 (файл kerimov_vol1/page_028.json)",
-    "page": null,
-    "role": null,
-    "quote": "Вәрни-зилидән көтүрүл мүшдүр.",
-    "note": null
-   },
-   {
-    "term": "heshterxan-toyugu",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 054 (файл kerimov_vol1/page_054.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "heshterxan-toyugu"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "hind-toyugu",
-  "type": "ornament",
-  "key": "həştərxantoyuğu",
-  "headword": "həştərxan toyuğu",
-  "meaning": {
-   "ru": "Индейка",
-   "en": "Turkey"
-  },
-  "names": [
-   {
-    "v": "həştərxan toyuğu",
-    "lang": "az",
-    "kind": "headword"
    },
    {
     "v": "Hind toyuğu",
@@ -49571,15 +48861,33 @@
    }
   ],
   "roles": {
-   "element": 2
+   "element": 4
   },
   "schools": {
-   "karabakh": 1
+   "karabakh": 2
   },
   "sources": {
-   "kerimov_v1": 2
+   "kerimov_v1": 4
   },
   "attestations": [
+   {
+    "term": "heshterxan-toyugu",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 028 (файл kerimov_vol1/page_028.json)",
+    "page": null,
+    "role": null,
+    "quote": "Вәрни-зилидән көтүрүл мүшдүр.",
+    "note": null
+   },
+   {
+    "term": "heshterxan-toyugu",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 054 (файл kerimov_vol1/page_054.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "hind-toyugu",
     "source_id": "kerimov_v1",
@@ -49600,14 +48908,17 @@
    }
   ],
   "records": [
+   "heshterxan-toyugu",
    "hind-toyugu"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 18
+  },
+  "schemes": []
  },
  {
   "id": "iki-qush",
@@ -49796,7 +49107,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t150_f05"
+  ]
  },
  {
   "id": "ilangach",
@@ -50268,9 +49582,10 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 19
   }
  },
  {
@@ -50465,79 +49780,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "islimi-i-ishli-ishli-i-islimi-i-ishli"
-   ]
-  }
- },
- {
-  "id": "biber",
-  "type": "ornament",
-  "key": "istiot",
-  "headword": "istiot",
-  "meaning": {
-   "ru": "перец",
-   "en": "pepper"
-  },
-  "names": [
-   {
-    "v": "istiot",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "bibər",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "перец",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "pepper",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
-   {
-    "term": "biber",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 102 (файл kerimov_vol1/page_102.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "biber",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 042 (файл kerimov_vol1/page_042.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "biber"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
+   ],
+   "decision_n": 102
   }
  },
  {
@@ -50569,14 +49817,24 @@
     "v": "pepper",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "istiot",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "bibər",
+    "lang": "az",
+    "kind": "record"
    }
   ],
   "roles": {
-   "element": 1
+   "element": 3
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 3
   },
   "attestations": [
    {
@@ -50587,19 +49845,40 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "biber",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 102 (файл kerimov_vol1/page_102.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "biber",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 042 (файл kerimov_vol1/page_042.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "istot"
+   "istot",
+   "biber"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 203
   },
   "schemes": [
-   "t90_f01"
+   "t90_f01",
+   "t90_f03"
   ]
  },
  {
@@ -50861,11 +50140,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qarmaqli-naxish"
-   ]
+   ],
+   "decision_n": 103
   },
   "schemes": [
    "t41_f06"
@@ -50948,7 +50228,10 @@
    "status": "auto",
    "rule": "same_word",
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t133_f02"
+  ]
  },
  {
   "id": "kaman",
@@ -51109,7 +50392,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t62_f02"
+  ]
  },
  {
   "id": "quvan",
@@ -51255,11 +50541,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qasa"
-   ]
+   ],
+   "decision_n": 104
   },
   "schemes": [
    "t34_f01"
@@ -51309,15 +50596,39 @@
     "v": "eyebrow",
     "lang": "en",
     "kind": "meaning_rejected"
+   },
+   {
+    "v": "Qaşı",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "Кашы",
+    "lang": "az-cyrl",
+    "kind": "attested"
+   },
+   {
+    "v": "Глазурованный кирпич",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "glazed brick",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 3,
-   "border": 1
+   "element": 4,
+   "border": 5,
+   "motif": 1
   },
-  "schools": {},
+  "schools": {
+   "baku": 1,
+   "guba-shirvan": 1
+  },
   "sources": {
-   "kerimov_v1": 3,
+   "kerimov_v1": 9,
    "huseynov_2012": 2,
    "kerimov_v2": 1
   },
@@ -51375,70 +50686,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "kashi",
-   "qash"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "renamed_by_reading",
-   "renamed": [
-    "qash"
-   ]
-  }
- },
- {
-  "id": "qashi-2",
-  "type": "ornament",
-  "key": "kaşı",
-  "headword": "kaşı",
-  "meaning": {
-   "ru": "глазурованный кирпич",
-   "en": "glazed brick"
-  },
-  "names": [
-   {
-    "v": "kaşı",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "Qaşı",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "Кашы",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "Глазурованный кирпич",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "glazed brick",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1,
-   "motif": 1,
-   "border": 4
-  },
-  "schools": {
-   "baku": 1,
-   "guba-shirvan": 1
-  },
-  "sources": {
-   "kerimov_v1": 6
-  },
-  "attestations": [
    {
     "term": "qashi-2",
     "source_id": "kerimov_v1",
@@ -51495,14 +50743,20 @@
    }
   ],
   "records": [
+   "kashi",
+   "qash",
    "qashi-2"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
+   "status": "checked_ai",
+   "rule": "renamed_by_reading",
+   "renamed": [
+    "qash"
+   ],
+   "decision_n": 105
+  },
+  "schemes": []
  },
  {
   "id": "qashi-kerpic",
@@ -51602,11 +50856,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qlazurlu-kerpic"
-   ]
+   ],
+   "decision_n": 106
   },
   "schemes": [
    "t46_f02"
@@ -51753,49 +51008,7 @@
     "v": "Goat's hoof",
     "lang": "en",
     "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "kechidagbani",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 8 (файл kerimov_vol1/page_027.json)",
-    "page": null,
-    "role": null,
-    "quote": "Һејван ләпири демәкдир.",
-    "note": null
-   }
-  ],
-  "records": [
-   "kechidagbani"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t19_f08"
-  ]
- },
- {
-  "id": "kechi-dirnagi",
-  "type": "ornament",
-  "key": "keçidabanı",
-  "headword": "keçi dabanı",
-  "meaning": {
-   "ru": "козлиная пятка",
-   "en": "goat's heel"
-  },
-  "names": [
+   },
    {
     "v": "keçi dabanı",
     "lang": "az",
@@ -51818,13 +51031,22 @@
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
+   {
+    "term": "kechidagbani",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 8 (файл kerimov_vol1/page_027.json)",
+    "page": null,
+    "role": null,
+    "quote": "Һејван ләпири демәкдир.",
+    "note": null
+   },
    {
     "term": "kechi-dirnagi",
     "source_id": "kerimov_v1",
@@ -51836,13 +51058,15 @@
    }
   ],
   "records": [
+   "kechidagbani",
    "kechi-dirnagi"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 21
   },
   "schemes": [
    "t19_f08"
@@ -52076,73 +51300,6 @@
   }
  },
  {
-  "id": "kilim-gul",
-  "type": "ornament",
-  "key": "kilimgül",
-  "headword": "kilimgül",
-  "meaning": {
-   "ru": "цветок килима",
-   "en": "kilim flower"
-  },
-  "names": [
-   {
-    "v": "kilimgül",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "kilim gül",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "килимкүл",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "цветок килима",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "kilim flower",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "kilim-gul",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 036 (файл kerimov_vol1/page_036.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "kilim-gul"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t60_f04"
-  ]
- },
- {
   "id": "kilim-gulu",
   "type": "ornament",
   "key": "kilimgülü",
@@ -52186,16 +51343,31 @@
     "v": "kilim flower",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "kilimgül",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "kilim gül",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "килимкүл",
+    "lang": "az-cyrl",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "element": 9
+   "element": 10
   },
   "schools": {
    "guba-shirvan": 1
   },
   "sources": {
-   "kerimov_v1": 8,
+   "kerimov_v1": 9,
    "kerimov_v2": 1
   },
   "attestations": [
@@ -52279,16 +51451,27 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "kilim-gul",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 036 (файл kerimov_vol1/page_036.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "kilim-gulu"
+   "kilim-gulu",
+   "kilim-gul"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 205
   },
   "schemes": [
    "t36_f05",
@@ -52381,11 +51564,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "torba"
-   ]
+   ],
+   "decision_n": 107
   },
   "schemes": [
    "t111_f02"
@@ -52546,124 +51730,6 @@
   "merge": {
    "status": "single",
    "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "malye-kaymy",
-  "type": "ornament",
-  "key": "kiçikhaşiyələr",
-  "headword": "kiçik haşiyələr",
-  "meaning": {
-   "ru": "Малые каймы",
-   "en": "Small borders"
-  },
-  "names": [
-   {
-    "v": "kiçik haşiyələr",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "Малые каймы",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "Small borders",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "border": 8
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 8
-  },
-  "attestations": [
-   {
-    "term": "kichik-hashiyeler",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 68 (файл kerimov_vol1/page_262.json)",
-    "page": null,
-    "role": null,
-    "quote": "«МАЛЫЕ КАЙМЫ»",
-    "note": null
-   },
-   {
-    "term": "kichik-hashiyeler",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 264 (файл kerimov_vol1/page_264.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "malye-kaymy",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 68 (файл kerimov_vol1/page_262.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "malye-kaymy",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 263 (файл kerimov_vol1/page_263.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "malye-kaymy",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 264 (файл kerimov_vol1/page_264.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "malye-kaymy",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 265 (файл kerimov_vol1/page_265.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "malye-kaymy",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 69 (файл kerimov_vol1/page_266.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "malye-kaymy",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 267 (файл kerimov_vol1/page_267.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "kichik-hashiyeler",
-   "malye-kaymy"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "same_word",
    "renamed": []
   }
  },
@@ -53057,7 +52123,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t19_f14"
+  ]
  },
  {
   "id": "kvadratlar-ve-duzbucaqlilar",
@@ -53083,14 +52152,24 @@
     "v": "squares and rectangles",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "kvadrat və düzbucaqlılar",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "квадрат вә дүзбуҹаглылар",
+    "lang": "az-cyrl",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
    {
@@ -53101,17 +52180,29 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "kvadrat-ve-duzbucaqlilar",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 219 (файл kerimov_vol1/page_018.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "kvadratlar-ve-duzbucaqlilar"
+   "kvadratlar-ve-duzbucaqlilar",
+   "kvadrat-ve-duzbucaqlilar"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 206
+  },
+  "schemes": []
  },
  {
   "id": "kvadrat-ve-duzbucaqli",
@@ -53164,65 +52255,6 @@
   ],
   "records": [
    "kvadrat-ve-duzbucaqli"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "kvadrat-ve-duzbucaqlilar",
-  "type": "ornament",
-  "key": "kvadratvədüzbucaqlılar",
-  "headword": "kvadrat və düzbucaqlılar",
-  "meaning": {
-   "ru": "квадраты и прямоугольники",
-   "en": "squares and rectangles"
-  },
-  "names": [
-   {
-    "v": "kvadrat və düzbucaqlılar",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "квадрат вә дүзбуҹаглылар",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "квадраты и прямоугольники",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "squares and rectangles",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "kvadrat-ve-duzbucaqlilar",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 219 (файл kerimov_vol1/page_018.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "kvadrat-ve-duzbucaqlilar"
   ],
   "external_references": [],
   "merge": {
@@ -53425,11 +52457,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "kohne-xett"
-   ]
+   ],
+   "decision_n": 108
   }
  },
  {
@@ -53461,50 +52494,6 @@
     "v": "flatbread",
     "lang": "en",
     "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "koke",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 034 (файл kerimov_vol1/page_034.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "koke"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "kolobok",
-  "type": "ornament",
-  "key": "kökə",
-  "headword": "kökə",
-  "meaning": {
-   "ru": "Колобок",
-   "en": null
-  },
-  "names": [
-   {
-    "v": "kökə",
-    "lang": "az",
-    "kind": "headword"
    },
    {
     "v": "kolobok",
@@ -53518,13 +52507,22 @@
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
+   {
+    "term": "koke",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 034 (файл kerimov_vol1/page_034.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "kolobok",
     "source_id": "kerimov_v1",
@@ -53536,14 +52534,17 @@
    }
   ],
   "records": [
+   "koke",
    "kolobok"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 22
+  },
+  "schemes": []
  },
  {
   "id": "kone-su",
@@ -53836,11 +52837,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "bucaq"
-   ]
+   ],
+   "decision_n": 109
   },
   "schemes": [
    "t112_f01"
@@ -54001,13 +53003,14 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "boyuk-kuze",
     "kupa",
     "kupan"
-   ]
+   ],
+   "decision_n": 110
   },
   "schemes": [
    "t34_f02",
@@ -54385,11 +53388,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "bala-it"
-   ]
+   ],
+   "decision_n": 111
   },
   "schemes": [
    "t18_f02"
@@ -54681,14 +53685,45 @@
     "v": "kəmər / toqqa / belbağı",
     "lang": "az",
     "kind": "record"
+   },
+   {
+    "v": "Белбағы",
+    "lang": "az-cyrl",
+    "kind": "attested"
+   },
+   {
+    "v": "Тогга",
+    "lang": "az-cyrl",
+    "kind": "attested"
+   },
+   {
+    "v": "пряжка",
+    "lang": "ru",
+    "kind": "meaning"
+   },
+   {
+    "v": "buckle",
+    "lang": "en",
+    "kind": "meaning"
+   },
+   {
+    "v": "toqqa poqas",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "тогга пояс",
+    "lang": "ru",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "element": 2
+   "element": 5
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 2
+   "kerimov_v1": 5,
+   "kerimov_v3": 1
   },
   "attestations": [
    {
@@ -54708,20 +53743,65 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "belbagi",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 030 (файл kerimov_vol1/page_030.json)",
+    "page": null,
+    "role": null,
+    "quote": "Зәргәрликдә бу элемент „гызыл кәтәбә“ адланыр.",
+    "note": null
+   },
+   {
+    "term": "toqqa",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 030 (файл kerimov_vol1/page_030.json)",
+    "page": null,
+    "role": null,
+    "quote": "Бурада кәмәрин гашыны нәзәрә алмалы.",
+    "note": null
+   },
+   {
+    "term": "toqqa",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 030 (файл kerimov_vol1/page_030.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "toqqa-poqas",
+    "source_id": "kerimov_v3",
+    "where": "том III, стр. 44 (файл kerimov_vol3/page_022.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
    "kemer",
-   "kemer-toqqa-belbagi"
+   "kemer-toqqa-belbagi",
+   "belbagi",
+   "toqqa",
+   "toqqa-poqas"
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 182
   },
   "schemes": [
-   "t30_f02"
+   "t30_f02",
+   "t30_f04",
+   "t30_f05",
+   "t30_f06",
+   "t30_f09",
+   "t30_f10"
   ]
  },
  {
@@ -55146,7 +54226,8 @@
   "schemes": [
    "t13_f03",
    "t44_f03",
-   "t46_f13"
+   "t46_f13",
+   "t117_f01"
   ]
  },
  {
@@ -55232,7 +54313,10 @@
    "status": "auto",
    "rule": "same_word",
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t133_f10"
+  ]
  },
  {
   "id": "ketebe",
@@ -55351,11 +54435,26 @@
     "v": "book",
     "lang": "en",
     "kind": "meaning_rejected"
+   },
+   {
+    "v": "uzun medalion",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "Удлиненный медальон",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "Elongated medallion",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
    "element": 19,
-   "motif": 15,
+   "motif": 16,
    "border": 5
   },
   "schools": {
@@ -55365,7 +54464,7 @@
   },
   "sources": {
    "kerimov_v2": 19,
-   "kerimov_v1": 21
+   "kerimov_v1": 22
   },
   "attestations": [
    {
@@ -55727,69 +54826,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "ketebe",
-   "ketebe-2",
-   "kitab"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "renamed_by_reading",
-   "renamed": [
-    "kitab"
-   ]
-  },
-  "schemes": [
-   "t27_f03"
-  ]
- },
- {
-  "id": "uzun-medalion",
-  "type": "ornament",
-  "key": "kətəbə",
-  "headword": "kətəbə",
-  "meaning": {
-   "ru": "Удлиненный медальон",
-   "en": "Elongated medallion"
-  },
-  "names": [
-   {
-    "v": "kətəbə",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "uzun medalion",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "Кетебэ",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "Удлиненный медальон",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "Elongated medallion",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "motif": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
    {
     "term": "uzun-medalion",
     "source_id": "kerimov_v1",
@@ -55801,14 +54838,28 @@
    }
   ],
   "records": [
+   "ketebe",
+   "ketebe-2",
+   "kitab",
    "uzun-medalion"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
+   "status": "checked_ai",
+   "rule": "renamed_by_reading",
+   "renamed": [
+    "kitab"
+   ],
+   "decision_n": 23
+  },
+  "schemes": [
+   "t27_f03",
+   "t101_f05",
+   "t148_f01",
+   "t138_f08",
+   "t101_f06",
+   "t102_f02"
+  ]
  },
  {
   "id": "ketebe-hashiye",
@@ -55881,11 +54932,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "geyme-ketebe"
-   ]
+   ],
+   "decision_n": 113
   }
  },
  {
@@ -56023,14 +55075,29 @@
     "v": "tulip",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "xaşxaş",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "мак",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "poppy",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 3
+   "element": 5
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 3
+   "kerimov_v1": 5
   },
   "attestations": [
    {
@@ -56059,62 +55126,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "lale"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t90_f06",
-   "t75_f10",
-   "t90_f19"
-  ]
- },
- {
-  "id": "xashxash",
-  "type": "ornament",
-  "key": "lalə",
-  "headword": "lalə",
-  "meaning": {
-   "ru": "мак",
-   "en": "poppy"
-  },
-  "names": [
-   {
-    "v": "lalə",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "xaşxaş",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "мак",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "poppy",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
    {
     "term": "xashxash",
     "source_id": "kerimov_v1",
@@ -56135,14 +55147,21 @@
    }
   ],
   "records": [
+   "lale",
    "xashxash"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 24
+  },
+  "schemes": [
+   "t90_f06",
+   "t75_f10",
+   "t90_f19"
+  ]
  },
  {
   "id": "lenin-ordeni",
@@ -56365,11 +55384,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "paxla-yarpagi"
-   ]
+   ],
+   "decision_n": 114
   }
  },
  {
@@ -56672,7 +55692,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t124_f02"
+  ]
  },
  {
   "id": "lechek",
@@ -56719,17 +55742,38 @@
     "v": "чака",
     "lang": "ru",
     "kind": "attested"
+   },
+   {
+    "v": "ləçəklər",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "decorative arch",
+    "lang": "ru",
+    "kind": "kerimov_translation",
+    "src": "kerimov"
+   },
+   {
+    "v": "лепестки",
+    "lang": "ru",
+    "kind": "meaning_rejected"
+   },
+   {
+    "v": "petals",
+    "lang": "en",
+    "kind": "meaning_rejected"
    }
   ],
   "roles": {
-   "element": 8,
+   "element": 9,
    "motif": 2
   },
   "schools": {
    "tabriz": 1
   },
   "sources": {
-   "kerimov_v2": 8,
+   "kerimov_v2": 9,
    "kerimov_v3": 2
   },
   "attestations": [
@@ -56822,66 +55866,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "lechek",
-   "chaqa"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "renamed_by_reading",
-   "renamed": [
-    "chaqa"
-   ]
-  }
- },
- {
-  "id": "lechekler",
-  "type": "ornament",
-  "key": "ləçək",
-  "headword": "ləçək",
-  "meaning": {
-   "ru": "decorative arch",
-   "en": "petals"
-  },
-  "names": [
-   {
-    "v": "ləçək",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "ləçəklər",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "decorative arch",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   },
-   {
-    "v": "лепестки",
-    "lang": "ru",
-    "kind": "meaning_rejected"
-   },
-   {
-    "v": "petals",
-    "lang": "en",
-    "kind": "meaning_rejected"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 1
-  },
-  "attestations": [
    {
     "term": "lechekler",
     "source_id": "kerimov_v2",
@@ -56893,14 +55878,20 @@
    }
   ],
   "records": [
+   "lechek",
+   "chaqa",
    "lechekler"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
+   "status": "checked_ai",
+   "rule": "renamed_by_reading",
+   "renamed": [
+    "chaqa"
+   ],
+   "decision_n": 115
+  },
+  "schemes": []
  },
  {
   "id": "lechek-turunc",
@@ -57666,12 +56657,16 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "meshe-chicheyi"
-   ]
-  }
+   ],
+   "decision_n": 116
+  },
+  "schemes": [
+   "t77_f10"
+  ]
  },
  {
   "id": "meshegozu",
@@ -57753,11 +56748,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "meshe-qozasi"
-   ]
+   ],
+   "decision_n": 117
   }
  },
  {
@@ -57842,12 +56838,16 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "meshe-bitkisi"
-   ]
-  }
+   ],
+   "decision_n": 118
+  },
+  "schemes": [
+   "t107_f04"
+  ]
  },
  {
   "id": "mil",
@@ -58013,11 +57013,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "minare-gunbezi"
-   ]
+   ],
+   "decision_n": 119
   },
   "schemes": [
    "t110_f01"
@@ -58141,11 +57142,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qvozd"
-   ]
+   ],
+   "decision_n": 120
   },
   "schemes": [
    "t46_f08"
@@ -58527,9 +57529,10 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 26
   }
  },
  {
@@ -58775,55 +57778,6 @@
   ]
  },
  {
-  "id": "muje",
-  "type": "ornament",
-  "key": "müjə",
-  "headword": "müjə",
-  "meaning": {
-   "ru": "ресница",
-   "en": null
-  },
-  "names": [
-   {
-    "v": "müjə",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "ресница",
-    "lang": "ru",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 0
-  },
-  "schools": {},
-  "sources": {
-   "huseynov_2012": 1
-  },
-  "attestations": [
-   {
-    "term": "muje",
-    "source_id": "huseynov_2012",
-    "where": "Hüseynov 2012, s. 84-85 (файл huseynov_hashiye/page_043.json)",
-    "page": "84-85",
-    "role": "element",
-    "quote": null,
-    "note": "Самые известные siçandişi — «müjə» (ресницы)."
-   }
-  ],
-  "records": [
-   "muje"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
   "id": "mujeler",
   "type": "ornament",
   "key": "müjələr",
@@ -58918,14 +57872,21 @@
     "v": "Eyelash",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "müjə",
+    "lang": "az",
+    "kind": "headword"
    }
   ],
   "roles": {
-   "border": 1
+   "border": 1,
+   "element": 0
   },
   "schools": {},
   "sources": {
-   "kerimov_v2": 1
+   "kerimov_v2": 1,
+   "huseynov_2012": 1
   },
   "attestations": [
    {
@@ -58936,17 +57897,29 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "muje",
+    "source_id": "huseynov_2012",
+    "where": "Hüseynov 2012, s. 84-85 (файл huseynov_hashiye/page_043.json)",
+    "page": "84-85",
+    "role": "element",
+    "quote": null,
+    "note": "Самые известные siçandişi — «müjə» (ресницы)."
    }
   ],
   "records": [
-   "muje-muje"
+   "muje-muje",
+   "muje"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 208
+  },
+  "schemes": []
  },
  {
   "id": "mebed-ara-hashiyesi",
@@ -59318,11 +58291,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "daxili-hashiye"
-   ]
+   ],
+   "decision_n": 121
   }
  },
  {
@@ -59773,12 +58747,16 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "mexmer-chichek"
-   ]
-  }
+   ],
+   "decision_n": 122
+  },
+  "schemes": [
+   "t75_f15"
+  ]
  },
  {
   "id": "mexezi",
@@ -59874,16 +58852,31 @@
     "v": "fakel",
     "lang": "az",
     "kind": "misreading"
+   },
+   {
+    "v": "şamal",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "шамал",
+    "lang": "az-cyrl",
+    "kind": "attested"
+   },
+   {
+    "v": "шамал",
+    "lang": "ru",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "border": 3,
+   "border": 4,
    "element": 3
   },
   "schools": {},
   "sources": {
    "kerimov_v1": 3,
-   "kerimov_v2": 3,
+   "kerimov_v2": 4,
    "huseynov_2012": 2
   },
   "attestations": [
@@ -59958,22 +58951,34 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "shamal",
+    "source_id": "kerimov_v2",
+    "where": "том II, стр. 130 (файл kerimov_vol2/page_065.json)",
+    "page": null,
+    "role": null,
+    "quote": "серединную полосу, известную в Азербайджане, как «шамал» (факел), в Карабахе — «шамдан» (подсвечник), в Кубе — «гейчи балыг» (ножницы — рыба)",
+    "note": "В Карабахе — «шамдан», в Кубе — «гейчи балыг», в Туркмении — «срез». Восходит к растительным криволинейным узорам."
    }
   ],
   "records": [
    "meshel",
-   "fakel"
+   "fakel",
+   "shamal"
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "fakel"
-   ]
+   ],
+   "decision_n": 209
   },
   "schemes": [
-   "t29_f05"
+   "t29_f05",
+   "t150_f01"
   ]
  },
  {
@@ -60416,16 +59421,32 @@
     "v": "наркул",
     "lang": "ru",
     "kind": "attested"
+   },
+   {
+    "v": "nargülü",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "nar çiçəyi",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "Гранатов. цветок",
+    "lang": "ru",
+    "kind": "kerimov_translation",
+    "src": "kerimov"
    }
   ],
   "roles": {
-   "element": 4
+   "element": 6
   },
   "schools": {
    "guba-shirvan": 1
   },
   "sources": {
-   "kerimov_v1": 4
+   "kerimov_v1": 6
   },
   "attestations": [
    {
@@ -60463,69 +59484,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "nargul",
-   "narkul"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "same_word",
-   "renamed": []
-  },
-  "schemes": [
-   "t87_f03",
-   "t88_f01",
-   "t83_f06"
-  ]
- },
- {
-  "id": "nar-chicheyi",
-  "type": "ornament",
-  "key": "nargülü",
-  "headword": "nargülü",
-  "meaning": {
-   "ru": "гранатовый цветок",
-   "en": "pomegranate flower"
-  },
-  "names": [
-   {
-    "v": "nargülü",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "nar çiçəyi",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "гранатовый цветок",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "Гранатов. цветок",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   },
-   {
-    "v": "pomegranate flower",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
    {
     "term": "nar-chicheyi",
     "source_id": "kerimov_v1",
@@ -60546,15 +59505,21 @@
    }
   ],
   "records": [
+   "nargul",
+   "narkul",
    "nar-chicheyi"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
+   "status": "checked_ai",
+   "rule": "same_word",
+   "renamed": [],
+   "decision_n": 211
   },
   "schemes": [
+   "t87_f03",
+   "t88_f01",
+   "t83_f06",
    "t80_f02"
   ]
  },
@@ -61480,11 +60445,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "boshqab"
-   ]
+   ],
+   "decision_n": 124
   },
   "schemes": [
    "t43_f02"
@@ -61612,13 +60578,19 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "gul-boshqab",
     "gulcuk-boshqab"
-   ]
-  }
+   ],
+   "decision_n": 125
+  },
+  "schemes": [
+   "t86_f03",
+   "t86_f04",
+   "t80_f05"
+  ]
  },
  {
   "id": "nazik-naxish",
@@ -62087,11 +61059,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "serp-ve-molot"
-   ]
+   ],
+   "decision_n": 126
   }
  },
  {
@@ -62623,11 +61596,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "ox-ucu"
-   ]
+   ],
+   "decision_n": 127
   },
   "schemes": [
    "t129_f02"
@@ -63067,7 +62041,14 @@
    "status": "auto",
    "rule": "same_word",
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t78_f04",
+   "t75_f17",
+   "t82_f09",
+   "t85_f01",
+   "t82_f07"
+  ]
  },
  {
   "id": "palid-yarpagi",
@@ -63208,11 +62189,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "pambiq-qutulari"
-   ]
+   ],
+   "decision_n": 128
   }
  },
  {
@@ -63795,11 +62777,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "xett"
-   ]
+   ],
+   "decision_n": 129
   }
  },
  {
@@ -64094,46 +63077,7 @@
     "v": "cat's paw",
     "lang": "en",
     "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "pishikayagi",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 026 (файл kerimov_vol1/page_026.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "pishikayagi"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "pishik-lepesi",
-  "type": "ornament",
-  "key": "pişikayağı",
-  "headword": "pişik ayağı",
-  "meaning": {
-   "ru": "кошачья лапа",
-   "en": "cat's paw"
-  },
-  "names": [
+   },
    {
     "v": "pişik ayağı",
     "lang": "az",
@@ -64153,21 +63097,25 @@
     "v": "кошачья лапа",
     "lang": "ru",
     "kind": "meaning"
-   },
-   {
-    "v": "cat's paw",
-    "lang": "en",
-    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
+   {
+    "term": "pishikayagi",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 026 (файл kerimov_vol1/page_026.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "pishik-lepesi",
     "source_id": "kerimov_v1",
@@ -64179,13 +63127,15 @@
    }
   ],
   "records": [
+   "pishikayagi",
    "pishik-lepesi"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 28
   },
   "schemes": [
    "t13_f04"
@@ -64270,11 +63220,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "sikke"
-   ]
+   ],
+   "decision_n": 130
   },
   "schemes": [
    "t49_f02"
@@ -64418,7 +63369,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t56_f05"
+  ]
  },
  {
   "id": "pence",
@@ -64455,14 +63409,29 @@
     "v": "paw",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "əl",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "кисть руки",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "hand",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 3
+   "element": 5
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 3
+   "kerimov_v1": 5
   },
   "attestations": [
    {
@@ -64491,60 +63460,7 @@
     "role": null,
     "quote": "Намазлыг хәлчәләриндә даһа артыг раст ҝәлмәк олур.",
     "note": null
-   }
-  ],
-  "records": [
-   "pence"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t33_f04"
-  ]
- },
- {
-  "id": "el",
-  "type": "ornament",
-  "key": "pəncə",
-  "headword": "pəncə",
-  "meaning": {
-   "ru": "кисть руки",
-   "en": "hand"
-  },
-  "names": [
-   {
-    "v": "pəncə",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "əl",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "кисть руки",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "hand",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
    {
     "term": "el",
     "source_id": "kerimov_v1",
@@ -64565,15 +63481,18 @@
    }
   ],
   "records": [
+   "pence",
    "el"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 29
   },
   "schemes": [
+   "t33_f04",
    "t15_f02"
   ]
  },
@@ -64773,9 +63692,10 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 30
   },
   "schemes": [
    "t26_f07"
@@ -65602,7 +64522,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t136_f05"
+  ]
  },
  {
   "id": "qarakalpak",
@@ -65912,10 +64835,25 @@
     "v": "hook-shaped (plural)",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "qarmaqlılar",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "гармаглылар",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "hooked ones",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 14,
+   "element": 15,
    "border": 3
   },
   "schools": {
@@ -65923,7 +64861,7 @@
    "guba-shirvan": 1
   },
   "sources": {
-   "kerimov_v1": 16,
+   "kerimov_v1": 17,
    "kerimov_v2": 1
   },
   "attestations": [
@@ -66079,16 +65017,27 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "qarmaqlilar",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 219 (файл kerimov_vol1/page_018.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "qarmaqli"
+   "qarmaqli",
+   "qarmaqlilar"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 213
   },
   "schemes": [
    "t12_f07",
@@ -66498,65 +65447,6 @@
   ],
   "records": [
    "ketebe-qarmaqli"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "qarmaqlilar",
-  "type": "ornament",
-  "key": "qarmaqlılar",
-  "headword": "qarmaqlılar",
-  "meaning": {
-   "ru": "крючкообразные",
-   "en": "hooked ones"
-  },
-  "names": [
-   {
-    "v": "qarmaqlılar",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "гармаглылар",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "крючкообразные",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "hooked ones",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "qarmaqlilar",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 219 (файл kerimov_vol1/page_018.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "qarmaqlilar"
   ],
   "external_references": [],
   "merge": {
@@ -66976,114 +65866,6 @@
   ],
   "records": [
    "qarishyani"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "qaychi-2",
-  "type": "ornament",
-  "key": "qayçı",
-  "headword": "qayçı",
-  "meaning": {
-   "ru": "Ножницы",
-   "en": "Scissors"
-  },
-  "names": [
-   {
-    "v": "qayçı",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "ножницы",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "Scissors",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "qaychi-2",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 104 (файл kerimov_vol1/page_104.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "qaychi-2"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "qaychibaliq",
-  "type": "ornament",
-  "key": "qayçıbalıq",
-  "headword": "qayçıbalıq",
-  "meaning": {
-   "ru": "Рыба-ножницы",
-   "en": "Scissor fish"
-  },
-  "names": [
-   {
-    "v": "qayçıbalıq",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "рыба-ножницы",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "Scissor fish",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "qaychibaliq",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 30 (файл kerimov_vol1/page_115.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "qaychibaliq"
   ],
   "external_references": [],
   "merge": {
@@ -67707,14 +66489,24 @@
     "v": "Apricot",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "gəysi",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "ərik",
+    "lang": "az",
+    "kind": "record"
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
    {
@@ -67725,17 +66517,31 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "erik",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 26 (файл kerimov_vol1/page_099.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "qaysi"
+   "qaysi",
+   "erik"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 199
+  },
+  "schemes": [
+   "t75_f01"
+  ]
  },
  {
   "id": "qeysi-beshax",
@@ -67830,17 +66636,27 @@
     "v": "apricot with a twig",
     "lang": "en",
     "kind": "meaning_rejected"
+   },
+   {
+    "v": "gəysibişax",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "qaysıbışaq",
+    "lang": "az",
+    "kind": "record"
    }
   ],
   "roles": {
-   "border": 2,
+   "border": 3,
    "element": 1
   },
   "schools": {
-   "guba-shirvan": 1
+   "guba-shirvan": 2
   },
   "sources": {
-   "kerimov_v1": 3
+   "kerimov_v1": 4
   },
   "attestations": [
    {
@@ -67869,20 +66685,34 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "qaysibishaq",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 110 (файл kerimov_vol1/page_110.json)",
+    "page": null,
+    "role": null,
+    "quote": "Эта «зенджире» встречается и в ширванских коврах.",
+    "note": ""
    }
   ],
   "records": [
    "qeysibishah",
-   "erik-budaqla"
+   "erik-budaqla",
+   "qaysibishaq"
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "erik-budaqla"
-   ]
-  }
+   ],
+   "decision_n": 200
+  },
+  "schemes": [
+   "t139_f07"
+  ]
  },
  {
   "id": "qeychi",
@@ -67928,13 +66758,13 @@
   "roles": {
    "motif": 1,
    "border": 2,
-   "element": 4
+   "element": 5
   },
   "schools": {
    "guba-shirvan": 1
   },
   "sources": {
-   "kerimov_v1": 7
+   "kerimov_v1": 8
   },
   "attestations": [
    {
@@ -67999,20 +66829,36 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "qaychi-2",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 104 (файл kerimov_vol1/page_104.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
    "qeychi",
-   "qaychi"
+   "qaychi",
+   "qaychi-2"
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qaychi"
-   ]
-  }
+   ],
+   "decision_n": 214
+  },
+  "schemes": [
+   "t104_f03",
+   "t140_f06",
+   "t104_f04"
+  ]
  },
  {
   "id": "qeychibaliq",
@@ -68044,16 +66890,22 @@
     "v": "Scissor fish",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "qayçıbalıq",
+    "lang": "az",
+    "kind": "headword"
    }
   ],
   "roles": {
-   "border": 2
+   "border": 2,
+   "element": 1
   },
   "schools": {
    "guba-shirvan": 1
   },
   "sources": {
-   "kerimov_v1": 2
+   "kerimov_v1": 3
   },
   "attestations": [
    {
@@ -68073,17 +66925,29 @@
     "role": null,
     "quote": "Типичен для ковров Карабаха и Гянджа-Казаха.",
     "note": ""
+   },
+   {
+    "term": "qaychibaliq",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 30 (файл kerimov_vol1/page_115.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "qeychibaliq"
+   "qeychibaliq",
+   "qaychibaliq"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 215
+  },
+  "schemes": []
  },
  {
   "id": "qovgalqa",
@@ -68435,11 +67299,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "fircha"
-   ]
+   ],
+   "decision_n": 133
   },
   "schemes": [
    "t28_f07",
@@ -69178,11 +68043,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "pambiq-qozasi"
-   ]
+   ],
+   "decision_n": 134
   },
   "schemes": [
    "t83_f03",
@@ -69344,11 +68210,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "baran"
-   ]
+   ],
+   "decision_n": 135
   },
   "schemes": [
    "t09_f02",
@@ -69540,9 +68407,10 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 31
   },
   "schemes": [
    "t16_f07"
@@ -70494,7 +69362,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t135_f03"
+  ]
  },
  {
   "id": "qosha-su",
@@ -70580,9 +69451,10 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 32
   },
   "schemes": [
    "t133_f05"
@@ -70635,7 +69507,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t133_f03"
+  ]
  },
  {
   "id": "qubba",
@@ -70673,15 +69548,30 @@
     "lang": "ru",
     "kind": "kerimov_translation",
     "src": "kerimov"
+   },
+   {
+    "v": "dodaq",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "губа",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "lip",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 6
+   "element": 7
   },
   "schools": {},
   "sources": {
    "kerimov_v1": 2,
-   "kerimov_v2": 3,
+   "kerimov_v2": 4,
    "kerimov_v3": 1
   },
   "attestations": [
@@ -70738,59 +69628,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "qubba",
-   "qubba-2",
-   "qubba-3"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "same_word",
-   "renamed": []
-  }
- },
- {
-  "id": "dodaq",
-  "type": "ornament",
-  "key": "qubba",
-  "headword": "qubba",
-  "meaning": {
-   "ru": "губа",
-   "en": "lip"
-  },
-  "names": [
-   {
-    "v": "qubba",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "dodaq",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "губа",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "lip",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 1
-  },
-  "attestations": [
    {
     "term": "dodaq",
     "source_id": "kerimov_v2",
@@ -70802,14 +69640,19 @@
    }
   ],
   "records": [
+   "qubba",
+   "qubba-2",
+   "qubba-3",
    "dodaq"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
+   "status": "checked_ai",
+   "rule": "same_word",
+   "renamed": [],
+   "decision_n": 34
+  },
+  "schemes": []
  },
  {
   "id": "qubna",
@@ -71666,7 +70509,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t85_f08"
+  ]
  },
  {
   "id": "qonche",
@@ -71737,11 +70583,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qoncha"
-   ]
+   ],
+   "decision_n": 136
   },
   "schemes": [
    "t76_f06"
@@ -71782,17 +70629,27 @@
     "v": "Dome",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "gübbə",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "ҝүбба",
+    "lang": "az-cyrl",
+    "kind": "attested"
    }
   ],
   "roles": {
    "motif": 3,
-   "element": 1
+   "element": 2
   },
   "schools": {
    "karabakh": 1
   },
   "sources": {
-   "kerimov_v1": 2,
+   "kerimov_v1": 3,
    "kerimov_v2": 2
   },
   "attestations": [
@@ -71831,18 +70688,30 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "gubbe",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 6 (файл kerimov_vol1/page_019.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
    "qubbe",
-   "qubbe-2"
+   "qubbe-2",
+   "gubbe"
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 194
+  },
+  "schemes": []
  },
  {
   "id": "quyruq",
@@ -71921,7 +70790,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t48_f06"
+  ]
  },
  {
   "id": "qif",
@@ -72225,7 +71097,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t26_f06"
+  ]
  },
  {
   "id": "qivrim-2",
@@ -72257,14 +71132,29 @@
     "v": "curl",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "sarmaşıq",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "вьющийся",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "creeping, climbing",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 4
+   "element": 6
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 3,
+   "kerimov_v1": 5,
    "kerimov_v3": 1
   },
   "attestations": [
@@ -72303,63 +71193,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "qivrim-2"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t52_f05",
-   "t52_f10",
-   "t53_f06",
-   "t55_f01"
-  ]
- },
- {
-  "id": "sarmashiq",
-  "type": "ornament",
-  "key": "qıvrım",
-  "headword": "qıvrım",
-  "meaning": {
-   "ru": "вьющийся",
-   "en": "creeping, climbing"
-  },
-  "names": [
-   {
-    "v": "qıvrım",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "sarmaşıq",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "вьющийся",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "creeping, climbing",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
    {
     "term": "sarmashiq",
     "source_id": "kerimov_v1",
@@ -72380,14 +71214,25 @@
    }
   ],
   "records": [
+   "qivrim-2",
    "sarmashiq"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 35
+  },
+  "schemes": [
+   "t52_f05",
+   "t52_f10",
+   "t53_f06",
+   "t55_f01",
+   "t167_f02",
+   "t55_f05",
+   "t55_f02"
+  ]
  },
  {
   "id": "qivrim-buta",
@@ -72475,82 +71320,6 @@
   }
  },
  {
-  "id": "qaynaq",
-  "type": "ornament",
-  "key": "qıynaq",
-  "headword": "qıynaq",
-  "meaning": {
-   "ru": "источник",
-   "en": "source"
-  },
-  "names": [
-   {
-    "v": "qıynaq",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "qaynaq",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "гајнаг",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "источник",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "source",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
-   {
-    "term": "qaynaq",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 034 (файл kerimov_vol1/page_034.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   },
-   {
-    "term": "qaynaq",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 7* (файл kerimov_vol1/page_025.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "qaynaq"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t50_f04"
-  ]
- },
- {
   "id": "qaynagi",
   "type": "ornament",
   "key": "qıynaq",
@@ -72605,14 +71374,25 @@
     "v": "Source",
     "lang": "en",
     "kind": "meaning_rejected"
+   },
+   {
+    "v": "qaynaq",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "гајнаг",
+    "lang": "az-cyrl",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "border": 1
+   "border": 1,
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 3
   },
   "attestations": [
    {
@@ -72623,17 +71403,40 @@
     "role": null,
     "quote": null,
     "note": "Коготь"
+   },
+   {
+    "term": "qaynaq",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 034 (файл kerimov_vol1/page_034.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "qaynaq",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 7* (файл kerimov_vol1/page_025.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "qaynagi"
+   "qaynagi",
+   "qaynaq"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 36
+  },
+  "schemes": [
+   "t50_f04"
+  ]
  },
  {
   "id": "qiynagi",
@@ -73105,11 +71908,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "mezar"
-   ]
+   ],
+   "decision_n": 137
   },
   "schemes": [
    "t47_f05"
@@ -73352,7 +72156,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t149_f03"
+  ]
  },
  {
   "id": "qalambash",
@@ -74060,12 +72867,13 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "seceq",
     "uchayaq"
-   ]
+   ],
+   "decision_n": 138
   }
  },
  {
@@ -74482,11 +73290,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "asilan"
-   ]
+   ],
+   "decision_n": 139
   },
   "schemes": [
    "t51_f06",
@@ -74765,74 +73574,6 @@
    "t57_f05",
    "t58_f02",
    "t58_f04"
-  ]
- },
- {
-  "id": "samavar",
-  "type": "ornament",
-  "key": "samovar",
-  "headword": "samovar",
-  "meaning": {
-   "ru": "Самовар",
-   "en": "Samovar"
-  },
-  "names": [
-   {
-    "v": "samovar",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "samavar",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "симавар",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "Самовар",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   },
-   {
-    "v": "Samovar",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "samavar",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 092 (файл kerimov_vol1/page_092.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "samavar"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t34_f08"
   ]
  },
  {
@@ -75805,14 +74546,24 @@
     "v": "samovar",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "samovar",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "симавар",
+    "lang": "ru",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
    {
@@ -75823,16 +74574,27 @@
     "role": null,
     "quote": "Самавар демәкдир. XIX әсрин ахырларына аиддир.",
     "note": null
+   },
+   {
+    "term": "samavar",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 092 (файл kerimov_vol1/page_092.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "samavar-2"
+   "samavar-2",
+   "samavar"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 216
   },
   "schemes": [
    "t34_f08"
@@ -76271,60 +75033,6 @@
   }
  },
  {
-  "id": "stilize-edilmish-heyvan-shekilleri",
-  "type": "ornament",
-  "key": "stilizeedilmişheyvanşəkilləri",
-  "headword": "stilize edilmiş heyvan şəkilləri",
-  "meaning": {
-   "ru": "Стилизованные изображения животных",
-   "en": "Stylized animal images"
-  },
-  "names": [
-   {
-    "v": "stilize edilmiş heyvan şəkilləri",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "стилизованные изображения животных",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "Stylized animal images",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "stilize-edilmish-heyvan-shekilleri",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 20* (файл kerimov_vol1/page_077.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "stilize-edilmish-heyvan-shekilleri"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
   "id": "stilize-edilmish-ejdaha-shekli",
   "type": "ornament",
   "key": "stilizeedilmişəjdahaşəkli",
@@ -76413,14 +75121,19 @@
     "v": "Stylized animal images",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "stilize edilmiş heyvan şəkilləri",
+    "lang": "az",
+    "kind": "headword"
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
    {
@@ -76431,17 +75144,29 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "stilize-edilmish-heyvan-shekilleri",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 20* (файл kerimov_vol1/page_077.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "stilleshmish-heyvan-shekilleri"
+   "stilleshmish-heyvan-shekilleri",
+   "stilize-edilmish-heyvan-shekilleri"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 217
+  },
+  "schemes": []
  },
  {
   "id": "su",
@@ -76877,11 +75602,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "sumaq-chicheyi"
-   ]
+   ],
+   "decision_n": 140
   },
   "schemes": [
    "t70_f14"
@@ -77249,11 +75975,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "daraq-sunbul"
-   ]
+   ],
+   "decision_n": 141
   },
   "schemes": [
    "t34_f12"
@@ -77815,11 +76542,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "genc-heyvan-sidiyi-izi"
-   ]
+   ],
+   "decision_n": 142
   }
  },
  {
@@ -78048,11 +76776,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "sekkizgusheli-ulduzlar-2"
-   ]
+   ],
+   "decision_n": 143
   }
  },
  {
@@ -78578,12 +77307,14 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
+   "renamed": [],
+   "decision_n": 38
   },
   "schemes": [
-   "t40_f04"
+   "t40_f04",
+   "t139_f01"
   ]
  },
  {
@@ -78831,7 +77562,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t63_f04"
+  ]
  },
  {
   "id": "perde-naxishi",
@@ -78896,72 +77630,6 @@
    "rule": null,
    "renamed": []
   }
- },
- {
-  "id": "tavus",
-  "type": "ornament",
-  "key": "tavus",
-  "headword": "tavus",
-  "meaning": {
-   "ru": "павлин",
-   "en": "peacock"
-  },
-  "names": [
-   {
-    "v": "tavus",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "Тавус",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "павлин",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "peacock",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {
-   "karabakh": 1
-  },
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "tavus",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 054 (файл kerimov_vol1/page_054.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "tavus"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t18_f14",
-   "t18_f15",
-   "t18_f16"
-  ]
  },
  {
   "id": "taxt",
@@ -79179,12 +77847,16 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "dereyine"
-   ]
-  }
+   ],
+   "decision_n": 144
+  },
+  "schemes": [
+   "t134_f02"
+  ]
  },
  {
   "id": "tay",
@@ -79433,15 +78105,36 @@
     "v": "arka",
     "lang": "az",
     "kind": "misreading"
+   },
+   {
+    "v": "tağlar",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "arches",
+    "lang": "ru",
+    "kind": "kerimov_translation",
+    "src": "kerimov"
+   },
+   {
+    "v": "арки",
+    "lang": "ru",
+    "kind": "meaning"
+   },
+   {
+    "v": "arches",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 2,
+   "element": 3,
    "motif": 1
   },
   "schools": {},
   "sources": {
-   "kerimov_v2": 3
+   "kerimov_v2": 4
   },
   "attestations": [
    {
@@ -79470,66 +78163,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "tag",
-   "arka"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "renamed_by_reading",
-   "renamed": [
-    "arka"
-   ]
-  }
- },
- {
-  "id": "taglar",
-  "type": "ornament",
-  "key": "tağ",
-  "headword": "tağ",
-  "meaning": {
-   "ru": "арки",
-   "en": "arches"
-  },
-  "names": [
-   {
-    "v": "tağ",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "tağlar",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "arches",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   },
-   {
-    "v": "арки",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "arches",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 1
-  },
-  "attestations": [
    {
     "term": "taglar",
     "source_id": "kerimov_v2",
@@ -79541,14 +78175,20 @@
    }
   ],
   "records": [
+   "tag",
+   "arka",
    "taglar"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
+   "status": "checked_ai",
+   "rule": "renamed_by_reading",
+   "renamed": [
+    "arka"
+   ],
+   "decision_n": 145
+  },
+  "schemes": []
  },
  {
   "id": "tagalaq",
@@ -79595,16 +78235,31 @@
     "v": "spinning wheel part",
     "lang": "en",
     "kind": "meaning_rejected"
+   },
+   {
+    "v": "iynə hissəsi",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "часть веретена",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "spindle part",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 3
+   "element": 4
   },
   "schools": {
    "karabakh": 1
   },
   "sources": {
-   "kerimov_v1": 3
+   "kerimov_v1": 4
   },
   "attestations": [
    {
@@ -79633,63 +78288,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "tagalaq",
-   "cehre-hissesi"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "renamed_by_reading",
-   "renamed": [
-    "cehre-hissesi"
-   ]
-  },
-  "schemes": [
-   "t48_f03"
-  ]
- },
- {
-  "id": "iyne-hissesi",
-  "type": "ornament",
-  "key": "tağalaq",
-  "headword": "tağalaq",
-  "meaning": {
-   "ru": "часть веретена",
-   "en": "spindle part"
-  },
-  "names": [
-   {
-    "v": "tağalaq",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "iynə hissəsi",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "часть веретена",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "spindle part",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
    {
     "term": "iyne-hissesi",
     "source_id": "kerimov_v1",
@@ -79701,14 +78300,22 @@
    }
   ],
   "records": [
+   "tagalaq",
+   "cehre-hissesi",
    "iyne-hissesi"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
+   "status": "checked_ai",
+   "rule": "renamed_by_reading",
+   "renamed": [
+    "cehre-hissesi"
+   ],
+   "decision_n": 146
+  },
+  "schemes": [
+   "t48_f03"
+  ]
  },
  {
   "id": "tagaraligi",
@@ -80019,7 +78626,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t86_f05"
+  ]
  },
  {
   "id": "tilov",
@@ -80370,140 +78980,6 @@
   }
  },
  {
-  "id": "toqqa",
-  "type": "ornament",
-  "key": "toqqa",
-  "headword": "toqqa",
-  "meaning": {
-   "ru": "пряжка",
-   "en": "buckle"
-  },
-  "names": [
-   {
-    "v": "toqqa",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "Тогга",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "пряжка",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "buckle",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
-   {
-    "term": "toqqa",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 030 (файл kerimov_vol1/page_030.json)",
-    "page": null,
-    "role": null,
-    "quote": "Бурада кәмәрин гашыны нәзәрә алмалы.",
-    "note": null
-   },
-   {
-    "term": "toqqa",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 030 (файл kerimov_vol1/page_030.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "toqqa"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t30_f05",
-   "t30_f06",
-   "t30_f09",
-   "t30_f10"
-  ]
- },
- {
-  "id": "toqqa-poqas",
-  "type": "ornament",
-  "key": "toqqa",
-  "headword": "toqqa",
-  "meaning": {
-   "ru": "пояс",
-   "en": null
-  },
-  "names": [
-   {
-    "v": "toqqa",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "toqqa poqas",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "тогга пояс",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "пояс",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v3": 1
-  },
-  "attestations": [
-   {
-    "term": "toqqa-poqas",
-    "source_id": "kerimov_v3",
-    "where": "том III, стр. 44 (файл kerimov_vol3/page_022.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "toqqa-poqas"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
   "id": "toqqaqabagi",
   "type": "ornament",
   "key": "toqqaqabağı",
@@ -80638,16 +79114,27 @@
     "v": "tovuz quşu",
     "lang": "az",
     "kind": "misreading"
+   },
+   {
+    "v": "tavus",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "Тавус",
+    "lang": "az-cyrl",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "element": 5
+   "element": 6
   },
   "schools": {
-   "guba-shirvan": 1
+   "guba-shirvan": 1,
+   "karabakh": 1
   },
   "sources": {
-   "kerimov_v1": 5
+   "kerimov_v1": 6
   },
   "attestations": [
    {
@@ -80694,20 +79181,31 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "tavus",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 054 (файл kerimov_vol1/page_054.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
    "tovus",
    "tovuz",
-   "tovuz-qushu"
+   "tovuz-qushu",
+   "tavus"
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "tovuz-qushu"
-   ]
+   ],
+   "decision_n": 219
   },
   "schemes": [
    "t18_f14",
@@ -81055,7 +79553,11 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t77_f03",
+   "t77_f02"
+  ]
  },
  {
   "id": "toyuq-ayagi",
@@ -81191,14 +79693,29 @@
     "v": "puppy",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "ov iti",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "охотничья собака",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "hunting dog",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 2
+   "element": 4
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 2
+   "kerimov_v1": 4
   },
   "attestations": [
    {
@@ -81218,61 +79735,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "tula"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t09_f01",
-   "t18_f04"
-  ]
- },
- {
-  "id": "ov-iti",
-  "type": "ornament",
-  "key": "tula",
-  "headword": "tula",
-  "meaning": {
-   "ru": "охотничья собака",
-   "en": "hunting dog"
-  },
-  "names": [
-   {
-    "v": "tula",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "ov iti",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "охотничья собака",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "hunting dog",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
    {
     "term": "ov-iti",
     "source_id": "kerimov_v1",
@@ -81293,15 +79756,19 @@
    }
   ],
   "records": [
+   "tula",
    "ov-iti"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 42
   },
   "schemes": [
+   "t09_f01",
+   "t18_f04",
    "t18_f08"
   ]
  },
@@ -81892,14 +80359,41 @@
     "v": "turtle",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "bağa",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "баға",
+    "lang": "az-cyrl",
+    "kind": "attested"
+   },
+   {
+    "v": "лягушка",
+    "lang": "ru",
+    "kind": "meaning_rejected"
+   },
+   {
+    "v": "frog",
+    "lang": "en",
+    "kind": "meaning_rejected"
+   },
+   {
+    "v": "Бага",
+    "lang": "az-cyrl",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "element": 2
+   "element": 4
   },
-  "schools": {},
+  "schools": {
+   "baku": 1
+  },
   "sources": {
-   "kerimov_v1": 2
+   "kerimov_v1": 4
   },
   "attestations": [
    {
@@ -81919,19 +80413,42 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "baga",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 10 (файл kerimov_vol1/page_035.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
+   {
+    "term": "tisbaga-2",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 25 (файл kerimov_vol1/page_095.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "tisbaga"
+   "tisbaga",
+   "baga",
+   "tisbaga-2"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 177
   },
   "schemes": [
-   "t17_f04"
+   "t17_f04",
+   "t17_f05",
+   "t54_f04"
   ]
  },
  {
@@ -82564,8 +81081,7 @@
    "renamed": []
   },
   "schemes": [
-   "t63_f02",
-   "t63_f04"
+   "t63_f02"
   ]
  },
  {
@@ -83256,12 +81772,13 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "vag-vag",
     "vagam"
-   ]
+   ],
+   "decision_n": 148
   }
  },
  {
@@ -83414,11 +81931,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "vag-vagi"
-   ]
+   ],
+   "decision_n": 149
   }
  },
  {
@@ -83501,11 +82019,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "xirman-taxtasi"
-   ]
+   ],
+   "decision_n": 150
   },
   "schemes": [
    "t27_f09",
@@ -83780,12 +82299,18 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "gulxetmi"
-   ]
-  }
+   ],
+   "decision_n": 151
+  },
+  "schemes": [
+   "t75_f04",
+   "t135_f05",
+   "t75_f03"
+  ]
  },
  {
   "id": "xanali",
@@ -83942,61 +82467,6 @@
   ],
   "records": [
    "xantip"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "xarxovuz",
-  "type": "ornament",
-  "key": "xarxovuz",
-  "headword": "xarxovuz",
-  "meaning": {
-   "ru": "бассейн",
-   "en": null
-  },
-  "names": [
-   {
-    "v": "xarxovuz",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "харховуз",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "бассейн",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   }
-  ],
-  "roles": {
-   "motif": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 1
-  },
-  "attestations": [
-   {
-    "term": "xarxovuz",
-    "source_id": "kerimov_v2",
-    "where": "том II, стр. 138 (файл kerimov_vol2/page_069.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "xarxovuz"
   ],
   "external_references": [],
   "merge": {
@@ -85121,7 +83591,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t150_f03"
+  ]
  },
  {
   "id": "xirdagul",
@@ -85260,53 +83733,6 @@
     "v": "sieve",
     "lang": "en",
     "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "xelbir",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 034 (файл kerimov_vol1/page_034.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "xelbir"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t47_f02"
-  ]
- },
- {
-  "id": "sito",
-  "type": "ornament",
-  "key": "xəlbir",
-  "headword": "xəlbir",
-  "meaning": {
-   "ru": "Сито",
-   "en": "Sieve"
-  },
-  "names": [
-   {
-    "v": "xəlbir",
-    "lang": "az",
-    "kind": "headword"
    },
    {
     "v": "sito",
@@ -85317,21 +83743,25 @@
     "v": "сито",
     "lang": "ru",
     "kind": "attested"
-   },
-   {
-    "v": "Sieve",
-    "lang": "en",
-    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
+   {
+    "term": "xelbir",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 034 (файл kerimov_vol1/page_034.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "sito",
     "source_id": "kerimov_v1",
@@ -85343,14 +83773,19 @@
    }
   ],
   "records": [
+   "xelbir",
    "sito"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 43
+  },
+  "schemes": [
+   "t47_f02"
+  ]
  },
  {
   "id": "xercheng",
@@ -86082,7 +84517,9 @@
    "t78_f07",
    "t89_f08",
    "t113_f05",
-   "t77_f01"
+   "t77_f01",
+   "t106_f04",
+   "t85_f10"
   ]
  },
  {
@@ -86305,50 +84742,6 @@
     "v": "Written kataba",
     "lang": "en",
     "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "yazili-ketebe",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 044 (файл kerimov_vol1/page_044.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "yazili-ketebe"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "ketebe-yazili",
-  "type": "ornament",
-  "key": "yazılıkətəbə",
-  "headword": "yazılı kətəbə",
-  "meaning": {
-   "ru": "Кетебә с надписью",
-   "en": null
-  },
-  "names": [
-   {
-    "v": "yazılı kətəbə",
-    "lang": "az",
-    "kind": "headword"
    },
    {
     "v": "kətəbə yazılı",
@@ -86368,13 +84761,23 @@
    }
   ],
   "roles": {
+   "element": 1,
    "motif": 1
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
+   {
+    "term": "yazili-ketebe",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 044 (файл kerimov_vol1/page_044.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
+   },
    {
     "term": "ketebe-yazili",
     "source_id": "kerimov_v1",
@@ -86386,14 +84789,17 @@
    }
   ],
   "records": [
+   "yazili-ketebe",
    "ketebe-yazili"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 44
+  },
+  "schemes": []
  },
  {
   "id": "yagdan",
@@ -86731,11 +85137,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "veer"
-   ]
+   ],
+   "decision_n": 152
   },
   "schemes": [
    "t27_f06"
@@ -87181,12 +85588,18 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "ovruk"
-   ]
-  }
+   ],
+   "decision_n": 153
+  },
+  "schemes": [
+   "t45_f05",
+   "t152_f02",
+   "t152_f01"
+  ]
  },
  {
   "id": "ulduzlu-2",
@@ -87361,10 +85774,25 @@
     "v": "kasatik",
     "lang": "az",
     "kind": "misreading"
+   },
+   {
+    "v": "zənbəq",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "ирис",
+    "lang": "ru",
+    "kind": "meaning"
+   },
+   {
+    "v": "iris",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 8
+   "element": 10
   },
   "schools": {
    "karabakh": 1,
@@ -87372,7 +85800,7 @@
    "guba-shirvan": 1
   },
   "sources": {
-   "kerimov_v1": 8
+   "kerimov_v1": 10
   },
   "attestations": [
    {
@@ -87446,72 +85874,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "zanbaq",
-   "kasatik"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "auto",
-   "rule": "renamed_by_reading",
-   "renamed": [
-    "kasatik"
-   ]
-  },
-  "schemes": [
-   "t93_f02",
-   "t81_f02",
-   "t91_f05",
-   "t75_f11",
-   "t93_f12"
-  ]
- },
- {
-  "id": "zenbeq",
-  "type": "ornament",
-  "key": "zanbaq",
-  "headword": "zanbaq",
-  "meaning": {
-   "ru": "ирис",
-   "en": "iris"
-  },
-  "names": [
-   {
-    "v": "zanbaq",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "zənbəq",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "зәнбәг",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "ирис",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "iris",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
    {
     "term": "zenbeq",
     "source_id": "kerimov_v1",
@@ -87532,14 +85895,26 @@
    }
   ],
   "records": [
+   "zanbaq",
+   "kasatik",
    "zenbeq"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
+   "status": "checked_ai",
+   "rule": "renamed_by_reading",
+   "renamed": [
+    "kasatik"
+   ],
+   "decision_n": 154
+  },
+  "schemes": [
+   "t93_f02",
+   "t81_f02",
+   "t91_f05",
+   "t75_f11",
+   "t93_f12"
+  ]
  },
  {
   "id": "zenbek-gulu",
@@ -87603,7 +85978,11 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t87_f04",
+   "t88_f03"
+  ]
  },
  {
   "id": "zanbagi",
@@ -88539,16 +86918,31 @@
     "v": "chain",
     "lang": "en",
     "kind": "meaning_rejected"
+   },
+   {
+    "v": "qalon",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "галун",
+    "lang": "ru",
+    "kind": "meaning"
+   },
+   {
+    "v": "galloon",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "border": 21
+   "border": 22
   },
   "schools": {
    "tabriz": 1
   },
   "sources": {
-   "kerimov_v1": 12,
+   "kerimov_v1": 13,
    "kerimov_v2": 5,
    "kerimov_v3": 4,
    "huseynov_2012": 1
@@ -88751,70 +87145,7 @@
     "role": "border",
     "quote": null,
     "note": "Корень «zən» — богатый, видный; также «цепь» — связующая. Связывает крупные и мелкие (mədaxil, su, cağ) полосы по элементам и цвету. · тип каймы: zəncirə"
-   }
-  ],
-  "records": [
-   "zencire"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t131_f05",
-   "t139_f02",
-   "t131_f01",
-   "t131_f02",
-   "t131_f04",
-   "t131_f03"
-  ]
- },
- {
-  "id": "qalon",
-  "type": "ornament",
-  "key": "zəncirə",
-  "headword": "zəncirə",
-  "meaning": {
-   "ru": "галун",
-   "en": "galloon"
-  },
-  "names": [
-   {
-    "v": "zəncirə",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "qalon",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "галуны",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "галун",
-    "lang": "ru",
-    "kind": "meaning"
-   },
-   {
-    "v": "galloon",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "border": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
    {
     "term": "qalon",
     "source_id": "kerimov_v1",
@@ -88826,14 +87157,24 @@
    }
   ],
   "records": [
+   "zencire",
    "qalon"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 46
+  },
+  "schemes": [
+   "t131_f05",
+   "t139_f02",
+   "t131_f01",
+   "t131_f02",
+   "t131_f04",
+   "t131_f03"
+  ]
  },
  {
   "id": "zerkeret-buta",
@@ -89040,11 +87381,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "shatir"
-   ]
+   ],
+   "decision_n": 155
   },
   "schemes": [
    "t110_f05"
@@ -89481,14 +87823,25 @@
     "lang": "ru",
     "kind": "kerimov_translation",
     "src": "kerimov"
+   },
+   {
+    "v": "xarxovuz",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "харховуз",
+    "lang": "ru",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "motif": 1
+   "motif": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v3": 1
+   "kerimov_v3": 1,
+   "kerimov_v2": 1
   },
   "attestations": [
    {
@@ -89499,17 +87852,29 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "xarxovuz",
+    "source_id": "kerimov_v2",
+    "where": "том II, стр. 138 (файл kerimov_vol2/page_069.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
-   "cherxouz"
+   "cherxouz",
+   "xarxovuz"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 222
+  },
+  "schemes": []
  },
  {
   "id": "charkezi",
@@ -89739,11 +88104,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "cherx"
-   ]
+   ],
+   "decision_n": 156
   },
   "schemes": [
    "t32_f05",
@@ -89910,10 +88276,14 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "same_word",
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 47
+  },
+  "schemes": [
+   "t151_f05"
+  ]
  },
  {
   "id": "chagmati-gilandar",
@@ -90224,11 +88594,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "chaydan"
-   ]
+   ],
+   "decision_n": 157
   },
   "schemes": [
    "t109_f01"
@@ -90587,11 +88958,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qovaq"
-   ]
+   ],
+   "decision_n": 158
   },
   "schemes": [
    "t19_f10"
@@ -91158,11 +89530,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "gullu-buta"
-   ]
+   ],
+   "decision_n": 159
   }
  },
  {
@@ -91949,11 +90322,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "chigga-buta"
-   ]
+   ],
+   "decision_n": 160
   }
  },
  {
@@ -91986,14 +90360,29 @@
     "v": "lamp",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "şəm",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "свеча",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "candle",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
-   "element": 4
+   "element": 5
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 3,
+   "kerimov_v1": 4,
    "kerimov_v2": 1
   },
   "attestations": [
@@ -92032,61 +90421,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "chiraq"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t45_f03",
-   "t58_f03"
-  ]
- },
- {
-  "id": "shem",
-  "type": "ornament",
-  "key": "çıraq",
-  "headword": "çıraq",
-  "meaning": {
-   "ru": "свеча",
-   "en": "candle"
-  },
-  "names": [
-   {
-    "v": "çıraq",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "şəm",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "свеча",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "candle",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
    {
     "term": "shem",
     "source_id": "kerimov_v1",
@@ -92098,16 +90433,19 @@
    }
   ],
   "records": [
+   "chiraq",
    "shem"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
+   "renamed": [],
+   "decision_n": 48
   },
   "schemes": [
-   "t45_f03"
+   "t45_f03",
+   "t58_f03"
   ]
  },
  {
@@ -92402,12 +90740,13 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "canqa",
     "musiqi-aleti"
-   ]
+   ],
+   "decision_n": 161
   },
   "schemes": [
    "t11_f06"
@@ -93361,7 +91700,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t49_f03"
+  ]
  },
  {
   "id": "qiynagi-2",
@@ -93417,7 +91759,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t157_f02"
+  ]
  },
  {
   "id": "shabalidbuta",
@@ -93525,11 +91870,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "buta-shabalid"
-   ]
+   ],
+   "decision_n": 162
   }
  },
  {
@@ -93622,71 +91968,6 @@
   ],
   "records": [
    "shahsever-ara-hashiyesi"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  }
- },
- {
-  "id": "shamal",
-  "type": "ornament",
-  "key": "şamal",
-  "headword": "şamal",
-  "meaning": {
-   "ru": "факел",
-   "en": "torch"
-  },
-  "names": [
-   {
-    "v": "şamal",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "шамал",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "шамал",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "факел",
-    "lang": "ru",
-    "kind": "kerimov_translation",
-    "src": "kerimov"
-   },
-   {
-    "v": "torch",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "border": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v2": 1
-  },
-  "attestations": [
-   {
-    "term": "shamal",
-    "source_id": "kerimov_v2",
-    "where": "том II, стр. 130 (файл kerimov_vol2/page_065.json)",
-    "page": null,
-    "role": null,
-    "quote": "серединную полосу, известную в Азербайджане, как «шамал» (факел), в Карабахе — «шамдан» (подсвечник), в Кубе — «гейчи балыг» (ножницы — рыба)",
-    "note": "В Карабахе — «шамдан», в Кубе — «гейчи балыг», в Туркмении — «срез». Восходит к растительным криволинейным узорам."
-   }
-  ],
-  "records": [
-   "shamal"
   ],
   "external_references": [],
   "merge": {
@@ -94108,11 +92389,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "qayma-shami"
-   ]
+   ],
+   "decision_n": 163
   }
  },
  {
@@ -94339,15 +92621,30 @@
     "v": "Comb",
     "lang": "en",
     "kind": "meaning"
+   },
+   {
+    "v": "yaba",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "вилы",
+    "lang": "ru",
+    "kind": "attested"
+   },
+   {
+    "v": "Pitchfork",
+    "lang": "en",
+    "kind": "meaning"
    }
   ],
   "roles": {
    "other": 1,
-   "element": 2
+   "element": 3
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 3
+   "kerimov_v1": 4
   },
   "attestations": [
    {
@@ -94376,60 +92673,7 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "shana"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t10_f07"
-  ]
- },
- {
-  "id": "yaba",
-  "type": "ornament",
-  "key": "şana",
-  "headword": "şana",
-  "meaning": {
-   "ru": "Вилы",
-   "en": "Pitchfork"
-  },
-  "names": [
-   {
-    "v": "şana",
-    "lang": "az",
-    "kind": "headword"
    },
-   {
-    "v": "yaba",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "вилы",
-    "lang": "ru",
-    "kind": "attested"
-   },
-   {
-    "v": "Pitchfork",
-    "lang": "en",
-    "kind": "meaning"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
    {
     "term": "yaba",
     "source_id": "kerimov_v1",
@@ -94441,14 +92685,19 @@
    }
   ],
   "records": [
+   "shana",
    "yaba"
   ],
   "external_references": [],
   "merge": {
-   "status": "single",
+   "status": "checked_ai",
    "rule": null,
-   "renamed": []
-  }
+   "renamed": [],
+   "decision_n": 49
+  },
+  "schemes": [
+   "t10_f07"
+  ]
  },
  {
   "id": "shanakotan",
@@ -94512,7 +92761,10 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t149_f02"
+  ]
  },
  {
   "id": "sharlama",
@@ -94762,11 +93014,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "shahakulu"
-   ]
+   ],
+   "decision_n": 164
   },
   "schemes": [
    "t25_f01"
@@ -94841,11 +93094,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "ledenes"
-   ]
+   ],
+   "decision_n": 165
   },
   "schemes": [
    "t41_f02",
@@ -94992,11 +93246,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "buta-shirvan"
-   ]
+   ],
+   "decision_n": 166
   },
   "schemes": [
    "t96_f07",
@@ -95089,7 +93344,11 @@
    "status": "auto",
    "rule": "same_word",
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t80_f06",
+   "t79_f05"
+  ]
  },
  {
   "id": "shebeke",
@@ -95397,7 +93656,10 @@
    "status": "auto",
    "rule": "same_word",
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t168_f03"
+  ]
  },
  {
   "id": "shedde-ve-verni-elementleri-2",
@@ -95592,11 +93854,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "afsham"
-   ]
+   ],
+   "decision_n": 167
   }
  },
  {
@@ -96164,11 +94427,12 @@
   ],
   "external_references": [],
   "merge": {
-   "status": "auto",
+   "status": "checked_ai",
    "rule": "renamed_by_reading",
    "renamed": [
     "alibeyli"
-   ]
+   ],
+   "decision_n": 168
   },
   "schemes": [
    "t149_f05"
