@@ -61,7 +61,11 @@
   .index-letter { font-family: Georgia, serif; font-size: 20px; border-bottom: 1px solid var(--border-light); margin: 22px 0 8px; padding-bottom: 3px; }
   .index-letter:first-child { margin-top: 0; }
   ul.index-list { column-width: 260px; column-gap: 30px; list-style: none; margin: 0; padding: 0; }
-  ul.index-list li { break-inside: avoid; margin-bottom: 5px; font-size: 14px; }
+  ul.index-list li { break-inside: avoid; margin-bottom: 5px; font-size: 14px; display: flex; gap: 8px; align-items: center; min-height: 34px; }
+  ul.index-list .th { flex: 0 0 34px; width: 34px; height: 34px; display: block; position: relative; }
+  ul.index-list .th img { width: 34px; height: 34px; display: block; border: 1px solid var(--border-light); background: #fff; image-rendering: auto; cursor: pointer; }
+  ul.index-list .th b { position: absolute; right: -3px; bottom: -3px; background: var(--bg); border: 1px solid var(--border-light); border-radius: 6px; font: 600 9px/1 -apple-system, sans-serif; padding: 1px 3px; color: var(--text-soft); }
+  ul.index-list .tx { min-width: 0; }
   ul.index-list .meta { color: var(--text-soft); font-size: 12px; }
 
   .article-wrap { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
@@ -791,10 +795,11 @@ function renderIndex(){
       const kind = 'term';
       const idAttr = item.id;
       const meaning = getMeaning(item);
-      const hasPix = (PIX.bySite[idAttr]||[]).length > 0;
+      const pxl = PIX.bySite[idAttr] || [], hasPix = pxl.length > 0;
+      const th = hasPix ? `<a class="th" data-open="${kind}" data-id="${esc(idAttr)}" title="${esc(PT().hasPix)}"><img src="${pixThumb(pxl[0], 32)}" alt="" width="34" height="34" loading="lazy">${pxl.length>1?`<b>${pxl.length}</b>`:''}</a>` : `<span class="th"></span>`;
       const untranslated = !item.canonical_az;
       const untransLabel = state.lang==='az' ? 'AZ tərcüməsi yoxdur' : state.lang==='en' ? 'no Azerbaijani translation yet' : 'нет азерб. перевода — показано по русскому названию';
-      body += `<li><a data-open="${kind}" data-id="${esc(idAttr)}">${esc(n)}</a>${untranslated?` <span class="meta" title="${esc(untransLabel)}" style="border:1px solid var(--border-light);border-radius:3px;padding:0 3px">RU</span>`:''}${hasPix?` <span class="meta" title="${esc(PT().hasPix)}">★</span>`:''} <span class="meta">(${item.mention_count})</span>${meaning?` <span class="meta">— ${esc(meaning)}</span>`:''}</li>`;
+      body += `<li>${th}<span class="tx"><a data-open="${kind}" data-id="${esc(idAttr)}">${esc(n)}</a>${untranslated?` <span class="meta" title="${esc(untransLabel)}" style="border:1px solid var(--border-light);border-radius:3px;padding:0 3px">RU</span>`:''} <span class="meta">(${item.mention_count})</span>${meaning?` <span class="meta">— ${esc(meaning)}</span>`:''}</span></li>`;
     });
     if (openUl) body += '</ul>';
     body += '</div>';
@@ -1134,6 +1139,25 @@ function pixCanvas(it, maxW, maxH, opts){
   c.title = it.name || it.id;
   return c;
 }
+/* миниатюра схемы S×S (по умолчанию 32): уменьшение вдвое по шагам, чтобы тонкие линии не рвались; результат кэшируется как dataURL */
+const PIX_TH = {};
+function pixThumb(it, S){
+  S = S || 32; const key = it.id + ':' + S + ':' + (it.updated||''); if (PIX_TH[key]) return PIX_TH[key];
+  const w = +it.w, h = +it.h, rows = it.rows || [], pal = it.palette || ['#ffffff','#222222'], R = 2, T = S * R;
+  let c = document.createElement('canvas'); c.width = w; c.height = h; let x = c.getContext('2d');
+  x.fillStyle = pal[0] || '#fff'; x.fillRect(0, 0, w, h);
+  for (let j = 0; j < h; j++) { const r = rows[j] || ''; for (let i = 0; i < w; i++) { const ch = r[i] || '.'; if (ch === '.') continue; x.fillStyle = pal[parseInt(ch, 36)] || '#f0f'; x.fillRect(i, j, 1, 1); } }
+  const sc = Math.min(T / w, T / h);
+  if (sc < 1) {                                   // уменьшаем шагами не более чем вдвое
+    while (c.width * sc < c.width / 2 && c.width > 2 && c.height > 2) { const n = document.createElement('canvas'); n.width = Math.max(1, Math.ceil(c.width / 2)); n.height = Math.max(1, Math.ceil(c.height / 2)); const nx = n.getContext('2d'); nx.imageSmoothingEnabled = true; nx.imageSmoothingQuality = 'high'; nx.drawImage(c, 0, 0, n.width, n.height); c = n; if (Math.min(T / c.width, T / c.height) >= .5) break; }
+  }
+  const s2 = Math.min(T / c.width, T / c.height), dw = Math.max(1, Math.round(c.width * (s2 >= 1 ? Math.floor(s2) || 1 : s2))), dh = Math.max(1, Math.round(c.height * (s2 >= 1 ? Math.floor(s2) || 1 : s2)));
+  const o = document.createElement('canvas'); o.width = T; o.height = T; const ox = o.getContext('2d');
+  ox.fillStyle = pal[0] || '#fff'; ox.fillRect(0, 0, T, T);
+  ox.imageSmoothingEnabled = s2 < 1; ox.imageSmoothingQuality = 'high';
+  ox.drawImage(c, 0, 0, c.width, c.height, Math.floor((T - dw) / 2), Math.floor((T - dh) / 2), dw, dh);
+  return (PIX_TH[key] = o.toDataURL('image/png'));
+}
 function pixGridOn(){ try { return localStorage.getItem('pixGrid') !== '0'; } catch(e) { return true; } }
 function pixL(o, fb){ if (o && typeof o === 'object') { const L = state.lang; return o[L] || (L==='az' ? '' : o.ru) || fb || ''; } return fb || ''; }
 function pixCaption(it){
@@ -1147,12 +1171,19 @@ function pixCaption(it){
   const note = pixL(it.note_i18n, it.note);
   return bits.join('') + `<div style="color:var(--text-soft);font-size:12px">${sub}</div>` + (note?`<div style="font-size:12.5px;margin-top:3px">${esc(note)}</div>`:'');
 }
-function pixFrame(it, maxW, maxH){
+let PIX_IO = null;
+function pixFrame(it, maxW, maxH, lazy){
   const fig = document.createElement('figure');
   fig.style.cssText = 'margin:0 0 14px;display:inline-block;vertical-align:top;max-width:100%';
   const box = document.createElement('div');
   box.style.cssText = 'border:1px solid var(--border-light);background:#fff;padding:6px;display:inline-block;cursor:zoom-in;max-width:100%;overflow:auto';
-  box.appendChild(pixCanvas(it, maxW, maxH));
+  if (lazy && 'IntersectionObserver' in window) {     // галерея на сотни схем: холст рисуем, когда карточка показалась на экране
+    const cs = Math.max(1, Math.floor(Math.min(maxW / (+it.w||1), maxH / (+it.h||1))));
+    const ph = document.createElement('div'); ph.style.cssText = `width:${(+it.w||1)*cs}px;height:${(+it.h||1)*cs}px;background:#f3f3f3`;
+    ph._it = it; ph._mw = maxW; ph._mh = maxH; box.appendChild(ph);
+    if (!PIX_IO) PIX_IO = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const el = e.target; PIX_IO.unobserve(el); if (el.parentNode) el.replaceWith(pixCanvas(el._it, el._mw, el._mh)); }), { rootMargin: '400px' });
+    PIX_IO.observe(ph);
+  } else box.appendChild(pixCanvas(it, maxW, maxH));
   box.addEventListener('click', () => pixZoom(it));
   const cap = document.createElement('figcaption'); cap.style.cssText = 'font-size:13px;margin-top:5px;max-width:'+Math.max(220,maxW)+'px';
   cap.innerHTML = pixCaption(it);
@@ -1219,7 +1250,7 @@ function renderIllustrations(){
     const sec = pixL(it.section_i18n, it.section || '') + (it.table ? ` — ${({ru:'Табл.',az:'Cədvəl',en:'Table'})[state.lang]||'Табл.'} ${it.table}` : '');
     if (sec !== lastSec) { lastSec = sec; const h = document.createElement('div'); h.className = 'index-letter'; h.textContent = sec || '—'; gal.appendChild(h);
       grid = document.createElement('div'); grid.style.cssText = 'display:flex;flex-wrap:wrap;gap:14px 22px'; gal.appendChild(grid); }
-    const fig = pixFrame(it, 200, 200);
+    const fig = pixFrame(it, 200, 200, true);
     const links = document.createElement('div'); links.style.cssText = 'font-size:12.5px;margin-top:3px';
     const ids = it.site_ids || [];
     links.innerHTML = ids.length ? ids.map(s => `<a data-pix-open="${esc(s)}">${esc(siteTitleFor(s))}</a>`).join(' · ') : `<span style="color:var(--text-soft)">${esc(t.unlinked)}</span>`;
