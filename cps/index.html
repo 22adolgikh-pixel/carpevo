@@ -423,12 +423,16 @@ function renderLeft(){
       '<div class="flex" style="margin-bottom:6px"><button id="upSheets" class="sm">+ загрузить сканы</button><button id="rfSheets" class="sm">обновить</button></div>'+
       '<input type="file" id="upFile" multiple accept="image/*" hidden>'+sheetTree()+
       '<div class="hint">Папка сканов задаётся переменной <kbd>CPS_SCANS</kbd> при запуске. Подпапки (до двух уровней) = источники: книга → раздел.<br><span id="scDir"></span></div>'+
-      '<h4>Книги (PDF)</h4><div id="pdfSec" class="hint">ищу PDF…</div>';
+      '<h4>Книги (PDF)</h4><div id="pdfSec" class="hint">ищу PDF…</div>'+
+      '<h4>Зарисовки из книги (zip с Drive)</h4><div class="flex"><input id="drwId" placeholder="id архива на Drive" style="flex:1;min-width:0"><button class="sm" id="drwGo">импорт</button></div>'+
+      '<div class="hint">Архив делает Colab-скрипт <kbd>drawings_colab.py</kbd> (id — в строке ИТОГ). Рисунки появятся в каталоге с сеткой по плотности узла ковра.</div>';
     L.querySelectorAll('.fld').forEach(e=>e.onclick=()=>{const k=e.dataset.f;S.fopen=S.fopen||foldLoad();if(e.dataset.open==='1'){S.fopen.delete(k);S.fopen.add('x|'+k);}else{S.fopen.add(k);S.fopen.delete('x|'+k);}foldSave();renderLeft();});
     L.querySelectorAll('.item').forEach(e=>e.onclick=()=>openSheet(e.dataset.p).catch(fail));
     $('upSheets').onclick=()=>$('upFile').click();$('rfSheets').onclick=()=>refreshSheets().catch(fail);
     $('upFile').onchange=e=>uploadFiles('/api/upload',[...e.target.files]).then(refreshSheets).catch(fail);
     api('/api/config').then(c=>{const e=$('scDir');if(e)e.textContent='Сейчас: '+c.scans;}).catch(()=>{});
+    $('drwGo').onclick=async()=>{const id=$('drwId').value.trim();if(!id)return;stat('импортирую зарисовки…','busy');
+      try{const r=await api('/api/import_drawings',{drive_id:id});stat('зарисовки: добавлено '+r.added+', уже были '+r.skipped_existing,'ok');await refreshSheets();await refreshFigures();}catch(err){fail(err);}};
     refreshPdfs().catch(()=>{const e=$('pdfSec');if(e)e.textContent='PDF не найдены или на сервере нет pymupdf.';});
   }else{L.innerHTML='';}   // на экранах 2–4 левой панели нет: навигация — в шапке, список — в «Каталоге»
 }
@@ -907,6 +911,10 @@ function renderRightGrid(){
   <div class="row"><label>начало X / Y</label><input type="number" id="gOx" step="0.1" value="${G.ox}"><input type="number" id="gOy" step="0.1" value="${G.oy}"></div>
   <div class="row"><label>клеток X / Y</label><input type="number" id="gCols" step="1" value="${G.cols}"><input type="number" id="gRows" step="1" value="${G.rows}"></div>
   <div class="flex"><button class="sm" id="gFitN">клеток — по кадру</button></div>
+  <h4>Сетка по узлу ковра ${HT('Для зарисовок без сетки. Узел ковра обычно не квадратный: при 38 узлах на 10 см по длине и 28 по ширине он шире своей высоты в 38/28 ≈ 1,36 раза. Задайте плотность из описания ковра и высоту рисунка в узлах — сетка станет прямоугольной с такой пропорцией. Высоту в узлах можно оценить по фото ковра: какую долю длины ковра занимает этот фрагмент × число узлов по длине (длина в см / 10 × узлов на 10 см).')}</h4>
+  <div class="row"><label>узлов на 10 см: длина / ширина</label><input type="number" id="kL" step="0.5" value="${(G.knot&&G.knot.l)||''}" placeholder="38"><input type="number" id="kW" step="0.5" value="${(G.knot&&G.knot.w)||''}" placeholder="28"></div>
+  <div class="row"><label>высота рисунка, узлов</label><input type="number" id="kR" step="1" value="${G.rows}"><button class="sm" id="kGo">сетка по узлу</button></div>
+  ${F.work.drawing&&F.work.drawing.dimensions_cm?`<div class="hint">Ковёр: ${esc(F.work.drawing.dimensions_cm)} см${F.work.drawing.knots_10cm_length?` ≈ ${Math.round(parseFloat(F.work.drawing.dimensions_cm)/10*F.work.drawing.knots_10cm_length)} узлов по длине`:''} · ${esc(F.work.drawing.title||'')}, с. ${F.work.drawing.printed_page||'?'}</div>`:''}
   <div style="margin:6px 0">${HT('В режиме ② тяните сетку мышью; <b style=\'color:var(--ok)\'>зелёные точки</b> — углы сетки: поставьте левый верхний на пересечение линий, затем правый нижний — шаг пересчитается сам. Стрелки — сдвиг сетки на ¼ px (<kbd>Shift</kbd> — 1 px), <kbd>Alt</kbd>+стрелки — шаг ±0.01.')}</div>
   <h4>Цвета клеток ${HT('<b>Как это работает.</b> В каждой клетке сетки меряется средняя яркость (0 — чёрный, 255 — белый) — не во всей клетке, а в её центре (размер центра — «замер»), чтобы линии миллиметровки не мешали.<br><br><b>Гистограмма</b> — сколько клеток какой яркости: слева тёмные, справа светлые. Обычно видны 2–3 горба: справа большой — бумага (фон), слева — тушь контура, между ними — серая заливка.<br><br><b>Пороги</b> — вертикальные линии на гистограмме, их можно тянуть мышью. Они делят клетки на цвета: всё правее самого правого порога — фон, левее самого левого — цвет 1 (контур), между ними — цвет 2 (заливка). Цветная полоска под гистограммой показывает, какой цвет получит каждая яркость.<br><br>Обычно достаточно «подобрать» и включить «превью» — если заливка съела фон, сдвиньте правый порог влево.')}</h4>
   <div class="row"><label>цветов кроме фона</label><input type="number" id="cT" min="1" max="8" value="${C.tones}" data-tip="1 — только контур, 2 — контур и серая заливка"><button class="sm" id="cAuto">подобрать пороги</button></div>
@@ -941,6 +949,10 @@ function renderRightGrid(){
     if(G.square&&key==='pw'){G.ph=v;$('gPh').value=v;}if(G.square&&key==='ph'){G.pw=v;$('gPw').value=v;}
     F.samples=null;markDirty();drawHist();redraw();};};
   gin('gPw','pw');gin('gPh','ph');gin('gOx','ox');gin('gOy','oy');gin('gCols','cols',1);gin('gRows','rows',1);
+  $('kGo').onclick=()=>{const l=+$('kL').value,w=+$('kW').value,r=Math.max(2,Math.round(+$('kR').value||0));if(!r)return;
+    const asp=(l>0&&w>0)?l/w:1;G.square=false;G.ox=0;G.oy=0;G.rows=r;G.ph=+(F.H/r).toFixed(3);G.pw=+(G.ph*asp).toFixed(3);
+    G.cols=Math.max(1,Math.floor(F.W/G.pw+0.02));G.knot={l:l||null,w:w||null};F.samples=null;markDirty();syncGridInputs();redraw();renderRight();
+    stat('сетка '+G.cols+'×'+G.rows+', клетка '+G.pw+'×'+G.ph+' px (узел шире высоты в '+asp.toFixed(2)+' раза)','ok');};
   $('gFitN').onclick=()=>{G.cols=Math.max(1,Math.floor((F.W-G.ox)/G.pw+0.02));G.rows=Math.max(1,Math.floor((F.H-G.oy)/G.ph+0.02));F.samples=null;markDirty();syncGridInputs();redraw();};
   $('cT').onchange=e=>{C.tones=clamp(+e.target.value|0,1,8);autoTones();};
   $('cAuto').onclick=()=>{F.samples=null;sampleCells(F);autoTones();};

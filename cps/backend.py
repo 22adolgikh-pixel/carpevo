@@ -18,7 +18,7 @@ import dupes
 import threading
 import cloud
 import backup
-import restore
+import restore, zipfile, shutil
 try:
     import pymupdf as fitz  # PyMuPDF (new import name; falls back to legacy)
 except Exception:
@@ -361,6 +361,57 @@ async def api_figure_upload(files: list[UploadFile] = File(...)):
             work["meta"] = meta_from_legend(work["table"], work["fig"]) if m else {k: "" for k in META_KEYS}
         jsave(wp, work); saved.append(stem)
     return {"saved": saved}
+
+@app.post("/api/import_drawings")
+def api_import_drawings(body: dict = Body(...)):
+    """Импорт зарисовок из zip на Google Drive (доступ «у кого есть ссылка»), который делает
+    cps/tools/colab/drawings_colab.py: PNG + manifest.json. Картинки кладутся в scans/<папка>/ как
+    одно-рисуночные листы (переживают перезапуск: кропы пересобираются из листов), сетка сразу
+    прямоугольная по плотности узла ковра (узлов на 10 см по длине / ширине). Повторный импорт
+    не трогает уже начатые рисунки."""
+    did = (body.get("drive_id") or "").strip()
+    folder = re.sub(r"[^\w\-]+", "_", body.get("folder") or "gans_ruedin_drawings")
+    rows0 = int(body.get("rows") or 60)
+    if not re.fullmatch(r"[\w\-]{10,}", did): return JSONResponse({"error": "нужен id файла на Google Drive"}, 400)
+    import tempfile
+    tmp = tempfile.mkdtemp()
+    zp = os.path.join(tmp, "d.zip")
+    try:
+        restore._drive_download(did, zp)
+        with open(zp, "rb") as f:
+            if f.read(4) != b"PK\x03\x04": return JSONResponse({"error": "скачался не zip — проверьте доступ «у кого есть ссылка»"}, 400)
+        outdir = os.path.join(SCANS, folder); os.makedirs(outdir, exist_ok=True)
+        with zipfile.ZipFile(zp) as z:
+            names = [n for n in z.namelist() if n.endswith(".png") or n.endswith("manifest.json")]
+            for n in names:
+                with z.open(n) as src, open(os.path.join(outdir, os.path.basename(n)), "wb") as dst: dst.write(src.read())
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    man = jload(os.path.join(outdir, "manifest.json"), []) or []
+    added, skipped = [], []
+    for e in man:
+        fid = re.sub(r"[^\w\-]+", "_", e.get("id") or os.path.splitext(e["file"])[0])
+        rel = folder + "/" + e["file"]
+        img = imread_any(os.path.join(outdir, e["file"]))
+        if img is None: continue
+        h, w = img.shape[:2]
+        jsave(os.path.join(D_SHEETS, _sheet_key(rel) + ".json"),
+              {"path": rel, "table": None, "boxes": [{"x": 0, "y": 0, "w": w, "h": h, "fig": None, "table": None, "id": fid, "difficulty": None}], "figures": [fid]})
+        imwrite_any(os.path.join(D_CROPS, fid + ".png"), img)
+        wp = os.path.join(D_WORK, fid + ".json")
+        if os.path.exists(wp): skipped.append(fid); continue
+        kl, kw = e.get("knots_10cm_length"), e.get("knots_10cm_width")
+        asp = (float(kl) / float(kw)) if kl and kw else 1.0          # ширина узла / высота узла
+        ph = h / rows0; pw = ph * asp
+        jsave(wp, {"id": fid, "sheet": rel, "table": None, "fig": None, "crop_origin": [0, 0], "frame": [0, 0, w, h],
+                   "quad": [[0, 0], [w, 0], [w, h], [0, h]], "kind": "drawing",
+                   "drawing": {k: e.get(k) for k in ("pdf_page", "printed_page", "plate_id", "title", "group", "knots_10cm_length", "knots_10cm_width", "dimensions_cm")},
+                   "grid": {"pw": round(pw, 3), "ph": round(ph, 3), "ox": 0, "oy": 0, "cols": max(1, int(w / pw)), "rows": rows0, "square": False,
+                            "knot": {"l": kl, "w": kw}},
+                   "meta": {"section": "зарисовка пером", "name_az": "", "name": e.get("title") or "", "translation": "",
+                            "carpet": e.get("group") or "", "type": "", "note": "Gans-Ruedin 1986, с. %s" % e.get("printed_page")}})
+        added.append(fid)
+    return {"ok": True, "added": len(added), "skipped_existing": len(skipped), "folder": folder}
 
 def _is_border(w):
     """кайма / бордюр: раздел в подписи, найденный раппорт или вытянутая полоса"""
