@@ -39,6 +39,8 @@
   "carpet": "Г.",
   "type": "—",
   "note": "К Встречается в фаянсовой посуде, найденной в Мингечауре.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -69,7 +71,7 @@
    3
   ],
   "rows": [
-   "1.1221.122.1.1221.1",
+   "1.1221.12221.1221.1",
    "1.1221..121..1221.1",
    "1.1221...1...1221.1",
    "1.1221...1...1221.1",
@@ -199,7 +201,7 @@
    4.896
   ],
   "angle": 0.4,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 5.434,
   "distortion": {
@@ -232,9 +234,10 @@
    "n_suspects": 2
   },
   "risk": 0.548,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -278,7 +281,7 @@
    104
   ]
  },
- "saved_at": "2026-10-05 08:19:56",
+ "saved_at": "2026-10-05 22:43:19",
  "auto_matrix": {
   "w": 19,
   "h": 104,
@@ -5993,5 +5996,13 @@
   ],
   "ntiles": 22,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
