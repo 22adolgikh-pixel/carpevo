@@ -414,6 +414,20 @@ def api_import_drawings(body: dict = Body(...)):
         added.append(fid)
     return {"ok": True, "added": len(added), "skipped_existing": len(skipped), "folder": folder}
 
+@app.post("/api/drawing_pixels/{fid}")
+def api_drawing_pixels(fid: str, body: dict = Body(...)):
+    """v10.17: зарисовка пером → матрица по областям (заливка / контур / штриховка), см. drawing.py.
+    body: grid (в координатах кадра на экране), W, H — размер кадра, levels — 2 (одна штриховка) или 3 (редкая и густая)."""
+    import drawing
+    if not _fid_ok(fid): return JSONResponse({"error": "bad id"}, 400)
+    g = imread_any(os.path.join(D_CROPS, fid + ".png"), cv2.IMREAD_GRAYSCALE)
+    if g is None: return JSONResponse({"error": "нет кропа"}, 404)
+    G = dict(body.get("grid") or {}); W = float(body.get("W") or g.shape[1]); H = float(body.get("H") or g.shape[0])
+    sx, sy = g.shape[1] / W, g.shape[0] / H
+    G.update({"pw": float(G["pw"]) * sx, "ph": float(G["ph"]) * sy, "ox": float(G.get("ox", 0)) * sx, "oy": float(G.get("oy", 0)) * sy})
+    M, _ = drawing.to_matrix(g, G, int(body.get("levels") or 3))
+    return {"w": int(M.shape[1]), "h": int(M.shape[0]), "d": M.ravel().tolist(), "used": sorted(int(v) for v in np.unique(M))}
+
 def _is_border(w):
     """кайма / бордюр: раздел в подписи, найденный раппорт или вытянутая полоса"""
     sect = ((w.get("meta") or {}).get("section") or "").lower()
