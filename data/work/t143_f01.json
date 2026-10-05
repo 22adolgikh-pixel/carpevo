@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "Кабала",
   "type": "К.-Ш",
-  "note": "Встречается в коврах Дагестана см. табл. № 142, рис. 5."
+  "note": "Встречается в коврах Дагестана см. табл. № 142, рис. 5.",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.9032,
@@ -180,7 +182,7 @@
    4.881
   ],
   "angle": -0.28,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 4.549,
   "distortion": {
@@ -204,9 +206,10 @@
    "n_suspects": 0
   },
   "risk": 1.33,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -255,7 +258,7 @@
    86
   ]
  },
- "saved_at": "2026-10-05 08:20:39",
+ "saved_at": "2026-10-05 14:09:20",
  "auto_matrix": {
   "w": 23,
   "h": 86,
@@ -6745,5 +6748,13 @@
   ],
   "ntiles": 27,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
