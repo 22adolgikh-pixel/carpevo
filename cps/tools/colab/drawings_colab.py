@@ -69,11 +69,14 @@ for n, i in enumerate(pages):
         x0, y0, x1, y1 = max(0, x - m), max(0, y - m), min(W, x + w + m), min(H, y + h + m)
         crop = g[y0:y1, x0:x1].copy()                                # текст внутри рамки НЕ белим: OCR находит «слова» в самих рисунках
         mid = float(((crop > 70) & (crop < 190)).mean())             # доля полутонов: у пера мало, у фото много
-        kind = 'photo' if mid > 0.35 else 'drawing'
+        white = float((crop > 215).mean())                           # чистая бумага: у пера много
+        lap = np.abs(cv2.Laplacian(cv2.GaussianBlur(crop, (3, 3), 0), cv2.CV_32F))
+        lt = crop > 190; tex = float(lap[lt].mean()) if lt.any() else 99.0   # «шум» в светлых местах: у фото выше
+        kind = 'photo' if (mid > 0.35 or (white < 0.35 and tex > 4.5)) else 'drawing'
         found += 1
         fid = 'gr86_p%03d_d%d' % (i, found)
         cv2.imwrite(os.path.join(out, fid + '.png'), crop)
-        manifest.append({'id': fid, 'file': fid + '.png', 'kind': kind, 'midtones': round(mid, 3), 'pdf_page': i, 'printed_page': i - 4, 'bbox_px300': [int(x0), int(y0), int(x1), int(y1)],
+        manifest.append({'id': fid, 'file': fid + '.png', 'kind': kind, 'midtones': round(mid, 3), 'paper': round(white, 3), 'texture': round(tex, 2), 'pdf_page': i, 'printed_page': i - 4, 'bbox_px300': [int(x0), int(y0), int(x1), int(y1)],
                          'plate_id': pl and pl.get('id'), 'title': pl and (pl.get('title_raw') or pl.get('type_name')),
                          'group': pl and pl.get('group'), 'knots_10cm_length': pl and pl.get('knots_10cm_length'),
                          'knots_10cm_width': pl and pl.get('knots_10cm_width'), 'dimensions_cm': pl and pl.get('dimensions_cm')})
