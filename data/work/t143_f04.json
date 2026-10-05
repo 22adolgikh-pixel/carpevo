@@ -39,6 +39,8 @@
   "carpet": "Карабах",
   "type": "Кар.",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -207,7 +209,7 @@
    4.915
   ],
   "angle": -0.2,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 4.906,
   "distortion": {
@@ -231,9 +233,10 @@
    "n_suspects": 0
   },
   "risk": 0.709,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -302,7 +305,7 @@
    112
   ]
  },
- "saved_at": "2026-10-05 08:20:45",
+ "saved_at": "2026-10-05 14:11:36",
  "auto_matrix": {
   "w": 23,
   "h": 112,
@@ -4695,5 +4698,13 @@
   ],
   "ntiles": 36,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
