@@ -44,6 +44,13 @@ def main(site_data, schemes_path, out_html, label=None):
         sch[s['id']] = {'w': s['w'], 'h': s['h'], 'rows': s['rows'], 'pal': s.get('palette'), 'n': s.get('name'),
                         'tb': s.get('table'), 'fg': s.get('fig'), 'sc': t, 'tr': s.get('translation'),
                         'c': s.get('carpet'), 'nt': s.get('note')}
+    desc = {}
+    ddir = os.path.join(MODEL, 'descriptions')
+    for f in sorted(os.listdir(ddir)) if os.path.isdir(ddir) else []:
+        if f.endswith('.json'):
+            dj = json.load(open(os.path.join(ddir, f)))
+            for cid, d in dj['items'].items():
+                desc[cid] = {**d, 'src': dj['source']['short']}
     linked = set()
     concepts = []
     for c in cs:
@@ -61,6 +68,7 @@ def main(site_data, schemes_path, out_html, label=None):
             'r': c['roles'], 'sc': dict(sc), 'src': c['sources'],
             'at': [[a['source_id'], a['where'], a['page'], a['quote'], a['note'], a['role']] for a in c['attestations']],
             'rec': c['records'], 'mg': c['merge'], 'cl': cl, 'sch': c.get('schemes') or [],
+            'ds': desc.get(c['id']),
             'x': [[r.get('title'), r.get('url')] for r in (c.get('external_references') or []) if isinstance(r, dict)],
         })
     carriers = []

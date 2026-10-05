@@ -58,7 +58,7 @@
   .rel .card { min-height:auto; padding:5px 8px; margin-bottom:5px; }
   .rel .card .th { flex-basis:36px; width:36px; height:36px; } .rel .card .th canvas { max-width:36px; max-height:36px; }
   .card.proposed { border-style:dashed; border-color:var(--prop); }
-  .pill { display:inline-block; font-size:11px; padding:0 6px; border-radius:8px; }
+  .pill { display:inline-block; font:400 11px/1.6 -apple-system,"Segoe UI",sans-serif; vertical-align:middle; padding:0 6px; border-radius:8px; }
   .pill.auto { background:var(--auto-bg); color:var(--auto); } .pill.prop { color:var(--prop); border:1px dashed var(--prop); }
   .figs { display:flex; flex-wrap:wrap; gap:16px; }
   .figs figure { margin:0; max-width:260px; } .figs .box { border:1px solid var(--line); background:#fff; padding:4px; display:inline-block; filter:var(--inv); }
@@ -67,6 +67,7 @@
   .tree li { margin:3px 0; } .muted { color:var(--soft); }
   .qf { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; } .qf button { font:inherit; font-size:13px; padding:3px 9px; border:1px solid var(--border); background:var(--bg); color:var(--text); border-radius:12px; cursor:pointer; } .qf button.on { background:var(--bg-alt); font-weight:600; }
   .more { margin-top:12px; } .more button { font:inherit; padding:5px 14px; border:1px solid var(--border); background:var(--bg-alt); color:var(--text); cursor:pointer; }
+  .desc { max-width:760px; } .desc h3 { font-size:15px; margin:14px 0 2px; } .desc p { margin:0 0 6px; }
   footer { color:var(--soft); font-size:12px; padding:20px; text-align:center; }
 </style>
 </head>
@@ -144,7 +145,7 @@ function thHTML(c, z) {
 function cardHTML(c, extra, cls) {
   const roles = Object.keys(c.r || {}).sort((a, b) => (c.r[b] || 0) - (c.r[a] || 0)).slice(0, 2).map(r => `<span class="tag">${ROLE[r] || r}</span>`).join('');
   const cl = (c.cl || []).slice(0, 2).map(k => `<span class="tag auto" title="класс поставлен машиной">${CLS[k].ru}</span>`).join('');
-  return `<a class="card ${cls || ''}" href="#/c/${encodeURIComponent(c.id)}">${thHTML(c, extra && extra.z)}<span><span class="hw">${esc(cap(c.h))}</span>${c.m.ru ? `<div class="mn">${esc(c.m.ru)}</div>` : ''}${extra && extra.why ? `<div class="mn" style="font-size:11.5px">${esc(extra.why)}</div>` : ''}<div class="tags">${roles}${cl}</div></span></a>`;
+  return `<a class="card ${cls || ''}" href="#/c/${encodeURIComponent(c.id)}">${thHTML(c, extra && extra.z)}<span><span class="hw">${esc(cap(c.h))}</span>${c.m.ru ? `<div class="mn">${esc(c.m.ru)}</div>` : ''}${extra && extra.why ? `<div class="mn" style="font-size:11.5px">${esc(extra.why)}</div>` : ''}<div class="tags">${c.ds ? '<span class="tag" style="color:var(--accent);border-color:var(--accent)">описание</span>' : ''}${roles}${cl}</div></span></a>`;
 }
 
 /* ---------- каталог ---------- */
@@ -245,6 +246,8 @@ function renderConcept(id) {
     <h1>${esc(cap(c.h))}</h1><div class="sub1">${esc(c.m.ru || '')}${c.m.en ? ` · <i>${esc(c.m.en)}</i>` : ''}</div>
     <div class="tags" style="margin-top:8px">${(c.cl || []).map(k => `<a class="tag auto" href="#/" data-cls="${k}" title="класс поставлен машиной">${CLS[k].ru}</a>`).join('')}</div>
     ${merged}
+    ${c.ds ? `<h2>Описание <span class="pill auto" title="пересказ составлен ИИ по тексту книги, человеком не проверен">черновик ИИ · не проверено</span></h2>
+      <div class="desc">${c.ds.sections.map(s => `<h3>${esc(s.title)}</h3><p>${esc(s.text)} <span class="muted" style="font-size:12px">— ${esc(c.ds.src)}, с. ${s.pages.map(esc).join(', ')}</span></p>`).join('')}</div>` : ''}
     ${figs ? `<h2>Схемы (${c.sch.length})</h2><div class="figs">${figs}</div>` : ''}
     ${relBlocks(c)}
     <h2>Названия</h2><table class="t">${names}</table>
