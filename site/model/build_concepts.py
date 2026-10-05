@@ -283,8 +283,32 @@ def main(data_path, schemes_path, out):
         for cid in new: sch_by_c[cid].append(s['id'])
     for cid, l in sch_by_c.items(): concepts[cid]['schemes'] = l
 
+    # ---- 8. непривязанные схемы с именем: предложить понятие по похожему написанию + согласному значению ----
+    fold = lambda z: z.translate(str.maketrans('əıöüğşçxq', 'eiougscgg'))
+    nidx = [(fold(key(n['v'])), c['id']) for c in concepts.values() if c['type'] == 'ornament'
+            for n in c['names'] if n['lang'] in ('az', 'az-cyrl') and n['kind'] not in ('misreading',)]
+    linked = {sid for l in sch_by_c.values() for sid in l}
+    proposals = []
+    for s in S:
+        if s['id'] in linked or not (s.get('name') or '').strip() or '?' in s['name']: continue
+        nm = s['name'].split('|')[0]
+        k = fold(key(nm))
+        if len(k) < 3: continue
+        best = max(((SequenceMatcher(None, k, n).ratio(), cid) for n, cid in nidx if n), default=(0, None))
+        r, cid = best
+        if not cid or r < 0.8: continue
+        tm = mtoks(s.get('translation') or '')
+        cm = mtoks(concepts[cid]['meaning'].get('ru') or '') | {w for n in concepts[cid]['names'] if n['lang'] == 'ru' for w in mtoks(n['v'])}
+        ok = bool(tm) and bool(cm) and agree(tm, cm)
+        if ok or r >= 0.92:
+            proposals.append({'scheme': s['id'], 'concept': cid, 'ratio': round(r, 2), 'meaning_agrees': ok})
+            R2 = 'имя похоже ({:.2f}){}'.format(r, ', значение согласно' if ok else ', значение не сверено')
+            queue.append(('схема → понятие?', f"{s['id']} «{s['name']}» «{s.get('translation') or '—'}» → {cid} «{concepts[cid]['headword']}» «{concepts[cid]['meaning'].get('ru') or '—'}»",
+                          R2, 'привязать' if ok else 'проверить'))
+
     # ---- запись ----
     J = lambda n, o: json.dump(o, open(os.path.join(out, n), 'w'), ensure_ascii=False, indent=1)
+    J('scheme_link_proposals.json', proposals)
     J('concepts.json', list(concepts.values())); J('relations.json', rel); J('term_map.json', term_map); J('schemes_relink.json', relink)
     with open(os.path.join(out, 'review_queue.csv'), 'w', newline='') as f:
         w = csv.writer(f); w.writerow(['тип', 'что', 'почему', 'предложение', 'решение'])

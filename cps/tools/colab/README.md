@@ -14,3 +14,17 @@
 
 Параметры (необязательно, перед `%run`): `%env CPS_ITERS=4000` — шагов на фолд (по умолчанию 4000; 8000 — дольше, чуть точнее).
 Токены и пароли в скрипте не нужны: репозиторий публичный.
+
+# Книга с Drive → страницы (текст + превью) — book_pages_colab.py
+
+Для новых источников (сканы PDF на Google Drive). Видеокарта не нужна; ≈2–4 с на страницу с OCR.
+
+```
+!rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
+%env BOOK=Caucasian_carpets
+%run /content/carpevo/cps/tools/colab/book_pages_colab.py
+```
+
+Ищет PDF по части имени на всём Drive, берёт текстовый слой, если он есть, иначе распознаёт (tesseract, eng+deu+fra+rus),
+и кладёт в `carpet-dna/output/raw_pages_<имя>/` файлы `page_NNN.json` (текст) и `page_NNN.jpg` (превью 110 dpi) + `_summary.json`.
+Прерванный запуск продолжает с места остановки.
