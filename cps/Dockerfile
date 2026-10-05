@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+# v10.15: torch (только процессор) — для свёрточной сети клеток (cnn.py); без него студия работает как раньше, на порогах и маленькой модели
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 
 COPY . .
 

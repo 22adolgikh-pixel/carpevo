@@ -354,6 +354,18 @@ def auto_figure(g, frame, dark_only=False, use_model=True):
             P = None
     if dark_only: M[M == 2] = 0
     elif P is None: M = Mt
+    if not dark_only:
+        # v10.15: свёрточная сеть (cnn.py) — основной результат: на листах, которых она не видела, ошибка 9,0% против 22,5% у порогов и 16,8% у маленькой модели.
+        # Пороги и маленькая модель остаются «вторым мнением» для трудных мест (hard.py).
+        try:
+            import cnn
+            if cnn.available():
+                Wq, Hq = quad_size([list(map(float, p_)) for p_ in G["corners"]])
+                Mc = cnn.predict(g, G["corners"], {"pw": Wq / G["cols"], "ph": Hq / G["rows"], "ox": 0, "oy": 0}, G["cols"], G["rows"])
+                if Mc is not None and Mc.shape == M.shape:
+                    M = Mc; info["cnn"] = True
+        except Exception as e:
+            print("cnn:", e)
     if Mm is not None and not dark_only:
         # согласие порогов и модели — независимый сигнал надёжности (v10.12): расходятся редко там, где оба правы и не сходятся там, где рисунок спорный
         ink = int(((Mt > 0) | (Mm > 0)).sum()); mism = int((Mt != Mm).sum())
@@ -417,7 +429,7 @@ def to_work(G, M, info, margin=0):
         "palette_touched": False,
         "auto": {"version": 1, "confidence": info["confidence"], "flags": info["flags"],
                  "pitch": [round(G["px"], 3), round(G["py"], 3)], "angle": round(G["angle"], 2),
-                 "reviewed": False, **({"grid_strength": info["strength"]} if info.get("strength") is not None else {}),
+                 "reviewed": False, **({"engine": "cnn"} if info.get("cnn") else {}), **({"grid_strength": info["strength"]} if info.get("strength") is not None else {}),
                  **({"distortion": info["distortion"]} if info.get("distortion") else {}),
                  **({"agree": info["agree"]} if info.get("agree") else {})},
     }

@@ -61,6 +61,13 @@ def compute(w, g, P):
     Mt = autogrid.clean(M0, info["t"])
     Mm = learn.classify_cells(P, learn.cell_features(g, C, pitch))
     D = Mt != Mm
+    if (w.get("auto") or {}).get("engine") == "cnn":
+        # v10.15: итог — сеть; спорно там, где с ней не согласны пороги ИЛИ маленькая модель
+        # (на 839 рисунках, листы вне обучения: медиана 10 кусков, 98% ошибок в них, остаток >2 клеток у 4,9% рисунков; пороги+MLP: 9 кусков, остаток у 8,0%)
+        import cnn
+        Mc = cnn.predict_work(g, w)
+        if Mc is not None and Mc.shape == Mt.shape:
+            D = (Mc != Mt) | (Mc != Mm)
     h, wd = D.shape
     tiles, ntot = [], 0
     for y in range(0, h, TILE):
