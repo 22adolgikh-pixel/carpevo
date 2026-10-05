@@ -143,10 +143,12 @@ def evaluate(ds, folds, K=3):
             U = d["U"]; pc = predict(net, d); pm = learn.classify_cells(P, d["X"]); pb = d["base"]
             ink = max(1, int(((pc > 0) | (U > 0)).sum()))
             res["cnn"].append(int((pc != U).sum())); res["mlp"].append(int((pm != U).sum())); res["thr"].append(int((pb != U).sum())); res["ink"].append(int(((U > 0) | (pb > 0)).sum()))
-            per.append(dict(id=d["id"], thr=tiles_stat(U, pb, pb), mlp=tiles_stat(U, pb, pm), cnn=tiles_stat(U, pb, pc), ink=res["ink"][-1]))
+            per.append(dict(id=d["id"], thr=tiles_stat(U, pb, pb), mlp=tiles_stat(U, pb, pm), cnn=tiles_stat(U, pb, pc),
+                            cnn_prim=tiles_stat(U, pc, pb), cnn_prim_mlp=tiles_stat(U, pc, pm),
+                            cnn_prim_any=tiles_stat(U, pc, np.where(pc != pb, pb, pm)), ink=res["ink"][-1]))
     I = max(1, sum(res["ink"])); out = {k: round(100 * sum(res[k]) / I, 2) for k in ("cnn", "mlp", "thr")}
     out["n_eval"] = len(per)
-    for k in ("mlp", "cnn"):
+    for k in ("mlp", "cnn", "cnn_prim", "cnn_prim_mlp", "cnn_prim_any"):
         n = np.array([p[k][0] for p in per]); tot = sum(p[k][1] for p in per); rs = np.array([p[k][2] for p in per])
         out[f"tiles_{k}"] = dict(median_tiles=float(np.median(n)), le10=int((n <= 10).sum()), errors_in_tiles_pct=round(100 * (1 - rs.sum() / max(1, tot)), 1),
                                  residual_gt2_figs_pct=round(100 * float((rs > 2).mean()), 1))
@@ -159,11 +161,18 @@ if __name__ == "__main__":
     json.dump(r, open(OUT + "/summary.json", "w"), ensure_ascii=False, indent=1)
     print("\n=== ИТОГ (ошибка по закрашенным клеткам, листы не пересекаются) ===")
     print(f"пороги {r['thr']}% | маленькая модель (MLP) {r['mlp']}% | СЕТЬ {r['cnn']}%  (рисунков в проверке: {r['n_eval']})")
-    for k, nm in (("tiles_mlp", "MLP"), ("tiles_cnn", "сеть")):
-        t = r[k]; print(f"спорные куски, второй метод — {nm}: медиана {t['median_tiles']:.0f} на рисунок, ≤10 кусков у {t['le10']} рис., в кусках {t['errors_in_tiles_pct']}% ошибок порогов, остаток >2 клеток у {t['residual_gt2_figs_pct']}% рисунков")
+    print("(остаток = ошибки итога после исправления спорных кусков; итог = пороги, кроме строк «итог=сеть»)")
+    for k, nm in (("tiles_mlp", "итог=пороги, спор с MLP"), ("tiles_cnn", "итог=пороги, спор с сетью"), ("tiles_cnn_prim", "итог=сеть, спор с порогами"),
+                  ("tiles_cnn_prim_mlp", "итог=сеть, спор с MLP"), ("tiles_cnn_prim_any", "итог=сеть, спор с порогами ИЛИ MLP")):
+        t = r[k]; print(f"{nm}: медиана {t['median_tiles']:.0f} на рисунок, ≤10 кусков у {t['le10']} рис., в кусках {t['errors_in_tiles_pct']}% ошибок итога, остаток >2 клеток у {t['residual_gt2_figs_pct']}% рисунков")
     print("\nобучаю итоговую сеть на всех данных…", flush=True)
     net = train(ds, tag="итог"); torch.save(net.state_dict(), OUT + "/net_all.pt")
     json.dump(r, open(OUT + "/summary.json", "w"), ensure_ascii=False, indent=1)
+    try:
+        from google.colab import files
+        for fn in ("net_all.pt", "summary.json"): files.download(OUT + "/" + fn)      # скачать в браузер (если запрос разрешений — «Разрешить»)
+    except Exception as e:
+        print("скачивание в браузер не вышло:", e)
     try:
         from google.colab import drive
         drive.mount("/content/drive"); dst = "/content/drive/MyDrive/carpet-dna/cps_cnn"; os.makedirs(dst, exist_ok=True)
