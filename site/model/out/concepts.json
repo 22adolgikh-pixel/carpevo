@@ -37402,58 +37402,6 @@
   }
  },
  {
-  "id": "ciqqa",
-  "type": "ornament",
-  "key": "cıqqa",
-  "headword": "cıqqa",
-  "meaning": {
-   "ru": null,
-   "en": null
-  },
-  "names": [
-   {
-    "v": "cıqqa",
-    "lang": "az",
-    "kind": "headword"
-   },
-   {
-    "v": "джыгга",
-    "lang": "ru",
-    "kind": "attested"
-   }
-  ],
-  "roles": {
-   "element": 1
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 1
-  },
-  "attestations": [
-   {
-    "term": "ciqqa",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 093 (файл kerimov_vol1/page_093.json)",
-    "page": null,
-    "role": null,
-    "quote": null,
-    "note": null
-   }
-  ],
-  "records": [
-   "ciqqa"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t39_f04"
-  ]
- },
- {
   "id": "ciqqa-buta-4",
   "type": "ornament",
   "key": "cıqqabuta",
@@ -37545,10 +37493,35 @@
     "v": "buta cığa",
     "lang": "az",
     "kind": "misreading"
+   },
+   {
+    "v": "çıqqabuta",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "çığqabuta",
+    "lang": "az",
+    "kind": "record"
+   },
+   {
+    "v": "Чыггапута",
+    "lang": "az-cyrl",
+    "kind": "attested"
+   },
+   {
+    "v": "çığğa buta",
+    "lang": "az",
+    "kind": "misreading"
+   },
+   {
+    "v": "чыггабута",
+    "lang": "ru",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "motif": 6,
+   "motif": 8,
    "element": 1
   },
   "schools": {
@@ -37556,7 +37529,7 @@
   },
   "sources": {
    "kerimov_v2": 3,
-   "kerimov_v1": 4
+   "kerimov_v1": 6
   },
   "attestations": [
    {
@@ -37621,6 +37594,24 @@
     "role": null,
     "quote": null,
     "note": null
+   },
+   {
+    "term": "chigqabuta",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 044 (файл kerimov_vol1/page_044.json)",
+    "page": null,
+    "role": null,
+    "quote": "„Чыггапута,“ кечмишдә шөһрәт символу һесаб едилирди.",
+    "note": null
+   },
+   {
+    "term": "chigga-buta",
+    "source_id": "kerimov_v1",
+    "where": "том I, стр. 15 (файл kerimov_vol1/page_055.json)",
+    "page": null,
+    "role": null,
+    "quote": null,
+    "note": null
    }
   ],
   "records": [
@@ -37629,7 +37620,9 @@
    "ciqqa-buta",
    "ciqqa-buta-3",
    "ciqqa-buta-4",
-   "buta-ciga"
+   "buta-ciga",
+   "chigqabuta",
+   "chigga-buta"
   ],
   "external_references": [],
   "merge": {
@@ -37638,7 +37631,7 @@
    "renamed": [
     "buta-ciga"
    ],
-   "decision_n": 79
+   "decision_n": "s1"
   },
   "schemes": [
    "t96_f04",
@@ -39869,8 +39862,7 @@
   "schemes": [
    "t51_f05",
    "t138_f05",
-   "t136_f09",
-   "t52_f05"
+   "t136_f09"
   ]
  },
  {
@@ -40864,7 +40856,6 @@
    "decision_n": 82
   },
   "schemes": [
-   "t50_f04",
    "t50_f06",
    "t117_f03"
   ]
@@ -43871,8 +43862,8 @@
    "renamed": []
   },
   "schemes": [
-   "t15_f03",
-   "t46_f05"
+   "t46_f05",
+   "t15_f03"
   ]
  },
  {
@@ -44046,9 +44037,7 @@
    "rule": "same_word",
    "renamed": []
   },
-  "schemes": [
-   "t15_f03"
-  ]
+  "schemes": []
  },
  {
   "id": "gul",
@@ -44754,7 +44743,6 @@
    "decision_n": 91
   },
   "schemes": [
-   "t25_f01",
    "t108_f03"
   ]
  },
@@ -54874,7 +54862,6 @@
    "decision_n": 23
   },
   "schemes": [
-   "t27_f03",
    "t101_f05",
    "t148_f01",
    "t138_f08",
@@ -71246,13 +71233,13 @@
    "decision_n": 35
   },
   "schemes": [
-   "t52_f05",
    "t52_f10",
    "t53_f06",
    "t55_f01",
    "t167_f02",
    "t55_f05",
-   "t55_f02"
+   "t55_f02",
+   "t52_f05"
   ]
  },
  {
@@ -79789,8 +79776,7 @@
   },
   "schemes": [
    "t09_f01",
-   "t18_f04",
-   "t18_f08"
+   "t18_f04"
   ]
  },
  {
@@ -90241,14 +90227,24 @@
     "v": "чыгга",
     "lang": "ru",
     "kind": "attested"
+   },
+   {
+    "v": "cıqqa",
+    "lang": "az",
+    "kind": "headword"
+   },
+   {
+    "v": "джыгга",
+    "lang": "ru",
+    "kind": "attested"
    }
   ],
   "roles": {
-   "element": 1
+   "element": 2
   },
   "schools": {},
   "sources": {
-   "kerimov_v1": 1
+   "kerimov_v1": 2
   },
   "attestations": [
    {
@@ -90259,78 +90255,11 @@
     "role": null,
     "quote": null,
     "note": null
-   }
-  ],
-  "records": [
-   "chigga"
-  ],
-  "external_references": [],
-  "merge": {
-   "status": "single",
-   "rule": null,
-   "renamed": []
-  },
-  "schemes": [
-   "t39_f04"
-  ]
- },
- {
-  "id": "chigqabuta",
-  "type": "ornament",
-  "key": "çıqqabuta",
-  "headword": "çıqqabuta",
-  "meaning": {
-   "ru": null,
-   "en": null
-  },
-  "names": [
-   {
-    "v": "çıqqabuta",
-    "lang": "az",
-    "kind": "headword"
    },
    {
-    "v": "çığqabuta",
-    "lang": "az",
-    "kind": "record"
-   },
-   {
-    "v": "Чыггапута",
-    "lang": "az-cyrl",
-    "kind": "attested"
-   },
-   {
-    "v": "çığğa buta",
-    "lang": "az",
-    "kind": "misreading"
-   },
-   {
-    "v": "чыггабута",
-    "lang": "ru",
-    "kind": "attested"
-   }
-  ],
-  "roles": {
-   "motif": 2
-  },
-  "schools": {},
-  "sources": {
-   "kerimov_v1": 2
-  },
-  "attestations": [
-   {
-    "term": "chigqabuta",
+    "term": "ciqqa",
     "source_id": "kerimov_v1",
-    "where": "том I, стр. 044 (файл kerimov_vol1/page_044.json)",
-    "page": null,
-    "role": null,
-    "quote": "„Чыггапута,“ кечмишдә шөһрәт символу һесаб едилирди.",
-    "note": null
-   },
-   {
-    "term": "chigga-buta",
-    "source_id": "kerimov_v1",
-    "where": "том I, стр. 15 (файл kerimov_vol1/page_055.json)",
+    "where": "том I, стр. 093 (файл kerimov_vol1/page_093.json)",
     "page": null,
     "role": null,
     "quote": null,
@@ -90338,18 +90267,19 @@
    }
   ],
   "records": [
-   "chigqabuta",
-   "chigga-buta"
+   "chigga",
+   "ciqqa"
   ],
   "external_references": [],
   "merge": {
    "status": "checked_ai",
-   "rule": "renamed_by_reading",
-   "renamed": [
-    "chigga-buta"
-   ],
-   "decision_n": 160
-  }
+   "rule": null,
+   "renamed": [],
+   "decision_n": "s2"
+  },
+  "schemes": [
+   "t39_f04"
+  ]
  },
  {
   "id": "chiraq",
@@ -91663,8 +91593,10 @@
   "key": "ğıynaq",
   "headword": "ğıynaq",
   "meaning": {
-   "ru": "Клык",
-   "en": "Canine (tooth)"
+   "ru": "коготь",
+   "en": "claw",
+   "status": "checked_ai",
+   "why": "Перевод Керимова в легенде таблицы — «Коготь»; «Клык» был машинным (п. 272)."
   },
   "names": [
    {
@@ -91732,8 +91664,10 @@
   "key": "ğıynağı",
   "headword": "ğıynağı",
   "meaning": {
-   "ru": null,
-   "en": null
+   "ru": "коготь",
+   "en": "claw",
+   "status": "checked_ai",
+   "why": "Легенда схемы t157_f02 «Гыйнагы» — «Коготь» (п. 303); ğıynağı — форма слова ğıynaq."
   },
   "names": [
    {
