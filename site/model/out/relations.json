@@ -1,0 +1,2095 @@
+[
+ {
+  "from": "adam-ve-at",
+  "type": "consists_of",
+  "to": "adam",
+  "status": "auto",
+  "why": "«adam və at»: часть «adam»"
+ },
+ {
+  "from": "adam-ve-at",
+  "type": "consists_of",
+  "to": "at",
+  "status": "auto",
+  "why": "«adam və at»: часть «at»"
+ },
+ {
+  "from": "alma-eleme",
+  "type": "related",
+  "to": "alma",
+  "status": "auto",
+  "why": "«alma eləm»: содержит «alma»"
+ },
+ {
+  "from": "ara-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«ara haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "arvad-ushaqli-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«arvad-uşaqlı buta»: главное слово «buta»"
+ },
+ {
+  "from": "agac-kolu",
+  "type": "related",
+  "to": "agac",
+  "status": "auto",
+  "why": "«ağac kolu»: содержит «ağac»"
+ },
+ {
+  "from": "baba-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«baba buta»: главное слово «buta»"
+ },
+ {
+  "from": "badamli-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«badamlı buta»: главное слово «buta»"
+ },
+ {
+  "from": "badambuta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«badamı buta»: главное слово «buta»"
+ },
+ {
+  "from": "baki-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«bakı buta»: главное слово «buta»"
+ },
+ {
+  "from": "bala-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«bala buta»: главное слово «buta»"
+ },
+ {
+  "from": "bala-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«bala haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "balali-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«balalı buta»: главное слово «buta»"
+ },
+ {
+  "from": "bashliq-ve-qubpa",
+  "type": "consists_of",
+  "to": "bashliq",
+  "status": "auto",
+  "why": "«başlıq və qübbə»: часть «başlıq»"
+ },
+ {
+  "from": "bashliq-ve-qubpa",
+  "type": "consists_of",
+  "to": "qubbe",
+  "status": "auto",
+  "why": "«başlıq və qübbə»: часть «qübbə»"
+ },
+ {
+  "from": "butali-islimi",
+  "type": "kind_of",
+  "to": "islimi",
+  "status": "auto",
+  "why": "«butalı islimi»: главное слово «islimi»"
+ },
+ {
+  "from": "butali-islimi",
+  "type": "related",
+  "to": "butali",
+  "status": "auto",
+  "why": "«butalı islimi»: содержит «butalı»"
+ },
+ {
+  "from": "buta-qarmaq",
+  "type": "kind_of",
+  "to": "qarmaq",
+  "status": "auto",
+  "why": "«buta qarmaq»: главное слово «qarmaq»"
+ },
+ {
+  "from": "buta-qarmaq",
+  "type": "related",
+  "to": "buta",
+  "status": "auto",
+  "why": "«buta qarmaq»: содержит «buta»"
+ },
+ {
+  "from": "buynuzlu-heyvan",
+  "type": "kind_of",
+  "to": "heyvan",
+  "status": "auto",
+  "why": "«buynuzlu heyvan»: главное слово «heyvan»"
+ },
+ {
+  "from": "bebe-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«bəbə buta»: главное слово «buta»"
+ },
+ {
+  "from": "cutqosha-su",
+  "type": "kind_of",
+  "to": "su",
+  "status": "auto",
+  "why": "«Cütqoşa su»: главное слово «su»"
+ },
+ {
+  "from": "cut-qosha-sular",
+  "type": "related",
+  "to": "qosha",
+  "status": "auto",
+  "why": "«cüt-qoşa sular»: содержит «qoşa»"
+ },
+ {
+  "from": "ciga-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«cığa buta»: главное слово «buta»"
+ },
+ {
+  "from": "dayaz-otaq",
+  "type": "kind_of",
+  "to": "tag",
+  "status": "auto",
+  "why": "«dayaz tağ»: главное слово «tağ»"
+ },
+ {
+  "from": "dik-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«dik buta»: главное слово «buta»"
+ },
+ {
+  "from": "dilek-dilek-naxishlar",
+  "type": "related",
+  "to": "dilik",
+  "status": "auto",
+  "why": "«dilik-dilik naxışlar»: содержит «dilik»"
+ },
+ {
+  "from": "dilerekli-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«dilikli buta»: главное слово «buta»"
+ },
+ {
+  "from": "dilerekli-buta",
+  "type": "related",
+  "to": "dilerekli",
+  "status": "auto",
+  "why": "«dilikli buta»: содержит «dilikli»"
+ },
+ {
+  "from": "dilerekli-itibucaq",
+  "type": "related",
+  "to": "dilerekli",
+  "status": "auto",
+  "why": "«dilikli-itibucaqlı»: содержит «dilikli»"
+ },
+ {
+  "from": "dilili-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«dilli buta»: главное слово «buta»"
+ },
+ {
+  "from": "dishli-medahillar",
+  "type": "kind_of",
+  "to": "medahil",
+  "status": "auto",
+  "why": "«dişli mədaxil»: главное слово «mədaxil»"
+ },
+ {
+  "from": "dolama-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«dolama haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "dolama-hashiye",
+  "type": "related",
+  "to": "dolama",
+  "status": "auto",
+  "why": "«dolama haşiyə»: содержит «dolama»"
+ },
+ {
+  "from": "spiral-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«dolama haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "spiral-hashiye",
+  "type": "related",
+  "to": "dolama",
+  "status": "auto",
+  "why": "«dolama haşiyə»: содержит «dolama»"
+ },
+ {
+  "from": "enli-su",
+  "type": "kind_of",
+  "to": "su",
+  "status": "auto",
+  "why": "«enli su»: главное слово «su»"
+ },
+ {
+  "from": "evli-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«evli buta»: главное слово «buta»"
+ },
+ {
+  "from": "fatir-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«fatir buta»: главное слово «buta»"
+ },
+ {
+  "from": "fetir-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«fətir buta»: главное слово «buta»"
+ },
+ {
+  "from": "fetir-buta",
+  "type": "related",
+  "to": "fetir",
+  "status": "auto",
+  "why": "«fətir buta»: содержит «fətir»"
+ },
+ {
+  "from": "gol-ortasi",
+  "type": "related",
+  "to": "gol",
+  "status": "auto",
+  "why": "«göl ortası»: содержит «göl»"
+ },
+ {
+  "from": "kul-ve-ya-kichik-xoncha",
+  "type": "alt_name_of",
+  "to": "gol",
+  "status": "proposed",
+  "why": "«göl və ya kiçik xonça»: «или» — другое название"
+ },
+ {
+  "from": "koz",
+  "type": "alt_name_of",
+  "to": "goz",
+  "status": "proposed",
+  "why": "«göz?/köz»: «или» — другое название"
+ },
+ {
+  "from": "gence-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«gəncə buta»: главное слово «buta»"
+ },
+ {
+  "from": "gence-buta",
+  "type": "related",
+  "to": "gence",
+  "status": "auto",
+  "why": "«gəncə buta»: содержит «gəncə»"
+ },
+ {
+  "from": "xamli-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«hamlı buta»: главное слово «buta»"
+ },
+ {
+  "from": "xachali-islimi",
+  "type": "kind_of",
+  "to": "islimi",
+  "status": "auto",
+  "why": "«haçalı islimi»: главное слово «islimi»"
+ },
+ {
+  "from": "xachali-islimi",
+  "type": "related",
+  "to": "xachali",
+  "status": "auto",
+  "why": "«haçalı islimi»: содержит «haçalı»"
+ },
+ {
+  "from": "heyvan-tesvirleri",
+  "type": "related",
+  "to": "heyvan",
+  "status": "auto",
+  "why": "«heyvan təsvirləri»: содержит «heyvan»"
+ },
+ {
+  "from": "horme-dairevi-rozet",
+  "type": "related",
+  "to": "horme",
+  "status": "auto",
+  "why": "«hörmə dairəvi rozet»: содержит «hörmə»"
+ },
+ {
+  "from": "xorme-islimi",
+  "type": "kind_of",
+  "to": "islimi",
+  "status": "auto",
+  "why": "«hörmə islimi»: главное слово «islimi»"
+ },
+ {
+  "from": "xorme-islimi",
+  "type": "related",
+  "to": "horme",
+  "status": "auto",
+  "why": "«hörmə islimi»: содержит «hörmə»"
+ },
+ {
+  "from": "xurma-islimi",
+  "type": "kind_of",
+  "to": "islimi",
+  "status": "auto",
+  "why": "«hörmə islimi»: главное слово «islimi»"
+ },
+ {
+  "from": "xurma-islimi",
+  "type": "related",
+  "to": "horme",
+  "status": "auto",
+  "why": "«hörmə islimi»: содержит «hörmə»"
+ },
+ {
+  "from": "horuk-buruq",
+  "type": "kind_of",
+  "to": "buruq",
+  "status": "auto",
+  "why": "«hörük-buruq»: главное слово «buruq»"
+ },
+ {
+  "from": "horuk-buruq",
+  "type": "related",
+  "to": "horuk",
+  "status": "auto",
+  "why": "«hörük-buruq»: содержит «hörük»"
+ },
+ {
+  "from": "hemli-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«həmli buta»: главное слово «buta»"
+ },
+ {
+  "from": "iki-qush",
+  "type": "kind_of",
+  "to": "qush",
+  "status": "auto",
+  "why": "«İki quş»: главное слово «quş»"
+ },
+ {
+  "from": "iki-qush-arasinda-agac-tesviri",
+  "type": "related",
+  "to": "qush",
+  "status": "auto",
+  "why": "«iki quş arasında ağac təsviri»: содержит «quş»"
+ },
+ {
+  "from": "iki-qush-arasinda-agac-tesviri",
+  "type": "related",
+  "to": "agac",
+  "status": "auto",
+  "why": "«iki quş arasında ağac təsviri»: содержит «ağac»"
+ },
+ {
+  "from": "islmi-ilan",
+  "type": "related",
+  "to": "islimi",
+  "status": "auto",
+  "why": "«islimi ilan»: содержит «islimi»"
+ },
+ {
+  "from": "ichli-su",
+  "type": "kind_of",
+  "to": "su",
+  "status": "auto",
+  "why": "«içli su»: главное слово «su»"
+ },
+ {
+  "from": "qashi-kerpic",
+  "type": "kind_of",
+  "to": "kerpich",
+  "status": "auto",
+  "why": "«kaşı kərpic»: главное слово «kərpic»"
+ },
+ {
+  "from": "qashi-kerpic",
+  "type": "related",
+  "to": "kashi",
+  "status": "auto",
+  "why": "«kaşı kərpic»: содержит «kaşı»"
+ },
+ {
+  "from": "kechi-dirnagi",
+  "type": "related",
+  "to": "kechi",
+  "status": "auto",
+  "why": "«keçi dabanı»: содержит «keçi»"
+ },
+ {
+  "from": "chechdagez",
+  "type": "kind_of",
+  "to": "tag",
+  "status": "auto",
+  "why": "«keçid tağ»: главное слово «tağ»"
+ },
+ {
+  "from": "kichik-gol",
+  "type": "kind_of",
+  "to": "gol",
+  "status": "auto",
+  "why": "«kiçik göl»: главное слово «göl»"
+ },
+ {
+  "from": "kichik-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«kiçik haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "kufi-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«kufi haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "kufi-hashiye",
+  "type": "related",
+  "to": "kufi",
+  "status": "auto",
+  "why": "«kufi haşiyə»: содержит «kufi»"
+ },
+ {
+  "from": "kohne-su",
+  "type": "kind_of",
+  "to": "su",
+  "status": "auto",
+  "why": "«Köhnə su»: главное слово «su»"
+ },
+ {
+  "from": "kone-su",
+  "type": "kind_of",
+  "to": "su",
+  "status": "auto",
+  "why": "«könə su»: главное слово «su»"
+ },
+ {
+  "from": "kusulu-buta-2",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«küsülü buta»: главное слово «buta»"
+ },
+ {
+  "from": "kesme-su",
+  "type": "kind_of",
+  "to": "su",
+  "status": "auto",
+  "why": "«kəsmə su»: главное слово «su»"
+ },
+ {
+  "from": "ketebe-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«kətəbə haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "ketebe-hashiye",
+  "type": "related",
+  "to": "ketebe",
+  "status": "auto",
+  "why": "«kətəbə haşiyə»: содержит «kətəbə»"
+ },
+ {
+  "from": "lobya-yarpagi",
+  "type": "kind_of",
+  "to": "yarpaq",
+  "status": "auto",
+  "why": "«lobya yarpağı»: главное слово «yarpağı»"
+ },
+ {
+  "from": "lobya-yarpagi",
+  "type": "related",
+  "to": "lobya",
+  "status": "auto",
+  "why": "«lobya yarpağı»: содержит «lobya»"
+ },
+ {
+  "from": "lelek-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«lələk buta»: главное слово «buta»"
+ },
+ {
+  "from": "lechek-turunc",
+  "type": "kind_of",
+  "to": "turunc",
+  "status": "auto",
+  "why": "«ləçək-turunc»: главное слово «turunc»"
+ },
+ {
+  "from": "lechek-turunc",
+  "type": "related",
+  "to": "lechek",
+  "status": "auto",
+  "why": "«ləçək-turunc»: содержит «ləçək»"
+ },
+ {
+  "from": "man-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«man buta»: главное слово «buta»"
+ },
+ {
+  "from": "mir-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«mir buta»: главное слово «buta»"
+ },
+ {
+  "from": "mugan-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«muğan buta»: главное слово «buta»"
+ },
+ {
+  "from": "muje-muje",
+  "type": "kind_of",
+  "to": "muje",
+  "status": "auto",
+  "why": "«müjə-müjə»: главное слово «müjə»"
+ },
+ {
+  "from": "muje-muje",
+  "type": "related",
+  "to": "muje",
+  "status": "auto",
+  "why": "«müjə-müjə»: содержит «müjə»"
+ },
+ {
+  "from": "mebed-ara-hashiyesi",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«Məbəd ara haşiyəsi»: главное слово «haşiyəsi»"
+ },
+ {
+  "from": "nar-agaclari",
+  "type": "related",
+  "to": "nar",
+  "status": "auto",
+  "why": "«nar ağacları»: содержит «nar»"
+ },
+ {
+  "from": "orta-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«orta haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "palid-yarpagi",
+  "type": "kind_of",
+  "to": "yarpaq",
+  "status": "auto",
+  "why": "«palıd yarpağı»: главное слово «yarpağı»"
+ },
+ {
+  "from": "palid-yarpagi",
+  "type": "related",
+  "to": "palid",
+  "status": "auto",
+  "why": "«palıd yarpağı»: содержит «palıd»"
+ },
+ {
+  "from": "pishik-lepesi",
+  "type": "kind_of",
+  "to": "ayaq",
+  "status": "auto",
+  "why": "«pişik ayağı»: главное слово «ayağı»"
+ },
+ {
+  "from": "pishik-lepesi",
+  "type": "related",
+  "to": "pishik",
+  "status": "auto",
+  "why": "«pişik ayağı»: содержит «pişik»"
+ },
+ {
+  "from": "qab-qabi",
+  "type": "related",
+  "to": "qab",
+  "status": "auto",
+  "why": "«qab-qabı»: содержит «qab»"
+ },
+ {
+  "from": "qanadli-islimi",
+  "type": "kind_of",
+  "to": "islimi",
+  "status": "auto",
+  "why": "«qanadlı islimi»: главное слово «islimi»"
+ },
+ {
+  "from": "qanadli-islimi",
+  "type": "related",
+  "to": "qanadli",
+  "status": "auto",
+  "why": "«qanadlı islimi»: содержит «qanadlı»"
+ },
+ {
+  "from": "qanraqli-golche",
+  "type": "kind_of",
+  "to": "golche",
+  "status": "auto",
+  "why": "«qanraqlı gölçə»: главное слово «gölçə»"
+ },
+ {
+  "from": "qarmaqli-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«qarmaqlı buta»: главное слово «buta»"
+ },
+ {
+  "from": "qarmaqli-buta",
+  "type": "related",
+  "to": "qarmaqli",
+  "status": "auto",
+  "why": "«qarmaqlı buta»: содержит «qarmaqlı»"
+ },
+ {
+  "from": "qarmaqli-bichaq",
+  "type": "related",
+  "to": "qarmaqli",
+  "status": "auto",
+  "why": "«qarmaqlı bıçaq»: содержит «qarmaqlı»"
+ },
+ {
+  "from": "qarmaqli-damga",
+  "type": "kind_of",
+  "to": "damga",
+  "status": "auto",
+  "why": "«qarmaqlı damğa»: главное слово «damğa»"
+ },
+ {
+  "from": "qarmaqli-damga",
+  "type": "related",
+  "to": "qarmaqli",
+  "status": "auto",
+  "why": "«qarmaqlı damğa»: содержит «qarmaqlı»"
+ },
+ {
+  "from": "qarmaqli-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«qarmaqlı haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "qarmaqli-hashiye",
+  "type": "related",
+  "to": "qarmaqli",
+  "status": "auto",
+  "why": "«qarmaqlı haşiyə»: содержит «qarmaqlı»"
+ },
+ {
+  "from": "ketebe-qarmaqli",
+  "type": "kind_of",
+  "to": "ketebe",
+  "status": "auto",
+  "why": "«qarmaqlı kətəbə»: главное слово «kətəbə»"
+ },
+ {
+  "from": "ketebe-qarmaqli",
+  "type": "related",
+  "to": "qarmaqli",
+  "status": "auto",
+  "why": "«qarmaqlı kətəbə»: содержит «qarmaqlı»"
+ },
+ {
+  "from": "qarmaqli-ketebe",
+  "type": "kind_of",
+  "to": "ketebe",
+  "status": "auto",
+  "why": "«qarmaxlı kətəbə»: главное слово «kətəbə»"
+ },
+ {
+  "from": "qeysi-beshax",
+  "type": "related",
+  "to": "qaysi",
+  "status": "auto",
+  "why": "«qeysi beşax»: содержит «qeysi»"
+ },
+ {
+  "from": "qotazli-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«qotazlı buta»: главное слово «buta»"
+ },
+ {
+  "from": "qotazli-buta",
+  "type": "related",
+  "to": "qotazli",
+  "status": "auto",
+  "why": "«qotazlı buta»: содержит «qotazlı»"
+ },
+ {
+  "from": "qovushan-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«qovuşan buta»: главное слово «buta»"
+ },
+ {
+  "from": "qovushqan-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«qovuşqan buta»: главное слово «buta»"
+ },
+ {
+  "from": "qozali-islimi",
+  "type": "kind_of",
+  "to": "islimi",
+  "status": "auto",
+  "why": "«qozalı islimi»: главное слово «islimi»"
+ },
+ {
+  "from": "qoshaarvadli-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«qoşaarvadlı buta»: главное слово «buta»"
+ },
+ {
+  "from": "qosha-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«qoşa buta»: главное слово «buta»"
+ },
+ {
+  "from": "qosha-buta",
+  "type": "related",
+  "to": "qosha",
+  "status": "auto",
+  "why": "«qoşa buta»: содержит «qoşa»"
+ },
+ {
+  "from": "qosha-islimi",
+  "type": "kind_of",
+  "to": "islimi",
+  "status": "auto",
+  "why": "«qoşa islimi»: главное слово «islimi»"
+ },
+ {
+  "from": "qosha-islimi",
+  "type": "related",
+  "to": "qosha",
+  "status": "auto",
+  "why": "«qoşa islimi»: содержит «qoşa»"
+ },
+ {
+  "from": "quyu-charxi",
+  "type": "related",
+  "to": "quyu",
+  "status": "auto",
+  "why": "«quyu çarxı»: содержит «quyu»"
+ },
+ {
+  "from": "qivrim-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«qıvrım buta»: главное слово «buta»"
+ },
+ {
+  "from": "qivrim-buta",
+  "type": "related",
+  "to": "qivrim-2",
+  "status": "auto",
+  "why": "«qıvrım buta»: содержит «qıvrım»"
+ },
+ {
+  "from": "qizil-ketebe",
+  "type": "kind_of",
+  "to": "ketebe",
+  "status": "auto",
+  "why": "«qızıl kətəbə»: главное слово «kətəbə»"
+ },
+ {
+  "from": "qizil-ulduz",
+  "type": "kind_of",
+  "to": "ulduz",
+  "status": "auto",
+  "why": "«qızıl ulduz»: главное слово «ulduz»"
+ },
+ {
+  "from": "qedim-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«qədim buta»: главное слово «buta»"
+ },
+ {
+  "from": "rombshekilli-dishli-goller",
+  "type": "kind_of",
+  "to": "kuller",
+  "status": "auto",
+  "why": "«rombşəkilli dişli göllər»: главное слово «göllər»"
+ },
+ {
+  "from": "saya-buta-2",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«sadə buta»: главное слово «buta»"
+ },
+ {
+  "from": "saya-buta-2",
+  "type": "related",
+  "to": "sade",
+  "status": "auto",
+  "why": "«sadə buta»: содержит «sadə»"
+ },
+ {
+  "from": "sade-islimi",
+  "type": "kind_of",
+  "to": "islimi",
+  "status": "auto",
+  "why": "«sadə islimi»: главное слово «islimi»"
+ },
+ {
+  "from": "sade-islimi",
+  "type": "related",
+  "to": "sade",
+  "status": "auto",
+  "why": "«sadə islimi»: содержит «sadə»"
+ },
+ {
+  "from": "sade-zolaqlar",
+  "type": "related",
+  "to": "sade",
+  "status": "auto",
+  "why": "«sadə zolaqlar»: содержит «sadə»"
+ },
+ {
+  "from": "salur-ara-hashiyesi",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«Salur ara haşiyəsi»: главное слово «haşiyəsi»"
+ },
+ {
+  "from": "sandiq-golu",
+  "type": "kind_of",
+  "to": "golu",
+  "status": "auto",
+  "why": "«sandıq gölü»: главное слово «gölü»"
+ },
+ {
+  "from": "saqqal-daragi",
+  "type": "kind_of",
+  "to": "daraq",
+  "status": "auto",
+  "why": "«saqqal darağı»: главное слово «darağı»"
+ },
+ {
+  "from": "sarabi-buta-2",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«sarabı buta»: главное слово «buta»"
+ },
+ {
+  "from": "sari-bulbul",
+  "type": "kind_of",
+  "to": "bulbul",
+  "status": "auto",
+  "why": "«sarı bülbül»: главное слово «bülbül»"
+ },
+ {
+  "from": "saya-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«saya buta»: главное слово «buta»"
+ },
+ {
+  "from": "sachaqlilar-ve-ya-tikanlilar",
+  "type": "alt_name_of",
+  "to": "sachalilar",
+  "status": "proposed",
+  "why": "«saçaqlılar və ya tikanlılar»: «или» — другое название"
+ },
+ {
+  "from": "sachaqli-ve-ya-tikanli",
+  "type": "alt_name_of",
+  "to": "tikanli",
+  "status": "proposed",
+  "why": "«saçaqlı və ya tikanlı»: «или» — другое название"
+ },
+ {
+  "from": "stilize-edilmish-heyvan-shekilleri",
+  "type": "related",
+  "to": "heyvan",
+  "status": "auto",
+  "why": "«stilize edilmiş heyvan şəkilləri»: содержит «heyvan»"
+ },
+ {
+  "from": "stilize-edilmish-ejdaha-shekli",
+  "type": "related",
+  "to": "drakon",
+  "status": "auto",
+  "why": "«stilize edilmiş əjdaha şəkli»: содержит «əjdaha»"
+ },
+ {
+  "from": "stilleshmish-heyvan-shekilleri",
+  "type": "related",
+  "to": "heyvan",
+  "status": "auto",
+  "why": "«stilləşmiş heyvan şəkilləri»: содержит «heyvan»"
+ },
+ {
+  "from": "suraxani-ara-hashiyesi",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«Suraxanı ara haşiyəsi»: главное слово «haşiyəsi»"
+ },
+ {
+  "from": "sigir-sidiyi",
+  "type": "related",
+  "to": "sigir",
+  "status": "auto",
+  "why": "«sığır sidiyi»: содержит «sığır»"
+ },
+ {
+  "from": "sekkizkunceli-ulduz",
+  "type": "kind_of",
+  "to": "ulduz",
+  "status": "auto",
+  "why": "«səkkizküncəli ulduz»: главное слово «ulduz»"
+ },
+ {
+  "from": "sarabi-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«sərabi buta»: главное слово «buta»"
+ },
+ {
+  "from": "tehenk-yarpagi",
+  "type": "kind_of",
+  "to": "yarpaq",
+  "status": "auto",
+  "why": "«təhənk yarpağı»: главное слово «yarpağı»"
+ },
+ {
+  "from": "tehenk-yarpagi",
+  "type": "related",
+  "to": "tehenk",
+  "status": "auto",
+  "why": "«təhənk yarpağı»: содержит «təhənk»"
+ },
+ {
+  "from": "uzum-yarpagi",
+  "type": "kind_of",
+  "to": "yarpaq",
+  "status": "auto",
+  "why": "«tənək yarpağı»: главное слово «yarpağı»"
+ },
+ {
+  "from": "uzum-yarpagi",
+  "type": "related",
+  "to": "tenek",
+  "status": "auto",
+  "why": "«tənək yarpağı»: содержит «tənək»"
+ },
+ {
+  "from": "vaq-vaq",
+  "type": "related",
+  "to": "vag",
+  "status": "auto",
+  "why": "«vaq-vaqı»: содержит «vaq»"
+ },
+ {
+  "from": "xalcha-hashiyesi",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«xalça haşiyəsi»: главное слово «haşiyəsi»"
+ },
+ {
+  "from": "xachali-islimi-2",
+  "type": "kind_of",
+  "to": "islimi",
+  "status": "auto",
+  "why": "«xaçalı islimi»: главное слово «islimi»"
+ },
+ {
+  "from": "xile-ara-hashiyesi",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«Xilə ara haşiyəsi»: главное слово «haşiyəsi»"
+ },
+ {
+  "from": "xile-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«xilə buta»: главное слово «buta»"
+ },
+ {
+  "from": "xoruk-burma",
+  "type": "kind_of",
+  "to": "burma",
+  "status": "auto",
+  "why": "«xoruk-burma»: главное слово «burma»"
+ },
+ {
+  "from": "xoruz-burma",
+  "type": "kind_of",
+  "to": "burma",
+  "status": "auto",
+  "why": "«xoruz burma»: главное слово «burma»"
+ },
+ {
+  "from": "xoruz-burma",
+  "type": "related",
+  "to": "xoruz",
+  "status": "auto",
+  "why": "«xoruz burma»: содержит «xoruz»"
+ },
+ {
+  "from": "xitan-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«xıtan buta»: главное слово «buta»"
+ },
+ {
+  "from": "yadeli-gul",
+  "type": "kind_of",
+  "to": "gul",
+  "status": "auto",
+  "why": "«yadelli gül»: главное слово «gül»"
+ },
+ {
+  "from": "yanar-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«yanar buta»: главное слово «buta»"
+ },
+ {
+  "from": "yazili-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«yazılı buta»: главное слово «buta»"
+ },
+ {
+  "from": "yazili-ketebe",
+  "type": "kind_of",
+  "to": "ketebe",
+  "status": "auto",
+  "why": "«yazılı kətəbə»: главное слово «kətəbə»"
+ },
+ {
+  "from": "ketebe-yazili",
+  "type": "kind_of",
+  "to": "ketebe",
+  "status": "auto",
+  "why": "«yazılı kətəbə»: главное слово «kətəbə»"
+ },
+ {
+  "from": "yomud-ara-hashiyesi",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«Yomud ara haşiyəsi»: главное слово «haşiyəsi»"
+ },
+ {
+  "from": "yomud-ara-hashiyesi",
+  "type": "related",
+  "to": "yomud",
+  "status": "auto",
+  "why": "«Yomud ara haşiyəsi»: содержит «yomud»"
+ },
+ {
+  "from": "zenbek-gulu",
+  "type": "related",
+  "to": "zanbaq",
+  "status": "auto",
+  "why": "«zanbaq gülü»: содержит «zanbaq»"
+ },
+ {
+  "from": "zulfu-elem",
+  "type": "kind_of",
+  "to": "elem",
+  "status": "auto",
+  "why": "«zülfi-ələm»: главное слово «ələm»"
+ },
+ {
+  "from": "zerkeret-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«zərkara buta»: главное слово «buta»"
+ },
+ {
+  "from": "zerxara-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«zərxara buta»: главное слово «buta»"
+ },
+ {
+  "from": "chanaqli-baga",
+  "type": "kind_of",
+  "to": "baga",
+  "status": "auto",
+  "why": "«çanaqlı-bağa»: главное слово «bağa»"
+ },
+ {
+  "from": "chanaqqala-ara-hashiyesi",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«Çanaqqala ara haşiyəsi»: главное слово «haşiyəsi»"
+ },
+ {
+  "from": "chatmagi-kelender",
+  "type": "related",
+  "to": "chaxmagi",
+  "status": "auto",
+  "why": "«çaxmağı kələndər»: содержит «çaxmağı»"
+ },
+ {
+  "from": "chichekli-buta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«çiçəkli buta»: главное слово «buta»"
+ },
+ {
+  "from": "chichekli-buta",
+  "type": "related",
+  "to": "chichekli",
+  "status": "auto",
+  "why": "«çiçəkli buta»: содержит «çiçəkli»"
+ },
+ {
+  "from": "chicheklenen-agac",
+  "type": "kind_of",
+  "to": "agac",
+  "status": "auto",
+  "why": "«çiçəklənən ağac»: главное слово «ağac»"
+ },
+ {
+  "from": "chep-zolaqli-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«çəp zolaqlı haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "uzum-salximlari",
+  "type": "related",
+  "to": "uzum",
+  "status": "auto",
+  "why": "«üzüm salxımı»: содержит «üzüm»"
+ },
+ {
+  "from": "uzum-yarpaqlari",
+  "type": "kind_of",
+  "to": "yarpaq",
+  "status": "auto",
+  "why": "«üzüm yarpağı»: главное слово «yarpağı»"
+ },
+ {
+  "from": "uzum-yarpaqlari",
+  "type": "related",
+  "to": "uzum",
+  "status": "auto",
+  "why": "«üzüm yarpağı»: содержит «üzüm»"
+ },
+ {
+  "from": "uchbucaqli-hashiye",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«üçbucaqlı haşiyə»: главное слово «haşiyə»"
+ },
+ {
+  "from": "shahsever-ara-hashiyesi",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«Şahsevər ara haşiyəsi»: главное слово «haşiyəsi»"
+ },
+ {
+  "from": "shami-zencir",
+  "type": "kind_of",
+  "to": "zencir",
+  "status": "auto",
+  "why": "«Şami-zəncir»: главное слово «zəncir»"
+ },
+ {
+  "from": "shami-zencir",
+  "type": "related",
+  "to": "shami-2",
+  "status": "auto",
+  "why": "«Şami-zəncir»: содержит «şami»"
+ },
+ {
+  "from": "shami-zencire",
+  "type": "kind_of",
+  "to": "zencire",
+  "status": "auto",
+  "why": "«şami-zəncirə»: главное слово «zəncirə»"
+ },
+ {
+  "from": "shami-zencire",
+  "type": "related",
+  "to": "shami-2",
+  "status": "auto",
+  "why": "«şami-zəncirə»: содержит «şami»"
+ },
+ {
+  "from": "shirvanbuta",
+  "type": "kind_of",
+  "to": "buta",
+  "status": "auto",
+  "why": "«şirvan buta»: главное слово «buta»"
+ },
+ {
+  "from": "afshan-gullu",
+  "type": "related",
+  "to": "efshan",
+  "status": "auto",
+  "why": "«əfşan gülü»: содержит «əfşan»"
+ },
+ {
+  "from": "efshar-ara-hashiyesi",
+  "type": "kind_of",
+  "to": "hashiye",
+  "status": "auto",
+  "why": "«Əfşar ara haşiyəsi»: главное слово «haşiyəsi»"
+ },
+ {
+  "from": "efshar-ara-hashiyesi",
+  "type": "related",
+  "to": "efshar",
+  "status": "auto",
+  "why": "«Əfşar ara haşiyəsi»: содержит «əfşar»"
+ },
+ {
+  "from": "ejdahali-xetai",
+  "type": "kind_of",
+  "to": "xetai",
+  "status": "auto",
+  "why": "«əjdahalı xətai»: главное слово «xətai»"
+ },
+ {
+  "from": "el-ele",
+  "type": "related",
+  "to": "el-2",
+  "status": "auto",
+  "why": "«əl-ələ»: содержит «əl»"
+ },
+ {
+  "from": "esas-elementler-ana-guller",
+  "type": "related",
+  "to": "esas",
+  "status": "auto",
+  "why": "«əsas elementlər, ana güllər»: содержит «əsas»"
+ },
+ {
+  "from": "esas-elementler-quba",
+  "type": "kind_of",
+  "to": "qubbe",
+  "status": "auto",
+  "why": "«əsas elementlər «qübbə»»: главное слово «qübbə»"
+ },
+ {
+  "from": "esas-elementler-quba",
+  "type": "related",
+  "to": "esas",
+  "status": "auto",
+  "why": "«əsas elementlər «qübbə»»: содержит «əsas»"
+ },
+ {
+  "from": "almalar",
+  "type": "derived_from",
+  "to": "alma",
+  "status": "auto",
+  "why": "almalar = alma + -lar"
+ },
+ {
+  "from": "agchichekli",
+  "type": "derived_from",
+  "to": "ag-chichek",
+  "status": "auto",
+  "why": "ağçiçəkli = ağçiçək + -li"
+ },
+ {
+  "from": "budaqlar",
+  "type": "derived_from",
+  "to": "budaq",
+  "status": "auto",
+  "why": "budaqlar = budaq + -lar"
+ },
+ {
+  "from": "butaqli",
+  "type": "derived_from",
+  "to": "budaq",
+  "status": "auto",
+  "why": "budaqlı = budaq + -lı"
+ },
+ {
+  "from": "butali",
+  "type": "derived_from",
+  "to": "buta",
+  "status": "auto",
+  "why": "butalı = buta + -lı"
+ },
+ {
+  "from": "dilerekli",
+  "type": "derived_from",
+  "to": "dilik",
+  "status": "auto",
+  "why": "dilikli = dilik + -li"
+ },
+ {
+  "from": "duymeli",
+  "type": "derived_from",
+  "to": "duyme",
+  "status": "auto",
+  "why": "düyməli = düymə + -li"
+ },
+ {
+  "from": "dirnaqli",
+  "type": "derived_from",
+  "to": "dirnaq",
+  "status": "auto",
+  "why": "dırnaqlı = dırnaq + -lı"
+ },
+ {
+  "from": "deyirmiler",
+  "type": "derived_from",
+  "to": "deyirmi",
+  "status": "auto",
+  "why": "dəyirmilər = dəyirmi + -lər"
+ },
+ {
+  "from": "kuller",
+  "type": "derived_from",
+  "to": "gol",
+  "status": "auto",
+  "why": "göllər = göl + -lər"
+ },
+ {
+  "from": "gozlu",
+  "type": "derived_from",
+  "to": "goz",
+  "status": "auto",
+  "why": "gözlü = göz + -lü"
+ },
+ {
+  "from": "ketebeli",
+  "type": "derived_from",
+  "to": "ketebe",
+  "status": "auto",
+  "why": "kətəbəli = kətəbə + -li"
+ },
+ {
+  "from": "ketebeler",
+  "type": "derived_from",
+  "to": "ketebe",
+  "status": "auto",
+  "why": "kətəbələr = kətəbə + -lər"
+ },
+ {
+  "from": "mujeler",
+  "type": "derived_from",
+  "to": "muje",
+  "status": "auto",
+  "why": "müjələr = müjə + -lər"
+ },
+ {
+  "from": "pitikli",
+  "type": "derived_from",
+  "to": "pitik",
+  "status": "auto",
+  "why": "pitikli = pitik + -li"
+ },
+ {
+  "from": "qanadli",
+  "type": "derived_from",
+  "to": "qanad",
+  "status": "auto",
+  "why": "qanadlı = qanad + -lı"
+ },
+ {
+  "from": "qarmaqli",
+  "type": "derived_from",
+  "to": "qarmaq",
+  "status": "auto",
+  "why": "qarmaqlı = qarmaq + -lı"
+ },
+ {
+  "from": "qarmaqlilar",
+  "type": "derived_from",
+  "to": "qarmaqli",
+  "status": "auto",
+  "why": "qarmaqlılar = qarmaqlı + -lar"
+ },
+ {
+  "from": "qollu",
+  "type": "derived_from",
+  "to": "qol",
+  "status": "auto",
+  "why": "qollu = qol + -lu"
+ },
+ {
+  "from": "qotazli",
+  "type": "derived_from",
+  "to": "qotaz",
+  "status": "auto",
+  "why": "qotazlı = qotaz + -lı"
+ },
+ {
+  "from": "qoshalar",
+  "type": "derived_from",
+  "to": "qosha",
+  "status": "auto",
+  "why": "qoşalar = qoşa + -lar"
+ },
+ {
+  "from": "ulduzlu",
+  "type": "derived_from",
+  "to": "ulduz",
+  "status": "auto",
+  "why": "ulduzlu = ulduz + -lu"
+ },
+ {
+  "from": "chichekli",
+  "type": "derived_from",
+  "to": "chichek",
+  "status": "auto",
+  "why": "çiçəkli = çiçək + -li"
+ },
+ {
+  "from": "choxbucaqlilar",
+  "type": "derived_from",
+  "to": "choxbucaqli",
+  "status": "auto",
+  "why": "çoxbucaqlılar = çoxbucaqlı + -lar"
+ },
+ {
+  "from": "chengelli",
+  "type": "derived_from",
+  "to": "chengel",
+  "status": "auto",
+  "why": "çəngəlli = çəngəl + -li"
+ },
+ {
+  "from": "shamdanli",
+  "type": "derived_from",
+  "to": "shamdan",
+  "status": "auto",
+  "why": "şamdanlı = şamdan + -lı"
+ },
+ {
+  "from": "achma-yumma",
+  "type": "named_after",
+  "to": "achma-yuma-bendi-rumi",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "baliq-carpet",
+  "type": "named_after",
+  "to": "baliq",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "budaqli",
+  "type": "named_after",
+  "to": "butaqli",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "bulud-carpet",
+  "type": "named_after",
+  "to": "bulud",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "butali-carpet",
+  "type": "named_after",
+  "to": "butali",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "buynuz-carpet",
+  "type": "named_after",
+  "to": "buynuz",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "bendi-rumi-carpet",
+  "type": "named_after",
+  "to": "bendi-rumi",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "dilikli",
+  "type": "named_after",
+  "to": "dilerekli",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "gulbendlik",
+  "type": "named_after",
+  "to": "golbendlik",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "gence-carpet",
+  "type": "named_after",
+  "to": "gence",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "islimi-bendlik-carpet",
+  "type": "named_after",
+  "to": "islimibendlik",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "lechekturunc",
+  "type": "named_after",
+  "to": "lechek-turunc",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "mereze-carpet",
+  "type": "named_after",
+  "to": "mereze",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "nelbeki-gul",
+  "type": "named_after",
+  "to": "nelbekigul",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "qollu-carpet",
+  "type": "named_after",
+  "to": "qollu",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "tekgul",
+  "type": "named_after",
+  "to": "tekgol",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "xilebuta",
+  "type": "named_after",
+  "to": "xile-buta",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "shabalidbuta-carpet",
+  "type": "named_after",
+  "to": "shabalidbuta",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "shebekendlik",
+  "type": "named_after",
+  "to": "shebekebendlik",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "efshan-carpet",
+  "type": "named_after",
+  "to": "efshan",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "gullebduz",
+  "type": "named_after",
+  "to": "gulebetin",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "mefresh-carpet",
+  "type": "named_after",
+  "to": "mefresh",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "qazaxcha-object",
+  "type": "named_after",
+  "to": "qazaxcha",
+  "status": "auto",
+  "why": "то же слово"
+ },
+ {
+  "from": "alcha-gul",
+  "type": "spelling_variant",
+  "to": "alchagulu",
+  "status": "proposed",
+  "why": "одно значение «цветок алычи», сходство написания 0.93"
+ },
+ {
+  "from": "ana-guller",
+  "type": "synonym",
+  "to": "anakuz",
+  "status": "proposed",
+  "why": "одно значение «материнские цветы», сходство написания 0.40"
+ },
+ {
+  "from": "ana-guller",
+  "type": "synonym",
+  "to": "ana-chichekleri",
+  "status": "proposed",
+  "why": "одно значение «материнские цветы», сходство написания 0.57"
+ },
+ {
+  "from": "anakuz",
+  "type": "synonym",
+  "to": "ana-chichekleri",
+  "status": "proposed",
+  "why": "одно значение «материнские цветы», сходство написания 0.44"
+ },
+ {
+  "from": "aggul",
+  "type": "synonym",
+  "to": "ag-chichek",
+  "status": "proposed",
+  "why": "одно значение «белый цветок», сходство написания 0.33"
+ },
+ {
+  "from": "bala-hashiyeler",
+  "type": "synonym",
+  "to": "malye-kaymy",
+  "status": "proposed",
+  "why": "одно значение «малые каймы», сходство написания 0.67"
+ },
+ {
+  "from": "bayraq",
+  "type": "synonym",
+  "to": "elem",
+  "status": "proposed",
+  "why": "одно значение «знамя», сходство написания 0.00"
+ },
+ {
+  "from": "bazibend",
+  "type": "synonym",
+  "to": "bilerzik",
+  "status": "proposed",
+  "why": "одно значение «браслет», сходство написания 0.25"
+ },
+ {
+  "from": "baga",
+  "type": "synonym",
+  "to": "tisbaga",
+  "status": "proposed",
+  "why": "одно значение «черепаха», сходство написания 0.73"
+ },
+ {
+  "from": "baga",
+  "type": "synonym",
+  "to": "chanaqli-baga",
+  "status": "proposed",
+  "why": "одно значение «черепаха», сходство написания 0.53"
+ },
+ {
+  "from": "tisbaga",
+  "type": "synonym",
+  "to": "chanaqli-baga",
+  "status": "proposed",
+  "why": "одно значение «черепаха», сходство написания 0.56"
+ },
+ {
+  "from": "belbagi",
+  "type": "synonym",
+  "to": "kemer",
+  "status": "proposed",
+  "why": "одно значение «пояс», сходство написания 0.00"
+ },
+ {
+  "from": "belbagi",
+  "type": "synonym",
+  "to": "toqqa-poqas",
+  "status": "proposed",
+  "why": "одно значение «пояс», сходство написания 0.17"
+ },
+ {
+  "from": "kemer",
+  "type": "synonym",
+  "to": "toqqa-poqas",
+  "status": "proposed",
+  "why": "одно значение «пояс», сходство написания 0.00"
+ },
+ {
+  "from": "beshik",
+  "type": "synonym",
+  "to": "ovruk",
+  "status": "proposed",
+  "why": "одно значение «люлька», сходство написания 0.18"
+ },
+ {
+  "from": "butali",
+  "type": "synonym",
+  "to": "butali-islimi",
+  "status": "proposed",
+  "why": "одно значение «миндалевидный ислими», сходство написания 0.67"
+ },
+ {
+  "from": "behli",
+  "type": "synonym",
+  "to": "gilas",
+  "status": "proposed",
+  "why": "одно значение «черешня», сходство написания 0.20"
+ },
+ {
+  "from": "cucgoz",
+  "type": "synonym",
+  "to": "cucezu",
+  "status": "proposed",
+  "why": "одно значение «цыплячий глаз», сходство написания 0.67"
+ },
+ {
+  "from": "daraq",
+  "type": "synonym",
+  "to": "shana",
+  "status": "proposed",
+  "why": "одно значение «гребень», сходство написания 0.44"
+ },
+ {
+  "from": "dilik",
+  "type": "spelling_variant",
+  "to": "dilerekli",
+  "status": "proposed",
+  "why": "одно значение «зубчатый», сходство написания 0.83"
+ },
+ {
+  "from": "dilik",
+  "type": "synonym",
+  "to": "dish-dish",
+  "status": "proposed",
+  "why": "одно значение «зубчатый», сходство написания 0.55"
+ },
+ {
+  "from": "dilerekli",
+  "type": "synonym",
+  "to": "dish-dish",
+  "status": "proposed",
+  "why": "одно значение «зубчатый», сходство написания 0.46"
+ },
+ {
+  "from": "qivrim",
+  "type": "synonym",
+  "to": "qivrim-2",
+  "status": "proposed",
+  "why": "одно значение «завиток», сходство написания 0.17"
+ },
+ {
+  "from": "dirnaqli",
+  "type": "synonym",
+  "to": "qaynagi",
+  "status": "proposed",
+  "why": "одно значение «коготь», сходство написания 0.57"
+ },
+ {
+  "from": "goz",
+  "type": "spelling_variant",
+  "to": "gozlu",
+  "status": "proposed",
+  "why": "одно значение «глаз», сходство написания 0.75"
+ },
+ {
+  "from": "gubbe",
+  "type": "spelling_variant",
+  "to": "qubbe",
+  "status": "proposed",
+  "why": "одно значение «купол», сходство написания 0.80"
+ },
+ {
+  "from": "gul",
+  "type": "synonym",
+  "to": "chichek",
+  "status": "proposed",
+  "why": "одно значение «цветок», сходство написания 0.00"
+ },
+ {
+  "from": "gulabgulu-2",
+  "type": "synonym",
+  "to": "qaychi-ve-ya-qizil-gul",
+  "status": "proposed",
+  "why": "одно значение «роза», сходство написания 0.23"
+ },
+ {
+  "from": "gulabgulu-2",
+  "type": "synonym",
+  "to": "qizilgul",
+  "status": "proposed",
+  "why": "одно значение «роза», сходство написания 0.35"
+ },
+ {
+  "from": "qaychi-ve-ya-qizil-gul",
+  "type": "synonym",
+  "to": "qizilgul",
+  "status": "proposed",
+  "why": "одно значение «роза», сходство написания 0.64"
+ },
+ {
+  "from": "erik",
+  "type": "synonym",
+  "to": "qaysi",
+  "status": "proposed",
+  "why": "одно значение «абрикос», сходство написания 0.60"
+ },
+ {
+  "from": "qaysibishaq",
+  "type": "spelling_variant",
+  "to": "qeysibishah",
+  "status": "proposed",
+  "why": "одно значение «абрикос с веточкой», сходство написания 0.80"
+ },
+ {
+  "from": "xachali",
+  "type": "synonym",
+  "to": "xachali-islimi",
+  "status": "proposed",
+  "why": "одно значение «раздвоенный ислими», сходство написания 0.67"
+ },
+ {
+  "from": "inek",
+  "type": "synonym",
+  "to": "sigir",
+  "status": "proposed",
+  "why": "одно значение «корова», сходство написания 0.00"
+ },
+ {
+  "from": "biber",
+  "type": "spelling_variant",
+  "to": "istot",
+  "status": "proposed",
+  "why": "одно значение «перец», сходство написания 0.91"
+ },
+ {
+  "from": "qashi-2",
+  "type": "synonym",
+  "to": "qashi-kerpic",
+  "status": "proposed",
+  "why": "одно значение «глазурованный кирпич», сходство написания 0.57"
+ },
+ {
+  "from": "kilim-gul",
+  "type": "spelling_variant",
+  "to": "kilim-gulu",
+  "status": "proposed",
+  "why": "одно значение «цветок килима», сходство написания 0.94"
+ },
+ {
+  "from": "kvadratlar-ve-duzbucaqlilar",
+  "type": "spelling_variant",
+  "to": "kvadrat-ve-duzbucaqlilar",
+  "status": "proposed",
+  "why": "одно значение «квадраты и прямоугольники», сходство написания 0.94"
+ },
+ {
+  "from": "kuchuq",
+  "type": "synonym",
+  "to": "tula",
+  "status": "proposed",
+  "why": "одно значение «щенок», сходство написания 0.00"
+ },
+ {
+  "from": "muje",
+  "type": "synonym",
+  "to": "muje-muje",
+  "status": "proposed",
+  "why": "одно значение «ресница», сходство написания 0.67"
+ },
+ {
+  "from": "meshel",
+  "type": "synonym",
+  "to": "shamal",
+  "status": "proposed",
+  "why": "одно значение «факел», сходство написания 0.40"
+ },
+ {
+  "from": "nagqash",
+  "type": "synonym",
+  "to": "naxish",
+  "status": "proposed",
+  "why": "одно значение «узор», сходство написания 0.00"
+ },
+ {
+  "from": "nargul",
+  "type": "spelling_variant",
+  "to": "nar-chicheyi",
+  "status": "proposed",
+  "why": "одно значение «гранатовый цветок», сходство написания 0.92"
+ },
+ {
+  "from": "surgu",
+  "type": "synonym",
+  "to": "sini",
+  "status": "proposed",
+  "why": "одно значение «поднос», сходство написания 0.20"
+ },
+ {
+  "from": "qarmaqli",
+  "type": "spelling_variant",
+  "to": "qarmaqlilar",
+  "status": "proposed",
+  "why": "одно значение «крючкообразные», сходство написания 0.84"
+ },
+ {
+  "from": "qaychi-2",
+  "type": "synonym",
+  "to": "qeychi",
+  "status": "proposed",
+  "why": "одно значение «ножницы», сходство написания 0.60"
+ },
+ {
+  "from": "qaychibaliq",
+  "type": "spelling_variant",
+  "to": "qeychibaliq",
+  "status": "proposed",
+  "why": "одно значение «рыба-ножницы», сходство написания 0.80"
+ },
+ {
+  "from": "samavar",
+  "type": "synonym",
+  "to": "samavar-2",
+  "status": "proposed",
+  "why": "одно значение «самовар», сходство написания 0.71"
+ },
+ {
+  "from": "stilize-edilmish-heyvan-shekilleri",
+  "type": "spelling_variant",
+  "to": "stilleshmish-heyvan-shekilleri",
+  "status": "proposed",
+  "why": "одно значение «стилизованные изображения животных», сходство написания 0.85"
+ },
+ {
+  "from": "tahanq-uzum-yarpagi",
+  "type": "synonym",
+  "to": "uzum-yarpagi",
+  "status": "proposed",
+  "why": "одно значение «виноградный лист», сходство написания 0.33"
+ },
+ {
+  "from": "tavus",
+  "type": "synonym",
+  "to": "tovuz",
+  "status": "proposed",
+  "why": "одно значение «павлин», сходство написания 0.60"
+ },
+ {
+  "from": "toqqa",
+  "type": "synonym",
+  "to": "toqqaqabagi",
+  "status": "proposed",
+  "why": "одно значение «пряжка», сходство написания 0.62"
+ },
+ {
+  "from": "ulduzlu",
+  "type": "synonym",
+  "to": "ulduzlu-2",
+  "status": "proposed",
+  "why": "одно значение «звездный», сходство написания 0.53"
+ },
+ {
+  "from": "xarxovuz",
+  "type": "spelling_variant",
+  "to": "cherxouz",
+  "status": "proposed",
+  "why": "одно значение «бассейн», сходство написания 0.75"
+ },
+ {
+  "from": "chalgi",
+  "type": "synonym",
+  "to": "cheng",
+  "status": "proposed",
+  "why": "одно значение «музыкальный инструмент», сходство написания 0.22"
+ }
+]
