@@ -95,7 +95,7 @@ while len(th) % cols: th.append(np.full((250, 240), 255, np.uint8))
 if th:
     sheet = np.vstack([np.hstack(th[r:r + cols]) for r in range(0, len(th), cols)])
     cv2.imwrite(os.path.join(out, '_contact_sheet.jpg'), sheet, [cv2.IMWRITE_JPEG_QUALITY, 70])
-dr = [e for e in manifest if e['kind'] == 'drawing']
+dr = list(manifest)   # в архив идут все вырезки; помеченные как фото CPS откроет «на пересмотр» — автоматика ошибается в обе стороны
 json.dump(dr, open(os.path.join(out, 'manifest_drawings.json'), 'w'), ensure_ascii=False, indent=1)
 sh(f'cd "{out}" && rm -f drawings_for_cps.zip && cp manifest_drawings.json /content/manifest.json && zip -q -j drawings_for_cps.zip ' + ' '.join('"%s"' % os.path.join(out, e['file']) for e in dr) + ' /content/manifest.json')
 

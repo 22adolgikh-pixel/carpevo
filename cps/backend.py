@@ -404,7 +404,8 @@ def api_import_drawings(body: dict = Body(...)):
         asp = (float(kl) / float(kw)) if kl and kw else 1.0          # ширина узла / высота узла
         ph = h / rows0; pw = ph * asp
         jsave(wp, {"id": fid, "sheet": rel, "table": None, "fig": None, "crop_origin": [0, 0], "frame": [0, 0, w, h],
-                   "quad": [[0, 0], [w, 0], [w, h], [0, h]], "kind": "drawing",
+                   "quad": [[0, 0], [w, 0], [w, h], [0, h]], "kind": "photo" if e.get("kind") == "photo" else "drawing",
+                   "review": e.get("kind") == "photo",             # автоматика сочла фото — человек решает (F/S в 🎯)
                    "drawing": {k: e.get(k) for k in ("pdf_page", "printed_page", "plate_id", "title", "group", "knots_10cm_length", "knots_10cm_width", "dimensions_cm")},
                    "grid": {"pw": round(pw, 3), "ph": round(ph, 3), "ox": 0, "oy": 0, "cols": max(1, int(w / pw)), "rows": rows0, "square": False,
                             "knot": {"l": kl, "w": kw}},
