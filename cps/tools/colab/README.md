@@ -28,3 +28,15 @@
 Ищет PDF по части имени на всём Drive, берёт текстовый слой, если он есть, иначе распознаёт (tesseract, eng+deu+fra+rus),
 и кладёт в `carpet-dna/output/raw_pages_<имя>/` файлы `page_NNN.json` (текст) и `page_NNN.jpg` (превью 110 dpi) + `_summary.json`.
 Прерванный запуск продолжает с места остановки.
+
+# Зарисовки узоров из книги → CPS — drawings_colab.py
+
+Для Gans-Ruedin «Caucasian Carpets»: вырезает рисунки пером со страниц-комментариев (300 dpi), убирая текст по рамкам слов
+из текстового слоя. Результат: `carpet-dna/output/gans_ruedin_drawings/` (PNG, manifest.json с плотностью узла ковра,
+_contact_sheet.jpg — обзор всех вырезок, drawings_for_cps.zip с доступом по ссылке; id архива печатается в ИТОГ).
+
+```
+!rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
+%env BOOK=Caucasian_carpets
+%run /content/carpevo/cps/tools/colab/drawings_colab.py
+```
