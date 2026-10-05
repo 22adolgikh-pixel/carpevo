@@ -39,6 +39,8 @@
   "carpet": "«гарагез»",
   "type": "—",
   "note": "«черным глазом».",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -69,7 +71,7 @@
    5
   ],
   "rows": [
-   "1111111111.....11.111111111111..........1111111111122..22..2111111111122222222221111111111..........1111111111.........11111111111.........11111111"
+   "11111111112222222.221111111111..........1111111111222..22..2111111111122222222221111111111..........1111111111.........11111111111........111111111"
   ]
  },
  "palette": [
@@ -95,7 +97,7 @@
    6.343
   ],
   "angle": 0.68,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 3.475,
   "agree": {
@@ -110,9 +112,10 @@
    "n_suspects": 0
   },
   "risk": 0.58,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -120,117 +123,16 @@
   "invert": false
  },
  "rapport": {
-  "found": true,
+  "found": false,
   "axis": "h",
-  "period": 20,
-  "offset": 10,
-  "match": 0.885,
-  "repeats": 6.7,
-  "agreement": 0.825,
-  "mirror_across": 1.0,
-  "is_mirror": true,
-  "glide": 0.0,
-  "is_glide": false,
-  "check": true,
-  "unit": {
-   "w": 20,
-   "h": 1,
-   "rows": [
-    "..........1111111111"
-   ]
-  },
-  "suspect_cells": [
-   [
-    0,
-    15
-   ],
-   [
-    0,
-    16
-   ],
-   [
-    0,
-    18
-   ],
-   [
-    0,
-    19
-   ],
-   [
-    0,
-    50
-   ],
-   [
-    0,
-    51
-   ],
-   [
-    0,
-    52
-   ],
-   [
-    0,
-    55
-   ],
-   [
-    0,
-    56
-   ],
-   [
-    0,
-    59
-   ],
-   [
-    0,
-    70
-   ],
-   [
-    0,
-    71
-   ],
-   [
-    0,
-    72
-   ],
-   [
-    0,
-    73
-   ],
-   [
-    0,
-    74
-   ],
-   [
-    0,
-    75
-   ],
-   [
-    0,
-    76
-   ],
-   [
-    0,
-    77
-   ],
-   [
-    0,
-    78
-   ],
-   [
-    0,
-    79
-   ],
-   [
-    0,
-    119
-   ]
-  ],
+  "best_mismatch": 0.036,
+  "agreement": 0.792,
   "computed_at_matrix": [
    147,
    1
   ]
  },
- "saved_at": "2026-10-05 08:19:44",
+ "saved_at": "2026-10-05 08:55:17",
  "auto_matrix": {
   "w": 147,
   "h": 1,
@@ -394,5 +296,13 @@
   ],
   "ntiles": 15,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
