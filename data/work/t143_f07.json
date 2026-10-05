@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   15.92,
-   49.51
+   13.39,
+   50.12
   ],
   [
-   152.6,
-   49.51
+   150.07,
+   48.92
   ],
   [
-   152.6,
-   629.64
+   155.13,
+   629.03
   ],
   [
-   15.92,
-   629.64
+   18.45,
+   630.23
   ]
  ],
  "meta": {
@@ -38,16 +38,18 @@
   "translation": "",
   "carpet": "",
   "type": "",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
-  "pw": 3.5128,
-  "ph": 4.9153,
-  "ox": 0,
-  "oy": 0,
+  "pw": 4.5628,
+  "ph": 4.5628,
+  "ox": -2.85,
+  "oy": 0.47,
   "cols": 39,
   "rows": 118,
-  "square": false
+  "square": true
  },
  "classify": {
   "tones": 1,
@@ -221,7 +223,8 @@
    "n_suspects": 0
   },
   "risk": 1.18,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -239,7 +242,7 @@
    112
   ]
  },
- "saved_at": "2026-10-05 08:20:51",
+ "saved_at": "2026-10-05 14:18:19",
  "auto_matrix": {
   "w": 30,
   "h": 112,
@@ -11844,5 +11847,13 @@
   ],
   "ntiles": 36,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
