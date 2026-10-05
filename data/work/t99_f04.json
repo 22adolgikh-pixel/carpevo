@@ -39,6 +39,8 @@
   "carpet": "Сор-сор",
   "type": "К.—Ш",
   "note": "Напоминает элементы муганских ковров.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -163,7 +165,7 @@
    4.941
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 4.89,
   "distortion": {
@@ -564,9 +566,10 @@
    "n_suspects": 94
   },
   "risk": 1.44,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -574,7 +577,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-05 08:27:31",
+ "saved_at": "2026-10-05 23:00:19",
  "auto_matrix": {
   "w": 39,
   "h": 68,
@@ -1231,5 +1234,13 @@
   ],
   "ntiles": 28,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }

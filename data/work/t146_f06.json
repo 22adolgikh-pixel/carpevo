@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "Кабала",
   "type": "К.-Ш",
-  "note": "Встречается в фаянсовой посуде."
+  "note": "Встречается в фаянсовой посуде.",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.871,
@@ -194,7 +196,7 @@
    4.859
   ],
   "angle": 0.36,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 5.031,
   "distortion": {
@@ -227,9 +229,10 @@
    "n_suspects": 2
   },
   "risk": 1.061,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -279,7 +282,7 @@
    100
   ]
  },
- "saved_at": "2026-10-05 08:21:16",
+ "saved_at": "2026-10-05 22:59:38",
  "auto_matrix": {
   "w": 25,
   "h": 100,
@@ -7818,5 +7821,13 @@
   ],
   "ntiles": 30,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }

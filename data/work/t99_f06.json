@@ -39,6 +39,8 @@
   "carpet": "Гасимушагы",
   "type": "Кар.",
   "note": "Взят из декора безворсных ковров.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -112,7 +114,7 @@
    "1222222222221.1222222222222222222221",
    "1111111112221.1221111111222111111111",
    "........12221.12221....12221........",
-   "........12221.1222.1...12221........",
+   "........12221.122221...12221........",
    "1111111.12221.1111111..12221.1111111",
    "122221..12221..........12221..122221",
    "12221...12221..........12221...12221",
@@ -152,7 +154,7 @@
   "обводка",
   "тело 1"
  ],
- "palette_touched": false,
+ "palette_touched": true,
  "auto": {
   "version": 1,
   "confidence": 0.72,
@@ -164,7 +166,7 @@
    4.943
   ],
   "angle": 0.32,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 4.312,
   "distortion": {
@@ -188,9 +190,10 @@
    "n_suspects": 0
   },
   "risk": 0.68,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -200,13 +203,13 @@
  "rapport": {
   "found": false,
   "axis": "v",
-  "best_mismatch": 0.185,
+  "best_mismatch": 0.183,
   "computed_at_matrix": [
    36,
    71
   ]
  },
- "saved_at": "2026-10-05 08:27:34",
+ "saved_at": "2026-10-05 23:01:37",
  "auto_matrix": {
   "w": 36,
   "h": 71,
@@ -2076,5 +2079,13 @@
   ],
   "ntiles": 32,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
