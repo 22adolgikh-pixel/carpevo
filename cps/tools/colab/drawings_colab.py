@@ -67,13 +67,13 @@ for n, i in enumerate(pages):
         if w > 0.95 * W and h > 0.9 * H: continue
         m = 15
         x0, y0, x1, y1 = max(0, x - m), max(0, y - m), min(W, x + w + m), min(H, y + h + m)
-        crop = g[y0:y1, x0:x1].copy()
-        cm = mask[y0:y1, x0:x1].astype(bool)                         # остатки текста внутри рамки — побелить
-        crop[cm] = 255
+        crop = g[y0:y1, x0:x1].copy()                                # текст внутри рамки НЕ белим: OCR находит «слова» в самих рисунках
+        mid = float(((crop > 70) & (crop < 190)).mean())             # доля полутонов: у пера мало, у фото много
+        kind = 'photo' if mid > 0.35 else 'drawing'
         found += 1
         fid = 'gr86_p%03d_d%d' % (i, found)
         cv2.imwrite(os.path.join(out, fid + '.png'), crop)
-        manifest.append({'id': fid, 'file': fid + '.png', 'pdf_page': i, 'printed_page': i - 4, 'bbox_px300': [int(x0), int(y0), int(x1), int(y1)],
+        manifest.append({'id': fid, 'file': fid + '.png', 'kind': kind, 'midtones': round(mid, 3), 'pdf_page': i, 'printed_page': i - 4, 'bbox_px300': [int(x0), int(y0), int(x1), int(y1)],
                          'plate_id': pl and pl.get('id'), 'title': pl and (pl.get('title_raw') or pl.get('type_name')),
                          'group': pl and pl.get('group'), 'knots_10cm_length': pl and pl.get('knots_10cm_length'),
                          'knots_10cm_width': pl and pl.get('knots_10cm_width'), 'dimensions_cm': pl and pl.get('dimensions_cm')})
@@ -86,13 +86,15 @@ for e in manifest:
     im = cv2.imread(os.path.join(out, e['file']), cv2.IMREAD_GRAYSCALE)
     s = 220 / max(im.shape); im = cv2.resize(im, (max(1, int(im.shape[1] * s)), max(1, int(im.shape[0] * s))), interpolation=cv2.INTER_AREA)
     t = np.full((250, 240), 255, np.uint8); t[:im.shape[0], :im.shape[1]] = im
-    cv2.putText(t, e['id'][5:], (2, 245), cv2.FONT_HERSHEY_SIMPLEX, 0.45, 0, 1); th.append(t)
+    cv2.putText(t, e['id'][5:] + (' PHOTO' if e['kind'] == 'photo' else ''), (2, 245), cv2.FONT_HERSHEY_SIMPLEX, 0.45, 0, 1); th.append(t)
 cols = 8
 while len(th) % cols: th.append(np.full((250, 240), 255, np.uint8))
 if th:
     sheet = np.vstack([np.hstack(th[r:r + cols]) for r in range(0, len(th), cols)])
     cv2.imwrite(os.path.join(out, '_contact_sheet.jpg'), sheet, [cv2.IMWRITE_JPEG_QUALITY, 70])
-sh(f'cd "{out}" && rm -f drawings_for_cps.zip && zip -q drawings_for_cps.zip *.png manifest.json')
+dr = [e for e in manifest if e['kind'] == 'drawing']
+json.dump(dr, open(os.path.join(out, 'manifest_drawings.json'), 'w'), ensure_ascii=False, indent=1)
+sh(f'cd "{out}" && rm -f drawings_for_cps.zip && cp manifest_drawings.json /content/manifest.json && zip -q -j drawings_for_cps.zip ' + ' '.join('"%s"' % os.path.join(out, e['file']) for e in dr) + ' /content/manifest.json')
 
 print('5/5 открываю доступ к zip по ссылке (для импорта в CPS) …', flush=True)
 fid = None
@@ -106,7 +108,8 @@ try:
         svc.permissions().create(fileId=fid, body={'type': 'anyone', 'role': 'reader'}).execute()
 except Exception as ex:
     print('   не получилось открыть доступ автоматически:', ex)
-summary = {'drawings': len(manifest), 'pages_with_drawings': len({e['pdf_page'] for e in manifest}),
+    print('   Откройте доступ вручную: Drive → carpet-dna/output/gans_ruedin_drawings/drawings_for_cps.zip → «Поделиться» → «Все, у кого есть ссылка».')
+summary = {'drawings': len(dr), 'photos_skipped': len(manifest) - len(dr), 'pages_with_drawings': len({e['pdf_page'] for e in manifest}),
            'with_knot_density': sum(1 for e in manifest if e['knots_10cm_length'] and e['knots_10cm_width']), 'zip_drive_id': fid, 'out': out}
 json.dump(summary, open(os.path.join(out, '_summary.json'), 'w'), ensure_ascii=False, indent=1)
 print('ИТОГ', json.dumps(summary, ensure_ascii=False))
