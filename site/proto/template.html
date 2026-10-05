@@ -247,7 +247,7 @@ function renderConcept(id) {
     <div class="tags" style="margin-top:8px">${(c.cl || []).map(k => `<a class="tag auto" href="#/" data-cls="${k}" title="класс поставлен машиной">${CLS[k].ru}</a>`).join('')}</div>
     ${merged}
     ${c.ds ? `<h2>Описание <span class="pill auto" title="пересказ составлен ИИ по тексту книги, человеком не проверен">черновик ИИ · не проверено</span></h2>
-      <div class="desc">${c.ds.sections.map(s => `<h3>${esc(s.title)}</h3><p>${esc(s.text)} <span class="muted" style="font-size:12px">— ${esc(c.ds.src)}, с. ${s.pages.map(esc).join(', ')}</span></p>`).join('')}</div>` : ''}
+      <div class="desc">${c.ds.sections.map(s => `<h3>${esc(s.title)}</h3><p>${esc(s.text)} <span class="muted" style="font-size:12px">— ${esc(c.ds.src)}, с. ${s.pages.map(esc).join(', ')}${s.figs && s.figs.length ? ' · в книге: ' + s.figs.map(esc).join(', ') : ''}</span></p>`).join('')}</div>` : ''}
     ${figs ? `<h2>Схемы (${c.sch.length})</h2><div class="figs">${figs}</div>` : ''}
     ${relBlocks(c)}
     <h2>Названия</h2><table class="t">${names}</table>
