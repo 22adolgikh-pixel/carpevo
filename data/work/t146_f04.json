@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "Хилаафшан",
   "type": "К.-Ш",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.8056,
@@ -166,7 +168,7 @@
    "1.1222221.....1.....1222221.1",
    "1.1211111....121....1111121.1",
    "1.121.......12221.......121.1",
-   "1.121......1.....1......121.1"
+   "1.121......1222221......121.1"
   ]
  },
  "palette": [
@@ -193,7 +195,7 @@
    4.878
   ],
   "angle": 0.24,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 7.586,
   "distortion": {
@@ -234,9 +236,10 @@
    "n_suspects": 4
   },
   "risk": 0.532,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -290,7 +293,7 @@
    99
   ]
  },
- "saved_at": "2026-10-05 08:21:12",
+ "saved_at": "2026-10-05 22:58:38",
  "auto_matrix": {
   "w": 29,
   "h": 99,
@@ -1251,5 +1254,13 @@
   ],
   "ntiles": 30,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }

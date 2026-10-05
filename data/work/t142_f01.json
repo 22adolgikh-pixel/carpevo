@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "Казах",
   "type": "Г.-К",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.8438,
@@ -68,7 +70,7 @@
    3
   ],
   "rows": [
-   "1...1.122222222222..1...1",
+   "1...1.122222222222221...1",
    "11.11..122222122222211.11",
    "11111...12221.12222211111",
    "11.11....121...1222211.11",
@@ -171,7 +173,7 @@
   "обводка",
   "тело 1"
  ],
- "palette_touched": false,
+ "palette_touched": true,
  "auto": {
   "version": 1,
   "confidence": 0.86,
@@ -183,7 +185,7 @@
    4.885
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 4.871,
   "distortion": {
@@ -207,9 +209,10 @@
    "n_suspects": 0
   },
   "risk": 0.54,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -261,7 +264,7 @@
    91
   ]
  },
- "saved_at": "2026-10-05 08:20:28",
+ "saved_at": "2026-10-05 22:57:25",
  "auto_matrix": {
   "w": 25,
   "h": 91,
@@ -1777,5 +1780,13 @@
   ],
   "ntiles": 30,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
