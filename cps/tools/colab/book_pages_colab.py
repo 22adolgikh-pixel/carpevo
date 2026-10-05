@@ -64,6 +64,10 @@ for i in range(1, pages + 1):
         print(f'   {i}/{pages}  ({el / 60:.1f} мин, осталось ≈{el / i * (pages - i) / 60:.0f} мин)', flush=True)
 
 print('4/4 итог', flush=True)
+# все тексты одним файлом (его Claude скачивает за один раз; картинки страниц остаются отдельными файлами)
+allp = [json.load(open(os.path.join(out, 'page_%03d.json' % i))) for i in range(1, pages + 1) if os.path.exists(os.path.join(out, 'page_%03d.json' % i))]
+json.dump(allp, open(os.path.join(out, '_all_pages.json'), 'w'), ensure_ascii=False)
+print('   _all_pages.json:', os.path.getsize(os.path.join(out, '_all_pages.json')) // 1024, 'КБ')
 summary = {'source_pdf': src, 'pages': pages, 'ocr_lang': langs, **stats, 'out': out}
 json.dump(summary, open(os.path.join(out, '_summary.json'), 'w'), ensure_ascii=False, indent=1)
 print('ИТОГ', json.dumps(summary, ensure_ascii=False))
