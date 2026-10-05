@@ -120,7 +120,7 @@ def main(data_path, schemes_path, out):
             main_t = sorted(p, key=lambda t: (key(t.get('canonical_az')) != k, bool(re.search(r'-\d+$', t['id'])),
                                               -(((t.get('book') or {}).get('status') or {}).get('ok', 0)), -t['mention_count'], len(t['id'])))[0]
             rd = (main_t.get('book') or {}).get('reading')
-            head = (rd.split(' / ')[0] if rd else None) or main_t.get('canonical_az') or main_t['id']
+            head = (rd.split(' / ')[0] if rd and '?' not in rd else None) or main_t.get('canonical_az') or main_t['id']
             cid = main_t['id'] if et == 'ornament' or main_t['id'].endswith(('-carpet', '-object')) else main_t['id']
             while cid in used_ids: cid += '-x'
             used_ids.add(cid)
@@ -251,7 +251,7 @@ def main(data_path, schemes_path, out):
                 sim = SequenceMatcher(None, a['key'], b['key']).ratio()
                 t = 'spelling_variant' if sim >= 0.75 else 'synonym'
                 R(a['id'], t, b['id'], f'одно значение «{m}», сходство написания {sim:.2f}', 'proposed')
-                queue.append((t, f"{a['id']} «{a['headword']}» ↔ {b['id']} «{b['headword']}»", f'значение «{m}»',
+                queue.append(({'spelling_variant': 'вариант написания?', 'synonym': 'синоним?'}[t], f"{a['id']} «{a['headword']}» ↔ {b['id']} «{b['headword']}»", f'значение «{m}»',
                               'слить в одно понятие' if t == 'spelling_variant' else 'синонимы: слить или связать'))
 
     # ---- 7. схемы ----

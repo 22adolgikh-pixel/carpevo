@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ковровое ДНК — прототип</title>
+<style>
+  :root {
+    --bg:#ffffff; --bg-alt:#f6f7f8; --card:#ffffff; --text:#151515; --soft:#5a6066; --border:#c8ccd0; --line:#e3e6e9;
+    --accent:#8a3b12; --link:#2457a6; --auto:#7a5d00; --auto-bg:#fff6d6; --prop:#6b4ca5; --ok:#2e7d32; --inv:none;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg:#101112; --bg-alt:#17191b; --card:#15171a; --text:#eaecef; --soft:#a2a9b1; --border:#3a3f45; --line:#262a2f;
+    --accent:#e39a6a; --link:#8ab4f8; --auto:#e7c75a; --auto-bg:#2c2614; --prop:#b49cf0; --ok:#7fc685; --inv:invert(1) hue-rotate(180deg);
+  } }
+  :root[data-theme="dark"] {
+    --bg:#101112; --bg-alt:#17191b; --card:#15171a; --text:#eaecef; --soft:#a2a9b1; --border:#3a3f45; --line:#262a2f;
+    --accent:#e39a6a; --link:#8ab4f8; --auto:#e7c75a; --auto-bg:#2c2614; --prop:#b49cf0; --ok:#7fc685; --inv:invert(1) hue-rotate(180deg);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.55 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  a { color:var(--link); text-decoration:none; } a:hover { text-decoration:underline; }
+  header { display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; padding:12px 20px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--bg); z-index:5; }
+  header .logo { font:600 20px Georgia,serif; color:var(--text); }
+  header .ver { font-size:11px; color:var(--soft); border:1px solid var(--border); border-radius:10px; padding:1px 7px; }
+  header nav { display:flex; flex-wrap:wrap; gap:4px; }
+  header nav a { padding:4px 10px; border-radius:4px; color:var(--text); font-size:14px; }
+  header nav a.on { background:var(--bg-alt); font-weight:600; }
+  header input { flex:1; min-width:180px; max-width:360px; margin-left:auto; font:inherit; padding:6px 10px; border:1px solid var(--border); border-radius:4px; background:var(--bg); color:var(--text); }
+  main { padding:18px 20px 60px; max-width:1300px; margin:0 auto; }
+  .layout { display:grid; grid-template-columns:240px 1fr; gap:24px; }
+  @media (max-width:820px) { .layout { grid-template-columns:1fr; } aside.facets { order:2; } }
+  aside.facets h4 { margin:14px 0 6px; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--soft); }
+  aside.facets label { display:flex; gap:6px; align-items:center; font-size:13.5px; padding:1px 0; cursor:pointer; }
+  aside.facets label .n { margin-left:auto; color:var(--soft); font-size:12px; }
+  aside.facets .sub { padding-left:16px; }
+  .note { border:1px solid var(--border); background:var(--bg-alt); padding:9px 12px; font-size:13px; border-radius:4px; margin-bottom:14px; }
+  .bar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px; color:var(--soft); font-size:13px; }
+  .bar select { font:inherit; padding:3px 6px; background:var(--bg); color:var(--text); border:1px solid var(--border); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; }
+  .card { min-width:0; display:flex; gap:10px; align-items:center; padding:8px; border:1px solid var(--line); border-radius:6px; background:var(--card); color:var(--text); min-height:66px; }
+  .card:hover { border-color:var(--border); text-decoration:none; }
+  .th { flex:0 0 48px; width:48px; height:48px; display:flex; align-items:center; justify-content:center; position:relative; }
+  .th canvas, .th img { max-width:48px; max-height:48px; image-rendering:pixelated; border:1px solid var(--line); background:#fff; filter:var(--inv); }
+  .th .cnt { position:absolute; right:-4px; bottom:-4px; font:600 9px/1 sans-serif; padding:2px 3px; border-radius:6px; background:var(--bg); border:1px solid var(--border); color:var(--soft); }
+  .th.empty { border:1px dashed var(--line); border-radius:3px; }
+  .card > span:last-child { min-width:0; } .card .hw { font-weight:600; overflow-wrap:anywhere; } .card .mn { color:var(--soft); font-size:13px; line-height:1.3; }
+  .tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:3px; }
+  .tag { font-size:11px; padding:0 6px; border-radius:8px; border:1px solid var(--border); color:var(--soft); white-space:nowrap; }
+  .tag.auto { border-style:dashed; color:var(--auto); }
+  h1 { font:600 30px Georgia,serif; margin:4px 0 2px; } h2 { font:600 19px Georgia,serif; margin:26px 0 8px; border-bottom:1px solid var(--line); padding-bottom:4px; }
+  .sub1 { color:var(--soft); font-size:15px; }
+  table.t { border-collapse:collapse; width:100%; font-size:13.5px; } table.t td, table.t th { border-bottom:1px solid var(--line); padding:5px 8px; text-align:left; vertical-align:top; }
+  table.t th { color:var(--soft); font-weight:600; font-size:12px; width:1%; white-space:nowrap; }
+  .rels { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+  .rel.wide { grid-column:1/-1; } .rel.wide .list { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:0 10px; }
+  .rel h5 { margin:0 0 4px; font-size:12px; color:var(--soft); text-transform:uppercase; letter-spacing:.04em; }
+  .rel .card { min-height:auto; padding:5px 8px; margin-bottom:5px; }
+  .rel .card .th { flex-basis:36px; width:36px; height:36px; } .rel .card .th canvas { max-width:36px; max-height:36px; }
+  .card.proposed { border-style:dashed; border-color:var(--prop); }
+  .pill { display:inline-block; font-size:11px; padding:0 6px; border-radius:8px; }
+  .pill.auto { background:var(--auto-bg); color:var(--auto); } .pill.prop { color:var(--prop); border:1px dashed var(--prop); }
+  .figs { display:flex; flex-wrap:wrap; gap:16px; }
+  .figs figure { margin:0; max-width:260px; } .figs .box { border:1px solid var(--line); background:#fff; padding:4px; display:inline-block; filter:var(--inv); }
+  .figs figcaption { font-size:12.5px; color:var(--soft); margin-top:4px; }
+  details summary { cursor:pointer; color:var(--link); font-size:13.5px; }
+  .tree li { margin:3px 0; } .muted { color:var(--soft); }
+  .qf { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; } .qf button { font:inherit; font-size:13px; padding:3px 9px; border:1px solid var(--border); background:var(--bg); color:var(--text); border-radius:12px; cursor:pointer; } .qf button.on { background:var(--bg-alt); font-weight:600; }
+  .more { margin-top:12px; } .more button { font:inherit; padding:5px 14px; border:1px solid var(--border); background:var(--bg-alt); color:var(--text); cursor:pointer; }
+  footer { color:var(--soft); font-size:12px; padding:20px; text-align:center; }
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#/">Ковровое ДНК</a><span class="ver" id="ver"></span>
+  <nav id="nav">
+    <a href="#/" data-r="">Узоры</a>
+    <a href="#/compositions" data-r="compositions">Ковры и композиции</a>
+    <a href="#/schools" data-r="schools">Школы</a>
+    <a href="#/review" data-r="review">Проверка</a>
+    <a href="#/about" data-r="about">О модели</a>
+  </nav>
+  <input id="q" type="search" placeholder="Поиск: слово, значение, старое название…">
+</header>
+<main id="app"></main>
+<footer id="foot"></footer>
+<script>
+const DATA = /*__DATA__*/null;
+const $ = s => document.querySelector(s);
+const cap = s => { s = String(s || ''); return s ? (s[0] === 'i' ? 'İ' : s[0].toLocaleUpperCase('az')) + s.slice(1) : s; };
+const pageOf = a => a[2] || ((String(a[1] || '').match(/(?:стр\.|s\.)\s*([0-9*]+(?:-[0-9]+)?)/) || [])[1] || '').replace(/^0+/, '');
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const C = {}; DATA.concepts.forEach(c => C[c.id] = c);
+const CLS = {}; DATA.classes.forEach(([id, az, ru, en]) => CLS[id] = {az, ru, en});
+const ROLE = {element:'элемент', motif:'мотив', border:'кайма', composition:'композиция', object:'изделие', generic:'общее слово', place:'место', other:'другое', group:'группа', school:'школа'};
+const TYPE = {ornament:'узор', composition:'ковёр / композиция', object:'изделие'};
+const NAMEKIND = {headword:'заголовок', book_reading:'чтение по книге (сверка)', record:'запись сайта', attested:'в источнике', variant:'вариант', meaning:'значение', kerimov_translation:'перевод Керимова', misreading:'ошибочное чтение', meaning_rejected:'отклонённое значение'};
+const LANG = {az:'аз. (лат.)', 'az-cyrl':'аз. (кир.)', ru:'рус.', en:'англ.'};
+const SCHOOL = {}; DATA.school_types.forEach(([id, ru, az, groups]) => { SCHOOL[id] = ru; groups.forEach(([g, gru]) => SCHOOL[id + '/' + g] = gru); });
+const SRC = DATA.sources;
+const REL = { // тип связи → [заголовок исходящих, заголовок входящих]
+  consists_of: ['Состоит из', 'Входит в'], kind_of: ['Вид понятия', 'Виды'], related: ['Содержит слово', 'Встречается в названиях'],
+  derived_from: ['Образовано от', 'Производные'], named_after: ['Назван по узору', 'Ковры и композиции с этим именем'],
+  alt_name_of: ['Другое название', 'Другое название'], synonym: ['Возможный синоним', 'Возможный синоним'], spelling_variant: ['Возможно, то же слово', 'Возможно, то же слово']
+};
+const OUT = {}, IN = {};
+DATA.rel.forEach(r => { (OUT[r.from] = OUT[r.from] || []).push(r); (IN[r.to] = IN[r.to] || []).push(r); });
+
+/* ---------- схемы ---------- */
+const TH = {};
+function schemeCanvas(id, max, cellMax) {
+  const s = DATA.schemes[id]; if (!s) return null;
+  const pal = s.pal || ['#ffffff', '#1a1a1a', '#b8b8b8'];
+  const cs = Math.max(1, Math.min(cellMax || 99, Math.floor(max / Math.max(s.w, s.h))));
+  const c = document.createElement('canvas'); c.width = s.w * cs; c.height = s.h * cs;
+  const x = c.getContext('2d'); x.fillStyle = pal[0] || '#fff'; x.fillRect(0, 0, c.width, c.height);
+  for (let j = 0; j < s.h; j++) { const r = s.rows[j] || ''; for (let i = 0; i < s.w; i++) { const ch = r[i]; if (!ch || ch === '.') continue; x.fillStyle = pal[parseInt(ch, 36)] || '#f0f'; x.fillRect(i * cs, j * cs, cs, cs); } }
+  return c;
+}
+function thumb(id, S) {           // миниатюра S×S как dataURL, плавное уменьшение
+  const k = id + ':' + S; if (TH[k]) return TH[k];
+  const s = DATA.schemes[id]; if (!s) return '';
+  let c = schemeCanvas(id, Math.max(s.w, s.h), 1); const T = S * 2;
+  while (Math.max(c.width, c.height) > T * 2) { const n = document.createElement('canvas'); n.width = Math.ceil(c.width / 2); n.height = Math.ceil(c.height / 2); const nx = n.getContext('2d'); nx.imageSmoothingQuality = 'high'; nx.drawImage(c, 0, 0, n.width, n.height); c = n; }
+  const o = document.createElement('canvas'); o.width = o.height = T; const ox = o.getContext('2d');
+  ox.fillStyle = (s.pal || ['#fff'])[0]; ox.fillRect(0, 0, T, T);
+  const sc = Math.min(T / c.width, T / c.height), up = sc >= 1, f = up ? Math.max(1, Math.floor(sc)) : sc;
+  const dw = Math.round(c.width * f), dh = Math.round(c.height * f);
+  ox.imageSmoothingEnabled = !up; ox.imageSmoothingQuality = 'high'; ox.drawImage(c, Math.floor((T - dw) / 2), Math.floor((T - dh) / 2), dw, dh);
+  return TH[k] = o.toDataURL();
+}
+let IO = null;
+function lazyThumbs(root) {
+  const els = root.querySelectorAll('img[data-s]');
+  if (!('IntersectionObserver' in window)) { els.forEach(e => e.src = thumb(e.dataset.s, +e.dataset.z)); return; }
+  IO = IO || new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { IO.unobserve(e.target); e.target.src = thumb(e.target.dataset.s, +e.target.dataset.z); } }), {rootMargin: '300px'});
+  els.forEach(e => IO.observe(e));
+}
+function thHTML(c, z) {
+  z = z || 48;
+  if (!c.sch.length) return `<span class="th empty" style="width:${z}px;height:${z}px;flex-basis:${z}px"></span>`;
+  return `<span class="th" style="width:${z}px;height:${z}px;flex-basis:${z}px"><img data-s="${c.sch[0]}" data-z="${z}" width="${z}" height="${z}" alt="">${c.sch.length > 1 ? `<b class="cnt">${c.sch.length}</b>` : ''}</span>`;
+}
+function cardHTML(c, extra, cls) {
+  const roles = Object.keys(c.r || {}).sort((a, b) => (c.r[b] || 0) - (c.r[a] || 0)).slice(0, 2).map(r => `<span class="tag">${ROLE[r] || r}</span>`).join('');
+  const cl = (c.cl || []).slice(0, 2).map(k => `<span class="tag auto" title="класс поставлен машиной">${CLS[k].ru}</span>`).join('');
+  return `<a class="card ${cls || ''}" href="#/c/${encodeURIComponent(c.id)}">${thHTML(c, extra && extra.z)}<span><span class="hw">${esc(cap(c.h))}</span>${c.m.ru ? `<div class="mn">${esc(c.m.ru)}</div>` : ''}${extra && extra.why ? `<div class="mn" style="font-size:11.5px">${esc(extra.why)}</div>` : ''}<div class="tags">${roles}${cl}</div></span></a>`;
+}
+
+/* ---------- каталог ---------- */
+const F = {cls: new Set(), role: new Set(), school: new Set(), src: new Set(), withScheme: false, sort: 'az', q: ''};
+let SHOWN = 120;
+function norm(s) { return (s || '').toLowerCase().replace(/[^0-9a-zа-яёəıöüğşç]/g, ''); }
+function fold(s) { return norm(s).replace(/ə/g, 'e').replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ğ/g, 'g').replace(/ş/g, 's').replace(/ç/g, 'c'); }
+DATA.concepts.forEach(c => { c._s = c.nm.map(n => fold(n[0])).concat([fold(c.h), fold(c.m.ru), fold(c.m.en)]).join('|'); });
+function match(c, q) { return !q || c._s.includes(q); }
+function filtered(type) {
+  const q = fold(F.q);
+  return DATA.concepts.filter(c => (type === 'ornament' ? c.t === 'ornament' : c.t !== 'ornament') && match(c, q)
+    && (!F.cls.size || [...F.cls].some(k => k === '_none' ? !c.cl.length : c.cl.includes(k)))
+    && (!F.role.size || [...F.role].some(r => c.r && r in c.r))
+    && (!F.school.size || [...F.school].some(s => Object.keys(c.sc).some(k => k === s || k.startsWith(s + '/'))))
+    && (!F.src.size || [...F.src].some(s => c.src && s in c.src))
+    && (!F.withScheme || c.sch.length));
+}
+function facetHTML(type, list) {
+  const cnt = (fn) => list.filter(fn).length;
+  let h = '';
+  if (type === 'ornament') {
+    h += `<h4>Смысловой класс <span class="pill auto" title="классы поставлены машиной по значению слова">авто</span></h4>`;
+    DATA.classes.forEach(([id, az, ru]) => h += `<label><input type="checkbox" data-f="cls" value="${id}" ${F.cls.has(id) ? 'checked' : ''}>${ru}<span class="n">${cnt(c => c.cl.includes(id))}</span></label>`);
+    h += `<label><input type="checkbox" data-f="cls" value="_none" ${F.cls.has('_none') ? 'checked' : ''}><i>без класса</i><span class="n">${cnt(c => !c.cl.length)}</span></label>`;
+    h += `<h4>Роль в источниках</h4>`;
+    ['element', 'motif', 'border', 'composition'].forEach(r => h += `<label><input type="checkbox" data-f="role" value="${r}" ${F.role.has(r) ? 'checked' : ''}>${ROLE[r]}<span class="n">${cnt(c => c.r && r in c.r)}</span></label>`);
+  }
+  h += `<h4>Школа (Керимов)</h4>`;
+  DATA.school_types.forEach(([id, ru, az, groups]) => {
+    h += `<label><input type="checkbox" data-f="school" value="${id}" ${F.school.has(id) ? 'checked' : ''}>${ru}<span class="n">${cnt(c => Object.keys(c.sc).some(k => k === id || k.startsWith(id + '/')))}</span></label>`;
+    groups.forEach(([g, gru]) => h += `<label class="sub"><input type="checkbox" data-f="school" value="${id}/${g}" ${F.school.has(id + '/' + g) ? 'checked' : ''}>${gru}<span class="n">${cnt(c => (id + '/' + g) in c.sc)}</span></label>`);
+  });
+  h += `<h4>Источник</h4>`;
+  Object.values(SRC).forEach(s => { const n = cnt(c => c.src && s.id in c.src); if (n) h += `<label><input type="checkbox" data-f="src" value="${s.id}" ${F.src.has(s.id) ? 'checked' : ''}>${esc(s.short)}<span class="n">${n}</span></label>`; });
+  h += `<h4>Прочее</h4><label><input type="checkbox" data-f="withScheme" ${F.withScheme ? 'checked' : ''}>только со схемой<span class="n">${cnt(c => c.sch.length)}</span></label>`;
+  return h;
+}
+function renderCatalog(type) {
+  const list = filtered(type);
+  const sorted = list.slice().sort(F.sort === 'att' ? (a, b) => b.at.length - a.at.length || a.h.localeCompare(b.h, 'az')
+    : F.sort === 'sch' ? (a, b) => b.sch.length - a.sch.length || a.h.localeCompare(b.h, 'az') : (a, b) => a.h.localeCompare(b.h, 'az'));
+  const title = type === 'ornament' ? 'Узоры' : 'Ковры, композиции и изделия';
+  const lead = type === 'ornament'
+    ? 'Одна карточка — одно понятие (идея узора). Синонимы, написания из разных книг и ошибочные чтения собраны внутри карточки; роль (элемент, мотив, кайма) — свойство упоминания в источнике, а не отдельная запись.'
+    : 'Ковры и композиции — предметы и типы ковров; связь «назван по узору» ведёт к понятию-узору.';
+  $('#app').innerHTML = `<div class="layout"><aside class="facets">${facetHTML(type, DATA.concepts.filter(c => (type === 'ornament') === (c.t === 'ornament')))}</aside><section>
+    <h1>${title}</h1><div class="note">${lead} <b>Прототип:</b> данные собраны машиной (слияния, связи и классы — без проверки человеком), см. «Проверка».</div>
+    <div class="bar"><span>${list.length} понятий</span><span>сортировка <select id="sort"><option value="az">по алфавиту</option><option value="att">по числу упоминаний</option><option value="sch">по числу схем</option></select></span>
+    ${F.cls.size || F.role.size || F.school.size || F.src.size || F.withScheme ? '<a href="#" id="reset">сбросить фильтры</a>' : ''}</div>
+    <div class="grid" id="grid">${sorted.slice(0, SHOWN).map(c => cardHTML(c)).join('')}</div>
+    ${sorted.length > SHOWN ? `<div class="more"><button id="more">показать ещё (${sorted.length - SHOWN})</button></div>` : ''}</section></div>`;
+  $('#sort').value = F.sort;
+  $('#sort').onchange = e => { F.sort = e.target.value; renderCatalog(type); };
+  document.querySelectorAll('aside input').forEach(i => i.onchange = () => {
+    const f = i.dataset.f; if (f === 'withScheme') F.withScheme = i.checked; else (i.checked ? F[f].add(i.value) : F[f].delete(i.value));
+    SHOWN = 120; renderCatalog(type);
+  });
+  if ($('#reset')) $('#reset').onclick = e => { e.preventDefault(); ['cls', 'role', 'school', 'src'].forEach(k => F[k].clear()); F.withScheme = false; renderCatalog(type); };
+  if ($('#more')) $('#more').onclick = () => { SHOWN += 240; renderCatalog(type); };
+  lazyThumbs($('#app'));
+}
+
+/* ---------- карточка понятия ---------- */
+function relBlocks(c) {
+  const groups = {};
+  (OUT[c.id] || []).forEach(r => { const k = 'o:' + r.type; (groups[k] = groups[k] || []).push([r.to, r]); });
+  (IN[c.id] || []).forEach(r => { const k = (r.type === 'synonym' || r.type === 'spelling_variant' || r.type === 'alt_name_of') ? 'o:' + r.type : 'i:' + r.type; (groups[k] = groups[k] || []).push([r.from, r]); });
+  const order = ['o:consists_of', 'i:consists_of', 'o:kind_of', 'i:kind_of', 'o:derived_from', 'i:derived_from', 'o:named_after', 'i:named_after', 'o:related', 'i:related', 'o:alt_name_of', 'o:spelling_variant', 'o:synonym'];
+  let h = '';
+  order.forEach(k => {
+    const L = groups[k]; if (!L) return;
+    const [dir, t] = k.split(':'); const title = REL[t][dir === 'o' ? 0 : 1];
+    const proposed = L.some(([, r]) => r.status === 'proposed');
+    h += `<div class="rel${L.length > 6 ? ' wide' : ''}"><h5>${title} (${L.length}) ${proposed ? '<span class="pill prop">предложено машиной</span>' : '<span class="pill auto">авто</span>'}</h5><div class="list">`
+      + L.slice(0, 60).map(([id, r]) => C[id] ? cardHTML(C[id], {z: 36, why: r.why}, r.status === 'proposed' ? 'proposed' : '') : '').join('')
+      + '</div>' + (L.length > 60 ? `<div class="muted">и ещё ${L.length - 60}</div>` : '') + '</div>';
+  });
+  return h ? `<h2>Связи</h2><div class="rels">${h}</div>` : '';
+}
+function renderConcept(id) {
+  const c = C[id] || C[DATA.tmap[id]];
+  if (!c) { $('#app').innerHTML = `<p>Понятие «${esc(id)}» не найдено.</p>`; return; }
+  if (C[id] === undefined) { location.replace('#/c/' + encodeURIComponent(c.id)); return; }
+  const vis = c.nm.filter(n => !['misreading', 'meaning_rejected'].includes(n[2]));
+  const hid = c.nm.filter(n => ['misreading', 'meaning_rejected'].includes(n[2]));
+  const byLang = {}; vis.forEach(n => (byLang[n[1]] = byLang[n[1]] || []).push(n));
+  const names = Object.keys(LANG).filter(l => byLang[l]).map(l => `<tr><th>${LANG[l]}</th><td>${byLang[l].map(n => `${esc(n[0])} <span class="muted" style="font-size:11.5px">· ${NAMEKIND[n[2]] || n[2]}</span>`).join('<br>')}</td></tr>`).join('');
+  const roles = Object.entries(c.r || {}).sort((a, b) => b[1] - a[1]).map(([r, n]) => `${ROLE[r] || r}${n ? ` <span class="muted">(${n})</span>` : ''}`).join(', ');
+  const schools = Object.entries(c.sc).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${SCHOOL[k] || k} <span class="muted">(${n})</span>`).join(', ');
+  const srcs = Object.entries(c.src || {}).map(([k, n]) => `${esc((SRC[k] || {}).short || k)} <span class="muted">(${n})</span>`).join(', ');
+  const figs = c.sch.map(sid => { const s = DATA.schemes[sid]; return `<figure><div class="box" data-fig="${sid}"></div><figcaption><b>${esc(s.n || '')}</b>${s.tr ? ' — «' + esc(s.tr) + '»' : ''}<br>Керимов, табл. ${s.tb}, рис. ${s.fg}${s.sc ? ' · ' + (SCHOOL[s.sc] || s.sc) : ''} · ${s.w}×${s.h} узлов${s.nt ? '<br>' + esc(s.nt) : ''}</figcaption></figure>`; }).join('');
+  const atts = c.at.map(a => `<tr><td>${esc((SRC[a[0]] || {}).short || a[0] || '')}</td><td>${esc(pageOf(a))}</td><td>${a[5] ? ROLE[a[5]] || a[5] : ''}</td><td>${a[3] ? '«' + esc(a[3]) + '»' : ''}${a[4] ? `<div class="muted">${esc(a[4])}</div>` : ''}<div class="muted" style="font-size:11px">${esc(a[1] || '')}</div></td></tr>`);
+  const car = DATA.carriers.filter(k => k[0] === c.id);
+  const merged = c.rec.length > 1 ? `<div class="note">Собрано из ${c.rec.length} записей старого сайта: ${c.rec.map(esc).join(', ')}. <span class="pill auto">${c.mg.rule === 'renamed_by_reading' ? 'слито по чтению сверки с Керимовым' : 'слито: одно написание'}</span>${c.mg.renamed && c.mg.renamed.length ? ` Переименованы сверкой: ${c.mg.renamed.map(esc).join(', ')}.` : ''}</div>` : '';
+  $('#app').innerHTML = `<div style="max-width:1050px">
+    <div class="muted" style="font-size:13px"><a href="#/${c.t === 'ornament' ? '' : 'compositions'}">${c.t === 'ornament' ? 'Узоры' : 'Ковры и композиции'}</a> · ${TYPE[c.t]}</div>
+    <h1>${esc(cap(c.h))}</h1><div class="sub1">${esc(c.m.ru || '')}${c.m.en ? ` · <i>${esc(c.m.en)}</i>` : ''}</div>
+    <div class="tags" style="margin-top:8px">${(c.cl || []).map(k => `<a class="tag auto" href="#/" data-cls="${k}" title="класс поставлен машиной">${CLS[k].ru}</a>`).join('')}</div>
+    ${merged}
+    ${figs ? `<h2>Схемы (${c.sch.length})</h2><div class="figs">${figs}</div>` : ''}
+    ${relBlocks(c)}
+    <h2>Названия</h2><table class="t">${names}</table>
+    ${hid.length ? `<details style="margin-top:6px"><summary>Ошибочные чтения и отклонённые значения (${hid.length}) — нужны только для поиска</summary><table class="t">${hid.map(n => `<tr><td>${esc(n[0])}</td><td class="muted">${LANG[n[1]] || n[1]} · ${NAMEKIND[n[2]]}</td></tr>`).join('')}</table></details>` : ''}
+    <h2>Где встречается</h2><table class="t">
+      ${roles ? `<tr><th>Роль</th><td>${roles}</td></tr>` : ''}${schools ? `<tr><th>Школы</th><td>${schools}</td></tr>` : ''}${srcs ? `<tr><th>Источники</th><td>${srcs}</td></tr>` : ''}
+      ${car.length ? `<tr><th>Ковры-носители</th><td>${car.slice(0, 12).map(k => esc([k[1], k[2], k[3], k[4]].filter(Boolean).join(', '))).join('<br>')}${car.length > 12 ? `<br><span class="muted">и ещё ${car.length - 12}</span>` : ''}</td></tr>` : ''}</table>
+    ${atts.length ? `<h2>Упоминания в источниках (${atts.length})</h2><table class="t"><tr><th>Источник</th><th>Стр.</th><th>Роль</th><th>Цитата / заметка</th></tr>${atts.slice(0, 15).join('')}</table>${atts.length > 15 ? `<details><summary>ещё ${atts.length - 15}</summary><table class="t">${atts.slice(15).join('')}</table></details>` : ''}` : ''}
+    ${c.x.length ? `<h2>Внешние источники</h2>${c.x.map(([t, u]) => `<div><a href="${esc(u)}" target="_blank" rel="noopener">${esc(t || u)}</a></div>`).join('')}` : ''}
+  </div>`;
+  document.querySelectorAll('[data-fig]').forEach(b => { const cv = schemeCanvas(b.dataset.fig, 240, 12); if (cv) { cv.style.maxWidth = '100%'; b.appendChild(cv); } });
+  document.querySelectorAll('a[data-cls]').forEach(a => a.onclick = () => { F.cls.clear(); F.cls.add(a.dataset.cls); });
+  lazyThumbs($('#app')); window.scrollTo(0, 0);
+}
+
+/* ---------- школы ---------- */
+function renderSchools() {
+  const cnt = (k) => DATA.concepts.filter(c => Object.keys(c.sc).some(x => x === k || x.startsWith(k + '/'))).length;
+  const scnt = (k) => Object.values(DATA.schemes).filter(s => s.sc === k || (s.sc || '').startsWith(k + '/')).length;
+  $('#app').innerHTML = `<div style="max-width:900px"><h1>Школы</h1>
+  <div class="note">Основная схема — <b>Керимов</b>: 4 типа → группы → композиции (≈144 стиля по сёлам). Популярная схема «7 школ» (Губа, Ширван, Баку, Гянджа, Газах, Карабах, Тебриз) — это те же типы, раздробленные на группы. Западные классификации (Schürmann, Wright) хранятся будущим фасетом «альтернативная классификация» с указанием источника, а не смешиваются с основной.</div>
+  <ul class="tree">${DATA.school_types.map(([id, ru, az, groups]) => `<li><b><a href="#/" data-school="${id}">${ru}</a></b> <span class="muted">${az} · понятий ${cnt(id)}, схем ${scnt(id)}</span>
+    ${groups.length ? `<ul>${groups.map(([g, gru, gaz]) => `<li><a href="#/" data-school="${id}/${g}">${gru}</a> <span class="muted">${gaz} · понятий ${cnt(id + '/' + g)}</span></li>`).join('')}</ul>` : ''}</li>`).join('')}</ul>
+  <h2>Соответствие схем</h2><table class="t"><tr><th>Керимов (тип)</th><th>«7 школ»</th><th>Wright (Iranica)</th><th>Рынок / Schürmann</th></tr>
+  <tr><td>Губа-Ширван</td><td>Губа · Ширван · Баку</td><td>Kuba/Shirvan</td><td>Kuba · Shirvan · Baku (+Moghan, Talish)</td></tr>
+  <tr><td>Гянджа-Газах</td><td>Гянджа · Газах</td><td>Ganja/Karabakh · Kazakh/Borchaly</td><td>Gendje · Kazak</td></tr>
+  <tr><td>Карабах</td><td>Карабах</td><td>Ganja/Karabakh</td><td>Karabagh</td></tr><tr><td>Тебриз</td><td>Тебриз</td><td>—</td><td>Tabriz, Heriz (Персия)</td></tr></table>
+  <p class="muted" style="font-size:13px">Нахчыван и Шуша — кандидаты в группы; спорные отнесения (например, Зейва: Губа у одних авторов, Ширван у других) будут храниться как два утверждения с источниками. Пока большинство понятий без школы: школы в старых данных указаны редко.</p></div>`;
+  document.querySelectorAll('a[data-school]').forEach(a => a.onclick = () => { F.school.clear(); F.school.add(a.dataset.school); });
+}
+
+/* ---------- проверка ---------- */
+let QF = '';
+function renderReview() {
+  const types = {}; DATA.queue.forEach(q => types[q['тип']] = (types[q['тип']] || 0) + 1);
+  const L = DATA.queue.filter(q => !QF || q['тип'] === QF);
+  const link = s => esc(s).replace(/\b([a-z0-9][a-z0-9-]*[a-z0-9])\b(?= «)/g, m => (C[m] || C[DATA.tmap[m]]) ? `<a href="#/c/${m}">${m}</a>` : m);
+  $('#app').innerHTML = `<h1>Очередь проверки</h1><div class="note">То, что машина не решилась решить сама. В прототипе — только просмотр; дальше здесь будут кнопки «слить / разные / связать», а решения — сохраняться и учитываться при следующей сборке.</div>
+    <div class="qf"><button data-q="" class="${QF ? '' : 'on'}">все (${DATA.queue.length})</button>${Object.entries(types).map(([t, n]) => `<button data-q="${esc(t)}" class="${QF === t ? 'on' : ''}">${esc(t)} (${n})</button>`).join('')}</div>
+    <table class="t"><tr><th>Тип</th><th>Что</th><th>Почему</th><th>Предложение</th></tr>${L.map(q => `<tr><td>${esc(q['тип'])}</td><td>${link(q['что'])}</td><td>${esc(q['почему'])}</td><td>${esc(q['предложение'])}</td></tr>`).join('')}</table>`;
+  document.querySelectorAll('.qf button').forEach(b => b.onclick = () => { QF = b.dataset.q; renderReview(); });
+}
+
+function renderAbout() {
+  const n = t => DATA.concepts.filter(c => c.t === t).length;
+  const rc = {}; DATA.rel.forEach(r => rc[r.type] = (rc[r.type] || 0) + 1);
+  $('#app').innerHTML = `<div style="max-width:850px"><h1>О модели</h1>
+  <p>Единица сайта — <b>понятие</b> (идея узора), а не запись из книги. У понятия есть <b>названия</b> (на разных языках, из разных источников), <b>упоминания</b> в источниках (страница, роль, цитата), <b>схемы</b> и <b>связи</b> с другими понятиями.</p>
+  <table class="t"><tr><th>Узоров</th><td>${n('ornament')}</td></tr><tr><th>Ковров и композиций</th><td>${n('composition')}</td></tr><tr><th>Изделий</th><td>${n('object')}</td></tr>
+  <tr><th>Схем</th><td>${Object.keys(DATA.schemes).length} (без привязки к понятию: ${DATA.meta.unlinked})</td></tr>
+  <tr><th>Связей</th><td>${Object.entries(rc).map(([t, k]) => `${REL[t] ? REL[t][0].toLowerCase() : t}: ${k}`).join(' · ')}</td></tr>
+  <tr><th>Очередь проверки</th><td>${DATA.queue.length}</td></tr></table>
+  <h2>Обозначения</h2><p><span class="pill auto">авто</span> — сделано машиной по правилу, человеком не проверено. <span class="pill prop">предложено машиной</span> — машина не уверена, решение в «Проверке».</p>
+  <h2>Версия</h2><p>${esc(DATA.meta.label)} · собрано ${esc(DATA.meta.built)} · данные и код: ветка cps-v5, коммит ${esc(DATA.meta.commit)}. Каждая опубликованная версия прототипа помечена в git тегом; откат — пересобрать и опубликовать нужный тег.</p></div>`;
+}
+
+/* ---------- роутер ---------- */
+function route() {
+  const h = decodeURIComponent(location.hash.slice(2));
+  const [p, a] = h.split('/');
+  document.querySelectorAll('#nav a').forEach(x => x.classList.toggle('on', x.dataset.r === (p === 'c' ? (C[a] && C[a].t !== 'ornament' ? 'compositions' : '') : p)));
+  if (p === 'c') renderConcept(h.slice(2));
+  else if (p === 'compositions') renderCatalog('composition');
+  else if (p === 'schools') renderSchools();
+  else if (p === 'review') renderReview();
+  else if (p === 'about') renderAbout();
+  else renderCatalog('ornament');
+}
+let qt; $('#q').oninput = e => { clearTimeout(qt); qt = setTimeout(() => { F.q = e.target.value; SHOWN = 120; const p = location.hash.slice(2).split('/')[0]; if (p === 'compositions') renderCatalog('composition'); else { if (location.hash && location.hash !== '#/') location.hash = '#/'; else renderCatalog('ornament'); } }, 200); };
+$('#ver').textContent = DATA.meta.label;
+$('#foot').textContent = `Ковровое ДНК · ${DATA.meta.label} · сборка ${DATA.meta.built} · коммит ${DATA.meta.commit}`;
+window.addEventListener('hashchange', route); route();
+</script>
+</body>
+</html>
