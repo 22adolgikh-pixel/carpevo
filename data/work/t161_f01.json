@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   51.88,
-   21.13
+   53.1,
+   17.05
   ],
   [
-   638.2,
-   21.13
+   639.36,
+   25.23
   ],
   [
-   638.2,
-   191.76
+   636.98,
+   195.84
   ],
   [
-   51.88,
-   191.76
+   50.72,
+   187.66
   ]
  ],
  "meta": {
@@ -39,16 +39,18 @@
   "carpet": "Куба",
   "type": "К.—Ш.",
   "note": "В табл. 161—163 даны образцы общих построений бордюра.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
-  "pw": 4.9244,
-  "ph": 7.7727,
-  "ox": 0,
-  "oy": 0,
+  "pw": 4.9,
+  "ph": 4.9,
+  "ox": 0.63,
+  "oy": 5.51,
   "cols": 119,
-  "rows": 22,
-  "square": false
+  "rows": 39,
+  "square": true
  },
  "classify": {
   "tones": 1,
@@ -129,7 +131,8 @@
    "n_suspects": 0
   },
   "risk": 1.5,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -147,7 +150,7 @@
    19
   ]
  },
- "saved_at": "2026-10-05 08:22:21",
+ "saved_at": "2026-10-05 22:34:29",
  "auto_matrix": {
   "w": 113,
   "h": 19,
@@ -1246,5 +1249,13 @@
   ],
   "ntiles": 24,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
