@@ -64,6 +64,9 @@
   ul.index-list li { break-inside: avoid; margin-bottom: 5px; font-size: 14px; display: flex; gap: 8px; align-items: center; min-height: 34px; }
   ul.index-list .th { flex: 0 0 34px; width: 34px; height: 34px; display: block; position: relative; }
   ul.index-list .th img { width: 34px; height: 34px; display: block; border: 1px solid var(--border-light); background: #fff; image-rendering: auto; cursor: pointer; }
+  /* тёмная тема: превью схем инвертируем (белый фон → тёмный, линии → светлые); hue-rotate возвращает оттенки цветных схем */
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) ul.index-list .th img { filter: invert(1) hue-rotate(180deg); background: #000; } }
+  :root[data-theme="dark"] ul.index-list .th img { filter: invert(1) hue-rotate(180deg); background: #000; }
   ul.index-list .th b { position: absolute; right: -3px; bottom: -3px; background: var(--bg); border: 1px solid var(--border-light); border-radius: 6px; font: 600 9px/1 -apple-system, sans-serif; padding: 1px 3px; color: var(--text-soft); }
   ul.index-list .tx { min-width: 0; }
   ul.index-list .meta { color: var(--text-soft); font-size: 12px; }
