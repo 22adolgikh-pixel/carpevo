@@ -73,6 +73,21 @@ def ru_meaning(p):
         next(((t.get('book') or {}).get('kerimov_translation') for t in p if (t.get('book') or {}).get('kerimov_translation')), None)
 
 
+# Легенда т. I разобрана по колонкам с ошибкой: двухсловное название «Ara | хашийе Серединная кайма …» разрезано —
+# второе слово названия (аз. кириллица) попало в начало перевода. Склеиваем обратно.
+CONT = {'хашийе': 'haşiyə', 'хашиjе': 'haşiyə', 'су': 'su', 'нахышы': 'naxışı', 'гюлю': 'gülü', 'золаглар': 'zolaqlar', 'бута': 'buta'}
+
+
+def full_scheme_name(s):
+    nm = (s.get('name') or '').split('|')[0].strip()
+    tr = (s.get('translation') or '').strip()
+    if nm and tr:
+        w = tr.split()[0].lower()
+        if w in CONT and (('|' in (s.get('name') or '')) or tr.split()[0][0].islower()):
+            return nm + ' ' + CONT[w]
+    return nm
+
+
 ETYPE = {'ornament': 'ornament', 'carpet': 'composition', 'object': 'object'}
 SUFFIX = ('lı', 'li', 'lu', 'lü', 'lar', 'lər')
 POSS = (('si', ''), ('sı', ''), ('su', ''), ('sü', ''), ('yi', 'k'), ('yı', 'q'), ('ği', 'k'), ('ğı', 'q'))
@@ -273,7 +288,7 @@ def main(data_path, schemes_path, out):
                 queue.append(('схема: имя ≠ понятие', f"{s['id']} «{s['name']}» (табл. {s.get('table')}, рис. {s.get('fig')})",
                               'привязана к ' + ', '.join(f"{c} «{concepts[c]['headword']}»" for c in new), 'проверить привязку'))
         if not new and s.get('name'):
-            k = key(s['name'])
+            k = key(full_scheme_name(s))
             cand = orn_key.get(k)
             if cand:
                 new = [cand]

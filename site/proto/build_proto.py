@@ -51,6 +51,21 @@ def main(site_data, schemes_path, out_html, label=None):
             dj = json.load(open(os.path.join(ddir, f)))
             for cid, d in dj['items'].items():
                 desc[cid] = {**d, 'src': dj['source']['short']}
+    # схема → ковёр/композиция по колонке легенды Керимова «для какого ковра характерен»
+    def nz(x):
+        x = (x or '').lower().replace('ё', 'е'); x = re.sub(r'[«»"\'|().,]', ' ', x); return re.sub(r'\s+', ' ', x).strip()
+    cidx = C.defaultdict(set)
+    for c in cs:
+        if c['type'] in ('composition', 'object'):
+            for n in c['names']:
+                if n['kind'] not in ('misreading', 'meaning_rejected', 'meaning'): cidx[nz(n['v'])].add(c['id'])
+    for s in S:
+        car = nz((s.get('carpet_i18n') or {}).get('ru') or s.get('carpet'))
+        cc = []
+        for part in [p.strip() for p in re.split(r',| и |;', car) if p.strip()]:
+            for x in sorted(cidx.get(part, ())):
+                if x not in cc: cc.append(x)
+        sch[s['id']]['cc'] = cc
     linked = set()
     concepts = []
     for c in cs:

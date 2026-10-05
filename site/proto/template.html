@@ -80,6 +80,7 @@
     <a href="#/compositions" data-r="compositions">Ковры и композиции</a>
     <a href="#/schools" data-r="schools">Школы</a>
     <a href="#/review" data-r="review">Проверка</a>
+    <a href="#/schemes" data-r="schemes">Схемы</a>
     <a href="#/plates" data-r="plates">Ковры из книг</a>
     <a href="#/about" data-r="about">О модели</a>
   </nav>
@@ -249,6 +250,10 @@ function renderConcept(id) {
   const roles = Object.entries(c.r || {}).sort((a, b) => b[1] - a[1]).map(([r, n]) => `${ROLE[r] || r}${n ? ` <span class="muted">(${n})</span>` : ''}`).join(', ');
   const schools = Object.entries(c.sc).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${SCHOOL[k] || k} <span class="muted">(${n})</span>`).join(', ');
   const srcs = Object.entries(c.src || {}).map(([k, n]) => `${esc((SRC[k] || {}).short || k)} <span class="muted">(${n})</span>`).join(', ');
+  const carSch = c.t !== 'ornament' ? Object.keys(DATA.schemes).filter(sid => (DATA.schemes[sid].cc || []).includes(c.id) && !c.sch.includes(sid)) : [];
+  const owner = {}; DATA.concepts.forEach(x => x.sch.forEach(sid => owner[sid] = owner[sid] || x));
+  const carHTML = carSch.length ? `<h2>Узоры этого ковра в таблицах Керимова (${carSch.length})</h2><div class="muted" style="font-size:13px;margin-bottom:8px">По колонке легенды «для какого ковра характерен». Без названия — элементы, которым Керимов не дал народного имени.</div><div class="figs">${carSch.map(sid => { const s = DATA.schemes[sid], o = owner[sid]; const nm = s.n && s.n !== '?' ? s.n : 'без названия'; return `<figure style="max-width:170px"><div class="box" data-fig="${sid}" data-max="150"></div><figcaption>${o ? `<a href="#/c/${o.id}"><b>${esc(cap(o.h))}</b></a>` : `<b>${esc(nm)}</b>`}${s.tr ? ' — «' + esc(s.tr) + '»' : ''}<br>табл. ${s.tb}, рис. ${s.fg}${s.nt ? '<br>' + esc(s.nt) : ''}</figcaption></figure>`; }).join('')}</div>` : '';
+  const onCarpets = c.t === 'ornament' ? [...new Set(c.sch.flatMap(sid => DATA.schemes[sid].cc || []))].filter(x => C[x]) : [];
   const figs = c.sch.map(sid => { const s = DATA.schemes[sid]; return `<figure><div class="box" data-fig="${sid}"></div><figcaption><b>${esc(s.n || '')}</b>${s.tr ? ' — «' + esc(s.tr) + '»' : ''}<br>Керимов, табл. ${s.tb}, рис. ${s.fg}${s.sc ? ' · ' + (SCHOOL[s.sc] || s.sc) : ''} · ${s.w}×${s.h} узлов${s.nt ? '<br>' + esc(s.nt) : ''}</figcaption></figure>`; }).join('');
   const atts = c.at.map(a => `<tr><td>${esc((SRC[a[0]] || {}).short || a[0] || '')}</td><td>${esc(pageOf(a))}</td><td>${a[5] ? ROLE[a[5]] || a[5] : ''}</td><td>${a[3] ? '«' + esc(a[3]) + '»' : ''}${a[4] ? `<div class="muted">${esc(a[4])}</div>` : ''}<div class="muted" style="font-size:11px">${esc(a[1] || '')}</div></td></tr>`);
   const car = DATA.carriers.filter(k => k[0] === c.id);
@@ -262,6 +267,8 @@ function renderConcept(id) {
     ${c.ds ? `<h2>Описание <span class="pill auto" title="пересказ составлен ИИ по тексту книги, человеком не проверен">черновик ИИ · не проверено</span></h2>
       <div class="desc">${c.ds.sections.map(s => `<h3>${esc(s.title)}</h3><p>${esc(s.text)} <span class="muted" style="font-size:12px">— ${esc(c.ds.src)}, с. ${s.pages.map(esc).join(', ')}${s.figs && s.figs.length ? ' · в книге: ' + s.figs.map(esc).join(', ') : ''}</span></p>`).join('')}</div>` : ''}
     ${figs ? `<h2>Схемы (${c.sch.length})</h2><div class="figs">${figs}</div>` : ''}
+    ${carHTML}
+    ${onCarpets.length ? `<div class="note" style="margin-top:10px">Встречается на коврах (по таблицам Керимова): ${onCarpets.map(x => `<a href="#/c/${x}">${esc(cap(C[x].h))}</a>`).join(', ')}</div>` : ''}
     ${relBlocks(c)}
     <h2>Названия</h2><table class="t">${names}</table>
     ${hid.length ? `<details style="margin-top:6px"><summary>Ошибочные чтения и отклонённые значения (${hid.length}) — нужны только для поиска</summary><table class="t">${hid.map(n => `<tr><td>${esc(n[0])}</td><td class="muted">${LANG[n[1]] || n[1]} · ${NAMEKIND[n[2]]}</td></tr>`).join('')}</table></details>` : ''}
@@ -272,7 +279,7 @@ function renderConcept(id) {
     ${atts.length ? `<h2>Упоминания в источниках (${atts.length})</h2><table class="t"><tr><th>Источник</th><th>Стр.</th><th>Роль</th><th>Цитата / заметка</th></tr>${atts.slice(0, 15).join('')}</table>${atts.length > 15 ? `<details><summary>ещё ${atts.length - 15}</summary><table class="t">${atts.slice(15).join('')}</table></details>` : ''}` : ''}
     ${c.x.length ? `<h2>Внешние источники</h2>${c.x.map(([t, u]) => `<div><a href="${esc(u)}" target="_blank" rel="noopener">${esc(t || u)}</a></div>`).join('')}` : ''}
   </div>`;
-  document.querySelectorAll('[data-fig]').forEach(b => { const cv = schemeCanvas(b.dataset.fig, 240, 12); if (cv) { cv.style.maxWidth = '100%'; b.appendChild(cv); } });
+  document.querySelectorAll('[data-fig]').forEach(b => { const cv = schemeCanvas(b.dataset.fig, +(b.dataset.max || 240), 12); if (cv) { cv.style.maxWidth = '100%'; b.appendChild(cv); } });
   document.querySelectorAll('a[data-cls]').forEach(a => a.onclick = () => { F.cls.clear(); F.cls.add(a.dataset.cls); });
   lazyThumbs($('#app')); window.scrollTo(0, 0);
 }
@@ -314,6 +321,21 @@ function renderReview() {
   document.querySelectorAll('.qf button[data-s]').forEach(b => b.onclick = () => { QS = b.dataset.s; QF = ''; renderReview(); });
 }
 
+let SF = 'all';
+function renderSchemes() {
+  const owner = {}; DATA.concepts.forEach(x => x.sch.forEach(sid => owner[sid] = owner[sid] || x));
+  const ids = Object.keys(DATA.schemes).sort((a, b) => (DATA.schemes[a].tb - DATA.schemes[b].tb) || (DATA.schemes[a].fg - DATA.schemes[b].fg));
+  const cat = sid => owner[sid] ? 'own' : ((DATA.schemes[sid].cc || []).length ? 'car' : 'none');
+  const cnt = {own: 0, car: 0, none: 0}; ids.forEach(i => cnt[cat(i)]++);
+  const L = ids.filter(i => SF === 'all' || cat(i) === SF);
+  const byT = {}; L.forEach(i => (byT[DATA.schemes[i].tb] = byT[DATA.schemes[i].tb] || []).push(i));
+  $('#app').innerHTML = `<h1>Схемы Керимова</h1><div class="note">Все оцифрованные схемы по таблицам т. I. У каждой — понятие (если у элемента есть народное имя) и ковёр, для которого он характерен (по легенде таблицы).</div>
+    <div class="qf"><button data-f="all" class="${SF === 'all' ? 'on' : ''}">все (${ids.length})</button><button data-f="own" class="${SF === 'own' ? 'on' : ''}">с понятием (${cnt.own})</button><button data-f="car" class="${SF === 'car' ? 'on' : ''}">только ковёр (${cnt.car})</button><button data-f="none" class="${SF === 'none' ? 'on' : ''}">без привязки (${cnt.none})</button></div>
+    ${Object.entries(byT).map(([t, L]) => `<h2>Таблица ${t}</h2><div class="figs">${L.map(sid => { const s = DATA.schemes[sid], o = owner[sid]; const nm = s.n && s.n !== '?' ? s.n : 'без названия';
+      return `<figure style="max-width:150px"><div class="box" data-fig="${sid}" data-max="130"></div><figcaption>рис. ${s.fg} · ${o ? `<a href="#/c/${o.id}"><b>${esc(cap(o.h))}</b></a>` : `<b>${esc(nm)}</b>`}${s.tr ? '<br>«' + esc(s.tr) + '»' : ''}${(s.cc || []).filter(x => C[x]).length ? '<br>ковёр: ' + s.cc.filter(x => C[x]).map(x => `<a href="#/c/${x}">${esc(cap(C[x].h))}</a>`).join(', ') : ''}</figcaption></figure>`; }).join('')}</div>`).join('')}`;
+  document.querySelectorAll('.qf button').forEach(b => b.onclick = () => { SF = b.dataset.f; renderSchemes(); });
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); const cv = schemeCanvas(e.target.dataset.fig, 130, 12); if (cv) { cv.style.maxWidth = '100%'; e.target.appendChild(cv); } } }), {rootMargin: '400px'}); document.querySelectorAll('[data-fig]').forEach(b => io.observe(b)); }
+}
 let PG = '';
 function renderPlates() {
   const groups = {}; DATA.plates.forEach(p => { const g = p.group || p.section || '—'; groups[g] = (groups[g] || 0) + 1; });
@@ -348,6 +370,7 @@ function route() {
   else if (p === 'review') renderReview();
   else if (p === 'about') renderAbout();
   else if (p === 'plates') renderPlates();
+  else if (p === 'schemes') renderSchemes();
   else renderCatalog('ornament');
 }
 let qt; $('#q').oninput = e => { clearTimeout(qt); qt = setTimeout(() => { F.q = e.target.value; SHOWN = 120; const p = location.hash.slice(2).split('/')[0]; if (p === 'compositions') renderCatalog('composition'); else { if (location.hash && location.hash !== '#/') location.hash = '#/'; else renderCatalog('ornament'); } }, 200); };

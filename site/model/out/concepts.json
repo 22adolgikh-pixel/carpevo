@@ -29317,7 +29317,25 @@
    "status": "single",
    "rule": null,
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t132_f05",
+   "t132_f14",
+   "t132_f01",
+   "t132_f04",
+   "t132_f13",
+   "t132_f02",
+   "t132_f08",
+   "t132_f12",
+   "t132_f07",
+   "t132_f03",
+   "t132_f11",
+   "t132_f15",
+   "t132_f16",
+   "t132_f10",
+   "t132_f06",
+   "t132_f09"
+  ]
  },
  {
   "id": "ara-hashiyeler",
@@ -53242,7 +53260,10 @@
    "status": "auto",
    "rule": "same_word",
    "renamed": []
-  }
+  },
+  "schemes": [
+   "t99_f03"
+  ]
  },
  {
   "id": "gucu",
