@@ -39,6 +39,8 @@
   "carpet": "Карабах",
   "type": "Кар.",
   "note": "Называют также мятным листочком.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -69,11 +71,11 @@
    2
   ],
   "rows": [
-   "1.1...............1.1",
-   "1.1...............1.1",
-   "1.1...111...1112221.1",
-   "1.1...1.1...1.12221.1",
-   "1.1.111.11111.11121.1",
+   "1.12222222222222221.1",
+   "1.12222222222222221.1",
+   "1.12221112221112221.1",
+   "1.12221.12221.12221.1",
+   "1.12111.11111.11121.1",
    "1.121...........121.1",
    "1.12111.11111.11121.1",
    "1.12221.1...1.12221.1",
@@ -218,7 +220,7 @@
    4.887
   ],
   "angle": -0.2,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 4.019,
   "distortion": {
@@ -242,9 +244,10 @@
    "n_suspects": 0
   },
   "risk": 0.42,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -334,7 +337,7 @@
    125
   ]
  },
- "saved_at": "2026-10-05 08:21:23",
+ "saved_at": "2026-10-05 16:12:38",
  "auto_matrix": {
   "w": 21,
   "h": 125,
@@ -8767,5 +8770,13 @@
   ],
   "ntiles": 39,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }

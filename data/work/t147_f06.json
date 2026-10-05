@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   16.5,
-   54.12
+   14.26,
+   54.63
   ],
   [
-   159.23,
-   54.12
+   156.99,
+   53.63
   ],
   [
-   159.23,
-   695.74
+   161.47,
+   695.23
   ],
   [
-   16.5,
-   695.74
+   18.74,
+   696.23
   ]
  ],
  "meta": {
@@ -39,16 +39,18 @@
   "carpet": "Баку",
   "type": "К.-Ш",
   "note": "Похож на крючок для удочки.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
-  "pw": 3.3256,
-  "ph": 4.9008,
-  "ox": 0,
-  "oy": 0,
+  "pw": 4.9056,
+  "ph": 4.9056,
+  "ox": -4.67,
+  "oy": -5.32,
   "cols": 43,
   "rows": 131,
-  "square": false
+  "square": true
  },
  "classify": {
   "tones": 1,
@@ -235,7 +237,8 @@
    "n_suspects": 0
   },
   "risk": 1.08,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -253,7 +256,7 @@
    125
   ]
  },
- "saved_at": "2026-10-05 08:21:26",
+ "saved_at": "2026-10-05 16:14:25",
  "auto_matrix": {
   "w": 37,
   "h": 125,
@@ -8111,5 +8114,13 @@
   ],
   "ntiles": 52,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
