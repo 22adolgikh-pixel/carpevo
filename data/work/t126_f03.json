@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   63.34,
-   58.45
+   63.93,
+   57.79
   ],
   [
-   822.78,
-   58.45
+   823.37,
+   59.11
   ],
   [
-   822.78,
-   739.26
+   822.19,
+   739.92
   ],
   [
-   63.34,
-   739.26
+   62.75,
+   738.6
   ]
  ],
  "meta": {
@@ -39,13 +39,15 @@
   "carpet": "Куба",
   "type": "Г.-К",
   "note": "Этот медальон больше встречается в сумахах Дербента.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
   "pw": 4.9286,
   "ph": 4.9348,
-  "ox": 0,
-  "oy": 0,
+  "ox": 5.32,
+  "oy": -3.22,
   "cols": 154,
   "rows": 138,
   "square": true
@@ -245,7 +247,8 @@
    "n_suspects": 0
   },
   "risk": 1.13,
-  "difficulty_est": "ultra"
+  "difficulty_est": "ultra",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -255,7 +258,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-06 19:20:18",
+ "saved_at": "2026-10-06 20:32:05",
  "auto_matrix": {
   "w": 143,
   "h": 126,
@@ -22878,5 +22881,13 @@
   ],
   "ntiles": 195,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
