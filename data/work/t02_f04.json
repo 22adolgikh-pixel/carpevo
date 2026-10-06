@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "",
   "type": "",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.9346,
@@ -191,7 +193,7 @@
   "обводка",
   "тело 1"
  ],
- "palette_touched": false,
+ "palette_touched": true,
  "auto": {
   "version": 1,
   "confidence": 0.85,
@@ -228,7 +230,8 @@
    "n_suspects": 0
   },
   "risk": 0.63,
-  "difficulty_est": "ultra"
+  "difficulty_est": "ultra",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -238,7 +241,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-05 08:17:47",
+ "saved_at": "2026-10-06 14:12:24",
  "auto_matrix": {
   "w": 145,
   "h": 111,
@@ -21392,5 +21395,13 @@
   ],
   "ntiles": 180,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
