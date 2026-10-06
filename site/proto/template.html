@@ -309,6 +309,12 @@ function schoolDesc(k) {
   const d = (DATA.school_desc || {})[k]; if (!d) return '';
   return `<details style="margin:4px 0 8px"><summary class="muted" style="cursor:pointer">описание школы — ${esc(d.src)} <span class="pill auto">черновик ИИ</span></summary>${descHTML(d)}</details>`;
 }
+function otherSchoolsHTML() {
+  const used = new Set(); DATA.school_types.forEach(([id, , , groups]) => { used.add(id); groups.forEach(g => used.add(g[0])); });
+  const NM = {nakhchivan: 'Нахчыван', shusha: 'Шуша'};
+  const rest = Object.keys(DATA.school_desc || {}).filter(k => !used.has(k));
+  return rest.length ? `<h2>Другие школы в литературе</h2><ul class="tree">${rest.map(k => `<li><b>${esc(NM[k] || k)}</b>${schoolDesc(k)}</li>`).join('')}</ul>` : '';
+}
 function renderSchools() {
   const cnt = (k) => DATA.concepts.filter(c => Object.keys(c.sc).some(x => x === k || x.startsWith(k + '/'))).length;
   const scnt = (k) => Object.values(DATA.schemes).filter(s => s.sc === k || (s.sc || '').startsWith(k + '/')).length;
@@ -321,7 +327,7 @@ function renderSchools() {
   <tr><td>Гянджа-Газах</td><td>Гянджа · Газах</td><td>Ganja/Karabakh · Kazakh/Borchaly</td><td>Gendje · Kazak</td></tr>
   <tr><td>Карабах</td><td>Карабах</td><td>Ganja/Karabakh</td><td>Karabagh</td></tr><tr><td>Тебриз</td><td>Тебриз</td><td>—</td><td>Tabriz, Heriz (Персия)</td></tr></table>
   <p class="muted" style="font-size:13px">Нахчыван и Шуша — кандидаты в группы; спорные отнесения (например, Зейва: Губа у одних авторов, Ширван у других) будут храниться как два утверждения с источниками. Пока большинство понятий без школы: школы в старых данных указаны редко.</p>
-  ${westOpenHTML()}</div>`;
+  ${otherSchoolsHTML()}${westOpenHTML()}</div>`;
   document.querySelectorAll('a[data-school]').forEach(a => a.onclick = () => { F.school.clear(); F.school.add(a.dataset.school); });
 }
 
