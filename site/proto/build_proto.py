@@ -75,7 +75,11 @@ def main(site_data, schemes_path, out_html, label=None):
         if f.endswith('.json'):
             dj = json.load(open(os.path.join(ddir, f)))
             for cid, d in dj['items'].items():
-                desc[cid] = {**d, 'src': dj['source']['short']}
+                d = {**d, 'src': dj['source']['short']}
+                if cid in desc and not cid.startswith('school:'):     # второй источник — добавить разделы с его подписью
+                    desc[cid].setdefault('more', []).append(d)
+                else:
+                    desc[cid] = d
     # схема → ковёр/композиция по колонке легенды Керимова «для какого ковра характерен»
     def nz(x):
         x = (x or '').lower().replace('ё', 'е'); x = re.sub(r'[«»"\'|().,]', ' ', x); return re.sub(r'\s+', ' ', x).strip()
@@ -153,7 +157,7 @@ def main(site_data, schemes_path, out_html, label=None):
     for c in concepts: c['w'] = west.get(c['id'], [])
     DATA = {'concepts': concepts, 'rel': rel, 'tmap': tmap, 'queue': queue, 'schemes': sch,
             'sources': srcs, 'carriers': carriers, 'plates': plates,
-            'west_open': west_open, 'classes': CLASSES, 'school_types': SCHOOL_TYPES, 'meta': meta}
+            'west_open': west_open, 'school_desc': {k[7:]: v for k, v in desc.items() if k.startswith('school:')}, 'classes': CLASSES, 'school_types': SCHOOL_TYPES, 'meta': meta}
     tpl = open(os.path.join(HERE, 'template.html')).read()
     js = json.dumps(DATA, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     open(out_html, 'w').write(tpl.replace('/*__DATA__*/null', js))
