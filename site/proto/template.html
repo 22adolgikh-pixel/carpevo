@@ -269,7 +269,7 @@ function renderConcept(id) {
     <div class="tags" style="margin-top:8px">${(c.cl || []).map(k => `<a class="tag auto" href="#/" data-cls="${k}" title="${c.cq === 'ai' ? 'класс по значению (ИИ)' : 'класс поставлен машиной'}">${CLS[k].ru}</a>`).join('')}${c.cl && c.cl.length ? `<span class="muted" style="font-size:12px;margin-left:6px">${c.cq === 'ai' ? 'классы по значению (ИИ)' : 'классы по ключевым словам (машина)'}</span>` : ''}</div>
     ${merged}
     ${c.ds ? `<h2>Описание <span class="pill auto" title="пересказ составлен ИИ по тексту книги, человеком не проверен">черновик ИИ · не проверено</span></h2>
-      <div class="desc">${c.ds.sections.map(s => `<h3>${esc(s.title)}</h3><p>${esc(s.text)} <span class="muted" style="font-size:12px">— ${esc(c.ds.src)}, с. ${s.pages.map(esc).join(', ')}${s.figs && s.figs.length ? ' · в книге: ' + s.figs.map(esc).join(', ') : ''}</span></p>`).join('')}</div>` : ''}
+      <div class="desc">${c.ds.sections.map(s => `<h3>${esc(s.title)}</h3><p>${esc(s.text)} <span class="muted" style="font-size:12px">— ${esc(c.ds.src)}, ${(s.pages[0] || '').startsWith('f') ? 'стр. скана ' + s.pages.map(x => esc(x.slice(1))).join(', ') : 'с. ' + s.pages.map(esc).join(', ')}${s.figs && s.figs.length ? ' · в книге: ' + s.figs.map(esc).join(', ') : ''}</span></p>`).join('')}</div>` : ''}
     ${figs ? `<h2>Схемы (${c.sch.length})</h2><div class="figs">${figs}</div>` : ''}
     ${carHTML}
     ${onCarpets.length ? `<div class="note" style="margin-top:10px">Встречается на коврах (по таблицам Керимова): ${onCarpets.map(x => `<a href="#/c/${x}">${esc(cap(C[x].h))}</a>`).join(', ')}</div>` : ''}
