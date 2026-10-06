@@ -39,13 +39,15 @@
   "carpet": "Лямпа",
   "type": "Кар.",
   "note": "Встречается во всех коврах удлиненной формы Карабаха.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
-  "pw": 5.6147,
-  "ph": 5.619,
-  "ox": 0,
-  "oy": 0,
+  "pw": 5.3147,
+  "ph": 5.3147,
+  "ox": 33.07,
+  "oy": 0.16,
   "cols": 109,
   "rows": 21,
   "square": true
@@ -126,7 +128,8 @@
    "n_suspects": 0
   },
   "risk": 1.07,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -177,7 +180,7 @@
    17
   ]
  },
- "saved_at": "2026-10-06 19:20:51",
+ "saved_at": "2026-10-06 21:01:06",
  "auto_matrix": {
   "w": 104,
   "h": 17,
@@ -4121,5 +4124,13 @@
   ],
   "ntiles": 22,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
