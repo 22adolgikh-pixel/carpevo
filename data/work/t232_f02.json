@@ -38,15 +38,17 @@
   "translation": "",
   "carpet": "",
   "type": "",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
-  "pw": 5.903,
-  "ph": 5.9306,
-  "ox": 0,
-  "oy": 0,
-  "cols": 134,
-  "rows": 72,
+  "pw": 7.442,
+  "ph": 7.442,
+  "ox": 0.05,
+  "oy": 3.8,
+  "cols": 106,
+  "rows": 56,
   "square": true
  },
  "classify": {
@@ -180,7 +182,8 @@
    "n_suspects": 0
   },
   "risk": 1.48,
-  "difficulty_est": "ultra"
+  "difficulty_est": "ultra",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -190,7 +193,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-06 19:24:36",
+ "saved_at": "2026-10-06 20:04:16",
  "auto_matrix": {
   "w": 133,
   "h": 72,
@@ -30214,5 +30217,13 @@
   ],
   "ntiles": 112,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": true,
+ "transparent_bg": true,
+ "difficulty": null
 }
