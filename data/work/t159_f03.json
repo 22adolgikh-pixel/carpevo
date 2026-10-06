@@ -39,6 +39,8 @@
   "carpet": "Карабах",
   "type": "Кар.",
   "note": "Этот орнамент древнего происхождения.",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -445,7 +447,8 @@
    "n_suspects": 56
   },
   "risk": 1.12,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -517,7 +520,7 @@
    101
   ]
  },
- "saved_at": "2026-10-05 08:22:02",
+ "saved_at": "2026-10-06 14:36:49",
  "auto_matrix": {
   "w": 51,
   "h": 101,
@@ -16695,5 +16698,13 @@
   ],
   "ntiles": 66,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
