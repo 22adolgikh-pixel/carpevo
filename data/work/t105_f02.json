@@ -39,6 +39,8 @@
   "carpet": "Хилаафшан",
   "type": "К.—Ш",
   "note": "",
+  "site_id": "",
+  "source": "",
   "name_az_auto": true
  },
  "grid": {
@@ -150,7 +152,7 @@
    4.899
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 10.322,
   "distortion": {
@@ -174,9 +176,10 @@
    "n_suspects": 0
   },
   "risk": 0.932,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -184,7 +187,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-05 08:18:20",
+ "saved_at": "2026-10-06 14:22:40",
  "auto_matrix": {
   "w": 60,
   "h": 56,
@@ -747,5 +750,12 @@
   "ntiles": 36,
   "verified": []
  },
- "review": true
+ "review": false,
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "transparent_bg": true,
+ "difficulty": null
 }
