@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   17.94,
-   47.49
+   15.13,
+   48.1
   ],
   [
-   141.19,
-   49.73
+   138.4,
+   49.05
   ],
   [
-   131.48,
-   584.91
+   134.29,
+   584.3
   ],
   [
-   8.22,
-   582.67
+   11.01,
+   583.35
   ]
  ],
  "meta": {
@@ -38,16 +38,18 @@
   "translation": "",
   "carpet": "Казах Г.",
   "type": "—",
-  "note": "К"
+  "note": "К",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
-  "pw": 3.4167,
-  "ph": 4.9083,
-  "ox": 0,
-  "oy": 0,
+  "pw": 4.4367,
+  "ph": 4.4367,
+  "ox": -11.42,
+  "oy": -6.02,
   "cols": 36,
-  "rows": 109,
-  "square": false
+  "rows": 120,
+  "square": true
  },
  "classify": {
   "tones": 1,
@@ -213,7 +215,8 @@
    "n_suspects": 0
   },
   "risk": 1.18,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -231,7 +234,7 @@
    104
   ]
  },
- "saved_at": "2026-10-05 08:19:54",
+ "saved_at": "2026-10-06 14:54:50",
  "auto_matrix": {
   "w": 26,
   "h": 104,
@@ -2892,5 +2895,13 @@
   ],
   "ntiles": 33,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
