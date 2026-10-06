@@ -1,0 +1,3348 @@
+{
+ "_about": "Привязка ковров/композиций/изделий к школам по иерархии Керимова: type ∈ {guba-shirvan, ganja-gazakh, karabakh, tabriz}; group ∈ {guba, shirvan, baku} (guba-shirvan), {ganja, gazakh} (ganja-gazakh); для отдельных районов — nakhchivan, mugan, talysh (с пояснением в note). Источники: Керимов т. II (эл. версия, с. = номер страницы файла book.txt), Керимов т. II скан ширванской группы (f1–f37), Мурадов 2008 (m1-N, m2-N; m2-76+ — каталог «Азер-Ильме», слабое свидетельство), таблицы схем Керимова (school_now), Ганс-Рюден (слабое). Изделия и общие термины, не привязанные к одной школе, — type null, note «общее, не одной школы». Составлено 2026-10-06.",
+ "items": {
+  "afurca": {
+   "id": "afurca",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 168: глава «Афурджа» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 153–154 «Афурджа», Кубинская группа ковров",
+    "Мурадов m1-63: в перечне ковров Губинской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "alpan": {
+   "id": "alpan",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 135: глава «Алпан» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 216: ил. 115а, 116 «Алпан», Кубинская группа ковров",
+    "Мурадов m1-81: подпись «“Alpan” xalçası. Quba məktəbi»",
+    "Мурадов m1-82: подпись «“Alpan” carpet. Guba school»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "agchaqgulchichi": {
+   "id": "agchaqgulchichi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 138: глава «Алчагюль чичи» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 219: табл. 6 «Алчагюль чичи», Кубинская группа",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "alchaqaygulchichi": {
+   "id": "alchaqaygulchichi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 138: глава «Алчагюль чичи» — кубинская группа Куба-Ширванского типа"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вариант написания agchaqgulchichi (то же значение)"
+  },
+  "aran": {
+   "id": "aran",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "arsalan": {
+   "id": "arsalan",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 178: глава «Арсалан» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 161–162 «Арсалан», Кубинская группа ковров",
+    "Мурадов m1-92: подпись «“Arsalan” carpet. Guba school»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "arslan": {
+   "id": "arslan",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "возможно, вариант arsalan (кубинская группа); прямых данных нет"
+  },
+  "atli-inti": {
+   "id": "atli-inti",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 48: «в Шуше — … «Атлы-итлы» (Всадник с собакой)»"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вариант написания atli-itli"
+  },
+  "atli-itli": {
+   "id": "atli-itli",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 48: «в Шуше — … «Атлы-итлы» (Всадник с собакой)»",
+    "Керимов т. II (эл.) с. 213: ил. 41 «Атлы-итли». Шушинская группа ковров",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "atli-tulu": {
+   "id": "atli-tulu",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "то же значение, что atli-itli (Шуша, Керимов т. II с. 48)"
+  },
+  "achma-yumma": {
+   "id": "achma-yumma",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-11: в перечне ковров Гарабахской («Ачма-юмма») школы (основной текст)",
+    "Мурадов m2-9: орнамент «Ачма юмма» в карабахских ковровых комплектах",
+    "Керимов, таблицы схем (school_now): Карабах×1, Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "в таблицах схем Керимова (school_now) — и karabakh, и tabriz",
+   "note": ""
+  },
+  "agacli": {
+   "id": "agacli",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-65: подпись «“Ağaclı” xalçası. Təbriz məktəbi»",
+    "Мурадов m2-66: подпись «“Ağaclı” xalçası. Təbriz məktəbi»",
+    "Мурадов m1-45: «В тебризских коврах «Агаджлы» дракон …»",
+    "Керимов т. II (скан) f32: «примыкает к ковру «Агаджлы» из тебризской группы»",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "high",
+   "conflict": "Мурадов m1-139: подпись «“Agach” xalçası. Şirvan məktəbi / Ковер «Агаджлы». Ширванская школа»; у Керимова (скан f32) «Агаджлы» — также вариант ширванского «Кабала»",
+   "note": ""
+  },
+  "baki": {
+   "id": "baki",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Мурадов m1-170: в перечне ковров Бакинской («Баку») школы (основной текст)",
+    "Мурадов m2-131 (каталог «Азер-Ильме», слабое): подпись «“Bakı” xalçası. Bakı məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1, Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "baliq-carpet": {
+   "id": "baliq-carpet",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 103: «афганский «Гераты» (в Карабахе известен как «Балыг», в Иране — как «Махи»)»",
+    "Керимов т. II (эл.) с. 159: «в Карабахе «Герат-Пиребедиль» был известен под названием «Балыг»»",
+    "Мурадов m2-10: в перечне ковров Гарабахской («Balıq») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "Мурадов m2-69: подпись «“Balıq” xalçası. Təbriz məktəbi» и m2-58/59 — в перечне Тебризской школы",
+   "note": ""
+  },
+  "baxshayish": {
+   "id": "baxshayish",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "город/село Южного Азербайджана"
+  },
+  "bag-bagat": {
+   "id": "bag-bagat",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 137: ковроткачи деревни Алпан называют общее поле ковра «Баг-Багат» (сады)"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "термин для поля ковра, не отдельный ковёр"
+  },
+  "bagchada-guller": {
+   "id": "bagchada-guller",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 48: новые композиции «в Шуше — «Бахчада гюлляр» (Цветы в саду)»",
+    "Мурадов m2-183 (каталог «Азер-Ильме», слабое): подпись «“Bağçadagüllər” xalçası. Qarabağ məktəbi»",
+    "Керимов, таблицы схем (school_now): Карабах×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "bicer": {
+   "id": "bicer",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 103: «грузинский [sic] «Биджар»» — пример композиции «Афшан»"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "Биджар — ковры Ирана, вне азербайджанских школ"
+  },
+  "bico": {
+   "id": "bico",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f22: глава «Биджо» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-140: подпись «“Bico” xalçası. Şirvan məktəbi»",
+    "Мурадов m2-195 (каталог «Азер-Ильме», слабое): подпись «“Bico” xalçası, Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1",
+    "Ганс-Рюден gr86_p222: «BIDSHOF SHIRVAN» → Shirvan (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "bilici": {
+   "id": "bilici",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 165: глава «Билиджи» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 148, Кубинская группа ковров",
+    "Мурадов m1-78: подпись «“Bilici” xalçası, Quba məktəbi»",
+    "Мурадов m1-103: подпись «“Bilici” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "bilichi": {
+   "id": "bilichi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 165: глава «Билиджи» — кубинская группа Куба-Ширванского типа",
+    "Мурадов m1-78: подпись «“Bilici” xalçası, Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "вариант написания bilici"
+  },
+  "borchali": {
+   "id": "borchali",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-230: подпись «“Borçalı” (Namazlıq) xalçası, Qazax məktəbi»",
+    "Мурадов m1-213: в перечне ковров Газахской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1",
+    "Ганс-Рюден gr86_p090: «BORJALU KAZAK» → Kazak (слабое)",
+    "Ганс-Рюден gr86_p093: «BORJALU KAZAK» → Kazak (слабое)",
+    "Ганс-Рюден gr86_p094: «BORJALU KAZAK» → Kazak (слабое)",
+    "Ганс-Рюден gr86_p097: «BORJALU KAZAK» → Kazak (слабое)",
+    "Ганс-Рюден gr86_p098: «BORJALU KAZAK» → Kazak (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "buati": {
+   "id": "buati",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "в источниках не найдено"
+  },
+  "budaqli": {
+   "id": "budaqli",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f31: в главе «Кабала»: первый вариант, «который ковроткачи называют «будаглы» — ветвистый»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "bulud-carpet": {
+   "id": "bulud-carpet",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 48: новые композиции «в Шуше — … «Булут» (Облака)»",
+    "Керимов т. II (эл.) с. 84: «Булут» … входящих в шушинскую группу Карабаха",
+    "Мурадов m2-11: в перечне ковров Гарабахской школы (основной текст)",
+    "Мурадов m2-189 (каталог «Азер-Ильме», слабое): подпись «“Bulud” xalçası. Şuşa. Qarabağ məktəbi»",
+    "Керимов, таблицы схем (school_now): Карабах×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "butali-carpet": {
+   "id": "butali-carpet",
+   "type": "ganja-gazakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 88: «в тканях тирме — «Буталы»» (общий раздел)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1",
+    "Ганс-Рюден gr86_p136: «BUTALY KARABAKH (DETAIL)» → Karabakh (слабое)"
+   ],
+   "confidence": "low",
+   "conflict": "Ганс-Рюден gr86_p136: Karabakh",
+   "note": ""
+  },
+  "buta-yelen": {
+   "id": "buta-yelen",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "название каймы, не ковра"
+  },
+  "buynuz-carpet": {
+   "id": "buynuz-carpet",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-10: в перечне ковров Гарабахской («Buynuz») школы (основной текст)",
+    "Мурадов m2-16: «Буйнуз» среди карабахских ковров",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1, Карабах×1, Гянджа-Газах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "в таблицах схем Керимова (school_now) — guba-shirvan, karabakh и ganja-gazakh; у Мурадова (m1-59) «буйнуз» — также мотив губинских ковров",
+   "note": ""
+  },
+  "behmenli": {
+   "id": "behmenli",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-11: в перечне ковров Гарабахской («Бахмянли») школы (основной текст)",
+    "Мурадов m2-146 (каталог «Азер-Ильме», слабое): подпись ««Bəhmənli» xalçası. Qarabağ məktəbi»",
+    "Керимов, таблицы схем (school_now): Карабах×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "bendi-rumi-carpet": {
+   "id": "bendi-rumi-carpet",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 104: «Бенди руми» — общий раздел основных композиций"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "berde": {
+   "id": "berde",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-11: в перечне ковров Гарабахской («Барда») школы (основной текст)",
+    "Керимов т. II (эл.) с. 212: ил. 33 «Барда» (I вариант «Челеби»). Карабахская группа",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "beshir": {
+   "id": "beshir",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "Бешир — туркменские (среднеазиатские) ковры, вне азербайджанских школ"
+  },
+  "cediyelyan": {
+   "id": "cediyelyan",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "название каймы, не ковра"
+  },
+  "caymaqli": {
+   "id": "caymaqli",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-213: в перечне ковров Газахской («Гаймахлы») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вариант написания qaymaqli"
+  },
+  "cagirili": {
+   "id": "cagirili",
+   "type": "guba-shirvan",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "возможно, связан с «Джаглы» — другим названием «Джайирли» (Керимов скан f20); прямых данных нет"
+  },
+  "cek": {
+   "id": "cek",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 171: глава «Джек» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 219: табл. 28 «Джек», Кубинская группа",
+    "Мурадов m1-63: в перечне ковров Губинской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "cili": {
+   "id": "cili",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "в источниках не найдено"
+  },
+  "cimi": {
+   "id": "cimi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 173: глава «Джими» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 155 «Джими», Кубинская группа ковров",
+    "Мурадов m1-98: подпись «“Cimi” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "cingirdag": {
+   "id": "cingirdag",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (скан) f7: рис. 7 «Джингирдаг» в главе «Кабыстан»"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "в источниках — название рисунка/памятника, не ясно, ковёр ли это"
+  },
+  "cebrayil-kilimi": {
+   "id": "cebrayil-kilimi",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "Джебраил — Карабах"
+  },
+  "cemcemli": {
+   "id": "cemcemli",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f21: глава «Джамджамли» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-118: «Джамджамли» среди ковров Ширванской школы",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "ceyirli": {
+   "id": "ceyirli",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f20: глава «Джайирли» — ширванская группа Куба-Ширванского типа",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "cechodi": {
+   "id": "cechodi",
+   "type": "guba-shirvan",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "daryur": {
+   "id": "daryur",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вероятно, вариант deryanur"
+  },
+  "dagkesemen": {
+   "id": "dagkesemen",
+   "type": "ganja-gazakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "dilikli": {
+   "id": "dilikli",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f31: в главе «Кабала»: второй вариант, известный под названием «Диликли» — зубчатый",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1, Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "в таблицах схем Керимова (school_now) также ganja-gazakh",
+   "note": ""
+  },
+  "dordfesil": {
+   "id": "dordfesil",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-59: в перечне ковров Тебризской («Дорд фесил») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "demirchiler": {
+   "id": "demirchiler",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-229: подпись «Ковер «Демирчиляр», Газахская школа»",
+    "Мурадов m1-213: в перечне ковров Газахской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "deryanur": {
+   "id": "deryanur",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×2"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "erkek-dishi-heshebendlik": {
+   "id": "erkek-dishi-heshebendlik",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 215: ил. 83: композиция «эркек-диши хашебендлик», автор — Л. Керимов"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы (авторская композиция)"
+  },
+  "fatmayi": {
+   "id": "fatmayi",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Мурадов m1-178: подпись «“Fatmayı” xalçası. Bakı məktəbi»",
+    "Мурадов m1-166: в перечне ковров Бакинской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1, Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "findiqan": {
+   "id": "findiqan",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1, Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "faxrali": {
+   "id": "faxrali",
+   "type": "ganja-gazakh",
+   "group": "ganja",
+   "evidence": [
+    "Мурадов m1-196: в перечне ковров Гянджинской («Фахралы») школы (основной текст)",
+    "Мурадов m1-195: в перечне ковров Гянджинской («Faxralı») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1",
+    "Ганс-Рюден gr86_p101: «FACHRALY KAZAK» → Kazak (слабое)",
+    "Ганс-Рюден gr86_p105: «FACHRALY KAZAK» → Kazak (слабое)",
+    "Ганс-Рюден gr86_p106: «FACEIRAE YA Zk [FACHRALY KAZAK, garbled in text layer]» → Kazak (слабое)",
+    "Ганс-Рюден gr86_p109: «FACHRALY KAZAK» → Kazak (слабое)"
+   ],
+   "confidence": "medium",
+   "conflict": "каталог «Азер-Ильме» (Мурадов m2-154): «Faxralı» — Qazax məktəbi; Ганс-Рюден: Kazak (gr86_p101–109)",
+   "note": ""
+  },
+  "gulbendlik": {
+   "id": "gulbendlik",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 32: «самостоятельные композиции типа «Гельбендлик» и «Агаджлы»» (общий раздел)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "композиция широкого применения; школа — только по таблице схем"
+  },
+  "golluchichi": {
+   "id": "golluchichi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 140: глава «Голлу чичи» — кубинская группа Куба-Ширванского типа",
+    "Мурадов m1-107: подпись «“Qollu Çiçi” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "вариант написания qollu-chichi"
+  },
+  "geradil": {
+   "id": "geradil",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Мурадов m1-166: в перечне ковров Бакинской («Горадиль») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1, Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qorevan": {
+   "id": "qorevan",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "korevan-ve-baxshayish": {
+   "id": "korevan-ve-baxshayish",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "goycheli": {
+   "id": "goycheli",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-235: подпись «“Göycəli” xalçası. Qazax məktəbi»",
+    "Мурадов m1-213: в перечне ковров Газахской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "gulgezi": {
+   "id": "gulgezi",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "в источниках не найдено"
+  },
+  "gedebey": {
+   "id": "gedebey",
+   "type": "ganja-gazakh",
+   "group": "ganja",
+   "evidence": [
+    "Мурадов m1-196: в перечне ковров Гянджинской («Кедабек») школы (основной текст)",
+    "Мурадов m1-195: в перечне ковров Гянджинской («Gədəbəy») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "gence-carpet": {
+   "id": "gence-carpet",
+   "type": "ganja-gazakh",
+   "group": "ganja",
+   "evidence": [
+    "Мурадов m1-207: подпись «“Gəncə” xalçası, Gəncə məktəbi»",
+    "Мурадов m1-206: подпись «“Gəncə” xalçası. Gəncə məktəbi»",
+    "Мурадов m1-204: подпись «“Gəncə” xalçası. Gəncə maktabi»",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "gence-qazax": {
+   "id": "gence-qazax",
+   "type": "ganja-gazakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 212: ил. 17, 26: «Гянджа-Казахского типа», «Гянджа-казахская группа»",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "название самого типа"
+  },
+  "qereche-sheddesi": {
+   "id": "qereche-sheddesi",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "по названию: шедде из Гяраджи (qereche — tabriz по таблице Керимова)"
+  },
+  "haciqabul": {
+   "id": "haciqabul",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f29: глава «Гаджикабул» — ширванская группа Куба-Ширванского типа",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "haciqayib": {
+   "id": "haciqayib",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 149: глава «Гаджигайыб» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 217: ил. 130 «Гаджигайыб», Кубинская группа ковров",
+    "Мурадов m1-95: подпись «“Hajigayib” carpet. Guba school»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "herat": {
+   "id": "herat",
+   "type": "guba-shirvan",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "low",
+   "conflict": "Керимов т. II с. 103: «афганский «Гераты» (в Карабахе — «Балыг», в Иране — «Махи»)»; Мурадов m2-61: «гераты-турундж» в Тебризской школе",
+   "note": "кубинская привязка — через «Герат-Пиребедиль»"
+  },
+  "herat-pirebedil": {
+   "id": "herat-pirebedil",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 159: глава «Герат-Пиребедиль» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 217: ил. 140–141 «Герат — Пиребедиль», Кубинская группа ковров",
+    "Мурадов m1-80: подпись «“Herat Pirəbədil” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "Керимов с. 159: в Карабахе этот узор известен как «Балыг»"
+  },
+  "heris": {
+   "id": "heris",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "город/село Южного Азербайджана"
+  },
+  "islimi-bendlik-carpet": {
+   "id": "islimi-bendlik-carpet",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 212: ил. 19, 49: «Ислими бендлик» — на миниатюре и в южноазербайджанском ковре",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы; композиция всех видов искусства; в таблице Керимова — guba-shirvan"
+  },
+  "israfil": {
+   "id": "israfil",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f14: глава «Исрафил» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-118: «Исрафил» среди ковров Ширванской школы",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "kechebeylik": {
+   "id": "kechebeylik",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "в источниках не найдено"
+  },
+  "kovxani": {
+   "id": "kovxani",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Мурадов m1-174: подпись «“Novxanı” xalçası. Bakı məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "искажённое «Новханы» (novxani)"
+  },
+  "kohne-quba": {
+   "id": "kohne-quba",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 131: глава «Кёхна-Куба (Старая Куба)» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 219: табл. 1 «Кёхна Куба», Кубинская группа",
+    "Мурадов m1-63: в перечне ковров Губинской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "koredil": {
+   "id": "koredil",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Мурадов m1-166: в перечне ковров Бакинской («Горадиль») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1, Губа-Ширван / Баку×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вариант написания geradil"
+  },
+  "kurd": {
+   "id": "kurd",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "kurdemir": {
+   "id": "kurdemir",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f25: глава «Кюрдемир» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-132: подпись «“Kürdəmir” xalçası. Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "ke-di": {
+   "id": "ke-di",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "kemerli": {
+   "id": "kemerli",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-226: подпись «“Kamarli” carpet. Gazakh school»",
+    "Мурадов m1-227: подпись «Ковер «Камарли». Газахская школа»",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "ketebe-bendlik": {
+   "id": "ketebe-bendlik",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 214: ил. 72: фрагмент халы на фоне «кетебе». Тебризская группа ковров",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "композиция широкого применения"
+  },
+  "lampa": {
+   "id": "lampa",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-19: подпись «“Lampa” xalçası. Qarabağ məktəbi»",
+    "Мурадов m2-10: в перечне ковров Гарабахской («Ləmpə») школы (основной текст)",
+    "Мурадов m1-45: «на гарабахских коврах «Шабалыт бута», «Лемпа»»",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "lecedi": {
+   "id": "lecedi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 219: табл. 18 «Ляджади», Кубинская группа",
+    "Мурадов m1-64: в перечне ковров Губинской («Ляджади») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "Керимов т. II (эл.) с. 155, текст главы: «входящий в ширванскую группу Куба-Ширванского типа» — противоречит таблице и оглавлению (кубинская группа)",
+   "note": ""
+  },
+  "lemberan": {
+   "id": "lemberan",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-11: в перечне ковров Гарабахской («Лемберан») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "lenarenturunc": {
+   "id": "lenarenturunc",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "в источниках не найдено"
+  },
+  "lechekli": {
+   "id": "lechekli",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы (композиция с лячаками)"
+  },
+  "lechekturunc": {
+   "id": "lechekturunc",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-59: в перечне ковров Тебризской («Лечек-турундж») школы (основной текст)",
+    "Керимов т. II (скан) f25: «тебризского коврика «Лячактурундж» (см. тебризскую группу)»",
+    "Керимов, таблицы схем (school_now): Тебриз×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "композиция широкого применения (Керимов т. II (эл.) с. 116 — общий раздел)"
+  },
+  "malibeyli": {
+   "id": "malibeyli",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-23: подпись «“Malıbəyli” xalçası. Qarabağ məktəbi»",
+    "Керимов т. II (эл.) с. 84: «Малыбейли» … входящих в шушинскую группу Карабаха",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "mashin": {
+   "id": "mashin",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 48: «в Шуше — … «Машын» (машина)»",
+    "Керимов т. II (эл.) с. 141: «Голлу чичи» … был широко известен в Карабахе (город Шуша) под названием «Машин»",
+    "Мурадов m2-6: «машина» среди карабахских узоров",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "mehrabli": {
+   "id": "mehrabli",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 88: «Мехраблы» — композиция резьбы по камню и тканей (общий раздел)"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "mesheli": {
+   "id": "mesheli",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1, Карабах×1"
+   ],
+   "confidence": "low",
+   "conflict": "таблицы схем Керимова: и tabriz, и karabakh — без других данных выбрать нельзя",
+   "note": ""
+  },
+  "milas": {
+   "id": "milas",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "Милас — анатолийские (турецкие) ковры, вне азербайджанских школ"
+  },
+  "mir": {
+   "id": "mir",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m1-45: «на тебризских коврах «Мир», «Сараби»»",
+    "Керимов т. II (скан) f28: «южноазербайджанского ковра «Мирь»»",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "mirish": {
+   "id": "mirish",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m1-45: «на тебризских коврах «Мир»»",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вероятно, тот же ковёр, что mir"
+  },
+  "mollakamalli": {
+   "id": "mollakamalli",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 153: глава «Моллакамаллы» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 217: ил. 137, Кубинская группа ковров",
+    "Мурадов m1-74: подпись «“Mollakamallı” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "mugan": {
+   "id": "mugan",
+   "type": "karabakh",
+   "group": "mugan",
+   "evidence": [
+    "Мурадов m2-28: подпись «“Muğan” xalçası. Qarabağ məktəbi»",
+    "Мурадов m2-11: в перечне ковров Гарабахской («Мугань») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1, Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "в таблицах схем Керимова (school_now) — guba-shirvan и karabakh; Керимов (скан f35): ковры Сальяна/Мугани/Талыша, «известные под названием «Мугань»», описаны в ширванской группе",
+   "note": "Мугань — отдельный ковроткацкий район; группа дана как «mugan»"
+  },
+  "memmedagali": {
+   "id": "memmedagali",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f32: в главе «Кабала»: четвёртый вариант — ковры, «называемые местными ковроткачами «Мамедагалы»»",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "в таблице схем Керимова (school_now) — tabriz; текст главы «Кабала» (ширванская группа) — вариант «Кабалы»",
+   "note": ""
+  },
+  "merend": {
+   "id": "merend",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "город/село Южного Азербайджана"
+  },
+  "mereze-carpet": {
+   "id": "mereze-carpet",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f17: глава «Мараза» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-137: подпись «“Mərəzə” xalçası. Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1",
+    "Ганс-Рюден gr86_p214: «MARASALI SHIRVAN» → Shirvan (слабое)",
+    "Ганс-Рюден gr86_p217: «MARASALI SHIRVAN» → Shirvan (слабое)",
+    "Ганс-Рюден gr86_p218: «MARASALI SHIRVAN» → Shirvan (слабое)",
+    "Ганс-Рюден gr86_p221: «MARASALI SHIRVAN» → Shirvan (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "nebur": {
+   "id": "nebur",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f19: глава «Набур» — ширванская группа Куба-Ширванского типа",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "naxchivan": {
+   "id": "naxchivan",
+   "type": "karabakh",
+   "group": "nakhchivan",
+   "evidence": [
+    "Мурадов m2-46: подпись ««Naxçıvan» xalçası. Naxçıvan məktəbi»",
+    "Мурадов m2-50: подпись «“Naxçıvan” xalçası. Naxçıvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "Мурадов выделяет Нахчыванскую школу (m2-32…54); у Керимова нахчыванские ковры входят в карабахский тип (school_now: karabakh)"
+  },
+  "novxani": {
+   "id": "novxani",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Мурадов m1-174: подпись «“Novxanı” xalçası. Bakı məktəbi»",
+    "Мурадов m1-166: в перечне ковров Бакинской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1, Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "nelbeki-gul": {
+   "id": "nelbeki-gul",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 166: «карабахского ковра «Нялбекигюль», или «Годжа»»",
+    "Керимов, таблицы схем (school_now): Карабах×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "orduc": {
+   "id": "orduc",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 167: глава «Ордудж» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 217–218: ил. 151–152 «Ордудж», Кубинская группа ковров",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "ovchuluq": {
+   "id": "ovchuluq",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-64: подпись «“Ovçuluq” xalçası, Təbriz məktəbi»",
+    "Мурадов m2-59: в перечне ковров Тебризской («Овчулуг») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "high",
+   "conflict": "Мурадов m1-117/118 называет «Овчулуг» (Охотничий) среди знаменитых ковров Ширванской школы",
+   "note": ""
+  },
+  "oysuzlu": {
+   "id": "oysuzlu",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-213: в перечне ковров Газахской («Ойсузлу») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "pashali-kilimi": {
+   "id": "pashali-kilimi",
+   "type": "guba-shirvan",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "pechegul": {
+   "id": "pechegul",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "в источниках не найдено"
+  },
+  "pirhesenli": {
+   "id": "pirhesenli",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f25: глава «Пиргасанлы» — ширванская группа Куба-Ширванского типа",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "pirebedil": {
+   "id": "pirebedil",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 156: глава «Пиребедиль» — кубинская группа Куба-Ширванского типа",
+    "Мурадов m1-70: подпись «“Pirəbədil” xalçası. Quba məktəbi»",
+    "Мурадов m1-72: подпись «“Pirəbədil” xalçası. Quba məktəbi»",
+    "Мурадов m2-164 (каталог «Азер-Ильме», слабое): подпись «“Pirəbədil” (Namazlıq) xalçası, Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1",
+    "Ганс-Рюден gr86_p295: «PEREPEDIL» → Kuba (слабое)",
+    "Ганс-Рюден gr86_p296: «PEREPEDIL» → Kuba (слабое)",
+    "Ганс-Рюден gr86_p299: «PEREPEDIL» → Kuba (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "bichaqturunc": {
+   "id": "bichaqturunc",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "qadi": {
+   "id": "qadi",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1, Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "qab-qacaq": {
+   "id": "qab-qacaq",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "qala": {
+   "id": "qala",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "Гала — село на Апшероне (Мурадов m1-165 упоминает его как место добычи глины для мытья ковров)"
+  },
+  "qarabag": {
+   "id": "qarabag",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-20: подпись «“Qarabağ” xalçası. Qarabağ məktəbi»",
+    "Мурадов m2-11: в перечне ковров Гарабахской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qarabag-vernisi": {
+   "id": "qarabag-vernisi",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "по названию (верни из Карабаха)"
+  },
+  "qarabag-sheddesi": {
+   "id": "qarabag-sheddesi",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "по названию (шедде из Карабаха)"
+  },
+  "qaraca": {
+   "id": "qaraca",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "qaraqashli": {
+   "id": "qaraqashli",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 151: глава «Гарагашлы» — кубинская группа Куба-Ширванского типа",
+    "Мурадов m1-97: подпись «“Qaraqaşlı” xalçası. Quba məktəbi»",
+    "Мурадов m1-63: в перечне ковров Губинской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qaraqoyunlu": {
+   "id": "qaraqoyunlu",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-222: подпись «“Qaraqoyunlu” xalçası. Qazax məktəbi»",
+    "Мурадов m1-213: в перечне ковров Газахской школы (основной текст)",
+    "Керимов т. II (эл.) с. 212: ил. 26 «Кара-коюнлу». Гянджа-казахская группа ковров",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1, Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "в таблицах схем Керимова (school_now) также karabakh",
+   "note": ""
+  },
+  "qarayazi": {
+   "id": "qarayazi",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-213: в перечне ковров Газахской («Гараязы») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qarachop": {
+   "id": "qarachop",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-228: подпись «“Qaracöp” xalçası. Qazax məktəbi»",
+    "Мурадов m1-213: в перечне ковров Газахской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1",
+    "Ганс-Рюден gr86_p118: «KARACHOPH KAZAK» → Kazak (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qarxun": {
+   "id": "qarxun",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Мурадов m1-129: подпись «“Qarxun” xalçası. Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qasimushagi": {
+   "id": "qasimushagi",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-29: подпись «“Qasım uşağı” xalçası. Qarabağ məktəbi»",
+    "Мурадов m2-11: в перечне ковров Гарабахской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qaymaqli": {
+   "id": "qaymaqli",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-213: в перечне ковров Газахской («Гаймахлы») школы (основной текст)",
+    "Мурадов m2-198 (каталог «Азер-Ильме», слабое): подпись «“Qaymaxlı” xalçası. Qazax məktəbi»",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qazax": {
+   "id": "qazax",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-231: подпись «“Qazax” xalçası. Qazax məktəbi»",
+    "Мурадов m1-233: подпись «“Qazax” xalçası, Qazax məktəbi»",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qachagan": {
+   "id": "qachagan",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-234: подпись «“Qacağan” xalçası. Qazax məktəbi»",
+    "Мурадов m1-213: в перечне ковров Газахской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qashad": {
+   "id": "qashad",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f24: глава «Гашад» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-118: «Гашед» среди ковров Ширванской школы",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qashqayi": {
+   "id": "qashqayi",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "Кашкай — ковры Фарса (Иран), вне азербайджанских школ"
+  },
+  "qobustan": {
+   "id": "qobustan",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f4: глава «Кабыстан» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-128: подпись «“Qabistan” xalçası. Şirvan məktəbi»",
+    "Мурадов m1-134: подпись «“Qabistan” xalçası. Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qobustan-kilimi": {
+   "id": "qobustan-kilimi",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "по названию (Гобустан — ширванская группа, Керимов скан f4)"
+  },
+  "qoca": {
+   "id": "qoca",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 166: «карабахского ковра «Нялбекигюль», или «Годжа»»",
+    "Керимов т. II (скан) f14: «карабахском ковре «Годжа»»",
+    "Мурадов m2-10: в перечне ковров Гарабахской («Qoca») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qollu-carpet": {
+   "id": "qollu-carpet",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (эл.) с. 141: «в Ширване мастера дали им название «Голлу» или «Голлу кёл»» (ср. «Голлу чичи» кубинской группы)",
+    "Керимов т. II (скан) f13: в главе «Шемахы»: вариант, который ковроткачи называют «голлу» — с рукавами",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "близок к «Голлу чичи» (кубинская группа); в Карабахе — «Машин»"
+  },
+  "qollu-chichi": {
+   "id": "qollu-chichi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 140: глава «Голлу чичи» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 216: ил. 121 «Голлу чичи», Кубинская группа ковров",
+    "Мурадов m1-99: подпись «“Qollu Çiçi” xalçası. Quba məktəbi»",
+    "Мурадов m1-107: подпись «“Qollu Çiçi” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qonaqkend": {
+   "id": "qonaqkend",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 175: глава «Гонахкенд» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 158, 160 «Гонахкенд», Кубинская группа ковров",
+    "Мурадов m2-188 (каталог «Азер-Ильме», слабое): подпись «“Qonaqkənd” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×2",
+    "Ганс-Рюден gr86_p280: «KONAKHEND» → Kuba (слабое)",
+    "Ганс-Рюден gr86_p283: «KONAKHEND» → Kuba (слабое)",
+    "Ганс-Рюден gr86_p284: «ORDUTCH KONAKHEND» → Kuba (слабое)",
+    "Ганс-Рюден gr86_p287: «ORDUTCH KONAKHEND» → Kuba (слабое)",
+    "Ганс-Рюден gr86_p288: «ORDUTCH KONAKHEND» → Kuba (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "geravan": {
+   "id": "geravan",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "qocha": {
+   "id": "qocha",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1, Карабах×1"
+   ],
+   "confidence": "low",
+   "conflict": "таблицы схем Керимова: и guba-shirvan, и karabakh",
+   "note": "возможно, тот же ковёр, что qoca («Годжа», Карабах)"
+  },
+  "qosha-gol": {
+   "id": "qosha-gol",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (скан) f16: «Гошагёль» — ковёр с парными гёлями (общее обозначение)"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "quba": {
+   "id": "quba",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 133: глава «Куба» — кубинская группа Куба-Ширванского типа",
+    "Мурадов m1-94: подпись «“Guba” carpet. Guba school / Ковер «Губа». Губинская школа»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qubadli": {
+   "id": "qubadli",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-11: в перечне ковров Гарабахской («Губадлы») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "quruz": {
+   "id": "quruz",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "в источниках не найдено"
+  },
+  "qushlu": {
+   "id": "qushlu",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f36: в главе «Сальян» (ширванская группа): композиция, «известная во всех ковроткацких пунктах Муганского и Талышского округов под названием «Гушлу»»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "ареал — Мугань и Талыш (в схеме Керимова отнесены к ширванской группе)"
+  },
+  "qimil": {
+   "id": "qimil",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 143: глава «Гымыл» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 216: ил. 125–126 «Гымыл», Кубинская группа ковров",
+    "Мурадов m1-63: в перечне ковров Губинской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1",
+    "Ганс-Рюден gr86_p307: «GYMYL» → Kuba (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "giriz": {
+   "id": "giriz",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 172: глава «Гырыз» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 219: табл. 29 «Гырыз», Кубинская группа",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qebele": {
+   "id": "qebele",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f31: глава «Кабала» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-119: «Габала» среди ковров Ширванской школы",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qedim-gence": {
+   "id": "qedim-gence",
+   "type": "ganja-gazakh",
+   "group": "ganja",
+   "evidence": [
+    "Мурадов m1-205: подпись «“Qədim Gəncə” xalçası. Gəncə məktəbi»",
+    "Мурадов m1-208: подпись «“Qədim Gəncə” xalçası. Gəncə məktəbi»",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qedim-minare": {
+   "id": "qedim-minare",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 147: глава «Гедим минаре» — кубинская группа Куба-Ширванского типа",
+    "Мурадов m1-88: подпись «“Qədim minarə” xalçası. Quba məktəbi»",
+    "Мурадов m2-134 (каталог «Азер-Ильме», слабое): подпись «“Qədim minarə” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "qedim-zeyve": {
+   "id": "qedim-zeyve",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 160: в главе «Зейва» (кубинская группа): ковёр «известен в народе под названием «Гадим Зейва» (древний Зейва)»"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "название-синоним «Зейва»"
+  },
+  "qereche": {
+   "id": "qereche",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "salahli": {
+   "id": "salahli",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-213: в перечне ковров Газахской («Салахлы») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "salmasoyud": {
+   "id": "salmasoyud",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 181: глава «Салмасеют» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 167 «Салмасёют», Кубинская группа ковров",
+    "Мурадов m2-168 (каталог «Азер-Ильме», слабое): подпись «“Səlməsöyüd” (Namazlıq) xalçası, Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "salyan": {
+   "id": "salyan",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f34: глава «Сальян» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m2-175 (каталог «Азер-Ильме», слабое): подпись «“Salyan” xalçası. Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×2"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "Керимов f35: ковры Сальяна, Мугани, Талыша известны также как «Мугань»"
+  },
+  "salyan-xilesi": {
+   "id": "salyan-xilesi",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f36: в главе «Сальян»: «производились также ковры, называемые «Сальян хиляси»»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "samux": {
+   "id": "samux",
+   "type": "ganja-gazakh",
+   "group": "ganja",
+   "evidence": [
+    "Мурадов m1-196: в перечне ковров Гянджинской («Самух») школы (основной текст)"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "saxsida-guller": {
+   "id": "saxsida-guller",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 48: «в Шуше — … «Сахсыда гюлляр» (Цветы в фаянсовой посуде)»",
+    "Керимов, таблицы схем (school_now): Карабах×3"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "sor-sor": {
+   "id": "sor-sor",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f27: глава «Сор-Сор» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-119: «Сор-Сор» среди ковров Ширванской школы",
+    "Мурадов m2-176 (каталог «Азер-Ильме», слабое): подпись «“Sor-sor” xalçası, Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "sumax": {
+   "id": "sumax",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 150: глава «Сумах» — в разделе «а/ Кубинская группа» (оглавление с. 229)",
+    "Керимов т. II (эл.) с. 217: ил. 131–132 «Сумах», Кубинская группа ковров",
+    "Мурадов m1-108: подпись «Sumax. Quba məktəbi»",
+    "Мурадов m2-118 (каталог «Азер-Ильме», слабое): подпись «“Sumax” xalçası, Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1, Гянджа-Газах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "Керимов (с. 150): «Сумахи» раньше производились также в Ахаре, Маранде, Урмии, Шемахе, Нахичевани, Мугани, Джебраиле и Лачине; в таблицах схем Керимова есть и ganja-gazakh",
+   "note": "сумах — также техника безворсового тканья (см. sumax-object)"
+  },
+  "sumaxcha": {
+   "id": "sumaxcha",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 151: «Сумахча» — малый «Сумах» (в главе «Сумах» кубинской группы)",
+    "Керимов т. II (эл.) с. 217: ил. 133 «Сумахча», Кубинская группа ковров",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "suraxani": {
+   "id": "suraxani",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Мурадов m1-183: подпись «“Suraxanı” xalçası. Bakı məktəbi»",
+    "Мурадов m1-185: подпись «“Suraxanı” xalçası, Bakı məktəbi»",
+    "Керимов т. II (эл.) с. 162: «в ковроткацких пунктах Хиля и Сураханы (г. Баку)»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1, Губа-Ширван×1",
+    "Ганс-Рюден gr86_p233: «SURAKHANY BAKU» → Baku (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "sirt-chichi": {
+   "id": "sirt-chichi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 139: глава «Сырт чичи» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 216: ил. 118–119, Кубинская группа ковров",
+    "Мурадов m1-89: подпись «“Sirt-chichi” carpet. Guba school»",
+    "Мурадов m2-122 (каталог «Азер-Ильме», слабое): подпись «“Sırt-Çiçi” xalçası, Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "selmas": {
+   "id": "selmas",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "город/село Южного Азербайджана"
+  },
+  "selmesoyud": {
+   "id": "selmesoyud",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 181: глава «Салмасеют» — кубинская группа Куба-Ширванского типа",
+    "Мурадов m1-63: в перечне ковров Губинской («Səlməsöyüd») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "вариант написания salmasoyud"
+  },
+  "senne": {
+   "id": "senne",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "Сенне (Сенендедж) — иранский Курдистан; у Керимова в тебризском типе"
+  },
+  "sarabi": {
+   "id": "sarabi",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m1-45: «на тебризских коврах «Мир», «Сараби»»",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "talish": {
+   "id": "talish",
+   "type": "karabakh",
+   "group": "talysh",
+   "evidence": [
+    "Мурадов m2-24: подпись «Ковер «Талыш». Гарабахская школа»",
+    "Мурадов m2-187 (каталог «Азер-Ильме», слабое): подпись «“Talış” xalçası, Qarabağ məktəbi»",
+    "Керимов, таблицы схем (school_now): Карабах×1",
+    "Ганс-Рюден gr86_p156: «TALISH» → Karabakh (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "Талыш — отдельный район; Мурадов относит ковёр «Талыш» к Карабахской школе; Керимов (скан f36) описывает талышские узоры в главе «Сальян» ширванской группы"
+  },
+  "tagli": {
+   "id": "tagli",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 88: «Таглы» — композиция вышивки (общий раздел)"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "tolbuz": {
+   "id": "tolbuz",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "в источниках не найдено"
+  },
+  "tebriz": {
+   "id": "tebriz",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 212: ил. 27 Ковер «Тебриз»",
+    "Керимов, таблицы схем (school_now): Тебриз×1, Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "в таблицах схем Керимова (school_now) — и tabriz, и karabakh",
+   "note": ""
+  },
+  "tebriz-kilimi": {
+   "id": "tebriz-kilimi",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "по названию (килим из Тебриза)"
+  },
+  "tekgul": {
+   "id": "tekgul",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (скан) f15: «Текгёль» (с одним гёлем) — так мастера называют любой ковёр с одним гёлем",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "ugax": {
+   "id": "ugax",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 165: глава «Угах» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 149 «Угах», Кубинская группа ковров",
+    "Мурадов m1-100: подпись «“Ugah” carpet. Guba school»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "xan": {
+   "id": "xan",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 179: глава «Хан» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 163–166 «Хан», Кубинская группа ковров",
+    "Мурадов m1-77: подпись «“Xan” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "xan-gervend": {
+   "id": "xan-gervend",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "xanliq": {
+   "id": "xanliq",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-25: подпись «“Khanlyk” carpet, Garabagh school»",
+    "Керимов т. II (эл.) с. 213: ил. 44 «Ханлыг» (Шуша). Карабахская группа ковров",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "xan-qarabag": {
+   "id": "xan-qarabag",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "по названию также Карабах"
+  },
+  "xan-qonaxkend": {
+   "id": "xan-qonaxkend",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 179: глава «Хан» (кубинская группа): производятся в ковроткацких пунктах Гонахкенда, Джими…",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "xanqervend": {
+   "id": "xanqervend",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вариант написания xan-gervend"
+  },
+  "xantirme": {
+   "id": "xantirme",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-21: подпись «“Xantirmə” xalçası. Qarabağ məktəbi»",
+    "Мурадов m2-11: в перечне ковров Гарабахской школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "xashi": {
+   "id": "xashi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 174: глава «Хаши» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 156–157 «Хаши», Кубинская группа ковров",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "xile": {
+   "id": "xile",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Керимов т. II (эл.) с. 162: «ковроткацких пунктах Хиля и Сураханы (г. Баку)»",
+    "Керимов т. II (скан) f35: «с коврами «Сураханы», «Хиля» бакинской группы»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "xilebuta": {
+   "id": "xilebuta",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Мурадов m1-166: в перечне ковров Бакинской («Хиля-бута») школы (основной текст)",
+    "Керимов т. II (скан) f28: «бакинского ковра «Хиля-бута»»",
+    "Мурадов m2-120 (каталог «Азер-Ильме», слабое): подпись «Ковер «Хиля-бута». Бакинская школа»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1, Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "xilenishani": {
+   "id": "xilenishani",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "по названию (Хиля — бакинская группа)"
+  },
+  "xile-suraxani": {
+   "id": "xile-suraxani",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "по названию (Хиля, Сураханы — бакинская группа)"
+  },
+  "xileafshan": {
+   "id": "xileafshan",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Мурадов m1-175: подпись «“Khila-afshan” carpet. Baku school»",
+    "Мурадов m1-179: подпись «“Khila-afshan” carpet. Baku school»",
+    "Керимов т. II (эл.) с. 162: «Хиля-Афшан», производимых в … Хиля и Сураханы (г. Баку)",
+    "Мурадов m2-178 (каталог «Азер-Ильме», слабое): подпись «“Xilə-əfşan” xalçası. Bakı məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×2, Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "xorasan-cheshni": {
+   "id": "xorasan-cheshni",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 175: в главе «Гонахкенд» (кубинская группа): «старейшие мастера и ковроткачи называют этот ковер «Хорасан чешни»»"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "синоним «Гонахкенд»"
+  },
+  "xoruz-nishan": {
+   "id": "xoruz-nishan",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (эл.) с. 213: ил. 42 «Хоруз нишан». Ширванская группа ковров",
+    "Керимов т. II (эл.) с. 48: новые композиции … «в Шемахе — «Хорус-[нишан]»»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "xoy": {
+   "id": "xoy",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "город/село Южного Азербайджана"
+  },
+  "xirdagul-chichi": {
+   "id": "xirdagul-chichi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 137: глава «Хырдагюль чичи» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 216: ил. 117 «Хырдагюль чичи», Кубинская группа ковров",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×3"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "yerfi": {
+   "id": "yerfi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 169: глава «Ерфи» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 219: табл. 27 «Ерфи», Кубинская группа",
+    "Мурадов m1-61: в перечне ковров Губинской («Erfi») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "zagli": {
+   "id": "zagli",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 162: глава «Заглы» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 219: табл. 22–23 «Заглы», Кубинская группа",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1",
+    "Ганс-Рюден gr86_p248: «KUBA, FROM THE VILLAGE OF SAGLY (DETAIL)» → Kuba (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "zeyve": {
+   "id": "zeyve",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 160: глава «Зейва» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 217: ил. 142–146 «Зейва», Кубинская группа ковров",
+    "Мурадов m1-66: подпись «“Zeyvə” xalçası. Quba məktəbi»",
+    "Мурадов m1-102: подпись «“Zeyvə” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "zencan": {
+   "id": "zencan",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "город/село Южного Азербайджана"
+  },
+  "charx-carpet": {
+   "id": "charx-carpet",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 166: глава «Чарах» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 150 «Чарах», Кубинская группа ковров",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1, Губа-Ширван / Баку×1"
+   ],
+   "confidence": "high",
+   "conflict": "в таблицах схем Керимова (school_now) есть также guba-shirvan/baku",
+   "note": ""
+  },
+  "chayli": {
+   "id": "chayli",
+   "type": "ganja-gazakh",
+   "group": "ganja",
+   "evidence": [
+    "Мурадов m1-196: в перечне ковров Гянджинской («Чайлы») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1",
+    "Ганс-Рюден gr86_p163: «CHAYLY» → Karabakh (слабое)",
+    "Ганс-Рюден gr86_p164: «CHAYLY» → Karabakh (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "Ганс-Рюден: «Chajli» отнесён к Карабаху (gr86_p163, p164); у Керимова (скан f24) есть и село Чайлы под Шемахой",
+   "note": ""
+  },
+  "chek": {
+   "id": "chek",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вероятно, вариант написания cek («Джек», кубинская группа, Керимов т. II с. 171)"
+  },
+  "chichi": {
+   "id": "chichi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 137: глава «Хырдагюль чичи» — ковры деревни Чичи (Деречичи) Кубинского района, кубинская группа",
+    "Керимов т. II (эл.) с. 139: «Сырт чичи» … принадлежит деревне Деречичи Кубинского района",
+    "Мурадов m1-63: «В Чичи продолжается традиция ковроткачества» (Губинская школа)",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1",
+    "Ганс-Рюден gr86_p291: «CHICHI» → Kuba (слабое)",
+    "Ганс-Рюден gr86_p292: «CHICHI» → Kuba (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "chuxanli": {
+   "id": "chuxanli",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f19: глава «Чуханлы» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-45: «на ширванских «Сор-Сор», «Мараза», «Чуханлы», «Ширалибей»»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "chiraqli": {
+   "id": "chiraqli",
+   "type": "ganja-gazakh",
+   "group": "ganja",
+   "evidence": [
+    "Мурадов m1-196: в перечне ковров Гянджинской («Чыраглы») школы (основной текст)",
+    "Мурадов m2-196 (каталог «Азер-Ильме», слабое): подпись «Ковер «Чирахлы» (Молитвенный). Гянджинская школа»",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "chelebi": {
+   "id": "chelebi",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 212: ил. 33 «Барда» (I вариант «Челеби»). Карабахская группа",
+    "Мурадов m2-11: в перечне ковров Гарабахской («Челеби») школы (основной текст)",
+    "Мурадов m2-137 (каталог «Азер-Ильме», слабое): подпись «“Çələbi” xalçası. Qarabağ məktəbi»",
+    "Ганс-Рюден gr86_p147: «KARABAKH CHELABERD (DETAIL)» → Karabakh (слабое)",
+    "Ганс-Рюден gr86_p148: «KARABAKH CHELABERD» → Karabakh (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "oysuzlu-carpet": {
+   "id": "oysuzlu-carpet",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-213: в перечне ковров Газахской («Ойсузлу») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "вариант написания oysuzlu"
+  },
+  "shabalidbuta-carpet": {
+   "id": "shabalidbuta-carpet",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-22: подпись «“Şabalıd buta” xalçası. Qarabağ məktəbi»",
+    "Мурадов m1-45: «на гарабахских коврах «Шабалыт бута»»",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "shadli": {
+   "id": "shadli",
+   "type": "ganja-gazakh",
+   "group": "ganja",
+   "evidence": [
+    "Мурадов m1-196: в перечне ковров Гянджинской («Шадлы») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "shadorvan": {
+   "id": "shadorvan",
+   "type": "guba-shirvan",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 23: «шадорван» … восходит к названию города Шадорван (позднее — Шабран) … в Ширванской области",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "shahabbasi": {
+   "id": "shahabbasi",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-59: в перечне ковров Тебризской («Шах Аббаси») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "shahnezerli": {
+   "id": "shahnezerli",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 217: ил. 135–136 «Шахназарли», Кубинская группа ковров",
+    "Керимов т. II (эл.) с. 229: оглавление: в разделе «а/ Кубинская группа»",
+    "Мурадов m1-101: подпись «“Şahnəzərli” xalçası. Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "Керимов т. II (эл.) с. 153, текст главы: «входящие в ширванскую группу Куба-Ширванского типа» — противоречит оглавлению и подписям того же тома (кубинская группа)",
+   "note": ""
+  },
+  "shahsever": {
+   "id": "shahsever",
+   "type": "guba-shirvan",
+   "group": "mugan",
+   "evidence": [
+    "Мурадов m2-151 (каталог «Азер-Ильме», слабое): подпись «“Şahsevən” xalçası. Muğan. Şirvan məktəbi»"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "шахсевенские ковры Мугани; единственный источник — каталог"
+  },
+  "shamaxi": {
+   "id": "shamaxi",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f11: глава «Шемахы» — ширванская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 212: ил. 31 «Шемаха». Ширванская группа",
+    "Мурадов m2-138 (каталог «Азер-Ильме», слабое): подпись «“Şamaxı” xalçası, Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "sheyx-sefi": {
+   "id": "sheyx-sefi",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-59: в перечне ковров Тебризской («Шейх Сафи») школы (основной текст)",
+    "Мурадов m2-56: «Шейх Сафи» в разделе Тебризской школы",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "shilyan": {
+   "id": "shilyan",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f27: глава «Шильян» — ширванская группа Куба-Ширванского типа",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "shilyani": {
+   "id": "shilyani",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f27: глава «Шильян» — ширванская группа Куба-Ширванского типа"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вариант написания shilyan"
+  },
+  "shirvan": {
+   "id": "shirvan",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f2: «Б) ШИРВАНСКАЯ ГРУППА … ковры, входящие в ширванскую группу … называемые «Ширван»»",
+    "Мурадов m1-138: подпись «“Şirvan” xalçası. Şirvan məktəbi»",
+    "Мурадов m1-159: подпись «“Şirvan” xalçası. Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "shirvan-aral": {
+   "id": "shirvan-aral",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f4: «Ширван-араб» — вариант «Кабыстана»"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "вероятно, искажение/вариант shirvan-ereb («ширван-араб»)"
+  },
+  "shirvani": {
+   "id": "shirvani",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "по названию («ширванский ковёр»); прямых подписей нет"
+  },
+  "shirvaniboy": {
+   "id": "shirvaniboy",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "по названию (Ширван); в источниках не найдено"
+  },
+  "shirvan-ereb": {
+   "id": "shirvan-ereb",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f4: в главе «Кабыстан»: первый вариант — ковры, которые старейшие ковроведы называют «Ширван-араб»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "shirelibey": {
+   "id": "shirelibey",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f29: глава «Ширалибек» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-45: «на ширванских … «Ширалибей»»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "shixli": {
+   "id": "shixli",
+   "type": "ganja-gazakh",
+   "group": "gazakh",
+   "evidence": [
+    "Мурадов m1-213: в перечне ковров Газахской («Шыхлы») школы (основной текст)",
+    "Керимов т. II (эл.) с. 148: «Шихлы», входящих в казахскую группу",
+    "Мурадов m2-161 (каталог «Азер-Ильме», слабое): подпись «“Şıxlı” xalçası. Qazax məktəbi»",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1",
+    "Ганс-Рюден gr86_p121: «SHIKHLY KAZAK» → Kazak (слабое)"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "shebekendlik": {
+   "id": "shebekendlik",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "efshan-carpet": {
+   "id": "efshan-carpet",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-59: в перечне ковров Тебризской («Афшан») школы (основной текст)",
+    "Керимов, таблицы схем (school_now): Тебриз×1",
+    "Ганс-Рюден gr86_p074: «RUG WITH AFSHAN PATTERN» → — (слабое)",
+    "Ганс-Рюден gr86_p236: «AFSHAN KUBA» → Kuba (слабое)"
+   ],
+   "confidence": "medium",
+   "conflict": "композиция используется и в бакинском «Хиля-Афшан» (Керимов т. II с. 103); Ганс-Рюден gr86_p236 — Kuba",
+   "note": "композиция широкого применения (Керимов т. II (эл.) с. 102 — общий раздел)"
+  },
+  "eher": {
+   "id": "eher",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "город/село Южного Азербайджана"
+  },
+  "ejdaha-ile-feniksin-doyushu": {
+   "id": "ejdaha-ile-feniksin-doyushu",
+   "type": "ganja-gazakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 212: ил. 17 «Борьба дракона с фениксом», Гянджа-Казахского типа. XV век",
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "ejdaha-ile-simurqun-doyushu": {
+   "id": "ejdaha-ile-simurqun-doyushu",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 31: композиция «Борьба дракона с симургом» появилась в сельджукский период (общий раздел)"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "ejdahali": {
+   "id": "ejdahali",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Мурадов m1-79: подпись «“Әјдаһа” xalçası. Quba məktəbi / “Dragon” carpet. Guba school»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1",
+    "Ганс-Рюден gr86_p030: «'DRAGON' RUG (DETAIL)» → — (слабое)",
+    "Ганс-Рюден gr86_p034: «'DRAGON' RUG, KARABAKH OR SHIRVAN» → Karabakh (слабое)",
+    "Ганс-Рюден gr86_p037: «'DRAGON' RUG, SHEMAKHA SHIRVAN OR KARABAKH (DETAIL)» → Shirvan (слабое)",
+    "Ганс-Рюден gr86_p038: «'DRAGON' RUG» → — (слабое)",
+    "Ганс-Рюден gr86_p041: «'DRAGON' RUG» → — (слабое)",
+    "Ганс-Рюден gr86_p046: «'DRAGON' RUG, SHIRVAN OR KARABAKH» → Shirvan (слабое)",
+    "Ганс-Рюден gr86_p049: «'DRAGON' RUG, KARABAKH (?)» → Karabakh (слабое)",
+    "Ганс-Рюден gr86_p053: «'DRAGON' RUG» → — (слабое)",
+    "Ганс-Рюден gr86_p054: «'DRAGON' RUG» → — (слабое)",
+    "Ганс-Рюден gr86_p057: «'DRAGON' RUG, KARABAKH OR SHIRVAN (DETAIL)» → Karabakh (слабое)",
+    "Ганс-Рюден gr86_p073: «'DRAGON' RUG, KARABAKH» → Karabakh (слабое)"
+   ],
+   "confidence": "medium",
+   "conflict": "каталог «Азер-Ильме» (Мурадов m2-114): «Əjdahalı» — Qarabağ məktəbi; Мурадов m1-45 упоминает «Аждахалы» рядом с карабахскими; Ганс-Рюден: «Dragon» — Karabakh or Shirvan / Shirvan (gr86_p034, p037, p046)",
+   "note": ""
+  },
+  "elixanli": {
+   "id": "elixanli",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 163: глава «Алиханлы» — кубинская группа Куба-Ширванского типа",
+    "Керимов т. II (эл.) с. 218: ил. 147 «Алиханлы», Кубинская группа ковров",
+    "Мурадов m2-125 (каталог «Азер-Ильме», слабое): подпись «“Əlixanlı” xalçası, Quba məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "arciman": {
+   "id": "arciman",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f15: глава «Арджиман» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-136: подпись «“Ərciman” xalçası. Şirvan məktəbi»",
+    "Мурадов m1-146: подпись «“Ərciman” xalçası. Şirvan məktəbi»",
+    "Мурадов m1-150: подпись «“Ərciman” xalçası. Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "erdebil": {
+   "id": "erdebil",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-58: ардебильский ковёр «Шейх Сафи» в разделе Тебризской школы",
+    "Керимов, таблицы схем (school_now): Тебриз×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": ""
+  },
+  "erdebili": {
+   "id": "erdebili",
+   "type": "tabriz",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-58: ардебильский ковёр «Шейх Сафи» в разделе Тебризской школы"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вариант erdebil"
+  },
+  "erfi": {
+   "id": "erfi",
+   "type": "guba-shirvan",
+   "group": "guba",
+   "evidence": [
+    "Керимов т. II (эл.) с. 169: глава «Ерфи» — кубинская группа Куба-Ширванского типа",
+    "Мурадов m1-61: в перечне ковров Губинской («Erfi») школы (основной текст)"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вариант написания yerfi"
+  },
+  "erchiman": {
+   "id": "erchiman",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (скан) f15: глава «Арджиман» — ширванская группа Куба-Ширванского типа",
+    "Мурадов m1-136: подпись «“Ərciman” xalçası. Şirvan məktəbi»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "вариант написания arciman"
+  },
+  "asmaliq": {
+   "id": "asmaliq",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "ayaqliq": {
+   "id": "ayaqliq",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "balishuzu": {
+   "id": "balishuzu",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "bisat": {
+   "id": "bisat",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "buraya": {
+   "id": "buraya",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "cecim": {
+   "id": "cecim",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Ганс-Рюден gr86_p357: «DJIDJIM» → — (слабое)"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы; Керимов (глоссарий с. 190): джеджим ткали в Лемберане, Агджабеди, Шуше, Джебраиле, Нахчыване; с. 188 — также Шемаха"
+  },
+  "corab": {
+   "id": "corab",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "dinari": {
+   "id": "dinari",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "duz-torbasi": {
+   "id": "duz-torbasi",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "dest-xali-qebe": {
+   "id": "dest-xali-qebe",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-9: комплект «даст халы габа» (Карабахская школа)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "вариант написания dest-xali-gebe"
+  },
+  "dest-xali-gebe": {
+   "id": "dest-xali-gebe",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-9: комплект «даст халы габа» … из пяти верхних и нижних ковров (Карабахская школа)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "комплект ковров, описан у Мурадова для Карабаха"
+  },
+  "desterxan": {
+   "id": "desterxan",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "deve-bash-bezeyi": {
+   "id": "deve-bash-bezeyi",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "engsi": {
+   "id": "engsi",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы; туркменское изделие (Керимов, глоссарий с. 198)"
+  },
+  "eshik-qas": {
+   "id": "eshik-qas",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы; каракалпакское изделие (Керимов, глоссарий с. 198)"
+  },
+  "gullebduz": {
+   "id": "gullebduz",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "heybe": {
+   "id": "heybe",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "hesir": {
+   "id": "hesir",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "karvud": {
+   "id": "karvud",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы; Керимов (глоссарий с. 191): ткали кочевники-терекеме"
+  },
+  "kilim": {
+   "id": "kilim",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "общее, не одной школы; килимы ткали во всех районах (Мурадов: m1-147 — Ширванская, m1-236 — Газахская школа; m1-171 — Бакинская)"
+  },
+  "kenare": {
+   "id": "kenare",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы; форма ковра; Мурадов m2-9 упоминает парные «кянаре» в Карабахе"
+  },
+  "ladi": {
+   "id": "ladi",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "lemeqabagi": {
+   "id": "lemeqabagi",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "migrazi": {
+   "id": "migrazi",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "mefresh-carpet": {
+   "id": "mefresh-carpet",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Ганс-Рюден gr86_p362: «SOUMAK MAFRASH» → — (слабое)",
+    "Ганс-Рюден gr86_p365: «MAFRASH» → — (слабое)"
+   ],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "mexfur": {
+   "id": "mexfur",
+   "type": "guba-shirvan",
+   "group": "shirvan",
+   "evidence": [
+    "Керимов т. II (эл.) с. 192: глоссарий MAKHFUR: «in the early Middle ages Makhfurs were manufactured only in South-East Azerbaijan — in Shirvan … the main town of which was Shemakha»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "технический тип (рельефный безворсовый ковёр); привязка к Ширвану — средневековая"
+  },
+  "namazliq": {
+   "id": "namazliq",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "общее, не одной школы; молитвенные коврики есть во всех школах (Мурадов: Ширван m1-130, m1-145; Газах m1-230; Губа m2-148)"
+  },
+  "naxishli-chul": {
+   "id": "naxishli-chul",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "numune-xalchalar": {
+   "id": "numune-xalchalar",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "nemend": {
+   "id": "nemend",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "palaz": {
+   "id": "palaz",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "общее, не одной школы; Керимов (скан f36) описывает «Палас» в ширванской группе безворсовых, но паласы ткали повсеместно"
+  },
+  "qazaxcha-object": {
+   "id": "qazaxcha-object",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "qashliq": {
+   "id": "qashliq",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "qashiqdan": {
+   "id": "qashiqdan",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "sumax-object": {
+   "id": "sumax-object",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы; техника; Мурадов m1-108 — «Sumax. Quba məktəbi», Керимов с. 150 — производились в Ахаре, Маранде, Шемахе, Нахичевани и др."
+  },
+  "verni": {
+   "id": "verni",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Гянджа-Газах×1, Карабах×1",
+    "Ганс-Рюден gr86_p350: «VERNEH (OCR: 'VERINETA')» → — (слабое)"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "общее, не одной школы; Керимов (глоссарий с. 193): «Varnies were manufactured in Karabakh and Kazakh carpet areas»; Мурадов m2-15/16 — в Карабахской школе"
+  },
+  "xali-gebe": {
+   "id": "xali-gebe",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "общее, не одной школы; общее название ворсового ковра (в таблице Керимова — karabakh)"
+  },
+  "xamyan": {
+   "id": "xamyan",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Керимов т. II (эл.) с. 191: глоссарий: «KHAMYAN — a name given to Varni in Agjabedinian district» (Агджабеди — Карабах)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "xurcun": {
+   "id": "xurcun",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "xeli-kebe": {
+   "id": "xeli-kebe",
+   "type": "karabakh",
+   "group": null,
+   "evidence": [
+    "Мурадов m2-9: комплект «даст халы габа» (Карабахская школа)",
+    "Керимов, таблицы схем (school_now): Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": ""
+  },
+  "yurd-bezeyi": {
+   "id": "yurd-bezeyi",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "yukuzu": {
+   "id": "yukuzu",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "yeherustu": {
+   "id": "yeherustu",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "yaxaruzu": {
+   "id": "yaxaruzu",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "zili": {
+   "id": "zili",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1, Гянджа-Газах×2, Губа-Ширван×1, Карабах×1"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "общее, не одной школы; Мурадов: зили Газахской (m1-223, m1-232), Карабахской (m2-30, m2-31), Нахчыванской (m2-45) школ; каталог — Бакинской (m2-115)"
+  },
+  "chanta-carpet": {
+   "id": "chanta-carpet",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "chin": {
+   "id": "chin",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Керимов т. II (эл.) с. 63: «ЧИН — палас очень высокого качества … производимый в селениях Ходжагасанли и Гобу близ Баку»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "безворсовое изделие, но привязано к Апшерону"
+  },
+  "chini": {
+   "id": "chini",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "chichi-palaz": {
+   "id": "chichi-palaz",
+   "type": "guba-shirvan",
+   "group": "baku",
+   "evidence": [
+    "Керимов т. II (эл.) с. 188: «In Apsheron, in Kobu and Khojagasanli villages … ornamental delicate-woven Palases … called «Chiyi palas»»",
+    "Керимов, таблицы схем (school_now): Губа-Ширван / Баку×1"
+   ],
+   "confidence": "high",
+   "conflict": "",
+   "note": "безворсовое изделие, привязано к Апшерону"
+  },
+  "chul": {
+   "id": "chul",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "chuval": {
+   "id": "chuval",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "orken": {
+   "id": "orken",
+   "type": null,
+   "group": null,
+   "evidence": [],
+   "confidence": "low",
+   "conflict": "",
+   "note": "общее, не одной школы"
+  },
+  "shedde": {
+   "id": "shedde",
+   "type": null,
+   "group": null,
+   "evidence": [
+    "Керимов, таблицы схем (school_now): Карабах×1, Губа-Ширван×1",
+    "Ганс-Рюден gr86_p358: «SHADDA» → — (слабое)",
+    "Ганс-Рюден gr86_p361: «SHADDA» → — (слабое)"
+   ],
+   "confidence": "medium",
+   "conflict": "",
+   "note": "общее, не одной школы; Мурадов: подписи «Şəddə. Naxçıvan məktəbi» (m2-53, каталог m2-150, 157, 163); Керимов (глоссарий с. 193): «manufactured mostly in Azerbaijan»; в таблицах схем — karabakh и guba-shirvan"
+  }
+ }
+}

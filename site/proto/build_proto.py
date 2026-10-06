@@ -12,6 +12,8 @@ _mp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'model', 'c
 MANUAL_CL = json.load(open(_mp))['items'] if os.path.exists(_mp) else {}
 _tp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'model', 'translations_ai.json')
 TRANSL = json.load(open(_tp))['items'] if os.path.exists(_tp) else {}
+_cp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'model', 'carpet_schools.json')
+CSCH = json.load(open(_cp))['items'] if os.path.exists(_cp) else {}
 BASIS_RU = {'kerimov': 'по переводу Керимова / легенде таблицы', 'book': 'по тексту книги Керимова', 'ai_language': 'разбор слова (ИИ)',
             'place_name': 'название по месту (ИИ)', 'unknown': 'значение не установлено'}
 
@@ -121,6 +123,16 @@ def main(site_data, schemes_path, out_html, label=None):
             'w': [],
             'x': [[r.get('title'), r.get('url')] for r in (c.get('external_references') or []) if isinstance(r, dict)],
         })
+    cc_of = C.defaultdict(list)
+    for sid, sv in sch.items():
+        for x in sv.get('cc') or []: cc_of[x].append(sid)
+    for c in concepts:
+        k = CSCH.get(c['id'])
+        if k:
+            c['cs'] = [k.get('type'), k.get('group'), k.get('confidence'), k.get('conflict') or '', k.get('evidence') or []]
+            key = '/'.join(filter(None, [k.get('type'), k.get('group') if k.get('group') in ('guba', 'shirvan', 'baku', 'ganja', 'gazakh') else None]))
+            if key and key not in c['sc']: c['sc'][key] = 0          # 0 = школа из привязки ковров (carpet_schools.json), не из таблиц
+        if not c['sch'] and cc_of.get(c['id']): c['ill'] = cc_of[c['id']][:6]
     carriers = []
     for k in D.get('carriers') or []:
         cid = tmap.get(k.get('term_id'))

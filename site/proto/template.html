@@ -145,8 +145,9 @@ function lazyThumbs(root) {
 }
 function thHTML(c, z) {
   z = z || 48;
-  if (!c.sch.length) return `<span class="th empty" style="width:${z}px;height:${z}px;flex-basis:${z}px"></span>`;
-  return `<span class="th" style="width:${z}px;height:${z}px;flex-basis:${z}px"><img data-s="${c.sch[0]}" data-z="${z}" width="${z}" height="${z}" alt="">${c.sch.length > 1 ? `<b class="cnt">${c.sch.length}</b>` : ''}</span>`;
+  const L = c.sch.length ? c.sch : (c.ill || []);
+  if (!L.length) return `<span class="th empty" style="width:${z}px;height:${z}px;flex-basis:${z}px"></span>`;
+  return `<span class="th" style="width:${z}px;height:${z}px;flex-basis:${z}px"${c.sch.length ? '' : ' title="узор этого ковра из таблиц Керимова"'}><img data-s="${L[0]}" data-z="${z}" width="${z}" height="${z}" alt="">${L.length > 1 ? `<b class="cnt">${L.length}</b>` : ''}</span>`;
 }
 function cardHTML(c, extra, cls) {
   const roles = Object.keys(c.r || {}).sort((a, b) => (c.r[b] || 0) - (c.r[a] || 0)).slice(0, 2).map(r => `<span class="tag">${ROLE[r] || r}</span>`).join('');
@@ -278,7 +279,7 @@ function renderConcept(id) {
     <h2>Названия</h2><table class="t">${names}</table>
     ${hid.length ? `<details style="margin-top:6px"><summary>Ошибочные чтения и отклонённые значения (${hid.length}) — нужны только для поиска</summary><table class="t">${hid.map(n => `<tr><td>${esc(n[0])}</td><td class="muted">${LANG[n[1]] || n[1]} · ${NAMEKIND[n[2]]}</td></tr>`).join('')}</table></details>` : ''}
     <h2>Где встречается</h2><table class="t">
-      ${roles ? `<tr><th>Роль</th><td>${roles}</td></tr>` : ''}${schools ? `<tr><th>Школы</th><td>${schools}</td></tr>` : ''}${srcs ? `<tr><th>Источники</th><td>${srcs}</td></tr>` : ''}
+      ${roles ? `<tr><th>Роль</th><td>${roles}</td></tr>` : ''}${schools ? `<tr><th>Школы</th><td>${schools}</td></tr>` : ''}${c.cs && c.cs[0] ? `<tr><th>Школа ковра</th><td>${esc(SCHOOL[c.cs[0] + (c.cs[1] && ['guba','shirvan','baku','ganja','gazakh'].includes(c.cs[1]) ? '/' + c.cs[1] : '')] || SCHOOL[c.cs[0]] || c.cs[0])}${c.cs[1] && !['guba','shirvan','baku','ganja','gazakh'].includes(c.cs[1]) ? ' · ' + esc(c.cs[1]) : ''} <span class="muted">(${esc({high: 'надёжно', medium: 'вероятно', low: 'под вопросом'}[c.cs[2]] || '')}; ИИ по источникам)</span>${c.cs[3] ? `<div class="muted" style="font-size:12px">расхождение: ${esc(c.cs[3])}</div>` : ''}${c.cs[4].length ? `<div class="muted" style="font-size:12px">${c.cs[4].slice(0, 4).map(esc).join(' · ')}</div>` : ''}</td></tr>` : ''}${srcs ? `<tr><th>Источники</th><td>${srcs}</td></tr>` : ''}
       ${car.length ? `<tr><th>Ковры-носители</th><td>${car.slice(0, 12).map(k => esc([k[1], k[2], k[3], k[4]].filter(Boolean).join(', '))).join('<br>')}${car.length > 12 ? `<br><span class="muted">и ещё ${car.length - 12}</span>` : ''}</td></tr>` : ''}</table>
     ${pls.length ? `<h2>Ковры в книгах (${pls.length})</h2>${pls.map(pl => plateHTML(pl, false)).join('')}` : ''}
     ${atts.length ? `<h2>Упоминания в источниках (${atts.length})</h2><table class="t"><tr><th>Источник</th><th>Стр.</th><th>Роль</th><th>Цитата / заметка</th></tr>${atts.slice(0, 15).join('')}</table>${atts.length > 15 ? `<details><summary>ещё ${atts.length - 15}</summary><table class="t">${atts.slice(15).join('')}</table></details>` : ''}` : ''}
@@ -305,6 +306,14 @@ function westOpenHTML() {
   ${W.borders.length ? `<h3>Каймы</h3><table class="t">${W.borders.map(([t, w, s]) => `<tr><td><b>${esc(t)}</b></td><td>${esc(w || '')}</td><td class="muted">${esc(sn(s))}</td></tr>`).join('')}</table>` : ''}`;
 }
 
+function schoolCarpets(type, group) {
+  const L = DATA.concepts.filter(c => c.cs && c.cs[0] === type && (group ? c.cs[1] === group : !['guba', 'shirvan', 'baku', 'ganja', 'gazakh'].includes(c.cs[1])));
+  if (!L.length) return '';
+  L.sort((a, b) => (b.cs[2] === 'high') - (a.cs[2] === 'high') || ((b.sch.length || (b.ill || []).length) ? 1 : 0) - ((a.sch.length || (a.ill || []).length) ? 1 : 0) || a.h.localeCompare(b.h));
+  const sub = c => [c.cs[1] && !['guba', 'shirvan', 'baku', 'ganja', 'gazakh'].includes(c.cs[1]) ? ({nakhchivan: 'Нахчыван', mugan: 'Муган', talysh: 'Талыш'}[c.cs[1]] || c.cs[1]) : '', c.cs[2] !== 'high' ? 'отнесение: ' + ({medium: 'вероятно', low: 'под вопросом'}[c.cs[2]] || c.cs[2]) : '', c.cs[3] ? 'источники расходятся' : ''].filter(Boolean).join(' · ');
+  const il = L.filter(c => c.sch.length || (c.ill || []).length).length;
+  return `<details style="margin:4px 0 8px"><summary class="muted" style="cursor:pointer">ковры и изделия (${L.length}, с иллюстрацией ${il})</summary><div class="grid" style="margin:8px 0">${L.map(c => cardHTML(c, {why: sub(c)})).join('')}</div></details>`;
+}
 function schoolDesc(k) {
   const d = (DATA.school_desc || {})[k]; if (!d) return '';
   return `<details style="margin:4px 0 8px"><summary class="muted" style="cursor:pointer">описание школы — ${esc(d.src)} <span class="pill auto">черновик ИИ</span></summary>${descHTML(d)}</details>`;
@@ -321,7 +330,7 @@ function renderSchools() {
   $('#app').innerHTML = `<div style="max-width:900px"><h1>Школы</h1>
   <div class="note">Основная схема — <b>Керимов</b>: 4 типа → группы → композиции (≈144 стиля по сёлам). Популярная схема «7 школ» (Губа, Ширван, Баку, Гянджа, Газах, Карабах, Тебриз) — это те же типы, раздробленные на группы. Западные классификации (Schürmann, Wright) хранятся будущим фасетом «альтернативная классификация» с указанием источника, а не смешиваются с основной.</div>
   <ul class="tree">${DATA.school_types.map(([id, ru, az, groups]) => `<li><b><a href="#/" data-school="${id}">${ru}</a></b> <span class="muted">${az} · понятий ${cnt(id)}, схем ${scnt(id)}</span>
-    ${groups.length ? `<ul>${groups.map(([g, gru, gaz]) => `<li><a href="#/" data-school="${id}/${g}">${gru}</a> <span class="muted">${gaz} · понятий ${cnt(id + '/' + g)}</span>${schoolDesc(g)}</li>`).join('')}</ul>` : schoolDesc(id)}</li>`).join('')}</ul>
+    ${groups.length ? `<ul>${groups.map(([g, gru, gaz]) => `<li><a href="#/" data-school="${id}/${g}">${gru}</a> <span class="muted">${gaz} · понятий ${cnt(id + '/' + g)}</span>${schoolDesc(g)}${schoolCarpets(id, g)}</li>`).join('')}${schoolCarpets(id, null) ? `<li><i>без группы</i>${schoolCarpets(id, null)}</li>` : ''}</ul>` : schoolDesc(id) + schoolCarpets(id, null)}</li>`).join('')}</ul>
   <h2>Соответствие схем</h2><table class="t"><tr><th>Керимов (тип)</th><th>«7 школ»</th><th>Wright (Iranica)</th><th>Рынок / Schürmann</th></tr>
   <tr><td>Губа-Ширван</td><td>Губа · Ширван · Баку</td><td>Kuba/Shirvan</td><td>Kuba · Shirvan · Baku (+Moghan, Talish)</td></tr>
   <tr><td>Гянджа-Газах</td><td>Гянджа · Газах</td><td>Ganja/Karabakh · Kazakh/Borchaly</td><td>Gendje · Kazak</td></tr>
@@ -329,6 +338,7 @@ function renderSchools() {
   <p class="muted" style="font-size:13px">Нахчыван и Шуша — кандидаты в группы; спорные отнесения (например, Зейва: Губа у одних авторов, Ширван у других) будут храниться как два утверждения с источниками. Пока большинство понятий без школы: школы в старых данных указаны редко.</p>
   ${otherSchoolsHTML()}${westOpenHTML()}</div>`;
   document.querySelectorAll('a[data-school]').forEach(a => a.onclick = () => { F.school.clear(); F.school.add(a.dataset.school); });
+  lazyThumbs($('#app'));
 }
 
 /* ---------- проверка ---------- */
