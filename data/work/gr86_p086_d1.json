@@ -43,22 +43,25 @@
   "dimensions_cm": "203 x 129"
  },
  "grid": {
-  "pw": 27.0952,
-  "ph": 26.2,
-  "ox": 0,
-  "oy": 0,
+  "pw": 30,
+  "ph": 30,
+  "ox": 30.56,
+  "oy": 8.84,
   "cols": 42,
   "rows": 40,
-  "square": false
+  "square": true
  },
  "meta": {
   "section": "зарисовка пером",
-  "name_az": "",
+  "name_az": "KAZAK",
   "name": "KAZAK",
   "translation": "",
   "carpet": "Kazak",
   "type": "",
-  "note": "Gans-Ruedin 1986, с. 82"
+  "note": "Gans-Ruedin 1986, с. 82",
+  "site_id": "",
+  "source": "",
+  "name_az_auto": true
  },
  "classify": {
   "tones": 1,
@@ -209,7 +212,9 @@
    "n_suspects": 0
   },
   "risk": 1.01,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "scheme_ok": true,
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -219,7 +224,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-06 19:19:42",
+ "saved_at": "2026-10-06 19:34:45",
  "hard": {
   "sig": "4c6834d7bdf6",
   "tiles": [
@@ -1010,5 +1015,12 @@
   ],
   "ntiles": 20,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "transparent_bg": true,
+ "difficulty": null
 }
