@@ -176,6 +176,11 @@ button.bigrev{background:transparent;border-color:#8a3c44;color:#f0b3b9}button.b
 aside{min-height:0}
 .dchip.rev{background:var(--bad)}
 #right .hintbox .htxt{left:auto;right:-6px}
+#userchip{margin-left:10px;white-space:nowrap}#userchip button{padding:4px 10px}
+#um{position:fixed;inset:0;background:#000a;z-index:99;display:flex;align-items:center;justify-content:center}
+#um .bx{background:#1d1d20;border:1px solid #444;border-radius:10px;padding:16px 20px;max-width:760px;width:92vw;max-height:86vh;overflow:auto}
+#um table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 14px}#um td,#um th{padding:4px 8px;border-bottom:1px solid #333;text-align:left}
+#um input{padding:5px 8px;margin:2px 4px 2px 0}#um h3{margin:10px 0 4px}
 #ovbar{justify-self:end;display:flex;gap:4px}#ovbar button{padding:4px 12px}#ovbar button.on{background:var(--acc);color:#111}#tab-close{background:#3a2326}
 .seg{display:inline-flex;border:1px solid var(--ln);border-radius:7px;overflow:hidden}.seg button{border:0;border-radius:0;background:transparent;font-weight:600}.seg button.on{background:var(--acc);color:#111}.seg small{opacity:.7;margin-left:3px}
 .card.kf{outline:2px solid var(--acc);outline-offset:1px}
@@ -241,6 +246,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
     <button id="tab-pipe">◉ Обзор</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button>
   </div>
   <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
+  <span id="userchip"></span>
 </header>
 
 <aside id="left"></aside>
@@ -275,7 +281,7 @@ async function api(path,body,method){
   const opt=body===undefined&&!method?{}:{method:method||'POST',headers:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)};
   const r=await fetch(path,opt);
   if(r.status===401){location.reload();throw new Error('нужен вход');}
-  if(!r.ok){const t=await r.text();throw new Error(path+' → '+r.status+' '+t.slice(0,200));}
+  if(!r.ok){const t=await r.text();let m=null;try{m=JSON.parse(t).error}catch(e){}throw new Error(m||(path+' → '+r.status+' '+t.slice(0,200)));}
   return r.json();
 }
 /* строка состояния: последнее сообщение остаётся на месте (тускнеет), вся история — по кнопке ☰ */
@@ -1906,5 +1912,41 @@ setInterval(pollAct,3000);$('logBtn').onclick=logToggle;
     if(matches.length===1){try{await openFigure(matches[0].id);setMode(S.fig.M?'pix':'grid');stat('открыт по привязке к '+qSite,'ok');}catch(e){fail(e);setMode('sheet');}}
     else{S.catQ=qSite;setMode('cat');stat(matches.length?('найдено рисунков: '+matches.length):('рисунков с привязкой к '+qSite+' не найдено'),matches.length?'ok':'err');}
   }else{setMode('pipe');}
+})();
+
+// ---- v10.19: пользователи ----
+(async()=>{
+  let me; try{me=await fetch('/api/me').then(r=>r.json());}catch(e){return}
+  window.ME=me; const box=document.getElementById('userchip');
+  box.innerHTML=me.local?'':`<button id="uBtn" data-tip="Учётная запись">👤 ${me.name} · ${me.role_ru}</button>`;
+  if(me.role==='viewer')document.body.classList.add('viewer');
+  if(!me.local)document.getElementById('uBtn').onclick=openUM;
+  const esc=t=>String(t==null?'':t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const ago=t=>{if(!t)return '—';const d=Math.floor(Date.now()/1000-t);return d<90?'только что':d<5400?Math.round(d/60)+' мин назад':d<172800?Math.round(d/3600)+' ч назад':new Date(t*1000).toLocaleDateString('ru')};
+  async function post(u,b){const r=await fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||r.status);return j}
+  async function openUM(){
+    let h=`<h3>${esc(me.name)} <small style="color:#999">· ${me.role_ru}</small></h3>
+    ${me.role==='viewer'?'<p style="color:#bbb">У вас права только на просмотр. Чтобы править, попросите администратора выдать роль «редактор».</p>':''}
+    <input id="pwo" type="password" placeholder="старый пароль"><input id="pwn" type="password" placeholder="новый (от 6 символов)"><button id="pwb">Сменить пароль</button> <span id="pwm"></span>`;
+    if(me.role==='admin'){
+      const U=await fetch('/api/users').then(r=>r.json());
+      h+=`<h3>Люди</h3><table><tr><th>Имя</th><th>Роль</th><th>Был</th><th>Правок</th><th>Последняя правка</th><th></th></tr>`+
+      U.map(u=>`<tr><td>${esc(u.name)}</td><td><select data-role="${esc(u.name)}">${['admin','editor','viewer'].map(r=>`<option value="${r}"${r===u.role?' selected':''}>${{admin:'админ',editor:'редактор',viewer:'наблюдатель'}[r]}</option>`).join('')}</select></td><td>${ago(u.last_seen)}</td><td>${u.edits}</td><td>${ago(u.last_edit)}</td><td><button data-reset="${esc(u.name)}">новый пароль</button></td></tr>`).join('')+`</table>
+      <h3>Журнал</h3><select id="actU"><option value="">все</option>${U.map(u=>`<option>${esc(u.name)}</option>`).join('')}</select><div id="actL"></div>`;
+    }
+    const m=document.createElement('div');m.id='um';m.innerHTML=`<div class="bx">${h}<p style="text-align:right"><button id="uOut">Выйти</button> <button id="uClose">Закрыть</button></p></div>`;
+    document.body.appendChild(m);
+    m.onclick=e=>{if(e.target===m)m.remove()};
+    m.querySelector('#uClose').onclick=()=>m.remove();
+    m.querySelector('#uOut').onclick=async()=>{await post('/api/logout',{});location.reload()};
+    m.querySelector('#pwb').onclick=async()=>{const o=m.querySelector('#pwo').value,n=m.querySelector('#pwn').value;try{await post('/api/me/password',{old:o,new:n});m.querySelector('#pwm').textContent='готово'}catch(e){m.querySelector('#pwm').textContent=e.message}};
+    if(me.role==='admin'){
+      m.querySelectorAll('[data-role]').forEach(sel=>sel.onchange=async()=>{try{await post('/api/users/role',{name:sel.dataset.role,role:sel.value})}catch(e){alert(e.message)}});
+      m.querySelectorAll('[data-reset]').forEach(b=>b.onclick=async()=>{if(!confirm('Сбросить пароль '+b.dataset.reset+'?'))return;try{const j=await post('/api/users/reset',{name:b.dataset.reset});prompt('Новый пароль для '+b.dataset.reset+' (передайте человеку):',j.password)}catch(e){alert(e.message)}});
+      const load=async()=>{const u=m.querySelector('#actU').value;const A=await fetch('/api/activity?limit=150&user='+encodeURIComponent(u)).then(r=>r.json());
+        m.querySelector('#actL').innerHTML='<table>'+A.map(a=>`<tr><td>${new Date(a.t*1000).toLocaleString('ru',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</td><td>${esc(a.user)}</td><td>${{edit:'правка',login:'вход',register:'регистрация',password:'смена пароля',role:'роль',reset:'сброс пароля'}[a.do]||esc(a.do)}</td><td style="color:#999">${esc(a.what)}</td></tr>`).join('')+'</table>'};
+      m.querySelector('#actU').onchange=load;load();
+    }
+  }
 })();
 </script></body></html>

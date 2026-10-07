@@ -3,7 +3,6 @@
 __pycache__/
 .DS_Store
 .env
-users.json
 scans/
 uploads/
 data/crops/
@@ -12,3 +11,6 @@ _backup_*/
 .bin/
 .tunnel.log
 .backup_repo/
+data/users.json
+data/auth_secret
+data/INITIAL_PASSWORDS.txt
