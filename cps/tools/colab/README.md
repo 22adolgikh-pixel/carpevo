@@ -40,3 +40,15 @@ _contact_sheet.jpg — обзор всех вырезок, drawings_for_cps.zip 
 %env BOOK=Caucasian_carpets
 %run /content/carpevo/cps/tools/colab/drawings_colab.py
 ```
+
+# Фото ковров azerbaijanrugs → каталог и школы — azrugs_school.py
+
+Папка `carpet-dna/photos/azerbaijan_rugs_guide` (фото + одноимённые .txt). Нужна видеокарта T4 (15–40 мин).
+
+```
+!rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
+%run /content/carpevo/cps/tools/colab/azrugs_school.py
+```
+
+Результат в `carpet-dna/photos/azrugs_school/`: catalog.csv (школа, век, размер, описание), report.json, predictions.csv, disagreements.csv, model.npz (веса для CPS), features.npz (кэш; повторный запуск быстрый).
+Проверка групповая (почти одинаковые фото не попадают одновременно в обучение и проверку).
