@@ -28,7 +28,7 @@ def fname(pid):
 
 def big_url(p):
     u = p['img']
-    if p['src'] == 'wikimedia': return u.replace('/400px-', '/800px-')
+    if p['src'] == 'wikimedia': return u.replace('/400px-', '/500px-')   # стандартный размер Wikimedia (уже в кэше) — не упирается в лимит 429
     if p['src'] == 'aic': return u.replace('/full/400,/', '/full/843,/')
     return u
 
@@ -50,7 +50,8 @@ for i, p in enumerate(items):
         for attempt in range(6):   # Wikimedia: 429 Too Many Requests → ждём и повторяем
             r = requests.get(big_url(p), headers=hd, timeout=60)
             if r.status_code == 429:
-                time.sleep(int(r.headers.get('Retry-After', 0) or 0) or 5 * (attempt + 1)); continue
+                w = min(int(r.headers.get('Retry-After', 0) or 0) or 3 * (attempt + 1), 20)
+                print(f'   {p["id"][:50]}: 429, жду {w} с', flush=True); time.sleep(w); continue
             break
         if r.status_code != 200 and big_url(p) != p['img']:
             r = requests.get(p['img'], headers=hd, timeout=60)
@@ -63,9 +64,9 @@ for i, p in enumerate(items):
     except Exception as e:
         man[p['id']] = {'ok': False, 'err': str(e)[:200]}
     if p['src'] == 'wikimedia': time.sleep(1.0)
-    if i % 25 == 0:
-        print(f'{i + 1}/{len(items)}  ({(time.time() - t0) / 60:.1f} мин)', flush=True)
-        json.dump(man, open(mp, 'w'))
+    done = sum(1 for v in man.values() if v.get('ok'))
+    print(f'{i + 1}/{len(items)} · скачано {done} · {(time.time() - t0) / 60:.1f} мин · {"ок" if man[p["id"]].get("ok") else "ошибка"}', flush=True)
+    if i % 10 == 0: json.dump(man, open(mp, 'w'))
 json.dump(man, open(mp, 'w'))
 
 # миниатюры пачками ≤ 2 МБ
