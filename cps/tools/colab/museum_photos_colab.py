@@ -1,0 +1,78 @@
+# museum_photos_colab.py — скачать фото ковров из открытых коллекций (список: site/model/sources/museum_photos/catalog_photos.json)
+# Результат на Drive (папка carpet-dna/photos/):
+#   full/<id>.jpg     — фото для обучения (как отдаёт источник, до ~840 px)
+#   thumbs/<id>.jpg   — миниатюры 320 px для сайта
+#   thumbs_partN.zip  — миниатюры пачками ≤ 8 МБ (их забирает Claude через Google Drive)
+#   manifest.json     — что скачано, размеры, ошибки
+# Запуск в Colab:
+#   !rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
+#   %run /content/carpevo/cps/tools/colab/museum_photos_colab.py
+# Повторный запуск докачивает только недостающее.
+import os, json, io, re, time, zipfile, hashlib
+import requests
+from PIL import Image
+from google.colab import drive
+
+drive.mount('/content/drive')
+ROOT = '/content/drive/MyDrive/carpet-dna/photos'
+for d in ('full', 'thumbs'):
+    os.makedirs(f'{ROOT}/{d}', exist_ok=True)
+items = json.load(open('/content/carpevo/site/model/sources/museum_photos/catalog_photos.json'))['items']
+H = {'User-Agent': 'CarpetDNA/1.0 (research catalogue of Azerbaijani carpets; contact via github.com/22adolgikh-pixel)'}
+
+
+def fname(pid):
+    s = re.sub(r'[^A-Za-z0-9._-]+', '_', pid)[:80]
+    return s + '_' + hashlib.md5(pid.encode()).hexdigest()[:6]
+
+
+def big_url(p):
+    u = p['img']
+    if p['src'] == 'wikimedia': return u.replace('/400px-', '/800px-')
+    if p['src'] == 'aic': return u.replace('/full/400,/', '/full/843,/')
+    return u
+
+
+man = {}
+mp = f'{ROOT}/manifest.json'
+if os.path.exists(mp): man = json.load(open(mp))
+t0 = time.time()
+for i, p in enumerate(items):
+    fn = fname(p['id'])
+    if man.get(p['id'], {}).get('ok') and os.path.exists(f'{ROOT}/thumbs/{fn}.jpg'):
+        continue
+    try:
+        r = requests.get(big_url(p), headers=H, timeout=60)
+        if r.status_code != 200 and big_url(p) != p['img']:
+            r = requests.get(p['img'], headers=H, timeout=60)
+        r.raise_for_status()
+        im = Image.open(io.BytesIO(r.content)).convert('RGB')
+        im.save(f'{ROOT}/full/{fn}.jpg', quality=90)
+        th = im.copy(); th.thumbnail((320, 320))
+        th.save(f'{ROOT}/thumbs/{fn}.jpg', quality=78)
+        man[p['id']] = {'ok': True, 'file': fn + '.jpg', 'w': im.width, 'h': im.height}
+    except Exception as e:
+        man[p['id']] = {'ok': False, 'err': str(e)[:200]}
+    if p['src'] == 'wikimedia': time.sleep(0.3)
+    if i % 25 == 0:
+        print(f'{i + 1}/{len(items)}  ({(time.time() - t0) / 60:.1f} мин)', flush=True)
+        json.dump(man, open(mp, 'w'))
+json.dump(man, open(mp, 'w'))
+
+# миниатюры пачками ≤ 8 МБ
+for f in os.listdir(ROOT):
+    if f.startswith('thumbs_part') and f.endswith('.zip'): os.remove(f'{ROOT}/{f}')
+part, size, z = 1, 0, None
+for pid, m in sorted(man.items()):
+    if not m.get('ok'): continue
+    fp = f'{ROOT}/thumbs/{m["file"]}'
+    if not os.path.exists(fp): continue
+    s = os.path.getsize(fp)
+    if z is None or size + s > 8_000_000:
+        if z: z.close(); part += 1
+        z = zipfile.ZipFile(f'{ROOT}/thumbs_part{part}.zip', 'w', zipfile.ZIP_STORED); size = 0
+    z.write(fp, m['file']); size += s
+if z: z.close()
+ok = sum(1 for m in man.values() if m.get('ok'))
+print('ИТОГ', json.dumps({'всего': len(items), 'скачано': ok, 'ошибок': len(items) - ok, 'пачек': part}, ensure_ascii=False))
+print('Готово. Напишите Claude: «фото скачаны».')
