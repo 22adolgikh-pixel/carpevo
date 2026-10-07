@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "",
   "type": "",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "kind": "photo",
  "auto": {
@@ -53,5 +55,61 @@
    "похоже на фото ковра, а не на схему — оцифровка не делалась"
   ]
  },
- "saved_at": "2026-10-03 11:06:38"
+ "saved_at": "2026-10-07 19:08:00",
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "grid": {
+  "pw": 4.723,
+  "ph": 4.763,
+  "ox": -1.14,
+  "oy": 2.16,
+  "cols": 158,
+  "rows": 107,
+  "square": false
+ },
+ "classify": {
+  "tones": 5,
+  "inner": 55,
+  "thr": [
+   220,
+   170,
+   136,
+   118,
+   87
+  ],
+  "centers": [
+   246,
+   193,
+   147,
+   125,
+   111,
+   63
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8",
+  "#dedede",
+  "#4f7cd1",
+  "#d98f2e"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1",
+  "тело 2",
+  "тело 3",
+  "тело 4"
+ ],
+ "palette_dyes": [],
+ "palette_touched": false,
+ "done": false,
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
