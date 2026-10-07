@@ -2,7 +2,7 @@
 # Результат на Drive (папка carpet-dna/photos/):
 #   full/<id>.jpg     — фото для обучения (как отдаёт источник, до ~840 px)
 #   thumbs/<id>.jpg   — миниатюры 320 px для сайта
-#   thumbs_partN.zip  — миниатюры пачками ≤ 8 МБ (их забирает Claude через Google Drive)
+#   thumbs_partN.zip  — миниатюры пачками ≤ 2 МБ (их забирает Claude через Google Drive)
 #   manifest.json     — что скачано, размеры, ошибки
 # Запуск в Colab:
 #   !rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
@@ -42,9 +42,18 @@ for i, p in enumerate(items):
     if man.get(p['id'], {}).get('ok') and os.path.exists(f'{ROOT}/thumbs/{fn}.jpg'):
         continue
     try:
-        r = requests.get(big_url(p), headers=H, timeout=60)
+        hd = dict(H)
+        if p['src'] == 'aic':   # IIIF Чикаго отвечает 403 на «небраузерные» запросы
+            hd = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36',
+                  'AIC-User-Agent': H['User-Agent'], 'Referer': 'https://www.artic.edu/'}
+        r = None
+        for attempt in range(6):   # Wikimedia: 429 Too Many Requests → ждём и повторяем
+            r = requests.get(big_url(p), headers=hd, timeout=60)
+            if r.status_code == 429:
+                time.sleep(int(r.headers.get('Retry-After', 0) or 0) or 5 * (attempt + 1)); continue
+            break
         if r.status_code != 200 and big_url(p) != p['img']:
-            r = requests.get(p['img'], headers=H, timeout=60)
+            r = requests.get(p['img'], headers=hd, timeout=60)
         r.raise_for_status()
         im = Image.open(io.BytesIO(r.content)).convert('RGB')
         im.save(f'{ROOT}/full/{fn}.jpg', quality=90)
@@ -53,13 +62,13 @@ for i, p in enumerate(items):
         man[p['id']] = {'ok': True, 'file': fn + '.jpg', 'w': im.width, 'h': im.height}
     except Exception as e:
         man[p['id']] = {'ok': False, 'err': str(e)[:200]}
-    if p['src'] == 'wikimedia': time.sleep(0.3)
+    if p['src'] == 'wikimedia': time.sleep(1.0)
     if i % 25 == 0:
         print(f'{i + 1}/{len(items)}  ({(time.time() - t0) / 60:.1f} мин)', flush=True)
         json.dump(man, open(mp, 'w'))
 json.dump(man, open(mp, 'w'))
 
-# миниатюры пачками ≤ 8 МБ
+# миниатюры пачками ≤ 2 МБ
 for f in os.listdir(ROOT):
     if f.startswith('thumbs_part') and f.endswith('.zip'): os.remove(f'{ROOT}/{f}')
 part, size, z = 1, 0, None
@@ -68,7 +77,7 @@ for pid, m in sorted(man.items()):
     fp = f'{ROOT}/thumbs/{m["file"]}'
     if not os.path.exists(fp): continue
     s = os.path.getsize(fp)
-    if z is None or size + s > 8_000_000:
+    if z is None or size + s > 2_000_000:
         if z: z.close(); part += 1
         z = zipfile.ZipFile(f'{ROOT}/thumbs_part{part}.zip', 'w', zipfile.ZIP_STORED); size = 0
     z.write(fp, m['file']); size += s
