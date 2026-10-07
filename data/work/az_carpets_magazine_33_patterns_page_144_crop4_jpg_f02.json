@@ -107,7 +107,9 @@
    "share": 0.0
   },
   "risk": 1.5,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "photo": false,
+  "marked_photo": true
  },
  "done": false,
  "adjust": {
@@ -117,7 +119,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-07 06:48:10",
+ "saved_at": "2026-10-07 18:52:05",
  "auto_matrix": {
   "w": 11,
   "h": 8,
@@ -141,5 +143,7 @@
   "tiles": [],
   "ntiles": 2,
   "verified": []
- }
+ },
+ "kind_before": null,
+ "kind": "junk"
 }

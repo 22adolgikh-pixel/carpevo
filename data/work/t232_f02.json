@@ -183,7 +183,9 @@
   },
   "risk": 1.48,
   "difficulty_est": "ultra",
-  "edited": true
+  "edited": true,
+  "photo": true,
+  "marked_photo": true
  },
  "done": false,
  "adjust": {
@@ -193,7 +195,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-06 20:04:16",
+ "saved_at": "2026-10-07 18:52:21",
  "auto_matrix": {
   "w": 133,
   "h": 72,
@@ -30225,5 +30227,7 @@
  ],
  "review": true,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "kind_before": null,
+ "kind": "photo"
 }
