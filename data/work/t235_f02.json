@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "",
   "type": "",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 30.2,
@@ -81,7 +83,7 @@
    "....11....11111..11112..1",
    "11..11.1..11.1.21111.....",
    "1221.1.11.1.1112.121..2..",
-   "1.2111..1...22111..221..2",
+   "1.2111..1...22111..121..2",
    "..1..1.11..11.1..121..1..",
    ".111...11.111.11..11.1..."
   ]
@@ -124,7 +126,8 @@
   "difficulty_est": "simple",
   "grid_strength": 0.492,
   "photo": true,
-  "marked_photo": true
+  "marked_photo": true,
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -134,7 +137,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-04 17:34:03",
+ "saved_at": "2026-10-07 18:10:04",
  "auto_matrix": {
   "w": 25,
   "h": 16,
@@ -1134,6 +1137,13 @@
   "ntiles": 6,
   "verified": []
  },
- "review": true,
- "kind": "photo"
+ "review": false,
+ "kind": "photo",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "transparent_bg": true,
+ "difficulty": null
 }
