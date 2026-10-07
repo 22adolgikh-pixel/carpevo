@@ -16,20 +16,20 @@
  "difficulty": null,
  "quad": [
   [
-   29.72,
-   31.53
+   30.63,
+   30.75
   ],
   [
-   328.77,
-   31.53
+   329.68,
+   32.32
   ],
   [
-   328.77,
-   379.79
+   327.86,
+   380.57
   ],
   [
-   29.72,
-   379.79
+   28.81,
+   379
   ]
  ],
  "meta": {
@@ -39,16 +39,18 @@
   "translation": "",
   "carpet": "Мараза",
   "type": "К.—Ш",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
-  "pw": 4.9016,
-  "ph": 4.9014,
-  "ox": 0,
-  "oy": 0,
-  "cols": 61,
-  "rows": 71,
-  "square": true
+  "pw": 4.9416,
+  "ph": 4.8616,
+  "ox": 23.73,
+  "oy": 12.08,
+  "cols": 55,
+  "rows": 69,
+  "square": false
  },
  "classify": {
   "tones": 1,
@@ -189,7 +191,9 @@
    "n_suspects": 0
   },
   "risk": 1.46,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "scheme_ok": true,
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -199,7 +203,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-07 06:48:58",
+ "saved_at": "2026-10-07 06:57:25",
  "auto_matrix": {
   "w": 61,
   "h": 71,
@@ -15208,5 +15212,12 @@
   ],
   "ntiles": 56,
   "verified": []
- }
+ },
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true
 }
