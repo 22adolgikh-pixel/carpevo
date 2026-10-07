@@ -16,6 +16,22 @@ _cp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'model', 'c
 CSCH = json.load(open(_cp))['items'] if os.path.exists(_cp) else {}
 _pp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'model', 'sources', 'museum_photos', 'catalog_photos.json')
 PHOTOS = json.load(open(_pp))['items'] if os.path.exists(_pp) else []
+
+# локальные миниатюры (скачаны в Colab/браузере): вшиваем 160 px data-URI, иначе остаётся внешняя ссылка
+_TD = os.environ.get('THUMBS_DIRS', '')
+if _TD:
+    import re as _re, hashlib as _hl, io as _io, base64 as _b64
+    from PIL import Image as _Im
+    _fn = lambda pid: _re.sub(r'[^A-Za-z0-9._-]+', '_', pid)[:80] + '_' + _hl.md5(pid.encode()).hexdigest()[:6]
+    _dirs = [d for d in _TD.split(os.pathsep) if d]
+    _emb = 0
+    for _p in PHOTOS:
+        for _d in _dirs:
+            _f = os.path.join(_d, _fn(_p['id']) + '.jpg')
+            if os.path.exists(_f):
+                _im = _Im.open(_f).convert('RGB'); _im.thumbnail((240, 240)); _b = _io.BytesIO(); _im.save(_b, 'JPEG', quality=50, optimize=True)
+                _p['img_remote'] = _p['img']; _p['img'] = 'data:image/jpeg;base64,' + _b64.b64encode(_b.getvalue()).decode(); _emb += 1; break
+    print('миниатюры вшиты:', _emb, 'из', len(PHOTOS))
 BASIS_RU = {'kerimov': 'по переводу Керимова / легенде таблицы', 'book': 'по тексту книги Керимова', 'ai_language': 'разбор слова (ИИ)',
             'place_name': 'название по месту (ИИ)', 'unknown': 'значение не установлено'}
 
