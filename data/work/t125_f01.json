@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   42.59,
-   40.03
+   43.33,
+   39.22
   ],
   [
-   506.0,
-   40.03
+   506.74,
+   40.84
   ],
   [
-   506.0,
-   462.24
+   505.26,
+   463.05
   ],
   [
-   42.59,
-   462.24
+   41.85,
+   461.43
   ]
  ],
  "meta": {
@@ -38,16 +38,18 @@
   "translation": "",
   "carpet": "Куба",
   "type": "К.-Ш",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
-  "pw": 4.9255,
-  "ph": 5.0843,
-  "ox": 0,
-  "oy": 0,
+  "pw": 4.8955,
+  "ph": 4.8955,
+  "ox": 1.77,
+  "oy": -3.78,
   "cols": 94,
   "rows": 83,
-  "square": false
+  "square": true
  },
  "classify": {
   "tones": 1,
@@ -187,7 +189,8 @@
    "n_suspects": 0
   },
   "risk": 1.45,
-  "difficulty_est": "complex"
+  "difficulty_est": "complex",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -197,7 +200,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-07 06:48:49",
+ "saved_at": "2026-10-07 14:46:48",
  "auto_matrix": {
   "w": 79,
   "h": 69,
@@ -3746,5 +3749,12 @@
   "ntiles": 56,
   "verified": []
  },
- "review": true
+ "review": true,
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "transparent_bg": true,
+ "difficulty": null
 }
