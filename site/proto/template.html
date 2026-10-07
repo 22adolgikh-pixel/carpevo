@@ -37,6 +37,11 @@
   .note { border:1px solid var(--border); background:var(--bg-alt); padding:9px 12px; font-size:13px; border-radius:4px; margin-bottom:14px; }
   .bar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px; color:var(--soft); font-size:13px; }
   .bar select { font:inherit; padding:3px 6px; background:var(--bg); color:var(--text); border:1px solid var(--border); }
+  .pgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+  .pcard { border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--bg); }
+  .pcard img { width:100%; height:200px; object-fit:contain; background:#f3f1ec; display:block; }
+  .pcard .pc { padding:8px 10px; font-size:13px; line-height:1.35; }
+  .tag.on { background:var(--accent); color:#fff; border-color:var(--accent); }
   .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; }
   .card { min-width:0; display:flex; gap:10px; align-items:center; padding:8px; border:1px solid var(--line); border-radius:6px; background:var(--card); color:var(--text); min-height:66px; }
   .card:hover { border-color:var(--border); text-decoration:none; }
@@ -81,6 +86,7 @@
     <a href="#/schools" data-r="schools">Школы</a>
     <a href="#/review" data-r="review">Проверка</a>
     <a href="#/schemes" data-r="schemes">Схемы</a>
+    <a href="#/photos" data-r="photos">Фото ковров</a>
     <a href="#/plates" data-r="plates">Ковры из книг</a>
     <a href="#/about" data-r="about">О модели</a>
   </nav>
@@ -145,6 +151,7 @@ function lazyThumbs(root) {
 }
 function thHTML(c, z) {
   z = z || 48;
+  if (c.t !== 'ornament' && c.ph && c.ph.length) { const P = DATA.photos[c.ph[0]]; return `<span class="th photo" style="width:${z}px;height:${z}px;flex-basis:${z}px" title="фото: ${esc(P.title)}"><img loading="lazy" src="${esc(P.img)}" referrerpolicy="no-referrer" style="width:${z}px;height:${z}px;object-fit:cover;filter:none" alt="">${c.ph.length > 1 ? `<b class="cnt">${c.ph.length}</b>` : ''}</span>`; }
   const L = c.sch.length ? c.sch : (c.ill || []);
   if (!L.length) return `<span class="th empty" style="width:${z}px;height:${z}px;flex-basis:${z}px"></span>`;
   return `<span class="th" style="width:${z}px;height:${z}px;flex-basis:${z}px"${c.sch.length ? '' : ' title="узор этого ковра из таблиц Керимова"'}><img data-s="${L[0]}" data-z="${z}" width="${z}" height="${z}" alt="">${L.length > 1 ? `<b class="cnt">${L.length}</b>` : ''}</span>`;
@@ -269,6 +276,7 @@ function renderConcept(id) {
     <h1>${esc(cap(c.h))}</h1><div class="sub1">${esc(c.m.ru || '')}${c.m.en ? ` · <i>${esc(c.m.en)}</i>` : ''}<span class="muted" style="font-size:12px;margin-left:8px">${esc(MQ[c.mq] || '')}</span>${c.mo ? `<div class="muted" style="font-size:12px">прежний машинный перевод: «${esc(c.mo)}»</div>` : ''}</div>
     <div class="tags" style="margin-top:8px">${(c.cl || []).map(k => `<a class="tag auto" href="#/" data-cls="${k}" title="${c.cq === 'ai' ? 'класс по значению (ИИ)' : 'класс поставлен машиной'}">${CLS[k].ru}</a>`).join('')}${c.cl && c.cl.length ? `<span class="muted" style="font-size:12px;margin-left:6px">${c.cq === 'ai' ? 'классы по значению (ИИ)' : 'классы по ключевым словам (машина)'}</span>` : ''}</div>
     ${merged}
+    ${c.ph && c.ph.length ? `<h2>Фото (${c.ph.length}) <span class="pill auto" title="подписи музеев и Wikimedia, отнесено ИИ">открытые коллекции</span></h2><div class="pgrid">${c.ph.slice(0, 12).map(i => photoCard(DATA.photos[i])).join('')}</div>` : ''}
     ${c.ds ? `<h2>Описание <span class="pill auto" title="пересказ составлен ИИ по тексту книги, человеком не проверен">черновик ИИ · не проверено</span></h2>
       ${descHTML(c.ds)}${(c.ds.more || []).map(d => `<h3 style="margin-top:18px;color:var(--accent)">Ещё: ${esc(d.src)}</h3>` + descHTML(d)).join('')}` : ''}
     ${figs ? `<h2>Схемы (${c.sch.length})</h2><div class="figs">${figs}</div>` : ''}
@@ -294,6 +302,30 @@ function renderConcept(id) {
 function pgRef(p) { return p.startsWith('f') ? 'стр. скана ' + p.slice(1) : p.startsWith('m1-') ? 'стр. PDF ч.1: ' + p.slice(3) : p.startsWith('m2-') ? 'стр. PDF ч.2: ' + p.slice(3) : 'с. ' + p; }
 function descHTML(ds) {
   return `<div class="desc">${ds.sections.map(s => `<h3>${esc(s.title)}</h3><p>${esc(s.text)} <span class="muted" style="font-size:12px">— ${esc(ds.src)}, ${(s.pages || []).map(p => esc(pgRef(String(p)))).join(', ')}${s.figs && s.figs.length ? ' · в книге: ' + s.figs.map(esc).join(', ') : ''}</span></p>`).join('')}</div>`;
+}
+const SRCN = {aic: 'Art Institute of Chicago', met: 'The Met', cleveland: 'Cleveland Museum of Art', wikimedia: 'Wikimedia Commons'};
+function photoCard(P) {
+  const sch = P.type ? (SCHOOL[P.type + (P.group ? '/' + P.group : '')] || SCHOOL[P.type] || P.type) : (P.region || 'школа не указана');
+  const c = P.concept && C[P.concept] ? C[P.concept] : null;
+  return `<div class="pcard"><a href="${esc(P.url)}" target="_blank" rel="noopener"><img loading="lazy" referrerpolicy="no-referrer" src="${esc(P.img)}" alt="${esc(P.title)}"></a>
+    <div class="pc"><b>${esc(P.title.replace(/\.(jpe?g|png|tif+)$/i, '').slice(0, 90))}</b>
+    <div class="muted">${esc(sch)}${c ? ` · <a href="#/c/${encodeURIComponent(c.id)}">${esc(cap(c.h))}</a>` : ''}${P.century ? ' · ' + esc(P.century) + ' в.' : (P.date ? ' · ' + esc(String(P.date).slice(0, 30)) : '')}${P.conf !== 'high' ? ` · <span title="отнесение по тексту записи: ${esc(P.basis || '')}">${P.conf === 'medium' ? 'вероятно' : 'под вопросом'}</span>` : ''}${P.whole ? '' : ' · фрагмент/деталь'}</div>
+    <div class="muted" style="font-size:11px">${esc(SRCN[P.src] || P.src)} · ${esc(P.license)}${P.artist ? ' · ' + esc(P.artist.slice(0, 40)) : ''}</div></div></div>`;
+}
+let PF = {type: '', whole: true, src: ''};
+function renderPhotos() {
+  const P = DATA.photos.filter(p => (!PF.type || (PF.type === '_none' ? !p.type : p.type === PF.type)) && (!PF.whole || p.whole) && (!PF.src || p.src === PF.src));
+  const cnt = f => DATA.photos.filter(f).length;
+  const opt = (k, v, lbl, n) => `<a href="#/photos" data-pf="${k}" data-v="${v}" class="tag ${PF[k] === v ? 'on' : ''}">${lbl} <span class="muted">${n}</span></a>`;
+  $('#app').innerHTML = `<div style="max-width:1200px"><h1>Фото ковров</h1>
+  <div class="note">Фотографии из открытых коллекций: Art Institute of Chicago, The Met, Cleveland Museum of Art (CC0 / общественное достояние) и Wikimedia Commons (лицензия указана у каждого фото). Картинки не копируются — показываются с сайтов-источников; клик открывает страницу предмета. <b>Школа и название проставлены ИИ по подписи музея или категории Wikimedia, сами изображения пока не проверены глазами.</b> Это же — стартовый набор для обучения распознаванию.</div>
+  <div class="tags" style="margin:10px 0">${opt('type', '', 'все школы', cnt(p => !PF.whole || p.whole))}${DATA.school_types.map(([id, ru]) => opt('type', id, ru, cnt(p => p.type === id && (!PF.whole || p.whole)))).join('')}${opt('type', '_none', 'без школы', cnt(p => !p.type && (!PF.whole || p.whole)))}</div>
+  <div class="tags" style="margin:0 0 10px">${opt('src', '', 'все источники', DATA.photos.length)}${Object.keys(SRCN).map(k => opt('src', k, SRCN[k], cnt(p => p.src === k))).join('')}
+   <label style="margin-left:10px"><input type="checkbox" id="pfw" ${PF.whole ? 'checked' : ''}> только целые ковры</label></div>
+  <div class="muted" style="margin-bottom:8px">показано ${P.length}</div>
+  <div class="pgrid">${P.slice(0, 400).map(photoCard).join('')}</div>${P.length > 400 ? '<p class="muted">показаны первые 400 — уточните фильтр</p>' : ''}</div>`;
+  document.querySelectorAll('a[data-pf]').forEach(a => a.onclick = e => { e.preventDefault(); PF[a.dataset.pf] = a.dataset.v; renderPhotos(); });
+  $('#pfw').onchange = e => { PF.whole = e.target.checked; renderPhotos(); };
 }
 function westOpenHTML() {
   const W = DATA.west_open || {terms: [], types: [], borders: []};
@@ -411,6 +443,7 @@ function route() {
   else if (p === 'review') renderReview();
   else if (p === 'about') renderAbout();
   else if (p === 'plates') renderPlates();
+  else if (p === 'photos') renderPhotos();
   else if (p === 'schemes') renderSchemes();
   else renderCatalog('ornament');
 }

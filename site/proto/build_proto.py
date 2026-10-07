@@ -14,6 +14,8 @@ _tp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'model', 't
 TRANSL = json.load(open(_tp))['items'] if os.path.exists(_tp) else {}
 _cp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'model', 'carpet_schools.json')
 CSCH = json.load(open(_cp))['items'] if os.path.exists(_cp) else {}
+_pp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'model', 'sources', 'museum_photos', 'catalog_photos.json')
+PHOTOS = json.load(open(_pp))['items'] if os.path.exists(_pp) else []
 BASIS_RU = {'kerimov': 'по переводу Керимова / легенде таблицы', 'book': 'по тексту книги Керимова', 'ai_language': 'разбор слова (ИИ)',
             'place_name': 'название по месту (ИИ)', 'unknown': 'значение не установлено'}
 
@@ -133,6 +135,13 @@ def main(site_data, schemes_path, out_html, label=None):
             key = '/'.join(filter(None, [k.get('type'), k.get('group') if k.get('group') in ('guba', 'shirvan', 'baku', 'ganja', 'gazakh') else None]))
             if key and key not in c['sc']: c['sc'][key] = 0          # 0 = школа из привязки ковров (carpet_schools.json), не из таблиц
         if not c['sch'] and cc_of.get(c['id']): c['ill'] = cc_of[c['id']][:6]
+    ph_of = C.defaultdict(list)
+    for i, ph in enumerate(PHOTOS):
+        if ph.get('concept'): ph_of[tmap.get(ph['concept'], ph['concept'])].append(i)
+    for c in concepts:
+        if ph_of.get(c['id']):
+            # сначала целые ковры с высокой уверенностью
+            c['ph'] = sorted(ph_of[c['id']], key=lambda i: (not PHOTOS[i]['whole'], PHOTOS[i]['conf'] != 'high'))
     carriers = []
     for k in D.get('carriers') or []:
         cid = tmap.get(k.get('term_id'))
@@ -169,7 +178,7 @@ def main(site_data, schemes_path, out_html, label=None):
     for c in concepts: c['w'] = west.get(c['id'], [])
     DATA = {'concepts': concepts, 'rel': rel, 'tmap': tmap, 'queue': queue, 'schemes': sch,
             'sources': srcs, 'carriers': carriers, 'plates': plates,
-            'west_open': west_open, 'school_desc': {k[7:]: v for k, v in desc.items() if k.startswith('school:')}, 'classes': CLASSES, 'school_types': SCHOOL_TYPES, 'meta': meta}
+            'west_open': west_open, 'photos': PHOTOS, 'school_desc': {k[7:]: v for k, v in desc.items() if k.startswith('school:')}, 'classes': CLASSES, 'school_types': SCHOOL_TYPES, 'meta': meta}
     tpl = open(os.path.join(HERE, 'template.html')).read()
     js = json.dumps(DATA, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     open(out_html, 'w').write(tpl.replace('/*__DATA__*/null', js))
