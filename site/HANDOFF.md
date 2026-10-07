@@ -19,14 +19,10 @@
 - Каталог фото: `site/model/sources/museum_photos/catalog_photos.json` — 684 фото (Wikimedia 603, Met 65, AIC 11, Cleveland 5) с ИИ-разметкой (школа, целиком/деталь, уверенность, `check` = нужна проверка глазами, ≈190).
 
 ## 2. Как собрать прототип (v13)
-```
-cd site/proto
-THUMBS_DIRS=папка1:папка2 python3 build_proto.py SITE_DATA.json SCHEMES.json OUT.html "прототип v13"
-```
-- Входы лежат в рабочих каталогах старой сессии (`/tmp/claude-0/site_build/data.json`, `db_full.json`) — в новой сессии их нет; их нужно восстановить из репозитория/Drive или запросить у пользователя (см. README в site/proto).
-- `THUMBS_DIRS` — каталоги с миниатюрами `<id-имя>_<md5[:6]>.jpg` (функция `fname` в `cps/tools/colab/museum_photos_colab.py`). Без переменной в страницу попадут внешние ссылки (часть из них не показывается).
-- Миниатюры вшиваются как 240 px JPEG (q50) → страница ≈ 11,8 МБ (лимит артефакта 16 МБ). Если понадобится больше фото — уменьшить размер или вынести в файлы.
-- Публикация: Artifact c `url` выше и путём к HTML.
+Из корня репозитория: `sh site/proto/rebuild.sh "прототип v14" /tmp/carpet_dna_proto.html`
+- Входы лежат в репозитории: `site/proto/inputs/site_data.json.gz` (данные старого сайта), `schemes_db_full.json.gz` (схемы CPS), миниатюры 684 фото — `site/model/sources/museum_photos/thumbs/` (240 px JPEG, имя = `fname(id)` из `cps/tools/colab/museum_photos_colab.py`).
+- Без `THUMBS_DIRS` в страницу попадут внешние ссылки (часть не показывается). Страница ≈ 11,8 МБ (лимит артефакта 16 МБ).
+- Публикация: Artifact с `url` выше и путём к HTML. Новые описания/решения добавляются в `site/model/…` и подхватываются сборкой.
 
 ## 3. Фото: где что лежит
 - Drive, папка `carpet-dna/photos` (id 1bJ7NZ8vvrG98MoeKep0OqfW0SotEsEAL): `full/` (для обучения), `thumbs/`, `thumbs_part1–6.zip`, `manifest.json`. В Colab скачано 415 из 684 (Wikimedia режет IP Colab: 429).
