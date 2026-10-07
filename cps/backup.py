@@ -12,7 +12,7 @@ import os, shutil, subprocess, threading, time
 REPO = os.environ.get("CPS_BACKUP_REPO", "22adolgikh-pixel/carpevo")
 BRANCH = os.environ.get("CPS_BACKUP_BRANCH", "cps-data")
 EVERY = float(os.environ.get("CPS_BACKUP_MIN", "10"))
-ITEMS = ("work", "sheets", "legend.csv", "i18n.json", "site_index.json", "cell_model.json")
+ITEMS = ("work", "sheets", "legend.csv", "i18n.json", "site_index.json", "cell_model.json", "sources_hidden.json")
 
 state = {"enabled": False, "last_ok": None, "last_commit": None, "last_error": None, "running": False}
 _lock = threading.Lock()

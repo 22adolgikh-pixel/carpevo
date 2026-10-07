@@ -191,6 +191,44 @@ aside{min-height:0}
 #hv{position:fixed;inset:0;z-index:70;background:rgba(8,10,14,.98);display:flex;flex-direction:column;padding:12px 18px;gap:10px}
 #hv .rvh,#hv .rvf{display:flex;align-items:center;gap:12px;flex-wrap:wrap}#hv .rvf button{padding:10px 18px;font-size:14px}#hv .rvf button.sm{padding:6px 10px;font-size:12px}
 #hv kbd{background:rgba(0,0,0,.25);border-radius:3px;padding:0 5px;margin-left:4px;font-size:12px}#hv .rvdone{margin:auto;text-align:center;max-width:560px}
+/* v10.18 «Обзор» */
+.dash{max-width:1040px;margin:0 auto}
+.dash h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:600;margin:22px 0 8px}
+.kpis{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px}
+.kpi{background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:12px 14px;min-width:0}
+.kpi .kv{font-size:26px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}.kpi .kv small{font-size:14px;color:var(--mut);font-weight:500}
+.kpi .kl{color:var(--mut);font-size:12px;margin-top:3px}
+.pbar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:#2a2f3a;margin-top:10px}.pbar i{display:block;height:100%}
+.pleg{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--mut);margin-top:6px}.pleg b{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:0}
+.steps{background:var(--pan);border:1px solid var(--ln);border-radius:10px;overflow:hidden}
+.stp{display:flex;gap:12px;align-items:center;padding:10px 14px;border-top:1px solid var(--ln)}.stp:first-child{border-top:none}
+.stp .si{width:22px;height:22px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:2px solid var(--ln);color:var(--mut)}
+.stp.done{opacity:.55}.stp.done .si{border-color:var(--ok);color:var(--ok)}
+.stp.next{background:rgba(255,180,84,.07)}.stp.next .si{background:var(--acc);border-color:var(--acc);color:#1a1405}
+.stp.running .si{border-color:var(--acc);border-top-color:transparent;animation:sp .8s linear infinite}
+.stp .sb{flex:1;min-width:0}.stp .st{font-weight:600}.stp .st .cnt{font-variant-numeric:tabular-nums;color:var(--acc);margin-left:6px}.stp.done .st .cnt{color:var(--ok)}
+.stp .ss{color:var(--mut);font-size:12px}
+.stp .sa{display:flex;gap:6px;flex:none}
+.stp.next .sa button:first-child{background:var(--acc);color:#15171c;border-color:var(--acc)}
+.srcs{width:100%;border-collapse:collapse;background:var(--pan);border:1px solid var(--ln);border-radius:10px;overflow:hidden;font-variant-numeric:tabular-nums}
+.srcs th{text-align:left;font-weight:500;color:var(--mut);font-size:11.5px;padding:8px 10px;border-bottom:1px solid var(--ln)}
+.srcs td{padding:9px 10px;border-top:1px solid var(--ln);vertical-align:middle}.srcs tr:first-child td{border-top:none}
+.srcs td.n{text-align:right;white-space:nowrap}.srcs th.n{text-align:right}
+.srcs .mini{width:120px;height:6px;border-radius:3px;background:#2a2f3a;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:6px}.srcs .mini i{display:block;height:100%;background:var(--ok)}
+.srcs tr.hid td{color:var(--mut)}
+.newchip{display:inline-block;background:rgba(108,182,255,.15);color:var(--blue);border-radius:9px;padding:0 7px;font-size:11px;margin-left:6px}
+.dcard{background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:12px 14px}
+details.svc summary{cursor:pointer;color:var(--mut);margin:22px 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:12px}
+@media(max-width:900px){.kpis{grid-template-columns:1fr 1fr}}
+/* сортировка «схема / фото / не рисунок» */
+#sv{position:fixed;inset:0;z-index:70;background:rgba(8,10,14,.98);display:flex;flex-direction:column;padding:12px 18px;gap:10px}
+#sv .rvh,#sv .rvf{display:flex;align-items:center;gap:12px;flex-wrap:wrap}#sv .rvf button{padding:10px 18px;font-size:14px}
+#sv kbd{background:rgba(0,0,0,.25);border-radius:3px;padding:0 5px;margin-left:4px;font-size:12px}#sv .rvdone{margin:auto;text-align:center;max-width:560px}
+#sv .svi{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}#sv .svi img{width:100%;height:100%;object-fit:contain;border-radius:6px}
+/* редактор: «это не узор» */
+.notpat{margin-top:10px;padding:8px;border:1px dashed var(--ln);border-radius:8px}.notpat .flex{margin-top:6px}
+.kindbar{background:rgba(224,108,117,.12);border:1px solid var(--bad);border-radius:8px;padding:8px;margin-bottom:8px;font-size:12.5px}
 #hv .rvb{flex:1;min-height:0;display:flex;gap:14px}#hv .rvp{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center}#hv .rvp .pvl{align-self:stretch}
 #hv canvas{border-radius:6px;cursor:crosshair;max-width:100%}#hv .rvp:first-child canvas{cursor:default}
 .srcbar{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:8px}
@@ -200,7 +238,7 @@ aside{min-height:0}
 <header>
   <b>🧶 Carpet Pattern Studio</b>
   <div class="tabs">
-    <button id="tab-pipe">⚙ Конвейер</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button>
+    <button id="tab-pipe">◉ Обзор</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button>
   </div>
   <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -888,10 +926,22 @@ MODES.grid={
 };
 function syncGridInputs(){const F=S.fig;if(!F)return;const G=F.grid;[['gPw',G.pw],['gPh',G.ph],['gOx',G.ox],['gOy',G.oy],['gCols',G.cols],['gRows',G.rows]].forEach(([id,v])=>{const e=$(id);if(e&&document.activeElement!==e)e.value=v;});drawHist();}
 
+/* ---- v10.18: картинка оказалась не схемой (фото ковра, текст, мусор) ---- */
+function kindBarHTML(){const F=S.fig,k=F&&F.work.kind;if(k!=='photo'&&k!=='junk')return '';
+  return `<div class="kindbar">${k==='photo'?'📷 Отмечено как <b>фото ковра</b> — в очередь схем не идёт.':'✕ Отмечено как <b>не рисунок</b> — скрыт из списков.'} <span class="suggest" id="kindBack">это всё-таки схема</span></div>`;}
+function notPatternHTML(){const F=S.fig,k=F&&F.work.kind;if(k==='photo'||k==='junk')return '';
+  return `<div class="notpat"><div class="mut" style="font-size:12px">Распознано неправильно — это не схема узора?</div><div class="flex"><button class="sm" id="kPhoto" data-tip="Фото ковра: убрать из очереди схем, оставить в каталоге как фото">📷 это фото ковра</button><button class="sm" id="kJunk" data-tip="Текст, подпись, мусор с листа: скрыть отовсюду (файлы не удаляются)">✕ не рисунок</button></div></div>`;}
+function bindKind(){const b=$('kindBack');if(b)b.onclick=()=>setKind('scheme');const p=$('kPhoto');if(p)p.onclick=()=>setKind('photo');const j=$('kJunk');if(j)j.onclick=()=>setKind('junk');}
+async function setKind(k){const F=S.fig;if(!F)return;
+  try{if(S.dirty)await saveFigure(true);const r=await api('/api/kind/'+encodeURIComponent(F.id),{kind:k});
+    if(k==='scheme'){F.work.kind=r.kind==='scheme'?undefined:r.kind;await refreshFigures();renderRight();renderSbInfo();stat(F.id+': снова схема','ok');return;}
+    stat(F.id+(k==='photo'?': отмечено как фото ковра':': убрано как «не рисунок»'),'ok');
+    F.work.kind=k;F.done=false;const id=F.id;await gotoFig(1,true);
+    S.figures=await api('/api/figures');if(S.fig&&S.fig.id===id)renderRight();}catch(e){fail(e);}}
 function renderRightGrid(){
   const F=S.fig,R=$('right');if(!F){R.innerHTML='';return;}
   const G=F.grid,A=F.adj,C=F.cls;S.gridView=S.gridView||'grid';
-  R.innerHTML=`<div class="seg" style="margin-bottom:8px"><button id="vQuad" class="${S.gridView==='quad'?'on':''}">① углы на скане</button><button id="vGrid" class="${S.gridView==='grid'?'on':''}">② сетка</button></div>
+  R.innerHTML=`${kindBarHTML()}<div class="seg" style="margin-bottom:8px"><button id="vQuad" class="${S.gridView==='quad'?'on':''}">① углы на скане</button><button id="vGrid" class="${S.gridView==='grid'?'on':''}">② сетка</button></div>
   <h4>Вид ${HT('<b>Показать пиксели</b> — поверх скана рисуются клетки в цветах палитры (как получатся после «Извлечь»). Ту же цветную версию можно <b>подглядеть</b>, удерживая <kbd>Пробел</kbd>, — не переключая вкладку.')}</h4>
   <div class="vcard">
     <div class="ibar">${IB('pixels','Показать пиксели поверх скана · держите Пробел — оригинал скана в цвете','','id="pv"',F.preview)}<input type="range" id="pvA" min="0.1" max="1" step="0.05" value="${F.previewAlpha||0.6}" style="flex:1;min-width:40px" data-tip="прозрачность пикселей"></div>
@@ -923,6 +973,7 @@ function renderRightGrid(){
   <canvas class="hist" id="hist" width="580" height="120" data-tip="тяните вертикальные линии-пороги мышью"></canvas>
   <div class="flex" style="justify-content:space-between;font-size:11px;color:var(--mut);margin-top:2px"><span>← тёмные (тушь)</span><span>светлые (бумага) →</span></div>
   <div id="thrBox"></div>
+  ${notPatternHTML()}
   <div class="rfoot">
     <button id="toPix" class="big on" data-tip="Перевести клетки в пиксели по текущей сетке и порогам${F.M?' — ручные правки пикселей будут заменены':''}">▦ Извлечь в пиксели ${G.cols}×${G.rows} →</button>
     <button id="autoFig" class="big pri" data-tip="Сетка и пиксели автоматически (углы, шаг, наклон, контур и заливка)">⚡ Авто: сетка и пиксели</button>
@@ -968,7 +1019,7 @@ function renderRightGrid(){
   $('pv').onclick=e=>{F.preview=!F.preview;$('pv').classList.toggle('on',F.preview);redraw();};$('pvA').oninput=e=>{F.previewAlpha=+e.target.value;redraw();};
   F.previewAlpha=F.previewAlpha||0.6;
   $('blankEx').onchange=e=>{F.blankExtract=e.target.checked;};
-  $('toPix').onclick=extractToPixels;
+  $('toPix').onclick=extractToPixels;bindKind();
   $('autoFig').onclick=()=>autoFigure().catch(fail);bindAutoOpts('g');
   if($('gNcolGo'))$('gNcolGo').onclick=()=>autoFigure({mode:'color',ncolors:+$('gNcol').value||null}).catch(fail);
   renderThr();drawHist();histEvents();
@@ -1184,7 +1235,7 @@ function renderRightPix(){
   const m=F.meta,M=F.M;
   const E=(side,d,arrow,tip)=>`<button class="${d>0?'add':'del'}" data-op="${side}:${d}" data-tip="${tip} (Shift — ×5)">${arrow}</button>`;
   const ids=(m.site_id||'').split(',').map(x=>x.trim()).filter(Boolean);
-  R.innerHTML=`  <h4>Палитра <span class="hintbox">?<span class="htxt">Клик — выбрать цвет для рисования, двойной клик — сменить цвет, ✕ при наведении — удалить. <kbd>1</kbd> — фон, <kbd>2</kbd>–<kbd>9</kbd> — цвета. <kbd>X</kbd> — переключиться на предыдущий цвет (как в Illustrator). <kbd>Alt</kbd>+клик по клетке — взять её цвет. Левая кнопка мыши рисует выбранным цветом, правая — фоном.</span></span></h4>
+  R.innerHTML=`${kindBarHTML()}  <h4>Палитра <span class="hintbox">?<span class="htxt">Клик — выбрать цвет для рисования, двойной клик — сменить цвет, ✕ при наведении — удалить. <kbd>1</kbd> — фон, <kbd>2</kbd>–<kbd>9</kbd> — цвета. <kbd>X</kbd> — переключиться на предыдущий цвет (как в Illustrator). <kbd>Alt</kbd>+клик по клетке — взять её цвет. Левая кнопка мыши рисует выбранным цветом, правая — фоном.</span></span></h4>
   <div class="palgrid" id="palBox"></div>
   <div class="flex" style="gap:10px;margin:4px 0 2px;font-size:12px;color:var(--mut)"><label class="flex" style="gap:6px" data-tip="Цвет фона (клетки без цвета). Тот же цвет можно сменить двойным кликом по плитке 1."><input type="color" id="bgCol" value="${F.palette[0]}" style="width:26px;height:22px;padding:0;border:1px solid var(--ln);background:none"> цвет фона</label><label class="flex" style="gap:5px" data-tip="Выключено — файлы «PNG» и «×12» тоже получат цвет фона. «×12 с фоном» всегда с фоном."><input type="checkbox" id="bgTr" ${F.transparent?'checked':''}> прозрачный в PNG</label></div>
   <div class="opts" style="margin-top:2px"><button class="sm" id="palDye" data-tip="Выбрать краситель для выбранного цвета (или двойной клик по плитке)">краситель…</button><button class="sm" id="palSnap" data-tip="Подписать цвета ближайшими красителями из библиотеки. Сами цвета не меняются — остаются как на скане">↻ подписать красителями</button></div>
@@ -1212,6 +1263,7 @@ function renderRightPix(){
     <span></span><div class="eg">${E('B',-1,'▲','Убрать ряд снизу')}${E('B',1,'▼','Добавить ряд снизу')}</div><span></span>
   </div>
   <div style="margin:6px 0">${HT('Инструменты — слева от холста. <kbd>Пробел</kbd> (удерживать) — подглядеть скан, <kbd>Пробел</kbd>+тянуть — сдвиг, <kbd>U</kbd> — подложка вкл/выкл.<br>Зеркала: рисуете одну часть, остальное повторяется само. <kbd>Alt</kbd>+тянуть по фиолетовой пунктирной линии — сдвинуть ось.<br>Копирование (<kbd>C</kbd>): выделите область, дальше клики вставляют её (<kbd>Esc</kbd> — отмена).<br>Всё сохраняется само через секунду после правки. <kbd>[</kbd> <kbd>]</kbd> — предыдущий / следующий рисунок.<br>Сетка: жирная линия — каждые 10 узлов от левого верхнего угла, маленькие ▸ на краях — середина; скрыть — кнопка сетки в «Виде» или <kbd>⌘\'</kbd>.')}</div>
+  ${notPatternHTML()}
   <div class="rfoot">
     ${F.done||F.review?`<div class="hint" style="margin:0">${F.done?'<span style="color:var(--ok)">✓ уже отмечен готовым</span>':'<span style="color:var(--bad)">⚠ отмечен на пересмотр</span>'} · <span class="suggest" id="backToWork">вернуть в работу</span></div>`:''}
     <button id="reviewNext" class="big pri" data-tip="Отложить сложный рисунок (не идёт на сайт, легко найти в каталоге) и открыть следующий">⚠ На пересмотр → след.</button>
@@ -1226,7 +1278,7 @@ function renderRightPix(){
   $('doneNext').onclick=()=>finishFigure('done');
   $('reviewNext').onclick=()=>finishFigure('review');
   const bw=$('backToWork');if(bw)bw.onclick=()=>{F.done=false;F.review=false;markDirty();renderRight();};
-  $('editDesc').onclick=openDescModal;
+  $('editDesc').onclick=openDescModal;bindKind();
   renderToolcol();renderPal();renderInfo();outLinks();renderSbInfo();
 }
 async function finishFigure(kind){const F=S.fig;if(!F)return;
@@ -1512,18 +1564,19 @@ function hvNext(){const H=S.hv;if(!H)return;H.i++;hvLoad();}
 function hvRender(){
   const H=S.hv;if(!H){const e=$('hv');if(e)e.remove();return;}
   const el=hvEl(),c=H.cur;
-  if(!c){el.innerHTML=`<div class="rvdone"><div style="font-size:20px;margin-bottom:8px">Трудные места просмотрены</div><div>принято рисунков: <b>${H.acc}</b> · проверено кусков: <b>${H.tiles}</b> · исправлено клеток: <b>${H.fixed}</b></div><div class="mut" style="margin-top:8px">Проверенные куски уже годятся для обучения: «обучить на готовых» в конвейере (шаг 5).</div><div style="margin-top:14px"><button id="hvX">закрыть</button></div></div>`;$('hvX').onclick=hvClose;return;}
+  if(!c){el.innerHTML=`<div class="rvdone"><div style="font-size:20px;margin-bottom:8px">Трудные места просмотрены</div><div>принято рисунков: <b>${H.acc}</b> · проверено кусков: <b>${H.tiles}</b> · исправлено клеток: <b>${H.fixed}</b></div><div class="mut" style="margin-top:8px">Дальше — «Обзор»: дообучить распознавание, когда наберётся новых готовых.</div><div style="margin-top:14px"><button id="hvX">закрыть</button></div></div>`;$('hvX').onclick=hvClose;return;}
   const f=S.figures.find(v=>v.id===c.id)||{};
   const head=`<div class="rvh"><b>🎯 ${esc(dispName(f)||c.id)}</b><span class="mut">${esc(c.id)}${f.size?' · '+f.size[0]+'×'+f.size[1]:''}</span><span class="sp"></span><span class="mut">рисунок ${H.i+1} / ${H.list.length} · принято ${H.acc} · кусков ${H.tiles} · исправлено клеток ${H.fixed}</span><button class="sm" id="hvX">✕ закрыть (Esc)</button></div>`;
   const tail=(extra)=>`<button class="sm" id="hvGeo" data-tip="геометрия и сетка этого рисунка">▦ сетка</button><button class="sm" id="hvEdit" data-tip="открыть в «Пикселях» целиком">✎ целиком <kbd>E</kbd></button><span class="sp"></span>${extra||''}<button id="hvRev" style="background:var(--bad)">✗ на доработку <kbd>X</kbd></button><button id="hvSkip">→ пропустить рисунок</button>`;
   if(c.error){el.innerHTML=head+`<div class="rvdone">${esc(c.error)}</div><div class="rvf">${tail()}</div>`;}
   else if(c.weak){
-    el.innerHTML=head+`<div class="rvdone"><div style="font-size:17px;margin-bottom:6px">Сетка слабая (сила ${(+c.d.strength).toFixed(2)}) — это фото ковра или схема?</div><div class="mut" style="margin-bottom:8px">Обычно слабая сетка — фото/рисунок без миллиметровки (из 12 проверенных: 8 фото, 4 схемы с узкой каймой). Один клик решает, показывать ли куски.</div><img id="hvWi" style="width:min(70vw,760px);max-height:52vh;object-fit:contain;background:#fff;border:1px solid var(--line,#444)" src="${c.img.src}"></div>
-    <div class="rvf"><button id="hvPh" style="background:var(--bad)">📷 это фото <kbd>F</kbd></button><button id="hvSc" style="background:var(--ok)">▦ это схема — показать куски <kbd>S</kbd></button><span class="sp"></span><button id="hvEdit" class="sm">✎ целиком <kbd>E</kbd></button><button id="hvSkip">→ пропустить</button></div>`;
-    const mk=async k=>{try{await api('/api/hard/'+encodeURIComponent(c.id)+'/kind',{kind:k});
+    el.innerHTML=head+`<div class="rvdone"><div style="font-size:17px;margin-bottom:6px">Сетка слабая (сила ${(+c.d.strength).toFixed(2)}) — это фото ковра или схема?</div><img id="hvWi" style="width:min(70vw,760px);max-height:52vh;object-fit:contain;background:#fff;border:1px solid var(--line,#444)" src="${c.img.src}"></div>
+    <div class="rvf"><button id="hvPh" style="background:var(--bad)">📷 это фото <kbd>F</kbd></button><button id="hvSc" style="background:var(--ok)">▦ это схема — показать куски <kbd>S</kbd></button><button id="hvJk" class="sm" data-tip="текст, подпись, мусор — скрыть отовсюду">✕ не рисунок <kbd>D</kbd></button><span class="sp"></span><button id="hvEdit" class="sm">✎ целиком <kbd>E</kbd></button><button id="hvSkip">→ пропустить</button></div>`;
+    const mk=async k=>{try{await api('/api/kind/'+encodeURIComponent(c.id),{kind:k});
+      if(k==='junk'){S.figures=S.figures.filter(v=>v.id!==c.id);stat(c.id+': убрано как «не рисунок»','ok');return hvNext();}
       if(k==='photo'){H.photos=(H.photos||0)+1;const f=S.figures.find(v=>v.id===c.id);if(f)f.photo=true;stat(c.id+': отмечено как фото','ok');return hvNext();}
       hvLoad();}catch(e){fail(e);}};
-    $('hvPh').onclick=()=>mk('photo');$('hvSc').onclick=()=>mk('scheme');
+    $('hvPh').onclick=()=>mk('photo');$('hvSc').onclick=()=>mk('scheme');$('hvJk').onclick=()=>mk('junk');
     $('hvX').onclick=hvClose;$('hvSkip').onclick=hvNext;
     $('hvEdit').onclick=()=>{const id=c.id;hvClose();openFigure(id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail);};
     return;}
@@ -1591,7 +1644,7 @@ function hvKey(e){
   const H=S.hv;if(!H)return false;const k=kk(e),c=H.cur;
   if(e.key==='Escape'){hvClose();return true;}
   if(!c){if(e.key==='Enter')hvClose();return true;}
-  if(c.weak){if(k==='f'){$('hvPh')&&$('hvPh').click();return true;}if(k==='s'){$('hvSc')&&$('hvSc').click();return true;}
+  if(c.weak){if(k==='f'){$('hvPh')&&$('hvPh').click();return true;}if(k==='s'){$('hvSc')&&$('hvSc').click();return true;}if(k==='d'){$('hvJk')&&$('hvJk').click();return true;}
     if(k==='e'){$('hvEdit')&&$('hvEdit').click();return true;}if(e.key==='ArrowRight'){$('hvSkip')&&$('hvSkip').click();}return true;}
   if(e.key==='ArrowRight'){$('hvSkip')&&$('hvSkip').click();return true;}
   if(k==='x'){$('hvRev')&&$('hvRev').click();return true;}
@@ -1633,48 +1686,122 @@ function renderRightQueue(){
   upd();
 }
 
-/* ---- ⚙ Конвейер: разметка листов → оцифровка → проверка → доработка → дообучение ---- */
+/* ---- ◉ Обзор (v10.18): прогресс, шаги по порядку, источники, что нового ---- */
+const STEP_BTN={
+  segment:c=>[['▶ Нарезать','sg'],['листы','sgL']],
+  auto:c=>[['▶ Распознать','au']],
+  drawing:c=>[['открыть следующую','dr']],
+  weak:c=>[['Разобрать','wk']],
+  accept:c=>[['✓ Принять '+c,'ac']],
+  check:c=>[['🎯 Трудные места','hd'],['очередь','qu']],
+  train:c=>[['Обучить','tr']]};
 async function renderPipe(){
   const C=$('catalog');if(S.mode!=='pipe')return;
-  let P;try{P=await api('/api/pipeline');}catch(e){C.innerHTML='<div class="hint">не удалось получить сводку: '+esc(e.message||e)+'</div>';return;}
-  if(S.mode!=='pipe')return;
-  const sh=P.sheets,f=P.figures,pr=P.prowl,md=P.model,run=pr.running;
-  const stage={segment:'разметка листов',auto:'оцифровка',hard:'трудные места',redo:'перепрогон',regray:'серая заливка'}[pr.stage]||'';
-  const step=(n,title,body,btns)=>`<div class="pstep"><div class="pn">${n}</div><div class="pb"><b>${title}</b><div class="pt">${body}</div><div class="flex" style="gap:8px;margin-top:8px;flex-wrap:wrap">${btns}</div></div></div>`;
-  const dl={simple:'простых',medium:'средних',complex:'сложных',ultra:'ультра'};
-  C.innerHTML=`<div class="flex" style="margin-bottom:10px;flex-wrap:wrap;row-gap:8px"><b style="font-size:15px">Конвейер</b><span class="sp"></span>
-    <button id="pAll" ${run?'disabled':''}>▶ Запустить весь конвейер (шаги 1–2)</button><button id="pStop" class="sm" ${run?'':'disabled'}>■ стоп</button></div>
-  <div class="hint" id="pRun" style="margin-bottom:12px">${run?`идёт: ${stage} ${pr.done}/${pr.total}${pr.current?' · '+esc(pr.current):''}${pr.errors?' · ошибок '+pr.errors:''}`:(pr.finished?`последний прогон завершён ${esc(pr.finished)}: ${pr.done}/${pr.total}${pr.errors?', ошибок '+pr.errors:''}`:'прогон не запускался')}</div>
-  ${step(1,'Листы → разметка рамок',`Листов: ${sh.total} · размечено ${sh.cut}${sh.auto_cut?` (из них автоматически, не проверено глазами: ${sh.auto_cut})`:''} · без рисунков ${sh.empty} · <b>без разметки ${sh.uncut}</b>. Рамки ищутся автоматически, номер таблицы — по номеру страницы.`,
-     `<button class="sm" id="pSeg" ${run||!sh.uncut?'disabled':''}>▶ разметить ${sh.uncut} листов</button><button class="sm" id="pToSheets">открыть листы</button>`)}
-  ${step(2,'Оцифровка и оценка узора',`Рисунков: ${f.total} · не оцифровано <b>${f.undigitized}</b> · фото (не схемы) ${f.photo}. Для каждого определяется ЧБ/цвет, сетка, пиксели, симметрия, раппорт каймы, оценка сложности и риск ошибок.`,
-     `<button class="sm" id="pAuto" ${run||!f.undigitized?'disabled':''}>▶ оцифровать ${f.undigitized} рисунков</button><button class="sm" id="pRedo" ${run||!pr.pending_redo?'disabled':''} data-tip="Пересчитать свежим алгоритмом (серая заливка, раппорт кайм, модель) все автоматы, которых вы не касались: не принятые, не правленные, с нетронутой палитрой. Принятые и правленные не меняются.">↻ перепрогнать ${pr.pending_redo??'…'} непроверенных</button>`)}
-  ${step(3,'Проверка списка',`Ждут проверки <b>${f.queue}</b>: надёжных ${f.queue_low} · средних ${f.queue_mid} · рискованных ${f.queue_high}.${Object.keys(P.queue_difficulty||{}).filter(k=>k!=='null').length?' По сложности (оценка): '+Object.entries(P.queue_difficulty).filter(([k])=>k!=='null').map(([k,v])=>v+' '+(dl[k]||k)).join(' · ')+'.':''}`,
-     `<button class="sm" id="pQueue">открыть очередь</button><button class="sm" id="pLow" ${f.queue_low?'':'disabled'}>✓ принять ${f.queue_low} надёжных</button><button class="sm" id="pHardGo" ${f.queue?'':'disabled'} data-tip="Проверять только спорные куски 10×10 (пороги и модель расходятся). Все куски проверены — рисунок принят. Проверенные куски сразу учат модель.">🎯 трудные места</button><button class="sm" id="pHardCalc" ${run||!pr.pending_hard?'disabled':''} data-tip="Посчитать трудные куски заранее для всей очереди (в фоне), чтобы проверка шла без ожидания и в начале шли рисунки с малым числом кусков">посчитать трудные места (${pr.pending_hard??'…'})</button><div class="mut" style="width:100%">${f.hard_ready?`Посчитано для ${f.hard_ready} рисунков: осталось кусков ${f.hard_tiles}${f.hard_zero?`, у ${f.hard_zero} спорных мест нет — примутся сразу`:''}.`:''}</div>`)}
-  ${step('≈','Повторы узоров',`Один узор у Керимова бывает и в ЧБ, и в цвете (и дважды на разных листах). Сравнивается силуэт «не фон» во всех поворотах/отражениях; найденные пары — только кандидаты.<div id="dupBox" class="mut" style="margin-top:6px"></div>`,
-     `<button class="sm" id="pDup">найти повторы</button>`)}
-  ${step(4,'Ручная доработка сложных',`Рискованных (риск > 0,55): <b>${f.queue_high}</b> · отмечено на пересмотр: ${f.review}. В очереди они идут сверху при сортировке «рискованные сначала»; оранжевые рамки в «Пикселях» показывают клетки, нарушающие симметрию.`,
-     `<button class="sm" id="pHard" ${f.queue_high?'':'disabled'}>открыть рискованные</button>`)}
-  ${step(5,'Дообучение модели',`Готовых: ${f.done} (ЧБ ${f.done_bw}). ${md.present?`Модель обучена ${esc(md.trained||'')}${md.n_figures?' на '+md.n_figures+' рисунках':''}${md.cv_model!=null?` · ошибка ${(100*md.cv_model).toFixed(1)}% против ${(100*md.cv_threshold).toFixed(1)}% у порогов`:''}. Изменено после обучения: ${f.new_done_bw}.`:'Модели ещё нет — работают пороги.'} Модель учится на ваших готовых ЧБ-рисунках и подключается к «Авто» там, где пороги неуверенны.`,
-     `<button class="sm" id="pTrain" ${f.done_bw<30?'disabled':''}>обучить на готовых</button><button class="sm" id="pBroken" data-tip="Найти повреждённые файлы данных (обрыв записи) — они ломают обучение">проверить файлы</button><button class="sm" id="pLost" data-tip="Принятые ч/б рисунки без серого, где автомат видит заливку (старый прогон её стирал). Серое добавится в пустые клетки, контур не меняется, рисунок вернётся в проверку">вернуть серое в принятых</button><span class="mut" id="pTrainInfo"></span>`)}`;
-  const go=async(stages)=>{try{const r=await api('/api/prowl/start',{stages});stat(r.started?'прогон запущен: '+r.total+' шагов':'нечего обрабатывать','ok');}catch(e){fail(e);}renderPipe();};
-  $('pAll').onclick=()=>go(['segment','auto']);$('pRedo').onclick=()=>{if(confirm('Пересчитать '+(pr.pending_redo||0)+' непроверенных автоматов новым алгоритмом? Принятые и правленные вами не изменятся.'))go(['redo']);};$('pSeg').onclick=()=>go(['segment']);$('pAuto').onclick=()=>go(['auto']);
-  $('pStop').onclick=async()=>{await api('/api/prowl/stop',{});renderPipe();};
+  let D;try{D=await api('/api/dashboard');}catch(e){C.innerHTML='<div class="hint">не удалось получить сводку: '+esc(e.message||e)+'</div>';return;}
+  if(S.mode!=='pipe')return;S.dash=D;
+  const T=D.totals,f=T.figs,sh=T.sheets,pr=D.prowl,run=pr.running;
+  const sch=Math.max(1,T.schemes),inq=f.queue+f.weak,wait=f.todo+f.drawing_todo,pc=x=>(100*x/sch).toFixed(1);
+  const stg={segment:'нарезка листов',auto:'распознавание',hard:'трудные места',redo:'перепрогон',regray:'серая заливка'}[pr.stage]||'прогон';
+  const stIcon=s=>s.state==='done'?'✓':s.state==='running'?'':s.state==='next'?'!':'';
+  const steps=D.steps.map(s=>`<div class="stp ${s.state}"><div class="si">${stIcon(s)}</div><div class="sb"><div class="st">${esc(s.title)}${s.count?`<span class="cnt">${s.count} ${esc(plural(s.count,s.unit))}</span>`:'<span class="cnt">готово</span>'}</div><div class="ss">${s.state==='running'?`идёт: ${pr.done}/${pr.total}${pr.current?' · '+esc(pr.current):''}`:esc(s.sub)}</div></div>
+    <div class="sa">${s.count&&s.state!=='running'?STEP_BTN[s.id](s.count).map(([l,k])=>`<button class="sm" data-st="${k}" ${run&&['sg','au','tr'].includes(k)?'disabled':''}>${l}</button>`).join(''):''}</div></div>`).join('');
+  const vis=D.sources.filter(s=>!s.hidden&&(s.sheets.total||s.figs.total)),hid=D.sources.filter(s=>s.hidden);
+  const srow=s=>{const F=s.figs,n=F.total-F.photo-F.junk,dn=n?Math.round(100*F.done/n):0,nw=s.new||{},nn=[nw.sheets&&nw.sheets+' лист.',nw.figs&&nw.figs+' рис.'].filter(Boolean).join(', ');
+    return `<tr class="${s.hidden?'hid':''}"><td>${esc(s.title)}${nn?`<span class="newchip">новое: ${nn}</span>`:''}</td>
+    <td class="n">${s.sheets.cut+s.sheets.empty}/${s.sheets.total}</td><td class="n">${n}</td>
+    <td><span class="mini"><i style="width:${dn}%"></i></span>${F.done} <span class="mut">(${dn}%)</span></td>
+    <td class="n">${F.queue+F.weak+F.todo+F.drawing_todo||'—'}</td><td class="n">${F.photo||'—'}</td>
+    <td class="n"><button class="sm" data-hide="${esc(s.key)}" data-v="${s.hidden?0:1}">${s.hidden?'вернуть':'скрыть'}</button></td></tr>`;};
+  const sc=D.school;
+  C.innerHTML=`<div class="dash">
+  <div class="flex" style="margin-bottom:12px"><b style="font-size:16px">Обзор</b><span class="sp"></span>
+    ${run?`<span class="mut"><span class="spin"></span>${stg} ${pr.done}/${pr.total}</span><button class="sm" id="pStop">■ стоп</button>`:''}</div>
+  <div class="kpis">
+    <div class="kpi"><div class="kv">${f.done} <small>из ${T.schemes} схем готово</small></div>
+      <div class="pbar"><i style="width:${pc(f.done)}%;background:var(--ok)"></i><i style="width:${pc(inq)}%;background:var(--blue)"></i><i style="width:${pc(wait)}%;background:#5b6270"></i></div>
+      <div class="pleg"><span><b style="background:var(--ok)"></b>готово ${f.done}</span><span><b style="background:var(--blue)"></b>на проверке ${inq}</span><span><b style="background:#5b6270"></b>не распознано ${wait}</span><span>отсеяно фото ${f.photo}${f.junk?' · не рисунков '+f.junk:''}</span></div></div>
+    <div class="kpi"><div class="kv">${inq}</div><div class="kl">ждут проверки</div></div>
+    <div class="kpi"><div class="kv">${wait}</div><div class="kl">ждут распознавания${f.drawing_todo?` <span class="mut">(зарисовок ${f.drawing_todo})</span>`:''}</div></div>
+    <div class="kpi"><div class="kv">${sh.uncut}</div><div class="kl">листов не нарезано · всего ${sh.total}</div></div>
+  </div>
+  <h3>Что делать дальше</h3><div class="steps">${steps}</div>
+  <h3>Источники</h3>
+  <table class="srcs"><tr><th>источник</th><th class="n">листов</th><th class="n">схем</th><th>готово</th><th class="n">в работе</th><th class="n">фото</th><th></th></tr>${vis.map(srow).join('')}${hid.map(srow).join('')}</table>
+  ${hid.length?`<div class="hint">Скрытые источники не показываются в «Листах» и «Рисунках» и не трогаются прогонами. Файлы и разметка сохранены.</div>`:''}
+  <h3>Распознавание школ по фото ковров</h3>
+  <div class="dcard">${sc?`<div class="flex" style="gap:18px;align-items:baseline"><span style="font-size:24px;font-weight:700">${Math.round(100*sc.accuracy)}%</span><span class="mut">верно угадывает школу (наугад — ${Math.round(100*sc.baseline)}%) · обучено на ${sc.train} фото из ${sc.photos} · ${esc(sc.date)}</span></div>
+    <div class="pleg" style="margin-top:8px">${Object.entries(sc.classes||{}).map(([k,v])=>`<span>${esc(SCHOOL_RU[k]||k)}: ${v}</span>`).join('')}</div>
+    <div style="margin-top:8px">Расхождений с разметкой: <b>${sc.disagreements}</b>${sc.disagreements_in_train?` (из них в обучающих фото: ${sc.disagreements_in_train})`:''}. ${esc(sc.next||'')}</div>
+    <div class="mut" style="margin-top:4px;font-size:12px">Считается отдельно от студии (Colab), результаты — на Google Drive.</div>`:'<span class="mut">Модели ещё нет.</span>'}</div>
+  <details class="svc"><summary>Обслуживание</summary><div class="flex">
+    <button class="sm" id="pRedo" ${run||!pr.pending_redo?'':''}>↻ перепрогнать непроверенные</button>
+    <button class="sm" id="pHardCalc" ${run?'disabled':''}>посчитать трудные места заранее</button>
+    <button class="sm" id="pDup">найти повторы узоров</button>
+    <button class="sm" id="pBroken">проверить файлы</button>
+    <button class="sm" id="pLost">вернуть серое в принятых</button>
+    <button class="sm" id="rkBack">досчитать риск и симметрию</button>
+    <span class="mut" id="pTrainInfo" style="width:100%"></span><div id="dupBox" class="mut" style="width:100%"></div></div></details>
+  </div>`;
+  const go=async(stages)=>{try{const r=await api('/api/prowl/start',{stages});stat(r.started?'запущено: '+r.total+' шагов':'нечего обрабатывать','ok');pollAct();}catch(e){fail(e);}renderPipe();};
+  const act={sg:()=>go(['segment']),sgL:()=>setMode('sheet'),au:()=>go(['auto']),
+    dr:async()=>{const n=S.figures.find(x=>x.drawing&&!x.size&&!x.done);if(!n){stat('зарисовок без пикселей нет','ok');return;}try{await openFigure(n.id);setMode('grid');}catch(e){fail(e);}},
+    wk:()=>openSort(S.figures.filter(x=>x.weak&&!x.done&&!x.photo).map(x=>x.id),'Сетка не нашлась уверенно'),
+    ac:async()=>{const ids=S.figures.filter(x=>x.auto&&x.size&&!x.done&&!x.photo&&!x.weak&&qrisk(x)<=0.25).map(x=>x.id);
+      if(!ids.length||!confirm('Принять '+ids.length+' надёжных рисунков как готовые? Их можно открыть и поправить позже.'))return;
+      try{const r=await api('/api/accept',{ids});await refreshFigures();stat('принято: '+r.accepted,'ok');}catch(e){fail(e);}renderPipe();},
+    hd:()=>openHard(),qu:()=>{S.qSort='risk_asc';setMode('queue');},
+    tr:async()=>{try{await api('/api/model/train',{});stat('обучение идёт в фоне — ход внизу','busy');pollAct();}catch(x){fail(x);}}};
+  C.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>act[b.dataset.st]());
+  C.querySelectorAll('[data-hide]').forEach(b=>b.onclick=async()=>{const v=b.dataset.v==='1';
+    if(v&&!confirm('Скрыть источник? Он пропадёт из «Листов» и «Рисунков», прогоны его не тронут. Файлы останутся, вернуть можно здесь же.'))return;
+    try{await api('/api/sources/hide',{source:b.dataset.hide,hidden:v});[S.sheets,S.figures]=await Promise.all([api('/api/sheets'),api('/api/figures')]);renderPipe();renderRight();}catch(e){fail(e);}});
+  $('pStop')&&($('pStop').onclick=async()=>{await api('/api/prowl/stop',{});renderPipe();});
+  $('pRedo').onclick=()=>{if(confirm('Пересчитать непроверенные автоматы новым алгоритмом? Принятые и правленные вами не изменятся.'))go(['redo']);};
+  $('pHardCalc').onclick=()=>go(['hard']);
+  $('rkBack').onclick=async()=>{try{const r=await api('/api/risk_backfill',{});await refreshFigures();stat('досчитано: '+r.updated,'ok');}catch(e){fail(e);}};
   $('pDup').onclick=async()=>{const b=$('dupBox');b.textContent='ищу…';try{const r=await fetch('/api/dupes').then(x=>x.json());
     b.innerHTML=r.pairs.length?'Пар: <b>'+r.pairs.length+'</b> (ЧБ↔цвет: '+r.pairs.filter(p=>p.cross).length+')<div style="max-height:220px;overflow:auto;margin-top:4px">'+r.pairs.slice(0,80).map(p=>`<div><a href="#" data-a="${p.a}">${p.a}</a> ↔ <a href="#" data-a="${p.b}">${p.b}</a> · ${(100*p.iou).toFixed(0)}%${p.cross?' · <b>ЧБ↔цвет</b>':''} ${esc(p.name_a||p.name_b||'')}</div>`).join('')+'</div>':'повторов не найдено (проверено рисунков: '+r.n+')';
     b.querySelectorAll('a[data-a]').forEach(a=>a.onclick=async e=>{e.preventDefault();try{await openFigure(a.dataset.a);setMode(S.fig.M?'pix':'grid');}catch(x){fail(x);}});}catch(e){b.textContent='ошибка: '+e;}};
-  $('pToSheets').onclick=()=>setMode('sheet');
-  $('pQueue').onclick=()=>{S.qSort='risk_asc';setMode('queue');};
-  $('pHardGo').onclick=()=>openHard();$('pHardCalc').onclick=()=>go(['hard']);
-  $('pHard').onclick=()=>{S.qSort='risk_desc';setMode('queue');};
-  $('pLow').onclick=async()=>{const ids=S.figures.filter(x=>x.auto&&x.size&&!x.done&&!x.photo&&(x.risk!=null?x.risk:(1-(x.auto_conf??0)))<=0.25).map(x=>x.id);
-    if(!ids.length||!confirm('Принять '+ids.length+' надёжных рисунков как готовые? Их можно будет открыть и поправить позже.'))return;
-    try{const r=await api('/api/accept',{ids});await refreshFigures();stat('принято: '+r.accepted,'ok');}catch(e){fail(e);}renderPipe();};
-  $('pTrain').onclick=async()=>{const e=$('pTrainInfo');try{await api('/api/model/train',{});e.textContent=' идёт в фоне — ход в строке состояния внизу';stat('обучение модели запущено','busy');pollAct();}catch(x){e.textContent=' '+(x.message||x);}};
-  $('pLost')&&($('pLost').onclick=async()=>{const r=await fetch('/api/lostgray').then(x=>x.json());const e=$('pTrainInfo');e.textContent=r.count?(' кандидатов: '+r.count):' кандидатов нет';if(r.count&&confirm('У '+r.count+' принятых рисунков автомат видит серую заливку, которой нет в вашем результате. Добавить серое и вернуть их в проверку? (прежняя матрица сохранится в файле рисунка)')){const q=await fetch('/api/lostgray?fix=1').then(x=>x.json());stat('серое возвращено в '+q.count+' рисунков, они снова в проверке','ok');}});
-  $('pBroken')&&($('pBroken').onclick=async()=>{const r=await fetch('/api/broken').then(x=>x.json());const e=$('pTrainInfo');e.textContent=r.broken.length?(' битых файлов: '+r.broken.length+' ('+r.broken.slice(0,3).map(b=>b.file).join(', ')+'…)'):' битых файлов нет';if(r.broken.length&&confirm('Убрать '+r.broken.length+' битых файлов в data/broken? (прежняя версия есть в бэкапе cps-data)')){await fetch('/api/broken?fix=1').then(x=>x.json());stat('битые файлы убраны в data/broken','ok');}});
-  clearTimeout(S.pipeT);if(run)S.pipeT=setTimeout(()=>{refreshFigures();renderPipe();},3000);
+  $('pLost').onclick=async()=>{const r=await fetch('/api/lostgray').then(x=>x.json());const e=$('pTrainInfo');e.textContent=r.count?('кандидатов: '+r.count):'кандидатов нет';if(r.count&&confirm('У '+r.count+' принятых рисунков автомат видит серую заливку, которой нет в вашем результате. Добавить серое и вернуть их в проверку? (прежняя матрица сохранится в файле рисунка)')){const q=await fetch('/api/lostgray?fix=1').then(x=>x.json());stat('серое возвращено в '+q.count+' рисунков, они снова в проверке','ok');renderPipe();}};
+  $('pBroken').onclick=async()=>{const r=await fetch('/api/broken').then(x=>x.json());const e=$('pTrainInfo');e.textContent=r.broken.length?('битых файлов: '+r.broken.length+' ('+r.broken.slice(0,3).map(b=>b.file).join(', ')+'…)'):'битых файлов нет';if(r.broken.length&&confirm('Убрать '+r.broken.length+' битых файлов в data/broken? (прежняя версия есть в бэкапе cps-data)')){await fetch('/api/broken?fix=1').then(x=>x.json());stat('битые файлы убраны в data/broken','ok');}};
+  renderRightDash();
+  clearTimeout(S.pipeT);if(run)S.pipeT=setTimeout(()=>{refreshFigures();renderPipe();},4000);
 }
+function plural(n,u){if(!Array.isArray(u))return u||'';const a=n%10,b=n%100;return u[a===1&&b!==11?0:a>=2&&a<=4&&(b<12||b>14)?1:2];}
+const SCHOOL_RU={'guba-shirvan':'Губа-Ширван','karabakh':'Карабах','ganja-gazakh':'Гянджа-Газах','tabriz':'Тебриз'};
+function renderRightDash(){
+  const R=$('right'),D=S.dash;if(!D||S.mode!=='pipe')return;
+  const n=D.new,rows=D.sources.filter(s=>!s.hidden&&s.new&&(s.new.sheets||s.new.figs||s.new.done));
+  const pr=D.prowl;
+  R.innerHTML=`<h4>Что нового</h4><div class="hint" style="margin-top:0">с ${esc(D.seen_at||'—')}</div>
+  ${rows.length?rows.map(s=>`<div style="margin:6px 0"><b>${esc(s.title)}</b><div class="mut">${[s.new.sheets&&('новых листов: '+s.new.sheets),s.new.figs&&('новых рисунков: '+s.new.figs),s.new.done&&('стало готовыми: '+s.new.done)].filter(Boolean).join(' · ')}</div></div>`).join('')+`<button class="sm" id="dSeen" style="margin-top:6px">✓ просмотрено</button>`:'<div class="mut">ничего нового</div>'}
+  <h4>Последний прогон</h4><div class="mut">${pr.running?'идёт сейчас':pr.finished?`завершён ${esc(pr.finished)}: ${pr.done}/${pr.total}${pr.errors?`, <span style="color:var(--bad)">ошибок ${pr.errors}</span>`:''}`:'не запускался'}</div>
+  ${(pr.log||[]).length?`<div class="hint" style="max-height:160px;overflow:auto">${pr.log.slice(-8).map(esc).join('<br>')}</div>`:''}
+  <h4>Модель клеток (ЧБ)</h4><div class="mut">${D.model.present?`обучена ${esc(D.model.trained||'')}${D.model.cv_model!=null?` · ошибка ${(100*D.model.cv_model).toFixed(1)}% (пороги ${(100*D.model.cv_threshold).toFixed(1)}%)`:''}`:'ещё не обучена'}</div>`;
+  $('dSeen')&&($('dSeen').onclick=async()=>{try{await api('/api/dashboard/seen',{});renderPipe();}catch(e){fail(e);}});
+}
+
+/* ---- сортировка «схема / фото / не рисунок»: по одной картинке, один клик ---- */
+function openSort(ids,why){if(!ids.length){stat('нечего разбирать','ok');return;}
+  pvHide&&pvHide();S.sv={list:ids,i:0,n:{scheme:0,photo:0,junk:0},why:why||''};svRender();}
+function svClose(){S.sv=null;const e=$('sv');if(e)e.remove();refreshFigures().then(()=>{if(S.mode==='pipe')renderPipe();});}
+function svRender(){
+  const V=S.sv;let el=$('sv');if(!V){if(el)el.remove();return;}if(!el){el=document.createElement('div');el.id='sv';document.body.appendChild(el);}
+  const id=V.list[V.i];
+  if(!id){el.innerHTML=`<div class="rvdone"><div style="font-size:20px;margin-bottom:8px">Разобрано</div><div>схем: <b>${V.n.scheme}</b> · фото: <b>${V.n.photo}</b> · не рисунков: <b>${V.n.junk}</b></div><div style="margin-top:14px"><button id="svX">закрыть</button></div></div>`;$('svX').onclick=svClose;return;}
+  const f=S.figures.find(x=>x.id===id)||{};
+  el.innerHTML=`<div class="rvh"><b>${esc(dispName(f)||id)}</b><span class="mut">${esc(id)}${V.why?' · '+esc(V.why):''}</span><span class="sp"></span><span class="mut">${V.i+1} / ${V.list.length}</span><button class="sm" id="svX">✕ закрыть (Esc)</button></div>
+  <div class="svi"><img src="/api/crop/${encodeURIComponent(id)}?t=${Math.round(f.t||0)}"></div>
+  <div class="rvf"><button id="svS" style="background:var(--ok);color:#15171c">▦ схема узора <kbd>S</kbd></button><button id="svF" style="background:var(--acc);color:#15171c">📷 фото ковра <kbd>F</kbd></button><button id="svJ" style="background:var(--bad)">✕ не рисунок <kbd>D</kbd></button><span class="sp"></span><button class="sm" id="svE">✎ открыть в редакторе</button><button id="svN">→ пропустить</button></div>`;
+  $('svX').onclick=svClose;$('svN').onclick=()=>{V.i++;svRender();};
+  $('svS').onclick=()=>svMark('scheme');$('svF').onclick=()=>svMark('photo');$('svJ').onclick=()=>svMark('junk');
+  $('svE').onclick=()=>{svClose();openFigure(id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail);};
+}
+async function svMark(k){const V=S.sv;if(!V||V.busy)return;const id=V.list[V.i];V.busy=true;
+  try{await api('/api/kind/'+encodeURIComponent(id),{kind:k});V.n[k]++;const f=S.figures.find(x=>x.id===id);if(f){f.photo=k==='photo';f.weak=false;}V.i++;}catch(e){fail(e);}
+  V.busy=false;svRender();}
+function svKey(e){if(e.key==='Escape'){svClose();return true;}const k=kk(e);
+  if(k==='s')svMark('scheme');else if(k==='f')svMark('photo');else if(k==='d')svMark('junk');else if(e.key==='ArrowRight'){S.sv.i++;svRender();}else if(e.key==='ArrowLeft'){S.sv.i=Math.max(0,S.sv.i-1);svRender();}return true;}
 function renderRightCat(){
   const R=$('right');
   R.innerHTML=`<h4>На сайт</h4>
@@ -1705,7 +1832,7 @@ function renderRight(){
   else if(S.mode==='grid')renderRightGrid();
   else if(S.mode==='pix')renderRightPix();
   else if(S.mode==='queue'){renderRightQueue();renderQueue();}
-  else if(S.mode==='pipe'){$('right').innerHTML='<h4>Как это работает</h4><div class="hint">Слева направо: разметка листов → оцифровка → проверка → ручная доработка → дообучение. Каждый шаг можно запускать отдельно; «весь конвейер» делает шаги 1–2 подряд, пока вы заняты другим.</div>';renderPipe();}
+  else if(S.mode==='pipe'){$('right').innerHTML='';renderPipe();}
   else{renderRightCat();renderCatalog();}
 }
 
@@ -1720,6 +1847,7 @@ window.addEventListener('keydown',e=>{
   const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','range','button'].includes(ae.type)));
   if(!typing&&S.rv){if(rvKey(e)){e.preventDefault();return;}}
   if(!typing&&S.hv){if(hvKey(e)){e.preventDefault();return;}}
+  if(!typing&&S.sv){if(svKey(e)){e.preventDefault();return;}}
   if(!typing&&S.mode==='queue'&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Enter'].includes(e.key)||e.code==='Space'||['a','x','o'].includes(kk(e)))){qKey(e).then(ok=>{});if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)||e.code==='Space'||['a','x','o'].includes(kk(e))||e.key==='Enter')e.preventDefault();return;}
   if(e.code==='Space'&&!typing){e.preventDefault();if(ae&&ae!==document.body&&ae.blur)ae.blur();if(e.repeat)return;spaceDown=true;cv.style.cursor='grab';
     if(S.fig&&((S.mode==='pix'&&S.fig.M)||(S.mode==='grid'&&(S.gridView||'grid')==='grid'))){S.peek=true;$('peek').textContent='оригинал скана · пока держите пробел';$('peek').style.display='block';redraw();}return;}

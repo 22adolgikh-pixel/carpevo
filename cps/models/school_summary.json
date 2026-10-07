@@ -1,0 +1,14 @@
+{
+  "title": "Фото ковра → школа",
+  "date": "2026-10-07",
+  "method": "DINOv2 (ViT-S/14) + логистическая регрессия, Colab: tools/colab/photo_school_baseline.py",
+  "photos": 684,
+  "train": 321,
+  "classes": {"guba-shirvan": 133, "karabakh": 91, "ganja-gazakh": 63, "tabriz": 34},
+  "accuracy": 0.614,
+  "baseline": 0.414,
+  "disagreements": 33,
+  "disagreements_in_train": 7,
+  "results": "Google Drive: carpet-dna/photos/school_baseline/ (predictions.csv, disagreements.csv)",
+  "next": "Проверить глазами 33 расхождения с разметкой (сначала 7 из обучающей выборки), затем ≈190 фото с пометкой «проверить», и переобучить."
+}

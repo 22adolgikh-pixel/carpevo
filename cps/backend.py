@@ -41,6 +41,13 @@ META_KEYS = ("section", "name_az", "name", "translation", "carpet", "type", "not
 DIFFICULTY = ("simple", "medium", "complex", "ultra")   # простой / средний / сложный / ультра
 OUT_SUFFIXES = (".png", "_x12.png", "_grid.png", "_bg.png", ".svg", "_unit.png", "_knot.png")   # что лежит в data/out на каждый рисунок
 
+HIDDEN_SRC = os.path.join(DATA, "sources_hidden.json")   # v10.18: источники, скрытые с экранов и из прогонов (файлы не удаляются)
+DASH_SEEN = os.path.join(DATA, "dashboard_seen.json")    # v10.18: что человек уже видел на «Обзоре» (для «что нового»)
+NOT_SCHEME = ("photo", "junk")                           # kind: фото ковра / не рисунок (текст, мусор) — не схемы, в очередь не идут
+SOURCE_TITLES = {"kerimov_vol1_patterns": "Керимов, т. I — схемы",
+                 "gans_ruedin_drawings": "Gans-Ruedin — зарисовки",
+                 "az_carpets_magazine_33_patterns": "Журнал «Azərbaycan xalçaları» №33"}
+
 app = FastAPI(title="Carpet Pattern Studio")
 cloud.install(app)    # пароль для входа по ссылке (share.command), если задан CPS_PASSWORD
 
@@ -51,6 +58,18 @@ def _safe_rel(rel):
     return p
 
 def _sheet_key(rel): return re.sub(r"[^\w\-]+", "_", rel)
+
+def _src_of(rel):
+    """Источник листа = папка первого уровня в scans."""
+    parts = (rel or "").replace("\\", "/").split("/")
+    return parts[0] if len(parts) > 1 else "(без папки)"
+
+def _hidden_sources():
+    try: return set(json.load(open(HIDDEN_SRC, encoding="utf-8")))
+    except Exception: return set()
+
+def _is_hidden(rel, hid=None):
+    return _src_of(rel) in (_hidden_sources() if hid is None else hid)
 
 def _fid_ok(fid): return re.fullmatch(r"[\w\-]+", fid) is not None
 
@@ -160,12 +179,13 @@ def api_config():
     return {"scans": SCANS, "data": DATA}
 
 @app.get("/api/sheets")
-def api_sheets():
-    out = []
+def api_sheets(all: int = 0):
+    out = []; hid = set() if all else _hidden_sources()
     for root, _, files in os.walk(SCANS):
         for fn in sorted(files):
             if os.path.splitext(fn)[1].lower() not in IMG_EXT: continue
             rel = os.path.relpath(os.path.join(root, fn), SCANS)
+            if _is_hidden(rel, hid): continue
             meta = jload(os.path.join(D_SHEETS, _sheet_key(rel) + ".json"), {}) or {}
             figs = meta.get("figures", [])
             works = [jload(os.path.join(D_WORK, f + ".json"), {}) or {} for f in figs]
@@ -447,11 +467,12 @@ def _hard_left(w):
 
 
 @app.get("/api/figures")
-def api_figures():
-    out = []
+def api_figures(all: int = 0):
+    out = []; hid = set() if all else _hidden_sources()
     for fn in sorted(os.listdir(D_WORK)):
         if not fn.endswith(".json"): continue
         w = jload(os.path.join(D_WORK, fn), {}) or {}
+        if not all and (w.get("kind") == "junk" or _is_hidden(w.get("sheet"), hid)): continue
         m = with_az(w.get("meta", {}))
         out.append({"id": w.get("id", fn[:-5]), "table": w.get("table"), "fig": w.get("fig"), "sheet": w.get("sheet"),
                     "name_az": m.get("name_az", ""), "name_az_auto": bool(m.get("name_az_auto")),
@@ -466,7 +487,8 @@ def api_figures():
                     "n_sus": ((w.get("auto") or {}).get("symmetry") or {}).get("n_suspects"),
                     "size": [w["matrix"]["w"], w["matrix"]["h"]] if w.get("matrix") else None,
                     "colors": len(set("".join(w["matrix"]["rows"])) - {"."}) if w.get("matrix") else None,
-                    "color": bool(w.get("color_mode")), "photo": w.get("kind") == "photo",
+                    "color": bool(w.get("color_mode")), "photo": w.get("kind") == "photo", "drawing": w.get("kind") == "drawing",
+                    "weak": bool(hard.weak(w)) and w.get("kind") not in NOT_SCHEME,
                     "border": _is_border(w), "rapport": bool((w.get("rapport") or {}).get("found")),
                     "hard_left": _hard_left(w),
                     "t": os.path.getmtime(os.path.join(D_WORK, fn))})
@@ -979,25 +1001,27 @@ PROWL = {"running": False, "stop": False, "total": 0, "done": 0, "errors": 0, "c
 
 
 def _prowl_targets(only_sheets=None):
-    """Рисунки без пикселей на нарезанных листах (в порядке листов)."""
-    out = []
+    """Рисунки без пикселей на нарезанных листах (в порядке листов). Зарисовки (kind=drawing) извлекаются вручную в редакторе."""
+    out = []; hid = _hidden_sources()
     for fn in sorted(os.listdir(D_SHEETS)):
         if not fn.endswith(".json"): continue
         meta = jload(os.path.join(D_SHEETS, fn), {}) or {}
         if only_sheets and meta.get("path") not in only_sheets: continue
+        if _is_hidden(meta.get("path"), hid): continue
         for f in meta.get("figures", []):
             w = jload(os.path.join(D_WORK, f + ".json"), {}) or {}
-            if not w.get("matrix") and w.get("kind") != "photo" and os.path.exists(os.path.join(D_CROPS, f + ".png")):
+            if not w.get("matrix") and w.get("kind") not in NOT_SCHEME + ("drawing",) and os.path.exists(os.path.join(D_CROPS, f + ".png")):
                 out.append((meta.get("path"), f))
     return out
 
 
 def _regray_targets():
     """ЧБ-автоматы, не проверенные человеком, где нет серой заливки (прогон без заливки терял её) — их можно пересчитать без потерь."""
-    out = []
+    out = []; hid = _hidden_sources()
     for fn in sorted(os.listdir(D_WORK)):
         if not fn.endswith(".json"): continue
         w = jload(os.path.join(D_WORK, fn), {}) or {}
+        if w.get("kind") in NOT_SCHEME or _is_hidden(w.get("sheet"), hid): continue
         a = w.get("auto") or {}
         if not (w.get("matrix") and a and not a.get("reviewed") and not w.get("done") and not w.get("color_mode") and w.get("kind") != "photo"): continue
         if "2" in "".join(w["matrix"]["rows"]): continue
@@ -1007,10 +1031,11 @@ def _regray_targets():
 
 def _redo_targets():
     """Автоматы, которых человек не касался (не принят, не правился, палитра не тронута): их можно пересчитать свежим алгоритмом."""
-    out = []
+    out = []; hid = _hidden_sources()
     for fn in sorted(os.listdir(D_WORK)):
         if not fn.endswith(".json"): continue
         w = jload(os.path.join(D_WORK, fn), {}) or {}
+        if w.get("kind") in NOT_SCHEME or _is_hidden(w.get("sheet"), hid): continue
         a = w.get("auto") or {}
         if not (w.get("matrix") and a and not a.get("reviewed") and not a.get("edited") and not w.get("done") and not w.get("palette_touched") and w.get("kind") != "photo" and not a.get("photo")): continue
         if a.get("mode") == "color" and w.get("source_kind") == "photo": continue
@@ -1020,10 +1045,11 @@ def _redo_targets():
 
 def _hard_targets():
     """ЧБ-автоматы в очереди (не приняты), у которых трудные куски ещё не посчитаны или устарели (сетка менялась)."""
-    out = []
+    out = []; hid = _hidden_sources()
     for fn in sorted(os.listdir(D_WORK)):
         if not fn.endswith(".json"): continue
         w = jload(os.path.join(D_WORK, fn), {}) or {}
+        if w.get("kind") in NOT_SCHEME or _is_hidden(w.get("sheet"), hid): continue
         if w.get("done") or not hard.eligible(w): continue
         if (w.get("hard") or {}).get("sig") == hard.sig(w): continue
         if os.path.exists(os.path.join(D_CROPS, fn[:-5] + ".png")): out.append((w.get("sheet"), fn[:-5]))
@@ -1031,12 +1057,13 @@ def _hard_targets():
 
 
 def _segment_pending():
-    """Листы без разметки (нет файла в data/sheets)."""
-    out = []
+    """Листы без разметки (нет файла в data/sheets), кроме скрытых источников."""
+    out = []; hid = _hidden_sources()
     for root, _, files in os.walk(SCANS):
         for fn in sorted(files):
             if os.path.splitext(fn)[1].lower() not in IMG_EXT: continue
             rel = os.path.relpath(os.path.join(root, fn), SCANS)
+            if _is_hidden(rel, hid): continue
             if not os.path.exists(os.path.join(D_SHEETS, _sheet_key(rel) + ".json")): out.append(rel)
     return sorted(out)
 
@@ -1150,11 +1177,13 @@ def api_dupes(min_score: float = 0.93):
 @app.get("/api/pipeline")
 def api_pipeline():
     """Сводка по конвейеру: листы → оцифровка → очередь проверки → готово → модель."""
-    sheets = {"total": 0, "cut": 0, "empty": 0, "uncut": 0, "auto_cut": 0}
+    sheets = {"total": 0, "cut": 0, "empty": 0, "uncut": 0, "auto_cut": 0}; hid = _hidden_sources()
     for root, _, files in os.walk(SCANS):
         for fn in files:
             if os.path.splitext(fn)[1].lower() not in IMG_EXT: continue
-            rel = os.path.relpath(os.path.join(root, fn), SCANS); sheets["total"] += 1
+            rel = os.path.relpath(os.path.join(root, fn), SCANS)
+            if _is_hidden(rel, hid): continue
+            sheets["total"] += 1
             mp = os.path.join(D_SHEETS, _sheet_key(rel) + ".json")
             if not os.path.exists(mp): sheets["uncut"] += 1; continue
             m = jload(mp, {}) or {}
@@ -1166,7 +1195,9 @@ def api_pipeline():
     mp = learn.MODEL_PATH; mt = os.path.getmtime(mp) if os.path.exists(mp) else 0
     for fn in os.listdir(D_WORK):
         if not fn.endswith(".json"): continue
-        w = jload(os.path.join(D_WORK, fn), {}) or {}; f["total"] += 1
+        w = jload(os.path.join(D_WORK, fn), {}) or {}
+        if w.get("kind") == "junk" or _is_hidden(w.get("sheet"), hid): continue
+        f["total"] += 1
         a = w.get("auto") or {}
         if w.get("kind") == "photo": f["photo"] += 1; continue
         if not w.get("matrix"): f["undigitized"] += 1; continue
@@ -1185,6 +1216,160 @@ def api_pipeline():
     model = {"present": bool(mt)}
     if mt: model.update({"trained": time.strftime("%Y-%m-%d %H:%M", time.localtime(mt)), **((jload(mp, {}) or {}).get("meta") or {})})
     return {"sheets": sheets, "figures": f, "queue_difficulty": diff, "model": model, "prowl": api_prowl()}
+
+
+# ---------------- v10.18: «Обзор» — прогресс по источникам, шаги по порядку, что нового ----------------
+def _dash_scan():
+    """Один проход по листам и рисункам: счётчики по источникам + множества id для «что нового»."""
+    hid = _hidden_sources(); src = {}
+    def S(k):
+        if k not in src:
+            src[k] = {"key": k, "title": SOURCE_TITLES.get(k, k), "hidden": k in hid,
+                      "sheets": {"total": 0, "cut": 0, "empty": 0, "uncut": 0},
+                      "figs": {"total": 0, "todo": 0, "drawing_todo": 0, "weak": 0, "queue": 0, "low": 0, "high": 0,
+                               "done": 0, "review": 0, "photo": 0, "junk": 0}}
+        return src[k]
+    sheet_ids, fig_ids, done_ids = set(), set(), set()
+    for root, _, files in os.walk(SCANS):
+        for fn in files:
+            if os.path.splitext(fn)[1].lower() not in IMG_EXT: continue
+            rel = os.path.relpath(os.path.join(root, fn), SCANS).replace("\\", "/")
+            s = S(_src_of(rel))["sheets"]; s["total"] += 1; sheet_ids.add(rel)
+            m = jload(os.path.join(D_SHEETS, _sheet_key(rel) + ".json"), None)
+            if m is None: s["uncut"] += 1
+            elif m.get("no_figures"): s["empty"] += 1
+            else: s["cut"] += 1
+    mt = os.path.getmtime(learn.MODEL_PATH) if os.path.exists(learn.MODEL_PATH) else 0
+    new_bw = 0
+    for fn in os.listdir(D_WORK):
+        if not fn.endswith(".json"): continue
+        w = jload(os.path.join(D_WORK, fn), {}) or {}
+        fid = w.get("id", fn[:-5]); f = S(_src_of(w.get("sheet")))["figs"]; f["total"] += 1; fig_ids.add(fid)
+        a = w.get("auto") or {}; k = w.get("kind")
+        if k in NOT_SCHEME: f[k] += 1; continue
+        if w.get("review"): f["review"] += 1
+        if w.get("done"):
+            f["done"] += 1; done_ids.add(fid)
+            if not w.get("color_mode") and not _is_hidden(w.get("sheet"), hid):
+                new_bw += os.path.getmtime(os.path.join(D_WORK, fn)) > mt
+            continue
+        if not w.get("matrix"):
+            f["drawing_todo" if k == "drawing" else "todo"] += 1; continue
+        if a and not a.get("reviewed"):
+            if hard.weak(w): f["weak"] += 1; continue
+            f["queue"] += 1; r = a.get("risk"); r = (1 - (a.get("confidence") or 0)) if r is None else r
+            f["low"] += r <= 0.25; f["high"] += r > 0.55
+    return src, sheet_ids, fig_ids, done_ids, new_bw, mt
+
+
+def _school_summary():
+    """Последний итог модели «фото ковра → школа» (обучается в Colab; файл кладётся в models/)."""
+    for p in (os.path.join(DATA, "school_summary.json"), os.path.join(HERE, "models", "school_summary.json")):
+        d = jload(p, None)
+        if d: return d
+    return None
+
+
+@app.get("/api/dashboard")
+def api_dashboard():
+    src, sheet_ids, fig_ids, done_ids, new_bw, mt = _dash_scan()
+    seen = jload(DASH_SEEN, None)
+    if seen is None:                       # первый заход: запоминаем как есть, «нового» нет
+        seen = {"at": time.strftime("%Y-%m-%d %H:%M"), "sheets": sorted(sheet_ids), "figs": sorted(fig_ids), "done": sorted(done_ids)}
+        jsave(DASH_SEEN, seen)
+    ss, sf, sd = set(seen.get("sheets", [])), set(seen.get("figs", [])), set(seen.get("done", []))
+    for x in src.values(): x["new"] = {"sheets": 0, "figs": 0, "done": 0}
+    for rel in sheet_ids - ss: src[_src_of(rel)]["new"]["sheets"] += 1
+    fsrc = {}
+    for fn in os.listdir(D_WORK):
+        if fn.endswith(".json") and fn[:-5] not in sf | sd:
+            fsrc[fn[:-5]] = _src_of((jload(os.path.join(D_WORK, fn), {}) or {}).get("sheet"))
+    for fid in fig_ids - sf:
+        if fid in fsrc: src[fsrc[fid]]["new"]["figs"] += 1
+    for fid in done_ids - sd:
+        p = os.path.join(D_WORK, fid + ".json")
+        if os.path.exists(p): src[_src_of((jload(p, {}) or {}).get("sheet"))]["new"]["done"] += 1
+    vis = [x for x in src.values() if not x["hidden"]]
+    T = lambda grp, k: sum(x[grp][k] for x in vis)
+    model = {"present": bool(mt)}
+    if mt: model.update({"trained": time.strftime("%Y-%m-%d %H:%M", time.localtime(mt)), **((jload(learn.MODEL_PATH, {}) or {}).get("meta") or {})})
+    pr = api_prowl(light=1)
+    steps = [
+        {"id": "segment", "title": "Нарезать новые листы", "count": T("sheets", "uncut"), "unit": ["лист", "листа", "листов"],
+         "sub": "найти рамки рисунков на страницах"},
+        {"id": "auto", "title": "Распознать рисунки", "count": T("figs", "todo"), "unit": ["рисунок", "рисунка", "рисунков"],
+         "sub": "сетка, пиксели, цвета, оценка риска"},
+        {"id": "drawing", "title": "Извлечь зарисовки", "count": T("figs", "drawing_todo"), "unit": ["зарисовка", "зарисовки", "зарисовок"],
+         "sub": "зарисовки пером: по одной в редакторе, кнопка «Извлечь зарисовку»"},
+        {"id": "weak", "title": "Отсеять фото и мусор", "count": T("figs", "weak"), "unit": ["рисунок", "рисунка", "рисунков"],
+         "sub": "сетка не нашлась уверенно: схема, фото ковра или не рисунок?"},
+        {"id": "accept", "title": "Принять надёжные", "count": T("figs", "low"), "unit": ["рисунок", "рисунка", "рисунков"],
+         "sub": "автомат уверен, расхождений почти нет"},
+        {"id": "check", "title": "Проверить спорные", "count": T("figs", "queue") - T("figs", "low"), "unit": ["рисунок", "рисунка", "рисунков"],
+         "sub": "проверяются только трудные куски 10×10"},
+        {"id": "train", "title": "Дообучить распознавание", "count": new_bw if new_bw >= 20 or not mt else 0, "unit": ["новый готовый", "новых готовых", "новых готовых"],
+         "sub": f"готовых ЧБ после последнего обучения: {new_bw}" + ("" if mt else " · модели ещё нет")},
+    ]
+    for st in steps: st["state"] = "done" if not st["count"] else "todo"
+    nxt = next((st for st in steps if st["state"] == "todo"), None)
+    if nxt: nxt["state"] = "next"
+    if pr.get("running"):
+        cur = {"segment": "segment", "auto": "auto", "hard": "check", "redo": "auto", "regray": "auto"}.get(pr.get("stage"))
+        for st in steps:
+            if st["id"] == cur: st["state"] = "running"
+    figs_scheme = T("figs", "total") - T("figs", "photo") - T("figs", "junk")
+    totals = {"sheets": {k: T("sheets", k) for k in ("total", "cut", "empty", "uncut")},
+              "figs": {k: T("figs", k) for k in ("total", "todo", "drawing_todo", "weak", "queue", "low", "high", "done", "review", "photo", "junk")},
+              "schemes": figs_scheme}
+    new = {k: sum(x["new"][k] for x in vis) for k in ("sheets", "figs", "done")}
+    order = {k: i for i, k in enumerate(SOURCE_TITLES)}
+    return {"sources": sorted(src.values(), key=lambda x: (x["hidden"], order.get(x["key"], 99), x["key"])),
+            "totals": totals, "steps": steps, "new": new, "seen_at": seen.get("at"),
+            "model": model, "school": _school_summary(), "prowl": pr}
+
+
+@app.post("/api/dashboard/seen")
+def api_dashboard_seen():
+    """«Отметить просмотренным»: запомнить текущее состояние, «что нового» обнуляется."""
+    _, sheet_ids, fig_ids, done_ids, _, _ = _dash_scan()
+    jsave(DASH_SEEN, {"at": time.strftime("%Y-%m-%d %H:%M"), "sheets": sorted(sheet_ids), "figs": sorted(fig_ids), "done": sorted(done_ids)})
+    return {"ok": True}
+
+
+@app.post("/api/sources/hide")
+def api_sources_hide(body: dict = Body(...)):
+    """Скрыть / вернуть источник (папку в scans). Файлы и разметка не удаляются; скрытый источник
+    не показывается в «Листах» и «Рисунках» и не трогается прогонами."""
+    k = str(body.get("source") or "").strip()
+    if not k: return JSONResponse({"error": "source"}, 400)
+    h = _hidden_sources()
+    (h.add if body.get("hidden", True) else h.discard)(k)
+    jsave(HIDDEN_SRC, sorted(h))
+    return {"hidden": sorted(h)}
+
+
+@app.post("/api/kind/{fid}")
+def api_kind(fid: str, body: dict = Body(default={})):
+    """Что это за картинка: scheme — схема узора; photo — фото ковра (не схема, из очереди уходит);
+    junk — не рисунок (текст, мусор: скрывается отовсюду, файлы остаются). Можно вернуть: kind=scheme."""
+    if not _fid_ok(fid): return JSONResponse({"error": "bad id"}, 400)
+    wp = os.path.join(D_WORK, fid + ".json"); w = jload(wp, {}) or {}
+    if not w: return JSONResponse({"error": "нет рисунка"}, 404)
+    k = (body or {}).get("kind"); a = w.get("auto") if isinstance(w.get("auto"), dict) else None
+    if k in NOT_SCHEME:
+        if w.get("kind") not in NOT_SCHEME: w["kind_before"] = w.get("kind")
+        w["kind"] = k; w["done"] = False
+        if a is not None: a["photo"] = k == "photo"; a["marked_photo"] = True
+    elif k == "scheme":
+        if w.get("kind") in NOT_SCHEME:
+            prev = w.pop("kind_before", None)
+            if prev: w["kind"] = prev
+            else: w.pop("kind", None)
+        if a is not None: a["photo"] = False; a["scheme_ok"] = True
+        else: w["auto"] = {"scheme_ok": True}
+    else: return JSONResponse({"error": "kind: scheme | photo | junk"}, 400)
+    w["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S"); jsave(wp, w)
+    return {"kind": w.get("kind") or "scheme"}
 
 
 @app.post("/api/rapport/{fid}")
