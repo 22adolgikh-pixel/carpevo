@@ -7,7 +7,7 @@
 # Запуск в Colab:
 #   !rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
 #   %run /content/carpevo/cps/tools/colab/museum_photos_colab.py
-# Повторный запуск докачивает только недостающее.
+# Повторный запуск докачивает только недостающее. %env SKIP_WIKIMEDIA=1 — не трогать Wikimedia, только собрать архивы.
 import os, json, io, re, time, zipfile, hashlib
 import requests
 from PIL import Image
@@ -40,6 +40,8 @@ t0 = time.time()
 for i, p in enumerate(items):
     fn = fname(p['id'])
     if man.get(p['id'], {}).get('ok') and os.path.exists(f'{ROOT}/thumbs/{fn}.jpg'):
+        continue
+    if os.environ.get('SKIP_WIKIMEDIA') and p['src'] == 'wikimedia':   # Wikimedia режет IP Colab (429) — эти фото Claude берёт через браузер
         continue
     try:
         hd = dict(H)
