@@ -1577,5 +1577,8 @@ def migrate_outputs():
             try: render_outputs(fid, w["matrix"], w["palette"], w.get("transparent_bg", True))
             except Exception as e: print("migrate", fid, e)
 
+import rugs
+rugs.install(app, DATA, D_WORK)    # v10.20: экран «Ковры»
+
 @app.get("/")
 def index(): return FileResponse(os.path.join(HERE, "index.html"), headers={"Cache-Control": "no-store"})

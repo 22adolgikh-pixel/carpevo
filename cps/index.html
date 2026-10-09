@@ -181,6 +181,28 @@ aside{min-height:0}
 #um .bx{background:#1d1d20;border:1px solid #444;border-radius:10px;padding:16px 20px;max-width:760px;width:92vw;max-height:86vh;overflow:auto}
 #um table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 14px}#um td,#um th{padding:4px 8px;border-bottom:1px solid #333;text-align:left}
 #um input{padding:5px 8px;margin:2px 4px 2px 0}#um h3{margin:10px 0 4px}
+/* v10.20 «Ковры» */
+#rugs{position:fixed;left:0;right:0;bottom:30px;top:48px;display:none;grid-template-columns:250px 1fr 370px;background:var(--bg);z-index:20}
+#rgLeft,#rgSide{background:var(--pan);overflow:auto;border-right:1px solid var(--ln)}#rgSide{border-right:0;border-left:1px solid var(--ln);padding:8px 10px}
+.rgtop{display:flex;flex-wrap:wrap;gap:4px;padding:8px;border-bottom:1px solid var(--ln);position:sticky;top:0;background:var(--pan)}.rgtop input{flex:1;min-width:60px}
+label.btn{display:inline-block;border:1px solid var(--ln);border-radius:6px;padding:3px 8px;cursor:pointer;background:var(--pan2)}label.btn:hover{border-color:var(--acc)}
+.rgit{display:flex;gap:8px;padding:6px 8px;cursor:pointer;border-bottom:1px solid #0002}.rgit:hover{background:var(--pan2)}.rgit.sel{background:#ffb4541f;box-shadow:inset 3px 0 var(--acc)}
+.rgit img{width:52px;height:52px;object-fit:cover;border-radius:4px;flex:none;background:#0003}.rgit small{display:block;color:var(--mut)}
+.rgimp{padding:6px 8px;color:var(--acc);font-size:12px}
+#rgCenter{display:flex;flex-direction:column;min-width:0}.rgtools{display:flex;gap:4px;align-items:center;padding:6px 8px;border-bottom:1px solid var(--ln)}.rgtools .sep{width:10px}
+#rgView{flex:1;position:relative;overflow:hidden;background:#0b0c0f;cursor:crosshair}#rgStage{position:absolute;left:0;top:0;transform-origin:0 0}
+#rgImg{display:block;user-select:none}#rgSvg{position:absolute;left:0;top:0}
+.rgtabs{display:flex;gap:4px;margin-bottom:8px}.rgtabs button{flex:1}
+.rgform label,.rgform .lb{display:block;margin:7px 0;color:var(--mut);font-size:12px}.rgform input:not([type=checkbox]),.rgform select,.rgform textarea{display:block;width:100%;box-sizing:border-box;margin-top:2px;color:var(--tx)}
+.rgform .rgrow{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin:6px 0;color:var(--tx)}
+.rgpick{color:var(--tx);margin:3px 0;font-size:13px}.rghits{max-height:190px;overflow:auto}.rghit{padding:4px 6px;cursor:pointer;color:var(--tx);border-bottom:1px solid #0002}.rghit:hover{background:var(--pan2)}
+.rgzones{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}.rgzones button{border-left-width:4px}
+.rgcrop{text-align:center;background:#0b0c0f;border-radius:6px;padding:4px}.rgcrop img{max-width:100%;max-height:220px}
+.rgschs{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.rgsch{width:76px;cursor:pointer;border:2px solid transparent;border-radius:4px;text-align:center;background:#fff1}.rgsch.on{border-color:var(--acc)}
+.rgsch img{width:72px;height:72px;object-fit:contain;image-rendering:pixelated;background:#fff}.rgsch small{display:block;font-size:10px;color:var(--mut);overflow:hidden;white-space:nowrap}
+.rgschsel{color:var(--tx)}.rgschsel img{height:40px;vertical-align:middle;image-rendering:pixelated;background:#fff}
+.rgcheck{background:var(--pan2);border-radius:6px;padding:6px 8px;margin:8px 0;color:var(--tx)}
+.rgallit{display:flex;gap:8px;padding:5px;cursor:pointer;border-bottom:1px solid #0002}.rgallit:hover{background:var(--pan2)}.rgallit img{width:56px;height:56px;object-fit:contain;background:#0b0c0f;flex:none}.rgallit small{display:block;color:var(--mut)}
 #ovbar{justify-self:end;display:flex;gap:4px}#ovbar button{padding:4px 12px}#ovbar button.on{background:var(--acc);color:#111}#tab-close{background:#3a2326}
 .seg{display:inline-flex;border:1px solid var(--ln);border-radius:7px;overflow:hidden}.seg button{border:0;border-radius:0;background:transparent;font-weight:600}.seg button.on{background:var(--acc);color:#111}.seg small{opacity:.7;margin-left:3px}
 .card.kf{outline:2px solid var(--acc);outline-offset:1px}
@@ -1948,5 +1970,239 @@ setInterval(pollAct,3000);$('logBtn').onclick=logToggle;
       m.querySelector('#actU').onchange=load;load();
     }
   }
+})();
+
+// ==================== v10.20: экран «Ковры» — разметка элементов на фото ковров ====================
+const R={on:false,list:[],rug:null,sel:null,tool:'box',z:1,ox:0,oy:0,drag:null,repeatOf:null,saveT:null,filter:'',q:'',side:'rug',dictHits:[],figs:{},allGroup:true};
+const RZ={field:['поле','#6cb6ff'],medallion:['медальон','#ffb454'],spandrel:['угол поля','#c792ea'],border:['главная кайма','#7ec96b'],minor:['малая кайма','#4ec9b0'],guard:['бордюрная полоска','#d7ba7d'],end:['торцевая полоса','#ce9178'],other:['другое','#aaa']};
+const RZK=Object.keys(RZ);
+const RSCH={'':'—','guba-shirvan':'Губа-Ширван','ganja-gazakh':'Гянджа-Газах','karabakh':'Карабах','tabriz':'Тебриз','nakhchivan':'Нахчыван'};
+const RTECH=['','ворсовый','безворсовый: килим','безворсовый: сумах','безворсовый: зили','безворсовый: верни','безворсовый: шадда','палас','джеджим','другое'];
+const RST={new:'новый',work:'в работе',done:'размечен'};
+const rro=()=>window.ME&&window.ME.role==='viewer';
+function rugsOpen(){
+  if(S.mode==='grid'||S.mode==='pix'){try{ovClose('queue');}catch(e){}}
+  R.on=true;$('rugs').style.display='grid';$('rugs').style.top=document.querySelector('header').getBoundingClientRect().bottom+'px';
+  ['pipe','sheet','queue'].forEach(k=>$('tab-'+k).classList.remove('on'));$('tab-rugs').classList.add('on');
+  rugsLoadList().then(()=>{if(!R.rug&&R.list.length)rugOpen(R.list[0].id);else rugRender();});
+}
+function rugsClose(){R.on=false;$('rugs').style.display='none';$('tab-rugs').classList.remove('on');}
+async function rugsLoadList(){const j=await api('/api/rugs');R.list=j.rugs;R.imp=j.import;rugList();if(R.imp&&R.imp.running){clearTimeout(R.impT);R.impT=setTimeout(rugsLoadList,3000);}}
+function rugList(){
+  const L=$('rgList');if(!L)return;const q=R.q.toLowerCase();
+  const ls=R.list.filter(r=>(!R.filter||r.status===R.filter)&&(!q||(r.title+' '+r.museum+' '+r.id).toLowerCase().includes(q)));
+  const im=R.imp&&(R.imp.running||R.imp.total)?`<div class="rgimp">${R.imp.running?'⏳ импорт':'импорт завершён'}: ${R.imp.done}/${R.imp.total}${R.imp.errors?' · ошибок '+R.imp.errors:''}<br><small>${esc(R.imp.last||'')}</small></div>`:'';
+  L.innerHTML=im+(ls.length?ls.map(r=>`<div class="rgit ${R.rug&&R.rug.id===r.id?'sel':''}" data-id="${esc(r.id)}"><img loading="lazy" src="/rugthumb/${encodeURIComponent(r.id)}.jpg"><div><b>${esc(r.title)}</b><small>${esc(RSCH[r.school]||'')}${r.museum?' · '+esc(r.museum):''}</small><small>${r.n?`${r.n} элем. · ${r.motifs} узор. · ✓ ${r.confirmed}`:'не размечен'} · ${RST[r.status]||r.status}</small></div></div>`).join(''):'<p class="mut">Ковров пока нет. Загрузите фото («＋ фото») или каталог музея («⇪ каталог»).</p>');
+  L.querySelectorAll('.rgit').forEach(e=>e.onclick=()=>rugOpen(e.dataset.id));
+}
+async function rugOpen(id){R.rug=await api('/api/rugs/'+encodeURIComponent(id));R.sel=null;R.repeatOf=null;R.side='rug';R.fitNext=true;rugList();rugRender();}
+function rugSaveSoon(){if(rro())return;R.ver=(R.ver||0)+1;clearTimeout(R.saveT);$('rgSaved').textContent='…';R.saveT=setTimeout(rugSaveNow,500);}
+async function rugSaveNow(){
+  clearTimeout(R.saveT);const r=R.rug;if(!r)return;
+  const body={};['title','museum','inv','url','license','place','date','school','composition','technique','size','notes','status'].forEach(k=>body[k]=r[k]);
+  body.marks=r.marks.map(m=>({id:m.id,box:m.box,zone:m.zone,motif:m.motif,motif_text:m.motif_text,scheme:m.scheme,group:m.group,certainty:m.certainty,status:m.status,note:m.note}));
+  const v=R.ver;
+  try{const n=await api('/api/rugs/'+encodeURIComponent(r.id),body);
+    if(R.rug&&R.rug.id===n.id){
+      if(R.ver===v){const keep=R.sel&&R.sel.id;R.rug=n;R.sel=keep?(n.marks.find(m=>m.id===keep)||null):null;}
+      else{const by={};n.marks.forEach(m=>by[m.id]=m);R.rug.marks.forEach(m=>{const o=by[m.id];if(o)['by','at','confirmed_by','confirmed_at','edited_by','edited_at','_motif'].forEach(k=>m[k]=o[k]);});}
+    }
+    $('rgSaved')&&($('rgSaved').textContent='сохранено');const s=R.list.find(x=>x.id===r.id);if(s){s.n=n.marks.length;s.confirmed=n.marks.filter(m=>m.status==='confirmed').length;s.motifs=new Set(n.marks.filter(m=>m.motif).map(m=>m.motif)).size;s.title=n.title||n.id;s.status=n.status;s.school=n.school;}
+    rugList();const ae=document.activeElement;if(!(ae&&$('rgSide').contains(ae)&&/INPUT|TEXTAREA|SELECT/.test(ae.tagName)))rugSide();rugDraw();
+  }catch(e){fail(e);$('rgSaved')&&($('rgSaved').textContent='⚠ не сохранено');}
+}
+function rugRender(){
+  const r=R.rug,C=$('rgCenter');
+  if(!r){C.innerHTML='<p class="mut" style="padding:20px">Выберите ковёр слева.</p>';$('rgSide').innerHTML='';return;}
+  C.innerHTML=`<div class="rgtools">
+    <button id="rgTBox" data-tip="Рамка: тяните мышью вокруг элемента (B)">▭ рамка</button><button id="rgTHand" data-tip="Двигать фото (H, или держите пробел)">✋</button>
+    <button id="rgFit" data-tip="Вписать (F)">⤢</button><span id="rgZoom" class="mut"></span>
+    <span class="sep"></span><span id="rgHint" class="mut"></span>
+    <span style="margin-left:auto" id="rgSaved" class="mut"></span></div>
+    <div id="rgView"><div id="rgStage"><img id="rgImg" src="/rugimg/${encodeURIComponent(r.id)}.jpg?t=${r.updated}" draggable="false"><svg id="rgSvg"></svg></div></div>`;
+  $('rgTBox').onclick=()=>{R.tool='box';rugTools();};$('rgTHand').onclick=()=>{R.tool='hand';rugTools();};$('rgFit').onclick=rugFit;
+  const img=$('rgImg');img.onload=()=>{R.iw=img.naturalWidth;R.ih=img.naturalHeight;if(R.fitNext){R.fitNext=false;rugFit();}else rugApply();rugDraw();};
+  rugViewEvents();rugTools();rugSide();
+}
+function rugTools(){$('rgTBox')&&$('rgTBox').classList.toggle('on',R.tool==='box');$('rgTHand')&&$('rgTHand').classList.toggle('on',R.tool==='hand');
+  const h=$('rgHint');if(h)h.textContent=R.repeatOf?'Обводите повторы выбранного элемента один за другим (Esc — закончить)':(R.tool==='box'?'Обведите элемент мышью. Колесо — масштаб, пробел — двигать.':'Тяните фото мышью.');}
+function rugFit(){const V=$('rgView');if(!V||!R.iw)return;const k=Math.min(V.clientWidth/R.iw,V.clientHeight/R.ih)*0.96;R.z=k;R.ox=(V.clientWidth-R.iw*k)/2;R.oy=(V.clientHeight-R.ih*k)/2;rugApply();}
+function rugApply(){const st=$('rgStage');if(!st)return;st.style.transform=`translate(${R.ox}px,${R.oy}px) scale(${R.z})`;st.style.width=R.iw+'px';st.style.height=R.ih+'px';$('rgZoom').textContent=Math.round(R.z*100)+'%';rugDraw();}
+function rugPt(e){const V=$('rgView').getBoundingClientRect();return{x:(e.clientX-V.left-R.ox)/R.z/R.iw,y:(e.clientY-V.top-R.oy)/R.z/R.ih};}
+function rugViewEvents(){
+  const V=$('rgView');
+  V.onwheel=e=>{e.preventDefault();const b=V.getBoundingClientRect(),mx=e.clientX-b.left,my=e.clientY-b.top,k=Math.exp(-e.deltaY*0.0015),nz=Math.max(0.05,Math.min(8,R.z*k));R.ox=mx-(mx-R.ox)*nz/R.z;R.oy=my-(my-R.oy)*nz/R.z;R.z=nz;rugApply();};
+  V.onmousedown=e=>{
+    const p=rugPt(e),hand=R.tool==='hand'||R.space||e.button===1||e.button===2;
+    if(hand){R.drag={t:'pan',sx:e.clientX,sy:e.clientY,ox:R.ox,oy:R.oy};e.preventDefault();return;}
+    if(e.button!==0)return;
+    const tg=e.target;
+    if(tg.dataset&&tg.dataset.h&&R.sel&&!rro()){R.drag={t:'resize',h:tg.dataset.h,m:R.sel,b0:[...R.sel.box],p0:p};e.preventDefault();return;}
+    if(tg.dataset&&tg.dataset.m){const m=R.rug.marks.find(x=>x.id===tg.dataset.m);if(m){rugSelect(m);if(!rro())R.drag={t:'move',m,b0:[...m.box],p0:p};e.preventDefault();return;}}
+    if(rro()){rugSelect(null);return;}
+    R.drag={t:'new',p0:p,p1:p};e.preventDefault();
+  };
+  V.oncontextmenu=e=>e.preventDefault();
+  window.addEventListener('mousemove',rugMove);window.addEventListener('mouseup',rugUp);
+}
+function rugMove(e){
+  const d=R.drag;if(!d||!R.on)return;
+  if(d.t==='pan'){R.ox=d.ox+e.clientX-d.sx;R.oy=d.oy+e.clientY-d.sy;rugApply();return;}
+  const p=rugPt(e),cl=v=>Math.max(0,Math.min(1,v));
+  if(d.t==='new'){d.p1={x:cl(p.x),y:cl(p.y)};rugDraw();return;}
+  const dx=p.x-d.p0.x,dy=p.y-d.p0.y,b=d.b0;
+  if(d.t==='move'){d.m.box=[cl(b[0]+dx),cl(b[1]+dy),b[2],b[3]];d.m.box[0]=Math.min(d.m.box[0],1-b[2]);d.m.box[1]=Math.min(d.m.box[1],1-b[3]);}
+  if(d.t==='resize'){let[x,y,w,h]=b;if(d.h.includes('l')){x=b[0]+dx;w=b[2]-dx;}if(d.h.includes('r'))w=b[2]+dx;if(d.h.includes('t')){y=b[1]+dy;h=b[3]-dy;}if(d.h.includes('b'))h=b[3]+dy;
+    if(w>0.004&&h>0.004)d.m.box=[cl(x),cl(y),w,h];}
+  d.moved=true;rugDraw();
+}
+function rugUp(){
+  const d=R.drag;R.drag=null;if(!d||!R.on)return;
+  if(d.t==='new'){const x=Math.min(d.p0.x,d.p1.x),y=Math.min(d.p0.y,d.p1.y),w=Math.abs(d.p1.x-d.p0.x),h=Math.abs(d.p1.y-d.p0.y);
+    if(w*R.iw<6||h*R.ih<6){rugSelect(null);rugDraw();return;}
+    const src=R.repeatOf,id='m'+Date.now().toString(36);
+    const m={id,box:[x,y,w,h],zone:src?src.zone:(R.lastZone||'field'),motif:src?src.motif:'',motif_text:src?src.motif_text:'',scheme:src?src.scheme:'',group:src?(src.group||src.id):'',certainty:src?src.certainty:'sure',status:'proposed',note:'',_motif:src?src._motif:null,by:(window.ME&&ME.name)||''};
+    if(src&&!src.group)src.group=src.id;
+    R.rug.marks.push(m);if(!src)R.repeatOf=null;rugSelect(m);R.side='mark';rugSide();rugSaveSoon();rugDraw();return;}
+  if(d.moved)rugSaveSoon();
+}
+function rugSelect(m){R.sel=m;if(m)R.side='mark';rugDraw();rugSide();}
+function rugDraw(){
+  const svg=$('rgSvg');if(!svg||!R.rug||!R.iw)return;svg.setAttribute('viewBox',`0 0 ${R.iw} ${R.ih}`);svg.setAttribute('width',R.iw);svg.setAttribute('height',R.ih);
+  const sw=1.6/R.z,fs=12/R.z,sel=R.sel,grp=sel?(sel.group||sel.id):null;let h='';
+  R.rug.marks.forEach((m,i)=>{const[x,y,w,hh]=m.box.map((v,j)=>v*(j%2?R.ih:R.iw)),c=(RZ[m.zone]||RZ.other)[1],isSel=sel&&m.id===sel.id,same=grp&&(m.group||m.id)===grp;
+    const dash=m.status==='proposed'?`stroke-dasharray="${4/R.z} ${3/R.z}"`:'';const op=m.status==='rejected'?0.35:1;
+    h+=`<rect data-m="${m.id}" x="${x}" y="${y}" width="${w}" height="${hh}" fill="${isSel?c+'33':(same?c+'1a':'transparent')}" stroke="${c}" stroke-width="${isSel?sw*2:sw}" ${dash} opacity="${op}" style="cursor:pointer"/>`;
+    h+=`<text x="${x+2/R.z}" y="${y+fs}" font-size="${fs}" fill="${c}" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">${i+1}${m.status==='confirmed'?' ✓':(m.status==='rejected'?' ✗':'')}</text>`;});
+  if(sel&&!rro()){const[x,y,w,hh]=sel.box.map((v,j)=>v*(j%2?R.ih:R.iw)),s=7/R.z;
+    [['tl',x,y],['tr',x+w,y],['bl',x,y+hh],['br',x+w,y+hh]].forEach(([k,a,b])=>h+=`<rect data-h="${k}" x="${a-s/2}" y="${b-s/2}" width="${s}" height="${s}" fill="#fff" stroke="#000" stroke-width="${0.8/R.z}" style="cursor:nwse-resize"/>`);}
+  const d=R.drag;if(d&&d.t==='new'){const x=Math.min(d.p0.x,d.p1.x)*R.iw,y=Math.min(d.p0.y,d.p1.y)*R.ih;h+=`<rect x="${x}" y="${y}" width="${Math.abs(d.p1.x-d.p0.x)*R.iw}" height="${Math.abs(d.p1.y-d.p0.y)*R.ih}" fill="#fff2" stroke="#fff" stroke-width="${sw}"/>`;}
+  svg.innerHTML=h;
+}
+function rugGroup(m){const g=m.group||m.id;return R.rug.marks.filter(x=>(x.group||x.id)===g);}
+function rugSetMark(m,patch){const tgt=R.allGroup&&('motif' in patch||'scheme' in patch||'zone' in patch||'motif_text' in patch)?rugGroup(m):[m];tgt.forEach(x=>Object.assign(x,patch));if(patch.zone)R.lastZone=patch.zone;rugSaveSoon();rugDraw();rugSide();}
+function rugSide(){
+  const E=$('rgSide');if(!E)return;const r=R.rug;if(!r){E.innerHTML='';return;}
+  const tabs=`<div class="rgtabs"><button id="rgS1" class="${R.side==='rug'?'on':''}">Ковёр</button><button id="rgS2" class="${R.side==='mark'?'on':''}">Элемент${R.sel?' '+(r.marks.indexOf(R.sel)+1):''}</button><button id="rgS3" class="${R.side==='all'?'on':''}">Все элементы (${r.marks.length})</button></div>`;
+  let body='';const dis=rro()?'disabled':'';
+  if(R.side==='rug'){
+    const f=(k,l,ph)=>`<label>${l}<input data-f="${k}" value="${esc(r[k]||'')}" placeholder="${ph||''}" ${dis}></label>`;
+    body=`<div class="rgform">
+      ${f('title','Название')}
+      <label>Школа<select data-f="school" ${dis}>${Object.entries(RSCH).map(([k,v])=>`<option value="${k}" ${r.school===k?'selected':''}>${v}</option>`).join('')}</select></label>
+      <label>Тип ковра (композиция)<div class="rgpick"><span id="rgComp">${r._composition?`<b>${esc(r._composition.az)}</b> ${esc(r._composition.ru||'')}`:'<i class="mut">не выбран</i>'}</span>${r.composition&&!rro()?' <a href="#" id="rgCompX">✕</a>':''}</div>
+        ${rro()?'':`<input id="rgCompQ" placeholder="поиск в словаре: челеберд, хила…"><div id="rgCompHits" class="rghits"></div>`}</label>
+      <label>Техника<select data-f="technique" ${dis}>${RTECH.map(t=>`<option ${r.technique===t?'selected':''}>${t}</option>`).join('')}</select></label>
+      ${f('museum','Музей / собрание')}${f('inv','Инв. номер')}${f('place','Место (как у музея)')}${f('date','Дата','XIX в., 1880-е…')}${f('size','Размер','150×230 см')}${f('url','Ссылка на источник')}${f('license','Лицензия фото')}
+      <label>Заметки<textarea data-f="notes" rows="3" ${dis}>${esc(r.notes||'')}</textarea></label>
+      <label>Статус разметки<select data-f="status" ${dis}>${Object.entries(RST).map(([k,v])=>`<option value="${k}" ${r.status===k?'selected':''}>${v}</option>`).join('')}</select></label>
+      <p class="mut">Источник: ${esc(r.source||'—')}${r.updated_by?` · последняя правка: ${esc(r.updated_by)}`:''}</p>
+      ${rro()?'':`<p><button id="rgDel" class="sm" style="color:var(--bad)">удалить ковёр</button></p>`}</div>`;
+  }else if(R.side==='mark'){
+    const m=R.sel;
+    if(!m)body=`<p class="mut">Выберите рамку на фото или обведите новый элемент.<br><br><b>Как размечать</b><br>1. Обведите один элемент рамкой.<br>2. Укажите зону (поле, кайма…) и узор из словаря.<br>3. Если в схемах студии есть этот узор — выберите схему.<br>4. «＋ повтор» (R) — обведите такой же элемент в другом месте: название перейдёт само.<br>5. Другой человек проверяет: ✓ верно (C) или ✗ неверно (X).</p>`;
+    else{
+      const g=rugGroup(m),mine=window.ME&&m.by===ME.name;
+      body=`<div class="rgform">
+        <div class="rgcrop"><img src="/api/rugs/${encodeURIComponent(r.id)}/crop?b=${m.box.map(v=>v.toFixed(4)).join(',')}&s=260&t=${Date.now()}"></div>
+        <div class="lb">Зона ковра<div class="rgzones">${RZK.map((k,i)=>`<button data-z="${k}" class="sm ${m.zone===k?'on':''}" style="border-color:${RZ[k][1]}" ${dis}>${i+1} ${RZ[k][0]}</button>`).join('')}</div></div>
+        <label>Узор<div class="rgpick">${m.motif&&m._motif?`<b>${esc(m._motif.az)}</b> ${esc(m._motif.ru||'')} <small class="mut">${esc(m._motif.tr||'')}</small>`:(m.motif_text?`<i>${esc(m.motif_text)}</i> <small class="mut">(нет в словаре)</small>`:'<i class="mut">не указан</i>')}${(m.motif||m.motif_text)&&!rro()?' <a href="#" id="rgMotX">✕</a>':''}</div>
+          ${rro()?'':`<input id="rgMotQ" placeholder="поиск: гоча, бута, сарыгул…"><div id="rgMotHits" class="rghits"></div>`}</label>
+        <label>Схема в студии<div id="rgSch">${m.scheme?`<span class="rgschsel"><img src="/out/${encodeURIComponent(m.scheme)}_x12.png"> ${esc(m.scheme)} ${rro()?'':'<a href="#" id="rgSchX">✕</a>'}</span>`:'<i class="mut">не выбрана</i>'}</div><div id="rgSchList" class="rgschs"></div></label>
+        <label class="rgrow"><input type="checkbox" id="rgAllG" ${R.allGroup?'checked':''}> менять сразу для всех повторов (${g.length})</label>
+        <label>Уверенность<select id="rgCert" ${dis}><option value="sure" ${m.certainty!=='maybe'?'selected':''}>уверенно</option><option value="maybe" ${m.certainty==='maybe'?'selected':''}>предположительно</option></select></label>
+        <div class="rgrow">${rro()?'':`<button id="rgRep" class="sm" data-tip="обвести такой же элемент в другом месте (R)">＋ повтор</button> <button id="rgDelM" class="sm" style="color:var(--bad)" data-tip="Delete">удалить</button>`}</div>
+        <div class="rgcheck"><b>Проверка:</b> ${m.status==='confirmed'?'<span style="color:var(--ok)">✓ подтверждено</span>':m.status==='rejected'?'<span style="color:var(--bad)">✗ отклонено</span>':'ждёт проверки'}<br>
+          <small class="mut">отметил(а): ${esc(m.by||'—')}${m.at?' · '+new Date(m.at*1000).toLocaleString('ru',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):''}${m.confirmed_by?` · проверил(а): ${esc(m.confirmed_by)}`:''}</small>
+          ${rro()?'':`<div class="rgrow"><button id="rgOk" class="sm" data-tip="C">✓ верно</button><button id="rgNo" class="sm" data-tip="X">✗ неверно</button><button id="rgUn" class="sm">↺ снять</button>${mine&&m.status==='proposed'?'<small class="mut">лучше, чтобы проверял другой человек</small>':''}</div>`}</div>
+        <label>Комментарий<textarea id="rgNote" rows="2" ${dis}>${esc(m.note||'')}</textarea></label></div>`;
+    }
+  }else{
+    const groups={};r.marks.forEach((m,i)=>{const g=m.group||m.id;(groups[g]=groups[g]||[]).push([m,i]);});
+    body=`<div class="rgall">${Object.values(groups).map(gs=>{const[m,i]=gs[0];return `<div class="rgallit" data-m="${m.id}"><img src="/api/rugs/${encodeURIComponent(r.id)}/crop?b=${m.box.map(v=>v.toFixed(4)).join(',')}&s=80"><div><b>${m._motif?esc(m._motif.az):(m.motif_text?esc(m.motif_text):'<i class="mut">без названия</i>')}</b><small>${(RZ[m.zone]||RZ.other)[0]} · №${gs.map(x=>x[1]+1).join(', ')}</small><small>${gs.filter(x=>x[0].status==='confirmed').length}/${gs.length} ✓${m.scheme?' · схема '+esc(m.scheme):''}</small></div></div>`;}).join('')||'<p class="mut">Элементов пока нет.</p>'}</div>`;
+  }
+  E.innerHTML=tabs+body;
+  $('rgS1').onclick=()=>{R.side='rug';rugSide();};$('rgS2').onclick=()=>{R.side='mark';rugSide();};$('rgS3').onclick=()=>{R.side='all';rugSide();};
+  E.querySelectorAll('[data-f]').forEach(inp=>inp.onchange=inp.oninput=()=>{r[inp.dataset.f]=inp.value;rugSaveSoon();});
+  E.querySelectorAll('.rgallit').forEach(e=>e.onclick=()=>{const m=r.marks.find(x=>x.id===e.dataset.m);rugSelect(m);rugFocus(m);});
+  if(R.side==='rug'&&!rro()){
+    rugDictSearch('rgCompQ','rgCompHits','composition',d=>{r.composition=d.id;r._composition={az:d.az,ru:d.ru};rugSaveSoon();rugSide();});
+    $('rgCompX')&&($('rgCompX').onclick=e=>{e.preventDefault();r.composition='';r._composition=null;rugSaveSoon();rugSide();});
+    $('rgDel').onclick=async()=>{if(!confirm('Удалить ковёр «'+(r.title||r.id)+'» вместе с разметкой?'))return;await api('/api/rugs/'+encodeURIComponent(r.id),undefined,'DELETE');R.rug=null;await rugsLoadList();rugRender();};
+  }
+  if(R.side==='mark'&&R.sel&&!rro()){
+    const m=R.sel;
+    E.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>rugSetMark(m,{zone:b.dataset.z}));
+    rugDictSearch('rgMotQ','rgMotHits','',d=>rugSetMark(m,{motif:d.id,motif_text:'',_motif:{az:d.az,ru:d.ru,tr:d.tr}}),q=>rugSetMark(m,{motif:'',motif_text:q,_motif:null}));
+    $('rgMotX')&&($('rgMotX').onclick=e=>{e.preventDefault();rugSetMark(m,{motif:'',motif_text:'',_motif:null,scheme:''});});
+    $('rgSchX')&&($('rgSchX').onclick=e=>{e.preventDefault();rugSetMark(m,{scheme:''});});
+    $('rgAllG').onchange=e=>{R.allGroup=e.target.checked;};
+    $('rgCert').onchange=e=>{m.certainty=e.target.value;rugSaveSoon();};
+    $('rgNote').oninput=e=>{m.note=e.target.value;rugSaveSoon();};
+    $('rgRep').onclick=()=>rugRepeat();$('rgDelM').onclick=()=>rugDelMark();
+    $('rgOk').onclick=()=>rugCheck('confirmed');$('rgNo').onclick=()=>rugCheck('rejected');$('rgUn').onclick=()=>rugCheck('proposed');
+    if(m.motif)rugSchemes(m);
+  }else if(R.side==='mark'&&R.sel&&R.sel.motif)rugSchemes(R.sel);
+}
+function rugDictSearch(inId,outId,type,pick,free){
+  const inp=$(inId),out=$(outId);if(!inp)return;let t=null;
+  const run=async()=>{const q=inp.value.trim();if(!q){out.innerHTML='';return;}
+    const hits=await api('/api/dict?limit=30&q='+encodeURIComponent(q)+(type?'&type='+type:''));
+    out.innerHTML=hits.map((d,i)=>`<div class="rghit" data-i="${i}"><b>${esc(d.az)}</b> ${esc(d.ru||'')} <small class="mut">${esc(d.tr||'')}${d.type==='composition'?' · тип ковра':''}${d.schemes?' · схем: '+d.schemes:''}</small></div>`).join('')+
+      (free?`<div class="rghit" data-free="1"><i>«${esc(q)}» — нет в словаре, записать как есть</i></div>`:'');
+    out.querySelectorAll('.rghit').forEach(e=>e.onclick=()=>{if(e.dataset.free)free(q);else pick(hits[+e.dataset.i]);});};
+  inp.oninput=()=>{clearTimeout(t);t=setTimeout(()=>run().catch(fail),200);};
+  inp.onkeydown=e=>{if(e.key==='Enter'){const f=out.querySelector('.rghit');f&&f.click();}e.stopPropagation();};
+}
+async function rugSchemes(m){
+  const L=$('rgSchList');if(!L)return;
+  if(!R.figs[m.motif])R.figs[m.motif]=(await api('/api/dict/'+encodeURIComponent(m.motif))).figures||[];
+  const fs=R.figs[m.motif];if(!$('rgSchList'))return;
+  L.innerHTML=fs.length?fs.map(f=>`<div class="rgsch ${m.scheme===f.id?'on':''}" data-f="${esc(f.id)}" data-tip="${esc(f.id)}${f.done?'':' (в работе)'}"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_x12.png" onerror="this.src='/api/crop/${encodeURIComponent(f.id)}'"><small>${esc(f.id)}${f.done?'':' ◐'}</small></div>`).join(''):'<small class="mut">Схем этого узора в студии пока нет.</small>';
+  if(!rro())L.querySelectorAll('.rgsch').forEach(e=>e.onclick=()=>rugSetMark(m,{scheme:e.dataset.f}));
+}
+function rugFocus(m){const V=$('rgView');if(!V||!m)return;const cx=(m.box[0]+m.box[2]/2)*R.iw,cy=(m.box[1]+m.box[3]/2)*R.ih;R.ox=V.clientWidth/2-cx*R.z;R.oy=V.clientHeight/2-cy*R.z;rugApply();}
+function rugRepeat(){if(!R.sel)return;R.repeatOf=R.sel;R.tool='box';rugTools();stat('обведите повтор элемента '+(R.rug.marks.indexOf(R.sel)+1),'ok');}
+function rugDelMark(){const m=R.sel;if(!m)return;R.rug.marks=R.rug.marks.filter(x=>x!==m);R.rug.marks.filter(x=>x.group===m.id).forEach((x,i,a)=>x.group=a[0].id);R.sel=null;rugSaveSoon();rugDraw();rugSide();}
+function rugCheck(st){const m=R.sel;if(!m)return;m.status=st;rugSaveSoon();rugDraw();rugSide();}
+function rugNext(d){if(!R.rug||!R.rug.marks.length)return;const i=R.sel?R.rug.marks.indexOf(R.sel):-1,n=(i+d+R.rug.marks.length)%R.rug.marks.length;rugSelect(R.rug.marks[n]);rugFocus(R.rug.marks[n]);}
+window.addEventListener('keydown',e=>{
+  if(!R.on)return;
+  const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','button'].includes(ae.type)));
+  if(typing){if(e.key==='Escape')ae.blur();e.stopImmediatePropagation();return;}
+  if(!$('modal').hidden)return;
+  const k=kk(e);let used=true;
+  if(e.code==='Space'){R.space=true;$('rgView')&&($('rgView').style.cursor='grab');}
+  else if(e.key==='Escape'){R.repeatOf=null;rugSelect(null);rugTools();}
+  else if(k==='b')R.tool='box',rugTools();
+  else if(k==='h')R.tool='hand',rugTools();
+  else if(k==='f'||k==='0')rugFit();
+  else if(k==='r')rugRepeat();
+  else if((e.key==='Delete'||e.key==='Backspace')&&R.sel&&!rro())rugDelMark();
+  else if(k==='c'&&R.sel&&!rro())rugCheck('confirmed');
+  else if(k==='x'&&R.sel&&!rro())rugCheck('rejected');
+  else if(e.key==='Tab'){rugNext(e.shiftKey?-1:1);}
+  else if(/^[1-8]$/.test(k)&&R.sel&&!rro())rugSetMark(R.sel,{zone:RZK[+k-1]});
+  else if(k==='='||k==='+'){R.z*=1.25;rugApply();}
+  else if(k==='-'){R.z*=0.8;rugApply();}
+  else used=false;
+  if(used){e.preventDefault();}
+  e.stopImmediatePropagation();
+},true);
+window.addEventListener('keyup',e=>{if(e.code==='Space'&&R.on){R.space=false;$('rgView')&&($('rgView').style.cursor='');}},true);
+(()=>{
+  const t=document.createElement('button');t.id='tab-rugs';t.textContent='3 · Ковры';$('tab-queue').after(t);t.onclick=rugsOpen;
+  ['pipe','sheet','queue'].forEach(k=>$('tab-'+k).addEventListener('click',()=>{if(R.on)rugsClose();},true));
+  const d=document.createElement('div');d.id='rugs';d.innerHTML=`<aside id="rgLeft"><div class="rgtop">
+    <label class="btn sm" data-tip="Загрузить фото ковров (можно несколько)">＋ фото<input type="file" id="rgUp" accept="image/*" multiple hidden></label>
+    <label class="btn sm" data-tip="Каталог музея: catalog.json из Colab (museum_open) — фото скачает сервер">⇪ каталог<input type="file" id="rgCat" accept=".json" hidden></label>
+    <select id="rgFilt"><option value="">все</option>${Object.entries(RST).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
+    <input id="rgQ" placeholder="поиск"></div><div id="rgList"></div></aside><section id="rgCenter"></section><aside id="rgSide"></aside>`;
+  document.body.appendChild(d);
+  $('rgFilt').onchange=e=>{R.filter=e.target.value;rugList();};$('rgQ').oninput=e=>{R.q=e.target.value;rugList();};
+  $('rgUp').onchange=async e=>{const fd=new FormData();[...e.target.files].forEach(f=>fd.append('files',f));stat('загружаю…','busy');
+    try{const r=await fetch('/api/rugs_upload',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat('добавлено ковров: '+j.made.length,'ok');await rugsLoadList();if(j.made[0])rugOpen(j.made[0]);}catch(err){fail(err);}e.target.value='';};
+  $('rgCat').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const items=JSON.parse(await f.text());const j=await api('/api/rugs_import',items);stat(`импорт: ${j.started} новых, пропущено ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
+  window.addEventListener('resize',()=>{if(R.on){$('rugs').style.top=document.querySelector('header').getBoundingClientRect().bottom+'px';}});
 })();
 </script></body></html>

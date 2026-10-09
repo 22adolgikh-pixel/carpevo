@@ -30,7 +30,7 @@ def _git_restore(here, data):
                             capture_output=True, text=True, timeout=300)
         if r.returncode != 0:
             return {"ok": False, "error": (r.stderr or r.stdout).strip()[-400:].replace(token, "***")}
-        for item in ("work", "sheets", "legend.csv", "i18n.json", "site_index.json", "cell_model.json", "sources_hidden.json", "users.json", "activity.jsonl"):
+        for item in ("work", "sheets", "legend.csv", "i18n.json", "site_index.json", "cell_model.json", "sources_hidden.json", "users.json", "activity.jsonl", "rugs", "rug_img"):
             s, d = os.path.join(tmp, "data", item), os.path.join(data, item)
             if not os.path.exists(s):
                 continue
