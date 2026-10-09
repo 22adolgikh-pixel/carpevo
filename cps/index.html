@@ -182,6 +182,8 @@ aside{min-height:0}
 #um table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 14px}#um td,#um th{padding:4px 8px;border-bottom:1px solid #333;text-align:left}
 #um input{padding:5px 8px;margin:2px 4px 2px 0}#um h3{margin:10px 0 4px}
 /* v10.20 «Ковры» */
+.rgsug{background:#ffb4541a;border-radius:6px;padding:4px 6px;color:var(--tx);margin:-2px 0 6px}.rgrings{display:flex;flex-wrap:wrap;gap:3px;margin:4px 0}
+.rgring{border:1px solid;border-left-width:4px;border-radius:5px;padding:1px 6px;cursor:pointer;color:var(--tx);font-size:12px}
 #rugs{position:fixed;left:0;right:0;bottom:30px;top:48px;display:none;grid-template-columns:250px 1fr 370px;background:var(--bg);z-index:20}
 #rgLeft,#rgSide{background:var(--pan);overflow:auto;border-right:1px solid var(--ln)}#rgSide{border-right:0;border-left:1px solid var(--ln);padding:8px 10px}
 .rgtop{display:flex;flex-wrap:wrap;gap:4px;padding:8px;border-bottom:1px solid var(--ln);position:sticky;top:0;background:var(--pan)}.rgtop input{flex:1;min-width:60px}
@@ -1976,6 +1978,10 @@ setInterval(pollAct,3000);$('logBtn').onclick=logToggle;
 const R={on:false,list:[],rug:null,sel:null,tool:'box',z:1,ox:0,oy:0,drag:null,repeatOf:null,saveT:null,filter:'',q:'',side:'rug',dictHits:[],figs:{},allGroup:true};
 const RZ={field:['поле','#6cb6ff'],medallion:['медальон','#ffb454'],spandrel:['угол поля','#c792ea'],border:['главная кайма','#7ec96b'],minor:['малая кайма','#4ec9b0'],guard:['бордюрная полоска','#d7ba7d'],end:['торцевая полоса','#ce9178'],other:['другое','#aaa']};
 const RZK=Object.keys(RZ);
+function layRect(L,i){const[cx,cy,cw,ch]=L.carpet;if(i<0)return[cx,cy,cw,ch];const b=L.bounds[i];return[cx+b.ix*cw,cy+b.iy*ch,cw*(1-2*b.ix),ch*(1-2*b.iy)];}
+function layZoneAt(L,x,y){if(!L)return null;const[cx,cy,cw,ch]=L.carpet;if(x<cx||y<cy||x>cx+cw||y>cy+ch)return null;let n=0;
+  L.bounds.forEach((b,i)=>{const[a,c,w,h]=layRect(L,i);if(x>=a&&x<=a+w&&y>=c&&y<=c+h)n=i+1;});return (L.rings||[])[n]||'field';}
+function layFix(L){L.bounds.sort((a,b)=>a.ix-b.ix);const n=L.bounds.length;L.rings=(L.rings||[]).slice(0,n);while(L.rings.length<n)L.rings.push('minor');L.rings.push('field');}
 const RSCH={'':'—','guba-shirvan':'Губа-Ширван','ganja-gazakh':'Гянджа-Газах','karabakh':'Карабах','tabriz':'Тебриз','nakhchivan':'Нахчыван'};
 const RTECH=['','ворсовый','безворсовый: килим','безворсовый: сумах','безворсовый: зили','безворсовый: верни','безворсовый: шадда','палас','джеджим','другое'];
 const RST={new:'новый',work:'в работе',done:'размечен'};
@@ -2000,6 +2006,7 @@ function rugSaveSoon(){if(rro())return;R.ver=(R.ver||0)+1;clearTimeout(R.saveT);
 async function rugSaveNow(){
   clearTimeout(R.saveT);const r=R.rug;if(!r)return;
   const body={};['title','museum','inv','url','license','place','date','school','composition','technique','size','notes','status'].forEach(k=>body[k]=r[k]);
+  body.layout=r.layout||null;if(r.school_suggest===null)body.school_suggest=null;
   body.marks=r.marks.map(m=>({id:m.id,box:m.box,zone:m.zone,motif:m.motif,motif_text:m.motif_text,scheme:m.scheme,group:m.group,certainty:m.certainty,status:m.status,note:m.note}));
   const v=R.ver;
   try{const n=await api('/api/rugs/'+encodeURIComponent(r.id),body);
@@ -2016,16 +2023,16 @@ function rugRender(){
   if(!r){C.innerHTML='<p class="mut" style="padding:20px">Выберите ковёр слева.</p>';$('rgSide').innerHTML='';return;}
   C.innerHTML=`<div class="rgtools">
     <button id="rgTBox" data-tip="Рамка: тяните мышью вокруг элемента (B)">▭ рамка</button><button id="rgTHand" data-tip="Двигать фото (H, или держите пробел)">✋</button>
-    <button id="rgFit" data-tip="Вписать (F)">⤢</button><span id="rgZoom" class="mut"></span>
+    <button id="rgTZones" data-tip="Зоны ковра: тяните линии границ (Z)">▦ зоны</button><label style="margin:0 6px;color:var(--mut);white-space:nowrap" data-tip="показывать границы зон поверх фото"><input type="checkbox" id="rgShowZ" ${R.showZones?'checked':''}> зоны</label><button id="rgFit" data-tip="Вписать (F)">⤢</button><span id="rgZoom" class="mut"></span>
     <span class="sep"></span><span id="rgHint" class="mut"></span>
     <span style="margin-left:auto" id="rgSaved" class="mut"></span></div>
     <div id="rgView"><div id="rgStage"><img id="rgImg" src="/rugimg/${encodeURIComponent(r.id)}.jpg?t=${r.updated}" draggable="false"><svg id="rgSvg"></svg></div></div>`;
-  $('rgTBox').onclick=()=>{R.tool='box';rugTools();};$('rgTHand').onclick=()=>{R.tool='hand';rugTools();};$('rgFit').onclick=rugFit;
+  $('rgTBox').onclick=()=>{R.tool='box';rugTools();};$('rgTZones').onclick=()=>{R.tool='zones';R.showZones=true;rugTools();rugDraw();};$('rgShowZ').onchange=e=>{R.showZones=e.target.checked;rugDraw();};$('rgTHand').onclick=()=>{R.tool='hand';rugTools();};$('rgFit').onclick=rugFit;
   const img=$('rgImg');img.onload=()=>{R.iw=img.naturalWidth;R.ih=img.naturalHeight;if(R.fitNext){R.fitNext=false;rugFit();}else rugApply();rugDraw();};
   rugViewEvents();rugTools();rugSide();
 }
-function rugTools(){$('rgTBox')&&$('rgTBox').classList.toggle('on',R.tool==='box');$('rgTHand')&&$('rgTHand').classList.toggle('on',R.tool==='hand');
-  const h=$('rgHint');if(h)h.textContent=R.repeatOf?'Обводите повторы выбранного элемента один за другим (Esc — закончить)':(R.tool==='box'?'Обведите элемент мышью. Колесо — масштаб, пробел — двигать.':'Тяните фото мышью.');}
+function rugTools(){$('rgTBox')&&$('rgTBox').classList.toggle('on',R.tool==='box');$('rgTZones')&&$('rgTZones').classList.toggle('on',R.tool==='zones');$('rgTHand')&&$('rgTHand').classList.toggle('on',R.tool==='hand');
+  const h=$('rgHint');if(h)h.textContent=R.tool==='zones'?'Тяните линии: жёлтая — край ковра, голубые — границы кайм и поля. Delete — удалить выбранную границу.':R.preset?'Обведите элемент «'+(R.preset.name||R.preset.scheme)+'» на фото (Esc — отмена)':R.repeatOf?'Обводите повторы выбранного элемента один за другим (Esc — закончить)':(R.tool==='box'?'Обведите элемент мышью. Колесо — масштаб, пробел — двигать.':'Тяните фото мышью.');}
 function rugFit(){const V=$('rgView');if(!V||!R.iw)return;const k=Math.min(V.clientWidth/R.iw,V.clientHeight/R.ih)*0.96;R.z=k;R.ox=(V.clientWidth-R.iw*k)/2;R.oy=(V.clientHeight-R.ih*k)/2;rugApply();}
 function rugApply(){const st=$('rgStage');if(!st)return;st.style.transform=`translate(${R.ox}px,${R.oy}px) scale(${R.z})`;st.style.width=R.iw+'px';st.style.height=R.ih+'px';$('rgZoom').textContent=Math.round(R.z*100)+'%';rugDraw();}
 function rugPt(e){const V=$('rgView').getBoundingClientRect();return{x:(e.clientX-V.left-R.ox)/R.z/R.iw,y:(e.clientY-V.top-R.oy)/R.z/R.ih};}
@@ -2039,6 +2046,7 @@ function rugViewEvents(){
     const tg=e.target;
     if(tg.dataset&&tg.dataset.h&&R.sel&&!rro()){R.drag={t:'resize',h:tg.dataset.h,m:R.sel,b0:[...R.sel.box],p0:p};e.preventDefault();return;}
     if(tg.dataset&&tg.dataset.m){const m=R.rug.marks.find(x=>x.id===tg.dataset.m);if(m){rugSelect(m);if(!rro())R.drag={t:'move',m,b0:[...m.box],p0:p};e.preventDefault();return;}}
+    if(R.tool==='zones'){const L=R.rug.layout;if(!L||rro())return;const hit=layHit(L,p);if(hit){R.drag={t:'lay',hit,L};R.layBound=hit.i;rugDraw();e.preventDefault();}return;}
     if(rro()){rugSelect(null);return;}
     R.drag={t:'new',p0:p,p1:p};e.preventDefault();
   };
@@ -2050,6 +2058,7 @@ function rugMove(e){
   if(d.t==='pan'){R.ox=d.ox+e.clientX-d.sx;R.oy=d.oy+e.clientY-d.sy;rugApply();return;}
   const p=rugPt(e),cl=v=>Math.max(0,Math.min(1,v));
   if(d.t==='new'){d.p1={x:cl(p.x),y:cl(p.y)};rugDraw();return;}
+  if(d.t==='lay'){layDrag(d,cl(p.x),cl(p.y));d.moved=true;rugDraw();return;}
   const dx=p.x-d.p0.x,dy=p.y-d.p0.y,b=d.b0;
   if(d.t==='move'){d.m.box=[cl(b[0]+dx),cl(b[1]+dy),b[2],b[3]];d.m.box[0]=Math.min(d.m.box[0],1-b[2]);d.m.box[1]=Math.min(d.m.box[1],1-b[3]);}
   if(d.t==='resize'){let[x,y,w,h]=b;if(d.h.includes('l')){x=b[0]+dx;w=b[2]-dx;}if(d.h.includes('r'))w=b[2]+dx;if(d.h.includes('t')){y=b[1]+dy;h=b[3]-dy;}if(d.h.includes('b'))h=b[3]+dy;
@@ -2061,15 +2070,33 @@ function rugUp(){
   if(d.t==='new'){const x=Math.min(d.p0.x,d.p1.x),y=Math.min(d.p0.y,d.p1.y),w=Math.abs(d.p1.x-d.p0.x),h=Math.abs(d.p1.y-d.p0.y);
     if(w*R.iw<6||h*R.ih<6){rugSelect(null);rugDraw();return;}
     const src=R.repeatOf,id='m'+Date.now().toString(36);
-    const m={id,box:[x,y,w,h],zone:src?src.zone:(R.lastZone||'field'),motif:src?src.motif:'',motif_text:src?src.motif_text:'',scheme:src?src.scheme:'',group:src?(src.group||src.id):'',certainty:src?src.certainty:'sure',status:'proposed',note:'',_motif:src?src._motif:null,by:(window.ME&&ME.name)||''};
+    const pz=src?src.zone:(layZoneAt(R.rug.layout,x+w/2,y+h/2)||R.lastZone||'field'),pr=R.preset;
+    const m={id,box:[x,y,w,h],zone:pz,motif:src?src.motif:(pr?pr.motif:''),motif_text:src?src.motif_text:'',scheme:src?src.scheme:(pr?pr.scheme:''),group:src?(src.group||src.id):'',certainty:src?src.certainty:'sure',status:'proposed',note:'',_motif:src?src._motif:null,by:(window.ME&&ME.name)||''};
     if(src&&!src.group)src.group=src.id;
+    if(pr&&!src){m._motif=pr._motif||null;R.preset=null;rugTools();}
     R.rug.marks.push(m);if(!src)R.repeatOf=null;rugSelect(m);R.side='mark';rugSide();rugSaveSoon();rugDraw();return;}
+  if(d.t==='lay'){if(d.moved){layFix(d.L);d.L.status='edited';rugSaveSoon();rugSide();}return;}
   if(d.moved)rugSaveSoon();
 }
+function layHit(L,p){const tx=8/R.z/R.iw,ty=8/R.z/R.ih;let best=null;
+  for(let i=-1;i<L.bounds.length;i++){const[a,c,w,h]=layRect(L,i);
+    [['l',Math.abs(p.x-a),p.y>c&&p.y<c+h,tx],['r',Math.abs(p.x-a-w),p.y>c&&p.y<c+h,tx],['t',Math.abs(p.y-c),p.x>a&&p.x<a+w,ty],['b',Math.abs(p.y-c-h),p.x>a&&p.x<a+w,ty]].forEach(([s,dd,inside,tol])=>{
+      if(inside&&dd<tol&&(!best||dd/tol<best.d))best={i,s,d:dd/tol};});}
+  return best;}
+function layDrag(d,x,y){const L=d.L,[cx,cy,cw,ch]=L.carpet,h=d.hit;
+  if(h.i<0){let[a,c,w,hh]=L.carpet;if(h.s==='l'){w+=a-x;a=x;}if(h.s==='r')w=x-a;if(h.s==='t'){hh+=c-y;c=y;}if(h.s==='b')hh=y-c;if(w>0.05&&hh>0.05)L.carpet=[a,c,w,hh];return;}
+  const b=L.bounds[h.i];if(h.s==='l')b.ix=Math.max(0.002,Math.min(0.48,(x-cx)/cw));if(h.s==='r')b.ix=Math.max(0.002,Math.min(0.48,(cx+cw-x)/cw));
+  if(h.s==='t')b.iy=Math.max(0.002,Math.min(0.48,(y-cy)/ch));if(h.s==='b')b.iy=Math.max(0.002,Math.min(0.48,(cy+ch-y)/ch));}
 function rugSelect(m){R.sel=m;if(m)R.side='mark';rugDraw();rugSide();}
 function rugDraw(){
   const svg=$('rgSvg');if(!svg||!R.rug||!R.iw)return;svg.setAttribute('viewBox',`0 0 ${R.iw} ${R.ih}`);svg.setAttribute('width',R.iw);svg.setAttribute('height',R.ih);
   const sw=1.6/R.z,fs=12/R.z,sel=R.sel,grp=sel?(sel.group||sel.id):null;let h='';
+  const L=R.rug.layout;
+  if(L&&L.carpet&&(R.showZones||R.tool==='zones')){const ok=L.status==='confirmed',dash=ok?'':`stroke-dasharray="${8/R.z} ${5/R.z}"`;
+    for(let i=-1;i<L.bounds.length;i++){const[a,c,w,hh]=layRect(L,i).map((v,j)=>v*(j%2?R.ih:R.iw)),act=R.tool==='zones'&&R.layBound===i;
+      h+=`<rect x="${a}" y="${c}" width="${w}" height="${hh}" fill="none" stroke="${i<0?'#ffe066':'#4dd0e1'}" stroke-width="${(act?3:1.4)/R.z}" ${dash} style="pointer-events:none" opacity=".9"/>`;}
+    (L.rings||[]).forEach((z,i)=>{const[a,c,w,hh]=layRect(L,i-1),nx=i<L.bounds.length?layRect(L,i):null;const ty=(c+(nx?(nx[1]-c)/2:hh/2))*R.ih;
+      h+=`<text x="${(a+w/2)*R.iw}" y="${ty+fs/3}" font-size="${fs}" text-anchor="middle" fill="${(RZ[z]||RZ.other)[1]}" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">${(RZ[z]||RZ.other)[0]}</text>`;});}
   R.rug.marks.forEach((m,i)=>{const[x,y,w,hh]=m.box.map((v,j)=>v*(j%2?R.ih:R.iw)),c=(RZ[m.zone]||RZ.other)[1],isSel=sel&&m.id===sel.id,same=grp&&(m.group||m.id)===grp;
     const dash=m.status==='proposed'?`stroke-dasharray="${4/R.z} ${3/R.z}"`:'';const op=m.status==='rejected'?0.35:1;
     h+=`<rect data-m="${m.id}" x="${x}" y="${y}" width="${w}" height="${hh}" fill="${isSel?c+'33':(same?c+'1a':'transparent')}" stroke="${c}" stroke-width="${isSel?sw*2:sw}" ${dash} opacity="${op}" style="cursor:pointer"/>`;
@@ -2090,8 +2117,13 @@ function rugSide(){
     body=`<div class="rgform">
       ${f('title','Название')}
       <label>Школа<select data-f="school" ${dis}>${Object.entries(RSCH).map(([k,v])=>`<option value="${k}" ${r.school===k?'selected':''}>${v}</option>`).join('')}</select></label>
+      ${!r.school&&r.school_suggest&&r.school_suggest.school?`<div class="rgsug">предложено: <b>${RSCH[r.school_suggest.school]||r.school_suggest.school}</b> <small class="mut">— ${esc(r.school_suggest.why)}</small>${rro()?'':' <button class="sm" id="rgSugOk">принять</button> <button class="sm" id="rgSugNo">✕</button>'}</div>`:''}
+      <div class="lb">Зоны ковра (поле, каймы)<div class="rgrow">${r.layout?`<span>${r.layout.bounds.length} границ · ${r.layout.status==='confirmed'?'<span style="color:var(--ok)">✓ проверено</span>':(r.layout.status==='edited'?'поправлено, не подтверждено':'найдено автоматически, проверьте')}</span>`:'<i class="mut">не размечены</i>'}</div>
+        ${rro()?'':`<div class="rgrow"><button class="sm" id="rgLayAuto">⚙ найти автоматически</button>${r.layout?'<button class="sm" id="rgLayEdit">▦ править</button><button class="sm" id="rgLayAdd">＋ граница</button><button class="sm" id="rgLayOk">✓ зоны верны</button><button class="sm" id="rgLayDel" style="color:var(--bad)">убрать</button>':''}</div>`}
+        ${r.layout?`<div class="rgrings">${r.layout.rings.map((z,i)=>`<span class="rgring" data-ring="${i}" style="border-color:${(RZ[z]||RZ.other)[1]}">${i+1}. ${(RZ[z]||RZ.other)[0]}</span>`).join('')}</div><small class="mut">клик по полосе — сменить её тип (снаружи внутрь)</small>`:''}</div>
       <label>Тип ковра (композиция)<div class="rgpick"><span id="rgComp">${r._composition?`<b>${esc(r._composition.az)}</b> ${esc(r._composition.ru||'')}`:'<i class="mut">не выбран</i>'}</span>${r.composition&&!rro()?' <a href="#" id="rgCompX">✕</a>':''}</div>
         ${rro()?'':`<input id="rgCompQ" placeholder="поиск в словаре: челеберд, хила…"><div id="rgCompHits" class="rghits"></div>`}</label>
+      ${r.composition?`<div class="lb">По Керимову на коврах этого типа встречаются <span id="rgExpN"></span><div id="rgExp" class="rgschs"></div><small class="mut">клик по элементу → обведите его на фото; ✓ — уже отмечен</small></div>`:''}
       <label>Техника<select data-f="technique" ${dis}>${RTECH.map(t=>`<option ${r.technique===t?'selected':''}>${t}</option>`).join('')}</select></label>
       ${f('museum','Музей / собрание')}${f('inv','Инв. номер')}${f('place','Место (как у музея)')}${f('date','Дата','XIX в., 1880-е…')}${f('size','Размер','150×230 см')}${f('url','Ссылка на источник')}${f('license','Лицензия фото')}
       <label>Заметки<textarea data-f="notes" rows="3" ${dis}>${esc(r.notes||'')}</textarea></label>
@@ -2128,8 +2160,19 @@ function rugSide(){
   if(R.side==='rug'&&!rro()){
     rugDictSearch('rgCompQ','rgCompHits','composition',d=>{r.composition=d.id;r._composition={az:d.az,ru:d.ru};rugSaveSoon();rugSide();});
     $('rgCompX')&&($('rgCompX').onclick=e=>{e.preventDefault();r.composition='';r._composition=null;rugSaveSoon();rugSide();});
+    $('rgSugOk')&&($('rgSugOk').onclick=()=>{r.school=r.school_suggest.school;rugSaveSoon();rugSide();});
+    $('rgSugNo')&&($('rgSugNo').onclick=()=>{r.school_suggest=null;R.dropSug=true;rugSaveSoon();rugSide();});
+    $('rgLayAuto').onclick=async()=>{if(r.layout&&r.layout.status==='confirmed'&&!confirm('Зоны уже проверены. Заменить автоматическими?'))return;stat('ищу каймы…','busy');
+      try{const j=await api('/api/rugs/'+encodeURIComponent(r.id)+'/layout',{});r.layout=j.layout;R.showZones=true;R.tool='zones';rugTools();rugDraw();rugSaveSoon();rugSide();stat('найдено границ: '+j.layout.bounds.length+' — проверьте и подвиньте линии','ok');}catch(e){fail(e);}};
+    $('rgLayEdit')&&($('rgLayEdit').onclick=()=>{R.tool='zones';R.showZones=true;rugTools();rugDraw();});
+    $('rgLayOk')&&($('rgLayOk').onclick=()=>{r.layout.status='confirmed';r.layout.by=(window.ME&&ME.name)||'';rugSaveSoon();rugSide();rugDraw();});
+    $('rgLayDel')&&($('rgLayDel').onclick=()=>{if(!confirm('Убрать разметку зон?'))return;r.layout=null;rugSaveSoon();rugSide();rugDraw();});
+    $('rgLayAdd')&&($('rgLayAdd').onclick=()=>{const L=r.layout,i=R.layBound!=null&&R.layBound>=0?R.layBound:L.bounds.length-1,a=i>=0?L.bounds[i]:{ix:0,iy:0},b=L.bounds[i+1]||{ix:Math.min(0.45,a.ix+0.08),iy:Math.min(0.45,a.iy+0.08)};
+      L.bounds.splice(i+1,0,{ix:(a.ix+b.ix)/2||0.05,iy:(a.iy+b.iy)/2||0.05,strength:0});L.rings.splice(i+1,0,'minor');layFix(L);L.status='edited';R.tool='zones';R.showZones=true;R.layBound=i+1;rugTools();rugDraw();rugSaveSoon();rugSide();});
+    E.querySelectorAll('[data-ring]').forEach(e=>e.onclick=()=>{const i=+e.dataset.ring,L=r.layout,order=['border','minor','guard','end','field','other'];L.rings[i]=order[(order.indexOf(L.rings[i])+1)%order.length];L.status='edited';rugSaveSoon();rugSide();rugDraw();});
     $('rgDel').onclick=async()=>{if(!confirm('Удалить ковёр «'+(r.title||r.id)+'» вместе с разметкой?'))return;await api('/api/rugs/'+encodeURIComponent(r.id),undefined,'DELETE');R.rug=null;await rugsLoadList();rugRender();};
   }
+  if(R.side==='rug'&&r.composition)rugExpected(r);
   if(R.side==='mark'&&R.sel&&!rro()){
     const m=R.sel;
     E.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>rugSetMark(m,{zone:b.dataset.z}));
@@ -2154,6 +2197,17 @@ function rugDictSearch(inId,outId,type,pick,free){
   inp.oninput=()=>{clearTimeout(t);t=setTimeout(()=>run().catch(fail),200);};
   inp.onkeydown=e=>{if(e.key==='Enter'){const f=out.querySelector('.rghit');f&&f.click();}e.stopPropagation();};
 }
+async function rugExpected(r){
+  const E=$('rgExp');if(!E)return;
+  if(!R.figs['@'+r.composition])R.figs['@'+r.composition]=await api('/api/dict/'+encodeURIComponent(r.composition));
+  const d=R.figs['@'+r.composition];if(!$('rgExp'))return;
+  if(!r.school&&!r.school_suggest&&d.school_vote&&!R.dropSug){r.school_suggest={school:d.school_vote,why:'тип ковра «'+d.az+'» у Керимова'};rugSide();return;}
+  const done=new Set(r.marks.map(m=>m.scheme).filter(Boolean));$('rgExpN').textContent='('+d.expected.length+')';
+  E.innerHTML=d.expected.length?d.expected.map(f=>`<div class="rgsch ${done.has(f.id)?'on':''}" data-f="${esc(f.id)}" data-tip="${esc(f.id)} ${esc(f.name)}"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_x12.png" onerror="this.src='/api/crop/${encodeURIComponent(f.id)}'"><small>${done.has(f.id)?'✓ ':''}${esc(f.name||f.id)}</small></div>`).join(''):'<small class="mut">В легенде Керимова элементов этого типа не нашлось.</small>';
+  if(!rro())E.querySelectorAll('.rgsch').forEach(e=>e.onclick=async()=>{const f=d.expected.find(x=>x.id===e.dataset.f);let mo=null;
+    if(f.motif){try{const o=await api('/api/dict/'+encodeURIComponent(f.motif));mo={az:o.az,ru:o.ru,tr:o.tr};}catch(err){}}
+    R.preset={scheme:f.id,motif:f.motif||'',name:f.name,_motif:mo};R.tool='box';rugTools();stat('обведите на фото элемент «'+(f.name||f.id)+'»','ok');});
+}
 async function rugSchemes(m){
   const L=$('rgSchList');if(!L)return;
   if(!R.figs[m.motif])R.figs[m.motif]=(await api('/api/dict/'+encodeURIComponent(m.motif))).figures||[];
@@ -2173,7 +2227,9 @@ window.addEventListener('keydown',e=>{
   if(!$('modal').hidden)return;
   const k=kk(e);let used=true;
   if(e.code==='Space'){R.space=true;$('rgView')&&($('rgView').style.cursor='grab');}
-  else if(e.key==='Escape'){R.repeatOf=null;rugSelect(null);rugTools();}
+  else if(e.key==='Escape'){R.repeatOf=null;R.preset=null;if(R.tool==='zones')R.tool='box';rugSelect(null);rugTools();rugDraw();}
+  else if(k==='z'){R.tool='zones';R.showZones=true;rugTools();rugDraw();}
+  else if((e.key==='Delete'||e.key==='Backspace')&&R.tool==='zones'&&R.rug&&R.rug.layout&&R.layBound!=null&&R.layBound>=0&&!rro()){const L=R.rug.layout;L.bounds.splice(R.layBound,1);L.rings.splice(R.layBound,1);layFix(L);L.status='edited';R.layBound=null;rugSaveSoon();rugDraw();rugSide();}
   else if(k==='b')R.tool='box',rugTools();
   else if(k==='h')R.tool='hand',rugTools();
   else if(k==='f'||k==='0')rugFit();
@@ -2196,12 +2252,17 @@ window.addEventListener('keyup',e=>{if(e.code==='Space'&&R.on){R.space=false;$('
   const d=document.createElement('div');d.id='rugs';d.innerHTML=`<aside id="rgLeft"><div class="rgtop">
     <label class="btn sm" data-tip="Загрузить фото ковров (можно несколько)">＋ фото<input type="file" id="rgUp" accept="image/*" multiple hidden></label>
     <label class="btn sm" data-tip="Каталог музея: catalog.json из Colab (museum_open) — фото скачает сервер">⇪ каталог<input type="file" id="rgCat" accept=".json" hidden></label>
+    <label class="btn sm" data-tip="Архив .zip: фото + одноимённые .txt с описаниями (например, azerbaijanrugs). Школа предлагается по папке и описанию">🗜 архив<input type="file" id="rgZip" accept=".zip" hidden></label>
+    <button class="sm" id="rgFromFig" data-tip="Фото ковров из книг: рисунки, помеченные в студии как «фото ковра» (Керимов, журнал)">📖 из книг</button>
     <select id="rgFilt"><option value="">все</option>${Object.entries(RST).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
     <input id="rgQ" placeholder="поиск"></div><div id="rgList"></div></aside><section id="rgCenter"></section><aside id="rgSide"></aside>`;
   document.body.appendChild(d);
   $('rgFilt').onchange=e=>{R.filter=e.target.value;rugList();};$('rgQ').oninput=e=>{R.q=e.target.value;rugList();};
   $('rgUp').onchange=async e=>{const fd=new FormData();[...e.target.files].forEach(f=>fd.append('files',f));stat('загружаю…','busy');
     try{const r=await fetch('/api/rugs_upload',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat('добавлено ковров: '+j.made.length,'ok');await rugsLoadList();if(j.made[0])rugOpen(j.made[0]);}catch(err){fail(err);}e.target.value='';};
+  $('rgZip').onchange=async e=>{const f=e.target.files[0];if(!f)return;const fd=new FormData();fd.append('file',f);stat('загружаю архив…','busy');
+    try{const r=await fetch('/api/rugs_zip',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat(`из архива: ${j.made} ковров, уже были: ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
+  $('rgFromFig').onclick=async()=>{try{const j=await api('/api/rugs_from_figures',{});stat('добавлено фото из книг: '+j.made,'ok');rugsLoadList();}catch(err){fail(err);}};
   $('rgCat').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const items=JSON.parse(await f.text());const j=await api('/api/rugs_import',items);stat(`импорт: ${j.started} новых, пропущено ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
   window.addEventListener('resize',()=>{if(R.on){$('rugs').style.top=document.querySelector('header').getBoundingClientRect().bottom+'px';}});
 })();
