@@ -40,6 +40,7 @@ for dp, dn, fn in os.walk(ROOT):
     for f in fn:
         stem, ext = os.path.splitext(f)
         if ext.lower() not in IMG: continue
+        if os.path.getsize(os.path.join(dp, f)) < 12000: continue    # значки, кнопки и миниатюры сайта
         txt = ''
         for cand in (stem + '.txt', stem + '.TXT'):
             if cand in names:
