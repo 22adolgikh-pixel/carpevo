@@ -61,3 +61,15 @@ _contact_sheet.jpg — обзор всех вырезок, drawings_for_cps.zip 
 !rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
 %run /content/carpevo/cps/tools/colab/museum_open_colab.py
 ```
+
+# Своя модель для ковров, v1 — carpet_model_colab.py
+
+DINOv2 ViT-S/14, доучиваются последние 4 блока: «искусственные ковры» из принятых схем CPS ↔ чистые схемы + самообучение на всех фото ковров.
+Проверка до/после: узнавание узора на отложенных 15% схем (top-1/top-5), школы на azerbaijanrugs, контактные листы «музейное фото → 5 похожих узоров».
+T4 GPU, ~1–2 ч. Результат: `carpet-dna/carpet_model/` (report.json, motif_suggestions.csv, sheets/, synth_examples.jpg, carpet_vits14_v1.pt).
+
+```
+!rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
+%run /content/carpevo/cps/tools/colab/carpet_model_colab.py
+```
+Быстрая проверка без GPU: `%env CM_TEST=1`. Больше шагов: `%env CM_STEPS=6000`.
