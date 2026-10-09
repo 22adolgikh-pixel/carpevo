@@ -73,3 +73,16 @@ T4 GPU, ~1–2 ч. Результат: `carpet-dna/carpet_model/` (report.json, 
 %run /content/carpevo/cps/tools/colab/carpet_model_colab.py
 ```
 Быстрая проверка без GPU: `%env CM_TEST=1`. Больше шагов: `%env CM_STEPS=6000`.
+
+# Каталог ковров («паспорта») + двойники — rug_catalog_colab.py
+
+Собирает с Диска все фото ковров: Керимов т. I–III (страницы + подписи из raw_pages_v3), photos/full (Wikimedia/Met/AIC/Cleveland),
+museum_open (V&A/Met), azerbaijan_rugs_guide. Паспорт: названия, источник, музей/номер, дата, техника, фрагмент, школа + почему.
+Двойники (один и тот же ковёр в разных источниках): DINOv2 → кандидаты → проверка точками SIFT + RANSAC. T4, 40–70 мин.
+Результат: `carpet-dna/rug_catalog/` (catalog.json, groups.json, dup_sheets/*.jpg) и rugs_bundle.zip с доступом по ссылке — студия забирает его кнопкой «⟳ из Диска».
+
+```
+!rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
+%run /content/carpevo/cps/tools/colab/rug_catalog_colab.py
+```
+В конце Colab попросит разрешение на Google Drive (чтобы открыть доступ к пакету по ссылке) и напечатает «id пакета для студии».

@@ -17,6 +17,30 @@ SCHOOLS = {"guba-shirvan": "Губа-Ширван", "ganja-gazakh": "Гяндж�
 MAXSIDE = 1600
 _lock = threading.Lock()
 imp = {"running": False, "done": 0, "total": 0, "errors": 0, "last": ""}
+sync = {"running": False, "stage": "", "done": 0, "total": 0, "error": "", "last_ok": None, "made": 0, "updated": 0}
+
+
+def drive_fetch(file_id, dest, progress=None):
+    """Скачать публичный («по ссылке») файл Google Drive потоком в файл (большие файлы — через подтверждение антивирус-страницы)."""
+    import http.cookiejar
+    cj = http.cookiejar.CookieJar(); op = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+    H = {"User-Agent": "Mozilla/5.0 (compatible; cps-rugs/1.0)"}
+    urls = [f"https://drive.usercontent.google.com/download?id={file_id}&export=download&confirm=t",
+            f"https://drive.google.com/uc?export=download&id={file_id}&confirm=t"]
+    last = ""
+    for u in urls:
+        with op.open(urllib.request.Request(u, headers=H), timeout=120) as r:
+            if "text/html" in r.headers.get("Content-Type", ""):
+                last = r.read(4000).decode("utf-8", "ignore"); continue
+            total = int(r.headers.get("Content-Length") or 0); got = 0
+            with open(dest, "wb") as f:
+                while True:
+                    b = r.read(1 << 20)
+                    if not b: break
+                    f.write(b); got += len(b)
+                    if progress: progress(got, total)
+            return
+    raise RuntimeError("Диск не отдал файл (нет доступа «по ссылке»?) " + re.sub(r"<[^>]+>", " ", last)[:200])
 
 
 CYR = dict(zip("абвгдеёжзийклмнопрстуфхцчшщъыьэюяәғҹһөүҝ", ["a","b","v","g","d","e","e","j","z","i","y","k","l","m","n","o","p","r","s","t","u","f","h","ts","c","s","s","","i","","e","yu","ya","e","g","c","h","o","u","g"]))
@@ -160,7 +184,110 @@ def install(app, DATA, D_WORK):
         mk = r.get("marks") or []
         return {"id": r["id"], "title": r.get("title") or r["id"], "school": r.get("school", ""), "museum": r.get("museum", ""),
                 "status": r.get("status", "new"), "n": len(mk), "confirmed": sum(1 for m in mk if m.get("status") == "confirmed"),
-                "motifs": len({m.get("motif") for m in mk if m.get("motif")}), "updated": r.get("updated", 0), "source": r.get("source", "")}
+                "motifs": len({m.get("motif") for m in mk if m.get("motif")}), "updated": r.get("updated", 0), "source": r.get("source", ""),
+                "src": (r.get("cat") or {}).get("src") or ("upload" if not r.get("src_id") else (r.get("src_id") or "").split(":")[0]),
+                "group": r.get("same_group", ""), "same": len(r.get("same") or []), "fragment": (r.get("cat") or {}).get("fragment", False),
+                "composition": r.get("composition", ""), "kind": r.get("technique", "")}
+
+    D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
+
+    def settings():
+        try:
+            with open(SETF, encoding="utf-8") as f: return json.load(f)
+        except Exception: return {"bundle_id": os.environ.get("CPS_RUGS_BUNDLE_ID", "")}
+
+    def comp_id(name):
+        if not name: return ""
+        if name in BYID: return name
+        return COMP.get(fold(name)) or COMP.get("~" + skel(name)) or ""
+
+    CAT_FIELDS = ("title", "museum", "inv", "url", "license", "place", "date", "size", "technique", "school", "composition")
+
+    def run_sync(bid, who):
+        import zipfile, shutil
+        sync.update(running=True, stage="скачиваю пакет с Диска", done=0, total=0, error="", made=0, updated=0)
+        try:
+            os.makedirs(D_LIB, exist_ok=True); tmp = os.path.join(D_LIB, "_bundle.zip")
+            if os.environ.get("CPS_RUGS_TEST") and os.path.exists(bid): shutil.copy(bid, tmp)
+            else: drive_fetch(bid, tmp, lambda g, t: sync.update(done=g // (1 << 20), total=t // (1 << 20)))
+            sync.update(stage="распаковываю")
+            with zipfile.ZipFile(tmp) as z:
+                cat = json.loads(z.read("catalog.json").decode("utf-8"))
+                for n in z.namelist():
+                    if n.startswith("img/"): z.extract(n, D_LIB)
+            os.remove(tmp)
+            groups = {g["id"]: g for g in cat.get("groups", [])}
+            items = cat.get("items", []); sync.update(stage="обновляю карточки ковров", done=0, total=len(items))
+            for n, it in enumerate(items):
+                rid = re.sub(r"[^\w\-]+", "_", it["id"])[:80]
+                with _lock:
+                    r = load(rid); new = r is None
+                    if new: r = blank(rid, source="каталог: " + it.get("src", ""))
+                    old = r.get("cat") or {}
+                    val = {"title": it.get("title", ""), "museum": it.get("museum", ""), "inv": it.get("inv", ""), "url": it.get("url", ""),
+                           "license": it.get("license", ""), "place": it.get("place", ""), "date": it.get("date", ""), "size": it.get("size", ""),
+                           "technique": it.get("technique", ""), "school": it.get("school", ""), "composition": comp_id(it.get("composition", ""))}
+                    for k in CAT_FIELDS:                                 # правка человека важнее каталога: обновляем, только если поле не трогали
+                        if not r.get(k) or r.get(k) == old.get(k): r[k] = val[k]
+                    if not r.get("notes") or r.get("notes") == old.get("text"): r["notes"] = it.get("text", "")
+                    r["cat"] = {**val, "text": it.get("text", ""), "names": it.get("names", []), "src": it.get("src", ""), "school_why": it.get("school_why", ""),
+                                "composition_name": it.get("composition", ""), "fragment": bool(it.get("fragment")), "object": it.get("object", ""),
+                                "ambiguous": bool(it.get("ambiguous")), "folder": it.get("folder", "")}
+                    r["src_id"] = "cat:" + it["id"]; r["lib_img"] = it.get("img", "")
+                    g = groups.get(it.get("same_group") or "")
+                    if g:
+                        r["same_group"] = g["id"]
+                        sc = {}
+                        for a, b, v, cs in g.get("pairs", []):
+                            if it["id"] in (a, b): sc[b if a == it["id"] else a] = v
+                        r["same"] = [{"id": re.sub(r"[^\w\-]+", "_", m)[:80], "score": sc.get(m, 0)} for m in g["members"] if m != it["id"]]
+                    else: r.pop("same_group", None); r["same"] = []
+                    r.setdefault("same_ok", {})
+                    p = os.path.join(D_LIB, r["lib_img"])
+                    if os.path.exists(p) and not r.get("w"):
+                        a = cv2.imread(p)
+                        if a is not None: r["h"], r["w"] = a.shape[:2]
+                    th = os.path.join(D_TH, rid + ".jpg")
+                    if os.path.exists(th) and new is False and r.get("_lib_t") != cat.get("built"): os.remove(th)
+                    r["_lib_t"] = cat.get("built")
+                    save(r)
+                sync["made" if new else "updated"] += 1; sync["done"] = n + 1
+            st = settings(); st.update(bundle_id=bid, last_sync=time.strftime("%Y-%m-%d %H:%M"), built=cat.get("built"), by=who)
+            with open(SETF, "w", encoding="utf-8") as f: json.dump(st, f, ensure_ascii=False)
+            sync.update(stage="готово", last_ok=time.strftime("%Y-%m-%d %H:%M"))
+        except Exception as e:
+            sync.update(error=str(e)[:300], stage="ошибка")
+        sync["running"] = False
+
+    @app.get("/api/rugs_sync")
+    def api_rugs_sync_state():
+        st = settings(); return {**sync, "bundle_id": st.get("bundle_id", ""), "last_sync": st.get("last_sync"), "built": st.get("built")}
+
+    @app.post("/api/rugs_sync")
+    async def api_rugs_sync(request: Request):
+        b = await request.json() if (await request.body()) else {}
+        bid = (b.get("bundle_id") or settings().get("bundle_id") or "").strip()
+        if not (os.environ.get("CPS_RUGS_TEST") and os.path.exists(bid)):          # для проверки: путь к локальному пакету
+            m = re.search(r"[-\w]{25,}", bid); bid = m.group(0) if m else ""
+        if not bid: return JSONResponse({"error": "нужен id пакета (или ссылка на rugs_bundle.zip)"}, 400)
+        if sync["running"]: return JSONResponse({"error": "загрузка уже идёт"}, 409)
+        threading.Thread(target=run_sync, args=(bid, user(request)), daemon=True).start()
+        return {"started": True, "bundle_id": bid}
+
+    @app.post("/api/rugs/{rid}/same")
+    async def api_rug_same(rid: str, request: Request):
+        """Подтвердить / отклонить «это тот же ковёр» (отметка ставится у обоих)."""
+        b = await request.json(); other = b.get("other"); ok = b.get("ok")
+        who = user(request)
+        with _lock:
+            for a, c in ((rid, other), (other, rid)):
+                r = load(a)
+                if not r: continue
+                r.setdefault("same_ok", {})
+                if ok is None: r["same_ok"].pop(c, None)
+                else: r["same_ok"][c] = {"ok": bool(ok), "by": who, "at": int(time.time())}
+                save(r)
+        return api_rug(rid)
 
     # ---------------- словарь ----------------
     @app.get("/api/dict")
@@ -209,6 +336,10 @@ def install(app, DATA, D_WORK):
             m["_motif"] = {"az": d["az"], "ru": d["ru"], "tr": d["tr"]} if d else None
         c = BYID.get(r.get("composition") or "")
         r["_composition"] = {"az": c["az"], "ru": c["ru"]} if c else None
+        for x in r.get("same") or []:
+            o = load(x["id"]) or {}
+            x.update(title=o.get("title") or x["id"], src=(o.get("cat") or {}).get("src", ""), school=o.get("school", ""), museum=o.get("museum", ""),
+                     ok=(r.get("same_ok") or {}).get(x["id"]))
         return r
 
     @app.post("/api/rugs/{rid}")
@@ -303,7 +434,7 @@ def install(app, DATA, D_WORK):
     def api_rug_layout(rid: str):
         """Автоматически найти край ковра, полосы кайм и поле (предложение; человек правит)."""
         import rug_layout
-        r = load(rid); a = cv2.imread(os.path.join(D_IMG, rid + ".jpg"))
+        r = load(rid); p = img_path(rid); a = cv2.imread(p) if p else None
         if not r or a is None: return JSONResponse({"error": "нет такого ковра"}, 404)
         lay = rug_layout.detect(a); lay["status"] = "auto"
         return {"layout": lay}
@@ -367,22 +498,29 @@ def install(app, DATA, D_WORK):
         return {"made": made, "skipped": skipped}
 
     # ---------------- картинки ----------------
+    def img_path(rid):
+        p = os.path.join(D_IMG, rid + ".jpg")
+        if os.path.exists(p): return p
+        r = load(rid) or {}
+        q = os.path.join(D_LIB, r.get("lib_img") or ("img/" + rid + ".jpg"))
+        return q if os.path.exists(q) else None
+
     @app.get("/rugimg/{rid}.jpg")
     def rug_img(rid: str):
-        p = os.path.join(D_IMG, os.path.basename(rid) + ".jpg")
-        return FileResponse(p) if os.path.exists(p) else Response(status_code=404)
+        p = img_path(os.path.basename(rid))
+        return FileResponse(p) if p else Response(status_code=404)
 
     @app.get("/rugthumb/{rid}.jpg")
     def rug_thumb(rid: str):
-        rid = os.path.basename(rid); p = os.path.join(D_TH, rid + ".jpg"); src = os.path.join(D_IMG, rid + ".jpg")
-        if not os.path.exists(p) and os.path.exists(src):
+        rid = os.path.basename(rid); p = os.path.join(D_TH, rid + ".jpg"); src = img_path(rid)
+        if not os.path.exists(p) and src:
             a = cv2.imread(src); s = 220 / max(a.shape[:2]); a = cv2.resize(a, None, fx=s, fy=s, interpolation=cv2.INTER_AREA)
             cv2.imwrite(p, a, [cv2.IMWRITE_JPEG_QUALITY, 80])
         return FileResponse(p, headers={"Cache-Control": "max-age=3600"}) if os.path.exists(p) else Response(status_code=404)
 
     @app.get("/api/rugs/{rid}/crop")
     def rug_crop(rid: str, b: str = Query(...), s: int = 160):
-        a = cv2.imread(os.path.join(D_IMG, os.path.basename(rid) + ".jpg"))
+        p = img_path(os.path.basename(rid)); a = cv2.imread(p) if p else None
         if a is None: return Response(status_code=404)
         try: x, y, w, h = [float(v) for v in b.split(",")]
         except Exception: return Response(status_code=400)

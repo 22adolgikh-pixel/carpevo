@@ -182,6 +182,8 @@ aside{min-height:0}
 #um table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 14px}#um td,#um th{padding:4px 8px;border-bottom:1px solid #333;text-align:left}
 #um input{padding:5px 8px;margin:2px 4px 2px 0}#um h3{margin:10px 0 4px}
 /* v10.20 «Ковры» */
+.rgsub{padding-left:22px;background:#0001}.rgpass{background:var(--pan2);border-radius:6px;padding:6px 8px;color:var(--tx);margin-bottom:6px}.rgpass div{margin-top:3px}
+.rgsame{display:flex;flex-direction:column;gap:6px;margin-top:4px}.rgsm{display:flex;gap:8px;color:var(--tx)}.rgsm img{width:64px;height:64px;object-fit:cover;border-radius:4px;cursor:pointer;flex:none}.rgsm small{display:block}
 .rgsug{background:#ffb4541a;border-radius:6px;padding:4px 6px;color:var(--tx);margin:-2px 0 6px}.rgrings{display:flex;flex-wrap:wrap;gap:3px;margin:4px 0}
 .rgring{border:1px solid;border-left-width:4px;border-radius:5px;padding:1px 6px;cursor:pointer;color:var(--tx);font-size:12px}
 #rugs{position:fixed;left:0;right:0;bottom:30px;top:48px;display:none;grid-template-columns:250px 1fr 370px;background:var(--bg);z-index:20}
@@ -195,7 +197,7 @@ label.btn{display:inline-block;border:1px solid var(--ln);border-radius:6px;padd
 #rgView{flex:1;position:relative;overflow:hidden;background:#0b0c0f;cursor:crosshair}#rgStage{position:absolute;left:0;top:0;transform-origin:0 0}
 #rgImg{display:block;user-select:none}#rgSvg{position:absolute;left:0;top:0}
 .rgtabs{display:flex;gap:4px;margin-bottom:8px}.rgtabs button{flex:1}
-.rgform label,.rgform .lb{display:block;margin:7px 0;color:var(--mut);font-size:12px}.rgform input:not([type=checkbox]),.rgform select,.rgform textarea{display:block;width:100%;box-sizing:border-box;margin-top:2px;color:var(--tx)}
+.rgform label,.rgform .lb{display:block;margin:7px 0;color:var(--mut);font-size:12px}.rgform input:not([type=checkbox]),.rgform select,.rgform textarea{display:block;width:100%;box-sizing:border-box;margin-top:2px}.rgform input:not([type=checkbox]),.rgform textarea{color:#15171c}
 .rgform .rgrow{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin:6px 0;color:var(--tx)}
 .rgpick{color:var(--tx);margin:3px 0;font-size:13px}.rghits{max-height:190px;overflow:auto}.rghit{padding:4px 6px;cursor:pointer;color:var(--tx);border-bottom:1px solid #0002}.rghit:hover{background:var(--pan2)}
 .rgzones{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}.rgzones button{border-left-width:4px}
@@ -1993,13 +1995,26 @@ function rugsOpen(){
   rugsLoadList().then(()=>{if(!R.rug&&R.list.length)rugOpen(R.list[0].id);else rugRender();});
 }
 function rugsClose(){R.on=false;$('rugs').style.display='none';$('tab-rugs').classList.remove('on');}
-async function rugsLoadList(){const j=await api('/api/rugs');R.list=j.rugs;R.imp=j.import;rugList();if(R.imp&&R.imp.running){clearTimeout(R.impT);R.impT=setTimeout(rugsLoadList,3000);}}
+const RSRC={kerimov:'Керимов',museum:'музеи',azerbaijanrugs:'azerbaijanrugs',upload:'загруженные'};
+const srcKind=s=>/^kerimov/.test(s||'')?'kerimov':(s==='azerbaijanrugs'?'azerbaijanrugs':(['upload','fig','zip',''].includes(s||'')?'upload':'museum'));
+const SRCRU={kerimov_vol1:'Керимов т. I',kerimov_vol2:'Керимов т. II',kerimov_vol3:'Керимов т. III',met:'Метрополитен',vam:'V&A',aic:'Чикаго',cleveland:'Кливленд',wikimedia:'Wikimedia',azerbaijanrugs:'azerbaijanrugs',upload:'загружено',fig:'фото из студии',zip:'архив'};
+async function rugsLoadList(){const j=await api('/api/rugs');R.list=j.rugs;R.imp=j.import;
+  try{R.sync=await api('/api/rugs_sync');}catch(e){}
+  rugList();if((R.imp&&R.imp.running)||(R.sync&&R.sync.running)){clearTimeout(R.impT);R.impT=setTimeout(rugsLoadList,3000);}}
 function rugList(){
   const L=$('rgList');if(!L)return;const q=R.q.toLowerCase();
-  const ls=R.list.filter(r=>(!R.filter||r.status===R.filter)&&(!q||(r.title+' '+r.museum+' '+r.id).toLowerCase().includes(q)));
-  const im=R.imp&&(R.imp.running||R.imp.total)?`<div class="rgimp">${R.imp.running?'⏳ импорт':'импорт завершён'}: ${R.imp.done}/${R.imp.total}${R.imp.errors?' · ошибок '+R.imp.errors:''}<br><small>${esc(R.imp.last||'')}</small></div>`:'';
-  L.innerHTML=im+(ls.length?ls.map(r=>`<div class="rgit ${R.rug&&R.rug.id===r.id?'sel':''}" data-id="${esc(r.id)}"><img loading="lazy" src="/rugthumb/${encodeURIComponent(r.id)}.jpg"><div><b>${esc(r.title)}</b><small>${esc(RSCH[r.school]||'')}${r.museum?' · '+esc(r.museum):''}</small><small>${r.n?`${r.n} элем. · ${r.motifs} узор. · ✓ ${r.confirmed}`:'не размечен'} · ${RST[r.status]||r.status}</small></div></div>`).join(''):'<p class="mut">Ковров пока нет. Загрузите фото («＋ фото») или каталог музея («⇪ каталог»).</p>');
-  L.querySelectorAll('.rgit').forEach(e=>e.onclick=()=>rugOpen(e.dataset.id));
+  const ok=r=>(!R.filter||r.status===R.filter)&&(!R.fsrc||srcKind(r.src)===R.fsrc)&&(!R.fsch||(R.fsch==='-'?!r.school:r.school===R.fsch))&&(!R.fdup||r.group)&&(!q||(r.title+' '+r.museum+' '+r.id).toLowerCase().includes(q));
+  const ls=R.list.filter(ok);
+  // группы «один и тот же ковёр»: показываем одну строку, остальные фото — по клику
+  const PR={kerimov:0,museum:1,azerbaijanrugs:2,upload:3};const byG={};ls.forEach(r=>{if(r.group)(byG[r.group]=byG[r.group]||[]).push(r);});
+  Object.values(byG).forEach(g=>g.sort((a,b)=>PR[srcKind(a.src)]-PR[srcKind(b.src)]));
+  R.open=R.open||{};const row=(r,sub,n)=>`<div class="rgit ${R.rug&&R.rug.id===r.id?'sel':''} ${sub?'rgsub':''}" data-id="${esc(r.id)}"><img loading="lazy" src="/rugthumb/${encodeURIComponent(r.id)}.jpg"><div><b>${esc(r.title)}</b><small>${esc(SRCRU[r.src]||r.src||'')}${r.school?' · '+esc(RSCH[r.school]||r.school):' · <i>школа ?</i>'}${r.fragment?' · фрагмент':''}</small><small>${r.n?`${r.n} элем. · ✓ ${r.confirmed}`:'не размечен'}${n?` · <a href="#" data-g="${esc(r.group)}">🔗 ещё ${n} фото этого ковра</a>`:''}</small></div></div>`;
+  let h='';const done=new Set();
+  ls.forEach(r=>{if(done.has(r.id))return;if(r.group&&byG[r.group]){const g=byG[r.group];g.forEach(x=>done.add(x.id));h+=row(g[0],false,g.length-1);if(R.open[r.group])g.slice(1).forEach(x=>h+=row(x,true,0));}else{done.add(r.id);h+=row(r,false,0);}});
+  const sy=R.sync||{};const syl=sy.running?`<div class="rgimp">⏳ ${esc(sy.stage)}: ${sy.done}${sy.total?' / '+sy.total:''}</div>`:(sy.error?`<div class="rgimp" style="color:var(--bad)">⚠ ${esc(sy.error)}</div>`:(sy.last_sync?`<div class="rgimp mut" style="color:var(--mut)">каталог с Диска: ${esc(sy.last_sync)}${sy.made||sy.updated?` (новых ${sy.made}, обновлено ${sy.updated})`:''}</div>`:''));
+  const im=R.imp&&(R.imp.running||R.imp.total)?`<div class="rgimp">${R.imp.running?'⏳ импорт':'импорт завершён'}: ${R.imp.done}/${R.imp.total}${R.imp.errors?' · ошибок '+R.imp.errors:''}</div>`:'';
+  L.innerHTML=syl+im+`<div class="rgimp mut" style="color:var(--mut)">показано ${ls.length} из ${R.list.length}</div>`+(h||'<p class="mut" style="padding:8px">Ковров пока нет. Нажмите «⟳ из Диска».</p>');
+  L.querySelectorAll('.rgit').forEach(e=>e.onclick=ev=>{if(ev.target.dataset.g){ev.preventDefault();ev.stopPropagation();R.open[ev.target.dataset.g]=!R.open[ev.target.dataset.g];rugList();return;}rugOpen(e.dataset.id);});
 }
 async function rugOpen(id){R.rug=await api('/api/rugs/'+encodeURIComponent(id));R.sel=null;R.repeatOf=null;R.side='rug';R.fitNext=true;rugList();rugRender();}
 function rugSaveSoon(){if(rro())return;R.ver=(R.ver||0)+1;clearTimeout(R.saveT);$('rgSaved').textContent='…';R.saveT=setTimeout(rugSaveNow,500);}
@@ -2114,12 +2129,24 @@ function rugSide(){
   let body='';const dis=rro()?'disabled':'';
   if(R.side==='rug'){
     const f=(k,l,ph)=>`<label>${l}<input data-f="${k}" value="${esc(r[k]||'')}" placeholder="${ph||''}" ${dis}></label>`;
+    const C=r.cat||{};
+    const names=[...new Set([...(C.names||[]),C.composition_name].filter(x=>x&&x!==r.title))];
+    const same=r.same||[];
     body=`<div class="rgform">
+      <div class="rgpass"><b>Паспорт</b> <small class="mut">${esc(SRCRU[C.src]||C.src||r.source||'')}</small>
+        ${names.length?`<div><small class="mut">другие названия:</small> ${names.map(esc).join(' · ')}</div>`:''}
+        ${C.fragment?'<div style="color:var(--acc)">⚠ фрагмент ковра (по подписи)</div>':''}${C.object?`<div style="color:var(--acc)">⚠ ${esc(C.object)}</div>`:''}${C.ambiguous?'<div class="mut">⚠ на странице книги фото и подписи не совпали по числу — проверьте название</div>':''}
+        ${C.school_why?`<div><small class="mut">школа по каталогу:</small> ${esc(RSCH[C.school]||C.school||'')} <small class="mut">— ${esc(C.school_why)}</small></div>`:''}
+        ${(()=>{const sc=[...new Set([r.school,...same.filter(x=>x.ok?x.ok.ok:true).map(x=>x.school)].filter(Boolean))];return sc.length>1?`<div style="color:var(--acc)">⚠ источники расходятся по школе: ${sc.map(x=>esc(RSCH[x]||x)).join(' / ')} — решите, какая верна</div>`:'';})()}
+        ${C.text?`<details><summary class="mut">описание источника</summary><div style="white-space:pre-wrap;font-size:12px">${esc(C.text)}</div></details>`:''}
+      </div>
+      ${same.length?`<div class="lb">Этот же ковёр в других источниках (${same.length})<div class="rgsame">${same.map(x=>`<div class="rgsm"><img src="/rugthumb/${encodeURIComponent(x.id)}.jpg" data-open="${esc(x.id)}"><div><small><b>${esc(SRCRU[x.src]||x.src||'')}</b> · ${esc((x.title||'').slice(0,60))}${x.school?' · '+esc(RSCH[x.school]||x.school):''}</small><small class="mut">совпавших точек: ${x.score||'—'}</small>
+        ${x.ok?`<small style="color:${x.ok.ok?'var(--ok)':'var(--bad)'}">${x.ok.ok?'✓ тот же':'✗ другой'} (${esc(x.ok.by)})</small> ${rro()?'':`<a href="#" data-sameun="${esc(x.id)}">снять</a>`}`:(rro()?'<small class="mut">не проверено</small>':`<span><button class="sm" data-sameok="${esc(x.id)}">✓ тот же</button> <button class="sm" data-sameno="${esc(x.id)}">✗ другой</button></span>`)}</div></div>`).join('')}</div></div>`:''}
       ${f('title','Название')}
       <label>Школа<select data-f="school" ${dis}>${Object.entries(RSCH).map(([k,v])=>`<option value="${k}" ${r.school===k?'selected':''}>${v}</option>`).join('')}</select></label>
       ${!r.school&&r.school_suggest&&r.school_suggest.school?`<div class="rgsug">предложено: <b>${RSCH[r.school_suggest.school]||r.school_suggest.school}</b> <small class="mut">— ${esc(r.school_suggest.why)}</small>${rro()?'':' <button class="sm" id="rgSugOk">принять</button> <button class="sm" id="rgSugNo">✕</button>'}</div>`:''}
       <div class="lb">Зоны ковра (поле, каймы)<div class="rgrow">${r.layout?`<span>${r.layout.bounds.length} границ · ${r.layout.status==='confirmed'?'<span style="color:var(--ok)">✓ проверено</span>':(r.layout.status==='edited'?'поправлено, не подтверждено':'найдено автоматически, проверьте')}</span>`:'<i class="mut">не размечены</i>'}</div>
-        ${rro()?'':`<div class="rgrow"><button class="sm" id="rgLayAuto">⚙ найти автоматически</button>${r.layout?'<button class="sm" id="rgLayEdit">▦ править</button><button class="sm" id="rgLayAdd">＋ граница</button><button class="sm" id="rgLayOk">✓ зоны верны</button><button class="sm" id="rgLayDel" style="color:var(--bad)">убрать</button>':''}</div>`}
+        ${rro()?'':`<div class="rgrow">${(C.fragment||/безворс|палас|джеджим/.test(r.technique||''))?'<small style="color:var(--acc)">для фрагментов и безворсовых зоны ищутся плохо — лучше вручную</small>':''}<button class="sm" id="rgLayAuto">⚙ найти автоматически</button>${r.layout?'<button class="sm" id="rgLayEdit">▦ править</button><button class="sm" id="rgLayAdd">＋ граница</button><button class="sm" id="rgLayOk">✓ зоны верны</button><button class="sm" id="rgLayDel" style="color:var(--bad)">убрать</button>':''}</div>`}
         ${r.layout?`<div class="rgrings">${r.layout.rings.map((z,i)=>`<span class="rgring" data-ring="${i}" style="border-color:${(RZ[z]||RZ.other)[1]}">${i+1}. ${(RZ[z]||RZ.other)[0]}</span>`).join('')}</div><small class="mut">клик по полосе — сменить её тип (снаружи внутрь)</small>`:''}</div>
       <label>Тип ковра (композиция)<div class="rgpick"><span id="rgComp">${r._composition?`<b>${esc(r._composition.az)}</b> ${esc(r._composition.ru||'')}`:'<i class="mut">не выбран</i>'}</span>${r.composition&&!rro()?' <a href="#" id="rgCompX">✕</a>':''}</div>
         ${rro()?'':`<input id="rgCompQ" placeholder="поиск в словаре: челеберд, хила…"><div id="rgCompHits" class="rghits"></div>`}</label>
@@ -2156,10 +2183,13 @@ function rugSide(){
   E.innerHTML=tabs+body;
   $('rgS1').onclick=()=>{R.side='rug';rugSide();};$('rgS2').onclick=()=>{R.side='mark';rugSide();};$('rgS3').onclick=()=>{R.side='all';rugSide();};
   E.querySelectorAll('[data-f]').forEach(inp=>inp.onchange=inp.oninput=()=>{r[inp.dataset.f]=inp.value;rugSaveSoon();});
+  E.querySelectorAll('[data-open]').forEach(i=>i.onclick=()=>rugOpen(i.dataset.open));
   E.querySelectorAll('.rgallit').forEach(e=>e.onclick=()=>{const m=r.marks.find(x=>x.id===e.dataset.m);rugSelect(m);rugFocus(m);});
   if(R.side==='rug'&&!rro()){
     rugDictSearch('rgCompQ','rgCompHits','composition',d=>{r.composition=d.id;r._composition={az:d.az,ru:d.ru};rugSaveSoon();rugSide();});
     $('rgCompX')&&($('rgCompX').onclick=e=>{e.preventDefault();r.composition='';r._composition=null;rugSaveSoon();rugSide();});
+    E.querySelectorAll('[data-sameok],[data-sameno],[data-sameun]').forEach(b=>b.onclick=async ev=>{ev.preventDefault();const o=b.dataset.sameok||b.dataset.sameno||b.dataset.sameun;
+      try{const n=await api('/api/rugs/'+encodeURIComponent(r.id)+'/same',{other:o,ok:b.dataset.sameok?true:(b.dataset.sameno?false:null)});R.rug.same=n.same;R.rug.same_ok=n.same_ok;rugSide();}catch(e){fail(e);}});
     $('rgSugOk')&&($('rgSugOk').onclick=()=>{r.school=r.school_suggest.school;rugSaveSoon();rugSide();});
     $('rgSugNo')&&($('rgSugNo').onclick=()=>{r.school_suggest=null;R.dropSug=true;rugSaveSoon();rugSide();});
     $('rgLayAuto').onclick=async()=>{if(r.layout&&r.layout.status==='confirmed'&&!confirm('Зоны уже проверены. Заменить автоматическими?'))return;stat('ищу каймы…','busy');
@@ -2250,11 +2280,15 @@ window.addEventListener('keyup',e=>{if(e.code==='Space'&&R.on){R.space=false;$('
   const t=document.createElement('button');t.id='tab-rugs';t.textContent='3 · Ковры';$('tab-queue').after(t);t.onclick=rugsOpen;
   ['pipe','sheet','queue'].forEach(k=>$('tab-'+k).addEventListener('click',()=>{if(R.on)rugsClose();},true));
   const d=document.createElement('div');d.id='rugs';d.innerHTML=`<aside id="rgLeft"><div class="rgtop">
+    <button class="sm" id="rgSync" data-tip="Загрузить/обновить каталог ковров с Диска (пакет rugs_bundle.zip из Colab)" style="border-color:var(--acc)">⟳ из Диска</button>
     <label class="btn sm" data-tip="Загрузить фото ковров (можно несколько)">＋ фото<input type="file" id="rgUp" accept="image/*" multiple hidden></label>
     <label class="btn sm" data-tip="Каталог музея: catalog.json из Colab (museum_open) — фото скачает сервер">⇪ каталог<input type="file" id="rgCat" accept=".json" hidden></label>
     <label class="btn sm" data-tip="Архив .zip: фото + одноимённые .txt с описаниями (например, azerbaijanrugs). Школа предлагается по папке и описанию">🗜 архив<input type="file" id="rgZip" accept=".zip" hidden></label>
-    <button class="sm" id="rgFromFig" data-tip="Фото ковров из книг: рисунки, помеченные в студии как «фото ковра» (Керимов, журнал)">📖 из книг</button>
-    <select id="rgFilt"><option value="">все</option>${Object.entries(RST).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
+
+    <select id="rgFSrc"><option value="">все источники</option>${Object.entries(RSRC).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
+    <select id="rgFSch"><option value="">все школы</option>${Object.entries(RSCH).filter(([k])=>k).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}<option value="-">школа не известна</option></select>
+    <label style="white-space:nowrap;color:var(--mut)"><input type="checkbox" id="rgFDup"> есть двойники</label>
+    <select id="rgFilt"><option value="">любой статус</option>${Object.entries(RST).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
     <input id="rgQ" placeholder="поиск"></div><div id="rgList"></div></aside><section id="rgCenter"></section><aside id="rgSide"></aside>`;
   document.body.appendChild(d);
   $('rgFilt').onchange=e=>{R.filter=e.target.value;rugList();};$('rgQ').oninput=e=>{R.q=e.target.value;rugList();};
@@ -2262,7 +2296,10 @@ window.addEventListener('keyup',e=>{if(e.code==='Space'&&R.on){R.space=false;$('
     try{const r=await fetch('/api/rugs_upload',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat('добавлено ковров: '+j.made.length,'ok');await rugsLoadList();if(j.made[0])rugOpen(j.made[0]);}catch(err){fail(err);}e.target.value='';};
   $('rgZip').onchange=async e=>{const f=e.target.files[0];if(!f)return;const fd=new FormData();fd.append('file',f);stat('загружаю архив…','busy');
     try{const r=await fetch('/api/rugs_zip',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat(`из архива: ${j.made} ковров, уже были: ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
-  $('rgFromFig').onclick=async()=>{try{const j=await api('/api/rugs_from_figures',{});stat('добавлено фото из книг: '+j.made,'ok');rugsLoadList();}catch(err){fail(err);}};
+  $('rgFSrc').onchange=e=>{R.fsrc=e.target.value;rugList();};$('rgFSch').onchange=e=>{R.fsch=e.target.value;rugList();};$('rgFDup').onchange=e=>{R.fdup=e.target.checked;rugList();};
+  $('rgSync').onclick=async()=>{let st={};try{st=await api('/api/rugs_sync');}catch(e){}
+    let bid=st.bundle_id||'';if(!bid){bid=prompt('Ссылка или id файла rugs_bundle.zip на Диске (его печатает Colab в конце: «id пакета для студии»). Вводится один раз.')||'';if(!bid)return;}
+    try{await api('/api/rugs_sync',{bundle_id:bid});stat('загружаю каталог с Диска…','busy');rugsLoadList();}catch(err){fail(err);}};
   $('rgCat').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const items=JSON.parse(await f.text());const j=await api('/api/rugs_import',items);stat(`импорт: ${j.started} новых, пропущено ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
   window.addEventListener('resize',()=>{if(R.on){$('rugs').style.top=document.querySelector('header').getBoundingClientRect().bottom+'px';}});
 })();
