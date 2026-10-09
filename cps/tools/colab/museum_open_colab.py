@@ -33,14 +33,14 @@ for q in ('carpet', 'rug', 'kilim', 'sumak', 'bag'):
         page = 1
         while True:
             r = get('https://api.vam.ac.uk/v2/objects/search', params={'q': q, 'q_place_name': place, 'images_exist': 1, 'page_size': 100, 'page': page})
-            if not r: break
+            if not r: print('  V&A: нет ответа', q, place, page); break
             j = r.json(); rec = j.get('records', [])
             for o in rec:
                 sid = o.get('systemNumber')
                 if not sid or sid in seen: continue
                 seen.add(sid)
                 txt = ' '.join(str(o.get(k, '')) for k in ('objectType', '_primaryTitle', '_primaryPlace'))
-                if not RUG.search(txt) or not CAU.search(txt + ' ' + place): continue
+                if not RUG.search(txt) or not CAU.search(txt): continue    # место берём из записи музея, а не из запроса (v1 брал все ковры из выдачи)
                 base = (o.get('_images') or {}).get('_iiif_image_base_url')
                 if not base: continue
                 items['vam_' + sid] = dict(id='vam_' + sid, museum='V&A', inv=o.get('accessionNumber', ''), title=o.get('_primaryTitle') or o.get('objectType', ''),
@@ -55,6 +55,7 @@ ids = set()
 for q in ('Caucasus', 'Azerbaijan', 'Shirvan', 'Kuba', 'Kazak', 'Karabagh', 'Baku', 'Daghestan', 'Talish', 'Gendje', 'Soumak', 'Tabriz carpet'):
     r = get('https://collectionapi.metmuseum.org/public/collection/v1/search', params={'hasImages': 'true', 'q': q})
     if r: ids |= set(r.json().get('objectIDs') or [])
+    else: print('  Met: поиск не ответил —', q, '(у Met бывает защита от ботов; тогда пропускаем, 65 предметов Met у нас уже есть)')
 print('Met: кандидатов', len(ids), flush=True)
 for n, oid in enumerate(sorted(ids)):
     r = get(f'https://collectionapi.metmuseum.org/public/collection/v1/objects/{oid}')
@@ -69,6 +70,13 @@ for n, oid in enumerate(sorted(ids)):
                                url=o.get('objectURL', ''), img=o.get('primaryImage'), license='CC0')
     if n % 100 == 0: print('  Met', n, '/', len(ids), flush=True)
 print('Met:', sum(1 for k in items if k.startswith('met_')), flush=True)
+
+# ---- уборка после v1: лишние фото (английские, турецкие и пр. ковры) — в img_other/, не удаляются ----
+os.makedirs(f'{OUT}/img_other', exist_ok=True)
+for fn in os.listdir(f'{OUT}/img'):
+    if fn[:-4] not in items:
+        try: os.rename(f'{OUT}/img/{fn}', f'{OUT}/img_other/{fn}')
+        except Exception: pass
 
 # ---- скачивание ----
 ok = 0
