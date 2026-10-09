@@ -52,3 +52,12 @@ _contact_sheet.jpg — обзор всех вырезок, drawings_for_cps.zip 
 
 Результат в `carpet-dna/photos/azrugs_school/`: catalog.csv (школа, век, размер, описание), report.json, predictions.csv, disagreements.csv, model.npz (веса для CPS), features.npz (кэш; повторный запуск быстрый).
 Проверка групповая (почти одинаковые фото не попадают одновременно в обучение и проверку).
+
+# Открытые музеи (V&A + Метрополитен) → фото с музейными подписями — museum_open_colab.py
+
+Видеокарта не нужна, 10–30 мин. Результат: `carpet-dna/photos/museum_open/` (img/, catalog.csv). Met — только CC0; V&A — некоммерческая лицензия.
+
+```
+!rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
+%run /content/carpevo/cps/tools/colab/museum_open_colab.py
+```
