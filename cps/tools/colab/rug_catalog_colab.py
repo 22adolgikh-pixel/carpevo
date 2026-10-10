@@ -17,7 +17,7 @@ from google.colab import drive, auth
 drive.mount('/content/drive')
 D = os.environ.get('RC_ROOT', '/content/drive/MyDrive/carpet-dna')
 OUT = f'{D}/rug_catalog'; os.makedirs(f'{OUT}/dup_sheets', exist_ok=True)
-CACHE = os.environ.get('RC_CACHE', '/content/rugcat_cache'); os.makedirs(CACHE, exist_ok=True)
+CACHE = os.environ.get('RC_CACHE', f'{OUT}/_cache'); os.makedirs(CACHE, exist_ok=True)   # кэш на Диске: если Colab отключится, повторный запуск продолжит с места остановки
 REPO = os.environ.get('RC_REPO', '/content/carpevo')
 if not os.path.isdir(REPO):
     subprocess.run(['git', 'clone', '--depth', '1', '-b', 'cps-v5', 'https://github.com/22adolgikh-pixel/carpevo.git', REPO], check=True)
@@ -222,6 +222,7 @@ for i in range(0, len(todo), 32):
     with torch.no_grad(): f = model(x).float().cpu().numpy()
     f = f.reshape(len(ids), 3, -1).mean(1)
     for k, v in zip(ids, f): feats[k] = v / np.linalg.norm(v)
+    if (i // 32) % 20 == 19: np.savez(FC, d=np.array(feats, dtype=object))
 np.savez(FC, d=np.array(feats, dtype=object))
 ids = [it['id'] for it in items]; X = np.stack([feats[k] for k in ids]); log('признаки готовы')
 
@@ -232,20 +233,19 @@ for i in range(len(ids)):
     for j in np.argsort(-S[i])[:K]:
         if S[i, j] >= 0.72: cand.add((min(i, j), max(i, j)))
 log('кандидатов в двойники:', len(cand))
-sift = cv2.SIFT_create(nfeatures=2500)
-KC = {}
-def kp(i):
-    if i in KC: return KC[i]
+# точки SIFT всех фото — один раз в память (≈10 мин), потом сравнение пар быстрое
+sift = cv2.SIFT_create(nfeatures=1500)
+need = sorted({i for p in cand for i in p}); KP = {}
+for n, i in enumerate(need):
     g = cv2.cvtColor(cv2.imread(f'{IMGDIR}/{ids[i]}.jpg'), cv2.COLOR_BGR2GRAY)
-    s = 900 / max(g.shape); g = cv2.resize(g, None, fx=s, fy=s) if s < 1 else g
+    s_ = 900 / max(g.shape); g = cv2.resize(g, None, fx=s_, fy=s_) if s_ < 1 else g
     k, d = sift.detectAndCompute(g, None)
-    if d is not None: d = np.sqrt(d / (d.sum(1, keepdims=True) + 1e-7))      # RootSIFT
-    KC[i] = (np.float32([p.pt for p in k]) if k else np.zeros((0, 2), np.float32), d)
-    if len(KC) > 1500: KC.pop(next(iter(KC)))
-    return KC[i]
-flann = cv2.FlannBasedMatcher(dict(algorithm=1, trees=4), dict(checks=48))
+    if d is not None: d = np.sqrt(d / (d.sum(1, keepdims=True) + 1e-7)).astype(np.float16)      # RootSIFT
+    KP[i] = (np.float32([p.pt for p in k]) if k else np.zeros((0, 2), np.float32), d)
+    if n % 500 == 0: log('точки SIFT', n, '/', len(need))
+flann = cv2.FlannBasedMatcher(dict(algorithm=1, trees=4), dict(checks=40))
 def verify(i, j):
-    (p1, d1), (p2, d2) = kp(i), kp(j)
+    (p1, d1), (p2, d2) = KP[i], KP[j]
     if d1 is None or d2 is None or len(d1) < 30 or len(d2) < 30: return 0
     m = flann.knnMatch(d1.astype(np.float32), d2.astype(np.float32), k=2)
     good = [a for a, b in (x for x in m if len(x) == 2) if a.distance < 0.78 * b.distance]
@@ -255,11 +255,19 @@ def verify(i, j):
     if inl is None: return 0
     n = int(inl.sum())
     return n if n >= 0.3 * len(good) or n >= 120 else 0     # одна и та же вещь: много совпавших точек и большая их доля
-pairs = []
-for n, (i, j) in enumerate(sorted(cand, key=lambda t: (t[0], t[1]))):
-    v = verify(i, j)
-    if v >= 40: pairs.append((i, j, v, float(S[i, j])))
-    if n % 2000 == 0: log('проверено пар', n, '/', len(cand), '| двойников', len(pairs))
+PF = f'{CACHE}/pairs_progress.json'                         # проверенные пары сохраняются — после обрыва продолжаем
+prog = json.load(open(PF)) if os.path.exists(PF) else {'checked': [], 'found': []}
+checked = {tuple(x) for x in prog['checked']}; found = {(a, b): v for a, b, v in prog['found']}
+pos = {k: n for n, k in enumerate(ids)}
+todo = [(i, j) for i, j in sorted(cand) if (ids[i], ids[j]) not in checked]
+log('пар осталось проверить:', len(todo), '(уже проверено раньше:', len(checked), ')')
+for n, (i, j) in enumerate(todo):
+    v = verify(i, j); checked.add((ids[i], ids[j]))
+    if v >= 40: found[(ids[i], ids[j])] = v
+    if n % 1000 == 999 or n == len(todo) - 1:
+        json.dump({'checked': [list(x) for x in checked], 'found': [[a, b, v] for (a, b), v in found.items()]}, open(PF, 'w'))
+        log('проверено пар', n + 1, '/', len(todo), '| двойников', len(found))
+pairs = [(pos[a], pos[b], v, float(S[pos[a], pos[b]])) for (a, b), v in found.items() if a in pos and b in pos]
 # группы
 par = list(range(len(ids)))
 def fd(a):
@@ -294,7 +302,7 @@ for it in items: it.pop('img_path', None); it.pop('crop', None); it['img'] = f'i
 cat = {'built': time.strftime('%Y-%m-%d %H:%M'), 'items': items, 'groups': out_groups}
 json.dump(cat, open(f'{OUT}/catalog.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 json.dump(out_groups, open(f'{OUT}/groups.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-BZ = f'{CACHE}/rugs_bundle.zip'
+BZ = f'{CACHE}/rugs_bundle.zip' if os.environ.get('RC_TEST') else '/content/rugs_bundle.zip'   # пакет собирается локально и загружается на Диск через API
 with zipfile.ZipFile(BZ, 'w', zipfile.ZIP_STORED) as z:
     z.writestr('catalog.json', json.dumps(cat, ensure_ascii=False))
     for it in items: z.write(f'{IMGDIR}/{it["id"]}.jpg', it['img'])
