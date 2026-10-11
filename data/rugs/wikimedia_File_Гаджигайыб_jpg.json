@@ -31,7 +31,7 @@
    "scheme": "t106_f03",
    "group": "mmv44a13d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -39,8 +39,8 @@
    "score": 0,
    "by": "dolgikh",
    "at": 1791740914,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1791741261
   },
   {
    "id": "mmv44b1r40",
@@ -56,7 +56,7 @@
    "scheme": "t106_f03",
    "group": "mmv44a13d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -64,8 +64,8 @@
    "score": 0.861,
    "by": "машина → dolgikh",
    "at": 1791740962,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1791741238
   },
   {
    "id": "mmv44b1r41",
@@ -81,7 +81,7 @@
    "scheme": "t106_f03",
    "group": "mmv44a13d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 1,
@@ -89,8 +89,8 @@
    "score": 0.838,
    "by": "машина → dolgikh",
    "at": 1791740962,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1791741238
   },
   {
    "id": "mmv44b1r42",
@@ -106,7 +106,7 @@
    "scheme": "t106_f03",
    "group": "mmv44a13d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -114,24 +114,24 @@
    "score": 0.802,
    "by": "машина → dolgikh",
    "at": 1791740962,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1791741238
   },
   {
    "id": "mmv44e2fw",
    "box": [
-    0.32339,
-    0.57233,
+    0.41626,
+    0.6151,
     0.15331,
-    0.08485
+    0.08145
    ],
    "zone": "field",
    "motif": "kilim-gulu",
    "motif_text": "",
    "scheme": "t60_f04",
-   "group": "",
+   "group": "mmv44e2fw",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 1,
@@ -139,12 +139,37 @@
    "score": 0,
    "by": "dolgikh",
    "at": 1791741102,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1791741267
+  },
+  {
+   "id": "mmv44f99k0",
+   "box": [
+    0.41613,
+    0.27328,
+    0.15331,
+    0.0811
+   ],
+   "zone": "field",
+   "motif": "kilim-gulu",
+   "motif_text": "",
+   "scheme": "t60_f04",
+   "group": "mmv44e2fw",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 1,
+   "machine": 1,
+   "score": 0.629,
+   "by": "машина → dolgikh",
+   "at": 1791741158,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1791741230
   }
  ],
  "created": 1791736124,
- "updated": 1791741102,
+ "updated": 1791741267,
  "cat": {
   "title": "«Гаджигайыб».jpg",
   "museum": "Wikimedia Commons",
