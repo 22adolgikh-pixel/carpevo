@@ -33,9 +33,10 @@ def _maps(bgr):
     return g, e
 
 
-def _nms(c, iou=0.3):
+def _nms(c, iou=0.3, cap=200):
     c = sorted(c, key=lambda t: -t["score"]); keep = []
     for a in c:
+        if len(keep) >= cap: break
         ok = True
         for b in keep:
             x0, y0 = max(a["px"][0], b["px"][0]), max(a["px"][1], b["px"][1])
@@ -59,13 +60,15 @@ def find_repeats(img, box, exclude=(), limit=60, min_score=None):
     """img — BGR, box — [x,y,w,h] в долях. → [{box, score, angle, flip}] без пересечений с exclude (уже размеченные)."""
     H0, W0 = img.shape[:2]
     bw, bh = box[2] * W0, box[3] * H0
-    s = min(1.0, 56.0 / max(bw, bh))                 # шаблон ≈ 56 px по длинной стороне: быстро и достаточно деталей
+    # шаблон ≈ 56 px по длинной стороне, но фото — не больше 900 px: иначе мелкий элемент (10–20 px) заставляет перебирать
+    # фото в полном размере 24 раза, и это минуты. Мелкий шаблон при этом может стать 8–12 px — для поиска хватает.
+    s = min(1.0, 56.0 / max(bw, bh), 900.0 / max(H0, W0))
     a = cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else img
     H, W = a.shape[:2]
     G, E = _maps(a)
     x0, y0 = int(round(box[0] * W)), int(round(box[1] * H)); tw, th = max(6, int(round(box[2] * W))), max(6, int(round(box[3] * H)))
     tg, te = G[y0:y0 + th, x0:x0 + tw], E[y0:y0 + th, x0:x0 + tw]
-    if tg.shape[0] < 6 or tg.shape[1] < 6: return []
+    if tg.shape[0] < 5 or tg.shape[1] < 5: return []
     cands = []
     for sc in (0.92, 1.0, 1.08):                     # повторы на ковре бывают чуть разного размера (ручная работа)
         for ang, fl in TF:
@@ -78,10 +81,13 @@ def find_repeats(img, box, exclude=(), limit=60, min_score=None):
             # локальные максимумы
             k = max(3, int(min(hh, ww) * 0.5) | 1)
             mx = cv2.dilate(r, np.ones((k, k), np.uint8))
-            ys, xs = np.where((r >= mx - 1e-6) & (r > 0.25))
+            ys, xs = np.where((r >= mx - 1e-6) & (r > 0.35))
+            if len(ys) > 150:                            # мелкие элементы «находятся» везде — берём только лучшие места
+                top = np.argpartition(-r[ys, xs], 150)[:150]; ys, xs = ys[top], xs[top]
             for yy, xx in zip(ys, xs):
                 cands.append({"px": (xx / s, yy / s, ww / s, hh / s), "score": float(r[yy, xx]), "angle": ang, "flip": fl})
     if not cands: return []
+    cands = sorted(cands, key=lambda t: -t["score"])[:1500]
     cands = _nms(cands)
     # порог: сам исходный элемент находится с ~1.0; повторы обычно 0.5–0.8, случайные места — < 0.4.
     scores = sorted((c["score"] for c in cands), reverse=True)
@@ -118,7 +124,7 @@ def find_scheme(img, png, kx, ky, exclude=(), limit=12, region=None):
     kh, kw = png.shape[:2]
     pw, ph = kw * kx, kh * ky                         # ожидаемый размер элемента на фото, px
     if pw < 8 or ph < 8 or pw > W0 or ph > H0: return []
-    s = min(1.0, 64.0 / max(pw, ph))
+    s = min(1.0, 64.0 / max(pw, ph), 900.0 / max(H0, W0))
     a = cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else img
     _, E = _maps(a)
     m, lab = _scheme_edges(png)
@@ -204,3 +210,38 @@ def find_carpets(img):
             else: parts.append([a0 / w, b0 / h, (a1 - a0) / w, (b1 - b0) / h])
     if len(parts) < 2: return []
     return [[round(v, 4) for v in p] for p in parts]
+
+
+def align(a, b):
+    """Совместить два фото одного ковра (двойники из разных источников): SIFT-точки + гомография (RANSAC).
+    → (H 3×3 в долях: точка (x,y) фото a → фото b, число совпавших точек) или (None, n)."""
+    def prep(x):
+        s = min(1.0, 1200.0 / max(x.shape[:2]))
+        g = cv2.cvtColor(cv2.resize(x, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else x, cv2.COLOR_BGR2GRAY)
+        return cv2.createCLAHE(2.0, (8, 8)).apply(g)
+    ga, gb = prep(a), prep(b)
+    sift = cv2.SIFT_create(nfeatures=6000)
+    ka, da = sift.detectAndCompute(ga, None); kb, db = sift.detectAndCompute(gb, None)
+    if da is None or db is None or len(ka) < 10 or len(kb) < 10: return None, 0
+    def root(d): d = d / (d.sum(1, keepdims=True) + 1e-7); return np.sqrt(d).astype(np.float32)
+    m = cv2.FlannBasedMatcher(dict(algorithm=1, trees=5), dict(checks=64)).knnMatch(root(da), root(db), k=2)
+    good = [p[0] for p in m if len(p) == 2 and p[0].distance < 0.8 * p[1].distance]
+    if len(good) < 12: return None, len(good)
+    pa = np.float32([ka[g.queryIdx].pt for g in good]) / [ga.shape[1], ga.shape[0]]
+    pb = np.float32([kb[g.trainIdx].pt for g in good]) / [gb.shape[1], gb.shape[0]]
+    H, inl = cv2.findHomography(pa, pb, cv2.RANSAC, 0.01)
+    n = int(inl.sum()) if inl is not None else 0
+    if H is None or n < 12: return None, n
+    return H, n
+
+
+def map_box(H, box):
+    """рамка [x,y,w,h] в долях фото a → рамка на фото b (охватывающий прямоугольник) + поворот фото b относительно a (0/90/180/270)."""
+    x, y, w, h = box
+    pts = np.float32([[x, y], [x + w, y], [x + w, y + h], [x, y + h]]).reshape(-1, 1, 2)
+    q = cv2.perspectiveTransform(pts, H).reshape(-1, 2)
+    x0, y0 = q.min(0); x1, y1 = q.max(0)
+    v = q[1] - q[0]; ang = int(round(np.degrees(np.arctan2(v[1], v[0])) / 90.0)) * 90 % 360
+    x0, y0 = max(0.0, float(x0)), max(0.0, float(y0)); x1, y1 = min(1.0, float(x1)), min(1.0, float(y1))
+    if x1 - x0 < 0.003 or y1 - y0 < 0.003: return None, 0
+    return [round(x0, 5), round(y0, 5), round(x1 - x0, 5), round(y1 - y0, 5)], ang

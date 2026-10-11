@@ -8,6 +8,7 @@ import os, re, json, time, threading, io, urllib.request, hashlib
 import cv2, numpy as np
 from fastapi import Request, UploadFile, File, Body, Query
 from fastapi.responses import FileResponse, JSONResponse, Response
+from starlette.concurrency import run_in_threadpool
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ZONES = {"field": "поле", "medallion": "медальон", "spandrel": "угол поля", "border": "главная кайма",
@@ -353,7 +354,9 @@ def install(app, DATA, D_WORK):
         for x in r.get("same") or []:
             o = load(x["id"]) or {}
             x.update(title=o.get("title") or x["id"], src=(o.get("cat") or {}).get("src", ""), school=o.get("school", ""), museum=o.get("museum", ""),
-                     ok=(r.get("same_ok") or {}).get(x["id"]))
+                     ok=(r.get("same_ok") or {}).get(x["id"]), n=len([m for m in o.get("marks", []) if m.get("status") != "rejected"]),
+                     wh=img_size(x["id"], o))
+        r["wh"] = img_size(rid, r)
         return r
 
     @app.post("/api/rugs/{rid}")
@@ -374,7 +377,7 @@ def install(app, DATA, D_WORK):
                     except Exception: continue
                     if len(box) != 4 or box[2] < 0.003 or box[3] < 0.003: continue
                     mid = str(m.get("id") or f"m{now}{len(marks)}")
-                    keep = {k: m.get(k) for k in ("zone", "motif", "motif_text", "scheme", "group", "certainty", "status", "note", "angle", "flip", "machine", "score")}
+                    keep = {k: m.get(k) for k in ("zone", "motif", "motif_text", "scheme", "group", "certainty", "status", "note", "angle", "flip", "machine", "score", "xfer")}
                     keep = {k: ("" if v is None else v) for k, v in keep.items()}
                     if keep["zone"] not in ZONES: keep["zone"] = "other"
                     if keep["status"] not in STATUSES: keep["status"] = "proposed"
@@ -531,7 +534,8 @@ def install(app, DATA, D_WORK):
             if not m: return JSONResponse({"error": "нет такой рамки"}, 404)
             box = m["box"]
         rejected = [m["box"] for m in r.get("marks", []) if m.get("status") == "rejected"]
-        c = rug_match.find_repeats(a, box, exclude=marks_boxes(r) + rejected)
+        # тяжёлый расчёт — в отдельном потоке: иначе, пока он идёт, сервер не отвечает никому (пропадают миниатюры и т. п.)
+        c = await run_in_threadpool(rug_match.find_repeats, a, box, marks_boxes(r) + rejected)
         best = max([x["score"] for x in c] or [0])
         for x in c: x["sure"] = x["score"] >= max(0.68, best * 0.86)     # «точно такой же» / «похоже (другой цвет или близкий узор)»
         return {"cands": c}
@@ -568,8 +572,62 @@ def install(app, DATA, D_WORK):
             guess = [max(0, min(1 - gw, at[0] - gw / 2)), max(0, min(1 - gh, at[1] - gh / 2)), gw, gh]
             region = [max(0, at[0] - gw * 1.3), max(0, at[1] - gh * 1.3), 0, 0]
             region[2] = min(1 - region[0], gw * 2.6); region[3] = min(1 - region[1], gh * 2.6)
-        c = rug_match.find_scheme(a, q, kx, ky, exclude=[] if at else marks_boxes(r), limit=1 if at else 3, region=region)
+        c = await run_in_threadpool(lambda: rug_match.find_scheme(a, q, kx, ky, exclude=[] if at else marks_boxes(r), limit=1 if at else 3, region=region))
         return {"cands": c, "scale": [round(kx, 2), round(ky, 2)], "ref": ref["id"] if ref else "", "guess": guess, "scale_known": bool(sc)}
+
+    _sizes = {}
+
+    def img_size(rid, r=None):
+        """размер фото (ширина, высота) — чтобы видеть, у какого двойника фото крупнее"""
+        p = img_path(rid)
+        if not p: return None
+        k = (p, os.path.getmtime(p))
+        if k not in _sizes:
+            a = cv2.imread(p, cv2.IMREAD_REDUCED_GRAYSCALE_8)
+            _sizes[k] = None if a is None else [a.shape[1] * 8, a.shape[0] * 8]
+            if a is not None:
+                full = cv2.imread(p); _sizes[k] = [full.shape[1], full.shape[0]] if full is not None else _sizes[k]
+        return _sizes[k]
+
+    _H = {}
+
+    @app.post("/api/rugs/{rid}/transfer")
+    async def api_rug_transfer(rid: str, request: Request):
+        """Перенести разметку с фото rid на фото двойника (тот же ковёр, другой источник): фото совмещаются по точкам (SIFT),
+        рамки переводятся в координаты другого фото. Перенесённые рамки — предложения (пунктир «?»), их проверяет человек."""
+        import rug_match
+        b = await request.json(); dst = b.get("to") or ""; who = user(request)
+        r = load(rid); o = load(dst)
+        pa, pb = img_path(rid), img_path(dst)
+        if not r or not o or not pa or not pb: return JSONResponse({"error": "нет такого ковра или фото"}, 404)
+        key = (pa, pb, os.path.getmtime(pa), os.path.getmtime(pb))
+        if key not in _H:
+            A, B = cv2.imread(pa), cv2.imread(pb)
+            _H[key] = await run_in_threadpool(rug_match.align, A, B)
+        H, n = _H[key]
+        if H is None:
+            return JSONResponse({"error": f"не получилось совместить фото (общих точек: {n}) — возможно, это всё-таки разные ковры или фото слишком разные"}, 400)
+        made = skipped = 0
+        with _lock:
+            o = load(dst); have = {m["id"] for m in o.get("marks", [])}
+            def iou(p, q):
+                ix = max(0, min(p[0] + p[2], q[0] + q[2]) - max(p[0], q[0])); iy = max(0, min(p[1] + p[3], q[1] + q[3]) - max(p[1], q[1]))
+                u = p[2] * p[3] + q[2] * q[3] - ix * iy
+                return ix * iy / u if u > 0 else 0
+            for m in r.get("marks", []):
+                if m.get("status") == "rejected": continue
+                nid = "x" + m["id"]
+                if nid in have: skipped += 1; continue
+                box, ang = rug_match.map_box(H, m["box"])
+                if not box or any(iou(box, q["box"]) > 0.5 for q in o.get("marks", [])): skipped += 1; continue
+                g = m.get("group") or ""
+                o.setdefault("marks", []).append({**{k: m.get(k, "") for k in ("zone", "motif", "motif_text", "scheme", "certainty", "note")},
+                    "id": nid, "box": box, "group": ("x" + g) if g else "", "angle": ((m.get("angle") or 0) + ang) % 360, "flip": m.get("flip") or 0,
+                    "status": "proposed", "machine": 1, "score": 0, "xfer": rid,
+                    "by": "перенесено с двойника → " + who, "at": int(time.time()), "confirmed_by": "", "confirmed_at": 0})
+                made += 1
+            o["updated"], o["updated_by"] = int(time.time()), who; save(o)
+        return {"made": made, "skipped": skipped, "points": n}
 
     @app.post("/api/rugs/{rid}/split_detect")
     def api_rug_split_detect(rid: str):
