@@ -2,12 +2,12 @@
  "id": "kerimov_vol3_p005_1",
  "title": "Керимов, т. III, Рис. 3 (стр. скана 5, печ. 10-11)",
  "source": "каталог: kerimov_vol3",
- "museum": "",
- "inv": "",
+ "museum": "V&A",
+ "inv": "399-1880",
  "url": "",
  "license": "книга (не публиковать фото)",
- "place": "",
- "date": "",
+ "place": "Caucasus",
+ "date": "19th century",
  "school": "",
  "composition": "",
  "technique": "",
@@ -50,6 +50,18 @@
    "score": 277
   }
  ],
- "same_ok": {},
- "_lib_t": "2026-10-10 12:45"
+ "same_ok": {
+  "vam_O152843": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1791744860
+  }
+ },
+ "_lib_t": "2026-10-10 12:45",
+ "from_twin": {
+  "museum": "vam_O152843",
+  "inv": "vam_O152843",
+  "place": "vam_O152843",
+  "date": "vam_O152843"
+ }
 }
