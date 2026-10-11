@@ -25,7 +25,7 @@
     0.09361,
     0.08193
    ],
-   "zone": "field",
+   "zone": "border",
    "motif": "",
    "motif_text": "",
    "scheme": "t114_f01",
@@ -37,7 +37,9 @@
    "by": "dolgikh",
    "at": 1791736440,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "edited_by": "dolgikh",
+   "edited_at": 1791736593
   },
   {
    "id": "mmv41mdn6",
@@ -47,7 +49,7 @@
     0.08893,
     0.08434
    ],
-   "zone": "field",
+   "zone": "border",
    "motif": "",
    "motif_text": "",
    "scheme": "t114_f01",
@@ -59,7 +61,9 @@
    "by": "dolgikh",
    "at": 1791736451,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "edited_by": "dolgikh",
+   "edited_at": 1791736593
   },
   {
    "id": "mmv41mk34",
@@ -69,7 +73,7 @@
     0.09547,
     0.0782
    ],
-   "zone": "field",
+   "zone": "border",
    "motif": "",
    "motif_text": "",
    "scheme": "t114_f01",
@@ -81,7 +85,9 @@
    "by": "dolgikh",
    "at": 1791736460,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "edited_by": "dolgikh",
+   "edited_at": 1791736593
   },
   {
    "id": "mmv41mnvo",
@@ -91,7 +97,7 @@
     0.09681,
     0.07459
    ],
-   "zone": "field",
+   "zone": "border",
    "motif": "",
    "motif_text": "",
    "scheme": "t114_f01",
@@ -103,11 +109,13 @@
    "by": "dolgikh",
    "at": 1791736465,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "edited_by": "dolgikh",
+   "edited_at": 1791736593
   }
  ],
  "created": 1791736121,
- "updated": 1791736465,
+ "updated": 1791736593,
  "cat": {
   "title": "Керимов, т. I, Табл. 199. «КОХНА КУБА» (стр. скана 320, печ. ?)",
   "museum": "",
@@ -142,7 +150,13 @@
    "score": 66
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "kerimov_vol2_p067_1": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1791736624
+  }
+ },
  "_lib_t": "2026-10-10 12:45",
  "layout": null,
  "updated_by": "dolgikh"
