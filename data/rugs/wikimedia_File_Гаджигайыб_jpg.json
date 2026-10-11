@@ -104,10 +104,32 @@
    "at": 1791737844,
    "confirmed_by": "",
    "confirmed_at": 0
+  },
+  {
+   "id": "mmv43da31",
+   "box": [
+    0.41075,
+    0.2801,
+    0.16066,
+    0.06876
+   ],
+   "zone": "field",
+   "motif": "kilim-gulu",
+   "motif_text": "",
+   "scheme": "t60_f04",
+   "group": "",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": "",
+   "by": "dolgikh",
+   "at": 1791739386,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791736124,
- "updated": 1791738421,
+ "updated": 1791739386,
  "cat": {
   "title": "«Гаджигайыб».jpg",
   "museum": "Wikimedia Commons",
@@ -142,7 +164,13 @@
    "score": 698
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "kerimov_vol2_p133_3": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1791739351
+  }
+ },
  "_lib_t": "2026-10-10 12:45",
  "layout": null,
  "updated_by": "dolgikh"
