@@ -15,7 +15,7 @@ ZONES = {"field": "поле", "medallion": "медальон", "spandrel": "уг
          "minor": "малая кайма", "guard": "бордюрная полоска", "end": "торцевая полоса", "other": "другое"}
 STATUSES = ("proposed", "confirmed", "rejected")
 SCHOOLS = {"guba-shirvan": "Губа-Ширван", "ganja-gazakh": "Гянджа-Газах", "karabakh": "Карабах", "tabriz": "Тебриз", "nakhchivan": "Нахчыван", "": "—"}
-MAXSIDE = 1600
+MAXSIDE = 4000   # v10.27: хайрез загружается почти без уменьшения (поиск повторов и совмещение всё равно уменьшают фото у себя)
 SAME_FIELDS = ("school", "composition", "technique", "museum", "inv", "place", "date", "size")   # что переносится с двойника в пустые поля
 PASS_FIELDS = SAME_FIELDS + ("url", "license", "notes")   # v10.26: что части разворота наследуют от исходного фото
 _lock = threading.Lock()
