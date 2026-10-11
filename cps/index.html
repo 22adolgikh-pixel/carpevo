@@ -2046,15 +2046,18 @@ function rugRender(){
   C.innerHTML=`<div class="rgtools">
     <button id="rgTBox" data-tip="Рамка: тяните мышью вокруг элемента (B)">▭ рамка</button><button id="rgTHand" data-tip="Двигать фото (H, или держите пробел)">✋</button>
     <button id="rgTZones" data-tip="Зоны ковра: тяните линии границ (Z)">▦ зоны</button><label style="margin:0 6px;color:var(--mut);white-space:nowrap" data-tip="показывать границы зон поверх фото"><input type="checkbox" id="rgShowZ" ${R.showZones?'checked':''}> зоны</label><button id="rgFit" data-tip="Вписать (F)">⤢</button><span id="rgZoom" class="mut"></span>
+    <select id="rgColBy" data-tip="цвет рамок" style="margin-left:6px"><option value="el" ${R.colorBy!=='zone'?'selected':''}>цвет: элементы</option><option value="zone" ${R.colorBy==='zone'?'selected':''}>цвет: зоны</option></select>
+    <label style="margin:0 6px;color:var(--mut);white-space:nowrap" data-tip="затемнять ковёр вокруг выбранного элемента (D)"><input type="checkbox" id="rgDim" ${R.dim!==false?'checked':''}> фокус</label>
     <span class="sep"></span><span id="rgHint" class="mut"></span>
     <span style="margin-left:auto" id="rgSaved" class="mut"></span></div>
     <div id="rgView"><div id="rgStage"><img id="rgImg" src="/rugimg/${encodeURIComponent(r.id)}.jpg?t=${r.updated}" draggable="false"><svg id="rgSvg"></svg></div></div>`;
   $('rgTBox').onclick=()=>{R.tool='box';rugTools();};$('rgTZones').onclick=()=>{R.tool='zones';R.showZones=true;rugTools();rugDraw();};$('rgShowZ').onchange=e=>{R.showZones=e.target.checked;rugDraw();};$('rgTHand').onclick=()=>{R.tool='hand';rugTools();};$('rgFit').onclick=rugFit;
+  $('rgColBy').onchange=e=>{R.colorBy=e.target.value==='zone'?'zone':'el';rugDraw();rugSide();};$('rgDim').onchange=e=>{R.dim=e.target.checked;rugDraw();};
   const img=$('rgImg');img.onload=()=>{R.iw=img.naturalWidth;R.ih=img.naturalHeight;if(R.fitNext){R.fitNext=false;rugFit();}else rugApply();rugDraw();};
   rugViewEvents();rugTools();rugSide();
 }
 function rugTools(){$('rgTBox')&&$('rgTBox').classList.toggle('on',R.tool==='box');$('rgTZones')&&$('rgTZones').classList.toggle('on',R.tool==='zones');$('rgTHand')&&$('rgTHand').classList.toggle('on',R.tool==='hand');
-  const h=$('rgHint');if(h)h.textContent=R.tool==='split'?'Разделение фото: оранжевые прямоугольники — отдельные ковры. Обведите недостающий, клик по лишнему — убрать.':R.tool==='zones'?'Тяните линии: жёлтая — край ковра, голубые — границы кайм и поля. Delete — удалить выбранную границу.':R.preset?'Обведите элемент «'+(R.preset.name||R.preset.scheme)+'» на фото (Esc — отмена)':R.repeatOf?'Обводите повторы выбранного элемента один за другим (Esc — закончить)':(R.tool==='box'?'Обведите элемент мышью. Колесо — масштаб, пробел — двигать.':'Тяните фото мышью.');}
+  const h=$('rgHint');if(h)h.textContent=R.joinFrom?'Кликните по рамке элемента, с которым это тот же узор (Esc — отмена)':R.tool==='split'?'Разделение фото: оранжевые прямоугольники — отдельные ковры. Обведите недостающий, клик по лишнему — убрать.':R.tool==='zones'?'Тяните линии: жёлтая — край ковра, голубые — границы кайм и поля. Delete — удалить выбранную границу.':R.preset?'Обведите элемент «'+(R.preset.name||R.preset.scheme)+'» на фото (Esc — отмена)':R.repeatOf?'Обводите повторы выбранного элемента один за другим (Esc — закончить)':(R.tool==='box'?'Обведите элемент мышью. Колесо — масштаб, пробел — двигать.':'Тяните фото мышью.');}
 function rugFit(){const V=$('rgView');if(!V||!R.iw)return;const k=Math.min(V.clientWidth/R.iw,V.clientHeight/R.ih)*0.96;R.z=k;R.ox=(V.clientWidth-R.iw*k)/2;R.oy=(V.clientHeight-R.ih*k)/2;rugApply();}
 function rugApply(){const st=$('rgStage');if(!st)return;st.style.transform=`translate(${R.ox}px,${R.oy}px) scale(${R.z})`;st.style.width=R.iw+'px';st.style.height=R.ih+'px';$('rgZoom').textContent=Math.round(R.z*100)+'%';rugDraw();}
 function rugPt(e){const V=$('rgView').getBoundingClientRect();return{x:(e.clientX-V.left-R.ox)/R.z/R.iw,y:(e.clientY-V.top-R.oy)/R.z/R.ih};}
@@ -2069,6 +2072,7 @@ function rugViewEvents(){
     if(tg.dataset&&tg.dataset.sp!=null&&R.tool==='split'){R.split.splice(+tg.dataset.sp,1);rugDraw();rugSide();e.preventDefault();return;}
     if(tg.dataset&&tg.dataset.h&&R.sel&&!rro()){R.drag={t:'resize',h:tg.dataset.h,m:R.sel,b0:[...R.sel.box],p0:p};e.preventDefault();return;}
     // рамку двигаем, только если она уже выбрана; первый клик по чужой рамке — выбрать. В режиме «обведите элемент …» рамки не мешают рисовать
+    if(tg.dataset&&tg.dataset.m&&R.joinFrom){const t=R.rug.marks.find(x=>x.id===tg.dataset.m);if(t)rugJoin(R.joinFrom,t);e.preventDefault();return;}
     if(tg.dataset&&tg.dataset.m&&!(R.preset||R.repeatOf)){const m=R.rug.marks.find(x=>x.id===tg.dataset.m);if(m){const was=R.sel&&R.sel.id===m.id;rugSelect(m);if(was&&!rro())R.drag={t:'move',m,b0:[...m.box],p0:p};e.preventDefault();return;}}
     if(R.tool==='zones'){const L=R.rug.layout;if(!L||rro())return;const hit=layHit(L,p);if(hit){R.drag={t:'lay',hit,L};R.layBound=hit.i;rugDraw();e.preventDefault();}return;}
     if(rro()){rugSelect(null);return;}
@@ -2089,7 +2093,7 @@ function rugMove(e){
   if(d.t==='move'){d.m.box=[cl(b[0]+dx),cl(b[1]+dy),b[2],b[3]];d.m.box[0]=Math.min(d.m.box[0],1-b[2]);d.m.box[1]=Math.min(d.m.box[1],1-b[3]);}
   if(d.t==='resize'){let[x,y,w,h]=b;if(d.h.includes('l')){x=b[0]+dx;w=b[2]-dx;}if(d.h.includes('r'))w=b[2]+dx;if(d.h.includes('t')){y=b[1]+dy;h=b[3]-dy;}if(d.h.includes('b'))h=b[3]+dy;
     if(w>0.004&&h>0.004)d.m.box=[cl(x),cl(y),w,h];}
-  d.moved=true;rugDraw();
+  d.moved=true;rugDraw();if(d.t==='resize'&&d.m.scheme)rugDistortion(d.m);
 }
 function rugUp(){
   const d=R.drag;R.drag=null;if(!d||!R.on)return;
@@ -2125,21 +2129,33 @@ function rugDraw(){
       h+=`<rect x="${a}" y="${c}" width="${w}" height="${hh}" fill="none" stroke="${i<0?'#ffe066':'#4dd0e1'}" stroke-width="${(act?3:1.4)/R.z}" ${dash} style="pointer-events:none" opacity=".9"/>`;}
     (L.rings||[]).forEach((z,i)=>{const[a,c,w,hh]=layRect(L,i-1),nx=i<L.bounds.length?layRect(L,i):null;const ty=(c+(nx?(nx[1]-c)/2:hh/2))*R.ih;
       h+=`<text x="${(a+w/2)*R.iw}" y="${ty+fs/3}" font-size="${fs}" text-anchor="middle" fill="${(RZ[z]||RZ.other)[1]}" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">${(RZ[z]||RZ.other)[0]}</text>`;});}
-  R.rug.marks.forEach((m,i)=>{const[x,y,w,hh]=m.box.map((v,j)=>v*(j%2?R.ih:R.iw)),c=(RZ[m.zone]||RZ.other)[1],isSel=sel&&m.id===sel.id,same=grp&&(m.group||m.id)===grp;
+  const C=rugColors(),focus=sel&&R.tool!=='zones'&&R.tool!=='split'&&R.dim!==false;
+  // фокус: ковёр вокруг выбранного элемента и его повторов затемняется
+  if(focus){const gm=rugGroup(sel);h+=`<defs><mask id="rgMask"><rect x="0" y="0" width="${R.iw}" height="${R.ih}" fill="#fff"/>${gm.map(m=>{const[x,y,w,hh]=m.box.map((v,j)=>v*(j%2?R.ih:R.iw));return `<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="#000"/>`;}).join('')}</mask></defs><rect x="0" y="0" width="${R.iw}" height="${R.ih}" fill="#000" opacity=".6" mask="url(#rgMask)" style="pointer-events:none"/>`;}
+  // схема поверх рамок выбранного элемента: растянута по рамке, с поворотом и зеркалом — видно, как элемент искажён на ковре
+  if(sel&&sel.scheme&&R.showScheme!==false&&R.tool!=='zones')rugGroup(sel).forEach(m=>{if(!m.scheme||m.status==='rejected')return;const[x,y,w,hh]=m.box.map((v,j)=>v*(j%2?R.ih:R.iw)),a=m.angle||0,sw2=a%180?hh:w,sh2=a%180?w:hh;
+    h+=`<g transform="translate(${x+w/2} ${y+hh/2}) rotate(${a}) scale(${m.flip?-1:1} 1)" style="pointer-events:none" opacity="${R.schOp==null?0.6:R.schOp}"><image href="/out/${encodeURIComponent(m.scheme)}_x12.png" x="${-sw2/2}" y="${-sh2/2}" width="${sw2}" height="${sh2}" preserveAspectRatio="none" style="image-rendering:pixelated"/></g>`;});
+  R.rug.marks.forEach((m,i)=>{const[x,y,w,hh]=m.box.map((v,j)=>v*(j%2?R.ih:R.iw)),c=rugMarkColor(m,C),isSel=sel&&m.id===sel.id,same=grp&&(m.group||m.id)===grp;
     const dash=m.status==='proposed'?`stroke-dasharray="${4/R.z} ${3/R.z}"`:'';const op=m.status==='rejected'?0.35:1;
     const mach=m.machine&&m.status==='proposed',dsh=mach?`stroke-dasharray="${2/R.z} ${2.5/R.z}"`:dash;
     // внутри невыбранной рамки можно начинать новую: «ловит» только линия рамки (с запасом), выбранную — можно тащить целиком
-    h+=`<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="${isSel?c+'33':(same?c+'1a':'none')}" stroke="${mach?'#4dd0e1':c}" stroke-width="${isSel?sw*2:sw}" ${dsh} opacity="${op}" style="pointer-events:none"/>`;
-    h+=`<rect data-m="${m.id}" x="${x}" y="${y}" width="${w}" height="${hh}" fill="${isSel?'#0000':'none'}" stroke="#0000" stroke-width="${7/R.z}" style="cursor:${isSel?'move':'pointer'};pointer-events:${isSel?'all':'stroke'}"/>`;
-    h+=`<text x="${x+2/R.z}" y="${y+fs}" font-size="${fs}" fill="${mach?'#4dd0e1':c}" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">${i+1}${m.status==='confirmed'?' ✓':(m.status==='rejected'?' ✗':(mach?' ?':''))}</text>`;});
+    const dimmed=focus&&!same;
+    h+=`<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="none" stroke="${c}" stroke-width="${isSel?sw*2.4:(same?sw*1.6:sw)}" ${dsh} opacity="${dimmed?op*0.45:op}" style="pointer-events:none"/>`;
+    h+=`<rect data-m="${m.id}" x="${x}" y="${y}" width="${w}" height="${hh}" fill="${isSel?'#0000':'none'}" stroke="#0000" stroke-width="${7/R.z}" style="cursor:${R.joinFrom?'copy':(isSel?'move':'pointer')};pointer-events:${isSel?'all':'stroke'}"><title>${i+1}. ${esc(rugName(m))}</title></rect>`;
+    h+=`<text x="${x+2/R.z}" y="${y+fs}" font-size="${fs}" fill="${c}" opacity="${dimmed?0.55:1}" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">${i+1}${m.status==='confirmed'?' ✓':(m.status==='rejected'?' ✗':(mach?' ?':''))}${same&&!dimmed&&(m.motif||m.motif_text||m.scheme)&&isSel?' '+esc(rugName(m)):''}</text>`;});
   if(R.tool==='split'||(R.split&&R.split.length))(R.split||[]).forEach((b,i)=>{const[x,y,w,hh]=b.map((v,j)=>v*(j%2?R.ih:R.iw));
     h+=`<rect data-sp="${i}" x="${x}" y="${y}" width="${w}" height="${hh}" fill="#ffb45422" stroke="#ffb454" stroke-width="${3/R.z}" style="cursor:pointer"/><text x="${x+w/2}" y="${y+hh/2}" font-size="${40/R.z}" text-anchor="middle" fill="#ffb454" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${4/R.z}px">ковёр ${i+1}</text>`;});
   if(sel&&!rro()){const[x,y,w,hh]=sel.box.map((v,j)=>v*(j%2?R.ih:R.iw)),s=7/R.z;
-    [['tl',x,y],['tr',x+w,y],['bl',x,y+hh],['br',x+w,y+hh]].forEach(([k,a,b])=>h+=`<rect data-h="${k}" x="${a-s/2}" y="${b-s/2}" width="${s}" height="${s}" fill="#fff" stroke="#000" stroke-width="${0.8/R.z}" style="cursor:nwse-resize"/>`);}
+    [['tl',x,y,'nwse'],['tr',x+w,y,'nesw'],['bl',x,y+hh,'nesw'],['br',x+w,y+hh,'nwse'],['t',x+w/2,y,'ns'],['b',x+w/2,y+hh,'ns'],['l',x,y+hh/2,'ew'],['r',x+w,y+hh/2,'ew']].forEach(([k,a,b,cu])=>h+=`<rect data-h="${k}" x="${a-s/2}" y="${b-s/2}" width="${s}" height="${s}" fill="#fff" stroke="#000" stroke-width="${0.8/R.z}" style="cursor:${cu}-resize"/>`);}
   const d=R.drag;if(d&&d.t==='new'){const x=Math.min(d.p0.x,d.p1.x)*R.iw,y=Math.min(d.p0.y,d.p1.y)*R.ih;h+=`<rect x="${x}" y="${y}" width="${Math.abs(d.p1.x-d.p0.x)*R.iw}" height="${Math.abs(d.p1.y-d.p0.y)*R.ih}" fill="#fff2" stroke="#fff" stroke-width="${sw}"/>`;}
   svg.innerHTML=h;
 }
 function rugGroup(m){const g=m.group||m.id;return R.rug.marks.filter(x=>(x.group||x.id)===g);}
+// у каждого элемента (группы повторов) свой цвет: номер группы по порядку появления → палитра из 12 хорошо различимых цветов
+const RPAL=['#ff6b6b','#4dabf7','#69db7c','#ffd43b','#da77f2','#ff922b','#3bc9db','#f783ac','#a9e34b','#9775fa','#ffa8a8','#63e6be'];
+function rugColors(){const o={};let n=0;(R.rug?R.rug.marks:[]).forEach(m=>{const g=m.group||m.id;if(!(g in o))o[g]=RPAL[n++%RPAL.length];});return o;}
+function rugMarkColor(m,C){return R.colorBy==='zone'?(RZ[m.zone]||RZ.other)[1]:(C||rugColors())[m.group||m.id];}
+function rugName(m){return m._motif?m._motif.az:(m.motif_text||m.scheme||'без названия');}
 function rugSetMark(m,patch){const tgt=R.allGroup&&('motif' in patch||'scheme' in patch||'zone' in patch||'motif_text' in patch)?rugGroup(m):[m];tgt.forEach(x=>Object.assign(x,patch));if(patch.zone)R.lastZone=patch.zone;rugSaveSoon();rugDraw();rugSide();}
 function rugSide(){
   const E=$('rgSide');if(!E)return;const r=R.rug;if(!r){E.innerHTML='';return;}
@@ -2192,11 +2208,17 @@ function rugSide(){
         <label>Узор<div class="rgpick">${m.motif&&m._motif?`<b>${esc(m._motif.az)}</b> ${esc(m._motif.ru||'')} <small class="mut">${esc(m._motif.tr||'')}</small>`:(m.motif_text?`<i>${esc(m.motif_text)}</i> <small class="mut">(нет в словаре)</small>`:'<i class="mut">не указан</i>')}${(m.motif||m.motif_text)&&!rro()?' <a href="#" id="rgMotX">✕</a>':''}</div>
           ${rro()?'':`<input id="rgMotQ" placeholder="поиск: гоча, бута, сарыгул…"><div id="rgMotHits" class="rghits"></div>`}</label>
         <label>Схема в студии<div id="rgSch">${m.scheme?`<span class="rgschsel"><img src="/out/${encodeURIComponent(m.scheme)}_x12.png"> ${esc(m.scheme)} ${rro()?'':'<a href="#" id="rgSchX">✕</a>'}</span>`:'<i class="mut">не выбрана</i>'}</div><div id="rgSchList" class="rgschs"></div></label>
-        ${m.scheme?`<div class="rgorient"><img src="/out/${encodeURIComponent(m.scheme)}_x12.png" style="transform:rotate(${m.angle||0}deg) scaleX(${m.flip?-1:1})" data-tip="схема в том положении, как элемент лежит на ковре"><div>${rro()?'':`<button class="sm" id="rgRot" data-tip="повернуть схему на 90° (Q)">⟳ 90°</button> <button class="sm" id="rgFlip" data-tip="зеркально (W)">⇋ зеркало</button>`}<br><small class="mut">положение: ${m.angle||0}°${m.flip?', зеркально':''}</small></div></div>`:''}
+        ${m.scheme?`<div class="rgorient"><img src="/out/${encodeURIComponent(m.scheme)}_x12.png" style="transform:rotate(${m.angle||0}deg) scaleX(${m.flip?-1:1})" data-tip="схема в том положении, как элемент лежит на ковре"><div>${rro()?'':`<button class="sm" id="rgRot" data-tip="повернуть схему на 90° (Q)">⟳ 90°</button> <button class="sm" id="rgFlip" data-tip="зеркально (W)">⇋ зеркало</button>`}<br><small class="mut">положение: ${m.angle||0}°${m.flip?', зеркально':''}</small></div></div>
+          <div class="lb">Схема поверх фото <label style="display:inline;color:var(--tx)"><input type="checkbox" id="rgSchOn" ${R.showScheme!==false?'checked':''}> показать</label> (S)
+            <input type="range" id="rgSchOp" min="0.1" max="1" step="0.05" value="${R.schOp==null?0.6:R.schOp}" style="width:100%">
+            <small class="mut">Тяните углы и середины сторон рамки — схема растягивается вместе с ней. Совместите схему с элементом на фото:</small>
+            <div id="rgDist" class="rgpick"></div></div>`:''}
         ${(()=>{const pm=g.filter(x=>x.machine&&x.status==='proposed');return `<div class="rgmach">${pm.length?`<b>Машина предложила повторов: ${pm.length}</b> <small class="mut">(пунктир с «?»)</small><div class="rgrow">${rro()?'':`<button class="sm" id="rgMachOk">✓ все верны</button><button class="sm" id="rgMachSure">✓ только уверенные (${pm.filter(x=>x.certainty!=='maybe').length})</button><button class="sm" id="rgMachNo" style="color:var(--bad)">✕ убрать все</button>`}</div><small class="mut">по одному: Tab — следующий, C — верно, X — неверно</small>`:'<small class="mut">Повторы этого элемента на фото:</small>'}${rro()?'':`<div class="rgrow"><button class="sm" id="rgFindRep">🔍 найти повторы на фото</button></div>`}</div>`;})()}
+        <div class="rgrow"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${rugMarkColor(m)}"></span> <b>${esc(rugName(m))}</b> <small class="mut">· рамок этого элемента: ${g.length} (№ ${g.map(x=>R.rug.marks.indexOf(x)+1).join(', ')})</small></div>
         <label class="rgrow"><input type="checkbox" id="rgAllG" ${R.allGroup?'checked':''}> менять сразу для всех повторов (${g.length})</label>
         <label>Уверенность<select id="rgCert" ${dis}><option value="sure" ${m.certainty!=='maybe'?'selected':''}>уверенно</option><option value="maybe" ${m.certainty==='maybe'?'selected':''}>предположительно</option></select></label>
-        <div class="rgrow">${rro()?'':`<button id="rgRep" class="sm" data-tip="обвести такой же элемент в другом месте (R)">＋ повтор</button> <button id="rgDelM" class="sm" style="color:var(--bad)" data-tip="Delete">удалить</button>`}</div>
+        <div class="rgrow">${rro()?'':`<button id="rgRep" class="sm" data-tip="обвести такой же элемент в другом месте (R)">＋ повтор</button> <button id="rgJoin" class="sm" data-tip="эта рамка и её повторы — тот же узор, что другая рамка: кликните по ней (J)">🔗 тот же узор, что…</button> ${g.length>1?'<button id="rgSplitM" class="sm" data-tip="эта рамка — другой элемент, не повтор остальных (U)">✂ отделить от повторов</button>':''}`}</div>
+        <div class="rgrow">${rro()?'':`<button id="rgDelM" class="sm" style="color:var(--bad)" data-tip="удалить только эту рамку (Delete)">удалить рамку</button>${g.length>1?` <button id="rgDelG" class="sm" style="color:var(--bad)">удалить элемент со всеми повторами (${g.length})</button>`:''}`}</div>
         <div class="rgcheck"><b>Проверка:</b> ${m.status==='confirmed'?'<span style="color:var(--ok)">✓ подтверждено</span>':m.status==='rejected'?'<span style="color:var(--bad)">✗ отклонено</span>':'ждёт проверки'}<br>
           ${m.machine?`<small style="color:#4dd0e1">предложено машиной${m.score?' · сходство '+Math.round(m.score*100)+'%':''}${m.certainty==='maybe'?' · похоже, но не точно (другой цвет или близкий узор)':''}</small><br>`:''}<small class="mut">отметил(а): ${esc(m.by||'—')}${m.at?' · '+new Date(m.at*1000).toLocaleString('ru',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):''}${m.confirmed_by?` · проверил(а): ${esc(m.confirmed_by)}`:''}</small>
           ${rro()?'':`<div class="rgrow"><button id="rgOk" class="sm" data-tip="C">✓ верно</button><button id="rgNo" class="sm" data-tip="X">✗ неверно</button><button id="rgUn" class="sm">↺ снять</button>${mine&&m.status==='proposed'?'<small class="mut">лучше, чтобы проверял другой человек</small>':''}</div>`}</div>
@@ -2204,7 +2226,7 @@ function rugSide(){
     }
   }else{
     const groups={};r.marks.forEach((m,i)=>{const g=m.group||m.id;(groups[g]=groups[g]||[]).push([m,i]);});
-    body=`<div class="rgall">${Object.values(groups).map(gs=>{const[m,i]=gs[0];return `<div class="rgallit" data-m="${m.id}"><img src="/api/rugs/${encodeURIComponent(r.id)}/crop?b=${m.box.map(v=>v.toFixed(4)).join(',')}&s=80"><div><b>${m._motif?esc(m._motif.az):(m.motif_text?esc(m.motif_text):'<i class="mut">без названия</i>')}</b><small>${(RZ[m.zone]||RZ.other)[0]} · №${gs.map(x=>x[1]+1).join(', ')}</small><small>${gs.filter(x=>x[0].status==='confirmed').length}/${gs.length} ✓${m.scheme?' · схема '+esc(m.scheme):''}</small></div></div>`;}).join('')||'<p class="mut">Элементов пока нет.</p>'}</div>`;
+    body=`<div class="rgall">${Object.values(groups).map(gs=>{const[m,i]=gs[0];return `<div class="rgallit" data-m="${m.id}" style="box-shadow:inset 4px 0 ${rugMarkColor(m)}"><img src="/api/rugs/${encodeURIComponent(r.id)}/crop?b=${m.box.map(v=>v.toFixed(4)).join(',')}&s=80"><div><b>${m._motif?esc(m._motif.az):(m.motif_text?esc(m.motif_text):'<i class="mut">без названия</i>')}</b><small>${(RZ[m.zone]||RZ.other)[0]} · №${gs.map(x=>x[1]+1).join(', ')}</small><small>${gs.filter(x=>x[0].status==='confirmed').length}/${gs.length} ✓${m.scheme?' · схема '+esc(m.scheme):''}</small></div></div>`;}).join('')||'<p class="mut">Элементов пока нет.</p>'}</div>`;
   }
   E.innerHTML=tabs+body;
   $('rgS1').onclick=()=>{R.side='rug';rugSide();};$('rgS2').onclick=()=>{R.side='mark';rugSide();};$('rgS3').onclick=()=>{R.side='all';rugSide();};
@@ -2250,6 +2272,9 @@ function rugSide(){
     $('rgNote').oninput=e=>{m.note=e.target.value;rugSaveSoon();};
     $('rgRep').onclick=()=>rugRepeat();$('rgDelM').onclick=()=>rugDelMark();
     $('rgFindRep')&&($('rgFindRep').onclick=()=>rugFindRepeats(m,false));
+    $('rgJoin')&&($('rgJoin').onclick=()=>{R.joinFrom=m;rugTools();rugDraw();stat('кликните по рамке элемента, с которым это тот же узор','ok');});
+    $('rgSplitM')&&($('rgSplitM').onclick=()=>rugDetach(m));
+    $('rgDelG')&&($('rgDelG').onclick=()=>{const g=rugGroup(m);if(!confirm('Удалить элемент «'+rugName(m)+'» и все его рамки ('+g.length+')?'))return;const del=new Set(g.map(x=>x.id));R.rug.marks=R.rug.marks.filter(x=>!del.has(x.id));R.sel=null;rugSaveSoon();rugDraw();rugSide();});
     $('rgRot')&&($('rgRot').onclick=()=>rugOrient(m,90,0));$('rgFlip')&&($('rgFlip').onclick=()=>rugOrient(m,0,1));
     const pm=()=>rugGroup(m).filter(x=>x.machine&&x.status==='proposed');
     $('rgMachOk')&&($('rgMachOk').onclick=()=>{pm().forEach(x=>x.status='confirmed');rugSaveSoon();rugDraw();rugSide();});
@@ -2258,6 +2283,10 @@ function rugSide(){
     $('rgOk').onclick=()=>rugCheck('confirmed');$('rgNo').onclick=()=>rugCheck('rejected');$('rgUn').onclick=()=>rugCheck('proposed');
     if(m.motif)rugSchemes(m);
   }else if(R.side==='mark'&&R.sel&&R.sel.motif)rugSchemes(R.sel);
+  if(R.side==='mark'&&R.sel){
+    $('rgSchOn')&&($('rgSchOn').onchange=e=>{R.showScheme=e.target.checked;rugDraw();});
+    $('rgSchOp')&&($('rgSchOp').oninput=e=>{R.schOp=+e.target.value;rugDraw();});
+    if(R.sel.scheme)rugDistortion(R.sel);}
 }
 function rugDictSearch(inId,outId,type,pick,free){
   const inp=$(inId),out=$(outId);if(!inp)return;let t=null;
@@ -2351,7 +2380,27 @@ async function rugSplitDo(r){const n=(R.split||[]).length;if(!n)return;
   try{if(R.saveT)await rugSaveNow();stat('режу фото…','busy');const j=await api('/api/rugs/'+encodeURIComponent(r.id)+'/split',{parts:R.split});
     R.tool='box';R.split=null;await rugsLoadList();stat('создано карточек: '+j.made.length+'. Исходное фото скрыто из списка (разделение можно отменить в его паспорте).','ok');if(j.made[0])rugOpen(j.made[0]);}catch(e){fail(e);}}
 function rugRepeat(){if(!R.sel)return;R.repeatOf=R.sel;R.tool='box';rugTools();stat('обведите повтор элемента '+(R.rug.marks.indexOf(R.sel)+1),'ok');}
-function rugDelMark(){const m=R.sel;if(!m)return;R.rug.marks=R.rug.marks.filter(x=>x!==m);R.rug.marks.filter(x=>x.group===m.id).forEach((x,i,a)=>x.group=a[0].id);R.sel=null;rugSaveSoon();rugDraw();rugSide();}
+function rugDelMark(){const m=R.sel;if(!m)return;
+  // после удаления — следующая рамка этого же элемента (или следующая по номеру), а не возврат к началу
+  const g=rugGroup(m),gi=g.indexOf(m),idx=R.rug.marks.indexOf(m);
+  R.rug.marks=R.rug.marks.filter(x=>x!==m);R.rug.marks.filter(x=>x.group===m.id).forEach((x,i,a)=>x.group=a[0].id);
+  const rest=g.filter(x=>x!==m),nx=rest.length?rest[Math.min(gi,rest.length-1)]:(R.rug.marks[Math.min(idx,R.rug.marks.length-1)]||null);
+  R.sel=nx;if(!nx)R.side='mark';rugSaveSoon();rugDraw();rugSide();}
+function rugRegroup(m){/* убрать m из её группы: остальные получают новый корень */const g=m.group||m.id,others=R.rug.marks.filter(x=>x!==m&&(x.group||x.id)===g);
+  if(others.length){const root=others[0].id;others.forEach(x=>x.group=others.length>1?root:'');}m.group='';}
+function rugDetach(m){rugRegroup(m);m.motif='';m.motif_text='';m._motif=null;m.scheme='';m.angle=0;m.flip=0;if(m.machine)m.machine=0;m.status='proposed';
+  rugSaveSoon();rugDraw();rugSide();stat('рамка отделена — теперь это отдельный элемент: укажите узор или «🔗 тот же узор, что…»','ok');}
+function rugJoin(a,b){R.joinFrom=null;rugTools();if(!a||!b||(a.group||a.id)===(b.group||b.id)){rugDraw();return;}
+  const src=rugGroup(a),tg=b.group||b.id;if(!b.group)b.group=b.id;
+  // название и схема — у той группы, где они есть (приоритет — у той, по которой кликнули)
+  const name=(b.motif||b.motif_text||b.scheme)?b:a;
+  src.forEach(x=>{x.group=tg;});rugGroup(b).forEach(x=>{if(x!==name){x.motif=name.motif;x.motif_text=name.motif_text;x._motif=name._motif;if(name.scheme&&!x.scheme)x.scheme=name.scheme;}});
+  rugSaveSoon();rugSelect(a);stat('объединено: теперь это один элемент, рамок '+rugGroup(b).length,'ok');}
+async function rugDistortion(m){const E=$('rgDist');if(!E)return;R.knots=R.knots||{};
+  if(!R.knots[m.scheme]){const im=new Image();im.src='/out/'+encodeURIComponent(m.scheme)+'.png';try{await im.decode();R.knots[m.scheme]=[im.naturalWidth,im.naturalHeight];}catch(e){return;}}
+  if(!$('rgDist')||R.sel!==m)return;let[kw,kh]=R.knots[m.scheme];if((m.angle||0)%180)[kw,kh]=[kh,kw];
+  const pw=m.box[2]*R.iw,ph=m.box[3]*R.ih,ux=pw/kw,uy=ph/kh,r=uy/ux,pc=Math.round(Math.abs(r-1)*100);
+  $('rgDist').innerHTML=`схема ${kw}×${kh} узлов · узел на фото ≈ ${ux.toFixed(1)}×${uy.toFixed(1)} px<br>${pc<4?'<span style="color:var(--ok)">пропорции как на схеме</span>':`<span style="color:var(--acc)">${r>1?'вытянут по высоте':'сплющен по высоте'} на ${pc}%</span> <small class="mut">(узел ковра не квадратный или элемент искажён)</small>`}`;}
 function rugCheck(st){const m=R.sel;if(!m)return;m.status=st;rugSaveSoon();rugDraw();rugSide();}
 function rugNext(d){if(!R.rug||!R.rug.marks.length)return;const i=R.sel?R.rug.marks.indexOf(R.sel):-1,n=(i+d+R.rug.marks.length)%R.rug.marks.length;rugSelect(R.rug.marks[n]);rugFocus(R.rug.marks[n]);}
 window.addEventListener('keydown',e=>{
@@ -2361,7 +2410,7 @@ window.addEventListener('keydown',e=>{
   if(!$('modal').hidden)return;
   const k=kk(e);let used=true;
   if(e.code==='Space'){R.space=true;$('rgView')&&($('rgView').style.cursor='grab');}
-  else if(e.key==='Escape'){R.repeatOf=null;R.preset=null;if(R.tool==='zones'||R.tool==='split'){R.tool='box';R.split=null;}rugSelect(null);rugTools();rugDraw();}
+  else if(e.key==='Escape'){R.repeatOf=null;R.preset=null;R.joinFrom=null;if(R.tool==='zones'||R.tool==='split'){R.tool='box';R.split=null;}rugSelect(null);rugTools();rugDraw();}
   else if(k==='z'){R.tool='zones';R.showZones=true;rugTools();rugDraw();}
   else if((e.key==='Delete'||e.key==='Backspace')&&R.tool==='zones'&&R.rug&&R.rug.layout&&R.layBound!=null&&R.layBound>=0&&!rro()){const L=R.rug.layout;L.bounds.splice(R.layBound,1);L.rings.splice(R.layBound,1);layFix(L);L.status='edited';R.layBound=null;rugSaveSoon();rugDraw();rugSide();}
   else if(k==='b')R.tool='box',rugTools();
@@ -2369,6 +2418,10 @@ window.addEventListener('keydown',e=>{
   else if(k==='f'||k==='0')rugFit();
   else if(k==='r')rugRepeat();
   else if(k==='q'&&R.sel&&!rro())rugOrient(R.sel,90,0);
+  else if(k==='s'){R.showScheme=R.showScheme===false;rugDraw();rugSide();}
+  else if(k==='d'){R.dim=R.dim===false;$('rgDim')&&($('rgDim').checked=R.dim);rugDraw();}
+  else if(k==='j'&&R.sel&&!rro()){R.joinFrom=R.sel;rugTools();stat('кликните по рамке элемента, с которым это тот же узор','ok');}
+  else if(k==='u'&&R.sel&&!rro()&&rugGroup(R.sel).length>1)rugDetach(R.sel);
   else if(k==='w'&&R.sel&&!rro())rugOrient(R.sel,0,1);
   else if((e.key==='Delete'||e.key==='Backspace')&&R.sel&&!rro())rugDelMark();
   else if(k==='c'&&R.sel&&!rro())rugCheck('confirmed');
