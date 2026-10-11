@@ -17,6 +17,7 @@ STATUSES = ("proposed", "confirmed", "rejected")
 SCHOOLS = {"guba-shirvan": "Губа-Ширван", "ganja-gazakh": "Гянджа-Газах", "karabakh": "Карабах", "tabriz": "Тебриз", "nakhchivan": "Нахчыван", "": "—"}
 MAXSIDE = 1600
 SAME_FIELDS = ("school", "composition", "technique", "museum", "inv", "place", "date", "size")   # что переносится с двойника в пустые поля
+PASS_FIELDS = SAME_FIELDS + ("url", "license", "notes")   # v10.26: что части разворота наследуют от исходного фото
 _lock = threading.Lock()
 imp = {"running": False, "done": 0, "total": 0, "errors": 0, "last": ""}
 sync = {"running": False, "stage": "", "done": 0, "total": 0, "error": "", "last_ok": None, "made": 0, "updated": 0}
@@ -191,7 +192,11 @@ def install(app, DATA, D_WORK):
                 "group": r.get("same_group", ""), "same": len(r.get("same") or []), "fragment": (r.get("cat") or {}).get("fragment", False),
                 "composition": r.get("composition", ""), "kind": r.get("technique", ""),
                 "multi": len(r.get("multi") or []), "split_into": r.get("split_into") or [], "split_from": r.get("split_from", ""),
-                "machine": sum(1 for m in mk if m.get("machine") and m.get("status") == "proposed")}
+                "machine": sum(1 for m in mk if m.get("machine") and m.get("status") == "proposed"),
+                "w": r.get("w") or 0, "h": r.get("h") or 0,
+                "same_no": [k for k, v in (r.get("same_ok") or {}).items() if v and not v.get("ok")],
+                "same_ids": [x.get("id") for x in (r.get("same") or []) if x.get("id")],
+                "part": (r.get("cat") or {}).get("part", 0)}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -236,7 +241,8 @@ def install(app, DATA, D_WORK):
                     if not r.get("notes") or r.get("notes") == old.get("text"): r["notes"] = it.get("text", "")
                     r["cat"] = {**val, "text": it.get("text", ""), "names": it.get("names", []), "src": it.get("src", ""), "school_why": it.get("school_why", ""),
                                 "composition_name": it.get("composition", ""), "fragment": bool(it.get("fragment")), "object": it.get("object", ""),
-                                "ambiguous": bool(it.get("ambiguous")), "folder": it.get("folder", "")}
+                                "ambiguous": bool(it.get("ambiguous")), "folder": it.get("folder", ""),
+                                "page_figs": it.get("page_figs") or [], "page_box": it.get("page_box") or 0}
                     r["src_id"] = "cat:" + it["id"]; r["lib_img"] = it.get("img", "")
                     g = groups.get(it.get("same_group") or "")
                     if g:
@@ -289,6 +295,8 @@ def install(app, DATA, D_WORK):
             for a, c, r, o in ((rid, other, ra, rb), (other, rid, rb, ra)):
                 if not r: continue
                 r.setdefault("same_ok", {})
+                if ok is not None and c not in {x.get("id") for x in r.get("same") or []}:
+                    r.setdefault("same", []).append({"id": c, "score": 0})
                 if ok is None: r["same_ok"].pop(c, None)
                 else: r["same_ok"][c] = {"ok": bool(ok), "by": who, "at": int(time.time())}
                 # подтвердили «тот же ковёр» → пустые поля паспорта берём у двойника; заполненные НЕ трогаем
@@ -636,32 +644,132 @@ def install(app, DATA, D_WORK):
         if a is None: return JSONResponse({"error": "нет фото"}, 404)
         return {"parts": rug_match.find_carpets(a)}
 
+    def part_title(r, fig, i, n):
+        """название части разворота: подпись рисунка из книги, иначе «… · ковёр i из n»"""
+        if fig and (fig.get("title") or fig.get("caption") or fig.get("label")):
+            return fig.get("title") or ", ".join(x for x in (fig.get("label"), fig.get("caption")) if x)
+        base = re.sub(r" · ковёр \d+ из \d+$", "", r.get("title") or r["id"])
+        return base + f" · ковёр {i + 1} из {n}"
+
+    def apply_part(n, r, fig, i, cnt, box):
+        """паспорт части: всё, что знали о развороте, + подпись своего рисунка (если книга дала подписи по порядку).
+        Заполненные человеком поля части не трогаем."""
+        for k in PASS_FIELDS:
+            if not n.get(k) and r.get(k): n[k] = r[k]
+        cat = {**(r.get("cat") or {}), "part": i + 1, "parts": cnt}
+        cat.pop("page_figs", None)
+        if fig:
+            for k, v in (("school", fig.get("school")), ("composition", comp_id(fig.get("composition") or "")), ("date", fig.get("date")),
+                         ("technique", fig.get("technique"))):
+                if v and (not n.get(k) or n.get(k) == (n.get("cat") or {}).get(k) or n.get(k) == r.get(k)): n[k] = v
+            if fig.get("text") and (not n.get("notes") or n.get("notes") == r.get("notes")): n["notes"] = fig["text"]
+            cat.update(names=[x for x in (fig.get("composition"), fig.get("caption")) if x], school_why=fig.get("school_why", ""),
+                       composition_name=fig.get("composition", ""), text=fig.get("text", ""), fragment=bool(fig.get("fragment")),
+                       fig_label=fig.get("label", ""), ambiguous=False, **{k: n.get(k, "") for k in ("school", "composition", "date", "technique")})
+        else: cat["ambiguous"] = True
+        n["cat"] = cat
+        auto = not n.get("title") or re.search(r" · ковёр \d+ из \d+$", n.get("title") or "") or n.get("title") == (n.get("_auto_title") or "")
+        if auto: n["title"] = n["_auto_title"] = part_title(r, fig, i, cnt)
+        n["split_from"] = r["id"]; n["split_box"] = [round(float(v), 5) for v in box]; n["split_n"] = i
+        n["src_id"] = (r.get("src_id") or r["id"]) + f"#{i + 1}"
+        # двойники разворота — кандидаты и для части (человек отметит ✓ / ✗ у той части, где этот ковёр)
+        have = {x.get("id") for x in n.get("same") or []}
+        for x in r.get("same") or []:
+            if x.get("id") and x["id"] not in have: n.setdefault("same", []).append({"id": x["id"], "score": x.get("score", 0), "via": r["id"]})
+
+    def remap(m, ob, nb):
+        """рамка в координатах старой вырезки → в координатах новой (при правке разделения)"""
+        bx, by, bw, bh = m["box"]
+        ax, ay = ob[0] + bx * ob[2], ob[1] + by * ob[3]; aw, ah = bw * ob[2], bh * ob[3]
+        x0, y0 = max(ax, nb[0]), max(ay, nb[1]); x1, y1 = min(ax + aw, nb[0] + nb[2]), min(ay + ah, nb[1] + nb[3])
+        if x1 <= x0 or y1 <= y0 or (x1 - x0) * (y1 - y0) < 0.5 * aw * ah: return None
+        return [round((x0 - nb[0]) / nb[2], 5), round((y0 - nb[1]) / nb[3], 5), round((x1 - x0) / nb[2], 5), round((y1 - y0) / nb[3], 5)]
+
     @app.post("/api/rugs/{rid}/split")
     async def api_rug_split(rid: str, request: Request):
-        """Фото с несколькими коврами (разворот книги) → отдельные карточки. Исходная карточка скрывается, не удаляется."""
-        b = await request.json(); parts = b.get("parts") or []; who = user(request)
+        """Фото с несколькими коврами (разворот книги) → отдельные карточки, в порядке, который задал человек.
+        Каждая часть получает паспорт разворота и, если есть, подпись своего рисунка из книги (figs — номер подписи для каждой части).
+        Повторный вызов = правка разделения: части с указанным id перерезаются (их рамки переносятся), лишние удаляются.
+        Исходная карточка скрывается, не удаляется."""
+        b = await request.json(); parts = b.get("parts") or []; ids = b.get("ids") or []; fsel = b.get("figs") or []; who = user(request)
         r = load(rid); p = img_path(rid); a = cv2.imread(p) if p else None
         if not r or a is None: return JSONResponse({"error": "нет такого ковра"}, 404)
         if len(parts) < 1: return JSONResponse({"error": "нет частей"}, 400)
-        H, W = a.shape[:2]; made = []
+        H, W = a.shape[:2]; made = []; pf = (r.get("cat") or {}).get("page_figs") or []
         with _lock:
-            for i, (x, y, w, h) in enumerate(parts):
+            old = list(r.get("split_into") or []); keep = set()
+            for i, box in enumerate(parts):
+                x, y, w, h = [float(v) for v in box]
                 x0, y0 = max(0, int(x * W)), max(0, int(y * H)); x1, y1 = min(W, int((x + w) * W)), min(H, int((y + h) * H))
                 if x1 - x0 < 20 or y1 - y0 < 20: continue
-                nid = new_id(rid + f"_{i + 1}")
+                fi = fsel[i] if i < len(fsel) else None
+                fig = pf[fi] if isinstance(fi, int) and 0 <= fi < len(pf) else (pf[i] if fi is None and len(pf) == len(parts) else None)
+                cid = ids[i] if i < len(ids) else None
+                n = load(cid) if cid and cid in old else None
+                nid = n["id"] if n else new_id(rid + f"_{i + 1}")
                 wd, ht = store_image(nid, cv2.imencode(".jpg", a[y0:y1, x0:x1], [cv2.IMWRITE_JPEG_QUALITY, 92])[1].tobytes())
-                n = blank(nid, title=(r.get("title") or rid) + f" · ковёр {i + 1} из {len(parts)}", source=r.get("source", ""), w=wd, h=ht)
-                for k in ("museum", "url", "license", "notes"): n[k] = r.get(k, "")
-                n["cat"] = {**(r.get("cat") or {}), "ambiguous": True}
-                n["split_from"] = rid; n["src_id"] = (r.get("src_id") or rid) + f"#{i + 1}"
-                # рамки, целиком попавшие в эту часть, переносим (в координатах части)
-                for m in r.get("marks", []):
-                    bx, by, bw, bh = m["box"]
-                    if bx >= x and by >= y and bx + bw <= x + w and by + bh <= y + h:
-                        n["marks"].append({**m, "box": [round((bx - x) / w, 5), round((by - y) / h, 5), round(bw / w, 5), round(bh / h, 5)]})
-                save(n); made.append(nid)
+                if n:
+                    ob = n.get("split_box"); nb = [x, y, w, h]
+                    if ob:
+                        ms = []
+                        for m in n.get("marks", []):
+                            bb = remap(m, ob, nb)
+                            if bb: ms.append({**m, "box": bb})
+                        n["marks"] = ms
+                    n["w"], n["h"] = wd, ht
+                else:
+                    n = blank(nid, source=r.get("source", ""), w=wd, h=ht)
+                    # рамки исходного фото, целиком попавшие в эту часть, переносим (в координатах части)
+                    for m in r.get("marks", []):
+                        bx, by, bw, bh = m["box"]
+                        if bx >= x and by >= y and bx + bw <= x + w and by + bh <= y + h:
+                            n["marks"].append({**m, "box": [round((bx - x) / w, 5), round((by - y) / h, 5), round(bw / w, 5), round(bh / h, 5)]})
+                apply_part(n, r, fig, len(made), len(parts), [x, y, w, h])
+                n["updated"] = int(time.time()); save(n); made.append(nid); keep.add(nid)
+            for c in old:
+                if c not in keep: api_rug_del(c)
             r["split_into"] = made; r["split_by"] = who; r["updated"] = int(time.time()); save(r)
         return {"made": made}
+
+    @app.get("/api/rugs/{rid}/split_parts")
+    def api_rug_split_parts(rid: str):
+        """текущее разделение (для правки): рамки частей в порядке, их id, подписи рисунков страницы"""
+        r = load(rid)
+        if not r: return JSONResponse({"error": "нет такого ковра"}, 404)
+        out = []
+        for c in r.get("split_into") or []:
+            n = load(c) or {}
+            out.append({"id": c, "box": n.get("split_box"), "title": n.get("title", ""), "n": len(n.get("marks", [])), "fig": (n.get("cat") or {}).get("fig_label", "")})
+        return {"parts": out, "page_figs": (r.get("cat") or {}).get("page_figs") or []}
+
+    def repair_parts():
+        """v10.26: у частей, разрезанных до этой версии, паспорт был почти пустой, а место на развороте не записано.
+        Дополняем пустые поля из исходного фото и находим, где часть лежала на развороте (по совпадающим точкам)."""
+        import rug_match
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            try:
+                n = load(f[:-5])
+                if not n or not n.get("split_from") or n.get("_repaired"): continue
+                r = load(n["split_from"])
+                if not r: continue
+                kids = r.get("split_into") or []
+                i = kids.index(n["id"]) if n["id"] in kids else 0
+                box = n.get("split_box")
+                if not box:
+                    pa, pb = img_path(n["id"]), img_path(r["id"])
+                    A, B = (cv2.imread(pa) if pa else None), (cv2.imread(pb) if pb else None)
+                    if A is not None and B is not None:
+                        Hm, _ = rug_match.align(A, B)
+                        if Hm is not None: box, _a = rug_match.map_box(Hm, [0, 0, 1, 1])
+                with _lock:
+                    n = load(n["id"])
+                    pf = (r.get("cat") or {}).get("page_figs") or []
+                    apply_part(n, r, pf[i] if len(pf) == len(kids) else None, i, len(kids), box or [0, 0, 1, 1])
+                    if not box: n.pop("split_box", None)
+                    n["_repaired"] = 1; save(n)
+            except Exception as e:
+                print("repair_parts:", f, e)
 
     @app.post("/api/rugs/{rid}/unsplit")
     def api_rug_unsplit(rid: str):
@@ -733,3 +841,5 @@ def install(app, DATA, D_WORK):
         c = a[y0:y1, x0:x1]; k = min(4.0, max(1, s) / max(c.shape[:2]))
         c = cv2.resize(c, None, fx=k, fy=k, interpolation=cv2.INTER_AREA if k < 1 else cv2.INTER_NEAREST)
         return Response(cv2.imencode(".jpg", c, [cv2.IMWRITE_JPEG_QUALITY, 88])[1].tobytes(), media_type="image/jpeg")
+
+    threading.Thread(target=repair_parts, daemon=True).start()   # после того как определены img_path и остальное

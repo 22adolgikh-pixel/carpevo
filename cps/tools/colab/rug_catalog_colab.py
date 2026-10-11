@@ -114,6 +114,20 @@ for vol, roman in (('kerimov_vol1', 'I'), ('kerimov_vol2', 'II'), ('kerimov_vol3
         carriers = {c.get('figure_ref'): c for c in (J.get('carriers_mentioned') or []) if c.get('figure_ref')}
         schools = {m.get('name_ru'): m.get('school') for m in (J.get('motifs_mentioned') or []) if m.get('school')}
         pg = os.path.basename(jp)[5:-5]
+        # v10.26: подписи ВСЕХ рисунков страницы по порядку — если фото на странице слилось в одно (разворот),
+        # студия при разделении даёт каждой части подпись её рисунка
+        def fig_info(f):
+            lab = f.get('figure_label') or ''; cap = f.get('caption') or ''
+            c = carriers.get(lab, {}); comp = c.get('motif_name') or f.get('depicts_motif') or ''
+            title = (cap if cap and cap != lab else '') or comp
+            sc = SCHOOL_RU.get((schools.get(comp) or '').lower(), ''); why = f'Керимов: «{comp}» — {schools.get(comp)}' if sc else ''
+            if not sc:
+                sc, k = school_of(title, comp)
+                why = f'слово «{k}» в подписи Керимова' if sc else ''
+            return dict(label=lab, caption=cap, composition=comp, school=sc, school_why=why, date=c.get('date') or '',
+                        technique=tech_of(title, comp), fragment=frag_of(title), text=(c.get('quote') or '')[:400],
+                        title=f'Керимов, т. {roman}' + (f', {lab}' if lab else '') + (f'. {title}' if title else '') + f' (стр. скана {int(pg)}, печ. {J.get("page_number_printed") or "?"})')
+        page_figs = [fig_info(f) for f in figs]
         for i, b in enumerate(boxes):
             f = figs[i] if len(figs) == len(boxes) else (figs[0] if len(figs) == 1 else {})
             lab = f.get('figure_label') or ''; cap = f.get('caption') or ''
@@ -128,7 +142,8 @@ for vol, roman in (('kerimov_vol1', 'I'), ('kerimov_vol2', 'II'), ('kerimov_vol3
                 title=f'Керимов, т. {roman}' + (f', {lab}' if lab else '') + (f'. {title}' if title else '') + f' (стр. скана {int(pg)}, печ. {J.get("page_number_printed") or "?"})',
                 names=[comp, title], composition=comp, date=c.get('date') or '', school=sc, school_why=why,
                 technique=tech_of(title, comp), fragment=frag_of(title), text=(c.get('quote') or '')[:400], museum='', inv='', place='', url='', license='книга (не публиковать фото)',
-                ambiguous=len(figs) != len(boxes) and len(figs) != 1)
+                ambiguous=len(figs) != len(boxes) and len(figs) != 1,
+                page_figs=page_figs if len(figs) > 1 else [], page_box=i)
     log(vol, 'фото на страницах:', len(items) - n0)
 
 # ---------------- 2. музейные фото (catalog_photos.json) ----------------
