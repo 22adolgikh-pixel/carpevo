@@ -1,6 +1,6 @@
 # CPS — передача контекста другому чату (2026-10-04)
 
-Документ для нового чата: что за проект, где что лежит, что уже сделано и проверено, чего НЕ делать повторно, что дальше. Читать вместе с `cps_storage.md` (хостинг/хранение) и `site_terms_model.md`.
+Документ для нового чата: что за проект, где что лежит, что уже сделано и проверено, чего НЕ делать повторно, что дальше. Экран «Ковры» (v10.19–v10.25): отдельный документ `HANDOFF_rugs.md`. Читать вместе с `cps_storage.md` (хостинг/хранение) и `site_terms_model.md`.
 
 ## 0. Как работать с пользователем
 - Пользователь (jeyranbaku@gmail.com) говорит по-русски. **Если пишет по-азербайджански: перевести на русский, всегда дублировать русский перевод и дать возможный ответ тоже с переводом.**
@@ -17,7 +17,7 @@
 | Код CPS | GitHub `22adolgikh-pixel/carpevo`, ветка `cps-v5`, папка `cps/` (README.md с историей v10.x) |
 | Данные разметки (`data/work`, `data/sheets`, `legend.csv`, `i18n.json`, `cell_model.json`) | ветка `cps-data` (автобэкап `backup.py`) |
 | Картинки-кропы для анализа | ветка `cps-data`, `data/crops/*.png` (1285 шт., 458 МБ), коммит «кропы для анализа» 2026-10-03; обновлять вручную |
-| Живые данные на VPS | docker-том `deploy_cps_data`: `/var/lib/docker/volumes/deploy_cps_data/_data` (work, crops, sheets, out, thumbs); контейнер `deploy-cps-1`, compose: `~/carpevo/cps/deploy/docker-compose.existing-nginx.yml` |
+| Живые данные на VPS | docker-том `deploy_cps_data`: `/var/lib/docker/volumes/deploy_cps_data/_data` (work, crops, sheets, out, thumbs); контейнер `deploy-cps-1`, compose: `/root/carpevo/cps/deploy/docker-compose.existing-nginx.yml` (репозиторий склонирован на VPS заново 2026-10-11; `.env` рядом, не в git) |
 | Сканы книг | Google Drive `carpet-dna/cps_scans/scans_bundle2.zip` |
 | Сайт | `site/` (template.html + build.py; `site/data.json` приватный, в .gitignore); артефакт сайта на v44 пока не переопубликован с пересобранным шаблоном |
 | Проект claude.ai «CarpetsCat» | docs: `site_data_v44.json`, `kerimov_batch2_plan.md`, `cps_storage.md`, `site_terms_model.md`, `kerimov_verification_2026-09-27.md`, `site_audit_2026-09-26.md`, `sources.md`, `magazine_pass1_spec.md`, и этот файл |
