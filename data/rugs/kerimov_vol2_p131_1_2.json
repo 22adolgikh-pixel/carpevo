@@ -39,8 +39,31 @@
   "fragment": false,
   "object": "",
   "ambiguous": true,
-  "folder": ""
+  "folder": "",
+  "part": 2,
+  "parts": 2
  },
  "split_from": "kerimov_vol2_p131_1",
- "src_id": "cat:kerimov_vol2_p131_1#2"
+ "src_id": "cat:kerimov_vol2_p131_1#2",
+ "_auto_title": "Керимов, т. II, 10 (стр. скана 131, печ. 11) · ковёр 2 из 2",
+ "split_box": [
+  0.03826,
+  0.48801,
+  0.96174,
+  0.51197
+ ],
+ "split_n": 1,
+ "same": [
+  {
+   "id": "kerimov_vol2_p131_2",
+   "score": 65,
+   "via": "kerimov_vol2_p131_1"
+  },
+  {
+   "id": "wikimedia_File_Gimil_rug_gif",
+   "score": 0,
+   "via": "kerimov_vol2_p131_1"
+  }
+ ],
+ "_repaired": 1
 }

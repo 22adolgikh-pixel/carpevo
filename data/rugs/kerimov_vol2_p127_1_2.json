@@ -39,8 +39,31 @@
   "fragment": false,
   "object": "",
   "ambiguous": true,
-  "folder": ""
+  "folder": "",
+  "part": 2,
+  "parts": 2
  },
  "split_from": "kerimov_vol2_p127_1",
- "src_id": "cat:kerimov_vol2_p127_1#2"
+ "src_id": "cat:kerimov_vol2_p127_1#2",
+ "_auto_title": "Керимов, т. II (стр. скана 127, печ. 3) · ковёр 2 из 2",
+ "split_box": [
+  0.12535,
+  0.09598,
+  0.80844,
+  0.40803
+ ],
+ "split_n": 1,
+ "same": [
+  {
+   "id": "kerimov_vol2_p127_3",
+   "score": 350,
+   "via": "kerimov_vol2_p127_1"
+  },
+  {
+   "id": "wikimedia_File_Куба_jpg",
+   "score": 0,
+   "via": "kerimov_vol2_p127_1"
+  }
+ ],
+ "_repaired": 1
 }

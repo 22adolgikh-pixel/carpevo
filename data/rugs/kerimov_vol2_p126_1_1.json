@@ -39,8 +39,31 @@
   "fragment": false,
   "object": "",
   "ambiguous": true,
-  "folder": ""
+  "folder": "",
+  "part": 1,
+  "parts": 1
  },
  "split_from": "kerimov_vol2_p126_1",
- "src_id": "cat:kerimov_vol2_p126_1#1"
+ "src_id": "cat:kerimov_vol2_p126_1#1",
+ "_auto_title": "Керимов, т. II, 1 (стр. скана 126, печ. 1) · ковёр 1 из 1",
+ "split_box": [
+  0.13604,
+  0.15995,
+  0.86093,
+  0.72922
+ ],
+ "split_n": 0,
+ "same": [
+  {
+   "id": "kerimov_vol2_p126_2",
+   "score": 808,
+   "via": "kerimov_vol2_p126_1"
+  },
+  {
+   "id": "wikimedia_File_Кёхна_Куба_jpg",
+   "score": 0,
+   "via": "kerimov_vol2_p126_1"
+  }
+ ],
+ "_repaired": 1
 }

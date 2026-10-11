@@ -39,8 +39,31 @@
   "fragment": false,
   "object": "",
   "ambiguous": true,
-  "folder": ""
+  "folder": "",
+  "part": 1,
+  "parts": 1
  },
  "split_from": "kerimov_vol3_p023_1",
- "src_id": "cat:kerimov_vol3_p023_1#1"
+ "src_id": "cat:kerimov_vol3_p023_1#1",
+ "_auto_title": "Керимов, т. III (стр. скана 23, печ. 46) · ковёр 1 из 1",
+ "split_box": [
+  0.27926,
+  0.0,
+  0.72074,
+  1.0
+ ],
+ "split_n": 0,
+ "same": [
+  {
+   "id": "kerimov_vol3_p026_1",
+   "score": 67,
+   "via": "kerimov_vol3_p023_1"
+  },
+  {
+   "id": "kerimov_vol3_p026_2",
+   "score": 0,
+   "via": "kerimov_vol3_p023_1"
+  }
+ ],
+ "_repaired": 1
 }

@@ -39,8 +39,26 @@
   "fragment": false,
   "object": "",
   "ambiguous": true,
-  "folder": ""
+  "folder": "",
+  "part": 1,
+  "parts": 2
  },
  "split_from": "kerimov_vol2_p139_1",
- "src_id": "cat:kerimov_vol2_p139_1#1"
+ "src_id": "cat:kerimov_vol2_p139_1#1",
+ "_auto_title": "Керимов, т. II (стр. скана 139, печ. 27) · ковёр 1 из 2",
+ "split_box": [
+  0.03047,
+  0.0,
+  0.94173,
+  0.41501
+ ],
+ "split_n": 0,
+ "same": [
+  {
+   "id": "kerimov_vol2_p139_3",
+   "score": 368,
+   "via": "kerimov_vol2_p139_1"
+  }
+ ],
+ "_repaired": 1
 }
