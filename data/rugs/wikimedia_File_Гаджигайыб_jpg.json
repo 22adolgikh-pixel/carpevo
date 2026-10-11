@@ -16,9 +16,56 @@
  "status": "new",
  "w": 644,
  "h": 1000,
- "marks": [],
+ "marks": [
+  {
+   "id": "mmv42ffkt",
+   "box": [
+    0.59839,
+    0.53003,
+    0.16643,
+    0.08025
+   ],
+   "zone": "field",
+   "motif": "burma",
+   "motif_text": "",
+   "scheme": "t106_f03",
+   "group": "mmv42ffkt",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": "",
+   "by": "dolgikh",
+   "at": 1791737807,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "edited_by": "dolgikh",
+   "edited_at": 1791737814
+  },
+  {
+   "id": "mmv42flgd",
+   "box": [
+    0.22045,
+    0.5295,
+    0.16806,
+    0.08236
+   ],
+   "zone": "field",
+   "motif": "burma",
+   "motif_text": "",
+   "scheme": "t106_f03",
+   "group": "mmv42ffkt",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": "",
+   "by": "dolgikh",
+   "at": 1791737814,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  }
+ ],
  "created": 1791736124,
- "updated": 1791736124,
+ "updated": 1791737814,
  "cat": {
   "title": "«Гаджигайыб».jpg",
   "museum": "Wikimedia Commons",
@@ -54,5 +101,7 @@
   }
  ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45"
+ "_lib_t": "2026-10-10 12:45",
+ "layout": null,
+ "updated_by": "dolgikh"
 }
