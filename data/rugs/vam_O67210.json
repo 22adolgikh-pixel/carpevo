@@ -16,9 +16,36 @@
  "status": "new",
  "w": 522,
  "h": 1000,
- "marks": [],
+ "marks": [
+  {
+   "id": "mmv46hhb5",
+   "box": [
+    0.364,
+    0.56335,
+    0.09278,
+    0.04041
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "by": "dolgikh",
+   "at": 1791744620,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  }
+ ],
  "created": 1791736127,
- "updated": 1791736127,
+ "updated": 1791744626,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -52,6 +79,14 @@
    "score": 382
   }
  ],
- "same_ok": {},
- "_lib_t": "2026-10-10 12:45"
+ "same_ok": {
+  "kerimov_vol3_p035_1": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1791744587
+  }
+ },
+ "_lib_t": "2026-10-10 12:45",
+ "layout": null,
+ "updated_by": "dolgikh"
 }
