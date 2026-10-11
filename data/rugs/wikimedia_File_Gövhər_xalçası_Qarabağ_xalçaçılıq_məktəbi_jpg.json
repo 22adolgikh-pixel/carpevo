@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791736125,
- "updated": 1791736125,
+ "updated": 1791737023,
  "cat": {
   "title": "Gövhər xalçası, Qarabağ xalçaçılıq məktəbi.jpg",
   "museum": "Wikimedia Commons",
@@ -54,5 +54,51 @@
   }
  ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45"
+ "_lib_t": "2026-10-10 12:45",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [
+   {
+    "ix": 0.017948717948717947,
+    "iy": 0.01,
+    "strength": 6.77
+   },
+   {
+    "ix": 0.05384615384615385,
+    "iy": 0.03,
+    "strength": 3.07
+   },
+   {
+    "ix": 0.19230769230769232,
+    "iy": 0.10714285714285714,
+    "strength": 5.45
+   },
+   {
+    "ix": 0.2205128205128205,
+    "iy": 0.12285714285714286,
+    "strength": 3.84
+   },
+   {
+    "ix": 0.24615384615384617,
+    "iy": 0.13714285714285715,
+    "strength": 2.53
+   }
+  ],
+  "rings": [
+   "guard",
+   "guard",
+   "border",
+   "guard",
+   "guard",
+   "field"
+  ],
+  "conf": 0,
+  "status": "auto"
+ },
+ "updated_by": "dolgikh"
 }
