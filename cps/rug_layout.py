@@ -44,48 +44,60 @@ def _profiles(lab, rect, depth):
     return out
 
 
+def _ring(lab, rect, d, nseg=32, per=10):
+    """Средний цвет каждого из nseg участков «кольца» на глубине d от края ковра (кольцо = прямоугольник, отступивший на d)."""
+    x, y, w, h = rect
+    x0, y0, x1, y1 = x + d, y + d, x + w - 1 - d, y + h - 1 - d
+    if x1 - x0 < 4 or y1 - y0 < 4: return None
+    P = 2 * ((x1 - x0) + (y1 - y0)); t = (np.arange(nseg * per) + 0.5) / (nseg * per) * P
+    px = np.empty_like(t); py = np.empty_like(t); a, b = x1 - x0, y1 - y0
+    for i, v in enumerate(t):
+        if v < a: px[i], py[i] = x0 + v, y0
+        elif v < a + b: px[i], py[i] = x1, y0 + (v - a)
+        elif v < 2 * a + b: px[i], py[i] = x1 - (v - a - b), y1
+        else: px[i], py[i] = x0, y1 - (v - 2 * a - b)
+    s = lab[py.astype(int), px.astype(int)]                 # nseg*per × 3
+    return s.reshape(nseg, per, 3).mean(1)
+
+
 def detect(img):
     """→ {carpet:[x,y,w,h] в долях, bounds:[{ix, iy, strength}] — вложенные границы (отступы от края ковра в долях его ширины/высоты),
-           rings:[zone…] (на одну больше, чем границ: последнее — поле), conf}"""
+           rings:[zone…] (на одну больше, чем границ: последнее — поле), conf}
+
+    Кайма — полоса, которая идёт вокруг всего ковра. Поэтому границу ищем не по одному месту, а по всему «кольцу»:
+    кольцо на глубине d делим на 32 участка и смотрим, где цвет меняется одновременно на большинстве участков (медиана по участкам).
+    Медальоны и узоры поля меняют цвет лишь местами — медиана их не пропускает. Дальше 30% короткой стороны каймы не ищем."""
     H0, W0 = img.shape[:2]; s = 700 / max(H0, W0)
     a = cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else img.copy()
     h, w = a.shape[:2]
     rect, conf = _carpet_rect(a)
     x, y, cw, ch = rect
     lab = cv2.cvtColor(cv2.GaussianBlur(a, (0, 0), 1.5), cv2.COLOR_BGR2LAB).astype(np.float32)
-    short = min(cw, ch); depth = max(10, int(short * 0.42))
-    P = _profiles(lab, rect, depth)
-    L = min(len(p) for p in P)
-    # сила смены цвета на каждой стороне: разница среднего цвета «до» и «после» точки (окно k); пики каждой стороны отдельно,
-    # потом ищем расстояния, где пик есть хотя бы на 3 сторонах из 4 (каймы одной ширины со всех сторон)
-    k = max(2, int(short * 0.012)); tol = max(3, int(short * 0.012))
-    side_peaks = []
-    for p in P:
-        p = p[:L]; g = np.zeros(L)
-        for d in range(k, L - k): g[d] = np.linalg.norm(p[d:d + k].mean(0) - p[d - k:d].mean(0))
-        base = np.median(g[k:L - k]) + 1e-6; pk = []
-        for d in range(k + 1, L - k):
-            if g[d] >= g[max(0, d - k):d + k + 1].max() and g[d] > 2.0 * base: pk.append((d, g[d] / base))
-        side_peaks.append(pk)
-    cands = sorted({d for pk in side_peaks for d, _ in pk})
-    clusters = []
-    for d in cands:
-        hits = []
-        for pk in side_peaks:
-            near = [v for e, v in pk if abs(e - d) <= tol]
-            if near: hits.append(max(near))
-        if len(hits) >= 3: clusters.append((d, float(np.mean(hits)), len(hits)))
+    short = min(cw, ch); dmax = max(10, int(short * 0.30))
+    rings = []
+    for d in range(dmax):
+        r = _ring(lab, rect, d)
+        if r is None: break
+        rings.append(r)
+    if len(rings) < 8: return {"carpet": [x / w, y / h, cw / w, ch / h], "bounds": [], "rings": ["field"], "conf": round(conf, 2)}
+    Rg = np.stack(rings)                                       # depth × seg × 3
+    L = len(Rg); k = max(2, int(short * 0.012))
+    g = np.zeros(L)
+    for d in range(k, L - k):
+        ch_seg = np.linalg.norm(Rg[d:d + k].mean(0) - Rg[d - k:d].mean(0), axis=1)   # смена цвета на каждом участке кольца
+        g[d] = np.percentile(ch_seg, 40)                     # «почти везде по кругу» (40-й перцентиль — терпим износ/фрагменты)
+    base = np.median(g[k:L - k]) + 1e-6
+    pk = [(d, g[d] / base) for d in range(k + 1, L - k) if g[d] >= g[max(0, d - k):d + k + 1].max() and g[d] > 2.2 * base and g[d] > 4.0]
     kept = []
-    for d, v, n in sorted(clusters, key=lambda t: (-t[2], -t[1])):
-        if d > short * 0.008 and all(abs(d - e) > max(tol * 2, short * 0.02) for e, _ in kept): kept.append((d, v))
-    kept = sorted(kept[:7])
-    bounds = [{"ix": d / cw, "iy": d / ch, "strength": round(v, 2)} for d, v in kept]
-    # зоны колец: самое широкое кольцо — главная кайма, узкие (<35% главной) — бордюрные полоски, остальные — малые каймы
+    for d, v in sorted(pk, key=lambda t: -t[1]):
+        if d > short * 0.008 and all(abs(d - e) > max(2 * k, short * 0.02) for e, _ in kept): kept.append((d, v))
+    kept = sorted(kept[:6])
+    bounds = [{"ix": d / cw, "iy": d / ch, "strength": round(float(v), 2)} for d, v in kept]
     edges = [0] + [d for d, _ in kept]
     widths = [edges[i + 1] - edges[i] for i in range(len(edges) - 1)]
-    rings = []
+    zr = []
     if widths:
         wmax = max(widths)
-        for wd in widths: rings.append("border" if wd == wmax else ("guard" if wd < 0.35 * wmax else "minor"))
-    rings.append("field")
-    return {"carpet": [x / w, y / h, cw / w, ch / h], "bounds": bounds, "rings": rings, "conf": round(conf, 2)}
+        for wd in widths: zr.append("border" if wd == wmax else ("guard" if wd < 0.35 * wmax else "minor"))
+    zr.append("field")
+    return {"carpet": [x / w, y / h, cw / w, ch / h], "bounds": bounds, "rings": zr, "conf": round(conf, 2)}

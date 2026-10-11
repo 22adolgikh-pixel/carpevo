@@ -15,6 +15,7 @@ ZONES = {"field": "поле", "medallion": "медальон", "spandrel": "уг
 STATUSES = ("proposed", "confirmed", "rejected")
 SCHOOLS = {"guba-shirvan": "Губа-Ширван", "ganja-gazakh": "Гянджа-Газах", "karabakh": "Карабах", "tabriz": "Тебриз", "nakhchivan": "Нахчыван", "": "—"}
 MAXSIDE = 1600
+SAME_FIELDS = ("school", "composition", "technique", "museum", "inv", "place", "date", "size")   # что переносится с двойника в пустые поля
 _lock = threading.Lock()
 imp = {"running": False, "done": 0, "total": 0, "errors": 0, "last": ""}
 sync = {"running": False, "stage": "", "done": 0, "total": 0, "error": "", "last_ok": None, "made": 0, "updated": 0}
@@ -187,7 +188,9 @@ def install(app, DATA, D_WORK):
                 "motifs": len({m.get("motif") for m in mk if m.get("motif")}), "updated": r.get("updated", 0), "source": r.get("source", ""),
                 "src": (r.get("cat") or {}).get("src") or ("upload" if not r.get("src_id") else (r.get("src_id") or "").split(":")[0]),
                 "group": r.get("same_group", ""), "same": len(r.get("same") or []), "fragment": (r.get("cat") or {}).get("fragment", False),
-                "composition": r.get("composition", ""), "kind": r.get("technique", "")}
+                "composition": r.get("composition", ""), "kind": r.get("technique", ""),
+                "multi": len(r.get("multi") or []), "split_into": r.get("split_into") or [], "split_from": r.get("split_from", ""),
+                "machine": sum(1 for m in mk if m.get("machine") and m.get("status") == "proposed")}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -279,15 +282,26 @@ def install(app, DATA, D_WORK):
         """Подтвердить / отклонить «это тот же ковёр» (отметка ставится у обоих)."""
         b = await request.json(); other = b.get("other"); ok = b.get("ok")
         who = user(request)
+        filled = {}
         with _lock:
-            for a, c in ((rid, other), (other, rid)):
-                r = load(a)
+            ra, rb = load(rid), load(other)
+            for a, c, r, o in ((rid, other, ra, rb), (other, rid, rb, ra)):
                 if not r: continue
                 r.setdefault("same_ok", {})
                 if ok is None: r["same_ok"].pop(c, None)
                 else: r["same_ok"][c] = {"ok": bool(ok), "by": who, "at": int(time.time())}
+                # подтвердили «тот же ковёр» → пустые поля паспорта берём у двойника; заполненные НЕ трогаем
+                # (если значения расходятся — обе карточки сохраняют своё, расхождение видно в паспорте)
+                if ok and o:
+                    got = []
+                    for k in SAME_FIELDS:
+                        if not r.get(k) and o.get(k):
+                            r[k] = o[k]; got.append(k)
+                            r.setdefault("from_twin", {})[k] = c
+                    if got: filled[a] = got
                 save(r)
-        return api_rug(rid)
+        out = api_rug(rid); out["filled"] = filled
+        return out
 
     # ---------------- словарь ----------------
     @app.get("/api/dict")
@@ -352,6 +366,7 @@ def install(app, DATA, D_WORK):
                 if k in b: r[k] = str(b[k] or "")[:2000]
             if b.get("school_suggest") is None and "school_suggest" in b: r.pop("school_suggest", None)
             if "layout" in b: r["layout"] = b["layout"] if isinstance(b["layout"], dict) else None
+            if b.get("multi_no"): r["multi"] = []                     # «это один ковёр, не делить»
             if "marks" in b:
                 old = {m["id"]: m for m in r.get("marks", [])}; marks = []
                 for m in b["marks"]:
@@ -359,14 +374,16 @@ def install(app, DATA, D_WORK):
                     except Exception: continue
                     if len(box) != 4 or box[2] < 0.003 or box[3] < 0.003: continue
                     mid = str(m.get("id") or f"m{now}{len(marks)}")
-                    keep = {k: m.get(k) for k in ("zone", "motif", "motif_text", "scheme", "group", "certainty", "status", "note", "angle")}
+                    keep = {k: m.get(k) for k in ("zone", "motif", "motif_text", "scheme", "group", "certainty", "status", "note", "angle", "flip", "machine", "score")}
                     keep = {k: ("" if v is None else v) for k, v in keep.items()}
                     if keep["zone"] not in ZONES: keep["zone"] = "other"
                     if keep["status"] not in STATUSES: keep["status"] = "proposed"
+                    keep["angle"] = int(keep["angle"] or 0) % 360 if str(keep["angle"] or 0).lstrip("-").isdigit() else 0
+                    keep["flip"] = 1 if keep["flip"] else 0
                     if keep["motif"] and keep["motif"] not in BYID: keep["motif_text"] = keep["motif_text"] or keep["motif"]; keep["motif"] = ""
                     o = old.get(mid, {})
                     nm = {"id": mid, "box": [round(v, 5) for v in box], **keep,
-                          "by": o.get("by") or who, "at": o.get("at") or now,
+                          "by": o.get("by") or (("машина → " + who) if keep.get("machine") else who), "at": o.get("at") or now,
                           "confirmed_by": o.get("confirmed_by", ""), "confirmed_at": o.get("confirmed_at", 0)}
                     changed = not o or any(o.get(k) != nm.get(k) for k in ("box", "zone", "motif", "motif_text", "scheme", "group"))
                     if changed and o: nm["edited_by"], nm["edited_at"] = who, now
@@ -496,6 +513,136 @@ def install(app, DATA, D_WORK):
             if sc: r["school_suggest"] = {"school": sc, "why": f"слово «{why}» в имени/папке/описании"}
             r["src_id"] = sid; save(r); made += 1
         return {"made": made, "skipped": skipped}
+
+    # ---------------- машинные предложения (v10.23) ----------------
+    D_OUT = os.path.join(DATA, "out")
+
+    def marks_boxes(r): return [m["box"] for m in r.get("marks", []) if m.get("status") != "rejected"]
+
+    @app.post("/api/rugs/{rid}/repeats")
+    async def api_rug_repeats(rid: str, request: Request):
+        """Человек обвёл элемент → ищем такие же на этом фото (с поворотами и отражениями). Ответ — кандидаты, сохраняет клиент."""
+        import rug_match
+        b = await request.json(); r = load(rid); p = img_path(rid); a = cv2.imread(p) if p else None
+        if not r or a is None: return JSONResponse({"error": "нет такого ковра"}, 404)
+        box = b.get("box")
+        if not box:
+            m = next((m for m in r.get("marks", []) if m["id"] == b.get("mark")), None)
+            if not m: return JSONResponse({"error": "нет такой рамки"}, 404)
+            box = m["box"]
+        rejected = [m["box"] for m in r.get("marks", []) if m.get("status") == "rejected"]
+        c = rug_match.find_repeats(a, box, exclude=marks_boxes(r) + rejected)
+        best = max([x["score"] for x in c] or [0])
+        for x in c: x["sure"] = x["score"] >= max(0.68, best * 0.86)     # «точно такой же» / «похоже (другой цвет или близкий узор)»
+        return {"cands": c}
+
+    def scale_of(r, W, H):
+        """Сколько пикселей фото на один узел: по любой рамке со схемой (лучше подтверждённой)."""
+        ms = sorted([m for m in r.get("marks", []) if m.get("scheme") and m.get("status") != "rejected"], key=lambda m: m.get("status") != "confirmed")
+        for m in ms:
+            q = cv2.imread(os.path.join(D_OUT, m["scheme"] + ".png"), cv2.IMREAD_UNCHANGED)
+            if q is None: continue
+            kh, kw = q.shape[:2]
+            if (m.get("angle") or 0) in (90, 270): kh, kw = kw, kh
+            return m["box"][2] * W / kw, m["box"][3] * H / kh, m
+        return None
+
+    @app.post("/api/rugs/{rid}/scheme_find")
+    async def api_rug_scheme_find(rid: str, request: Request):
+        """Ищем на фото элемент по схеме студии; масштаб — по уже отмеченному элементу со схемой.
+        at=[x,y] — элемент перетащили на ковёр в эту точку: ищем только рядом, а если масштаба ещё нет — ставим рамку примерно."""
+        import rug_match
+        b = await request.json(); r = load(rid); p = img_path(rid); a = cv2.imread(p) if p else None
+        if not r or a is None: return JSONResponse({"error": "нет такого ковра"}, 404)
+        q = cv2.imread(os.path.join(D_OUT, os.path.basename(b.get("scheme") or "") + ".png"), cv2.IMREAD_UNCHANGED)
+        if q is None: return JSONResponse({"error": "у этой схемы нет картинки (рисунок не закончен в студии)"}, 404)
+        H, W = a.shape[:2]; kh, kw = q.shape[:2]; at = b.get("at")
+        sc = scale_of(r, W, H)
+        if not sc and not at:
+            return JSONResponse({"error": "сначала обведите на этом ковре хотя бы один элемент и выберите ему схему — по нему машина поймёт масштаб (сколько пикселей в узле)"}, 400)
+        if sc: kx, ky, ref = sc
+        else: kx = ky = min(W, H) / 7 / max(kw, kh); ref = None
+        guess = None; region = None
+        if at:
+            gw, gh = kw * kx / W, kh * ky / H
+            guess = [max(0, min(1 - gw, at[0] - gw / 2)), max(0, min(1 - gh, at[1] - gh / 2)), gw, gh]
+            region = [max(0, at[0] - gw * 1.3), max(0, at[1] - gh * 1.3), 0, 0]
+            region[2] = min(1 - region[0], gw * 2.6); region[3] = min(1 - region[1], gh * 2.6)
+        c = rug_match.find_scheme(a, q, kx, ky, exclude=[] if at else marks_boxes(r), limit=1 if at else 3, region=region)
+        return {"cands": c, "scale": [round(kx, 2), round(ky, 2)], "ref": ref["id"] if ref else "", "guess": guess, "scale_known": bool(sc)}
+
+    @app.post("/api/rugs/{rid}/split_detect")
+    def api_rug_split_detect(rid: str):
+        import rug_match
+        p = img_path(rid); a = cv2.imread(p) if p else None
+        if a is None: return JSONResponse({"error": "нет фото"}, 404)
+        return {"parts": rug_match.find_carpets(a)}
+
+    @app.post("/api/rugs/{rid}/split")
+    async def api_rug_split(rid: str, request: Request):
+        """Фото с несколькими коврами (разворот книги) → отдельные карточки. Исходная карточка скрывается, не удаляется."""
+        b = await request.json(); parts = b.get("parts") or []; who = user(request)
+        r = load(rid); p = img_path(rid); a = cv2.imread(p) if p else None
+        if not r or a is None: return JSONResponse({"error": "нет такого ковра"}, 404)
+        if len(parts) < 1: return JSONResponse({"error": "нет частей"}, 400)
+        H, W = a.shape[:2]; made = []
+        with _lock:
+            for i, (x, y, w, h) in enumerate(parts):
+                x0, y0 = max(0, int(x * W)), max(0, int(y * H)); x1, y1 = min(W, int((x + w) * W)), min(H, int((y + h) * H))
+                if x1 - x0 < 20 or y1 - y0 < 20: continue
+                nid = new_id(rid + f"_{i + 1}")
+                wd, ht = store_image(nid, cv2.imencode(".jpg", a[y0:y1, x0:x1], [cv2.IMWRITE_JPEG_QUALITY, 92])[1].tobytes())
+                n = blank(nid, title=(r.get("title") or rid) + f" · ковёр {i + 1} из {len(parts)}", source=r.get("source", ""), w=wd, h=ht)
+                for k in ("museum", "url", "license", "notes"): n[k] = r.get(k, "")
+                n["cat"] = {**(r.get("cat") or {}), "ambiguous": True}
+                n["split_from"] = rid; n["src_id"] = (r.get("src_id") or rid) + f"#{i + 1}"
+                # рамки, целиком попавшие в эту часть, переносим (в координатах части)
+                for m in r.get("marks", []):
+                    bx, by, bw, bh = m["box"]
+                    if bx >= x and by >= y and bx + bw <= x + w and by + bh <= y + h:
+                        n["marks"].append({**m, "box": [round((bx - x) / w, 5), round((by - y) / h, 5), round(bw / w, 5), round(bh / h, 5)]})
+                save(n); made.append(nid)
+            r["split_into"] = made; r["split_by"] = who; r["updated"] = int(time.time()); save(r)
+        return {"made": made}
+
+    @app.post("/api/rugs/{rid}/unsplit")
+    def api_rug_unsplit(rid: str):
+        """Отменить разделение: части удаляются, исходная карточка снова видна."""
+        r = load(rid)
+        if not r: return JSONResponse({"error": "нет такого ковра"}, 404)
+        for c in r.get("split_into") or []: api_rug_del(c)
+        r.pop("split_into", None); save(r)
+        return {"ok": True}
+
+    scan = {"running": False, "done": 0, "total": 0, "found": 0}
+
+    @app.get("/api/rugs_multi")
+    def api_rugs_multi_state(): return scan
+
+    @app.post("/api/rugs_multi")
+    def api_rugs_multi():
+        """Пройти все фото и пометить те, где похоже на несколько ковров (развороты книг)."""
+        import rug_match
+        if scan["running"]: return scan
+        ids = [f[:-5] for f in os.listdir(D_RUGS) if f.endswith(".json")]
+
+        def run():
+            scan.update(running=True, done=0, total=len(ids), found=0)
+            for rid in ids:
+                try:
+                    r = load(rid)
+                    if r and "multi" not in r and not r.get("split_into") and not r.get("split_from"):
+                        p = img_path(rid); a = cv2.imread(p) if p else None
+                        if a is not None:
+                            parts = rug_match.find_carpets(a)
+                            with _lock:
+                                r = load(rid); r["multi"] = parts; save(r)
+                    if r and r.get("multi"): scan["found"] += 1
+                except Exception: pass
+                scan["done"] += 1
+            scan["running"] = False
+        threading.Thread(target=run, daemon=True).start()
+        return scan
 
     # ---------------- картинки ----------------
     def img_path(rid):

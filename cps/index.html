@@ -193,6 +193,12 @@ label.btn{display:inline-block;border:1px solid var(--ln);border-radius:6px;padd
 .rgit{display:flex;gap:8px;padding:6px 8px;cursor:pointer;border-bottom:1px solid #0002}.rgit:hover{background:var(--pan2)}.rgit.sel{background:#ffb4541f;box-shadow:inset 3px 0 var(--acc)}
 .rgit img{width:52px;height:52px;object-fit:cover;border-radius:4px;flex:none;background:#0003}.rgit small{display:block;color:var(--mut)}
 .rgimp{padding:6px 8px;color:var(--acc);font-size:12px}
+.rgit b{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rgsch[draggable=true]{cursor:grab}.rgsch .rgfind{display:none}#rgView.drop{outline:3px dashed var(--acc);outline-offset:-3px}
+.rgorient{display:flex;gap:8px;align-items:center;margin:6px 0;color:var(--tx)}.rgorient img{width:64px;height:64px;object-fit:contain;image-rendering:pixelated;background:#fff;border-radius:4px;transition:transform .15s}
+.rgmach{background:#4dd0e11a;border:1px solid #4dd0e155;border-radius:6px;padding:6px 8px;margin:8px 0;color:var(--tx)}
+.rgwarn{background:#ffb4541a;border:1px solid #ffb45455;border-radius:6px;padding:6px 8px;margin:6px 0;color:var(--tx)}
+.rgtxt{white-space:pre-wrap;font-size:13px;line-height:1.5;color:var(--tx)}
 #rgCenter{display:flex;flex-direction:column;min-width:0}.rgtools{display:flex;gap:4px;align-items:center;padding:6px 8px;border-bottom:1px solid var(--ln)}.rgtools .sep{width:10px}
 #rgView{flex:1;position:relative;overflow:hidden;background:#0b0c0f;cursor:crosshair}#rgStage{position:absolute;left:0;top:0;transform-origin:0 0}
 #rgImg{display:block;user-select:none}#rgSvg{position:absolute;left:0;top:0}
@@ -2003,12 +2009,12 @@ async function rugsLoadList(){const j=await api('/api/rugs');R.list=j.rugs;R.imp
   rugList();if((R.imp&&R.imp.running)||(R.sync&&R.sync.running)){clearTimeout(R.impT);R.impT=setTimeout(rugsLoadList,3000);}}
 function rugList(){
   const L=$('rgList');if(!L)return;const q=R.q.toLowerCase();
-  const ok=r=>(!R.filter||r.status===R.filter)&&(!R.fsrc||srcKind(r.src)===R.fsrc)&&(!R.fsch||(R.fsch==='-'?!r.school:r.school===R.fsch))&&(!R.fdup||r.group)&&(!q||(r.title+' '+r.museum+' '+r.id).toLowerCase().includes(q));
+  const ok=r=>!(r.split_into&&r.split_into.length)&&(!R.fmulti||r.multi)&&(!R.filter||r.status===R.filter)&&(!R.fsrc||srcKind(r.src)===R.fsrc)&&(!R.fsch||(R.fsch==='-'?!r.school:r.school===R.fsch))&&(!R.fdup||r.group)&&(!q||(r.title+' '+r.museum+' '+r.id).toLowerCase().includes(q));
   const ls=R.list.filter(ok);
   // группы «один и тот же ковёр»: показываем одну строку, остальные фото — по клику
   const PR={kerimov:0,museum:1,azerbaijanrugs:2,upload:3};const byG={};ls.forEach(r=>{if(r.group)(byG[r.group]=byG[r.group]||[]).push(r);});
   Object.values(byG).forEach(g=>g.sort((a,b)=>PR[srcKind(a.src)]-PR[srcKind(b.src)]));
-  R.open=R.open||{};const row=(r,sub,n)=>`<div class="rgit ${R.rug&&R.rug.id===r.id?'sel':''} ${sub?'rgsub':''}" data-id="${esc(r.id)}"><img loading="lazy" src="/rugthumb/${encodeURIComponent(r.id)}.jpg"><div><b>${esc(r.title)}</b><small>${esc(SRCRU[r.src]||r.src||'')}${r.school?' · '+esc(RSCH[r.school]||r.school):' · <i>школа ?</i>'}${r.fragment?' · фрагмент':''}</small><small>${r.n?`${r.n} элем. · ✓ ${r.confirmed}`:'не размечен'}${n?` · <a href="#" data-g="${esc(r.group)}">🔗 ещё ${n} фото этого ковра</a>`:''}</small></div></div>`;
+  R.open=R.open||{};const row=(r,sub,n)=>`<div class="rgit ${R.rug&&R.rug.id===r.id?'sel':''} ${sub?'rgsub':''}" data-id="${esc(r.id)}"><img loading="lazy" src="/rugthumb/${encodeURIComponent(r.id)}.jpg"><div><b title="${esc(r.title)}">${esc(r.title)}</b><small>${r.multi?'<span style="color:var(--acc)">✂ похоже, '+r.multi+' ковра на фото</span> · ':''}${r.machine?'<span style="color:#4dd0e1">машина предложила: '+r.machine+'</span> · ':''}${esc(SRCRU[r.src]||r.src||'')}${r.school?' · '+esc(RSCH[r.school]||r.school):' · <i>школа ?</i>'}${r.fragment?' · фрагмент':''}</small><small>${r.n?`${r.n} элем. · ✓ ${r.confirmed}`:'не размечен'}${n?` · <a href="#" data-g="${esc(r.group)}">🔗 ещё ${n} фото этого ковра</a>`:''}</small></div></div>`;
   let h='';const done=new Set();
   ls.forEach(r=>{if(done.has(r.id))return;if(r.group&&byG[r.group]){const g=byG[r.group];g.forEach(x=>done.add(x.id));h+=row(g[0],false,g.length-1);if(R.open[r.group])g.slice(1).forEach(x=>h+=row(x,true,0));}else{done.add(r.id);h+=row(r,false,0);}});
   const sy=R.sync||{};const syl=sy.running?`<div class="rgimp">⏳ ${esc(sy.stage)}: ${sy.done}${sy.total?' / '+sy.total:''}</div>`:(sy.error?`<div class="rgimp" style="color:var(--bad)">⚠ ${esc(sy.error)}</div>`:(sy.last_sync?`<div class="rgimp mut" style="color:var(--mut)">каталог с Диска: ${esc(sy.last_sync)}${sy.made||sy.updated?` (новых ${sy.made}, обновлено ${sy.updated})`:''}</div>`:''));
@@ -2016,13 +2022,14 @@ function rugList(){
   L.innerHTML=syl+im+`<div class="rgimp mut" style="color:var(--mut)">показано ${ls.length} из ${R.list.length}</div>`+(h||'<p class="mut" style="padding:8px">Ковров пока нет. Нажмите «⟳ из Диска».</p>');
   L.querySelectorAll('.rgit').forEach(e=>e.onclick=ev=>{if(ev.target.dataset.g){ev.preventDefault();ev.stopPropagation();R.open[ev.target.dataset.g]=!R.open[ev.target.dataset.g];rugList();return;}rugOpen(e.dataset.id);});
 }
-async function rugOpen(id){R.rug=await api('/api/rugs/'+encodeURIComponent(id));R.sel=null;R.repeatOf=null;R.side='rug';R.fitNext=true;rugList();rugRender();}
+async function rugOpen(id){R.rug=await api('/api/rugs/'+encodeURIComponent(id));R.sel=null;R.repeatOf=null;R.preset=null;R.split=null;if(R.tool==='split')R.tool='box';R.side='rug';R.fitNext=true;rugList();rugRender();}
 function rugSaveSoon(){if(rro())return;R.ver=(R.ver||0)+1;clearTimeout(R.saveT);$('rgSaved').textContent='…';R.saveT=setTimeout(rugSaveNow,500);}
 async function rugSaveNow(){
   clearTimeout(R.saveT);const r=R.rug;if(!r)return;
   const body={};['title','museum','inv','url','license','place','date','school','composition','technique','size','notes','status'].forEach(k=>body[k]=r[k]);
   body.layout=r.layout||null;if(r.school_suggest===null)body.school_suggest=null;
-  body.marks=r.marks.map(m=>({id:m.id,box:m.box,zone:m.zone,motif:m.motif,motif_text:m.motif_text,scheme:m.scheme,group:m.group,certainty:m.certainty,status:m.status,note:m.note}));
+  body.marks=r.marks.map(m=>({id:m.id,box:m.box,zone:m.zone,motif:m.motif,motif_text:m.motif_text,scheme:m.scheme,group:m.group,certainty:m.certainty,status:m.status,note:m.note,angle:m.angle||0,flip:m.flip||0,machine:m.machine||0,score:m.score||0}));
+  if(r._multiNo){body.multi_no=1;delete r._multiNo;}
   const v=R.ver;
   try{const n=await api('/api/rugs/'+encodeURIComponent(r.id),body);
     if(R.rug&&R.rug.id===n.id){
@@ -2047,7 +2054,7 @@ function rugRender(){
   rugViewEvents();rugTools();rugSide();
 }
 function rugTools(){$('rgTBox')&&$('rgTBox').classList.toggle('on',R.tool==='box');$('rgTZones')&&$('rgTZones').classList.toggle('on',R.tool==='zones');$('rgTHand')&&$('rgTHand').classList.toggle('on',R.tool==='hand');
-  const h=$('rgHint');if(h)h.textContent=R.tool==='zones'?'Тяните линии: жёлтая — край ковра, голубые — границы кайм и поля. Delete — удалить выбранную границу.':R.preset?'Обведите элемент «'+(R.preset.name||R.preset.scheme)+'» на фото (Esc — отмена)':R.repeatOf?'Обводите повторы выбранного элемента один за другим (Esc — закончить)':(R.tool==='box'?'Обведите элемент мышью. Колесо — масштаб, пробел — двигать.':'Тяните фото мышью.');}
+  const h=$('rgHint');if(h)h.textContent=R.tool==='split'?'Разделение фото: оранжевые прямоугольники — отдельные ковры. Обведите недостающий, клик по лишнему — убрать.':R.tool==='zones'?'Тяните линии: жёлтая — край ковра, голубые — границы кайм и поля. Delete — удалить выбранную границу.':R.preset?'Обведите элемент «'+(R.preset.name||R.preset.scheme)+'» на фото (Esc — отмена)':R.repeatOf?'Обводите повторы выбранного элемента один за другим (Esc — закончить)':(R.tool==='box'?'Обведите элемент мышью. Колесо — масштаб, пробел — двигать.':'Тяните фото мышью.');}
 function rugFit(){const V=$('rgView');if(!V||!R.iw)return;const k=Math.min(V.clientWidth/R.iw,V.clientHeight/R.ih)*0.96;R.z=k;R.ox=(V.clientWidth-R.iw*k)/2;R.oy=(V.clientHeight-R.ih*k)/2;rugApply();}
 function rugApply(){const st=$('rgStage');if(!st)return;st.style.transform=`translate(${R.ox}px,${R.oy}px) scale(${R.z})`;st.style.width=R.iw+'px';st.style.height=R.ih+'px';$('rgZoom').textContent=Math.round(R.z*100)+'%';rugDraw();}
 function rugPt(e){const V=$('rgView').getBoundingClientRect();return{x:(e.clientX-V.left-R.ox)/R.z/R.iw,y:(e.clientY-V.top-R.oy)/R.z/R.ih};}
@@ -2059,13 +2066,17 @@ function rugViewEvents(){
     if(hand){R.drag={t:'pan',sx:e.clientX,sy:e.clientY,ox:R.ox,oy:R.oy};e.preventDefault();return;}
     if(e.button!==0)return;
     const tg=e.target;
+    if(tg.dataset&&tg.dataset.sp!=null&&R.tool==='split'){R.split.splice(+tg.dataset.sp,1);rugDraw();rugSide();e.preventDefault();return;}
     if(tg.dataset&&tg.dataset.h&&R.sel&&!rro()){R.drag={t:'resize',h:tg.dataset.h,m:R.sel,b0:[...R.sel.box],p0:p};e.preventDefault();return;}
-    if(tg.dataset&&tg.dataset.m){const m=R.rug.marks.find(x=>x.id===tg.dataset.m);if(m){rugSelect(m);if(!rro())R.drag={t:'move',m,b0:[...m.box],p0:p};e.preventDefault();return;}}
+    // рамку двигаем, только если она уже выбрана; первый клик по чужой рамке — выбрать. В режиме «обведите элемент …» рамки не мешают рисовать
+    if(tg.dataset&&tg.dataset.m&&!(R.preset||R.repeatOf)){const m=R.rug.marks.find(x=>x.id===tg.dataset.m);if(m){const was=R.sel&&R.sel.id===m.id;rugSelect(m);if(was&&!rro())R.drag={t:'move',m,b0:[...m.box],p0:p};e.preventDefault();return;}}
     if(R.tool==='zones'){const L=R.rug.layout;if(!L||rro())return;const hit=layHit(L,p);if(hit){R.drag={t:'lay',hit,L};R.layBound=hit.i;rugDraw();e.preventDefault();}return;}
     if(rro()){rugSelect(null);return;}
     R.drag={t:'new',p0:p,p1:p};e.preventDefault();
   };
   V.oncontextmenu=e=>e.preventDefault();
+  V.ondragover=e=>{if(R.dragScheme&&!rro()){e.preventDefault();V.classList.add('drop');}};V.ondragleave=()=>V.classList.remove('drop');
+  V.ondrop=e=>{V.classList.remove('drop');const ds=R.dragScheme;R.dragScheme=null;if(!ds||rro())return;e.preventDefault();rugDropScheme(ds,rugPt(e));};
   window.addEventListener('mousemove',rugMove);window.addEventListener('mouseup',rugUp);
 }
 function rugMove(e){
@@ -2086,10 +2097,12 @@ function rugUp(){
     if(w*R.iw<6||h*R.ih<6){rugSelect(null);rugDraw();return;}
     const src=R.repeatOf,id='m'+Date.now().toString(36);
     const pz=src?src.zone:(layZoneAt(R.rug.layout,x+w/2,y+h/2)||R.lastZone||'field'),pr=R.preset;
-    const m={id,box:[x,y,w,h],zone:pz,motif:src?src.motif:(pr?pr.motif:''),motif_text:src?src.motif_text:'',scheme:src?src.scheme:(pr?pr.scheme:''),group:src?(src.group||src.id):'',certainty:src?src.certainty:'sure',status:'proposed',note:'',_motif:src?src._motif:null,by:(window.ME&&ME.name)||''};
+    if(R.tool==='split'){(R.split=R.split||[]).push([x,y,w,h]);rugDraw();rugSide();return;}
+    const m={id,box:[x,y,w,h],zone:pz,motif:src?src.motif:(pr?pr.motif:''),motif_text:src?src.motif_text:'',scheme:src?src.scheme:(pr?pr.scheme:''),group:src?(src.group||src.id):'',certainty:src?src.certainty:'sure',status:'proposed',note:'',_motif:src?src._motif:null,by:(window.ME&&ME.name)||'',angle:0,flip:0};
     if(src&&!src.group)src.group=src.id;
     if(pr&&!src){m._motif=pr._motif||null;R.preset=null;rugTools();}
-    R.rug.marks.push(m);if(!src)R.repeatOf=null;rugSelect(m);R.side='mark';rugSide();rugSaveSoon();rugDraw();return;}
+    R.rug.marks.push(m);if(!src)R.repeatOf=null;rugSelect(m);R.side='mark';rugSide();rugSaveSoon();rugDraw();
+    if(!src&&R.autoRep!==false)rugFindRepeats(m,true);return;}
   if(d.t==='lay'){if(d.moved){layFix(d.L);d.L.status='edited';rugSaveSoon();rugSide();}return;}
   if(d.moved)rugSaveSoon();
 }
@@ -2114,8 +2127,13 @@ function rugDraw(){
       h+=`<text x="${(a+w/2)*R.iw}" y="${ty+fs/3}" font-size="${fs}" text-anchor="middle" fill="${(RZ[z]||RZ.other)[1]}" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">${(RZ[z]||RZ.other)[0]}</text>`;});}
   R.rug.marks.forEach((m,i)=>{const[x,y,w,hh]=m.box.map((v,j)=>v*(j%2?R.ih:R.iw)),c=(RZ[m.zone]||RZ.other)[1],isSel=sel&&m.id===sel.id,same=grp&&(m.group||m.id)===grp;
     const dash=m.status==='proposed'?`stroke-dasharray="${4/R.z} ${3/R.z}"`:'';const op=m.status==='rejected'?0.35:1;
-    h+=`<rect data-m="${m.id}" x="${x}" y="${y}" width="${w}" height="${hh}" fill="${isSel?c+'33':(same?c+'1a':'transparent')}" stroke="${c}" stroke-width="${isSel?sw*2:sw}" ${dash} opacity="${op}" style="cursor:pointer"/>`;
-    h+=`<text x="${x+2/R.z}" y="${y+fs}" font-size="${fs}" fill="${c}" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">${i+1}${m.status==='confirmed'?' ✓':(m.status==='rejected'?' ✗':'')}</text>`;});
+    const mach=m.machine&&m.status==='proposed',dsh=mach?`stroke-dasharray="${2/R.z} ${2.5/R.z}"`:dash;
+    // внутри невыбранной рамки можно начинать новую: «ловит» только линия рамки (с запасом), выбранную — можно тащить целиком
+    h+=`<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="${isSel?c+'33':(same?c+'1a':'none')}" stroke="${mach?'#4dd0e1':c}" stroke-width="${isSel?sw*2:sw}" ${dsh} opacity="${op}" style="pointer-events:none"/>`;
+    h+=`<rect data-m="${m.id}" x="${x}" y="${y}" width="${w}" height="${hh}" fill="${isSel?'#0000':'none'}" stroke="#0000" stroke-width="${7/R.z}" style="cursor:${isSel?'move':'pointer'};pointer-events:${isSel?'all':'stroke'}"/>`;
+    h+=`<text x="${x+2/R.z}" y="${y+fs}" font-size="${fs}" fill="${mach?'#4dd0e1':c}" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">${i+1}${m.status==='confirmed'?' ✓':(m.status==='rejected'?' ✗':(mach?' ?':''))}</text>`;});
+  if(R.tool==='split'||(R.split&&R.split.length))(R.split||[]).forEach((b,i)=>{const[x,y,w,hh]=b.map((v,j)=>v*(j%2?R.ih:R.iw));
+    h+=`<rect data-sp="${i}" x="${x}" y="${y}" width="${w}" height="${hh}" fill="#ffb45422" stroke="#ffb454" stroke-width="${3/R.z}" style="cursor:pointer"/><text x="${x+w/2}" y="${y+hh/2}" font-size="${40/R.z}" text-anchor="middle" fill="#ffb454" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${4/R.z}px">ковёр ${i+1}</text>`;});
   if(sel&&!rro()){const[x,y,w,hh]=sel.box.map((v,j)=>v*(j%2?R.ih:R.iw)),s=7/R.z;
     [['tl',x,y],['tr',x+w,y],['bl',x,y+hh],['br',x+w,y+hh]].forEach(([k,a,b])=>h+=`<rect data-h="${k}" x="${a-s/2}" y="${b-s/2}" width="${s}" height="${s}" fill="#fff" stroke="#000" stroke-width="${0.8/R.z}" style="cursor:nwse-resize"/>`);}
   const d=R.drag;if(d&&d.t==='new'){const x=Math.min(d.p0.x,d.p1.x)*R.iw,y=Math.min(d.p0.y,d.p1.y)*R.ih;h+=`<rect x="${x}" y="${y}" width="${Math.abs(d.p1.x-d.p0.x)*R.iw}" height="${Math.abs(d.p1.y-d.p0.y)*R.ih}" fill="#fff2" stroke="#fff" stroke-width="${sw}"/>`;}
@@ -2138,8 +2156,14 @@ function rugSide(){
         ${C.fragment?'<div style="color:var(--acc)">⚠ фрагмент ковра (по подписи)</div>':''}${C.object?`<div style="color:var(--acc)">⚠ ${esc(C.object)}</div>`:''}${C.ambiguous?'<div class="mut">⚠ на странице книги фото и подписи не совпали по числу — проверьте название</div>':''}
         ${C.school_why?`<div><small class="mut">школа по каталогу:</small> ${esc(RSCH[C.school]||C.school||'')} <small class="mut">— ${esc(C.school_why)}</small></div>`:''}
         ${(()=>{const sc=[...new Set([r.school,...same.filter(x=>x.ok?x.ok.ok:true).map(x=>x.school)].filter(Boolean))];return sc.length>1?`<div style="color:var(--acc)">⚠ источники расходятся по школе: ${sc.map(x=>esc(RSCH[x]||x)).join(' / ')} — решите, какая верна</div>`:'';})()}
-        ${C.text?`<details><summary class="mut">описание источника</summary><div style="white-space:pre-wrap;font-size:12px">${esc(C.text)}</div></details>`:''}
+        ${(C.text||(r.title||'').length>90||r.notes)?`<div class="rgrow"><button class="sm" id="rgTxt">📄 текст источника</button></div>`:''}
+        ${r.from_twin&&Object.keys(r.from_twin).length?`<div><small class="mut">взято у двойника: ${Object.keys(r.from_twin).map(k=>({school:'школа',composition:'тип ковра',technique:'техника',museum:'музей',inv:'инв. номер',place:'место',date:'дата',size:'размер'})[k]||k).join(', ')}</small></div>`:''}
       </div>
+      ${r.split_into&&r.split_into.length?`<div class="rgwarn">✂ Это фото разделено на ${r.split_into.length} карточки: ${r.split_into.map((c,i)=>`<a href="#" data-open="${esc(c)}">ковёр ${i+1}</a>`).join(', ')}${rro()?'':' · <a href="#" id="rgUnsplit">отменить разделение</a>'}</div>`:''}
+      ${r.split_from?`<div class="mut" style="font-size:12px">вырезано из фото <a href="#" data-open="${esc(r.split_from)}">${esc(r.split_from)}</a></div>`:''}
+      ${rro()||r.split_into&&r.split_into.length?'':(R.tool==='split'?`<div class="rgwarn"><b>Разделение фото</b><br><small>оранжевые рамки — отдельные ковры; обведите недостающий, клик по лишнему — убрать</small><div class="rgrow"><button class="sm" id="rgSplitGo" ${(R.split||[]).length?'':'disabled'}>✂ создать карточки (${(R.split||[]).length})</button><button class="sm" id="rgSplitX">отмена</button></div></div>`
+        :((r.multi&&r.multi.length)?`<div class="rgwarn">✂ Похоже, на этом фото ${r.multi.length} ковра (разворот книги). <div class="rgrow"><button class="sm" id="rgSplit">✂ разделить</button><button class="sm" id="rgMultiNo">это один ковёр</button></div></div>`
+        :`<div class="rgrow"><button class="sm" id="rgSplit" data-tip="Если на фото несколько ковров (разворот книги) — каждый станет отдельной карточкой">✂ разделить фото</button></div>`))}
       ${same.length?`<div class="lb">Этот же ковёр в других источниках (${same.length})<div class="rgsame">${same.map(x=>`<div class="rgsm"><img src="/rugthumb/${encodeURIComponent(x.id)}.jpg" data-open="${esc(x.id)}"><div><small><b>${esc(SRCRU[x.src]||x.src||'')}</b> · ${esc((x.title||'').slice(0,60))}${x.school?' · '+esc(RSCH[x.school]||x.school):''}</small><small class="mut">совпавших точек: ${x.score||'—'}</small>
         ${x.ok?`<small style="color:${x.ok.ok?'var(--ok)':'var(--bad)'}">${x.ok.ok?'✓ тот же':'✗ другой'} (${esc(x.ok.by)})</small> ${rro()?'':`<a href="#" data-sameun="${esc(x.id)}">снять</a>`}`:(rro()?'<small class="mut">не проверено</small>':`<span><button class="sm" data-sameok="${esc(x.id)}">✓ тот же</button> <button class="sm" data-sameno="${esc(x.id)}">✗ другой</button></span>`)}</div></div>`).join('')}</div></div>`:''}
       ${f('title','Название')}
@@ -2150,7 +2174,7 @@ function rugSide(){
         ${r.layout?`<div class="rgrings">${r.layout.rings.map((z,i)=>`<span class="rgring" data-ring="${i}" style="border-color:${(RZ[z]||RZ.other)[1]}">${i+1}. ${(RZ[z]||RZ.other)[0]}</span>`).join('')}</div><small class="mut">клик по полосе — сменить её тип (снаружи внутрь)</small>`:''}</div>
       <label>Тип ковра (композиция)<div class="rgpick"><span id="rgComp">${r._composition?`<b>${esc(r._composition.az)}</b> ${esc(r._composition.ru||'')}`:'<i class="mut">не выбран</i>'}</span>${r.composition&&!rro()?' <a href="#" id="rgCompX">✕</a>':''}</div>
         ${rro()?'':`<input id="rgCompQ" placeholder="поиск в словаре: челеберд, хила…"><div id="rgCompHits" class="rghits"></div>`}</label>
-      ${r.composition?`<div class="lb">По Керимову на коврах этого типа встречаются <span id="rgExpN"></span><div id="rgExp" class="rgschs"></div><small class="mut">клик по элементу → обведите его на фото; ✓ — уже отмечен</small></div>`:''}
+      ${r.composition?`<div class="lb">По Керимову на коврах этого типа встречаются <span id="rgExpN"></span><div id="rgExp" class="rgschs"></div><small class="mut">клик → обведите на фото, или перетащите картинку на ковёр; ✓ — уже отмечен</small>${rro()?'':'<div class="rgrow"><button class="sm" id="rgSchAll" data-tip="Машина ищет на фото остальные элементы этого списка — масштаб берёт по уже отмеченному элементу со схемой">🔍 поискать эти элементы на фото</button></div>'}</div>`:''}
       <label>Техника<select data-f="technique" ${dis}>${RTECH.map(t=>`<option ${r.technique===t?'selected':''}>${t}</option>`).join('')}</select></label>
       ${f('museum','Музей / собрание')}${f('inv','Инв. номер')}${f('place','Место (как у музея)')}${f('date','Дата','XIX в., 1880-е…')}${f('size','Размер','150×230 см')}${f('url','Ссылка на источник')}${f('license','Лицензия фото')}
       <label>Заметки<textarea data-f="notes" rows="3" ${dis}>${esc(r.notes||'')}</textarea></label>
@@ -2168,11 +2192,13 @@ function rugSide(){
         <label>Узор<div class="rgpick">${m.motif&&m._motif?`<b>${esc(m._motif.az)}</b> ${esc(m._motif.ru||'')} <small class="mut">${esc(m._motif.tr||'')}</small>`:(m.motif_text?`<i>${esc(m.motif_text)}</i> <small class="mut">(нет в словаре)</small>`:'<i class="mut">не указан</i>')}${(m.motif||m.motif_text)&&!rro()?' <a href="#" id="rgMotX">✕</a>':''}</div>
           ${rro()?'':`<input id="rgMotQ" placeholder="поиск: гоча, бута, сарыгул…"><div id="rgMotHits" class="rghits"></div>`}</label>
         <label>Схема в студии<div id="rgSch">${m.scheme?`<span class="rgschsel"><img src="/out/${encodeURIComponent(m.scheme)}_x12.png"> ${esc(m.scheme)} ${rro()?'':'<a href="#" id="rgSchX">✕</a>'}</span>`:'<i class="mut">не выбрана</i>'}</div><div id="rgSchList" class="rgschs"></div></label>
+        ${m.scheme?`<div class="rgorient"><img src="/out/${encodeURIComponent(m.scheme)}_x12.png" style="transform:rotate(${m.angle||0}deg) scaleX(${m.flip?-1:1})" data-tip="схема в том положении, как элемент лежит на ковре"><div>${rro()?'':`<button class="sm" id="rgRot" data-tip="повернуть схему на 90° (Q)">⟳ 90°</button> <button class="sm" id="rgFlip" data-tip="зеркально (W)">⇋ зеркало</button>`}<br><small class="mut">положение: ${m.angle||0}°${m.flip?', зеркально':''}</small></div></div>`:''}
+        ${(()=>{const pm=g.filter(x=>x.machine&&x.status==='proposed');return `<div class="rgmach">${pm.length?`<b>Машина предложила повторов: ${pm.length}</b> <small class="mut">(пунктир с «?»)</small><div class="rgrow">${rro()?'':`<button class="sm" id="rgMachOk">✓ все верны</button><button class="sm" id="rgMachSure">✓ только уверенные (${pm.filter(x=>x.certainty!=='maybe').length})</button><button class="sm" id="rgMachNo" style="color:var(--bad)">✕ убрать все</button>`}</div><small class="mut">по одному: Tab — следующий, C — верно, X — неверно</small>`:'<small class="mut">Повторы этого элемента на фото:</small>'}${rro()?'':`<div class="rgrow"><button class="sm" id="rgFindRep">🔍 найти повторы на фото</button></div>`}</div>`;})()}
         <label class="rgrow"><input type="checkbox" id="rgAllG" ${R.allGroup?'checked':''}> менять сразу для всех повторов (${g.length})</label>
         <label>Уверенность<select id="rgCert" ${dis}><option value="sure" ${m.certainty!=='maybe'?'selected':''}>уверенно</option><option value="maybe" ${m.certainty==='maybe'?'selected':''}>предположительно</option></select></label>
         <div class="rgrow">${rro()?'':`<button id="rgRep" class="sm" data-tip="обвести такой же элемент в другом месте (R)">＋ повтор</button> <button id="rgDelM" class="sm" style="color:var(--bad)" data-tip="Delete">удалить</button>`}</div>
         <div class="rgcheck"><b>Проверка:</b> ${m.status==='confirmed'?'<span style="color:var(--ok)">✓ подтверждено</span>':m.status==='rejected'?'<span style="color:var(--bad)">✗ отклонено</span>':'ждёт проверки'}<br>
-          <small class="mut">отметил(а): ${esc(m.by||'—')}${m.at?' · '+new Date(m.at*1000).toLocaleString('ru',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):''}${m.confirmed_by?` · проверил(а): ${esc(m.confirmed_by)}`:''}</small>
+          ${m.machine?`<small style="color:#4dd0e1">предложено машиной${m.score?' · сходство '+Math.round(m.score*100)+'%':''}${m.certainty==='maybe'?' · похоже, но не точно (другой цвет или близкий узор)':''}</small><br>`:''}<small class="mut">отметил(а): ${esc(m.by||'—')}${m.at?' · '+new Date(m.at*1000).toLocaleString('ru',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):''}${m.confirmed_by?` · проверил(а): ${esc(m.confirmed_by)}`:''}</small>
           ${rro()?'':`<div class="rgrow"><button id="rgOk" class="sm" data-tip="C">✓ верно</button><button id="rgNo" class="sm" data-tip="X">✗ неверно</button><button id="rgUn" class="sm">↺ снять</button>${mine&&m.status==='proposed'?'<small class="mut">лучше, чтобы проверял другой человек</small>':''}</div>`}</div>
         <label>Комментарий<textarea id="rgNote" rows="2" ${dis}>${esc(m.note||'')}</textarea></label></div>`;
     }
@@ -2189,7 +2215,16 @@ function rugSide(){
     rugDictSearch('rgCompQ','rgCompHits','composition',d=>{r.composition=d.id;r._composition={az:d.az,ru:d.ru};rugSaveSoon();rugSide();});
     $('rgCompX')&&($('rgCompX').onclick=e=>{e.preventDefault();r.composition='';r._composition=null;rugSaveSoon();rugSide();});
     E.querySelectorAll('[data-sameok],[data-sameno],[data-sameun]').forEach(b=>b.onclick=async ev=>{ev.preventDefault();const o=b.dataset.sameok||b.dataset.sameno||b.dataset.sameun;
-      try{const n=await api('/api/rugs/'+encodeURIComponent(r.id)+'/same',{other:o,ok:b.dataset.sameok?true:(b.dataset.sameno?false:null)});R.rug.same=n.same;R.rug.same_ok=n.same_ok;rugSide();}catch(e){fail(e);}});
+      try{if(R.saveT)await rugSaveNow();const n=await api('/api/rugs/'+encodeURIComponent(r.id)+'/same',{other:o,ok:b.dataset.sameok?true:(b.dataset.sameno?false:null)});
+        const keep=R.sel&&R.sel.id;R.rug=n;R.sel=keep?(n.marks.find(m=>m.id===keep)||null):null;rugSide();
+        const nm={school:'школа',composition:'тип ковра',technique:'техника',museum:'музей',inv:'инв. номер',place:'место',date:'дата',size:'размер'},f=n.filled||{},a=(f[r.id]||[]).map(k=>nm[k]||k),b2=(f[o]||[]).map(k=>nm[k]||k);
+        if(b.dataset.sameok)stat(a.length||b2.length?`тот же ковёр ✓ · сюда взято у двойника: ${a.join(', ')||'—'}; двойнику передано: ${b2.join(', ')||'—'}. Заполненные поля не менялись.`:'тот же ковёр ✓ · новых полей переносить не нужно (у обоих уже заполнено или пусто)','ok');}catch(e){fail(e);}});
+    $('rgTxt')&&($('rgTxt').onclick=()=>rugTextPopup(r));
+    $('rgSplit')&&($('rgSplit').onclick=()=>rugSplitStart(r));$('rgSplitX')&&($('rgSplitX').onclick=()=>{R.tool='box';R.split=null;rugTools();rugDraw();rugSide();});
+    $('rgSplitGo')&&($('rgSplitGo').onclick=()=>rugSplitDo(r));
+    $('rgMultiNo')&&($('rgMultiNo').onclick=()=>{r.multi=[];r._multiNo=1;const s=R.list.find(x=>x.id===r.id);if(s)s.multi=0;rugSaveSoon();rugSide();});
+    $('rgUnsplit')&&($('rgUnsplit').onclick=async ev=>{ev.preventDefault();if(!confirm('Отменить разделение? Карточки частей будут удалены вместе с их разметкой.'))return;await api('/api/rugs/'+encodeURIComponent(r.id)+'/unsplit',{});await rugsLoadList();rugOpen(r.id);});
+    $('rgSchAll')&&($('rgSchAll').onclick=()=>rugSchemeSearchAll(r));
     $('rgSugOk')&&($('rgSugOk').onclick=()=>{r.school=r.school_suggest.school;rugSaveSoon();rugSide();});
     $('rgSugNo')&&($('rgSugNo').onclick=()=>{r.school_suggest=null;R.dropSug=true;rugSaveSoon();rugSide();});
     $('rgLayAuto').onclick=async()=>{if(r.layout&&r.layout.status==='confirmed'&&!confirm('Зоны уже проверены. Заменить автоматическими?'))return;stat('ищу каймы…','busy');
@@ -2202,6 +2237,7 @@ function rugSide(){
     E.querySelectorAll('[data-ring]').forEach(e=>e.onclick=()=>{const i=+e.dataset.ring,L=r.layout,order=['border','minor','guard','end','field','other'];L.rings[i]=order[(order.indexOf(L.rings[i])+1)%order.length];L.status='edited';rugSaveSoon();rugSide();rugDraw();});
     $('rgDel').onclick=async()=>{if(!confirm('Удалить ковёр «'+(r.title||r.id)+'» вместе с разметкой?'))return;await api('/api/rugs/'+encodeURIComponent(r.id),undefined,'DELETE');R.rug=null;await rugsLoadList();rugRender();};
   }
+  if(R.side==='rug'&&rro())$('rgTxt')&&($('rgTxt').onclick=()=>rugTextPopup(r));
   if(R.side==='rug'&&r.composition)rugExpected(r);
   if(R.side==='mark'&&R.sel&&!rro()){
     const m=R.sel;
@@ -2213,6 +2249,12 @@ function rugSide(){
     $('rgCert').onchange=e=>{m.certainty=e.target.value;rugSaveSoon();};
     $('rgNote').oninput=e=>{m.note=e.target.value;rugSaveSoon();};
     $('rgRep').onclick=()=>rugRepeat();$('rgDelM').onclick=()=>rugDelMark();
+    $('rgFindRep')&&($('rgFindRep').onclick=()=>rugFindRepeats(m,false));
+    $('rgRot')&&($('rgRot').onclick=()=>rugOrient(m,90,0));$('rgFlip')&&($('rgFlip').onclick=()=>rugOrient(m,0,1));
+    const pm=()=>rugGroup(m).filter(x=>x.machine&&x.status==='proposed');
+    $('rgMachOk')&&($('rgMachOk').onclick=()=>{pm().forEach(x=>x.status='confirmed');rugSaveSoon();rugDraw();rugSide();});
+    $('rgMachSure')&&($('rgMachSure').onclick=()=>{pm().filter(x=>x.certainty!=='maybe').forEach(x=>x.status='confirmed');rugSaveSoon();rugDraw();rugSide();});
+    $('rgMachNo')&&($('rgMachNo').onclick=()=>{const del=new Set(pm().map(x=>x.id));R.rug.marks=R.rug.marks.filter(x=>!del.has(x.id));if(R.sel&&del.has(R.sel.id))R.sel=null;rugSaveSoon();rugDraw();rugSide();});
     $('rgOk').onclick=()=>rugCheck('confirmed');$('rgNo').onclick=()=>rugCheck('rejected');$('rgUn').onclick=()=>rugCheck('proposed');
     if(m.motif)rugSchemes(m);
   }else if(R.side==='mark'&&R.sel&&R.sel.motif)rugSchemes(R.sel);
@@ -2236,16 +2278,78 @@ async function rugExpected(r){
   E.innerHTML=d.expected.length?d.expected.map(f=>`<div class="rgsch ${done.has(f.id)?'on':''}" data-f="${esc(f.id)}" data-tip="${esc(f.id)} ${esc(f.name)}"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_x12.png" onerror="this.src='/api/crop/${encodeURIComponent(f.id)}'"><small>${done.has(f.id)?'✓ ':''}${esc(f.name||f.id)}</small></div>`).join(''):'<small class="mut">В легенде Керимова элементов этого типа не нашлось.</small>';
   if(!rro())E.querySelectorAll('.rgsch').forEach(e=>e.onclick=async()=>{const f=d.expected.find(x=>x.id===e.dataset.f);let mo=null;
     if(f.motif){try{const o=await api('/api/dict/'+encodeURIComponent(f.motif));mo={az:o.az,ru:o.ru,tr:o.tr};}catch(err){}}
-    R.preset={scheme:f.id,motif:f.motif||'',name:f.name,_motif:mo};R.tool='box';rugTools();stat('обведите на фото элемент «'+(f.name||f.id)+'»','ok');});
+    R.preset={scheme:f.id,motif:f.motif||'',name:f.name,_motif:mo};R.repeatOf=null;R.sel=null;R.tool='box';rugTools();rugDraw();stat('обведите на фото элемент «'+(f.name||f.id)+'» — или перетащите картинку прямо на ковёр','ok');});
+  if(!rro())E.querySelectorAll('.rgsch').forEach(e=>{e.draggable=true;e.ondragstart=ev=>{const f=d.expected.find(x=>x.id===e.dataset.f);ev.dataTransfer.setData('text/plain','scheme:'+f.id);R.dragScheme={scheme:f.id,motif:f.motif||'',name:f.name};};});
 }
 async function rugSchemes(m){
   const L=$('rgSchList');if(!L)return;
   if(!R.figs[m.motif])R.figs[m.motif]=(await api('/api/dict/'+encodeURIComponent(m.motif))).figures||[];
   const fs=R.figs[m.motif];if(!$('rgSchList'))return;
   L.innerHTML=fs.length?fs.map(f=>`<div class="rgsch ${m.scheme===f.id?'on':''}" data-f="${esc(f.id)}" data-tip="${esc(f.id)}${f.done?'':' (в работе)'}"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_x12.png" onerror="this.src='/api/crop/${encodeURIComponent(f.id)}'"><small>${esc(f.id)}${f.done?'':' ◐'}</small></div>`).join(''):'<small class="mut">Схем этого узора в студии пока нет.</small>';
-  if(!rro())L.querySelectorAll('.rgsch').forEach(e=>e.onclick=()=>rugSetMark(m,{scheme:e.dataset.f}));
+  if(!rro())L.querySelectorAll('.rgsch').forEach(e=>{e.onclick=()=>rugSetMark(m,{scheme:e.dataset.f});e.draggable=true;e.ondragstart=ev=>{ev.dataTransfer.setData('text/plain','scheme:'+e.dataset.f);R.dragScheme={scheme:e.dataset.f,motif:m.motif,name:e.dataset.f,_motif:m._motif};};});
 }
 function rugFocus(m){const V=$('rgView');if(!V||!m)return;const cx=(m.box[0]+m.box[2]/2)*R.iw,cy=(m.box[1]+m.box[3]/2)*R.ih;R.ox=V.clientWidth/2-cx*R.z;R.oy=V.clientHeight/2-cy*R.z;rugApply();}
+// ориентация: (угол, зеркало) как у _tf на сервере: сначала зеркало, потом поворот по часовой
+const rugCompose=(a0,f0,a,f)=>[(((a+(f?-a0:a0))%360)+360)%360,(f^f0)?1:0];
+function rugOrient(m,da,df){
+  // только у этой рамки: у каждого повтора своё положение (машина определяет его сама при поиске повторов)
+  if(df){m.flip=m.flip?0:1;m.angle=(360-(m.angle||0))%360;}if(da)m.angle=((m.angle||0)+da)%360;rugSaveSoon();rugDraw();rugSide();}
+async function rugFindRepeats(m0,auto){
+  if(rro()||!m0)return;stat('ищу повторы этого элемента на фото…','busy');const mid=m0.id,rid=R.rug.id;
+  try{if(R.saveT)await rugSaveNow();
+    // после сохранения карточка приходит с сервера заново — ищем рамку по id, а не по старому объекту
+    let m=R.rug&&R.rug.marks.find(x=>x.id===mid);if(!m){stat('');return;}
+    const j=await api('/api/rugs/'+encodeURIComponent(rid)+'/repeats',{box:m.box});
+    if(R.saveT)await rugSaveNow();
+    m=R.rug&&R.rug.id===rid&&R.rug.marks.find(x=>x.id===mid);if(!m){stat('');return;}
+    const g=m.group||m.id;if(!m.group&&j.cands.length)m.group=m.id;
+    j.cands.forEach((c,i)=>{const[a,f]=rugCompose(m.angle||0,m.flip||0,c.angle,c.flip);
+      R.rug.marks.push({id:'m'+Date.now().toString(36)+i,box:c.box,zone:layZoneAt(R.rug.layout,c.box[0]+c.box[2]/2,c.box[1]+c.box[3]/2)||m.zone,motif:m.motif,motif_text:m.motif_text,scheme:m.scheme,_motif:m._motif,group:g,
+        certainty:c.sure?'sure':'maybe',status:'proposed',note:'',machine:1,score:c.score,angle:a,flip:f,by:'машина'});});
+    const ns=j.cands.filter(c=>c.sure).length;
+    stat(j.cands.length?`машина нашла повторов: ${j.cands.length} (точно таких же: ${ns}, похожих: ${j.cands.length-ns}) — проверьте: ✓ все верны / по одному C и X`:(auto?'новая рамка сохранена · повторов на фото машина не нашла':'повторов не найдено'),'ok');
+    if(j.cands.length){if(R.sel&&R.sel.id===mid)R.sel=m;rugSaveSoon();}rugDraw();rugSide();
+  }catch(e){fail(e);}}
+async function rugDropScheme(ds,p){
+  // элемент перетащили на ковёр: сервер подбирает размер по масштабу уже отмеченного элемента со схемой (узлы → пиксели)
+  // и ищет точное место и поворот рядом с точкой броска. Нет масштаба — ставит рамку примерно, человек подгоняет углы.
+  if(R.saveT)await rugSaveNow();stat('ставлю элемент…','busy');
+  let j={};try{j=await api('/api/rugs/'+encodeURIComponent(R.rug.id)+'/scheme_find',{scheme:ds.scheme,at:[p.x,p.y]});}catch(e){fail(e);return;}
+  let mo=ds._motif||null;if(ds.motif&&!mo){try{const o=await api('/api/dict/'+encodeURIComponent(ds.motif));mo={az:o.az,ru:o.ru,tr:o.tr};}catch(e){}}
+  const c=(j.cands||[])[0],ok=c&&j.scale_known&&c.score>=0.3,box=ok?c.box:j.guess;
+  const m={id:'m'+Date.now().toString(36),box,zone:layZoneAt(R.rug.layout,box[0]+box[2]/2,box[1]+box[3]/2)||R.lastZone||'field',motif:ds.motif||'',motif_text:'',scheme:ds.scheme,_motif:mo,group:'',certainty:'sure',status:'proposed',note:'',angle:ok?c.angle:0,flip:ok?c.flip:0,by:(window.ME&&ME.name)||''};
+  R.preset=null;R.repeatOf=null;R.rug.marks.push(m);rugSelect(m);R.side='mark';rugSide();rugDraw();rugSaveSoon();
+  stat(ok?'элемент поставлен по схеме (сходство '+Math.round(c.score*100)+'%) — проверьте рамку и положение схемы (⟳ ⇋), затем «🔍 найти повторы»'
+    :(j.scale_known?'рамка поставлена — подгоните её по элементу (тяните углы), поверните схему ⟳/⇋, затем «🔍 найти повторы»'
+    :'рамка поставлена примерно: масштаб ещё неизвестен. Подгоните углы по элементу — по этой рамке машина поймёт масштаб для следующих'),'ok');
+}
+async function rugSchemeSearchAll(r){
+  const d=R.figs['@'+r.composition];if(!d)return;const done=new Set(r.marks.map(m=>m.scheme).filter(Boolean));
+  const todo=d.expected.filter(f=>!done.has(f.id));if(!todo.length){stat('все элементы списка уже отмечены','ok');return;}
+  if(R.saveT)await rugSaveNow();let n=0;
+  for(let i=0;i<todo.length;i++){const f=todo[i];stat(`ищу «${f.name||f.id}» (${i+1}/${todo.length})…`,'busy');
+    let j;try{j=await api('/api/rugs/'+encodeURIComponent(r.id)+'/scheme_find',{scheme:f.id});}catch(e){if(/масштаб/.test(String(e.message||e))){fail(e);return;}continue;}
+    if(!R.rug||R.rug.id!==r.id)return;r=R.rug;let mo=null;if(f.motif){try{const o=await api('/api/dict/'+encodeURIComponent(f.motif));mo={az:o.az,ru:o.ru,tr:o.tr};}catch(e){}}
+    (j.cands||[]).slice(0,1).forEach(c=>{n++;r.marks.push({id:'m'+Date.now().toString(36)+i,box:c.box,zone:layZoneAt(r.layout,c.box[0]+c.box[2]/2,c.box[1]+c.box[3]/2)||'field',motif:f.motif||'',motif_text:'',scheme:f.id,_motif:mo,group:'',certainty:'maybe',status:'proposed',note:'',machine:1,score:c.score,angle:c.angle,flip:c.flip,by:'машина'});});}
+  r=R.rug;rugSaveSoon();rugDraw();rugSide();
+  stat(n?`машина предлагает места для ${n} элементов (пунктир с «?»). Проверьте каждый: ✓ — тогда «🔍 найти повторы»; ✗ — если не то. Поиск по схеме грубый — ошибается чаще, чем поиск повторов.`:'по схемам ничего уверенного не нашлось — обведите элементы вручную','ok');
+}
+function rugTextPopup(r){const C=r.cat||{},W=$('modal');
+  W.innerHTML=`<div class="mbox" style="width:640px"><div class="flex" style="margin-bottom:8px"><b style="font-size:14px">Текст источника</b><span class="sp"></span><button class="sm" id="mClose">Закрыть</button></div>
+    <div class="lb mut" style="font-size:12px">Название / подпись</div><div class="rgtxt">${esc(r.title||'')}</div>
+    ${C.title&&C.title!==r.title?`<div class="lb mut" style="font-size:12px;margin-top:10px">Подпись в каталоге</div><div class="rgtxt">${esc(C.title)}</div>`:''}
+    ${C.text?`<div class="lb mut" style="font-size:12px;margin-top:10px">Описание источника</div><div class="rgtxt">${esc(C.text)}</div>`:''}
+    ${r.notes&&r.notes!==C.text?`<div class="lb mut" style="font-size:12px;margin-top:10px">Заметки</div><div class="rgtxt">${esc(r.notes)}</div>`:''}
+    ${r.url?`<p><a href="${esc(r.url)}" target="_blank" rel="noopener">открыть источник ↗</a></p>`:''}</div>`;
+  W.hidden=false;const close=()=>{W.hidden=true;W.innerHTML='';};$('mClose').onclick=close;W.onclick=e=>{if(e.target===W)close();};}
+async function rugSplitStart(r){
+  R.tool='split';R.split=(r.multi&&r.multi.length)?r.multi.map(b=>[...b]):[];R.showZones=false;R.sel=null;rugTools();rugDraw();rugSide();
+  if(!R.split.length){stat('ищу ковры на фото…','busy');try{const j=await api('/api/rugs/'+encodeURIComponent(r.id)+'/split_detect',{});if(R.tool!=='split')return;R.split=j.parts||[];rugDraw();rugSide();
+    stat(R.split.length?'найдено ковров: '+R.split.length+' — поправьте, если надо, и нажмите «создать карточки»':'машина видит один ковёр — обведите каждый ковёр рамкой сами','ok');}catch(e){fail(e);}}
+}
+async function rugSplitDo(r){const n=(R.split||[]).length;if(!n)return;
+  try{if(R.saveT)await rugSaveNow();stat('режу фото…','busy');const j=await api('/api/rugs/'+encodeURIComponent(r.id)+'/split',{parts:R.split});
+    R.tool='box';R.split=null;await rugsLoadList();stat('создано карточек: '+j.made.length+'. Исходное фото скрыто из списка (разделение можно отменить в его паспорте).','ok');if(j.made[0])rugOpen(j.made[0]);}catch(e){fail(e);}}
 function rugRepeat(){if(!R.sel)return;R.repeatOf=R.sel;R.tool='box';rugTools();stat('обведите повтор элемента '+(R.rug.marks.indexOf(R.sel)+1),'ok');}
 function rugDelMark(){const m=R.sel;if(!m)return;R.rug.marks=R.rug.marks.filter(x=>x!==m);R.rug.marks.filter(x=>x.group===m.id).forEach((x,i,a)=>x.group=a[0].id);R.sel=null;rugSaveSoon();rugDraw();rugSide();}
 function rugCheck(st){const m=R.sel;if(!m)return;m.status=st;rugSaveSoon();rugDraw();rugSide();}
@@ -2257,13 +2361,15 @@ window.addEventListener('keydown',e=>{
   if(!$('modal').hidden)return;
   const k=kk(e);let used=true;
   if(e.code==='Space'){R.space=true;$('rgView')&&($('rgView').style.cursor='grab');}
-  else if(e.key==='Escape'){R.repeatOf=null;R.preset=null;if(R.tool==='zones')R.tool='box';rugSelect(null);rugTools();rugDraw();}
+  else if(e.key==='Escape'){R.repeatOf=null;R.preset=null;if(R.tool==='zones'||R.tool==='split'){R.tool='box';R.split=null;}rugSelect(null);rugTools();rugDraw();}
   else if(k==='z'){R.tool='zones';R.showZones=true;rugTools();rugDraw();}
   else if((e.key==='Delete'||e.key==='Backspace')&&R.tool==='zones'&&R.rug&&R.rug.layout&&R.layBound!=null&&R.layBound>=0&&!rro()){const L=R.rug.layout;L.bounds.splice(R.layBound,1);L.rings.splice(R.layBound,1);layFix(L);L.status='edited';R.layBound=null;rugSaveSoon();rugDraw();rugSide();}
   else if(k==='b')R.tool='box',rugTools();
   else if(k==='h')R.tool='hand',rugTools();
   else if(k==='f'||k==='0')rugFit();
   else if(k==='r')rugRepeat();
+  else if(k==='q'&&R.sel&&!rro())rugOrient(R.sel,90,0);
+  else if(k==='w'&&R.sel&&!rro())rugOrient(R.sel,0,1);
   else if((e.key==='Delete'||e.key==='Backspace')&&R.sel&&!rro())rugDelMark();
   else if(k==='c'&&R.sel&&!rro())rugCheck('confirmed');
   else if(k==='x'&&R.sel&&!rro())rugCheck('rejected');
@@ -2288,6 +2394,7 @@ window.addEventListener('keyup',e=>{if(e.code==='Space'&&R.on){R.space=false;$('
     <select id="rgFSrc"><option value="">все источники</option>${Object.entries(RSRC).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
     <select id="rgFSch"><option value="">все школы</option>${Object.entries(RSCH).filter(([k])=>k).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}<option value="-">школа не известна</option></select>
     <label style="white-space:nowrap;color:var(--mut)"><input type="checkbox" id="rgFDup"> есть двойники</label>
+    <label style="white-space:nowrap;color:var(--mut)" data-tip="Фото, где похоже на несколько ковров (развороты книг). Первый раз машина просматривает все фото — несколько минут"><input type="checkbox" id="rgFMulti"> ✂ развороты</label>
     <select id="rgFilt"><option value="">любой статус</option>${Object.entries(RST).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
     <input id="rgQ" placeholder="поиск"></div><div id="rgList"></div></aside><section id="rgCenter"></section><aside id="rgSide"></aside>`;
   document.body.appendChild(d);
@@ -2297,6 +2404,9 @@ window.addEventListener('keyup',e=>{if(e.code==='Space'&&R.on){R.space=false;$('
   $('rgZip').onchange=async e=>{const f=e.target.files[0];if(!f)return;const fd=new FormData();fd.append('file',f);stat('загружаю архив…','busy');
     try{const r=await fetch('/api/rugs_zip',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat(`из архива: ${j.made} ковров, уже были: ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
   $('rgFSrc').onchange=e=>{R.fsrc=e.target.value;rugList();};$('rgFSch').onchange=e=>{R.fsch=e.target.value;rugList();};$('rgFDup').onchange=e=>{R.fdup=e.target.checked;rugList();};
+  $('rgFMulti').onchange=async e=>{R.fmulti=e.target.checked;rugList();if(!R.fmulti)return;
+    const poll=async()=>{const j=await api('/api/rugs_multi');if(j.running){stat(`ищу развороты: ${j.done} / ${j.total} фото, найдено ${j.found}`,'busy');await rugsLoadList();setTimeout(poll,3000);}else{await rugsLoadList();stat(`фото с несколькими коврами: ${j.found}`,'ok');}};
+    try{await api('/api/rugs_multi',{});poll();}catch(err){fail(err);}};
   $('rgSync').onclick=async()=>{let st={};try{st=await api('/api/rugs_sync');}catch(e){}
     let bid=st.bundle_id||'';if(!bid){bid=prompt('Ссылка или id файла rugs_bundle.zip на Диске (его печатает Colab в конце: «id пакета для студии»). Вводится один раз.')||'';if(!bid)return;}
     try{await api('/api/rugs_sync',{bundle_id:bid});stat('загружаю каталог с Диска…','busy');rugsLoadList();}catch(err){fail(err);}};
