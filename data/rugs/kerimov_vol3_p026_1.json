@@ -16,9 +16,36 @@
  "status": "new",
  "w": 661,
  "h": 644,
- "marks": [],
+ "marks": [
+  {
+   "id": "mmv47e8ra",
+   "box": [
+    0.29205,
+    0.04202,
+    0.70795,
+    0.95798
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "by": "dolgikh",
+   "at": 1791746149,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  }
+ ],
  "created": 1791736122,
- "updated": 1791736122,
+ "updated": 1791746167,
  "cat": {
   "title": "Керимов, т. III, Рис. 35 (стр. скана 26, печ. 52)",
   "museum": "",
@@ -69,5 +96,11 @@
    0.7267,
    1.0
   ]
- ]
+ ],
+ "layout": null,
+ "updated_by": "dolgikh",
+ "split_into": [
+  "kerimov_vol3_p026_1_1"
+ ],
+ "split_by": "dolgikh"
 }
