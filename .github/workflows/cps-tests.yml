@@ -1,0 +1,44 @@
+# Автотесты CPS: на каждый push / PR в cps-v5, где менялась папка cps/.
+# Поднимают студию на копии кода с тестовыми данными и проходят экраны в браузере (см. cps/TESTING.md).
+name: CPS tests
+on:
+  push:
+    branches: [cps-v5]
+    paths: ['cps/**', '.github/workflows/cps-tests.yml']
+  pull_request:
+    branches: [cps-v5]
+    paths: ['cps/**', '.github/workflows/cps-tests.yml']
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: cps/requirements.txt
+      - name: Install
+        run: |
+          pip install -r cps/requirements.txt playwright
+          python -m playwright install --with-deps chromium
+      - name: JS syntax check
+        run: |
+          python - <<'EOF'
+          import re
+          s = open('cps/index.html', encoding='utf-8').read()
+          open('/tmp/cps.js', 'w').write('\n'.join(re.findall(r'<script>(.*?)</script>', s, re.S)))
+          EOF
+          node --check /tmp/cps.js
+      - name: Run tests
+        run: python cps/tests/run_tests.py
+      - name: Screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cps-test-screenshots
+          path: cps/tests/out/
+          retention-days: 14

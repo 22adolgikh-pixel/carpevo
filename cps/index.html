@@ -1,34 +1,41 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Carpet Pattern Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#14161b;--pan:#1c1f26;--pan2:#232731;--ln:#2e3440;--tx:#dde1e8;--mut:#8b93a1;--acc:#ffb454;--ok:#7ec96b;--bad:#e06c75;--blue:#6cb6ff}
+:root{--bg:#1e1e1e;--pan:#2c2c2c;--pan2:#383838;--ln:#3e3e3e;--ln2:#4d4d4d;--sel:#444444;--tx:#ffffff;--mut:#b3b3b3;--acc:#ffffff;--acc-tx:#1e1e1e;--zog:#b8323f;--warn:#f0707e;--ok:#7ec96b;--bad:#e06c75;--blue:#6cb6ff;--canvas:#1a1a1a}
+/* v11: тема в стиле Figma — нейтральные серые, белый акцент, кизиловый (--zog / --warn) — только «нужно решение» и «в работе». Токены — cps/DESIGN.md */
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;font:13px/1.4 -apple-system,system-ui,sans-serif;background:var(--bg);color:var(--tx);display:grid;grid-template-columns:230px 1fr 310px;grid-template-rows:auto 1fr auto;height:100vh;overflow:hidden}
+body{margin:0;font:13px/1.4 'Inter',-apple-system,system-ui,sans-serif;font-feature-settings:'cv11','ss01';background:var(--bg);color:var(--tx);display:grid;grid-template-columns:230px 1fr 310px;grid-template-rows:auto 1fr auto;height:100vh;overflow:hidden}
 header{grid-column:1/4;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;padding:7px 12px;background:var(--pan);border-bottom:1px solid var(--ln)}
-header b{color:var(--acc);margin-right:8px;justify-self:start}header b small{color:var(--mut);font-weight:400;font-size:11px;margin-left:6px;font-variant-numeric:tabular-nums}
+header .hl{display:flex;align-items:center;gap:8px;justify-self:start;min-width:0}header b{color:var(--tx);font-weight:600;white-space:nowrap}header b small{color:var(--mut);font-weight:400;font-size:11px;margin-left:6px;font-variant-numeric:tabular-nums}
 header .tabs{justify-self:center}
 .sp{flex:1}
 .btn{text-decoration:none;display:inline-block}
 button,.btn{background:var(--pan2);color:var(--tx);border:1px solid var(--ln);border-radius:6px;padding:5px 9px;cursor:pointer;font:inherit;white-space:nowrap}
-button:hover{border-color:var(--acc)}
+button:hover{border-color:var(--ln2);background:var(--sel)}
+button.on:hover{background:var(--acc)}
 button:disabled{opacity:.45;cursor:default}
 button.on{background:var(--acc);color:#15171c;border-color:var(--acc)}
-button.pri{border-color:var(--acc);color:var(--acc)}
+button.pri{background:var(--acc);color:var(--acc-tx);border-color:var(--acc);font-weight:600}
 button.sm{padding:2px 7px;font-size:12px}
 .tabs button{border-radius:0;margin-left:-1px}
 .tabs button:first-child{border-radius:6px 0 0 6px}.tabs button:last-child{border-radius:0 6px 6px 0}
 aside{background:var(--pan);overflow:auto;padding:10px}
 #left{border-right:1px solid var(--ln)}
 #right{border-left:1px solid var(--ln)}
-main{position:relative;overflow:hidden;background:#0c0e12}
+main{position:relative;overflow:hidden;background:var(--canvas)}
 main canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 #vpbar{display:flex;gap:4px;align-items:center}
 #vpbar span{color:var(--mut);font-size:12px;min-width:44px;text-align:center}
 #hud{color:var(--mut);font:12px ui-monospace,Menlo,monospace;min-width:150px;text-align:right}
 #sbar{grid-column:1/4;grid-row:3;display:flex;gap:10px;align-items:center;padding:5px 10px;background:var(--pan);border-top:1px solid var(--ln);min-height:40px}
 #sbar .sep{width:1px;align-self:stretch;background:var(--ln)}
+#rgSb{display:none;gap:8px;align-items:center;min-width:0}#rgSb .pos{font-variant-numeric:tabular-nums;color:var(--tx)}#rgSb .ttl{max-width:420px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.rugmode #rgSb{display:flex}body.rugmode #sbar>:not(#rgSb):not(#stat):not(#logBtn):not(#act):not(.sep){display:none!important}
+#modal .mbox.rgpassm{width:min(760px,94vw);max-height:88vh}
+#rgPassBox .rgform{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}#rgPassBox .rgform>*{grid-column:1/-1}#rgPassBox .rgform>label{grid-column:auto}#rgPassBox .rgform>label:has(textarea),#rgPassBox .rgform>label:has(.rgpick){grid-column:1/-1}
 #sbInfo{font-size:12px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
 #sbInfo .warn{color:var(--acc)}#sbInfo .bad{color:var(--bad)}#sbInfo .mut{color:var(--mut)}
 #undoBox{display:flex;gap:4px}
@@ -48,7 +55,8 @@ h4:first-child{margin-top:0}
 .row{display:flex;gap:6px;align-items:center;margin:5px 0;flex-wrap:wrap}
 .row>label{width:92px;color:var(--mut);font-size:12px;flex:none}
 .row input[type=range]{flex:1;min-width:60px}
-input[type=number],input[type=text],input[type=search],select,textarea{background:var(--pan2);color:var(--tx);border:1px solid var(--ln);border-radius:5px;padding:4px 6px;font:inherit}
+input:not([type]),input[type=number],input[type=text],input[type=search],input[type=password],select,textarea{background:var(--pan2);color:var(--tx);border:1px solid var(--ln2);border-radius:5px;padding:4px 6px;font:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue)}
 input[type=number]{width:70px}
 input[type=text]{flex:1;min-width:0}
 textarea{width:100%;min-height:60px;resize:vertical}
@@ -117,7 +125,7 @@ main{grid-column:2;grid-row:2;min-width:0;min-height:0}#right{grid-column:3;grid
 input.draft{border-style:dashed;border-color:var(--acc)}
 .azsub{color:var(--mut);font-size:11px;margin:-2px 0 4px 98px}
 .azsub .suggest{font-size:11px}
-.peek{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(255,180,84,.92);color:#15171c;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;display:none;pointer-events:none}
+.peek{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.92);color:#1e1e1e;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;display:none;pointer-events:none}
 .card .t small{color:var(--mut);font-weight:400;margin-left:4px}
 .dfilter{display:inline-flex;gap:3px}
 .dfilter button{padding:2px 7px;font-size:11.5px}
@@ -176,7 +184,7 @@ button.bigrev{background:transparent;border-color:#8a3c44;color:#f0b3b9}button.b
 aside{min-height:0}
 .dchip.rev{background:var(--bad)}
 #right .hintbox .htxt{left:auto;right:-6px}
-#userchip{margin-left:10px;white-space:nowrap}#userchip button{padding:4px 10px}
+#userchip{white-space:nowrap}#userchip button{padding:2px 9px;font-size:12px;border-radius:12px;background:var(--pan2)}
 #um{position:fixed;inset:0;background:#000a;z-index:99;display:flex;align-items:center;justify-content:center}
 #um .bx{background:#1d1d20;border:1px solid #444;border-radius:10px;padding:16px 20px;max-width:760px;width:92vw;max-height:86vh;overflow:auto}
 #um table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 14px}#um td,#um th{padding:4px 8px;border-bottom:1px solid #333;text-align:left}
@@ -201,7 +209,7 @@ aside{min-height:0}
 #rgLeft{padding:8px 10px}#rgLeft h4{margin:12px 0 6px}.rgnav{display:flex;gap:4px;align-items:center}.rgnav .pos{color:var(--mut);font-size:12px;margin-left:auto}
 .rgttl{font-weight:600;margin:8px 0 2px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .rgtl{display:flex;flex-wrap:wrap;gap:4px;align-items:center}.rgtl label{color:var(--mut);font-size:12px;white-space:nowrap}
-#rgStrip{flex:none;display:flex;gap:8px;align-items:center;overflow-x:auto;padding:6px 8px;border-top:1px solid var(--ln);background:var(--pan);height:108px}#rgSide a,#rgLeft a{color:var(--blue)}.rgform textarea{background:#fff;color:#15171c}
+#rgStrip{flex:none;display:flex;gap:8px;align-items:center;overflow-x:auto;padding:6px 8px;border-top:1px solid var(--ln);background:var(--pan);height:108px}#rgSide a,#rgLeft a{color:var(--blue)}
 #rgStrip .lbl{writing-mode:vertical-rl;transform:rotate(180deg);color:var(--mut);font-size:10.5px;text-align:center;flex:none;max-height:96px;line-height:1.15}
 .rgtw{flex:none;width:96px;cursor:pointer;border:2px solid transparent;border-radius:6px;padding:2px;text-align:center;position:relative}.rgtw:hover{border-color:var(--ln)}.rgtw.cur{border-color:var(--acc)}
 .rgtw img{width:88px;height:62px;object-fit:contain;background:#0b0c0f;border-radius:4px;display:block;margin:0 auto}.rgtw small{display:block;font-size:10.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -221,10 +229,10 @@ label.btn{display:inline-block;border:1px solid var(--ln);border-radius:6px;padd
 .rgwarn{background:#ffb4541a;border:1px solid #ffb45455;border-radius:6px;padding:6px 8px;margin:6px 0;color:var(--tx)}
 .rgtxt{white-space:pre-wrap;font-size:13px;line-height:1.5;color:var(--tx)}
 #rgCenter{display:flex;flex-direction:column;min-width:0}.rgtools{display:flex;gap:4px;align-items:center;padding:6px 8px;border-bottom:1px solid var(--ln)}.rgtools .sep{width:10px}
-#rgView{flex:1;position:relative;overflow:hidden;background:#0b0c0f;cursor:crosshair}#rgStage{position:absolute;left:0;top:0;transform-origin:0 0}
+#rgView{flex:1;position:relative;overflow:hidden;background:var(--canvas);cursor:crosshair}#rgStage{position:absolute;left:0;top:0;transform-origin:0 0}
 #rgImg{display:block;user-select:none}#rgSvg{position:absolute;left:0;top:0}
 .rgtabs{display:flex;gap:4px;margin-bottom:8px}.rgtabs button{flex:1}
-.rgform label,.rgform .lb{display:block;margin:7px 0;color:var(--mut);font-size:12px}.rgform input:not([type=checkbox]),.rgform select,.rgform textarea{display:block;width:100%;box-sizing:border-box;margin-top:2px}.rgform input:not([type=checkbox]),.rgform textarea{color:#15171c}
+.rgform label,.rgform .lb{display:block;margin:7px 0;color:var(--mut);font-size:12px}.rgform input:not([type=checkbox]),.rgform select,.rgform textarea{display:block;width:100%;box-sizing:border-box;margin-top:2px}
 .rgform .rgrow{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin:6px 0;color:var(--tx)}
 .rgpick{color:var(--tx);margin:3px 0;font-size:13px}.rghits{max-height:190px;overflow:auto}.rghit{padding:4px 6px;cursor:pointer;color:var(--tx);border-bottom:1px solid #0002}.rghit:hover{background:var(--pan2)}
 .rgzones{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}.rgzones button{border-left-width:4px}
@@ -262,7 +270,7 @@ label.btn{display:inline-block;border:1px solid var(--ln);border-radius:6px;padd
 .stp{display:flex;gap:12px;align-items:center;padding:10px 14px;border-top:1px solid var(--ln)}.stp:first-child{border-top:none}
 .stp .si{width:22px;height:22px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:2px solid var(--ln);color:var(--mut)}
 .stp.done{opacity:.55}.stp.done .si{border-color:var(--ok);color:var(--ok)}
-.stp.next{background:rgba(255,180,84,.07)}.stp.next .si{background:var(--acc);border-color:var(--acc);color:#1a1405}
+.stp.next{background:rgba(255,255,255,.05)}.stp.next .si{background:var(--acc);border-color:var(--acc);color:#1a1405}
 .stp.running .si{border-color:var(--acc);border-top-color:transparent;animation:sp .8s linear infinite}
 .stp .sb{flex:1;min-width:0}.stp .st{font-weight:600}.stp .st .cnt{font-variant-numeric:tabular-nums;color:var(--acc);margin-left:6px}.stp.done .st .cnt{color:var(--ok)}
 .stp .ss{color:var(--mut);font-size:12px}
@@ -294,12 +302,11 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <b>🧶 Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v10.28</small></b>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.0</small></b><span id="userchip"></span></div>
   <div class="tabs">
     <button id="tab-pipe">◉ Обзор</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button>
   </div>
   <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
-  <span id="userchip"></span>
 </header>
 
 <aside id="left"></aside>
@@ -427,7 +434,7 @@ $('zIn').onclick=()=>zoomAt(1.25,V.w/2,V.h/2);$('zOut').onclick=()=>zoomAt(0.8,V
 let rafPending=false;
 function redraw(){if(rafPending)return;rafPending=true;requestAnimationFrame(()=>{rafPending=false;draw();});}
 function draw(){
-  ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle='#0c0e12';ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle='#1a1a1a';ctx.fillRect(0,0,cv.width,cv.height);
   ctx.setTransform(V.dpr*V.s,0,0,V.dpr*V.s,V.dpr*V.tx,V.dpr*V.ty);ctx.imageSmoothingEnabled=false;
   const h=H();if(h&&h.draw)h.draw(ctx);
   $('zLbl').textContent=Math.round(V.s*100)+'%';
@@ -1913,7 +1920,7 @@ window.addEventListener('keydown',e=>{
   if((e.metaKey||e.ctrlKey)&&kk(e)==="'"){e.preventDefault();toggleGrid();return;}
   if((e.metaKey||e.ctrlKey)&&kk(e)==='s'){e.preventDefault();if(S.fig)saveFigure().catch(fail);return;}
   if((e.metaKey||e.ctrlKey)&&e.key==='Enter'&&S.mode==='pix'&&S.fig&&S.fig.M&&$('modal').hidden){e.preventDefault();finishFigure('done');return;}
-  if(e.key==='Escape'&&!$('modal').hidden){$('modal').hidden=true;$('modal').innerHTML='';renderRight();return;}
+  if(e.key==='Escape'&&!$('modal').hidden){$('modal').hidden=true;$('modal').innerHTML='';$('modal').onclick=null;renderRight();if(R.on&&R.view==='edit')rugSide();return;}
   if(typing)return;
   if((e.metaKey||e.ctrlKey)&&kk(e)==='z'){e.preventDefault();e.shiftKey?redo():undo();return;}
   if((e.metaKey||e.ctrlKey)&&kk(e)==='y'){e.preventDefault();redo();return;}
@@ -2015,15 +2022,24 @@ const RSCH={'':'—','guba-shirvan':'Губа-Ширван','ganja-gazakh':'Гя
 const RTECH=['','ворсовый','безворсовый: килим','безворсовый: сумах','безворсовый: зили','безворсовый: верни','безворсовый: шадда','палас','джеджим','другое'];
 const RST={new:'новый',work:'в работе',done:'размечен'};
 const rro=()=>window.ME&&window.ME.role==='viewer';
+function rugsPlace(){const R2=$('rugs');R2.style.top=document.querySelector('header').getBoundingClientRect().bottom+'px';R2.style.bottom=Math.max(0,window.innerHeight-$('sbar').getBoundingClientRect().top)+'px';}
 function rugsOpen(){
   if(S.mode==='grid'||S.mode==='pix'){try{ovClose('queue');}catch(e){}}
-  R.on=true;$('rugs').style.display='block';$('rugs').style.top=document.querySelector('header').getBoundingClientRect().bottom+'px';
+  R.on=true;document.body.classList.add('rugmode');$('rugs').style.display='block';rugsPlace();
   ['pipe','sheet','queue'].forEach(k=>$('tab-'+k).classList.remove('on'));$('tab-rugs').classList.add('on');
   // как с рисунками: вкладка открывает плитку, ковёр — по клику (редактор)
   R.view='grid';rugView();rugsLoadList();
 }
-function rugsClose(){R.on=false;$('rugs').style.display='none';$('tab-rugs').classList.remove('on');}
-function rugView(){$('rgGridV').style.display=R.view==='edit'?'none':'block';$('rgEditV').style.display=R.view==='edit'?'grid':'none';}
+function rugsClose(){R.on=false;document.body.classList.remove('rugmode');$('rugs').style.display='none';$('tab-rugs').classList.remove('on');}
+function rugView(){$('rgGridV').style.display=R.view==='edit'?'none':'block';$('rgEditV').style.display=R.view==='edit'?'grid':'none';rugSbar();}
+// строка состояния в разделе «Ковры» — та же #sbar внизу, что у узоров: ‹ N / M › ковёр, название, число рамок
+function rugSbar(){let B=$('rgSb');if(!B){B=document.createElement('div');B.id='rgSb';$('sbar').prepend(B);}
+  if(!R.on){B.innerHTML='';return;}
+  if(R.view!=='edit'||!R.rug){B.innerHTML=`<span class="mut">Ковры · плитка${R.shown?' · '+R.shown.length+' плиток':''}</span>`;return;}
+  const r=R.rug,pos=(R.shown||[]).indexOf(r.id),n=(R.shown||[]).length;
+  B.innerHTML=`<button class="sm" id="rgSbPrev" data-tip="предыдущий ковёр (← или [)" ${pos>0?'':'disabled'}>‹</button><span class="pos">${pos>=0?(pos+1)+' / '+n:'— / '+n}</span><button class="sm" id="rgSbNext" data-tip="следующий ковёр (→ или ])" ${pos>=0&&pos<n-1?'':'disabled'}>›</button><span class="sep"></span><span class="ttl" title="${esc(r.title||r.id)}">${esc(r.title||r.id)}</span><span class="mut">рамок ${r.marks.length} · ✓ ${r.marks.filter(m=>m.status==='confirmed').length}${R.sel?' · выбран № '+(r.marks.indexOf(R.sel)+1):''}</span>`;
+  $('rgSbPrev').onclick=()=>rugStep(-1);$('rgSbNext').onclick=()=>rugStep(1);}
+function rugStep(d){const ls=R.shown||[],i=R.rug?ls.indexOf(R.rug.id):-1,j=i+d;if(i<0||j<0||j>=ls.length)return;rugOpen(ls[j]);}
 function rugBack(){if(R.saveT)rugSaveNow();R.view='grid';R.tool=R.tool==='split'||R.tool==='zones'?'box':R.tool;R.split=null;rugView();rugList();
   // вернуться к той же карточке в плитке
   setTimeout(()=>{const c=R.rug&&document.querySelector(`.rgcard[data-id="${CSS.escape(R.rug.id)}"]`);if(c)c.scrollIntoView({block:'center'});},30);}
@@ -2053,7 +2069,7 @@ function rugList(){
   const N=R.gridN||150;
   const card=([r,n])=>`<div class="rgcard" data-id="${esc(r.id)}"><div class="im"><img loading="lazy" src="/rugthumb/${encodeURIComponent(r.id)}.jpg"><div class="bd">${n?`<span>🔗 ещё ${n} фото</span>`:''}${r._big?`<span class="big" data-tip="у двойника (${esc(SRCRU[r._big.src]||r._big.src)}) фото в ${r._big.k.toFixed(1)} раза крупнее — размечать лучше там">⬆ фото крупнее ×${r._big.k.toFixed(1)}</span>`:''}${r.multi?`<span class="cut">✂ ${r.multi} ковра</span>`:''}${r.split_from?`<span>часть ${r.part||''} разворота</span>`:''}${r.machine?`<span style="color:#4dd0e1">машина: ${r.machine}</span>`:''}</div></div>
     <div class="t" title="${esc(r.title)}">${esc(r.title)}</div><div class="m">${esc(SRCRU[r.src]||r.src||'')} · ${r.school?esc(RSCH[r.school]||r.school):'<i>школа ?</i>'}${r.fragment?' · фрагмент':''}<br>${r.n?`${r.n} элем. · <b>✓ ${r.confirmed}</b>`:'не размечен'}${r.w?` · ${r.w}×${r.h}`:''}</div></div>`;
-  const sy=R.sync||{};const syl=sy.running?`<span style="color:var(--acc)">⏳ ${esc(sy.stage)}: ${sy.done}${sy.total?' / '+sy.total:''}</span>`:(sy.error?`<span style="color:var(--bad)">⚠ ${esc(sy.error)}</span>`:(sy.last_sync?`<span>каталог с Диска: ${esc(sy.last_sync)}${sy.made||sy.updated?` (новых ${sy.made}, обновлено ${sy.updated})`:''}</span>`:''));
+  const sy=R.sync||{};const syl=sy.running?`<span style="color:var(--warn)">⏳ ${esc(sy.stage)}: ${sy.done}${sy.total?' / '+sy.total:''}</span>`:(sy.error?`<span style="color:var(--bad)">⚠ ${esc(sy.error)}</span>`:(sy.last_sync?`<span>каталог с Диска: ${esc(sy.last_sync)}${sy.made||sy.updated?` (новых ${sy.made}, обновлено ${sy.updated})`:''}</span>`:''));
   const im=R.imp&&(R.imp.running||R.imp.total)?`<span>${R.imp.running?'⏳ импорт':'импорт завершён'}: ${R.imp.done}/${R.imp.total}${R.imp.errors?' · ошибок '+R.imp.errors:''}</span>`:'';
   const ker=R.list.filter(r=>srcKind(r.src)==='kerimov'&&!(r.split_into&&r.split_into.length)),kb=ker.filter(r=>r._big).length;
   $('rgStat').innerHTML=`<span>показано ${cards.length} плиток (${ls.length} фото из ${R.list.length})</span>${syl}${im}<span>Керимов: ${ker.length} фото · у ${kb} есть двойник с фото крупнее — <a href="#" id="rgKBig">${R.fbig?'показать все':'показать их'}</a></span>`;
@@ -2084,13 +2100,13 @@ function rugRender(){
   rugView();if(R.view!=='edit'){rugList();return;}
   const r=R.rug,C=$('rgCenter');
   if(!r){R.view='grid';rugView();rugList();return;}
-  C.innerHTML=`<div class="rgtools"><span id="rgHint" class="mut"></span>
+  C.innerHTML=`<div class="rgtools"><button class="sm" id="rgPassBtn" data-tip="Паспорт ковра: название, школа, источник, двойники, разделение (I)">Паспорт</button><span id="rgHint" class="mut"></span>
     <span style="margin-left:auto" class="mut" id="rgZoom"></span>
     <button class="sm ${R.tool==='zones'?'on':''}" id="rgTZones" data-tip="Поле и каймы: отдельный редактор, пока работает плохо — по желанию (Z)">▦ поле и каймы · тест</button>
     <span id="rgSaved" class="mut"></span></div>
     <div id="rgView"><div id="rgStage"><img id="rgImg" src="/rugimg/${encodeURIComponent(r.id)}.jpg?t=${r.updated}" draggable="false"><svg id="rgSvg"></svg></div></div>
     <div id="rgStrip"></div>`;
-  $('rgTZones').onclick=()=>rugZones(R.tool!=='zones');
+  $('rgTZones').onclick=()=>rugZones(R.tool!=='zones');$('rgPassBtn').onclick=rugPassOpen;
   const img=$('rgImg');img.onload=()=>{R.iw=img.naturalWidth;R.ih=img.naturalHeight;if(R.fitNext){R.fitNext=false;rugFit();}else rugApply();rugDraw();};
   rugViewEvents();rugTools();rugSide();rugStrip();
 }
@@ -2243,14 +2259,26 @@ function rugColors(){const o={};let n=0;(R.rug?R.rug.marks:[]).forEach(m=>{const
 function rugMarkColor(m,C){return R.colorBy==='zone'?(RZ[m.zone]||RZ.other)[1]:(C||rugColors())[m.group||m.id];}
 function rugName(m){return m._motif?m._motif.az:(m.motif_text||m.scheme||'без названия');}
 function rugSetMark(m,patch){const tgt=R.allGroup&&('motif' in patch||'scheme' in patch||'zone' in patch||'motif_text' in patch)?rugGroup(m):[m];tgt.forEach(x=>Object.assign(x,patch));if(patch.zone)R.lastZone=patch.zone;rugSaveSoon();rugDraw();rugSide();}
+// v11: справа — только выбранный элемент; паспорт ковра — во всплывающем окне (кнопка «Паспорт», клавиша I), как у узора
 function rugSide(){
   const E=$('rgSide');if(!E)return;const r=R.rug;if(!r){E.innerHTML='';return;}
-  if(R.side==='all')R.side='rug';
-  if(R.tool==='split'){rugSplitPanel(E,r);rugLeft();return;}
-  if(R.tool==='zones'){rugZonesPanel(E,r);rugLeft();return;}
-  const tabs=`<div class="rgtabs"><button id="rgS1" class="${R.side==='rug'?'on':''}">Паспорт</button><button id="rgS2" class="${R.side==='mark'?'on':''}">Элемент${R.sel?' '+(r.marks.indexOf(R.sel)+1):''}</button></div>`;
+  if(R.tool==='split'){rugSplitPanel(E,r);rugLeft();rugSbar();return;}
+  if(R.tool==='zones'){rugZonesPanel(E,r);rugLeft();rugSbar();return;}
+  rugSideFill(E,'mark',r);
+  const P=$('rgPassBox');if(P&&!$('modal').hidden){const ae=document.activeElement;if(!(ae&&P.contains(ae)&&/INPUT|TEXTAREA|SELECT/.test(ae.tagName)))rugSideFill(P,'rug',r);}
+  rugLeft();rugSbar();
+}
+function rugPassOpen(){const r=R.rug;if(!r||R.view!=='edit')return;const W=$('modal');
+  W.innerHTML=`<div class="mbox rgpassm" role="dialog" aria-modal="true" aria-labelledby="rgPassH"><div class="flex" style="margin-bottom:10px;gap:12px"><img src="/rugthumb/${encodeURIComponent(r.id)}.jpg" style="width:44px;height:58px;object-fit:cover;border-radius:4px"><div style="flex:1;min-width:0"><small class="mut" style="text-transform:uppercase;letter-spacing:.06em;font-size:11px">Паспорт ковра</small><div id="rgPassH" style="font-size:16px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(r.title||r.id)}</div><small class="mut">${esc(SRCRU[(r.cat||{}).src]||(r.cat||{}).src||'')}${r.w?' · '+r.w+'×'+r.h:''}</small></div><button class="sm" id="mClose" data-tip="Esc">Закрыть</button></div><div id="rgPassBox"></div></div>`;
+  W.hidden=false;$('mClose').onclick=rugPassClose;W.onclick=e=>{if(e.target===W)rugPassClose();};
+  rugSideFill($('rgPassBox'),'rug',r);}
+function rugPassClose(){const W=$('modal');W.hidden=true;W.innerHTML='';W.onclick=null;if(R.on&&R.view==='edit')rugSide();}
+function rugSideFill(E,side,r){
   let body='';const dis=rro()?'disabled':'';
-  if(R.side==='rug'){
+  if(side==='mark'&&!R.sel){const C=r.cat||{};
+    body=`<div class="rgform"><div class="rgpass"><b>${esc(r.title||r.id)}</b><br><small class="mut">${esc(SRCRU[C.src]||C.src||'')}${r.school?' · '+esc(RSCH[r.school]||r.school):' · школа ?'}${r._composition?' · '+esc(r._composition.az):''}</small>
+      <div class="rgrow"><button class="sm pri" id="rgPassBtn2" data-tip="Паспорт ковра (I)">Паспорт</button>${(r.multi&&r.multi.length&&!(r.split_into||[]).length&&!r.split_from)?`<small style="color:var(--warn)">✂ на фото, похоже, ${r.multi.length} ковра — разделить можно в паспорте</small>`:''}</div></div></div>`;}
+  if(side==='rug'){
     const f=(k,l,ph)=>`<label>${l}<input data-f="${k}" value="${esc(r[k]||'')}" placeholder="${ph||''}" ${dis}></label>`;
     const C=r.cat||{};
     const names=[...new Set([...(C.names||[]),C.composition_name].filter(x=>x&&x!==r.title))];
@@ -2258,9 +2286,9 @@ function rugSide(){
     body=`<div class="rgform">
       <div class="rgpass"><b>Паспорт</b> <small class="mut">${esc(SRCRU[C.src]||C.src||r.source||'')}</small>
         ${names.length?`<div><small class="mut">другие названия:</small> ${names.map(esc).join(' · ')}</div>`:''}
-        ${C.fragment?'<div style="color:var(--acc)">⚠ фрагмент ковра (по подписи)</div>':''}${C.object?`<div style="color:var(--acc)">⚠ ${esc(C.object)}</div>`:''}${C.ambiguous?'<div class="mut">⚠ на странице книги фото и подписи не совпали по числу — проверьте название</div>':''}
+        ${C.fragment?'<div style="color:var(--warn)">⚠ фрагмент ковра (по подписи)</div>':''}${C.object?`<div style="color:var(--warn)">⚠ ${esc(C.object)}</div>`:''}${C.ambiguous?'<div class="mut">⚠ на странице книги фото и подписи не совпали по числу — проверьте название</div>':''}
         ${C.school_why?`<div><small class="mut">школа по каталогу:</small> ${esc(RSCH[C.school]||C.school||'')} <small class="mut">— ${esc(C.school_why)}</small></div>`:''}
-        ${(()=>{const sc=[...new Set([r.school,...same.filter(x=>x.ok?x.ok.ok:true).map(x=>x.school)].filter(Boolean))];return sc.length>1?`<div style="color:var(--acc)">⚠ источники расходятся по школе: ${sc.map(x=>esc(RSCH[x]||x)).join(' / ')} — решите, какая верна</div>`:'';})()}
+        ${(()=>{const sc=[...new Set([r.school,...same.filter(x=>x.ok?x.ok.ok:true).map(x=>x.school)].filter(Boolean))];return sc.length>1?`<div style="color:var(--warn)">⚠ источники расходятся по школе: ${sc.map(x=>esc(RSCH[x]||x)).join(' / ')} — решите, какая верна</div>`:'';})()}
         ${(C.text||(r.title||'').length>90||r.notes)?`<div class="rgrow"><button class="sm" id="rgTxt">📄 текст источника</button></div>`:''}
         ${r.from_twin&&Object.keys(r.from_twin).length?`<div><small class="mut">взято у двойника: ${Object.keys(r.from_twin).map(k=>({school:'школа',composition:'тип ковра',technique:'техника',museum:'музей',inv:'инв. номер',place:'место',date:'дата',size:'размер'})[k]||k).join(', ')}</small></div>`:''}
       </div>
@@ -2282,9 +2310,9 @@ function rugSide(){
       <label>Статус разметки<select data-f="status" ${dis}>${Object.entries(RST).map(([k,v])=>`<option value="${k}" ${r.status===k?'selected':''}>${v}</option>`).join('')}</select></label>
       <p class="mut">Источник: ${esc(r.source||'—')}${r.updated_by?` · последняя правка: ${esc(r.updated_by)}`:''}</p>
       ${rro()?'':`<p><button id="rgDel" class="sm" style="color:var(--bad)">удалить ковёр</button></p>`}</div>`;
-  }else if(R.side==='mark'){
+  }else if(side==='mark'){
     const m=R.sel;
-    if(!m)body=`<p class="mut">Выберите рамку на фото или обведите новый элемент.<br><br><b>Как размечать</b><br>1. Обведите один элемент рамкой.<br>2. Укажите зону (поле, кайма…) и узор из словаря.<br>3. Если в схемах студии есть этот узор — выберите схему.<br>4. «＋ повтор» (R) — обведите такой же элемент в другом месте: название перейдёт само.<br>5. Другой человек проверяет: ✓ верно (C) или ✗ неверно (X).</p>`;
+    if(!m)body+=`<p class="mut">Выберите рамку на фото или обведите новый элемент.<br><br><b>Как размечать</b><br>1. Обведите один элемент рамкой.<br>2. Укажите зону (поле, кайма…) и узор из словаря.<br>3. Если в схемах студии есть этот узор — выберите схему.<br>4. «＋ повтор» (R) — обведите такой же элемент в другом месте: название перейдёт само.<br>5. Другой человек проверяет: ✓ верно (C) или ✗ неверно (X).</p>`;
     else{
       const g=rugGroup(m),mine=window.ME&&m.by===ME.name;
       body=`<div class="rgform">
@@ -2310,11 +2338,11 @@ function rugSide(){
         <label>Комментарий<textarea id="rgNote" rows="2" ${dis}>${esc(m.note||'')}</textarea></label></div>`;
     }
   }
-  E.innerHTML=tabs+body;
-  $('rgS1').onclick=()=>{R.side='rug';rugSide();};$('rgS2').onclick=()=>{R.side='mark';rugSide();};
+  E.innerHTML=body;
+  $('rgPassBtn2')&&($('rgPassBtn2').onclick=rugPassOpen);
   E.querySelectorAll('[data-f]').forEach(inp=>inp.onchange=inp.oninput=()=>{r[inp.dataset.f]=inp.value;rugSaveSoon();});
   E.querySelectorAll('[data-open]').forEach(i=>i.onclick=e=>{e.preventDefault();rugOpen(i.dataset.open);});
-  if(R.side==='rug'&&!rro()){
+  if(side==='rug'&&!rro()){
     rugDictSearch('rgCompQ','rgCompHits','composition',d=>{r.composition=d.id;r._composition={az:d.az,ru:d.ru};rugSaveSoon();rugSide();});
     $('rgCompX')&&($('rgCompX').onclick=e=>{e.preventDefault();r.composition='';r._composition=null;rugSaveSoon();rugSide();});
     E.querySelectorAll('[data-sameok],[data-sameno],[data-sameun]').forEach(b=>b.onclick=async ev=>{ev.preventDefault();const o=b.dataset.sameok||b.dataset.sameno||b.dataset.sameun;
@@ -2335,8 +2363,8 @@ function rugSide(){
     $('rgSugNo')&&($('rgSugNo').onclick=()=>{r.school_suggest=null;R.dropSug=true;rugSaveSoon();rugSide();});
     $('rgDel').onclick=async()=>{if(!confirm('Удалить ковёр «'+(r.title||r.id)+'» вместе с разметкой?'))return;await api('/api/rugs/'+encodeURIComponent(r.id),undefined,'DELETE');R.rug=null;await rugsLoadList();rugRender();};
   }
-  if(R.side==='rug'&&rro())$('rgTxt')&&($('rgTxt').onclick=()=>rugTextPopup(r));
-  if(R.side==='mark'&&R.sel&&!rro()){
+  if(side==='rug'&&rro())$('rgTxt')&&($('rgTxt').onclick=()=>rugTextPopup(r));
+  if(side==='mark'&&R.sel&&!rro()){
     const m=R.sel;
     E.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>rugSetMark(m,{zone:b.dataset.z}));
     rugDictSearch('rgMotQ','rgMotHits','',d=>rugSetMark(m,{motif:d.id,motif_text:'',_motif:{az:d.az,ru:d.ru,tr:d.tr}}),q=>rugSetMark(m,{motif:'',motif_text:q,_motif:null}));
@@ -2357,18 +2385,17 @@ function rugSide(){
     $('rgMachNo')&&($('rgMachNo').onclick=()=>{const del=new Set(pm().map(x=>x.id));R.rug.marks=R.rug.marks.filter(x=>!del.has(x.id));if(R.sel&&del.has(R.sel.id))R.sel=null;rugSaveSoon();rugDraw();rugSide();});
     $('rgOk').onclick=()=>rugCheck('confirmed');$('rgNo').onclick=()=>rugCheck('rejected');$('rgUn').onclick=()=>rugCheck('proposed');
     if(m.motif)rugSchemes(m);
-  }else if(R.side==='mark'&&R.sel&&R.sel.motif)rugSchemes(R.sel);
-  if(R.side==='mark'&&R.sel){
+  }else if(side==='mark'&&R.sel&&R.sel.motif)rugSchemes(R.sel);
+  if(side==='mark'&&R.sel){
     $('rgSchOn')&&($('rgSchOn').onchange=e=>{R.showScheme=e.target.checked;rugDraw();});
     $('rgSchOp')&&($('rgSchOp').oninput=e=>{R.schOp=+e.target.value;rugDraw();});
     if(R.sel.scheme)rugDistortion(R.sel);}
-  rugLeft();
 }
 // ---- поле и каймы: отдельный редактор (автопоиск пока ошибается, поэтому не мешает основной разметке) ----
 function rugZonesPanel(E,r){const C=r.cat||{};
   E.innerHTML=`<div class="rgform"><div class="rgwarn"><b>▦ Поле и каймы</b> <small class="mut">· экспериментальный редактор</small><br><small>Автопоиск границ пока работает плохо. Линии: жёлтая — край ковра, голубые — границы кайм и поля. Тяните линию мышью; Delete — удалить выбранную.</small></div>
     <div class="rgrow">${r.layout?`<span>${r.layout.bounds.length} границ · ${r.layout.status==='confirmed'?'<span style="color:var(--ok)">✓ проверено</span>':(r.layout.status==='edited'?'поправлено, не подтверждено':'найдено автоматически, проверьте')}</span>`:'<i class="mut">не размечены</i>'}</div>
-    ${rro()?'':`<div class="rgrow">${(C.fragment||/безворс|палас|джеджим/.test(r.technique||''))?'<small style="color:var(--acc)">для фрагментов и безворсовых зоны ищутся плохо — лучше вручную</small>':''}<button class="sm" id="rgLayAuto">⚙ найти автоматически</button>${r.layout?'<button class="sm" id="rgLayAdd">＋ граница</button><button class="sm" id="rgLayOk">✓ зоны верны</button><button class="sm" id="rgLayDel" style="color:var(--bad)">убрать</button>':''}</div>`}
+    ${rro()?'':`<div class="rgrow">${(C.fragment||/безворс|палас|джеджим/.test(r.technique||''))?'<small style="color:var(--warn)">для фрагментов и безворсовых зоны ищутся плохо — лучше вручную</small>':''}<button class="sm" id="rgLayAuto">⚙ найти автоматически</button>${r.layout?'<button class="sm" id="rgLayAdd">＋ граница</button><button class="sm" id="rgLayOk">✓ зоны верны</button><button class="sm" id="rgLayDel" style="color:var(--bad)">убрать</button>':''}</div>`}
     ${r.layout?`<div class="rgrings">${r.layout.rings.map((z,i)=>`<span class="rgring" data-ring="${i}" style="border-color:${(RZ[z]||RZ.other)[1]}">${i+1}. ${(RZ[z]||RZ.other)[0]}</span>`).join('')}</div><small class="mut">клик по полосе — сменить её тип (снаружи внутрь)</small>`:''}
     <p class="mut" style="margin-top:10px">Зачем: по зонам рамки элементов сами получают «поле / главная кайма / …». Без зон это просто выбирается у элемента (клавиши 1–8).</p>
     <div class="rgrow"><button id="rgZonesX">✓ готово — к разметке элементов</button></div></div>`;
@@ -2526,7 +2553,7 @@ async function rugDistortion(m){const E=$('rgDist');if(!E)return;R.knots=R.knots
   if(!R.knots[m.scheme]){const im=new Image();im.src='/out/'+encodeURIComponent(m.scheme)+'.png';try{await im.decode();R.knots[m.scheme]=[im.naturalWidth,im.naturalHeight];}catch(e){return;}}
   if(!$('rgDist')||R.sel!==m)return;let[kw,kh]=R.knots[m.scheme];if((m.angle||0)%180)[kw,kh]=[kh,kw];
   const pw=m.box[2]*R.iw,ph=m.box[3]*R.ih,ux=pw/kw,uy=ph/kh,r=uy/ux,pc=Math.round(Math.abs(r-1)*100);
-  $('rgDist').innerHTML=`схема ${kw}×${kh} узлов · узел на фото ≈ ${ux.toFixed(1)}×${uy.toFixed(1)} px<br>${pc<4?'<span style="color:var(--ok)">пропорции как на схеме</span>':`<span style="color:var(--acc)">${r>1?'вытянут по высоте':'сплющен по высоте'} на ${pc}%</span> <small class="mut">(узел ковра не квадратный или элемент искажён)</small>`}`;}
+  $('rgDist').innerHTML=`схема ${kw}×${kh} узлов · узел на фото ≈ ${ux.toFixed(1)}×${uy.toFixed(1)} px<br>${pc<4?'<span style="color:var(--ok)">пропорции как на схеме</span>':`<span style="color:var(--warn)">${r>1?'вытянут по высоте':'сплющен по высоте'} на ${pc}%</span> <small class="mut">(узел ковра не квадратный или элемент искажён)</small>`}`;}
 function rugCheck(st){const m=R.sel;if(!m)return;m.status=st;rugSaveSoon();rugDraw();rugSide();}
 function rugNext(d){if(!R.rug||!R.rug.marks.length)return;const i=R.sel?R.rug.marks.indexOf(R.sel):-1,n=(i+d+R.rug.marks.length)%R.rug.marks.length;rugSelect(R.rug.marks[n]);rugFocus(R.rug.marks[n]);}
 window.addEventListener('keydown',e=>{
@@ -2540,6 +2567,9 @@ window.addEventListener('keydown',e=>{
   else if(R.view!=='edit'){used=false;}
   else if((e.key==='Delete'||e.key==='Backspace')&&R.tool==='split'){if(R.spSel!=null)spDel(R.spSel);}
   else if(k==='z')rugZones(R.tool!=='zones');
+  else if(k==='i')rugPassOpen();
+  else if((e.key==='ArrowRight'||k===']')&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&R.tool!=='split')rugStep(1);
+  else if((e.key==='ArrowLeft'||k==='[')&&!e.metaKey&&!e.ctrlKey&&!e.altKey&&R.tool!=='split')rugStep(-1);
   else if((e.key==='Delete'||e.key==='Backspace')&&R.tool==='zones'&&R.rug&&R.rug.layout&&R.layBound!=null&&R.layBound>=0&&!rro()){const L=R.rug.layout;L.bounds.splice(R.layBound,1);L.rings.splice(R.layBound,1);layFix(L);L.status='edited';R.layBound=null;rugSaveSoon();rugDraw();rugSide();}
   else if(k==='b')R.tool='box',rugTools();
   else if(k==='h')R.tool='hand',rugTools();
@@ -2595,6 +2625,6 @@ window.addEventListener('keyup',e=>{if(e.code==='Space'&&R.on){R.space=false;$('
     let bid=st.bundle_id||'';if(!bid){bid=prompt('Ссылка или id файла rugs_bundle.zip на Диске (его печатает Colab в конце: «id пакета для студии»). Вводится один раз.')||'';if(!bid)return;}
     try{await api('/api/rugs_sync',{bundle_id:bid});stat('загружаю каталог с Диска…','busy');rugsLoadList();}catch(err){fail(err);}};
   $('rgCat').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const items=JSON.parse(await f.text());const j=await api('/api/rugs_import',items);stat(`импорт: ${j.started} новых, пропущено ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
-  window.addEventListener('resize',()=>{if(R.on){$('rugs').style.top=document.querySelector('header').getBoundingClientRect().bottom+'px';}});
+  window.addEventListener('resize',()=>{if(R.on)rugsPlace();});
 })();
 </script></body></html>
