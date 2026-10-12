@@ -221,11 +221,12 @@ bad = 0
 for k, f in enumerate(CH):
     p = f'{CF}/{cfn(f["file"])}'
     if not os.path.exists(p):
-        # Commons режет частые скачивания ОРИГИНАЛОВ с облачных адресов (HTTP 429). Берём стандартную уменьшенную копию 2560 px
-        # (она лежит в кэше CDN и не считается тяжёлым запросом) и ждём, если всё же просят подождать (Retry-After).
-        u = f['url']
-        if max(f.get('w') or 0, f.get('h') or 0) > 2560 and '/wikipedia/commons/' in u and not u.lower().endswith(('.tif', '.tiff')):
-            a_, b_ = u.split('/wikipedia/commons/', 1); u = f'{a_}/wikipedia/commons/thumb/{b_}/2560px-{b_.rsplit("/", 1)[1]}'
+        # Commons режет частые скачивания с облачных адресов (HTTP 429): качаем по одному с паузой и ждём, если просят (Retry-After).
+        # Фото до 4000 px — оригинал, крупнее — стандартная копия 3840 px (thumb.wikimedia.org).
+        u = f['url'].split('?')[0]                          # в ссылке API есть «?utm_source=…» — из-за него уменьшенные копии давали HTTP 400
+        if max(f.get('w') or 0, f.get('h') or 0) > 4000 and '/wikipedia/commons/' in u:
+            b_ = u.split('/wikipedia/commons/', 1)[1]; nm_ = b_.rsplit('/', 1)[1]
+            u = f'https://thumb.wikimedia.org/wikipedia/commons/thumb/{b_}/3840px-{nm_}' + ('.jpg' if nm_.lower().endswith(('.tif', '.tiff')) else '')
         data = None
         for att in range(5):
             try:
