@@ -38,7 +38,9 @@
   "translation": "",
   "carpet": "",
   "type": "",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.8365,
@@ -52,7 +54,10 @@
  "classify": {
   "tones": 9,
   "inner": 45,
-  "mode": "color"
+  "thr": [
+   200,
+   110
+  ]
  },
  "matrix": {
   "w": 159,
@@ -224,7 +229,7 @@
  },
  "palette": [
   "#4a5d72",
-  "#c59f6f",
+  "#dcb54c",
   "#b2654f",
   "#bb5440",
   "#4e3637",
@@ -236,7 +241,7 @@
  ],
  "palette_names": [
   "bənövşəyi",
-  "çəhrayı",
+  "sarı",
   "qırmızı",
   "qırmızı 2",
   "qara",
@@ -248,7 +253,7 @@
  ],
  "palette_names_ru": [
   "фиолетовый",
-  "розовый",
+  "жёлтый",
   "красный",
   "красный 2",
   "чёрный",
@@ -260,7 +265,7 @@
  ],
  "palette_dyes": [
   "benovseyi",
-  "cehrayi",
+  "sari",
   "qirmizi",
   "qirmizi",
   "qara",
@@ -270,7 +275,7 @@
   "ag",
   "aciq_yasil"
  ],
- "palette_touched": false,
+ "palette_touched": true,
  "color_mode": true,
  "auto": {
   "version": 1,
@@ -323,7 +328,8 @@
    "n_suspects": 0
   },
   "risk": 1.0,
-  "difficulty_est": "ultra"
+  "difficulty_est": "ultra",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -333,7 +339,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-07 06:49:43",
+ "saved_at": "2026-10-12 20:34:45",
  "palette_v": 1,
  "palette_scan": [
   "#4a5d72",
@@ -349,7 +355,7 @@
  ],
  "palette_link": [
   false,
-  false,
+  true,
   false,
   false,
   false,
@@ -358,5 +364,8 @@
   false,
   false,
   false
- ]
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
