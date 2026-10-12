@@ -215,6 +215,10 @@ def recolor(dye_ids, who=""):
             state["done"] += 1
     finally:
         state.update(running=False, last=f"{time.strftime('%H:%M')}: перекрашено рисунков {n} ({state['dye']})")
+        try:
+            import events
+            if n: events.add(f"Краситель изменён: {state['dye']}", f"перекрашено рисунков {n}, выгрузки перерисованы", link={"to": "dyes"})
+        except Exception: pass
     return n
 
 

@@ -64,6 +64,12 @@ def make_color_fig(data):
     json.dump(w2, open(f'{data}/work/tc_f02.json', 'w'), ensure_ascii=False)
 
 
+def make_auto_sheet(data):
+    """Лист, который нарезала машина (ночной прогон), — должен попасть в «Нужно решение»."""
+    json.dump({"path": "test/auto_page_001.jpg", "table": 901, "boxes": [{"x": 10, "y": 10, "w": 100, "h": 100, "id": "t901_f01"}],
+               "figures": ["t901_f01"], "auto_segmented": True}, open(f'{data}/sheets/test_auto_page_001_jpg.json', 'w'))
+
+
 def make_crops(data):
     """Сканы страниц в git не лежат — для каждого рисунка с сеткой рисуем серую «вырезку» нужного размера, чтобы редактор открывался."""
     import cv2, numpy as np
@@ -298,14 +304,62 @@ def t10_dyes_screen_and_picker(pg, ctx):
     errors_ok(ctx, 'красители')
 
 
+@test
+def t11_events_api(pg, ctx):
+    u = ctx['url']
+    j = get(u + 'api/events')
+    for k in ('decisions', 'system', 'people', 'automations', 'need', 'can', 'unseen'): assert k in j, f'в /api/events нет «{k}»'
+    D = {d['key']: d for d in j['decisions']}
+    assert 'train' in D and D['train']['level'] == 'need', f'нет пункта «нужно дообучить» (готовых ч/б в тестовых данных > 100): {list(D)}'
+    assert 'sheets' in D and D['sheets']['sheets'][0]['path'] == 'test/auto_page_001.jpg', 'лист, нарезанный машиной, не попал в «Нужно решение»'
+    assert {a['id'] for a in j['automations']} >= {'night', 'train', 'weekly'}, 'нет автоматических задач'
+    post(u + 'api/events/dismiss', {'key': 'train', 'sig': D['train']['sig']})
+    assert next(d for d in get(u + 'api/events')['decisions'] if d['key'] == 'train')['hidden'], '«скрыть» не скрывает пункт'
+    post(u + 'api/events/dismiss', {'key': 'train', 'sig': None})
+    post(u + 'api/sheet_checked', {'paths': ['test/auto_page_001.jpg']})
+    assert 'sheets' not in {d['key'] for d in get(u + 'api/events')['decisions']}, '«рамки верны» не убирает лист из проверки'
+    a = post(u + 'api/automation', {'id': 'night', 'auto': False, 'hour': 4})
+    n = next(x for x in a['automations'] if x['id'] == 'night'); assert not n['auto'] and n['hour'] == 4 and '04:00' in n['rule'], 'настройка задачи не сохранилась'
+    post(u + 'api/automation', {'id': 'night', 'auto': True, 'hour': 3})
+    r = get(u + 'api/events/report?days=7')
+    assert r['done_total'] >= 100 and r['text'].startswith('Неделя'), 'отчёт за неделю не собирается'
+    c = get(u + 'api/events/count'); assert c['need'] >= 1, 'счётчик колокольчика не видит «нужно решение»'
+
+
+@test
+def t12_events_screen(pg, ctx):
+    pg.goto(ctx['url']); pg.wait_for_timeout(3500)
+    assert pg.is_visible('#bellBtn') and pg.is_visible('#bellN'), 'нет колокольчика со счётчиком рядом с пользователем'
+    hb = pg.evaluate("document.querySelector('header').getBoundingClientRect().height"); assert hb < 70, 'шапка с колокольчиком переносится'
+    pg.click('#bellBtn'); pg.wait_for_timeout(1500)
+    assert pg.is_visible('#evScr'), 'центр событий не открылся'
+    assert pg.evaluate("document.querySelectorAll('#evList .evit').length") >= 1, 'в «Нужно решение» пусто'
+    assert pg.evaluate("document.querySelectorAll('#evAuto .evau').length") >= 3, 'нет автоматических задач справа'
+    assert pg.is_visible('#evRep .nums'), 'нет отчёта за неделю'
+    pg.screenshot(path=f'{OUT}/10_events.png')
+    pg.click('#evSeg [data-t="sys"]'); pg.wait_for_timeout(300); pg.click('#evSeg [data-t="ppl"]'); pg.wait_for_timeout(300)
+    pg.click('#evSeg [data-t="need"]'); pg.wait_for_timeout(300)
+    pg.uncheck('.evau[data-a="train"] [data-f="enabled"]'); pg.wait_for_timeout(800)
+    assert not next(a for a in get(ctx['url'] + 'api/events')['automations'] if a['id'] == 'train')['enabled'], 'галочка задачи не сохраняется'
+    pg.check('.evau[data-a="train"] [data-f="enabled"]'); pg.wait_for_timeout(800)
+    pg.keyboard.press('2'); pg.wait_for_timeout(300)
+    assert pg.is_visible('#evScr'), 'клавиши редакторов срабатывают поверх центра событий'
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(300); assert not pg.is_visible('#evScr'), 'Esc не закрывает центр событий'
+    pg.click('#bellBtn'); pg.wait_for_timeout(1200)
+    if pg.query_selector('#evList [data-act="accept"]'):          # кнопка «открыть» ведёт на нужный экран
+        pg.click('#evList [data-act="accept"]'); pg.wait_for_timeout(1500)
+        assert not pg.is_visible('#evScr') and pg.evaluate("S.mode") == 'queue', 'кнопка пункта не открывает «Рисунки»'
+    errors_ok(ctx, 'центр событий')
+
+
 # ---------------- запуск ----------------
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
     shutil.copytree(CPS, app, ignore=shutil.ignore_patterns('tests', '__pycache__', '*.pyc', 'rug_lib', 'rug_img', 'rugs', 'rug_thumbs'))
-    make_rugs(os.path.join(app, 'data')); make_color_fig(os.path.join(app, 'data')); make_crops(os.path.join(app, 'data'))
+    make_rugs(os.path.join(app, 'data')); make_color_fig(os.path.join(app, 'data')); make_crops(os.path.join(app, 'data')); make_auto_sheet(os.path.join(app, 'data'))
     port = free_port(); url = f'http://127.0.0.1:{port}/'
-    env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': ''}
+    env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': '', 'CPS_NO_SCHED': '1'}   # CPS_NO_SCHED: автоматические задачи не запускаются сами
     log = open(os.path.join(OUT, 'server.log'), 'w')
     srv = subprocess.Popen([sys.executable, '-m', 'uvicorn', 'backend:app', '--port', str(port)], cwd=app, env=env, stdout=log, stderr=subprocess.STDOUT)
     ok = fail = 0

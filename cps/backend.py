@@ -5,7 +5,7 @@
 #          CPS_SCANS="$HOME/Library/CloudStorage/GoogleDrive-.../My Drive/scans" uvicorn backend:app --port 8000
 import os, io, csv, json, re, time
 import cv2, numpy as np
-from fastapi import FastAPI, UploadFile, File, Body, Query
+from fastapi import FastAPI, UploadFile, File, Body, Query, Request
 from fastapi.responses import FileResponse, JSONResponse, Response
 from az_names import az_draft, site_suggest
 import autogrid
@@ -830,6 +830,11 @@ def _model_train_run():
         J.update(ok=False, err=str(e))
     finally:
         J.update(running=False, finished=time.strftime("%Y-%m-%d %H:%M:%S"))
+        try:
+            meta = (jload(learn.MODEL_PATH, {}) or {}).get("meta") or {}
+            events.add("Модель распознавания обучена" if J["ok"] else "Обучение модели не удалось",
+                       (", ".join(f"{k}: {v}" for k, v in list(meta.items())[:4]) if J["ok"] else (J["err"] or J["out"])[-300:]), level="info" if J["ok"] else "warn")
+        except Exception as e: print("events train", e)
 
 
 @app.post("/api/model/train")
@@ -1086,7 +1091,7 @@ def _segment_one(rel):
 
 
 def _prowl_run(stages, only_sheets=None):
-    P = PROWL; P.update(running=True, stop=False, stage="", total=0, done=0, errors=0, started=time.strftime("%Y-%m-%d %H:%M:%S"), finished=None, log=[])
+    P = PROWL; P.update(running=True, stop=False, stage="", total=0, done=0, errors=0, started=time.strftime("%Y-%m-%d %H:%M:%S"), finished=None, log=[], sum={})
     def err(msg): P["errors"] += 1; P["log"] = (P["log"] + [msg])[-50:]
     try:
         if "segment" in stages:
@@ -1097,6 +1102,7 @@ def _prowl_run(stages, only_sheets=None):
                 try: _segment_one(rel)
                 except Exception as e: err(f"{rel}: {e}")
                 P["done"] += 1
+            P["sum"]["segment"] = P["done"]
         if "redo" in stages and not P["stop"]:
             t = _redo_targets(); P.update(stage="redo", done=0, total=len(t))
             for path, f, is_color in t:
@@ -1108,6 +1114,7 @@ def _prowl_run(stages, only_sheets=None):
                     if r.get("error"): err(f"{f}: {r['error']}")
                 except Exception as e: err(f"{f}: {e}")
                 P["done"] += 1
+            P["sum"]["redo"] = P["done"]
         if "regray" in stages and not P["stop"]:
             t = _regray_targets(); P.update(stage="auto", done=0, total=len(t))
             for path, f in t:
@@ -1118,6 +1125,7 @@ def _prowl_run(stages, only_sheets=None):
                     if r.get("error"): err(f"{f}: {r['error']}")
                 except Exception as e: err(f"{f}: {e}")
                 P["done"] += 1
+            P["sum"]["regray"] = P["done"]
         if "auto" in stages and not P["stop"]:
             t = _prowl_targets(only_sheets); P.update(stage="auto", done=0, total=len(t))
             for path, f in t:
@@ -1129,6 +1137,7 @@ def _prowl_run(stages, only_sheets=None):
                     if r.get("error"): err(f"{f}: {r['error']}")
                 except Exception as e: err(f"{f}: {e}")
                 P["done"] += 1
+            P["sum"]["auto"] = P["done"]
         if "hard" in stages and not P["stop"]:
             t = _hard_targets(); P.update(stage="hard", done=0, total=len(t))
             if t and learn.load_model() is None: err("модель клеток не обучена — трудные места не посчитать"); t = []
@@ -1138,8 +1147,16 @@ def _prowl_run(stages, only_sheets=None):
                 _, _, _, e = _hard_load(f)
                 if e: err(f"{f}: {e}")
                 P["done"] += 1
+            P["sum"]["hard"] = P["done"]
     finally:
         P.update(running=False, current="", stage="", finished=time.strftime("%Y-%m-%d %H:%M:%S"))
+        try:                                                            # v11.2: итог — в «Система» центра событий
+            nm = {"segment": "нарезано листов", "redo": "перепрогнано рисунков", "regray": "возвращено серое у", "auto": "распознано рисунков", "hard": "трудные места посчитаны у"}
+            parts = [f"{nm.get(k, k)} {v}" for k, v in (P.get("sum") or {}).items() if v]
+            events.add("Прогон завершён" + (" (остановлен)" if P["stop"] else ""), ", ".join(parts) or "новой работы не было",
+                       level="warn" if P["errors"] else "info", link={"to": "pipe"})
+            if P["errors"]: events.add(f"Прогон: ошибок {P['errors']}", "; ".join(P["log"][-5:]), level="warn")
+        except Exception as e: print("events prowl", e)
 
 
 @app.post("/api/prowl/start")
@@ -1579,6 +1596,202 @@ def migrate_outputs():
 
 import rugs
 rugs.install(app, DATA, D_WORK)    # v10.20: экран «Ковры»
+import events
+
+
+# ---------------- v11.2: центр событий — что ждёт решения человека и автоматические задачи ----------------
+EV_CAN, EV_NEED = int(os.environ.get("CPS_TRAIN_CAN", "10")), int(os.environ.get("CPS_TRAIN_NEED", "100"))
+
+
+def _ev_sheets_to_check():
+    """Листы, которые нарезала машина (ночной прогон), а человек ещё не смотрел."""
+    hid = _hidden_sources(); out = []
+    for fn in os.listdir(D_SHEETS):
+        if not fn.endswith(".json"): continue
+        m = jload(os.path.join(D_SHEETS, fn), {}) or {}
+        if m.get("auto_segmented") and m.get("figures") and not m.get("checked") and not _is_hidden(m.get("path"), hid):
+            ws = [jload(os.path.join(D_WORK, f + ".json"), {}) or {} for f in m["figures"]]
+            if any(w.get("done") or (w.get("auto") or {}).get("reviewed") or w.get("kind") in ("junk", "photo") for w in ws): continue   # рисунки листа уже смотрели
+            out.append((os.path.getmtime(os.path.join(D_SHEETS, fn)), m["path"], len(m["figures"])))
+    return [{"path": p, "n": n} for _, p, n in sorted(out, reverse=True)]
+
+
+def _ev_rug_twins():
+    d = os.path.join(DATA, "rugs"); n = 0
+    if not os.path.isdir(d): return 0
+    for fn in os.listdir(d):
+        if not fn.endswith(".json"): continue
+        r = jload(os.path.join(d, fn), {}) or {}
+        if r.get("split_into"): continue
+        ok = r.get("same_ok") or {}
+        n += any(x.get("id") and x["id"] not in ok for x in (r.get("same") or []))
+    return n
+
+
+def _ev_dye_suggested():
+    n = 0
+    for fn in os.listdir(D_WORK):
+        if not fn.endswith(".json"): continue
+        w = jload(os.path.join(D_WORK, fn), {}) or {}
+        if w.get("done"): continue
+        dy, ln = w.get("palette_dyes") or [], w.get("palette_link") or []
+        n += any(d and not (i < len(ln) and ln[i]) for i, d in enumerate(dy)) and bool(w.get("matrix"))
+    return n
+
+
+def _pl(n, one, few, many):
+    n = abs(int(n)); return one if n % 10 == 1 and n % 100 != 11 else few if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14 else many
+
+
+@events.provider
+def _ev_main():
+    src, _, _, _, new_bw, mt = _dash_scan()
+    vis = [x for x in src.values() if not x["hidden"]]
+    T = lambda grp, k: sum(x[grp][k] for x in vis)
+    items = []
+    if not MODEL_JOB["running"] and new_bw >= EV_CAN:
+        need = new_bw >= EV_NEED
+        items.append({"key": "train", "sig": "need" if need else "can", "level": "need" if need else "can", "order": 10, "group": "learn",
+                      "title": f"{'Нужно' if need else 'Можно'} дообучить распознавание",
+                      "body": f"После последнего обучения проверено {new_bw} {_pl(new_bw, 'новый ч/б рисунок', 'новых ч/б рисунка', 'новых ч/б рисунков')} "
+                              f"(порог: {EV_CAN} — можно, {EV_NEED} — нужно). Обучение идёт в фоне несколько минут.",
+                      "action": {"do": "train", "label": "Обучить сейчас"}})
+    sh = _ev_sheets_to_check()
+    if sh:
+        items.append({"key": "sheets", "sig": f"{len(sh)}:{sh[0]['path']}", "level": "need", "order": 20, "group": "sheets",
+                      "title": f"Проверьте рамки: {len(sh)} {_pl(len(sh), 'лист нарезан', 'листа нарезаны', 'листов нарезаны')} машиной",
+                      "body": "Машина сама нашла рисунки на страницах. Посмотрите, все ли рамки на месте: «✓ рамки верны» или откройте лист и поправьте.",
+                      "sheets": sh[:12], "action": {"do": "open", "arg": "sheets", "label": "Открыть первый"}})
+    low = T("figs", "low")
+    if low:
+        items.append({"key": "accept", "sig": str(low), "level": "can", "order": 30, "group": "queue",
+                      "title": f"Можно принять {low} {_pl(low, 'надёжный рисунок', 'надёжных рисунка', 'надёжных рисунков')}",
+                      "body": "Автомат уверен, расхождений почти нет. В «Рисунках» — «выбрать надёжные» → «принять».",
+                      "action": {"do": "open", "arg": "queue", "label": "К рисункам"}})
+    tw = _ev_rug_twins()
+    if tw:
+        items.append({"key": "twins", "sig": str(tw), "level": "need", "order": 40, "group": "rugs",
+                      "title": f"Подтвердите двойников: {tw} {_pl(tw, 'ковёр', 'ковра', 'ковров')}",
+                      "body": "Машина нашла одни и те же ковры в разных источниках. Подтвердите «тот же» или «другой» — тогда переносятся паспорт и разметка.",
+                      "action": {"do": "open", "arg": "rugs-dup", "label": "К коврам"}})
+    ds = _ev_dye_suggested()
+    if ds:
+        items.append({"key": "dyes", "sig": str(ds), "level": "can", "order": 50, "group": "dyes",
+                      "title": f"Красители предложены, не подтверждены: {ds} {_pl(ds, 'рисунок', 'рисунка', 'рисунков')}",
+                      "body": "В цветных рисунках автомат подписал красители (знак «?» на плитке палитры). Подтвердите — цвета станут цветами общей палитры.",
+                      "action": {"do": "open", "arg": "dyes", "label": "К красителям"}})
+    if backup.state.get("enabled") and backup.state.get("last_error"):
+        items.append({"key": "backup", "sig": str(backup.state["last_error"])[:60], "level": "need", "order": 5, "group": "system",
+                      "title": "Резервная копия в GitHub не удалась", "body": str(backup.state["last_error"])[:300],
+                      "action": {"do": "backup", "label": "Повторить"}})
+    return items
+
+
+def _ev_act(it, who):
+    a = it.get("action") or {}
+    if a.get("do") == "train":
+        if MODEL_JOB["running"]: return {"result": "уже обучается"}
+        threading.Thread(target=_model_train_run, daemon=True).start()
+        events.add("Обучение модели запущено", f"по кнопке ({who})")
+        return {"result": "обучение запущено — ход виден в строке состояния"}
+    if a.get("do") == "backup":
+        r = backup.backup_once(HERE, DATA, "из центра событий"); return {"result": "копия сделана" if not backup.state.get("last_error") else "снова ошибка"}
+    return None
+
+
+def _night_pending():
+    model = learn.load_model() is not None
+    return len(_segment_pending()), len(_prowl_targets()), (len(_hard_targets()) if model else 0)
+
+
+def _night_run(c):
+    if PROWL["running"]: return None
+    a, b, h = _night_pending()
+    if not (a or b or h): return None
+    stages = ["segment", "auto"] + (["hard"] if h else [])
+    threading.Thread(target=_prowl_run, args=(stages, None), daemon=True).start()
+    return f"запущен: новых листов {a}, рисунков {b}" + (f", трудные места у {h}" if h else "")
+
+
+def _night_due(c, t):
+    last = str(c.get("last_run") or "")
+    return t.hour == int(c.get("hour", 3)) and not last.startswith(t.strftime("%Y-%m-%d"))
+
+
+def _night_ask(c):
+    if PROWL["running"]: return None
+    a, b, h = _night_pending()
+    if not (a or b): return None
+    return {"title": f"Готово к прогону: новых листов {a}, рисунков {b}", "body": "Ночной прогон в режиме «спросить». Запустить сейчас?", "sig": f"{a}/{b}", "label": "Запустить прогон"}
+
+
+def _train_run(c):
+    if MODEL_JOB["running"]: return None
+    _, _, _, _, new_bw, _ = _dash_scan()
+    if new_bw < EV_NEED: return None
+    threading.Thread(target=_model_train_run, daemon=True).start()
+    return f"запущено (новых проверенных ч/б: {new_bw})"
+
+
+def _train_due(c, t):
+    last = str(c.get("last_run") or "")
+    if last and (t.replace(tzinfo=None) - __import__("datetime").datetime.strptime(last, "%Y-%m-%d %H:%M")).total_seconds() < 3 * 3600: return False
+    return not MODEL_JOB["running"] and _dash_scan()[4] >= EV_NEED
+
+
+def _week_run(c):
+    r = events.report(7, _ev_extra); return events.report_text(r)
+
+
+def _week_due(c, t):
+    last = str(c.get("last_run") or "")
+    if last:
+        try:
+            if (t.replace(tzinfo=None) - __import__("datetime").datetime.strptime(last, "%Y-%m-%d %H:%M")).days < 6: return False
+        except ValueError: pass
+    return t.weekday() == int(c.get("weekday", 0)) and t.hour >= int(c.get("hour", 9))
+
+
+def _ev_extra(since):
+    done_new = done = total = 0
+    for fn in os.listdir(D_WORK):
+        if not fn.endswith(".json"): continue
+        w = jload(os.path.join(D_WORK, fn), {}) or {}
+        if w.get("kind") in ("junk", "photo"): continue
+        total += 1
+        if w.get("done"):
+            done += 1
+            try: done_new += time.mktime(time.strptime(w.get("saved_at") or "", "%Y-%m-%d %H:%M:%S")) >= since
+            except ValueError: pass
+    sheets_new = sum(1 for fn in os.listdir(D_SHEETS) if fn.endswith(".json") and os.path.getmtime(os.path.join(D_SHEETS, fn)) >= since)
+    mc = 0; d = os.path.join(DATA, "rugs")
+    if os.path.isdir(d):
+        for fn in os.listdir(d):
+            if fn.endswith(".json"):
+                mc += sum(1 for m in ((jload(os.path.join(d, fn), {}) or {}).get("marks") or []) if (m.get("confirmed_at") or 0) >= since and m.get("status") == "confirmed")
+    mt = os.path.getmtime(learn.MODEL_PATH) if os.path.exists(learn.MODEL_PATH) else 0
+    return {"done_new": done_new, "done_total": done, "figs_total": total, "sheets_new": sheets_new, "marks_confirmed": mc, "trained": mt >= since}
+
+
+events.automation("night", "Ночной прогон", lambda c: f"каждую ночь в {int(c.get('hour', 3)):02d}:00 — нарезать новые листы, распознать новые рисунки, посчитать трудные места; утром — итог в «Система» и листы на проверку",
+                  _night_run, due=_night_due, ask=_night_ask, enabled=True, auto=True, hour=3)
+events.automation("train", "Дообучение распознавания", f"когда после обучения проверено {EV_NEED} новых ч/б рисунков — обучить модель клеток (на {EV_CAN} — только подсказка)",
+                  _train_run, due=_train_due, enabled=True, auto=False)
+events.automation("weekly", "Отчёт за неделю", lambda c: f"по {['понедельникам', 'вторникам', 'средам', 'четвергам', 'пятницам', 'субботам', 'воскресеньям'][int(c.get('weekday', 0))]} в {int(c.get('hour', 9)):02d}:00 — сводка: что сделали люди и система, что ждёт решения",
+                  _week_run, due=_week_due, enabled=True, auto=True, hour=9, weekday=0)
+events.install(app, DATA, act=_ev_act, extra=_ev_extra)
+
+
+@app.post("/api/sheet_checked")
+def api_sheet_checked(request: Request, body: dict = Body(...)):
+    """Человек посмотрел лист, нарезанный машиной, — рамки верны."""
+    who = getattr(request.state, "user", None) or "local"; n = 0
+    for rel in body.get("paths") or []:
+        mp = os.path.join(D_SHEETS, _sheet_key(rel) + ".json"); m = jload(mp, None)
+        if m is None: continue
+        m["checked"] = True; m["checked_by"] = who; m["checked_at"] = time.strftime("%Y-%m-%d %H:%M"); jsave(mp, m); n += 1
+    events._cache["at"] = 0
+    return {"ok": True, "checked": n}
 import dyes
 dyes.install(app, DATA, D_WORK, render_outputs, jload, jsave, on_change=autocolor.reload_dyes)    # v11.1: единая палитра красителей
 

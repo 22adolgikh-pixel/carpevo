@@ -196,6 +196,23 @@ aside{min-height:0}
 .rgsame{display:flex;flex-direction:column;gap:6px;margin-top:4px}.rgsm{display:flex;gap:8px;color:var(--tx)}.rgsm img{width:64px;height:64px;object-fit:cover;border-radius:4px;cursor:pointer;flex:none}.rgsm small{display:block}
 .rgsug{background:#ffb4541a;border-radius:6px;padding:4px 6px;color:var(--tx);margin:-2px 0 6px}.rgrings{display:flex;flex-wrap:wrap;gap:3px;margin:4px 0}
 .rgring{border:1px solid;border-left-width:4px;border-radius:5px;padding:1px 6px;cursor:pointer;color:var(--tx);font-size:12px}
+.bell{position:relative;padding:3px 7px;border-radius:12px;display:inline-flex;align-items:center;color:var(--tx)}.bell.on{background:var(--acc);color:var(--acc-tx)}
+#bellN{position:absolute;top:-5px;right:-6px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--zog);color:#fff;font-size:10.5px;font-weight:700;line-height:16px;text-align:center}
+#bellN.dot{min-width:8px;width:8px;height:8px;padding:0;top:-1px;right:-1px;background:#fff;box-shadow:0 0 0 2px var(--pan)}
+#evScr{position:fixed;left:0;right:0;top:48px;bottom:40px;display:none;grid-template-columns:1fr 400px;background:var(--bg);z-index:21}
+#evScr .evmain{overflow:auto;padding:14px 18px}#evScr .evseg{display:inline-flex;border:1px solid var(--ln2);border-radius:7px;overflow:hidden;margin-bottom:12px}
+#evScr .evseg button{border:0;border-radius:0;background:transparent;padding:6px 14px}#evScr .evseg button.cur{background:var(--acc);color:var(--acc-tx);font-weight:600}
+.evit{display:flex;gap:12px;padding:12px 14px;border:1px solid var(--ln);border-radius:9px;background:var(--pan);margin-bottom:8px}
+.evit .lv{flex:none;width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--mut)}.evit.need .lv{background:var(--zog);box-shadow:0 0 0 3px #b8323f33}.evit.warn .lv{background:var(--warn)}
+.evit .bd{flex:1;min-width:0}.evit b{display:block;font-size:13.5px}.evit p{margin:3px 0 0;color:var(--mut);font-size:12.5px}.evit .acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.evit.hid{opacity:.5}.evit .t{flex:none;color:var(--mut);font-size:11.5px;font-variant-numeric:tabular-nums}.evit.new{border-color:var(--ln2);background:var(--sel)}
+.evsheets{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-top:8px}.evsh{background:var(--pan2);border-radius:6px;padding:5px;display:flex;flex-direction:column;gap:4px}
+.evsh img{width:100%;height:120px;object-fit:contain;background:#fff;border-radius:3px}.evsh small{font-size:10.5px;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.evsh .rgrow{gap:4px}
+#evSide{background:var(--pan);border-left:1px solid var(--ln);overflow:auto;padding:14px}#evSide h4{margin:4px 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.evau{border:1px solid var(--ln);border-radius:8px;padding:10px 12px;margin-bottom:8px}.evau b{font-size:13px}.evau p{margin:4px 0;color:var(--mut);font-size:12px}
+.evau .flex{gap:12px;flex-wrap:wrap;font-size:12px}.evau label{display:flex;gap:5px;align-items:center;color:var(--tx)}.evau .last{font-size:11.5px;color:var(--mut)}
+.evrep{border:1px solid var(--ln);border-radius:8px;padding:12px;margin-top:14px}.evrep .nums{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.evrep .nums div{background:var(--pan2);border-radius:6px;padding:8px}.evrep .nums b{display:block;font-size:20px;font-variant-numeric:tabular-nums}.evrep .nums small{color:var(--mut);font-size:11.5px}
 #dyesScr{position:fixed;left:0;right:0;top:48px;bottom:40px;display:none;grid-template-columns:1fr 380px;background:var(--bg);z-index:20}
 #dyesScr .dymain{overflow:auto;padding:14px 16px}#dyesScr .dybar{display:flex;gap:12px;align-items:baseline;margin-bottom:12px;flex-wrap:wrap}#dyesScr .dybar b{font-size:15px}
 #dyesScr .zg{color:var(--warn)}
@@ -318,7 +335,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.1</small></b><span id="userchip"></span></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.2</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <div class="tabs">
     <button id="tab-pipe">◉ Обзор</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button>
   </div>
@@ -1948,7 +1965,7 @@ function kk(e){const c=e.code||'';
   return m[c]||String(e.key||'').toLowerCase();}
 window.addEventListener('keydown',e=>{
   const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','range','button'].includes(ae.type)));
-  if(DY.on){if(e.key==='Escape'&&$('modal').hidden&&!typing)dyesClose();return;}   // экран «Красители»: клавиши редакторов не действуют
+  if(DY.on||EV.on){if(e.key==='Escape'&&$('modal').hidden&&!typing){DY.on?dyesClose():evClose();}return;}   // экраны «Красители» и «События»: клавиши редакторов не действуют   // экран «Красители»: клавиши редакторов не действуют
   if(!typing&&S.rv){if(rvKey(e)){e.preventDefault();return;}}
   if(!typing&&S.hv){if(hvKey(e)){e.preventDefault();return;}}
   if(!typing&&S.sv){if(svKey(e)){e.preventDefault();return;}}
@@ -2715,5 +2732,73 @@ async function dyesSide(){const E=$('dySide');const ro=document.body.classList.c
   d.innerHTML=`<section class="dymain"><div class="dybar"><b>Красители</b><span class="mut">одна палитра на все рисунки — сменили цвет здесь, он поменялся во всех связанных рисунках и выгрузках</span><span class="sp"></span><span id="dyStat" class="mut"></span></div><div class="dycards" id="dyCards"></div></section><aside id="dySide"></aside>`;
   document.body.appendChild(d);
   window.addEventListener('resize',()=>{if(DY.on)dyesPlace();});
+})();
+
+/* ============ v11.2: центр событий — «Нужно решение», «Система», «Люди», автоматические задачи, отчёт ============ */
+const EV={on:false,tab:'need',data:null,rep:null,repDays:7,pollT:null};
+function evPlace(){const E=$('evScr');E.style.top=document.querySelector('header').getBoundingClientRect().bottom+'px';E.style.bottom=Math.max(0,window.innerHeight-$('sbar').getBoundingClientRect().top)+'px';}
+async function evCount(){clearTimeout(EV.pollT);try{const c=await api('/api/events/count');const b=$('bellN');
+  if(c.need){b.hidden=false;b.className='';b.textContent=c.need>99?'99+':c.need;}else if(c.can||c.unseen){b.hidden=false;b.className='dot';b.textContent='';}else b.hidden=true;
+  $('bellBtn').setAttribute('aria-label',`Центр событий: нужно решение ${c.need}, можно сделать ${c.can}, новых в «Система» ${c.unseen}`);}catch(e){}
+  EV.pollT=setTimeout(evCount,60000);}
+async function evOpen(tab){if(R.on)rugsClose();if(DY.on)dyesClose();if(S.mode==='grid'||S.mode==='pix'){try{await ovClose();}catch(e){}}
+  EV.on=true;if(tab)EV.tab=tab;$('evScr').style.display='grid';$('bellBtn').classList.add('on');evPlace();await evLoad();
+  try{await api('/api/events/seen',{});}catch(e){}evCount();}
+function evClose(){EV.on=false;$('evScr').style.display='none';$('bellBtn').classList.remove('on');}
+async function evLoad(){EV.data=await api('/api/events');evRender();evSide();evReport();}
+const evAgo=t=>{const d=new Date(t*1000),n=new Date();return d.toDateString()===n.toDateString()?d.toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'}):d.toLocaleDateString('ru',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'});};
+function evRender(){const D=EV.data,M=$('evList');if(!D)return;const ro=document.body.classList.contains('viewer');
+  const vis=D.decisions.filter(x=>!x.hidden),hid=D.decisions.filter(x=>x.hidden);
+  $('evSeg').innerHTML=[['need',`Нужно решение${vis.length?' ('+vis.length+')':''}`],['sys',`Система${D.unseen?' · '+D.unseen+' нов.':''}`],['ppl','Люди']].map(([k,l])=>`<button data-t="${k}" class="${EV.tab===k?'cur':''}" aria-pressed="${EV.tab===k}">${l}</button>`).join('');
+  $('evSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{EV.tab=b.dataset.t;evRender();});
+  if(EV.tab==='need'){
+    const it=x=>`<div class="evit ${x.level==='need'?'need':''} ${x.hidden?'hid':''}" data-k="${esc(x.key)}"><span class="lv"></span><div class="bd"><b>${esc(x.title)}</b><p>${esc(x.body||'')}</p>
+      ${x.sheets?`<div class="evsheets">${x.sheets.map(s=>`<div class="evsh"><img loading="lazy" src="/api/sheet_thumb?path=${encodeURIComponent(s.path)}&w=260" alt=""><small title="${esc(s.path)}">${esc(s.path.split('/').pop())} · ${s.n} рис.</small><div class="rgrow"><button class="sm" data-open-sheet="${esc(s.path)}">открыть</button>${ro?'':`<button class="sm" data-ok-sheet="${esc(s.path)}">✓ верно</button>`}</div></div>`).join('')}</div>`:''}
+      <div class="acts">${x.action&&!(ro&&x.action.do!=='open')?`<button class="sm pri" data-act="${esc(x.key)}">${esc(x.action.label||'Открыть')}</button>`:''}${x.sheets&&!ro?`<button class="sm" data-ok-all="${esc(x.key)}">✓ все показанные верны</button>`:''}${x.hidden?`<button class="sm" data-unhide="${esc(x.key)}">вернуть</button>`:`<button class="sm" data-hide="${esc(x.key)}" data-tip="Скрыть, пока не изменится">скрыть</button>`}</div></div></div>`;
+    M.innerHTML=(vis.map(it).join('')||'<p class="mut" style="padding:20px 4px">Сейчас ничего не ждёт вашего решения.</p>')+(hid.length?`<h4 class="mut" style="margin:16px 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.06em">Скрытые (${hid.length})</h4>`+hid.map(it).join(''):'');
+  }else if(EV.tab==='sys'){
+    M.innerHTML=D.system.map(e=>`<div class="evit ${e.level==='warn'?'warn':''} ${e.new?'new':''}"><span class="lv"></span><div class="bd"><b>${esc(e.title)}</b>${e.body?`<p>${esc(e.body)}</p>`:''}</div><span class="t">${evAgo(e.t)}</span></div>`).join('')||'<p class="mut" style="padding:20px 4px">Пока ничего — здесь появятся итоги ночных прогонов, обучения, перекраски и недельные отчёты.</p>';
+  }else{
+    const days={};D.people.forEach(p=>(days[p.day]=days[p.day]||[]).push(p));
+    M.innerHTML=Object.entries(days).map(([d,ps])=>`<h4 class="mut" style="margin:12px 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em">${new Date(d+'T12:00').toLocaleDateString('ru',{weekday:'long',day:'numeric',month:'long'})}</h4>`+ps.map(p=>`<div class="evit"><span class="lv"></span><div class="bd"><b>${esc(p.user)}</b><p>${[p.figs?`рисунков: ${p.figs}`:'',p.rugs?`ковров: ${p.rugs}`:'',p.other?`других правок: ${p.other}`:''].filter(Boolean).join(' · ')}</p></div><span class="t">до ${p.last}</span></div>`).join('')).join('')||'<p class="mut" style="padding:20px 4px">За неделю правок не было.</p>';}
+  M.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>evAct(b.dataset.act));
+  M.querySelectorAll('[data-hide],[data-unhide]').forEach(b=>b.onclick=async()=>{const k=b.dataset.hide||b.dataset.unhide,x=D.decisions.find(y=>y.key===k);
+    try{await api('/api/events/dismiss',{key:k,sig:b.dataset.hide?x.sig:null});await evLoad();evCount();}catch(e){fail(e);}});
+  M.querySelectorAll('[data-open-sheet]').forEach(b=>b.onclick=()=>evGo('sheets',b.dataset.openSheet));
+  const okSheets=async ps=>{try{const j=await api('/api/sheet_checked',{paths:ps});stat('отмечено: рамки верны на '+j.checked+' '+(j.checked===1?'листе':'листах'),'ok');await evLoad();evCount();}catch(e){fail(e);}};
+  M.querySelectorAll('[data-ok-sheet]').forEach(b=>b.onclick=()=>okSheets([b.dataset.okSheet]));
+  M.querySelectorAll('[data-ok-all]').forEach(b=>b.onclick=()=>{const x=D.decisions.find(y=>y.key===b.dataset.okAll);if(confirm('Отметить рамки верными на '+x.sheets.length+' показанных листах?'))okSheets(x.sheets.map(s=>s.path));});}
+async function evGo(to,arg){evClose();
+  if(to==='sheets'){setMode('sheet');if(arg)await openSheet(arg).catch(fail);}
+  else if(to==='queue'||to==='pipe'){setMode(to);}
+  else if(to==='rugs-dup'){rugsOpen();R.fdup=true;$('rgFDup')&&($('rgFDup').checked=true);R.gridN=150;setTimeout(rugList,400);}
+  else if(to==='dyes'){dyesOpen();}}
+async function evAct(key){const x=EV.data.decisions.find(y=>y.key===key);if(!x)return;const a=x.action||{};
+  if(a.do==='open'){if(key==='sheets'&&x.sheets&&x.sheets[0])return evGo('sheets',x.sheets[0].path);return evGo(a.arg);}
+  try{const j=await api('/api/events/act',{key});stat(j.result||'сделано','ok');if(j.open)return evGo(j.open);await evLoad();evCount();}catch(e){fail(e);}}
+function evSide(){const D=EV.data,E=$('evAuto');if(!D)return;const ro=document.body.classList.contains('viewer');
+  const WD=['пн','вт','ср','чт','пт','сб','вс'];
+  E.innerHTML=D.automations.map(a=>`<div class="evau" data-a="${a.id}"><b>${esc(a.title)}</b><p>${esc(a.rule)}</p>
+    <div class="flex"><label><input type="checkbox" data-f="enabled" ${a.enabled?'checked':''} ${ro?'disabled':''}> включена</label><label data-tip="Делать самой, не спрашивая. Без галочки — задача появится в «Нужно решение» с кнопкой"><input type="checkbox" data-f="auto" ${a.auto?'checked':''} ${ro||!a.enabled?'disabled':''}> без вопросов</label>
+    ${a.weekday!=null?`<label>день <select data-f="weekday" ${ro?'disabled':''}>${WD.map((d,i)=>`<option value="${i}" ${a.weekday===i?'selected':''}>${d}</option>`).join('')}</select></label>`:''}
+    ${a.hour!=null?`<label>в <select data-f="hour" ${ro?'disabled':''}>${[...Array(24).keys()].map(h=>`<option value="${h}" ${a.hour===h?'selected':''}>${String(h).padStart(2,'0')}:00</option>`).join('')}</select></label>`:''}</div>
+    <div class="last">${a.last_run?`последний раз ${esc(a.last_run)} — ${esc(a.last_result||'')}`:'ещё не запускалась'}</div></div>`).join('')+`<small class="mut">Время — ${esc(D.tz)} (Баку). Задачи выполняет сервер — компьютер может спать.</small>`;
+  E.querySelectorAll('.evau').forEach(box=>box.querySelectorAll('[data-f]').forEach(inp=>inp.onchange=async()=>{const f=inp.dataset.f,v=inp.type==='checkbox'?inp.checked:+inp.value;
+    try{const j=await api('/api/automation',{id:box.dataset.a,[f]:v});EV.data.automations=j.automations;evSide();stat('задача «'+j.automations.find(x=>x.id===box.dataset.a).title+'» сохранена','ok');}catch(e){fail(e);}}));}
+async function evReport(){const E=$('evRep');try{EV.rep=await api('/api/events/report?days='+EV.repDays);}catch(e){E.innerHTML='';return;}const r=EV.rep;
+  E.innerHTML=`<div class="flex" style="justify-content:space-between"><h4 style="margin:0">Отчёт · ${r.from}–${r.to}</h4><div class="evseg" style="margin:0"><button data-d="7" class="sm ${EV.repDays===7?'cur':''}">неделя</button><button data-d="30" class="sm ${EV.repDays===30?'cur':''}">30 дней</button></div></div>
+    <div class="nums"><div><b>${r.done_new??'—'}</b><small>принято рисунков</small></div><div><b>${r.sheets_new??'—'}</b><small>нарезано листов</small></div><div><b>${r.marks_confirmed??'—'}</b><small>подтверждено рамок на коврах</small></div><div><b>${r.done_total??'—'}<span class="mut" style="font-size:12px"> / ${r.figs_total??'—'}</span></b><small>готово всего</small></div></div>
+    ${r.people.length?`<p style="margin:6px 0;font-size:12.5px">${r.people.map(p=>`<b style="display:inline">${esc(p.user)}</b> — рисунков ${p.figs}, ковров ${p.rugs} (${p.days} ${p.days===1?'день':'дн.'})`).join('<br>')}</p>`:'<p class="mut" style="font-size:12.5px">правок людей не было</p>'}
+    <p class="mut" style="font-size:12px;margin:6px 0 0">Система: событий ${r.system}${r.trained?' · модель обучалась':''}${r.open.length?' · ждёт решения: '+r.open.length:''}</p>`;
+  E.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{EV.repDays=+b.dataset.d;evReport();});
+  E.querySelector('.evseg').querySelectorAll('button').forEach(b=>b.classList.toggle('cur',+b.dataset.d===EV.repDays));}
+(()=>{
+  const d=document.createElement('div');d.id='evScr';
+  d.innerHTML=`<section class="evmain" aria-label="События"><div class="evseg" id="evSeg" role="group" aria-label="Раздел"></div><div id="evList"></div></section><aside id="evSide"><h4>Автоматические задачи</h4><div id="evAuto"></div><div class="evrep" id="evRep"></div></aside>`;
+  document.body.appendChild(d);
+  $('bellBtn').onclick=()=>EV.on?evClose():evOpen();
+  ['pipe','sheet','queue','rugs','dyes'].forEach(k=>$('tab-'+k)&&$('tab-'+k).addEventListener('click',()=>{if(EV.on)evClose();},true));
+  window.addEventListener('resize',()=>{if(EV.on)evPlace();});
+  setTimeout(evCount,1500);
 })();
 </script></body></html>
