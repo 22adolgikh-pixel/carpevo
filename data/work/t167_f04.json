@@ -87,23 +87,22 @@
   ]
  },
  "palette": [
-  "#484c57",
-  "#815254",
-  "#c1b9af",
+  "#1e1c1f",
+  "#6d4a30",
+  "#8c8a86",
   "#86a6cc"
  ],
  "palette_names": [
   "qara",
   "qəhvəyi",
-  "boz 2",
+  "boz",
   "mavi"
  ],
  "palette_names_ru": [
   "чёрный",
-  "фиолетовый",
   "коричневый",
   "серый",
-  "серый 2"
+  "голубой"
  ],
  "palette_dyes": [
   "qara",
@@ -157,5 +156,18 @@
  "rapport": null,
  "saved_at": "2026-10-02 19:30:32",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "palette_v": 1,
+ "palette_scan": [
+  "#484c57",
+  "#815254",
+  "#c1b9af",
+  "#86a6cc"
+ ],
+ "palette_link": [
+  true,
+  true,
+  true,
+  true
+ ]
 }

@@ -144,13 +144,13 @@
   "#f3efe4",
   "#8c8a86",
   "#1e1c1f",
-  "#f3efe4"
+  "#faf6eb"
  ],
  "palette_names": [
-  "ağ 2",
-  "boz 2",
-  "qara 2",
-  "ağ"
+  "ağ",
+  "boz",
+  "qara",
+  "ağ 2"
  ],
  "palette_touched": true,
  "auto": {
@@ -294,10 +294,23 @@
  "review": true,
  "transparent_bg": true,
  "palette_names_ru": [
-  "чёрный",
-  "коричневый",
+  "белый",
   "серый",
-  "розовый"
+  "чёрный",
+  "белый 2"
  ],
- "color_mode": true
+ "color_mode": true,
+ "palette_v": 1,
+ "palette_scan": [
+  "#f3efe4",
+  "#8c8a86",
+  "#1e1c1f",
+  "#f3efe4"
+ ],
+ "palette_link": [
+  true,
+  true,
+  true,
+  true
+ ]
 }

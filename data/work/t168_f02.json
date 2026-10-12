@@ -88,21 +88,22 @@
   ]
  },
  "palette": [
-  "#556870",
-  "#826059",
-  "#647465",
+  "#8c8a86",
+  "#6d4a30",
+  "#a6a4a0",
   "#dedede"
  ],
  "palette_names": [
   "boz",
   "qəhvəyi",
-  "boz 3",
+  "boz 2",
   "тело 2"
  ],
  "palette_names_ru": [
   "серый",
   "коричневый",
-  "серый 3"
+  "серый 2",
+  ""
  ],
  "palette_dyes": [
   "boz",
@@ -162,5 +163,18 @@
  "rapport": null,
  "saved_at": "2026-10-09 17:39:33",
  "review": true,
- "transparent_bg": true
+ "transparent_bg": true,
+ "palette_v": 1,
+ "palette_scan": [
+  "#556870",
+  "#826059",
+  "#647465",
+  "#dedede"
+ ],
+ "palette_link": [
+  true,
+  true,
+  true,
+  false
+ ]
 }

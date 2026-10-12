@@ -143,33 +143,31 @@
   ]
  },
  "palette": [
-  "#b55349",
-  "#536771",
-  "#5c3038",
-  "#3d3739",
-  "#a49a71",
-  "#a88077",
+  "#b8402f",
+  "#8c8a86",
+  "#7a2a2a",
+  "#1e1c1f",
+  "#93ad6c",
+  "#dfa092",
   "#f3efe4"
  ],
  "palette_names": [
   "qırmızı",
   "boz",
-  "zoğalı 2",
+  "zoğalı",
   "qara",
   "açıq yaşıl",
-  "çəhrayı 2",
+  "çəhrayı",
   "ağ"
  ],
  "palette_names_ru": [
   "красный",
   "серый",
   "тёмно-красный (кизиловый)",
-  "серый 2",
-  "тёмно-красный (кизиловый) 2",
   "чёрный",
-  "розовый",
   "светло-зелёный",
-  "розовый 2"
+  "розовый",
+  "белый"
  ],
  "palette_dyes": [
   "qirmizi",
@@ -234,5 +232,24 @@
  "rapport": null,
  "saved_at": "2026-10-02 20:14:41",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "palette_v": 1,
+ "palette_scan": [
+  "#b55349",
+  "#536771",
+  "#5c3038",
+  "#3d3739",
+  "#a49a71",
+  "#a88077",
+  "#f3efe4"
+ ],
+ "palette_link": [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+ ]
 }
