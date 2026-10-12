@@ -205,7 +205,7 @@ log('azerbaijanrugs:', len(items) - n0)
 # ---------------- 5. Wikimedia Commons в полном размере (v10.28) ----------------
 # Список собран в браузере (категории «Azerbaijani carpets by museum», «Rugs and carpets of Azerbaijan», «Caucasian carpets and rugs»…):
 # cps/tools/colab/data/commons_hires.json — [{file, url, w, h, page, desc, artist, lic, cats}]. Фото качаются один раз в photos/commons_full/.
-import urllib.request, urllib.parse
+import urllib.request, urllib.parse, urllib.error
 n0 = len(items); CF = f'{D}/photos/commons_full'; os.makedirs(CF, exist_ok=True)
 CH = json.load(open(f'{REPO}/cps/tools/colab/data/commons_hires.json', encoding='utf-8')) if os.path.exists(f'{REPO}/cps/tools/colab/data/commons_hires.json') else []
 MUS = [('Museum of Azerbaijan Carpet', 'Национальный музей азербайджанского ковра'), ('Carpet Museum', 'Национальный музей азербайджанского ковра'),
@@ -221,16 +221,25 @@ bad = 0
 for k, f in enumerate(CH):
     p = f'{CF}/{cfn(f["file"])}'
     if not os.path.exists(p):
-        u = f['url'] if max(f.get('w') or 0, f.get('h') or 0) <= 4000 else 'https://commons.wikimedia.org/wiki/Special:FilePath/' + urllib.parse.quote(f['file'][5:]) + '?width=4000'
-        try:
-            data = urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'CarpetDNA-research/1.0 (catalogue of Azerbaijani carpets; Colab)'}), timeout=120).read()
-            a = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_COLOR)
-            if a is None: bad += 1; continue
-            s_ = 4000 / max(a.shape[:2])
-            if s_ < 1: a = cv2.resize(a, None, fx=s_, fy=s_, interpolation=cv2.INTER_AREA)
-            cv2.imwrite(p, a, [cv2.IMWRITE_JPEG_QUALITY, 92]); time.sleep(0.5)
-        except Exception as e:
-            bad += 1; print('  commons: не скачалось', f['file'][:60], str(e)[:80]); time.sleep(3); continue
+        # Commons режет частые скачивания ОРИГИНАЛОВ с облачных адресов (HTTP 429). Берём стандартную уменьшенную копию 2560 px
+        # (она лежит в кэше CDN и не считается тяжёлым запросом) и ждём, если всё же просят подождать (Retry-After).
+        u = f['url']
+        if max(f.get('w') or 0, f.get('h') or 0) > 2560 and '/wikipedia/commons/' in u and not u.lower().endswith(('.tif', '.tiff')):
+            a_, b_ = u.split('/wikipedia/commons/', 1); u = f'{a_}/wikipedia/commons/thumb/{b_}/2560px-{b_.rsplit("/", 1)[1]}'
+        data = None
+        for att in range(5):
+            try:
+                data = urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'CarpetDNA-research/1.0 (https://github.com/22adolgikh-pixel/carpevo; catalogue of Azerbaijani carpets)'}), timeout=120).read(); break
+            except urllib.error.HTTPError as e:
+                if e.code == 429:
+                    w = int(e.headers.get('Retry-After') or 0) or 30 * (att + 1); print(f'  commons: просят подождать {w} с'); time.sleep(min(w, 300)); continue
+                print('  commons: не скачалось', f['file'][:60], e.code); break
+            except Exception as e:
+                print('  commons: не скачалось', f['file'][:60], str(e)[:80]); time.sleep(5); break
+        if data is None: bad += 1; continue
+        a = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_COLOR)
+        if a is None: bad += 1; continue
+        cv2.imwrite(p, a, [cv2.IMWRITE_JPEG_QUALITY, 92]); time.sleep(1.5)
     if k % 100 == 0: log('commons', k, '/', len(CH))
     cats = ' | '.join(f.get('cats') or []); txt = (f.get('desc') or '')[:600]; name = re.sub(r'\.(jpe?g|png|tiff?|webp)$', '', f['file'][5:], flags=re.I).replace('_', ' ')
     sc = next((v for kk, v in CATSCH if kk in cats.lower()), ''); why = 'категория Wikimedia: ' + next((c for c in f.get('cats') or [] if any(kk in c.lower() for kk, _ in CATSCH)), '') if sc else ''
