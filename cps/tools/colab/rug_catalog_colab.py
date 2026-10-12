@@ -336,12 +336,17 @@ log('кандидатов в двойники:', len(cand))
 # точки SIFT всех фото — один раз в память (≈10 мин), потом сравнение пар быстрое
 sift = cv2.SIFT_create(nfeatures=1500)
 need = sorted({i for p in cand for i in p}); KP = {}
+SD = f'{CACHE}/sift'; os.makedirs(SD, exist_ok=True)      # v10.28: точки SIFT кэшируются на Диске — повторный запуск не считает их заново (было ~20 мин)
 for n, i in enumerate(need):
+    cf = f'{SD}/{ids[i]}.npz'
+    if os.path.exists(cf):
+        z_ = np.load(cf); KP[i] = (z_['p'], z_['d'] if z_['d'].size else None); continue
     g = cv2.cvtColor(cv2.imread(f'{IMGDIR}/{ids[i]}.jpg'), cv2.COLOR_BGR2GRAY)
     s_ = 900 / max(g.shape); g = cv2.resize(g, None, fx=s_, fy=s_) if s_ < 1 else g
     k, d = sift.detectAndCompute(g, None)
     if d is not None: d = np.sqrt(d / (d.sum(1, keepdims=True) + 1e-7)).astype(np.float16)      # RootSIFT
     KP[i] = (np.float32([p.pt for p in k]) if k else np.zeros((0, 2), np.float32), d)
+    np.savez(cf, p=KP[i][0], d=d if d is not None else np.zeros((0, 128), np.float16))
     if n % 500 == 0: log('точки SIFT', n, '/', len(need))
 flann = cv2.FlannBasedMatcher(dict(algorithm=1, trees=4), dict(checks=40))
 def verify(i, j):
