@@ -254,7 +254,7 @@ def install(app, DATA, D_WORK):
                     else: r.pop("same_group", None); r["same"] = []
                     r.setdefault("same_ok", {})
                     p = os.path.join(D_LIB, r["lib_img"])
-                    if os.path.exists(p) and not r.get("w"):
+                    if os.path.exists(p) and (not r.get("w") or r.get("_lib_t") != cat.get("built")):   # v10.28: пакет с фото крупнее — обновить размер
                         a = cv2.imread(p)
                         if a is not None: r["h"], r["w"] = a.shape[:2]
                     th = os.path.join(D_TH, rid + ".jpg")

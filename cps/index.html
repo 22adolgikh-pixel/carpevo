@@ -294,7 +294,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <b>🧶 Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v10.27</small></b>
+  <b>🧶 Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v10.28</small></b>
   <div class="tabs">
     <button id="tab-pipe">◉ Обзор</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button>
   </div>
@@ -2029,7 +2029,7 @@ function rugBack(){if(R.saveT)rugSaveNow();R.view='grid';R.tool=R.tool==='split'
   setTimeout(()=>{const c=R.rug&&document.querySelector(`.rgcard[data-id="${CSS.escape(R.rug.id)}"]`);if(c)c.scrollIntoView({block:'center'});},30);}
 const RSRC={kerimov:'Керимов',museum:'музеи',azerbaijanrugs:'azerbaijanrugs',upload:'загруженные'};
 const srcKind=s=>/^kerimov/.test(s||'')?'kerimov':(s==='azerbaijanrugs'?'azerbaijanrugs':(['upload','fig','zip',''].includes(s||'')?'upload':'museum'));
-const SRCRU={kerimov_vol1:'Керимов т. I',kerimov_vol2:'Керимов т. II',kerimov_vol3:'Керимов т. III',met:'Метрополитен',vam:'V&A',aic:'Чикаго',cleveland:'Кливленд',wikimedia:'Wikimedia',azerbaijanrugs:'azerbaijanrugs',upload:'загружено',fig:'фото из студии',zip:'архив'};
+const SRCRU={kerimov_vol1:'Керимов т. I',kerimov_vol2:'Керимов т. II',kerimov_vol3:'Керимов т. III',met:'Метрополитен',vam:'V&A',aic:'Чикаго',cleveland:'Кливленд',wikimedia:'Wikimedia',commons:'Wikimedia (оригинал)',azcarpetmuseum:'Музей ковра',azerbaijanrugs:'azerbaijanrugs',upload:'загружено',fig:'фото из студии',zip:'архив'};
 async function rugsLoadList(){const j=await api('/api/rugs');R.list=j.rugs;R.imp=j.import;
   try{R.sync=await api('/api/rugs_sync');}catch(e){}
   rugList();if((R.imp&&R.imp.running)||(R.sync&&R.sync.running)){clearTimeout(R.impT);R.impT=setTimeout(rugsLoadList,3000);}}

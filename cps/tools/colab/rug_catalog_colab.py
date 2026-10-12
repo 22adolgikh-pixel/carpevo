@@ -5,11 +5,13 @@
 #     (на странице ищутся фото — плотные прямоугольные области; подписи: «Табл. 217. ПАЛАС…», «Рис. 44» + «carriers_mentioned» → тип ковра, дата, школа);
 #   • музейные фото: photos/full/* + site/model/sources/museum_photos/catalog_photos.json из репозитория (Wikimedia, Met, AIC, Cleveland — с подписью музея, школой, техникой);
 #   • V&A / Met: photos/museum_open/img + catalog.json;
-#   • azerbaijanrugs: photos/azerbaijan_rugs_guide (папки + одноимённые .txt).
+#   • azerbaijanrugs: photos/azerbaijan_rugs_guide (папки + одноимённые .txt);
+#   • Нац. музей ковра (API, ~850 px): cps/tools/colab/data/azcarpetmuseum_items.json → photos/azcarpetmuseum/;
+#   • Wikimedia Commons в полном размере (v10.28): список cps/tools/colab/data/commons_hires.json → photos/commons_full/ (качается один раз).
 # Для каждого ковра — паспорт: название(я), источник, музей/номер, дата, место, техника (ворс/безворс), целый/фрагмент, школа + почему.
 # Двойники: признаки DINOv2 (фото, зеркало, поворот на 180°) → кандидаты → проверка точками SIFT + RANSAC (одна и та же вещь, а не «похожий узор»).
 # Результат: Drive carpet-dna/rug_catalog/ — catalog.json, groups.json, dup_sheets/*.jpg (листы двойников для проверки глазами),
-#            rugs_bundle.zip (каталог + фото ≤1000 px для студии; доступ «по ссылке», id печатается в конце и хранится в bundle_id.txt).
+#            rugs_bundle.zip (каталог + фото ≤2400 px для студии; доступ «по ссылке», id печатается в конце и хранится в bundle_id.txt).
 # Время: 40–70 мин на T4 (больше всего — чтение фото с Диска и SIFT). Повторный запуск использует кэш признаков.
 import os, re, io, json, glob, csv, time, zipfile, hashlib, collections, subprocess
 import numpy as np, cv2, torch
@@ -200,6 +202,79 @@ for dp, dn, fn in sorted(os.walk(AZ)):
             technique=tech_of(stem, folder, txt[:300]), fragment=frag_of(stem, txt[:200]), text=txt[:1500], museum='', inv='', place='', url='', license='azerbaijanrugs.com (только анализ)',
             size=f'{m.group(1)}×{m.group(2)} см' if m else '', folder=folder.split('/')[0])
 log('azerbaijanrugs:', len(items) - n0)
+# ---------------- 5. Wikimedia Commons в полном размере (v10.28) ----------------
+# Список собран в браузере (категории «Azerbaijani carpets by museum», «Rugs and carpets of Azerbaijan», «Caucasian carpets and rugs»…):
+# cps/tools/colab/data/commons_hires.json — [{file, url, w, h, page, desc, artist, lic, cats}]. Фото качаются один раз в photos/commons_full/.
+import urllib.request, urllib.parse
+n0 = len(items); CF = f'{D}/photos/commons_full'; os.makedirs(CF, exist_ok=True)
+CH = json.load(open(f'{REPO}/cps/tools/colab/data/commons_hires.json', encoding='utf-8')) if os.path.exists(f'{REPO}/cps/tools/colab/data/commons_hires.json') else []
+MUS = [('Museum of Azerbaijan Carpet', 'Национальный музей азербайджанского ковра'), ('Carpet Museum', 'Национальный музей азербайджанского ковра'),
+       ('National Art Museum', 'Национальный музей искусств Азербайджана'), ('Hermitage', 'Эрмитаж'), ('Metropolitan', 'Метрополитен-музей'), ('Dragon carpet MET', 'Метрополитен-музей'),
+       ('Victoria and Albert', 'Музей Виктории и Альберта'), ('Turkish and Islamic Arts', 'Музей турецкого и исламского искусства (Стамбул)'), ('Louvre', 'Лувр'),
+       ('Nizami Museum', 'Музей литературы им. Низами'), ('Shusha Carpet', 'Шушинский музей ковра'), ('LACMA', 'LACMA'), ('Pergamon', 'Музей Пергамон')]
+CATSCH = [('quba', 'guba-shirvan'), ('şirvan', 'guba-shirvan'), ('shirvan', 'guba-shirvan'), ('absheron', 'guba-shirvan'), ('baku', 'guba-shirvan'), ('bakı', 'guba-shirvan'),
+          ('gəncə', 'ganja-gazakh'), ('ganja', 'ganja-gazakh'), ('qazax', 'ganja-gazakh'), ('qazakh', 'ganja-gazakh'), ('gazakh', 'ganja-gazakh'), ('kazak', 'ganja-gazakh'),
+          ('karabakh', 'karabakh'), ('qarabağ', 'karabakh'), ('chelyabi', 'karabakh'), ('kasim ushag', 'karabakh'), ('tabriz', 'tabriz'), ('təbriz', 'tabriz'),
+          ('ardabil', 'tabriz'), ('nakhchivan', 'nakhchivan'), ('naxçıvan', 'nakhchivan')]
+def cfn(t): return re.sub(r'[^A-Za-z0-9._-]+', '_', t)[:80] + '_' + hashlib.md5(t.encode()).hexdigest()[:6] + '.jpg'
+bad = 0
+for k, f in enumerate(CH):
+    p = f'{CF}/{cfn(f["file"])}'
+    if not os.path.exists(p):
+        u = f['url'] if max(f.get('w') or 0, f.get('h') or 0) <= 4000 else 'https://commons.wikimedia.org/wiki/Special:FilePath/' + urllib.parse.quote(f['file'][5:]) + '?width=4000'
+        try:
+            data = urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'CarpetDNA-research/1.0 (catalogue of Azerbaijani carpets; Colab)'}), timeout=120).read()
+            a = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_COLOR)
+            if a is None: bad += 1; continue
+            s_ = 4000 / max(a.shape[:2])
+            if s_ < 1: a = cv2.resize(a, None, fx=s_, fy=s_, interpolation=cv2.INTER_AREA)
+            cv2.imwrite(p, a, [cv2.IMWRITE_JPEG_QUALITY, 92]); time.sleep(0.5)
+        except Exception as e:
+            bad += 1; print('  commons: не скачалось', f['file'][:60], str(e)[:80]); time.sleep(3); continue
+    if k % 100 == 0: log('commons', k, '/', len(CH))
+    cats = ' | '.join(f.get('cats') or []); txt = (f.get('desc') or '')[:600]; name = re.sub(r'\.(jpe?g|png|tiff?|webp)$', '', f['file'][5:], flags=re.I).replace('_', ' ')
+    sc = next((v for kk, v in CATSCH if kk in cats.lower()), ''); why = 'категория Wikimedia: ' + next((c for c in f.get('cats') or [] if any(kk in c.lower() for kk, _ in CATSCH)), '') if sc else ''
+    if not sc:
+        sc, kk = school_of(name, txt); why = f'слово «{kk}» в подписи' if sc else ''
+    mus = next((v for kk, v in MUS if kk.lower() in cats.lower() or kk.lower() in txt.lower()), '')
+    inv = (re.search(r'(?:inv(?:entory)?\.?\s*(?:no\.?|№|number)?|TIEM|№)\s*([A-ZА-Я]{0,3}[-‐ ]?\d[\d\-./]*)', name + ' ' + txt, re.I) or [None, ''])[1]
+    add(id='cm_' + hashlib.md5(f['file'].encode()).hexdigest()[:10], src='commons', img_path=p, title=(txt.split('.')[0][:110] if len(txt) > 12 else name)[:110], names=[name],
+        composition='', date=(re.search(r'\b(?:(?:1[5-9]|20)\s*(?:th|-?ci|-?cü|-?cu)?\s*(?:c\.|century|əsr)|X{0,2}(?:IX|IV|V?I{0,3})\s*(?:c\b|c\.|century|əsr|в\.)|(?:circa|ca\.|c\.)\s*1[5-9]\d\d|1[6-9]\d\d)', txt + ' ' + name, re.I) or [''])[0].strip(), school=sc, school_why=why,
+        technique=tech_of(name, txt, cats), fragment=frag_of(name, txt), text=txt, museum=mus, inv=inv, place='', url=f.get('page') or '',
+        license=(f.get('lic') or 'Wikimedia Commons') + (f' · {f.get("artist")}' if f.get('artist') else ''), size='', big=True)
+log('Wikimedia Commons (полный размер):', len(items) - n0, '| не скачалось:', bad)
+
+# ---------------- 6. Национальный музей азербайджанского ковра (открытый API, v10.28) ----------------
+# Список (327 предметов) собран раньше из azcarpet.culture.az/api/site → cps/tools/colab/data/azcarpetmuseum_items.json.
+# Фото у музея ~850 px — меньше, чем на Commons, но это цветные снимки тех ковров, что у Керимова на сканах. Если сайт из Colab недоступен — пропускаем.
+n0 = len(items); AM = f'{D}/photos/azcarpetmuseum'; os.makedirs(AM, exist_ok=True)
+AMJ = f'{REPO}/cps/tools/colab/data/azcarpetmuseum_items.json'
+AML = json.load(open(AMJ, encoding='utf-8')) if os.path.exists(AMJ) else []
+AM_SCH = {'Qarabağ': 'karabakh', 'Quba-Şirvan': 'guba-shirvan', 'Gəncə-Qazax': 'ganja-gazakh', 'Təbriz': 'tabriz'}
+AM_TECH = {'Kilim': 'безворсовый: килим', 'Zili': 'безворсовый: зили', 'Sumax': 'безворсовый: сумах', 'Palaz': 'палас', 'Şəddə': 'безворсовый: шадда', 'Сecim': 'джеджим', 'Vərni': 'безворсовый: верни'}
+AM_KEEP_OBJ = {'Xurcun', 'Məfrəş', 'Heybə', 'Çuval', 'Duz torbası'}
+fails = 0
+for k, x in enumerate(AML):
+    if x['cat'] == 'Xalça məmulatları' and x['sub'] not in AM_KEEP_OBJ: continue
+    p = f'{AM}/{x["id"]}.jpg'
+    if not os.path.exists(p):
+        if fails >= 5: continue                              # сайт не отвечает из Colab — не тратим время
+        try:
+            data = urllib.request.urlopen(urllib.request.Request('https://azcarpet.culture.az/storage/uploads/carpet/' + x['img'], headers={'User-Agent': 'Mozilla/5.0 CarpetDNA-research'}), timeout=60).read()
+            open(p, 'wb').write(data); time.sleep(0.8)
+        except Exception as e:
+            fails += 1; print('  музей ковра: не скачалось', x['id'], str(e)[:80]); time.sleep(5); continue
+    pl = (x.get('place') or {}).get('ru') or ''; nm = (x.get('n') or {})
+    sc = AM_SCH.get(x['cat'], ''); why = f'раздел музея «{x["cat"]}»' if sc else ''
+    if not sc:
+        sc, kk = school_of(pl, (x.get('place') or {}).get('en'), nm.get('en')); why = f'место по музею: «{pl}»' if sc else ''
+    add(id=f'azcm_{x["id"]}', src='azcarpetmuseum', img_path=p, title=f'{nm.get("az") or ""} ({nm.get("ru") or nm.get("en") or ""}), {pl}'.strip(', '), names=[nm.get('az'), nm.get('ru'), nm.get('en')],
+        composition=nm.get('az') or '', date=(x.get('date') or {}).get('ru') or '', school=sc, school_why=why,
+        technique=AM_TECH.get(x['sub'], 'ворсовый' if x['cat'] in AM_SCH else ''), fragment=frag_of(nm.get('en')), text=f'{(x.get("mat") or {}).get("ru", "")}; {(x.get("tech") or {}).get("ru", "")}',
+        museum='Национальный музей азербайджанского ковра', inv=str(x.get('inv') or ''), place=pl, url='https://azcarpetmuseum.az/', license='Нац. музей ковра (только анализ)',
+        size=x.get('size') or '', **({'object': 'мешок / сумка'} if x['sub'] in AM_KEEP_OBJ else {}))
+log('Музей ковра (API):', len(items) - n0, '| не скачалось:', fails, '(если 5 — сайт из Colab недоступен; можно положить фото в photos/azcarpetmuseum/ вручную)')
+
 for it in items:
     if any(b in (it['title'] + ' ' + it.get('folder', '')).lower() for b in BAGS): it['object'] = 'мешок / сумка'
 log('ВСЕГО ковров (фото):', len(items), dict(collections.Counter(it['src'] for it in items)))
@@ -292,7 +367,7 @@ for i, j, v, s in pairs: par[fd(i)] = fd(j)
 G = collections.defaultdict(list)
 for i in range(len(ids)): G[fd(i)].append(i)
 groups = [g for g in G.values() if len(g) > 1]
-PRI = {'kerimov_vol1': 0, 'kerimov_vol2': 0, 'kerimov_vol3': 0, 'met': 1, 'vam': 1, 'aic': 1, 'cleveland': 1, 'wikimedia': 2, 'azerbaijanrugs': 3}
+PRI = {'kerimov_vol1': 0, 'kerimov_vol2': 0, 'kerimov_vol3': 0, 'met': 1, 'vam': 1, 'aic': 1, 'cleveland': 1, 'wikimedia': 2, 'commons': 1, 'azcarpetmuseum': 1, 'azerbaijanrugs': 3}
 out_groups = []
 for gi, g in enumerate(sorted(groups, key=len, reverse=True)):
     g.sort(key=lambda i: (PRI.get(items[i]['src'], 2), items[i]['id']))
@@ -313,6 +388,14 @@ for gi, g in enumerate(sorted(groups, key=len, reverse=True)):
 log('групп двойников:', len(out_groups), '| фото в них:', sum(len(g['members']) for g in out_groups))
 
 # ---------------- сохранение и пакет для студии ----------------
+# v10.28: в пакет — фото до 2400 px (раньше 1000): мелкие элементы видны, «⬆ фото крупнее» показывает реальный размер
+BIGDIR = f'{CACHE}/big2400'; os.makedirs(BIGDIR, exist_ok=True)
+for n, it in enumerate(items):
+    bp = f'{BIGDIR}/{it["id"]}.jpg'
+    if not os.path.exists(bp):
+        a = load(it, 2400)
+        if a is not None: cv2.imwrite(bp, a, [cv2.IMWRITE_JPEG_QUALITY, 88])
+    if n % 500 == 0: log('фото для пакета', n, '/', len(items))
 for it in items: it.pop('img_path', None); it.pop('crop', None); it['img'] = f'img/{it["id"]}.jpg'
 cat = {'built': time.strftime('%Y-%m-%d %H:%M'), 'items': items, 'groups': out_groups}
 json.dump(cat, open(f'{OUT}/catalog.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
@@ -320,7 +403,7 @@ json.dump(out_groups, open(f'{OUT}/groups.json', 'w', encoding='utf-8'), ensure_
 BZ = f'{CACHE}/rugs_bundle.zip' if os.environ.get('RC_TEST') else '/content/rugs_bundle.zip'   # пакет собирается локально и загружается на Диск через API
 with zipfile.ZipFile(BZ, 'w', zipfile.ZIP_STORED) as z:
     z.writestr('catalog.json', json.dumps(cat, ensure_ascii=False))
-    for it in items: z.write(f'{IMGDIR}/{it["id"]}.jpg', it['img'])
+    for it in items: z.write(f'{BIGDIR}/{it["id"]}.jpg' if os.path.exists(f'{BIGDIR}/{it["id"]}.jpg') else f'{IMGDIR}/{it["id"]}.jpg', it['img'])
 log('пакет:', round(os.path.getsize(BZ) / 1e6), 'МБ')
 # загрузка на Диск с доступом «по ссылке» (тот же id при повторных запусках — студии не нужно ничего менять)
 if os.environ.get('RC_TEST'): raise SystemExit('RC_TEST: без загрузки на Диск')
