@@ -141,6 +141,8 @@ input.draft{border-style:dashed;border-color:var(--acc)}
 .palgrid{display:flex;flex-wrap:wrap;gap:8px}
 .palgrid .sq{position:relative;width:40px;height:40px;border-radius:7px;border:1px solid #0006;box-shadow:0 0 0 2px transparent;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .palgrid .sq.on{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--acc)}
+.palgrid .sq .lk{position:absolute;top:3px;right:3px;width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 0 1.5px #000a;pointer-events:none}
+.palgrid .sq .lq{position:absolute;top:1px;right:3px;font-size:10px;font-weight:700;color:#fff;text-shadow:0 0 2px #000,0 0 2px #000;pointer-events:none}
 .palgrid .sq .k{font-size:12px;font-weight:700;pointer-events:none}
 .palgrid .sq .bgl{position:absolute;bottom:-16px;left:-8px;right:-8px;text-align:center;font-size:9.5px;color:var(--mut);pointer-events:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .palgrid{padding-bottom:18px;row-gap:22px}
@@ -194,6 +196,20 @@ aside{min-height:0}
 .rgsame{display:flex;flex-direction:column;gap:6px;margin-top:4px}.rgsm{display:flex;gap:8px;color:var(--tx)}.rgsm img{width:64px;height:64px;object-fit:cover;border-radius:4px;cursor:pointer;flex:none}.rgsm small{display:block}
 .rgsug{background:#ffb4541a;border-radius:6px;padding:4px 6px;color:var(--tx);margin:-2px 0 6px}.rgrings{display:flex;flex-wrap:wrap;gap:3px;margin:4px 0}
 .rgring{border:1px solid;border-left-width:4px;border-radius:5px;padding:1px 6px;cursor:pointer;color:var(--tx);font-size:12px}
+#dyesScr{position:fixed;left:0;right:0;top:48px;bottom:40px;display:none;grid-template-columns:1fr 380px;background:var(--bg);z-index:20}
+#dyesScr .dymain{overflow:auto;padding:14px 16px}#dyesScr .dybar{display:flex;gap:12px;align-items:baseline;margin-bottom:12px;flex-wrap:wrap}#dyesScr .dybar b{font-size:15px}
+#dyesScr .zg{color:var(--warn)}
+.dycards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.dycard{display:flex;gap:10px;align-items:center;text-align:left;padding:10px;border-radius:8px;background:var(--pan);border:1px solid var(--ln);white-space:normal}
+.dycard.cur{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc);background:var(--sel)}.dycard i{flex:none;width:44px;height:44px;border-radius:6px;border:1px solid #0006}
+.dycard.add i{border:1px dashed var(--ln2);background:transparent}.dycard span{display:flex;flex-direction:column;min-width:0}.dycard small{font-size:11.5px}
+#dySide{background:var(--pan);border-left:1px solid var(--ln);overflow:auto;padding:14px}#dySide label{display:block;margin:10px 0;color:var(--mut);font-size:12px}#dySide label input:not([type=color]){display:block;width:100%;margin-top:3px}
+#dySide input[type=color]{width:56px;height:30px;padding:0;border:1px solid var(--ln2);border-radius:5px;background:none;margin-top:3px}
+#dySide h3{margin:0;font-size:17px}#dySide h4{margin:16px 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.dyhead{display:flex;gap:12px;align-items:center}.dyhead i{width:56px;height:56px;border-radius:8px;border:1px solid #0006;flex:none}
+.dyfigs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.dyfig{display:flex;flex-direction:column;gap:3px;padding:4px;background:var(--pan2);border-radius:6px}
+.dyfig img{width:100%;aspect-ratio:1;object-fit:contain;image-rendering:pixelated;background:#fff;border-radius:3px}.dyfig small{font-size:10px;color:var(--mut);overflow:hidden;text-overflow:ellipsis}
+.dyfigs.sug .dyfig{opacity:.65}
 #rugs{position:fixed;left:0;right:0;bottom:30px;top:48px;display:none;background:var(--bg);z-index:20}
 #rgGridV{position:absolute;inset:0;overflow:auto}#rgEditV{position:absolute;inset:0;display:grid;grid-template-columns:270px 1fr 370px}
 .rgbar{position:sticky;top:0;z-index:3;display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 14px;background:var(--pan);border-bottom:1px solid var(--ln)}.rgbar input#rgQ{width:200px;flex:none}
@@ -302,7 +318,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.0</small></b><span id="userchip"></span></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.1</small></b><span id="userchip"></span></div>
   <div class="tabs">
     <button id="tab-pipe">◉ Обзор</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button>
   </div>
@@ -891,7 +907,7 @@ async function openFigure(id){
     adj:Object.assign({brightness:0,contrast:1,gamma:1,invert:false},w.adjust||{}),
     grid:Object.assign({pw:8,ph:8,ox:0,oy:0,cols:10,rows:10,square:true},w.grid||{}),
     cls:Object.assign({tones:2,inner:55,thr:[200,110]},w.classify||{}),
-    palette:(w.palette||FIXED_PALETTE.slice(0,3)).map(c=>String(c).toLowerCase()==='#8a8a8a'?'#b8b8b8':c),palNames:w.palette_names||FIXED_NAMES.slice(0,3),palDyes:(w.palette||[]).map((_,i)=>{const id=(w.palette_dyes||[])[i];if(id)return id;const nm=String((w.palette_names||[])[i]||'').replace(/ \d+$/,'');const d=S.dyes.find(x=>x.az===nm);return d?d.id:null;}),palTouched:!!w.palette_touched,
+    palette:(w.palette||FIXED_PALETTE.slice(0,3)).map(c=>String(c).toLowerCase()==='#8a8a8a'?'#b8b8b8':c),palNames:w.palette_names||FIXED_NAMES.slice(0,3),palDyes:(w.palette||[]).map((_,i)=>{const id=(w.palette_dyes||[])[i];if(id)return id;const nm=String((w.palette_names||[])[i]||'').replace(/ \d+$/,'');const d=S.dyes.find(x=>x.az===nm);return d?d.id:null;}),palLink:(w.palette||[]).map((_,i)=>!!(w.palette_link||[])[i]),palScan:(w.palette||[]).map((_,i)=>(w.palette_scan||[])[i]||null),palTouched:!!w.palette_touched,
     meta:Object.assign({section:'',name_az:'',name:'',translation:'',carpet:'',type:'',note:'',site_id:'',source:''},w.meta||{}),
     done:!!w.done,review:!!w.review,transparent:w.transparent_bg!==false,difficulty:w.difficulty||null,
     M:null,cur:1,tool:'line',sym:{x:false,y:false,rot:false,ax:null,ay:null},under:0.35,undo:[],redo:[],clip:null};
@@ -1127,8 +1143,8 @@ async function autoFigure(opt){
 }
 
 /* ============================ 3. ПИКСЕЛИ ============================ */
-function snap(F){return {w:F.M.w,h:F.M.h,ox:F.M.ox,oy:F.M.oy,d:F.M.d.slice(),pal:F.palette.slice(),names:F.palNames.slice(),dyes:(F.palDyes||[]).slice(),thr:F.cls&&F.cls.thr?F.cls.thr.slice():null,cur:F.cur};}
-function restore(F,z){F.M={w:z.w,h:z.h,ox:z.ox,oy:z.oy,d:z.d.slice(),edited:true};if(z.pal){F.palette=z.pal.slice();F.palNames=z.names.slice();F.palDyes=z.dyes.slice();if(z.thr&&F.cls)F.cls.thr=z.thr.slice();F.cur=Math.min(z.cur,F.palette.length-1);F.palTouched=true;}}
+function snap(F){return {w:F.M.w,h:F.M.h,ox:F.M.ox,oy:F.M.oy,d:F.M.d.slice(),pal:F.palette.slice(),names:F.palNames.slice(),dyes:(F.palDyes||[]).slice(),link:(F.palLink||[]).slice(),scan:(F.palScan||[]).slice(),thr:F.cls&&F.cls.thr?F.cls.thr.slice():null,cur:F.cur};}
+function restore(F,z){F.M={w:z.w,h:z.h,ox:z.ox,oy:z.oy,d:z.d.slice(),edited:true};if(z.pal){F.palette=z.pal.slice();F.palNames=z.names.slice();F.palDyes=z.dyes.slice();if(z.link)F.palLink=z.link.slice();if(z.scan)F.palScan=z.scan.slice();if(z.thr&&F.cls)F.cls.thr=z.thr.slice();F.cur=Math.min(z.cur,F.palette.length-1);F.palTouched=true;}}
 function pushUndo(){const F=S.fig;if(!F.M)return;F.undo.push(snap(F));if(F.undo.length>300)F.undo.shift();F.redo=[];}
 function undo(){const F=S.fig;if(!F||!F.M||!F.undo.length)return;F.redo.push(snap(F));restore(F,F.undo.pop());markDirty();renderRight();redraw();}
 function redo(){const F=S.fig;if(!F||!F.M||!F.redo.length)return;F.undo.push(snap(F));restore(F,F.redo.pop());markDirty();renderRight();redraw();}
@@ -1240,17 +1256,18 @@ function resizeM(x0,y0,w,h){const F=S.fig,M=F.M;if(w<1||h<1)return;const d=new U
   F.M={w,h,ox:M.ox+x0,oy:M.oy+y0,d,edited:true};}
 function renderPal(){const F=S.fig,b=$('palBox');if(!b)return;
   // крупные квадраты: клик — выбрать, двойной клик — сменить цвет, ✕ (при наведении) — удалить; «+» — новый цвет
-  b.innerHTML=F.palette.map((c,i)=>`<div class="sq ${i===F.cur?'on':''}" data-i="${i}" style="background:${c}"><span class="k" style="color:${lum(c)>150?'#15171c':'#fff'}">${i+1}</span><span class="bgl">${esc(F.palNames[i]||(i?'':'фон'))}</span>${i?'<span class="del" data-del title="удалить цвет">✕</span>':''}<input type="color" value="${c}" tabindex="-1"></div>`).join('')+
+  palFix(F);
+  b.innerHTML=F.palette.map((c,i)=>`<div class="sq ${i===F.cur?'on':''} ${F.palLink[i]?'lnk':(F.palDyes[i]?'sug':'')}" data-i="${i}" style="background:${c}" title="${esc(palTip(F,i))}"><span class="k" style="color:${lum(c)>150?'#15171c':'#fff'}">${i+1}</span>${F.palLink[i]?'<span class="lk" aria-hidden="true"></span>':(F.palDyes[i]?'<span class="lq" aria-hidden="true">?</span>':'')}<span class="bgl">${esc(F.palNames[i]||(i?'':'фон'))}</span>${i?'<span class="del" data-del title="удалить цвет">✕</span>':''}<input type="color" value="${c}" tabindex="-1"></div>`).join('')+
     `<div class="sq add" id="palAdd" title="добавить цвет">+</div>`;
   b.querySelectorAll('.sq[data-i]').forEach(el=>{const i=+el.dataset.i;const inp=el.querySelector('input[type=color]');
     el.onclick=e=>{if(e.target.hasAttribute('data-del'))return;setCur(i);};
     el.ondblclick=e=>{if(e.target.hasAttribute('data-del'))return;openDyePicker(i);};
-    inp.onfocus=()=>{inp._u=false;};inp.oninput=e=>{if(!inp._u){pushUndo();inp._u=true;}F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;el.style.background=e.target.value;markDirty();redraw();};inp.onchange=()=>{inp._u=false;inp.blur();};
+    inp.onfocus=()=>{inp._u=false;};inp.oninput=e=>{if(!inp._u){pushUndo();inp._u=true;}F.palette[i]=e.target.value;F.palDyes[i]=null;F.palLink[i]=false;F.palTouched=true;el.style.background=e.target.value;markDirty();redraw();};inp.onchange=()=>{inp._u=false;inp.blur();};
     const del=el.querySelector('[data-del]');if(del)del.onclick=()=>{if(!confirm('Удалить цвет '+(i+1)+'? Его клетки станут фоном.'))return;pushUndo();const M=F.M;
       if(M)for(let k=0;k<M.d.length;k++){if(M.d[k]===i)M.d[k]=0;else if(M.d[k]>i)M.d[k]--;}
-      F.palette.splice(i,1);F.palNames.splice(i,1);F.palDyes.splice(i,1);F.cls.thr.splice(i-1,1);F.cur=Math.min(F.cur,F.palette.length-1);F.palTouched=true;markDirty();renderPal();renderSbInfo();redraw();};});
+      F.palette.splice(i,1);F.palNames.splice(i,1);F.palDyes.splice(i,1);F.palLink.splice(i,1);F.palScan.splice(i,1);resolvePal(F);F.cls.thr.splice(i-1,1);F.cur=Math.min(F.cur,F.palette.length-1);F.palTouched=true;markDirty();renderPal();renderSbInfo();redraw();};});
   renderPalNames();
-  $('palAdd').onclick=()=>{pushUndo();const i=F.palette.length;F.palette.push(FIXED_PALETTE[i]||'#b22222');F.palNames.push(FIXED_NAMES[i]||'');F.palDyes.push(null);F.cur=F.palette.length-1;F.palTouched=true;markDirty();renderPal();};}
+  $('palAdd').onclick=()=>{pushUndo();const i=F.palette.length;F.palette.push(FIXED_PALETTE[i]||'#b22222');F.palNames.push(FIXED_NAMES[i]||'');F.palDyes.push(null);F.palLink.push(false);F.palScan.push(null);F.cur=F.palette.length-1;F.palTouched=true;markDirty();renderPal();};}
 function hex2lab(h){const[r0,g0,b0]=hex2rgb(h).map(v=>{v/=255;return v<=0.04045?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
   const f=t=>t>0.008856?Math.cbrt(t):7.787*t+16/116;
   const fx=f((0.4124*r0+0.3576*g0+0.1805*b0)/0.95047),fy=f(0.2126*r0+0.7152*g0+0.0722*b0),fz=f((0.0193*r0+0.1192*g0+0.9505*b0)/1.08883);
@@ -1261,33 +1278,53 @@ function nearestDye(hex){const L=hex2lab(hex);let best=null,bd=1e9;
 function dyeById(id){return S.dyes.find(d=>d.id===id)||null;}
 function dyeLabel(F,i,dye){   // «zoğalı», «zoğalı 2» — два оттенка одного красителя в одном рисунке
   const n=F.palDyes.filter((x,j)=>j!==i&&x===dye.id).length;return n?dye.az+' '+(n+1):dye.az;}
-function applyDye(F,i,dye,recolor){if(F.M)pushUndo();if(recolor)F.palette[i]=dye.hex;F.palDyes[i]=dye.id;F.palNames[i]=dyeLabel(F,i,dye);F.palTouched=true;markDirty();}
+// v11.1: единая палитра — связанный цвет (palLink) берётся из библиотеки красителей; тот же расчёт на сервере (dyes.py resolve)
+function palFix(F){const n=F.palette.length;F.palDyes=F.palDyes||[];F.palLink=F.palLink||[];F.palScan=F.palScan||[];
+  while(F.palDyes.length<n)F.palDyes.push(null);while(F.palLink.length<n)F.palLink.push(false);while(F.palScan.length<n)F.palScan.push(null);}
+function lab2hex(L,a,b){const fy=(L+16)/116,fx=fy+a/500,fz=fy-b/200,inv=t=>t*t*t>0.008856?t*t*t:(t-16/116)/7.787;
+  const X=inv(fx)*0.95047,Y=inv(fy),Z=inv(fz)*1.08883;
+  const g=v=>{v=Math.max(0,v);v=v<=0.0031308?12.92*v:1.055*Math.pow(v,1/2.4)-0.055;return Math.max(0,Math.min(255,Math.floor(v*255+0.5)));};
+  return '#'+[3.2406*X-1.5372*Y-0.4986*Z,-0.9689*X+1.8758*Y+0.0415*Z,0.0557*X-0.2040*Y+1.0570*Z].map(g).map(v=>v.toString(16).padStart(2,'0')).join('');}
+function dyeShade(hex,k){if(!k)return hex;const[L,a,b]=hex2lab(hex);return lab2hex(Math.min(97,Math.max(3,L+k*10)),a,b);}
+function resolvePal(F){palFix(F);const n=F.palette.length,groups={};
+  for(let i=0;i<n;i++){if(F.palLink[i]&&dyeById(F.palDyes[i]))(groups[F.palDyes[i]]=groups[F.palDyes[i]]||[]).push(i);else if(F.palLink[i])F.palLink[i]=false;}
+  for(const[d,idx]of Object.entries(groups)){const dy=dyeById(d);
+    if(idx.length===1)F.palette[idx[0]]=dy.hex;
+    else{const sc=i=>/^#[0-9a-f]{6}$/i.test(F.palScan[i]||'')?hex2lab(F.palScan[i])[0]:50;const ord=idx.slice().sort((a,b)=>sc(a)-sc(b)||a-b),mid=Math.floor((ord.length-1)/2);ord.forEach((i,p)=>F.palette[i]=dyeShade(dy.hex,p-mid));}
+    idx.forEach((i,k)=>F.palNames[i]=k?dy.az+' '+(k+1):dy.az);}}
+function palTip(F,i){const d=dyeById(F.palDyes[i]);let t=(F.palNames[i]||(i?'цвет '+(i+1):'фон'));
+  if(d&&F.palLink[i])t+=' — из палитры красителей (меняется вместе с ней)';else if(d)t+=' — предложено: '+d.az+', не подтверждено (двойной клик — выбрать)';else t+=' — свой цвет';
+  if(F.palScan[i])t+=' · на скане '+F.palScan[i];return t+' · двойной клик — краситель';}
+function applyDye(F,i,dye,keepScan){if(F.M)pushUndo();palFix(F);F.palDyes[i]=dye.id;F.palLink[i]=!keepScan;
+  if(keepScan&&F.palScan[i])F.palette[i]=F.palScan[i];
+  resolvePal(F);if(keepScan)F.palNames[i]=dyeLabel(F,i,dye);F.palTouched=true;markDirty();}
+function palAcceptAll(F){if(F.M)pushUndo();palFix(F);let n=0;F.palDyes.forEach((d,i)=>{if(d&&!F.palLink[i]&&dyeById(d)){F.palLink[i]=true;n++;}});resolvePal(F);F.palTouched=true;markDirty();renderPal();redraw();return n;}
 function renderPalNames(){const F=S.fig;if(!F)return;
   while(F.palDyes.length<F.palette.length)F.palDyes.push(null);
   const bc=$('bgCol');if(bc){bc.value=F.palette[0];bc.onfocus=()=>{bc._u=false;};
-    bc.oninput=e=>{if(!bc._u){if(F.M)pushUndo();bc._u=true;}F.palette[0]=e.target.value;F.palDyes[0]=null;F.palTouched=true;markDirty();const t=document.querySelector('#palBox .sq[data-i="0"]');if(t)t.style.background=e.target.value;redraw();};
+    bc.oninput=e=>{if(!bc._u){if(F.M)pushUndo();bc._u=true;}F.palette[0]=e.target.value;F.palDyes[0]=null;F.palLink[0]=false;F.palTouched=true;markDirty();const t=document.querySelector('#palBox .sq[data-i="0"]');if(t)t.style.background=e.target.value;redraw();};
     bc.onchange=()=>{bc._u=false;bc.blur();renderPal();};}
   const bt=$('bgTr');if(bt){bt.checked=!!F.transparent;bt.onchange=()=>{F.transparent=bt.checked;markDirty();};}
   const pd=$('palDye');if(pd)pd.onclick=()=>openDyePicker(F.cur);
   const sn=$('palSnap');if(sn)sn.onclick=()=>{if(!S.dyes.length){stat('библиотека красителей не загрузилась','err');return;}
     if(F.M)pushUndo();
-    F.palDyes=[];F.palette.forEach((c,k)=>{const r=nearestDye(c);F.palDyes[k]=r?r.dye.id:null;});
-    F.palette.forEach((c,k)=>{const d2=dyeById(F.palDyes[k]);if(d2)F.palNames[k]=dyeLabel(F,k,d2);});   // только подписи: измеренные цвета остаются как на скане
-    F.palTouched=true;markDirty();renderPal();redraw();};}
+    palFix(F);F.palette.forEach((c,k)=>{if(!F.palScan[k])F.palScan[k]=c;const r=nearestDye(F.palScan[k]);F.palDyes[k]=r?r.dye.id:null;F.palLink[k]=!!r;});
+    resolvePal(F);F.palTouched=true;markDirty();renderPal();redraw();stat('цвета связаны с ближайшими красителями палитры — цвета со скана сохранены как замер (видны в подсказке)','ok');};
+  const pa=$('palAcc');if(pa)pa.onclick=()=>{const n=palAcceptAll(F);stat(n?'подтверждено красителей: '+n+' — цвета взяты из общей палитры':'нечего подтверждать','ok');renderRightPix&&renderRight();};}
 function openDyePicker(i){
   const F=S.fig,W=$('modal');if(!F||!W)return;
   const cur=F.palDyes[i];
   W.innerHTML=`<div class="mbox"><div class="flex" style="margin-bottom:6px"><b style="font-size:14px">Цвет ${i+1}${i?'':' (фон)'} — краситель</b><span class="sp"></span><button class="sm" id="dyClose">Закрыть</button></div>
-  <div class="hint" style="margin:0">Выберите краситель — название будет одинаковым во всех рисунках. Цвет по умолчанию остаётся как на скане (печать выцвела и сдвинута); галочка ниже заменит его эталонным. Нового красителя нет в списке — добавьте строку в <code>dyes.json</code>.</div>
+  <div class="hint" style="margin:0">Выберите краситель — цвет и название возьмутся из общей палитры и будут меняться вместе с ней во всех рисунках. Два цвета одного красителя в рисунке получают оттенки светлее/темнее. Нужного красителя нет — добавьте его на экране «Красители».</div>
   <div class="dyegrid">${S.dyes.map(d=>`<div class="dy ${d.id===cur?'on':''}" data-id="${esc(d.id)}"><i style="background:${d.hex}"></i><span>${esc(d.az)}<small>${esc(d.ru)}</small></span></div>`).join('')}</div>
-  <label class="flex" style="gap:6px;margin:6px 0;font-size:12px"><input type="checkbox" id="dyRe"> заменить цвет на эталонный цвет красителя</label>
+  <label class="flex" style="gap:6px;margin:6px 0;font-size:12px"><input type="checkbox" id="dyKeep"> не связывать: только название, цвет оставить как на скане${F.palScan&&F.palScan[i]?` <i style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${F.palScan[i]}"></i>`:''}</label>
   <div class="flex"><button class="sm" id="dyOwn">свой цвет…</button><input type="color" id="dyIn" value="${F.palette[i]}" style="width:1px;height:1px;opacity:0;border:0;padding:0"></div></div>`;
   W.hidden=false;
   const close=()=>{W.hidden=true;W.innerHTML='';renderPal();redraw();};
   $('dyClose').onclick=close;W.onclick=e=>{if(e.target===W)close();};
-  W.querySelectorAll('.dy').forEach(el=>el.onclick=()=>{applyDye(F,i,dyeById(el.dataset.id),$('dyRe').checked);close();});
+  W.querySelectorAll('.dy').forEach(el=>el.onclick=()=>{applyDye(F,i,dyeById(el.dataset.id),$('dyKeep').checked);close();});
   $('dyOwn').onclick=()=>$('dyIn').click();
-  $('dyIn').oninput=e=>{if(!$('dyIn')._u){if(F.M)pushUndo();$('dyIn')._u=true;}F.palette[i]=e.target.value;F.palDyes[i]=null;F.palTouched=true;markDirty();redraw();};
+  $('dyIn').oninput=e=>{if(!$('dyIn')._u){if(F.M)pushUndo();$('dyIn')._u=true;}F.palette[i]=e.target.value;F.palDyes[i]=null;F.palLink[i]=false;F.palTouched=true;markDirty();redraw();};
 }
 function setCur(i){const F=S.fig;if(!F)return;if(i!==F.cur){F.prevCur=F.cur;F.cur=i;}renderPal();}
 function lum(h){const[r,g,b]=hex2rgb(h);return 0.299*r+0.587*g+0.114*b;}
@@ -1304,7 +1341,7 @@ function renderRightPix(){
   R.innerHTML=`${kindBarHTML()}  <h4>Палитра <span class="hintbox">?<span class="htxt">Клик — выбрать цвет для рисования, двойной клик — сменить цвет, ✕ при наведении — удалить. <kbd>1</kbd> — фон, <kbd>2</kbd>–<kbd>9</kbd> — цвета. <kbd>X</kbd> — переключиться на предыдущий цвет (как в Illustrator). <kbd>Alt</kbd>+клик по клетке — взять её цвет. Левая кнопка мыши рисует выбранным цветом, правая — фоном.</span></span></h4>
   <div class="palgrid" id="palBox"></div>
   <div class="flex" style="gap:10px;margin:4px 0 2px;font-size:12px;color:var(--mut)"><label class="flex" style="gap:6px" data-tip="Цвет фона (клетки без цвета). Тот же цвет можно сменить двойным кликом по плитке 1."><input type="color" id="bgCol" value="${F.palette[0]}" style="width:26px;height:22px;padding:0;border:1px solid var(--ln);background:none"> цвет фона</label><label class="flex" style="gap:5px" data-tip="Выключено — файлы «PNG» и «×12» тоже получат цвет фона. «×12 с фоном» всегда с фоном."><input type="checkbox" id="bgTr" ${F.transparent?'checked':''}> прозрачный в PNG</label></div>
-  <div class="opts" style="margin-top:2px"><button class="sm" id="palDye" data-tip="Выбрать краситель для выбранного цвета (или двойной клик по плитке)">краситель…</button><button class="sm" id="palSnap" data-tip="Подписать цвета ближайшими красителями из библиотеки. Сами цвета не меняются — остаются как на скане">↻ подписать красителями</button></div>
+  <div class="opts" style="margin-top:2px"><button class="sm" id="palDye" data-tip="Выбрать краситель для выбранного цвета (или двойной клик по плитке)">краситель…</button><button class="sm" id="palSnap" data-tip="Связать все цвета с ближайшими красителями палитры: цвет и название берутся из общей палитры, цвет со скана остаётся замером">↻ связать с палитрой</button>${(F.palDyes||[]).some((d,i)=>d&&!(F.palLink||[])[i])?`<button class="sm pri" id="palAcc" data-tip="Автомат предложил красители (знак «?» на плитке) — подтвердить их все: цвета станут цветами общей палитры">✓ принять предложенные (${F.palDyes.filter((d,i)=>d&&!F.palLink[i]).length})</button>`:''}</div>
   <h4>Вид</h4>
   <div class="ibar">${IB('under','Подложка скана вкл/выкл · держите Пробел — оригинал скана','U','id="uTog"',F.under>0)}<input type="range" id="uA" min="0" max="1" step="0.05" value="${F.under}" style="flex:1;min-width:40px" data-tip="прозрачность подложки">
    <span class="gap"></span>${IB('flipH','Отразить матрицу по горизонтали','','id="mFH"')}${IB('flipV','Отразить матрицу по вертикали','','id="mFV"')}<span class="gap"></span>${IB('grid','Сетка узлов (скрыть/показать)',"⌘'",'id="vGridTog"',S.showGrid)}</div>
@@ -1427,7 +1464,7 @@ async function suggestSite(){const F=S.fig,e=$('sugg');if(!e||!F)return;const m=
 
 /* ============================ сохранение ============================ */
 function workPayload(){const F=S.fig;const p={quad:F.quad.map(q=>q.map(v=>+v.toFixed(2))),adjust:F.adj,grid:F.grid,classify:{tones:F.cls.tones,inner:F.cls.inner,thr:F.cls.thr,centers:F.cls.centers},
-  palette:F.palette,palette_names:F.palNames,palette_dyes:F.palDyes,palette_touched:F.palTouched,meta:F.meta,done:F.done,review:!!F.review,transparent_bg:F.transparent,difficulty:F.difficulty||null};
+  palette:F.palette,palette_names:F.palNames,palette_dyes:F.palDyes,palette_link:F.palLink,palette_scan:F.palScan,palette_touched:F.palTouched,meta:F.meta,done:F.done,review:!!F.review,transparent_bg:F.transparent,difficulty:F.difficulty||null};
   if(F.M){const M=F.M,rows=[];for(let j=0;j<M.h;j++){let r='';for(let i=0;i<M.w;i++){const v=M.d[j*M.w+i];r+=v?v.toString(36):'.';}rows.push(r);}p.matrix={w:M.w,h:M.h,origin:[M.ox,M.oy],rows};}
   return p;}
 function trimSilent(){ // автообрезка по рамке рисунка перед сохранением — не нужно жать «обрезать» руками каждый раз
@@ -1911,6 +1948,7 @@ function kk(e){const c=e.code||'';
   return m[c]||String(e.key||'').toLowerCase();}
 window.addEventListener('keydown',e=>{
   const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','range','button'].includes(ae.type)));
+  if(DY.on){if(e.key==='Escape'&&$('modal').hidden&&!typing)dyesClose();return;}   // экран «Красители»: клавиши редакторов не действуют
   if(!typing&&S.rv){if(rvKey(e)){e.preventDefault();return;}}
   if(!typing&&S.hv){if(hvKey(e)){e.preventDefault();return;}}
   if(!typing&&S.sv){if(svKey(e)){e.preventDefault();return;}}
@@ -2626,5 +2664,56 @@ window.addEventListener('keyup',e=>{if(e.code==='Space'&&R.on){R.space=false;$('
     try{await api('/api/rugs_sync',{bundle_id:bid});stat('загружаю каталог с Диска…','busy');rugsLoadList();}catch(err){fail(err);}};
   $('rgCat').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const items=JSON.parse(await f.text());const j=await api('/api/rugs_import',items);stat(`импорт: ${j.started} новых, пропущено ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
   window.addEventListener('resize',()=>{if(R.on)rugsPlace();});
+})();
+/* ============ v11.1: экран «Красители» — одна палитра на все рисунки ============ */
+const DY={on:false,list:[],sel:null,figs:[],pollT:null};
+function dyesPlace(){const E=$('dyesScr');E.style.top=document.querySelector('header').getBoundingClientRect().bottom+'px';E.style.bottom=Math.max(0,window.innerHeight-$('sbar').getBoundingClientRect().top)+'px';}
+async function dyesOpen(){if(R.on)rugsClose();if(S.mode==='grid'||S.mode==='pix'){try{ovClose();}catch(e){}}
+  DY.on=true;$('dyesScr').style.display='grid';dyesPlace();['pipe','sheet','queue','rugs'].forEach(k=>$('tab-'+k)&&$('tab-'+k).classList.remove('on'));$('tab-dyes').classList.add('on');await dyesLoad();}
+function dyesClose(){DY.on=false;$('dyesScr').style.display='none';$('tab-dyes').classList.remove('on');}
+async function dyesLoad(){const j=await api('/api/dyes?usage=1');DY.list=j.dyes;S.dyes=j.dyes;DY.rc=j.recolor;if(!DY.sel||!DY.list.find(d=>d.id===DY.sel))DY.sel=(DY.list[0]||{}).id||null;dyesList();await dyesSide();dyesPoll(j.recolor);}
+function dyesPoll(rc){clearTimeout(DY.pollT);const st=$('dyStat');if(!rc)return;
+  if(rc.running){st.innerHTML=`<span class="zg">перекрашиваю рисунки (${esc(rc.dye)}): ${rc.done} / ${rc.total}</span>`;DY.wasRun=true;DY.pollT=setTimeout(async()=>{try{const j=await api('/api/dyes');dyesPoll(j.recolor);}catch(e){}},1200);}
+  else{st.textContent=rc.last||'';if(DY.wasRun){DY.wasRun=false;stat(rc.last||'перекрашено','ok');refreshFigures().catch(()=>{});dyesLoad();}}}
+function dyesList(){const L=$('dyCards');
+  L.innerHTML=DY.list.map(d=>`<button class="dycard ${d.id===DY.sel?'cur':''}" data-id="${esc(d.id)}" aria-pressed="${d.id===DY.sel}"><i style="background:${d.hex}"></i><span><b>${esc(d.az)}</b><small>${esc(d.ru||'')}</small><small class="mut">${d.used?'в '+d.used+' рис.':'не используется'}${d.suggested?' · предложен в '+d.suggested:''}</small></span></button>`).join('')
+    +`<button class="dycard add" id="dyAddBtn"><i></i><span><b>＋ краситель</b><small class="mut">новый цвет в палитре</small></span></button>`;
+  L.querySelectorAll('.dycard[data-id]').forEach(b=>b.onclick=()=>{DY.sel=b.dataset.id;DY.adding=false;dyesList();dyesSide();});
+  $('dyAddBtn').onclick=()=>{DY.adding=true;DY.sel=null;dyesList();dyesSide();};}
+async function dyesSide(){const E=$('dySide');const ro=document.body.classList.contains('viewer');
+  if(DY.adding){E.innerHTML=`<h3>Новый краситель</h3><label>Название (az)<input id="dyNAz" placeholder="məs.: tünd göy"></label><label>По-русски<input id="dyNRu" placeholder="тёмно-синий"></label>
+      <label>Цвет<input type="color" id="dyNHex" value="#3a5a8c"></label><div class="rgrow"><button class="pri" id="dyNGo">Добавить</button><button id="dyNX">Отмена</button></div>`;
+    $('dyNX').onclick=()=>{DY.adding=false;DY.sel=(DY.list[0]||{}).id;dyesList();dyesSide();};
+    $('dyNGo').onclick=async()=>{try{const j=await api('/api/dyes',{az:$('dyNAz').value,ru:$('dyNRu').value,hex:$('dyNHex').value});DY.adding=false;DY.sel=j.dye.id;stat('краситель добавлен: '+j.dye.az,'ok');await dyesLoad();}catch(e){fail(e);}};return;}
+  const d=DY.list.find(x=>x.id===DY.sel);if(!d){E.innerHTML='<p class="mut">Выберите краситель.</p>';return;}
+  let figs=[];try{figs=(await api('/api/dyes/'+encodeURIComponent(d.id)+'/figures')).figures;}catch(e){}
+  if(DY.sel!==d.id)return;
+  const lk=figs.filter(f=>f.linked),sg=figs.filter(f=>!f.linked);
+  const fig=f=>`<button class="dyfig" data-fig="${esc(f.id)}" title="${esc(f.id)}${f.linked?'':' — предложен автоматом, не подтверждён'}"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_x12.png?t=${Date.now()}" alt=""><small>${esc(f.id)}</small></button>`;
+  E.innerHTML=`<div class="dyhead"><i style="background:${d.hex}"></i><div><h3>${esc(d.az)}</h3><small class="mut">${esc(d.ru||'')} · id ${esc(d.id)}</small></div></div>
+    <label>Цвет в палитре<span class="mut"> — так краситель выглядит во всех рисунках и выгрузках</span><span class="flex" style="gap:8px"><input type="color" id="dyHex" value="${d.hex}" ${ro?'disabled':''}><input id="dyHexT" value="${d.hex}" style="width:90px" ${ro?'disabled':''}></span></label>
+    <label>Цвет в печати книги<span class="mut"> — по нему автомат узнаёт краситель на скане (обычно не трогать)</span><span class="flex" style="gap:8px"><input type="color" id="dyScan" value="${d.scan}" ${ro?'disabled':''}><small class="mut">${d.scan}</small></span></label>
+    <div class="flex" style="gap:8px"><label style="flex:1">Название (az)<input id="dyAz" value="${esc(d.az)}" ${ro?'disabled':''}></label><label style="flex:1">По-русски<input id="dyRu" value="${esc(d.ru||'')}" ${ro?'disabled':''}></label></div>
+    ${ro?'':`<div class="rgrow"><button class="pri" id="dySave" disabled>Сохранить${lk.length?' и перекрасить '+lk.length+' рис.':''}</button><button id="dyReset" disabled>Отменить</button></div>`}
+    <h4>Связаны с палитрой (${lk.length})</h4><div class="dyfigs">${lk.map(fig).join('')||'<p class="mut">пока нет — в редакторе узора выберите этот краситель для цвета</p>'}</div>
+    ${sg.length?`<h4>Предложен автоматом, не подтверждён (${sg.length})</h4><div class="dyfigs sug">${sg.map(fig).join('')}</div>`:''}`;
+  E.querySelectorAll('[data-fig]').forEach(b=>b.onclick=()=>{dyesClose();openFigure(b.dataset.fig).catch(fail);});
+  if(ro)return;
+  const dirty=()=>{const ch=$('dyHex').value!==d.hex||$('dyScan').value!==d.scan||$('dyAz').value!==d.az||$('dyRu').value!==(d.ru||'');$('dySave').disabled=$('dyReset').disabled=!ch;
+    E.querySelector('.dyhead i').style.background=$('dyHex').value;const c=document.querySelector(`.dycard[data-id="${CSS.escape(d.id)}"] i`);if(c)c.style.background=$('dyHex').value;};
+  $('dyHex').oninput=()=>{$('dyHexT').value=$('dyHex').value;dirty();};
+  $('dyHexT').oninput=()=>{if(/^#[0-9a-f]{6}$/i.test($('dyHexT').value)){$('dyHex').value=$('dyHexT').value.toLowerCase();dirty();}};
+  $('dyScan').oninput=dirty;$('dyAz').oninput=dirty;$('dyRu').oninput=dirty;
+  $('dyReset').onclick=()=>dyesSide();
+  $('dySave').onclick=async()=>{try{const j=await api('/api/dyes',{id:d.id,hex:$('dyHex').value,scan:$('dyScan').value,az:$('dyAz').value,ru:$('dyRu').value});
+    stat(j.recolor==='started'?'краситель сохранён — перекрашиваю связанные рисунки…':(j.recolor==='busy'?'сохранено; перекраска уже идёт — этот краситель обновится при следующем сохранении':'краситель сохранён'),'ok');
+    if(S.fig){resolvePal(S.fig);redraw();}await dyesLoad();}catch(e){fail(e);}};}
+(()=>{
+  const t=document.createElement('button');t.id='tab-dyes';t.textContent='Красители';t.setAttribute('data-tip','Одна палитра красителей на все рисунки: сменили цвет здесь — он поменялся везде');$('tab-rugs').after(t);t.onclick=dyesOpen;
+  ['pipe','sheet','queue','rugs'].forEach(k=>$('tab-'+k).addEventListener('click',()=>{if(DY.on)dyesClose();},true));
+  const d=document.createElement('div');d.id='dyesScr';
+  d.innerHTML=`<section class="dymain"><div class="dybar"><b>Красители</b><span class="mut">одна палитра на все рисунки — сменили цвет здесь, он поменялся во всех связанных рисунках и выгрузках</span><span class="sp"></span><span id="dyStat" class="mut"></span></div><div class="dycards" id="dyCards"></div></section><aside id="dySide"></aside>`;
+  document.body.appendChild(d);
+  window.addEventListener('resize',()=>{if(DY.on)dyesPlace();});
 })();
 </script></body></html>

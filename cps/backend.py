@@ -620,6 +620,8 @@ def api_work_save(fid: str, body: dict = Body(...)):
     wp = os.path.join(D_WORK, fid + ".json")
     work = jload(wp, {}) or {}
     work.update(body); work["id"] = fid; work["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    if any(k in body for k in ("palette", "palette_dyes", "palette_link")):
+        work["palette_v"] = 1; dyes.resolve(work)               # v11.1: связанные цвета — из общей библиотеки красителей
     if "matrix" in body and isinstance(work.get("auto"), dict): work["auto"]["edited"] = True      # человек правил — перепрогон это не тронет
     if work.get("done") and isinstance(work.get("auto"), dict): work["auto"]["reviewed"] = True
     jsave(wp, work)
@@ -710,6 +712,8 @@ def run_auto(fid, force=False, dark_only=False, mode="auto", pitch_hint=None, nc
         work["saved_at"] = time.strftime("%Y-%m-%d %H:%M:%S"); jsave(wp, work)
         return {"id": fid, "photo": True, "R": G.get("R"), "mode": mode}
     upd = autocolor.to_work_color(G, M, info) if mode == "color" else autogrid.to_work(G, M, info)
+    if mode == "color":                                          # v11.1: замер со скана хранится отдельно, красители автомата — предложения
+        upd.update(palette_scan=list(upd["palette"]), palette_link=[False] * len(upd["palette"]), palette_v=1)
     if mode != "color" and work.get("palette_touched") and work.get("palette"):   # свою палитру не трогаем (ЧБ), только дополняем
         pal, names = list(work["palette"]), list(work.get("palette_names") or [])
         while len(pal) < len(upd["palette"]): pal.append(upd["palette"][len(pal)]); names.append(upd["palette_names"][len(names)])
@@ -1413,10 +1417,6 @@ def api_site_suggest(body: dict = Body(...)):
     names = [n for n in body.get("names", []) if n]
     return site_suggest(SITE_INDEX, names, body.get("translation", ""), int(body.get("limit", 8)))
 
-@app.get("/api/dyes")
-def api_dyes():
-    """Библиотека красителей (dyes.json): одни и те же названия и опорные цвета для всех рисунков."""
-    return {"dyes": [{"id": i, "az": a, "ru": r, "hex": h} for a, r, h, i in autocolor.DYES]}
 
 @app.get("/api/az_draft")
 def api_az_draft(text: str = ""):
@@ -1579,6 +1579,8 @@ def migrate_outputs():
 
 import rugs
 rugs.install(app, DATA, D_WORK)    # v10.20: экран «Ковры»
+import dyes
+dyes.install(app, DATA, D_WORK, render_outputs, jload, jsave, on_change=autocolor.reload_dyes)    # v11.1: единая палитра красителей
 
 @app.get("/")
 def index(): return FileResponse(os.path.join(HERE, "index.html"), headers={"Cache-Control": "no-store"})

@@ -48,6 +48,22 @@ def make_rugs(data):
     for i in range(6): save(f"vam_{i}", carpet(300 + 10 * i, 420, 10 + i), title=f"V&A rug {i}", museum="V&A", cat={"src": "vam"})
 
 
+def make_color_fig(data):
+    """Цветной рисунок, принятый до v11.1: красители подписаны, но цвета — как на скане (связи с палитрой ещё нет)."""
+    os.makedirs(f'{data}/work', exist_ok=True)
+    w = {"id": "tc_f01", "sheet": "test", "table": 900, "fig": 1, "quad": [[20, 20], [140, 20], [140, 100], [20, 100]],
+         "grid": {"pw": 20, "ph": 20, "ox": 0, "oy": 0, "cols": 6, "rows": 4, "square": True},
+         "classify": {"tones": 4, "inner": 45, "mode": "color"},
+         "matrix": {"w": 6, "h": 4, "origin": [0, 0], "rows": ["123321", "234432", "234432", "123321"]},
+         "palette": ["#f2eee2", "#83423b", "#7f3336", "#2b2a2c", "#c9a23a"],
+         "palette_names": ["ağ", "zoğalı", "zoğalı 2", "qara", "sarı"],
+         "palette_dyes": ["ag", "zogali", "zogali", "qara", "sari"], "palette_touched": False, "color_mode": True,
+         "done": True, "meta": {"name_az": "test"}, "auto": {"mode": "color", "reviewed": True}}
+    json.dump(w, open(f'{data}/work/tc_f01.json', 'w'), ensure_ascii=False)
+    w2 = dict(w, id="tc_f02", done=False, palette_dyes=["ag", "qirmizi", "zogali", "qara", "sari"])   # не принят: красители — только предложения
+    json.dump(w2, open(f'{data}/work/tc_f02.json', 'w'), ensure_ascii=False)
+
+
 def make_crops(data):
     """Сканы страниц в git не лежат — для каждого рисунка с сеткой рисуем серую «вырезку» нужного размера, чтобы редактор открывался."""
     import cv2, numpy as np
@@ -220,12 +236,74 @@ def t08_api(pg, ctx):
         get(u + p)
 
 
+@test
+def t09_dyes_palette_api(pg, ctx):
+    u = ctx['url']
+    for _ in range(30):                       # переход на ссылки на красители идёт в фоне при старте
+        w = get(u + 'api/work/tc_f01')
+        if w.get('palette_v') == 1: break
+        time.sleep(0.5)
+    L = {d['id']: d for d in get(u + 'api/dyes')['dyes']}
+    assert w.get('palette_link') == [True] * 5, f'принятый рисунок не связан с палитрой: {w.get("palette_link")}'
+    assert w['palette_scan'][1] == '#83423b', 'цвет со скана не сохранился как замер'
+    assert w['palette'][3] == L['qara']['hex'], 'связанный цвет не взят из библиотеки'
+    assert w['palette'][1] != w['palette'][2] and L['zogali']['hex'] in w['palette'][1:3], 'два оттенка одного красителя слились или не из библиотеки'
+    w2 = get(u + 'api/work/tc_f02')
+    assert w2['palette_link'] == [False] * 5 and w2['palette'][1] == '#83423b', 'непринятый рисунок перекрашен без подтверждения'
+    j = post(u + 'api/dyes', {'id': 'qara', 'hex': '#101060'})
+    assert j['recolor'] == 'started', f'перекраска не запустилась: {j}'
+    for _ in range(40):
+        if not get(u + 'api/dyes')['recolor']['running'] and get(u + 'api/work/tc_f01')['palette'][3] == '#101060': break
+        time.sleep(0.5)
+    assert get(u + 'api/work/tc_f01')['palette'][3] == '#101060', 'смена цвета красителя не дошла до рисунка'
+    assert get(u + 'api/work/tc_f02')['palette'][3] == '#2b2a2c', 'перекрашен рисунок, где краситель не подтверждён'
+    import cv2
+    img = cv2.imread(os.path.join(ctx['app'], 'data', 'out', 'tc_f01.png'), cv2.IMREAD_UNCHANGED)
+    assert img is not None and tuple(int(v) for v in img[0, 2][:3]) == (0x60, 0x10, 0x10), 'выгрузка PNG не перерисована новым цветом'
+    n = post(u + 'api/dyes', {'az': 'tünd göy', 'ru': 'тёмно-синий', 'hex': '#22335a'})
+    assert n['dye']['id'] == 'tund_goy', 'новый краситель не добавился'
+    # тот же расчёт оттенков в браузере и на сервере
+    pal = {'palette': ['#fff', '#83423b', '#7f3336', '#97463a'], 'palette_dyes': [None, 'zogali', 'zogali', 'zogali'],
+           'palette_link': [False, True, True, True], 'palette_scan': ['#ffffff', '#83423b', '#7f3336', '#97463a'], 'palette_names': ['', '', '', '']}
+    srv = post(u + 'api/dyes/resolve', pal)
+    pg.goto(u); pg.wait_for_timeout(2500)
+    js = pg.evaluate("""p=>{const F={palette:p.palette.slice(),palDyes:p.palette_dyes.slice(),palLink:p.palette_link.slice(),palScan:p.palette_scan.slice(),palNames:p.palette_names.slice()};resolvePal(F);return F.palette;}""", pal)
+    assert js == srv['palette'], f'оттенки в редакторе и на сервере считаются по-разному: {js} / {srv["palette"]}'
+
+
+@test
+def t10_dyes_screen_and_picker(pg, ctx):
+    pg.click('#tab-dyes'); pg.wait_for_timeout(1500)
+    assert pg.is_visible('#dyesScr'), 'экран «Красители» не открылся'
+    n = pg.evaluate("document.querySelectorAll('.dycard[data-id]').length"); assert n >= 16, f'на экране красителей {n} карточек'
+    pg.click('.dycard[data-id="qara"]'); pg.wait_for_timeout(1200)
+    assert pg.is_visible('.dyfig[data-fig="tc_f01"]'), 'у красителя не показаны рисунки, где он используется'
+    pg.screenshot(path=f'{OUT}/08_dyes.png')
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(300); assert not pg.is_visible('#dyesScr'), 'Esc не закрывает экран красителей'
+    pg.click('#tab-dyes'); pg.wait_for_timeout(1200)
+    pg.click('.dycard[data-id="qara"]'); pg.wait_for_timeout(1200)
+    pg.click('.dyfig[data-fig="tc_f01"]'); pg.wait_for_timeout(2000)
+    assert pg.evaluate("S.fig&&S.fig.id") == 'tc_f01', 'клик по рисунку на экране красителей не открывает его'
+    if pg.evaluate("S.mode") != 'pix': pg.keyboard.press('Tab'); pg.wait_for_timeout(600)
+    pg.evaluate("openDyePicker(4)"); pg.wait_for_timeout(400)
+    pg.click('#modal .dy[data-id="krem"]'); pg.wait_for_timeout(300)
+    k = pg.evaluate("S.dyes.find(d=>d.id==='krem').hex")
+    assert pg.evaluate("S.fig.palette[4]") == k and pg.evaluate("S.fig.palLink[4]"), 'выбор красителя меняет только название, а не цвет'
+    pg.evaluate("openDyePicker(4)"); pg.wait_for_timeout(400); pg.check('#dyKeep'); pg.click('#modal .dy[data-id="sari"]'); pg.wait_for_timeout(300)
+    assert pg.evaluate("S.fig.palette[4]") == '#c9a23a' and not pg.evaluate("S.fig.palLink[4]"), '«не связывать» не вернуло цвет со скана'
+    pg.keyboard.press('Control+z'); pg.wait_for_timeout(300)
+    assert pg.evaluate("S.fig.palette[4]") == k, 'отмена (Ctrl+Z) не возвращает выбор красителя'
+    pg.screenshot(path=f'{OUT}/09_palette.png')
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(800)
+    errors_ok(ctx, 'красители')
+
+
 # ---------------- запуск ----------------
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
     shutil.copytree(CPS, app, ignore=shutil.ignore_patterns('tests', '__pycache__', '*.pyc', 'rug_lib', 'rug_img', 'rugs', 'rug_thumbs'))
-    make_rugs(os.path.join(app, 'data')); make_crops(os.path.join(app, 'data'))
+    make_rugs(os.path.join(app, 'data')); make_color_fig(os.path.join(app, 'data')); make_crops(os.path.join(app, 'data'))
     port = free_port(); url = f'http://127.0.0.1:{port}/'
     env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': ''}
     log = open(os.path.join(OUT, 'server.log'), 'w')
@@ -239,7 +317,7 @@ def main():
         from playwright.sync_api import sync_playwright
         with sync_playwright() as p:
             br = p.chromium.launch(); pg = br.new_page(viewport={'width': 1600, 'height': 950})
-            ctx = {'url': url, 'errors': []}
+            ctx = {'url': url, 'errors': [], 'app': app}
             pg.on('pageerror', lambda e: ctx['errors'].append(str(e)))
             pg.goto(url); pg.wait_for_timeout(2000)
             for t in TESTS:

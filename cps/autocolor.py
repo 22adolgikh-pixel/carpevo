@@ -19,13 +19,17 @@ GOOD_R = 0.60          # выше — шаг надёжный, им можно �
 # ---------------------------------------------------------------- словарь красителей
 # опорные цвета — как они выглядят в печати книги (выцветшие), не «идеальные» красители
 def _load_dyes():
-    """Библиотека красителей — файл dyes.json рядом (общая для студии и автооцифровки)."""
+    """Библиотека красителей: data/dyes.json (правится на экране «Красители»), иначе dyes.json рядом с кодом.
+    Для узнавания берётся цвет красителя в печати книги (scan), а не цвет показа (hex)."""
     import json, os
-    try:
-        d = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "dyes.json"), encoding="utf-8"))["dyes"]
-        return [(x["az"], x["ru"], x["hex"], x["id"]) for x in d]
-    except Exception:
-        return [("qırmızı", "красный", "#b8402f", "qirmizi"), ("qara", "чёрный", "#1e1c1f", "qara"), ("ağ", "белый", "#f3efe4", "ag")]
+    here = os.path.dirname(os.path.abspath(__file__))
+    for p in (os.path.join(here, "data", "dyes.json"), os.path.join(here, "dyes.json")):
+        try:
+            d = json.load(open(p, encoding="utf-8"))["dyes"]
+            return [(x["az"], x.get("ru", ""), x.get("scan") or x["hex"], x["id"]) for x in d]
+        except Exception:
+            continue
+    return [("qırmızı", "красный", "#b8402f", "qirmizi"), ("qara", "чёрный", "#1e1c1f", "qara"), ("ağ", "белый", "#f3efe4", "ag")]
 
 
 DYES = _load_dyes()
@@ -43,6 +47,13 @@ def _lab8_to_ref(lab8):
 
 
 _DYE_LAB = _lab8_to_ref(np.array([_hex2lab(h) for _, _, h, _ in DYES]))
+
+
+def reload_dyes():
+    """После правки библиотеки на экране «Красители» (новый краситель, новое название)."""
+    global DYES, _DYE_LAB
+    DYES = _load_dyes()
+    _DYE_LAB = _lab8_to_ref(np.array([_hex2lab(h) for _, _, h, _ in DYES]))
 
 
 def dye_name(lab8):
