@@ -16,9 +16,66 @@
  "status": "new",
  "w": 1090,
  "h": 1958,
- "marks": [],
+ "marks": [
+  {
+   "id": "mmv6aahdr15",
+   "box": [
+    0.42054,
+    0.50937,
+    0.03568,
+    0.07378
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv6aahdr15",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 270,
+   "flip": 0,
+   "machine": 1,
+   "score": 0.593,
+   "xfer": "",
+   "by": "машина → dolgikh",
+   "at": 1791871945,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "edited_by": "dolgikh",
+   "edited_at": 1791871953
+  },
+  {
+   "id": "mmv6aahdr16",
+   "box": [
+    0.27272,
+    0.61295,
+    0.03568,
+    0.07378
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv6aahdr15",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 90,
+   "flip": 1,
+   "machine": 1,
+   "score": 0.591,
+   "xfer": "",
+   "by": "машина → dolgikh",
+   "at": 1791871945,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "edited_by": "dolgikh",
+   "edited_at": 1791871953
+  }
+ ],
  "created": 1791870033,
- "updated": 1791870033,
+ "updated": 1791871953,
  "cat": {
   "title": "Guba rug, Guba school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -63,5 +120,7 @@
   }
  ],
  "same_ok": {},
- "_lib_t": "2026-10-12 22:38"
+ "_lib_t": "2026-10-12 22:38",
+ "layout": null,
+ "updated_by": "dolgikh"
 }
