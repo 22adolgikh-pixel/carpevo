@@ -45,7 +45,14 @@ def make_rugs(data):
     k = cv2.resize(carpet(420, 600, 3), (280, 400)); m = cv2.resize(carpet(420, 600, 3), (840, 1200))
     save("kerimov_vol3_p100_1", k, title="Керимов, т. III, Челеберд", cat={"src": "kerimov_vol3"}, same_group="g1", same=[{"id": "met_123", "score": 80}], school="karabakh")
     save("met_123", m, title="Carpet, Karabagh", museum="Метрополитен", cat={"src": "met"}, same_group="g1", same=[{"id": "kerimov_vol3_p100_1", "score": 80}])
-    for i in range(6): save(f"vam_{i}", carpet(300 + 10 * i, 420, 10 + i), title=f"V&A rug {i}", museum="V&A", cat={"src": "vam"})
+    def star(a, cx, cy, r, col):     # v11.4: один и тот же «узор» на трёх коврах — для поиска по всем коврам
+        pts = [(int(cx + (r if i % 2 == 0 else r * .45) * np.cos(i * np.pi / 8)), int(cy + (r if i % 2 == 0 else r * .45) * np.sin(i * np.pi / 8))) for i in range(16)]
+        cv2.fillPoly(a, [np.array(pts)], col); cv2.circle(a, (cx, cy), int(r * .25), (250, 250, 250), -1)
+    STARS = {0: (150, 200, (30, 200, 230)), 3: (230, 140, (200, 90, 40)), 5: (110, 300, (90, 220, 90))}
+    for i in range(6):
+        a = carpet(300 + 10 * i, 420, 10 + i)
+        if i in STARS: star(a, *STARS[i][:2], 34, STARS[i][2])
+        save(f"vam_{i}", a, title=f"V&A rug {i}", museum="V&A", cat={"src": "vam"})
 
 
 def make_color_fig(data):
@@ -426,6 +433,47 @@ def t15_rugs_overview(pg, ctx):
     pg.keyboard.press('Escape'); errors_ok(ctx, 'обзор ковров')
 
 
+@test
+def t16_motif_search(pg, ctx):
+    """v11.4: «где ещё встречается этот узор» — индекс, поиск по рамке, ✓ добавляет рамку на найденный ковёр, клавиша G"""
+    u = ctx['url']
+    st = post(u + 'api/motif/index', {})
+    for _ in range(60):
+        st = get(u + 'api/motif/status')
+        if not st['running'] and st['indexed']: break
+        time.sleep(0.5)
+    assert st['indexed'] >= 6 and not st['stale'], f'индекс не построился: {st}'
+    W = 300; box = [(150 - 40) / W, (200 - 40) / 420, 80 / W, 80 / 420]
+    post(u + 'api/rugs/vam_0', {'marks': [{'id': 'mStar', 'box': box, 'zone': 'field', 'status': 'confirmed', 'motif_text': 'звезда'}]})
+    j = post(u + 'api/motif/search', {'rug': 'vam_0', 'mark': 'mStar'})
+    top = [r['rid'] for r in j['results'][:3]]
+    assert 'vam_3' in top and 'vam_5' in top, f'поиск не нашёл тот же узор на других коврах: {top}'
+    best = j['results'][0]
+    assert 'vam_0' not in [r['rid'] for r in j['results']], 'в находках — сам ковёр запроса'
+    # интерфейс: выбрать рамку, G — окно поиска, ✓ на первой находке
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
+    pg.evaluate("rugOpen('vam_0')"); pg.wait_for_timeout(1500)
+    pg.evaluate("rugSelect(R.rug.marks.find(m=>m.id==='mStar'))"); pg.wait_for_timeout(300)
+    assert pg.is_visible('#rgMotSearch'), 'у выбранной рамки нет кнопки «найти на других коврах»'
+    pg.keyboard.press('g'); pg.wait_for_timeout(2500)
+    assert pg.is_visible('#modal .msm') and pg.evaluate("document.querySelectorAll('.mscard').length") >= 2, 'клавиша G не открывает окно находок'
+    pg.screenshot(path=f'{OUT}/13_motif_search.png')
+    rid = pg.evaluate("MSS.res.results[0].rid")
+    pg.click('.mscard[data-i="0"] [data-ok]'); pg.wait_for_timeout(1200)
+    t = get(u + 'api/rugs/' + rid)
+    mk = [m for m in t['marks'] if m.get('machine') == 'motif']
+    assert mk and mk[-1]['status'] == 'confirmed' and mk[-1]['motif_text'] == 'звезда', '✓ не добавил подтверждённую рамку на найденный ковёр'
+    assert pg.evaluate("document.querySelector('.mscard[data-i=\"0\"]').classList.contains('yes')"), 'карточка не отмечена как ✓'
+    pg.click('.mscard[data-i="0"] [data-no]'); pg.wait_for_timeout(1000)
+    assert not [m for m in get(u + 'api/rugs/' + rid)['marks'] if m.get('machine') == 'motif'], '✗ после ✓ не убрал добавленную рамку'
+    pg.click('.mscard[data-i="1"] .msim'); pg.wait_for_timeout(2000)
+    assert pg.is_hidden('#modal') and pg.evaluate("R.rug.id") == j['results'][1]['rid'], 'клик по находке не открывает тот ковёр'
+    assert pg.evaluate("!!R.hl"), 'найденное место не подсвечено'
+    pg.screenshot(path=f'{OUT}/14_motif_open.png')
+    assert get(u + 'api/motif/status')['labels']['total'] >= 2, 'ответы ✓/✗ не записаны в обучающий набор'
+    errors_ok(ctx, 'поиск узора')
+
+
 # ---------------- запуск ----------------
 def main():
     os.makedirs(OUT, exist_ok=True)
@@ -433,7 +481,7 @@ def main():
     shutil.copytree(CPS, app, ignore=shutil.ignore_patterns('tests', '__pycache__', '*.pyc', 'rug_lib', 'rug_img', 'rugs', 'rug_thumbs'))
     make_rugs(os.path.join(app, 'data')); make_color_fig(os.path.join(app, 'data')); make_crops(os.path.join(app, 'data')); make_auto_sheet(os.path.join(app, 'data'))
     port = free_port(); url = f'http://127.0.0.1:{port}/'
-    env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': '', 'CPS_NO_SCHED': '1'}   # CPS_NO_SCHED: автоматические задачи не запускаются сами
+    env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': '', 'CPS_NO_SCHED': '1', 'CPS_MOTIF_FAKE': '1'}   # CPS_NO_SCHED: автоматические задачи не запускаются сами
     log = open(os.path.join(OUT, 'server.log'), 'w')
     srv = subprocess.Popen([sys.executable, '-m', 'uvicorn', 'backend:app', '--port', str(port)], cwd=app, env=env, stdout=log, stderr=subprocess.STDOUT)
     ok = fail = 0

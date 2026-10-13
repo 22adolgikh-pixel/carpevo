@@ -1779,6 +1779,24 @@ events.automation("train", "Дообучение распознавания", f"
                   _train_run, due=_train_due, enabled=True, auto=False)
 events.automation("weekly", "Отчёт за неделю", lambda c: f"по {['понедельникам', 'вторникам', 'средам', 'четвергам', 'пятницам', 'субботам', 'воскресеньям'][int(c.get('weekday', 0))]} в {int(c.get('hour', 9)):02d}:00 — сводка: что сделали люди и система, что ждёт решения",
                   _week_run, due=_week_due, enabled=True, auto=True, hour=9, weekday=0)
+import motif_search    # v11.4: индекс признаков фото ковров для поиска узора по всем коврам
+
+
+def _motif_run(c):
+    need, _ = motif_search.todo()
+    if not need or motif_search.state["running"]: return None
+    if not motif_search.available(): return "на сервере нет torch — индекс не посчитать"
+    motif_search.build(on_done=lambda res: events.add("Индекс узоров: " + res, "поиск «где ещё встречается этот узор» видит новые фото", link={"to": "events"}))
+    return f"запущен расчёт признаков: {len(need)} фото"
+
+
+def _motif_due(c, t):
+    last = str(c.get("last_run") or "")
+    return t.hour == int(c.get("hour", 4)) and not last.startswith(t.strftime("%Y-%m-%d"))
+
+
+events.automation("motif", "Индекс узоров", lambda c: f"каждую ночь в {int(c.get('hour', 4)):02d}:00 — посчитать признаки новых и изменённых фото ковров для поиска «где ещё встречается этот узор»",
+                  _motif_run, due=_motif_due, enabled=True, auto=True, hour=4)
 events.install(app, DATA, act=_ev_act, extra=_ev_extra)
 
 

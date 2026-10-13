@@ -842,4 +842,119 @@ def install(app, DATA, D_WORK):
         c = cv2.resize(c, None, fx=k, fy=k, interpolation=cv2.INTER_AREA if k < 1 else cv2.INTER_NEAREST)
         return Response(cv2.imencode(".jpg", c, [cv2.IMWRITE_JPEG_QUALITY, 88])[1].tobytes(), media_type="image/jpeg")
 
+    # ---------------- v11.4: «где ещё встречается этот узор» — поиск по всем коврам (motif_search.py) ----------------
+    import motif_search as MS
+    MS.configure(DATA, img_path, D_RUGS)
+
+    def _all_rugs():
+        out = {}
+        for fn in os.listdir(D_RUGS):
+            if not fn.endswith(".json"): continue
+            try:
+                with open(os.path.join(D_RUGS, fn), encoding="utf-8") as f: out[fn[:-5]] = json.load(f)
+            except Exception: pass
+        return out
+
+    @app.get("/api/motif/status")
+    def api_motif_status():
+        return {**MS.status(), "labels": MS.label_stats()}
+
+    @app.post("/api/motif/index")
+    def api_motif_index(body: dict = Body(default={})):
+        """построить / дополнить индекс (в фоне); stop=true — остановить"""
+        if body.get("stop"): MS.stop(); return MS.status()
+        if not MS.available(): return JSONResponse({"error": "на сервере нет torch — признаки посчитать нечем (нужен контейнер с torch, как на VPS)"}, 400)
+
+        def done(res):
+            try:
+                import events
+                events.add("Индекс узоров: " + res, "теперь «🔎 найти на других коврах» ищет и по этим фото", link={"to": "events"})
+            except Exception: pass
+        MS.build(limit=body.get("limit"), on_done=done)
+        return MS.status()
+
+    @app.post("/api/motif/search")
+    async def api_motif_search(request: Request):
+        """mode=mark — по выбранной рамке; motif / scheme — по всем подтверждённым рамкам с этим узором словаря / схемой (+ выбранная)."""
+        b = await request.json(); r = load(b.get("rug") or "")
+        if not r: return JSONResponse({"error": "нет такого ковра"}, 404)
+        m = next((x for x in r.get("marks", []) if x.get("id") == b.get("mark")), None)
+        box = b.get("box") or (m and m["box"]); mode = b.get("mode") or "mark"
+        if not box: return JSONResponse({"error": "выберите рамку элемента"}, 400)
+        limit = max(6, min(200, int(b.get("limit") or 60)))
+
+        def work():
+            A = _all_rugs(); ex = []
+            if mode in ("motif", "scheme"):
+                fld = mode; val = (m or {}).get(fld) or b.get(fld)
+                if not val: return {"error": "у рамки не указан " + ("узор из словаря" if fld == "motif" else "схема")}
+                key = f"{fld}:{val}"
+                for rid, t in A.items():
+                    for mk in t.get("marks") or []:
+                        if mk.get(fld) == val and (mk.get("status") == "confirmed" or (rid == r["id"] and m and mk["id"] == m["id"])):
+                            ex.append((rid, mk["box"]))
+                ex = ex[:80]
+            else:
+                key = f"mark:{r['id']}:{m['id'] if m else ','.join(str(round(v, 3)) for v in box)}"; ex = [(r["id"], box)]
+            vs, sizes = [], []
+            for rid, bx in ex:
+                G = MS.ensure(rid)
+                if G is None: continue
+                v, sz = MS.vec(G, bx); vs.append(v); sizes.append(sz)
+            if not vs:
+                st = MS.status()
+                return {"error": "индекс узоров ещё не построен" if not st["indexed"] else "у этого фото ещё нет признаков — дождитесь расчёта индекса", "need_index": True, "index": st}
+            q = np.mean(vs, 0); q = q / max(np.linalg.norm(q), 1e-8)
+            qsize = (float(np.median([s[0] for s in sizes])), float(np.median([s[1] for s in sizes])))
+            only = None
+            if b.get("school"): only = {rid for rid, t in A.items() if t.get("school") == b["school"]}
+            res = MS.search(q, qsize, exclude=[r["id"]], only=only, limit=limit)
+            L = MS.labels(key); twins = {x.get("id") for x in r.get("same") or []}; grp = r.get("same_group")
+            out = []
+            for h in res:
+                t = A.get(h["rid"]) or {}
+                for bx in h["boxes"]:
+                    bb = bx["box"]
+                    lab = next((l for l in reversed(L) if l.get("rug") == h["rid"] and MS._iou(l.get("box") or [0, 0, 0, 0], bb) > 0.4), None)
+                    bx["label"] = None if not lab else ("yes" if lab.get("ok") else "no")
+                    bx["label_mark"] = (lab or {}).get("mark", "")
+                    fld = mode if mode in ("motif", "scheme") else None; val = (m or {}).get(fld) if fld else None
+                    bx["marked"] = any(MS._iou(mk["box"], bb) > 0.3 and mk.get("status") != "rejected" and
+                                       (not val or mk.get(fld) == val or (m and (mk.get("motif") and mk.get("motif") == m.get("motif")))) for mk in t.get("marks") or [])
+                out.append({**h, "title": t.get("title") or h["rid"], "school": t.get("school", ""), "src": (t.get("cat") or {}).get("src", ""),
+                            "museum": t.get("museum", ""), "twin": h["rid"] in twins or bool(grp and t.get("same_group") == grp), "w": t.get("w", 0), "h": t.get("h", 0)})
+            return {"key": key, "examples": len(vs), "results": out, "index": MS.status()}
+        j = await run_in_threadpool(work)
+        if j.get("error") and not j.get("need_index"): return JSONResponse(j, 400)
+        return j
+
+    @app.post("/api/motif/label")
+    async def api_motif_label(request: Request):
+        """Человек ответил на находку: ✓ это он (на тот ковёр добавляется подтверждённая рамка) / ✗ не он (только запись в обучающий набор).
+        undo — отменить свой ✓ (рамка убирается)."""
+        b = await request.json(); who = user(request); rid = b.get("rug") or ""; now = int(time.time())
+        try: box = [max(0.0, min(1.0, float(v))) for v in b.get("box")][:4]
+        except Exception: return JSONResponse({"error": "нет рамки"}, 400)
+        ok = bool(b.get("ok")); mid = ""
+        with _lock:
+            t = load(rid)
+            if not t: return JSONResponse({"error": "нет такого ковра"}, 404)
+            if b.get("undo"):
+                t["marks"] = [x for x in t.get("marks", []) if x.get("id") != b["undo"]]
+            if ok:
+                mid = f"m{int(time.time() * 1000)}s"
+                motif = b.get("motif") or ""
+                nm = {"id": mid, "box": [round(v, 5) for v in box], "zone": b.get("zone") if b.get("zone") in ZONES else "other",
+                      "motif": motif if motif in BYID else "", "motif_text": b.get("motif_text") or ("" if motif in BYID else motif),
+                      "scheme": b.get("scheme") or "", "group": "g" + mid, "certainty": "sure", "status": "confirmed", "note": "",
+                      "angle": 0, "flip": 0, "machine": "motif", "score": round(float(b.get("score") or 0), 3), "xfer": "",
+                      "by": "поиск узора → " + who, "at": now, "confirmed_by": who, "confirmed_at": now, "found_from": b.get("q_rug", "")}
+                t.setdefault("marks", []).append(nm)
+            if ok or b.get("undo"):
+                t["updated"], t["updated_by"] = now, who; save(t)
+        MS.label_log({"key": b.get("key", ""), "q_rug": b.get("q_rug", ""), "q_mark": b.get("q_mark", ""), "rug": rid, "box": box,
+                      "score": b.get("score"), "ok": ok, "undo": b.get("undo", ""), "mark": mid, "who": who,
+                      "motif": b.get("motif", ""), "scheme": b.get("scheme", "")})
+        return {"ok": True, "mark": mid}
+
     threading.Thread(target=repair_parts, daemon=True).start()   # после того как определены img_path и остальное
