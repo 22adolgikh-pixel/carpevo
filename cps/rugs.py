@@ -4,7 +4,7 @@
 # Метка (элемент на ковре): рамка в долях фото [x, y, w, h] (0..1), зона (поле / кайма / угол / медальон …), узор из словаря
 # (models/dictionary.json — выгрузка вики-части сайта), схема студии (id рисунка), группа повторов, уверенность, статус проверки,
 # кто отметил и кто подтвердил. Повторы одного элемента — метки с одинаковой group.
-import os, re, json, time, threading, io, urllib.request, hashlib
+import os, re, json, time, threading, io, urllib.request, urllib.parse, hashlib
 import cv2, numpy as np
 from fastapi import Request, UploadFile, File, Body, Query
 from fastapi.responses import FileResponse, JSONResponse, Response
@@ -210,6 +210,55 @@ def install(app, DATA, D_WORK):
         if name in BYID: return name
         return COMP.get(fold(name)) or COMP.get("~" + skel(name)) or ""
 
+    # ---- v11.5: тип ковра (композиция) — предположение по названию и по двойникам ----
+    # Слова-названия школ, групп и техник: «Baku rug», «Quba», «Shirvan», «Sumakh» — это не тип композиции, хотя такие статьи в словаре есть.
+    NOT_COMP = {"baku", "baki", "absheron", "abseron", "guba", "kuba", "sirvan", "karabah", "karabag", "garabag", "karabak", "tebriz", "tabriz",
+                "gazah", "kazah", "kazak", "gence", "ganja", "genje", "nahcivan", "nakhcivan", "talis", "mugan", "sumah", "sumag", "sumak", "palaz",
+                "kilim", "zili", "cecim", "verni", "hunting", "susa", "shusha", "lenkeran", "lenkoran", "derbend", "dagestan", "zagatala", "ardabil",
+                "ardebil", "heriz", "salyan", "sahdag", "carpet", "rugs", "xalca", "halca"}
+    CV = {}
+    for d in DICT:
+        if d["type"] != "composition": continue
+        for n in [d["az"], d["ru"], d.get("tr") or ""] + d["names"]:
+            if not n or n.startswith("motif_") or "?" in n: continue
+            k = re.sub(r"[^a-z]", "", fold(n).replace("j", "c"))
+            if len(k) >= 4 and k not in NOT_COMP: CV.setdefault(k, d["id"])
+
+    def comp_from_text(*texts):
+        """«Pirəbədil carpet, Quba group», «Ковёр Касымушагы», «Hajigayib rug» → (id, слово) или ("", ""). Самое длинное совпадение
+        (1–3 слова подряд): «Qollu çiçi» важнее «çiçi»."""
+        best = ("", "", 0)
+        for t in texts:
+            toks = re.findall(r"[a-z]+", fold(t or "").replace("j", "c"))
+            for n in (3, 2, 1):
+                for i in range(len(toks) - n + 1):
+                    k = "".join(toks[i:i + n])
+                    if k in CV and len(k) > best[2]: best = (CV[k], " ".join(toks[i:i + n]), len(k))
+        return best[0], best[1]
+
+    _cg = {}
+
+    def comp_guess_text(r):
+        k = (r["id"], r.get("updated", 0))
+        if k not in _cg:
+            C = r.get("cat") or {}
+            cid, w = comp_from_text(r.get("title"), " ".join(x for x in C.get("names") or [] if x), C.get("composition_name"))
+            _cg[k] = {"id": cid, "why": f"слово «{w}» в названии", "kind": "title"} if cid else None
+        return _cg[k]
+
+    def comp_guess(r, others=None):
+        """предположение типа для ковра без типа: сначала двойник с указанным типом (кроме отклонённых ✗), потом название"""
+        if r.get("composition") in BYID: return None
+        no = {k for k, v in (r.get("same_ok") or {}).items() if v and not v.get("ok")}
+        ids = [x.get("id") for x in r.get("same") or [] if x.get("id") and x.get("id") not in no]
+        for i in ids:
+            o = (others or {}).get(i) or load(i) or {}
+            c = o.get("composition")
+            if c in BYID:
+                okd = ((r.get("same_ok") or {}).get(i) or {}).get("ok")
+                return {"id": c, "why": f"у двойника{' (проверен ✓)' if okd else ''}: {(o.get('title') or i)[:60]}", "kind": "twin", "from": i}
+        return comp_guess_text(r)
+
     CAT_FIELDS = ("title", "museum", "inv", "url", "license", "place", "date", "size", "technique", "school", "composition")
 
     def run_sync(bid, who):
@@ -264,6 +313,8 @@ def install(app, DATA, D_WORK):
                 sync["made" if new else "updated"] += 1; sync["done"] = n + 1
             st = settings(); st.update(bundle_id=bid, last_sync=time.strftime("%Y-%m-%d %H:%M"), built=cat.get("built"), by=who)
             with open(SETF, "w", encoding="utf-8") as f: json.dump(st, f, ensure_ascii=False)
+            sync.update(stage="склеиваю одинаковые файлы")
+            dedupe_files()
             sync.update(stage="готово", last_ok=time.strftime("%Y-%m-%d %H:%M"))
         except Exception as e:
             sync.update(error=str(e)[:300], stage="ошибка")
@@ -342,11 +393,15 @@ def install(app, DATA, D_WORK):
     # ---------------- ковры ----------------
     @app.get("/api/rugs")
     def api_rugs():
-        out = []
+        out = []; full = {}
         for f in sorted(os.listdir(D_RUGS)):
             if f.endswith(".json"):
                 r = load(f[:-5])
-                if r: out.append(summary(r))
+                if r and not r.get("dup_of"): out.append(summary(r)); full[r["id"]] = r
+        for sm in out:                                          # v11.5: предположение типа ковра
+            if sm["composition"] in BYID: continue
+            g = comp_guess(full[sm["id"]], {i: {"composition": full[i].get("composition"), "title": full[i].get("title")} for i in sm["same_ids"] if i in full})
+            if g: sm["comp_sug"] = g["id"]; sm["comp_sug_kind"] = g["kind"]
         out.sort(key=lambda s: (s["status"] == "done", -s["updated"]))
         return {"rugs": out, "import": imp, "zones": ZONES, "schools": SCHOOLS}
 
@@ -359,6 +414,9 @@ def install(app, DATA, D_WORK):
             m["_motif"] = {"az": d["az"], "ru": d["ru"], "tr": d["tr"]} if d else None
         c = BYID.get(r.get("composition") or "")
         r["_composition"] = {"az": c["az"], "ru": c["ru"]} if c else None
+        g = comp_guess(r)
+        if g: g["az"], g["ru"] = BYID[g["id"]]["az"], BYID[g["id"]]["ru"]; r["comp_suggest"] = g
+        r["same"] = [x for x in r.get("same") or [] if not (load(x.get("id") or "") or {}).get("dup_of")]
         for x in r.get("same") or []:
             o = load(x["id"]) or {}
             x.update(title=o.get("title") or x["id"], src=(o.get("cat") or {}).get("src", ""), school=o.get("school", ""), museum=o.get("museum", ""),
@@ -542,11 +600,23 @@ def install(app, DATA, D_WORK):
             if not m: return JSONResponse({"error": "нет такой рамки"}, 404)
             box = m["box"]
         rejected = [m["box"] for m in r.get("marks", []) if m.get("status") == "rejected"]
+        # v11.5: образцы — все рамки этого элемента (группы), кроме отклонённых: повторы в других красках находятся по «своему» образцу
+        me = next((m for m in r.get("marks", []) if m["id"] == b.get("mark")), None)
+        tpl = []
+        if me:
+            g = me.get("group") or me["id"]
+            tpl = [m for m in r.get("marks", []) if (m.get("group") or m["id"]) == g and m.get("status") != "rejected"]
+            tpl.sort(key=lambda m: (m["id"] != me["id"], m.get("status") != "confirmed", m.get("machine") and m.get("status") != "confirmed"))
+        boxes = [m["box"] for m in tpl[:8]] or [box]
+        loose = bool(b.get("loose"))
         # тяжёлый расчёт — в отдельном потоке: иначе, пока он идёт, сервер не отвечает никому (пропадают миниатюры и т. п.)
-        c = await run_in_threadpool(rug_match.find_repeats, a, box, marks_boxes(r) + rejected)
+        c = await run_in_threadpool(lambda: rug_match.find_repeats(a, box, marks_boxes(r) + rejected, boxes=boxes, loose=loose, limit=30 if loose else 60))
         best = max([x["score"] for x in c] or [0])
-        for x in c: x["sure"] = x["score"] >= max(0.68, best * 0.86)     # «точно такой же» / «похоже (другой цвет или близкий узор)»
-        return {"cands": c}
+        byb = {tuple(m["box"]): m["id"] for m in tpl}
+        for x in c:
+            x["sure"] = x["above"] and x["score"] >= max(0.62, best * 0.8)     # «точно такой же» / «похоже (другой цвет или близкий узор)»
+            x["ref"] = byb.get(tuple(x.pop("tpl")), "")                         # по какой рамке-образцу найдено (её поворот — отсчёт)
+        return {"cands": c, "templates": len(boxes)}
 
     def scale_of(r, W, H):
         """Сколько пикселей фото на один узел: по любой рамке со схемой (лучше подтверждённой)."""
@@ -684,6 +754,21 @@ def install(app, DATA, D_WORK):
         x0, y0 = max(ax, nb[0]), max(ay, nb[1]); x1, y1 = min(ax + aw, nb[0] + nb[2]), min(ay + ah, nb[1] + nb[3])
         if x1 <= x0 or y1 <= y0 or (x1 - x0) * (y1 - y0) < 0.5 * aw * ah: return None
         return [round((x0 - nb[0]) / nb[2], 5), round((y0 - nb[1]) / nb[3], 5), round((x1 - x0) / nb[2], 5), round((y1 - y0) / nb[3], 5)]
+
+    @app.post("/api/rugs_comp_accept")
+    async def api_rugs_comp_accept(request: Request):
+        """принять предложенный тип ковра: ids — у этих ковров; all + kind — у всех, где он предложен этим способом (title / twin)"""
+        b = await request.json(); who = user(request); n = 0; now = int(time.time())
+        ids = b.get("ids") or ([f[:-5] for f in os.listdir(D_RUGS) if f.endswith(".json")] if b.get("all") else [])
+        with _lock:
+            for rid in ids:
+                r = load(rid)
+                if not r or r.get("dup_of"): continue
+                g = comp_guess(r)
+                if not g or (b.get("kind") and g["kind"] != b["kind"]): continue
+                r["composition"] = g["id"]; r["composition_by"] = f"{who} (предложено: {g['why']})"; r["updated"], r["updated_by"] = now, who
+                save(r); n += 1
+        return {"ok": True, "n": n}
 
     @app.post("/api/rugs/{rid}/split")
     async def api_rug_split(rid: str, request: Request):
@@ -928,6 +1013,83 @@ def install(app, DATA, D_WORK):
         if j.get("error") and not j.get("need_index"): return JSONResponse(j, 400)
         return j
 
+    # ---------------- v11.5: «на что это похоже» — подсказка названия по форме (shape_hint.py) ----------------
+    import shape_hint as SH
+    _sm = {"t": 0, "v": {}}
+
+    def scheme_meta():
+        """все схемы студии с картинкой: {id: {name, motif, done}} (узор словаря — как в figures_by_concept)"""
+        if time.time() - _sm["t"] < 120: return _sm["v"]
+        out = {}
+        for f in os.listdir(D_WORK):
+            if not f.endswith(".json"): continue
+            try:
+                with open(os.path.join(D_WORK, f), encoding="utf-8") as fh: w = json.load(fh)
+            except Exception: continue
+            if not w.get("matrix") or w.get("kind") in ("photo", "junk"): continue
+            m = w.get("meta") or {}
+            cid = ALIAS.get((m.get("site_id") or "").split(",")[0].strip().lower()) or ALIAS.get((m.get("name_az") or "").lower()) or ALIAS.get((m.get("name") or "").lower()) or ""
+            out[f[:-5]] = {"name": m.get("name_az") or m.get("name") or "", "motif": cid if cid in BYID and BYID[cid]["type"] != "composition" else "", "done": bool(w.get("done"))}
+        _sm.update(t=time.time(), v=out)
+        return out
+
+    def shape_index():
+        return SH.build_index(D_OUT, scheme_meta(), os.path.join(DATA, "motif", "shape_schemes.npz"))
+
+    threading.Thread(target=lambda: (time.sleep(5), shape_index()), daemon=True).start()   # первый раз ≈20 мс на схему, потом из кэша
+
+    _nm = {"t": 0, "v": []}
+
+    def named_marks():
+        """подтверждённые рамки с названием на всех коврах: [(ковёр, рамка, узор, название)]"""
+        if time.time() - _nm["t"] < 60: return _nm["v"]
+        out = []
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            try:
+                with open(os.path.join(D_RUGS, f), encoding="utf-8") as fh: t = json.load(fh)
+            except Exception: continue
+            if t.get("dup_of"): continue
+            for m in t.get("marks") or []:
+                if m.get("status") == "confirmed" and (m.get("motif") or m.get("motif_text")):
+                    out.append((t["id"], m, m.get("motif") or "", (BYID.get(m.get("motif") or "") or {}).get("az") or m.get("motif_text") or ""))
+        _nm.update(t=time.time(), v=out)
+        return out
+
+    @app.post("/api/rugs/{rid}/shape_hint")
+    async def api_shape_hint(rid: str, request: Request):
+        """Обведённый элемент → на что он похож: схемы студии (с поворотом) и названные элементы на других коврах."""
+        b = await request.json(); p = img_path(rid); a = cv2.imread(p) if p else None
+        if a is None: return JSONResponse({"error": "нет такого ковра"}, 404)
+        try: x, y, w, h = [float(v) for v in b.get("box")][:4]
+        except Exception: return JSONResponse({"error": "нет рамки"}, 400)
+
+        def work():
+            H, W = a.shape[:2]; x0, y0 = int(x * W), int(y * H); x1, y1 = max(x0 + 4, int((x + w) * W)), max(y0 + 4, int((y + h) * H))
+            crop = a[y0:y1, x0:x1]
+            shape_index(); sch = SH.match_schemes(crop, limit=8)
+            for c in sch:
+                d = BYID.get(c["motif"]) if c["motif"] else None
+                if d: c.update(az=d["az"], ru=d["ru"], tr=d["tr"])
+            near = []
+            G = MS.ensure(rid) if MS.status()["indexed"] else None
+            if G is not None:
+                q, _ = MS.vec(G, [x, y, w, h]); best = {}
+                for trid, m, motif, name in named_marks():
+                    if trid == rid and m.get("box") == [x, y, w, h]: continue
+                    Gt = G if trid == rid else MS.grid(trid)
+                    if Gt is None: continue
+                    v, _ = MS.vec(Gt, m["box"]); sc = float(v @ q); k = motif or name.lower()
+                    if k not in best or sc > best[k]["score"]:
+                        best[k] = {"rug": trid, "mark": m["id"], "box": m["box"], "motif": motif, "name": name, "scheme": m.get("scheme") or "",
+                                   "score": round(sc, 3), "same_rug": trid == rid}
+                near = sorted(best.values(), key=lambda t: -t["score"])[:6]
+                for c in near:
+                    d = BYID.get(c["motif"]) if c["motif"] else None
+                    if d: c.update(az=d["az"], ru=d["ru"], tr=d["tr"])
+            return {"schemes": sch, "marks": near, "n_schemes": len(SH._idx["ids"])}
+        return await run_in_threadpool(work)
+
     @app.post("/api/motif/label")
     async def api_motif_label(request: Request):
         """Человек ответил на находку: ✓ это он (на тот ковёр добавляется подтверждённая рамка) / ✗ не он (только запись в обучающий набор).
@@ -956,5 +1118,58 @@ def install(app, DATA, D_WORK):
                       "score": b.get("score"), "ok": ok, "undo": b.get("undo", ""), "mark": mid, "who": who,
                       "motif": b.get("motif", ""), "scheme": b.get("scheme", "")})
         return {"ok": True, "mark": mid}
+
+    def _file_key(u):
+        """один и тот же файл Wikimedia: страница commons.wikimedia.org/wiki/File:… (у маленькой копии и у оригинала она одна)"""
+        u = urllib.parse.unquote(u or "")
+        m = re.search(r"commons\.wikimedia\.org/wiki/(?:File|Файл):(.+)$", u, re.I)
+        return re.sub(r"[\s_]+", "_", m.group(1)).strip().lower() if m else ""
+
+    def dedupe_files():
+        """v11.5: «Wikimedia» (уменьшенная копия ~800 px) и «Wikimedia (оригинал)» — один и тот же файл. Оставляем самый крупный,
+        рамки маленькой копии переносим в него (фото то же — доли рамок те же), пустые поля паспорта дополняем, копию скрываем (dup_of)."""
+        by = {}
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r: continue
+            k = _file_key(r.get("url"))
+            if k: by.setdefault(k, []).append(r)
+        n = 0
+        for k, rs in by.items():
+            if len(rs) < 2: continue
+            def area(r):
+                wh = img_size(r["id"], r) or [r.get("w") or 0, r.get("h") or 0]
+                return (wh[0] * wh[1], (r.get("cat") or {}).get("src") == "commons")
+            rs.sort(key=area, reverse=True); keep = rs[0]
+            with _lock:
+                K = load(keep["id"]); changed = False
+                if K.get("dup_of"): K.pop("dup_of"); changed = True
+                for d in rs[1:]:
+                    D = load(d["id"])
+                    if not D: continue
+                    if D.get("dup_of") != K["id"]:
+                        for m in D.get("marks") or []:
+                            if not any(max(0, min(m["box"][0] + m["box"][2], x["box"][0] + x["box"][2]) - max(m["box"][0], x["box"][0])) *
+                                       max(0, min(m["box"][1] + m["box"][3], x["box"][1] + x["box"][3]) - max(m["box"][1], x["box"][1])) > 0.7 * m["box"][2] * m["box"][3]
+                                       for x in K.get("marks") or []):
+                                K.setdefault("marks", []).append({**m, "note": (m.get("note") or "") + (" · " if m.get("note") else "") + "перенесено с уменьшенной копии " + D["id"]})
+                        for f2 in PASS_FIELDS:
+                            if not K.get(f2) and D.get(f2): K[f2] = D[f2]
+                        have = {x.get("id") for x in K.get("same") or []} | {K["id"]}
+                        for x in D.get("same") or []:
+                            if x.get("id") not in have: K.setdefault("same", []).append(x)
+                        for o, v in (D.get("same_ok") or {}).items(): K.setdefault("same_ok", {}).setdefault(o, v)
+                        D["dup_of"] = K["id"]; D["updated"] = int(time.time()); save(D); changed = True; n += 1
+                if changed: K["updated"] = int(time.time()); save(K)
+        return n
+
+    def _dedupe_bg():
+        try:
+            k = dedupe_files()
+            if k: print("dedupe_files: скрыто уменьшенных копий:", k)
+        except Exception as e: print("dedupe_files:", e)
+
+    threading.Thread(target=_dedupe_bg, daemon=True).start()
 
     threading.Thread(target=repair_parts, daemon=True).start()   # после того как определены img_path и остальное

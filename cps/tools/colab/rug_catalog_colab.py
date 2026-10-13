@@ -152,7 +152,17 @@ for vol, roman in (('kerimov_vol1', 'I'), ('kerimov_vol2', 'II'), ('kerimov_vol3
 def fname(pid): return re.sub(r'[^A-Za-z0-9._-]+', '_', pid)[:80] + '_' + hashlib.md5(pid.encode()).hexdigest()[:6] + '.jpg'
 CP = json.load(open(f'{REPO}/site/model/sources/museum_photos/catalog_photos.json', encoding='utf-8'))['items']
 n0 = len(items)
+# v11.5: уменьшенные копии Wikimedia (~800 px), у которых есть оригинал в commons_hires.json, не берём — тот же файл.
+# Их разметку сайта (школа, тип ковра) отдаём оригиналу: WM_INFO[файл] → в разделе 5.
+def _wm_key(u):
+    import urllib.parse as _up
+    u = _up.unquote(u or ''); m_ = re.search(r'(?:File|Файл):(.+)$', u)
+    return re.sub(r'[\s_]+', '_', m_.group(1)).strip().lower() if m_ else ''
+_CH_KEYS = {_wm_key(f.get('page') or f.get('file')) for f in (json.load(open(f'{REPO}/cps/tools/colab/data/commons_hires.json', encoding='utf-8')) if os.path.exists(f'{REPO}/cps/tools/colab/data/commons_hires.json') else [])}
+WM_INFO = {}; wm_skip = 0
 for p in CP:
+    if p.get('src') == 'wikimedia' and _wm_key(p.get('url') or p.get('id')) in _CH_KEYS:
+        WM_INFO[_wm_key(p.get('url') or p.get('id'))] = p; wm_skip += 1; continue
     ip = f'{D}/photos/full/{fname(p["id"])}'
     if not os.path.exists(ip): continue
     sc = p.get('type') or ''; why = f'{p.get("basis") or "подпись источника"} ({p.get("conf") or "?"})' if sc else ''
@@ -163,7 +173,7 @@ for p in CP:
         technique={'flatweave': 'безворсовый', 'pile': 'ворсовый'}.get(p.get('kind') or '', '') or tech_of(p.get('title')),
         fragment=p.get('whole') is False, text='', museum={'met': 'Метрополитен-музей', 'aic': 'Институт искусств Чикаго', 'cleveland': 'Кливлендский музей искусств', 'wikimedia': 'Wikimedia Commons'}.get(p.get('src'), p.get('src') or ''),
         inv='', place=p.get('place') or '', url=p.get('url') or '', license=p.get('license') or '', size=p.get('dims') or '')
-log('музейные фото (catalog_photos):', len(items) - n0)
+log('музейные фото (catalog_photos):', len(items) - n0, '| уменьшенных копий Wikimedia пропущено (есть оригинал):', wm_skip)
 
 # ---------------- 3. V&A / Met (museum_open) ----------------
 n0 = len(items); mo = f'{D}/photos/museum_open'
@@ -248,8 +258,10 @@ for k, f in enumerate(CH):
         sc, kk = school_of(name, txt); why = f'слово «{kk}» в подписи' if sc else ''
     mus = next((v for kk, v in MUS if kk.lower() in cats.lower() or kk.lower() in txt.lower()), '')
     inv = (re.search(r'(?:inv(?:entory)?\.?\s*(?:no\.?|№|number)?|TIEM|№)\s*([A-ZА-Я]{0,3}[-‐ ]?\d[\d\-./]*)', name + ' ' + txt, re.I) or [None, ''])[1]
+    wi = WM_INFO.get(_wm_key(f.get('page') or f.get('file'))) or {}           # v11.5: разметка сайта для этого файла (тип ковра, школа)
+    if not sc and wi.get('type'): sc = wi['type']; why = f'{wi.get("basis") or "сайт"} ({wi.get("conf") or "?"})'
     add(id='cm_' + hashlib.md5(f['file'].encode()).hexdigest()[:10], src='commons', img_path=p, title=(txt.split('.')[0][:110] if len(txt) > 12 else name)[:110], names=[name],
-        composition='', date=(re.search(r'\b(?:(?:1[5-9]|20)\s*(?:th|-?ci|-?cü|-?cu)?\s*(?:c\.|century|əsr)|X{0,2}(?:IX|IV|V?I{0,3})\s*(?:c\b|c\.|century|əsr|в\.)|(?:circa|ca\.|c\.)\s*1[5-9]\d\d|1[6-9]\d\d)', txt + ' ' + name, re.I) or [''])[0].strip(), school=sc, school_why=why,
+        composition=wi.get('concept') or '', date=(re.search(r'\b(?:(?:1[5-9]|20)\s*(?:th|-?ci|-?cü|-?cu)?\s*(?:c\.|century|əsr)|X{0,2}(?:IX|IV|V?I{0,3})\s*(?:c\b|c\.|century|əsr|в\.)|(?:circa|ca\.|c\.)\s*1[5-9]\d\d|1[6-9]\d\d)', txt + ' ' + name, re.I) or [''])[0].strip(), school=sc, school_why=why,
         technique=tech_of(name, txt, cats), fragment=frag_of(name, txt), text=txt, museum=mus, inv=inv, place='', url=f.get('page') or '',
         license=(f.get('lic') or 'Wikimedia Commons') + (f' · {f.get("artist")}' if f.get('artist') else ''), size='', big=True)
 log('Wikimedia Commons (полный размер):', len(items) - n0, '| не скачалось:', bad)

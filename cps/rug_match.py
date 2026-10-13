@@ -56,51 +56,85 @@ def _overlaps(px, boxes, W, H, thr=0.35):
     return False
 
 
-def find_repeats(img, box, exclude=(), limit=60, min_score=None):
-    """img — BGR, box — [x,y,w,h] в долях. → [{box, score, angle, flip}] без пересечений с exclude (уже размеченные)."""
+def _ori(bgr):
+    """v11.5: направление линий узора (тензор структуры по Lab в «двойном угле»): не зависит ни от цвета, ни от того,
+    светлый узор на тёмном или тёмный на светлом, — повтор с переставленными красками сравнивается по форме."""
+    lab = cv2.cvtColor(bgr, cv2.COLOR_BGR2LAB).astype(np.float32)
+    Jxx = Jyy = Jxy = 0
+    for c in range(3):
+        ch = cv2.GaussianBlur(lab[..., c], (0, 0), 1.0); gx = cv2.Sobel(ch, cv2.CV_32F, 1, 0); gy = cv2.Sobel(ch, cv2.CV_32F, 0, 1)
+        Jxx = Jxx + gx * gx; Jyy = Jyy + gy * gy; Jxy = Jxy + gx * gy
+    Jxx, Jyy, Jxy = [cv2.GaussianBlur(x, (0, 0), 1.5) for x in (Jxx, Jyy, Jxy)]
+    m = np.sqrt((Jxx - Jyy) ** 2 + 4 * Jxy ** 2) + 1e-6; n = np.sqrt(m)
+    return (Jxx - Jyy) / m * n, 2 * Jxy / m * n
+
+
+def _tf_ori(c, s, ang, fl):
+    """поворот/зеркало поля направлений: картинку поворачиваем, а «двойной угол» меняет знак (90°/270° — оба, зеркало — sin)"""
+    c, s = _tf(c, ang, fl), _tf(s, ang, fl)
+    if ang in (90, 270): c, s = -c, -s
+    if fl: s = -s
+    return c, s
+
+
+def find_repeats(img, box, exclude=(), limit=60, min_score=None, boxes=None, loose=False):
+    """img — BGR, box — [x,y,w,h] в долях. → [{box, score, angle, flip, sure}] без пересечений с exclude (уже размеченные).
+    boxes — несколько образцов того же элемента (все рамки группы): ищем по каждому, место получает лучший балл —
+    так находятся и повторы в других красках. loose — «вижу ещё»: порог ниже, ответ — следующие по сходству места."""
     H0, W0 = img.shape[:2]
-    bw, bh = box[2] * W0, box[3] * H0
+    T = [b for b in (boxes or []) if b] or [box]
+    if box not in T: T = [box] + T
+    T = T[:8]
+    bw = float(np.median([b[2] for b in T])) * W0; bh = float(np.median([b[3] for b in T])) * H0
     # шаблон ≈ 56 px по длинной стороне, но фото — не больше 900 px: иначе мелкий элемент (10–20 px) заставляет перебирать
     # фото в полном размере 24 раза, и это минуты. Мелкий шаблон при этом может стать 8–12 px — для поиска хватает.
     s = min(1.0, 56.0 / max(bw, bh), 900.0 / max(H0, W0))
     a = cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else img
     H, W = a.shape[:2]
-    G, E = _maps(a)
-    x0, y0 = int(round(box[0] * W)), int(round(box[1] * H)); tw, th = max(6, int(round(box[2] * W))), max(6, int(round(box[3] * H)))
-    tg, te = G[y0:y0 + th, x0:x0 + tw], E[y0:y0 + th, x0:x0 + tw]
-    if tg.shape[0] < 5 or tg.shape[1] < 5: return []
+    G, E = _maps(a); C, S = _ori(a); EN = C * C + S * S
+    tw, th = max(6, int(round(bw * s))), max(6, int(round(bh * s)))
     cands = []
-    for sc in (0.92, 1.0, 1.08):                     # повторы на ковре бывают чуть разного размера (ручная работа)
-        for ang, fl in TF:
-            g = _tf(tg, ang, fl); e = _tf(te, ang, fl)
-            if sc != 1.0:
-                g = cv2.resize(g, None, fx=sc, fy=sc); e = cv2.resize(e, None, fx=sc, fy=sc)
-            if g.shape[0] >= H or g.shape[1] >= W: continue
-            r = 0.45 * cv2.matchTemplate(G, g, cv2.TM_CCOEFF_NORMED) + 0.55 * cv2.matchTemplate(E, e, cv2.TM_CCOEFF_NORMED)
-            hh, ww = g.shape[:2]
-            # локальные максимумы
-            k = max(3, int(min(hh, ww) * 0.5) | 1)
-            mx = cv2.dilate(r, np.ones((k, k), np.uint8))
-            ys, xs = np.where((r >= mx - 1e-6) & (r > 0.35))
-            if len(ys) > 150:                            # мелкие элементы «находятся» везде — берём только лучшие места
-                top = np.argpartition(-r[ys, xs], 150)[:150]; ys, xs = ys[top], xs[top]
-            for yy, xx in zip(ys, xs):
-                cands.append({"px": (xx / s, yy / s, ww / s, hh / s), "score": float(r[yy, xx]), "angle": ang, "flip": fl})
+    for ti, b in enumerate(T):
+        x0, y0 = int(round(b[0] * W)), int(round(b[1] * H))
+        x0, y0 = max(0, min(W - tw, x0)), max(0, min(H - th, y0))
+        tg, te, tc, ts = (M[y0:y0 + th, x0:x0 + tw] for M in (G, E, C, S))
+        if tg.shape[0] < 5 or tg.shape[1] < 5: continue
+        for sc in (0.92, 1.0, 1.08):                     # повторы на ковре бывают чуть разного размера (ручная работа)
+            for ang, fl in TF:
+                g = _tf(tg, ang, fl); e = _tf(te, ang, fl); c, ss = _tf_ori(tc, ts, ang, fl)
+                if sc != 1.0:
+                    g, e, c, ss = (cv2.resize(m, None, fx=sc, fy=sc) for m in (g, e, c, ss))
+                if g.shape[0] >= H or g.shape[1] >= W: continue
+                hh, ww = g.shape[:2]
+                num = cv2.matchTemplate(C, c, cv2.TM_CCORR) + cv2.matchTemplate(S, ss, cv2.TM_CCORR)
+                en = cv2.boxFilter(EN, -1, (ww, hh), normalize=False, anchor=(0, 0))[:H - hh + 1, :W - ww + 1]
+                ro = num / np.sqrt(np.maximum(en, 1e-6) * (float((c * c + ss * ss).sum()) + 1e-6))
+                r = 0.2 * cv2.matchTemplate(G, g, cv2.TM_CCOEFF_NORMED) + 0.35 * cv2.matchTemplate(E, e, cv2.TM_CCOEFF_NORMED) + 0.45 * ro
+                # локальные максимумы
+                k = max(3, int(min(hh, ww) * 0.5) | 1)
+                mx = cv2.dilate(r, np.ones((k, k), np.uint8))
+                ys, xs = np.where((r >= mx - 1e-6) & (r > 0.25))
+                if len(ys) > 150:                            # мелкие элементы «находятся» везде — берём только лучшие места
+                    top = np.argpartition(-r[ys, xs], 150)[:150]; ys, xs = ys[top], xs[top]
+                for yy, xx in zip(ys, xs):
+                    cands.append({"px": (xx / s, yy / s, ww / s, hh / s), "score": float(r[yy, xx]), "angle": ang, "flip": fl, "tpl": ti})
     if not cands: return []
-    cands = sorted(cands, key=lambda t: -t["score"])[:1500]
+    cands = sorted(cands, key=lambda t: -t["score"])[:3000]
     cands = _nms(cands)
-    # порог: сам исходный элемент находится с ~1.0; повторы обычно 0.5–0.8, случайные места — < 0.4.
-    scores = sorted((c["score"] for c in cands), reverse=True)
-    noise = float(np.median(scores[min(len(scores) - 1, 5):])) if len(scores) > 6 else 0.3
-    thr = min_score if min_score is not None else max(0.42, noise + 0.12)
+    ex = list(exclude) + list(T)
+    free = [c for c in cands if not _overlaps(c["px"], ex, W0, H0)]
+    # порог: образцы находятся с ~1.0; повторы — 0.45–0.85 (в других красках ниже), случайные места — < 0.4.
+    scores = [c["score"] for c in free]
+    noise = float(np.median(scores[min(len(scores) - 1, 8):])) if len(scores) > 10 else 0.3
+    thr = min_score if min_score is not None else max(0.4, noise + 0.1)
+    sure_thr = thr
+    if loose: thr = max(0.28, noise + 0.03)          # «вижу ещё»: следующие по сходству места (их проверяет человек)
     out = []
-    ex = list(exclude) + [box]
-    for c in cands:
+    for c in free:
         if c["score"] < thr: break
-        if _overlaps(c["px"], ex, W0, H0): continue
         x, y, w, h = c["px"]
         out.append({"box": [round(x / W0, 5), round(y / H0, 5), round(w / W0, 5), round(h / H0, 5)], "score": round(c["score"], 3),
-                    "angle": c["angle"], "flip": c["flip"]})
+                    "angle": c["angle"], "flip": c["flip"], "above": c["score"] >= sure_thr, "tpl": T[c["tpl"]]})
         if len(out) >= limit: break
     return out
 

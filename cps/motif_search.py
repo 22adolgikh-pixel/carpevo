@@ -171,6 +171,7 @@ def _rug_list(fresh=False):
             with open(os.path.join(d, fn), encoding="utf-8") as f: r = json.load(f)
         except Exception: continue
         if r.get("split_into"): continue                      # разворот, разделённый на части: ищем по частям
+        if r.get("dup_of"): continue                          # уменьшенная копия того же файла (v11.5)
         p = _cfg["img_path"](rid)
         if not p: continue
         out.append((rid, p, round(os.path.getmtime(p), 1)))

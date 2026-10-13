@@ -53,6 +53,21 @@ def make_rugs(data):
         a = carpet(300 + 10 * i, 420, 10 + i)
         if i in STARS: star(a, *STARS[i][:2], 34, STARS[i][2])
         save(f"vam_{i}", a, title=f"V&A rug {i}", museum="V&A", cat={"src": "vam"})
+    # v11.5: кайма с одним элементом в разных красках (как у «Гаджигайыба»: красный на светлом / светлый на чёрном)
+    a = np.full((620, 300, 3), (40, 30, 120), np.uint8)
+    pal = [((40, 40, 160), (230, 225, 210)), ((20, 20, 20), (230, 225, 210)), ((230, 225, 210), (40, 40, 160)), ((40, 40, 160), (20, 20, 20))]
+    for i in range(6):
+        bg, fg = pal[i % 4]; y0 = 20 + i * 100
+        cv2.rectangle(a, (20, y0), (100, y0 + 80), bg, -1); cv2.circle(a, (60, y0 + 40), 9, fg, -1)
+        for dx, dy in ((-1, -1), (1, -1), (-1, 1), (1, 1)):
+            cv2.ellipse(a, (60 + dx * 22, y0 + 40 + dy * 22), (14, 9), 45 * dx * dy, 0, 300, fg, 4)
+        cv2.rectangle(a, (180, y0), (260, y0 + 80), (110, 60, 20), -1); cv2.line(a, (190, y0 + 10), (250, y0 + 70), (200, 200, 200), 5)
+    save("border_rep", a, title="Hajigayib rug, Guba school, XIX c", cat={"src": "commons"})
+    # v11.5: тип ковра по названию и одинаковый файл Wikimedia в двух размерах
+    save("cm_pir", carpet(320, 420, 31), title="Pirəbədil carpet, Quba group of Azerbaijani carpets", url="https://commons.wikimedia.org/wiki/File:Pir%C9%99b%C9%99dil_carpet.jpg", cat={"src": "commons"})
+    small = cv2.resize(carpet(320, 420, 31), (160, 210))
+    save("wm_pir_small", small, title="Pirəbədil carpet.jpg", url="https://commons.wikimedia.org/wiki/File:Pirəbədil_carpet.jpg", cat={"src": "wikimedia"},
+         marks=[{"id": "mSm", "box": [0.3, 0.3, 0.2, 0.2], "zone": "field", "status": "confirmed", "motif_text": "с маленькой копии"}])
 
 
 def make_color_fig(data):
@@ -411,7 +426,7 @@ def t15_rugs_overview(pg, ctx):
     n_all = pg.evaluate("document.querySelectorAll('.rgcard').length")
     pg.click('#rgTree .pn[data-k="museum"]'); pg.wait_for_timeout(500)
     ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
-    assert ids and all(i.startswith(('vam_', 'met_')) for i in ids), f'фильтр «музеи» пропускает другие: {ids}'
+    assert ids and all(i.startswith(('vam_', 'met_', 'cm_', 'border_rep')) for i in ids), f'фильтр «музеи» пропускает другие: {ids}'
     pg.click('#rgTree .pn[data-k="museum"]'); pg.wait_for_timeout(300)   # раскрыть подисточники
     if pg.query_selector('#rgTree .pn.sub[data-s="vam"]'):
         pg.click('#rgTree .pn.sub[data-s="vam"]'); pg.wait_for_timeout(400)
@@ -472,6 +487,56 @@ def t16_motif_search(pg, ctx):
     pg.screenshot(path=f'{OUT}/14_motif_open.png')
     assert get(u + 'api/motif/status')['labels']['total'] >= 2, 'ответы ✓/✗ не записаны в обучающий набор'
     errors_ok(ctx, 'поиск узора')
+
+
+@test
+def t17_feedback_v115(pg, ctx):
+    """v11.5: повторы в других красках и «вижу ещё», тип ковра по названию, уменьшенная копия Wikimedia скрыта, подсказка по форме, лента двойников не прыгает"""
+    u = ctx['url']
+    # 1) повторы: образец — элемент в первой клетке каймы; остальные 5 — в других красках
+    box = [20 / 300, 20 / 620, 80 / 300, 80 / 620]
+    post(u + 'api/rugs/border_rep', {'marks': [{'id': 'mB', 'box': box, 'zone': 'border', 'status': 'confirmed', 'motif_text': 'qarmaq'}]})
+    j = post(u + 'api/rugs/border_rep/repeats', {'box': box, 'mark': 'mB'})
+    left = [c for c in j['cands'] if c['box'][0] < 0.4]
+    assert len(left) >= 5, f'повторы в других красках: найдено {len(left)} из 5 — {[c["score"] for c in j["cands"]]}'
+    assert not [c for c in j['cands'] if c['box'][0] > 0.5 and c['score'] > 0.6], 'полосы справа приняты за тот же элемент'
+    jl = post(u + 'api/rugs/border_rep/repeats', {'box': box, 'mark': 'mB', 'loose': True})
+    assert len(jl['cands']) >= len(j['cands']), '«вижу ещё» даёт меньше мест, чем обычный поиск'
+    # 2) тип ковра по названию + принять; копия Wikimedia скрыта, её рамка перенесена в оригинал
+    for _ in range(20):
+        L = {r['id']: r for r in get(u + 'api/rugs')['rugs']}
+        if 'wm_pir_small' not in L: break
+        time.sleep(0.5)
+    assert 'wm_pir_small' not in L, 'уменьшенная копия того же файла Wikimedia не скрыта'
+    assert any(m.get('motif_text') == 'с маленькой копии' for m in get(u + 'api/rugs/cm_pir')['marks']), 'рамка уменьшенной копии не перенесена в оригинал'
+    assert L['cm_pir'].get('comp_sug') == 'pirebedil', f'тип по названию не предложен: {L["cm_pir"].get("comp_sug")}'
+    assert L['border_rep'].get('comp_sug') == 'haciqayib', f'«Hajigayib» не узнан как hacıqayıb: {L["border_rep"].get("comp_sug")}'
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
+    if pg.evaluate("R.view") == 'edit': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
+    assert pg.is_visible('#rgKpiComp [data-cacc="title"]'), 'в обзоре нет «принять по названию»'
+    pg.on('dialog', lambda d: d.accept())
+    pg.click('#rgKpiComp [data-cacc="title"]'); pg.wait_for_timeout(1500)
+    assert get(u + 'api/rugs/cm_pir')['composition'] == 'pirebedil', '«принять по названию» не поставило тип'
+    # 3) подсказка по форме: звезда на vam_3 → схемы студии из тестовых данных (качество формы проверено отдельно на 28 схемах)
+    j = post(u + 'api/rugs/vam_3/shape_hint', {'box': [(230 - 40) / 330, (140 - 40) / 420, 80 / 330, 80 / 420]})
+    assert len(j['schemes']) >= 3 and j['n_schemes'] >= 3, f'подсказка по форме пустая: {j}'
+    pg.evaluate("rugOpen('vam_3')"); pg.wait_for_timeout(1500)
+    pg.evaluate("(()=>{const m={id:'mNew',box:[190/330,100/420,80/330,80/420],zone:'field',status:'proposed',motif:'',motif_text:'',scheme:'',group:'',angle:0,flip:0};R.rug.marks.push(m);rugSelect(m);})()".replace('190/330,100/420', '(230-40)/330,(140-40)/420'))
+    pg.wait_for_timeout(2500)
+    assert pg.is_visible('#rgShape [data-hs="0"]'), 'у новой рамки без названия нет подсказок по форме'
+    pg.screenshot(path=f'{OUT}/15_shape_hint.png')
+    sid = j['schemes'][0]['id']
+    pg.click('#rgShape [data-hs="0"]'); pg.wait_for_timeout(400)
+    assert pg.evaluate("R.sel.scheme") == sid and pg.evaluate("!!(R.sel.motif||R.sel.motif_text)"), 'клик по подсказке не поставил схему и название'
+    pg.keyboard.press('Delete'); pg.wait_for_timeout(1200)
+    # 4) лента двойников: порядок не меняется при переключении
+    pg.evaluate("rugOpen('kerimov_vol3_p100_1')"); pg.wait_for_timeout(1500)
+    o1 = pg.evaluate("[...document.querySelectorAll('#rgStrip .rgtw')].map(e=>e.dataset.open)")
+    pg.evaluate("rugOpen('met_123')"); pg.wait_for_timeout(1500)
+    o2 = pg.evaluate("[...document.querySelectorAll('#rgStrip .rgtw')].map(e=>e.dataset.open)")
+    assert o1 == o2 and len(o1) == 2, f'порядок миниатюр двойников меняется: {o1} → {o2}'
+    assert pg.evaluate("document.querySelector('#rgStrip .rgtw.cur').dataset.open") == 'met_123', 'открытое фото не подсвечено'
+    errors_ok(ctx, 'v11.5')
 
 
 # ---------------- запуск ----------------
