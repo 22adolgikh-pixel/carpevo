@@ -7,8 +7,8 @@
 /* v11: тема в стиле Figma — нейтральные серые, белый акцент, кизиловый (--zog / --warn) — только «нужно решение» и «в работе». Токены — cps/DESIGN.md */
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;font:13px/1.4 'Inter',-apple-system,system-ui,sans-serif;font-feature-settings:'cv11','ss01';background:var(--bg);color:var(--tx);display:grid;grid-template-columns:230px 1fr 310px;grid-template-rows:auto 1fr auto;height:100vh;overflow:hidden}
-header{grid-column:1/4;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;padding:7px 12px;background:var(--pan);border-bottom:1px solid var(--ln)}
+body{margin:0;font:13px/1.4 'Inter',-apple-system,system-ui,sans-serif;font-feature-settings:'cv11','ss01';background:var(--bg);color:var(--tx);display:grid;grid-template-columns:64px 230px 1fr 310px;grid-template-rows:auto 1fr auto;height:100vh;overflow:hidden}
+header{grid-column:1/5;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;padding:7px 12px;background:var(--pan);border-bottom:1px solid var(--ln)}
 header .hl{display:flex;align-items:center;gap:8px;justify-self:start;min-width:0}header b{color:var(--tx);font-weight:600;white-space:nowrap}header b small{color:var(--mut);font-weight:400;font-size:11px;margin-left:6px;font-variant-numeric:tabular-nums}
 header .tabs{justify-self:center}
 .sp{flex:1}
@@ -30,7 +30,7 @@ main canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 #vpbar{display:flex;gap:4px;align-items:center}
 #vpbar span{color:var(--mut);font-size:12px;min-width:44px;text-align:center}
 #hud{color:var(--mut);font:12px ui-monospace,Menlo,monospace;min-width:150px;text-align:right}
-#sbar{grid-column:1/4;grid-row:3;display:flex;gap:10px;align-items:center;padding:5px 10px;background:var(--pan);border-top:1px solid var(--ln);min-height:40px}
+#sbar{grid-column:1/5;grid-row:3;display:flex;gap:10px;align-items:center;padding:5px 10px;background:var(--pan);border-top:1px solid var(--ln);min-height:40px}
 #sbar .sep{width:1px;align-self:stretch;background:var(--ln)}
 #rgSb{display:none;gap:8px;align-items:center;min-width:0}#rgSb .pos{font-variant-numeric:tabular-nums;color:var(--tx)}#rgSb .ttl{max-width:420px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 body.rugmode #rgSb{display:flex}body.rugmode #sbar>:not(#rgSb):not(#stat):not(#logBtn):not(#act):not(.sep){display:none!important}
@@ -98,9 +98,17 @@ textarea{width:100%;min-height:60px;resize:vertical}
 hr{border:none;border-top:1px solid var(--ln);margin:10px 0}
 .hist{width:100%;height:60px;background:#0c0e12;border:1px solid var(--ln);border-radius:5px;display:block}
 /* v4: без левой панели на экранах 2–4 */
-body.noleft{grid-template-columns:0 1fr 310px}
+body.noleft{grid-template-columns:64px 0 1fr 310px}
 body.noleft #left{display:none}
-main{grid-column:2;grid-row:2;min-width:0;min-height:0}#right{grid-column:3;grid-row:2}#left{grid-column:1;grid-row:2}
+main{grid-column:3;grid-row:2;min-width:0;min-height:0}#right{grid-column:4;grid-row:2}#left{grid-column:2;grid-row:2}
+/* v11.3: колонка разделов слева (как в Figma) и «где вы сейчас» в шапке */
+#rail{grid-column:1;grid-row:2;background:var(--pan);border-right:1px solid var(--ln);display:flex;flex-direction:column;gap:2px;padding:8px 6px;overflow:hidden;z-index:22}
+#rail button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px 6px;border:0;border-radius:8px;background:none;color:var(--mut);font-size:10.5px;line-height:1.1;white-space:normal;text-align:center;position:relative}
+#rail button svg{width:20px;height:20px}#rail button:hover{background:var(--pan2);color:var(--tx)}
+#rail button.on{background:var(--sel);color:var(--tx)}#rail button.on::before{content:"";position:absolute;left:-6px;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--acc)}
+#rail .kb{margin-top:auto}
+#crumbs{justify-self:center;display:flex;gap:6px;align-items:center;color:var(--mut);font-size:13px;min-width:0;max-width:52vw;overflow:hidden;white-space:nowrap}
+#crumbs b{color:var(--tx);font-weight:600}#crumbs i{font-style:normal;opacity:.5}#crumbs span{overflow:hidden;text-overflow:ellipsis}
 #nav{display:flex;gap:4px;align-items:center;margin-left:10px}
 #nav select{max-width:260px}
 #nav .pos{color:var(--mut);font-size:12px;min-width:44px;text-align:center}
@@ -199,7 +207,7 @@ aside{min-height:0}
 .bell{position:relative;padding:3px 7px;border-radius:12px;display:inline-flex;align-items:center;color:var(--tx)}.bell.on{background:var(--acc);color:var(--acc-tx)}
 #bellN{position:absolute;top:-5px;right:-6px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--zog);color:#fff;font-size:10.5px;font-weight:700;line-height:16px;text-align:center}
 #bellN.dot{min-width:8px;width:8px;height:8px;padding:0;top:-1px;right:-1px;background:#fff;box-shadow:0 0 0 2px var(--pan)}
-#evScr{position:fixed;left:0;right:0;top:48px;bottom:40px;display:none;grid-template-columns:1fr 400px;background:var(--bg);z-index:21}
+#evScr{position:fixed;left:64px;right:0;top:48px;bottom:40px;display:none;grid-template-columns:1fr 400px;background:var(--bg);z-index:21}
 #evScr .evmain{overflow:auto;padding:14px 18px}#evScr .evseg{display:inline-flex;border:1px solid var(--ln2);border-radius:7px;overflow:hidden;margin-bottom:12px}
 #evScr .evseg button{border:0;border-radius:0;background:transparent;padding:6px 14px}#evScr .evseg button.cur{background:var(--acc);color:var(--acc-tx);font-weight:600}
 .evit{display:flex;gap:12px;padding:12px 14px;border:1px solid var(--ln);border-radius:9px;background:var(--pan);margin-bottom:8px}
@@ -213,7 +221,14 @@ aside{min-height:0}
 .evau .flex{gap:12px;flex-wrap:wrap;font-size:12px}.evau label{display:flex;gap:5px;align-items:center;color:var(--tx)}.evau .last{font-size:11.5px;color:var(--mut)}
 .evrep{border:1px solid var(--ln);border-radius:8px;padding:12px;margin-top:14px}.evrep .nums{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
 .evrep .nums div{background:var(--pan2);border-radius:6px;padding:8px}.evrep .nums b{display:block;font-size:20px;font-variant-numeric:tabular-nums}.evrep .nums small{color:var(--mut);font-size:11.5px}
-#dyesScr{position:fixed;left:0;right:0;top:48px;bottom:40px;display:none;grid-template-columns:1fr 380px;background:var(--bg);z-index:20}
+.kbgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:4px 18px}.kbgrid h4{margin:10px 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.kbgrid div{display:flex;gap:10px;align-items:baseline;padding:2px 0;font-size:12.5px}.kbgrid kbd{flex:none;min-width:84px;font:11.5px ui-monospace,Menlo,monospace;color:var(--tx);background:var(--pan2);border:1px solid var(--ln2);border-radius:4px;padding:1px 6px;text-align:center}
+.ptree{display:flex;flex-direction:column;gap:1px}.ptree .pn{display:flex;align-items:center;gap:6px;width:100%;height:30px;border:0;border-radius:6px;background:none;color:var(--tx);padding:0 8px;font-weight:600;text-align:left}
+.ptree .pn.sub{font-weight:400;padding-left:24px}.ptree .pn:hover{background:var(--pan2)}.ptree .pn.cur{background:var(--sel)}.ptree .ch{width:10px;flex:none;color:var(--mut);font-size:10px}
+.ptree .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ptree .c{flex:none;color:var(--mut);font-size:11.5px;font-weight:400;font-variant-numeric:tabular-nums}.zg{color:var(--warn)!important}
+.kpirow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}.kpirow>div{background:var(--pan);border:1px solid var(--ln);border-radius:9px;padding:10px 12px;display:flex;flex-direction:column}
+.kpirow b{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}.kpirow small{color:var(--mut);font-size:12px}.kbar{display:block;height:4px;border-radius:2px;background:var(--pan2);margin-top:6px;overflow:hidden}.kbar i{display:block;height:100%;background:var(--ok)}
+#dyesScr{position:fixed;left:64px;right:0;top:48px;bottom:40px;display:none;grid-template-columns:1fr 380px;background:var(--bg);z-index:20}
 #dyesScr .dymain{overflow:auto;padding:14px 16px}#dyesScr .dybar{display:flex;gap:12px;align-items:baseline;margin-bottom:12px;flex-wrap:wrap}#dyesScr .dybar b{font-size:15px}
 #dyesScr .zg{color:var(--warn)}
 .dycards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
@@ -227,8 +242,14 @@ aside{min-height:0}
 .dyfigs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.dyfig{display:flex;flex-direction:column;gap:3px;padding:4px;background:var(--pan2);border-radius:6px}
 .dyfig img{width:100%;aspect-ratio:1;object-fit:contain;image-rendering:pixelated;background:#fff;border-radius:3px}.dyfig small{font-size:10px;color:var(--mut);overflow:hidden;text-overflow:ellipsis}
 .dyfigs.sug .dyfig{opacity:.65}
-#rugs{position:fixed;left:0;right:0;bottom:30px;top:48px;display:none;background:var(--bg);z-index:20}
-#rgGridV{position:absolute;inset:0;overflow:auto}#rgEditV{position:absolute;inset:0;display:grid;grid-template-columns:270px 1fr 370px}
+#rugs{position:fixed;left:64px;right:0;bottom:30px;top:48px;display:none;background:var(--bg);z-index:20}
+#rgGridV{position:absolute;inset:0;display:grid;grid-template-columns:240px minmax(0,1fr) 300px}#rgGridV .rgmid{overflow:auto;min-width:0}#rgGridV .rgmid .kpirow{margin:12px 14px 6px}
+#rgTree,#rgPeek{background:var(--pan);overflow:auto;padding:12px 10px}#rgTree{border-right:1px solid var(--ln)}#rgPeek{border-left:1px solid var(--ln);padding:14px}
+#rgTree h4,#rgPeek h4{margin:6px 4px 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}#rgTree .sch{display:flex;gap:7px;align-items:center;padding:4px 8px;border-radius:6px;color:var(--tx);font-size:12.5px}#rgTree .sch:hover{background:var(--pan2)}#rgTree .sch .nm{flex:1}#rgTree .sch .c{color:var(--mut);font-size:11.5px}
+.rgchips{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 14px 4px}.rgchips h2{margin:0 8px 0 0;font-size:16px;font-weight:600}
+.chip{display:inline-flex;gap:6px;align-items:center;height:28px;padding:0 11px;border:1px solid var(--ln2);border-radius:14px;color:var(--tx);font-size:12px;cursor:pointer;white-space:nowrap}.chip input{margin:0}.chip:has(input:checked){background:var(--acc);color:var(--acc-tx);border-color:var(--acc)}
+#rgPeek .pim{width:100%;aspect-ratio:3/4;object-fit:contain;background:var(--canvas);border-radius:8px}#rgPeek .pt{font-size:15px;font-weight:600;margin:10px 0 2px}#rgPeek .pm{color:var(--mut);font-size:12px}
+#rgPeek .tw{display:flex;gap:8px;align-items:center;padding:6px;border-radius:6px;background:var(--pan2);margin-top:6px;font-size:12px;cursor:pointer;border:0;width:100%;text-align:left;color:var(--tx)}#rgPeek .tw img{width:40px;height:52px;object-fit:cover;border-radius:3px}#rgEditV{position:absolute;inset:0;display:grid;grid-template-columns:270px 1fr 370px}
 .rgbar{position:sticky;top:0;z-index:3;display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 14px;background:var(--pan);border-bottom:1px solid var(--ln)}.rgbar input#rgQ{width:200px;flex:none}
 .rgstat{padding:8px 14px 0;color:var(--mut);font-size:12px;display:flex;gap:14px;flex-wrap:wrap}.rgstat a{color:var(--blue)}
 .rgcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;padding:10px 14px 20px}
@@ -335,13 +356,14 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.2</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
-  <div class="tabs">
-    <button id="tab-pipe">◉ Обзор</button><button id="tab-sheet">1 · Листы</button><button id="tab-queue">2 · Рисунки</button>
-  </div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.3</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
 
+<nav id="rail" aria-label="Разделы">
+  <button id="tab-pipe" data-tip="Обзор: прогресс по источникам и шаги">Обзор</button><button id="tab-sheet" data-tip="Листы: сканы страниц и рамки рисунков (1)">Листы</button><button id="tab-queue" data-tip="Узоры: очередь проверки и все рисунки (2)">Узоры</button>
+</nav>
 <aside id="left"></aside>
 <main>
   <canvas id="cv"></canvas>
@@ -485,7 +507,7 @@ function setMode(m,opt){
   if(ov&&!wasOv){S.back=opt.back||S.mode||'queue';S.backScroll=$('catalog').scrollTop;}
   if(m!=='sheet'&&m!=='cat'&&m!=='queue'&&m!=='pipe'&&!S.fig){stat('сначала откройте рисунок в «Каталоге» (или нарежьте лист)','err');m=S.fig?m:(S.mode==='sheet'?'sheet':'queue');}
   S.mode=m;S.peek=false;if(typeof pvHide==='function')pvHide();$('peek').style.display='none';
-  document.body.classList.toggle('noleft',m!=='sheet');
+  document.body.classList.toggle('noleft',!['sheet','queue','cat'].includes(m));   // v11.3: у «Узоров» слева — дерево источников
   const under=ov?(S.back||'queue'):m;
   ['pipe','sheet','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===under||(k==='queue'&&under==='cat')));
   $('tab-edit').style.display=!ov&&S.fig&&m!=='pipe'?'':'none';
@@ -571,7 +593,8 @@ function renderLeft(){
     $('drwGo').onclick=async()=>{const id=$('drwId').value.trim();if(!id)return;stat('импортирую зарисовки…','busy');
       try{const r=await api('/api/import_drawings',{drive_id:id});stat('зарисовки: добавлено '+r.added+', уже были '+r.skipped_existing,'ok');await refreshSheets();await refreshFigures();}catch(err){fail(err);}};
     refreshPdfs().catch(()=>{const e=$('pdfSec');if(e)e.textContent='PDF не найдены или на сервере нет pymupdf.';});
-  }else{L.innerHTML='';}   // на экранах 2–4 левой панели нет: навигация — в шапке, список — в «Каталоге»
+  }else if(S.mode==='queue'||S.mode==='cat'){patTree();}
+  else{L.innerHTML='';}
 }
 async function uploadFiles(url,files){
   files=files.filter(f=>/^image\//.test(f.type)||/\.(png|jpe?g|webp|tiff?|bmp)$/i.test(f.name));
@@ -584,7 +607,7 @@ async function uploadFiles(url,files){
   stat('загружено '+files.length,'ok');
 }
 async function refreshSheets(){S.sheets=await api('/api/sheets');if(S.mode==='sheet')renderLeft();}
-async function refreshFigures(){S.figures=await api('/api/figures');renderNav();if(S.mode==='cat')renderCatalog();if(S.mode==='queue')renderQueue();if(S.mode==='pipe')renderPipe();}
+async function refreshFigures(){S.figures=await api('/api/figures');renderNav();if(S.mode==='queue'||S.mode==='cat')patTree();if(S.mode==='cat')renderCatalog();if(S.mode==='queue')renderQueue();if(S.mode==='pipe')renderPipe();}
 async function refreshPdfs(){
   const list=await api('/api/pdfs');
   const e=$('pdfSec');if(!e)return;
@@ -1511,9 +1534,9 @@ function renderCatalog(){
   pvHide();
   const C=$('catalog');const q=norm(S.catQ);
   const fq=document.activeElement&&document.activeElement.id==='catQ',cpos=fq?document.activeElement.selectionStart:0;
-  const figs=S.figures.filter(f=>(!q||[f.id,f.name_az,f.name,f.translation,f.site_id].some(v=>norm(v).includes(q)))&&(!S.catRev||f.review)&&(!S.catAuto||f.auto)&&(!S.catNoSite||!f.site_id)&&TYPEF[S.catType||''](f));
+  const figs=S.figures.filter(f=>srcOk(f)&&(!q||[f.id,f.name_az,f.name,f.translation,f.site_id].some(v=>norm(v).includes(q)))&&(!S.catRev||f.review)&&(!S.catAuto||f.auto)&&(!S.catNoSite||!f.site_id)&&TYPEF[S.catType||''](f));
   const done=figs.filter(f=>f.done).length,rev=S.figures.filter(f=>f.review).length;
-  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">${viewSwitch()}<span style="color:var(--mut)">${figs.length}${q?(' из '+S.figures.length):''} · ${done} готово</span><span class="sp"></span>
+  C.innerHTML=kpiRow()+`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">${viewSwitch()}<span style="color:var(--mut)">${figs.length}${q?(' из '+S.figures.length):''} · ${done} готово</span><span class="sp"></span>
     <span class="dfilter" data-tip="тип рисунка">${TYPEL.map(([k,l])=>`<button class="${(S.catType||'')===k?'on':''}" data-ct="${k}">${l} <small>${S.figures.filter(TYPEF[k]).length}</small></button>`).join('')}</span>
     <label class="flex" style="color:var(--mut)"><input type="checkbox" id="catRev" ${S.catRev?'checked':''}>⚠ на пересмотр (${rev})</label>
     <label class="flex" style="color:var(--mut)" data-tip="автооцифровка, ещё не проверена человеком"><input type="checkbox" id="catAuto" ${S.catAuto?'checked':''}>⚡ не проверены (${S.figures.filter(f=>f.auto).length})</label>
@@ -1540,13 +1563,13 @@ function renderCatalog(){
 /* ---- 5 · Очередь проверки: авто-результаты, ещё не принятые человеком, от надёжных к рискованным ---- */
 const QSORT={risk_asc:['надёжные сначала',(a,b)=>qrisk(a)-qrisk(b)],risk_desc:['рискованные сначала',(a,b)=>qrisk(b)-qrisk(a)],id:['по номеру',(a,b)=>0]};
 function qrisk(f){return f.risk!=null?f.risk:(1-(f.auto_conf??0));}
-function qItems(){return S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo&&TYPEF[S.qType||''](f)).sort((QSORT[S.qSort||'risk_asc']||QSORT.risk_asc)[1]);}
+function qItems(){return S.figures.filter(f=>srcOk(f)&&f.auto&&f.size&&!f.done&&!f.photo&&TYPEF[S.qType||''](f)).sort((QSORT[S.qSort||'risk_asc']||QSORT.risk_asc)[1]);}
 function renderQueue(){
   pvHide();
   const C=$('catalog');S.qSel=S.qSel||new Set();const thr=S.qThr??0.25;
-  const all=S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo),items=qItems(),sure=items.filter(f=>qrisk(f)<=thr);
+  const all=S.figures.filter(f=>srcOk(f)&&f.auto&&f.size&&!f.done&&!f.photo),items=qItems(),sure=items.filter(f=>qrisk(f)<=thr);
   [...S.qSel].forEach(id=>{if(!items.some(f=>f.id===id))S.qSel.delete(id);});
-  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">${viewSwitch()}<span style="color:var(--mut)">${items.length} из ${all.length} ждут проверки</span><button id="qFast" class="sm" ${items.length?'':'disabled'} data-tip="Рисунки по одному: слева оригинал, справа результат. A — принять, X — на доработку, → — пропустить">▶ быстрая проверка</button><button id="qHard" class="sm" ${items.some(f=>!f.color)?'':'disabled'} data-tip="Только спорные куски 10×10, где пороги и модель расходятся (в них ~98% ошибок). Все куски проверены — рисунок принят. Проверенные куски учат модель.">🎯 трудные места</button><span class="sp"></span>
+  C.innerHTML=kpiRow()+`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">${viewSwitch()}<span style="color:var(--mut)">${items.length} из ${all.length} ждут проверки</span><button id="qFast" class="sm" ${items.length?'':'disabled'} data-tip="Рисунки по одному: слева оригинал, справа результат. A — принять, X — на доработку, → — пропустить">▶ быстрая проверка</button><button id="qHard" class="sm" ${items.some(f=>!f.color)?'':'disabled'} data-tip="Только спорные куски 10×10, где пороги и модель расходятся (в них ~98% ошибок). Все куски проверены — рисунок принят. Проверенные куски учат модель.">🎯 трудные места</button><span class="sp"></span>
     <span class="dfilter" data-tip="тип рисунка">${TYPEL.map(([k,l])=>`<button class="${(S.qType||'')===k?'on':''}" data-qt="${k}">${l} <small>${all.filter(TYPEF[k]).length}</small></button>`).join('')}</span>
     <select id="qSort" style="flex:none">${Object.entries(QSORT).map(([k,v])=>`<option value="${k}" ${(S.qSort||'risk_asc')===k?'selected':''}>${v[0]}</option>`).join('')}</select></div>
   <div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">
@@ -2086,7 +2109,7 @@ function rugsOpen(){
   R.view='grid';rugView();rugsLoadList();
 }
 function rugsClose(){R.on=false;document.body.classList.remove('rugmode');$('rugs').style.display='none';$('tab-rugs').classList.remove('on');}
-function rugView(){$('rgGridV').style.display=R.view==='edit'?'none':'block';$('rgEditV').style.display=R.view==='edit'?'grid':'none';rugSbar();}
+function rugView(){$('rgGridV').style.display=R.view==='edit'?'none':'grid';$('rgEditV').style.display=R.view==='edit'?'grid':'none';rugSbar();}
 // строка состояния в разделе «Ковры» — та же #sbar внизу, что у узоров: ‹ N / M › ковёр, название, число рамок
 function rugSbar(){let B=$('rgSb');if(!B){B=document.createElement('div');B.id='rgSb';$('sbar').prepend(B);}
   if(!R.on){B.innerHTML='';return;}
@@ -2111,7 +2134,7 @@ function rugBigTwin(r,byId){if(srcKind(r.src)!=='kerimov')return null;const a=(r
 function rugList(){
   const L=$('rgCards');if(!L)return;const q=R.q.toLowerCase();const byId={};R.list.forEach(r=>byId[r.id]=r);
   R.list.forEach(r=>r._big=rugBigTwin(r,byId));
-  const ok=r=>!(r.split_into&&r.split_into.length)&&(!R.fmulti||r.multi)&&(!R.filter||r.status===R.filter)&&(!R.fsrc||srcKind(r.src)===R.fsrc)&&(!R.fsch||(R.fsch==='-'?!r.school:r.school===R.fsch))&&(!R.fdup||r.group||r.same)&&(!R.fbig||r._big)&&(!q||(r.title+' '+r.museum+' '+r.id).toLowerCase().includes(q));
+  const ok=r=>!(r.split_into&&r.split_into.length)&&(!R.fmulti||r.multi)&&(!R.filter||r.status===R.filter)&&(!R.fsrc||srcKind(r.src)===R.fsrc)&&(!R.fsrc2||r.src===R.fsrc2)&&(!R.fschs||!R.fschs.size||R.fschs.has(r.school||'-'))&&(!R.fnone||!r.n)&&(!R.fdup||r.group||r.same)&&(!R.fbig||r._big)&&(!q||(r.title+' '+r.museum+' '+r.id).toLowerCase().includes(q));
   let ls=R.list.filter(ok);
   if(R.sort==='kbig')ls=ls.slice().sort((a,b)=>(b._big?b._big.k:0)-(a._big?a._big.k:0)||(srcKind(a.src)==='kerimov'?0:1)-(srcKind(b.src)==='kerimov'?0:1));
   else if(R.sort==='title')ls=ls.slice().sort((a,b)=>(a.title||'').localeCompare(b.title||'','ru'));
@@ -2128,10 +2151,11 @@ function rugList(){
   const im=R.imp&&(R.imp.running||R.imp.total)?`<span>${R.imp.running?'⏳ импорт':'импорт завершён'}: ${R.imp.done}/${R.imp.total}${R.imp.errors?' · ошибок '+R.imp.errors:''}</span>`:'';
   const ker=R.list.filter(r=>srcKind(r.src)==='kerimov'&&!(r.split_into&&r.split_into.length)),kb=ker.filter(r=>r._big).length;
   $('rgStat').innerHTML=`<span>показано ${cards.length} плиток (${ls.length} фото из ${R.list.length})</span>${syl}${im}<span>Керимов: ${ker.length} фото · у ${kb} есть двойник с фото крупнее — <a href="#" id="rgKBig">${R.fbig?'показать все':'показать их'}</a></span>`;
-  $('rgKBig').onclick=e=>{e.preventDefault();R.fbig=!R.fbig;if(R.fbig){R.fsrc='kerimov';R.sort='kbig';}$('rgFSrc').value=R.fsrc||'';$('rgSort').value=R.sort||'';R.gridN=150;rugList();};
+  $('rgKBig').onclick=e=>{e.preventDefault();R.fbig=!R.fbig;if(R.fbig){R.fsrc='kerimov';R.sort='kbig';}$('rgFBig').checked=!!R.fbig;$('rgSort').value=R.sort||'';R.gridN=150;rugList();};
   L.innerHTML=(cards.slice(0,N).map(card).join('')||'<p class="mut" style="padding:8px">Ковров пока нет — или фильтр ничего не нашёл. Каталог: «⟳ из Диска».</p>')+(cards.length>N?`<div class="rgmore"><button id="rgMore">показать ещё (${cards.length-N})</button></div>`:'');
-  L.querySelectorAll('.rgcard').forEach(e=>e.onclick=()=>rugOpen(e.dataset.id));
-  const mb=$('rgMore');if(mb){mb.onclick=()=>{R.gridN=N+150;rugList();};try{const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){io.disconnect();R.gridN=N+150;rugList();}},{root:$('rgGridV'),rootMargin:'400px'});io.observe(mb);}catch(e){}}
+  L.querySelectorAll('.rgcard').forEach(e=>{e.onclick=()=>rugOpen(e.dataset.id);e.onmouseenter=()=>{clearTimeout(R.peekT);R.peekT=setTimeout(()=>rugPeek(e.dataset.id),120);};});
+  rugTree();rugKpi(byId,kb,ker.length);if(!R.peekId||!R.list.find(x=>x.id===R.peekId))rugPeek(null);
+  const mb=$('rgMore');if(mb){mb.onclick=()=>{R.gridN=N+150;rugList();};try{const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){io.disconnect();R.gridN=N+150;rugList();}},{root:document.querySelector('#rgGridV .rgmid'),rootMargin:'400px'});io.observe(mb);}catch(e){}}
 }
 async function rugOpen(id){if(R.saveT)await rugSaveNow();R.rug=await api('/api/rugs/'+encodeURIComponent(id));R.sel=null;R.repeatOf=null;R.preset=null;R.split=null;if(R.tool==='split'||R.tool==='zones')R.tool='box';R.side='rug';R.fitNext=true;R.view='edit';rugView();rugRender();}
 function rugSaveSoon(){if(rro())return;R.ver=(R.ver||0)+1;clearTimeout(R.saveT);$('rgSaved').textContent='…';R.saveT=setTimeout(rugSaveNow,500);}
@@ -2651,20 +2675,18 @@ window.addEventListener('keyup',e=>{if(e.code==='Space'&&R.on){R.space=false;$('
 (()=>{
   const t=document.createElement('button');t.id='tab-rugs';t.textContent='3 · Ковры';$('tab-queue').after(t);t.onclick=rugsOpen;
   ['pipe','sheet','queue'].forEach(k=>$('tab-'+k).addEventListener('click',()=>{if(R.on)rugsClose();},true));
-  const d=document.createElement('div');d.id='rugs';d.innerHTML=`<div id="rgGridV"><div class="rgbar">
+  const d=document.createElement('div');d.id='rugs';d.innerHTML=`<div id="rgGridV"><aside id="rgTree" aria-label="Источники и школы"></aside><section class="rgmid"><div class="rgbar">
     <button class="sm" id="rgSync" data-tip="Загрузить/обновить каталог ковров с Диска (пакет rugs_bundle.zip из Colab)" style="border-color:var(--acc)">⟳ из Диска</button>
     <label class="btn sm" data-tip="Загрузить фото ковров (можно несколько)">＋ фото<input type="file" id="rgUp" accept="image/*" multiple hidden></label>
     <label class="btn sm" data-tip="Каталог музея: catalog.json из Colab (museum_open) — фото скачает сервер">⇪ каталог<input type="file" id="rgCat" accept=".json" hidden></label>
     <label class="btn sm" data-tip="Архив .zip: фото + одноимённые .txt с описаниями (например, azerbaijanrugs). Школа предлагается по папке и описанию">🗜 архив<input type="file" id="rgZip" accept=".zip" hidden></label>
     <span style="width:10px"></span>
     <input id="rgQ" type="search" placeholder="поиск по названию, музею…">
-    <select id="rgFSrc"><option value="">все источники</option>${Object.entries(RSRC).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
-    <select id="rgFSch"><option value="">все школы</option>${Object.entries(RSCH).filter(([k])=>k).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}<option value="-">школа не известна</option></select>
     <select id="rgFilt"><option value="">любой статус</option>${Object.entries(RST).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
     <select id="rgSort" data-tip="порядок плиток"><option value="">сначала в работе, потом новые</option><option value="kbig">Керимов с крупным двойником — первыми</option><option value="title">по названию</option></select>
-    <label style="white-space:nowrap;color:var(--mut)"><input type="checkbox" id="rgFDup"> есть двойники</label>
-    <label style="white-space:nowrap;color:var(--mut)" data-tip="Фото, где похоже на несколько ковров (развороты книг). Первый раз машина просматривает все фото — несколько минут"><input type="checkbox" id="rgFMulti"> ✂ развороты</label>
-    </div><div class="rgstat" id="rgStat"></div><div class="rgcards" id="rgCards"></div></div>
+    </div><div class="kpirow" id="rgKpi"></div>
+    <div class="rgchips"><h2 id="rgH"></h2><label class="chip" data-tip="У ковра из Керимова есть фото этого же ковра крупнее — размечать лучше там"><input type="checkbox" id="rgFBig"> ⬆ есть фото крупнее</label><label class="chip"><input type="checkbox" id="rgFDup"> есть двойники</label><label class="chip" data-tip="Фото, где похоже на несколько ковров (развороты книг). Первый раз машина просматривает все фото — несколько минут"><input type="checkbox" id="rgFMulti"> ✂ развороты</label><label class="chip"><input type="checkbox" id="rgFNone"> не размечены</label></div>
+    <div class="rgstat" id="rgStat"></div><div class="rgcards" id="rgCards"></div></section><aside id="rgPeek" aria-label="Ковёр под курсором"></aside></div>
     <div id="rgEditV"><aside id="rgLeft"></aside><section id="rgCenter"></section><aside id="rgSide"></aside></div>`;
   document.body.appendChild(d);
   $('rgFilt').onchange=e=>{R.filter=e.target.value;R.gridN=150;rugList();};$('rgQ').oninput=e=>{R.q=e.target.value;R.gridN=150;rugList();};$('rgSort').onchange=e=>{R.sort=e.target.value;R.gridN=150;rugList();};
@@ -2672,7 +2694,7 @@ window.addEventListener('keyup',e=>{if(e.code==='Space'&&R.on){R.space=false;$('
     try{const r=await fetch('/api/rugs_upload',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat('добавлено ковров: '+j.made.length,'ok');await rugsLoadList();if(j.made[0])rugOpen(j.made[0]);}catch(err){fail(err);}e.target.value='';};
   $('rgZip').onchange=async e=>{const f=e.target.files[0];if(!f)return;const fd=new FormData();fd.append('file',f);stat('загружаю архив…','busy');
     try{const r=await fetch('/api/rugs_zip',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat(`из архива: ${j.made} ковров, уже были: ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
-  $('rgFSrc').onchange=e=>{R.fsrc=e.target.value;R.gridN=150;rugList();};$('rgFSch').onchange=e=>{R.fsch=e.target.value;R.gridN=150;rugList();};$('rgFDup').onchange=e=>{R.fdup=e.target.checked;R.gridN=150;rugList();};
+  $('rgFBig').onchange=e=>{R.fbig=e.target.checked;R.gridN=150;rugList();};$('rgFNone').onchange=e=>{R.fnone=e.target.checked;R.gridN=150;rugList();};$('rgFDup').onchange=e=>{R.fdup=e.target.checked;R.gridN=150;rugList();};
   $('rgFMulti').onchange=async e=>{R.fmulti=e.target.checked;rugList();if(!R.fmulti)return;
     const poll=async()=>{const j=await api('/api/rugs_multi');if(j.running){stat(`ищу развороты: ${j.done} / ${j.total} фото, найдено ${j.found}`,'busy');await rugsLoadList();setTimeout(poll,3000);}else{await rugsLoadList();stat(`фото с несколькими коврами: ${j.found}`,'ok');}};
     try{await api('/api/rugs_multi',{});poll();}catch(err){fail(err);}};
@@ -2800,5 +2822,91 @@ async function evReport(){const E=$('evRep');try{EV.rep=await api('/api/events/r
   ['pipe','sheet','queue','rugs','dyes'].forEach(k=>$('tab-'+k)&&$('tab-'+k).addEventListener('click',()=>{if(EV.on)evClose();},true));
   window.addEventListener('resize',()=>{if(EV.on)evPlace();});
   setTimeout(evCount,1500);
+})();
+
+/* ---- v11.3: «Ковры» — обзор: источники и школы слева, цифры сверху, карточка ковра под курсором справа ---- */
+function rugTree(){const E=$('rgTree');if(!E)return;const base=R.list.filter(r=>!(r.split_into&&r.split_into.length));
+  const kinds={};base.forEach(r=>{const k=srcKind(r.src);const K=kinds[k]=kinds[k]||{n:0,src:{}};K.n++;K.src[r.src||'']=(K.src[r.src||'']||0)+1;});
+  const sch={};base.forEach(r=>{const k=r.school||'-';sch[k]=(sch[k]||0)+1;});R.fschs=R.fschs||new Set();
+  E.innerHTML=`<h4>Источники</h4><div class="ptree"><button class="pn ${!R.fsrc&&!R.fsrc2?'cur':''}" data-k=""><span class="ch"></span><span class="nm">Все источники</span><span class="c">${base.length}</span></button>`+
+    Object.keys(RSRC).filter(k=>kinds[k]).map(k=>{const K=kinds[k],subs=Object.entries(K.src).sort((a,b)=>b[1]-a[1]),op=R.fsrc===k;
+      return `<button class="pn ${R.fsrc===k&&!R.fsrc2?'cur':''}" data-k="${k}"><span class="ch">${subs.length>1?(op?'▾':'▸'):''}</span><span class="nm">${esc(RSRC[k])}</span><span class="c">${K.n}</span></button>`+
+        (op&&subs.length>1?subs.map(([sv,n])=>`<button class="pn sub ${R.fsrc2===sv?'cur':''}" data-k="${k}" data-s="${esc(sv)}"><span class="ch"></span><span class="nm">${esc(SRCRU[sv]||sv||'—')}</span><span class="c">${n}</span></button>`).join(''):'');}).join('')+`</div>
+    <h4 style="margin-top:14px">Школа</h4>${Object.entries(RSCH).filter(([k])=>k&&sch[k]).concat(sch['-']?[['-','школа не известна']]:[]).map(([k,v])=>`<label class="sch"><input type="checkbox" data-sch="${esc(k)}" ${R.fschs.has(k)?'checked':''}><span class="nm">${esc(v)}</span><span class="c">${sch[k]}</span></label>`).join('')}`;
+  E.querySelectorAll('.pn').forEach(b=>b.onclick=()=>{const k=b.dataset.k||'',sv=b.dataset.s;
+    if(sv!=null){R.fsrc=k;R.fsrc2=sv;}else if(R.fsrc===k&&!R.fsrc2&&k){R.fsrc='';}else{R.fsrc=k;R.fsrc2='';}R.fbig=false;$('rgFBig').checked=false;R.gridN=150;rugList();});
+  E.querySelectorAll('[data-sch]').forEach(c=>c.onchange=()=>{c.checked?R.fschs.add(c.dataset.sch):R.fschs.delete(c.dataset.sch);R.gridN=150;rugList();});
+  const h=[R.fsrc2?(SRCRU[R.fsrc2]||R.fsrc2):(R.fsrc?RSRC[R.fsrc]:'Все ковры'),...[...R.fschs].map(k=>k==='-'?'школа ?':(RSCH[k]||k))];$('rgH').textContent=h.join(' · ');}
+function rugKpi(byId,kb,nker){const E=$('rgKpi');if(!E)return;const base=R.list.filter(r=>!(r.split_into&&r.split_into.length));
+  const groups=new Set(base.filter(r=>r.group).map(r=>r.group)).size,marked=base.filter(r=>r.n).length;
+  E.innerHTML=`<div><b>${base.length}</b><small>фото ковров</small></div><div><b>${groups}</b><small>групп «один и тот же ковёр»</small></div><div><b class="${kb?'zg':''}">${kb}</b><small>из Керимова с фото крупнее (из ${nker})</small></div><div><b>${marked}</b><small>размечено</small><span class="kbar"><i style="width:${base.length?100*marked/base.length:0}%"></i></span></div>`;}
+function rugPeek(id){const E=$('rgPeek');if(!E)return;const r=id&&R.list.find(x=>x.id===id);R.peekId=r?r.id:null;
+  if(!r){E.innerHTML=`<h4>Ковёр</h4><p class="mut" style="font-size:12.5px">Наведите на плитку — здесь появится карточка ковра и его двойники. Клик по плитке — открыть в редакторе.</p>`;return;}
+  const tw=R.list.filter(x=>x.id!==r.id&&((r.group&&x.group===r.group)||(r.same_ids||[]).includes(x.id)));
+  E.innerHTML=`<h4>Ковёр</h4><img class="pim" src="/rugthumb/${encodeURIComponent(r.id)}.jpg" alt=""><div class="pt">${esc(r.title||r.id)}</div>
+    <div class="pm">${esc(SRCRU[r.src]||r.src||'')}${r.school?' · '+esc(RSCH[r.school]||r.school):' · школа ?'}${r.w?' · '+r.w+'×'+r.h:''}<br>${r.n?`рамок ${r.n} · ✓ ${r.confirmed}`:'не размечен'}${r._big?` · <span style="color:var(--ok)">⬆ у двойника фото ×${r._big.k.toFixed(1)}</span>`:''}</div>
+    <div class="rgrow" style="margin-top:10px"><button class="pri" id="rgPeekOpen">Открыть в редакторе</button></div>
+    ${tw.length?`<h4 style="margin-top:14px">Этот же ковёр в других источниках (${tw.length})</h4>${tw.slice(0,8).map(x=>`<button class="tw" data-open="${esc(x.id)}"><img src="/rugthumb/${encodeURIComponent(x.id)}.jpg" alt=""><span><b>${esc(SRCRU[x.src]||x.src||'')}</b><br><span class="mut">${x.w?x.w+'×'+x.h:''}${(r.same_no||[]).includes(x.id)?' · ✗ другой':''}</span></span></button>`).join('')}`:''}`;
+  $('rgPeekOpen').onclick=()=>rugOpen(r.id);E.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>rugOpen(b.dataset.open));}
+
+/* ---- v11.3: «Узоры» — дерево источников слева (источник → таблица) и цифры сверху ---- */
+function figSrc(f){const p=String(f.sheet||'').replace(/\\/g,'/').split('/');return p.length>1?p[0]:'(загружено)';}
+function srcTitle(k){return (S.srcTitles||{})[k]||k.replace(/_/g,' ');}
+function srcOk(f){return (!S.fsrc||figSrc(f)===S.fsrc)&&(S.ftab==null||String(f.table)===String(S.ftab));}
+function kpiRow(){const F=S.figures.filter(srcOk),sch=F.filter(f=>!f.photo),done=sch.filter(f=>f.done).length,q=sch.filter(f=>f.auto&&f.size&&!f.done).length;
+  return `<div class="kpirow"><div><b>${sch.length}</b><small>схем узоров${S.fsrc?' в источнике':''}</small><span class="kbar"><i style="width:${sch.length?100*done/sch.length:0}%"></i></span></div><div><b>${done}</b><small>приняты</small></div><div><b class="${q?'zg':''}">${q}</b><small>ждут проверки</small></div><div><b>${(S.dyes||[]).length}</b><small>красителей в палитре</small></div></div>`;}
+function patTree(){const L=$('left');if(!L)return;S.srcOpen=S.srcOpen||new Set();
+  const by={};S.figures.forEach(f=>{const k=figSrc(f);const s=by[k]=by[k]||{n:0,done:0,q:0,tabs:{}};s.n++;s.done+=f.done?1:0;s.q+=(f.auto&&f.size&&!f.done&&!f.photo)?1:0;
+    const t=f.table??'—';const T=s.tabs[t]=s.tabs[t]||{n:0,done:0,q:0};T.n++;T.done+=f.done?1:0;T.q+=(f.auto&&f.size&&!f.done&&!f.photo)?1:0;});
+  const cnt=x=>S.mode==='queue'?(x.q?`<span class="c zg" title="ждут проверки">${x.q}</span>`:`<span class="c">✓</span>`):`<span class="c" title="принято / всего">${x.done}/${x.n}</span>`;
+  const keys=Object.keys(by).sort((a,b)=>srcTitle(a).localeCompare(srcTitle(b),'ru'));
+  L.innerHTML=`<h4>Источники</h4><div class="ptree" role="tree" aria-label="Источники узоров"><button class="pn ${!S.fsrc?'cur':''}" data-src="" role="treeitem"><span class="ch"></span><span class="nm">Все источники</span>${cnt({n:S.figures.length,done:S.figures.filter(f=>f.done).length,q:S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo).length})}</button>`+
+    keys.map(k=>{const s=by[k],op=S.srcOpen.has(k)||S.fsrc===k;const tabs=Object.keys(s.tabs).sort((a,b)=>(+a||0)-(+b||0));
+      return `<button class="pn ${S.fsrc===k&&S.ftab==null?'cur':''}" data-src="${esc(k)}" role="treeitem" aria-expanded="${op}"><span class="ch" data-tog="${esc(k)}">${tabs.length>1?(op?'▾':'▸'):''}</span><span class="nm" title="${esc(srcTitle(k))}">${esc(srcTitle(k))}</span>${cnt(s)}</button>`+
+        (op&&tabs.length>1?tabs.map(t=>`<button class="pn sub ${S.fsrc===k&&String(S.ftab)===String(t)?'cur':''}" data-src="${esc(k)}" data-tab="${esc(t)}" role="treeitem"><span class="ch"></span><span class="nm">${t==='—'?'без таблицы':'Табл. '+esc(t)}</span>${cnt(s.tabs[t])}</button>`).join(''):'');}).join('')+`</div>`;
+  const re=()=>{patTree();S.mode==='queue'?renderQueue():renderCatalog();};
+  L.querySelectorAll('[data-tog]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();const k=e.dataset.tog;S.srcOpen.has(k)?S.srcOpen.delete(k):S.srcOpen.add(k);patTree();});
+  L.querySelectorAll('.pn').forEach(b=>b.onclick=()=>{const k=b.dataset.src||null,t=b.dataset.tab;
+    if(t!=null){S.fsrc=k;S.ftab=t==='—'?null:t;}else if(S.fsrc===k&&S.ftab==null&&k){S.fsrc=null;}else{S.fsrc=k;S.ftab=null;if(k)S.srcOpen.add(k);}re();});}
+api('/api/config').then(c=>{S.srcTitles=c.src_titles||{};if(S.mode==='queue'||S.mode==='cat')patTree();}).catch(()=>{});
+
+/* ============ v11.3: колонка разделов, «где вы сейчас», шпаргалка клавиш ============ */
+const RAIL_IC={pipe:'<rect x="3" y="3" width="6" height="6" rx="1.2"/><rect x="11" y="3" width="6" height="6" rx="1.2"/><rect x="3" y="11" width="6" height="6" rx="1.2"/><rect x="11" y="11" width="6" height="6" rx="1.2"/>',
+  sheet:'<path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5"/><rect x="7.5" y="9" width="5" height="5"/>',
+  queue:'<path d="M10 3l7 7-7 7-7-7z"/><path d="M10 7l3 3-3 3-3-3z"/>',
+  rugs:'<rect x="4" y="2.5" width="12" height="15" rx="1"/><rect x="7" y="6" width="6" height="8"/>',
+  dyes:'<circle cx="7" cy="8" r="3.5"/><circle cx="13" cy="8" r="3.5"/><circle cx="10" cy="13" r="3.5"/>',
+  kb:'<rect x="2.5" y="5.5" width="15" height="10" rx="1.5"/><path d="M5.5 9h1M9.5 9h1M13.5 9h1M6 12.5h8"/>'};
+const RAIL_LB={pipe:'Обзор',sheet:'Листы',queue:'Узоры',rugs:'Ковры',dyes:'Красители'};
+function railIcon(k){return `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">${RAIL_IC[k]}</svg>`;}
+function crumbsText(){const P=[];
+  if(EV.on)P.push('События');
+  else if(DY.on){P.push('Красители');const d=DY.list.find(x=>x.id===DY.sel);if(d)P.push(d.az);}
+  else if(R.on){P.push('Ковры');if(R.view==='edit'&&R.rug){P.push(SRCRU[(R.rug.cat||{}).src]||(R.rug.cat||{}).src||'');P.push(R.rug.title||R.rug.id);}
+    else{if(R.fsrc2)P.push(SRCRU[R.fsrc2]||R.fsrc2);else if(R.fsrc)P.push(RSRC[R.fsrc]||R.fsrc);else P.push('Все источники');}}
+  else{const m=S.mode;
+    if(m==='pipe')P.push('Обзор');
+    else if(m==='sheet'){P.push('Листы');if(S.sheet&&S.sheet.path)P.push(S.sheet.path.split('/').slice(-2).join(' / '));}
+    else if(m==='queue'||m==='cat'){P.push('Узоры');P.push(m==='queue'?'Очередь проверки':'Все рисунки');if(S.fsrc)P.push(srcTitle(S.fsrc));if(S.ftab!=null)P.push('Табл. '+S.ftab);}
+    else if((m==='grid'||m==='pix')&&S.fig){P.push('Узоры');P.push(S.fig.id+(S.fig.meta&&S.fig.meta.name_az?' · '+S.fig.meta.name_az:''));P.push(m==='grid'?'Геометрия':'Пиксели');}}
+  return P.filter(Boolean);}
+function crumbsUpd(){const P=crumbsText(),k=P.join('|');if(k===crumbsUpd.k)return;crumbsUpd.k=k;
+  $('crumbs').innerHTML=P.map((x,i)=>i?`<span>${esc(x)}</span>`:`<b>${esc(x)}</b>`).join('<i>/</i>');
+  const cur=EV.on?'':DY.on?'dyes':R.on?'rugs':(S.mode==='grid'||S.mode==='pix')?(S.back==='cat'?'queue':S.back||'queue'):S.mode==='cat'?'queue':S.mode;
+  ['pipe','sheet','queue','rugs','dyes'].forEach(t=>{const b=$('tab-'+t);if(b){b.classList.toggle('on',t===cur);b.setAttribute('aria-current',t===cur?'page':'false');}});}
+function keysHelp(){const W=$('modal');
+  const G=[['Везде',[['1 / 2','Листы / Узоры'],['+ −','масштаб'],['0','вписать'],['пробел (держать)','двигать / подглядеть скан'],['⌘Z, ⇧⌘Z','отменить / повторить'],['⌘S','сохранить'],['Esc','закрыть окно / редактор'],['?','эта шпаргалка']]],
+    ['Редактор узора',[['Tab','Геометрия ↔ Пиксели'],['[ ]','соседний рисунок'],['B / P','перо'],['E','ластик'],['G / F','заливка'],['L','линия'],['R','прямоугольник (ещё раз — с заливкой)'],['C','копировать область'],['1…9, 0','цвет (1 — фон)'],['X','предыдущий цвет'],['U','подложка скана'],['Q','углы ↔ сетка (геометрия)'],['⌘\'','сетка'],['⌘Enter','готово']]],
+    ['Очередь проверки',[['← → ↑ ↓','по карточкам'],['пробел','отметить'],['A','принять'],['X','на доработку'],['O','оригинал'],['Enter','открыть']]],
+    ['Редактор ковра',[['B','рамка'],['H','рука'],['F / 0','вписать'],['Z','поле и каймы'],['I','паспорт'],['← → или [ ]','соседний ковёр'],['Tab','следующая рамка'],['C / X','верно / неверно'],['1…8','зона'],['R','повтор'],['J','тот же узор, что…'],['U','отделить от повторов'],['Q / W','повернуть / зеркало'],['S','схема поверх'],['D','фокус'],['Delete','удалить рамку']]]];
+  W.innerHTML=`<div class="mbox" style="width:min(860px,94vw)" role="dialog" aria-modal="true" aria-labelledby="kbH"><div class="flex" style="margin-bottom:8px"><b id="kbH" style="font-size:15px">Горячие клавиши</b><span class="sp"></span><button class="sm" id="mClose">Закрыть</button></div>
+    <div class="kbgrid">${G.map(([h,ks])=>`<section><h4>${h}</h4>${ks.map(([k,d])=>`<div><kbd>${esc(k)}</kbd><span>${esc(d)}</span></div>`).join('')}</section>`).join('')}</div>
+    <p class="mut" style="font-size:12px;margin:8px 0 0">Клавиши работают в любой раскладке (рус / az / en).</p></div>`;
+  W.hidden=false;const close=()=>{W.hidden=true;W.innerHTML='';W.onclick=null;};$('mClose').onclick=close;W.onclick=e=>{if(e.target===W)close();};}
+(()=>{
+  ['pipe','sheet','queue','rugs','dyes'].forEach(k=>{const b=$('tab-'+k);if(!b)return;b.innerHTML=railIcon(k)+`<span>${RAIL_LB[k]}</span>`;b.setAttribute('aria-label',RAIL_LB[k]);$('rail').appendChild(b);});
+  const kb=document.createElement('button');kb.id='railKeys';kb.className='kb';kb.setAttribute('aria-label','Горячие клавиши');kb.setAttribute('data-tip','Горячие клавиши (?)');kb.innerHTML=railIcon('kb')+'<span>Клавиши</span>';kb.onclick=keysHelp;$('rail').appendChild(kb);
+  window.addEventListener('keydown',e=>{const ae=document.activeElement;if(e.key==='?'&&!(ae&&/INPUT|TEXTAREA|SELECT/.test(ae.tagName))&&$('modal').hidden&&!S.rv&&!S.hv&&!S.sv){e.preventDefault();e.stopImmediatePropagation();keysHelp();}},true);
+  setInterval(crumbsUpd,400);crumbsUpd();
 })();
 </script></body></html>

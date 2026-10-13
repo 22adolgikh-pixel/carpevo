@@ -176,7 +176,7 @@ def _guess_table(rel):
 # ---------------- API: листы ----------------
 @app.get("/api/config")
 def api_config():
-    return {"scans": SCANS, "data": DATA}
+    return {"scans": SCANS, "data": DATA, "src_titles": SOURCE_TITLES}
 
 @app.get("/api/sheets")
 def api_sheets(all: int = 0):

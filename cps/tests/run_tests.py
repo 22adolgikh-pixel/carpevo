@@ -352,6 +352,80 @@ def t12_events_screen(pg, ctx):
     errors_ok(ctx, 'центр событий')
 
 
+@test
+def t13_rail_crumbs_keys(pg, ctx):
+    pg.goto(ctx['url']); pg.wait_for_timeout(2500)
+    ids = pg.evaluate("[...document.querySelectorAll('#rail button')].map(b=>b.id)")
+    for t in ('tab-pipe', 'tab-sheet', 'tab-queue', 'tab-rugs', 'tab-dyes', 'railKeys'): assert t in ids, f'в колонке разделов нет {t}'
+    for t, word in (('tab-pipe', 'Обзор'), ('tab-sheet', 'Листы'), ('tab-queue', 'Узоры'), ('tab-rugs', 'Ковры'), ('tab-dyes', 'Красители')):
+        pg.click('#' + t); pg.wait_for_timeout(900)
+        assert (pg.text_content('#crumbs') or '').startswith(word), f'«где вы сейчас» не показывает {word}: {pg.text_content("#crumbs")}'
+        assert pg.evaluate(f"document.getElementById('{t}').classList.contains('on')"), f'раздел {word} не подсвечен в колонке'
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(300)
+    pg.click('#tab-pipe'); pg.wait_for_timeout(600)
+    pg.keyboard.press('Shift+Slash'); pg.wait_for_timeout(400)
+    assert pg.is_visible('#modal .kbgrid'), '«?» не открывает шпаргалку клавиш'
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(300); assert not pg.is_visible('#modal'), 'Esc не закрывает шпаргалку'
+    pg.click('#railKeys'); pg.wait_for_timeout(300); assert pg.is_visible('#modal .kbgrid'), 'кнопка «Клавиши» не открывает шпаргалку'
+    pg.click('#mClose'); pg.wait_for_timeout(200)
+    pg.keyboard.press('2'); pg.wait_for_timeout(600); assert pg.evaluate("S.mode") == 'queue', 'клавиша 2 не открывает «Узоры»'
+    pg.keyboard.press('1'); pg.wait_for_timeout(600); assert pg.evaluate("S.mode") == 'sheet', 'клавиша 1 не открывает «Листы»'
+    errors_ok(ctx, 'колонка разделов')
+
+
+@test
+def t14_patterns_tree(pg, ctx):
+    pg.click('#tab-queue'); pg.wait_for_timeout(800)
+    pg.evaluate("setMode('cat')"); pg.wait_for_timeout(600)
+    assert pg.is_visible('#left .ptree'), 'у «Узоров» слева нет дерева источников'
+    assert pg.is_visible('#catalog .kpirow'), 'нет цифр сверху'
+    src = pg.evaluate("[...document.querySelectorAll('#left .pn[data-src]')].map(b=>b.dataset.src).filter(Boolean)")
+    assert src, 'в дереве нет источников'
+    k = src[0]; n_all = pg.evaluate("document.querySelectorAll('#catalog .card').length")
+    pg.click(f'#left .pn[data-src="{k}"]:not(.sub)'); pg.wait_for_timeout(500)
+    ids = pg.evaluate("[...document.querySelectorAll('#catalog .card')].map(c=>c.dataset.id)")
+    assert ids and all(pg.evaluate(f"figSrc(S.figures.find(f=>f.id==='{i}'))") == k for i in ids[:30]), 'фильтр по источнику пропускает чужие рисунки'
+    assert k.replace('_', ' ')[:6].lower() in (pg.text_content('#crumbs') or '').lower() or pg.evaluate("srcTitle(S.fsrc)") in (pg.text_content('#crumbs') or ''), 'источник не показан в «где вы сейчас»'
+    tabs = pg.evaluate(f"[...document.querySelectorAll('#left .pn.sub[data-src=\"{k}\"]')].map(b=>b.dataset.tab)")
+    if tabs:
+        pg.click(f'#left .pn.sub[data-tab="{tabs[0]}"]'); pg.wait_for_timeout(500)
+        assert all(str(pg.evaluate(f"S.figures.find(f=>f.id==='{i}').table")) == tabs[0] for i in pg.evaluate("[...document.querySelectorAll('#catalog .card')].map(c=>c.dataset.id)")[:20]), 'фильтр по таблице не работает'
+    pg.click('#left .pn[data-src=""]'); pg.wait_for_timeout(500)
+    assert pg.evaluate("document.querySelectorAll('#catalog .card').length") == n_all, '«Все источники» не снимает фильтр'
+    pg.screenshot(path=f'{OUT}/11_patterns_tree.png')
+    errors_ok(ctx, 'дерево источников')
+
+
+@test
+def t15_rugs_overview(pg, ctx):
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1500)
+    if pg.evaluate("R.view") == 'edit': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
+    assert pg.is_visible('#rgTree .ptree') and pg.is_visible('#rgKpi') and pg.is_visible('#rgPeek'), 'у «Ковров» нет дерева / цифр / карточки справа'
+    n_all = pg.evaluate("document.querySelectorAll('.rgcard').length")
+    pg.click('#rgTree .pn[data-k="museum"]'); pg.wait_for_timeout(500)
+    ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
+    assert ids and all(i.startswith(('vam_', 'met_')) for i in ids), f'фильтр «музеи» пропускает другие: {ids}'
+    pg.click('#rgTree .pn[data-k="museum"]'); pg.wait_for_timeout(300)   # раскрыть подисточники
+    if pg.query_selector('#rgTree .pn.sub[data-s="vam"]'):
+        pg.click('#rgTree .pn.sub[data-s="vam"]'); pg.wait_for_timeout(400)
+        assert all(i.startswith('vam_') for i in pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")), 'фильтр по одному музею не работает'
+    pg.click('#rgTree .pn[data-k=""]'); pg.wait_for_timeout(400)
+    pg.check('#rgTree [data-sch="karabakh"]'); pg.wait_for_timeout(400)
+    ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
+    assert ids == ['kerimov_vol3_p100_1'] or set(ids) <= {'kerimov_vol3_p100_1', 'met_123'}, f'фильтр по школе: {ids}'
+    pg.uncheck('#rgTree [data-sch="karabakh"]'); pg.wait_for_timeout(300)
+    pg.check('#rgFBig'); pg.wait_for_timeout(400)
+    assert pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)") == ['kerimov_vol3_p100_1'], 'чип «есть фото крупнее» не работает'
+    pg.uncheck('#rgFBig'); pg.wait_for_timeout(400)
+    assert pg.evaluate("document.querySelectorAll('.rgcard').length") == n_all, 'фильтры не снимаются'
+    pg.hover('.rgcard[data-id="kerimov_vol3_p100_1"]'); pg.wait_for_timeout(500)
+    assert 'Метрополитен' in (pg.text_content('#rgPeek') or ''), 'карточка справа не показывает двойника'
+    pg.screenshot(path=f'{OUT}/12_rugs_overview.png')
+    pg.click('#rgPeekOpen'); pg.wait_for_timeout(1200)
+    assert pg.evaluate("R.view") == 'edit' and pg.evaluate("R.rug.id") == 'kerimov_vol3_p100_1', '«Открыть в редакторе» не открывает ковёр'
+    pg.keyboard.press('Escape'); errors_ok(ctx, 'обзор ковров')
+
+
 # ---------------- запуск ----------------
 def main():
     os.makedirs(OUT, exist_ok=True)
