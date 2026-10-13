@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 750,
- "h": 1000,
+ "w": 960,
+ "h": 1280,
  "marks": [],
  "created": 1791736126,
  "updated": 1791736126,
@@ -42,18 +42,28 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Azerbaijani_carpet_in_Quba_02_jpg",
  "lib_img": "img/wikimedia_File_Azerbaijani_carpet_in_Quba_02_jpg.jpg",
- "same_group": "g0097",
+ "same_group": "g0034",
  "same": [
+  {
+   "id": "cm_00ec17f4c3",
+   "score": 247
+  },
+  {
+   "id": "cm_ce8daa0857",
+   "score": 1132
+  },
   {
    "id": "wikimedia_File_Azerbaijani_carpet_in_Quba_01_jpg",
    "score": 215
   }
  ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": []
 }

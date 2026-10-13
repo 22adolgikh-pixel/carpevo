@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 774,
- "h": 1000,
+ "w": 803,
+ "h": 1037,
  "marks": [],
  "created": 1791736123,
  "updated": 1791736123,
@@ -42,13 +42,24 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Azerbaijanian_carpet_from_Karabakh_jpg",
  "lib_img": "img/wikimedia_File_Azerbaijanian_carpet_from_Karabakh_jpg.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "azcm_170",
+   "score": 41
+  },
+  {
+   "id": "cm_e645ab9a9e",
+   "score": 58
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": [
   [
    0.0,
@@ -62,5 +73,6 @@
    0.4849,
    1.0
   ]
- ]
+ ],
+ "same_group": "g0063"
 }

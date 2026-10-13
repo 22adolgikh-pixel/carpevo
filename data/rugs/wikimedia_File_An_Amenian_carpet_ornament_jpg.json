@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 750,
- "h": 1000,
+ "w": 960,
+ "h": 1280,
  "marks": [],
  "created": 1791736125,
  "updated": 1791736125,
@@ -42,18 +42,28 @@
   "fragment": true,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_An_Amenian_carpet_ornament_jpg",
  "lib_img": "img/wikimedia_File_An_Amenian_carpet_ornament_jpg.jpg",
- "same_group": "g0077",
+ "same_group": "g0027",
  "same": [
+  {
+   "id": "cm_07c3f08e18",
+   "score": 1079
+  },
+  {
+   "id": "cm_81fb400b18",
+   "score": 285
+  },
   {
    "id": "wikimedia_File_CarpetArtsakh2_jpg",
    "score": 293
   }
  ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": []
 }

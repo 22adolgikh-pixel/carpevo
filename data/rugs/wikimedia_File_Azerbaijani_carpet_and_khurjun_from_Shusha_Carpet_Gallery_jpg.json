@@ -41,13 +41,20 @@
   "fragment": true,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Azerbaijani_carpet_and_khurjun_from_Shusha_Carpet_Gallery_jpg",
  "lib_img": "img/wikimedia_File_Azerbaijani_carpet_and_khurjun_from_Shusha_Carpet_Gallery_jpg.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "cm_067af6ac09",
+   "score": 747
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": [
   [
    0.0,
@@ -61,5 +68,6 @@
    0.405,
    0.805
   ]
- ]
+ ],
+ "same_group": "g0126"
 }

@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 635,
- "h": 1000,
+ "w": 650,
+ "h": 1024,
  "marks": [],
  "created": 1791736133,
  "updated": 1791736133,
@@ -39,12 +39,24 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": "Antique Kuba rugs2000 rugs displayed"
+  "folder": "Antique Kuba rugs2000 rugs displayed",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:azr_kuba_konagkend59",
  "lib_img": "img/azr_kuba_konagkend59.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "azcm_22",
+   "score": 154
+  },
+  {
+   "id": "azcm_31",
+   "score": 109
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
- "multi": []
+ "_lib_t": "2026-10-12 22:38",
+ "multi": [],
+ "same_group": "g0091"
 }

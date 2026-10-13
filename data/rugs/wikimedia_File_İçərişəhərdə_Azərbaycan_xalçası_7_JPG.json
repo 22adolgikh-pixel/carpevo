@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 667,
- "h": 1000,
+ "w": 960,
+ "h": 1440,
  "marks": [],
  "created": 1791736123,
  "updated": 1791736123,
@@ -41,13 +41,20 @@
   "fragment": true,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_İçərişəhərdə_Azərbaycan_xalçası_7_JPG",
  "lib_img": "img/wikimedia_File_İçərişəhərdə_Azərbaycan_xalçası_7_JPG.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "cm_629e01e542",
+   "score": 1144
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": [
   [
    0.0,
@@ -61,5 +68,6 @@
    1.0,
    0.1533
   ]
- ]
+ ],
+ "same_group": "g0159"
 }

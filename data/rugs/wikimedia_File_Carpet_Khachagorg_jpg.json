@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 860,
- "h": 1000,
+ "w": 960,
+ "h": 1116,
  "marks": [],
  "created": 1791736125,
  "updated": 1791736125,
@@ -42,12 +42,20 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Carpet_Khachagorg_jpg",
  "lib_img": "img/wikimedia_File_Carpet_Khachagorg_jpg.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "cm_c489c6af28",
+   "score": 1005
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
- "multi": []
+ "_lib_t": "2026-10-12 22:38",
+ "multi": [],
+ "same_group": "g0215"
 }

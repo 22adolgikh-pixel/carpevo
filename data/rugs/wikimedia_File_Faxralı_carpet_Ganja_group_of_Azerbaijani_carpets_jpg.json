@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 646,
- "h": 1000,
+ "w": 960,
+ "h": 1487,
  "marks": [],
  "created": 1791736125,
  "updated": 1791736125,
@@ -42,13 +42,20 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Faxralı_carpet_Ganja_group_of_Azerbaijani_carpets_jpg",
  "lib_img": "img/wikimedia_File_Faxralı_carpet_Ganja_group_of_Azerbaijani_carpets_jpg.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "cm_d48ea0ece4",
+   "score": 1093
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": [
   [
    0.0,
@@ -62,5 +69,6 @@
    0.8273,
    1.0
   ]
- ]
+ ],
+ "same_group": "g0238"
 }

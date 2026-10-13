@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 750,
- "h": 1000,
+ "w": 960,
+ "h": 1280,
  "marks": [],
  "created": 1791736127,
  "updated": 1791736127,
@@ -42,18 +42,28 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Kasim_Usagy_jpg",
  "lib_img": "img/wikimedia_File_Kasim_Usagy_jpg.jpg",
- "same_group": "g0108",
+ "same_group": "g0038",
  "same": [
+  {
+   "id": "cm_2d904d6055",
+   "score": 879
+  },
+  {
+   "id": "cm_d31dec1269",
+   "score": 1164
+  },
   {
    "id": "wikimedia_File_Kasymushagy_jpg",
    "score": 737
   }
  ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": []
 }

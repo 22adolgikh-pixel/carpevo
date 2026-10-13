@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 710,
- "h": 1000,
+ "w": 1049,
+ "h": 1477,
  "marks": [],
  "created": 1791736122,
  "updated": 1791746361,
@@ -39,15 +39,46 @@
   "fragment": false,
   "object": "",
   "ambiguous": true,
-  "folder": ""
+  "folder": "",
+  "page_figs": [
+   {
+    "label": "3",
+    "caption": "",
+    "composition": "",
+    "school": "",
+    "school_why": "",
+    "date": "",
+    "technique": "",
+    "fragment": false,
+    "text": "",
+    "title": "Керимов, т. II, 3 (стр. скана 127, печ. 3)"
+   },
+   {
+    "label": "2",
+    "caption": "",
+    "composition": "",
+    "school": "",
+    "school_why": "",
+    "date": "",
+    "technique": "",
+    "fragment": false,
+    "text": "",
+    "title": "Керимов, т. II, 2 (стр. скана 127, печ. 3)"
+   }
+  ],
+  "page_box": 0
  },
  "src_id": "cat:kerimov_vol2_p127_1",
  "lib_img": "img/kerimov_vol2_p127_1.jpg",
- "same_group": "g0012",
+ "same_group": "g0017",
  "same": [
   {
    "id": "kerimov_vol2_p127_3",
    "score": 350
+  },
+  {
+   "id": "cm_de088aa11d",
+   "score": 0
   },
   {
    "id": "wikimedia_File_Куба_jpg",
@@ -55,7 +86,7 @@
   }
  ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "layout": null,
  "updated_by": "dolgikh",
  "split_into": [

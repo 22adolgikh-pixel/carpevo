@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 557,
- "h": 1000,
+ "w": 960,
+ "h": 1724,
  "marks": [],
  "created": 1791736124,
  "updated": 1791746455,
@@ -42,11 +42,13 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Куба_jpg",
  "lib_img": "img/wikimedia_File_Куба_jpg.jpg",
- "same_group": "g0012",
+ "same_group": "g0017",
  "same": [
   {
    "id": "kerimov_vol2_p127_1",
@@ -55,6 +57,10 @@
   {
    "id": "kerimov_vol2_p127_3",
    "score": 643
+  },
+  {
+   "id": "cm_de088aa11d",
+   "score": 1255
   }
  ],
  "same_ok": {
@@ -64,7 +70,7 @@
    "at": 1791744831
   }
  },
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "layout": null,
  "updated_by": "dolgikh",
  "multi": []

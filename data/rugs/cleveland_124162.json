@@ -42,12 +42,24 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:cleveland_124162",
  "lib_img": "img/cleveland_124162.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "cm_0c62f446d3",
+   "score": 798
+  },
+  {
+   "id": "wikimedia_File_Antique_Shirvan_Prayer_Rug_png",
+   "score": 0
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
- "multi": []
+ "_lib_t": "2026-10-12 22:38",
+ "multi": [],
+ "same_group": "g0082"
 }

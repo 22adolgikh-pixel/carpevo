@@ -42,13 +42,20 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Faig_Ahmed_Doubts_jpg",
  "lib_img": "img/wikimedia_File_Faig_Ahmed_Doubts_jpg.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "cm_5d5b320c08",
+   "score": 711
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": [
   [
    0.2317,
@@ -62,5 +69,6 @@
    0.2183,
    0.8846
   ]
- ]
+ ],
+ "same_group": "g0145"
 }

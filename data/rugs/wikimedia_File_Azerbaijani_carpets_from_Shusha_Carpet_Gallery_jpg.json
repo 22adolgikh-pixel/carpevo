@@ -41,13 +41,20 @@
   "fragment": true,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Azerbaijani_carpets_from_Shusha_Carpet_Gallery_jpg",
  "lib_img": "img/wikimedia_File_Azerbaijani_carpets_from_Shusha_Carpet_Gallery_jpg.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "cm_79dd4cf291",
+   "score": 857
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": [
   [
    0.06,
@@ -61,5 +68,6 @@
    0.2817,
    1.0
   ]
- ]
+ ],
+ "same_group": "g0134"
 }

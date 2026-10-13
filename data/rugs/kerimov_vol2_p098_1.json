@@ -172,15 +172,37 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:kerimov_vol2_p098_1",
  "lib_img": "img/kerimov_vol2_p098_1.jpg",
- "same_group": "g0033",
+ "same_group": "g0005",
  "same": [
+  {
+   "id": "kerimov_vol1_p330_1",
+   "score": 0
+  },
   {
    "id": "kerimov_vol1_p332_1",
    "score": 64
+  },
+  {
+   "id": "cm_608854babe",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Shusha_rug_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Ширван_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Шихлы_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -190,7 +212,7 @@
    "at": 1791744492
   }
  },
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "layout": null,
  "updated_by": "dolgikh",
  "multi": []

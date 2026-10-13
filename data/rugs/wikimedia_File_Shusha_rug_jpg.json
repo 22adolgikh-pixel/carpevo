@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 463,
- "h": 1000,
+ "w": 740,
+ "h": 1598,
  "marks": [],
  "created": 1791736124,
  "updated": 1791736124,
@@ -42,15 +42,29 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Shusha_rug_jpg",
  "lib_img": "img/wikimedia_File_Shusha_rug_jpg.jpg",
- "same_group": "g0003",
+ "same_group": "g0005",
  "same": [
   {
    "id": "kerimov_vol1_p330_1",
    "score": 0
+  },
+  {
+   "id": "kerimov_vol1_p332_1",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p098_1",
+   "score": 0
+  },
+  {
+   "id": "cm_608854babe",
+   "score": 1500
   },
   {
    "id": "wikimedia_File_Ширван_jpg",
@@ -68,6 +82,6 @@
    "at": 1791745247
   }
  },
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": []
 }

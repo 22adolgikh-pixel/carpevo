@@ -42,13 +42,28 @@
   "fragment": true,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Milli_Xalça_Muzeyinin_Şuşa_filialı_3_jpg",
  "lib_img": "img/wikimedia_File_Milli_Xalça_Muzeyinin_Şuşa_filialı_3_jpg.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "cm_76f4cf50f2",
+   "score": 687
+  },
+  {
+   "id": "cm_9f74557ac3",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Milli_Xalça_Muzeyinin_Şuşa_filialı_2_jpg",
+   "score": 0
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
+ "_lib_t": "2026-10-12 22:38",
  "multi": [
   [
    0.2317,
@@ -62,5 +77,6 @@
    0.3233,
    1.0
   ]
- ]
+ ],
+ "same_group": "g0036"
 }

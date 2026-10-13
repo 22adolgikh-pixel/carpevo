@@ -14,8 +14,8 @@
  "size": "",
  "notes": "",
  "status": "new",
- "w": 641,
- "h": 1000,
+ "w": 960,
+ "h": 1498,
  "marks": [],
  "created": 1791736126,
  "updated": 1791736126,
@@ -42,12 +42,24 @@
   "fragment": false,
   "object": "",
   "ambiguous": false,
-  "folder": ""
+  "folder": "",
+  "page_figs": [],
+  "page_box": 0
  },
  "src_id": "cat:wikimedia_File_Azerbaijanian_carpet_from_Pirabadil_jpg",
  "lib_img": "img/wikimedia_File_Azerbaijanian_carpet_from_Pirabadil_jpg.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "azcm_30",
+   "score": 139
+  },
+  {
+   "id": "cm_a6836a71b7",
+   "score": 1137
+  }
+ ],
  "same_ok": {},
- "_lib_t": "2026-10-10 12:45",
- "multi": []
+ "_lib_t": "2026-10-12 22:38",
+ "multi": [],
+ "same_group": "g0080"
 }
