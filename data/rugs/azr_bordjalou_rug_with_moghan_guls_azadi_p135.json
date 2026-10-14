@@ -16,9 +16,147 @@
  "status": "new",
  "w": 888,
  "h": 1200,
- "marks": [],
+ "marks": [
+  {
+   "id": "mmv8h4b4d",
+   "box": [
+    0.29442,
+    0.20708,
+    0.062,
+    0.04078
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8h4b4d",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1792004346,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "mmv8h4de90",
+   "box": [
+    0.64264,
+    0.20444,
+    0.06607,
+    0.04444
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8h4b4d",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 1,
+   "machine": 1,
+   "score": 0.891,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1792004350,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "mmv8h4de91",
+   "box": [
+    0.29129,
+    0.38,
+    0.06156,
+    0.04111
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8h4b4d",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 1,
+   "score": 0.742,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1792004350,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "mmv8h4de92",
+   "box": [
+    0.64114,
+    0.38667,
+    0.06156,
+    0.03819
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8h4b4d",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 1,
+   "score": 0.717,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1792004350,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "mmv8h59sz",
+   "box": [
+    0.32296,
+    0.20592,
+    0.36513,
+    0.20101
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1792004392,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "edited_by": "dolgikh",
+   "edited_at": 1792004398
+  }
+ ],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1792004398,
  "cat": {
   "title": "bordjalou rug with moghan guls azadi p135",
   "museum": "",
@@ -56,7 +194,15 @@
    "score": 184
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_kuba74": {
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1792004333
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
- "multi": []
+ "multi": [],
+ "layout": null,
+ "updated_by": "dolgikh"
 }
