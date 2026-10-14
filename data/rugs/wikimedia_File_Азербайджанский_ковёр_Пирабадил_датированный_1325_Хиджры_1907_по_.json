@@ -16,9 +16,37 @@
  "status": "new",
  "w": 884,
  "h": 1100,
- "marks": [],
+ "marks": [
+  {
+   "id": "mmv8jutwg",
+   "box": [
+    0.23266,
+    0.13825,
+    0.17555,
+    0.15507
+   ],
+   "zone": "field",
+   "motif": "qeychi",
+   "motif_text": "",
+   "scheme": "t104_f01",
+   "group": "",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 270,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "detail",
+   "by": "dolgikh",
+   "at": 1792008943,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792009081
+  }
+ ],
  "created": 1791736123,
- "updated": 1791736123,
+ "updated": 1792009101,
  "cat": {
   "title": "Азербайджанский ковёр \"Пирабадил\" датированный 1325 Хиджры (1907 по григорианскому календарю).jpg",
   "museum": "Wikimedia Commons",
@@ -51,5 +79,7 @@
  "same": [],
  "same_ok": {},
  "_lib_t": "2026-10-12 22:38",
- "multi": []
+ "multi": [],
+ "layout": null,
+ "updated_by": "dolgikh"
 }
