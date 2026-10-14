@@ -672,6 +672,7 @@ def t20_twin_verdicts_v118(pg, ctx):
     """v11.8: в ленте двойников ✓ тот же / ≈ похожи / ✗ другой; очередь тяжёлых расчётов; список ковров из кэша"""
     u = ctx['url']
     assert 'run' in get(u + 'api/heavy'), 'нет /api/heavy'
+    h = get(u + 'api/health'); assert h['rss_mb'] > 0 and 'mem_tail' in h, f'/api/health: {h}'
     pg.click('#tab-rugs'); pg.wait_for_timeout(800)
     pg.evaluate("rugOpen('kerimov_vol3_p100_1')"); pg.wait_for_timeout(1500)
     tw = '#rgStrip .rgtw[data-open="met_123"]'

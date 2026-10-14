@@ -1779,6 +1779,8 @@ events.automation("train", "Дообучение распознавания", f"
                   _train_run, due=_train_due, enabled=True, auto=False)
 events.automation("weekly", "Отчёт за неделю", lambda c: f"по {['понедельникам', 'вторникам', 'средам', 'четвергам', 'пятницам', 'субботам', 'воскресеньям'][int(c.get('weekday', 0))]} в {int(c.get('hour', 9)):02d}:00 — сводка: что сделали люди и система, что ждёт решения",
                   _week_run, due=_week_due, enabled=True, auto=True, hour=9, weekday=0)
+import health          # v11.10: журнал памяти и аварий (почему сервер падает) — /api/health
+health.install(app, DATA, rugs.heavy_q, events)
 import motif_search    # v11.4: индекс признаков фото ковров для поиска узора по всем коврам
 
 
