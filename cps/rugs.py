@@ -196,7 +196,8 @@ def install(app, DATA, D_WORK):
                 "w": r.get("w") or 0, "h": r.get("h") or 0,
                 "same_no": [k for k, v in (r.get("same_ok") or {}).items() if v and not v.get("ok")],
                 "same_ids": [x.get("id") for x in (r.get("same") or []) if x.get("id")],
-                "part": (r.get("cat") or {}).get("part", 0)}
+                "part": (r.get("cat") or {}).get("part", 0),
+                "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", "")}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -258,6 +259,27 @@ def install(app, DATA, D_WORK):
                 okd = ((r.get("same_ok") or {}).get(i) or {}).get("ok")
                 return {"id": c, "why": f"у двойника{' (проверен ✓)' if okd else ''}: {(o.get('title') or i)[:60]}", "kind": "twin", "from": i}
         return comp_guess_text(r)
+
+    # ---- v11.6: что на фото — ковёр, изделие (сумка, конское снаряжение, бытовое) или вообще не фото ковра ----
+    OBJ = {"carpet": "ковёр", "bag": "сумка, мешок", "horse": "конское снаряжение", "home": "бытовое изделие", "scene": "не фото ковра"}
+    OBJ_KEYS = [("scene", ("carpet tools", "kirkid", "həvə", "hava (", "qayçı", "qaycisi", "scissors", "loom", "dəzgah", "hanası", "hanasi", " hana ", "skein", "kələf",
+                           "iplik", "weaver", "toxucu", "sərgi", "yarmarka", "exhibition", "festival", "store", "shop", "mağaza", "bazaar", "içərişəhər",
+                           "icherisheher", "old city", "faig ahmed", "street", "interior", "hall of", "craft room")),
+                ("bag", ("məfrəş", "mefres", "mafrash", "мафраш", "xurcun", "khurjun", "khorjin", "хурджун", "heybə", "heybe", "хейбе", "çuval", "chuval",
+                         "чувал", "torba", "torbası", "çanta", "canta", "qaşıqdan", "qasiqdan", "saddle bag", "saddlebag", " bag", "сумк", "мешок")),
+                ("horse", ("çul ", "çul,", "çul)", "(çul", " cul ", "попона", "horse cover", "yəhərüstü", "yeherustu", "ləməqabağı", "lemeqabagi", "örkən", "orken", "qaşlıq", "qasliq")),
+                ("home", ("balışüzü", "balisuzu", "dəstərxan", "desterxan", "corab", "носки", "socks", "pillow"))]
+
+    def obj_guess(r):
+        """(вид, слово) по названию / подписи / каталогу; человек ставит r["obj"] — тогда это"""
+        if r.get("obj") in OBJ: return r["obj"], ""
+        C = r.get("cat") or {}
+        t = " " + " ".join(x for x in [r.get("title"), " ".join(y for y in C.get("names") or [] if y), C.get("object"), C.get("folder")] if x).lower() + " "
+        for k, ws in OBJ_KEYS:
+            for w in ws:
+                if w in t: return k, w.strip(" ,()")
+        if "сумка" in (C.get("object") or ""): return "bag", "каталог"
+        return "carpet", ""
 
     CAT_FIELDS = ("title", "museum", "inv", "url", "license", "place", "date", "size", "technique", "school", "composition")
 
@@ -423,6 +445,7 @@ def install(app, DATA, D_WORK):
                      ok=(r.get("same_ok") or {}).get(x["id"]), n=len([m for m in o.get("marks", []) if m.get("status") != "rejected"]),
                      wh=img_size(x["id"], o))
         r["wh"] = img_size(rid, r)
+        o, w = obj_guess(r); r["_obj"] = {"k": o, "why": w, "set": bool(r.get("obj"))}
         return r
 
     @app.post("/api/rugs/{rid}")
@@ -436,6 +459,8 @@ def install(app, DATA, D_WORK):
             if b.get("school_suggest") is None and "school_suggest" in b: r.pop("school_suggest", None)
             if "layout" in b: r["layout"] = b["layout"] if isinstance(b["layout"], dict) else None
             if b.get("multi_no"): r["multi"] = []                     # «это один ковёр, не делить»
+            if "obj" in b: r["obj"] = b["obj"] if b["obj"] in OBJ else ""            # v11.6: вид изделия (человек)
+            if "hidden" in b: r["hidden"] = str(b["hidden"] or "")[:200]            # v11.6: скрыт из каталога (причина)
             if "marks" in b:
                 old = {m["id"]: m for m in r.get("marks", [])}; marks = []
                 for m in b["marks"]:
@@ -443,18 +468,19 @@ def install(app, DATA, D_WORK):
                     except Exception: continue
                     if len(box) != 4 or box[2] < 0.003 or box[3] < 0.003: continue
                     mid = str(m.get("id") or f"m{now}{len(marks)}")
-                    keep = {k: m.get(k) for k in ("zone", "motif", "motif_text", "scheme", "group", "certainty", "status", "note", "angle", "flip", "machine", "score", "xfer")}
+                    keep = {k: m.get(k) for k in ("zone", "motif", "motif_text", "scheme", "group", "certainty", "status", "note", "angle", "flip", "machine", "score", "xfer", "variant")}
                     keep = {k: ("" if v is None else v) for k, v in keep.items()}
                     if keep["zone"] not in ZONES: keep["zone"] = "other"
                     if keep["status"] not in STATUSES: keep["status"] = "proposed"
                     keep["angle"] = int(keep["angle"] or 0) % 360 if str(keep["angle"] or 0).lstrip("-").isdigit() else 0
                     keep["flip"] = 1 if keep["flip"] else 0
+                    if keep["variant"] not in ("", "color", "detail"): keep["variant"] = ""
                     if keep["motif"] and keep["motif"] not in BYID: keep["motif_text"] = keep["motif_text"] or keep["motif"]; keep["motif"] = ""
                     o = old.get(mid, {})
                     nm = {"id": mid, "box": [round(v, 5) for v in box], **keep,
                           "by": o.get("by") or (("машина → " + who) if keep.get("machine") else who), "at": o.get("at") or now,
                           "confirmed_by": o.get("confirmed_by", ""), "confirmed_at": o.get("confirmed_at", 0)}
-                    changed = not o or any(o.get(k) != nm.get(k) for k in ("box", "zone", "motif", "motif_text", "scheme", "group"))
+                    changed = not o or any(o.get(k) != nm.get(k) for k in ("box", "zone", "motif", "motif_text", "scheme", "group", "variant"))
                     if changed and o: nm["edited_by"], nm["edited_at"] = who, now
                     if nm["status"] in ("confirmed", "rejected") and (o.get("status") != nm["status"] or changed):
                         nm["confirmed_by"], nm["confirmed_at"] = who, now
@@ -1171,5 +1197,98 @@ def install(app, DATA, D_WORK):
         except Exception as e: print("dedupe_files:", e)
 
     threading.Thread(target=_dedupe_bg, daemon=True).start()
+
+    # ---- v11.6: машинная проверка «один и тот же ковёр» — совмещение фото пары по точкам (SIFT + гомография) ----
+    # Одинаковые ковры (тот же узор, те же ошибки ткача) дают десятки–сотни совпавших точек; разные ковры одного типа — единицы.
+    dchk = {"running": False, "done": 0, "total": 0, "stage": "", "error": "", "last": ""}
+
+    def dup_pairs(only_new=True):
+        out = []; seen = set()
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("dup_of") or r.get("split_into"): continue
+            for x in r.get("same") or []:
+                o = x.get("id"); k = tuple(sorted((r["id"], o)))
+                if not o or k in seen: continue
+                seen.add(k)
+                if only_new and o in (r.get("same_chk") or {}): continue
+                out.append(k)
+        return out
+
+    def dup_check_run(only_new=True, on_done=None):
+        import rug_match
+        if dchk["running"]: return False
+        P = dup_pairs(only_new)
+        dchk.update(running=True, done=0, total=len(P), stage="совмещаю фото пар", error="")
+
+        def run():
+            bad = 0
+            try:
+                for a, b in P:
+                    pa, pb = img_path(a), img_path(b)
+                    A, B = (cv2.imread(pa) if pa else None), (cv2.imread(pb) if pb else None)
+                    n = 0
+                    if A is not None and B is not None:
+                        try: _, n = rug_match.align(A, B)
+                        except Exception: n = 0
+                    v = "same" if n >= 60 else ("maybe" if n >= 20 else "diff")
+                    bad += v == "diff"
+                    with _lock:
+                        for x, y in ((a, b), (b, a)):
+                            r = load(x)
+                            if r: r.setdefault("same_chk", {})[y] = {"inl": int(n), "v": v, "at": int(time.time())}; save(r)
+                    dchk["done"] += 1
+                dchk["last"] = f"проверено пар: {len(P)}, похоже, разные ковры: {bad}"
+                if on_done: on_done(dchk["last"])
+            except Exception as e:
+                dchk["error"] = str(e)[:300]
+            finally:
+                dchk.update(running=False, stage="")
+        threading.Thread(target=run, daemon=True).start()
+        return True
+
+    app.state.dup_check_run = dup_check_run; app.state.dup_pairs = dup_pairs
+
+    @app.get("/api/rugs_dupcheck")
+    def api_dupcheck_list():
+        """группы «один и тот же ковёр» для проверки: пары с машинной оценкой и ответом человека"""
+        A = {}
+        for f in os.listdir(D_RUGS):
+            if f.endswith(".json"):
+                r = load(f[:-5])
+                if r and not r.get("dup_of") and not r.get("split_into"): A[r["id"]] = r
+        pairs = []; seen = set()
+        for r in A.values():
+            for x in r.get("same") or []:
+                o = x.get("id")
+                if o not in A: continue
+                k = tuple(sorted((r["id"], o)))
+                if k in seen: continue
+                seen.add(k); ra, rb = A[k[0]], A[k[1]]
+                ch = (ra.get("same_chk") or {}).get(k[1]); ok = (ra.get("same_ok") or {}).get(k[1])
+                pairs.append({"a": k[0], "b": k[1], "chk": ch, "ok": ok, "score": x.get("score", 0),
+                              "ta": ra.get("title") or k[0], "tb": rb.get("title") or k[1], "sa": (ra.get("cat") or {}).get("src", ""), "sb": (rb.get("cat") or {}).get("src", ""),
+                              "wa": [ra.get("w") or 0, ra.get("h") or 0], "wb": [rb.get("w") or 0, rb.get("h") or 0]})
+        return {"pairs": pairs, "state": dchk}
+
+    @app.post("/api/rugs_dupcheck")
+    def api_dupcheck_run(body: dict = Body(default={})):
+        """запустить машинную проверку (в фоне); all=true — перепроверить и уже проверенные; accept=true — ✓ у всех пар «точно тот же», без ответа человека"""
+        if body.get("accept"):
+            n = 0; who = "машина (совпало ≥60 точек) → " + (body.get("who") or "")
+            with _lock:
+                for f in os.listdir(D_RUGS):
+                    if not f.endswith(".json"): continue
+                    r = load(f[:-5])
+                    if not r: continue
+                    ch = False
+                    for o, c in (r.get("same_chk") or {}).items():
+                        if c.get("v") == "same" and o not in (r.get("same_ok") or {}):
+                            r.setdefault("same_ok", {})[o] = {"ok": True, "by": who, "at": int(time.time())}; ch = True; n += 1
+                    if ch: save(r)
+            return {"ok": True, "n": n // 2}
+        dup_check_run(only_new=not body.get("all"))
+        return dchk
 
     threading.Thread(target=repair_parts, daemon=True).start()   # после того как определены img_path и остальное

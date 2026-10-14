@@ -65,6 +65,7 @@ def make_rugs(data):
     save("border_rep", a, title="Hajigayib rug, Guba school, XIX c", cat={"src": "commons"})
     # v11.5: тип ковра по названию и одинаковый файл Wikimedia в двух размерах
     save("cm_pir", carpet(320, 420, 31), title="Pirəbədil carpet, Quba group of Azerbaijani carpets", url="https://commons.wikimedia.org/wiki/File:Pir%C9%99b%C9%99dil_carpet.jpg", cat={"src": "commons"})
+    save("am_bag", carpet(400, 260, 41), title="Məfrəş (Мафраш), Ширван, Азербайджан", museum="Музей ковра", cat={"src": "azcarpetmuseum"})   # v11.6: изделие
     small = cv2.resize(carpet(320, 420, 31), (160, 210))
     save("wm_pir_small", small, title="Pirəbədil carpet.jpg", url="https://commons.wikimedia.org/wiki/File:Pirəbədil_carpet.jpg", cat={"src": "wikimedia"},
          marks=[{"id": "mSm", "box": [0.3, 0.3, 0.2, 0.2], "zone": "field", "status": "confirmed", "motif_text": "с маленькой копии"}])
@@ -537,6 +538,71 @@ def t17_feedback_v115(pg, ctx):
     assert o1 == o2 and len(o1) == 2, f'порядок миниатюр двойников меняется: {o1} → {o2}'
     assert pg.evaluate("document.querySelector('#rgStrip .rgtw.cur').dataset.open") == 'met_123', 'открытое фото не подсвечено'
     errors_ok(ctx, 'v11.5')
+
+
+@test
+def t18_feedback_v116(pg, ctx):
+    """v11.6: изделия отдельно, скрыть фото, Tab — явный фокус, пробел прячет рамки, автоповторы только точные, вариант элемента, K — разделить, проверка склеек"""
+    u = ctx['url']
+    L = {r['id']: r for r in get(u + 'api/rugs')['rugs']}
+    assert L['am_bag']['obj'] == 'bag', f'мафраш не узнан как сумка: {L["am_bag"]["obj"]}'
+    assert L['vam_1']['obj'] == 'carpet'
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
+    if pg.evaluate("R.view") == 'edit': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
+    ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
+    assert 'am_bag' not in ids, 'сумка показана среди ковров'
+    pg.click('#rgKinds [data-kind="items"]'); pg.wait_for_timeout(400)
+    assert pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)") == ['am_bag'], 'фильтр «Изделия» не работает'
+    pg.click('#rgKinds [data-kind="carpets"]'); pg.wait_for_timeout(300)
+    # скрыть
+    pg.evaluate("rugOpen('vam_4')"); pg.wait_for_timeout(1400)
+    pg.click('#rgTbHide'); pg.wait_for_timeout(300); pg.click('#modal [data-hr="0"]'); pg.wait_for_timeout(1500)
+    assert get(u + 'api/rugs/vam_4').get('hidden'), 'фото не скрылось'
+    assert 'vam_4' not in pg.evaluate("R.list.filter(r=>rugKindOf(r)==='carpets').map(r=>r.id)"), 'скрытое фото осталось среди ковров'
+    pg.click('#rgTbHide'); pg.wait_for_timeout(1200)
+    assert not get(u + 'api/rugs/vam_4').get('hidden'), '«вернуть» не вернуло фото'
+    # автоповторы после новой рамки — только «точно такие же»
+    pg.evaluate("rugOpen('border_rep')"); pg.wait_for_timeout(1500)
+    pg.evaluate("R.rug.marks=[];rugSaveSoon();"); pg.wait_for_timeout(900)
+    pg.evaluate("(()=>{const m={id:'mA',box:[20/300,120/620,80/300,80/620],zone:'border',status:'proposed',motif:'',motif_text:'',scheme:'',group:'',angle:0,flip:0};R.rug.marks.push(m);rugSelect(m);rugFindRepeats(m,true);})()")
+    pg.wait_for_timeout(3500)
+    mk = pg.evaluate("R.rug.marks.filter(m=>m.machine).map(m=>m.certainty)")
+    assert mk and all(c == 'sure' for c in mk), f'после новой рамки добавлены неуверенные повторы: {mk}'
+    # Tab: ореол, подпись, пинг; пробел — рамки скрыты
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200); pg.keyboard.press('Tab'); pg.wait_for_timeout(300)
+    assert pg.evaluate("!!document.querySelector('#rgSvg .rgping')"), 'Tab не подсвечивает выбранный элемент'
+    pg.keyboard.down(' '); pg.wait_for_timeout(200)
+    assert pg.evaluate("getComputedStyle(document.getElementById('rgSvg')).opacity") == '0', 'пробел не прячет рамки'
+    pg.keyboard.up(' '); pg.wait_for_timeout(200)
+    assert pg.evaluate("getComputedStyle(document.getElementById('rgSvg')).opacity") == '1', 'рамки не вернулись после пробела'
+    # вариант элемента
+    pg.click('#rgSide [data-var="detail"]'); pg.wait_for_timeout(1500)
+    sid = pg.evaluate("R.sel.id")
+    assert [m for m in get(u + 'api/rugs/border_rep')['marks'] if m['id'] == sid][0].get('variant') == 'detail', 'вариант элемента не сохранился'
+    pg.screenshot(path=f'{OUT}/16_focus_variant.png')
+    # K — разделение
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200); pg.keyboard.press('k'); pg.wait_for_timeout(1500)
+    assert pg.evaluate("R.tool") == 'split', 'K не включает разделение фото'
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(300)
+    # проверка склеек: Керимов т. III и Метрополитен — один ковёр в разном размере
+    post(u + 'api/rugs_dupcheck', {})
+    for _ in range(60):
+        j = get(u + 'api/rugs_dupcheck')
+        if not j['state']['running']: break
+        time.sleep(0.5)
+    pr = [p for p in j['pairs'] if {p['a'], p['b']} == {'kerimov_vol3_p100_1', 'met_123'}]
+    assert pr and pr[0]['chk'] and pr[0]['chk']['v'] == 'same', f'машинная проверка не узнала один и тот же ковёр: {pr}'
+    pg.evaluate("rugBack()"); pg.wait_for_timeout(500)
+    pg.click('#rgDupChk'); pg.wait_for_timeout(1200)
+    pg.click('#dcBar [data-df="same"]'); pg.wait_for_timeout(300)
+    assert pg.evaluate("document.querySelectorAll('.dcrow').length") >= 1, 'в окне проверки нет пары «точно тот же»'
+    pg.screenshot(path=f'{OUT}/17_dupcheck.png')
+    pg.click('.dcrow [data-dno]'); pg.wait_for_timeout(800)
+    assert (get(u + 'api/rugs/met_123').get('same_ok') or {}).get('kerimov_vol3_p100_1', {}).get('ok') is False, '✗ в окне проверки не записался'
+    pg.click('#dcBar [data-df="done"]'); pg.wait_for_timeout(300)
+    pg.click('.dcrow [data-dok]'); pg.wait_for_timeout(800)
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(300)
+    errors_ok(ctx, 'v11.6')
 
 
 # ---------------- запуск ----------------

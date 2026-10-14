@@ -1795,6 +1795,20 @@ def _motif_due(c, t):
     return t.hour == int(c.get("hour", 4)) and not last.startswith(t.strftime("%Y-%m-%d"))
 
 
+def _dupchk_run(c):
+    n = len(app.state.dup_pairs(True))
+    if not n: return None
+    app.state.dup_check_run(True, on_done=lambda res: events.add("Проверка двойников: " + res, "Ковры → «проверить склейки»: начните с пар «похоже, разные ковры»", link={"to": "events"}))
+    return f"запущена проверка новых пар двойников: {n}"
+
+
+def _dupchk_due(c, t):
+    last = str(c.get("last_run") or "")
+    return t.hour == int(c.get("hour", 5)) and not last.startswith(t.strftime("%Y-%m-%d"))
+
+
+events.automation("dupchk", "Проверка двойников", lambda c: f"каждую ночь в {int(c.get('hour', 5)):02d}:00 — совместить фото новых пар «один и тот же ковёр» и отметить подозрительные склейки",
+                  _dupchk_run, due=_dupchk_due, enabled=True, auto=True, hour=5)
 events.automation("motif", "Индекс узоров", lambda c: f"каждую ночь в {int(c.get('hour', 4)):02d}:00 — посчитать признаки новых и изменённых фото ковров для поиска «где ещё встречается этот узор»",
                   _motif_run, due=_motif_due, enabled=True, auto=True, hour=4)
 events.install(app, DATA, act=_ev_act, extra=_ev_extra)
