@@ -8,7 +8,7 @@
  "license": "CC0 · Avisadehh",
  "place": "",
  "date": "2017-10-20 17:59:31",
- "school": "",
+ "school": "guba-shirvan",
  "composition": "",
  "technique": "",
  "size": "",
@@ -58,7 +58,13 @@
    "score": 808
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_9f23a758cf": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792002568
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_9f23a758cf": {
@@ -71,5 +77,8 @@
    "v": "same",
    "at": 1792001025
   }
+ },
+ "from_twin": {
+  "school": "cm_9f23a758cf"
  }
 }

@@ -3,15 +3,15 @@
  "title": "Knotted-pile wool carpet “Pirabadil”",
  "source": "каталог: commons",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "445",
  "url": "https://commons.wikimedia.org/wiki/File:Azerbaijanian_carpet_from_Pirabadil.jpg",
  "license": "Public domain · Unknown author Unknown author",
- "place": "",
+ "place": "Губа, Азербайджан",
  "date": "1883",
  "school": "guba-shirvan",
  "composition": "pirebedil",
  "technique": "ворсовый",
- "size": "",
+ "size": "142x213 sm",
  "notes": "Knotted-pile wool carpet “Pirabadil”. Guba school.",
  "status": "new",
  "w": 1145,
@@ -58,7 +58,13 @@
    "score": 1137
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_30": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792002552
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "azcm_30": {
@@ -66,5 +72,10 @@
    "v": "same",
    "at": 1792001041
   }
+ },
+ "from_twin": {
+  "inv": "azcm_30",
+  "place": "azcm_30",
+  "size": "azcm_30"
  }
 }
