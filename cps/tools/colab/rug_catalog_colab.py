@@ -429,7 +429,8 @@ log('групп двойников:', len(out_groups), '| фото в них:', 
 # ---------------- сохранение и пакет для студии ----------------
 # v10.28: в пакет — фото до 2400 px (раньше 1000): мелкие элементы видны, «⬆ фото крупнее» показывает реальный размер
 BIGDIR = f'{CACHE}/big2400'; os.makedirs(BIGDIR, exist_ok=True)
-for n, it in enumerate(items):
+BUNDLE = os.environ.get('RC_BUNDLE', '1') != '0'      # v11.8: RC_BUNDLE=0 — без пакета фото, только каталог (подписи, типы, двойники)
+for n, it in enumerate(items if BUNDLE else []):
     bp = f'{BIGDIR}/{it["id"]}.jpg'
     if not os.path.exists(bp):
         a = load(it, 2400)
@@ -440,10 +441,11 @@ cat = {'built': time.strftime('%Y-%m-%d %H:%M'), 'items': items, 'groups': out_g
 json.dump(cat, open(f'{OUT}/catalog.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 json.dump(out_groups, open(f'{OUT}/groups.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 BZ = f'{CACHE}/rugs_bundle.zip' if os.environ.get('RC_TEST') else '/content/rugs_bundle.zip'   # пакет собирается локально и загружается на Диск через API
-with zipfile.ZipFile(BZ, 'w', zipfile.ZIP_STORED) as z:
-    z.writestr('catalog.json', json.dumps(cat, ensure_ascii=False))
-    for it in items: z.write(f'{BIGDIR}/{it["id"]}.jpg' if os.path.exists(f'{BIGDIR}/{it["id"]}.jpg') else f'{IMGDIR}/{it["id"]}.jpg', it['img'])
-log('пакет:', round(os.path.getsize(BZ) / 1e6), 'МБ')
+if BUNDLE:
+    with zipfile.ZipFile(BZ, 'w', zipfile.ZIP_STORED) as z:
+        z.writestr('catalog.json', json.dumps(cat, ensure_ascii=False))
+        for it in items: z.write(f'{BIGDIR}/{it["id"]}.jpg' if os.path.exists(f'{BIGDIR}/{it["id"]}.jpg') else f'{IMGDIR}/{it["id"]}.jpg', it['img'])
+    log('пакет:', round(os.path.getsize(BZ) / 1e6), 'МБ')
 # загрузка на Диск с доступом «по ссылке» (тот же id при повторных запусках — студии не нужно ничего менять)
 if os.environ.get('RC_TEST'): raise SystemExit('RC_TEST: без загрузки на Диск')
 auth.authenticate_user()
@@ -451,19 +453,31 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 svc = build('drive', 'v3')
 idf = f'{OUT}/bundle_id.txt'; fid = open(idf).read().strip() if os.path.exists(idf) else ''
-media = MediaFileUpload(BZ, mimetype='application/zip', resumable=True, chunksize=50 * 1024 * 1024)
-if fid:
+media = MediaFileUpload(BZ, mimetype='application/zip', resumable=True, chunksize=50 * 1024 * 1024) if BUNDLE else None
+if fid and BUNDLE:
     try: svc.files().update(fileId=fid, media_body=media).execute()
     except Exception as e: print('не удалось обновить старый файл, создаю новый:', e); fid = ''
-if not fid:
+if not fid and BUNDLE:
     folder = svc.files().list(q="name='rug_catalog' and mimeType='application/vnd.google-apps.folder' and trashed=false", fields='files(id)').execute()['files']
     meta = {'name': 'rugs_bundle.zip', **({'parents': [folder[0]['id']]} if folder else {})}
     fid = svc.files().create(body=meta, media_body=media, fields='id').execute()['id']
     svc.permissions().create(fileId=fid, body={'type': 'anyone', 'role': 'reader'}).execute()
     open(idf, 'w').write(fid)
+# v11.8: отдельно — только каталог (без фото, несколько МБ): если фото на сервере уже есть, студии достаточно его
+cidf = f'{OUT}/catalog_id.txt'; cfid = open(cidf).read().strip() if os.path.exists(cidf) else ''
+cmedia = MediaFileUpload(f'{OUT}/catalog.json', mimetype='application/json', resumable=True)
+if cfid:
+    try: svc.files().update(fileId=cfid, media_body=cmedia).execute()
+    except Exception as e: print('не удалось обновить старый каталог, создаю новый:', e); cfid = ''
+if not cfid:
+    folder = svc.files().list(q="name='rug_catalog' and mimeType='application/vnd.google-apps.folder' and trashed=false", fields='files(id)').execute()['files']
+    cfid = svc.files().create(body={'name': 'rugs_catalog_only.json', **({'parents': [folder[0]['id']]} if folder else {})}, media_body=cmedia, fields='id').execute()['id']
+    svc.permissions().create(fileId=cfid, body={'type': 'anyone', 'role': 'reader'}).execute()
+    open(cidf, 'w').write(cfid)
 print('\nИТОГ')
 print('ковров (фото):', len(items), dict(collections.Counter(it['src'] for it in items)))
 print('со школой:', sum(1 for it in items if it['school']), '| с названием типа ковра:', sum(1 for it in items if it.get('composition')))
 print('групп «один и тот же ковёр»:', len(out_groups), '(листы для проверки: carpet-dna/rug_catalog/dup_sheets/)')
-print('id пакета для студии:', fid)
+print('id пакета для студии (каталог + фото):', fid)
+print('id только каталога (без фото — быстро, если фото на сервере уже есть):', cfid)
 print('Готово. Напишите Claude: «каталог готов».')

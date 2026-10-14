@@ -37,7 +37,7 @@ body.rugmode #rgSb{display:flex}body.rugmode #sbar>:not(#rgSb):not(#stat):not(#l
 @keyframes rgping{0%{transform:scale(2.4);opacity:0}25%{opacity:1}100%{transform:scale(1);opacity:0}}.rgping{transform-box:fill-box;transform-origin:center;animation:rgping .9s ease-out 1 forwards}
 #rgSvg.peek{opacity:0}
 .dcrows{display:flex;flex-direction:column;gap:8px}.dcrow{display:flex;gap:10px;align-items:stretch;background:var(--pan2);border:1px solid var(--ln);border-radius:8px;padding:6px}
-.dcrow.diff{border-color:var(--bad)}.dcrow.maybe{border-color:var(--warn)}.dcrow.yes{opacity:.6}.dcrow.no{opacity:.6}
+.dcrow.diff{border-color:var(--bad)}.dcrow.maybe{border-color:var(--warn)}.dcrow.yes,.dcrow.sim{opacity:.6}.dcrow.no{opacity:.6}
 .dcim{width:170px;flex:none;cursor:zoom-in;text-align:center}.dcim img{width:170px;height:150px;object-fit:contain;background:#0b0c0f;border-radius:5px;display:block}.dcim small{color:var(--mut);font-size:11px}
 .dcinfo{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}.dct{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dcv .same{color:var(--ok)}.dcv .maybe{color:var(--warn)}.dcv .diff{color:var(--bad)}
 #rgTypesV{position:absolute;inset:0;display:none;grid-template-columns:330px minmax(0,1fr)}#tyList{background:var(--pan);border-right:1px solid var(--ln);overflow:auto;padding:10px}#tySheet{overflow:auto;padding:12px 18px 30px}
@@ -49,6 +49,8 @@ body.rugmode #rgSb{display:flex}body.rugmode #sbar>:not(#rgSb):not(#stat):not(#l
 .typh{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}.tyc{background:var(--pan2);border:1px solid var(--ln);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}.tyc.dim{opacity:.45}
 .tyc .im{height:180px;background:#0b0c0f;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}.tyc .im img{max-width:100%;max-height:100%;object-fit:contain}.tyc .bd{position:absolute;left:5px;top:5px;display:flex;flex-direction:column;gap:3px;align-items:flex-start}.tyc .bd span{background:rgba(0,0,0,.75);color:#fff;font-size:10.5px;padding:1px 6px;border-radius:9px}
 .tyc .t{padding:6px 8px 0;font-size:12px;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.tyc .m{padding:2px 8px;color:var(--mut);font-size:11.5px}.tyc .rgrow{padding:4px 8px 8px;margin:0}
+#rgLoad{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:5;background:rgba(0,0,0,.8);color:#fff;padding:6px 12px;border-radius:16px;font-size:12.5px}
+.rgtw .vd{display:flex;gap:2px;justify-content:center;margin-top:2px}.rgtw .vd button{padding:0 5px;font-size:11px;line-height:16px;min-height:0;border-radius:4px}.rgtw .vd button.on{background:var(--tx);color:var(--bg)}
 #modal .mbox.rgpassm{width:min(760px,94vw);max-height:88vh}
 .rghint{margin:6px 0 4px}.rghint .hl{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}.rghint button.hi{display:flex;flex-direction:column;align-items:center;gap:2px;width:78px;padding:4px;background:var(--pan2);border:1px solid var(--ln);border-radius:6px;color:var(--tx);cursor:pointer}
 .rghint button.hi:hover{border-color:var(--tx)}.rghint button.hi img{width:66px;height:52px;object-fit:contain;background:#f2eee2;border-radius:3px;image-rendering:pixelated}.rghint button.hi.ph img{background:#0b0c0f;image-rendering:auto}
@@ -385,7 +387,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.7</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.8</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2130,6 +2132,10 @@ const RTECH=['','ворсовый','безворсовый: килим','без�
 const RST={new:'новый',work:'в работе',done:'размечен'};
 const rro=()=>window.ME&&window.ME.role==='viewer';
 function rugsPlace(){const R2=$('rugs');R2.style.top=document.querySelector('header').getBoundingClientRect().bottom+'px';R2.style.bottom=Math.max(0,window.innerHeight-$('sbar').getBoundingClientRect().top)+'px';}
+document.addEventListener('error',e=>{const im=e.target;if(!(im instanceof HTMLImageElement))return;if(!/\/(rugthumb|rugimg|api\/rugs\/[^/]+\/crop)/.test(im.src)||(im.dataset.retry|0)>=3)return;
+  im.dataset.retry=(im.dataset.retry|0)+1;const u=im.src.replace(/([?&])r=\d+/,'').replace(/[?&]$/,'');setTimeout(()=>{im.src=u+(u.includes('?')?'&':'?')+'r='+im.dataset.retry;},1500*im.dataset.retry);},true);
+// v11.8: что сейчас считает сервер (тяжёлые расчёты идут по одному) — в строке состояния
+setInterval(async()=>{if(!R.on||document.hidden)return;try{const h=await api('/api/heavy');R.busyHeavy=h.run?(h.run+(h.wait?` · в очереди ${h.wait}`:'')):'';const B=$('rgBusy')||(()=>{const b=document.createElement('span');b.id='rgBusy';b.className='mut';b.style.marginLeft='10px';$('sbar').appendChild(b);return b;})();B.innerHTML=R.busyHeavy?'<span class="spin"></span> сервер считает: '+esc(R.busyHeavy):'';}catch(e){}},4000);
 function rugsOpen(){
   if(S.mode==='grid'||S.mode==='pix'){try{ovClose('queue');}catch(e){}}
   R.on=true;document.body.classList.add('rugmode');$('rugs').style.display='block';rugsPlace();
@@ -2193,7 +2199,8 @@ function rugList(){
   rugTree();rugKpi(byId,kb,ker.length);if(!R.peekId||!R.list.find(x=>x.id===R.peekId))rugPeek(null);
   const mb=$('rgMore');if(mb){mb.onclick=()=>{R.gridN=N+150;rugList();};try{const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){io.disconnect();R.gridN=N+150;rugList();}},{root:document.querySelector('#rgGridV .rgmid'),rootMargin:'400px'});io.observe(mb);}catch(e){}}
 }
-async function rugOpen(id){if(R.saveT)await rugSaveNow();R.rug=await api('/api/rugs/'+encodeURIComponent(id));R.sel=null;R.repeatOf=null;R.preset=null;R.split=null;if(R.tool==='split'||R.tool==='zones')R.tool='box';R.side='rug';R.fitNext=true;R.view='edit';rugView();rugRender();}
+async function rugOpen(id){const V=$('rgView');if(V&&R.view==='edit'){let o=$('rgLoad');if(!o){o=document.createElement('div');o.id='rgLoad';V.appendChild(o);}o.innerHTML='<span class="spin"></span> открываю ковёр…'+(R.busyHeavy?' <small>(сервер занят: '+esc(R.busyHeavy)+')</small>':'');}
+  try{if(R.saveT)await rugSaveNow();R.rug=await api('/api/rugs/'+encodeURIComponent(id));}finally{const o=$('rgLoad');o&&o.remove();}R.sel=null;R.repeatOf=null;R.preset=null;R.split=null;if(R.tool==='split'||R.tool==='zones')R.tool='box';R.side='rug';R.fitNext=true;R.view='edit';rugView();rugRender();}
 function rugSaveSoon(){if(rro())return;R.ver=(R.ver||0)+1;clearTimeout(R.saveT);$('rgSaved').textContent='…';R.saveT=setTimeout(rugSaveNow,500);}
 async function rugSaveNow(){
   clearTimeout(R.saveT);const r=R.rug;if(!r)return;
@@ -2263,7 +2270,7 @@ function rugStrip(){
   const E=$('rgStrip'),r=R.rug;if(!E||!r)return;const byId={};R.list.forEach(x=>byId[x.id]=x);
   const me=byId[r.id]||{id:r.id,src:(r.cat||{}).src,w:(r.wh||[])[0],h:(r.wh||[])[1]};
   const tw=(x,cur,plain)=>{const o=byId[x.id]||{},wh=x.wh||(o.w?[o.w,o.h]:null),ok=x.ok,a=(r.wh?r.wh[0]*r.wh[1]:0),b=wh?wh[0]*wh[1]:0,big=!cur&&!plain&&a&&b>1.4*a;
-    return `<div class="rgtw ${cur?'cur':''}" data-open="${esc(x.id)}" data-tip="${esc((x.title||o.title||x.id).slice(0,120))}${big?' · фото крупнее — размечать удобнее там':''}"><img loading="lazy" src="/rugthumb/${encodeURIComponent(x.id)}.jpg">${cur||plain?'':`<span class="st" style="color:${ok?(ok.ok?'var(--ok)':'var(--bad)'):'var(--mut)'}">${ok?(ok.ok?'✓':'✗'):'?'}</span>`}<small>${esc(x.cap||SRCRU[x.src||o.src]||x.src||o.src||'')}</small><small class="${big?'big':''}">${wh?wh[0]+'×'+wh[1]:''}${big?' ⬆':''}</small></div>`;};
+    return `<div class="rgtw ${cur?'cur':''}" data-open="${esc(x.id)}" data-tip="${esc((x.title||o.title||x.id).slice(0,120))}${big?' · фото крупнее — размечать удобнее там':''}"><img loading="lazy" src="/rugthumb/${encodeURIComponent(x.id)}.jpg">${cur||plain?'':`<span class="st" style="color:${ok?(ok.ok?'var(--ok)':ok.similar?'var(--warn)':'var(--bad)'):'var(--mut)'}">${ok?(ok.ok?'✓':ok.similar?'≈':'✗'):'?'}</span>`}<small>${esc(x.cap||SRCRU[x.src||o.src]||x.src||o.src||'')}</small><small class="${big?'big':''}">${wh?wh[0]+'×'+wh[1]:''}${big?' ⬆':''}</small>${cur||plain||rro()?'':`<span class="vd"><button class="sm ${ok&&ok.ok?'on':''}" data-vd="ok" data-tip="это тот же самый ковёр (тот же экземпляр) — пустые поля паспорта дополнятся">✓</button><button class="sm ${ok&&ok.similar?'on':''}" data-vd="sim" data-tip="похожи, но не одинаковые: тот же рисунок, другой ковёр (другие краски, детали)">≈</button><button class="sm ${ok&&!ok.ok&&!ok.similar?'on':''}" data-vd="no" data-tip="другой ковёр">✗</button></span>`}</div>`;};
   const same=(r.same||[]).filter(x=>byId[x.id]||!R.list.length);let h='';
   // v11.5: порядок постоянный (Керимов, потом фото крупнее), открытое фото просто подсвечено — миниатюры не прыгают при переключении
   const all=[{...me,title:r.title,wh:r.wh,_cur:1},...same],area=x=>{const o=byId[x.id]||{},wh=x.wh||(o.w?[o.w,o.h]:[0,0]);return wh[0]*wh[1];},
@@ -2273,7 +2280,11 @@ function rugStrip(){
   if(r.split_from){const sib=R.list.filter(x=>x.split_from===r.split_from&&x.id!==r.id).sort((a,b)=>(a.part||0)-(b.part||0));
     h+=`<div class="lbl" style="margin-left:10px">тот же разворот</div>`+tw({id:r.split_from,cap:'весь разворот'},false,true)+sib.map(x=>tw({id:x.id,cap:'ковёр '+(x.part||'')},false,true)).join('');}
   E.innerHTML=h;
-  E.querySelectorAll('[data-open]').forEach(e=>e.onclick=()=>{if(e.classList.contains('cur'))return;rugOpen(e.dataset.open);});
+  E.querySelectorAll('[data-open]').forEach(e=>e.onclick=ev=>{if(ev.target.closest('[data-vd]')||e.classList.contains('cur'))return;rugOpen(e.dataset.open);});
+  E.querySelectorAll('[data-vd]').forEach(b=>b.onclick=async ev=>{ev.stopPropagation();const o=b.closest('[data-open]').dataset.open,v=b.dataset.vd,x=(r.same||[]).find(t=>t.id===o);
+    const cur=x&&x.ok,same=v==='ok'?cur&&cur.ok:v==='sim'?cur&&cur.similar:cur&&!cur.ok&&!cur.similar,body={other:o,ok:same?null:v==='ok',similar:!same&&v==='sim'};
+    try{if(R.saveT)await rugSaveNow();const j=await api('/api/rugs/'+encodeURIComponent(r.id)+'/same',body);if(R.rug&&R.rug.id===r.id){R.rug=j;rugStrip();rugSide();}
+      stat(same?'отметка снята':v==='ok'?'✓ тот же ковёр'+(j.filled&&j.filled[r.id]?' — паспорт дополнен':''):v==='sim'?'≈ похожи, но разные ковры':'✗ другой ковёр','ok');rugsLoadList();}catch(e){fail(e);}});
 }
 function rugTools(){$('rgTBox')&&$('rgTBox').classList.toggle('on',R.tool==='box');$('rgTZones')&&$('rgTZones').classList.toggle('on',R.tool==='zones');$('rgTHand')&&$('rgTHand').classList.toggle('on',R.tool==='hand');
   const h=$('rgHint');if(h)h.textContent=R.joinFrom?'Кликните по рамке элемента, с которым это тот же узор (Esc — отмена)':R.tool==='split'?'Разделение фото: оранжевые рамки — отдельные ковры (номер = порядок). Обведите недостающий; клик — выбрать, тяните — подвинуть, углы — размер, Delete — убрать.':R.tool==='zones'?'Тяните линии: жёлтая — край ковра, голубые — границы кайм и поля. Delete — удалить выбранную границу.':R.preset?'Обведите элемент «'+(R.preset.name||R.preset.scheme)+'» на фото (Esc — отмена)':R.repeatOf?'Обводите повторы выбранного элемента один за другим (Esc — закончить)':(R.tool==='box'?'Обведите элемент мышью. Колесо — масштаб, пробел — двигать.':'Тяните фото мышью.');}
@@ -2456,7 +2467,7 @@ async function dupCheckOpen(){const W=$('modal');
 async function dupCheckLoad(){try{DCK.j=await api('/api/rugs_dupcheck');}catch(e){fail(e);return;}dupCheckDraw();
   clearTimeout(DCK.poll);if(DCK.j.state.running)DCK.poll=setTimeout(dupCheckLoad,3000);}
 function dupCheckDraw(){const B=$('msBody'),bar=$('dcBar');if(!B)return;const j=DCK.j,P=j.pairs,st=j.state;
-  const cls=p=>p.ok?(p.ok.ok?'yes':'no'):(!p.chk?'new':p.chk.v);
+  const cls=p=>p.ok?(p.ok.ok?'yes':p.ok.similar?'sim':'no'):(!p.chk?'new':p.chk.v);
   const cnt={bad:0,maybe:0,same:0,new:0,done:0};P.forEach(p=>{const c=cls(p);if(c==='yes'||c==='no')cnt.done++;else if(c==='diff')cnt.bad++;else cnt[c]++;});
   const F={bad:['похоже, разные',p=>cls(p)==='diff'],maybe:['сомнительные',p=>cls(p)==='maybe'],same:['точно тот же',p=>cls(p)==='same'],new:['машина не проверяла',p=>cls(p)==='new'],done:['уже ответили',p=>p.ok]};
   bar.innerHTML=`<span class="seg">${Object.entries(F).map(([k,[v]])=>`<button class="sm ${DCK.f===k?'on':''}" data-df="${k}">${v} <span class="mut">${cnt[k]}</span></button>`).join('')}</span><span class="sp"></span>
@@ -2468,11 +2479,11 @@ function dupCheckDraw(){const B=$('msBody'),bar=$('dcBar');if(!B)return;const j=
   const ls=P.filter(F[DCK.f][1]).sort((a,b)=>((a.chk||{}).inl||0)-((b.chk||{}).inl||0)).slice(0,120);
   const im=(id,wh,src,t)=>`<div class="dcim" data-open="${esc(id)}" data-tip="${esc(t)} — открыть"><img loading="lazy" src="/rugthumb/${encodeURIComponent(id)}.jpg"><small>${esc(SRCRU[src]||src||'')}${wh[0]?' · '+wh[0]+'×'+wh[1]:''}</small></div>`;
   B.innerHTML=ls.length?`<div class="dcrows">${ls.map((p,i)=>{const c=p.chk,v=cls(p);return `<div class="dcrow ${v}" data-i="${P.indexOf(p)}">${im(p.a,p.wa,p.sa,p.ta)}${im(p.b,p.wb,p.sb,p.tb)}<div class="dcinfo"><div class="dct" title="${esc(p.ta)}">${esc(p.ta.slice(0,70))}</div><div class="dct mut" title="${esc(p.tb)}">${esc(p.tb.slice(0,70))}</div>
-      <div class="dcv">${c?`<b class="${c.v}">${c.v==='same'?'✓ точно тот же':c.v==='maybe'?'? сомнительно':'✗ похоже, разные ковры'}</b> <small class="mut">совпало точек: ${c.inl}</small>`:'<small class="mut">машина ещё не проверяла</small>'}${p.ok?` · <b>${p.ok.ok?'вы: тот же':'вы: разные'}</b> <small class="mut">${esc(p.ok.by||'')}</small>`:''}</div>
-      ${rro()?'':`<div class="rgrow"><button class="sm" data-dok="1" ${p.ok&&p.ok.ok?'disabled':''}>✓ тот же ковёр</button><button class="sm" data-dno="1" ${p.ok&&!p.ok.ok?'disabled':''}>✗ разные</button></div>`}</div></div>`;}).join('')}</div>${P.filter(F[DCK.f][1]).length>120?'<p class="mut">показаны первые 120</p>':''}`:'<p class="mut">Здесь пусто.</p>';
+      <div class="dcv">${c?`<b class="${c.v}">${c.v==='same'?'✓ точно тот же':c.v==='maybe'?'? сомнительно':'✗ похоже, разные ковры'}</b> <small class="mut">совпало точек: ${c.inl}</small>`:'<small class="mut">машина ещё не проверяла</small>'}${p.ok?` · <b>${p.ok.ok?'вы: тот же':p.ok.similar?'вы: похожи, но разные':'вы: разные'}</b> <small class="mut">${esc(p.ok.by||'')}</small>`:''}</div>
+      ${rro()?'':`<div class="rgrow"><button class="sm" data-dok="1" ${p.ok&&p.ok.ok?'disabled':''}>✓ тот же ковёр</button><button class="sm" data-dsim="1" ${p.ok&&p.ok.similar?'disabled':''} data-tip="тот же рисунок, но другой ковёр (другие краски, детали)">≈ похожи, но разные</button><button class="sm" data-dno="1" ${p.ok&&!p.ok.ok&&!p.ok.similar?'disabled':''}>✗ разные</button></div>`}</div></div>`;}).join('')}</div>${P.filter(F[DCK.f][1]).length>120?'<p class="mut">показаны первые 120</p>':''}`:'<p class="mut">Здесь пусто.</p>';
   B.querySelectorAll('[data-open]').forEach(e=>e.onclick=()=>{$('modal').hidden=true;$('modal').innerHTML='';rugOpen(e.dataset.open);});
-  B.querySelectorAll('.dcrow').forEach(row=>{const p=P[+row.dataset.i];const ans=async ok=>{try{await api('/api/rugs/'+encodeURIComponent(p.a)+'/same',{other:p.b,ok});p.ok={ok,by:(window.ME&&ME.name)||''};dupCheckDraw();}catch(e){fail(e);}};
-    const a=row.querySelector('[data-dok]'),b=row.querySelector('[data-dno]');a&&(a.onclick=()=>ans(true));b&&(b.onclick=()=>ans(false));});}
+  B.querySelectorAll('.dcrow').forEach(row=>{const p=P[+row.dataset.i];const ans=async(ok,sim)=>{try{await api('/api/rugs/'+encodeURIComponent(p.a)+'/same',{other:p.b,ok,similar:!!sim});p.ok={ok,similar:!!sim,by:(window.ME&&ME.name)||''};dupCheckDraw();}catch(e){fail(e);}};
+    const a=row.querySelector('[data-dok]'),b=row.querySelector('[data-dno]'),c=row.querySelector('[data-dsim]');a&&(a.onclick=()=>ans(true));b&&(b.onclick=()=>ans(false));c&&(c.onclick=()=>ans(false,true));});}
 // ---- v11.5: «на что это похоже» — подсказка названия по форме (сервер: shape_hint.py) ----
 const SHC={};
 async function rugShapeHint(m,force){const E=$('rgShape');if(!E||!R.rug)return;const rid=R.rug.id,key=rid+'|'+m.box.map(v=>v.toFixed(4)).join(',');

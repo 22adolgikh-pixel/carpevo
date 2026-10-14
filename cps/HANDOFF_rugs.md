@@ -116,3 +116,10 @@
 Код: `rug_match.find_schemes_auto` (+`_scheme_tpl`, `_score_maps`; z-оценка), в `rugs.py` блок «v11.7: рабочий лист» (`all_rugs_cached`, `type_photo`, `api_types`, `api_type`, `find_expected` в фоне, `rugs_set_comp`), `link_by_inv` / `mus_family` / `inv_norm`; Colab — `kerimov_lists.py` (+ проверка `python3 kerimov_lists.py`). UI — `tyOpen/tyList/tyLoad/tyDraw/tyFind`, вид `R.view='types'`, `R.back`.
 Не проверено на реальных фото: `find_schemes_auto` (нет доступа к фото каталога из облака). Первое, что спросить у пользователя после обновления: как сработало «🔎 найти элементы» на 2–3 крупных фото (например, «Пиребедиль» cm_fcbef7be41, «Мараза», «Биджо»).
 
+## 16. v11.8 (2026-10-14, поздно) — по замечаниям: падения, «похожи», Colab
+- Пользователь на v11.6 видел 502 на /api/rugs_dupcheck и «зависание» (миниатюры пропадают, не переключается) во время поиска повторов. Причину не знаем (логов нет) — попросили `docker logs --tail 80 deploy-cps-1`, `docker inspect … OOMKilled RestartCount`, `free -h`, `nproc`.
+- Сделано: очередь тяжёлых расчётов `heavy()` в rugs.py (семафор `HEAVY`, `heavy_q`, `GET /api/heavy`), `cv2.setNumThreads`, кэш `/api/rugs` (`_sum` по mtime) и списка пар (`_dcl`), повтор загрузки миниатюр, «открываю ковёр…».
+- `same_ok[x] = {ok: False, similar: True}` — «≈ похожи, но разные»; кнопки ✓ ≈ ✗ в `rugStrip`.
+- `run_sync`: json вместо zip → только каталог. Colab: `RC_BUNDLE=0`, `catalog_id.txt` / `rugs_catalog_only.json`.
+- Следующий шаг по плану: пользователь обновляет сервер (v11.8), запускает Colab с RC_BUNDLE=0, проверяет склейки, затем один тип целиком («Пиребедиль») в рабочем листе — по результатам подстраивать `find_schemes_auto`.
+

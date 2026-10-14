@@ -661,6 +661,39 @@ def t19_type_worksheet(pg, ctx):
     errors_ok(ctx, 'рабочий лист типа')
 
 
+@test
+def t20_twin_verdicts_v118(pg, ctx):
+    """v11.8: в ленте двойников ✓ тот же / ≈ похожи / ✗ другой; очередь тяжёлых расчётов; список ковров из кэша"""
+    u = ctx['url']
+    assert 'run' in get(u + 'api/heavy'), 'нет /api/heavy'
+    pg.click('#tab-rugs'); pg.wait_for_timeout(800)
+    pg.evaluate("rugOpen('kerimov_vol3_p100_1')"); pg.wait_for_timeout(1500)
+    tw = '#rgStrip .rgtw[data-open="met_123"]'
+    assert pg.is_visible(tw + ' [data-vd="sim"]'), 'в ленте двойников нет кнопок ✓ ≈ ✗'
+    pg.click(tw + ' [data-vd="sim"]'); pg.wait_for_timeout(1200)
+    ok = (get(u + 'api/rugs/kerimov_vol3_p100_1').get('same_ok') or {}).get('met_123') or {}
+    assert ok.get('similar') and ok.get('ok') is False, f'«≈ похожи» не записалось: {ok}'
+    assert (pg.text_content(tw + ' .st') or '').strip() == '≈', 'значок «≈» не появился на миниатюре'
+    assert pg.evaluate("R.rug.id") == 'kerimov_vol3_p100_1', 'клик по кнопке открыл другой ковёр'
+    pg.click(tw + ' [data-vd="ok"]'); pg.wait_for_timeout(1200)
+    assert ((get(u + 'api/rugs/met_123').get('same_ok') or {}).get('kerimov_vol3_p100_1') or {}).get('ok') is True, '✓ не записалось у второго ковра'
+    pg.click(tw + ' [data-vd="ok"]'); pg.wait_for_timeout(1200)
+    assert 'met_123' not in (get(u + 'api/rugs/kerimov_vol3_p100_1').get('same_ok') or {}), 'повторный клик не снял отметку'
+    t0 = time.time(); get(u + 'api/rugs'); get(u + 'api/rugs'); assert time.time() - t0 < 5
+    # «только каталог»: json вместо zip — паспорт обновляется, фото не трогаются
+    cp = ctx['app'] + '/cat_only.json'
+    json.dump({"built": "test", "groups": [], "items": [{"id": "vam_1", "src": "vam", "title": "V&A rug 1", "museum": "V&A", "inv": "T.123-1920", "img": "img/vam_1.jpg"}]},
+              open(cp, 'w'), ensure_ascii=False)
+    post(u + 'api/rugs_sync', {'bundle_id': cp})
+    for _ in range(40):
+        st = get(u + 'api/rugs_sync')
+        if not st.get('running'): break
+        time.sleep(0.5)
+    assert not st.get('error'), st
+    assert get(u + 'api/rugs/vam_1')['inv'] == 'T.123-1920', 'каталог без фото не обновил паспорт'
+    errors_ok(ctx, 'v11.8')
+
+
 # ---------------- запуск ----------------
 def main():
     os.makedirs(OUT, exist_ok=True)

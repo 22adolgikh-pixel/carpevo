@@ -19,6 +19,24 @@ MAXSIDE = 4000   # v10.27: хайрез загружается почти без
 SAME_FIELDS = ("school", "composition", "technique", "museum", "inv", "place", "date", "size")   # что переносится с двойника в пустые поля
 PASS_FIELDS = SAME_FIELDS + ("url", "license", "notes")   # v10.26: что части разворота наследуют от исходного фото
 _lock = threading.Lock()
+# v11.8: тяжёлые расчёты (поиск повторов, схем, совмещение фото, проверка склеек, поиск элементов Керимова) — по одному за раз,
+# остальные ждут в очереди: так сервер не захлёбывается и успевает отдавать миниатюры и сохранять правки. CPS_HEAVY — сколько одновременно.
+HEAVY = threading.BoundedSemaphore(int(os.environ.get("CPS_HEAVY") or 1))
+heavy_q = {"wait": 0, "run": "", "since": 0}
+try: cv2.setNumThreads(int(os.environ.get("CPS_CV_THREADS") or 2))
+except Exception: pass
+
+
+def heavy(fn, name=""):
+    """выполнить fn() в очереди тяжёлых расчётов"""
+    heavy_q["wait"] += 1
+    HEAVY.acquire()
+    heavy_q["wait"] -= 1; heavy_q.update(run=name, since=int(time.time()))
+    try: return fn()
+    finally:
+        heavy_q.update(run="", since=0); HEAVY.release()
+
+
 imp = {"running": False, "done": 0, "total": 0, "errors": 0, "last": ""}
 sync = {"running": False, "stage": "", "done": 0, "total": 0, "error": "", "last_ok": None, "made": 0, "updated": 0}
 
@@ -291,10 +309,16 @@ def install(app, DATA, D_WORK):
             if os.environ.get("CPS_RUGS_TEST") and os.path.exists(bid): shutil.copy(bid, tmp)
             else: drive_fetch(bid, tmp, lambda g, t: sync.update(done=g // (1 << 20), total=t // (1 << 20)))
             sync.update(stage="распаковываю")
-            with zipfile.ZipFile(tmp) as z:
-                cat = json.loads(z.read("catalog.json").decode("utf-8"))
-                for n in z.namelist():
-                    if n.startswith("img/"): z.extract(n, D_LIB)
+            with open(tmp, "rb") as fh: head = fh.read(4)
+            if head[:1] in (b"{", b"["):
+                # v11.8: только каталог (catalog.json, несколько МБ) — паспорта обновляются, фото остаются те, что уже на сервере
+                with open(tmp, encoding="utf-8") as fh: cat = json.load(fh)
+                sync.update(stage="только каталог: фото не перекачиваются")
+            else:
+                with zipfile.ZipFile(tmp) as z:
+                    cat = json.loads(z.read("catalog.json").decode("utf-8"))
+                    for n in z.namelist():
+                        if n.startswith("img/"): z.extract(n, D_LIB)
             os.remove(tmp)
             groups = {g["id"]: g for g in cat.get("groups", [])}
             items = cat.get("items", []); sync.update(stage="обновляю карточки ковров", done=0, total=len(items))
@@ -362,7 +386,8 @@ def install(app, DATA, D_WORK):
     @app.post("/api/rugs/{rid}/same")
     async def api_rug_same(rid: str, request: Request):
         """Подтвердить / отклонить «это тот же ковёр» (отметка ставится у обоих)."""
-        b = await request.json(); other = b.get("other"); ok = b.get("ok")
+        b = await request.json(); other = b.get("other"); ok = b.get("ok"); sim = bool(b.get("similar"))
+        if sim: ok = False          # v11.8: «похожи, но не одинаковые» — разные ковры одного рисунка (паспорт не переносится)
         who = user(request)
         filled = {}
         with _lock:
@@ -373,7 +398,7 @@ def install(app, DATA, D_WORK):
                 if ok is not None and c not in {x.get("id") for x in r.get("same") or []}:
                     r.setdefault("same", []).append({"id": c, "score": 0})
                 if ok is None: r["same_ok"].pop(c, None)
-                else: r["same_ok"][c] = {"ok": bool(ok), "by": who, "at": int(time.time())}
+                else: r["same_ok"][c] = {"ok": bool(ok), "by": who, "at": int(time.time()), **({"similar": True} if sim else {})}
                 # подтвердили «тот же ковёр» → пустые поля паспорта берём у двойника; заполненные НЕ трогаем
                 # (если значения расходятся — обе карточки сохраняют своё, расхождение видно в паспорте)
                 if ok and o:
@@ -384,6 +409,7 @@ def install(app, DATA, D_WORK):
                             r.setdefault("from_twin", {})[k] = c
                     if got: filled[a] = got
                 save(r)
+        _dcl["t"] = 0
         out = api_rug(rid); out["filled"] = filled
         return out
 
@@ -415,13 +441,29 @@ def install(app, DATA, D_WORK):
                 "school_vote": max(v, key=v.get) if v else ""}
 
     # ---------------- ковры ----------------
+    _sum = {}
+
+    @app.get("/api/heavy")
+    def api_heavy():
+        return heavy_q
+
     @app.get("/api/rugs")
     def api_rugs():
-        out = []; full = {}
-        for f in sorted(os.listdir(D_RUGS)):
-            if f.endswith(".json"):
-                r = load(f[:-5])
-                if r and not r.get("dup_of"): out.append(summary(r)); full[r["id"]] = r
+        """v11.8: сводка каждого ковра кэшируется по времени изменения файла — 4000 файлов не перечитываются на каждый запрос"""
+        out = []; full = {}; seen = set()
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            rid = f[:-5]; seen.add(rid)
+            try: st = os.stat(os.path.join(D_RUGS, f)); k = (st.st_mtime_ns, st.st_size)
+            except OSError: continue
+            c = _sum.get(rid)
+            if not c or c[0] != k:
+                r = load(rid)
+                if not r: continue
+                c = _sum[rid] = (k, None if r.get("dup_of") else summary(r), {"composition": r.get("composition"), "title": r.get("title"), "same": r.get("same"),
+                                  "same_ok": r.get("same_ok"), "cat": {x: (r.get("cat") or {}).get(x) for x in ("names", "composition_name")}, "id": rid, "updated": r.get("updated", 0)})
+            if c[1]: out.append(dict(c[1])); full[rid] = c[2]
+        for rid in [x for x in _sum if x not in seen]: _sum.pop(rid, None)
         for sm in out:                                          # v11.5: предположение типа ковра
             if sm["composition"] in BYID: continue
             g = comp_guess(full[sm["id"]], {i: {"composition": full[i].get("composition"), "title": full[i].get("title")} for i in sm["same_ids"] if i in full})
@@ -638,7 +680,7 @@ def install(app, DATA, D_WORK):
         boxes = [m["box"] for m in tpl[:8]] or [box]
         loose = bool(b.get("loose"))
         # тяжёлый расчёт — в отдельном потоке: иначе, пока он идёт, сервер не отвечает никому (пропадают миниатюры и т. п.)
-        c = await run_in_threadpool(lambda: rug_match.find_repeats(a, box, marks_boxes(r) + rejected, boxes=boxes, loose=loose, limit=30 if loose else 60))
+        c = await run_in_threadpool(heavy, lambda: rug_match.find_repeats(a, box, marks_boxes(r) + rejected, boxes=boxes, loose=loose, limit=30 if loose else 60), "поиск повторов")
         best = max([x["score"] for x in c] or [0])
         byb = {tuple(m["box"]): m["id"] for m in tpl}
         for x in c:
@@ -678,7 +720,7 @@ def install(app, DATA, D_WORK):
             guess = [max(0, min(1 - gw, at[0] - gw / 2)), max(0, min(1 - gh, at[1] - gh / 2)), gw, gh]
             region = [max(0, at[0] - gw * 1.3), max(0, at[1] - gh * 1.3), 0, 0]
             region[2] = min(1 - region[0], gw * 2.6); region[3] = min(1 - region[1], gh * 2.6)
-        c = await run_in_threadpool(lambda: rug_match.find_scheme(a, q, kx, ky, exclude=[] if at else marks_boxes(r), limit=1 if at else 3, region=region))
+        c = await run_in_threadpool(heavy, lambda: rug_match.find_scheme(a, q, kx, ky, exclude=[] if at else marks_boxes(r), limit=1 if at else 3, region=region), "поиск по схеме")
         return {"cands": c, "scale": [round(kx, 2), round(ky, 2)], "ref": ref["id"] if ref else "", "guess": guess, "scale_known": bool(sc)}
 
     _sizes = {}
@@ -709,7 +751,7 @@ def install(app, DATA, D_WORK):
         key = (pa, pb, os.path.getmtime(pa), os.path.getmtime(pb))
         if key not in _H:
             A, B = cv2.imread(pa), cv2.imread(pb)
-            _H[key] = await run_in_threadpool(rug_match.align, A, B)
+            _H[key] = await run_in_threadpool(heavy, lambda: rug_match.align(A, B), "совмещение фото")
         H, n = _H[key]
         if H is None:
             return JSONResponse({"error": f"не получилось совместить фото (общих точек: {n}) — возможно, это всё-таки разные ковры или фото слишком разные"}, 400)
@@ -1037,7 +1079,7 @@ def install(app, DATA, D_WORK):
                 out.append({**h, "title": t.get("title") or h["rid"], "school": t.get("school", ""), "src": (t.get("cat") or {}).get("src", ""),
                             "museum": t.get("museum", ""), "twin": h["rid"] in twins or bool(grp and t.get("same_group") == grp), "w": t.get("w", 0), "h": t.get("h", 0)})
             return {"key": key, "examples": len(vs), "results": out, "index": MS.status()}
-        j = await run_in_threadpool(work)
+        j = await run_in_threadpool(heavy, work, "поиск узора по коврам")
         if j.get("error") and not j.get("need_index"): return JSONResponse(j, 400)
         return j
 
@@ -1116,7 +1158,7 @@ def install(app, DATA, D_WORK):
                     d = BYID.get(c["motif"]) if c["motif"] else None
                     if d: c.update(az=d["az"], ru=d["ru"], tr=d["tr"])
             return {"schemes": sch, "marks": near, "n_schemes": len(SH._idx["ids"])}
-        return await run_in_threadpool(work)
+        return await run_in_threadpool(heavy, work, "подсказка по форме")
 
     # ---------------- v11.7: рабочий лист типа ковра (элементы Керимова → фото этого типа) ----------------
     _ty = {"t": 0, "rugs": None}
@@ -1225,9 +1267,10 @@ def install(app, DATA, D_WORK):
                     if q is not None and q.shape[0] >= 3 and q.shape[1] >= 3: P[e["id"]] = q
                 if not P: st.update(stage="у схем этого типа нет картинок (рисунки не закончены в студии)"); return
                 sc = scale_of(r, W, H); knots = (W / sc[0]) if sc else (r.get("knots") or None)
-                prog = lambda i, n: st.update(done=i, total=n)
+                prog = lambda i, n: st.update(done=i, total=n, stage="подбираю масштаб" if n > 1 and i < n else "ищу элементы")
                 st.update(stage="ищу элементы" if knots else "подбираю масштаб по всем элементам")
-                knots, res = rug_match.find_schemes_auto(a, P, knots=knots, exclude=marks_boxes(load(rid) or r), progress=prog)
+                st["stage"] = "в очереди" if heavy_q["run"] else st["stage"]
+                knots, res = heavy(lambda: rug_match.find_schemes_auto(a, P, knots=knots, exclude=marks_boxes(load(rid) or r), progress=prog), "элементы Керимова")
                 st["knots"] = int(knots); now = int(time.time()); added = 0
                 with _lock:
                     t = load(rid)
@@ -1432,15 +1475,16 @@ def install(app, DATA, D_WORK):
                     A, B = (cv2.imread(pa) if pa else None), (cv2.imread(pb) if pb else None)
                     n = 0
                     if A is not None and B is not None:
-                        try: _, n = rug_match.align(A, B)
+                        try: _, n = heavy(lambda: rug_match.align(A, B), "проверка склеек")
                         except Exception: n = 0
+                    del A, B; time.sleep(0.05)
                     v = "same" if n >= 60 else ("maybe" if n >= 20 else "diff")
                     bad += v == "diff"
                     with _lock:
                         for x, y in ((a, b), (b, a)):
                             r = load(x)
                             if r: r.setdefault("same_chk", {})[y] = {"inl": int(n), "v": v, "at": int(time.time())}; save(r)
-                    dchk["done"] += 1
+                    dchk["done"] += 1; _dcl["t"] = 0
                 dchk["last"] = f"проверено пар: {len(P)}, похоже, разные ковры: {bad}"
                 if on_done: on_done(dchk["last"])
             except Exception as e:
@@ -1452,9 +1496,12 @@ def install(app, DATA, D_WORK):
 
     app.state.dup_check_run = dup_check_run; app.state.dup_pairs = dup_pairs
 
+    _dcl = {"t": 0, "v": None}
+
     @app.get("/api/rugs_dupcheck")
-    def api_dupcheck_list():
-        """группы «один и тот же ковёр» для проверки: пары с машинной оценкой и ответом человека"""
+    def api_dupcheck_list(fresh: int = 0):
+        """группы «один и тот же ковёр» для проверки: пары с машинной оценкой и ответом человека (кэш 15 с — окно опрашивает часто)"""
+        if not fresh and _dcl["v"] and time.time() - _dcl["t"] < 15: return {**_dcl["v"], "state": dchk, "queue": heavy_q}
         A = {}
         for f in os.listdir(D_RUGS):
             if f.endswith(".json"):
@@ -1472,7 +1519,8 @@ def install(app, DATA, D_WORK):
                 pairs.append({"a": k[0], "b": k[1], "chk": ch, "ok": ok, "score": x.get("score", 0),
                               "ta": ra.get("title") or k[0], "tb": rb.get("title") or k[1], "sa": (ra.get("cat") or {}).get("src", ""), "sb": (rb.get("cat") or {}).get("src", ""),
                               "wa": [ra.get("w") or 0, ra.get("h") or 0], "wb": [rb.get("w") or 0, rb.get("h") or 0]})
-        return {"pairs": pairs, "state": dchk}
+        _dcl.update(t=time.time(), v={"pairs": pairs})
+        return {"pairs": pairs, "state": dchk, "queue": heavy_q}
 
     @app.post("/api/rugs_dupcheck")
     def api_dupcheck_run(body: dict = Body(default={})):
