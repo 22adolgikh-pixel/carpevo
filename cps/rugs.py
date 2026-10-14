@@ -28,6 +28,27 @@ try: cv2.setNumThreads(int(os.environ.get("CPS_CV_THREADS") or 2))
 except Exception: pass
 
 
+def file_dims(p):
+    """[ширина, высота] без декодирования фото (оригиналы с Wikimedia бывают в сотни мегапикселей)"""
+    try:
+        from PIL import Image
+        Image.MAX_IMAGE_PIXELS = None
+        with Image.open(p) as im: return [im.size[0], im.size[1]]
+    except Exception: pass
+    a = cv2.imread(p, cv2.IMREAD_REDUCED_GRAYSCALE_8)       # запасной путь: 1/8 размера, без полного декодирования
+    return None if a is None else [a.shape[1] * 8, a.shape[0] * 8]
+
+
+THUMB = threading.BoundedSemaphore(2)
+
+
+def read_small(p, side):
+    """фото, уменьшенное до ~side px по длинной стороне; JPEG декодируется сразу в 1/2, 1/4 или 1/8 — без гигабайтного полного кадра"""
+    d = file_dims(p) or [side, side]; k = max(d) / float(side)
+    flag = cv2.IMREAD_REDUCED_COLOR_8 if k >= 8 else cv2.IMREAD_REDUCED_COLOR_4 if k >= 4 else cv2.IMREAD_REDUCED_COLOR_2 if k >= 2 else cv2.IMREAD_COLOR
+    return cv2.imread(p, flag)
+
+
 def heavy(fn, name="", ui=False):
     """выполнить fn() в очереди тяжёлых расчётов (ui=True — полоса для интерактивных запросов)"""
     sem, w, r = (HEAVY_UI, "ui_wait", "ui_run") if ui else (HEAVY, "wait", "run")
@@ -380,8 +401,8 @@ def install(app, DATA, D_WORK):
                     r.setdefault("same_ok", {})
                     p = os.path.join(D_LIB, r["lib_img"])
                     if os.path.exists(p) and (not r.get("w") or r.get("_lib_t") != cat.get("built")):   # v10.28: пакет с фото крупнее — обновить размер
-                        a = cv2.imread(p)
-                        if a is not None: r["h"], r["w"] = a.shape[:2]
+                        d = file_dims(p)
+                        if d: r["w"], r["h"] = d
                     th = os.path.join(D_TH, rid + ".jpg")
                     if os.path.exists(th) and new is False and r.get("_lib_t") != cat.get("built"): os.remove(th)
                     r["_lib_t"] = cat.get("built")
@@ -771,11 +792,7 @@ def install(app, DATA, D_WORK):
         p = img_path(rid)
         if not p: return None
         k = (p, os.path.getmtime(p))
-        if k not in _sizes:
-            a = cv2.imread(p, cv2.IMREAD_REDUCED_GRAYSCALE_8)
-            _sizes[k] = None if a is None else [a.shape[1] * 8, a.shape[0] * 8]
-            if a is not None:
-                full = cv2.imread(p); _sizes[k] = [full.shape[1], full.shape[0]] if full is not None else _sizes[k]
+        if k not in _sizes: _sizes[k] = file_dims(p)          # v11.11: только заголовок файла — раньше фото декодировалось целиком (гигабайты при старте)
         return _sizes[k]
 
     _H = {}
@@ -1023,8 +1040,12 @@ def install(app, DATA, D_WORK):
     def rug_thumb(rid: str):
         rid = os.path.basename(rid); p = os.path.join(D_TH, rid + ".jpg"); src = img_path(rid)
         if not os.path.exists(p) and src:
-            a = cv2.imread(src); s = 220 / max(a.shape[:2]); a = cv2.resize(a, None, fx=s, fy=s, interpolation=cv2.INTER_AREA)
-            cv2.imwrite(p, a, [cv2.IMWRITE_JPEG_QUALITY, 80])
+            with THUMB:                                          # не больше двух разверток одновременно: страница просит сотни миниатюр сразу
+                if not os.path.exists(p):
+                    a = read_small(src, 220)
+                    if a is not None:
+                        s = 220 / max(a.shape[:2]); a = cv2.resize(a, None, fx=s, fy=s, interpolation=cv2.INTER_AREA)
+                        cv2.imwrite(p, a, [cv2.IMWRITE_JPEG_QUALITY, 80])
         return FileResponse(p, headers={"Cache-Control": "max-age=3600"}) if os.path.exists(p) else Response(status_code=404)
 
     @app.get("/api/rugs/{rid}/crop")
