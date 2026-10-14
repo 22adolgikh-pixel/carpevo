@@ -279,3 +279,111 @@ def map_box(H, box):
     x0, y0 = max(0.0, float(x0)), max(0.0, float(y0)); x1, y1 = min(1.0, float(x1)), min(1.0, float(y1))
     if x1 - x0 < 0.003 or y1 - y0 < 0.003: return None, 0
     return [round(x0, 5), round(y0, 5), round(x1 - x0, 5), round(y1 - y0, 5)], ang
+
+
+# ---------------------------------------------------------------- v11.7: все ожидаемые элементы сразу, масштаб неизвестен
+def _scheme_tpl(png, tw, th):
+    """схема (1 px = 1 узел) → карты контуров и направлений линий размером tw×th (как у фото)"""
+    if png.ndim == 2: png = cv2.cvtColor(png, cv2.COLOR_GRAY2BGRA)
+    if png.shape[2] == 3:
+        bg = np.median(np.concatenate([png[0], png[-1], png[:, 0], png[:, -1]]), 0)
+        al = (np.abs(png.astype(np.int16) - bg).sum(-1) > 30).astype(np.uint8) * 255
+        png = np.dstack([png, al])
+    big = cv2.resize(png, (tw, th), interpolation=cv2.INTER_NEAREST).astype(np.float32)
+    al = big[..., 3:4] / 255.0
+    rgb = np.clip(big[..., :3] * al + 128 * (1 - al), 0, 255).astype(np.uint8)
+    rgb = cv2.GaussianBlur(rgb, (0, 0), max(0.6, 0.35 * tw / max(1, png.shape[1])))
+    _, E = _maps(rgb); C, S = _ori(rgb)
+    # прозрачность — тоже граница (силуэт элемента на фоне ковра)
+    a = cv2.GaussianBlur(al[..., 0] * 100, (0, 0), 1.0)
+    E = E + cv2.GaussianBlur(cv2.magnitude(cv2.Sobel(a, cv2.CV_32F, 1, 0), cv2.Sobel(a, cv2.CV_32F, 0, 1)), (0, 0), 1.2)
+    return E, C, S
+
+
+def _score_maps(PE, PC, PS, PEN, E, C, S):
+    """карта сходства: контуры (TM_CCOEFF_NORMED) + направления линий (нормированная корреляция поля направлений)"""
+    hh, ww = E.shape
+    if E.std() < 1e-3: return None
+    re_ = cv2.matchTemplate(PE, E, cv2.TM_CCOEFF_NORMED)
+    num = cv2.matchTemplate(PC, C, cv2.TM_CCORR) + cv2.matchTemplate(PS, S, cv2.TM_CCORR)
+    en = cv2.boxFilter(PEN, -1, (ww, hh), normalize=False, anchor=(0, 0))[:PE.shape[0] - hh + 1, :PE.shape[1] - ww + 1]
+    ro = num / np.sqrt(np.maximum(en, 1e-6) * (float((C * C + S * S).sum()) + 1e-6))
+    return 0.45 * re_ + 0.55 * ro
+
+
+def find_schemes_auto(img, schemes, knots=None, exclude=(), per=4, work=900, progress=None, min_z=4.0):
+    """img — фото ковра (BGR); schemes — {id: png схемы}; knots — сколько узлов по ширине фото (если известно по уже найденному
+    элементу со схемой), иначе подбирается сразу по всем схемам: у одного ковра один масштаб, и он тот, при котором элементы
+    находятся увереннее всего (по крупным схемам: мелкие, до 12 узлов, «находятся» где угодно).
+    Уверенность — не абсолютный балл (на шерстяном фото он низкий), а насколько лучшее место выделяется среди всех мест
+    этого же фото: z = (балл − среднее) / разброс по 200 лучшим местам. → (узлов по ширине, {id: [{box, score, z, angle, flip}]})"""
+    H0, W0 = img.shape[:2]
+
+    def prep(side):
+        s = min(1.0, side / max(H0, W0)); a = cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else img
+        _, PE = _maps(a); PC, PS = _ori(a)
+        return s, a.shape[1], a.shape[0], PE, PC, PS, PC * PC + PS * PS
+
+    def run(M, K, ids, jit=(1.0,), ky=(1.0,), tfs=TF, cap=200):
+        s, W, H, PE, PC, PS, PEN = M; k = W / K; out = {}
+        for sid in ids:
+            png = schemes[sid]; kh, kw = png.shape[:2]; best = []
+            for j in jit:
+                for q in ky:
+                    tw, th = int(round(kw * k * j)), int(round(kh * k * j * q))
+                    if tw < 8 or th < 8 or tw >= W * 0.9 or th >= H * 0.9: continue
+                    E0, C0, S0 = _scheme_tpl(png, tw, th)
+                    for ang, fl in tfs:
+                        E = _tf(E0, ang, fl); C, S = _tf_ori(C0, S0, ang, fl)
+                        if E.shape[0] >= H or E.shape[1] >= W: continue
+                        r = _score_maps(PE, PC, PS, PEN, E, C, S)
+                        if r is None: continue
+                        hh, ww = E.shape; kk = max(3, int(min(hh, ww) * 0.5) | 1)
+                        mx = cv2.dilate(r, np.ones((kk, kk), np.uint8))
+                        ys, xs = np.where(r >= mx - 1e-6)
+                        if len(ys) > cap:
+                            t = np.argpartition(-r[ys, xs], cap)[:cap]; ys, xs = ys[t], xs[t]
+                        for yy, xx in zip(ys, xs):
+                            best.append({"px": (xx / s, yy / s, ww / s, hh / s), "score": float(r[yy, xx]), "angle": ang, "flip": fl})
+            c = _nms(best, iou=0.3, cap=200)
+            if len(c) >= 8:
+                v = np.array([x["score"] for x in c[1:]]); mu, sd = float(v.mean()), float(v.std()) + 1e-4
+            else: mu, sd = 0.2, 0.1
+            for x in c: x["z"] = (x["score"] - mu) / sd
+            out[sid] = c
+        return out
+    ids = list(schemes)
+    if not ids: return knots, {}
+    big = [i for i in ids if max(schemes[i].shape[:2]) >= 12] or ids
+    if not knots:
+        M = prep(560)
+        med_w = float(np.median([schemes[i].shape[1] for i in big]))
+        cands = sorted({max(30, int(round(med_w * f))) for f in (4, 5.5, 7, 9, 12, 16, 22)})     # элемент ≈ 1/4 … 1/22 ширины фото
+        sc = []
+        def val(r):
+            b = sorted((v[0]["z"] if v else 0 for v in r.values()), reverse=True)
+            return float(np.mean(b[:max(1, (len(b) + 1) // 2)]))
+        for n, K in enumerate(cands):
+            sc.append((val(run(M, K, big, tfs=[(a, 0) for a in (0, 90, 180, 270)], cap=120)), K))
+            if progress: progress(n + 1, len(cands) + 3)
+        best, knots = max(sc)
+        for K in (int(knots * 0.87), int(knots * 1.15)):
+            v = val(run(M, K, big, tfs=[(a, 0) for a in (0, 90, 180, 270)], cap=120))
+            if v > best: best, knots = v, K
+    res = run(prep(work), knots, ids, jit=(0.92, 1.0, 1.08), ky=(1.0, 1.18))
+    if progress: progress(1, 1)
+    out = {}
+    for sid, c in res.items():
+        keep = []
+        if c:
+            top = c[0]
+            for x in c:
+                # первое место — если выделяется (z ≥ min_z; у настоящего элемента обычно 8–11, у случайного места 3–5; сервер предлагает от 6); повторы того же элемента — почти так же хорошие
+                if x["z"] < min_z or x["score"] < top["score"] * 0.88: break
+                if _overlaps(x["px"], exclude, W0, H0): continue
+                X, Y, w, h = x["px"]
+                keep.append({"box": [round(X / W0, 5), round(Y / H0, 5), round(w / W0, 5), round(h / H0, 5)], "score": round(x["score"], 3),
+                             "z": round(x["z"], 2), "angle": x["angle"], "flip": x["flip"]})
+                if len(keep) >= per: break
+        out[sid] = keep
+    return knots, out

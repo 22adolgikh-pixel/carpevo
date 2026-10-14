@@ -605,6 +605,62 @@ def t18_feedback_v116(pg, ctx):
     errors_ok(ctx, 'v11.6')
 
 
+@test
+def t19_type_worksheet(pg, ctx):
+    """v11.7: рабочий лист типа — типы с элементами Керимова, фото типа, «найти элементы» находит схемы на ковре без известного масштаба"""
+    import cv2, numpy as np
+    u = ctx['url']; D = ctx['app'] + '/data'
+    T = get(u + 'api/types')['types']
+    t = next((t for t in T if not t['region'] and t['el'] >= 2 and t['id'] != 'pirebedil'), None)
+    assert t, f'нет типов с элементами Керимова: {T[:3]}'
+    d = get(u + 'api/types/' + t['id'])
+    els = [e for e in d['elements'] if os.path.exists(f"{D}/out/{e['id']}.png")]
+    big = sorted(els, key=lambda e: -max(cv2.imread(f"{D}/out/{e['id']}.png", cv2.IMREAD_UNCHANGED).shape[:2]))[:2]
+    assert len(big) == 2, 'у типа меньше двух схем с картинкой'
+    rng = np.random.default_rng(5); k = 4
+    img = np.zeros((1500, 1100, 3), np.uint8); img[:] = (60, 40, 120); img = img + rng.integers(0, 20, img.shape).astype(np.uint8)
+    truth = {}
+    for i, e in enumerate(big):
+        p = cv2.imread(f"{D}/out/{e['id']}.png", cv2.IMREAD_UNCHANGED)
+        if p.shape[2] == 3: p = np.dstack([p, np.full(p.shape[:2], 255, np.uint8)])
+        p = p.copy(); al = p[..., 3] > 0; p[..., :3][al] = rng.integers(30, 230, 3)
+        b = cv2.resize(p, (p.shape[1] * k, int(p.shape[0] * k * 1.1)), interpolation=cv2.INTER_NEAREST)
+        x, y = 80 + i * 520, 120 + i * 650; h, w = b.shape[:2]; a = b[..., 3:4] / 255.
+        img[y:y + h, x:x + w] = (b[..., :3] * a + img[y:y + h, x:x + w] * (1 - a)).astype(np.uint8)
+        truth[e['id']] = [x / 1100, y / 1500, w / 1100, h / 1500]
+    img = cv2.GaussianBlur(img, (0, 0), 1.2)
+    cv2.imwrite(f'{D}/rug_img/ty_test.jpg', img)
+    json.dump({"id": "ty_test", "title": "Тест типа", "source": "тест", "museum": "", "inv": "", "url": "", "license": "", "place": "", "date": "", "school": "",
+               "composition": "", "technique": "", "size": "", "notes": "", "status": "new", "w": 1100, "h": 1500, "marks": [], "cat": {"src": "upload"},
+               "created": int(time.time()), "updated": int(time.time())}, open(f'{D}/rugs/ty_test.json', 'w'), ensure_ascii=False)
+    post(u + 'api/rugs_set_comp', {'composition': t['id'], 'ids': ['ty_test']})
+    post(u + 'api/rugs/ty_test/find_expected', {'only': [e['id'] for e in els]})
+    for _ in range(240):
+        st = get(u + 'api/rugs/ty_test/find_expected')
+        if not st.get('running'): break
+        time.sleep(1)
+    assert not st.get('error'), st
+    mk = [m for m in get(u + 'api/rugs/ty_test')['marks'] if m.get('machine') == 'kerimov']
+    def iou(a, b):
+        ix = max(0, min(a[0] + a[2], b[0] + b[2]) - max(a[0], b[0])); iy = max(0, min(a[1] + a[3], b[1] + b[3]) - max(a[1], b[1])); i = ix * iy
+        return i / (a[2] * a[3] + b[2] * b[3] - i)
+    for sid, tb in truth.items():
+        assert any(m['scheme'] == sid and iou(m['box'], tb) > 0.5 for m in mk), f'элемент {sid} не найден: {[(m["scheme"], m["box"], m["score"]) for m in mk]}'
+    # интерфейс
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1000)
+    if pg.evaluate("R.view") == 'edit': pg.evaluate("rugBack()"); pg.wait_for_timeout(500)
+    pg.click('#rgTypesBtn'); pg.wait_for_timeout(1500)
+    pg.click(f'#tyList [data-ty="{t["id"]}"]'); pg.wait_for_timeout(1200)
+    assert pg.is_visible('#tySheet .tyel') and pg.is_visible('#tySheet .tyc[data-p="ty_test"]'), 'рабочий лист не показал элементы и фото типа'
+    assert pg.evaluate(f"document.querySelector('#tySheet .tyel[data-el=\"{big[0]['id']}\"]').classList.contains('pr')"), 'элемент, найденный машиной, не помечен «ждёт проверки»'
+    pg.screenshot(path=f'{OUT}/18_type_sheet.png')
+    pg.click('#tySheet .tyc[data-p="ty_test"] .im'); pg.wait_for_timeout(1500)
+    assert pg.evaluate("R.view") == 'edit' and pg.evaluate("R.rug.id") == 'ty_test', 'фото из листа не открылось'
+    pg.evaluate("rugBack()"); pg.wait_for_timeout(1200)
+    assert pg.evaluate("R.view") == 'types', '«← все ковры» из редактора не вернул к рабочему листу'
+    errors_ok(ctx, 'рабочий лист типа')
+
+
 # ---------------- запуск ----------------
 def main():
     os.makedirs(OUT, exist_ok=True)

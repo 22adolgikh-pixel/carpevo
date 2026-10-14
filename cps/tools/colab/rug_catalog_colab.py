@@ -101,9 +101,17 @@ for vol, roman in (('kerimov_vol1', 'I'), ('kerimov_vol2', 'II'), ('kerimov_vol3
     pdir, jdir = f'{D}/output/page_images/{vol}', f'{D}/output/raw_pages_v3/{vol}'
     if not os.path.isdir(pdir): log('нет папки', pdir); continue
     n0 = len(items)
+    # v11.7: подписи из «Списка иллюстраций» в конце тома — для рисунков, у которых на странице подписи нет
+    import sys as _sys; _sys.path.insert(0, f'{REPO}/cps/tools/colab'); import kerimov_lists as KL
+    _pages = []
     for jp in sorted(glob.glob(f'{jdir}/page_*.json')):
-        try: J = json.load(open(jp, encoding='utf-8'))
-        except Exception: continue
+        try: _pages.append((jp, json.load(open(jp, encoding='utf-8'))))
+        except Exception: pass
+    LISTS = KL.parse_pages(_pages)
+    log(vol, 'подписей в списке иллюстраций:', len(LISTS))
+    def list_cap(lab):
+        k = KL.label_key(lab); return LISTS.get(k, '') if k else ''
+    for jp, J in _pages:
         figs = J.get('figures') or []
         if not figs: continue
         if vol == 'kerimov_vol1' and int(re.sub(r'\D', '', os.path.basename(jp)) or 0) < 318: continue   # т. I до с. 318 — схемы, не фото
@@ -120,20 +128,24 @@ for vol, roman in (('kerimov_vol1', 'I'), ('kerimov_vol2', 'II'), ('kerimov_vol3
         # студия при разделении даёт каждой части подпись её рисунка
         def fig_info(f):
             lab = f.get('figure_label') or ''; cap = f.get('caption') or ''
-            c = carriers.get(lab, {}); comp = c.get('motif_name') or f.get('depicts_motif') or ''
+            if not cap or cap == lab: cap = list_cap(lab) or cap
+            ci = KL.caption_info(cap)
+            c = carriers.get(lab, {}); comp = c.get('motif_name') or f.get('depicts_motif') or ci['name'] or ''
             title = (cap if cap and cap != lab else '') or comp
             sc = SCHOOL_RU.get((schools.get(comp) or '').lower(), ''); why = f'Керимов: «{comp}» — {schools.get(comp)}' if sc else ''
             if not sc:
                 sc, k = school_of(title, comp)
                 why = f'слово «{k}» в подписи Керимова' if sc else ''
-            return dict(label=lab, caption=cap, composition=comp, school=sc, school_why=why, date=c.get('date') or '',
+            return dict(museum=ci['museum'], inv=ci['inv'], label=lab, caption=cap, composition=comp, school=sc, school_why=why, date=c.get('date') or '',
                         technique=tech_of(title, comp), fragment=frag_of(title), text=(c.get('quote') or '')[:400],
                         title=f'Керимов, т. {roman}' + (f', {lab}' if lab else '') + (f'. {title}' if title else '') + f' (стр. скана {int(pg)}, печ. {J.get("page_number_printed") or "?"})')
         page_figs = [fig_info(f) for f in figs]
         for i, b in enumerate(boxes):
             f = figs[i] if len(figs) == len(boxes) else (figs[0] if len(figs) == 1 else {})
             lab = f.get('figure_label') or ''; cap = f.get('caption') or ''
-            c = carriers.get(lab, {}); comp = c.get('motif_name') or f.get('depicts_motif') or ''
+            if not cap or cap == lab: cap = list_cap(lab) or cap
+            ci = KL.caption_info(cap)
+            c = carriers.get(lab, {}); comp = c.get('motif_name') or f.get('depicts_motif') or ci['name'] or ''
             title = (cap if cap and cap != lab else '') or comp
             sc = SCHOOL_RU.get((schools.get(comp) or '').lower(), ''); why = f'Керимов: «{comp}» — {schools.get(comp)}' if sc else ''
             if not sc:
@@ -142,8 +154,8 @@ for vol, roman in (('kerimov_vol1', 'I'), ('kerimov_vol2', 'II'), ('kerimov_vol3
             x, y, w, h = b
             add(id=f'{vol}_p{pg}_{i + 1}', src=vol, img_path=ip, crop=[int(x), int(y), int(w), int(h)],
                 title=f'Керимов, т. {roman}' + (f', {lab}' if lab else '') + (f'. {title}' if title else '') + f' (стр. скана {int(pg)}, печ. {J.get("page_number_printed") or "?"})',
-                names=[comp, title], composition=comp, date=c.get('date') or '', school=sc, school_why=why,
-                technique=tech_of(title, comp), fragment=frag_of(title), text=(c.get('quote') or '')[:400], museum='', inv='', place='', url='', license='книга (не публиковать фото)',
+                names=[comp, title], composition=comp, date=c.get('date') or ci['date'] or '', school=sc, school_why=why,
+                technique=tech_of(title, comp), fragment=frag_of(title), text=(c.get('quote') or '')[:400], museum=ci['museum'] or c.get('museum_or_collection') or '', inv=ci['inv'] or c.get('inv_number') or '', place='', url='', license='книга (не публиковать фото)',
                 ambiguous=len(figs) != len(boxes) and len(figs) != 1,
                 page_figs=page_figs if len(figs) > 1 else [], page_box=i)
     log(vol, 'фото на страницах:', len(items) - n0)

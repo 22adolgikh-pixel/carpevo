@@ -337,6 +337,8 @@ def install(app, DATA, D_WORK):
             with open(SETF, "w", encoding="utf-8") as f: json.dump(st, f, ensure_ascii=False)
             sync.update(stage="склеиваю одинаковые файлы")
             dedupe_files()
+            sync.update(stage="связываю ковры Керимова с музеями по инв. номеру")
+            link_by_inv()
             sync.update(stage="готово", last_ok=time.strftime("%Y-%m-%d %H:%M"))
         except Exception as e:
             sync.update(error=str(e)[:300], stage="ошибка")
@@ -756,7 +758,7 @@ def install(app, DATA, D_WORK):
         cat.pop("page_figs", None)
         if fig:
             for k, v in (("school", fig.get("school")), ("composition", comp_id(fig.get("composition") or "")), ("date", fig.get("date")),
-                         ("technique", fig.get("technique"))):
+                         ("technique", fig.get("technique")), ("museum", fig.get("museum")), ("inv", fig.get("inv"))):
                 if v and (not n.get(k) or n.get(k) == (n.get("cat") or {}).get(k) or n.get(k) == r.get(k)): n[k] = v
             if fig.get("text") and (not n.get("notes") or n.get("notes") == r.get("notes")): n["notes"] = fig["text"]
             cat.update(names=[x for x in (fig.get("composition"), fig.get("caption")) if x], school_why=fig.get("school_why", ""),
@@ -1116,6 +1118,161 @@ def install(app, DATA, D_WORK):
             return {"schemes": sch, "marks": near, "n_schemes": len(SH._idx["ids"])}
         return await run_in_threadpool(work)
 
+    # ---------------- v11.7: рабочий лист типа ковра (элементы Керимова → фото этого типа) ----------------
+    _ty = {"t": 0, "rugs": None}
+
+    def all_rugs_cached():
+        if _ty["rugs"] is None or time.time() - _ty["t"] > 20:
+            A = {}
+            for f in os.listdir(D_RUGS):
+                if not f.endswith(".json"): continue
+                try:
+                    with open(os.path.join(D_RUGS, f), encoding="utf-8") as fh: r = json.load(fh)
+                except Exception: continue
+                if r.get("dup_of") or r.get("split_into") or r.get("hidden") or r.get("obj") == "scene": continue
+                A[r["id"]] = r
+            _ty.update(t=time.time(), rugs=A)
+        return _ty["rugs"]
+
+    def expected_of(cid):
+        figures_by_concept()
+        return figcache["exp"].get(cid, [])
+
+    def type_photo(r, exp):
+        ids = {e["id"] for e in exp}; mot = {e["motif"]: e["id"] for e in exp if e.get("motif")}
+        found, prop = set(), set()
+        for m in r.get("marks") or []:
+            if m.get("status") == "rejected": continue
+            e = m.get("scheme") if m.get("scheme") in ids else mot.get(m.get("motif") or "")
+            if not e: continue
+            (found if m.get("status") == "confirmed" else prop).add(e)
+        wh = [r.get("w") or 0, r.get("h") or 0]
+        return {"id": r["id"], "title": r.get("title") or r["id"], "src": (r.get("cat") or {}).get("src", ""), "w": wh[0], "h": wh[1],
+                "kerimov": (r.get("cat") or {}).get("src", "").startswith("kerimov"), "found": sorted(found), "prop": sorted(prop - found),
+                "n": len(r.get("marks") or []), "obj": obj_guess(r)[0], "school": r.get("school", ""), "museum": r.get("museum", ""), "inv": r.get("inv", "")}
+
+    @app.get("/api/types")
+    def api_types():
+        """типы ковров (композиции): сколько элементов у Керимова, сколько фото этого типа, сколько элементов уже найдено"""
+        figures_by_concept(); A = all_rugs_cached(); by = {}
+        for r in A.values():
+            c = r.get("composition")
+            if c in BYID: by.setdefault(c, []).append(r)
+        sug = {}
+        for r in A.values():
+            if r.get("composition") in BYID: continue
+            g = comp_guess_text(r)
+            if g: sug[g["id"]] = sug.get(g["id"], 0) + 1
+        out = []
+        for cid in set(figcache["exp"]) | set(by):
+            if cid not in BYID: continue
+            exp = figcache["exp"].get(cid, []); rs = by.get(cid, [])
+            found = set(); prop = set(); best = 0; ker = 0
+            for r in rs:
+                tp = type_photo(r, exp); found |= set(tp["found"]); prop |= set(tp["prop"])
+                best = max(best, tp["w"] * tp["h"]); ker += tp["kerimov"]
+            d = BYID[cid]; v = figcache["vote"].get(cid) or {}
+            reg = re.sub(r"[^a-z]", "", fold(d["az"]).replace("j", "c")) in NOT_COMP | {"gebele", "gabala", "kebele", "sirvan", "garabag", "gazah", "gence", "guba", "baki", "mugan", "tebriz"}
+            out.append({"id": cid, "az": d["az"], "ru": d["ru"], "school": max(v, key=v.get) if v else "", "el": len(exp), "photos": len(rs), "region": reg,
+                        "kerimov": ker, "found": len(found), "prop": len(prop - found), "best": int(best ** 0.5), "sug": sug.get(cid, 0)})
+        out.sort(key=lambda t: (t["region"], -(t["el"] > 0 and t["photos"] > 0), -(t["el"] * min(t["photos"], 5)), t["az"]))
+        return {"types": out}
+
+    @app.get("/api/types/{cid}")
+    def api_type(cid: str):
+        if cid not in BYID: return JSONResponse({"error": "нет такого типа"}, 404)
+        exp = expected_of(cid); A = all_rugs_cached()
+        photos = [type_photo(r, exp) for r in A.values() if r.get("composition") == cid]
+        photos.sort(key=lambda p: (-(p["w"] * p["h"]), p["id"]))
+        sug = []
+        for r in A.values():
+            if r.get("composition") in BYID: continue
+            g = comp_guess_text(r)
+            if g and g["id"] == cid: sug.append({**type_photo(r, exp), "why": g["why"]})
+        sug.sort(key=lambda p: -(p["w"] * p["h"]))
+        els = []
+        for e in exp:
+            on = [p["id"] for p in photos if e["id"] in p["found"]]; pr = [p["id"] for p in photos if e["id"] in p["prop"]]
+            d = BYID.get(e.get("motif") or "")
+            els.append({**e, "az": d["az"] if d else "", "found_on": on, "prop_on": pr})
+        d = BYID[cid]; v = figcache["vote"].get(cid) or {}
+        return {"id": cid, "az": d["az"], "ru": d["ru"], "school": max(v, key=v.get) if v else "", "elements": els, "photos": photos[:300], "suggested": sug[:120]}
+
+    fexp = {}
+
+    @app.post("/api/rugs/{rid}/find_expected")
+    def api_find_expected(rid: str, request: Request, body: dict = Body(default={})):
+        """В фоне: найти на фото все элементы Керимова для типа этого ковра (масштаб подбирается сам). Найденное — предложения машины."""
+        import rug_match
+        r = load(rid); p = img_path(rid)
+        if not r or not p: return JSONResponse({"error": "нет такого ковра"}, 404)
+        cid = body.get("composition") or r.get("composition")
+        if cid not in BYID: return JSONResponse({"error": "сначала укажите тип ковра — по нему берутся элементы Керимова"}, 400)
+        st = fexp.get(rid)
+        if st and st.get("running"): return st
+        exp = expected_of(cid)
+        have = {m.get("scheme") for m in r.get("marks") or [] if m.get("scheme")}
+        todo = [e for e in exp if e["id"] not in have and (not body.get("only") or e["id"] in body["only"])]
+        who = user(request)
+        st = fexp[rid] = {"running": True, "done": 0, "total": 1, "stage": "подбираю масштаб", "added": 0, "error": "", "knots": 0}
+
+        def run():
+            try:
+                a = cv2.imread(p); H, W = a.shape[:2]
+                P = {}
+                for e in todo:
+                    q = cv2.imread(os.path.join(D_OUT, e["id"] + ".png"), cv2.IMREAD_UNCHANGED)
+                    if q is not None and q.shape[0] >= 3 and q.shape[1] >= 3: P[e["id"]] = q
+                if not P: st.update(stage="у схем этого типа нет картинок (рисунки не закончены в студии)"); return
+                sc = scale_of(r, W, H); knots = (W / sc[0]) if sc else (r.get("knots") or None)
+                prog = lambda i, n: st.update(done=i, total=n)
+                st.update(stage="ищу элементы" if knots else "подбираю масштаб по всем элементам")
+                knots, res = rug_match.find_schemes_auto(a, P, knots=knots, exclude=marks_boxes(load(rid) or r), progress=prog)
+                st["knots"] = int(knots); now = int(time.time()); added = 0
+                with _lock:
+                    t = load(rid)
+                    if not t: return
+                    t["knots"] = int(knots)
+                    byid = {e["id"]: e for e in exp}
+                    for sid, cs in res.items():
+                        cs = [c for c in cs if c.get("z", 0) >= 6]
+                        if not cs: continue
+                        e = byid[sid]; g = "k" + sid
+                        for i, c in enumerate(cs):
+                            if any(MS._iou(c["box"], m["box"]) > 0.5 for m in t.get("marks") or []): continue
+                            t.setdefault("marks", []).append({"id": f"m{now}{added}k", "box": c["box"], "zone": "other", "motif": e.get("motif") if e.get("motif") in BYID else "",
+                                "motif_text": "" if e.get("motif") in BYID else (e.get("name") or ""), "scheme": sid, "group": g,
+                                "certainty": "sure" if c.get("z", 0) >= 8 else "maybe", "status": "proposed", "note": "", "angle": c["angle"], "flip": c["flip"],
+                                "machine": "kerimov", "score": c["score"], "xfer": "", "by": "машина (элементы Керимова) → " + who, "at": now,
+                                "confirmed_by": "", "confirmed_at": 0})
+                            added += 1
+                    t["updated"] = now; save(t)
+                st.update(added=added, stage="готово", weak=sorted([[sid, round(cs[0]["z"], 1)] for sid, cs in res.items() if cs and cs[0].get("z", 0) < 6], key=lambda t: -t[1])[:8],
+                          missing=len([1 for cs in res.values() if not cs]))
+            except Exception as ex:
+                st.update(error=str(ex)[:300], stage="ошибка")
+            finally:
+                st["running"] = False; _ty["t"] = 0
+        threading.Thread(target=run, daemon=True).start()
+        return st
+
+    @app.get("/api/rugs/{rid}/find_expected")
+    def api_find_expected_state(rid: str):
+        return fexp.get(rid) or {"running": False, "stage": ""}
+
+    @app.post("/api/rugs_set_comp")
+    async def api_rugs_set_comp(request: Request):
+        """поставить тип ковра (из рабочего листа: «да, это этот тип»)"""
+        b = await request.json(); who = user(request); n = 0
+        if b.get("composition") not in BYID: return JSONResponse({"error": "нет такого типа"}, 400)
+        with _lock:
+            for rid in b.get("ids") or []:
+                r = load(rid)
+                if not r: continue
+                r["composition"] = b["composition"]; r["composition_by"] = who; r["updated"], r["updated_by"] = int(time.time()), who; save(r); n += 1
+        _ty["t"] = 0
+        return {"ok": True, "n": n}
+
     @app.post("/api/motif/label")
     async def api_motif_label(request: Request):
         """Человек ответил на находку: ✓ это он (на тот ковёр добавляется подтверждённая рамка) / ✗ не он (только запись в обучающий набор).
@@ -1190,10 +1347,55 @@ def install(app, DATA, D_WORK):
                 if changed: K["updated"] = int(time.time()); save(K)
         return n
 
+    MUSF = [("azcm", ("ковра", "carpet museum", "xalça muzey", "xalca muzey", "azcarpet")), ("tiem", ("тюрк ве ислам", "türk ve islam", "turk ve islam", "turkish and islamic", "tiem")),
+            ("hermitage", ("эрмитаж", "hermitage")), ("rem", ("этнограф", "ethnograph")), ("met", ("метрополитен", "metropolitan")),
+            ("vam", ("виктори", "victoria and albert", "v&a")), ("orient", ("востока", "oriental art", "museum of oriental")), ("nam", ("искусств", "art museum", "incəsənət"))]
+
+    def mus_family(r):
+        src = (r.get("cat") or {}).get("src", "")
+        if src == "azcarpetmuseum": return "azcm"
+        if src in ("met", "vam"): return src
+        t = (r.get("museum") or "").lower()
+        return next((k for k, ws in MUSF if any(w in t for w in ws)), "")
+
+    def inv_norm(v):
+        v = re.sub(r"[\s\-–—./№]", "", (v or "").upper()).replace("УТ", "UT")
+        return v if re.search(r"\d", v) else ""
+
+    def link_by_inv():
+        """v11.7: ковёр из Керимова и фото музея с тем же инвентарным номером того же музея — один и тот же ковёр (двойник «по номеру»)"""
+        A = {}
+        for f in os.listdir(D_RUGS):
+            if f.endswith(".json"):
+                r = load(f[:-5])
+                if r and not r.get("dup_of") and not r.get("split_into"): A[r["id"]] = r
+        idx = {}
+        for r in A.values():
+            k = (mus_family(r), inv_norm(r.get("inv")))
+            if k[0] and k[1] and not (r.get("cat") or {}).get("src", "").startswith("kerimov"): idx.setdefault(k, []).append(r["id"])
+        n = 0
+        for r in A.values():
+            if not (r.get("cat") or {}).get("src", "").startswith("kerimov"): continue
+            k = (mus_family(r), inv_norm(r.get("inv")))
+            for o in idx.get(k, []) if k[0] and k[1] else []:
+                with _lock:
+                    for a, b in ((r["id"], o), (o, r["id"])):
+                        t = load(a)
+                        if not t: continue
+                        same = t.setdefault("same", [])
+                        x = next((x for x in same if x.get("id") == b), None)
+                        if x is None: same.append({"id": b, "score": 999, "inv": True}); n += 1
+                        elif not x.get("inv"): x["inv"] = True; x["score"] = max(x.get("score") or 0, 999)
+                        else: continue
+                        save(t)
+        return n
+
     def _dedupe_bg():
         try:
             k = dedupe_files()
             if k: print("dedupe_files: скрыто уменьшенных копий:", k)
+            k = link_by_inv()
+            if k: print("link_by_inv: связано по инв. номеру:", k)
         except Exception as e: print("dedupe_files:", e)
 
     threading.Thread(target=_dedupe_bg, daemon=True).start()
