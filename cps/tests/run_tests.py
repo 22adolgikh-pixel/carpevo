@@ -147,9 +147,12 @@ def t01_load(pg, ctx):
 
 @test
 def t02_tabs(pg, ctx):
-    for t in ('tab-pipe', 'tab-sheet', 'tab-queue', 'tab-rugs'):
+    for t in ('tab-pipe', 'tab-queue', 'tab-rugs'):
         pg.click('#' + t); pg.wait_for_timeout(900)
         errors_ok(ctx, 'вкладка ' + t)
+    pg.click('#tab-queue'); pg.wait_for_timeout(600); pg.click('#catalog [data-vs="sheet"]'); pg.wait_for_timeout(900)
+    assert pg.evaluate("S.mode") == 'sheet', 'вкладка «Листы» внутри «Узоров» не открывается'
+    errors_ok(ctx, 'листы')
     pg.screenshot(path=f'{OUT}/02_tabs.png')
 
 
@@ -379,8 +382,9 @@ def t12_events_screen(pg, ctx):
 def t13_rail_crumbs_keys(pg, ctx):
     pg.goto(ctx['url']); pg.wait_for_timeout(2500)
     ids = pg.evaluate("[...document.querySelectorAll('#rail button')].map(b=>b.id)")
-    for t in ('tab-pipe', 'tab-sheet', 'tab-queue', 'tab-rugs', 'tab-dyes', 'railKeys'): assert t in ids, f'в колонке разделов нет {t}'
-    for t, word in (('tab-pipe', 'Обзор'), ('tab-sheet', 'Листы'), ('tab-queue', 'Узоры'), ('tab-rugs', 'Ковры'), ('tab-dyes', 'Красители')):
+    for t in ('tab-pipe', 'tab-queue', 'tab-rugs', 'tab-dyes', 'railKeys'): assert t in ids, f'в колонке разделов нет {t}'
+    assert not pg.is_visible('#tab-sheet'), '«Листы» должны быть внутри «Узоров», а не отдельным разделом'
+    for t, word in (('tab-pipe', 'Обзор'), ('tab-queue', 'Узоры'), ('tab-rugs', 'Ковры'), ('tab-dyes', 'Красители')):
         pg.click('#' + t); pg.wait_for_timeout(900)
         assert (pg.text_content('#crumbs') or '').startswith(word), f'«где вы сейчас» не показывает {word}: {pg.text_content("#crumbs")}'
         assert pg.evaluate(f"document.getElementById('{t}').classList.contains('on')"), f'раздел {word} не подсвечен в колонке'
@@ -393,6 +397,8 @@ def t13_rail_crumbs_keys(pg, ctx):
     pg.click('#mClose'); pg.wait_for_timeout(200)
     pg.keyboard.press('2'); pg.wait_for_timeout(600); assert pg.evaluate("S.mode") == 'queue', 'клавиша 2 не открывает «Узоры»'
     pg.keyboard.press('1'); pg.wait_for_timeout(600); assert pg.evaluate("S.mode") == 'sheet', 'клавиша 1 не открывает «Листы»'
+    assert (pg.text_content('#crumbs') or '').startswith('Узоры') and pg.evaluate("document.getElementById('tab-queue').classList.contains('on')"), 'листы не отмечены как часть «Узоров»'
+    assert pg.is_visible('#left [data-vs="sheet"]'), 'на листах нет переключателя Листы · Очередь · Все рисунки'
     errors_ok(ctx, 'колонка разделов')
 
 
@@ -556,10 +562,10 @@ def t18_feedback_v116(pg, ctx):
     pg.click('#rgKinds [data-kind="carpets"]'); pg.wait_for_timeout(300)
     # скрыть
     pg.evaluate("rugOpen('vam_4')"); pg.wait_for_timeout(1400)
-    pg.click('#rgTbHide'); pg.wait_for_timeout(300); pg.click('#modal [data-hr="0"]'); pg.wait_for_timeout(1500)
+    pg.click('#rgTbMenu'); pg.wait_for_timeout(200); pg.click('#rgTbHide'); pg.wait_for_timeout(300); pg.click('#modal [data-hr="0"]'); pg.wait_for_timeout(1500)
     assert get(u + 'api/rugs/vam_4').get('hidden'), 'фото не скрылось'
     assert 'vam_4' not in pg.evaluate("R.list.filter(r=>rugKindOf(r)==='carpets').map(r=>r.id)"), 'скрытое фото осталось среди ковров'
-    pg.click('#rgTbHide'); pg.wait_for_timeout(1200)
+    pg.click('#rgTbMenu'); pg.wait_for_timeout(200); pg.click('#rgTbHide'); pg.wait_for_timeout(1200)
     assert not get(u + 'api/rugs/vam_4').get('hidden'), '«вернуть» не вернуло фото'
     # автоповторы после новой рамки — только «точно такие же»
     pg.evaluate("rugOpen('border_rep')"); pg.wait_for_timeout(1500)
@@ -692,6 +698,40 @@ def t20_twin_verdicts_v118(pg, ctx):
     assert not st.get('error'), st
     assert get(u + 'api/rugs/vam_1')['inv'] == 'T.123-1920', 'каталог без фото не обновил паспорт'
     errors_ok(ctx, 'v11.8')
+
+@test
+def t21_rug_editor_zones(pg, ctx):
+    """v11.9: слева «Узоры» (вкладки), над фото панель инструментов, справа только выбранная рамка; пояснения — в «i»."""
+    pg.goto(ctx['url']); pg.wait_for_timeout(2000)
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1200); pg.evaluate("rugOpen('vam_1')"); pg.wait_for_timeout(1500)
+    tb = pg.query_selector('.rgtb').bounding_box(); v = pg.query_selector('#rgView').bounding_box()
+    assert abs((tb['x'] + tb['width'] / 2) - (v['x'] + v['width'] / 2)) < 30 and tb['y'] - v['y'] < 30, 'панель инструментов не над фото посередине'
+    assert pg.evaluate("document.getElementById('rgFindRep').disabled"), 'кнопки элемента активны без выбранной рамки'
+    assert pg.evaluate("document.querySelectorAll('#rgPassBtn,#rgPassBtn2').length") == 1, 'кнопка «Паспорт» на экране не одна'
+    title = pg.evaluate("R.rug.title")
+    for sel in ('#rgLeft', '#rgSide', '#sbar'):
+        assert title not in (pg.text_content(sel) or ''), f'название ковра повторяется в {sel}'
+    assert not pg.is_visible('#rgMenu'); pg.click('#rgTbMenu'); pg.wait_for_timeout(200); assert pg.is_visible('#rgMenu'), 'меню «⋯» не открывается'
+    pg.mouse.click(v['x'] + 20, v['y'] + v['height'] - 20); pg.wait_for_timeout(200); assert not pg.is_visible('#rgMenu'), 'меню не закрывается кликом мимо'
+    # пояснения спрятаны за «i»
+    assert pg.evaluate("[...document.querySelectorAll('#rgSide .hint')].every(h=>h.offsetParent===null)"), 'пояснения видны без «i»'
+    pg.click('#rgSide .ib-i'); pg.wait_for_timeout(150); assert pg.evaluate("[...document.querySelectorAll('#rgSide .hint')].some(h=>h.offsetParent!==null)"), '«i» не раскрывает пояснение'
+    # новая рамка → слева «Похожие», справа рамка, кнопки элемента активны
+    x, y = v['x'] + v['width'] * .45, v['y'] + v['height'] * .45
+    pg.mouse.move(x, y); pg.mouse.down(); pg.mouse.move(x + 50, y + 50, steps=5); pg.mouse.up(); pg.wait_for_timeout(2500)
+    assert pg.evaluate("R.lib") == 'shape' and pg.is_visible('#rgShape'), 'у новой рамки без названия слева не открылись «Похожие»'
+    assert not pg.evaluate("document.getElementById('rgFindRep').disabled"), 'кнопки элемента не включились'
+    # «Все схемы»: клик назначает схему выбранной рамке
+    pg.click('#rgLeft [data-lib="all"]'); pg.wait_for_timeout(400)
+    if pg.query_selector('#rgLibAll .rgsch'):
+        f = pg.evaluate("document.querySelector('#rgLibAll .rgsch').dataset.f"); pg.click('#rgLibAll .rgsch'); pg.wait_for_timeout(400)
+        assert pg.evaluate("R.sel.scheme") == f, 'клик по схеме в «Все схемы» не назначает её рамке'
+    pg.click('#rgLeft [data-lib="ker"]'); pg.wait_for_timeout(800); assert pg.is_visible('#rgKerType'), 'во вкладке «Керимов» нет выбора типа ковра'
+    pg.click('#rgLeft [data-lib="rug"]'); pg.wait_for_timeout(300); assert pg.evaluate("document.querySelectorAll('#rgLeft .rgallit').length") >= 1, 'во вкладке «На ковре» нет элементов'
+    pg.keyboard.press('r'); pg.wait_for_timeout(200); assert pg.evaluate("!!R.repeatOf"), 'R (повтор) перестал работать'
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+    pg.screenshot(path=f'{OUT}/13_rug_zones.png')
+    errors_ok(ctx, 'зоны редактора ковра')
 
 
 # ---------------- запуск ----------------
