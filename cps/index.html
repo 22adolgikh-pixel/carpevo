@@ -409,7 +409,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.10</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.11</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -452,6 +452,10 @@ async function api(path,body,method){
   if(!r.ok){const t=await r.text();let m=null;try{m=JSON.parse(t).error}catch(e){}throw new Error(m||(path+' → '+r.status+' '+t.slice(0,200)));}
   return r.json();
 }
+/* v11.11: долгие расчёты (поиск повторов) приходят как {pending:id} — опрашиваем, пока не будет готово */
+async function apiJob(path,body){let j=await api(path,body);const t0=Date.now();
+  while(j&&j.pending){if(Date.now()-t0>600000)throw new Error('сервер считает слишком долго — попробуйте позже');await new Promise(r=>setTimeout(r,1500));j=await api('/api/jobs/'+j.pending,undefined,'GET');}
+  return j;}
 /* строка состояния: последнее сообщение остаётся на месте (тускнеет), вся история — по кнопке ☰ */
 function stat(t,kind){const e=$('stat');e.className=kind||'';e.title=t;e.innerHTML=kind==='busy'?'<span class="spin"></span>'+esc(t):esc(t);
   if(t){S.log=S.log||[];const l=S.log[S.log.length-1];if(!l||l.t!==t)S.log.push({ts:new Date(),t,kind:kind||''});if(S.log.length>200)S.log.shift();if($('logPanel'))logRender();}
@@ -2157,7 +2161,7 @@ function rugsPlace(){const R2=$('rugs');R2.style.top=document.querySelector('hea
 document.addEventListener('error',e=>{const im=e.target;if(!(im instanceof HTMLImageElement))return;if(!/\/(rugthumb|rugimg|api\/rugs\/[^/]+\/crop)/.test(im.src)||(im.dataset.retry|0)>=3)return;
   im.dataset.retry=(im.dataset.retry|0)+1;const u=im.src.replace(/([?&])r=\d+/,'').replace(/[?&]$/,'');setTimeout(()=>{im.src=u+(u.includes('?')?'&':'?')+'r='+im.dataset.retry;},1500*im.dataset.retry);},true);
 // v11.8: что сейчас считает сервер (тяжёлые расчёты идут по одному) — в строке состояния
-setInterval(async()=>{if(!R.on||document.hidden)return;try{const h=await api('/api/heavy');R.busyHeavy=h.run?(h.run+(h.wait?` · в очереди ${h.wait}`:'')):'';const B=$('rgBusy')||(()=>{const b=document.createElement('span');b.id='rgBusy';b.className='mut';b.style.marginLeft='10px';$('sbar').appendChild(b);return b;})();B.innerHTML=R.busyHeavy?'<span class="spin"></span> сервер считает: '+esc(R.busyHeavy):'';}catch(e){}},4000);
+setInterval(async()=>{if(!R.on||document.hidden)return;try{const h=await api('/api/heavy');const hr=[h.ui_run&&(h.ui_run+(h.ui_wait?` · в очереди ${h.ui_wait}`:'')),h.run&&(h.run+(h.wait?` · в очереди ${h.wait}`:''))].filter(Boolean);R.busyHeavy=hr.join(' · ');const B=$('rgBusy')||(()=>{const b=document.createElement('span');b.id='rgBusy';b.className='mut';b.style.marginLeft='10px';$('sbar').appendChild(b);return b;})();B.innerHTML=R.busyHeavy?'<span class="spin"></span> сервер считает: '+esc(R.busyHeavy):'';}catch(e){}},4000);
 function rugsOpen(){
   if(S.mode==='grid'||S.mode==='pix'){try{ovClose('queue');}catch(e){}}
   R.on=true;document.body.classList.add('rugmode');$('rugs').style.display='block';rugsPlace();
@@ -2846,7 +2850,7 @@ async function rugFindRepeats(m0,auto,loose){
   try{if(R.saveT)await rugSaveNow();
     // после сохранения карточка приходит с сервера заново — ищем рамку по id, а не по старому объекту
     let m=R.rug&&R.rug.marks.find(x=>x.id===mid);if(!m){stat('');return;}
-    const j=await api('/api/rugs/'+encodeURIComponent(rid)+'/repeats',{box:m.box,mark:mid,loose:!!loose});
+    const j=await apiJob('/api/rugs/'+encodeURIComponent(rid)+'/repeats',{box:m.box,mark:mid,loose:!!loose});
     if(R.saveT)await rugSaveNow();
     m=R.rug&&R.rug.id===rid&&R.rug.marks.find(x=>x.id===mid);if(!m){stat('');return;}
     // v11.6: после новой рамки сами добавляются только «точно такие же»; похожие — по кнопке «найти повторы» / «вижу ещё»

@@ -21,20 +21,50 @@ PASS_FIELDS = SAME_FIELDS + ("url", "license", "notes")   # v10.26: что ча�
 _lock = threading.Lock()
 # v11.8: тяжёлые расчёты (поиск повторов, схем, совмещение фото, проверка склеек, поиск элементов Керимова) — по одному за раз,
 # остальные ждут в очереди: так сервер не захлёбывается и успевает отдавать миниатюры и сохранять правки. CPS_HEAVY — сколько одновременно.
-HEAVY = threading.BoundedSemaphore(int(os.environ.get("CPS_HEAVY") or 1))
-heavy_q = {"wait": 0, "run": "", "since": 0}
+HEAVY = threading.BoundedSemaphore(int(os.environ.get("CPS_HEAVY") or 1))          # фоновые: проверка склеек, элементы Керимова
+HEAVY_UI = threading.BoundedSemaphore(int(os.environ.get("CPS_HEAVY_UI") or 1))    # v11.11: то, что человек ждёт у экрана (повторы, поиск по схеме), — своя полоса, чтобы не стоять за фоновой проверкой
+heavy_q = {"wait": 0, "run": "", "since": 0, "ui_wait": 0, "ui_run": ""}
 try: cv2.setNumThreads(int(os.environ.get("CPS_CV_THREADS") or 2))
 except Exception: pass
 
 
-def heavy(fn, name=""):
-    """выполнить fn() в очереди тяжёлых расчётов"""
-    heavy_q["wait"] += 1
-    HEAVY.acquire()
-    heavy_q["wait"] -= 1; heavy_q.update(run=name, since=int(time.time()))
+def heavy(fn, name="", ui=False):
+    """выполнить fn() в очереди тяжёлых расчётов (ui=True — полоса для интерактивных запросов)"""
+    sem, w, r = (HEAVY_UI, "ui_wait", "ui_run") if ui else (HEAVY, "wait", "run")
+    heavy_q[w] += 1
+    sem.acquire()
+    heavy_q[w] -= 1; heavy_q[r] = name
+    if not ui: heavy_q["since"] = int(time.time())
     try: return fn()
     finally:
-        heavy_q.update(run="", since=0); HEAVY.release()
+        heavy_q[r] = ""
+        if not ui: heavy_q["since"] = 0
+        sem.release()
+
+
+# v11.11: длинный расчёт не держит HTTP-запрос открытым (nginx рвёт запрос через ~60 с → 502 «не ищет»):
+# ждём до 20 с, не успели — отдаём номер задачи, страница опрашивает /api/jobs/<номер>
+JOBS = {}
+
+
+async def job_wait(fn, name, ui=True, wait=20.0):
+    import asyncio, uuid
+    jid = uuid.uuid4().hex[:10]; J = {"done": False, "res": None, "err": "", "t": time.time()}
+    for k in [k for k, v in JOBS.items() if time.time() - v["t"] > 1800]: JOBS.pop(k, None)
+    JOBS[jid] = J
+
+    def run():
+        try: J["res"] = heavy(fn, name, ui)
+        except Exception as e:
+            import traceback; traceback.print_exc(); J["err"] = f"{type(e).__name__}: {e}"
+        J["done"] = True
+    threading.Thread(target=run, daemon=True).start()
+    t0 = time.time()
+    while not J["done"] and time.time() - t0 < wait: await asyncio.sleep(0.15)
+    if not J["done"]: return {"pending": jid}
+    JOBS.pop(jid, None)
+    if J["err"]: return JSONResponse({"error": J["err"]}, 500)
+    return J["res"]
 
 
 imp = {"running": False, "done": 0, "total": 0, "errors": 0, "last": ""}
@@ -443,6 +473,15 @@ def install(app, DATA, D_WORK):
     # ---------------- ковры ----------------
     _sum = {}
 
+    @app.get("/api/jobs/{jid}")
+    def api_job(jid: str):
+        J = JOBS.get(jid)
+        if not J: return JSONResponse({"error": "задача потеряна (сервер перезапускался?) — повторите поиск"}, 404)
+        if not J["done"]: return {"pending": jid}
+        JOBS.pop(jid, None)
+        if J["err"]: return JSONResponse({"error": J["err"]}, 500)
+        return J["res"]
+
     @app.get("/api/heavy")
     def api_heavy():
         return heavy_q
@@ -680,13 +719,15 @@ def install(app, DATA, D_WORK):
         boxes = [m["box"] for m in tpl[:8]] or [box]
         loose = bool(b.get("loose"))
         # тяжёлый расчёт — в отдельном потоке: иначе, пока он идёт, сервер не отвечает никому (пропадают миниатюры и т. п.)
-        c = await run_in_threadpool(heavy, lambda: rug_match.find_repeats(a, box, marks_boxes(r) + rejected, boxes=boxes, loose=loose, limit=30 if loose else 60), "поиск повторов")
-        best = max([x["score"] for x in c] or [0])
-        byb = {tuple(m["box"]): m["id"] for m in tpl}
-        for x in c:
-            x["sure"] = x["above"] and x["score"] >= max(0.62, best * 0.8)     # «точно такой же» / «похоже (другой цвет или близкий узор)»
-            x["ref"] = byb.get(tuple(x.pop("tpl")), "")                         # по какой рамке-образцу найдено (её поворот — отсчёт)
-        return {"cands": c, "templates": len(boxes)}
+        def work():
+            c = rug_match.find_repeats(a, box, marks_boxes(r) + rejected, boxes=boxes, loose=loose, limit=30 if loose else 60)
+            best = max([x["score"] for x in c] or [0])
+            byb = {tuple(m["box"]): m["id"] for m in tpl}
+            for x in c:
+                x["sure"] = x["above"] and x["score"] >= max(0.62, best * 0.8)     # «точно такой же» / «похоже (другой цвет или близкий узор)»
+                x["ref"] = byb.get(tuple(x.pop("tpl")), "")                         # по какой рамке-образцу найдено (её поворот — отсчёт)
+            return {"cands": c, "templates": len(boxes)}
+        return await job_wait(work, "поиск повторов")
 
     def scale_of(r, W, H):
         """Сколько пикселей фото на один узел: по любой рамке со схемой (лучше подтверждённой)."""
@@ -720,7 +761,7 @@ def install(app, DATA, D_WORK):
             guess = [max(0, min(1 - gw, at[0] - gw / 2)), max(0, min(1 - gh, at[1] - gh / 2)), gw, gh]
             region = [max(0, at[0] - gw * 1.3), max(0, at[1] - gh * 1.3), 0, 0]
             region[2] = min(1 - region[0], gw * 2.6); region[3] = min(1 - region[1], gh * 2.6)
-        c = await run_in_threadpool(heavy, lambda: rug_match.find_scheme(a, q, kx, ky, exclude=[] if at else marks_boxes(r), limit=1 if at else 3, region=region), "поиск по схеме")
+        c = await run_in_threadpool(heavy, lambda: rug_match.find_scheme(a, q, kx, ky, exclude=[] if at else marks_boxes(r), limit=1 if at else 3, region=region), "поиск по схеме", True)
         return {"cands": c, "scale": [round(kx, 2), round(ky, 2)], "ref": ref["id"] if ref else "", "guess": guess, "scale_known": bool(sc)}
 
     _sizes = {}

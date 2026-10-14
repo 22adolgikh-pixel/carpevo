@@ -509,6 +509,11 @@ def t17_feedback_v115(pg, ctx):
     assert not [c for c in j['cands'] if c['box'][0] > 0.5 and c['score'] > 0.6], 'полосы справа приняты за тот же элемент'
     jl = post(u + 'api/rugs/border_rep/repeats', {'box': box, 'mark': 'mB', 'loose': True})
     assert len(jl['cands']) >= len(j['cands']), '«вижу ещё» даёт меньше мест, чем обычный поиск'
+    # 1б) v11.11: долгий расчёт отдаётся номером задачи и забирается опросом; фоновая очередь не мешает интерактивной
+    import time as _t
+    j = post(u + 'api/rugs/border_rep/repeats', {'box': box, 'mark': 'mB'})
+    assert 'cands' in j, 'повторы не вернулись'
+    h = get(u + 'api/heavy'); assert 'ui_wait' in h and 'wait' in h, 'нет полос очереди в /api/heavy'
     # 2) тип ковра по названию + принять; копия Wikimedia скрыта, её рамка перенесена в оригинал
     for _ in range(20):
         L = {r['id']: r for r in get(u + 'api/rugs')['rugs']}
