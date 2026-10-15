@@ -7,6 +7,7 @@
 # 2) find_scheme: один элемент со схемой уже найден → знаем, сколько пикселей фото приходится на один узел.
 #    Тогда схемы других элементов (из студии, 1 px = 1 узел) можно перевести в масштаб фото и искать их контуры.
 #    Это грубее: схема — чистый рисунок, фото — шерсть, тени, износ. Даёт кандидатов для проверки человеком.
+import math
 import cv2, numpy as np
 
 TF = [(a, f) for f in (0, 1) for a in (0, 90, 180, 270)]   # угол, зеркало (по горизонтали — до поворота)
@@ -132,11 +133,56 @@ def find_repeats(img, box, exclude=(), limit=60, min_score=None, boxes=None, loo
     out = []
     for c in free:
         if c["score"] < thr: break
+        _pick_orient(c, T, (G, E, C, S), s, W, H)
         x, y, w, h = c["px"]
         out.append({"box": [round(x / W0, 5), round(y / H0, 5), round(w / W0, 5), round(h / H0, 5)], "score": round(c["score"], 3),
                     "angle": c["angle"], "flip": c["flip"], "above": c["score"] >= sure_thr, "tpl": T[c["tpl"]]})
         if len(out) >= limit: break
     return out
+
+
+def _pick_orient(c, T, maps, s, W, H):
+    """v11.15: у почти симметричных элементов (верблюд, гёль) 8 положений шаблона дают почти одинаковый балл, и среди них
+    выигрывало случайное — повторы «смотрели» в разные стороны. Перепроверяем 8 положений на найденном месте;
+    если «как у образца» (0°, без зеркала) не хуже лучшего более чем на 0.04, берём его (затем 180°, мягче — 0.015)."""
+    G, E, C, S = maps
+    try:
+        b = T[c["tpl"]]; tw0, th0 = None, None
+        x, y, w, h = c["px"]; ww, hh = max(6, int(round(w * s))), max(6, int(round(h * s)))
+        x0, y0 = int(round(x * s)), int(round(y * s))
+        m = 3; X0, Y0 = max(0, x0 - m), max(0, y0 - m); X1, Y1 = min(W, x0 + ww + m), min(H, y0 + hh + m)
+        if X1 - X0 < ww or Y1 - Y0 < hh: return
+        bx, by = int(round(b[0] * W)), int(round(b[1] * H))
+        # шаблон в тех же координатах, что в find_repeats; размер — по исходному положению (0°)
+        odd = c["angle"] in (90, 270)
+        tw, th = (hh, ww) if odd else (ww, hh)
+        bx, by = max(0, min(W - tw, bx)), max(0, min(H - th, by))
+        tg, te, tc, ts = (M[by:by + th, bx:bx + tw] for M in (G, E, C, S))
+        if tg.shape[0] < 5 or tg.shape[1] < 5: return
+        sq = abs(math.log(max(1e-3, tw / th))) < 0.15
+        sc = {}
+        for ang, fl in TF:
+            if (ang in (90, 270)) != odd and not sq: continue
+            g = _tf(tg, ang, fl); e = _tf(te, ang, fl); cc, ss = _tf_ori(tc, ts, ang, fl)
+            if g.shape[:2] != (hh, ww):
+                g, e, cc, ss = (cv2.resize(mm, (ww, hh)) for mm in (g, e, cc, ss))
+            Cw, Sw, Gw, Ew = (M[Y0:Y1, X0:X1] for M in (C, S, G, E))
+            EN = Cw * Cw + Sw * Sw
+            num = cv2.matchTemplate(Cw, cc, cv2.TM_CCORR) + cv2.matchTemplate(Sw, ss, cv2.TM_CCORR)
+            en = cv2.boxFilter(EN, -1, (ww, hh), normalize=False, anchor=(0, 0))[:Y1 - Y0 - hh + 1, :X1 - X0 - ww + 1]
+            ro = num / np.sqrt(np.maximum(en, 1e-6) * (float((cc * cc + ss * ss).sum()) + 1e-6))
+            r = 0.2 * cv2.matchTemplate(Gw, g, cv2.TM_CCOEFF_NORMED) + 0.35 * cv2.matchTemplate(Ew, e, cv2.TM_CCOEFF_NORMED) + 0.45 * ro
+            sc[(ang, fl)] = float(r.max())
+        if not sc: return
+        best = max(sc, key=sc.get); top = sc[best]
+        pick = best
+        if (0, 0) in sc and sc[(0, 0)] >= top - 0.04: pick = (0, 0)
+        elif (180, 0) in sc and sc[(180, 0)] >= top - 0.015: pick = (180, 0)
+        if pick != (c["angle"], c["flip"]):
+            c["angle"], c["flip"] = pick
+            if (pick[0] in (90, 270)) != odd: c["px"] = (x, y, h, w) if sq else c["px"]
+    except Exception:
+        return
 
 
 def _scheme_edges(png):

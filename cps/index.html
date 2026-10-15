@@ -282,7 +282,7 @@ aside{min-height:0}
 .hint:not(.open){display:none!important}.ib-i{display:inline-grid;place-items:center;width:17px;height:17px;padding:0;margin:0 0 0 4px;border-radius:50%;border:1px solid var(--ln2);background:none;color:var(--mut);font:italic 600 11px/1 Georgia,serif;vertical-align:middle;cursor:pointer;flex:none}.ib-i:hover,.ib-i.on{color:var(--tx);border-color:var(--tx)}
 .hint.open{display:block;margin:6px 0;padding:8px 10px;background:var(--pan2);border:1px solid var(--ln);border-radius:7px;color:var(--tx);font-size:12px;font-style:normal;text-transform:none;letter-spacing:0;font-weight:400;line-height:1.45}
 
-/* v11.15: правая панель — фото и схема рядом, зона списком, «Верно / Неверно → следующая» внизу; вопрос о двойнике — поверх фото */
+/* v11.16: правая панель — фото и схема рядом, зона списком, «Верно / Неверно → следующая» внизу; вопрос о двойнике — поверх фото */
 .rghead2 .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rghead2 figure{margin:0;display:flex;flex-direction:column;gap:3px}.rghead2 figure img,.rghead2 .nosch{width:100%;aspect-ratio:1;object-fit:contain;background:var(--canvas);border-radius:6px}
 .rghead2 .nosch{display:grid;place-items:center;text-align:center;color:var(--mut);font-size:12px;border:1px dashed var(--ln2)}.rghead2 figure img[src^="/out/"]{background:#fff;image-rendering:pixelated}
 .rghead2 figcaption{font-size:11px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rghead2 .nm{font-size:16px;font-weight:600;margin:10px 0 4px;word-break:break-word}.rghead2 .meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.rghead2 .rgrow{margin-top:8px}
@@ -421,7 +421,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.15</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.16</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -464,7 +464,7 @@ async function api(path,body,method){
   if(!r.ok){const t=await r.text();let m=null;try{m=JSON.parse(t).error}catch(e){}throw new Error(m||(path+' → '+r.status+' '+t.slice(0,200)));}
   return r.json();
 }
-/* v11.14: долгие расчёты (поиск повторов) приходят как {pending:id} — опрашиваем, пока не будет готово */
+/* v11.16: долгие расчёты (поиск повторов) приходят как {pending:id} — опрашиваем, пока не будет готово */
 async function apiJob(path,body){let j=await api(path,body);const t0=Date.now();
   while(j&&j.pending){if(Date.now()-t0>600000)throw new Error('сервер считает слишком долго — попробуйте позже');await new Promise(r=>setTimeout(r,1500));j=await api('/api/jobs/'+j.pending,undefined,'GET');}
   return j;}
@@ -2383,7 +2383,7 @@ function rugStrip(){
   E.innerHTML=h;
   E.querySelectorAll('[data-open]').forEach(e=>e.onclick=()=>{if(e.classList.contains('cur'))return;rugOpen(e.dataset.open);});
 }
-// v11.15: «это тот же ковёр?» — один вопрос поверх фото при открытии ковра (не в ленте). «Позже» — до следующего запуска студии.
+// v11.16: «это тот же ковёр?» — один вопрос поверх фото при открытии ковра (не в ленте). «Позже» — до следующего запуска студии.
 // Пачкой двойники проверяются в «Ковры → проверить склейки» и через «События».
 function rugTwinAsk(){const V=$('rgView'),r=R.rug;let E=$('rgTwinAsk');if(E)E.remove();if(!V||!r||rro())return;R.twinLater=R.twinLater||new Set();
   if(R.twinLater.has(r.id))return;const byId={};R.list.forEach(x=>byId[x.id]=x);
@@ -2414,7 +2414,7 @@ function rugViewEvents(){
   const V=$('rgView');
   V.onwheel=e=>{e.preventDefault();const b=V.getBoundingClientRect(),mx=e.clientX-b.left,my=e.clientY-b.top,k=Math.exp(-e.deltaY*0.0015),nz=Math.max(0.05,Math.min(8,R.z*k));R.ox=mx-(mx-R.ox)*nz/R.z;R.oy=my-(my-R.oy)*nz/R.z;R.z=nz;rugApply();};
   V.onmousedown=e=>{
-    if(e.target.closest&&e.target.closest('.rgtb'))return;   // v11.14: кнопки панели лежат поверх фото — клик по ним не «клик по пустому месту» (снимал выбор, и «найти повторы» не срабатывало)
+    if(e.target.closest&&e.target.closest('.rgtb'))return;   // v11.16: кнопки панели лежат поверх фото — клик по ним не «клик по пустому месту» (снимал выбор, и «найти повторы» не срабатывало)
     const p=rugPt(e),hand=R.tool==='hand'||R.space||e.button===1||e.button===2;
     if(hand){R.drag={t:'pan',sx:e.clientX,sy:e.clientY,ox:R.ox,oy:R.oy};e.preventDefault();return;}
     if(e.button!==0)return;
@@ -2428,7 +2428,7 @@ function rugViewEvents(){
     if(tg.dataset&&tg.dataset.m&&!(R.preset||R.repeatOf)){const m=R.rug.marks.find(x=>x.id===tg.dataset.m);if(m){const was=R.sel&&R.sel.id===m.id;rugSelect(m);if(was&&!rro())R.drag={t:'move',m,b0:[...m.box],p0:p};e.preventDefault();return;}}
     if(R.tool==='zones'){const L=R.rug.layout;if(!L||rro())return;const hit=layHit(L,p);if(hit){R.drag={t:'lay',hit,L};R.layBound=hit.i;rugDraw();e.preventDefault();}return;}
     if(rro()){rugSelect(null);return;}
-    R.drag={t:'new',p0:p,p1:p};e.preventDefault();
+    R.drag={t:e.shiftKey?'sweep':'new',p0:p,p1:p};e.preventDefault();
   };
   V.oncontextmenu=e=>e.preventDefault();
   V.ondragover=e=>{if(R.dragScheme&&!rro()){e.preventDefault();V.classList.add('drop');}};V.ondragleave=()=>V.classList.remove('drop');
@@ -2439,7 +2439,7 @@ function rugMove(e){
   const d=R.drag;if(!d||!R.on)return;
   if(d.t==='pan'){R.ox=d.ox+e.clientX-d.sx;R.oy=d.oy+e.clientY-d.sy;rugApply();return;}
   const p=rugPt(e),cl=v=>Math.max(0,Math.min(1,v));
-  if(d.t==='new'){d.p1={x:cl(p.x),y:cl(p.y)};rugDraw();return;}
+  if(d.t==='new'||d.t==='sweep'){d.p1={x:cl(p.x),y:cl(p.y)};rugDraw();return;}
   if(d.t==='lay'){layDrag(d,cl(p.x),cl(p.y));d.moved=true;rugDraw();return;}
   const dx=p.x-d.p0.x,dy=p.y-d.p0.y,b=d.b0;
   if(d.t==='smove'){R.split[d.i]=[cl(Math.min(b[0]+dx,1-b[2])),cl(Math.min(b[1]+dy,1-b[3])),b[2],b[3]];rugDraw();return;}
@@ -2451,8 +2451,12 @@ function rugMove(e){
 }
 function rugUp(){
   const d=R.drag;R.drag=null;if(!d||!R.on)return;
+  if(d.t==='sweep'){const x0=Math.min(d.p0.x,d.p1.x),x1=Math.max(d.p0.x,d.p1.x),y0=Math.min(d.p0.y,d.p1.y),y1=Math.max(d.p0.y,d.p1.y);
+    const del=new Set(R.rug.marks.filter(m=>m.machine&&rugUnchecked(m)&&m.box[0]+m.box[2]/2>=x0&&m.box[0]+m.box[2]/2<=x1&&m.box[1]+m.box[3]/2>=y0&&m.box[1]+m.box[3]/2<=y1).map(m=>m.id));
+    if(del.size){R.rug.marks=R.rug.marks.filter(m=>!del.has(m.id));if(R.sel&&del.has(R.sel.id))R.sel=null;rugSaveSoon();stat('убрано машинных рамок: '+del.size+' (Shift+протяжка по области)','ok');}
+    rugDraw();rugSide();return;}
   if(d.t==='new'){const x=Math.min(d.p0.x,d.p1.x),y=Math.min(d.p0.y,d.p1.y),w=Math.abs(d.p1.x-d.p0.x),h=Math.abs(d.p1.y-d.p0.y);
-    if(w*R.iw<6||h*R.ih<6){rugSelect(null);rugDraw();return;}
+    if(w*R.iw<6||h*R.ih<6){rugDraw();return;}   // v11.16: клик мимо рамки выбор не снимает (снимает Esc) — иначе в поле постоянно терялся фокус
     const src=R.repeatOf,id='m'+Date.now().toString(36);
     const pz=src?src.zone:(layZoneAt(R.rug.layout,x+w/2,y+h/2)||R.lastZone||'field'),pr=R.preset;
     if(R.tool==='split'){(R.split=R.split||[]).push([x,y,w,h]);(R.splitIds=R.splitIds||[]).push(null);(R.splitFigs=R.splitFigs||[]).push(null);R.spSel=R.split.length-1;rugDraw();rugSide();return;}
@@ -2508,7 +2512,7 @@ function rugDraw(){
     if(R.ping&&R.ping.id===sel.id&&Date.now()-R.ping.t<1200)h+=`<rect class="rgping" x="${x-o}" y="${y-o}" width="${w+2*o}" height="${hh+2*o}" fill="none" stroke="#fff" stroke-width="${3/R.z}" style="pointer-events:none"/>`;}
   if(sel&&!rro()&&R.tool!=='split'){const[x,y,w,hh]=sel.box.map((v,j)=>v*(j%2?R.ih:R.iw)),s=7/R.z;
     [['tl',x,y,'nwse'],['tr',x+w,y,'nesw'],['bl',x,y+hh,'nesw'],['br',x+w,y+hh,'nwse'],['t',x+w/2,y,'ns'],['b',x+w/2,y+hh,'ns'],['l',x,y+hh/2,'ew'],['r',x+w,y+hh/2,'ew']].forEach(([k,a,b,cu])=>h+=`<rect data-h="${k}" x="${a-s/2}" y="${b-s/2}" width="${s}" height="${s}" fill="#fff" stroke="#000" stroke-width="${0.8/R.z}" style="cursor:${cu}-resize"/>`);}
-  const d=R.drag;if(d&&d.t==='new'){const x=Math.min(d.p0.x,d.p1.x)*R.iw,y=Math.min(d.p0.y,d.p1.y)*R.ih;h+=`<rect x="${x}" y="${y}" width="${Math.abs(d.p1.x-d.p0.x)*R.iw}" height="${Math.abs(d.p1.y-d.p0.y)*R.ih}" fill="#fff2" stroke="#fff" stroke-width="${sw}"/>`;}
+  const d=R.drag;if(d&&(d.t==='new'||d.t==='sweep')){const x=Math.min(d.p0.x,d.p1.x)*R.iw,y=Math.min(d.p0.y,d.p1.y)*R.ih;h+=`<rect x="${x}" y="${y}" width="${Math.abs(d.p1.x-d.p0.x)*R.iw}" height="${Math.abs(d.p1.y-d.p0.y)*R.ih}" fill="${d.t==='sweep'?'#f442':'#fff2'}" stroke="${d.t==='sweep'?'#f55':'#fff'}" stroke-width="${sw}"${d.t==='sweep'?` stroke-dasharray="${6/R.z}"`:''}/>`;}
   if(R.hl&&R.hl.rid===(R.rug&&R.rug.id)){const[x,y,w,hh]=R.hl.box.map((v,j)=>v*(j%2?R.ih:R.iw));h+=`<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="none" stroke="#4dd0e1" stroke-width="${3/R.z}" stroke-dasharray="${8/R.z} ${5/R.z}" style="pointer-events:none"/><text x="${x}" y="${y-6/R.z}" font-size="${14/R.z}" fill="#4dd0e1" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">найдено поиском узора</text>`;}
   svg.innerHTML=h;
 }
@@ -2734,7 +2738,7 @@ function rugSideFill(E,side,r){
         <div class="rgsec rgline"><label for="rgZone">Зона</label><select id="rgZone" ${dis}>${RZK.map((k2,i)=>`<option value="${k2}" ${m.zone===k2?'selected':''}>${i+1} · ${RZ[k2][0]}</option>`).join('')}</select></div>
         <div class="rgsec"><h5>Отличие от образца <span class="hint">«Другие краски» — тот же узор в другой расцветке, название то же. «Другие детали» — тот же узор, но отличается деталями (крючки, заполнение, пропорции): вариант, опишите в комментарии.</span></h5><div class="rgzones">${[['','такой же'],['color','другие краски'],['detail','другие детали']].map(([k2,v])=>`<button class="sm ${(m.variant||'')===k2?'on':''}" data-var="${k2}" ${dis}>${v}</button>`).join('')}</div></div>
         <div class="rgsec"><h5>Повторы на фото <small class="mut">${g.length} · ✓ ${g.filter(x=>x.status==='confirmed').length}</small></h5>
-          ${pm.length?`<p class="mut" style="margin:2px 0 6px">Машина предложила ${pm.length} (пунктир «?»)<span class="hint">По одному: Tab — следующий, C — верно, X — неверно. Найти ещё — кнопки 🔍 и 👁 над фото.</span></p>${rro()?'':`<div class="rgrow"><button class="sm" id="rgMachOk">✓ все</button><button class="sm" id="rgMachSure">✓ уверенные (${pm.filter(x=>x.certainty!=='maybe').length})</button><button class="sm" id="rgMachMaybe">✕ неуверенные (${pm.filter(x=>x.certainty==='maybe').length})</button><button class="sm" id="rgMachNo" style="color:var(--bad)">✕ все</button></div>`}`:`<span class="hint">Найти повторы — кнопка 🔍 над фото; «вижу ещё» — 👁 (E); обвести вручную — ＋ (R).</span>`}
+          ${pm.length?`<p class="mut" style="margin:2px 0 6px">Машина предложила ${pm.length} (пунктир «?»)<span class="hint">Tab — следующая рамка этого элемента (сначала непроверенные), C — верно, X — неверно; Shift+протяжка по области — убрать машинные рамки внутри. Найти ещё — кнопки 🔍 и 👁 над фото.</span></p>${rro()?'':`<div class="rgrow"><button class="sm" id="rgMachOk">✓ все</button><button class="sm" id="rgMachSure">✓ уверенные (${pm.filter(x=>x.certainty!=='maybe').length})</button><button class="sm" id="rgMachMaybe">✕ неуверенные (${pm.filter(x=>x.certainty==='maybe').length})</button><button class="sm" id="rgMachNo" style="color:var(--bad)">✕ все</button></div>`}`:`<span class="hint">Найти повторы — кнопка 🔍 над фото; «вижу ещё» — 👁 (E); обвести вручную — ＋ (R).</span>`}
           <label class="mut rgrow"><input type="checkbox" id="rgAllG" ${R.allGroup?'checked':''}> правки — сразу для всех повторов</label></div>
         <details class="rgmore"><summary>Ещё</summary>
           <label>Уверенность<select id="rgCert" ${dis}><option value="sure" ${m.certainty!=='maybe'?'selected':''}>уверенно</option><option value="maybe" ${m.certainty==='maybe'?'selected':''}>предположительно</option></select></label>
@@ -2792,7 +2796,7 @@ function rugSideFill(E,side,r){
     $('rgMachSure')&&($('rgMachSure').onclick=()=>{pm().filter(x=>x.certainty!=='maybe').forEach(x=>x.status='confirmed');rugSaveSoon();rugDraw();rugSide();});
     $('rgMachMaybe')&&($('rgMachMaybe').onclick=()=>{const del=new Set(pm().filter(x=>x.certainty==='maybe').map(x=>x.id));R.rug.marks=R.rug.marks.filter(x=>!del.has(x.id));if(R.sel&&del.has(R.sel.id))R.sel=null;rugSaveSoon();rugDraw();rugSide();});
     $('rgMachNo')&&($('rgMachNo').onclick=()=>{const del=new Set(pm().map(x=>x.id));R.rug.marks=R.rug.marks.filter(x=>!del.has(x.id));if(R.sel&&del.has(R.sel.id))R.sel=null;rugSaveSoon();rugDraw();rugSide();});
-    $('rgOk')&&($('rgOk').onclick=()=>{rugCheck('confirmed');rugNextOpen();});$('rgNo')&&($('rgNo').onclick=()=>{rugCheck('rejected');rugNextOpen();});
+    $('rgOk')&&($('rgOk').onclick=()=>{rugCheck('confirmed',true);});$('rgNo')&&($('rgNo').onclick=()=>{rugCheck('rejected',true);});
     $('rgZone')&&($('rgZone').onchange=e=>rugSetMark(m,{zone:e.target.value}));$('rgUn')&&($('rgUn').onclick=()=>rugCheck('proposed'));
     if(m.motif)rugSchemes(m);
   }else if(side==='mark'&&R.sel&&R.sel.motif)rugSchemes(R.sel);
@@ -2891,11 +2895,14 @@ async function rugFindRepeats(m0,auto,loose){
     // v11.6: после новой рамки сами добавляются только «точно такие же»; похожие — по кнопке «найти повторы» / «вижу ещё»
     const all=j.cands.length;if(auto)j.cands=j.cands.filter(c=>c.sure);const more=all-j.cands.length;
     const g=m.group||m.id;if(!m.group&&j.cands.length)m.group=m.id;
+    // v11.16: повтор ищем в той же зоне ковра, что и образец (поле ↔ бордюр — разные узоры); в другой зоне — только если зон нет
+    const zOf=c=>layZoneAt(R.rug.layout,c.box[0]+c.box[2]/2,c.box[1]+c.box[3]/2),zr=c=>((c.ref&&R.rug.marks.find(x=>x.id===c.ref))||m).zone||'';
+    let zskip=0;if(R.rug.layout){const k0=j.cands.length;j.cands=j.cands.filter(c=>{const z=zOf(c),r0=zr(c);return !z||!r0||z===r0;});zskip=k0-j.cands.length;}
     j.cands.forEach((c,i)=>{const rm=(c.ref&&R.rug.marks.find(x=>x.id===c.ref))||m,[a,f]=rugCompose(rm.angle||0,rm.flip||0,c.angle,c.flip);
       R.rug.marks.push({id:'m'+Date.now().toString(36)+i,box:c.box,zone:layZoneAt(R.rug.layout,c.box[0]+c.box[2]/2,c.box[1]+c.box[3]/2)||m.zone,motif:m.motif,motif_text:m.motif_text,scheme:m.scheme,_motif:m._motif,group:g,
         certainty:c.sure?'sure':'maybe',status:'proposed',note:'',machine:1,score:c.score,angle:a,flip:f,by:'машина'});});
     const ns=j.cands.filter(c=>c.sure).length;
-    stat(j.cands.length?`найдено ${loose?'ещё мест':'повторов'}: ${j.cands.length}${auto&&more?` · ещё ${more} похожих — 🔍 над фото`:''}`:(auto?(more?`новая рамка сохранена · точных повторов нет, похожих мест ${more} — «🔍 найти повторы», если нужно`:'новая рамка сохранена · повторов на фото машина не нашла'):(loose?'больше похожих мест машина не видит — обведите пропущенный повтор (R), и поиск пойдёт и по нему':'повторов не найдено')),'ok');
+    stat(j.cands.length?`найдено ${loose?'ещё мест':'повторов'}: ${j.cands.length}${auto&&more?` · ещё ${more} похожих — 🔍 над фото`:''}${zskip?` · ${zskip} в другой зоне (бордюр/поле) пропущено`:''}`:(auto?(more?`новая рамка сохранена · точных повторов нет, похожих мест ${more} — «🔍 найти повторы», если нужно`:'новая рамка сохранена · повторов на фото машина не нашла'):(loose?'больше похожих мест машина не видит — обведите пропущенный повтор (R), и поиск пойдёт и по нему':'повторов не найдено')),'ok');
     if(j.cands.length){if(R.sel&&R.sel.id===mid)R.sel=m;rugSaveSoon();}rugDraw();rugSide();
   }catch(e){fail(e);}}
 async function rugDropScheme(ds,p){
@@ -2969,10 +2976,17 @@ async function rugDistortion(m){const E=$('rgDist');if(!E)return;R.knots=R.knots
   if(!$('rgDist')||R.sel!==m)return;let[kw,kh]=R.knots[m.scheme];if((m.angle||0)%180)[kw,kh]=[kh,kw];
   const pw=m.box[2]*R.iw,ph=m.box[3]*R.ih,ux=pw/kw,uy=ph/kh,r=uy/ux,pc=Math.round(Math.abs(r-1)*100);
   $('rgDist').innerHTML=`схема ${kw}×${kh} узлов · узел на фото ≈ ${ux.toFixed(1)}×${uy.toFixed(1)} px<br>${pc<4?'<span style="color:var(--ok)">пропорции как на схеме</span>':`<span style="color:var(--warn)">${r>1?'вытянут по высоте':'сплющен по высоте'} на ${pc}%</span> <small class="mut">(узел ковра не квадратный или элемент искажён)</small>`}`;}
-function rugCheck(st){const m=R.sel;if(!m)return;m.status=st;rugSaveSoon();rugDraw();rugSide();}
-// v11.15: после «Верно / Неверно» кнопкой — к следующей непроверенной рамке (как «Готово → след.» у узоров)
+function rugCheck(st,more){const m=R.sel;if(!m)return;m.status=st;rugSaveSoon();
+  const g=rugGroup(m),k=g.indexOf(m),nx=g.slice(k+1).concat(g.slice(0,k)).find(rugUnchecked);   // v11.16: следующая непроверенная в этой же группе
+  if(nx&&st!=='proposed'){R.ping={id:nx.id,t:Date.now()};rugSelect(nx);rugFocus(nx,true);return;}
+  if(more){rugNextOpen();return;}   // группа проверена — к любой другой непроверенной рамке ковра
+  rugDraw();rugSide();}
+const rugUnchecked=x=>!x.status||x.status==='proposed';
+function rugNext(d){if(!R.rug||!R.rug.marks.length)return;   // v11.16: Tab ходит внутри группы выбранного элемента, сначала непроверенные, потом проверенные; Shift+Tab — назад
+  const base=R.sel?rugGroup(R.sel):R.rug.marks,L=base.filter(rugUnchecked).concat(base.filter(x=>!rugUnchecked(x)));if(!L.length)return;
+  const i=R.sel?L.indexOf(R.sel):-1,n=i<0?(d>0?0:L.length-1):(i+d+L.length)%L.length,m=L[n];R.ping={id:m.id,t:Date.now()};rugSelect(m);rugFocus(m,true);}
+// v11.16: после «Верно / Неверно» кнопкой — к следующей непроверенной рамке (как «Готово → след.» у узоров)
 function rugNextOpen(){const L=R.rug?R.rug.marks:[];const i=L.indexOf(R.sel);for(let k=1;k<=L.length;k++){const m=L[(i+k)%L.length];if(m.status==='proposed'){R.ping={id:m.id,t:Date.now()};rugSelect(m);rugFocus(m,true);return;}}stat('все рамки на этом ковре проверены','ok');}
-function rugNext(d){if(!R.rug||!R.rug.marks.length)return;const i=R.sel?R.rug.marks.indexOf(R.sel):-1,n=(i+d+R.rug.marks.length)%R.rug.marks.length,m=R.rug.marks[n];R.ping={id:m.id,t:Date.now()};rugSelect(m);rugFocus(m,true);}
 window.addEventListener('keydown',e=>{
   if(!R.on)return;
   const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','button'].includes(ae.type)));

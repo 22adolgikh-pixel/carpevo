@@ -204,8 +204,10 @@ def t04_rug_grid_and_editor(pg, ctx):
     pg.keyboard.press('z'); pg.wait_for_timeout(200); assert pg.evaluate("R.tool") == 'box', 'повторное Z не выходит из режима зон'
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200); assert pg.evaluate("R.sel") is None, 'Esc не снимает выделение'
     pg.keyboard.press('Tab'); pg.wait_for_timeout(200); assert pg.evaluate("!!R.sel"), 'Tab не выбирает элемент'
-    pg.keyboard.press('c'); pg.wait_for_timeout(200); assert pg.evaluate("R.sel.status") == 'confirmed', 'C не подтверждает элемент'
-    pg.keyboard.press('x'); pg.wait_for_timeout(200); assert pg.evaluate("R.sel.status") == 'rejected', 'X не отклоняет элемент'
+    sid = pg.evaluate("R.sel.id"); pg.keyboard.press('c'); pg.wait_for_timeout(200)
+    assert pg.evaluate(f"R.rug.marks.find(m=>m.id==='{sid}').status") == 'confirmed', 'C не подтверждает элемент'
+    sid = pg.evaluate("R.sel.id"); pg.keyboard.press('x'); pg.wait_for_timeout(200)
+    assert pg.evaluate(f"R.rug.marks.find(m=>m.id==='{sid}').status") == 'rejected', 'X не отклоняет элемент'
     pg.keyboard.press('2'); pg.wait_for_timeout(200); assert pg.evaluate("R.sel.zone") == 'medallion', 'цифра 2 не ставит зону «медальон»'
     k0 = pg.evaluate("R.rug.marks.length"); pg.keyboard.press('Delete'); pg.wait_for_timeout(300)
     assert pg.evaluate("R.rug.marks.length") == k0 - 1, 'Delete не удаляет рамку'
@@ -783,6 +785,37 @@ def t22_rug_mark_panel_v1115(pg, ctx):
 
 
 # ---------------- запуск ----------------
+@test
+def t23_tab_group_sweep(pg, ctx):
+    """v11.16: Tab — только внутри группы выбранного элемента и сначала непроверенные; клик мимо рамки выбор не снимает; Shift+протяжка убирает машинные рамки"""
+    pg.goto(ctx['url']); pg.wait_for_timeout(2000)
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1200); pg.evaluate("rugOpen('border_rep')"); pg.wait_for_timeout(1500)
+    pg.evaluate("""(()=>{const mk=(id,x,y,g,st,mach)=>({id,box:[x,y,0.08,0.05],zone:'field',status:st,motif:'',motif_text:'',scheme:'',group:g,angle:0,flip:0,machine:mach,certainty:'sure'});
+      R.rug.marks=[mk('a1',.1,.1,'a1','confirmed',0),mk('a2',.3,.1,'a1','proposed',1),mk('a3',.5,.1,'a1','proposed',1),mk('b1',.1,.5,'b1','proposed',0),mk('b2',.3,.5,'b1','proposed',1)];
+      rugSelect(R.rug.marks[0]);rugDraw();rugSide();})()""")
+    seen = []
+    for _ in range(4):
+        pg.keyboard.press('Tab'); pg.wait_for_timeout(150); seen.append(pg.evaluate("R.sel.id"))
+    assert seen == ['a2', 'a3', 'a1', 'a2'], f'Tab ушёл за пределы группы или начал не с непроверенных: {seen}'
+    pg.keyboard.press('Shift+Tab'); pg.wait_for_timeout(150)
+    assert pg.evaluate("R.sel.id") == 'a1'
+    # ✓ — переход к следующей непроверенной той же группы
+    pg.evaluate("rugSelect(R.rug.marks.find(m=>m.id==='a2'))"); pg.keyboard.press('c'); pg.wait_for_timeout(200)
+    assert pg.evaluate("R.sel.id") == 'a3', 'после «верно» не выбрана следующая непроверенная'
+    # клик мимо рамки выбор не снимает
+    b = pg.query_selector('#rgView').bounding_box()
+    pg.mouse.click(b['x'] + b['width'] * 0.9, b['y'] + b['height'] * 0.9); pg.wait_for_timeout(200)
+    assert pg.evaluate("!!R.sel"), 'клик по пустому месту снял выбор'
+    # Shift+протяжка вокруг b2 убирает машинную рамку b2 и не трогает ручную b1
+    pg.evaluate("R.z=1;R.ox=0;R.oy=0;rugApply()"); pg.wait_for_timeout(200)
+    p0 = pg.evaluate("(()=>{const r=document.getElementById('rgView').getBoundingClientRect(),i=document.getElementById('rgSvg').getBoundingClientRect();return [i.left,i.top,i.width,i.height]})()")
+    x0, y0, w, h = p0
+    pg.keyboard.down('Shift'); pg.mouse.move(x0 + w * .05, y0 + h * .40); pg.mouse.down(); pg.mouse.move(x0 + w * .45, y0 + h * .65, steps=4); pg.mouse.up(); pg.keyboard.up('Shift'); pg.wait_for_timeout(300)
+    ids = pg.evaluate("R.rug.marks.map(m=>m.id)")
+    assert 'b2' not in ids and 'b1' in ids, f'Shift+протяжка: {ids}'
+    errors_ok(ctx, "t23")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

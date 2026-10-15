@@ -56,6 +56,8 @@ def desc_photo(bgr):
 
 def desc_scheme(rgba, ang=0, fl=0):
     """схема студии (1 px = 1 узел, фон прозрачный) → признак формы в положении (угол, зеркало)"""
+    if max(rgba.shape[:2]) > 480:
+        q = 480 / max(rgba.shape[:2]); rgba = cv2.resize(rgba, (max(3, int(rgba.shape[1] * q)), max(3, int(rgba.shape[0] * q))), interpolation=cv2.INTER_AREA)
     t = _tf(rgba, ang, fl)
     h, w = t.shape[:2]; k = max(1, int(math.ceil(192 / max(h, w))))
     big = cv2.resize(t, (w * k, h * k), interpolation=cv2.INTER_NEAREST).astype(np.float32)
@@ -70,6 +72,9 @@ def desc_scheme(rgba, ang=0, fl=0):
 def _load_rgba(p):
     a = cv2.imread(p, cv2.IMREAD_UNCHANGED)
     if a is None: return None
+    m = max(a.shape[:2])
+    if m > 480:                                                # v11.15: «схема» бывает огромной картинкой — float32 × 8 положений съедали гигабайты
+        k = 480 / m; a = cv2.resize(a, (max(3, int(a.shape[1] * k)), max(3, int(a.shape[0] * k))), interpolation=cv2.INTER_AREA)
     if a.ndim == 2: a = cv2.cvtColor(a, cv2.COLOR_GRAY2BGRA)
     if a.shape[2] == 3:                                        # без прозрачности: фон — самый частый цвет
         bg = np.median(np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]]), 0)
