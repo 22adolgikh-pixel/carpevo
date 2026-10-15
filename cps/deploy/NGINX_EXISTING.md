@@ -63,8 +63,13 @@ server {
 
   client_max_body_size 100m;   # сканы/загрузки могут быть крупными
 
+  # v11.12: адрес контейнера nginx запоминал при старте, после пересборки CPS он менялся → 502 «No route to host».
+  # resolver Docker + переменная в proxy_pass заставляют nginx узнавать адрес заново (valid=10s).
+  resolver 127.0.0.11 valid=10s ipv6=off;
+  set $cps_up http://cps:8000;
   location / {
-    proxy_pass http://cps:8000;
+    proxy_pass $cps_up;
+    proxy_read_timeout 300s;
     proxy_set_header Host $host;
     proxy_set_header X-Forwarded-Host $host;
     proxy_set_header X-Forwarded-Proto $scheme;
@@ -87,3 +92,9 @@ cd cps/deploy && docker compose -f docker-compose.existing-nginx.yml up -d --bui
 
 ## Продление сертификата
 Скорее всего у существующего контейнера `upriver-server-certbot` уже настроено автопродление всех доменов из `conf.d` разом (по крону/циклу внутри контейнера) — отдельно ничего делать не нужно, если новый домен подхватывается автоматически так же, как остальные. Если нет — тот же `docker run ... certbot renew` вручную раз в ~80 дней.
+
+
+## 502 после пересборки CPS
+
+Признак — в `docker logs nginx`: `connect() failed (113: No route to host) ... upstream: "http://172.18.0.N:8000"`.
+Быстро: `docker exec nginx nginx -s reload`. Насовсем — блок с `resolver 127.0.0.11` и `set $cps_up` выше (после правки: `nginx -t && nginx -s reload`).
