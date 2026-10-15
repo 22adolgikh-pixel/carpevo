@@ -399,9 +399,9 @@
    "id": "mmv9u1fvx0",
    "box": [
     0.342,
-    0.5902,
+    0.58044,
     0.11106,
-    0.04977
+    0.05953
    ],
    "zone": "field",
    "motif": "deve",
@@ -411,8 +411,8 @@
    "certainty": "maybe",
    "status": "confirmed",
    "note": "",
-   "angle": 180,
-   "flip": 0,
+   "angle": 0,
+   "flip": 1,
    "machine": 1,
    "score": 0.448,
    "xfer": "",
@@ -420,7 +420,9 @@
    "by": "машина → dolgikh",
    "at": 1792086514,
    "confirmed_by": "dolgikh",
-   "confirmed_at": 1792086762
+   "confirmed_at": 1792088138,
+   "edited_by": "dolgikh",
+   "edited_at": 1792088138
   },
   {
    "id": "mmv9u23ka",
@@ -812,7 +814,7 @@
    "motif": "gol",
    "motif_text": "",
    "scheme": "t118_f01",
-   "group": "",
+   "group": "mmv9uwdfe",
    "certainty": "sure",
    "status": "confirmed",
    "note": "",
@@ -825,11 +827,38 @@
    "by": "dolgikh",
    "at": 1792087957,
    "confirmed_by": "dolgikh",
-   "confirmed_at": 1792087990
+   "confirmed_at": 1792088008
+  },
+  {
+   "id": "mmv9uxglr",
+   "box": [
+    0.44393,
+    0.16403,
+    0.11264,
+    0.12404
+   ],
+   "zone": "field",
+   "motif": "gol",
+   "motif_text": "",
+   "scheme": "t118_f01",
+   "group": "mmv9uwdfe",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1792088008,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791736123,
- "updated": 1792087990,
+ "updated": 1792088138,
  "cat": {
   "title": "Азербайджанский ковёр \"Пирабадил\" датированный 1325 Хиджры (1907 по григорианскому календарю).jpg",
   "museum": "Wikimedia Commons",
