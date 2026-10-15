@@ -59,6 +59,13 @@ def install(app, data, heavy_q=None, events=None):
                 f.seek(max(0, os.path.getsize(mem) - 600)); last = f.read().decode("utf-8", "ignore").strip().splitlines()[-1]
         except Exception: pass
         _cfg["last_crash"] = {"started": prev.get("started"), "last": last}
+        try:                                                  # v11.14: подробности аварии — в файл, который уходит в бэкап (ветка cps-data) и доступен без доступа к серверу
+            tail = open(mem, "rb").read()[-6000:].decode("utf-8", "ignore").strip().splitlines()[-30:] if os.path.exists(mem) else []
+            ft = ""
+            fp = os.path.join(d, "faults.log")
+            if os.path.exists(fp): ft = open(fp, "rb").read()[-3000:].decode("utf-8", "ignore")
+            json.dump({"noticed": time.strftime("%Y-%m-%d %H:%M:%S"), "prev": prev, "mem_tail": tail, "faults_tail": ft}, open(os.path.join(d, "crash.json"), "w"), ensure_ascii=False, indent=1)
+        except Exception: pass
         if events:
             @app.on_event("startup")
             def _note():           # события подключаются позже — пишем, когда сервер уже поднялся
@@ -77,6 +84,14 @@ def install(app, data, heavy_q=None, events=None):
                 tot, av = _sys_mb(); hq = heavy_q or {}
                 line = f'{time.strftime("%Y-%m-%d %H:%M:%S")} rss={_rss_mb()}MB avail={av}/{tot}MB limit={_cg_limit_mb()}MB heavy={hq.get("run") or "-"} wait={hq.get("wait", 0)}\n'
                 with open(mem, "a") as f: f.write(line)
+                r = _rss_mb()                                  # новый рекорд памяти (шаг 750 МБ, от 1,5 ГБ) — снимок для разбора
+                if r >= 1500 and r >= _cfg.get("peak", 0) + 750:
+                    _cfg["peak"] = r
+                    try:
+                        with open(mem, "rb") as f: f.seek(max(0, os.path.getsize(mem) - 3000)); t = f.read().decode("utf-8", "ignore").strip().splitlines()[-15:]
+                        json.dump({"at": time.strftime("%Y-%m-%d %H:%M:%S"), "rss_mb": r, "avail_mb": av, "heavy": hq.get("run") or "", "ui_heavy": hq.get("ui_run") or "", "up_s": int(time.time() - _cfg["t0"]),
+                                   "threads": [t_.name for t_ in threading.enumerate()][:40], "mem_tail": t}, open(os.path.join(d, "peak.json"), "w"), ensure_ascii=False, indent=1)
+                    except Exception: pass
                 if os.path.getsize(mem) > 2_000_000:            # хвост 1 МБ
                     with open(mem, "rb") as f: f.seek(-1_000_000, 2); tail = f.read()
                     with open(mem, "wb") as f: f.write(tail)
