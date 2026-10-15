@@ -409,7 +409,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.12</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.13</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -452,7 +452,7 @@ async function api(path,body,method){
   if(!r.ok){const t=await r.text();let m=null;try{m=JSON.parse(t).error}catch(e){}throw new Error(m||(path+' → '+r.status+' '+t.slice(0,200)));}
   return r.json();
 }
-/* v11.12: долгие расчёты (поиск повторов) приходят как {pending:id} — опрашиваем, пока не будет готово */
+/* v11.13: долгие расчёты (поиск повторов) приходят как {pending:id} — опрашиваем, пока не будет готово */
 async function apiJob(path,body){let j=await api(path,body);const t0=Date.now();
   while(j&&j.pending){if(Date.now()-t0>600000)throw new Error('сервер считает слишком долго — попробуйте позже');await new Promise(r=>setTimeout(r,1500));j=await api('/api/jobs/'+j.pending,undefined,'GET');}
   return j;}
@@ -2380,6 +2380,7 @@ function rugViewEvents(){
   const V=$('rgView');
   V.onwheel=e=>{e.preventDefault();const b=V.getBoundingClientRect(),mx=e.clientX-b.left,my=e.clientY-b.top,k=Math.exp(-e.deltaY*0.0015),nz=Math.max(0.05,Math.min(8,R.z*k));R.ox=mx-(mx-R.ox)*nz/R.z;R.oy=my-(my-R.oy)*nz/R.z;R.z=nz;rugApply();};
   V.onmousedown=e=>{
+    if(e.target.closest&&e.target.closest('.rgtb'))return;   // v11.13: кнопки панели лежат поверх фото — клик по ним не «клик по пустому месту» (снимал выбор, и «найти повторы» не срабатывало)
     const p=rugPt(e),hand=R.tool==='hand'||R.space||e.button===1||e.button===2;
     if(hand){R.drag={t:'pan',sx:e.clientX,sy:e.clientY,ox:R.ox,oy:R.oy};e.preventDefault();return;}
     if(e.button!==0)return;

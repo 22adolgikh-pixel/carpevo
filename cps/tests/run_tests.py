@@ -579,6 +579,14 @@ def t18_feedback_v116(pg, ctx):
     pg.wait_for_timeout(3500)
     mk = pg.evaluate("R.rug.marks.filter(m=>m.machine).map(m=>m.certainty)")
     assert mk and all(c == 'sure' for c in mk), f'после новой рамки добавлены неуверенные повторы: {mk}'
+    # v11.12: кнопка «🔍 найти повторы» в панели — до конца, с нажатием мышью
+    n0 = pg.evaluate("R.rug.marks.length")
+    pg.evaluate("R.rug.marks.forEach(m=>{if(m.id==='mA')m.status='confirmed'});rugSaveSoon();rugDraw();rugSide();"); pg.wait_for_timeout(900)
+    pg.evaluate("rugSelect(R.rug.marks.find(m=>m.id==='mA'))"); pg.wait_for_timeout(300)
+    pg.click('#rgFindRep'); pg.wait_for_timeout(6000)
+    assert pg.evaluate("!!R.sel"), 'клик по кнопке панели снял выбор рамки'
+    n1 = pg.evaluate("R.rug.marks.length"); st = pg.evaluate("document.getElementById('stat').title")
+    assert n1 > n0, f'кнопка «найти повторы» ничего не добавила (было {n0}, стало {n1}); строка состояния: {st}'
     # Tab: ореол, подпись, пинг; пробел — рамки скрыты
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200); pg.keyboard.press('Tab'); pg.wait_for_timeout(300)
     assert pg.evaluate("!!document.querySelector('#rgSvg .rgping')"), 'Tab не подсвечивает выбранный элемент'
