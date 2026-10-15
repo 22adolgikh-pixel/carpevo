@@ -686,19 +686,28 @@ def t20_twin_verdicts_v118(pg, ctx):
     u = ctx['url']
     assert 'run' in get(u + 'api/heavy'), 'нет /api/heavy'
     h = get(u + 'api/health'); assert h['rss_mb'] > 0 and 'mem_tail' in h, f'/api/health: {h}'
+    post(u + 'api/rugs/kerimov_vol3_p100_1/same', {'other': 'met_123', 'ok': None})   # t18 уже ответил на эту пару
     pg.click('#tab-rugs'); pg.wait_for_timeout(800)
+    pg.evaluate("R.twinLater&&R.twinLater.clear();rugsLoadList()"); pg.wait_for_timeout(600)
     pg.evaluate("rugOpen('kerimov_vol3_p100_1')"); pg.wait_for_timeout(1500)
     tw = '#rgStrip .rgtw[data-open="met_123"]'
-    assert pg.is_visible(tw + ' [data-vd="sim"]'), 'в ленте двойников нет кнопок ✓ ≈ ✗'
-    pg.click(tw + ' [data-vd="sim"]'); pg.wait_for_timeout(1200)
+    # v11.15: вопрос «это тот же ковёр?» — поверх фото, один раз; в ленте только значок
+    assert not pg.query_selector(tw + ' [data-vd]'), 'кнопки ✓ ≈ ✗ остались в ленте'
+    assert pg.is_visible('#rgTwinAsk [data-vd="sim"]'), 'при открытии ковра с непроверенным двойником нет вопроса «это тот же ковёр?»'
+    pg.click('#rgTwinAsk [data-vd="sim"]'); pg.wait_for_timeout(1200)
     ok = (get(u + 'api/rugs/kerimov_vol3_p100_1').get('same_ok') or {}).get('met_123') or {}
     assert ok.get('similar') and ok.get('ok') is False, f'«≈ похожи» не записалось: {ok}'
     assert (pg.text_content(tw + ' .st') or '').strip() == '≈', 'значок «≈» не появился на миниатюре'
-    assert pg.evaluate("R.rug.id") == 'kerimov_vol3_p100_1', 'клик по кнопке открыл другой ковёр'
-    pg.click(tw + ' [data-vd="ok"]'); pg.wait_for_timeout(1200)
+    assert not pg.query_selector('#rgTwinAsk'), 'вопрос не исчез после ответа'
+    assert pg.evaluate("R.rug.id") == 'kerimov_vol3_p100_1', 'ответ открыл другой ковёр'
+    post(u + 'api/rugs/kerimov_vol3_p100_1/same', {'other': 'met_123', 'ok': None})
+    pg.evaluate("rugOpen('kerimov_vol3_p100_1')"); pg.wait_for_timeout(1500)
+    pg.click('#rgTwinAsk [data-vd="later"]'); pg.wait_for_timeout(300); assert not pg.query_selector('#rgTwinAsk'), '«позже» не убрало вопрос'
+    pg.evaluate("rugOpen('met_123')"); pg.wait_for_timeout(1200); pg.evaluate("rugOpen('kerimov_vol3_p100_1')"); pg.wait_for_timeout(1500)
+    assert not pg.query_selector('#rgTwinAsk'), 'после «позже» вопрос снова появился в этом же запуске'
+    pg.evaluate("R.twinLater.clear();rugTwinAsk()"); pg.wait_for_timeout(200)
+    pg.click('#rgTwinAsk [data-vd="ok"]'); pg.wait_for_timeout(1200)
     assert ((get(u + 'api/rugs/met_123').get('same_ok') or {}).get('kerimov_vol3_p100_1') or {}).get('ok') is True, '✓ не записалось у второго ковра'
-    pg.click(tw + ' [data-vd="ok"]'); pg.wait_for_timeout(1200)
-    assert 'met_123' not in (get(u + 'api/rugs/kerimov_vol3_p100_1').get('same_ok') or {}), 'повторный клик не снял отметку'
     t0 = time.time(); get(u + 'api/rugs'); get(u + 'api/rugs'); assert time.time() - t0 < 5
     # «только каталог»: json вместо zip — паспорт обновляется, фото не трогаются
     cp = ctx['app'] + '/cat_only.json'
@@ -746,6 +755,31 @@ def t21_rug_editor_zones(pg, ctx):
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
     pg.screenshot(path=f'{OUT}/13_rug_zones.png')
     errors_ok(ctx, 'зоны редактора ковра')
+
+
+@test
+def t22_rug_mark_panel_v1115(pg, ctx):
+    """v11.15: справа фото и схема рядом, зона списком, «Верно / Неверно → следующая» только у названной рамки; поиск узора слева"""
+    u = ctx['url']; pg.goto(u); pg.wait_for_timeout(2000)
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1000); pg.evaluate("rugOpen('vam_3')"); pg.wait_for_timeout(1500)
+    v = pg.query_selector('#rgView').bounding_box(); x, y = v['x'] + v['width'] * .45, v['y'] + v['height'] * .5
+    pg.mouse.move(x, y); pg.mouse.down(); pg.mouse.move(x + 50, y + 50, steps=5); pg.mouse.up(); pg.wait_for_timeout(2500)
+    assert not pg.query_selector('#rgOk'), 'у рамки без названия есть «Верно / Неверно»'
+    assert pg.is_visible('#rgSide .rghead2 .pair'), 'нет пары «на фото / схема»'
+    assert pg.is_visible('#rgZone') and not pg.query_selector('#rgSide [data-z]'), 'зона не выпадающим списком'
+    assert not pg.query_selector('#rgSide #rgMotQ') and pg.is_visible('#rgLeft #rgMotQ'), 'поиск узора не слева'
+    assert not pg.query_selector('#rgSide #rgSchList'), 'список схем остался справа'
+    pg.select_option('#rgZone', 'medallion'); pg.wait_for_timeout(300); assert pg.evaluate("R.sel.zone") == 'medallion', 'зона из списка не ставится'
+    pg.keyboard.press('3'); pg.wait_for_timeout(200); assert pg.evaluate("R.sel.zone") == 'spandrel', 'клавиша 3 не ставит зону'
+    pg.click('#rgLeft [data-lib="all"]'); pg.wait_for_timeout(400)
+    if pg.query_selector('#rgLibAll .rgsch'):
+        pg.click('#rgLibAll .rgsch'); pg.wait_for_timeout(500)
+        assert pg.is_visible('#rgOk') and pg.is_visible('#rgSide .rghead2 figure img[src^="/out/"]'), 'после выбора схемы нет схемы рядом с фото или кнопок проверки'
+        n0 = pg.evaluate("R.sel.id"); pg.evaluate("R.rug.marks.push({...R.sel,id:'mX',box:[0.1,0.1,0.05,0.05],status:'proposed'})")
+        pg.click('#rgOk'); pg.wait_for_timeout(600)
+        assert pg.evaluate(f"R.rug.marks.find(m=>m.id==='{n0}').status") == 'confirmed' and pg.evaluate("R.sel.id") != n0, '«Верно → следующая» не отметило и не перешло'
+    pg.fill('#rgMotQ', 'dəvə'); pg.wait_for_timeout(900)
+    errors_ok(ctx, 'панель рамки v11.15')
 
 
 # ---------------- запуск ----------------
