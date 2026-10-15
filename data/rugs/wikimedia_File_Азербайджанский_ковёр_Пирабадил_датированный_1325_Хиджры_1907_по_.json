@@ -104,7 +104,7 @@
     0.33238,
     0.51766,
     0.3341,
-    0.05841
+    0.0619
    ],
    "zone": "field",
    "motif": "qeychi",
@@ -123,7 +123,7 @@
    "by": "машина → dolgikh",
    "at": 1792047408,
    "confirmed_by": "dolgikh",
-   "confirmed_at": 1792047453
+   "confirmed_at": 1792088198
   },
   {
    "id": "mmv96sz1y",
@@ -263,9 +263,9 @@
   {
    "id": "mmv9txpaw0",
    "box": [
-    0.59278,
+    0.60232,
     0.58787,
-    0.18498,
+    0.17544,
     0.20271
    ],
    "zone": "field",
@@ -285,7 +285,7 @@
    "by": "машина → dolgikh",
    "at": 1792086340,
    "confirmed_by": "dolgikh",
-   "confirmed_at": 1792086397
+   "confirmed_at": 1792088211
   },
   {
    "id": "mmv9tzg3w",
@@ -301,7 +301,7 @@
    "scheme": "t104_f01",
    "group": "mmv9tzg3w",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 90,
    "flip": 0,
@@ -311,8 +311,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792086421,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792088213
   },
   {
    "id": "mmv9tzh8h0",
@@ -420,9 +420,7 @@
    "by": "машина → dolgikh",
    "at": 1792086514,
    "confirmed_by": "dolgikh",
-   "confirmed_at": 1792088138,
-   "edited_by": "dolgikh",
-   "edited_at": 1792088138
+   "confirmed_at": 1792088138
   },
   {
    "id": "mmv9u23ka",
@@ -627,7 +625,7 @@
    "scheme": "t74_f01",
    "group": "mmv9u886u0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -637,35 +635,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792086972,
-   "confirmed_by": "",
-   "confirmed_at": 0
-  },
-  {
-   "id": "mmv9ub9111",
-   "box": [
-    0.16744,
-    0.06155,
-    0.10687,
-    0.04294
-   ],
-   "zone": "field",
-   "motif": "deve",
-   "motif_text": "",
-   "scheme": "t74_f01",
-   "group": "mmv9u886u0",
-   "certainty": "maybe",
-   "status": "proposed",
-   "note": "",
-   "angle": 0,
-   "flip": 1,
-   "machine": 1,
-   "score": 0.433,
-   "xfer": "",
-   "variant": "",
-   "by": "машина → dolgikh",
-   "at": 1792086972,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792088223
   },
   {
    "id": "mmv9ubff0",
@@ -681,7 +652,7 @@
    "scheme": "t22_f03",
    "group": "mmv8k4d81",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -691,8 +662,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792086980,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792088228
   },
   {
    "id": "mmv9ubmp1",
@@ -708,7 +679,7 @@
    "scheme": "t22_f03",
    "group": "mmv8k4d81",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 1,
@@ -718,8 +689,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792086990,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792088228
   },
   {
    "id": "mmv9udnpr",
@@ -735,7 +706,7 @@
    "scheme": "t22_f03",
    "group": "mmv8k4d81",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 1,
@@ -745,8 +716,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792087084,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792088230
   },
   {
    "id": "mmv9uduse",
@@ -774,33 +745,6 @@
    "at": 1792087093,
    "confirmed_by": "dolgikh",
    "confirmed_at": 1792087098
-  },
-  {
-   "id": "mmv9uuf90",
-   "box": [
-    0.06968,
-    0.51551,
-    0.10469,
-    0.06795
-   ],
-   "zone": "field",
-   "motif": "",
-   "motif_text": "",
-   "scheme": "",
-   "group": "mmv9uuf90",
-   "certainty": "sure",
-   "status": "proposed",
-   "note": "",
-   "angle": 0,
-   "flip": 0,
-   "machine": 0,
-   "score": 0,
-   "xfer": "",
-   "variant": "",
-   "by": "dolgikh",
-   "at": 1792087866,
-   "confirmed_by": "",
-   "confirmed_at": 0
   },
   {
    "id": "mmv9uwdfe",
@@ -843,7 +787,7 @@
    "scheme": "t118_f01",
    "group": "mmv9uwdfe",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -853,12 +797,12 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792088008,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792088234
   }
  ],
  "created": 1791736123,
- "updated": 1792088138,
+ "updated": 1792088252,
  "cat": {
   "title": "Азербайджанский ковёр \"Пирабадил\" датированный 1325 Хиджры (1907 по григорианскому календарю).jpg",
   "museum": "Wikimedia Commons",
