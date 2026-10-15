@@ -65,6 +65,9 @@ jobs:
         run: |
           install -m 700 -d ~/.ssh
           printf '%s\n' "$KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+          # диагностика входа: причина попадает в аннотацию задания (без ключа и секретов)
+          if ! ssh-keygen -y -f ~/.ssh/deploy_key > /dev/null 2> /tmp/kg.err; then echo "::error::CPS_SSH_KEY не читается как SSH-ключ: $(tr '\n' ' ' < /tmp/kg.err | cut -c1-200). Вставьте приватный ключ целиком, с первой строки BEGIN до последней END."; exit 1; fi
+          if ! ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=accept-new "$USER_@$HOST" true 2> /tmp/ssh.err; then echo "::error::SSH не вошёл: $(tr '\n' ' ' < /tmp/ssh.err | sed "s/$HOST/<host>/g" | cut -c1-300)"; exit 1; fi
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 "$USER_@$HOST" bash -s "$DIR" <<'REMOTE'
           set -euo pipefail
           cd "$1"
