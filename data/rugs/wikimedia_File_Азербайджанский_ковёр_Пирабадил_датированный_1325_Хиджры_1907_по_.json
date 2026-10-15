@@ -47,29 +47,29 @@
   {
    "id": "mmv8k1vv4",
    "box": [
-    0.66325,
-    0.29429,
-    0.099,
-    0.04725
+    0.66632,
+    0.2912,
+    0.09593,
+    0.05404
    ],
    "zone": "field",
    "motif": "taya",
    "motif_text": "",
    "scheme": "t61_f01",
-   "group": "",
+   "group": "mmv8k1vv4",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
    "machine": 0,
    "score": 0,
    "xfer": "",
-   "variant": "",
+   "variant": "color",
    "by": "dolgikh",
    "at": 1792009273,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792086157
   },
   {
    "id": "mmv8k2rhm",
@@ -83,7 +83,7 @@
    "motif": "",
    "motif_text": "",
    "scheme": "t61_f04",
-   "group": "",
+   "group": "mmv8k2rhm",
    "certainty": "sure",
    "status": "proposed",
    "note": "",
@@ -96,7 +96,9 @@
    "by": "dolgikh",
    "at": 1792009314,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "edited_by": "dolgikh",
+   "edited_at": 1792086189
   },
   {
    "id": "mmv8k4d81",
@@ -205,10 +207,64 @@
    "at": 1792047491,
    "confirmed_by": "",
    "confirmed_at": 0
+  },
+  {
+   "id": "mmv9trrvg1",
+   "box": [
+    0.22521,
+    0.301,
+    0.08288,
+    0.0549
+   ],
+   "zone": "field",
+   "motif": "taya",
+   "motif_text": "",
+   "scheme": "t61_f01",
+   "group": "mmv8k1vv4",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 1,
+   "machine": 1,
+   "score": 0.444,
+   "xfer": "",
+   "variant": "color",
+   "by": "машина → dolgikh",
+   "at": 1792086063,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "mmv9tugzb0",
+   "box": [
+    0.67631,
+    0.52621,
+    0.09328,
+    0.05767
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "t61_f04",
+   "group": "mmv8k2rhm",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 1,
+   "score": 0.481,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1792086189,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791736123,
- "updated": 1792047532,
+ "updated": 1792086189,
  "cat": {
   "title": "Азербайджанский ковёр \"Пирабадил\" датированный 1325 Хиджры (1907 по григорианскому календарю).jpg",
   "museum": "Wikimedia Commons",
