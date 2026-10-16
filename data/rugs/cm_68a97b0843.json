@@ -7,7 +7,7 @@
  "url": "https://commons.wikimedia.org/wiki/File:Dragon_Carpet_MET_DP211663.jpg",
  "license": "CC0",
  "place": "",
- "date": "",
+ "date": "1971",
  "school": "",
  "composition": "",
  "technique": "",
@@ -154,7 +154,13 @@
    "score": 165
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_34a29c4a3e": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792147565
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_ba4aeb0a49": {
@@ -287,5 +293,8 @@
    "v": "same",
    "at": 1792113430
   }
+ },
+ "from_twin": {
+  "date": "cm_34a29c4a3e"
  }
 }
