@@ -138,6 +138,7 @@ main{grid-column:3;grid-row:2;min-width:0;min-height:0}#right{grid-column:4;grid
 #rail button svg{width:20px;height:20px}#rail button:hover{background:var(--pan2);color:var(--tx)}
 #rail button.on{background:var(--sel);color:var(--tx)}#rail button.on::before{content:"";position:absolute;left:-6px;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--acc)}
 #rail .kb{margin-top:auto}
+#rgPassBtn.hdpass{height:28px;padding:0 12px;border:1px solid var(--ln2);border-radius:7px;background:var(--pan2);color:var(--tx);font-weight:500;margin-right:6px}#rgPassBtn.hdpass:hover{border-color:var(--acc)}
 #crumbs{justify-self:center;display:flex;gap:6px;align-items:center;color:var(--mut);font-size:13px;min-width:0;max-width:52vw;overflow:hidden;white-space:nowrap}
 #crumbs b{color:var(--tx);font-weight:600}#crumbs i{font-style:normal;opacity:.5}#crumbs span{overflow:hidden;text-overflow:ellipsis}
 #nav{display:flex;gap:4px;align-items:center;margin-left:10px}
@@ -261,9 +262,12 @@ aside{min-height:0}
 .kpirow b{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}.kpirow small{color:var(--mut);font-size:12px}.kbar{display:block;height:4px;border-radius:2px;background:var(--pan2);margin-top:6px;overflow:hidden}.kbar i{display:block;height:100%;background:var(--ok)}
 
 /* v11.8: редактор ковра — зоны: слева «Узоры», над фото панель инструментов, справа выбранная рамка */
-#rgView{position:relative}.rgtb{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;gap:2px;align-items:center;background:var(--pan);border:1px solid var(--ln2);border-radius:10px;padding:3px;box-shadow:0 6px 24px rgba(0,0,0,.45);z-index:5;white-space:nowrap}
-.rgtb .g{display:flex;gap:2px;align-items:center;padding:0 3px}.rgtb .g+.g{border-left:1px solid var(--ln)}
-.rgtb .ib{width:32px;height:30px;padding:0;display:grid;place-items:center;border:0;border-radius:7px;background:none;color:var(--tx)}.rgtb .ib:hover{background:var(--pan2)}.rgtb .ib.on{background:var(--acc);color:var(--acc-tx)}.rgtb .ib:disabled{opacity:.3}
+#rgView{position:relative}.rgtb{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:3px;align-items:center;background:var(--pan);border:1px solid var(--ln2);border-radius:10px;padding:3px;box-shadow:0 6px 24px rgba(0,0,0,.45);z-index:5;white-space:nowrap}
+.rgorient{display:flex;align-items:center;gap:3px;flex-wrap:wrap;margin:6px 0}.rgorient .mut{font-size:12px;margin-right:auto}.rgorient .ib{width:34px;height:32px;display:grid;place-items:center;border:1px solid var(--ln);border-radius:7px;background:var(--pan2);color:var(--tx);padding:0}.rgorient .ib:hover{border-color:var(--acc)}
+.fzrow{display:flex;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--ln)}.fzt{flex:1;min-width:0;height:72px;background-repeat:repeat-x;background-size:auto 100%;border-radius:4px;border:1px solid var(--ln)}.fzi{width:220px;flex:none}
+.rgacts{display:flex;flex-direction:column;gap:6px;align-items:stretch}.rgacts .sm{justify-content:flex-start;text-align:left;height:32px}.rgacts kbd{margin-left:auto}
+.rgtb .g{display:flex;flex-direction:column;gap:3px;align-items:center}.rgtb hr{width:100%;margin:2px 0;border:0;border-top:1px solid var(--ln)}.rgtb .ib.rep{outline:2px dashed var(--acc);outline-offset:-3px}
+.rgtb .ib{width:36px;height:34px;padding:0;display:grid;place-items:center;border:0;border-radius:7px;background:none;color:var(--tx)}.rgtb .ib:hover{background:var(--pan2)}.rgtb .ib.on{background:var(--acc);color:var(--acc-tx)}.rgtb .ib:disabled{opacity:.3}
 .rgtb .tx{height:30px;border:0;border-radius:7px;background:none;padding:0 10px;font-weight:500}.rgtb .tx:hover{background:var(--pan2)}.rgtb .zl{color:var(--mut);font-size:11.5px;font-variant-numeric:tabular-nums;padding:0 4px}
 .rgmenu{position:absolute;top:40px;right:0;min-width:300px;background:var(--pan);border:1px solid var(--ln2);border-radius:10px;padding:6px;box-shadow:0 12px 32px rgba(0,0,0,.5);display:flex;flex-direction:column;gap:2px;white-space:normal}
 .rgmenu button{border:0;background:none;text-align:left;padding:7px 9px;border-radius:6px;display:flex;justify-content:space-between;gap:10px}.rgmenu button:hover{background:var(--pan2)}.rgmenu label{display:flex;gap:6px;align-items:center;padding:5px 9px;font-size:12.5px}.rgmenu hr{border:0;border-top:1px solid var(--ln);margin:4px 0}.rgmenu kbd{color:var(--mut);font:11px ui-monospace,monospace}
@@ -311,6 +315,8 @@ aside{min-height:0}
 #rgGridV{position:absolute;inset:0;display:grid;grid-template-columns:240px minmax(0,1fr) 300px}#rgGridV .rgmid{overflow:auto;min-width:0}#rgGridV .rgmid .kpirow{margin:12px 14px 6px}
 #rgTree,#rgPeek{background:var(--pan);overflow:auto;padding:12px 10px}#rgTree{border-right:1px solid var(--ln)}#rgPeek{border-left:1px solid var(--ln);padding:14px}
 #rgTree h4,#rgPeek h4{margin:6px 4px 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}#rgTree .sch{display:flex;gap:7px;align-items:center;padding:4px 8px;border-radius:6px;color:var(--tx);font-size:12.5px}#rgTree .sch:hover{background:var(--pan2)}#rgTree .sch .nm{flex:1}#rgTree .sch .c{color:var(--mut);font-size:11.5px}
+.kpiline{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;padding:10px 14px 4px;font-size:12.5px;color:var(--mut)}.kpiline b{color:var(--tx);font-size:14px;font-variant-numeric:tabular-nums}.kpiline .kbar{display:inline-block;width:60px;vertical-align:middle;margin:0 0 0 4px}.kpiline .sm{height:24px;font-size:11.5px}
+.rgfl{padding:6px 14px 2px;display:flex;flex-direction:column;gap:6px}.rgflr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.rgfll{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}.rgflr .seg{display:inline-flex}.rgflr .seg .sm.on{background:var(--tx);color:var(--bg)}.rgflr #rgQ{width:220px}.rgflr select{width:auto;flex:none}
 .rgchips{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 14px 4px}.rgchips h2{margin:0 8px 0 0;font-size:16px;font-weight:600}
 .chip{display:inline-flex;gap:6px;align-items:center;height:28px;padding:0 11px;border:1px solid var(--ln2);border-radius:14px;color:var(--tx);font-size:12px;cursor:pointer;white-space:nowrap}.chip input{margin:0}.chip:has(input:checked){background:var(--acc);color:var(--acc-tx);border-color:var(--acc)}
 #rgPeek .pim{width:100%;aspect-ratio:3/4;object-fit:contain;background:var(--canvas);border-radius:8px}#rgPeek .pt{font-size:15px;font-weight:600;margin:10px 0 2px}#rgPeek .pm{color:var(--mut);font-size:12px}
@@ -421,9 +427,9 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.18</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.19</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
-  <span id="ovbar"><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
+  <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
 
 <nav id="rail" aria-label="Разделы">
@@ -578,7 +584,7 @@ function setMode(m,opt){
   S.mode=m;S.peek=false;if(typeof pvHide==='function')pvHide();$('peek').style.display='none';
   document.body.classList.toggle('noleft',!['sheet','queue','cat'].includes(m));   // v11.3: у «Узоров» слева — дерево источников
   const under=ov?(S.back||'queue'):m;
-  ['pipe','sheet','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===under||(k==='queue'&&under==='cat')));
+  ['sheet','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===under||(k==='queue'&&(under==='cat'||under==='pipe'))));
   $('tab-edit').style.display=!ov&&S.fig&&m!=='pipe'?'':'none';
   ['grid','pix','close'].forEach(k=>$('tab-'+k).style.display=ov?'':'none');
   $('tab-grid').classList.toggle('on',m==='grid');$('tab-pix').classList.toggle('on',m==='pix');
@@ -1596,7 +1602,7 @@ const TYPEF={'':()=>true,bw:f=>!f.color&&!f.photo,color:f=>!!f.color&&!f.photo,b
 const TYPEL=[['','все'],['bw','узор ЧБ'],['color','узор цветной'],['border','бордюр'],['photo','фото']];
 function viewSwitch(){
   const nq=S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo).length;
-  return `<span class="seg vsw" data-tip="Узоры: листы (сканы страниц и рамки рисунков, клавиша 1), очередь проверки (клавиша 2) и все рисунки"><button data-vs="sheet" class="${S.mode==='sheet'?'on':''}">Листы</button><button data-vs="queue" class="${S.mode==='queue'?'on':''}">✓ Очередь проверки <small>${nq}</small></button><button data-vs="cat" class="${S.mode==='cat'?'on':''}">▦ Все рисунки <small>${S.figures.length}</small></button></span>`;
+  return `<span class="seg vsw" data-tip="Узоры: сводка, листы (сканы страниц и рамки рисунков, клавиша 1), очередь проверки (клавиша 2) и все рисунки"><button data-vs="pipe" class="${S.mode==='pipe'?'on':''}">Сводка</button><button data-vs="sheet" class="${S.mode==='sheet'?'on':''}">Листы</button><button data-vs="queue" class="${S.mode==='queue'?'on':''}">✓ Очередь проверки <small>${nq}</small></button><button data-vs="cat" class="${S.mode==='cat'?'on':''}">▦ Все рисунки <small>${S.figures.length}</small></button></span>`;
 }
 function bindViewSwitch(C){C.querySelectorAll('[data-vs]').forEach(b=>b.onclick=()=>{if(S.mode!==b.dataset.vs)setMode(b.dataset.vs);});}
 function renderCatalog(){
@@ -1926,7 +1932,7 @@ async function renderPipe(){
     <td class="n"><button class="sm" data-hide="${esc(s.key)}" data-v="${s.hidden?0:1}">${s.hidden?'вернуть':'скрыть'}</button></td></tr>`;};
   const sc=D.school;
   C.innerHTML=`<div class="dash">
-  <div class="flex" style="margin-bottom:12px"><b style="font-size:16px">Обзор</b><span class="sp"></span>
+  <div class="flex" style="margin-bottom:12px">${viewSwitch()}<span class="sp"></span>
     ${run?`<span class="mut"><span class="spin"></span>${stg} ${pr.done}/${pr.total}</span><button class="sm" id="pStop">■ стоп</button>`:''}</div>
   <div class="kpis">
     <div class="kpi"><div class="kv">${f.done} <small>из ${T.schemes} схем готово</small></div>
@@ -1954,6 +1960,7 @@ async function renderPipe(){
     <button class="sm" id="rkBack">досчитать риск и симметрию</button>
     <span class="mut" id="pTrainInfo" style="width:100%"></span><div id="dupBox" class="mut" style="width:100%"></div></div></details>
   </div>`;
+  bindViewSwitch(C);
   const go=async(stages)=>{try{const r=await api('/api/prowl/start',{stages});stat(r.started?'запущено: '+r.total+' шагов':'нечего обрабатывать','ok');pollAct();}catch(e){fail(e);}renderPipe();};
   const act={sg:()=>go(['segment']),sgL:()=>setMode('sheet'),au:()=>go(['auto']),
     dr:async()=>{const n=S.figures.find(x=>x.drawing&&!x.size&&!x.done);if(!n){stat('зарисовок без пикселей нет','ok');return;}try{await openFigure(n.id);setMode('grid');}catch(e){fail(e);}},
@@ -2057,7 +2064,7 @@ function kk(e){const c=e.code||'';
   return m[c]||String(e.key||'').toLowerCase();}
 window.addEventListener('keydown',e=>{
   const ae=document.activeElement,typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||(ae.tagName==='INPUT'&&!['checkbox','radio','range','button'].includes(ae.type)));
-  if(DY.on||EV.on){if(e.key==='Escape'&&$('modal').hidden&&!typing){DY.on?dyesClose():evClose();}return;}   // экраны «Красители» и «События»: клавиши редакторов не действуют   // экран «Красители»: клавиши редакторов не действуют
+  if(DY.on||EV.on){if(e.key==='Escape'){if(!$('modal').hidden){$('modal').hidden=true;$('modal').innerHTML='';$('modal').onclick=null;}else if(!typing){DY.on?dyesClose():evClose();}}return;}   // экраны «Красители» и «События»: клавиши редакторов не действуют   // экран «Красители»: клавиши редакторов не действуют
   if(!typing&&S.rv){if(rvKey(e)){e.preventDefault();return;}}
   if(!typing&&S.hv){if(hvKey(e)){e.preventDefault();return;}}
   if(!typing&&S.sv){if(svKey(e)){e.preventDefault();return;}}
@@ -2230,6 +2237,9 @@ function rugList(){
   {const K=$('rgKinds');if(K){const base=R.list.filter(r=>!(r.split_into&&r.split_into.length)),cnt={carpets:0,items:0,hidden:0};base.forEach(r=>cnt[rugKindOf(r)]++);
     K.innerHTML=[['carpets','Ковры','ковры (ворсовые и безворсовые)'],['items','Изделия','сумки и мешки (məfrəş, xurcun, heybə…), конское снаряжение (çul…), бытовые (dəstərxan, corab…) — узоры те же, поиск элементов их видит'],['hidden','Скрытые и не ковры','скрытые вручную и фото, где не ковёр: интерьер, выставка, инструменты'],['all','Все','']].map(([k,v,t])=>`<button class="sm ${fk===k?'on':''}" data-kind="${k}" data-tip="${t}">${v}${k!=='all'?` <span class="mut">${cnt[k]}</span>`:''}</button>`).join('');
     K.querySelectorAll('[data-kind]').forEach(b=>b.onclick=()=>{R.fkind=b.dataset.kind;R.gridN=150;rugList();});}}
+  {const G=$('rgStSeg');if(G){G.innerHTML=[['','любой'],...Object.entries(RST)].map(([k,v])=>`<button class="sm ${(R.filter||'')===k?'on':''}" data-st="${k}">${v}</button>`).join('');
+    G.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>{R.filter=b.dataset.st;R.gridN=150;rugList();});}
+   const any=R.filter||R.fnone||R.fdup||R.fbig||R.fmulti||R.fppl||R.q;const X=$('rgFReset');if(X){X.hidden=!any;X.onclick=()=>{R.filter='';R.fnone=R.fdup=R.fbig=R.fmulti=R.fppl=false;R.q='';['rgFNone','rgFDup','rgFBig','rgFMulti','rgFPpl'].forEach(k=>$(k)&&($(k).checked=false));$('rgQ').value='';R.gridN=150;rugList();};}}
   const N=R.gridN||150;
   const card=([r,n])=>`<div class="rgcard" data-id="${esc(r.id)}"><div class="im"><img loading="lazy" src="/rugthumb/${encodeURIComponent(r.id)}.jpg"><div class="bd">${n?`<span>🔗 ещё ${n} фото</span>`:''}${r._big?`<span class="big" data-tip="у двойника (${esc(SRCRU[r._big.src]||r._big.src)}) фото в ${r._big.k.toFixed(1)} раза крупнее — размечать лучше там">⬆ фото крупнее ×${r._big.k.toFixed(1)}</span>`:''}${r.multi?`<span class="cut">✂ ${r.multi} ковра</span>`:''}${r.split_from?`<span>часть ${r.part||''} разворота</span>`:''}${r.machine?`<span style="color:#4dd0e1">машина: ${r.machine}</span>`:''}</div></div>
     <div class="t" title="${esc(r.title)}">${esc(r.title)}</div><div class="m">${esc(SRCRU[r.src]||r.src||'')} · ${r.school?esc(RSCH[r.school]||r.school):'<i>школа ?</i>'}${r.fragment?' · фрагмент':''}<br>${r.n?`${r.n} элем. · <b>✓ ${r.confirmed}</b>`:'не размечен'}${r.w?` · ${r.w}×${r.h}`:''}</div></div>`;
@@ -2276,9 +2286,15 @@ const RG_IC={box:'<rect x="3.5" y="4.5" width="13" height="11" rx="1" stroke-das
   hand:'<path d="M7 10V4.8a1.2 1.2 0 0 1 2.4 0V9m0-4.6a1.2 1.2 0 0 1 2.4 0V9m0-3.4a1.2 1.2 0 0 1 2.4 0V10m0-2a1.2 1.2 0 0 1 2.4 0v3.5a5.5 5.5 0 0 1-5.5 5.5h-.8a5 5 0 0 1-3.9-1.9L4 12.4a1.2 1.2 0 0 1 1.9-1.5L7 12"/>',
   fit:'<path d="M3.5 7.5v-4h4M12.5 3.5h4v4M16.5 12.5v4h-4M7.5 16.5h-4v-4"/>',
   rep:'<rect x="2.5" y="5.5" width="8" height="8" rx="1"/><path d="M12.5 8.5h5M15 6v5"/><rect x="9.5" y="11.5" width="5" height="5" rx="1" stroke-dasharray="1.6 1.2"/>',
+  findrep:'<rect x="2.5" y="2.5" width="6" height="6" rx="1"/><rect x="2.5" y="11.5" width="6" height="6" rx="1" stroke-dasharray="1.6 1.3"/><circle cx="13.5" cy="9.5" r="3.5"/><path d="M16 12l2.5 2.5"/>',
   find:'<circle cx="8.5" cy="8.5" r="4.5"/><path d="M12 12l4.5 4.5"/><path d="M6.5 8.5h4M8.5 6.5v4"/>',
   more:'<path d="M1.8 10S5 4.5 10 4.5 18.2 10 18.2 10 15 15.5 10 15.5 1.8 10 1.8 10z"/><circle cx="10" cy="10" r="2.6"/>',
-  glob:'<circle cx="8" cy="8" r="4.5"/><path d="M11.4 11.4L16 16"/><path d="M3.5 8h9M8 3.5c-1.6 1.6-1.6 7.4 0 9M8 3.5c1.6 1.6 1.6 7.4 0 9"/>',
+  glob:'<rect x="1.5" y="2.5" width="5" height="8" rx=".8"/><rect x="8" y="2.5" width="5" height="8" rx=".8"/><path d="M3 5h2M9.5 5h2"/><circle cx="13.5" cy="13.5" r="3"/><path d="M15.7 15.7l2.6 2.6"/>',
+  rotl:'<path d="M5 8.5A6 6 0 1 1 6 14"/><path d="M5 4v4.5h4.5"/>',
+  rotr:'<path d="M15 8.5A6 6 0 1 0 14 14"/><path d="M15 4v4.5h-4.5"/>',
+  flipx:'<path d="M10 2.5v15" stroke-dasharray="2 2"/><path d="M8 6L3.5 10 8 14z"/><path d="M12 6l4.5 4-4.5 4z" fill="currentColor"/>',
+  flipy:'<path d="M2.5 10h15" stroke-dasharray="2 2"/><path d="M6 8l4-4.5L14 8z"/><path d="M6 12l4 4.5 4-4.5z" fill="currentColor"/>',
+  reset:'<rect x="4" y="4" width="12" height="12" rx="1.5"/><path d="M7 10h6M10 7v6"/>',
   menu:'<circle cx="5" cy="10" r="1.2"/><circle cx="10" cy="10" r="1.2"/><circle cx="15" cy="10" r="1.2"/>'};
 const rgIc=k=>`<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${RG_IC[k]}</svg>`;
 function rugRender(){
@@ -2287,39 +2303,40 @@ function rugRender(){
   if(!r){R.view='grid';rugView();rugList();return;}
   const ro=rro(),tb=(id,ic,tip,extra)=>`<button class="ib" id="${id}" data-tip="${tip}" aria-label="${tip.replace(/ \(.*$/,'')}" ${extra||''}>${rgIc(ic)}</button>`;
   C.innerHTML=`<div id="rgView"><div id="rgStage"><img id="rgImg" src="/rugimg/${encodeURIComponent(r.id)}.jpg?t=${r.updated}" draggable="false"><svg id="rgSvg"></svg></div>
-    <div class="rgtb" role="toolbar" aria-label="Инструменты разметки">
-      <div class="g">${tb('rgTBox','box','Рамка: обведите элемент мышью (B)')}${tb('rgTHand','hand','Двигать фото (H, или держите пробел)')}</div>
-      ${ro?'':`<div class="g" data-need-sel>${tb('rgTbRep','rep','＋ повтор: обведите такой же элемент в другом месте (R)')}${tb('rgFindRep','find','Найти повторы выбранного элемента на этом фото — в других красках тоже')}${tb('rgFindMore','more','Вижу ещё: следующие по сходству места, порог ниже — проверьте C / X (E)')}${tb('rgMotSearch','glob','Где ещё встречается этот элемент — на других коврах каталога (G)')}</div>`}
-      <div class="g"><button class="tx" id="rgPassBtn" data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">Паспорт</button></div>
-      <div class="g">${tb('rgTbMenu','menu','Ещё: несколько ковров на фото, не подходит, поле и каймы, вид рамок','aria-haspopup="true" aria-expanded="false"')}</div>
-      <div class="rgmenu" id="rgMenu" hidden role="menu">
-        ${ro||r.split_from||(r.split_into||[]).length?'':`<button id="rgTbSplit" role="menuitem">✂ Несколько ковров на фото — разделить <kbd>K</kbd></button>`}
-        ${ro?'':`<button id="rgTbHide" role="menuitem">${r.hidden?'↺ Вернуть фото в каталог':'Не подходит: скрыть фото…'}</button>`}
-        <button id="rgTZones" role="menuitem">Поле и каймы (тест) <kbd>Z</kbd></button>
-        <hr><label>Цвет рамок <select id="rgColBy"><option value="el" ${R.colorBy!=='zone'?'selected':''}>по элементам</option><option value="zone" ${R.colorBy==='zone'?'selected':''}>по зонам</option></select></label>
-        <label><input type="checkbox" id="rgDim" ${R.dim!==false?'checked':''}> затемнять вокруг выбранного <kbd>D</kbd></label>
-        ${r.layout?`<label><input type="checkbox" id="rgShowZ" ${R.showZones?'checked':''}> показывать зоны</label>`:''}
-      </div></div>
+    <div class="rgtb" role="toolbar" aria-label="Инструменты разметки" aria-orientation="vertical">
+      ${tb('rgTBox','box','Рамка: обведите элемент мышью (B). Повтор выбранного элемента — R')}${tb('rgTHand','hand','Двигать фото (H, или держите пробел)')}
+      ${ro?'':`<div class="g" data-need-sel><hr>${tb('rgFindRep','findrep','Найти этот элемент на фото — повторы, в других красках тоже. Нажмите ещё раз — следующие по сходству места, порог ниже (E)')}${tb('rgMotSearch','glob','Где ещё встречается — на других коврах каталога (G)')}</div>`}
+    </div>
     <div id="rgHint" class="rgpill" hidden></div></div>
     <div id="rgStrip"></div>`;
   $('rgTBox').onclick=()=>{if(R.tool==='zones')rugZones(false);R.tool='box';rugTools();};$('rgTHand').onclick=()=>{R.tool='hand';rugTools();};
   const sel=()=>R.sel&&R.rug.marks.includes(R.sel)?R.sel:null;
-  $('rgTbRep')&&($('rgTbRep').onclick=()=>sel()&&rugRepeat());
-  $('rgFindRep')&&($('rgFindRep').onclick=()=>sel()&&rugFindRepeats(sel(),false));$('rgFindMore')&&($('rgFindMore').onclick=()=>sel()&&rugFindRepeats(sel(),false,true));
+  // v11.19: одна кнопка поиска на фото: первый раз — точные повторы, ещё раз по тому же элементу — следующие по сходству (порог ниже)
+  $('rgFindRep')&&($('rgFindRep').onclick=()=>{const m=sel();if(!m)return;const more=R.findMid===m.id;R.findMid=m.id;rugFindRepeats(m,false,more);});
   $('rgMotSearch')&&($('rgMotSearch').onclick=()=>sel()&&rugMotifSearch(sel(),'mark'));
-  const M=$('rgMenu'),mb=$('rgTbMenu'),menu=on=>{M.hidden=!on;mb.setAttribute('aria-expanded',on);mb.classList.toggle('on',on);};
-  mb.onclick=e=>{e.stopPropagation();menu(M.hidden);};M.onclick=e=>e.stopPropagation();
-  if(!R.menuDoc){R.menuDoc=1;document.addEventListener('click',()=>{const m2=$('rgMenu');if(m2&&!m2.hidden){m2.hidden=true;const b2=$('rgTbMenu');b2&&(b2.classList.remove('on'),b2.setAttribute('aria-expanded','false'));}});}
-  $('rgTZones').onclick=()=>{menu(false);rugZones(R.tool!=='zones');};
-  $('rgTbSplit')&&($('rgTbSplit').onclick=()=>{menu(false);rugSplitStart(R.rug);});$('rgTbHide')&&($('rgTbHide').onclick=()=>{menu(false);if(R.rug.hidden){R.rug.hidden='';rugSaveSoon();rugRender();}else rugHide(R.rug);});
-  $('rgColBy').onchange=e=>{R.colorBy=e.target.value==='zone'?'zone':'el';rugDraw();rugSide();};$('rgDim').onchange=e=>{R.dim=e.target.checked;rugDraw();};
-  $('rgShowZ')&&($('rgShowZ').onchange=e=>{R.showZones=e.target.checked;rugDraw();});
-  $('rgPassBtn').onclick=rugPassOpen;
   const img=$('rgImg');img.onload=()=>{R.iw=img.naturalWidth;R.ih=img.naturalHeight;if(R.fitNext){R.fitNext=false;rugFit();}else rugApply();
     if(R.hl&&R.hl.rid===r.id&&!R.hl.shown){R.hl.shown=1;const V=$('rgView'),b=R.hl.box;R.z=Math.min(4,Math.min(V.clientWidth/(b[2]*R.iw),V.clientHeight/(b[3]*R.ih))*0.35);rugFocus({box:b});}rugDraw();};
   rugViewEvents();rugTools();rugSide();rugStrip();rugTwinAsk();
 }
 // поле и каймы — отдельный режим: свои инструменты справа, на фото только линии границ
+// v11.19: каймы как фризы — машина находит раппорты сама (без базы), человек размечает одним кликом и называет
+async function rugFriezes(r){if(R.saveT)await rugSaveNow();stat('ищу каймы и шаг повтора…','busy');let j;
+  try{j=await apiJob('/api/rugs/'+encodeURIComponent(r.id)+'/friezes',{});}catch(e){fail(e);return;}
+  stat(j.bands.length?'каймы с повтором: '+j.bands.length:'повторяющихся кайм машина не нашла','ok');
+  const W=$('modal'),SD={l:'слева',r:'справа',t:'сверху',b:'снизу'};
+  W.innerHTML=`<div class="mbox" style="width:min(820px,94vw)" role="dialog" aria-modal="true" aria-labelledby="fzH"><div class="flex" style="margin-bottom:8px"><b id="fzH" style="font-size:15px">Каймы: раппорты (тест)</b><span class="sp"></span><button class="sm" id="mClose">Закрыть</button></div>
+    <p class="mut" style="margin:0 0 10px;font-size:12.5px">Каждая строка — полоса каймы, в которой узор повторяется. Картинка — «чистый» раппорт: медиана всех повторов, поэтому без бликов и случайных огрехов. Этого узора может не быть в базе — разметьте повторы и назовите элемент потом (или найдите его на других коврах).</p>
+    ${j.bands.map((b,i)=>`<div class="fzrow"><div class="fzt" style="background-image:url(${b.tile})"></div><div class="fzi"><b>${b.boxes.length} повторов</b> <small class="mut">${Object.entries(b.sides).map(([k,v])=>SD[k]+' '+v.n).join(' · ')} · чёткость ${Math.round(b.q*100)}%</small>
+      <div class="rgrow"><button class="sm pri" data-fz="${i}">разметить повторы</button></div></div></div>`).join('')||'<p class="mut">Повторяющихся кайм не нашлось — у ковра нет кайм или фото снято под углом.</p>'}</div>`;
+  W.hidden=false;const close=()=>{W.hidden=true;W.innerHTML='';W.onclick=null;};$('mClose').onclick=close;W.onclick=e=>{if(e.target===W)close();};
+  W.querySelectorAll('[data-fz]').forEach(btn=>btn.onclick=()=>{const b=j.bands[+btn.dataset.fz],R0=R.rug;if(!R0||R0.id!==r.id)return;
+    const OR={l:[0,0],r:[0,1],t:[90,0],b:[270,0]},ov=(p,q)=>{const ix=Math.max(0,Math.min(p[0]+p[2],q[0]+q[2])-Math.max(p[0],q[0])),iy=Math.max(0,Math.min(p[1]+p[3],q[1]+q[3])-Math.max(p[1],q[1]));return ix*iy/Math.min(p[2]*p[3],q[2]*q[3]);};
+    let g='',n=0;const t0=Date.now().toString(36);
+    b.boxes.forEach((bx,k)=>{if(R0.marks.some(m=>ov(m.box,bx)>0.5))return;const id='m'+t0+'f'+k,[a,f]=OR[b.box_sides[k]]||[0,0];if(!g)g=id;n++;
+      R0.marks.push({id,box:bx,zone:layZoneAt(R0.layout,bx[0]+bx[2]/2,bx[1]+bx[3]/2)||'border',motif:'',motif_text:'',scheme:'',group:g,certainty:b.q>0.6?'sure':'maybe',status:'proposed',note:'раппорт каймы',machine:1,score:b.q,angle:a,flip:f,by:'машина'});});
+    if(!n){stat('эти повторы уже размечены','ok');return;}
+    rugSaveSoon();close();const m=R0.marks.find(x=>x.id===g);R.ping={id:g,t:Date.now()};rugSelect(m);rugFocus(m,true);
+    stat(`размечено повторов каймы: ${n} — назовите элемент (слева поиск / «Похожие»), Tab — по повторам, C / X — проверить`,'ok');});}
 function rugZones(on){if(on){R.tool='zones';R.showZones=true;R.sel=null;}else{R.tool='box';}rugTools();rugDraw();rugSide();$('rgTZones')&&$('rgTZones').classList.toggle('on',R.tool==='zones');}
 // слева: инструменты и узоры этого ковра (как список рисунков у листа)
 // v11.8: слева — «Узоры»: на этом ковре · по Керимову (тип ковра, школа) · похожие по форме · все схемы студии
@@ -2424,7 +2441,7 @@ function rugTwinAsk(){const V=$('rgView'),r=R.rug;let E=$('rgTwinAsk');if(E)E.re
       stat(v==='ok'?'✓ тот же ковёр'+(j.filled&&j.filled[r.id]?' — паспорт дополнен':''):v==='sim'?'≈ похожи, но разные ковры':'✗ другой ковёр','ok');rugsLoadList();}catch(e){fail(e);}});}
 function rugTools(){$('rgTBox')&&$('rgTBox').classList.toggle('on',R.tool==='box');$('rgTZones')&&$('rgTZones').classList.toggle('on',R.tool==='zones');$('rgTHand')&&$('rgTHand').classList.toggle('on',R.tool==='hand');
   const has=!!(R.sel&&R.rug&&R.rug.marks.includes(R.sel));document.querySelectorAll('#rgCenter [data-need-sel] button').forEach(b=>{b.disabled=!has;});
-  $('rgTbRep')&&$('rgTbRep').classList.toggle('on',!!R.repeatOf);
+  $('rgTBox')&&$('rgTBox').classList.toggle('rep',!!R.repeatOf);
   // строка-подсказка над фото — только в особых режимах (разделение, зоны, «тот же узор», обвести элемент); обычные пояснения — в «i»
   const h=$('rgHint');if(!h)return;const r=R.rug;
   const t=R.joinFrom?'Кликните по рамке элемента, с которым это тот же узор · Esc — отмена':R.tool==='split'?'Разделение фото: обведите каждый ковёр; клик — выбрать, тяните — подвинуть, Delete — убрать':R.tool==='zones'?'Поле и каймы: тяните линии, Delete — удалить выбранную границу':R.preset?'Обведите на фото элемент «'+(R.preset.name||R.preset.scheme)+'» · Esc — отмена':R.repeatOf?'Обводите повторы выбранного элемента · Esc — закончить':'';
@@ -2554,6 +2571,14 @@ function rugSide(){
   if(R.tool==='split'){rugSplitPanel(E,r);rugLeft();rugSbar();return;}
   if(R.tool==='zones'){rugZonesPanel(E,r);rugLeft();rugSbar();return;}
   rugSideFill(E,'mark',r);
+  // v11.19: всё про фото целиком (каймы, разделить, скрыть, вид рамок) — справа, когда рамка не выбрана
+  $('rgTZones')&&($('rgTZones').onclick=()=>rugZones(R.tool!=='zones'));
+  $('rgTbSplit')&&($('rgTbSplit').onclick=()=>rugSplitStart(R.rug));
+  $('rgFriez')&&($('rgFriez').onclick=()=>rugFriezes(R.rug));
+  $('rgTbHide')&&($('rgTbHide').onclick=()=>{if(R.rug.hidden){R.rug.hidden='';rugSaveSoon();rugRender();}else rugHide(R.rug);});
+  $('rgColBy')&&($('rgColBy').onchange=e=>{R.colorBy=e.target.value==='zone'?'zone':'el';rugDraw();rugSide();});
+  $('rgDim')&&($('rgDim').onchange=e=>{R.dim=e.target.checked;rugDraw();});
+  $('rgShowZ')&&($('rgShowZ').onchange=e=>{R.showZones=e.target.checked;rugDraw();});
   const P=$('rgPassBox');if(P&&!$('modal').hidden){const ae=document.activeElement;if(!(ae&&P.contains(ae)&&/INPUT|TEXTAREA|SELECT/.test(ae.tagName)))rugSideFill(P,'rug',r);}
   rugLeft();rugSbar();
 }
@@ -2747,7 +2772,16 @@ function rugSideFill(E,side,r){
     const m=R.sel;
     if(!m){const n=r.marks.length,ng=new Set(r.marks.map(x=>x.group||x.id)).size,ok=r.marks.filter(x=>x.status==='confirmed').length;
       body=`<div class="rgform"><div class="rgsec"><b>Ничего не выбрано</b> <span class="hint">Как размечать: 1) обведите один элемент рамкой (B); 2) назовите его — слева «Похожие» подскажут по форме, или найдите в словаре справа; 3) «＋ повтор» (R) — такой же элемент в другом месте, название перейдёт само; 🔍 над фото — машина найдёт повторы; 4) другой человек проверяет: ✓ верно (C) / ✗ неверно (X). Tab — следующая рамка.</span>
-        <p class="mut" style="margin:6px 0 0">${n?`На ковре ${ng} ${ng===1?'элемент':'элемента(-ов)'}, рамок ${n}, проверено ${ok}.`:'Рамок пока нет.'}</p></div></div>`;}
+        <p class="mut" style="margin:6px 0 0">${n?`На ковре ${ng} ${ng===1?'элемент':'элемента(-ов)'}, рамок ${n}, проверено ${ok}.`:'Рамок пока нет.'}</p></div>
+        <div class="rgsec"><h5>Фото</h5><div class="rgacts">
+          <button class="sm" id="rgTZones" data-tip="Поле и каймы: граница ковра, полосы кайм и поле — зоны рамок ставятся сами">▭ Поле и каймы <kbd>Z</kbd></button>
+          ${rro()||r.split_from||(r.split_into||[]).length?'':`<button class="sm" id="rgTbSplit">✂ Несколько ковров на фото — разделить <kbd>K</kbd></button>`}
+          ${rro()?'':`<button class="sm" id="rgFriez" data-tip="Машина сама находит полосы кайм, шаг повтора и «чистый» раппорт каждой (медиана всех повторов). Узор не обязан быть в базе: раппорт можно разметить как новый элемент и назвать позже">🧩 Каймы: найти раппорты <small class="mut">тест</small></button>`}
+          ${rro()?'':`<button class="sm" id="rgTbHide">${r.hidden?'↺ Вернуть фото в каталог':'🚫 Не подходит: скрыть фото…'}</button>`}</div></div>
+        <div class="rgsec"><h5>Вид рамок</h5>
+          <label class="rgline">Цвет <select id="rgColBy"><option value="el" ${R.colorBy!=='zone'?'selected':''}>по элементам</option><option value="zone" ${R.colorBy==='zone'?'selected':''}>по зонам</option></select></label>
+          <label><input type="checkbox" id="rgDim" ${R.dim!==false?'checked':''}> затемнять вокруг выбранного <kbd>D</kbd></label>
+          ${r.layout?`<label><input type="checkbox" id="rgShowZ" ${R.showZones?'checked':''}> показывать зоны</label>`:''}</div></div>`;}
     else{
       const g=rugGroup(m),mine=window.ME&&m.by===ME.name,pm=g.filter(x=>x.machine&&x.status==='proposed'),k=r.marks.indexOf(m)+1;
       const stt=m.status==='confirmed'?'<span class="pill ok">✓ проверено</span>':m.status==='rejected'?'<span class="pill bad">✗ неверно</span>':'<span class="pill">ждёт проверки</span>';
@@ -2758,12 +2792,15 @@ function rugSideFill(E,side,r){
           <div class="nm" style="border-left:3px solid ${rugMarkColor(m)};padding-left:7px">${m.motif&&m._motif?esc(m._motif.az)+` <small class="mut">${esc(m._motif.ru||'')}</small>`:(m.motif_text?esc(m.motif_text)+' <small class="mut">(нет в словаре)</small>':'<i class="mut">без названия</i>')}${(m.motif||m.motif_text)&&!rro()?' <a href="#" id="rgMotX" aria-label="убрать название">✕</a>':''}</div>
           <div class="meta"><small class="mut">рамка № ${k}${g.length>1?' · повторов '+g.length:''}</small> ${stt}
           <span class="hint">${named?'':'Название и схему выбирайте слева: поиск сверху, «Похожие» — по форме, «Керимов», «Все схемы». '}${m.xfer?'Перенесено с фото двойника '+esc(m.xfer)+'. ':''}${m.machine&&!m.xfer?'Предложено машиной'+(m.score?', сходство '+Math.round(m.score*100)+'%':'')+(m.certainty==='maybe'?', похоже, но не точно':'')+'. ':''}Отметил(а): ${esc(m.by||'—')}${m.at?', '+new Date(m.at*1000).toLocaleString('ru',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):''}${m.confirmed_by?'; проверил(а): '+esc(m.confirmed_by):''}${mine&&m.status==='proposed'?'. Лучше, чтобы проверял другой человек.':''}</span></div>
-          ${m.scheme?`<div class="rgrow">${rro()?'':`<button class="sm" id="rgRot" data-tip="повернуть схему на 90° (Q)">⟳ 90°</button><button class="sm" id="rgFlip" data-tip="зеркально (W)">⇋</button>`}<label class="mut"><input type="checkbox" id="rgSchOn" ${R.showScheme!==false?'checked':''}> поверх фото (S)</label><input type="range" id="rgSchOp" min="0.1" max="1" step="0.05" value="${R.schOp==null?0.6:R.schOp}" style="flex:1;min-width:50px" aria-label="прозрачность схемы"></div>
+          ${rro()?'':`<div class="rgorient" role="group" aria-label="Положение элемента"><span class="mut">положение ${m.angle||0}°${m.flip?' · зеркально':''}</span>
+            ${[['rgRotL','rotl','Повернуть на 90° против часовой'],['rgRot','rotr','Повернуть на 90° по часовой (Q)'],['rgFlip','flipx','Отразить по горизонтали — слева направо (W)'],['rgFlipY','flipy','Отразить по вертикали — сверху вниз'],['rgOrient0','reset','Как на схеме: 0°, без зеркала']].map(([id,ic,t])=>`<button class="ib" id="${id}" data-tip="${t}" aria-label="${t.replace(/ \(.*$/,'')}">${rgIc(ic)}</button>`).join('')}</div>`}
+          ${m.scheme?`<div class="rgrow"><label class="mut"><input type="checkbox" id="rgSchOn" ${R.showScheme!==false?'checked':''}> поверх фото (S)</label><input type="range" id="rgSchOp" min="0.1" max="1" step="0.05" value="${R.schOp==null?0.6:R.schOp}" style="flex:1;min-width:50px" aria-label="прозрачность схемы"></div>
             <span class="hint">Тяните углы и середины сторон рамки — схема растягивается вместе с ней. Совместите схему с элементом на фото.</span><div id="rgDist" class="rgpick"></div>`:''}</div>
         <div class="rgsec rgline"><label for="rgZone">Зона</label><select id="rgZone" ${dis}>${RZK.map((k2,i)=>`<option value="${k2}" ${m.zone===k2?'selected':''}>${i+1} · ${RZ[k2][0]}</option>`).join('')}</select></div>
         <div class="rgsec"><h5>Отличие от образца <span class="hint">«Другие краски» — тот же узор в другой расцветке, название то же. «Другие детали» — тот же узор, но отличается деталями (крючки, заполнение, пропорции): вариант, опишите в комментарии.</span></h5><div class="rgzones">${[['','такой же'],['color','другие краски'],['detail','другие детали']].map(([k2,v])=>`<button class="sm ${(m.variant||'')===k2?'on':''}" data-var="${k2}" ${dis}>${v}</button>`).join('')}</div></div>
         <div class="rgsec"><h5>Повторы на фото <small class="mut">${g.length} · ✓ ${g.filter(x=>x.status==='confirmed').length}</small></h5>
-          ${pm.length?`<p class="mut" style="margin:2px 0 6px">Машина предложила ${pm.length} (пунктир «?»)<span class="hint">Tab — следующая рамка этого элемента (сначала непроверенные), C — верно, X — неверно; Shift+протяжка по области — убрать машинные рамки внутри. Найти ещё — кнопки 🔍 и 👁 над фото.</span></p>${rro()?'':`<div class="rgrow"><button class="sm" id="rgMachOk">✓ все</button><button class="sm" id="rgMachSure">✓ уверенные (${pm.filter(x=>x.certainty!=='maybe').length})</button><button class="sm" id="rgMachMaybe">✕ неуверенные (${pm.filter(x=>x.certainty==='maybe').length})</button><button class="sm" id="rgMachNo" style="color:var(--bad)">✕ все</button></div>`}`:`<span class="hint">Найти повторы — кнопка 🔍 над фото; «вижу ещё» — 👁 (E); обвести вручную — ＋ (R).</span>`}
+          ${rro()?'':`<div class="rgrow"><button class="sm" id="rgRepHand" data-tip="обвести такой же элемент в другом месте — название и схема перейдут сами (R)">＋ обвести повтор вручную <kbd>R</kbd></button><button class="sm" id="rgRepFind" data-tip="машина ищет повторы на фото; ещё раз — следующие по сходству места (E)">🔍 найти на фото</button></div>`}
+          ${pm.length?`<p class="mut" style="margin:2px 0 6px">Машина предложила ${pm.length} (пунктир «?»)<span class="hint">Tab — следующая рамка этого элемента (сначала непроверенные), C — верно, X — неверно; Shift+протяжка по области — убрать машинные рамки внутри. Найти ещё — 🔍 ещё раз.</span></p>${rro()?'':`<div class="rgrow"><button class="sm" id="rgMachOk">✓ все</button><button class="sm" id="rgMachSure">✓ уверенные (${pm.filter(x=>x.certainty!=='maybe').length})</button><button class="sm" id="rgMachMaybe">✕ неуверенные (${pm.filter(x=>x.certainty==='maybe').length})</button><button class="sm" id="rgMachNo" style="color:var(--bad)">✕ все</button></div>`}`:`<span class="hint">Найти повторы — 🔍 (ещё раз — следующие похожие, E); обвести вручную — R.</span>`}
           <label class="mut rgrow"><input type="checkbox" id="rgAllG" ${R.allGroup?'checked':''}> правки — сразу для всех повторов</label></div>
         <details class="rgmore"><summary>Ещё</summary>
           <label>Уверенность<select id="rgCert" ${dis}><option value="sure" ${m.certainty!=='maybe'?'selected':''}>уверенно</option><option value="maybe" ${m.certainty==='maybe'?'selected':''}>предположительно</option></select></label>
@@ -2820,6 +2857,9 @@ function rugSideFill(E,side,r){
     $('rgSplitM')&&($('rgSplitM').onclick=()=>rugDetach(m));
     $('rgDelG')&&($('rgDelG').onclick=()=>{const g=rugGroup(m);if(!confirm('Удалить элемент «'+rugName(m)+'» и все его рамки ('+g.length+')?'))return;const del=new Set(g.map(x=>x.id));R.rug.marks=R.rug.marks.filter(x=>!del.has(x.id));R.sel=null;rugSaveSoon();rugDraw();rugSide();});
     $('rgRot')&&($('rgRot').onclick=()=>rugOrient(m,90,0));$('rgFlip')&&($('rgFlip').onclick=()=>rugOrient(m,0,1));
+    $('rgRotL')&&($('rgRotL').onclick=()=>rugOrient(m,270,0));$('rgFlipY')&&($('rgFlipY').onclick=()=>rugOrient(m,180,1));
+    $('rgRepHand')&&($('rgRepHand').onclick=()=>rugRepeat());$('rgRepFind')&&($('rgRepFind').onclick=()=>{const more=R.findMid===m.id;R.findMid=m.id;rugFindRepeats(m,false,more);});
+    $('rgOrient0')&&($('rgOrient0').onclick=()=>{m.angle=0;m.flip=0;rugSaveSoon();rugDraw();rugSide();});
     const pm=()=>rugGroup(m).filter(x=>x.machine&&x.status==='proposed');
     $('rgMachOk')&&($('rgMachOk').onclick=()=>{pm().forEach(x=>x.status='confirmed');rugSaveSoon();rugDraw();rugSide();});
     $('rgMachSure')&&($('rgMachSure').onclick=()=>{pm().filter(x=>x.certainty!=='maybe').forEach(x=>x.status='confirmed');rugSaveSoon();rugDraw();rugSide();});
@@ -2912,7 +2952,7 @@ function rugFocus(m,zoom){const V=$('rgView');if(!V||!m)return;
 const rugCompose=(a0,f0,a,f)=>[(((a+(f?-a0:a0))%360)+360)%360,(f^f0)?1:0];
 function rugOrient(m,da,df){
   // только у этой рамки: у каждого повтора своё положение (машина определяет его сама при поиске повторов)
-  if(df){m.flip=m.flip?0:1;m.angle=(360-(m.angle||0))%360;}if(da)m.angle=((m.angle||0)+da)%360;rugSaveSoon();rugDraw();rugSide();}
+  if(df){m.flip=m.flip?0:1;m.angle=(360-(m.angle||0))%360;}if(da)m.angle=((m.angle||0)+da)%360;rugSaveSoon();rugDraw();rugSide();}   // (180, 1) — отражение сверху вниз
 async function rugFindRepeats(m0,auto,loose){
   if(rro()||!m0)return;stat(loose?'ищу ещё похожие места (порог ниже)…':'ищу повторы этого элемента на фото…','busy');const mid=m0.id,rid=R.rug.id;
   try{if(R.saveT)await rugSaveNow();
@@ -3066,18 +3106,27 @@ window.addEventListener('blur',()=>{if(R.on){R.space=false;$('rgSvg')&&$('rgSvg'
     <label class="btn sm" data-tip="Загрузить фото ковров (можно несколько)">＋ фото<input type="file" id="rgUp" accept="image/*" multiple hidden></label>
     <label class="btn sm" data-tip="Каталог музея: catalog.json из Colab (museum_open) — фото скачает сервер">⇪ каталог<input type="file" id="rgCat" accept=".json" hidden></label>
     <label class="btn sm" data-tip="Архив .zip: фото + одноимённые .txt с описаниями (например, azerbaijanrugs). Школа предлагается по папке и описанию">🗜 архив<input type="file" id="rgZip" accept=".zip" hidden></label>
-    <span style="width:10px"></span>
-    <input id="rgQ" type="search" placeholder="поиск по названию, музею…">
-    <select id="rgFilt"><option value="">любой статус</option>${Object.entries(RST).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
-    <select id="rgSort" data-tip="порядок плиток"><option value="">сначала в работе, потом новые</option><option value="kbig">Керимов с крупным двойником — первыми</option><option value="title">по названию</option></select>
-    </div><div class="kpirow" id="rgKpi"></div>
-    <div class="rgchips" id="rgKinds"></div>
-    <div class="rgchips"><h2 id="rgH"></h2><button class="sm" id="rgDupChk" data-tip="Машина совмещает фото каждой пары «один и тот же ковёр» и показывает подозрительные склейки — вы отвечаете ✓ / ✗">🔎 проверить склейки</button><label class="chip" data-tip="У ковра из Керимова есть фото этого же ковра крупнее — размечать лучше там"><input type="checkbox" id="rgFBig"> ⬆ есть фото крупнее</label><label class="chip"><input type="checkbox" id="rgFDup"> есть двойники</label><label class="chip" data-tip="Машина нашла на фото лица — обычно это выставка, мастерская, помещение с людьми. Посмотрите и скройте лишние одной кнопкой (портретные ковры снимите с отметки)"><input type="checkbox" id="rgFPpl"> 👤 люди на фото</label><label class="chip" data-tip="Фото, где похоже на несколько ковров (развороты книг). Первый раз машина просматривает все фото — несколько минут"><input type="checkbox" id="rgFMulti"> ✂ развороты</label><label class="chip"><input type="checkbox" id="rgFNone"> не размечены</label></div>
+    <span class="sp"></span>
+    <button class="sm" id="rgDupChk" data-tip="Машина совмещает фото каждой пары «один и тот же ковёр» и показывает подозрительные склейки — вы отвечаете ✓ / ✗">🔎 проверить склейки</button>
+    </div>
+    <div class="kpiline" id="rgKpi"></div>
+    <div class="rgfl" role="group" aria-label="Фильтры плитки">
+      <div class="rgflr"><span class="rgfll">Что</span><span class="seg" id="rgKinds"></span><span class="rgfll">Статус</span><span class="seg" id="rgStSeg"></span>
+        <span class="sp"></span><input id="rgQ" type="search" placeholder="поиск по названию, музею…"><select id="rgSort" data-tip="порядок плиток"><option value="">сначала в работе, потом новые</option><option value="kbig">Керимов с крупным двойником — первыми</option><option value="title">по названию</option></select></div>
+      <div class="rgflr"><span class="rgfll">Показать только</span>
+        <label class="chip"><input type="checkbox" id="rgFNone"> не размечены</label>
+        <label class="chip"><input type="checkbox" id="rgFDup"> есть двойники</label>
+        <label class="chip" data-tip="У ковра из Керимова есть фото этого же ковра крупнее — размечать лучше там"><input type="checkbox" id="rgFBig"> есть фото крупнее</label>
+        <span class="rgfll" style="margin-left:10px">Проверить</span>
+        <label class="chip" data-tip="Фото, где похоже на несколько ковров (развороты книг). Первый раз машина просматривает все фото — несколько минут"><input type="checkbox" id="rgFMulti"> развороты</label>
+        <label class="chip" data-tip="Машина нашла на фото лица — обычно это выставка, мастерская, помещение с людьми. Посмотрите и скройте лишние одной кнопкой (портретные ковры снимите с отметки)"><input type="checkbox" id="rgFPpl"> люди на фото</label>
+        <span class="sp"></span><h2 id="rgH" hidden></h2><button class="sm" id="rgFReset" hidden>сбросить фильтры</button></div>
+    </div>
     <div class="rgstat" id="rgStat"></div><div class="rgcards" id="rgCards"></div></section><aside id="rgPeek" aria-label="Ковёр под курсором"></aside></div>
     <div id="rgTypesV" style="display:none"><aside id="tyList"></aside><section id="tySheet"></section></div>
     <div id="rgEditV"><aside id="rgLeft"></aside><section id="rgCenter"></section><aside id="rgSide"></aside></div>`;
   document.body.appendChild(d);
-  $('rgFilt').onchange=e=>{R.filter=e.target.value;R.gridN=150;rugList();};$('rgQ').oninput=e=>{R.q=e.target.value;R.gridN=150;rugList();};$('rgSort').onchange=e=>{R.sort=e.target.value;R.gridN=150;rugList();};
+  $('rgQ').oninput=e=>{R.q=e.target.value;R.gridN=150;rugList();};$('rgSort').onchange=e=>{R.sort=e.target.value;R.gridN=150;rugList();};
   $('rgUp').onchange=async e=>{const fd=new FormData();[...e.target.files].forEach(f=>fd.append('files',f));stat('загружаю…','busy');
     try{const r=await fetch('/api/rugs_upload',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat('добавлено ковров: '+j.made.length,'ok');await rugsLoadList();if(j.made[0])rugOpen(j.made[0]);}catch(err){fail(err);}e.target.value='';};
   $('rgZip').onchange=async e=>{const f=e.target.files[0];if(!f)return;const fd=new FormData();fd.append('file',f);stat('загружаю архив…','busy');
@@ -3228,7 +3277,8 @@ function rugTree(){const E=$('rgTree');if(!E)return;const base=R.list.filter(r=>
 function rugKpi(byId,kb,nker){const E=$('rgKpi');if(!E)return;const base=R.list.filter(r=>!(r.split_into&&r.split_into.length));
   const groups=new Set(base.filter(r=>r.group).map(r=>r.group)).size,marked=base.filter(r=>r.n).length;
   const cs=base.filter(r=>!r.composition&&r.comp_sug),ct=cs.filter(r=>r.comp_sug_kind==='title').length,cw=cs.length-ct,nc=base.filter(r=>!r.composition).length;
-  E.innerHTML=`<div><b>${base.length}</b><small>фото ковров</small></div><div><b>${groups}</b><small>групп «один и тот же ковёр»</small></div><div><b class="${kb?'zg':''}">${kb}</b><small>из Керимова с фото крупнее (из ${nker})</small></div><div><b>${marked}</b><small>размечено</small><span class="kbar"><i style="width:${base.length?100*marked/base.length:0}%"></i></span></div><div id="rgKpiComp"><b class="${cs.length?'zg':''}">${nc}</b><small>без типа ковра${cs.length?` · предположен у ${cs.length}`:''}</small>${cs.length&&!rro()?`<span class="rgrow" style="margin:4px 0 0">${cw?`<button class="sm" data-cacc="twin" data-tip="взять тип у двойника, у которого он указан">принять от двойников (${cw})</button>`:''}${ct?`<button class="sm" data-cacc="title" data-tip="тип по слову в названии: «Pirəbədil carpet…», «Ковёр Касымушагы». Проверьте выборочно — названия бывают неточные">принять по названию (${ct})</button>`:''}</span>`:''}</div>`;
+  // v11.19: сводка одной строкой (карточки занимали пол-экрана)
+  E.innerHTML=`<span><b>${base.length}</b> фото</span><span><b>${marked}</b> размечено <span class="kbar"><i style="width:${base.length?100*marked/base.length:0}%"></i></span></span><span><b>${groups}</b> групп двойников</span><span><b class="${kb?'zg':''}">${kb}</b> из ${nker} Керимова с фото крупнее</span><span id="rgKpiComp"><b class="${cs.length?'zg':''}">${nc}</b> без типа ковра${cs.length?` · предложен у ${cs.length}${!rro()?`: ${cw?`<button class="sm" data-cacc="twin" data-tip="взять тип у двойника, у которого он указан">от двойников (${cw})</button>`:''}${ct?` <button class="sm" data-cacc="title" data-tip="тип по слову в названии: «Pirəbədil carpet…», «Ковёр Касымушагы». Проверьте выборочно — названия бывают неточные">по названию (${ct})</button>`:''}`:''}`:''}</span>`;
   E.querySelectorAll('[data-cacc]').forEach(b=>b.onclick=async()=>{const k=b.dataset.cacc,n=k==='title'?ct:cw;if(!confirm(`Поставить предложенный тип ковра у ${n} ковров (${k==='title'?'по слову в названии':'от двойника'})? Потом его можно поменять в паспорте.`))return;
     try{const j=await api('/api/rugs_comp_accept',{all:true,kind:k});stat('тип ковра поставлен у '+j.n+' ковров','ok');await rugsLoadList();}catch(e){fail(e);}});}
 function rugPeek(id){const E=$('rgPeek');if(!E)return;const r=id&&R.list.find(x=>x.id===id);R.peekId=r?r.id:null;
@@ -3269,13 +3319,13 @@ function hintsToI(root){(root||document).querySelectorAll('.hint:not([data-i])')
 new MutationObserver(ms=>{for(const m of ms)if(m.addedNodes.length){hintsToI();break;}}).observe(document.body,{childList:true,subtree:true});hintsToI();
 
 /* ============ v11.3: колонка разделов, «где вы сейчас», шпаргалка клавиш ============ */
-const RAIL_IC={pipe:'<rect x="3" y="3" width="6" height="6" rx="1.2"/><rect x="11" y="3" width="6" height="6" rx="1.2"/><rect x="3" y="11" width="6" height="6" rx="1.2"/><rect x="11" y="11" width="6" height="6" rx="1.2"/>',
+const RAIL_IC={pipe:'<path d="M5 14V9a5 5 0 0 1 10 0v5l1.5 2h-13z"/><path d="M8.5 18a1.8 1.8 0 0 0 3 0"/>',
   sheet:'<path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5"/><rect x="7.5" y="9" width="5" height="5"/>',
   queue:'<path d="M10 3l7 7-7 7-7-7z"/><path d="M10 7l3 3-3 3-3-3z"/>',
   rugs:'<rect x="4" y="2.5" width="12" height="15" rx="1"/><rect x="7" y="6" width="6" height="8"/>',
   dyes:'<circle cx="7" cy="8" r="3.5"/><circle cx="13" cy="8" r="3.5"/><circle cx="10" cy="13" r="3.5"/>',
   kb:'<rect x="2.5" y="5.5" width="15" height="10" rx="1.5"/><path d="M5.5 9h1M9.5 9h1M13.5 9h1M6 12.5h8"/>'};
-const RAIL_LB={pipe:'Обзор',sheet:'Листы',queue:'Узоры',rugs:'Ковры',dyes:'Красители'};
+const RAIL_LB={pipe:'События',sheet:'Листы',queue:'Узоры',rugs:'Ковры',dyes:'Красители'};
 function railIcon(k){return `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">${RAIL_IC[k]}</svg>`;}
 function crumbsText(){const P=[];
   if(EV.on)P.push('События');
@@ -3283,14 +3333,15 @@ function crumbsText(){const P=[];
   else if(R.on){P.push('Ковры');if(R.view==='edit'&&R.rug){P.push(SRCRU[(R.rug.cat||{}).src]||(R.rug.cat||{}).src||'');P.push(R.rug.title||R.rug.id);}
     else{if(R.fsrc2)P.push(SRCRU[R.fsrc2]||R.fsrc2);else if(R.fsrc)P.push(RSRC[R.fsrc]||R.fsrc);else P.push('Все источники');}}
   else{const m=S.mode;
-    if(m==='pipe')P.push('Обзор');
+    if(m==='pipe'){P.push('Узоры');P.push('Сводка');}
     else if(m==='sheet'){P.push('Узоры');P.push('Листы');if(S.sheet&&S.sheet.path)P.push(S.sheet.path.split('/').slice(-2).join(' / '));}
     else if(m==='queue'||m==='cat'){P.push('Узоры');P.push(m==='queue'?'Очередь проверки':'Все рисунки');if(S.fsrc)P.push(srcTitle(S.fsrc));if(S.ftab!=null)P.push('Табл. '+S.ftab);}
     else if((m==='grid'||m==='pix')&&S.fig){P.push('Узоры');P.push(S.fig.id+(S.fig.meta&&S.fig.meta.name_az?' · '+S.fig.meta.name_az:''));P.push(m==='grid'?'Геометрия':'Пиксели');}}
   return P.filter(Boolean);}
-function crumbsUpd(){const P=crumbsText(),k=P.join('|');if(k===crumbsUpd.k)return;crumbsUpd.k=k;
+function crumbsUpd(){const pb=$('rgPassBtn');if(pb){const on=!!(R.on&&R.view==='edit'&&R.rug);if(pb.hidden===on)pb.hidden=!on;if(!pb.onclick)pb.onclick=()=>rugPassOpen();}   // v11.19: паспорт — у названия ковра, справа в шапке
+  const P=crumbsText(),k=P.join('|');if(k===crumbsUpd.k)return;crumbsUpd.k=k;
   $('crumbs').innerHTML=P.map((x,i)=>i?`<span>${esc(x)}</span>`:`<b>${esc(x)}</b>`).join('<i>/</i>');
-  const cur=EV.on?'':DY.on?'dyes':R.on?'rugs':(S.mode==='grid'||S.mode==='pix'||S.mode==='cat'||S.mode==='sheet')?'queue':S.mode;
+  const cur=EV.on?'pipe':DY.on?'dyes':R.on?'rugs':(S.mode==='grid'||S.mode==='pix'||S.mode==='cat'||S.mode==='sheet'||S.mode==='pipe')?'queue':S.mode;
   ['pipe','sheet','queue','rugs','dyes'].forEach(t=>{const b=$('tab-'+t);if(b){b.classList.toggle('on',t===cur);b.setAttribute('aria-current',t===cur?'page':'false');}});}
 function keysHelp(){const W=$('modal');
   const G=[['Везде',[['1 / 2','Узоры: листы / очередь проверки'],['+ −','масштаб'],['0','вписать'],['пробел (держать)','двигать / подглядеть скан'],['⌘Z, ⇧⌘Z','отменить / повторить'],['⌘S','сохранить'],['Esc','закрыть окно / редактор'],['?','эта шпаргалка']]],
@@ -3306,6 +3357,9 @@ function keysHelp(){const W=$('modal');
   $('tab-sheet').hidden=true;   // v11.8: «Листы» — вкладка внутри «Узоров» (клавиша 1 работает как раньше)
   const kb=document.createElement('button');kb.id='railKeys';kb.className='kb';kb.setAttribute('aria-label','Горячие клавиши');kb.setAttribute('data-tip','Горячие клавиши (?)');kb.innerHTML=railIcon('kb')+'<span>Клавиши</span>';kb.onclick=keysHelp;$('rail').appendChild(kb);
   window.addEventListener('keydown',e=>{const ae=document.activeElement;if(e.key==='?'&&!(ae&&/INPUT|TEXTAREA|SELECT/.test(ae.tagName))&&$('modal').hidden&&!S.rv&&!S.hv&&!S.sv){e.preventDefault();e.stopImmediatePropagation();keysHelp();}},true);
+  // v11.19: «Обзор» был про узоры — он теперь «Сводка» внутри «Узоров»; в колонке вместо него — «События» (что ждёт решения)
+  const pb=$('tab-pipe');pb.setAttribute('data-tip','События: что ждёт вашего решения, итоги ночных прогонов, кто что сделал');
+  pb.addEventListener('click',e=>{e.stopImmediatePropagation();e.preventDefault();EV.on?evClose():evOpen();},true);
   setInterval(crumbsUpd,400);crumbsUpd();
 })();
 </script></body></html>

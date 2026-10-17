@@ -647,6 +647,24 @@ def install(app, DATA, D_WORK):
         threading.Thread(target=run, daemon=True).start()
         return {"started": len(todo), "skipped": len(items) - len(todo)}
 
+    @app.post("/api/rugs/{rid}/friezes")
+    async def api_rug_friezes(rid: str):
+        """v11.19: каймы как фризы — полосы, шаг повтора, «чистый» раппорт (медиана повторов) и места всех повторов.
+        Новый знак без базы: раппорт можно разметить как элемент, назвать и потом искать на других коврах."""
+        import sign_lab, base64
+        r = load(rid); p = img_path(rid)
+        if not r or not p: return JSONResponse({"error": "нет такого ковра"}, 404)
+        def work():
+            a = read_small(p, 1800)
+            if a is None: return {"error": "фото не читается"}
+            res = sign_lab.friezes(a)
+            for b in res["bands"]:
+                t = cv2.rotate(b.pop("tile"), cv2.ROTATE_90_CLOCKWISE)          # раппорт лёжа: вдоль каймы — слева направо
+                k = 96.0 / max(1, t.shape[0]); t = cv2.resize(t, None, fx=k, fy=k, interpolation=cv2.INTER_CUBIC if k > 1 else cv2.INTER_AREA)
+                b["tile"] = "data:image/jpeg;base64," + base64.b64encode(cv2.imencode(".jpg", t, [cv2.IMWRITE_JPEG_QUALITY, 88])[1]).decode()
+            return res
+        return await job_wait(work, "каймы: раппорты")
+
     @app.post("/api/rugs/{rid}/layout")
     def api_rug_layout(rid: str):
         """Автоматически найти край ковра, полосы кайм и поле (предложение; человек правит)."""

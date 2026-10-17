@@ -45,6 +45,15 @@ def make_rugs(data):
     k = cv2.resize(carpet(420, 600, 3), (280, 400)); m = cv2.resize(carpet(420, 600, 3), (840, 1200))
     save("kerimov_vol3_p100_1", k, title="Керимов, т. III, Челеберд", cat={"src": "kerimov_vol3"}, same_group="g1", same=[{"id": "met_123", "score": 80}], school="karabakh")
     save("met_123", m, title="Carpet, Karabagh", museum="Метрополитен", cat={"src": "met"}, same_group="g1", same=[{"id": "kerimov_vol3_p100_1", "score": 80}])
+    def frieze_rug():                # v11.19: ковёр с каймой из повторяющегося узора (раппорт 40 px)
+        a = np.full((760, 560, 3), 235, np.uint8); a[30:730, 30:530] = (40, 40, 150)
+        t = np.full((40, 60, 3), (60, 140, 200), np.uint8); cv2.rectangle(t, (6, 6), (28, 34), (240, 240, 230), -1); cv2.line(t, (34, 4), (56, 36), (20, 90, 40), 5)
+        for y in range(30, 730 - 40, 40): a[y:y + 40, 30:90] = t; a[y:y + 40, 470:530] = cv2.flip(t, 1)
+        tt = cv2.rotate(t, cv2.ROTATE_90_CLOCKWISE)
+        for x in range(90, 470 - 40, 40): a[30:90, x:x + 40] = tt; a[670:730, x:x + 40] = cv2.flip(tt, 0)
+        a[90:670, 90:470] = carpet(380, 580, 77)[:580, :380]
+        return a
+    save("frieze_1", frieze_rug(), title="Rug with border", cat={"src": "azerbaijanrugs"})
     for i in (1, 2):                 # v11.18: фото с людьми (лица найдены машиной заранее)
         save(f"ppl_{i}", carpet(300, 420, 40 + i), title=f"Rug photo {i}", cat={"src": "azerbaijanrugs"}, people={"n": i, "ver": 1, "faces": []})
     def star(a, cx, cy, r, col):     # v11.4: один и тот же «узор» на трёх коврах — для поиска по всем коврам
@@ -388,7 +397,7 @@ def t13_rail_crumbs_keys(pg, ctx):
     ids = pg.evaluate("[...document.querySelectorAll('#rail button')].map(b=>b.id)")
     for t in ('tab-pipe', 'tab-queue', 'tab-rugs', 'tab-dyes', 'railKeys'): assert t in ids, f'в колонке разделов нет {t}'
     assert not pg.is_visible('#tab-sheet'), '«Листы» должны быть внутри «Узоров», а не отдельным разделом'
-    for t, word in (('tab-pipe', 'Обзор'), ('tab-queue', 'Узоры'), ('tab-rugs', 'Ковры'), ('tab-dyes', 'Красители')):
+    for t, word in (('tab-pipe', 'События'), ('tab-queue', 'Узоры'), ('tab-rugs', 'Ковры'), ('tab-dyes', 'Красители')):
         pg.click('#' + t); pg.wait_for_timeout(900)
         assert (pg.text_content('#crumbs') or '').startswith(word), f'«где вы сейчас» не показывает {word}: {pg.text_content("#crumbs")}'
         assert pg.evaluate(f"document.getElementById('{t}').classList.contains('on')"), f'раздел {word} не подсвечен в колонке'
@@ -399,6 +408,7 @@ def t13_rail_crumbs_keys(pg, ctx):
     pg.keyboard.press('Escape'); pg.wait_for_timeout(300); assert not pg.is_visible('#modal'), 'Esc не закрывает шпаргалку'
     pg.click('#railKeys'); pg.wait_for_timeout(300); assert pg.is_visible('#modal .kbgrid'), 'кнопка «Клавиши» не открывает шпаргалку'
     pg.click('#mClose'); pg.wait_for_timeout(200)
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(300)   # v11.19: «События» — экран из колонки; Esc закрывает
     pg.keyboard.press('2'); pg.wait_for_timeout(600); assert pg.evaluate("S.mode") == 'queue', 'клавиша 2 не открывает «Узоры»'
     pg.keyboard.press('1'); pg.wait_for_timeout(600); assert pg.evaluate("S.mode") == 'sheet', 'клавиша 1 не открывает «Листы»'
     assert (pg.text_content('#crumbs') or '').startswith('Узоры') and pg.evaluate("document.getElementById('tab-queue').classList.contains('on')"), 'листы не отмечены как часть «Узоров»'
@@ -571,10 +581,10 @@ def t18_feedback_v116(pg, ctx):
     pg.click('#rgKinds [data-kind="carpets"]'); pg.wait_for_timeout(300)
     # скрыть
     pg.evaluate("rugOpen('vam_4')"); pg.wait_for_timeout(1400)
-    pg.click('#rgTbMenu'); pg.wait_for_timeout(200); pg.click('#rgTbHide'); pg.wait_for_timeout(300); pg.click('#modal [data-hr="0"]'); pg.wait_for_timeout(1500)
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200); pg.click('#rgTbHide'); pg.wait_for_timeout(300); pg.click('#modal [data-hr="0"]'); pg.wait_for_timeout(1500)
     assert get(u + 'api/rugs/vam_4').get('hidden'), 'фото не скрылось'
     assert 'vam_4' not in pg.evaluate("R.list.filter(r=>rugKindOf(r)==='carpets').map(r=>r.id)"), 'скрытое фото осталось среди ковров'
-    pg.click('#rgTbMenu'); pg.wait_for_timeout(200); pg.click('#rgTbHide'); pg.wait_for_timeout(1200)
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200); pg.click('#rgTbHide'); pg.wait_for_timeout(1200)
     assert not get(u + 'api/rugs/vam_4').get('hidden'), '«вернуть» не вернуло фото'
     # автоповторы после новой рамки — только «точно такие же»
     pg.evaluate("rugOpen('border_rep')"); pg.wait_for_timeout(1500)
@@ -732,14 +742,15 @@ def t21_rug_editor_zones(pg, ctx):
     pg.goto(ctx['url']); pg.wait_for_timeout(2000)
     pg.click('#tab-rugs'); pg.wait_for_timeout(1200); pg.evaluate("rugOpen('vam_1')"); pg.wait_for_timeout(1500)
     tb = pg.query_selector('.rgtb').bounding_box(); v = pg.query_selector('#rgView').bounding_box()
-    assert abs((tb['x'] + tb['width'] / 2) - (v['x'] + v['width'] / 2)) < 30 and tb['y'] - v['y'] < 30, 'панель инструментов не над фото посередине'
+    assert tb['x'] - v['x'] < 30 and tb['y'] - v['y'] < 30 and tb['height'] > tb['width'], 'панель инструментов не слева сверху столбиком (как у узоров)'
     assert pg.evaluate("document.getElementById('rgFindRep').disabled"), 'кнопки элемента активны без выбранной рамки'
     assert pg.evaluate("document.querySelectorAll('#rgPassBtn,#rgPassBtn2').length") == 1, 'кнопка «Паспорт» на экране не одна'
     title = pg.evaluate("R.rug.title")
     for sel in ('#rgLeft', '#rgSide', '#sbar'):
         assert title not in (pg.text_content(sel) or ''), f'название ковра повторяется в {sel}'
-    assert not pg.is_visible('#rgMenu'); pg.click('#rgTbMenu'); pg.wait_for_timeout(200); assert pg.is_visible('#rgMenu'), 'меню «⋯» не открывается'
-    pg.mouse.click(v['x'] + 20, v['y'] + v['height'] - 20); pg.wait_for_timeout(200); assert not pg.is_visible('#rgMenu'), 'меню не закрывается кликом мимо'
+    # v11.19: всё про фото целиком — справа, когда рамка не выбрана
+    for sel in ('#rgSide #rgTZones', '#rgSide #rgTbHide', '#rgSide #rgColBy', '#rgSide #rgDim'): assert pg.is_visible(sel), f'справа нет {sel}'
+    assert pg.is_visible('header #rgPassBtn'), 'кнопки «Паспорт ковра» нет в шапке у названия'
     # пояснения спрятаны за «i»
     assert pg.evaluate("[...document.querySelectorAll('#rgSide .hint')].every(h=>h.offsetParent===null)"), 'пояснения видны без «i»'
     pg.click('#rgSide .ib-i'); pg.wait_for_timeout(150); assert pg.evaluate("[...document.querySelectorAll('#rgSide .hint')].some(h=>h.offsetParent!==null)"), '«i» не раскрывает пояснение'
@@ -860,6 +871,27 @@ def t24_people_schemes_twins_v1118(pg, ctx):
         time.sleep(1)
     assert not st['running'] and not st['error'] and st['done'] == st['total'] > 0, f'проверка фото на людей: {st}'
     errors_ok(ctx, 't24')
+
+
+@test
+def t25_friezes_v1119(pg, ctx):
+    """v11.19: каймы как фризы — машина находит раппорт без базы, «разметить повторы» ставит группу рамок"""
+    u = ctx['url']
+    j = post(u + 'api/rugs/frieze_1/friezes', {})
+    for _ in range(40):
+        if 'pending' not in j: break
+        time.sleep(1); j = get(u + 'api/jobs/' + j['pending'])
+        j = j.get('res', j) if isinstance(j, dict) and j.get('done') else j
+    assert j.get('bands'), f'раппорт каймы не найден: {str(j)[:300]}'
+    b = max(j['bands'], key=lambda b: len(b['boxes']))
+    assert len(b['boxes']) >= 12 and b['tile'].startswith('data:image'), f'мало повторов каймы: {len(b["boxes"])}'
+    pg.goto(u); pg.wait_for_timeout(1800); pg.click('#tab-rugs'); pg.wait_for_timeout(1000); pg.evaluate("rugOpen('frieze_1')"); pg.wait_for_timeout(1500)
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+    pg.click('#rgFriez'); pg.wait_for_selector('#modal [data-fz]', timeout=30000)
+    n0 = pg.evaluate("R.rug.marks.length"); pg.click('#modal [data-fz]'); pg.wait_for_timeout(800)
+    n1 = pg.evaluate("R.rug.marks.length"); g = pg.evaluate("new Set(R.rug.marks.map(m=>m.group)).size")
+    assert n1 - n0 >= 8 and g == 1, f'«разметить повторы»: было {n0}, стало {n1}, групп {g}'
+    errors_ok(ctx, 't25')
 
 
 def main():
