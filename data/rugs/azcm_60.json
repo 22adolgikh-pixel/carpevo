@@ -9,7 +9,7 @@
  "place": "Карабах, Азербайджан",
  "date": "конец XIX века",
  "school": "karabakh",
- "composition": "",
+ "composition": "buynuz-carpet",
  "technique": "ворсовый",
  "size": "123x271 sm",
  "notes": "основа, уток, ворс – шерсть; ",
@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791870042,
- "updated": 1791870042,
+ "updated": 1792269794,
  "cat": {
   "title": "“Buynuz” («Буйнуз»), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -60,7 +60,18 @@
    "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Buynuz_carpet_jpg": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792269742
+  },
+  "azr_kuba_seychour66": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792269747
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "azr_kuba_seychour66": {
@@ -79,5 +90,10 @@
   "faces": [],
   "ver": 1,
   "at": 1792261886
+ },
+ "layout": null,
+ "updated_by": "dolgikh",
+ "from_twin": {
+  "composition": "wikimedia_File_Buynuz_carpet_jpg"
  }
 }
