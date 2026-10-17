@@ -436,7 +436,7 @@
    "scheme": "",
    "group": "mmvcp95ni",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -446,8 +446,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792259876,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792259929
   },
   {
    "id": "mmvcp9cr80",
@@ -463,7 +463,7 @@
    "scheme": "",
    "group": "mmvcp95ni",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -473,8 +473,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792259884,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792259930
   },
   {
    "id": "mmvcp9cr81",
@@ -490,7 +490,7 @@
    "scheme": "",
    "group": "mmvcp95ni",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -500,8 +500,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792259884,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792259931
   },
   {
    "id": "mmvcp9cr82",
@@ -517,7 +517,7 @@
    "scheme": "",
    "group": "mmvcp95ni",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -527,8 +527,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792259884,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792259932
   },
   {
    "id": "mmvcp9cr83",
@@ -544,7 +544,7 @@
    "scheme": "",
    "group": "mmvcp95ni",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 270,
    "flip": 0,
@@ -554,62 +554,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792259884,
-   "confirmed_by": "",
-   "confirmed_at": 0
-  },
-  {
-   "id": "mmvcp9cr84",
-   "box": [
-    0.33584,
-    0.67639,
-    0.11123,
-    0.03979
-   ],
-   "zone": "field",
-   "motif": "",
-   "motif_text": "",
-   "scheme": "",
-   "group": "mmvcp95ni",
-   "certainty": "maybe",
-   "status": "proposed",
-   "note": "",
-   "angle": 180,
-   "flip": 1,
-   "machine": 1,
-   "score": 0.434,
-   "xfer": "",
-   "variant": "",
-   "by": "машина → dolgikh",
-   "at": 1792259884,
-   "confirmed_by": "",
-   "confirmed_at": 0
-  },
-  {
-   "id": "mmvcp9cr85",
-   "box": [
-    0.32301,
-    0.23077,
-    0.06417,
-    0.06896
-   ],
-   "zone": "field",
-   "motif": "",
-   "motif_text": "",
-   "scheme": "",
-   "group": "mmvcp95ni",
-   "certainty": "maybe",
-   "status": "proposed",
-   "note": "",
-   "angle": 270,
-   "flip": 0,
-   "machine": 1,
-   "score": 0.433,
-   "xfer": "",
-   "variant": "",
-   "by": "машина → dolgikh",
-   "at": 1792259884,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792259933
   },
   {
    "id": "mmvcp9cr86",
@@ -625,7 +571,7 @@
    "scheme": "",
    "group": "mmvcp95ni",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -635,8 +581,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792259884,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792259955
   },
   {
    "id": "mmvcp9cr87",
@@ -652,7 +598,7 @@
    "scheme": "",
    "group": "mmvcp95ni",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -662,8 +608,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792259884,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792259954
   },
   {
    "id": "mmvcp9w43",
@@ -679,7 +625,7 @@
    "scheme": "",
    "group": "mmvcp95ni",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -689,12 +635,120 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792259909,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792259928
+  },
+  {
+   "id": "mmvcpak6r",
+   "box": [
+    0.25211,
+    0.67506,
+    0.11218,
+    0.03916
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcp95ni",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1792259940,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792259942
+  },
+  {
+   "id": "mmvcpaqa7",
+   "box": [
+    0.36783,
+    0.67616,
+    0.106,
+    0.03642
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcp95ni",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1792259948,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792259948
+  },
+  {
+   "id": "mmvcpd1pl",
+   "box": [
+    0.2761,
+    0.78651,
+    0.08219,
+    0.04092
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcpd1pl",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1792260055,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792260063
+  },
+  {
+   "id": "mmvcpd3o10",
+   "box": [
+    0.62545,
+    0.77889,
+    0.08244,
+    0.04111
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcpd1pl",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 1,
+   "score": 0.889,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1792260058,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792260064
   }
  ],
  "created": 1791870041,
- "updated": 1792259909,
+ "updated": 1792260091,
  "cat": {
   "title": "“Fəxralı” («Фахралы»), Гянджа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
