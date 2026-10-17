@@ -7,9 +7,9 @@
  "url": "https://commons.wikimedia.org/wiki/File:Dragon_Carpet_MET_DP211662.jpg",
  "license": "CC0",
  "place": "",
- "date": "",
+ "date": "1971",
  "school": "",
- "composition": "",
+ "composition": "qarabag",
  "technique": "",
  "size": "",
  "notes": "Textiles-Rugs; Carpet",
@@ -18,7 +18,7 @@
  "h": 1936,
  "marks": [],
  "created": 1791870020,
- "updated": 1792147554,
+ "updated": 1792258085,
  "cat": {
   "title": "Textiles-Rugs; Carpet",
   "museum": "Метрополитен-музей",
@@ -154,7 +154,28 @@
    "score": 170
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_1332fbb9a0": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258081
+  },
+  "cm_287f68ee2f": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258083
+  },
+  "cm_34a29c4a3e": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258084
+  },
+  "cm_46ae6f9b72": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258085
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_1332fbb9a0": {
@@ -289,5 +310,9 @@
   }
  },
  "layout": null,
- "updated_by": "dolgikh"
+ "updated_by": "dolgikh",
+ "from_twin": {
+  "date": "cm_1332fbb9a0",
+  "composition": "cm_34a29c4a3e"
+ }
 }
