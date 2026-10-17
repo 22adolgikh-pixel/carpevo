@@ -18,7 +18,7 @@
  "h": 605,
  "marks": [],
  "created": 1791736122,
- "updated": 1791736122,
+ "updated": 1792272840,
  "cat": {
   "title": "Керимов, т. II (стр. скана 127, печ. 3)",
   "museum": "",
@@ -70,8 +70,25 @@
  },
  "src_id": "cat:kerimov_vol2_p127_2",
  "lib_img": "img/kerimov_vol2_p127_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol2_p127_3",
+   "score": 350,
+   "via": "kerimov_vol2_p127_1"
+  },
+  {
+   "id": "wikimedia_File_Куба_jpg",
+   "score": 0,
+   "via": "kerimov_vol2_p127_1"
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol2_p127_3": {
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1792153090
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
