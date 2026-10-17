@@ -647,6 +647,87 @@ def install(app, DATA, D_WORK):
         threading.Thread(target=run, daemon=True).start()
         return {"started": len(todo), "skipped": len(items) - len(todo)}
 
+    # ---- v11.20: словарь знаков кайм по всему каталогу (sign_lib) ----
+    import sign_lib
+    sign_lib.setup(DATA)
+    D_SIGNS = os.path.join(DATA, "signs")
+
+    def signs_todo(all_=False):
+        ix = sign_lib.index(); out = []
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("dup_of") or r.get("split_into") or r.get("hidden") or obj_guess(r)[0] == "scene": continue
+            if not all_ and (ix.get(r["id"]) or {}).get("ver", 0) >= sign_lib.VER: continue
+            if img_path(r["id"]): out.append(r["id"])
+        return out
+
+    def signs_run(all_=False, on_done=None):
+        todo = signs_todo(all_)
+        if not todo: return 0
+        sign_lib.run(todo, lambda rid: read_small(img_path(rid), 1800), heavy, on_done)
+        return len(todo)
+
+    app.state.signs_run = signs_run; app.state.signs_todo = signs_todo
+
+    @app.get("/api/signs")
+    def api_signs(min_rugs: int = 1):
+        meta = {}
+        for f in os.listdir(D_RUGS):
+            if f.endswith(".json"):
+                r = load(f[:-5])
+                if r and not r.get("dup_of") and not r.get("hidden"):
+                    meta[r["id"]] = {"title": (r.get("title") or r["id"])[:90], "school": r.get("school", ""), "composition": r.get("composition", ""),
+                                     "src": (r.get("cat") or {}).get("src", "")}
+        cl = [g for g in sign_lib.clusters(meta) if g["rugs"] >= min_rugs]
+        for g in cl:
+            for m in g["members"]: m.update(meta.get(m["rid"]) or {})
+            sch = {}
+            for m in g["members"]: sch[m.get("school") or "-"] = sch.get(m.get("school") or "-", 0) + 1
+            g["schools"] = sch
+        ix = sign_lib.index()
+        return {"state": sign_lib.state, "queue": heavy_q, "rugs_done": len(ix), "rugs_todo": len(signs_todo()), "clusters": cl}
+
+    @app.post("/api/signs/run")
+    def api_signs_run(body: dict = Body(default={})):
+        n = signs_run(bool(body.get("all")))
+        return {"started": n, "state": sign_lib.state}
+
+    @app.get("/signs/tile/{key}.jpg")
+    def signs_tile(key: str):
+        p = os.path.join(D_SIGNS, "tiles", os.path.basename(key) + ".jpg")
+        return FileResponse(p, headers={"Cache-Control": "max-age=600"}) if os.path.exists(p) else Response(status_code=404)
+
+    @app.post("/api/signs/name")
+    def api_signs_name(body: dict = Body(...)):
+        """назвать группу: name = {motif, motif_text, az} или null (снять)"""
+        sign_lib.set_name(body.get("keys") or [], body.get("name"))
+        return {"ok": True}
+
+    @app.post("/api/signs/mark")
+    def api_signs_mark(request: Request, body: dict = Body(...)):
+        """разметить группу на всех её коврах: на каждом — группа рамок по местам повторов (машинные, ждут проверки)"""
+        ix = sign_lib.index(); nm = body.get("name") or {}; made = rugs_n = 0; t0 = int(time.time())
+        OR = {"l": (0, 0), "r": (0, 1), "t": (90, 0), "b": (270, 0)}
+        def ov(p, q):
+            ix_ = max(0, min(p[0] + p[2], q[0] + q[2]) - max(p[0], q[0])); iy = max(0, min(p[1] + p[3], q[1] + q[3]) - max(p[1], q[1]))
+            return ix_ * iy / max(1e-9, min(p[2] * p[3], q[2] * q[3]))
+        with _lock:
+            for k in body.get("keys") or []:
+                rid, _, i = k.rpartition("__"); r = load(rid)
+                b = next((x for x in (ix.get(rid) or {}).get("bands") or [] if str(x["i"]) == i), None)
+                if not r or not b: continue
+                g = ""; n = 0
+                for j, bx in enumerate(b["boxes"]):
+                    if any(ov(m["box"], bx) > 0.5 for m in r.get("marks") or []): continue
+                    mid = f"m{t0:x}s{i}_{j}"; a, f = OR.get((b.get("box_sides") or ["l"] * len(b["boxes"]))[j], (0, 0)); g = g or mid
+                    r.setdefault("marks", []).append({"id": mid, "box": bx, "zone": "border", "motif": nm.get("motif", ""), "motif_text": nm.get("motif_text", ""),
+                                                      "scheme": "", "group": g, "certainty": "sure" if b["q"] > 0.6 else "maybe", "status": "proposed",
+                                                      "note": "знак каймы (словарь знаков)", "machine": 1, "score": b["q"], "angle": a, "flip": f, "by": "машина"})
+                    n += 1
+                if n: r["updated"] = t0; save(r); made += n; rugs_n += 1
+        return {"ok": True, "marks": made, "rugs": rugs_n}
+
     @app.post("/api/rugs/{rid}/friezes")
     async def api_rug_friezes(rid: str):
         """v11.19: каймы как фризы — полосы, шаг повтора, «чистый» раппорт (медиана повторов) и места всех повторов.

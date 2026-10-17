@@ -1809,6 +1809,13 @@ def _dupchk_due(c, t):
     return t.hour == int(c.get("hour", 5)) and not last.startswith(t.strftime("%Y-%m-%d"))
 
 
+def _signs_run(c):
+    n = app.state.signs_run(False, on_done=lambda res: events.add("Знаки кайм: " + res, "Ковры → «🧩 знаки кайм»: назовите группы — имя и разметка перейдут на все ковры группы", link={"to": "events"}))
+    return f"запущен поиск раппортов кайм: {n} фото" if n else None
+
+
+events.automation("signs", "Знаки кайм", lambda c: f"каждую ночь в {int(c.get('hour', 3)):02d}:00 — найти раппорты кайм на новых фото и собрать их в группы (словарь знаков)",
+                  _signs_run, due=lambda c, t: t.hour == int(c.get("hour", 3)) and not str(c.get("last_run") or "").startswith(t.strftime("%Y-%m-%d")), enabled=True, auto=True, hour=3)
 events.automation("dupchk", "Проверка двойников", lambda c: f"каждую ночь в {int(c.get('hour', 5)):02d}:00 — совместить фото новых пар «один и тот же ковёр» и отметить подозрительные склейки",
                   _dupchk_run, due=_dupchk_due, enabled=True, auto=True, hour=5)
 events.automation("motif", "Индекс узоров", lambda c: f"каждую ночь в {int(c.get('hour', 4)):02d}:00 — посчитать признаки новых и изменённых фото ковров для поиска «где ещё встречается этот узор»",

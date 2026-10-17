@@ -54,6 +54,8 @@ def make_rugs(data):
         a[90:670, 90:470] = carpet(380, 580, 77)[:580, :380]
         return a
     save("frieze_1", frieze_rug(), title="Rug with border", cat={"src": "azerbaijanrugs"})
+    f2 = frieze_rug(); f2[90:670, 90:470] = (30, 110, 60); f2 = cv2.resize(f2, None, fx=1.2, fy=1.2)
+    save("frieze_2", f2, title="Another rug, same border", cat={"src": "azerbaijanrugs"})
     for i in (1, 2):                 # v11.18: фото с людьми (лица найдены машиной заранее)
         save(f"ppl_{i}", carpet(300, 420, 40 + i), title=f"Rug photo {i}", cat={"src": "azerbaijanrugs"}, people={"n": i, "ver": 1, "faces": []})
     def star(a, cx, cy, r, col):     # v11.4: один и тот же «узор» на трёх коврах — для поиска по всем коврам
@@ -457,9 +459,9 @@ def t15_rugs_overview(pg, ctx):
     ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
     assert ids == ['kerimov_vol3_p100_1'] or set(ids) <= {'kerimov_vol3_p100_1', 'met_123'}, f'фильтр по школе: {ids}'
     pg.uncheck('#rgTree [data-sch="karabakh"]'); pg.wait_for_timeout(300)
-    pg.check('#rgFBig'); pg.wait_for_timeout(400)
+    pg.select_option('#rgFShow', 'big'); pg.wait_for_timeout(400)
     assert pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)") == ['kerimov_vol3_p100_1'], 'чип «есть фото крупнее» не работает'
-    pg.uncheck('#rgFBig'); pg.wait_for_timeout(400)
+    pg.select_option('#rgFShow', ''); pg.wait_for_timeout(400)
     assert pg.evaluate("document.querySelectorAll('.rgcard').length") == n_all, 'фильтры не снимаются'
     pg.hover('.rgcard[data-id="kerimov_vol3_p100_1"]'); pg.wait_for_timeout(500)
     assert 'Метрополитен' in (pg.text_content('#rgPeek') or ''), 'карточка справа не показывает двойника'
@@ -576,9 +578,9 @@ def t18_feedback_v116(pg, ctx):
     if pg.evaluate("R.view") == 'edit': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
     ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
     assert 'am_bag' not in ids, 'сумка показана среди ковров'
-    pg.click('#rgKinds [data-kind="items"]'); pg.wait_for_timeout(400)
+    pg.click('#rgTree [data-kind="items"]'); pg.wait_for_timeout(400)
     assert pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)") == ['am_bag'], 'фильтр «Изделия» не работает'
-    pg.click('#rgKinds [data-kind="carpets"]'); pg.wait_for_timeout(300)
+    pg.click('#rgTree [data-kind="carpets"]'); pg.wait_for_timeout(300)
     # скрыть
     pg.evaluate("rugOpen('vam_4')"); pg.wait_for_timeout(1400)
     pg.keyboard.press('Escape'); pg.wait_for_timeout(200); pg.click('#rgTbHide'); pg.wait_for_timeout(300); pg.click('#modal [data-hr="0"]'); pg.wait_for_timeout(1500)
@@ -851,14 +853,14 @@ def t24_people_schemes_twins_v1118(pg, ctx):
     u = ctx['url']
     pg.goto(u); pg.wait_for_timeout(1800); pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
     if pg.evaluate("R.view") != 'grid': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
-    pg.check('#rgFPpl'); pg.wait_for_timeout(500)
+    pg.select_option('#rgFCheck', 'ppl'); pg.wait_for_timeout(500)
     ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
     assert sorted(ids) == ['ppl_1', 'ppl_2'], f'фильтр «люди на фото»: {ids} · ' + str(pg.evaluate("R.list.filter(r=>r.id.startsWith('ppl')).map(r=>[r.id,r.people,r.obj,r.hidden,rugKindOf(r)])")) + ' fk=' + str(pg.evaluate("R.fkind"))
     pg.click('[data-keep="ppl_2"]'); pg.wait_for_timeout(300)
     pg.evaluate('window.confirm=()=>true'); pg.click('#rgPplHide'); pg.wait_for_timeout(1500)
     assert get(u + 'api/rugs/ppl_1').get('hidden'), 'фото с людьми не скрылось'
     assert not get(u + 'api/rugs/ppl_2').get('hidden'), 'оставленное фото скрылось'
-    pg.uncheck('#rgFPpl'); pg.wait_for_timeout(300)
+    pg.select_option('#rgFCheck', ''); pg.wait_for_timeout(300)
     # «Все схемы» в редакторе: счётчик всех схем, не обрезано до 150
     pg.evaluate("rugOpen('vam_1')"); pg.wait_for_timeout(1500)
     pg.click('#rgLibTabs [data-lib="all"]'); pg.wait_for_timeout(500)
@@ -892,6 +894,30 @@ def t25_friezes_v1119(pg, ctx):
     n1 = pg.evaluate("R.rug.marks.length"); g = pg.evaluate("new Set(R.rug.marks.map(m=>m.group)).size")
     assert n1 - n0 >= 8 and g == 1, f'«разметить повторы»: было {n0}, стало {n1}, групп {g}'
     errors_ok(ctx, 't25')
+
+
+@test
+def t26_sign_library_v1120(pg, ctx):
+    """v11.20: словарь знаков кайм — прогон по всем фото, группа из двух ковров, назвать, разметить на всех"""
+    u = ctx['url']
+    post(u + 'api/signs/run', {})
+    for _ in range(90):
+        d = get(u + 'api/signs?min_rugs=1')
+        if not d['state']['running'] and d['rugs_done']: break
+        time.sleep(1)
+    assert not d['state']['error'], d['state']
+    g = next((g for g in d['clusters'] if {'frieze_1', 'frieze_2'} <= {m['rid'] for m in g['members']}), None)
+    assert g, 'кайма двух ковров не попала в одну группу: ' + str([[m['rid'] for m in c['members']] for c in d['clusters']][:8])
+    post(u + 'api/signs/name', {'keys': [m['key'] for m in g['members']], 'name': {'motif': '', 'motif_text': 'тест-знак', 'az': 'тест-знак'}})
+    j = post(u + 'api/signs/mark', {'keys': [m['key'] for m in g['members']], 'name': {'motif': '', 'motif_text': 'тест-знак'}})
+    assert j['rugs'] >= 2 and j['marks'] >= 16, j
+    r = get(u + 'api/rugs/frieze_2'); assert any(m.get('motif_text') == 'тест-знак' for m in r['marks']), 'имя знака не перешло на рамки'
+    pg.goto(u); pg.wait_for_timeout(1800); pg.click('#tab-rugs'); pg.wait_for_timeout(1000)
+    if pg.evaluate("R.view") != 'grid': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
+    pg.click('#rgSignsBtn'); pg.wait_for_selector('#rgSignsV .sgc', timeout=20000)
+    assert 'тест-знак' in (pg.text_content('#rgSignsV') or ''), 'названный знак не виден в словаре'
+    pg.click('#sgBack'); pg.wait_for_timeout(400); assert pg.evaluate("R.view") == 'grid'
+    errors_ok(ctx, 't26')
 
 
 def main():
