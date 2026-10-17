@@ -54,6 +54,10 @@ def make_rugs(data):
         a[90:670, 90:470] = carpet(380, 580, 77)[:580, :380]
         return a
     save("frieze_1", frieze_rug(), title="Rug with border", cat={"src": "azerbaijanrugs"})
+    big = carpet(600, 840, 91)            # v11.21: один и тот же снимок в двух размерах (ресайз Wikimedia)
+    save("cm_shot_o", big, title="Shot original", cat={"src": "commons"})
+    save("cm_shot_s", cv2.resize(big, (300, 420), interpolation=cv2.INTER_AREA), title="Shot small", cat={"src": "wikimedia"},
+         marks=[{"id": "ms1", "box": [0.1, 0.1, 0.2, 0.2], "zone": "field", "motif": "", "motif_text": "тест", "scheme": "", "group": "", "certainty": "sure", "status": "confirmed", "note": "", "angle": 0, "flip": 0}])
     f2 = frieze_rug(); f2[90:670, 90:470] = (30, 110, 60); f2 = cv2.resize(f2, None, fx=1.2, fy=1.2)
     save("frieze_2", f2, title="Another rug, same border", cat={"src": "azerbaijanrugs"})
     for i in (1, 2):                 # v11.18: фото с людьми (лица найдены машиной заранее)
@@ -918,6 +922,37 @@ def t26_sign_library_v1120(pg, ctx):
     assert 'тест-знак' in (pg.text_content('#rgSignsV') or ''), 'названный знак не виден в словаре'
     pg.click('#sgBack'); pg.wait_for_timeout(400); assert pg.evaluate("R.view") == 'grid'
     errors_ok(ctx, 't26')
+
+
+@test
+def t27_multiselect_phash_v1121(pg, ctx):
+    """v11.21: один снимок в двух размерах склеивается (рамки переходят в оригинал); множественный выбор в плитке — «один ковёр», «скрыть»"""
+    u = ctx['url']
+    post(u + 'api/rugs_phash', {})
+    for _ in range(60):
+        if not get(u + 'api/rugs_phash')['running']: break
+        time.sleep(1)
+    s = get(u + 'api/rugs/cm_shot_s'); o = get(u + 'api/rugs/cm_shot_o')
+    assert s.get('dup_of') == 'cm_shot_o', f'ресайз не склеен с оригиналом: {s.get("dup_of")}'
+    assert any(m.get('motif_text') == 'тест' for m in o['marks']), 'рамки копии не перешли в оригинал'
+    assert not get(u + 'api/rugs/vam_1').get('dup_of'), 'разные ковры склеены как один снимок'
+    pg.goto(u); pg.wait_for_timeout(1800); pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
+    if pg.evaluate("R.view") != 'grid': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
+    pg.click('#rgTree .pn[data-k="museum"]'); pg.wait_for_timeout(500)
+    ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
+    a, b = [i for i in ids if i.startswith('vam_')][:2]
+    pg.click(f'.rgcard[data-id="{a}"]', modifiers=['Meta']); pg.wait_for_timeout(200)
+    assert pg.evaluate("R.view") == 'grid' and pg.is_visible('#rgMsel'), 'Cmd+клик не выбирает плитку'
+    pg.click(f'.rgcard[data-id="{b}"]'); pg.wait_for_timeout(200)      # пока что-то выбрано — клик тоже выбирает
+    assert pg.evaluate("R.msel.size") == 2
+    pg.click('#msOne'); pg.wait_for_timeout(1500)
+    assert (get(u + f'api/rugs/{a}').get('same_ok') or {}).get(b, {}).get('ok'), '«один ковёр» не связал фото'
+    ids2 = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
+    assert len(ids2) == len(ids) - 1, f'после «один ковёр» плиток не стало меньше: {len(ids)} → {len(ids2)}'
+    pg.click(f'.rgcard[data-id="{ids2[-1]}"] .rgck'); pg.wait_for_timeout(200)
+    pg.evaluate('window.confirm=()=>true'); pg.click('#msHide'); pg.wait_for_timeout(1500)
+    assert get(u + f'api/rugs/{ids2[-1]}').get('hidden'), 'выбранное фото не скрылось'
+    pg.keyboard.press('Escape'); errors_ok(ctx, 't27')
 
 
 def main():

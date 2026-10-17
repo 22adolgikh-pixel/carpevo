@@ -252,6 +252,21 @@ def install(app, DATA, D_WORK):
         figcache.update(t=time.time(), by=by, exp=exp, vote=vote)
         return by
 
+    def same_link(r):
+        """v11.21: с кем этот ковёр в одной плитке — только пары с прямым подтверждением: ✓ человека, «тот же» новой проверки машины
+        или прямое совпадение точек из каталога; ✗ человека и «разные» машины связь рвут (без цепочек через группу)"""
+        ok = r.get("same_ok") or {}; ch = r.get("same_chk") or {}; out = []
+        for x in r.get("same") or []:
+            o = x.get("id")
+            if not o: continue
+            v = ok.get(o); c = ch.get(o) or {}
+            if v is not None:
+                if v.get("ok"): out.append(o)
+                continue
+            if (c.get("ver") or 1) >= 2: (out.append(o) if c.get("v") == "same" else None); continue
+            if (x.get("score") or 0) >= 60 or x.get("inv"): out.append(o)
+        return out
+
     def summary(r):
         mk = r.get("marks") or []
         return {"id": r["id"], "title": r.get("title") or r["id"], "school": r.get("school", ""), "museum": r.get("museum", ""),
@@ -265,6 +280,7 @@ def install(app, DATA, D_WORK):
                 "w": r.get("w") or 0, "h": r.get("h") or 0,
                 "same_no": [k for k, v in (r.get("same_ok") or {}).items() if v and not v.get("ok")],
                 "same_ids": [x.get("id") for x in (r.get("same") or []) if x.get("id")],
+                "same_link": same_link(r),
                 "part": (r.get("cat") or {}).get("part", 0),
                 "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", ""),
                 "people": (r.get("people") or {}).get("n", 0)}
@@ -464,6 +480,27 @@ def install(app, DATA, D_WORK):
         _dcl["t"] = 0
         out = api_rug(rid); out["filled"] = filled
         return out
+
+    @app.post("/api/rugs_same_bulk")
+    def api_rugs_same_bulk(request: Request, body: dict = Body(...)):
+        """v11.21: много пар сразу: pairs=[[a,b],…], ok=true (тот же ковёр) / false (разные) / null (снять ответ)"""
+        ok = body.get("ok"); who = user(request); n = 0; P = {}
+        for a_, b_ in (body.get("pairs") or [])[:5000]:
+            if a_ and b_ and a_ != b_: P.setdefault(a_, set()).add(b_); P.setdefault(b_, set()).add(a_)
+        with _lock:
+            for rid, others in P.items():
+                r = load(rid)
+                if not r: continue
+                have = {x.get("id") for x in r.get("same") or []}
+                for o in others:
+                    if ok is not None and o not in have: r.setdefault("same", []).append({"id": o, "score": 0})
+                    so = r.setdefault("same_ok", {})
+                    if ok is None: so.pop(o, None)
+                    else: so[o] = {"ok": bool(ok), "by": who, "at": int(time.time())}
+                    n += 1
+                save(r)
+        _dcl["t"] = 0
+        return {"ok": True, "n": n // 2}
 
     # ---------------- словарь ----------------
     @app.get("/api/dict")
@@ -1529,28 +1566,127 @@ def install(app, DATA, D_WORK):
             def area(r):
                 wh = img_size(r["id"], r) or [r.get("w") or 0, r.get("h") or 0]
                 return (wh[0] * wh[1], (r.get("cat") or {}).get("src") == "commons")
-            rs.sort(key=area, reverse=True); keep = rs[0]
-            with _lock:
-                K = load(keep["id"]); changed = False
-                if K.get("dup_of"): K.pop("dup_of"); changed = True
-                for d in rs[1:]:
-                    D = load(d["id"])
-                    if not D: continue
-                    if D.get("dup_of") != K["id"]:
-                        for m in D.get("marks") or []:
-                            if not any(max(0, min(m["box"][0] + m["box"][2], x["box"][0] + x["box"][2]) - max(m["box"][0], x["box"][0])) *
-                                       max(0, min(m["box"][1] + m["box"][3], x["box"][1] + x["box"][3]) - max(m["box"][1], x["box"][1])) > 0.7 * m["box"][2] * m["box"][3]
-                                       for x in K.get("marks") or []):
-                                K.setdefault("marks", []).append({**m, "note": (m.get("note") or "") + (" · " if m.get("note") else "") + "перенесено с уменьшенной копии " + D["id"]})
-                        for f2 in PASS_FIELDS:
-                            if not K.get(f2) and D.get(f2): K[f2] = D[f2]
-                        have = {x.get("id") for x in K.get("same") or []} | {K["id"]}
-                        for x in D.get("same") or []:
-                            if x.get("id") not in have: K.setdefault("same", []).append(x)
-                        for o, v in (D.get("same_ok") or {}).items(): K.setdefault("same_ok", {}).setdefault(o, v)
-                        D["dup_of"] = K["id"]; D["updated"] = int(time.time()); save(D); changed = True; n += 1
-                if changed: K["updated"] = int(time.time()); save(K)
+            rs.sort(key=area, reverse=True)
+            n += merge_dups(rs[0]["id"], [d["id"] for d in rs[1:]], "уменьшенной копии")
         return n
+
+    def merge_dups(keep_id, dup_ids, why="копии"):
+        """копии одного и того же снимка → в одну карточку: рамки копий переносятся (снимок тот же — доли рамок те же),
+        пустые поля паспорта дополняются, связи «тот же ковёр» объединяются, копия скрывается (dup_of)"""
+        n = 0
+        with _lock:
+            K = load(keep_id); changed = False
+            if not K: return 0
+            if K.get("dup_of"): K.pop("dup_of"); changed = True
+            for did in dup_ids:
+                D = load(did)
+                if not D or D.get("dup_of") == K["id"] or did == K["id"]: continue
+                for m in D.get("marks") or []:
+                    if not any(max(0, min(m["box"][0] + m["box"][2], x["box"][0] + x["box"][2]) - max(m["box"][0], x["box"][0])) *
+                               max(0, min(m["box"][1] + m["box"][3], x["box"][1] + x["box"][3]) - max(m["box"][1], x["box"][1])) > 0.7 * m["box"][2] * m["box"][3]
+                               for x in K.get("marks") or []):
+                        K.setdefault("marks", []).append({**m, "note": (m.get("note") or "") + (" · " if m.get("note") else "") + f"перенесено с {why} " + D["id"]})
+                for f2 in PASS_FIELDS:
+                    if not K.get(f2) and D.get(f2): K[f2] = D[f2]
+                have = {x.get("id") for x in K.get("same") or []} | {K["id"]}
+                for x in D.get("same") or []:
+                    if x.get("id") not in have and x.get("id") not in dup_ids: K.setdefault("same", []).append(x)
+                for o, v in (D.get("same_ok") or {}).items():
+                    if o != K["id"]: K.setdefault("same_ok", {}).setdefault(o, v)
+                K["same"] = [x for x in K.get("same") or [] if x.get("id") != did]
+                D["dup_of"] = K["id"]; D["updated"] = int(time.time()); save(D); changed = True; n += 1
+            if changed: K["updated"] = int(time.time()); save(K)
+        return n
+
+    # ---- v11.21: один и тот же СНИМОК в разных размерах (ресайзы Wikimedia, копии музейных фото на Commons) — по «отпечатку» ----
+    PH = os.path.join(DATA, "phash.json"); phs = {"running": False, "done": 0, "total": 0, "merged": 0, "groups": 0}
+
+    def _phash(p):
+        a = read_small(p, 256)
+        if a is None: return None
+        g = cv2.cvtColor(a, cv2.COLOR_BGR2GRAY).astype(np.float32)
+        d = cv2.dct(cv2.resize(g, (32, 32), interpolation=cv2.INTER_AREA))[:8, :8].ravel()
+        bits = d[1:] > np.median(d[1:])
+        return "%016x" % int("".join("1" if b else "0" for b in np.r_[False, bits]), 2), round(a.shape[1] / a.shape[0], 4)
+
+    _sv = {}
+
+    def _same_shot(a, b):
+        """проверка пары: серые 64×64 совпадают почти полностью (корреляция ≥ 0.93)"""
+        def v(rid):
+            if rid not in _sv:
+                im = read_small(img_path(rid), 256)
+                x = cv2.resize(cv2.cvtColor(im, cv2.COLOR_BGR2GRAY), (64, 64), interpolation=cv2.INTER_AREA).astype(np.float32).ravel() if im is not None else None
+                _sv[rid] = None if x is None else (x - x.mean()) / (np.linalg.norm(x - x.mean()) + 1e-6)
+            return _sv[rid]
+        x, y = v(a), v(b)
+        return x is not None and y is not None and float(x @ y) >= 0.93
+
+    def dedupe_phash(dry=False):
+        """→ [[keep, dup, dup…]]: снимки с почти одинаковым отпечатком (≤ 6 из 64 бит) и пропорциями — одна фотография.
+        Оставляем оригинал: не «Wikimedia» (уменьшенная копия) и фото крупнее; рамки копий переносятся в него."""
+        try: cache = json.load(open(PH, encoding="utf-8"))
+        except Exception: cache = {}
+        R_ = {}
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("dup_of") or r.get("split_into"): continue
+            p = img_path(r["id"])
+            if not p: continue
+            mt = int(os.path.getmtime(p)); c = cache.get(r["id"])
+            if not c or c[2] != mt:
+                h = _phash(p)
+                if not h: continue
+                cache[r["id"]] = c = [h[0], h[1], mt]
+            R_[r["id"]] = (r, int(c[0], 16), c[1])
+        try: json.dump(cache, open(PH, "w", encoding="utf-8"))
+        except Exception: pass
+        ids = list(R_); H = np.array([R_[i][1] for i in ids], dtype=np.uint64)
+        KB = {i: str((R_[i][0].get("cat") or {}).get("src", "")).startswith("kerimov") for i in ids}; AR = np.array([R_[i][2] for i in ids])
+        par = list(range(len(ids)))
+        def fd(a):
+            while par[a] != a: par[a] = par[par[a]]; a = par[a]
+            return a
+        for i in range(len(ids)):
+            x = np.bitwise_xor(H[i + 1:], H[i])
+            d = np.array([bin(int(v)).count("1") for v in x]) if len(x) else np.array([])
+            for j in np.where((d <= 5) & (np.abs(np.log(AR[i + 1:] / AR[i])) < 0.03))[0]:
+                o = ids[i + 1 + int(j)]
+                if KB[ids[i]] != KB[o]: continue          # книга (Керимов) и музейное фото — разные снимки, даже если похожи
+                if _same_shot(ids[i], o): par[fd(i)] = fd(i + 1 + int(j))
+        G = {}
+        for i in range(len(ids)): G.setdefault(fd(i), []).append(ids[i])
+        groups = []
+        for g in G.values():
+            if len(g) < 2: continue
+            def rank(rid):
+                r = R_[rid][0]; wh = img_size(rid, r) or [r.get("w") or 0, r.get("h") or 0]
+                return ((r.get("cat") or {}).get("src") != "wikimedia", wh[0] * wh[1], len(r.get("marks") or []))   # оригинал (крупнее), рамки переносятся
+            g.sort(key=rank, reverse=True); groups.append(g)
+        if not dry:
+            for g in groups: phs["merged"] += merge_dups(g[0], g[1:], "копии этого же снимка")
+        phs["groups"] = len(groups)
+        return groups
+
+    def _phash_bg():
+        if phs["running"]: return
+        phs.update(running=True, merged=0)
+        try:
+            gs = heavy(lambda: dedupe_phash(), "одинаковые снимки")
+            if phs["merged"]: print("dedupe_phash: копий одного снимка скрыто:", phs["merged"], "групп:", len(gs))
+        except Exception as e: print("dedupe_phash:", e)
+        finally: phs["running"] = False; _dcl["t"] = 0
+
+    @app.post("/api/rugs_phash")
+    def api_rugs_phash(body: dict = Body(default={})):
+        """найти одинаковые снимки: dry=true — только показать группы (не склеивать)"""
+        if body.get("dry"): return {"groups": heavy(lambda: dedupe_phash(True), "одинаковые снимки", True)}
+        threading.Thread(target=_phash_bg, daemon=True).start()
+        return phs
+
+    @app.get("/api/rugs_phash")
+    def api_rugs_phash_state(): return phs
 
     MUSF = [("azcm", ("ковра", "carpet museum", "xalça muzey", "xalca muzey", "azcarpet")), ("tiem", ("тюрк ве ислам", "türk ve islam", "turk ve islam", "turkish and islamic", "tiem")),
             ("hermitage", ("эрмитаж", "hermitage")), ("rem", ("этнограф", "ethnograph")), ("met", ("метрополитен", "metropolitan")),
@@ -1599,6 +1735,7 @@ def install(app, DATA, D_WORK):
         try:
             k = dedupe_files()
             if k: print("dedupe_files: скрыто уменьшенных копий:", k)
+            time.sleep(60); _phash_bg()
             k = link_by_inv()
             if k: print("link_by_inv: связано по инв. номеру:", k)
         except Exception as e: print("dedupe_files:", e)
