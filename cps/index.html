@@ -321,6 +321,7 @@ aside{min-height:0}
 .rgck{position:absolute;top:6px;left:6px;z-index:3;width:22px;height:22px;border-radius:50%;border:2px solid #fff;background:rgba(0,0,0,.45);color:#111;font-weight:700;font-size:13px;line-height:1;padding:0;opacity:0;cursor:pointer}.rgcard:hover .rgck,.rgcard.msel .rgck,#rgCards:has(.msel) .rgck{opacity:1}.rgcard.msel{outline:3px solid var(--acc);outline-offset:-3px}.rgcard.msel .rgck{background:var(--acc);border-color:var(--acc)}
 .rgmsel{position:sticky;bottom:0;z-index:4;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 14px;background:var(--pan);border-top:1px solid var(--ln2);box-shadow:0 -6px 20px rgba(0,0,0,.35)}
 .rggr{position:absolute;bottom:6px;right:6px;z-index:2;width:22px;height:22px;display:grid;place-items:center;border-radius:5px;font-weight:700;font-size:12px;color:#111;background:#9aa0a6}.rggr.gA{background:#7bd88f}.rggr.gB{background:#c6e27a}.rggr.gC{background:#f2c46d}.rggr.gD{background:#8a8f98}
+.rgtwq{align-self:center;margin-left:12px;flex:none;border-color:var(--warn)!important;color:var(--warn)}
 .rgfl1{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 14px 4px}.rgfl1 select{width:auto;flex:none;height:30px}.rgfl1 #rgQ{width:210px;flex:none;height:30px}
 .rgfl{padding:6px 14px 2px;display:flex;flex-direction:column;gap:6px}.rgflr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.rgfll{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}.rgflr .seg{display:inline-flex}.rgflr .seg .sm.on{background:var(--tx);color:var(--bg)}.rgflr #rgQ{width:220px}.rgflr select{width:auto;flex:none}
 .rgchips{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 14px 4px}.rgchips h2{margin:0 8px 0 0;font-size:16px;font-weight:600}
@@ -433,7 +434,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.22</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.23</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2359,7 +2360,7 @@ function rugRender(){
   $('rgMotSearch')&&($('rgMotSearch').onclick=()=>sel()&&rugMotifSearch(sel(),'mark'));
   const img=$('rgImg');img.onload=()=>{R.iw=img.naturalWidth;R.ih=img.naturalHeight;if(R.fitNext){R.fitNext=false;rugFit();}else rugApply();
     if(R.hl&&R.hl.rid===r.id&&!R.hl.shown){R.hl.shown=1;const V=$('rgView'),b=R.hl.box;R.z=Math.min(4,Math.min(V.clientWidth/(b[2]*R.iw),V.clientHeight/(b[3]*R.ih))*0.35);rugFocus({box:b});}rugDraw();};
-  rugViewEvents();rugTools();rugSide();rugStrip();rugTwinAsk();
+  rugViewEvents();rugTools();rugSide();rugStrip();   // v11.23: вопрос про двойников сам не всплывает (мешал размечать) — кнопка в ленте снизу
 }
 // поле и каймы — отдельный режим: свои инструменты справа, на фото только линии границ
 // v11.19: каймы как фризы — машина находит раппорты сама (без базы), человек размечает одним кликом и называет
@@ -2461,8 +2462,11 @@ function rugStrip(){
   h+=`<div class="lbl">${same.length?'этот ковёр в других источниках':'других фото этого ковра нет'}</div>`+all.map(x=>tw(x,!!x._cur)).join('');
   if(r.split_from){const sib=R.list.filter(x=>x.split_from===r.split_from&&x.id!==r.id).sort((a,b)=>(a.part||0)-(b.part||0));
     h+=`<div class="lbl" style="margin-left:10px">тот же разворот</div>`+tw({id:r.split_from,cap:'весь разворот'},false,true)+sib.map(x=>tw({id:x.id,cap:'ковёр '+(x.part||'')},false,true)).join('');}
+  const nq=rro()?0:(r.same||[]).filter(t=>!t.ok&&(byId[t.id]||!R.list.length)).length;
+  if(nq)h+=`<button class="sm rgtwq" id="rgTwinQ" data-tip="ответить, тот же ли это ковёр (по одному или «ни один» сразу)">? двойники: ${nq} не проверено</button>`;
   E.innerHTML=h;
   E.querySelectorAll('[data-open]').forEach(e=>e.onclick=()=>{if(e.classList.contains('cur'))return;rugOpen(e.dataset.open);});
+  $('rgTwinQ')&&($('rgTwinQ').onclick=()=>{R.twinLater&&R.twinLater.delete(r.id);R.twinAsk=true;rugTwinAsk();});
 }
 // v11.16: «это тот же ковёр?» — один вопрос поверх фото при открытии ковра (не в ленте). «Позже» — до следующего запуска студии.
 // Пачкой двойники проверяются в «Ковры → проверить склейки» и через «События».
@@ -2478,10 +2482,10 @@ function rugTwinAsk(){const V=$('rgView'),r=R.rug;let E=$('rgTwinAsk');if(E)E.re
     <div class="rgrow"><button class="sm pri" data-vd="ok" data-tip="тот же экземпляр — пустые поля паспорта дополнятся">✓ тот же</button><button class="sm" data-vd="sim" data-tip="тот же рисунок, но другой ковёр">≈ похожи</button><button class="sm" data-vd="no">✗ другой</button>${n>1?`<button class="sm" data-vd="none" data-tip="все ${n} непроверенных «двойников» этого фото — другие ковры (фрагменты, похожие ковры)">✗ ни один из ${n}</button>`:''}<button class="sm" data-vd="later" data-tip="спросить в следующий раз">позже</button></div></div>`;
   V.appendChild(E);
   E.querySelectorAll('[data-vd]').forEach(b=>b.onclick=async ev=>{ev.stopPropagation();const v=b.dataset.vd;
-    if(v==='later'){R.twinLater.add(r.id);E.remove();return;}
+    if(v==='later'){R.twinLater.add(r.id);R.twinAsk=false;E.remove();return;}
     if(v==='none'){try{const ids=(r.same||[]).filter(t=>!t.ok).map(t=>t.id);await api('/api/rugs_same_bulk',{pairs:ids.map(o=>[r.id,o]),ok:false});R.rug=await api('/api/rugs/'+encodeURIComponent(r.id));rugStrip();rugSide();E.remove();stat('отмечено «другой ковёр»: '+ids.length,'ok');rugsLoadList();}catch(e){fail(e);}return;}
     try{if(R.saveT)await rugSaveNow();const j=await api('/api/rugs/'+encodeURIComponent(r.id)+'/same',{other:x.id,ok:v==='ok',similar:v==='sim'});
-      if(R.rug&&R.rug.id===r.id){R.rug=j;rugStrip();rugSide();rugTwinAsk();}
+      if(R.rug&&R.rug.id===r.id){R.rug=j;rugStrip();rugSide();if(R.twinAsk)rugTwinAsk();}
       stat(v==='ok'?'✓ тот же ковёр'+(j.filled&&j.filled[r.id]?' — паспорт дополнен':''):v==='sim'?'≈ похожи, но разные ковры':'✗ другой ковёр','ok');rugsLoadList();}catch(e){fail(e);}});}
 function rugTools(){$('rgTBox')&&$('rgTBox').classList.toggle('on',R.tool==='box');$('rgTZones')&&$('rgTZones').classList.toggle('on',R.tool==='zones');$('rgTHand')&&$('rgTHand').classList.toggle('on',R.tool==='hand');
   const has=!!(R.sel&&R.rug&&R.rug.marks.includes(R.sel));document.querySelectorAll('#rgCenter [data-need-sel] button').forEach(b=>{b.disabled=!has;});

@@ -717,7 +717,10 @@ def t20_twin_verdicts_v118(pg, ctx):
     tw = '#rgStrip .rgtw[data-open="met_123"]'
     # v11.15: вопрос «это тот же ковёр?» — поверх фото, один раз; в ленте только значок
     assert not pg.query_selector(tw + ' [data-vd]'), 'кнопки ✓ ≈ ✗ остались в ленте'
-    assert pg.is_visible('#rgTwinAsk [data-vd="sim"]'), 'при открытии ковра с непроверенным двойником нет вопроса «это тот же ковёр?»'
+    assert not pg.query_selector('#rgTwinAsk'), 'вопрос про двойников всплыл сам — мешает размечать (v11.23)'
+    assert pg.is_visible('#rgTwinQ'), 'в ленте нет кнопки «? двойники: … не проверено»'
+    pg.click('#rgTwinQ'); pg.wait_for_timeout(300)
+    assert pg.is_visible('#rgTwinAsk [data-vd="sim"]'), 'кнопка в ленте не открывает вопрос «это тот же ковёр?»'
     pg.click('#rgTwinAsk [data-vd="sim"]'); pg.wait_for_timeout(1200)
     ok = (get(u + 'api/rugs/kerimov_vol3_p100_1').get('same_ok') or {}).get('met_123') or {}
     assert ok.get('similar') and ok.get('ok') is False, f'«≈ похожи» не записалось: {ok}'
@@ -726,6 +729,7 @@ def t20_twin_verdicts_v118(pg, ctx):
     assert pg.evaluate("R.rug.id") == 'kerimov_vol3_p100_1', 'ответ открыл другой ковёр'
     post(u + 'api/rugs/kerimov_vol3_p100_1/same', {'other': 'met_123', 'ok': None})
     pg.evaluate("rugOpen('kerimov_vol3_p100_1')"); pg.wait_for_timeout(1500)
+    pg.click('#rgTwinQ'); pg.wait_for_timeout(300)
     pg.click('#rgTwinAsk [data-vd="later"]'); pg.wait_for_timeout(300); assert not pg.query_selector('#rgTwinAsk'), '«позже» не убрало вопрос'
     pg.evaluate("rugOpen('met_123')"); pg.wait_for_timeout(1200); pg.evaluate("rugOpen('kerimov_vol3_p100_1')"); pg.wait_for_timeout(1500)
     assert not pg.query_selector('#rgTwinAsk'), 'после «позже» вопрос снова появился в этом же запуске'
