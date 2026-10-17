@@ -18,7 +18,7 @@
  "h": 630,
  "marks": [],
  "created": 1791736122,
- "updated": 1791736122,
+ "updated": 1792275097,
  "cat": {
   "title": "Керимов, т. III, Рис. 17 (стр. скана 15, печ. 30)",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:kerimov_vol3_p015_1",
  "lib_img": "img/kerimov_vol3_p015_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol2_p060_3",
+   "score": 75
+  },
+  {
+   "id": "kerimov_vol2_p060_4",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol2_p060_4": {
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1792258584
+  },
+  "kerimov_vol2_p060_3": {
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1792271370
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
