@@ -252,6 +252,17 @@ def install(app, DATA, D_WORK):
         figcache.update(t=time.time(), by=by, exp=exp, vote=vote)
         return by
 
+    _phc = {"t": 0, "v": {}}
+
+    def photo_q(r):
+        """качество фото для грейда: длинная сторона, цветное ли (насыщенность из кэша отпечатков; нет данных — None)"""
+        if time.time() - _phc["t"] > 300:
+            try: _phc["v"] = json.load(open(os.path.join(DATA, "phash.json"), encoding="utf-8"))
+            except Exception: _phc["v"] = {}
+            _phc["t"] = time.time()
+        c = _phc["v"].get(r["id"]) or []
+        return {"side": max(r.get("w") or 0, r.get("h") or 0), "sat": c[3] if len(c) > 3 else None}
+
     def same_link(r):
         """v11.21: с кем этот ковёр в одной плитке — только пары с прямым подтверждением: ✓ человека, «тот же» новой проверки машины
         или прямое совпадение точек из каталога; ✗ человека и «разные» машины связь рвут (без цепочек через группу)"""
@@ -273,7 +284,8 @@ def install(app, DATA, D_WORK):
                 "status": r.get("status", "new"), "n": len(mk), "confirmed": sum(1 for m in mk if m.get("status") == "confirmed"),
                 "motifs": len({m.get("motif") for m in mk if m.get("motif")}), "updated": r.get("updated", 0), "source": r.get("source", ""),
                 "src": (r.get("cat") or {}).get("src") or ("upload" if not r.get("src_id") else (r.get("src_id") or "").split(":")[0]),
-                "group": r.get("same_group", ""), "same": len(r.get("same") or []), "fragment": (r.get("cat") or {}).get("fragment", False),
+                "group": r.get("same_group", ""), "same": len(r.get("same") or []),
+                "fragment": r["fragment"] if r.get("fragment") is not None else bool((r.get("cat") or {}).get("fragment", False)),
                 "composition": r.get("composition", ""), "kind": r.get("technique", ""),
                 "multi": len(r.get("multi") or []), "split_into": r.get("split_into") or [], "split_from": r.get("split_from", ""),
                 "machine": sum(1 for m in mk if m.get("machine") and m.get("status") == "proposed"),
@@ -481,6 +493,18 @@ def install(app, DATA, D_WORK):
         out = api_rug(rid); out["filled"] = filled
         return out
 
+    @app.post("/api/rugs_bulk_set")
+    def api_rugs_bulk_set(body: dict = Body(...)):
+        """v11.22: пачкой отметить фото: fragment=true/false/null"""
+        n = 0
+        with _lock:
+            for rid in body.get("ids") or []:
+                r = load(rid)
+                if not r: continue
+                if "fragment" in body: r["fragment"] = None if body["fragment"] is None else bool(body["fragment"])
+                r["updated"] = int(time.time()); save(r); n += 1
+        return {"ok": True, "n": n}
+
     @app.post("/api/rugs_same_bulk")
     def api_rugs_same_bulk(request: Request, body: dict = Body(...)):
         """v11.21: много пар сразу: pairs=[[a,b],…], ok=true (тот же ковёр) / false (разные) / null (снять ответ)"""
@@ -562,12 +586,15 @@ def install(app, DATA, D_WORK):
                                   "same_ok": r.get("same_ok"), "cat": {x: (r.get("cat") or {}).get(x) for x in ("names", "composition_name")}, "id": rid, "updated": r.get("updated", 0)})
             if c[1]: out.append(dict(c[1])); full[rid] = c[2]
         for rid in [x for x in _sum if x not in seen]: _sum.pop(rid, None)
+        for sm in out: sm["q"] = photo_q(sm)                    # v11.22: качество фото — не в кэше сводки (кэш отпечатков обновляется отдельно)
         for sm in out:                                          # v11.5: предположение типа ковра
             if sm["composition"] in BYID: continue
             g = comp_guess(full[sm["id"]], {i: {"composition": full[i].get("composition"), "title": full[i].get("title")} for i in sm["same_ids"] if i in full})
             if g: sm["comp_sug"] = g["id"]; sm["comp_sug_kind"] = g["kind"]
         out.sort(key=lambda s: (s["status"] == "done", -s["updated"]))
-        return {"rugs": out, "import": imp, "zones": ZONES, "schools": SCHOOLS}
+        try: figures_by_concept(); elx = {k: len(v) for k, v in figcache["exp"].items() if v}
+        except Exception: elx = {}
+        return {"rugs": out, "import": imp, "zones": ZONES, "schools": SCHOOLS, "elx": elx}
 
     @app.get("/api/rugs/{rid}")
     def api_rug(rid: str):
@@ -603,6 +630,7 @@ def install(app, DATA, D_WORK):
             if b.get("multi_no"): r["multi"] = []                     # «это один ковёр, не делить»
             if "obj" in b: r["obj"] = b["obj"] if b["obj"] in OBJ else ""            # v11.6: вид изделия (человек)
             if "hidden" in b: r["hidden"] = str(b["hidden"] or "")[:200]            # v11.6: скрыт из каталога (причина)
+            if "fragment" in b: r["fragment"] = None if b["fragment"] is None else bool(b["fragment"])   # v11.22: фрагмент / остаток ковра (человек)
             if "marks" in b:
                 old = {m["id"]: m for m in r.get("marks", [])}; marks = []
                 for m in b["marks"]:
@@ -1570,7 +1598,7 @@ def install(app, DATA, D_WORK):
             n += merge_dups(rs[0]["id"], [d["id"] for d in rs[1:]], "уменьшенной копии")
         return n
 
-    def merge_dups(keep_id, dup_ids, why="копии"):
+    def merge_dups(keep_id, dup_ids, why="копии", boxmap=None):
         """копии одного и того же снимка → в одну карточку: рамки копий переносятся (снимок тот же — доли рамок те же),
         пустые поля паспорта дополняются, связи «тот же ковёр» объединяются, копия скрывается (dup_of)"""
         n = 0
@@ -1582,6 +1610,10 @@ def install(app, DATA, D_WORK):
                 D = load(did)
                 if not D or D.get("dup_of") == K["id"] or did == K["id"]: continue
                 for m in D.get("marks") or []:
+                    if boxmap and did in boxmap:                    # другой кадр того же снимка (обрезан иначе) — рамки переводятся по совмещению
+                        b2 = boxmap[did](m["box"])
+                        if not b2: continue
+                        m = {**m, "box": b2}
                     if not any(max(0, min(m["box"][0] + m["box"][2], x["box"][0] + x["box"][2]) - max(m["box"][0], x["box"][0])) *
                                max(0, min(m["box"][1] + m["box"][3], x["box"][1] + x["box"][3]) - max(m["box"][1], x["box"][1])) > 0.7 * m["box"][2] * m["box"][3]
                                for x in K.get("marks") or []):
@@ -1607,7 +1639,8 @@ def install(app, DATA, D_WORK):
         g = cv2.cvtColor(a, cv2.COLOR_BGR2GRAY).astype(np.float32)
         d = cv2.dct(cv2.resize(g, (32, 32), interpolation=cv2.INTER_AREA))[:8, :8].ravel()
         bits = d[1:] > np.median(d[1:])
-        return "%016x" % int("".join("1" if b else "0" for b in np.r_[False, bits]), 2), round(a.shape[1] / a.shape[0], 4)
+        sat = float(cv2.cvtColor(a, cv2.COLOR_BGR2HSV)[..., 1].mean())            # насыщенность: ч/б скан книги ≈ 0–15
+        return "%016x" % int("".join("1" if b else "0" for b in np.r_[False, bits]), 2), round(a.shape[1] / a.shape[0], 4), round(sat, 1)
 
     _sv = {}
 
@@ -1635,10 +1668,10 @@ def install(app, DATA, D_WORK):
             p = img_path(r["id"])
             if not p: continue
             mt = int(os.path.getmtime(p)); c = cache.get(r["id"])
-            if not c or c[2] != mt:
+            if not c or c[2] != mt or len(c) < 4:
                 h = _phash(p)
                 if not h: continue
-                cache[r["id"]] = c = [h[0], h[1], mt]
+                cache[r["id"]] = c = [h[0], h[1], mt, h[2]]
             R_[r["id"]] = (r, int(c[0], 16), c[1])
         try: json.dump(cache, open(PH, "w", encoding="utf-8"))
         except Exception: pass
@@ -1677,6 +1710,67 @@ def install(app, DATA, D_WORK):
             if phs["merged"]: print("dedupe_phash: копий одного снимка скрыто:", phs["merged"], "групп:", len(gs))
         except Exception as e: print("dedupe_phash:", e)
         finally: phs["running"] = False; _dcl["t"] = 0
+
+    # ---- v11.22: листы книг/журналов: тот же ковёр, вырезанный со страницы дважды (каталог + «разделить фото») ----
+    def _page_key(rid):
+        m = re.match(r"^(.*?_p\d{3})(?:_|$)", rid) or re.match(r"^(.*?page_\d{3})(?:_|$)", rid)
+        return m.group(1) if m else None
+
+    def dedupe_pages():
+        """в пределах одной страницы скана: фото, которые совмещаются по точкам (≥ 60, по всему кадру), — один и тот же ковёр;
+        остаётся крупное фото (рамки других переводятся по совмещению), остальные скрываются (dup_of)"""
+        import rug_match
+        pages = {}
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("dup_of") or r.get("split_into") or r.get("hidden"): continue
+            k = _page_key(r["id"])
+            if k and img_path(r["id"]): pages.setdefault(k, []).append(r)
+        merged = 0
+        for k, rs in pages.items():
+            if len(rs) < 2: continue
+            im = {r["id"]: read_small(img_path(r["id"]), 1000) for r in rs}
+            par = {r["id"]: r["id"] for r in rs}
+            def fd(a):
+                while par[a] != a: a = par[a]
+                return a
+            for i in range(len(rs)):
+                for j in range(i + 1, len(rs)):
+                    a, b = rs[i]["id"], rs[j]["id"]
+                    if im[a] is None or im[b] is None or fd(a) == fd(b): continue
+                    _, n = rug_match.align(im[a], im[b])
+                    if n >= 60: par[fd(a)] = fd(b)
+            G = {}
+            for r in rs: G.setdefault(fd(r["id"]), []).append(r)
+            for g in G.values():
+                if len(g) < 2: continue
+                # оставляем кадр, где сам ковёр снят крупнее всего (а не лист с полями): пиксели общей части в этом кадре
+                def own(c):
+                    tot = 0.0; ac = (c.get("w") or 1) * (c.get("h") or 1)
+                    for o in g:
+                        if o is c: continue
+                        H, n = rug_match.align(im[o["id"]], im[c["id"]])
+                        bx = rug_match.map_box(H, [0, 0, 1, 1])[0] if H is not None else None
+                        tot += ac * (bx[2] * bx[3] if bx else 0)
+                    return (tot, len(c.get("marks") or []))
+                g.sort(key=own, reverse=True)
+                keep = g[0]["id"]; bm = {}
+                for d in g[1:]:
+                    H, n = rug_match.align(im[d["id"]], im[keep])
+                    if H is not None: bm[d["id"]] = (lambda H_: lambda box: rug_match.map_box(H_, box)[0])(H)
+                merged += merge_dups(keep, [d["id"] for d in g[1:]], "другого кадра этой же страницы", bm)
+        return merged
+
+    @app.post("/api/rugs_pages_dedupe")
+    def api_rugs_pages_dedupe():
+        def run():
+            try:
+                n = heavy(dedupe_pages, "листы: повторные кадры")
+                if n: print("dedupe_pages: скрыто повторных кадров:", n)
+            except Exception as e: print("dedupe_pages:", e)
+        threading.Thread(target=run, daemon=True).start()
+        return {"started": True}
 
     @app.post("/api/rugs_phash")
     def api_rugs_phash(body: dict = Body(default={})):
@@ -1736,6 +1830,8 @@ def install(app, DATA, D_WORK):
             k = dedupe_files()
             if k: print("dedupe_files: скрыто уменьшенных копий:", k)
             time.sleep(60); _phash_bg()
+            n = heavy(dedupe_pages, "листы: повторные кадры")
+            if n: print("dedupe_pages: скрыто повторных кадров:", n)
             k = link_by_inv()
             if k: print("link_by_inv: связано по инв. номеру:", k)
         except Exception as e: print("dedupe_files:", e)

@@ -54,6 +54,10 @@ def make_rugs(data):
         a[90:670, 90:470] = carpet(380, 580, 77)[:580, :380]
         return a
     save("frieze_1", frieze_rug(), title="Rug with border", cat={"src": "azerbaijanrugs"})
+    pg_ = np.full((1100, 800, 3), 238, np.uint8); rugimg = carpet(520, 700, 93); pg_[200:900, 140:660] = rugimg   # v11.22: лист книги и вырезанный с него ковёр
+    save("kerimov_vol9_p050_1", pg_, title="Керимов, т. IX (стр. 50)", cat={"src": "kerimov_vol9"})
+    save("kerimov_vol9_p050_2", cv2.resize(rugimg, (390, 525), interpolation=cv2.INTER_AREA), title="Керимов, т. IX (стр. 50), ковёр", cat={"src": "kerimov_vol9"},
+         marks=[{"id": "mp1", "box": [0.2, 0.2, 0.2, 0.2], "zone": "field", "motif": "", "motif_text": "лист", "scheme": "", "group": "", "certainty": "sure", "status": "confirmed", "note": "", "angle": 0, "flip": 0}])
     big = carpet(600, 840, 91)            # v11.21: один и тот же снимок в двух размерах (ресайз Wikimedia)
     save("cm_shot_o", big, title="Shot original", cat={"src": "commons"})
     save("cm_shot_s", cv2.resize(big, (300, 420), interpolation=cv2.INTER_AREA), title="Shot small", cat={"src": "wikimedia"},
@@ -583,7 +587,7 @@ def t18_feedback_v116(pg, ctx):
     ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
     assert 'am_bag' not in ids, 'сумка показана среди ковров'
     pg.click('#rgTree [data-kind="items"]'); pg.wait_for_timeout(400)
-    assert pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)") == ['am_bag'], 'фильтр «Изделия» не работает'
+    _it = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)"); assert _it == ['am_bag'], f'фильтр «Изделия» не работает: {_it}'
     pg.click('#rgTree [data-kind="carpets"]'); pg.wait_for_timeout(300)
     # скрыть
     pg.evaluate("rugOpen('vam_4')"); pg.wait_for_timeout(1400)
@@ -953,6 +957,33 @@ def t27_multiselect_phash_v1121(pg, ctx):
     pg.evaluate('window.confirm=()=>true'); pg.click('#msHide'); pg.wait_for_timeout(1500)
     assert get(u + f'api/rugs/{ids2[-1]}').get('hidden'), 'выбранное фото не скрылось'
     pg.keyboard.press('Escape'); errors_ok(ctx, 't27')
+
+
+@test
+def t28_pages_grades_fragments_v1122(pg, ctx):
+    """v11.22: лист книги, с которого вырезан ковёр, склеивается с вырезкой (рамки переводятся); грейды; фрагменты пачкой"""
+    u = ctx['url']
+    post(u + 'api/rugs_pages_dedupe', {})
+    for _ in range(60):
+        a, b = get(u + 'api/rugs/kerimov_vol9_p050_1'), get(u + 'api/rugs/kerimov_vol9_p050_2')
+        if a.get('dup_of') or b.get('dup_of'): break
+        time.sleep(1)
+    assert a.get('dup_of') == 'kerimov_vol9_p050_2' and not b.get('dup_of'), f'лист не склеен с вырезанным ковром: {a.get("dup_of")} / {b.get("dup_of")}'
+    L = get(u + 'api/rugs')
+    assert 'elx' in L and all('q' in r and 'fragment' in r for r in L['rugs']), 'нет данных для грейда'
+    pg.goto(u); pg.wait_for_timeout(1800); pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
+    if pg.evaluate("R.view") != 'grid': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
+    assert pg.evaluate("document.querySelectorAll('.rgcard .rggr').length") == pg.evaluate("document.querySelectorAll('.rgcard').length"), 'не у всех плиток есть грейд'
+    n = sum(pg.evaluate("R.gradeCnt")[g] for g in 'ABCD')
+    pg.click('#rgTree [data-grade="D"]'); pg.wait_for_timeout(400)
+    assert pg.evaluate("[...document.querySelectorAll('.rgcard .rggr')].every(b=>b.textContent==='D')"), 'фильтр грейда пропускает другие'
+    pg.click('#rgTree [data-grade="D"]'); pg.wait_for_timeout(300)
+    ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
+    pg.click(f'.rgcard[data-id="{ids[0]}"] .rgck'); pg.wait_for_timeout(200); pg.click('#msFrag'); pg.wait_for_timeout(1500)
+    assert get(u + f'api/rugs/{ids[0]}').get('fragment') is True, 'отметка «фрагмент» пачкой не сохранилась'
+    pg.select_option('#rgFShow', 'frag'); pg.wait_for_timeout(400)
+    assert ids[0] in pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)"), 'фильтр «фрагменты» не показывает отмеченное'
+    pg.select_option('#rgFShow', ''); errors_ok(ctx, 't28')
 
 
 def main():

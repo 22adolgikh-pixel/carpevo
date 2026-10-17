@@ -320,6 +320,7 @@ aside{min-height:0}
 #rgSignsV{position:absolute;inset:0;overflow:auto}.sglist{padding:0 14px 20px;display:flex;flex-direction:column;gap:8px}.sgc{display:flex;gap:12px;background:var(--pan);border:1px solid var(--ln);border-radius:8px;padding:8px}.sgt{width:280px;flex:none;height:60px;background-repeat:repeat-x;background-size:auto 100%;border-radius:4px;border:1px solid var(--ln)}.sgi{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}.sgmem{display:flex;flex-wrap:wrap;gap:6px}.sgm{display:flex;flex-direction:column;width:150px;border:1px solid var(--ln);border-radius:6px;background:var(--pan2);padding:4px;gap:3px;text-align:left;cursor:pointer}.sgm img{height:36px;object-fit:cover;object-position:left;border-radius:3px}.sgm small{font-size:11px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rgck{position:absolute;top:6px;left:6px;z-index:3;width:22px;height:22px;border-radius:50%;border:2px solid #fff;background:rgba(0,0,0,.45);color:#111;font-weight:700;font-size:13px;line-height:1;padding:0;opacity:0;cursor:pointer}.rgcard:hover .rgck,.rgcard.msel .rgck,#rgCards:has(.msel) .rgck{opacity:1}.rgcard.msel{outline:3px solid var(--acc);outline-offset:-3px}.rgcard.msel .rgck{background:var(--acc);border-color:var(--acc)}
 .rgmsel{position:sticky;bottom:0;z-index:4;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 14px;background:var(--pan);border-top:1px solid var(--ln2);box-shadow:0 -6px 20px rgba(0,0,0,.35)}
+.rggr{position:absolute;bottom:6px;right:6px;z-index:2;width:22px;height:22px;display:grid;place-items:center;border-radius:5px;font-weight:700;font-size:12px;color:#111;background:#9aa0a6}.rggr.gA{background:#7bd88f}.rggr.gB{background:#c6e27a}.rggr.gC{background:#f2c46d}.rggr.gD{background:#8a8f98}
 .rgfl1{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 14px 4px}.rgfl1 select{width:auto;flex:none;height:30px}.rgfl1 #rgQ{width:210px;flex:none;height:30px}
 .rgfl{padding:6px 14px 2px;display:flex;flex-direction:column;gap:6px}.rgflr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.rgfll{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}.rgflr .seg{display:inline-flex}.rgflr .seg .sm.on{background:var(--tx);color:var(--bg)}.rgflr #rgQ{width:220px}.rgflr select{width:auto;flex:none}
 .rgchips{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 14px 4px}.rgchips h2{margin:0 8px 0 0;font-size:16px;font-weight:600}
@@ -432,7 +433,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.21</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.22</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2214,7 +2215,7 @@ function rugBack(){R.hl=null;if(R.back==='types'&&R.view==='edit'){if(R.saveT)ru
 const RSRC={kerimov:'Керимов',museum:'музеи',azerbaijanrugs:'azerbaijanrugs',upload:'загруженные'};
 const srcKind=s=>/^kerimov/.test(s||'')?'kerimov':(s==='azerbaijanrugs'?'azerbaijanrugs':(['upload','fig','zip',''].includes(s||'')?'upload':'museum'));
 const SRCRU={kerimov_vol1:'Керимов т. I',kerimov_vol2:'Керимов т. II',kerimov_vol3:'Керимов т. III',met:'Метрополитен',vam:'V&A',aic:'Чикаго',cleveland:'Кливленд',wikimedia:'Wikimedia',commons:'Wikimedia (оригинал)',azcarpetmuseum:'Музей ковра',azerbaijanrugs:'azerbaijanrugs',upload:'загружено',fig:'фото из студии',zip:'архив'};
-async function rugsLoadList(){const j=await api('/api/rugs');R.list=j.rugs;R.imp=j.import;
+async function rugsLoadList(){const j=await api('/api/rugs');R.list=j.rugs;R.imp=j.import;R.elx=j.elx||{};
   try{R.sync=await api('/api/rugs_sync');}catch(e){}
   rugList();if((R.imp&&R.imp.running)||(R.sync&&R.sync.running)){clearTimeout(R.impT);R.impT=setTimeout(rugsLoadList,3000);}}
 // у ковра из книги Керимова есть двойник с фото крупнее (музей, другой источник)? → {id,src,k} или null
@@ -2226,6 +2227,15 @@ const rugKindOf=r=>r.hidden||r.obj==='scene'?'hidden':(r.obj&&r.obj!=='carpet'?'
 async function pplPoll(once){   // ход проверки фото на людей — в строке над плиткой
   try{const j=await api('/api/rugs_people');const E=$('rgPplSt');if(E)E.textContent=j.running?`проверяю: ${j.done} / ${j.total}, с лицами ${j.found}`:(j.total?`проверено ${j.total}`:'');
     if(j.running){clearTimeout(R.pplT);R.pplT=setTimeout(()=>pplPoll(),4000);}else if(!once){await rugsLoadList();}}catch(e){}}
+// v11.22: грейд плитки (ковра) — с чего начинать: A — школа, тип, элементы типа у Керимова, ковёр описан у Керимова, хорошее цветное фото
+function rugGrade(ids){const ms=ids.map(i=>R.list.find(x=>x.id===i)).filter(Boolean);if(!ms.length)return {g:'D',miss:[]};
+  const typ=(ms.find(m=>m.composition)||{}).composition,C={
+    sch:ms.some(m=>m.school),typ:!!typ,el:!!(typ&&(R.elx||{})[typ]>=3),
+    desc:ms.some(m=>srcKind(m.src)==='kerimov'),
+    qual:ms.some(m=>m.q&&m.q.side>=1400&&(m.q.sat==null||m.q.sat>22))};
+  const L={sch:'школа',typ:'тип ковра',el:'элементы типа у Керимова',desc:'описан у Керимова',qual:'хорошее цветное фото (≥1400 px)'};
+  const n=Object.values(C).filter(Boolean).length,frag=ms.every(m=>m.fragment);let g=n>=5?'A':n===4?'B':n===3?'C':'D';if(frag&&g<'C')g='C';
+  return {g,miss:Object.keys(C).filter(k=>!C[k]).map(k=>L[k]),frag};}
 function rugMselBar(){let B=$('rgMsel');const M=document.querySelector('#rgGridV .rgmid');if(!M)return;
   if(!B){B=document.createElement('div');B.id='rgMsel';B.className='rgmsel';M.appendChild(B);}
   const n=R.msel?R.msel.size:0;B.hidden=!n;if(!n){B.innerHTML='';return;}
@@ -2234,18 +2244,21 @@ function rugMselBar(){let B=$('rgMsel');const M=document.querySelector('#rgGridV
     <button class="sm" id="msHide" data-tip="убрать из каталога (раздел «Скрытые» — вернуть можно)">🚫 скрыть из каталога</button>
     ${n>1?'<button class="sm" id="msOne" data-tip="все выбранные плитки — один и тот же ковёр (паспорт не меняется)">🔗 один ковёр</button>':''}
     ${all.length>n?'<button class="sm" id="msSplit" data-tip="фото внутри выбранных плиток — разные ковры: каждая фото станет своей плиткой">✂ разъединить фото</button>':''}
+    <button class="sm" id="msFrag" data-tip="фрагмент или остаток ковра: в грейде не выше C, фильтр «фрагменты»">✂ фрагмент</button><button class="sm" id="msFragX">не фрагмент</button>
     <span class="sp"></span><button class="sm" id="msAll">выбрать все показанные</button><button class="sm" id="msNone">снять выбор (Esc)</button>`;
   const done=async msg=>{stat(msg,'ok');R.msel.clear();await rugsLoadList();};
   $('msHide').onclick=async()=>{if(!confirm(`Скрыть ${all.length} фото из каталога?`))return;try{const j=await api('/api/rugs_hide',{ids:all,reason:'скрыто вручную'});done('скрыто фото: '+j.n);}catch(e){fail(e);}};
   $('msOne')&&($('msOne').onclick=async()=>{const ids=[...R.msel],p=ids.slice(1).map(x=>[ids[0],x]);try{await api('/api/rugs_same_bulk',{pairs:p,ok:true});done('объединено в один ковёр: '+ids.length+' плиток');}catch(e){fail(e);}});
   $('msSplit')&&($('msSplit').onclick=async()=>{const p=[];[...R.msel].forEach(id=>{const g=(R.cardIds&&R.cardIds[id])||[id];for(let i=0;i<g.length;i++)for(let j=i+1;j<g.length;j++)p.push([g[i],g[j]]);});
     if(!confirm(`Отметить «разные ковры» для ${p.length} пар фото?`))return;try{const j=await api('/api/rugs_same_bulk',{pairs:p,ok:false});done('разъединено пар: '+j.n);}catch(e){fail(e);}});
+  const frag=async v=>{try{const j=await api('/api/rugs_bulk_set',{ids:all,fragment:v});done((v?'отмечено фрагментом: ':'снята отметка «фрагмент»: ')+j.n);}catch(e){fail(e);}};
+  $('msFrag').onclick=()=>frag(true);$('msFragX').onclick=()=>frag(false);
   $('msAll').onclick=()=>{(R.shown||[]).forEach(x=>R.msel.add(x));rugList();};$('msNone').onclick=()=>{R.msel.clear();rugList();};}
 function rugList(){
   const L=$('rgCards');if(!L)return;const q=R.q.toLowerCase();const byId={};R.list.forEach(r=>byId[r.id]=r);
   R.list.forEach(r=>r._big=rugBigTwin(r,byId));
   const fk=R.fkind||'carpets';
-  const ok=r=>!(r.split_into&&r.split_into.length)&&(fk==='all'||rugKindOf(r)===fk)&&(!R.fmulti||r.multi)&&(!R.filter||r.status===R.filter)&&(!R.fsrc||srcKind(r.src)===R.fsrc)&&(!R.fsrc2||r.src===R.fsrc2)&&(!R.fschs||!R.fschs.size||R.fschs.has(r.school||'-'))&&(!R.fnone||!r.n)&&(!R.fdup||r.group||r.same)&&(!R.fbig||r._big)&&(!R.fppl||r.people>0)&&(!q||(r.title+' '+r.museum+' '+r.id).toLowerCase().includes(q));
+  const ok=r=>!(r.split_into&&r.split_into.length)&&(fk==='all'||rugKindOf(r)===fk)&&(!R.fmulti||r.multi)&&(!R.filter||r.status===R.filter)&&(!R.fsrc||srcKind(r.src)===R.fsrc)&&(!R.fsrc2||r.src===R.fsrc2)&&(!R.fschs||!R.fschs.size||R.fschs.has(r.school||'-'))&&(!R.fnone||!r.n)&&(!R.fdup||r.group||r.same)&&(!R.fbig||r._big)&&(!R.fppl||r.people>0)&&(!R.ffrag||(R.ffrag>0?!!r.fragment:!r.fragment))&&(!q||(r.title+' '+r.museum+' '+r.id).toLowerCase().includes(q));
   let ls=R.list.filter(ok);
   if(R.sort==='kbig')ls=ls.slice().sort((a,b)=>(b._big?b._big.k:0)-(a._big?a._big.k:0)||(srcKind(a.src)==='kerimov'?0:1)-(srcKind(b.src)==='kerimov'?0:1));
   else if(R.sort==='title')ls=ls.slice().sort((a,b)=>(a.title||'').localeCompare(b.title||'','ru'));
@@ -2256,13 +2269,16 @@ function rugList(){
   ls.forEach(r=>{par[r.id]=par[r.id]||r.id;(r.same_link||[]).forEach(o=>{if(!inLs.has(o))return;par[o]=par[o]||o;const a=fd(r.id),b=fd(o);if(a!==b)par[a]=b;});});
   const byG={};ls.forEach(r=>{const k=fd(r.id);(byG[k]=byG[k]||[]).push(r);});
   Object.values(byG).forEach(g=>g.sort((a,b)=>(PR[srcKind(a.src)]-PR[srcKind(b.src)])||((b.w||0)*(b.h||0)-(a.w||0)*(a.h||0))));
-  const cards=[];const done=new Set();R.cardIds={};
-  ls.forEach(r=>{if(done.has(r.id))return;const g=R.fppl?[r]:byG[fd(r.id)];g.forEach(x=>done.add(x.id));R.cardIds[g[0].id]=g.map(x=>x.id);cards.push([g[0],g.length-1]);});
+  let cards=[];const done=new Set();R.cardIds={};R.cardGrade={};
+  ls.forEach(r=>{if(done.has(r.id))return;const g=R.fppl?[r]:byG[fd(r.id)];g.forEach(x=>done.add(x.id));R.cardIds[g[0].id]=g.map(x=>x.id);R.cardGrade[g[0].id]=rugGrade(g.map(x=>x.id));cards.push([g[0],g.length-1]);});
+  R.gradeCnt={A:0,B:0,C:0,D:0};cards.forEach(([r])=>R.gradeCnt[R.cardGrade[r.id].g]++);
+  if(R.fgrade)cards=cards.filter(([r])=>R.cardGrade[r.id].g===R.fgrade);
+  if(R.sort==='grade')cards.sort((a,b)=>R.cardGrade[a[0].id].g.localeCompare(R.cardGrade[b[0].id].g));
   R.shown=cards.map(c=>c[0].id);
-  {const sv=(id,v)=>{const e=$(id);if(e&&e.value!==v)e.value=v;};sv('rgFStatus',R.filter||'');sv('rgFShow',R.fnone?'none':R.fdup?'dup':R.fbig?'big':'');sv('rgFCheck',R.fmulti?'multi':R.fppl?'ppl':'');sv('rgSort',R.sort||'');
-   const any=R.filter||R.fnone||R.fdup||R.fbig||R.fmulti||R.fppl||R.q;const X=$('rgFReset');if(X){X.hidden=!any;X.onclick=()=>{R.filter='';R.fnone=R.fdup=R.fbig=R.fmulti=R.fppl=false;R.q='';$('rgQ').value='';R.gridN=150;rugList();};}}
+  {const sv=(id,v)=>{const e=$(id);if(e&&e.value!==v)e.value=v;};sv('rgFStatus',R.filter||'');sv('rgFShow',R.fnone?'none':R.fdup?'dup':R.fbig?'big':R.ffrag===1?'frag':R.ffrag===-1?'nofrag':'');sv('rgFCheck',R.fmulti?'multi':R.fppl?'ppl':'');sv('rgSort',R.sort||'');
+   const any=R.filter||R.fnone||R.fdup||R.fbig||R.fmulti||R.fppl||R.q||R.ffrag||R.fgrade;const X=$('rgFReset');if(X){X.hidden=!any;X.onclick=()=>{R.filter='';R.fnone=R.fdup=R.fbig=R.fmulti=R.fppl=false;R.ffrag=0;R.fgrade='';R.q='';$('rgQ').value='';R.gridN=150;rugList();};}}
   const N=R.gridN||150;
-  const card=([r,n])=>`<div class="rgcard" data-id="${esc(r.id)}"><div class="im"><img loading="lazy" src="/rugthumb/${encodeURIComponent(r.id)}.jpg"><div class="bd">${n?`<span>🔗 ещё ${n} фото</span>`:''}${r._big?`<span class="big" data-tip="у двойника (${esc(SRCRU[r._big.src]||r._big.src)}) фото в ${r._big.k.toFixed(1)} раза крупнее — размечать лучше там">⬆ фото крупнее ×${r._big.k.toFixed(1)}</span>`:''}${r.multi?`<span class="cut">✂ ${r.multi} ковра</span>`:''}${r.split_from?`<span>часть ${r.part||''} разворота</span>`:''}${r.machine?`<span style="color:#4dd0e1">машина: ${r.machine}</span>`:''}</div></div>
+  const card=([r,n])=>`<div class="rgcard" data-id="${esc(r.id)}"><div class="im"><img loading="lazy" src="/rugthumb/${encodeURIComponent(r.id)}.jpg">${(g=>`<span class="rggr g${g.g}" data-tip="грейд ${g.g}${g.miss.length?' — нет: '+esc(g.miss.join(', ')):' — всё есть: с таких начинать'}${g.frag?' · фрагмент':''}">${g.g}</span>`)(R.cardGrade[r.id]||{g:'D',miss:[]})}<div class="bd">${n?`<span>🔗 ещё ${n} фото</span>`:''}${r._big?`<span class="big" data-tip="у двойника (${esc(SRCRU[r._big.src]||r._big.src)}) фото в ${r._big.k.toFixed(1)} раза крупнее — размечать лучше там">⬆ фото крупнее ×${r._big.k.toFixed(1)}</span>`:''}${r.multi?`<span class="cut">✂ ${r.multi} ковра</span>`:''}${r.split_from?`<span>часть ${r.part||''} разворота</span>`:''}${r.machine?`<span style="color:#4dd0e1">машина: ${r.machine}</span>`:''}</div></div>
     <div class="t" title="${esc(r.title)}">${esc(r.title)}</div><div class="m">${esc(SRCRU[r.src]||r.src||'')} · ${r.school?esc(RSCH[r.school]||r.school):'<i>школа ?</i>'}${r.fragment?' · фрагмент':''}<br>${r.n?`${r.n} элем. · <b>✓ ${r.confirmed}</b>`:'не размечен'}${r.w?` · ${r.w}×${r.h}`:''}</div></div>`;
   const sy=R.sync||{};const syl=sy.running?`<span style="color:var(--warn)">⏳ ${esc(sy.stage)}: ${sy.done}${sy.total?' / '+sy.total:''}</span>`:(sy.error?`<span style="color:var(--bad)">⚠ ${esc(sy.error)}</span>`:(sy.last_sync?`<span>каталог с Диска: ${esc(sy.last_sync)}${sy.made||sy.updated?` (новых ${sy.made}, обновлено ${sy.updated})`:''}</span>`:''));
   const im=R.imp&&(R.imp.running||R.imp.total)?`<span>${R.imp.running?'⏳ импорт':'импорт завершён'}: ${R.imp.done}/${R.imp.total}${R.imp.errors?' · ошибок '+R.imp.errors:''}</span>`:'';
@@ -2294,7 +2310,7 @@ function rugSaveSoon(){if(rro())return;R.ver=(R.ver||0)+1;clearTimeout(R.saveT);
 async function rugSaveNow(){
   clearTimeout(R.saveT);const r=R.rug;if(!r)return;
   const body={};['title','museum','inv','url','license','place','date','school','composition','technique','size','notes','status'].forEach(k=>body[k]=r[k]);
-  body.layout=r.layout||null;if(r.school_suggest===null)body.school_suggest=null;if('obj' in r)body.obj=r.obj||'';if('hidden' in r)body.hidden=r.hidden||'';
+  body.layout=r.layout||null;if(r.school_suggest===null)body.school_suggest=null;if('obj' in r)body.obj=r.obj||'';if('hidden' in r)body.hidden=r.hidden||'';if('fragment' in r)body.fragment=r.fragment;
   body.marks=r.marks.map(m=>({id:m.id,box:m.box,zone:m.zone,motif:m.motif,motif_text:m.motif_text,scheme:m.scheme,group:m.group,certainty:m.certainty,status:m.status,note:m.note,angle:m.angle||0,flip:m.flip||0,machine:m.machine||0,score:m.score||0,xfer:m.xfer||'',variant:m.variant||''}));
   if(r._multiNo){body.multi_no=1;delete r._multiNo;}
   const v=R.ver;
@@ -2682,9 +2698,14 @@ function dupCheckDraw(){const B=$('msBody'),bar=$('dcBar');if(!B)return;const j=
   const im=(id,wh,src,t)=>`<div class="dcim" data-open="${esc(id)}" data-tip="${esc(t)} — открыть"><img loading="lazy" src="/rugthumb/${encodeURIComponent(id)}.jpg"><small>${esc(SRCRU[src]||src||'')}${wh[0]?' · '+wh[0]+'×'+wh[1]:''}</small></div>`;
   B.innerHTML=ls.length?`<div class="dcrows">${ls.map((p,i)=>{const c=p.chk,v=cls(p);return `<div class="dcrow ${v}" data-i="${P.indexOf(p)}">${im(p.a,p.wa,p.sa,p.ta)}${im(p.b,p.wb,p.sb,p.tb)}<div class="dcinfo"><div class="dct" title="${esc(p.ta)}">${esc(p.ta.slice(0,70))}</div><div class="dct mut" title="${esc(p.tb)}">${esc(p.tb.slice(0,70))}</div>
       <div class="dcv">${c?`<b class="${c.v}">${c.v==='same'?'✓ точно тот же':c.v==='maybe'?'? сомнительно':'✗ похоже, разные ковры'}</b> <small class="mut">совпало точек: ${c.inl}</small>`:'<small class="mut">машина ещё не проверяла</small>'}${p.ok?` · <b>${p.ok.ok?'вы: тот же':p.ok.similar?'вы: похожи, но разные':'вы: разные'}</b> <small class="mut">${esc(p.ok.by||'')}</small>`:''}</div>
-      ${rro()?'':`<div class="rgrow"><button class="sm" data-dok="1" ${p.ok&&p.ok.ok?'disabled':''}>✓ тот же ковёр</button><button class="sm" data-dsim="1" ${p.ok&&p.ok.similar?'disabled':''} data-tip="тот же рисунок, но другой ковёр (другие краски, детали)">≈ похожи, но разные</button><button class="sm" data-dno="1" ${p.ok&&!p.ok.ok&&!p.ok.similar?'disabled':''}>✗ разные</button></div>`}</div></div>`;}).join('')}</div>${P.filter(F[DCK.f][1]).length>120?'<p class="mut">показаны первые 120</p>':''}`:'<p class="mut">Здесь пусто.</p>';
+      ${rro()?'':`<div class="rgrow"><button class="sm" data-dok="1" ${p.ok&&p.ok.ok?'disabled':''}>✓ тот же ковёр</button><button class="sm" data-dsim="1" ${p.ok&&p.ok.similar?'disabled':''} data-tip="тот же рисунок, но другой ковёр (другие краски, детали)">≈ похожи, но разные</button><button class="sm" data-dno="1" ${p.ok&&!p.ok.ok&&!p.ok.similar?'disabled':''}>✗ разные</button><button class="sm" data-dfrag="1" data-tip="это фрагменты (куски, остатки) ковра: все фото этой группы отмечаются фрагментами, все их пары — «разные фото», и больше не спрашиваются">✂ фрагменты — вся группа</button></div>`}</div></div>`;}).join('')}</div>${P.filter(F[DCK.f][1]).length>120?'<p class="mut">показаны первые 120</p>':''}`:'<p class="mut">Здесь пусто.</p>';
   B.querySelectorAll('[data-open]').forEach(e=>e.onclick=()=>{$('modal').hidden=true;$('modal').innerHTML='';rugOpen(e.dataset.open);});
   B.querySelectorAll('.dcrow').forEach(row=>{const p=P[+row.dataset.i];const ans=async(ok,sim)=>{try{await api('/api/rugs/'+encodeURIComponent(p.a)+'/same',{other:p.b,ok,similar:!!sim});p.ok={ok,similar:!!sim,by:(window.ME&&ME.name)||''};dupCheckDraw();}catch(e){fail(e);}};
+    const fr=row.querySelector('[data-dfrag]');fr&&(fr.onclick=async()=>{   // v11.22: группа = все фото, связанные парами проверки с этой парой
+      const par={},f=x=>{while(par[x]&&par[x]!==x)x=par[x];return x;};P.forEach(q=>{par[q.a]=par[q.a]||q.a;par[q.b]=par[q.b]||q.b;const x=f(q.a),y=f(q.b);if(x!==y)par[x]=y;});
+      const root=f(p.a),mem=Object.keys(par).filter(x=>f(x)===root),pairs=P.filter(q=>f(q.a)===root).map(q=>[q.a,q.b]);
+      if(!confirm(`Отметить фрагментами ${mem.length} фото и «разные» для ${pairs.length} пар этой группы?`))return;
+      try{await api('/api/rugs_bulk_set',{ids:mem,fragment:true});await api('/api/rugs_same_bulk',{pairs,ok:false});P.filter(q=>f(q.a)===root).forEach(q=>q.ok={ok:false,by:(window.ME&&ME.name)||''});stat(`фрагменты: ${mem.length} фото, пар отвечено: ${pairs.length}`,'ok');dupCheckDraw();}catch(e){fail(e);}});
     const a=row.querySelector('[data-dok]'),b=row.querySelector('[data-dno]'),c=row.querySelector('[data-dsim]');a&&(a.onclick=()=>ans(true));b&&(b.onclick=()=>ans(false));c&&(c.onclick=()=>ans(false,true));});}
 // ---- v11.5: «на что это похоже» — подсказка названия по форме (сервер: shape_hint.py) ----
 const SHC={};
@@ -2792,6 +2813,7 @@ function rugSideFill(E,side,r){
       ${f('museum','Музей / собрание')}${f('inv','Инв. номер')}${f('place','Место (как у музея)')}${f('date','Дата','XIX в., 1880-е…')}${f('size','Размер','150×230 см')}${f('url','Ссылка на источник')}${f('license','Лицензия фото')}
       <label>Заметки<textarea data-f="notes" rows="3" ${dis}>${esc(r.notes||'')}</textarea></label>
       <label>Что на фото<select id="rgObj" ${dis}>${Object.entries(ROBJ).map(([k,v])=>`<option value="${k}" ${(r._obj||{}).k===k?'selected':''}>${v}</option>`).join('')}</select>${r._obj&&!r._obj.set&&r._obj.why?`<small class="mut">определено по слову «${esc(r._obj.why)}» — поменяйте, если неверно</small>`:''}</label>
+      <label class="rgline"><input type="checkbox" id="rgFrag" ${dis} ${(r.fragment!=null?r.fragment:(r.cat||{}).fragment)?'checked':''}> фрагмент / остаток ковра ${r.fragment==null&&(r.cat||{}).fragment?'<small class="mut">(по подписи источника)</small>':''}</label>
       ${r.hidden?`<div class="rgwarn">🚫 Скрыт из каталога: ${esc(r.hidden)} ${rro()?'':'<a href="#" id="rgUnhide">вернуть</a>'}</div>`:(rro()?'':`<div class="rgrow"><button class="sm" id="rgHide" data-tip="убрать из плитки и из поиска узоров (не удаляется — найти в «Скрытые и не ковры»)">🚫 скрыть: не подходит</button></div>`)}
       <label>Статус разметки<select data-f="status" ${dis}>${Object.entries(RST).map(([k,v])=>`<option value="${k}" ${r.status===k?'selected':''}>${v}</option>`).join('')}</select></label>
       <p class="mut">Источник: ${esc(r.source||'—')}${r.updated_by?` · последняя правка: ${esc(r.updated_by)}`:''}</p>
@@ -2844,6 +2866,7 @@ function rugSideFill(E,side,r){
   if(side==='rug'&&!rro()){
     rugDictSearch('rgCompQ','rgCompHits','composition',d=>{r.composition=d.id;r._composition={az:d.az,ru:d.ru};rugSaveSoon();rugSide();});
     $('rgCompX')&&($('rgCompX').onclick=e=>{e.preventDefault();r.composition='';r._composition=null;rugSaveSoon();rugSide();});
+    $('rgFrag')&&($('rgFrag').onchange=e=>{r.fragment=e.target.checked;rugSaveSoon();});
     $('rgObj')&&($('rgObj').onchange=e=>{r.obj=e.target.value;r._obj={k:r.obj,why:'',set:true};rugSaveSoon();rugSide();});
     $('rgHide')&&($('rgHide').onclick=()=>rugHide(r));$('rgUnhide')&&($('rgUnhide').onclick=e=>{e.preventDefault();r.hidden='';rugSaveSoon();rugSide();});
     $('rgCompSugOk')&&($('rgCompSugOk').onclick=()=>{const g=r.comp_suggest;r.composition=g.id;r._composition={az:g.az,ru:g.ru};delete r.comp_suggest;rugSaveSoon();rugSide();if(R.rug===r&&r.composition)rugLeft();});
@@ -3183,9 +3206,9 @@ window.addEventListener('blur',()=>{if(R.on){R.space=false;$('rgSvg')&&$('rgSvg'
     <div class="rgfl1" role="group" aria-label="Фильтры плитки">
       <input id="rgQ" type="search" placeholder="поиск по названию, музею…">
       <select id="rgFStatus" aria-label="статус разметки"><option value="">любой статус</option>${Object.entries(RST).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select>
-      <select id="rgFShow" aria-label="показать только"><option value="">все фото</option><option value="none">не размечены</option><option value="dup">есть двойники</option><option value="big">есть фото крупнее</option></select>
+      <select id="rgFShow" aria-label="показать только"><option value="">все фото</option><option value="none">не размечены</option><option value="dup">есть двойники</option><option value="big">есть фото крупнее</option><option value="frag">фрагменты</option><option value="nofrag">без фрагментов</option></select>
       <select id="rgFCheck" aria-label="проверить" data-tip="Развороты — фото, где похоже на несколько ковров (первый раз машина просматривает все фото, несколько минут). Люди на фото — машина нашла лица (выставка, мастерская, помещение)"><option value="">проверить: —</option><option value="multi">развороты книг</option><option value="ppl">люди на фото</option></select>
-      <select id="rgSort" aria-label="порядок плиток"><option value="">сначала в работе</option><option value="kbig">Керимов с крупным двойником</option><option value="title">по названию</option></select>
+      <select id="rgSort" aria-label="порядок плиток"><option value="">сначала в работе</option><option value="kbig">Керимов с крупным двойником</option><option value="title">по названию</option><option value="grade">по грейду: A первыми</option></select>
       <button class="sm" id="rgFReset" hidden>✕ сбросить</button><h2 id="rgH" hidden></h2>
     </div>
     <div class="rgstat" id="rgStat"></div><div class="rgcards" id="rgCards"></div></section><aside id="rgPeek" aria-label="Ковёр под курсором"></aside></div>
@@ -3201,7 +3224,7 @@ window.addEventListener('blur',()=>{if(R.on){R.space=false;$('rgSvg')&&$('rgSvg'
   $('rgDupChk').onclick=dupCheckOpen;$('rgTypesBtn').onclick=()=>tyOpen();$('rgSignsBtn').onclick=()=>sgOpen();
   // v11.20: обычный фильтр — компактные выпадающие списки
   $('rgFStatus').onchange=e=>{R.filter=e.target.value;R.gridN=150;rugList();};
-  $('rgFShow').onchange=e=>{const v=e.target.value;R.fnone=v==='none';R.fdup=v==='dup';R.fbig=v==='big';R.gridN=150;rugList();};
+  $('rgFShow').onchange=e=>{const v=e.target.value;R.fnone=v==='none';R.fdup=v==='dup';R.fbig=v==='big';R.ffrag=v==='frag'?1:v==='nofrag'?-1:0;R.gridN=150;rugList();};
   $('rgFCheck').onchange=async e=>{const v=e.target.value;R.fmulti=v==='multi';R.fppl=v==='ppl';R.gridN=150;rugList();if(!R.fmulti)return;
     const poll=async()=>{const j=await api('/api/rugs_multi');if(j.running){stat(`ищу развороты: ${j.done} / ${j.total} фото, найдено ${j.found}`,'busy');await rugsLoadList();setTimeout(poll,3000);}else{await rugsLoadList();stat(`фото с несколькими коврами: ${j.found}`,'ok');}};
     try{await api('/api/rugs_multi',{});poll();}catch(err){fail(err);}};
@@ -3337,12 +3360,14 @@ function rugTree(){const E=$('rgTree');if(!E)return;const base=R.list.filter(r=>
   const sch={};base.forEach(r=>{const k=r.school||'-';sch[k]=(sch[k]||0)+1;});R.fschs=R.fschs||new Set();
   const fk=R.fkind||'carpets',cnt={carpets:0,items:0,hidden:0};base.forEach(r=>cnt[rugKindOf(r)]++);
   E.innerHTML=`<h4>Что</h4><div class="ptree" id="rgKinds">${[['carpets','Ковры','ковры (ворсовые и безворсовые)'],['items','Изделия','сумки и мешки (məfrəş, xurcun, heybə…), конское снаряжение (çul…), бытовые (dəstərxan, corab…) — узоры те же, поиск элементов их видит'],['hidden','Скрытые и не ковры','скрытые вручную и фото, где не ковёр: интерьер, выставка, инструменты'],['all','Всё','']].map(([k,v,t])=>`<button class="pn ${fk===k?'cur':''}" data-kind="${k}" ${t?`data-tip="${t}"`:''}><span class="ch"></span><span class="nm">${v}</span><span class="c">${k==='all'?base.length:cnt[k]}</span></button>`).join('')}</div>
+  <h4 style="margin-top:14px">Грейд <span class="mut" style="text-transform:none;letter-spacing:0" data-tip="A — известны школа и тип, у Керимова описаны элементы этого типа, ковёр есть у Керимова, есть хорошее цветное фото: с таких начинать. B — одного не хватает, C — двух, D — трёх и больше. Подсказка на значке плитки — чего не хватает">ⓘ</span></h4><div class="ptree">${['A','B','C','D'].map(g=>`<button class="pn ${R.fgrade===g?'cur':''}" data-grade="${g}"><span class="ch"></span><span class="nm"><span class="rggr g${g}" style="position:static;display:inline-grid">${g}</span> ${{A:'всё есть — в первую очередь',B:'не хватает одного',C:'не хватает двух',D:'мало данных'}[g]}</span><span class="c">${(R.gradeCnt||{})[g]||0}</span></button>`).join('')}</div>
   <h4 style="margin-top:14px">Источники</h4><div class="ptree"><button class="pn ${!R.fsrc&&!R.fsrc2?'cur':''}" data-k=""><span class="ch"></span><span class="nm">Все источники</span><span class="c">${base.length}</span></button>`+
     Object.keys(RSRC).filter(k=>kinds[k]).map(k=>{const K=kinds[k],subs=Object.entries(K.src).sort((a,b)=>b[1]-a[1]),op=R.fsrc===k;
       return `<button class="pn ${R.fsrc===k&&!R.fsrc2?'cur':''}" data-k="${k}"><span class="ch">${subs.length>1?(op?'▾':'▸'):''}</span><span class="nm">${esc(RSRC[k])}</span><span class="c">${K.n}</span></button>`+
         (op&&subs.length>1?subs.map(([sv,n])=>`<button class="pn sub ${R.fsrc2===sv?'cur':''}" data-k="${k}" data-s="${esc(sv)}"><span class="ch"></span><span class="nm">${esc(SRCRU[sv]||sv||'—')}</span><span class="c">${n}</span></button>`).join(''):'');}).join('')+`</div>
     <h4 style="margin-top:14px">Школа</h4>${Object.entries(RSCH).filter(([k])=>k&&sch[k]).concat(sch['-']?[['-','школа не известна']]:[]).map(([k,v])=>`<label class="sch"><input type="checkbox" data-sch="${esc(k)}" ${R.fschs.has(k)?'checked':''}><span class="nm">${esc(v)}</span><span class="c">${sch[k]}</span></label>`).join('')}`;
   E.querySelectorAll('[data-kind]').forEach(b=>b.onclick=()=>{R.fkind=b.dataset.kind;R.gridN=150;rugList();});
+  E.querySelectorAll('[data-grade]').forEach(b=>b.onclick=()=>{R.fgrade=R.fgrade===b.dataset.grade?'':b.dataset.grade;R.gridN=150;rugList();});
   E.querySelectorAll('.pn[data-k]').forEach(b=>b.onclick=()=>{const k=b.dataset.k||'',sv=b.dataset.s;
     if(sv!=null){R.fsrc=k;R.fsrc2=sv;}else if(R.fsrc===k&&!R.fsrc2&&k){R.fsrc='';}else{R.fsrc=k;R.fsrc2='';}R.fbig=false;R.gridN=150;rugList();});
   E.querySelectorAll('[data-sch]').forEach(c=>c.onchange=()=>{c.checked?R.fschs.add(c.dataset.sch):R.fschs.delete(c.dataset.sch);R.gridN=150;rugList();});
