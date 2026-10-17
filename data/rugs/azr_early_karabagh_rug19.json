@@ -2,15 +2,15 @@
  "id": "azr_early_karabagh_rug19",
  "title": "early karabagh rug19",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Метрополитен-музей",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "18th century",
  "school": "karabakh",
  "composition": "",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 2110,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1792261373,
  "cat": {
   "title": "early karabagh rug19",
   "museum": "",
@@ -56,7 +56,13 @@
    "score": 407
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_319213c085": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792261296
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -70,5 +76,12 @@
    "v": "same",
    "at": 1792113528
   }
- }
+ },
+ "from_twin": {
+  "technique": "cm_319213c085",
+  "museum": "cm_319213c085",
+  "date": "cm_319213c085"
+ },
+ "layout": null,
+ "updated_by": "dolgikh"
 }

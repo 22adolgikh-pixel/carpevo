@@ -16,9 +16,118 @@
  "status": "new",
  "w": 1081,
  "h": 2400,
- "marks": [],
+ "marks": [
+  {
+   "id": "mmvcq3xxy",
+   "box": [
+    0.31804,
+    0.04402,
+    0.37289,
+    0.19938
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcq3xxy",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1792261311,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792261335
+  },
+  {
+   "id": "mmvcq4gud0",
+   "box": [
+    0.60075,
+    0.46641,
+    0.3399,
+    0.18514
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcq3xxy",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 1,
+   "score": 0.568,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1792261335,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792261338
+  },
+  {
+   "id": "mmvcq4gud1",
+   "box": [
+    0.07114,
+    0.46285,
+    0.3399,
+    0.18514
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcq3xxy",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 1,
+   "machine": 1,
+   "score": 0.557,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1792261335,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "mmvcq4tjw",
+   "box": [
+    0.32525,
+    0.84228,
+    0.36178,
+    0.11769
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcq3xxy",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1792261352,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1792261353
+  }
+ ],
  "created": 1791870025,
- "updated": 1791997208,
+ "updated": 1792261365,
  "cat": {
   "title": "Carpet with Geometricized Floral Design Late 18th century Attributed to Caucasus This carpet is representative",
   "museum": "Метрополитен-музей",
@@ -58,7 +167,13 @@
    "score": 447
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_early_karabagh_rug19": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792261296
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "azr_early_karabagh_rug19": {
@@ -71,5 +186,7 @@
    "v": "same",
    "at": 1792113741
   }
- }
+ },
+ "layout": null,
+ "updated_by": "dolgikh"
 }
