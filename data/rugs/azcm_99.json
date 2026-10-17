@@ -9,7 +9,7 @@
  "place": "Шуша, Карабах, Азербайджан",
  "date": "начало ХХ века",
  "school": "karabakh",
- "composition": "",
+ "composition": "malibeyli",
  "technique": "ворсовый",
  "size": "126х249 sm",
  "notes": "основа, уток, ворс – шерсть; ",
@@ -56,7 +56,13 @@
    "score": 43
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Karabakh_carpet_malibayli_1813_jpg": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258672
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Karabakh_carpet_malibayli_1813_jpg": {
@@ -64,5 +70,8 @@
    "v": "same",
    "at": 1792113233
   }
+ },
+ "from_twin": {
+  "composition": "wikimedia_File_Karabakh_carpet_malibayli_1813_jpg"
  }
 }

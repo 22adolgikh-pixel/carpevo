@@ -2,15 +2,15 @@
  "id": "azr_kuba_gollu_chichi30",
  "title": "kuba gollu chichi30",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "XIX əsr",
  "school": "guba-shirvan",
- "composition": "",
- "technique": "",
+ "composition": "qollu-chichi",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -56,7 +56,13 @@
    "score": 87
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_eaabfd4fec": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258712
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -70,5 +76,11 @@
    "v": "maybe",
    "at": 1792113155
   }
+ },
+ "from_twin": {
+  "composition": "cm_eaabfd4fec",
+  "technique": "cm_eaabfd4fec",
+  "museum": "cm_eaabfd4fec",
+  "date": "cm_eaabfd4fec"
  }
 }

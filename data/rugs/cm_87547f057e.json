@@ -6,12 +6,12 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Azerbaijanian_carpet_from_Shikhly.jpg",
  "license": "Public domain · Unknown author Unknown author",
- "place": "",
+ "place": "Газах, Азербайджан",
  "date": "19th centurydate QS:P,+1850-00-00T00:00:00Z/7",
  "school": "ganja-gazakh",
  "composition": "shixli",
  "technique": "ворсовый",
- "size": "",
+ "size": "128x316 sm",
  "notes": "Knotted-pile wool carpet “Shykhly”. Kazakh school.",
  "status": "new",
  "w": 708,
@@ -58,7 +58,13 @@
    "score": 1502
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_138": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258701
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "azcm_138": {
@@ -71,5 +77,9 @@
    "v": "same",
    "at": 1792113823
   }
+ },
+ "from_twin": {
+  "place": "azcm_138",
+  "size": "azcm_138"
  }
 }

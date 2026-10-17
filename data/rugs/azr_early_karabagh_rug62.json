@@ -2,16 +2,16 @@
  "id": "azr_early_karabagh_rug62",
  "title": "early karabagh rug62",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Метрополитен-музей",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "probably Quba, Karabakh, present-day Azerbaijan",
+ "date": "1600sdate QS:P,+1600-00-00T00:00:00Z/8",
  "school": "karabakh",
- "composition": "",
- "technique": "",
- "size": "",
+ "composition": "ejdahali",
+ "technique": "ворсовый",
+ "size": "Textile: L. 184 in. (467.4 cm)\r\n             W. 86 in. (218.4 cm)",
  "notes": "",
  "status": "new",
  "w": 500,
@@ -92,7 +92,28 @@
    "score": 568
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_802aff8b0a": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258695
+  },
+  "cm_9453a46c77": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258718
+  },
+  "cm_d12ac0d41b": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258767
+  },
+  "cm_d868a6c152": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258794
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -151,5 +172,13 @@
    "v": "same",
    "at": 1792112889
   }
+ },
+ "from_twin": {
+  "technique": "cm_802aff8b0a",
+  "museum": "cm_802aff8b0a",
+  "date": "cm_802aff8b0a",
+  "composition": "cm_d12ac0d41b",
+  "place": "cm_d12ac0d41b",
+  "size": "cm_d12ac0d41b"
  }
 }

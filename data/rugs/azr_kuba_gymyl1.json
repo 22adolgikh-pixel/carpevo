@@ -2,15 +2,15 @@
  "id": "azr_kuba_gymyl1",
  "title": "kuba gymyl1",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "1902",
  "school": "guba-shirvan",
- "composition": "",
- "technique": "",
+ "composition": "qimil",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -52,7 +52,13 @@
    "score": 72
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Gimil_carpet_1902_gif": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258734
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -61,5 +67,11 @@
    "v": "same",
    "at": 1792112527
   }
+ },
+ "from_twin": {
+  "composition": "wikimedia_File_Gimil_carpet_1902_gif",
+  "technique": "wikimedia_File_Gimil_carpet_1902_gif",
+  "museum": "wikimedia_File_Gimil_carpet_1902_gif",
+  "date": "wikimedia_File_Gimil_carpet_1902_gif"
  }
 }

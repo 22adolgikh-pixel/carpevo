@@ -6,12 +6,12 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Dragon_Carpet_MET_wb-22.100.122b.jpeg",
  "license": "CC0",
- "place": "",
- "date": "",
+ "place": "Caucasus",
+ "date": "17th century",
  "school": "",
- "composition": "",
- "technique": "",
- "size": "",
+ "composition": "ejdahali",
+ "technique": "ворсовый",
+ "size": "H. 170 in. (431.8 cm)\r\nW.  90.00 in. (228.6 cm)",
  "notes": "Carpet; Textiles-Rugs",
  "status": "new",
  "w": 1583,
@@ -70,7 +70,13 @@
    "score": 134
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "met_447580": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258721
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_a38c54d791": {
@@ -98,5 +104,12 @@
    "v": "same",
    "at": 1792112479
   }
+ },
+ "from_twin": {
+  "composition": "met_447580",
+  "technique": "met_447580",
+  "place": "met_447580",
+  "date": "met_447580",
+  "size": "met_447580"
  }
 }

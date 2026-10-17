@@ -9,7 +9,7 @@
  "place": "Газах, Азербайджан",
  "date": "начало ХХ века",
  "school": "ganja-gazakh",
- "composition": "",
+ "composition": "shixli",
  "technique": "ворсовый",
  "size": "128x316 sm",
  "notes": "Основа, ворс – шерсть, уток – хлопок; ",
@@ -60,7 +60,13 @@
    "score": 49
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_87547f057e": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258701
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_87547f057e": {
@@ -73,5 +79,8 @@
    "v": "same",
    "at": 1792112692
   }
+ },
+ "from_twin": {
+  "composition": "cm_87547f057e"
  }
 }

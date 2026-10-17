@@ -9,7 +9,7 @@
  "place": "Баку, Азербайджан",
  "date": "конец XIX века",
  "school": "guba-shirvan",
- "composition": "",
+ "composition": "findiqan",
  "technique": "ворсовый",
  "size": "158 x 246 sm",
  "notes": "основа, уток, ворс – шерсть; ",
@@ -60,7 +60,13 @@
    "score": 55
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_antique_khizi_findigan_rug13": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258764
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Фындыган_jpg": {
@@ -73,5 +79,8 @@
    "v": "same",
    "at": 1792113585
   }
+ },
+ "from_twin": {
+  "composition": "azr_antique_khizi_findigan_rug13"
  }
 }
