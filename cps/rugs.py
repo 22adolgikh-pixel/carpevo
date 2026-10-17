@@ -266,7 +266,8 @@ def install(app, DATA, D_WORK):
                 "same_no": [k for k, v in (r.get("same_ok") or {}).items() if v and not v.get("ok")],
                 "same_ids": [x.get("id") for x in (r.get("same") or []) if x.get("id")],
                 "part": (r.get("cat") or {}).get("part", 0),
-                "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", "")}
+                "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", ""),
+                "people": (r.get("people") or {}).get("n", 0)}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -546,7 +547,7 @@ def install(app, DATA, D_WORK):
         for x in r.get("same") or []:
             o = load(x["id"]) or {}
             x.update(title=o.get("title") or x["id"], src=(o.get("cat") or {}).get("src", ""), school=o.get("school", ""), museum=o.get("museum", ""),
-                     ok=(r.get("same_ok") or {}).get(x["id"]), n=len([m for m in o.get("marks", []) if m.get("status") != "rejected"]),
+                     ok=(r.get("same_ok") or {}).get(x["id"]), chk=(r.get("same_chk") or {}).get(x["id"]), n=len([m for m in o.get("marks", []) if m.get("status") != "rejected"]),
                      wh=img_size(x["id"], o))
         r["wh"] = img_size(rid, r)
         o, w = obj_guess(r); r["_obj"] = {"k": o, "why": w, "set": bool(r.get("obj"))}
@@ -1509,6 +1510,8 @@ def install(app, DATA, D_WORK):
     # Одинаковые ковры (тот же узор, те же ошибки ткача) дают десятки–сотни совпавших точек; разные ковры одного типа — единицы.
     dchk = {"running": False, "done": 0, "total": 0, "stage": "", "error": "", "last": ""}
 
+    CHK_VER = 2       # v11.18: совпавшие точки должны покрывать кадр, а не только цветовую шкалу / линейку музейного фото
+
     def dup_pairs(only_new=True):
         out = []; seen = set()
         for f in os.listdir(D_RUGS):
@@ -1519,7 +1522,7 @@ def install(app, DATA, D_WORK):
                 o = x.get("id"); k = tuple(sorted((r["id"], o)))
                 if not o or k in seen: continue
                 seen.add(k)
-                if only_new and o in (r.get("same_chk") or {}): continue
+                if only_new and ((r.get("same_chk") or {}).get(o) or {}).get("ver", 1) >= CHK_VER: continue   # v11.18: проверенные старым способом — перепроверить
                 out.append(k)
         return out
 
@@ -1530,7 +1533,7 @@ def install(app, DATA, D_WORK):
         dchk.update(running=True, done=0, total=len(P), stage="совмещаю фото пар", error="")
 
         def run():
-            bad = 0
+            bad = 0; revoked = 0
             try:
                 for a, b in P:
                     pa, pb = img_path(a), img_path(b)
@@ -1545,9 +1548,20 @@ def install(app, DATA, D_WORK):
                     with _lock:
                         for x, y in ((a, b), (b, a)):
                             r = load(x)
-                            if r: r.setdefault("same_chk", {})[y] = {"inl": int(n), "v": v, "at": int(time.time())}; save(r)
+                            if r:
+                                old = (r.get("same_chk") or {}).get(y) or {}
+                                r.setdefault("same_chk", {})[y] = {"inl": int(n), "v": v, "at": int(time.time()), "ver": CHK_VER}
+                                ok = (r.get("same_ok") or {}).get(y)
+                                # «✓ тот же», поставленное, когда старая проверка говорила «точно тот же» (шкала/линейка MET), а новая говорит «разные», —
+                                # снимаем; запись сохраняется в same_ok_revoked (можно вернуть), паспортные поля, взятые у этого «двойника», убираем
+                                if v == "diff" and ok and ok.get("ok") and (old.get("v") == "same" or str(ok.get("by") or "").startswith("машина")):
+                                    r.setdefault("same_ok_revoked", {})[y] = {**ok, "revoked_at": int(time.time())}; r["same_ok"].pop(y, None)
+                                    for k, src in list((r.get("from_twin") or {}).items()):
+                                        if src == y: r.pop(k, None); r["from_twin"].pop(k, None)
+                                    revoked += 1
+                                save(r)
                     dchk["done"] += 1; _dcl["t"] = 0
-                dchk["last"] = f"проверено пар: {len(P)}, похоже, разные ковры: {bad}"
+                dchk["last"] = f"проверено пар: {len(P)}, похоже, разные ковры: {bad}" + (f"; снято ошибочных «тот же»: {revoked // 2}" if revoked else "")
                 if on_done: on_done(dchk["last"])
             except Exception as e:
                 dchk["error"] = str(e)[:300]
@@ -1583,6 +1597,78 @@ def install(app, DATA, D_WORK):
                               "wa": [ra.get("w") or 0, ra.get("h") or 0], "wb": [rb.get("w") or 0, rb.get("h") or 0]})
         _dcl.update(t=time.time(), v={"pairs": pairs})
         return {"pairs": pairs, "state": dchk, "queue": heavy_q}
+
+    # ---- v11.18: фото из помещений с людьми (выставки, мастерские) — найти по лицам, человек решает, скрыть ли ----
+    pplst = {"running": False, "done": 0, "total": 0, "found": 0, "error": ""}
+    PPL_VER = 1
+    _fd = {"m": None}
+
+    def _faces(p):
+        """лица на фото: [[x,y,w,h,score] в долях]. Детектор YuNet (OpenCV), фото уменьшено до 1280 px."""
+        if _fd["m"] is None:
+            _fd["m"] = cv2.FaceDetectorYN.create(os.path.join(HERE, "models", "face_detection_yunet_2023mar.onnx"), "", (320, 320), 0.82, 0.3, 50)
+        a = read_small(p, 1280)
+        if a is None: return []
+        s = min(1.0, 1280.0 / max(a.shape[:2]))
+        if s < 1: a = cv2.resize(a, None, fx=s, fy=s, interpolation=cv2.INTER_AREA)
+        h, w = a.shape[:2]; _fd["m"].setInputSize((w, h))
+        _, f = _fd["m"].detect(a)
+        out = []
+        for r_ in (f if f is not None else []):
+            x, y, fw, fh, sc = float(r_[0]), float(r_[1]), float(r_[2]), float(r_[3]), float(r_[-1])
+            if fw * fh < 0.00004 * w * h: continue          # крошечные «лица» — узор ковра, а не человек
+            out.append([round(x / w, 4), round(y / h, 4), round(fw / w, 4), round(fh / h, 4), round(sc, 3)])
+        return out
+
+    def people_run(all_=False):
+        if pplst["running"]: return False
+        ids = []
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("dup_of") or r.get("split_into") or r.get("hidden"): continue
+            if not all_ and (r.get("people") or {}).get("ver", 0) >= PPL_VER: continue
+            ids.append(r["id"])
+        pplst.update(running=True, done=0, total=len(ids), found=0, error="")
+
+        def run():
+            try:
+                for rid in ids:
+                    p = img_path(rid); fs = []
+                    if p:
+                        try: fs = heavy(lambda: _faces(p), "люди на фото")
+                        except Exception as e: pplst["error"] = str(e)[:200]
+                    with _lock:
+                        r = load(rid)
+                        if r: r["people"] = {"n": len(fs), "faces": fs[:12], "ver": PPL_VER, "at": int(time.time())}; save(r)
+                    pplst["done"] += 1; pplst["found"] += bool(fs); time.sleep(0.02)
+            finally:
+                pplst["running"] = False
+        threading.Thread(target=run, daemon=True).start()
+        return True
+
+    app.state.people_run = people_run
+    threading.Thread(target=lambda: (time.sleep(90), people_run()), daemon=True).start()   # непроверенные фото — в фоне после старта (≈0,1 с на фото)
+
+    @app.get("/api/rugs_people")
+    def api_people_state(): return pplst
+
+    @app.post("/api/rugs_people")
+    def api_people_run(body: dict = Body(default={})):
+        """проверить фото на людей (в фоне): all=true — и уже проверенные"""
+        people_run(bool(body.get("all")))
+        return pplst
+
+    @app.post("/api/rugs_hide")
+    def api_rugs_hide(request: Request, body: dict = Body(default={})):
+        """скрыть несколько фото сразу (ids, reason); reason="" — вернуть"""
+        why = str(body.get("reason") if body.get("reason") is not None else "на фото люди / помещение")[:200]; n = 0
+        with _lock:
+            for rid in body.get("ids") or []:
+                r = load(rid)
+                if not r: continue
+                r["hidden"] = why; r["updated"] = int(time.time()); save(r); n += 1
+        return {"ok": True, "n": n}
 
     @app.post("/api/rugs_dupcheck")
     def api_dupcheck_run(body: dict = Body(default={})):

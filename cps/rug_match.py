@@ -309,10 +309,39 @@ def align(a, b):
     if len(good) < 12: return None, len(good)
     pa = np.float32([ka[g.queryIdx].pt for g in good]) / [ga.shape[1], ga.shape[0]]
     pb = np.float32([kb[g.trainIdx].pt for g in good]) / [gb.shape[1], gb.shape[0]]
-    H, inl = cv2.findHomography(pa, pb, cv2.RANSAC, 0.01)
-    n = int(inl.sum()) if inl is not None else 0
-    if H is None or n < 12: return None, n
-    return H, n
+    return _spread_homography(pa, pb)
+
+
+def _hull_area(p):
+    """площадь выпуклой оболочки точек (координаты в долях фото)"""
+    if len(p) < 3: return 0.0
+    return float(cv2.contourArea(cv2.convexHull(np.float32(p).reshape(-1, 1, 2))))
+
+
+def _spread_ok(p, g=6):
+    """точки разбросаны по кадру: заняты (≥2 точки) хотя бы 3 ряда и 3 столбца сетки 6×6 — полоса шкалы или линейки так не может"""
+    if len(p) < 12: return False
+    c = np.clip((np.float32(p) * g).astype(int), 0, g - 1)
+    cnt = np.zeros((g, g), int); np.add.at(cnt, (c[:, 1], c[:, 0]), 1)
+    occ = cnt >= 2
+    return int(occ.any(1).sum()) >= 3 and int(occ.any(0).sum()) >= 3 and int(occ.sum()) >= 6
+
+
+def _spread_homography(pa, pb, thr=0.01, min_area=0.12, tries=4):
+    """v11.18: RANSAC находит самое большое согласованное скопление точек. На музейных фото (MET «wb-…», DT…) это часто
+    цветовая шкала и линейка внизу кадра — одинаковые на фото РАЗНЫХ ковров, и сотни «совпавших точек» склеивали
+    разные ковры. Скопление засчитывается, только если точки покрывают заметную часть хотя бы одного фото
+    (у фрагмента-крупного плана — почти весь кадр крупного плана); иначе его точки выбрасываются и ищется следующее."""
+    pa, pb = np.float32(pa), np.float32(pb)
+    for _ in range(tries):
+        if len(pa) < 12: return None, 0
+        H, inl = cv2.findHomography(pa, pb, cv2.RANSAC, thr)
+        if H is None or inl is None: return None, 0
+        m = inl.ravel().astype(bool); n = int(m.sum())
+        if n < 12: return None, n
+        if _spread_ok(pa[m]) or _spread_ok(pb[m]): return H, n
+        pa, pb = pa[~m], pb[~m]                      # шкала / линейка / подпись — убираем и смотрим, что совпадает кроме неё
+    return None, 0
 
 
 def map_box(H, box):

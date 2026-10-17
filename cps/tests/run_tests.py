@@ -45,6 +45,8 @@ def make_rugs(data):
     k = cv2.resize(carpet(420, 600, 3), (280, 400)); m = cv2.resize(carpet(420, 600, 3), (840, 1200))
     save("kerimov_vol3_p100_1", k, title="Керимов, т. III, Челеберд", cat={"src": "kerimov_vol3"}, same_group="g1", same=[{"id": "met_123", "score": 80}], school="karabakh")
     save("met_123", m, title="Carpet, Karabagh", museum="Метрополитен", cat={"src": "met"}, same_group="g1", same=[{"id": "kerimov_vol3_p100_1", "score": 80}])
+    for i in (1, 2):                 # v11.18: фото с людьми (лица найдены машиной заранее)
+        save(f"ppl_{i}", carpet(300, 420, 40 + i), title=f"Rug photo {i}", cat={"src": "azerbaijanrugs"}, people={"n": i, "ver": 1, "faces": []})
     def star(a, cx, cy, r, col):     # v11.4: один и тот же «узор» на трёх коврах — для поиска по всем коврам
         pts = [(int(cx + (r if i % 2 == 0 else r * .45) * np.cos(i * np.pi / 8)), int(cy + (r if i % 2 == 0 else r * .45) * np.sin(i * np.pi / 8))) for i in range(16)]
         cv2.fillPoly(a, [np.array(pts)], col); cv2.circle(a, (cx, cy), int(r * .25), (250, 250, 250), -1)
@@ -814,6 +816,50 @@ def t23_tab_group_sweep(pg, ctx):
     ids = pg.evaluate("R.rug.marks.map(m=>m.id)")
     assert 'b2' not in ids and 'b1' in ids, f'Shift+протяжка: {ids}'
     errors_ok(ctx, "t23")
+
+
+@test
+def t24_people_schemes_twins_v1118(pg, ctx):
+    """v11.18: фото с людьми — фильтр и «скрыть разом» (с исключением); «Все схемы» — счётчик; склейка по цветовой шкале не считается «тем же ковром»"""
+    import cv2, numpy as np
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import rug_match
+    rng = np.random.default_rng(5)
+    def rug(seed):
+        r = np.random.default_rng(seed); a = np.full((900, 700, 3), (40, 60, 150), np.uint8)
+        for _ in range(250):
+            c = tuple(int(x) for x in r.integers(0, 255, 3)); x, y = int(r.integers(0, 700)), int(r.integers(0, 820))
+            cv2.fillPoly(a, [np.int32([[x, y], [x + int(r.integers(10, 60)), y + int(r.integers(-30, 30))], [x + int(r.integers(-20, 40)), y + int(r.integers(10, 60))]])], c)
+        return cv2.GaussianBlur(a, (3, 3), 0)
+    chart = np.zeros((80, 700, 3), np.uint8)
+    for i in range(24): chart[10:60, i * 28 + 4:i * 28 + 26] = rng.integers(0, 255, 3)
+    A, B = rug(1), rug(2); A[820:] = chart; B[820:] = chart
+    n = rug_match.align(A, B)[1]
+    assert n < 20, f'разные ковры с одинаковой цветовой шкалой: совпало {n} точек (должно быть «разные»)'
+    D = cv2.resize(A[100:500, 100:450], None, fx=2, fy=2)
+    assert rug_match.align(D, A)[1] >= 60, 'крупный план того же ковра больше не узнаётся'
+    u = ctx['url']
+    pg.goto(u); pg.wait_for_timeout(1800); pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
+    if pg.evaluate("R.view") != 'grid': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
+    pg.check('#rgFPpl'); pg.wait_for_timeout(500)
+    ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
+    assert sorted(ids) == ['ppl_1', 'ppl_2'], f'фильтр «люди на фото»: {ids} · ' + str(pg.evaluate("R.list.filter(r=>r.id.startsWith('ppl')).map(r=>[r.id,r.people,r.obj,r.hidden,rugKindOf(r)])")) + ' fk=' + str(pg.evaluate("R.fkind"))
+    pg.click('[data-keep="ppl_2"]'); pg.wait_for_timeout(300)
+    pg.evaluate('window.confirm=()=>true'); pg.click('#rgPplHide'); pg.wait_for_timeout(1500)
+    assert get(u + 'api/rugs/ppl_1').get('hidden'), 'фото с людьми не скрылось'
+    assert not get(u + 'api/rugs/ppl_2').get('hidden'), 'оставленное фото скрылось'
+    pg.uncheck('#rgFPpl'); pg.wait_for_timeout(300)
+    # «Все схемы» в редакторе: счётчик всех схем, не обрезано до 150
+    pg.evaluate("rugOpen('vam_1')"); pg.wait_for_timeout(1500)
+    pg.click('#rgLibTabs [data-lib="all"]'); pg.wait_for_timeout(500)
+    tx = pg.evaluate("document.getElementById('rgLibAll').innerText")
+    assert 'схем:' in tx, 'нет счётчика схем во «Все схемы»'
+    st = post(u + 'api/rugs_people', {'all': True})
+    for _ in range(60):
+        st = get(u + 'api/rugs_people')
+        if not st['running']: break
+        time.sleep(1)
+    assert not st['running'] and not st['error'] and st['done'] == st['total'] > 0, f'проверка фото на людей: {st}'
+    errors_ok(ctx, 't24')
 
 
 def main():

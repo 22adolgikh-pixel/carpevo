@@ -380,11 +380,23 @@ def verify(i, j):
     good = [a for a, b in (x for x in m if len(x) == 2) if a.distance < 0.78 * b.distance]
     if len(good) < 15: return 0
     A = p1[[g.queryIdx for g in good]]; B = p2[[g.trainIdx for g in good]]
-    H, inl = cv2.findHomography(A, B, cv2.RANSAC, 6.0)
-    if inl is None: return 0
-    n = int(inl.sum())
-    return n if n >= 0.3 * len(good) or n >= 120 else 0     # одна и та же вещь: много совпавших точек и большая их доля
-PF = f'{CACHE}/pairs_progress.json'                         # проверенные пары сохраняются — после обрыва продолжаем
+    na, nb = p1.max(0) + 1, p2.max(0) + 1; n0 = len(good)
+    # v11.18: совпадение засчитывается, только если точки разбросаны по кадру; скопление на цветовой шкале / линейке
+    # музейного фото (одинаковых у РАЗНЫХ ковров) выбрасывается, и ищется следующее
+    for _ in range(4):
+        if len(A) < 15: return 0
+        H, inl = cv2.findHomography(A, B, cv2.RANSAC, 6.0)
+        if inl is None: return 0
+        m = inl.ravel().astype(bool); n = int(m.sum())
+        if spread_ok(A[m] / na) or spread_ok(B[m] / nb):
+            return n if n >= 0.3 * n0 or n >= 120 else 0     # одна и та же вещь: много совпавших точек и большая их доля
+        A, B = A[~m], B[~m]
+    return 0
+def spread_ok(p, g=6):
+    if len(p) < 12: return False
+    c = np.clip((np.float32(p) * g).astype(int), 0, g - 1); cnt = np.zeros((g, g), int); np.add.at(cnt, (c[:, 1], c[:, 0]), 1); occ = cnt >= 2
+    return int(occ.any(1).sum()) >= 3 and int(occ.any(0).sum()) >= 3 and int(occ.sum()) >= 6
+PF = f'{CACHE}/pairs_progress_v2.json'   # v11.18: новая проверка пар — старый прогресс не годится                         # проверенные пары сохраняются — после обрыва продолжаем
 prog = json.load(open(PF)) if os.path.exists(PF) else {'checked': [], 'found': []}
 checked = {tuple(x) for x in prog['checked']}; found = {(a, b): v for a, b, v in prog['found']}
 pos = {k: n for n, k in enumerate(ids)}
