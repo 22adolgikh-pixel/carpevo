@@ -8,7 +8,7 @@
  "license": "CC BY-SA 4.0",
  "place": "",
  "date": "2018-08-12 12:52:21",
- "school": "",
+ "school": "karabakh",
  "composition": "",
  "technique": "ворсовый",
  "size": "",
@@ -79,7 +79,13 @@
    "score": 236
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_c4a0df687c": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792271535
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -124,5 +130,8 @@
   "faces": [],
   "ver": 1,
   "at": 1792261946
+ },
+ "from_twin": {
+  "school": "cm_c4a0df687c"
  }
 }
