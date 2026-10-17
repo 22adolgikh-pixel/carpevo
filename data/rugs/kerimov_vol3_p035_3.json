@@ -2,12 +2,12 @@
  "id": "kerimov_vol3_p035_3",
  "title": "Керимов, т. III (стр. скана 35, печ. 71)",
  "source": "каталог: kerimov_vol3",
- "museum": "",
- "inv": "",
+ "museum": "V&A",
+ "inv": "275-1906",
  "url": "",
  "license": "книга (не публиковать фото)",
- "place": "",
- "date": "",
+ "place": "Azerbaijan",
+ "date": "1800-1900",
  "school": "",
  "composition": "",
  "technique": "",
@@ -18,7 +18,7 @@
  "h": 601,
  "marks": [],
  "created": 1791736122,
- "updated": 1791736122,
+ "updated": 1792275006,
  "cat": {
   "title": "Керимов, т. III (стр. скана 35, печ. 71)",
   "museum": "",
@@ -70,8 +70,20 @@
  },
  "src_id": "cat:kerimov_vol3_p035_3",
  "lib_img": "img/kerimov_vol3_p035_3.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O67210",
+   "score": 999,
+   "inv": true
+  }
+ ],
+ "same_ok": {
+  "vam_O67210": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1791744587
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [
   [

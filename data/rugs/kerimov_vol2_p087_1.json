@@ -18,7 +18,7 @@
  "h": 1339,
  "marks": [],
  "created": 1791736122,
- "updated": 1791736122,
+ "updated": 1792275053,
  "cat": {
   "title": "Керимов, т. II, Рис. 143 (стр. скана 87, печ. 174)",
   "museum": "",
@@ -82,8 +82,41 @@
  },
  "src_id": "cat:kerimov_vol2_p087_1",
  "lib_img": "img/kerimov_vol2_p087_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_194",
+   "score": 0
+  },
+  {
+   "id": "cm_08cb8ca7c9",
+   "score": 0
+  },
+  {
+   "id": "vam_O117935",
+   "score": 427
+  },
+  {
+   "id": "wikimedia_File_Гянджа_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O117935": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1791737052
+  },
+  "azcm_194": {
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1792271187
+  },
+  "cm_08cb8ca7c9": {
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1792271189
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [
   [
