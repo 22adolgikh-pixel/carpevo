@@ -6,12 +6,12 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Metropoliten_muzeyind%C9%99_1600-c%C3%BC_ill%C9%99r%C9%99_aid_Quba_xal%C3%A7as%C4%B1_(2).jpeg",
  "license": "Public domain",
- "place": "",
+ "place": "Caucasus",
  "date": "1600sdate QS:P,+1600-00-00T00:00:00Z/8",
  "school": "guba-shirvan",
- "composition": "",
+ "composition": "ejdahali",
  "technique": "ворсовый",
- "size": "",
+ "size": "H. 170 in. (431.8 cm)\r\nW.  90.00 in. (228.6 cm)",
  "notes": "",
  "status": "new",
  "w": 516,
@@ -71,7 +71,13 @@
    "score": 208
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_ea07ad4c5c": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258838
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -100,5 +106,10 @@
    "v": "same",
    "at": 1792113162
   }
+ },
+ "from_twin": {
+  "composition": "cm_ea07ad4c5c",
+  "place": "cm_ea07ad4c5c",
+  "size": "cm_ea07ad4c5c"
  }
 }

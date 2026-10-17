@@ -3,15 +3,15 @@
  "title": "Borchali carpet.gif",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "6565",
  "url": "https://commons.wikimedia.org/wiki/File:Borchali_carpet.gif",
  "license": "Public domain",
- "place": "",
+ "place": "Газах, Азербайджан",
  "date": "Early 20th century",
  "school": "ganja-gazakh",
  "composition": "borchali",
  "technique": "ворсовый",
- "size": "",
+ "size": "155x202 sm",
  "notes": "",
  "status": "new",
  "w": 250,
@@ -54,7 +54,13 @@
    "score": 109
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_118": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258843
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_group": "g0276",
@@ -64,5 +70,10 @@
    "v": "same",
    "at": 1792113361
   }
+ },
+ "from_twin": {
+  "inv": "azcm_118",
+  "place": "azcm_118",
+  "size": "azcm_118"
  }
 }

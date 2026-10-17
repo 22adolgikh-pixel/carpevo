@@ -9,7 +9,7 @@
  "place": "Газах, Азербайджан",
  "date": "начало XX века",
  "school": "ganja-gazakh",
- "composition": "",
+ "composition": "borchali",
  "technique": "ворсовый",
  "size": "155x202 sm",
  "notes": "основа, уток, ворс – шерсть; ",
@@ -56,7 +56,13 @@
    "score": 109
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Borchali_carpet_gif": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258843
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Borchali_carpet_gif": {
@@ -64,5 +70,8 @@
    "v": "same",
    "at": 1792113361
   }
+ },
+ "from_twin": {
+  "composition": "wikimedia_File_Borchali_carpet_gif"
  }
 }
