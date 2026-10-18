@@ -731,18 +731,40 @@ def install(app, DATA, D_WORK):
             return n
 
     def et_run(keys=None, on_done=None):
-        return ET.run(keys, _all_rugs, et_add, heavy, et_names(), on_done, load_img=lambda rid: read_small(img_path(rid), 1400) if img_path(rid) else None)
+        return ET.run(keys, _all_rugs, et_add, heavy, et_names(), on_done, load_img=et_img, save_eval=et_save_eval)
+
+    _eimg = {}
+
+    def et_img(rid):
+        """фото для эталонов (≤1400 px), последние 40 — в памяти: самопроверка обращается к одним и тем же коврам"""
+        if rid in _eimg: return _eimg[rid]
+        p = img_path(rid); a = read_small(p, 1400) if p else None
+        if a is not None and max(a.shape[:2]) > 1400:
+            k = 1400 / max(a.shape[:2]); a = cv2.resize(a, None, fx=k, fy=k, interpolation=cv2.INTER_AREA)
+        if len(_eimg) > 40: _eimg.pop(next(iter(_eimg)))
+        _eimg[rid] = a
+        return a
+
+    EVF = os.path.join(DATA, "etalon_eval.json")
+
+    def et_save_eval(key, v):
+        try: d = json.load(open(EVF, encoding="utf-8"))
+        except Exception: d = {}
+        d[key] = v
+        json.dump(d, open(EVF, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
     app.state.etalon_run = et_run
 
     @app.get("/api/etalon")
     def api_etalon():
         A = all_rugs_cached(); E = ET.elements(A, et_names())
+        try: evd = json.load(open(EVF, encoding="utf-8"))
+        except Exception: evd = {}
         try: figures_by_concept(); exp = {k: v for k, v in figcache["exp"].items() if v}
         except Exception: exp = {}
         els = [{"key": e["key"], "name": e["name"], "motif": e["motif"], "scheme": e["scheme"], "npos": len(e["pos"]), "nneg": len(e["neg"]),
                 "rugs": len(e["rugs"]), "types": e["types"], "schools": e["schools"], "pending": e["pending"],
-                "sample": (lambda p: {"rid": p[0], "box": p[1]})(e["pos"][0]) if e["pos"] else None} for e in E.values()]
+                "sample": (lambda p: {"rid": p[0], "box": p[1]})(e["pos"][0]) if e["pos"] else None, "eval": evd.get(e["key"])} for e in E.values()]
         els.sort(key=lambda x: (-x["npos"], x["name"]))
         expn = {c: [{"scheme": x["id"], "motif": x.get("motif", ""), "key": ("m:" + x["motif"]) if x.get("motif") else ("s:" + x["id"]),
                      "az": (BYID.get(x.get("motif")) or {}).get("az") or x.get("name") or x["id"]} for x in xs] for c, xs in exp.items()}
@@ -761,7 +783,7 @@ def install(app, DATA, D_WORK):
             A = _all_rugs(); E = ET.elements(A, et_names()); li = lambda rid: read_small(img_path(rid), 1400) if img_path(rid) else None
             T = {}; n = 0
             for rid, r0 in A.items():
-                todo = [m for m in r0.get("marks") or [] if m.get("status") == "proposed" and str(m.get("note") or "").startswith(ET.NOTE) and (m.get("refined") or 0) < 2]
+                todo = [m for m in r0.get("marks") or [] if m.get("status") == "proposed" and str(m.get("note") or "").startswith(ET.NOTE) and (m.get("refined") or 0) < 3]
                 if not todo: continue
                 img = li(rid)
                 if img is None: continue
@@ -775,12 +797,27 @@ def install(app, DATA, D_WORK):
                     r = load(rid)
                     for m in r.get("marks") or []:
                         if m["id"] in upd:
-                            rf = upd[m["id"]]; m["refined"] = 2
+                            rf = upd[m["id"]]; m["refined"] = 3
                             if rf: m["box"], m["angle"], m["flip"] = rf[0], rf[1], rf[2]; n += 1
                     save(r)
             _ty["t"] = 0
             return {"ok": True, "refined": n}
         return heavy(work, "эталоны: уточнение рамок")
+
+    @app.post("/api/etalon/clear")
+    def api_etalon_clear(body: dict = Body(default={})):
+        """удалить непроверенные находки детектора (keys — только этих элементов)"""
+        keys = set(body.get("keys") or []); n = 0
+        with _lock:
+            for f in os.listdir(D_RUGS):
+                if not f.endswith(".json"): continue
+                r = load(f[:-5])
+                if not r: continue
+                ms = r.get("marks") or []
+                kept = [m for m in ms if not (m.get("status") == "proposed" and str(m.get("note") or "").startswith(ET.NOTE) and (not keys or ET.key_of(m) in keys))]
+                if len(kept) != len(ms): n += len(ms) - len(kept); r["marks"] = kept; save(r)
+        _ty["t"] = 0
+        return {"ok": True, "removed": n}
 
     @app.get("/api/etalon/finds")
     def api_etalon_finds(key: str = "", limit: int = 300):
