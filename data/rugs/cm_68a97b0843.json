@@ -170,16 +170,6 @@
    "by": "dolgikh",
    "at": 1792258150
   },
-  "cm_dd69f7415d": {
-   "ok": true,
-   "by": "dolgikh",
-   "at": 1792258702
-  },
-  "cm_d4233e0f4f": {
-   "ok": true,
-   "by": "dolgikh",
-   "at": 1792258709
-  },
   "cm_92160179d5": {
    "ok": true,
    "by": "dolgikh",
@@ -258,14 +248,16 @@
    "ver": 2
   },
   "cm_d4233e0f4f": {
-   "inl": 102,
-   "v": "same",
-   "at": 1792112806
+   "inl": 10,
+   "v": "diff",
+   "at": 1792285768,
+   "ver": 2
   },
   "cm_dd69f7415d": {
-   "inl": 88,
-   "v": "same",
-   "at": 1792112838
+   "inl": 10,
+   "v": "diff",
+   "at": 1792285812,
+   "ver": 2
   },
   "met_452312": {
    "inl": 399,
@@ -381,5 +373,19 @@
   "faces": [],
   "ver": 1,
   "at": 1792261947
+ },
+ "same_ok_revoked": {
+  "cm_d4233e0f4f": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258709,
+   "revoked_at": 1792285768
+  },
+  "cm_dd69f7415d": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258702,
+   "revoked_at": 1792285812
+  }
  }
 }
