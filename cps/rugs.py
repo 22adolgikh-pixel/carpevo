@@ -761,7 +761,7 @@ def install(app, DATA, D_WORK):
             A = _all_rugs(); E = ET.elements(A, et_names()); li = lambda rid: read_small(img_path(rid), 1400) if img_path(rid) else None
             T = {}; n = 0
             for rid, r0 in A.items():
-                todo = [m for m in r0.get("marks") or [] if m.get("status") == "proposed" and str(m.get("note") or "").startswith(ET.NOTE) and not m.get("refined")]
+                todo = [m for m in r0.get("marks") or [] if m.get("status") == "proposed" and str(m.get("note") or "").startswith(ET.NOTE) and (m.get("refined") or 0) < 2]
                 if not todo: continue
                 img = li(rid)
                 if img is None: continue
@@ -775,7 +775,7 @@ def install(app, DATA, D_WORK):
                     r = load(rid)
                     for m in r.get("marks") or []:
                         if m["id"] in upd:
-                            rf = upd[m["id"]]; m["refined"] = 1
+                            rf = upd[m["id"]]; m["refined"] = 2
                             if rf: m["box"], m["angle"], m["flip"] = rf[0], rf[1], rf[2]; n += 1
                     save(r)
             _ty["t"] = 0

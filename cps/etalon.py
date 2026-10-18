@@ -99,6 +99,15 @@ def train(e, E, A):
         if G is None: continue
         for b in _rand_boxes(rng, size, bxs + [m["box"] for m in (A.get(rid) or {}).get("marks") or [] if key_of(m) == e["key"]], 8):
             Xn.append(MS.vec(G, b)[0])
+    # куски элемента и окно «с лишним» — тоже отрицательные: детектор учится выбирать окно ЦЕЛОГО элемента, а не его середину
+    for rid, bx in pos[:60]:
+        G = MS.grid(rid)
+        if G is None: continue
+        x, y, w, h = bx
+        for b in ([x + w * .25, y + h * .25, w * .5, h * .5], [x, y, w, h * .5], [x, y + h * .5, w, h * .5], [x, y, w * .5, h], [x + w * .5, y, w * .5, h],
+                  [x - w * .45, y - h * .45, w * 1.9, h * 1.9]):
+            b = [max(0.0, b[0]), max(0.0, b[1]), min(b[2], 1 - max(0.0, b[0])), min(b[3], 1 - max(0.0, b[1]))]
+            if b[2] > 0.01 and b[3] > 0.01: Xn.append(MS.vec(G, b)[0])
     if len(Xn) < 5: return None
     X = np.stack(Xp + Xn).astype(np.float32); y = np.r_[np.ones(len(Xp)), np.zeros(len(Xn))].astype(np.float32)
     w, b = _fit(X, y)
@@ -117,7 +126,7 @@ def detect(model, rid, per_rug=12):
     if G is None: return []
     gh, gw, d = G.shape; S = MS._integral(G); gmean = S[-1, -1] / (gh * gw)
     cand = []
-    for k in (0.75, 1.0, 1.3):
+    for k in (0.6, 0.8, 1.0, 1.25, 1.6, 2.0, 2.5):          # фото одного типа сняты в разном масштабе (целый ковёр / деталь)
         sw = max(1, min(gw, int(round(model["size"][0] * gw * k)))); sh = max(1, min(gh, int(round(model["size"][1] * gh * k))))
         P = _sig(MS._feat(S, sh, sw, gmean) @ model["w"] + model["b"])
         ys, xs = np.where(P >= model["thr"])
@@ -152,7 +161,7 @@ def refine(img, tpls, box):
     import cv2, rug_match as RM
     H, W = img.shape[:2]; x, y, w, h = box[0] * W, box[1] * H, box[2] * W, box[3] * H
     side = max(w, h); k = min(1.0, 72.0 / max(1.0, side))                   # элемент ≈ 72 px — хватает и быстро
-    rx0, ry0 = max(0, int(x - 1.4 * w)), max(0, int(y - 1.4 * h)); rx1, ry1 = min(W, int(x + 2.4 * w)), min(H, int(y + 2.4 * h))
+    rx0, ry0 = max(0, int(x - 1.8 * w)), max(0, int(y - 1.8 * h)); rx1, ry1 = min(W, int(x + 2.8 * w)), min(H, int(y + 2.8 * h))
     reg = img[ry0:ry1, rx0:rx1]
     if reg.size == 0: return None
     reg = cv2.resize(reg, None, fx=k, fy=k, interpolation=cv2.INTER_AREA)
@@ -162,13 +171,13 @@ def refine(img, tpls, box):
         for ang, fl in TF8:
             et = RM._tf(ET0, ang, fl); th, tw = et.shape[:2]
             area = w * h * k * k
-            for sc in (0.9, 1.1, 1.35, 1.65, 2.0):            # окно детектора обычно МЕНЬШЕ элемента (режет его) — ищем крупнее
+            for sc in (0.7, 0.9, 1.15, 1.45, 1.85, 2.35, 3.0):   # окно детектора часто МЕНЬШЕ элемента (режет его) — ищем и в 3 раза крупнее
                 f = math.sqrt(area * sc * sc / max(1, th * tw)); nw, nh = max(6, int(tw * f)), max(6, int(th * f))
                 if nw >= ER.shape[1] or nh >= ER.shape[0]: continue
                 r = cv2.matchTemplate(ER, cv2.resize(et, (nw, nh), interpolation=cv2.INTER_AREA), cv2.TM_CCOEFF_NORMED)
                 # центр найденного должен оставаться около окна детектора (окно нашло элемент, уточняем — не ищем заново)
-                cx0, cx1 = (x - 0.25 * w - rx0) * k - nw / 2, (x + 1.25 * w - rx0) * k - nw / 2
-                cy0, cy1 = (y - 0.25 * h - ry0) * k - nh / 2, (y + 1.25 * h - ry0) * k - nh / 2
+                cx0, cx1 = (x - 0.6 * w - rx0) * k - nw / 2, (x + 1.6 * w - rx0) * k - nw / 2
+                cy0, cy1 = (y - 0.6 * h - ry0) * k - nh / 2, (y + 1.6 * h - ry0) * k - nh / 2
                 msk = np.full(r.shape, -1.0, np.float32)
                 ya, yb, xa, xb = max(0, int(cy0)), min(r.shape[0], int(cy1) + 1), max(0, int(cx0)), min(r.shape[1], int(cx1) + 1)
                 if ya >= yb or xa >= xb: continue
@@ -226,7 +235,7 @@ def run(keys, load_all, add_marks, heavy, names=None, on_done=None, limit_rugs=4
                         mid = f"m{int(time.time()):x}e{abs(hash((e['key'], rid))) % 10**6}_{j}"; g = g or mid
                         ms.append({"id": mid, "box": [round(v, 5) for v in b], "zone": "other", "motif": e["motif"], "motif_text": e["motif_text"] if not e["motif"] else "",
                                    "scheme": e["scheme"], "group": g, "certainty": "sure" if p >= 0.9 else "maybe", "status": "proposed",
-                                   "note": NOTE + e["name"], "machine": 1, "score": round(p, 3), "angle": ang, "flip": fl, "by": "машина", "refined": 1 if tpls else 0})
+                                   "note": NOTE + e["name"], "machine": 1, "score": round(p, 3), "angle": ang, "flip": fl, "by": "машина", "refined": 2 if tpls else 0})
                     n += add_marks(rid, ms)
                 state["found"] += n; state["done"] += 1
                 rep.append(f"{e['name']}: {n}")
