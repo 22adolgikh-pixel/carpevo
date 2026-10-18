@@ -95,20 +95,10 @@
   }
  ],
  "same_ok": {
-  "cm_802aff8b0a": {
-   "ok": true,
-   "by": "dolgikh",
-   "at": 1792258666
-  },
   "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_1_jpeg": {
    "ok": true,
    "by": "dolgikh",
    "at": 1792258714
-  },
-  "cm_d868a6c152": {
-   "ok": true,
-   "by": "dolgikh",
-   "at": 1792258716
   },
   "azr_early_karabagh_rug62": {
    "ok": true,
@@ -144,59 +134,70 @@
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_37e38ad820": {
-   "inl": 298,
+   "inl": 297,
    "v": "same",
-   "at": 1792112482
+   "at": 1792285328,
+   "ver": 2
   },
   "cm_76b023d1d2": {
-   "inl": 693,
+   "inl": 685,
    "v": "same",
-   "at": 1792112483
+   "at": 1792285329,
+   "ver": 2
   },
   "cm_802aff8b0a": {
-   "inl": 64,
-   "v": "same",
-   "at": 1792112484
+   "inl": 10,
+   "v": "diff",
+   "at": 1792285332,
+   "ver": 2
   },
   "cm_aa85e7129e": {
-   "inl": 184,
+   "inl": 186,
    "v": "same",
-   "at": 1792112485
+   "at": 1792285334,
+   "ver": 2
   },
   "cm_d12ac0d41b": {
    "inl": 8,
    "v": "diff",
-   "at": 1792112487
+   "at": 1792285335,
+   "ver": 2
   },
   "cm_d71221ed77": {
-   "inl": 280,
+   "inl": 279,
    "v": "same",
-   "at": 1792112488
+   "at": 1792285336,
+   "ver": 2
   },
   "cm_d868a6c152": {
-   "inl": 110,
-   "v": "same",
-   "at": 1792112489
+   "inl": 5,
+   "v": "diff",
+   "at": 1792285339,
+   "ver": 2
   },
   "cm_ec27c32594": {
-   "inl": 10,
+   "inl": 1,
    "v": "diff",
-   "at": 1792112490
+   "at": 1792285341,
+   "ver": 2
   },
   "met_447577": {
-   "inl": 56,
+   "inl": 54,
    "v": "maybe",
-   "at": 1792112491
+   "at": 1792285341,
+   "ver": 2
   },
   "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_1_jpeg": {
    "inl": 108,
    "v": "same",
-   "at": 1792112492
+   "at": 1792285342,
+   "ver": 2
   },
   "azr_early_karabagh_rug62": {
    "inl": 114,
    "v": "same",
-   "at": 1792112493
+   "at": 1792285343,
+   "ver": 2
   }
  },
  "from_twin": {
@@ -212,5 +213,19 @@
   "faces": [],
   "ver": 1,
   "at": 1792261782
+ },
+ "same_ok_revoked": {
+  "cm_802aff8b0a": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258666,
+   "revoked_at": 1792285332
+  },
+  "cm_d868a6c152": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258716,
+   "revoked_at": 1792285339
+  }
  }
 }

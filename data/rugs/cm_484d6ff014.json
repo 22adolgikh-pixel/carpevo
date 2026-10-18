@@ -9,7 +9,6 @@
  "place": "Karabakh, present-day Azerbaijan",
  "date": "1971",
  "school": "karabakh",
- "composition": "qarabag",
  "technique": "безворсовый",
  "size": "L. 90 in. (228.6 cm)\r\nW. 70 3/4 in. (179.7 cm)",
  "notes": "Textiles-Rugs; Carpet",
@@ -160,11 +159,6 @@
    "by": "dolgikh",
    "at": 1792147561
   },
-  "cm_ba4aeb0a49": {
-   "ok": true,
-   "by": "dolgikh",
-   "at": 1792258094
-  },
   "met_452312": {
    "ok": true,
    "by": "dolgikh",
@@ -224,9 +218,10 @@
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_ba4aeb0a49": {
-   "inl": 782,
-   "v": "same",
-   "at": 1792112553
+   "inl": 0,
+   "v": "diff",
+   "at": 1792285424,
+   "ver": 2
   },
   "cm_cc8d8f0196": {
    "inl": 22,
@@ -356,7 +351,6 @@
  },
  "from_twin": {
   "date": "cm_34a29c4a3e",
-  "composition": "cm_ba4aeb0a49",
   "school": "met_452312",
   "technique": "met_452312",
   "place": "met_452312",
@@ -369,5 +363,13 @@
   "faces": [],
   "ver": 1,
   "at": 1792262040
+ },
+ "same_ok_revoked": {
+  "cm_ba4aeb0a49": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258094,
+   "revoked_at": 1792285424
+  }
  }
 }

@@ -100,11 +100,6 @@
    "by": "dolgikh",
    "at": 1792258634
   },
-  "cm_9453a46c77": {
-   "ok": true,
-   "by": "dolgikh",
-   "at": 1792258666
-  },
   "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_1_jpeg": {
    "ok": true,
    "by": "dolgikh",
@@ -144,14 +139,16 @@
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_9453a46c77": {
-   "inl": 64,
-   "v": "same",
-   "at": 1792112484
+   "inl": 10,
+   "v": "diff",
+   "at": 1792285332,
+   "ver": 2
   },
   "met_447577": {
-   "inl": 94,
+   "inl": 92,
    "v": "same",
-   "at": 1792112586
+   "at": 1792285465,
+   "ver": 2
   },
   "cm_d71221ed77": {
    "inl": 361,
@@ -212,5 +209,13 @@
   "faces": [],
   "ver": 1,
   "at": 1792261924
+ },
+ "same_ok_revoked": {
+  "cm_9453a46c77": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258666,
+   "revoked_at": 1792285332
+  }
  }
 }
