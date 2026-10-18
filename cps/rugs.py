@@ -712,6 +712,80 @@ def install(app, DATA, D_WORK):
         threading.Thread(target=run, daemon=True).start()
         return {"started": len(todo), "skipped": len(items) - len(todo)}
 
+    # ---- v11.24: эталоны и детектор по образцам (etalon.py) ----
+    import etalon as ET
+
+    def et_names():
+        return {d["id"]: d["az"] for d in DICT}
+
+    def et_add(rid, ms):
+        with _lock:
+            r = load(rid)
+            if not r: return 0
+            have = r.get("marks") or []; n = 0
+            for m in ms:
+                k = ET.key_of(m)
+                if any(MS._iou(m["box"], x["box"]) > (0.4 if ET.key_of(x) == k else 0.6) for x in have): continue
+                have.append(m); n += 1
+            if n: r["marks"] = have; r["updated"] = int(time.time()); save(r); _ty["t"] = 0
+            return n
+
+    def et_run(keys=None, on_done=None):
+        return ET.run(keys, _all_rugs, et_add, heavy, et_names(), on_done)
+
+    app.state.etalon_run = et_run
+
+    @app.get("/api/etalon")
+    def api_etalon():
+        A = all_rugs_cached(); E = ET.elements(A, et_names())
+        try: figures_by_concept(); exp = {k: v for k, v in figcache["exp"].items() if v}
+        except Exception: exp = {}
+        els = [{"key": e["key"], "name": e["name"], "motif": e["motif"], "scheme": e["scheme"], "npos": len(e["pos"]), "nneg": len(e["neg"]),
+                "rugs": len(e["rugs"]), "types": e["types"], "schools": e["schools"], "pending": e["pending"],
+                "sample": (lambda p: {"rid": p[0], "box": p[1]})(e["pos"][0]) if e["pos"] else None} for e in E.values()]
+        els.sort(key=lambda x: (-x["npos"], x["name"]))
+        expn = {c: [{"scheme": x["id"], "motif": x.get("motif", ""), "key": ("m:" + x["motif"]) if x.get("motif") else ("s:" + x["id"]),
+                     "az": (BYID.get(x.get("motif")) or {}).get("az") or x.get("name") or x["id"]} for x in xs] for c, xs in exp.items()}
+        return {"state": ET.state, "elements": els, "exp": expn, "index": MS.status(), "min_pos": ET.MIN_POS}
+
+    @app.post("/api/etalon/run")
+    def api_etalon_run(body: dict = Body(default={})):
+        if not MS.status().get("indexed"): return JSONResponse({"error": "индекс узоров ещё не построен (События → «Индекс узоров»)"}, 400)
+        et_run(body.get("keys") or None)
+        return ET.state
+
+    @app.get("/api/etalon/finds")
+    def api_etalon_finds(key: str = "", limit: int = 300):
+        """находки детектора, ждущие проверки (машинные рамки «эталон: …»)"""
+        out = []
+        for rid, r in all_rugs_cached().items():
+            if r.get("dup_of"): continue
+            for m in r.get("marks") or []:
+                if m.get("status") != "proposed" or not str(m.get("note") or "").startswith(ET.NOTE): continue
+                if key and ET.key_of(m) != key: continue
+                out.append({"rid": rid, "mid": m["id"], "box": m["box"], "score": m.get("score", 0), "key": ET.key_of(m), "name": m["note"][len(ET.NOTE):],
+                            "title": (r.get("title") or rid)[:80], "school": r.get("school", ""), "composition": r.get("composition", "")})
+        out.sort(key=lambda x: -x["score"])
+        return {"finds": out[:limit], "total": len(out)}
+
+    @app.post("/api/marks_status")
+    def api_marks_status(request: Request, body: dict = Body(...)):
+        """проверка пачкой: items=[{rid, mid, status: confirmed|rejected}]"""
+        who = user(request); by = {}; n = 0
+        for it in body.get("items") or []:
+            if it.get("status") in ("confirmed", "rejected", "proposed"): by.setdefault(it.get("rid"), []).append(it)
+        with _lock:
+            for rid, its in by.items():
+                r = load(rid)
+                if not r: continue
+                for it in its:
+                    m = next((x for x in r.get("marks") or [] if x.get("id") == it.get("mid")), None)
+                    if not m: continue
+                    m["status"] = it["status"]; m["confirmed_by"] = who if it["status"] == "confirmed" else m.get("confirmed_by", ""); n += 1
+                r["updated"] = int(time.time()); save(r)
+        _ty["t"] = 0
+        return {"ok": True, "n": n}
+
     # ---- v11.20: словарь знаков кайм по всему каталогу (sign_lib) ----
     import sign_lib
     sign_lib.setup(DATA)

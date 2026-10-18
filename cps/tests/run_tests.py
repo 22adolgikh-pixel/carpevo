@@ -10,7 +10,7 @@
 Правило: каждое изменение интерфейса — сначала (или вместе с ним) тест сюда. Горячие клавиши проверяются здесь же —
 если клавиша перестала работать, тест упадёт с её названием.
 """
-import os, sys, json, time, shutil, socket, subprocess, tempfile, traceback, urllib.request, argparse
+import os, sys, json, time, shutil, socket, subprocess, tempfile, traceback, urllib.request, urllib.parse, argparse
 HERE = os.path.dirname(os.path.abspath(__file__)); CPS = os.path.dirname(HERE); OUT = os.path.join(HERE, 'out')
 
 ap = argparse.ArgumentParser(); ap.add_argument('--keep', action='store_true'); ap.add_argument('--only', default='')
@@ -74,6 +74,7 @@ def make_rugs(data):
         a = carpet(300 + 10 * i, 420, 10 + i)
         if i in STARS: star(a, *STARS[i][:2], 34, STARS[i][2])
         save(f"vam_{i}", a, title=f"V&A rug {i}", museum="V&A", cat={"src": "vam"})
+    a = carpet(320, 420, 31); star(a, 160, 220, 34, (60, 200, 200)); save("vam_star", a, title="Star rug extra", museum="V&A", cat={"src": "vam"})   # v11.24: эталоны
     # v11.5: кайма с одним элементом в разных красках (как у «Гаджигайыба»: красный на светлом / светлый на чёрном)
     a = np.full((620, 300, 3), (40, 30, 120), np.uint8)
     pal = [((40, 40, 160), (230, 225, 210)), ((20, 20, 20), (230, 225, 210)), ((230, 225, 210), (40, 40, 160)), ((40, 40, 160), (20, 20, 20))]
@@ -988,6 +989,52 @@ def t28_pages_grades_fragments_v1122(pg, ctx):
     pg.select_option('#rgFShow', 'frag'); pg.wait_for_timeout(400)
     assert ids[0] in pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)"), 'фильтр «фрагменты» не показывает отмеченное'
     pg.select_option('#rgFShow', ''); errors_ok(ctx, 't28')
+
+
+@test
+def t29_etalon_v1124(pg, ctx):
+    """v11.24: эталоны — детектор учится на ✓ рамках элемента и находит его на коврах того же типа; проверка находок пачкой"""
+    u = ctx['url']
+    st = post(u + 'api/motif/index', {})
+    for _ in range(80):
+        st = get(u + 'api/motif/status')
+        if not st['running'] and st['indexed'] and not st['stale']: break
+        time.sleep(0.5)
+    def box(cx, cy, W, H=420): return [(cx - 40) / W, (cy - 40) / H, 80 / W, 80 / H]
+    mk = lambda i, b: {'id': 'et' + i, 'box': b, 'zone': 'field', 'status': 'confirmed', 'motif_text': 'звезда-эталон'}
+    for rid, b in (('vam_0', box(150, 200, 300)), ('vam_3', box(230, 140, 330)), ('vam_star', box(160, 220, 320))):
+        r = get(u + f'api/rugs/{rid}'); post(u + f'api/rugs/{rid}', {'composition': 'pirebedil', 'marks': [m for m in r['marks'] if not m['id'].startswith('et')] + [mk(rid, b)]})
+    for rid in ('vam_5', 'vam_1'): post(u + f'api/rugs/{rid}', {'composition': 'pirebedil', 'marks': [], 'hidden': ''})   # звезду на vam_5 мог отметить t16, скрыть — t27
+    E = get(u + 'api/etalon'); e = next((x for x in E['elements'] if x['key'] == 't:звезда-эталон'), None)
+    assert e and e['npos'] == 3 and e['types'].get('pirebedil') == 3, f'элемент не собран из ✓ рамок: {e}'
+    post(u + 'api/etalon/run', {'keys': ['t:звезда-эталон']})
+    for _ in range(60):
+        s = get(u + 'api/etalon')['state']
+        if not s['running']: break
+        time.sleep(0.5)
+    assert not s['error'], s
+    F = get(u + 'api/etalon/finds?key=' + urllib.parse.quote('t:звезда-эталон'))['finds']
+    hit = [f for f in F if f['rid'] == 'vam_5']
+    sb = box(110, 300, 350)
+    assert any(max(0, min(f['box'][0] + f['box'][2], sb[0] + sb[2]) - max(f['box'][0], sb[0])) > 0 and max(0, min(f['box'][1] + f['box'][3], sb[1] + sb[3]) - max(f['box'][1], sb[1])) > 0 for f in hit), \
+        f'детектор не нашёл звезду на vam_5: {[(f["rid"], f["box"], f["score"]) for f in F][:8]}'
+    j = post(u + 'api/marks_status', {'items': [{'rid': hit[0]['rid'], 'mid': hit[0]['mid'], 'status': 'confirmed'}]})
+    assert j['n'] == 1 and next(m for m in get(u + 'api/rugs/vam_5')['marks'] if m['id'] == hit[0]['mid'])['status'] == 'confirmed'
+    # экран: тип → элементы и ковры-эталоны; проверка находок клавишами
+    pg.goto(u); pg.wait_for_timeout(1800); pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
+    if pg.evaluate("R.view") != 'grid': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
+    pg.click('#rgEtBtn'); pg.wait_for_selector('#etTypes [data-et="pirebedil"]', timeout=15000); pg.click('#etTypes [data-et="pirebedil"]'); pg.wait_for_timeout(400)
+    assert 'звезда-эталон' in (pg.text_content('#etMain .etels') or ''), 'элемент не показан у типа'
+    assert pg.evaluate("document.querySelectorAll('#etMain .etrug').length") >= 4, 'нет ковров-эталонов этого типа'
+    left = sum(1 for f in F if f['mid'] != hit[0]['mid'])
+    if left:
+        pg.click('#etFinds'); pg.wait_for_selector('#modal .efc', timeout=10000)
+        pg.keyboard.press('x'); pg.wait_for_timeout(800)
+        assert pg.evaluate("document.querySelectorAll('#modal .efc.no').length") == 1, 'X не отклонил находку'
+        pg.keyboard.press('Escape'); pg.wait_for_timeout(500)
+    pg.click('#etMain [data-etdone]'); pg.wait_for_timeout(800)
+    assert pg.evaluate("document.querySelectorAll('#etMain [data-etdone].on').length") >= 1, '«отметить эталоном» не сработало'
+    pg.click('#etBack'); pg.wait_for_timeout(300); errors_ok(ctx, 't29')
 
 
 def main():

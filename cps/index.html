@@ -41,7 +41,7 @@ body.rugmode #rgSb{display:flex}body.rugmode #sbar>:not(#rgSb):not(#stat):not(#l
 .dcim{width:170px;flex:none;cursor:zoom-in;text-align:center}.dcim img{width:170px;height:150px;object-fit:contain;background:#0b0c0f;border-radius:5px;display:block}.dcim small{color:var(--mut);font-size:11px}
 .dcinfo{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}.dct{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dcv .same{color:var(--ok)}.dcv .maybe{color:var(--warn)}.dcv .diff{color:var(--bad)}
 #rgTypesV{position:absolute;inset:0;display:none;grid-template-columns:330px minmax(0,1fr)}#tyList{background:var(--pan);border-right:1px solid var(--ln);overflow:auto;padding:10px}#tySheet{overflow:auto;padding:12px 18px 30px}
-#tyList .tyh{display:flex;gap:6px;align-items:center;margin-bottom:8px}#tyList input{flex:1}.tyrow{display:block;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:7px;padding:6px 8px;color:var(--tx);cursor:pointer;margin-bottom:2px}
+#tyList .tyh,#etTypes .tyh{display:flex;gap:6px;align-items:center;margin-bottom:8px}#tyList input{flex:1}.tyrow{display:block;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:7px;padding:6px 8px;color:var(--tx);cursor:pointer;margin-bottom:2px}
 .tyrow:hover{background:var(--pan2)}.tyrow.cur{border-color:var(--tx);background:var(--pan2)}.tyrow b{font-size:13px}.tyrow small{display:block;color:var(--mut);font-size:11.5px}.tybar{height:4px;background:var(--ln);border-radius:2px;margin-top:4px;overflow:hidden}.tybar i{display:block;height:100%;background:var(--ok)}.tybar i.p{background:var(--warn)}
 .tysec{margin:18px 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}.tyels{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
 .tyel{background:var(--pan2);border:1px solid var(--ln);border-radius:7px;padding:5px;text-align:center;cursor:pointer}.tyel img{width:100%;height:78px;object-fit:contain;background:#f2eee2;border-radius:4px;image-rendering:pixelated}.tyel b{display:block;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tyel small{font-size:10.5px;color:var(--mut)}
@@ -322,6 +322,15 @@ aside{min-height:0}
 .rgmsel{position:sticky;bottom:0;z-index:4;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 14px;background:var(--pan);border-top:1px solid var(--ln2);box-shadow:0 -6px 20px rgba(0,0,0,.35)}
 .rggr{position:absolute;bottom:6px;right:6px;z-index:2;width:22px;height:22px;display:grid;place-items:center;border-radius:5px;font-weight:700;font-size:12px;color:#111;background:#9aa0a6}.rggr.gA{background:#7bd88f}.rggr.gB{background:#c6e27a}.rggr.gC{background:#f2c46d}.rggr.gD{background:#8a8f98}
 .rgtwq{align-self:center;margin-left:12px;flex:none;border-color:var(--warn)!important;color:var(--warn)}
+#rgEtV{position:absolute;inset:0;display:none;grid-template-columns:330px minmax(0,1fr)}#etTypes{background:var(--pan);border-right:1px solid var(--ln);overflow:auto;padding:10px}#etMain{overflow:auto}
+.etwrap{padding:0 14px}#etMain h4{margin:14px 14px 8px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}#etMain h4 small{text-transform:none;letter-spacing:0;margin-left:6px}
+.etels{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:8px}.etel{display:flex;gap:10px;align-items:center;background:var(--pan);border:1px solid var(--ln);border-radius:8px;padding:6px}.etel.ok{border-color:var(--ok)}
+.etel img,.etno{width:56px;height:56px;object-fit:cover;border-radius:5px;flex:none;background:var(--pan2)}.etel>div:not(.etact){flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.etact{display:flex;flex-direction:column;gap:4px}
+.etbar{display:block;height:4px;background:var(--pan2);border-radius:2px;overflow:hidden}.etbar i{display:block;height:100%;background:var(--ok)}.etexp{margin:8px 0;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.etrugs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;padding:0 14px 20px}.etrug{position:relative;background:var(--pan);border:1px solid var(--ln);border-radius:8px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column}
+.etrug img{width:100%;height:150px;object-fit:contain;background:#111}.etrug>div{padding:6px 8px;display:flex;flex-direction:column;gap:4px}.etrug b{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.etrug .sm.on{background:var(--ok);color:#111}
+.efgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;max-height:72vh;overflow:auto;padding:2px}.efc{background:var(--pan2);border:2px solid var(--ln);border-radius:8px;padding:5px;display:flex;flex-direction:column;gap:3px;cursor:pointer}
+.efc img{width:100%;height:150px;object-fit:contain;background:#111;border-radius:4px}.efc.cur{border-color:var(--acc)}.efc.yes{border-color:var(--ok);opacity:.65}.efc.no{border-color:var(--bad);opacity:.45}.efc small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rgfl1{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 14px 4px}.rgfl1 select{width:auto;flex:none;height:30px}.rgfl1 #rgQ{width:210px;flex:none;height:30px}
 .rgfl{padding:6px 14px 2px;display:flex;flex-direction:column;gap:6px}.rgflr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.rgfll{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}.rgflr .seg{display:inline-flex}.rgflr .seg .sm.on{background:var(--tx);color:var(--bg)}.rgflr #rgQ{width:220px}.rgflr select{width:auto;flex:none}
 .rgchips{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 14px 4px}.rgchips h2{margin:0 8px 0 0;font-size:16px;font-weight:600}
@@ -434,7 +443,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.23</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.24</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2196,7 +2205,7 @@ function rugsOpen(){
   R.view='grid';rugView();rugsLoadList();
 }
 function rugsClose(){R.on=false;document.body.classList.remove('rugmode');$('rugs').style.display='none';$('tab-rugs').classList.remove('on');}
-function rugView(){$('rgGridV').style.display=R.view==='grid'?'grid':'none';$('rgEditV').style.display=R.view==='edit'?'grid':'none';const T=$('rgTypesV');if(T)T.style.display=R.view==='types'?'grid':'none';const SG=$('rgSignsV');if(SG)SG.style.display=R.view==='signs'?'block':'none';rugSbar();}
+function rugView(){$('rgGridV').style.display=R.view==='grid'?'grid':'none';$('rgEditV').style.display=R.view==='edit'?'grid':'none';const T=$('rgTypesV');if(T)T.style.display=R.view==='types'?'grid':'none';const SG=$('rgSignsV');if(SG)SG.style.display=R.view==='signs'?'block':'none';const EV_=$('rgEtV');if(EV_)EV_.style.display=R.view==='etalon'?'grid':'none';rugSbar();}
 // строка состояния в разделе «Ковры» — та же #sbar внизу, что у узоров: ‹ N / M › ковёр, название, число рамок
 function rugSbar(){let B=$('rgSb');if(!B){B=document.createElement('div');B.id='rgSb';$('sbar').prepend(B);}
   // v11.16: масштаб, «вписать» и «сохранено» — в строке состояния, не над фото
@@ -2204,6 +2213,7 @@ function rugSbar(){let B=$('rgSb');if(!B){B=document.createElement('div');B.id='
   B2.style.display=(R.on&&R.view==='edit'&&R.rug)?'flex':'none';if($('rgZoom')&&R.z)$('rgZoom').textContent=Math.round(R.z*100)+'%';
   if(!R.on){B.innerHTML='';return;}
   if(R.view==='signs'){B.innerHTML=`<span class="mut">Ковры · знаки кайм</span>`;return;}
+  if(R.view==='etalon'){B.innerHTML=`<span class="mut">Ковры · эталоны${ET.cur?' · '+esc(((R.types||[]).find(t=>t.id===ET.cur)||{}).az||ET.cur):''}</span>`;return;}
   if(R.view==='types'){B.innerHTML=`<span class="mut">Ковры · типы Керимова${TY.d?' · '+esc(TY.d.az):''}</span>`;return;}
   if(R.view!=='edit'||!R.rug){B.innerHTML=`<span class="mut">Ковры · плитка${R.shown?' · '+R.shown.length+' плиток':''}</span>`;return;}
   const r=R.rug,pos=(R.shown||[]).indexOf(r.id),n=(R.shown||[]).length;
@@ -2972,6 +2982,61 @@ function rugSplitPanel(E,r){const pf=R.splitPF||[],n=R.split.length,info=R.split
   $('rgSpSort').onclick=()=>{spSort();rugDraw();rugSide();};
   $('rgSplitGo').onclick=()=>rugSplitDo(r);$('rgSplitX').onclick=()=>{R.tool='box';R.split=null;R.spSel=null;rugTools();rugDraw();rugSide();};
 }
+// ---- v11.24: эталоны — лучшие ковры типа размечаются полностью; детектор учится на ✓ рамках элемента и ищет его на коврах того же типа ----
+const ET={cur:'',d:null};
+async function etOpen(cid){R.view='etalon';rugView();if(!R.types){try{R.types=(await api('/api/types')).types||[];}catch(e){R.types=[];}}if(cid)ET.cur=cid;await etLoad();}
+async function etLoad(){try{ET.d=await api('/api/etalon');}catch(e){fail(e);return;}etDraw();clearTimeout(ET.t);if(ET.d.state.running&&R.view==='etalon')ET.t=setTimeout(etLoad,4000);}
+function etRugsOf(cid){const seen=new Set(),out=[];R.list.filter(r=>r.composition===cid&&!(r.split_into&&r.split_into.length)).forEach(r=>{if(seen.has(r.id))return;
+    const ids=[r.id,...(r.same_link||[]).filter(i=>R.list.some(x=>x.id===i))];ids.forEach(i=>seen.add(i));out.push({r,ids,g:rugGrade(ids)});});
+  return out.sort((a,b)=>a.g.g.localeCompare(b.g.g)||(b.r.n-a.r.n));}
+function etDraw(){const D=ET.d;if(!D)return;const L=$('etTypes'),M=$('etMain');if(!L||!M)return;
+  const els=D.elements,ready=e=>e.npos>=D.min_pos;
+  const types=(R.types||[]).filter(t=>!t.region&&(t.photos||t.el)).map(t=>{const rs=etRugsOf(t.id);const E=els.filter(e=>e.types[t.id]);
+    return {t,rs,a:rs.filter(x=>x.g.g==='A').length,b:rs.filter(x=>x.g.g==='B').length,er:E.filter(ready).length,ne:E.length};})
+    .sort((x,y)=>(y.er-x.er)||(y.a-x.a)||(y.rs.length-x.rs.length));
+  if(!ET.cur&&types[0])ET.cur=types[0].t.id;
+  L.innerHTML=`<div class="tyh"><button class="sm" id="etBack">← плитка</button></div><small class="mut" style="display:block;margin:0 4px 8px">Типы ковров: сверху — где уже есть готовые элементы (≥ ${D.min_pos} ✓) и ковры грейда A.</small>`+
+    types.map(x=>`<button class="tyrow ${ET.cur===x.t.id?'cur':''}" data-et="${esc(x.t.id)}"><b>${esc(x.t.az)}</b><small class="mut">${esc(x.t.ru||'')}</small><small>A ${x.a} · B ${x.b} · ковров ${x.rs.length} · элементов готово ${x.er}/${x.ne}${x.t.el?` · у Керимова ${x.t.el}`:''}</small></button>`).join('');
+  $('etBack').onclick=()=>{R.view='grid';rugView();rugList();};
+  L.querySelectorAll('[data-et]').forEach(b=>b.onclick=()=>{ET.cur=b.dataset.et;etDraw();});
+  const cur=types.find(x=>x.t.id===ET.cur);if(!cur){M.innerHTML='<p class="mut" style="padding:20px">Типов пока нет — укажите тип ковра в паспорте.</p>';return;}
+  const st=D.state,E=els.filter(e=>e.types[ET.cur]),have=new Set(E.map(e=>e.key)),exp=(D.exp[ET.cur]||[]).filter(x=>!have.has(x.key)),ro=rro();
+  const pend=E.reduce((a,e)=>a+e.pending,0);
+  const crop=e=>e.sample?`<img loading="lazy" src="/api/rugs/${encodeURIComponent(e.sample.rid)}/crop?b=${e.sample.box.map(v=>(+v).toFixed(4)).join(',')}&s=80" alt="">`:'<span class="etno"></span>';
+  M.innerHTML=`<div class="sgbar"><b style="font-size:15px">${esc(cur.t.az)}</b><span class="mut">${esc(cur.t.ru||'')}</span><span class="sp"></span>
+      ${st.running?`<span class="mut"><span class="spin"></span> ${esc(st.stage||'')} · ${st.done}/${st.total}</span>`:(st.last?`<small class="mut" title="${esc(st.last)}">последний поиск ${esc(st.finished||'')}: найдено ${st.found}</small>`:'')}
+      ${ro?'':`<button class="sm" id="etFinds" ${pend?'':'disabled'}>проверить находки (${pend})</button><button class="sm pri" id="etRun" ${st.running||!E.some(ready)?'disabled':''} data-tip="детектор учится на ✓ рамках каждого готового элемента и ищет его на коврах этого типа; находки — на проверку">▶ искать элементы на коврах типа</button>`}</div>
+    <div class="etwrap"><h4>Элементы типа <small class="mut">цель — ≥ 5 проверенных образцов на разных коврах; с ${D.min_pos} детектор уже ищет</small></h4>
+    <div class="etels">${E.map(e=>`<div class="etel ${ready(e)?'ok':''}">${crop(e)}<div><b>${esc(e.name)}</b><small class="mut">${e.rugs} ${e.rugs===1?'ковёр':'ковров'}${e.nneg?` · ✗ ${e.nneg}`:''}${e.pending?` · ждут проверки ${e.pending}`:''}</small>
+        <span class="etbar"><i style="width:${Math.min(100,e.npos*20)}%"></i></span><small>${e.npos} / 5 ✓</small></div>
+        ${ro?'':`<div class="etact">${e.pending?`<button class="sm" data-etf="${esc(e.key)}">проверить (${e.pending})</button>`:''}<button class="sm" data-etr="${esc(e.key)}" ${ready(e)&&!st.running?'':'disabled'} data-tip="${ready(e)?'искать этот элемент на коврах того же типа':'нужно ≥ '+D.min_pos+' проверенных образца'}">искать</button></div>`}</div>`).join('')||'<p class="mut">На коврах этого типа ещё нет проверенных рамок с названием.</p>'}
+      ${exp.length?`<div class="etexp"><small class="mut">У Керимова для этого типа ещё: </small>${exp.map(x=>`<span class="chip">${esc(x.az)}</span>`).join(' ')}<small class="mut"> — образцов пока нет: обведите и назовите на ковре-эталоне.</small></div>`:''}</div>
+    <h4>Ковры-эталоны <small class="mut">сначала грейд A: размечайте полностью — все элементы поля и кайм; потом отметьте «★ эталон»</small></h4>
+    <div class="etrugs">${cur.rs.slice(0,60).map(x=>`<div class="etrug" data-open="${esc(x.r.id)}"><img loading="lazy" src="/rugthumb/${encodeURIComponent(x.r.id)}.jpg" alt=""><span class="rggr g${x.g.g}" style="position:absolute;top:6px;left:6px">${x.g.g}</span>
+        <div><b title="${esc(x.r.title)}">${esc((x.r.title||x.r.id).slice(0,60))}</b><small class="mut">${esc(SRCRU[x.r.src]||x.r.src||'')}${x.ids.length>1?` · ещё ${x.ids.length-1} фото`:''} · ${x.r.n?`рамок ${x.r.n}, ✓ ${x.r.confirmed}`:'не размечен'}</small>
+        ${ro?'':`<button class="sm ${x.r.status==='done'?'on':''}" data-etdone="${esc(x.r.id)}" data-tip="ковёр размечен полностью — эталон типа">${x.r.status==='done'?'★ эталон':'☆ отметить эталоном'}</button>`}</div></div>`).join('')}</div>`;
+  $('etRun')&&($('etRun').onclick=async()=>{try{await api('/api/etalon/run',{keys:E.filter(ready).map(e=>e.key)});stat('детектор учится и ищет — ход здесь','busy');etLoad();}catch(e){fail(e);}});
+  $('etFinds')&&($('etFinds').onclick=()=>etFinds(E.map(e=>e.key)));
+  M.querySelectorAll('[data-etr]').forEach(b=>b.onclick=async()=>{try{await api('/api/etalon/run',{keys:[b.dataset.etr]});etLoad();}catch(e){fail(e);}});
+  M.querySelectorAll('[data-etf]').forEach(b=>b.onclick=()=>etFinds([b.dataset.etf]));
+  M.querySelectorAll('[data-etdone]').forEach(b=>b.onclick=async ev=>{ev.stopPropagation();const r=R.list.find(x=>x.id===b.dataset.etdone);const v=r.status==='done'?'work':'done';
+    try{await api('/api/rugs/'+encodeURIComponent(r.id),{status:v});r.status=v;etDraw();}catch(e){fail(e);}});
+  M.querySelectorAll('.etrug[data-open]').forEach(c=>c.onclick=()=>rugOpen(c.dataset.open));}
+// проверка находок по вырезкам: C — верно, X — неверно, ← → — по карточкам; ответ сразу сохраняется и учит детектор
+async function etFinds(keys){let F=[];try{for(const k of keys){const j=await api('/api/etalon/finds?key='+encodeURIComponent(k));F=F.concat(j.finds);}}catch(e){fail(e);return;}
+  F.sort((a,b)=>b.score-a.score);const W=$('modal');let i=0;const ans={};
+  const draw=()=>{W.innerHTML=`<div class="mbox" style="width:min(1100px,96vw)" role="dialog" aria-modal="true" aria-labelledby="efH"><div class="flex" style="margin-bottom:8px"><b id="efH">Находки детектора: ${F.length}</b><small class="mut" style="margin-left:10px">C — верно, X — неверно, ← → — по карточкам; ответ сохраняется сразу и учит детектор</small><span class="sp"></span><button class="sm" id="mClose">Закрыть</button></div>
+    <div class="efgrid">${F.map((f,k)=>`<div class="efc ${k===i?'cur':''} ${ans[k]||''}" data-k="${k}"><img loading="lazy" src="/api/rugs/${encodeURIComponent(f.rid)}/crop?b=${f.box.map(v=>(+v).toFixed(4)).join(',')}&s=160" alt=""><b>${esc(f.name)}</b><small class="mut" title="${esc(f.title)}">${Math.round(f.score*100)}% · ${esc(f.title.slice(0,40))}</small>
+      <div class="rgrow"><button class="sm" data-a="confirmed">✓</button><button class="sm" data-a="rejected">✗</button><button class="sm" data-go="1" data-tip="открыть ковёр">↗</button></div></div>`).join('')||'<p class="mut">Находок, ждущих проверки, нет.</p>'}</div></div>`;
+    W.hidden=false;$('mClose').onclick=close;W.querySelectorAll('.efc').forEach(c=>{const k=+c.dataset.k;c.onclick=()=>{i=k;mark();};
+      c.querySelectorAll('[data-a]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();i=k;set(b.dataset.a);});c.querySelector('[data-go]').onclick=ev=>{ev.stopPropagation();close();rugOpen(F[k].rid);};});};
+  const mark=()=>W.querySelectorAll('.efc').forEach(c=>{c.classList.toggle('cur',+c.dataset.k===i);if(+c.dataset.k===i)c.scrollIntoView({block:'nearest'});});
+  const set=async a=>{const f=F[i];if(!f)return;try{await api('/api/marks_status',{items:[{rid:f.rid,mid:f.mid,status:a}]});ans[i]=a==='confirmed'?'yes':'no';
+    const c=W.querySelector(`.efc[data-k="${i}"]`);c&&(c.classList.remove('yes','no'),c.classList.add(ans[i]));if(i<F.length-1)i++;mark();}catch(e){fail(e);}};
+  const key=e=>{if(W.hidden)return;const k=kk(e);if(k==='c'){set('confirmed');e.preventDefault();}else if(k==='x'){set('rejected');e.preventDefault();}
+    else if(e.key==='ArrowRight'){i=Math.min(F.length-1,i+1);mark();e.preventDefault();}else if(e.key==='ArrowLeft'){i=Math.max(0,i-1);mark();e.preventDefault();}else if(e.key==='Escape')close();};
+  function close(){window.removeEventListener('keydown',key,true);W.hidden=true;W.innerHTML='';W.onclick=null;const n=Object.keys(ans).length;if(n)stat(`проверено находок: ${n}`,'ok');rugsLoadList().then(()=>{if(R.view==='etalon')etLoad();});}
+  window.addEventListener('keydown',key,true);draw();}
 // ---- v11.20: словарь знаков кайм — группы похожих раппортов со всех ковров; назвать один раз → разметить везде ----
 const SG={min:2,n:40,open:{}};
 async function sgOpen(){R.view='signs';rugView();await sgLoad();}
@@ -3198,6 +3263,7 @@ window.addEventListener('blur',()=>{if(R.on){R.space=false;$('rgSvg')&&$('rgSvg'
   ['pipe','sheet','queue'].forEach(k=>$('tab-'+k).addEventListener('click',()=>{if(R.on)rugsClose();},true));
   const d=document.createElement('div');d.id='rugs';d.innerHTML=`<div id="rgGridV"><aside id="rgTree" aria-label="Источники и школы"></aside><section class="rgmid"><div class="rgbar">
     <button class="sm" id="rgTypesBtn" data-tip="Рабочий лист по типам ковров: элементы Керимова → фото этого типа (самые крупные первыми) → найти элементы на фото" style="border-color:var(--tx)">📚 типы Керимова</button>
+    <button class="sm" id="rgEtBtn" data-tip="Эталоны: лучшие ковры каждого типа размечаются полностью, детектор учится на проверенных рамках и сам ищет элементы на коврах того же типа" style="border-color:var(--ok)">🎯 эталоны</button>
     <button class="sm" id="rgSignsBtn" data-tip="Словарь знаков кайм: машина находит раппорты кайм на всех фото и собирает похожие в группы. Назовите группу — имя и разметка перейдут на все её ковры">🧩 знаки кайм</button>
     <button class="sm" id="rgSync" data-tip="Загрузить/обновить каталог ковров с Диска (пакет rugs_bundle.zip из Colab)" style="border-color:var(--acc)">⟳ из Диска</button>
     <label class="btn sm" data-tip="Загрузить фото ковров (можно несколько)">＋ фото<input type="file" id="rgUp" accept="image/*" multiple hidden></label>
@@ -3218,6 +3284,7 @@ window.addEventListener('blur',()=>{if(R.on){R.space=false;$('rgSvg')&&$('rgSvg'
     <div class="rgstat" id="rgStat"></div><div class="rgcards" id="rgCards"></div></section><aside id="rgPeek" aria-label="Ковёр под курсором"></aside></div>
     <div id="rgTypesV" style="display:none"><aside id="tyList"></aside><section id="tySheet"></section></div>
     <div id="rgSignsV" style="display:none"></div>
+    <div id="rgEtV" style="display:none"><aside id="etTypes"></aside><section id="etMain"></section></div>
     <div id="rgEditV"><aside id="rgLeft"></aside><section id="rgCenter"></section><aside id="rgSide"></aside></div>`;
   document.body.appendChild(d);
   $('rgQ').oninput=e=>{R.q=e.target.value;R.gridN=150;rugList();};$('rgSort').onchange=e=>{R.sort=e.target.value;R.gridN=150;rugList();};
@@ -3225,7 +3292,7 @@ window.addEventListener('blur',()=>{if(R.on){R.space=false;$('rgSvg')&&$('rgSvg'
     try{const r=await fetch('/api/rugs_upload',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat('добавлено ковров: '+j.made.length,'ok');await rugsLoadList();if(j.made[0])rugOpen(j.made[0]);}catch(err){fail(err);}e.target.value='';};
   $('rgZip').onchange=async e=>{const f=e.target.files[0];if(!f)return;const fd=new FormData();fd.append('file',f);stat('загружаю архив…','busy');
     try{const r=await fetch('/api/rugs_zip',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);stat(`из архива: ${j.made} ковров, уже были: ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
-  $('rgDupChk').onclick=dupCheckOpen;$('rgTypesBtn').onclick=()=>tyOpen();$('rgSignsBtn').onclick=()=>sgOpen();
+  $('rgDupChk').onclick=dupCheckOpen;$('rgTypesBtn').onclick=()=>tyOpen();$('rgSignsBtn').onclick=()=>sgOpen();$('rgEtBtn').onclick=()=>etOpen();
   // v11.20: обычный фильтр — компактные выпадающие списки
   $('rgFStatus').onchange=e=>{R.filter=e.target.value;R.gridN=150;rugList();};
   $('rgFShow').onchange=e=>{const v=e.target.value;R.fnone=v==='none';R.fdup=v==='dup';R.fbig=v==='big';R.ffrag=v==='frag'?1:v==='nofrag'?-1:0;R.gridN=150;rugList();};

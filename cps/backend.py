@@ -1816,6 +1816,13 @@ def _signs_run(c):
 
 events.automation("signs", "Знаки кайм", lambda c: f"каждую ночь в {int(c.get('hour', 3)):02d}:00 — найти раппорты кайм на новых фото и собрать их в группы (словарь знаков)",
                   _signs_run, due=lambda c, t: t.hour == int(c.get("hour", 3)) and not str(c.get("last_run") or "").startswith(t.strftime("%Y-%m-%d")), enabled=True, auto=True, hour=3)
+def _etalon_run(c):
+    ok = app.state.etalon_run(None, on_done=lambda res: events.add("Эталоны: " + res, "Ковры → «🎯 эталоны» → «проверить находки»: ✓ / ✗ по вырезкам — каждый ответ учит детектор", link={"to": "events"}))
+    return "запущен поиск элементов эталонов на коврах их типов" if ok else None
+
+
+events.automation("etalon", "Эталоны: поиск элементов", lambda c: f"каждую ночь в {int(c.get('hour', 2)):02d}:00 — детектор учится на проверенных рамках каждого элемента (≥ 3) и ищет его на коврах того же типа; находки — на проверку",
+                  _etalon_run, due=lambda c, t: t.hour == int(c.get("hour", 2)) and not str(c.get("last_run") or "").startswith(t.strftime("%Y-%m-%d")), enabled=True, auto=True, hour=2)
 events.automation("dupchk", "Проверка двойников", lambda c: f"каждую ночь в {int(c.get('hour', 5)):02d}:00 — совместить фото новых пар «один и тот же ковёр» и отметить подозрительные склейки",
                   _dupchk_run, due=_dupchk_due, enabled=True, auto=True, hour=5)
 events.automation("motif", "Индекс узоров", lambda c: f"каждую ночь в {int(c.get('hour', 4)):02d}:00 — посчитать признаки новых и изменённых фото ковров для поиска «где ещё встречается этот узор»",
