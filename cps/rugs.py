@@ -805,7 +805,7 @@ def install(app, DATA, D_WORK):
         return ET.state
 
     @app.post("/api/etalon/refine")
-    def api_etalon_refine(body: dict = Body(default={})):
+    async def api_etalon_refine(body: dict = Body(default={})):
         """уточнить рамки уже найденных (ждущих проверки) находок: контур SAM (v11.28), без torch — шаблоном по пикселям"""
         use_sam = sam_seg.available() and not body.get("no_sam")
         def work():
@@ -838,7 +838,7 @@ def install(app, DATA, D_WORK):
                     save(r)
             _ty["t"] = 0
             return {"ok": True, "refined": n}
-        return heavy(work, "эталоны: уточнение рамок")
+        return await job_wait(work, "эталоны: контуры находок", ui=False)
 
     @app.post("/api/etalon/clear")
     def api_etalon_clear(body: dict = Body(default={})):
