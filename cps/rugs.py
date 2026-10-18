@@ -653,6 +653,8 @@ def install(app, DATA, D_WORK):
                     nm = {"id": mid, "box": [round(v, 5) for v in box], **keep,
                           "by": o.get("by") or (("машина → " + who) if keep.get("machine") else who), "at": o.get("at") or now,
                           "confirmed_by": o.get("confirmed_by", ""), "confirmed_at": o.get("confirmed_at", 0)}
+                    for f in ("box0", "refined", "sam"):       # служебные поля машины — студия их не присылает
+                        if f in o: nm[f] = o[f]
                     changed = not o or any(o.get(k) != nm.get(k) for k in ("box", "zone", "motif", "motif_text", "scheme", "group", "variant"))
                     if changed and o: nm["edited_by"], nm["edited_at"] = who, now
                     if nm["status"] in ("confirmed", "rejected") and (o.get("status") != nm["status"] or changed):
@@ -662,6 +664,7 @@ def install(app, DATA, D_WORK):
                 r["marks"] = marks
             r["updated"], r["updated_by"] = now, who
             save(r)
+        if "marks" in b: _ty["t"] = 0          # элементы/эталоны пересчитаются по свежей разметке
         return api_rug(rid)
 
     @app.delete("/api/rugs/{rid}")
@@ -738,12 +741,18 @@ def install(app, DATA, D_WORK):
         if img is None: return 0
         n = 0
         for m in ms:
-            try: c = sam_seg.refine_box(rid, img, m["box"])
+            m.setdefault("box0", list(m["box"]))
+            try: c = sam_seg.refine_box(rid, img, m["box0"])
             except Exception as e:
                 print("sam:", e); return n
             m["refined"] = 4
             if c: m["box"], m["poly"] = c["box"], c["poly"]; m["sam"] = c["score"]; n += 1
+            else: m["box"] = list(m["box0"]); m.pop("poly", None); m.pop("sam", None)      # SAM ушёл в фон — оставить рамку детектора
         return n
+
+    def _cover(a, b):
+        ix = max(0, min(a[0] + a[2], b[0] + b[2]) - max(a[0], b[0])); iy = max(0, min(a[1] + a[3], b[1] + b[3]) - max(a[1], b[1]))
+        return ix * iy / max(1e-9, min(a[2] * a[3], b[2] * b[3]))
 
     def et_add(rid, ms):
         sam_fix(rid, ms)
@@ -753,7 +762,8 @@ def install(app, DATA, D_WORK):
             have = r.get("marks") or []; n = 0
             for m in ms:
                 k = ET.key_of(m)
-                if any(MS._iou(m["box"], x["box"]) > (0.4 if ET.key_of(x) == k else 0.6) for x in have): continue
+                # тот же элемент: перекрытие считаем от меньшей рамки (маленькая внутри большой — тоже повтор)
+                if any((_cover(m["box"], x["box"]) > 0.5 if ET.key_of(x) == k else MS._iou(m["box"], x["box"]) > 0.6) for x in have): continue
                 have.append(m); n += 1
             if n: r["marks"] = have; r["updated"] = int(time.time()); save(r); _ty["t"] = 0
             return n
@@ -792,7 +802,9 @@ def install(app, DATA, D_WORK):
         except Exception: exp = {}
         els = [{"key": e["key"], "name": e["name"], "motif": e["motif"], "scheme": e["scheme"], "npos": len(e["pos"]), "nneg": len(e["neg"]),
                 "rugs": len(e["rugs"]), "types": e["types"], "schools": e["schools"], "pending": e["pending"],
-                "sample": (lambda p: {"rid": p[0], "box": p[1]})(e["pos"][0]) if e["pos"] else None, "eval": evd.get(e["key"])} for e in E.values()]
+                "sample": (lambda p: {"rid": p[0], "box": p[1]})(e["pos"][0]) if e["pos"] else None, "eval": evd.get(e["key"]) or evd.get(e["key"] + "#1"),
+                "shapes": [[{"rid": e["pos"][i][0], "box": e["pos"][i][1], "mid": e["pos_m"][i][1], "angle": e["pos_m"][i][2]} for i in c] for c in ET.shapes(e, A)]
+                if e["pos"] else []} for e in E.values()]
         els.sort(key=lambda x: (-x["npos"], x["name"]))
         expn = {c: [{"scheme": x["id"], "motif": x.get("motif", ""), "key": ("m:" + x["motif"]) if x.get("motif") else ("s:" + x["id"]),
                      "az": (BYID.get(x.get("motif")) or {}).get("az") or x.get("name") or x["id"]} for x in xs] for c, xs in exp.items()}
@@ -833,12 +845,35 @@ def install(app, DATA, D_WORK):
                         u = upd.get(m["id"])
                         if not u: continue
                         if u.get("box") != m.get("box"): n += 1
-                        for f in ("box", "angle", "flip", "poly", "sam", "refined"):
+                        for f in ("box", "box0", "angle", "flip", "poly", "sam", "refined"):
                             if f in u: m[f] = u[f]
+                        if "poly" not in u: m.pop("poly", None)
                     save(r)
             _ty["t"] = 0
             return {"ok": True, "refined": n}
         return await job_wait(work, "эталоны: контуры находок", ui=False)
+
+    @app.post("/api/etalon/relabel")
+    def api_etalon_relabel(request: Request, body: dict = Body(...)):
+        """v11.29: образцы другой формы — другой элемент: items=[{rid, mid}], name — новое название (узор словаря по az-названию,
+        иначе текстом); scheme_off — снять схему (она от другой фигуры)"""
+        who = user(request); name = (body.get("name") or "").strip(); by = {}; n = 0
+        if not name: return JSONResponse({"error": "нужно название"}, 400)
+        mot = next((k for k, v in et_names().items() if k == name or (v or "").strip().lower() == name.lower()), "")
+        for it in body.get("items") or []: by.setdefault(it.get("rid"), set()).add(it.get("mid"))
+        with _lock:
+            for rid, mids in by.items():
+                r = load(rid)
+                if not r: continue
+                grp = {m.get("group") or m["id"] for m in r.get("marks") or [] if m.get("id") in mids}      # и все повторы этих рамок
+                for m in r.get("marks") or []:
+                    if m.get("id") not in mids and (m.get("group") or m["id"]) not in grp: continue
+                    m["motif"], m["motif_text"] = (mot, "") if mot else ("", name)
+                    if body.get("scheme_off"): m["scheme"] = ""
+                    m["edited_by"], m["edited_at"] = who, int(time.time()); n += 1
+                r["updated"] = int(time.time()); save(r)
+        _ty["t"] = 0
+        return {"ok": True, "n": n, "motif": mot}
 
     @app.post("/api/etalon/clear")
     def api_etalon_clear(body: dict = Body(default={})):
@@ -979,7 +1014,7 @@ def install(app, DATA, D_WORK):
         def work():
             img = et_img(rid)
             if box and body.get("grow"):
-                c = sam_seg.refine_box(rid, img, box)
+                c = sam_seg.refine_box(rid, img, box, max_k=2.5)
                 return {"cands": [c] if c else [], "pick": 0}
             cs = sam_seg.segment(rid, img, points=pts or None, box=box)
             if box: pick = cs.index(sam_seg.best_for_box(cs, box)) if cs else 0

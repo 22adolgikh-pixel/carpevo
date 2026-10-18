@@ -119,7 +119,7 @@ def segment(key, bgr, points=None, box=None):
     return out
 
 
-def refine_box(key, bgr, box, grow=1.6):
+def refine_box(key, bgr, box, grow=1.6, max_k=1.8):
     """рамка находки (часто обрезанная, сдвинутая или с запасом) → контур элемента целиком.
     Три подсказки SAM: (1) рамка ×grow + точка в центре, (2) сама рамка, (3) только точка в центре — 9 вариантов.
     Отбрасываются: упёршиеся в расширенную рамку со всех сторон (это фон/поле), крупнее 1/5 фото, меньше 1/4 рамки.
@@ -132,7 +132,13 @@ def refine_box(key, bgr, box, grow=1.6):
     def edges(b, tol=0.01):
         return (b[0] <= e[0] + tol * e[2]) + (b[1] <= e[1] + tol * e[3]) + (b[0] + b[2] >= e[0] + e[2] * (1 - tol)) + (b[1] + b[3] >= e[1] + e[3] * (1 - tol))
     cands = segment(key, bgr, points=[(cx, cy, 1)], box=e) + segment(key, bgr, box=box) + segment(key, bgr, points=[(cx, cy, 1)])
-    ok = [c for c in cands if edges(c["box"]) < 4 and c["area"] < 0.2 and c["box"][2] * c["box"][3] >= box[2] * box[3] / 4]
+    # v11.29: на плотном поле (пиребедиль) SAM охотно сливает соседние фигуры в одну — результат не должен уходить далеко
+    # от рамки: стороны не больше max_k и не меньше 1/2 исходных, центр — в пределах исходной рамки
+    def near(b):
+        bx, by = b[0] + b[2] / 2, b[1] + b[3] / 2
+        return (box[2] / 2 <= b[2] <= box[2] * max_k and box[3] / 2 <= b[3] <= box[3] * max_k
+                and abs(bx - cx) <= box[2] / 2 and abs(by - cy) <= box[3] / 2)
+    ok = [c for c in cands if edges(c["box"]) < 4 and c["area"] < 0.2 and near(c["box"])]
     return max(ok, key=lambda c: c["score"]) if ok else None
 
 

@@ -15,10 +15,15 @@ NOTE = "эталон: "
 MIN_POS = 3
 
 
+_alias = {}      # v11.29: «t:dəvə» (название текстом) = «m:deve» (узор словаря с тем же названием) — один элемент
+
+
 def key_of(m):
-    """ключ элемента: узор словаря → «m:<id>»; название текстом → «t:<текст>»; только схема → «s:<id>»"""
+    """ключ элемента: узор словаря → «m:<id>»; название текстом → «t:<текст>» (или узор словаря с таким названием); только схема → «s:<id>»"""
     if m.get("motif"): return "m:" + m["motif"]
-    if (m.get("motif_text") or "").strip(): return "t:" + m["motif_text"].strip().lower()
+    if (m.get("motif_text") or "").strip():
+        k = "t:" + m["motif_text"].strip().lower()
+        return _alias.get(k, k)
     if m.get("scheme"): return "s:" + m["scheme"]
     return ""
 
@@ -26,6 +31,9 @@ def key_of(m):
 def elements(A, names=None):
     """A — {rid: ковёр}. → {key: {name, pos: [(rid, box)], neg: [(rid, box)], rugs, types, schools, pending}}"""
     E = {}
+    for mid, nm in (names or {}).items():
+        for v in {mid, nm or ""}:
+            if v.strip(): _alias["t:" + v.strip().lower()] = "m:" + mid
     for rid, r in A.items():
         if r.get("dup_of"): continue
         for m in r.get("marks") or []:
@@ -37,13 +45,43 @@ def elements(A, names=None):
             if not e["scheme"] and m.get("scheme"): e["scheme"] = m["scheme"]
             st = m.get("status")
             if st == "confirmed":
-                e["pos"].append((rid, m["box"])); e["rugs"].add(rid)
+                e["pos"].append((rid, m["box"])); e["rugs"].add(rid); e.setdefault("pos_m", []).append((rid, m.get("id", ""), m.get("angle") or 0))
                 c = r.get("composition") or ""; s = r.get("school") or ""
                 if c: e["types"][c] = e["types"].get(c, 0) + 1
                 if s: e["schools"][s] = e["schools"].get(s, 0) + 1
             elif st == "rejected": e["neg"].append((rid, m["box"]))
             elif m.get("machine") and str(m.get("note") or "").startswith(NOTE): e["pending"] += 1
     return E
+
+
+def shapes(e, A):
+    """v11.29: образцы одного названия часто — РАЗНЫЕ фигуры (длинная планка и крюк по бокам под одним «qeyçi»), или одна
+    фигура в разных положениях (лёжа / стоя). Окно детектора одно на модель и не поворачивается — смесь форм даёт
+    «среднее окно», которое режет одно и захватывает лишнее у другого. Делим образцы по форме рамки на фото
+    (пропорции в пикселях и площадь): близкие — одна форма. → [[индексы e["pos"]], …], крупные группы первыми"""
+    P = e["pos"]; n = len(P)
+    if n < 2: return [list(range(n))]
+    f = []
+    for rid, b in P:
+        r = A.get(rid) or {}; W, H = r.get("w") or 1, r.get("h") or 1
+        f.append((math.log(max(1e-4, b[2] * W) / max(1e-4, b[3] * H)), math.log(max(1e-6, b[2] * b[3]))))
+    par = list(range(n))
+    def fd(i):
+        while par[i] != i: par[i] = par[par[i]]; i = par[i]
+        return i
+    for i in range(n):
+        for j in range(i + 1, n):
+            if ((f[i][0] - f[j][0]) / 0.35) ** 2 + ((f[i][1] - f[j][1]) / 0.9) ** 2 < 1: par[fd(i)] = fd(j)
+    g = {}
+    for i in range(n): g.setdefault(fd(i), []).append(i)
+    return sorted(g.values(), key=len, reverse=True)
+
+
+def sub(e, idx, i, total):
+    """элемент только из образцов одной формы (ключ тот же — находки остаются этим элементом)"""
+    s = dict(e); s["pos"] = [e["pos"][k] for k in idx]; s["rugs"] = {p[0] for p in s["pos"]}
+    s["shape"] = i if total > 1 else None
+    return s
 
 
 def _sig(z): return 1 / (1 + np.exp(-np.clip(z, -30, 30)))
@@ -302,19 +340,25 @@ def run(keys, load_all, add_marks, heavy, names=None, on_done=None, limit_rugs=4
     def go():
         try:
             A = load_all(); E = elements(A, names)
-            todo = [E[k] for k in (keys or E) if k in E and len(E[k]["pos"]) >= MIN_POS]
-            state["total"] = len(todo); rep = []
+            todo, skipped = [], []
+            for k in (keys or E):
+                if k not in E or len(E[k]["pos"]) < MIN_POS: continue
+                cl = shapes(E[k], A); big = [c for c in cl if len(c) >= MIN_POS]
+                if not big: skipped.append(E[k]["name"]); continue
+                todo += [sub(E[k], c, i, len(big)) for i, c in enumerate(big)]
+            state["total"] = len(todo); rep = [f"{n}: образцы разной формы, каждой меньше {MIN_POS} ✓ — не искал" for n in skipped]
             for e in todo:
-                state["stage"] = f"«{e['name']}»: самопроверка на {len(e['rugs'])} коврах с ✓"
+                sh = f" · форма {e['shape'] + 1}" if e.get("shape") is not None else ""
+                state["stage"] = f"«{e['name']}{sh}»: самопроверка на {len(e['rugs'])} коврах с ✓"
                 ev = heavy(lambda: evaluate(e, E, A, load_img), "эталоны: самопроверка")
                 cfg = pick(ev); C = CFGS[cfg]
-                if save_eval: save_eval(e["key"], {"name": e["name"], "eval": ev, "cfg": cfg, "npos": len(e["pos"]), "rugs": len(e["rugs"]), "at": int(time.time())})
-                state["stage"] = f"«{e['name']}»: учусь на {len(e['pos'])} образцах"
+                if save_eval: save_eval(e["key"] + (f"#{e['shape'] + 1}" if sh else ""), {"name": e["name"] + sh, "eval": ev, "cfg": cfg, "npos": len(e["pos"]), "rugs": len(e["rugs"]), "at": int(time.time())})
+                state["stage"] = f"«{e['name']}{sh}»: учусь на {len(e['pos'])} образцах"
                 model = heavy(lambda: train(e, E, A, load_img, parts=C["parts"]), "эталоны: обучение")
                 if not model: state["done"] += 1; continue
                 tg = targets(e, A)[:limit_rugs]; n = 0
                 tpls = heavy(lambda: templates(e, load_img), "эталоны: образцы") if (load_img and C["refine"]) else []
-                state["stage"] = f"«{e['name']}»: ищу на {len(tg)} коврах"
+                state["stage"] = f"«{e['name']}{sh}»: ищу на {len(tg)} коврах"
                 for rid in tg:
                     hits = heavy(lambda: find(cfg, model, tpls, rid, A, load_img), "эталоны: поиск")
                     if not hits: continue
@@ -323,11 +367,12 @@ def run(keys, load_all, add_marks, heavy, names=None, on_done=None, limit_rugs=4
                         mid = f"m{int(time.time()):x}e{abs(hash((e['key'], rid))) % 10**6}_{j}"; g = g or mid
                         ms.append({"id": mid, "box": [round(v, 5) for v in b], "zone": "other", "motif": e["motif"], "motif_text": e["motif_text"] if not e["motif"] else "",
                                    "scheme": e["scheme"], "group": g, "certainty": "sure" if p >= 0.9 else "maybe", "status": "proposed",
-                                   "note": NOTE + e["name"], "machine": 1, "score": round(p, 3), "angle": ang, "flip": fl, "by": "машина", "refined": 3})
+                                   "note": NOTE + e["name"] + sh, "machine": 1, "score": round(p, 3), "angle": ang, "flip": fl, "by": "машина", "refined": 3,
+                                   "box0": [round(v, 5) for v in b]})
                     n += add_marks(rid, ms)
                 state["found"] += n; state["done"] += 1
                 ev_ = ev.get(cfg) or {}
-                rep.append(f"{e['name']}: {n}" + (f" (самопроверка: рамки совпали в {round(100 * ev_['recall'])} %)" if ev_ else ""))
+                rep.append(f"{e['name']}{sh}: {n}" + (f" (самопроверка: рамки совпали в {round(100 * ev_['recall'])} %)" if ev_ else ""))
             state["last"] = "; ".join(rep) or "нечего искать — нужно ≥ 3 проверенных образца элемента"
             state["finished"] = time.strftime("%Y-%m-%d %H:%M")
             if on_done: on_done(f"найдено {state['found']} мест ({state['last'][:300]})")

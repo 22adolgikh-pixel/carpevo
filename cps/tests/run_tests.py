@@ -1052,7 +1052,9 @@ def t30_sam_contour(pg, ctx):
     assert ok, 'segment без SAM должен отвечать 400'
     pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(1000)
     pg.evaluate("rugOpen('vam_2')"); pg.wait_for_selector('#rgTMagic', timeout=10000); pg.wait_for_timeout(800)
-    assert pg.evaluate("document.querySelectorAll('#rgSvg polygon').length") >= 1, 'контур не нарисован'
+    assert pg.evaluate("document.querySelectorAll('#rgSvg polygon').length") == 0, 'контур невыбранной рамки рисуется (каша)'
+    pg.evaluate("rugSelect(R.rug.marks.find(m=>m.id==='samt'))"); pg.wait_for_timeout(200)
+    assert pg.evaluate("document.querySelectorAll('#rgSvg polygon').length") == 1, 'контур выбранной рамки не нарисован'
     pg.keyboard.press('m'); pg.wait_for_timeout(200)
     assert pg.evaluate("R.tool") == 'magic' and pg.evaluate("$('rgTMagic').classList.contains('on')"), 'M не включил инструмент «контур»'
     pg.keyboard.press('b'); pg.wait_for_timeout(200)
@@ -1061,6 +1063,30 @@ def t30_sam_contour(pg, ctx):
     m = next(m for m in get(u + 'api/rugs/vam_2')['marks'] if m['id'] == 'samt')
     assert m.get('poly') == poly, 'студия потеряла контур при сохранении'
     post(u + 'api/rugs/vam_2', {'marks': keep})
+
+
+@test
+def t31_etalon_shapes_v1129(pg, ctx):
+    """v11.29: образцы одного названия разной формы — делятся на формы; чужую форму можно переименовать вместе с повторами"""
+    u = ctx['url']
+    sq = lambda x, y: [x, y, 0.12, 0.12]
+    bar = lambda x, y: [x, y, 0.4, 0.04]
+    saved = {}
+    for i, rid in enumerate(('vam_0', 'vam_1', 'vam_3')):
+        r = get(u + f'api/rugs/{rid}'); saved[rid] = r['marks']
+        ms = [m for m in r['marks'] if not m['id'].startswith('fs')]
+        ms += [{'id': f'fsq{i}', 'box': sq(0.1, 0.1), 'zone': 'field', 'status': 'confirmed', 'motif_text': 'форма-тест'},
+               {'id': f'fsb{i}', 'box': bar(0.3, 0.6), 'zone': 'field', 'status': 'confirmed', 'motif_text': 'форма-тест', 'group': f'fsb{i}'},
+               {'id': f'fsr{i}', 'box': bar(0.3, 0.8), 'zone': 'field', 'status': 'proposed', 'motif_text': 'форма-тест', 'group': f'fsb{i}'}]
+        post(u + f'api/rugs/{rid}', {'marks': ms})
+    e = next(x for x in get(u + 'api/etalon')['elements'] if x['key'] == 't:форма-тест')
+    assert len(e['shapes']) == 2 and sorted(len(s) for s in e['shapes']) == [3, 3], f'формы не разделены: {[len(s) for s in e["shapes"]]}'
+    bars = next(s for s in e['shapes'] if s[0]['box'][2] > 0.3)
+    j = post(u + 'api/etalon/relabel', {'items': [{'rid': x['rid'], 'mid': x['mid']} for x in bars], 'name': 'планка-тест'})
+    assert j['n'] == 6, f'переименованы не все рамки формы с повторами: {j}'
+    E = {x['key']: x for x in get(u + 'api/etalon')['elements']}
+    assert len(E['t:форма-тест']['shapes']) == 1 and E['t:планка-тест']['npos'] == 3
+    for rid, ms in saved.items(): post(u + f'api/rugs/{rid}', {'marks': ms})
 
 
 
