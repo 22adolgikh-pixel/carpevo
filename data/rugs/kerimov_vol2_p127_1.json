@@ -2,15 +2,15 @@
  "id": "kerimov_vol2_p127_1",
  "title": "Керимов, т. II (стр. скана 127, печ. 3)",
  "source": "каталог: kerimov_vol2",
- "museum": "",
+ "museum": "Национальный музей азербайджанского ковра",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
+ "date": "XIX c",
+ "school": "guba-shirvan",
+ "composition": "quba",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -85,7 +85,13 @@
    "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_de088aa11d": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792312633
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "layout": null,
  "updated_by": "dolgikh",
@@ -107,5 +113,12 @@
    "at": 1792286538,
    "ver": 2
   }
+ },
+ "from_twin": {
+  "school": "cm_de088aa11d",
+  "composition": "cm_de088aa11d",
+  "technique": "cm_de088aa11d",
+  "museum": "cm_de088aa11d",
+  "date": "cm_de088aa11d"
  }
 }
