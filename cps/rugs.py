@@ -647,6 +647,9 @@ def install(app, DATA, D_WORK):
                     if keep["variant"] not in ("", "color", "detail"): keep["variant"] = ""
                     if keep["motif"] and keep["motif"] not in BYID: keep["motif_text"] = keep["motif_text"] or keep["motif"]; keep["motif"] = ""
                     o = old.get(mid, {})
+                    try: poly = [[round(max(0.0, min(1.0, float(p[0]))), 5), round(max(0.0, min(1.0, float(p[1]))), 5)] for p in (m.get("poly") or [])[:600]]
+                    except Exception: poly = []
+                    if len(poly) >= 3: keep["poly"] = poly          # v11.28: контур SAM
                     nm = {"id": mid, "box": [round(v, 5) for v in box], **keep,
                           "by": o.get("by") or (("машина → " + who) if keep.get("machine") else who), "at": o.get("at") or now,
                           "confirmed_by": o.get("confirmed_by", ""), "confirmed_at": o.get("confirmed_at", 0)}
@@ -718,7 +721,32 @@ def install(app, DATA, D_WORK):
     def et_names():
         return {d["id"]: d["az"] for d in DICT}
 
+    # ---- v11.28: SAM — контур элемента целиком (sam_seg) ----
+    import sam_seg
+    sam_seg.configure(DATA)
+
+    def _sam_prefetch():
+        try:
+            if sam_seg.available(): sam_seg._weights()
+        except Exception as e: print("sam: веса не скачались:", e)
+    threading.Thread(target=_sam_prefetch, daemon=True).start()
+
+    def sam_fix(rid, ms):
+        """рамки машинных находок → контур SAM (рамка по контуру + poly). Без torch/весов — молча оставляет как есть"""
+        if not ms or not sam_seg.available(): return 0
+        img = et_img(rid)
+        if img is None: return 0
+        n = 0
+        for m in ms:
+            try: c = sam_seg.refine_box(rid, img, m["box"])
+            except Exception as e:
+                print("sam:", e); return n
+            m["refined"] = 4
+            if c: m["box"], m["poly"] = c["box"], c["poly"]; m["sam"] = c["score"]; n += 1
+        return n
+
     def et_add(rid, ms):
+        sam_fix(rid, ms)
         with _lock:
             r = load(rid)
             if not r: return 0
@@ -778,27 +806,35 @@ def install(app, DATA, D_WORK):
 
     @app.post("/api/etalon/refine")
     def api_etalon_refine(body: dict = Body(default={})):
-        """уточнить по пикселям рамки уже найденных (ждущих проверки) находок — для находок до v11.25"""
+        """уточнить рамки уже найденных (ждущих проверки) находок: контур SAM (v11.28), без torch — шаблоном по пикселям"""
+        use_sam = sam_seg.available() and not body.get("no_sam")
         def work():
             A = _all_rugs(); E = ET.elements(A, et_names()); li = lambda rid: read_small(img_path(rid), 1400) if img_path(rid) else None
             T = {}; n = 0
             for rid, r0 in A.items():
-                todo = [m for m in r0.get("marks") or [] if m.get("status") == "proposed" and str(m.get("note") or "").startswith(ET.NOTE) and (m.get("refined") or 0) < 3]
+                lim = 4 if use_sam else 3
+                todo = [m for m in r0.get("marks") or [] if m.get("status") == "proposed" and str(m.get("note") or "").startswith(ET.NOTE) and (m.get("refined") or 0) < lim]
                 if not todo: continue
-                img = li(rid)
-                if img is None: continue
                 upd = {}
-                for m in todo:
-                    k = ET.key_of(m)
-                    if k not in T: T[k] = ET.templates(E[k], li) if k in E else []
-                    rf = ET.refine(img, T[k], m["box"]) if T[k] else None
-                    upd[m["id"]] = rf
+                if use_sam:
+                    cp = [dict(m) for m in todo]; sam_fix(rid, cp)
+                    upd = {m["id"]: m for m in cp}
+                else:
+                    img = li(rid)
+                    if img is None: continue
+                    for m in todo:
+                        k = ET.key_of(m)
+                        if k not in T: T[k] = ET.templates(E[k], li) if k in E else []
+                        rf = ET.refine(img, T[k], m["box"]) if T[k] else None
+                        upd[m["id"]] = dict(m, refined=3, **({"box": rf[0], "angle": rf[1], "flip": rf[2]} if rf else {}))
                 with _lock:
                     r = load(rid)
                     for m in r.get("marks") or []:
-                        if m["id"] in upd:
-                            rf = upd[m["id"]]; m["refined"] = 3
-                            if rf: m["box"], m["angle"], m["flip"] = rf[0], rf[1], rf[2]; n += 1
+                        u = upd.get(m["id"])
+                        if not u: continue
+                        if u.get("box") != m.get("box"): n += 1
+                        for f in ("box", "angle", "flip", "poly", "sam", "refined"):
+                            if f in u: m[f] = u[f]
                     save(r)
             _ty["t"] = 0
             return {"ok": True, "refined": n}
@@ -931,6 +967,27 @@ def install(app, DATA, D_WORK):
                     n += 1
                 if n: r["updated"] = t0; save(r); made += n; rugs_n += 1
         return {"ok": True, "marks": made, "rugs": rugs_n}
+
+    @app.post("/api/rugs/{rid}/segment")
+    async def api_rug_segment(rid: str, body: dict = Body(default={})):
+        """v11.28: контур элемента (SAM). points=[[x,y,1|0],…] и/или box=[x,y,w,h] в долях фото → 3 варианта
+        {poly, box, area, score} от меньшего к большему и pick — номер подходящего"""
+        if not sam_seg.available(): return JSONResponse({"error": "SAM недоступен: нет torch"}, 400)
+        pts = [tuple(p) for p in body.get("points") or []]; box = body.get("box")
+        if not pts and not box: return JSONResponse({"error": "нужна точка или рамка"}, 400)
+        if not img_path(rid): return JSONResponse({"error": "нет фото"}, 404)
+        def work():
+            img = et_img(rid)
+            if box and body.get("grow"):
+                c = sam_seg.refine_box(rid, img, box)
+                return {"cands": [c] if c else [], "pick": 0}
+            cs = sam_seg.segment(rid, img, points=pts or None, box=box)
+            if box: pick = cs.index(sam_seg.best_for_box(cs, box)) if cs else 0
+            else:      # клик: самый уверенный из вариантов не крупнее трети фото (крупнее — это поле/фон)
+                ok = [i for i, c in enumerate(cs) if c["area"] < 0.33] or list(range(len(cs)))
+                pick = max(ok, key=lambda i: cs[i]["score"]) if cs else 0
+            return {"cands": cs, "pick": pick}
+        return await job_wait(work, "контур (SAM)")
 
     @app.post("/api/rugs/{rid}/friezes")
     async def api_rug_friezes(rid: str):

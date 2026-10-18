@@ -1037,13 +1037,40 @@ def t29_etalon_v1124(pg, ctx):
     pg.click('#etBack'); pg.wait_for_timeout(300); errors_ok(ctx, 't29')
 
 
+@test
+def t30_sam_contour(pg, ctx):
+    """v11.28: контур элемента (SAM) — рамка хранит poly, инструмент «контур» есть в студии; без torch сервер честно отвечает 400"""
+    u = ctx['url']
+    r = get(u + 'api/rugs/vam_2')
+    poly = [[0.1, 0.1], [0.3, 0.12], [0.28, 0.3], [0.12, 0.28]]
+    keep = [m for m in r['marks'] if m['id'] != 'samt']
+    post(u + 'api/rugs/vam_2', {'marks': keep + [{'id': 'samt', 'box': [0.1, 0.1, 0.2, 0.2], 'zone': 'field', 'status': 'proposed', 'motif_text': 'контур', 'poly': poly}]})
+    m = next(m for m in get(u + 'api/rugs/vam_2')['marks'] if m['id'] == 'samt')
+    assert m.get('poly') == poly, f'контур не сохранился: {m}'
+    try: post(u + 'api/rugs/vam_2/segment', {'points': [[0.2, 0.2, 1]]}); ok = True
+    except Exception as e: ok = '400' in str(e)
+    assert ok, 'segment без SAM должен отвечать 400'
+    pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(1000)
+    pg.evaluate("rugOpen('vam_2')"); pg.wait_for_selector('#rgTMagic', timeout=10000); pg.wait_for_timeout(800)
+    assert pg.evaluate("document.querySelectorAll('#rgSvg polygon').length") >= 1, 'контур не нарисован'
+    pg.keyboard.press('m'); pg.wait_for_timeout(200)
+    assert pg.evaluate("R.tool") == 'magic' and pg.evaluate("$('rgTMagic').classList.contains('on')"), 'M не включил инструмент «контур»'
+    pg.keyboard.press('b'); pg.wait_for_timeout(200)
+    # сохранение из студии не теряет контур
+    pg.evaluate("R.sel=R.rug.marks.find(m=>m.id==='samt');rugSaveNow()"); pg.wait_for_timeout(800)
+    m = next(m for m in get(u + 'api/rugs/vam_2')['marks'] if m['id'] == 'samt')
+    assert m.get('poly') == poly, 'студия потеряла контур при сохранении'
+    post(u + 'api/rugs/vam_2', {'marks': keep})
+
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
     shutil.copytree(CPS, app, ignore=shutil.ignore_patterns('tests', '__pycache__', '*.pyc', 'rug_lib', 'rug_img', 'rugs', 'rug_thumbs'))
     make_rugs(os.path.join(app, 'data')); make_color_fig(os.path.join(app, 'data')); make_crops(os.path.join(app, 'data')); make_auto_sheet(os.path.join(app, 'data'))
     port = free_port(); url = f'http://127.0.0.1:{port}/'
-    env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': '', 'CPS_NO_SCHED': '1', 'CPS_MOTIF_FAKE': '1'}   # CPS_NO_SCHED: автоматические задачи не запускаются сами
+    env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': '', 'CPS_NO_SCHED': '1', 'CPS_MOTIF_FAKE': '1', 'CPS_SAM': '0'}   # CPS_NO_SCHED: автоматические задачи не запускаются сами
     log = open(os.path.join(OUT, 'server.log'), 'w')
     srv = subprocess.Popen([sys.executable, '-m', 'uvicorn', 'backend:app', '--port', str(port)], cwd=app, env=env, stdout=log, stderr=subprocess.STDOUT)
     ok = fail = 0
