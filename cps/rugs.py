@@ -731,7 +731,7 @@ def install(app, DATA, D_WORK):
             return n
 
     def et_run(keys=None, on_done=None):
-        return ET.run(keys, _all_rugs, et_add, heavy, et_names(), on_done)
+        return ET.run(keys, _all_rugs, et_add, heavy, et_names(), on_done, load_img=lambda rid: read_small(img_path(rid), 1400) if img_path(rid) else None)
 
     app.state.etalon_run = et_run
 
@@ -753,6 +753,34 @@ def install(app, DATA, D_WORK):
         if not MS.status().get("indexed"): return JSONResponse({"error": "индекс узоров ещё не построен (События → «Индекс узоров»)"}, 400)
         et_run(body.get("keys") or None)
         return ET.state
+
+    @app.post("/api/etalon/refine")
+    def api_etalon_refine(body: dict = Body(default={})):
+        """уточнить по пикселям рамки уже найденных (ждущих проверки) находок — для находок до v11.25"""
+        def work():
+            A = _all_rugs(); E = ET.elements(A, et_names()); li = lambda rid: read_small(img_path(rid), 1400) if img_path(rid) else None
+            T = {}; n = 0
+            for rid, r0 in A.items():
+                todo = [m for m in r0.get("marks") or [] if m.get("status") == "proposed" and str(m.get("note") or "").startswith(ET.NOTE) and not m.get("refined")]
+                if not todo: continue
+                img = li(rid)
+                if img is None: continue
+                upd = {}
+                for m in todo:
+                    k = ET.key_of(m)
+                    if k not in T: T[k] = ET.templates(E[k], li) if k in E else []
+                    rf = ET.refine(img, T[k], m["box"]) if T[k] else None
+                    upd[m["id"]] = rf
+                with _lock:
+                    r = load(rid)
+                    for m in r.get("marks") or []:
+                        if m["id"] in upd:
+                            rf = upd[m["id"]]; m["refined"] = 1
+                            if rf: m["box"], m["angle"], m["flip"] = rf[0], rf[1], rf[2]; n += 1
+                    save(r)
+            _ty["t"] = 0
+            return {"ok": True, "refined": n}
+        return heavy(work, "эталоны: уточнение рамок")
 
     @app.get("/api/etalon/finds")
     def api_etalon_finds(key: str = "", limit: int = 300):
@@ -1288,14 +1316,21 @@ def install(app, DATA, D_WORK):
         return FileResponse(p, headers={"Cache-Control": "max-age=3600"}) if os.path.exists(p) else Response(status_code=404)
 
     @app.get("/api/rugs/{rid}/crop")
-    def rug_crop(rid: str, b: str = Query(...), s: int = 160):
+    def rug_crop(rid: str, b: str = Query(...), s: int = 160, pad: float = 0.0, mark: int = 0):
+        """вырезка рамки; pad — поля вокруг (доля размера рамки), mark=1 — сама рамка обведена (видно, что вокруг)"""
         p = img_path(os.path.basename(rid)); a = cv2.imread(p) if p else None
         if a is None: return Response(status_code=404)
         try: x, y, w, h = [float(v) for v in b.split(",")]
         except Exception: return Response(status_code=400)
-        H, W = a.shape[:2]; x0, y0 = int(x * W), int(y * H); x1, y1 = max(x0 + 2, int((x + w) * W)), max(y0 + 2, int((y + h) * H))
-        c = a[y0:y1, x0:x1]; k = min(4.0, max(1, s) / max(c.shape[:2]))
+        H, W = a.shape[:2]; pad = max(0.0, min(1.5, pad))
+        bx0, by0, bx1, by1 = int(x * W), int(y * H), max(int(x * W) + 2, int((x + w) * W)), max(int(y * H) + 2, int((y + h) * H))
+        x0, y0 = max(0, int(bx0 - pad * (bx1 - bx0))), max(0, int(by0 - pad * (by1 - by0)))
+        x1, y1 = min(W, int(bx1 + pad * (bx1 - bx0))), min(H, int(by1 + pad * (by1 - by0)))
+        c = a[y0:y1, x0:x1].copy(); k = min(4.0, max(1, s) / max(c.shape[:2]))
         c = cv2.resize(c, None, fx=k, fy=k, interpolation=cv2.INTER_AREA if k < 1 else cv2.INTER_NEAREST)
+        if mark:
+            p0 = (int((bx0 - x0) * k), int((by0 - y0) * k)); p1 = (int((bx1 - x0) * k), int((by1 - y0) * k))
+            cv2.rectangle(c, p0, p1, (0, 0, 0), 4); cv2.rectangle(c, p0, p1, (60, 230, 255), 2)
         return Response(cv2.imencode(".jpg", c, [cv2.IMWRITE_JPEG_QUALITY, 88])[1].tobytes(), media_type="image/jpeg")
 
     # ---------------- v11.4: «где ещё встречается этот узор» — поиск по всем коврам (motif_search.py) ----------------
