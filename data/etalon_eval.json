@@ -81,9 +81,9 @@
   "name": "göl",
   "eval": {},
   "cfg": "C",
-  "npos": 4,
+  "npos": 3,
   "rugs": 2,
-  "at": 1792353269
+  "at": 1792360994
  },
  "m:taya": {
   "name": "taya",
@@ -91,7 +91,7 @@
   "cfg": "C",
   "npos": 4,
   "rugs": 1,
-  "at": 1792353271
+  "at": 1792360993
  },
  "m:deve#1": {
   "name": "dəvə · форма 1",
@@ -139,5 +139,235 @@
   "npos": 22,
   "rugs": 1,
   "at": 1792360861
+ },
+ "m:qeychi#1": {
+  "name": "qeyçi · форма 1",
+  "eval": {
+   "A": {
+    "recall": 0.105,
+    "iou": 0.081,
+    "hits": 6.0,
+    "n": 19
+   },
+   "B": {
+    "recall": 0.105,
+    "iou": 0.081,
+    "hits": 6.0,
+    "n": 19
+   },
+   "C": {
+    "recall": 0.0,
+    "iou": 0.0,
+    "hits": 0.0,
+    "n": 19
+   },
+   "D": {
+    "recall": 0.0,
+    "iou": 0.0,
+    "hits": 0.0,
+    "n": 19
+   },
+   "E": {
+    "recall": 0.053,
+    "iou": 0.059,
+    "hits": 6.0,
+    "n": 19
+   }
+  },
+  "cfg": "A",
+  "npos": 19,
+  "rugs": 4,
+  "at": 1792360903
+ },
+ "m:qeychi#2": {
+  "name": "qeyçi · форма 2",
+  "eval": {},
+  "cfg": "C",
+  "npos": 3,
+  "rugs": 1,
+  "at": 1792360913
+ },
+ "s:t08_f03": {
+  "name": "t08_f03",
+  "eval": {},
+  "cfg": "C",
+  "npos": 8,
+  "rugs": 1,
+  "at": 1792360914
+ },
+ "m:qebir": {
+  "name": "qəbir",
+  "eval": {},
+  "cfg": "C",
+  "npos": 5,
+  "rugs": 1,
+  "at": 1792360969
+ },
+ "m:qabirga": {
+  "name": "qabırğa",
+  "eval": {},
+  "cfg": "C",
+  "npos": 4,
+  "rugs": 1,
+  "at": 1792360970
+ },
+ "m:damga": {
+  "name": "damğa",
+  "eval": {},
+  "cfg": "C",
+  "npos": 3,
+  "rugs": 1,
+  "at": 1792360970
+ },
+ "m:kilim-gulu": {
+  "name": "kilimgülü",
+  "eval": {
+   "A": {
+    "recall": 0.0,
+    "iou": 0.0,
+    "hits": 0.0,
+    "n": 9
+   },
+   "B": {
+    "recall": 0.0,
+    "iou": 0.0,
+    "hits": 0.0,
+    "n": 9
+   },
+   "C": {
+    "recall": 0.0,
+    "iou": 0.0,
+    "hits": 0.0,
+    "n": 9
+   },
+   "D": {
+    "recall": 0.0,
+    "iou": 0.0,
+    "hits": 0.0,
+    "n": 9
+   },
+   "E": {
+    "recall": 0.0,
+    "iou": 0.0,
+    "hits": 0.0,
+    "n": 9
+   }
+  },
+  "cfg": "A",
+  "npos": 9,
+  "rugs": 2,
+  "at": 1792360974
+ },
+ "m:cincilim": {
+  "name": "cincilim",
+  "eval": {},
+  "cfg": "C",
+  "npos": 8,
+  "rugs": 1,
+  "at": 1792360977
+ },
+ "s:t101_f01": {
+  "name": "t101_f01",
+  "eval": {},
+  "cfg": "C",
+  "npos": 28,
+  "rugs": 1,
+  "at": 1792360986
+ },
+ "m:kupe": {
+  "name": "küpə",
+  "eval": {},
+  "cfg": "C",
+  "npos": 4,
+  "rugs": 1,
+  "at": 1792360986
+ },
+ "s:t114_f01": {
+  "name": "t114_f01",
+  "eval": {},
+  "cfg": "C",
+  "npos": 4,
+  "rugs": 1,
+  "at": 1792360987
+ },
+ "m:kise": {
+  "name": "kisə",
+  "eval": {},
+  "cfg": "C",
+  "npos": 16,
+  "rugs": 1,
+  "at": 1792360991
+ },
+ "m:manqal#1": {
+  "name": "manqal · форма 1",
+  "eval": {},
+  "cfg": "C",
+  "npos": 4,
+  "rugs": 1,
+  "at": 1792360992
+ },
+ "m:manqal#2": {
+  "name": "manqal · форма 2",
+  "eval": {},
+  "cfg": "C",
+  "npos": 4,
+  "rugs": 1,
+  "at": 1792360993
+ },
+ "m:qapi-naxishi": {
+  "name": "qapı naxışı",
+  "eval": {},
+  "cfg": "C",
+  "npos": 15,
+  "rugs": 1,
+  "at": 1792360995
+ },
+ "m:alma": {
+  "name": "alma",
+  "eval": {},
+  "cfg": "C",
+  "npos": 8,
+  "rugs": 1,
+  "at": 1792361014
+ },
+ "m:tutuqushu": {
+  "name": "tutuquşu",
+  "eval": {},
+  "cfg": "C",
+  "npos": 6,
+  "rugs": 1,
+  "at": 1792361020
+ },
+ "m:alaqapi": {
+  "name": "alaqapı",
+  "eval": {},
+  "cfg": "C",
+  "npos": 4,
+  "rugs": 1,
+  "at": 1792361021
+ },
+ "m:kishi": {
+  "name": "kişi",
+  "eval": {},
+  "cfg": "C",
+  "npos": 4,
+  "rugs": 1,
+  "at": 1792361022
+ },
+ "m:xercheng": {
+  "name": "xərçəng",
+  "eval": {},
+  "cfg": "C",
+  "npos": 12,
+  "rugs": 1,
+  "at": 1792361022
+ },
+ "t:quyrum": {
+  "name": "Quyrum",
+  "eval": {},
+  "cfg": "C",
+  "npos": 4,
+  "rugs": 1,
+  "at": 1792361023
  }
 }
