@@ -63,24 +63,21 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1792258703
-  },
-  "cm_55cdf91067": {
-   "ok": true,
-   "by": "dolgikh",
-   "at": 1792258775
   }
  },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_40ec040cc6": {
-   "inl": 92,
-   "v": "same",
-   "at": 1792112444
+   "inl": 31,
+   "v": "maybe",
+   "at": 1792285276,
+   "ver": 2
   },
   "cm_55cdf91067": {
-   "inl": 239,
-   "v": "same",
-   "at": 1792112445
+   "inl": 9,
+   "v": "diff",
+   "at": 1792285280,
+   "ver": 2
   }
  },
  "people": {
@@ -88,5 +85,13 @@
   "faces": [],
   "ver": 1,
   "at": 1792261774
+ },
+ "same_ok_revoked": {
+  "cm_55cdf91067": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792258775,
+   "revoked_at": 1792285280
+  }
  }
 }

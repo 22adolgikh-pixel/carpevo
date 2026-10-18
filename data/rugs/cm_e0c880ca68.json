@@ -54,19 +54,14 @@
    "score": 59
   }
  ],
- "same_ok": {
-  "cm_59c0a6ea5e": {
-   "ok": true,
-   "by": "dolgikh",
-   "at": 1792002329
-  }
- },
+ "same_ok": {},
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_59c0a6ea5e": {
-   "inl": 181,
-   "v": "same",
-   "at": 1792001031
+   "inl": 9,
+   "v": "diff",
+   "at": 1792285248,
+   "ver": 2
   }
  },
  "people": {
@@ -74,5 +69,13 @@
   "faces": [],
   "ver": 1,
   "at": 1792261771
+ },
+ "same_ok_revoked": {
+  "cm_59c0a6ea5e": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1792002329,
+   "revoked_at": 1792285248
+  }
  }
 }
