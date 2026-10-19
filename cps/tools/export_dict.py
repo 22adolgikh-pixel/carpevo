@@ -11,12 +11,13 @@ out = []
 for c in C:
     ns = c.get("names") or []
     pick = lambda pred: next((n["v"] for n in ns if pred(n)), "")
-    ru = pick(lambda n: n.get("lang") == "ru" and n.get("kind") != "kerimov_translation")
+    # отклонённые при сверке смыслы и ошибочные прочтения названием не становятся (v11.30: так в студию попали «бута-косичка», «Комната»)
+    ru = pick(lambda n: n.get("lang") == "ru" and n.get("kind") not in ("kerimov_translation", "meaning_rejected", "misreading"))
     tr = pick(lambda n: n.get("kind") == "kerimov_translation") or ((c.get("meaning") or {}).get("ru") or "")
     roles = c.get("roles") or {}
     out.append({"id": c["id"], "type": c["type"], "az": c.get("headword") or c["id"], "ru": ru, "tr": tr[:120],
                 "role": max(roles, key=roles.get) if roles else "", "schools": sorted((c.get("schools") or {}), key=lambda s: -c["schools"][s]),
-                "names": sorted({n["v"] for n in ns if n.get("kind") != "kerimov_translation"} | set(alias.get(c["id"], [])))})
+                "names": sorted({n["v"] for n in ns if n.get("kind") not in ("kerimov_translation", "meaning_rejected")} | set(alias.get(c["id"], [])))})
 out.sort(key=lambda x: (x["type"] != "ornament", x["az"]))
 json.dump({"_about": "из site/model/out/concepts.json (вики-часть), пересобрать: python3 cps/tools/export_dict.py", "items": out},
           open(f"{ROOT}/cps/models/dictionary.json", "w", encoding="utf-8"), ensure_ascii=False, indent=0)
