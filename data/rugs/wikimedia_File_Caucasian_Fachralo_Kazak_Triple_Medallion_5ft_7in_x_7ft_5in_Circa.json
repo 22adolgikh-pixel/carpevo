@@ -303,18 +303,12 @@
    "certainty": "maybe",
    "status": "proposed",
    "note": "эталон: Quyrum",
-   "machine": 1,
-   "score": 0.707,
    "angle": 270,
    "flip": 1,
-   "by": "машина",
-   "refined": 4,
-   "box0": [
-    0.61702,
-    0.82132,
-    0.05106,
-    0.03762
-   ],
+   "machine": 1,
+   "score": 0.707,
+   "xfer": "",
+   "variant": "",
    "poly": [
     [
      0.61671,
@@ -365,11 +359,76 @@
      0.82715
     ]
    ],
+   "by": "машина",
+   "at": 1792393741,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "box0": [
+    0.61702,
+    0.82132,
+    0.05106,
+    0.03762
+   ],
+   "refined": 4,
    "sam": 0.952
+  },
+  {
+   "id": "mmvewye70",
+   "box": [
+    0.45966,
+    0.27388,
+    0.08664,
+    0.05664
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1792393741,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "mmvex0cxr",
+   "box": [
+    0.34595,
+    0.40871,
+    0.31947,
+    0.23296
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1792393833,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791736125,
- "updated": 1792361030,
+ "updated": 1792393834,
  "cat": {
   "title": "Caucasian Fachralo Kazak 'Triple Medallion'. 5ft 7in x 7ft 5in, Circa 1825.jpg",
   "museum": "Wikimedia Commons",
