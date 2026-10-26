@@ -1,14 +1,10 @@
 {
- "noticed": "2026-10-26 13:03:38",
+ "noticed": "2026-10-26 13:04:18",
  "prev": {
-  "started": "2026-10-26 12:53:21",
+  "started": "2026-10-26 13:03:38",
   "pid": 7
  },
  "mem_tail": [
-  "2026-10-26 12:32:15 rss=2173MB avail=4034/11925MB limit=0MB heavy=подсказка по форме wait=1",
-  "2026-10-26 12:32:25 rss=3911MB avail=2280/11925MB limit=0MB heavy=подсказка по форме wait=1",
-  "2026-10-26 12:32:35 rss=5883MB avail=252/11925MB limit=0MB heavy=подсказка по форме wait=1",
-  "2026-10-26 12:32:45 rss=6089MB avail=102/11925MB limit=0MB heavy=подсказка по форме wait=1",
   "2026-10-26 12:37:15 rss=115MB avail=5785/11925MB limit=0MB heavy=- wait=0",
   "2026-10-26 12:37:25 rss=964MB avail=5057/11925MB limit=0MB heavy=- wait=0",
   "2026-10-26 12:37:35 rss=4544MB avail=1599/11925MB limit=0MB heavy=- wait=0",
@@ -34,7 +30,11 @@
   "2026-10-26 12:54:08 rss=6054MB avail=67/11925MB limit=0MB heavy=- wait=0",
   "2026-10-26 12:54:20 rss=6068MB avail=73/11925MB limit=0MB heavy=- wait=0",
   "2026-10-26 12:54:32 rss=6074MB avail=70/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-10-26 12:56:39 rss=6079MB avail=66/11925MB limit=0MB heavy=одинаковые снимки wait=0"
+  "2026-10-26 12:56:39 rss=6079MB avail=66/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-10-26 13:03:38 rss=116MB avail=5738/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-26 13:03:48 rss=889MB avail=5166/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-26 13:03:58 rss=3987MB avail=2114/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-26 13:04:08 rss=5952MB avail=84/11925MB limit=0MB heavy=- wait=0"
  ],
  "faults_tail": ""
 }
