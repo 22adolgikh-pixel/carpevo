@@ -1,17 +1,10 @@
 {
- "noticed": "2026-10-26 12:37:15",
+ "noticed": "2026-10-26 12:42:34",
  "prev": {
-  "started": "2026-10-19 07:18:51",
-  "pid": 8
+  "started": "2026-10-26 12:37:15",
+  "pid": 6
  },
  "mem_tail": [
-  "2026-10-26 12:27:55 rss=1818MB avail=4325/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-26 12:28:05 rss=1818MB avail=4343/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-26 12:28:15 rss=1818MB avail=4330/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-26 12:28:25 rss=1818MB avail=4314/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-26 12:28:35 rss=1818MB avail=4329/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-26 12:28:45 rss=1818MB avail=4323/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-26 12:28:55 rss=1818MB avail=4333/11925MB limit=0MB heavy=- wait=0",
   "2026-10-26 12:29:05 rss=1818MB avail=4353/11925MB limit=0MB heavy=- wait=0",
   "2026-10-26 12:29:15 rss=1818MB avail=4329/11925MB limit=0MB heavy=- wait=0",
   "2026-10-26 12:29:25 rss=1818MB avail=4332/11925MB limit=0MB heavy=- wait=0",
@@ -34,7 +27,14 @@
   "2026-10-26 12:32:15 rss=2173MB avail=4034/11925MB limit=0MB heavy=подсказка по форме wait=1",
   "2026-10-26 12:32:25 rss=3911MB avail=2280/11925MB limit=0MB heavy=подсказка по форме wait=1",
   "2026-10-26 12:32:35 rss=5883MB avail=252/11925MB limit=0MB heavy=подсказка по форме wait=1",
-  "2026-10-26 12:32:45 rss=6089MB avail=102/11925MB limit=0MB heavy=подсказка по форме wait=1"
+  "2026-10-26 12:32:45 rss=6089MB avail=102/11925MB limit=0MB heavy=подсказка по форме wait=1",
+  "2026-10-26 12:37:15 rss=115MB avail=5785/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-26 12:37:25 rss=964MB avail=5057/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-26 12:37:35 rss=4544MB avail=1599/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-26 12:37:45 rss=6072MB avail=83/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-26 12:38:02 rss=6083MB avail=67/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-26 12:38:21 rss=6093MB avail=72/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-26 12:38:34 rss=6098MB avail=69/11925MB limit=0MB heavy=одинаковые снимки wait=0"
  ],
  "faults_tail": ""
 }
