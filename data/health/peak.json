@@ -1,10 +1,10 @@
 {
- "at": "2026-10-29 18:07:33",
- "rss_mb": 3595,
- "avail_mb": 3700,
+ "at": "2026-10-29 18:07:43",
+ "rss_mb": 5882,
+ "avail_mb": 1429,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 20,
+ "up_s": 30,
  "threads": [
   "MainThread",
   "Thread-2 (<lambda>)",
@@ -16,7 +16,6 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-10-29 18:05:15 rss=6216MB avail=1033/11925MB limit=0MB heavy=- wait=0",
   "2026-10-29 18:05:25 rss=6216MB avail=1025/11925MB limit=0MB heavy=- wait=0",
   "2026-10-29 18:05:35 rss=6216MB avail=1036/11925MB limit=0MB heavy=- wait=0",
   "2026-10-29 18:05:45 rss=6216MB avail=1090/11925MB limit=0MB heavy=- wait=0",
@@ -30,6 +29,7 @@
   "2026-10-29 18:07:05 rss=6216MB avail=993/11925MB limit=0MB heavy=- wait=0",
   "2026-10-29 18:07:13 rss=190MB avail=7024/11925MB limit=0MB heavy=- wait=0",
   "2026-10-29 18:07:23 rss=1132MB avail=6107/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-29 18:07:33 rss=3595MB avail=3700/11925MB limit=0MB heavy=- wait=0"
+  "2026-10-29 18:07:33 rss=3595MB avail=3700/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-29 18:07:43 rss=5882MB avail=1429/11925MB limit=0MB heavy=- wait=0"
  ]
 }
