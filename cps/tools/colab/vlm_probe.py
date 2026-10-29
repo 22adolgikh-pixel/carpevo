@@ -23,11 +23,14 @@ if not os.path.isdir(DATA + '/data'):
 D = DATA + '/data'
 N = int(os.environ.get('VP_N', 120)); K = int(os.environ.get('VP_K', 8)); SEED = int(os.environ.get('VP_SEED', 1))
 MODELS = [m.strip() for m in os.environ.get('VP_MODELS', 'qwen/qwen2.5-vl-72b-instruct:free').split(',') if m.strip()]
-try:
-    from google.colab import userdata; KEY = userdata.get('OPENROUTER_API_KEY')
-except Exception:
-    KEY = os.environ.get('OPENROUTER_API_KEY', '')
-assert KEY, 'нет ключа: Секреты Colab → OPENROUTER_API_KEY'
+EXPORT = os.environ.get('VP_EXPORT', '') == '1'   # 1 = не спрашивать модели, а сложить вопросы в zip (для проверки внутри Claude)
+KEY = ''
+if not EXPORT:
+    try:
+        from google.colab import userdata; KEY = userdata.get('OPENROUTER_API_KEY')
+    except Exception:
+        KEY = os.environ.get('OPENROUTER_API_KEY', '')
+    assert KEY, 'нет ключа: Секреты Colab → OPENROUTER_API_KEY'
 
 # ---------- правда: подтверждённые рамки со схемой ----------
 works = {os.path.splitext(f)[0] for f in os.listdir(D + '/work')}
@@ -120,6 +123,17 @@ for m in pick:
 print('вопросов:', len(sel), 'схем в выборке:', len(cnt))
 OUT = '/content/drive/MyDrive/carpet-dna/vlm_probe' if os.path.isdir('/content/drive/MyDrive') else W
 os.makedirs(OUT, exist_ok=True)
+if EXPORT:
+    zp = f'{OUT}/probe_questions.zip'; key = []
+    with zipfile.ZipFile(zp, 'w', zipfile.ZIP_DEFLATED) as z:
+        for i, m in enumerate(sel):
+            others = [s for s in allsch if s != m['scheme']]; r2 = random.Random(SEED * 1000 + i); opts = r2.sample(others, min(K - 1, len(others))) + [m['scheme']]; r2.shuffle(opts)
+            b = io.BytesIO(); crop(m).save(b, 'JPEG', quality=88); z.writestr(f'q{i:03d}_photo.jpg', b.getvalue())
+            b = io.BytesIO(); panel(opts).save(b, 'PNG'); z.writestr(f'q{i:03d}_schemes.png', b.getvalue())
+            key.append(dict(q=i, rug=m['rug'], scheme=m['scheme'], truth='ABCDEFGHIJKLMNOP'[opts.index(m['scheme'])], opts=opts))
+        z.writestr('answer_key.json', json.dumps(key, ensure_ascii=False, indent=1))
+    print(f'Готово: {zp} ({os.path.getsize(zp) / 1e6:.1f} МБ, вопросов {len(key)}). Скачайте его с Диска и приложите в чат Claude.')
+    MODELS = []
 for model in MODELS:
     log = []; ok = ok2 = bad = 0; per = collections.defaultdict(lambda: [0, 0]); t0 = time.time()
     for i, m in enumerate(sel):
