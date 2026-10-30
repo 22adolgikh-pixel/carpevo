@@ -103,7 +103,7 @@ PROMPT = ('Первое изображение — фото азербайджа
           f'элементов узора (1…{len(cands)}; каждая клетка = один узел). Определи, какие из этих элементов ЕСТЬ на ковре (фото может быть повёрнуто, цвета другие, ворс сглаживает форму). '
           'Не называй элемент, если не уверен: лишние ответы хуже пропусков. Для каждого найденного дай номер схемы, уверенность 0..1 и рамки [x,y,w,h] в процентах фото, по одной на каждое место, где он виден (до 6). '
           'Если это не ковёр или узор не разобрать, верни пустой список. Ответь только JSON: {"found":[{"n":<номер>,"conf":<0..1>,"boxes":[[x,y,w,h],...]}]}')
-cost = [0.0]; lock = threading.Lock()
+cost = [0.0]; lock = threading.Lock(); ERR = [0]; NOPHOTO = [0]
 def ask(im):
     content = [dict(type='text', text=PROMPT), dict(type='image_url', image_url=dict(url=b64(im)))] + [dict(type='image_url', image_url=dict(url=u)) for u in PANELS]
     body = dict(model=MODEL, temperature=0, max_tokens=900, usage=dict(include=True), messages=[dict(role='user', content=content)])
@@ -116,6 +116,15 @@ def ask(im):
             s = out['choices'][0]['message']['content']; j = re.search(r'\{.*\}', s, re.S)
             return (json.loads(j.group(0)) if j else {'found': []}), u, c
         except Exception as e:
+            msg = str(e)
+            if hasattr(e, 'read'):
+                try: msg += ' | ' + e.read().decode('utf-8', 'replace')[:400]
+                except Exception: pass
+            with lock:
+                if ERR[0] < 4: print('ОШИБКА ЗАПРОСА:', msg, flush=True)
+                ERR[0] += 1
+            code = getattr(e, 'code', 0)
+            if code in (400, 401, 402, 403, 404): break      # повтор не поможет
             time.sleep(6 * (t + 1))
     return None, {}, 0
 
@@ -124,21 +133,23 @@ if os.path.exists(fn): done = {json.loads(l)['rug'] for l in open(fn) if l.strip
 todo = [r for r in sorted(rugs, key=lambda r: (r not in marked if os.environ.get('VC_PRIOR') == '1' else 0, r)) if r not in done]
 if LIMIT: todo = todo[:LIMIT]
 print(f'модель {MODEL}: уже сделано {len(done)}, в очереди {len(todo)}, бюджет ${MAX_USD}')
-fout = open(fn, 'a', encoding='utf-8'); t0 = time.time(); nbad = [0]
+fout = open(fn, 'a', encoding='utf-8'); t0 = time.time(); nbad = [0]; nok = [0]
 def work(rid):
-    if cost[0] >= MAX_USD: return
+    if cost[0] >= MAX_USD or (ERR[0] >= 8 and nok[0] == 0): return
     im = photo(rid)
-    if im is None: return
+    if im is None: NOPHOTO[0] += 1; return
     res, u, c = ask(im)
     if res is None: nbad[0] += 1; return
     found = [dict(sid=cands[int(f['n']) - 1], conf=f.get('conf'), boxes=f.get('boxes') or []) for f in res.get('found', []) if str(f.get('n', '')).isdigit() and 1 <= int(f['n']) <= len(cands)]
     with lock:
+        nok[0] += 1
         fout.write(json.dumps(dict(rug=rid, found=found, tokens=[u.get('prompt_tokens'), u.get('completion_tokens')], usd=round(c, 5)), ensure_ascii=False) + '\n'); fout.flush()
 with ThreadPoolExecutor(THREADS) as ex:
     for i, _ in enumerate(ex.map(work, todo)):
         if (i + 1) % 25 == 0: print(f'{i + 1}/{len(todo)}  потрачено ${cost[0]:.3f}  ({time.time() - t0:.0f} с)', flush=True)
 rows = [json.loads(l) for l in open(fn) if l.strip()]
 n = max(1, len(rows)); tok = [sum((r['tokens'][k] or 0) for r in rows) for k in (0, 1)]
+print(f'без фото в пакете: {NOPHOTO[0]}')
 print(f'\n=== {MODEL}: ковров обработано {len(rows)}, ошибок запроса {nbad[0]}, потрачено ${cost[0]:.3f} в этой сессии, в среднем ${sum(r["usd"] for r in rows) / n:.5f} на ковёр; токенов на ковёр: вход {tok[0] // n}, выход {tok[1] // n}')
 sch = collections.Counter(f['sid'] for r in rows for f in r['found'])
 print('элементов на ковёр в среднем:', round(sum(len(r['found']) for r in rows) / n, 1), '; чаще всего:', [(s, c) for s, c in sch.most_common(8)])
