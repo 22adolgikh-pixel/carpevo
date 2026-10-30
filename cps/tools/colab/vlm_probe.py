@@ -23,7 +23,7 @@ if not os.path.isdir(DATA + '/data'):
 D = DATA + '/data'
 N = int(os.environ.get('VP_N', 120)); K = int(os.environ.get('VP_K', 8)); SEED = int(os.environ.get('VP_SEED', 1))
 MODELS = [m.strip() for m in os.environ.get('VP_MODELS', 'qwen/qwen2.5-vl-72b-instruct:free').split(',') if m.strip()]
-EXPORT = os.environ.get('VP_EXPORT', '') == '1'   # 1 = не спрашивать модели, а сложить вопросы в zip (для проверки внутри Claude)
+EXPORT = os.environ.get('VP_EXPORT', '') == '1' or os.environ.get('VP_FULL', '') == '1'   # 1 = не спрашивать модели, а сложить вопросы в zip (для проверки внутри Claude)
 KEY = ''
 if not EXPORT:
     try:
@@ -123,6 +123,16 @@ for m in pick:
 print('вопросов:', len(sel), 'схем в выборке:', len(cnt))
 OUT = '/content/drive/MyDrive/carpet-dna/vlm_probe' if os.path.isdir('/content/drive/MyDrive') else W
 os.makedirs(OUT, exist_ok=True)
+if os.environ.get('VP_FULL', '') == '1':   # целые ковры (≤1600 px) + ✓ рамки со схемами — для пробы «найди элемент без рамки»
+    zp = f'{OUT}/probe_full.zip'; key = {}
+    for m in marks: key.setdefault(m['rug'], []).append(dict(box=m['box'], scheme=m['scheme']))
+    with zipfile.ZipFile(zp, 'w', zipfile.ZIP_DEFLATED) as z:
+        for i, rid in enumerate(sorted(key)):
+            im = Image.open(f'{IMG}/{rid}.jpg').convert('RGB'); im.thumbnail((1600, 1600))
+            b = io.BytesIO(); im.save(b, 'JPEG', quality=88); z.writestr(f'rug{i:02d}.jpg', b.getvalue()); key[rid] = dict(file=f'rug{i:02d}.jpg', size=im.size, marks=key[rid])
+        z.writestr('full_key.json', json.dumps(key, ensure_ascii=False, indent=1))
+    print(f'Готово: {zp} ({os.path.getsize(zp) / 1e6:.1f} МБ, ковров {len(key)})')
+    MODELS = []; EXPORT = False
 if EXPORT:
     zp = f'{OUT}/probe_questions.zip'; key = []
     with zipfile.ZipFile(zp, 'w', zipfile.ZIP_DEFLATED) as z:
