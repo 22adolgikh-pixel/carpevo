@@ -1,13 +1,12 @@
 {
- "at": "2026-10-30 21:26:49",
- "rss_mb": 3411,
- "avail_mb": 3827,
- "heavy": "",
+ "at": "2026-10-30 21:27:49",
+ "rss_mb": 6379,
+ "avail_mb": 830,
+ "heavy": "листы: повторные кадры",
  "ui_heavy": "",
- "up_s": 30,
+ "up_s": 90,
  "threads": [
   "MainThread",
-  "Thread-2 (<lambda>)",
   "Thread-3 (_dedupe_bg)",
   "Thread-4 (<lambda>)",
   "Thread-6 (loop)",
@@ -16,12 +15,6 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-10-30 21:24:22 rss=6215MB avail=1014/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 21:24:32 rss=6215MB avail=985/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 21:24:42 rss=6215MB avail=1050/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 21:24:52 rss=6215MB avail=1039/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 21:25:02 rss=6215MB avail=971/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 21:25:12 rss=6215MB avail=986/11925MB limit=0MB heavy=- wait=0",
   "2026-10-30 21:25:22 rss=6215MB avail=990/11925MB limit=0MB heavy=- wait=0",
   "2026-10-30 21:25:32 rss=6215MB avail=1001/11925MB limit=0MB heavy=- wait=0",
   "2026-10-30 21:25:42 rss=6215MB avail=985/11925MB limit=0MB heavy=- wait=0",
@@ -30,6 +23,12 @@
   "2026-10-30 21:26:19 rss=190MB avail=7009/11925MB limit=0MB heavy=- wait=0",
   "2026-10-30 21:26:29 rss=612MB avail=6615/11925MB limit=0MB heavy=- wait=0",
   "2026-10-30 21:26:39 rss=2065MB avail=5110/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 21:26:49 rss=3411MB avail=3827/11925MB limit=0MB heavy=- wait=0"
+  "2026-10-30 21:26:49 rss=3411MB avail=3827/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 21:26:59 rss=5625MB avail=1647/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 21:27:09 rss=6267MB avail=929/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 21:27:19 rss=6267MB avail=922/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 21:27:29 rss=6268MB avail=939/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-10-30 21:27:39 rss=6364MB avail=877/11925MB limit=0MB heavy=листы: повторные кадры wait=0",
+  "2026-10-30 21:27:49 rss=6379MB avail=830/11925MB limit=0MB heavy=листы: повторные кадры wait=0"
  ]
 }
