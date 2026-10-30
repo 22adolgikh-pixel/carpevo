@@ -61,14 +61,30 @@ print('фото ковров:', sum(have(r) for r in need), 'из', len(need))
 marks = [m for m in marks if have(m['rug'])]
 
 # ---------- схема → картинка ----------
+def strip_frame(a):
+    """У части схем (24 из 1084, напр. qapı t40_f03) по периметру нарисована рамка, на ковре её нет:
+    убираем сплошное кольцо и однотонную заливку между ним и узором. Проверено 30.10: qapı 3/7 -> 7/7."""
+    import cv2
+    if a.shape[0] < 8 or a.shape[1] < 8: return a
+    ring = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]])
+    if (ring == 0).any(): return a
+    a = a[1:-1, 1:-1].copy()
+    ring = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]]); col = collections.Counter(ring.tolist()).most_common(1)[0][0]
+    n, lab = cv2.connectedComponents((a == col).astype(np.uint8), connectivity=4)
+    for l in set(lab[0].tolist() + lab[-1].tolist() + lab[:, 0].tolist() + lab[:, -1].tolist()) - {0}: a[lab == l] = 0
+    return a
+
 def scheme_img(sid, px=14):
     w = json.load(open(f'{D}/work/{sid}.json', encoding='utf-8')); mx = w['matrix']; pal = w.get('palette') or ['#ffffff', '#1a1a1a', '#b8b8b8']
-    rows = mx['rows']; h = len(rows); ww = max(len(r) for r in rows); a = np.full((h, ww, 3), 255, np.uint8)
+    rows = mx['rows']; h = len(rows); ww = max(len(r) for r in rows); idx = np.zeros((h, ww), np.uint8)
     for y, row in enumerate(rows):
         for x, ch in enumerate(row):
             if ch in '. ': continue
-            k = int(ch) if ch.isdigit() else 1
-            c = pal[min(k, len(pal) - 1)].lstrip('#'); a[y, x] = [int(c[i:i + 2], 16) for i in (0, 2, 4)]
+            idx[y, x] = int(ch) if ch.isdigit() else 1
+    if os.environ.get('VP_KEEP_FRAME', '') != '1': idx = strip_frame(idx)
+    h, ww = idx.shape; a = np.full((h, ww, 3), 255, np.uint8)
+    for k in range(1, int(idx.max()) + 1):
+        c = pal[min(k, len(pal) - 1)].lstrip('#'); a[idx == k] = [int(c[i:i + 2], 16) for i in (0, 2, 4)]
     s = max(1, min(px, 160 // max(h, ww)))
     return Image.fromarray(a).resize((ww * s, h * s), Image.NEAREST)
 
