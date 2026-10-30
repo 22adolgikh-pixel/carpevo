@@ -1,12 +1,13 @@
 {
- "at": "2026-10-30 09:30:21",
- "rss_mb": 6277,
- "avail_mb": 964,
+ "at": "2026-10-30 10:52:07",
+ "rss_mb": 4049,
+ "avail_mb": 3258,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 50,
+ "up_s": 20,
  "threads": [
   "MainThread",
+  "Thread-2 (<lambda>)",
   "Thread-3 (_dedupe_bg)",
   "Thread-4 (<lambda>)",
   "Thread-6 (loop)",
@@ -15,20 +16,20 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-10-30 09:27:59 rss=6624MB avail=568/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:28:09 rss=6624MB avail=577/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:28:19 rss=6624MB avail=568/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:28:29 rss=6624MB avail=584/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:28:39 rss=6624MB avail=561/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:28:49 rss=6624MB avail=565/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:28:59 rss=6624MB avail=566/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:29:09 rss=6624MB avail=575/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:29:19 rss=6623MB avail=527/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:29:31 rss=191MB avail=7088/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:29:41 rss=402MB avail=6885/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:29:51 rss=1958MB avail=5280/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:30:01 rss=3256MB avail=4028/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:30:11 rss=5389MB avail=1891/11925MB limit=0MB heavy=- wait=0",
-  "2026-10-30 09:30:21 rss=6277MB avail=964/11925MB limit=0MB heavy=- wait=0"
+  "2026-10-30 10:49:42 rss=6317MB avail=1009/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:49:52 rss=6317MB avail=1010/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:50:02 rss=6317MB avail=1025/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:50:12 rss=6317MB avail=1007/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:50:22 rss=6317MB avail=1017/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:50:32 rss=6317MB avail=1028/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:50:42 rss=6317MB avail=1023/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:50:52 rss=6317MB avail=1013/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:51:02 rss=6317MB avail=1003/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:51:12 rss=6317MB avail=1020/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:51:22 rss=6317MB avail=1017/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:51:32 rss=6272MB avail=972/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:51:47 rss=305MB avail=6973/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:51:57 rss=1268MB avail=6022/11925MB limit=0MB heavy=- wait=0",
+  "2026-10-30 10:52:07 rss=4049MB avail=3258/11925MB limit=0MB heavy=- wait=0"
  ]
 }
