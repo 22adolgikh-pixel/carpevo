@@ -8,6 +8,7 @@ import cv2, numpy as np
 from fastapi import FastAPI, UploadFile, File, Body, Query, Request
 from fastapi.responses import FileResponse, JSONResponse, Response
 from az_names import az_draft, site_suggest
+from kerimov_book import book_ref
 import autogrid
 import autocolor
 import rapport
@@ -274,8 +275,10 @@ def api_sheet_save(body: dict = Body(...)):
         if b.get("frame_changed") or "quad" not in work:
             work["quad"] = [[x - x0, y - y0], [x - x0 + w, y - y0], [x - x0 + w, y - y0 + h], [x - x0, y - y0 + h]]
             work.pop("grid", None)
+        bt, bf = book_ref(rel, t, b.get("fig"))     # номер по книге (Керимов т. I: разделители глав, порядок рисунков)
+        if bt is not None and (bt, bf) != (t, b.get("fig")): work["book_table"], work["book_fig"] = bt, bf
         if "meta" not in work:
-            work["meta"] = meta_from_legend(t, b.get("fig"))
+            work["meta"] = meta_from_legend(bt, bf) if bt is not None else {k: "" for k in META_KEYS}
         jsave(wp, work)
         boxes.append({"x": x, "y": y, "w": w, "h": h, "fig": b.get("fig"), "table": b.get("table") or None, "id": fid,
                       "difficulty": norm_diff(b.get("difficulty"))})
@@ -1459,7 +1462,7 @@ def i18n_fields(w, m, sids, site):
     carpet = (m.get("carpet") or "").strip().rstrip(" |")
     c3 = (d.get("carpet") or {}).get(carpet)
     note = (m.get("note") or "").strip(); n3 = (d.get("notes") or {}).get(note)
-    t, f = w.get("table"), w.get("fig")
+    t, f = w.get("book_table") or w.get("table"), w.get("book_fig") or w.get("fig")
     return {"names": {"az": az, "ru": ru, "en": en},
             "carpet_i18n": ({"ru": carpet, "az": c3[0], "en": c3[1]} if c3 else ({"ru": carpet} if carpet else None)),
             "note_i18n": ({"ru": note, **n3} if n3 else ({"ru": note} if note else None)),
@@ -1473,18 +1476,19 @@ def api_bundle(all: int = 0):
     site = {x["id"]: x for x in jload(SITE_INDEX, [])}
     for fn in sorted(os.listdir(D_WORK)):
         w = jload(os.path.join(D_WORK, fn), {}) or {}
-        if not w.get("matrix") or not (w.get("done") or all): continue
+        if not w.get("matrix") or not (w.get("done") or all) or w.get("kerimov_fix") == "drop": continue
         m = with_az(w.get("meta", {}))
         sids = [s.strip() for s in (m.get("site_id") or "").split(",") if s.strip()]
         items.append(i18n_fields(w, m, sids, site))
-        items[-1].update({"id": w["id"], "table": w.get("table"), "fig": w.get("fig"),
+        bt, bf = w.get("book_table") or w.get("table"), w.get("book_fig") or w.get("fig")
+        items[-1].update({"id": w["id"], "table": bt, "fig": bf, "cps_table": w.get("table"), "cps_fig": w.get("fig"),
                       "section": m.get("section", ""),
                       "name": m.get("name_az") or m.get("name", ""),        # основное имя — азербайджанское (латиница)
                       "name_az": m.get("name_az", ""), "name_book": m.get("name", ""),
                       "difficulty": norm_diff(w.get("difficulty")), "colors": len(set("".join(w["matrix"]["rows"])) - {"."}), "translation": m.get("translation", ""),
                       "carpet": m.get("carpet", ""), "type": m.get("type", ""), "note": m.get("note", ""),
                       "site_ids": [s.strip() for s in (m.get("site_id") or "").split(",") if s.strip()],
-                      "source": m.get("source", "") or (f"Табл. {w.get('table')}, рис. {w.get('fig')}" if w.get("table") else ""),
+                      "source": m.get("source", "") or (f"Табл. {bt}, рис. {bf}" if bt else ""),
                       "w": w["matrix"]["w"], "h": w["matrix"]["h"], "rows": w["matrix"]["rows"],
                       "palette": w["palette"], "palette_names": w.get("palette_names", []),
                       "updated": w.get("saved_at", "")})

@@ -4,12 +4,15 @@
 #   merge — слить понятия пункта в primary; separate — снять предложенную связь; related — связь relation (checked_ai);
 #   attach/reattach — схема → target; detach — отвязать; keep — слияние подтверждено; unsure — остаётся в очереди;
 #   set_meaning — заменить значение понятия target на meaning {ru, en} (по легенде/переводу Керимова).
+# --remap REMAP.json — схемы переименованы сверкой номеров (cps/tools/kerimov_fix/remap.json): решение по схеме
+#   переносится на схему с тем же книжным номером, null — решение пропускается.
 # Несколько файлов решений применяются по очереди: python3 apply_decisions.py A.json out && python3 apply_decisions.py B.json out
 # Пишет обратно concepts.json, relations.json, term_map.json, review_queue.csv (+ колонки «решение», «обоснование»), decisions_log.json.
 import json, sys, os, csv, collections as C
 
 
-def main(dec_path, out):
+def main(dec_path, out, remap=None):
+    remap = remap or {}
     L = lambda n: json.load(open(os.path.join(out, n)))
     cs = {c['id']: c for c in L('concepts.json')}
     rel = L('relations.json'); tm = L('term_map.json')
@@ -56,6 +59,9 @@ def main(dec_path, out):
             log['separate'] += 1
         elif k in ('attach', 'reattach', 'detach'):
             for sid in d.get('schemes') or []:
+                if sid in remap:
+                    if not remap[sid]: log['skip_remapped_none'] += 1; continue
+                    sid = remap[sid]
                 for c in cs.values():
                     if sid in (c.get('schemes') or []) and (k != 'attach'): c['schemes'].remove(sid)
                 if k in ('attach', 'reattach') and d.get('target') and res(d['target']) in cs:
@@ -104,4 +110,7 @@ def main(dec_path, out):
 
 
 if __name__ == '__main__':
-    main(*sys.argv[1:3])
+    rm = None
+    if '--remap' in sys.argv:
+        rm = json.load(open(sys.argv[sys.argv.index('--remap') + 1]))
+    main(sys.argv[1], sys.argv[2], rm)
