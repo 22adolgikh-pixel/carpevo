@@ -244,6 +244,30 @@ def t04b_rug_quad(pg, ctx):
     assert any(abs(v - 0.12) < 0.02 for v in bx) and any(abs(v - 60 / 700) < 0.02 for v in by), f'граница кайма/поле не найдена: ix={bx}, iy={by} (ждали ≈0.12 и ≈0.086)'
     assert pg.evaluate("layZoneAt(R.rug.layout,0.5,0.5)") == 'field', 'центр ковра не попадает в поле'
     assert pg.evaluate("layZoneAt(R.rug.layout,0.03,0.03)") is None, 'фон за углом ковра считается ковром'
+    # v11.31: рамка элемента поверх линии каймы не мешает выбрать и удалить линию (кликом, Delete и кнопкой)
+    def line_pt(i):
+        return pg.evaluate(f"""(()=>{{const L=R.rug.layout,b=L.bounds[{i}],[x,y]=layToImg(L,b.ix,0.5),V=document.getElementById('rgView').getBoundingClientRect();
+          return [V.left+R.ox+x*R.iw*R.z, V.top+R.oy+y*R.ih*R.z];}})()""")
+    pg.evaluate("""(()=>{const L=R.rug.layout,b=L.bounds[0],[x,y]=layToImg(L,b.ix,0.5);
+      R.rug.marks.push({id:'mz1',box:[x-0.03,y-0.05,0.06,0.1],zone:'border',motif:'',motif_text:'кайма',scheme:'',group:'',certainty:'sure',status:'proposed',note:'',angle:0,flip:0});rugDraw();})()""")
+    n0 = pg.evaluate("R.rug.layout.bounds.length"); x, y = line_pt(0)
+    pg.mouse.click(x, y); pg.wait_for_timeout(300)
+    assert pg.evaluate("R.layBound") == 0, 'клик по линии каймы под рамкой элемента не выбирает линию'
+    assert pg.evaluate("R.sel") is None, 'в режиме зон клик выбрал рамку элемента вместо линии'
+    pg.keyboard.press('Delete'); pg.wait_for_timeout(300)
+    assert pg.evaluate("R.rug.layout.bounds.length") == n0 - 1, 'Delete не удаляет выбранную линию каймы'
+    assert pg.evaluate("R.rug.layout.rings.length") == n0, 'после удаления линии число полос не сходится'
+    if n0 - 1 >= 1:
+        x, y = line_pt(0); pg.mouse.click(x, y); pg.wait_for_timeout(300)
+        assert pg.is_visible('#rgLayRm'), 'нет кнопки «✕ выбранную линию»'
+        pg.click('#rgLayRm'); pg.wait_for_timeout(300)
+        assert pg.evaluate("R.rug.layout.bounds.length") == n0 - 2, 'кнопка не удаляет линию'
+    pg.evaluate("R.rug.marks=R.rug.marks.filter(m=>m.id!=='mz1');rugSaveSoon()")
+    pg.click('#rgLayAuto'); pg.wait_for_timeout(2500)
+    # перетаскивание линии: типы полос едут вместе с линиями
+    rg0 = pg.evaluate("R.rug.layout.rings.slice()"); x, y = line_pt(0)
+    pg.mouse.move(x, y); pg.mouse.down(); pg.mouse.move(x + 15, y, steps=4); pg.mouse.up(); pg.wait_for_timeout(400)
+    assert pg.evaluate("R.rug.layout.status") == 'edited', 'линия каймы не перетаскивается'
     pg.check('#rgCtl'); pg.wait_for_timeout(1500)
     r = json.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/persp_1'))
     assert r.get('control') is True, 'отметка «контрольный набор» не сохранилась'
