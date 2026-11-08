@@ -937,7 +937,7 @@
   }
  ],
  "created": 1791736122,
- "updated": 1794148462,
+ "updated": 1794155147,
  "cat": {
   "title": "Керимов, т. II (стр. скана 133, печ. 15)",
   "museum": "",
@@ -1024,7 +1024,47 @@
  },
  "_lib_t": "2026-10-12 22:38",
  "updated_by": "dolgikh",
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.00929,
+   0.00093,
+   0.95252,
+   0.99907
+  ],
+  "bounds": [
+   {
+    "ix": 0.13857142857142857,
+    "iy": 0.20638297872340425,
+    "strength": 5.08
+   }
+  ],
+  "rings": [
+   "border",
+   "field"
+  ],
+  "status": "confirmed",
+  "quad": [
+   [
+    0.01774,
+    0.00093
+   ],
+   [
+    0.96181,
+    0.02088
+   ],
+   [
+    0.95803,
+    1.00568
+   ],
+   [
+    0.00929,
+    0.99114
+   ]
+  ],
+  "quad_status": "confirmed",
+  "quad_by": "dolgikh",
+  "by": "dolgikh"
+ },
  "multi": [],
  "from_twin": {
   "museum": "cm_25129c6ea0",
