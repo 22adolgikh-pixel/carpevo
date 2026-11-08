@@ -34,5 +34,5 @@ jobs:
           cd "$1"
           echo "на сервере: $(git log --oneline -1)"
           cd cps/deploy
-          docker compose -f docker-compose.existing-nginx.yml exec -T cps python tools/kerimov_fix/apply_kerimov_fix.py /app/data $2
+          docker compose -f docker-compose.existing-nginx.yml exec -T cps python tools/kerimov_fix/apply_kerimov_fix.py /app/data ${2:-}
           REMOTE
