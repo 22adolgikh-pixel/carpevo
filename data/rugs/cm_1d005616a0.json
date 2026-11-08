@@ -18,7 +18,7 @@
  "h": 1796,
  "marks": [],
  "created": 1791870033,
- "updated": 1792317857,
+ "updated": 1794148616,
  "cat": {
   "title": "Old Guba rug, Guba school, XVIII c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -66,7 +66,7 @@
   "kerimov_vol2_p126_1": {
    "ok": true,
    "by": "dolgikh",
-   "at": 1791737626
+   "at": 1794148584
   },
   "kerimov_vol2_p126_2": {
    "ok": true,
@@ -107,6 +107,37 @@
   "ver": 1,
   "at": 1792261986
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.0021,
+   0.00245,
+   0.9979,
+   0.98755
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0021,
+    0.00245
+   ],
+   [
+    1.00093,
+    0.00605
+   ],
+   [
+    0.99,
+    0.99
+   ],
+   [
+    0.01,
+    0.99
+   ]
+  ],
+  "quad_status": "edited"
+ },
  "updated_by": "dolgikh"
 }
