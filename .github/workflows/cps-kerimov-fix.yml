@@ -34,9 +34,9 @@ jobs:
           cd "$1"
           echo "на сервере: $(git log --oneline -1)"
           cd cps/deploy
-          if [ "${3:-}" = "ops/cps-backup-now" ]; then
+          if [[ " $* " == *" ops/cps-backup-now "* ]]; then
             docker compose -f docker-compose.existing-nginx.yml exec -T cps sh -c 'echo "токен задан: $([ -n "$CPS_GITHUB_TOKEN" ] && echo да || echo нет)"; python -c "import backup; print(backup.backup_once(\"/app\", \"/app/data\", \"вручную\"))"'
           else
-            docker compose -f docker-compose.existing-nginx.yml exec -T cps python tools/kerimov_fix/apply_kerimov_fix.py /app/data ${2:-}
+            docker compose -f docker-compose.existing-nginx.yml exec -T cps python tools/kerimov_fix/apply_kerimov_fix.py /app/data $([[ " $* " == *" --apply "* ]] && echo --apply)
           fi
           REMOTE
