@@ -1,13 +1,12 @@
 {
- "at": "2026-11-08 14:58:40",
- "rss_mb": 3647,
- "avail_mb": 3474,
+ "at": "2026-11-08 14:59:00",
+ "rss_mb": 6285,
+ "avail_mb": 890,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 20,
+ "up_s": 40,
  "threads": [
   "MainThread",
-  "Thread-2 (<lambda>)",
   "Thread-3 (_dedupe_bg)",
   "Thread-4 (<lambda>)",
   "Thread-6 (loop)",
@@ -17,8 +16,6 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-08 14:56:24 rss=394MB avail=6820/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-08 14:56:34 rss=394MB avail=6819/11925MB limit=0MB heavy=- wait=0",
   "2026-11-08 14:56:44 rss=394MB avail=6837/11925MB limit=0MB heavy=- wait=0",
   "2026-11-08 14:56:54 rss=393MB avail=6810/11925MB limit=0MB heavy=- wait=0",
   "2026-11-08 14:57:04 rss=436MB avail=6767/11925MB limit=0MB heavy=- wait=0",
@@ -31,6 +28,8 @@
   "2026-11-08 14:58:14 rss=464MB avail=6694/11925MB limit=0MB heavy=- wait=0",
   "2026-11-08 14:58:20 rss=127MB avail=6998/11925MB limit=0MB heavy=- wait=0",
   "2026-11-08 14:58:30 rss=719MB avail=6396/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-08 14:58:40 rss=3647MB avail=3474/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-08 14:58:40 rss=3647MB avail=3474/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-08 14:58:50 rss=5403MB avail=1782/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-08 14:59:00 rss=6285MB avail=890/11925MB limit=0MB heavy=- wait=0"
  ]
 }
