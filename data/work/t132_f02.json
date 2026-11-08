@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Ara",
-  "name": "Ара",
-  "translation": "хашийе Серединная кайма Ширван",
-  "carpet": "К.",
-  "type": "-",
-  "note": "Ш См. таблицу 155, рис. 4.",
+  "name_az": "zəncirə",
+  "name": "Зенджире",
+  "translation": "Галуны",
+  "carpet": "Балыг",
+  "type": "Кар.",
+  "note": "См. табл. № 141, рис. 2.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 131, рис. 2"
  },
  "grid": {
   "pw": 4.7917,
@@ -129,5 +128,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 131,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

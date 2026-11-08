@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Vəl",
-  "name": "Вәл",
+  "name_az": "Vel",
+  "name": "Вел",
   "translation": "Молотильная доска",
   "carpet": "Карабах",
   "type": "Кар.",
   "note": "",
-  "site_id": "vel",
-  "source": "",
-  "name_az_auto": true
+  "site_id": "",
+  "source": "Табл. 27, рис. 10",
+  "site_id_prev": "vel"
  },
  "adjust": {
   "brightness": 0,
@@ -145,5 +145,8 @@
    "1.........................1"
   ]
  },
- "saved_at": "2026-09-26 16:31:09"
+ "saved_at": "2026-09-26 16:31:09",
+ "book_table": 27,
+ "book_fig": 10,
+ "kerimov_fix": "2026-10-31"
 }

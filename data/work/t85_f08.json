@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Quşappeyi",
+  "name_az": "quşəppəyi",
   "name": "Гушаппейи",
   "translation": "Пастушья сумка",
   "carpet": "Дарянур",
   "type": "Кар.",
   "note": "Этот элемент встречается и в турецких коврах.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 85, рис. 8"
  },
  "grid": {
   "pw": 4.9333,
@@ -218,5 +217,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 85,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

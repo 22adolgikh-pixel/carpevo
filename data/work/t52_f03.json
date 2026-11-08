@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çoxaaq",
-  "name": "Чохааг",
+  "name_az": "Çoxayaq",
+  "name": "Чохаяг",
   "translation": "Многоножка",
   "carpet": "Куба",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
-  "site_id": "choxayaq",
-  "source": "",
-  "name_az_auto": true
+  "site_id": "",
+  "source": "Табл. 52, рис. 3",
+  "site_id_prev": "choxayaq"
  },
  "grid": {
   "pw": 4.925,
@@ -126,5 +126,8 @@
  },
  "saved_at": "2026-09-27 00:21:52",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 52,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

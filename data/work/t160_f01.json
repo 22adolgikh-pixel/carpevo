@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Cağ",
-  "name": "Джаг",
-  "translation": "Джаг",
-  "carpet": "Ханкарванд",
-  "type": "Кар.",
-  "note": "Взят из ковра «Кабала».",
+  "name_az": "Qıynaq",
+  "name": "Гыйнаг",
+  "translation": "Коготь",
+  "carpet": "Сураханы",
+  "type": "К.—Ш",
+  "note": "Иногда называют «головой животного».",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 159, рис. 1"
  },
  "grid": {
   "pw": 4.9055,
@@ -752,5 +751,8 @@
   null
  ],
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 159,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

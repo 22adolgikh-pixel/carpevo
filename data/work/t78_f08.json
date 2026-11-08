@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Butaq",
+  "name_az": "budaq",
   "name": "Бутаг",
   "translation": "Веточка",
   "carpet": "Кобыстан",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Напоминает пугало.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 78, рис. 8"
  },
  "grid": {
   "pw": 4.9167,
@@ -220,5 +219,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 78,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

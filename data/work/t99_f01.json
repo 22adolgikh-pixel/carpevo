@@ -33,13 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çiçekli",
-  "name": "Чичекли",
-  "translation": "бута Бута с цветком",
+  "name_az": "çiçəkli buta",
+  "name": "Чичекли бута",
+  "translation": "Бута с цветком",
   "carpet": "Хила",
   "type": "К.—Ш",
   "note": "",
-  "name_az_auto": true
+  "source": "Табл. 99, рис. 1"
  },
  "grid": {
   "pw": 4.9444,
@@ -2016,5 +2016,8 @@
     40
    ]
   ]
- }
+ },
+ "book_table": 99,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

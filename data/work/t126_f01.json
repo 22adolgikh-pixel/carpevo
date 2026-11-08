@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Göl",
+  "name_az": "göl",
   "name": "Гель",
   "translation": "Медальон",
   "carpet": "Шахназарли",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 126, рис. 1"
  },
  "grid": {
   "pw": 4.9178,
@@ -1658,5 +1657,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 126,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

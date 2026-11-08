@@ -38,11 +38,10 @@
   "name": "Гуш",
   "translation": "Птица",
   "carpet": "Сураханы",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Больше напоминает сидящую кошку.",
   "site_id": "qush",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 24, рис. 5"
  },
  "grid": {
   "pw": 4.931,
@@ -126,5 +125,8 @@
  },
  "saved_at": "2026-09-26 20:48:12",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 24,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

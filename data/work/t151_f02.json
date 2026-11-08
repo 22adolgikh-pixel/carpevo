@@ -33,14 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "",
-  "translation": "",
-  "carpet": "Гырыз",
+  "name_az": "Pete",
+  "name": "Пэтэ",
+  "translation": "Соты",
+  "carpet": "Ширалибек",
   "type": "К.—Ш",
-  "note": "Встречается в коврах «Конахкенд», «Джек» и «Афурджа».",
+  "note": "Встречается и в коврах Кобыстана.",
   "site_id": "",
-  "source": ""
+  "source": "Табл. 150, рис. 2"
  },
  "grid": {
   "pw": 4.9338,
@@ -1045,5 +1045,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 150,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

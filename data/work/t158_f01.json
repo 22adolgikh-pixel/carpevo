@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Cağ",
-  "name": "Джаг",
-  "translation": "Джаг",
-  "carpet": "Ширван",
-  "type": "К.—Ш.",
-  "note": "Встречается и в анатолийских коврах (Турция).",
+  "name_az": "heyvan",
+  "name": "Хейван",
+  "translation": "Животное",
+  "carpet": "Фахралы",
+  "type": "Г.—К",
+  "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 157, рис. 1"
  },
  "grid": {
   "pw": 4.8252,
@@ -10479,5 +10478,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 157,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

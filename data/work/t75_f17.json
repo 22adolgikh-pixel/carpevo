@@ -34,13 +34,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Palıt",
+  "name_az": "palıd",
   "name": "Палыт",
   "translation": "Дуб",
   "carpet": "Хан-Карабах",
   "type": "Кар.",
   "note": "",
-  "name_az_auto": true
+  "source": "Табл. 75, рис. 17"
  },
  "grid": {
   "pw": 4.9286,
@@ -138,5 +138,8 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 10:32:14"
+ "saved_at": "2026-10-03 10:32:14",
+ "book_table": 75,
+ "book_fig": 17,
+ "kerimov_fix": "2026-10-31"
 }

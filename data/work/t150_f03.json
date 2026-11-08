@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Xoruk-buruq",
-  "name": "Хорук-буруг",
-  "translation": "Кудрявые косы",
-  "carpet": "Ширван",
+  "name_az": "qədim heykəl",
+  "name": "Гадимхейкел",
+  "translation": "Старинная статуя",
+  "carpet": "Баку",
   "type": "К.—Ш",
-  "note": "Встречается в бордюре мехраба ханега в Нахичевани (XII в.).",
+  "note": "Встречается и в коврах Ширвана.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 149, рис. 3"
  },
  "grid": {
   "pw": 4.8182,
@@ -10494,5 +10493,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 149,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

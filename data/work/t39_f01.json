@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Yaylıq",
-  "name": "Яйлыг",
-  "translation": "гюлю Цветок платковый",
+  "name_az": "yaylıq gülü",
+  "name": "Яйлыг гюлю",
+  "translation": "Цветок платковый",
   "carpet": "Гянджа",
-  "type": "Г.-К",
-  "note": "Этот элемент называется также «Алты-юм», что означает шестиузловый.",
+  "type": "Г.—К",
+  "note": "Этот элемент называется также «Алтыюм», что означает шестиузловый, т. к. бывает в виде ромба, в каждой стороне которого 6 узлов.",
   "site_id": "yayliq-gulu",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 39, рис. 1"
  },
  "grid": {
   "pw": 4.96,
@@ -114,5 +113,8 @@
  },
  "saved_at": "2026-09-26 20:23:38",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 39,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Tendir",
+  "name_az": "təndir",
   "name": "Тендир",
   "translation": "Печь для хлеба",
   "carpet": "Казах",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "",
   "site_id": "tendir",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 44, рис. 4"
  },
  "grid": {
   "pw": 4.907,
@@ -136,5 +135,8 @@
  },
  "saved_at": "2026-09-26 20:20:02",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 44,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

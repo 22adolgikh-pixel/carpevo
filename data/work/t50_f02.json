@@ -38,11 +38,10 @@
   "name": "Гармаг",
   "translation": "Крючок",
   "carpet": "Бакы",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "qarmaq",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 50, рис. 2"
  },
  "grid": {
   "pw": 4.9583,
@@ -117,5 +116,8 @@
  },
  "saved_at": "2026-09-27 00:26:40",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 50,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

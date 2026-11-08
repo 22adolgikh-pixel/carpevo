@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Ordək",
-  "name": "Ордәк",
+  "name_az": "Ordek",
+  "name": "Ордэк",
   "translation": "Утка",
   "carpet": "Гымыл",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Напоминает плавающую утку.",
   "site_id": "ordek",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 20, рис. 8"
  },
  "grid": {
   "pw": 4.907,
@@ -129,5 +128,8 @@
  },
  "saved_at": "2026-09-27 23:53:39",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 20,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

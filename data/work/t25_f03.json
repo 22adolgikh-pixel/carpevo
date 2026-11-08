@@ -38,11 +38,10 @@
   "name": "Бута",
   "translation": "Бута",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Парное изображение птицы. Взято из карабахских зили и верни.",
   "site_id": "buta",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 25, рис. 3"
  },
  "grid": {
   "pw": 4.9275,
@@ -164,5 +163,8 @@
   "invert": false
  },
  "saved_at": "2026-09-26 11:11:27",
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 25,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

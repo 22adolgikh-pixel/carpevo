@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Bala",
-  "name": "Бала",
-  "translation": "хашийе Малая кайма",
-  "carpet": "Губа",
-  "type": "К.—Ш",
-  "note": "См. таблицу 140, рис. 6.",
+  "name_az": "Medaxil",
+  "name": "Медахил",
+  "translation": "Внутрен. кайма",
+  "carpet": "Тебриз",
+  "type": "Теб.",
+  "note": "См. табл. № 138, рис. 8.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 130, рис. 24"
  },
  "grid": {
   "pw": 4.9,
@@ -151,5 +150,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 130,
+ "book_fig": 24,
+ "kerimov_fix": "2026-10-31"
 }

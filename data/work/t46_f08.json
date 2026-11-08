@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Mismar",
-  "name": "Мисмар",
-  "translation": "Гвоздь",
-  "carpet": "Карабах",
-  "type": "Кар.",
-  "note": "Этот элемент встречается в коврах типа Куба-Ширван (см. таб. 46, рис. 2).",
-  "site_id": "mismar",
-  "source": "",
-  "name_az_auto": true
+  "name_az": "kaşı",
+  "name": "Кашы",
+  "translation": "Майолика",
+  "carpet": "Куба",
+  "type": "К.—Ш",
+  "note": "",
+  "site_id": "qashi",
+  "source": "Табл. 46, рис. 11",
+  "site_id_prev": "mismar"
  },
  "grid": {
   "pw": 4.9118,
@@ -127,5 +127,8 @@
  },
  "saved_at": "2026-09-27 00:48:23",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 46,
+ "book_fig": 11,
+ "kerimov_fix": "2026-10-31"
 }

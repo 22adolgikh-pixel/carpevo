@@ -37,10 +37,10 @@
   "name_az": "Yarpaq",
   "name": "Ярпаг",
   "translation": "Лист",
-  "carpet": "Херис",
+  "carpet": "Афшан",
   "type": "Теб.",
-  "note": "",
-  "name_az_auto": true
+  "note": "Вид листа спереди.",
+  "source": "Табл. 89, рис. 6"
  },
  "grid": {
   "pw": 4.9176,
@@ -144,5 +144,8 @@
    24
   ]
  },
- "saved_at": "2026-10-03 18:12:11"
+ "saved_at": "2026-10-03 18:12:11",
+ "book_table": 89,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

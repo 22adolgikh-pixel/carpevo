@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çakmaq",
-  "name": "Чакмаг",
-  "translation": "Курок",
-  "carpet": "Арджиман",
-  "type": "К.—Ш",
-  "note": "Встречается и в коврах Карабаха.",
+  "name_az": "ikiquşlu",
+  "name": "Икигушлу",
+  "translation": "Парная птица",
+  "carpet": "Казах",
+  "type": "Г.—К",
+  "note": "Символ любви. Встречается на посуде, найденной при раскопках Старой Гянджи (XII в.).",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 150, рис. 5"
  },
  "grid": {
   "pw": 4.9268,
@@ -1826,5 +1825,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 150,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

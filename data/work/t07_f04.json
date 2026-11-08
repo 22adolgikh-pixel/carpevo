@@ -35,13 +35,12 @@
   "section": "",
   "name_az": "Quş",
   "name": "Гуш",
-  "translation": "Птица Карабахский",
-  "carpet": "верни",
+  "translation": "Птица",
+  "carpet": "Карабахский верни",
   "type": "Кар.",
   "note": "Возможно это изображение петуха.",
   "site_id": "qush",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 7, рис. 4"
  },
  "adjust": {
   "brightness": 0,
@@ -163,5 +162,8 @@
   ]
  },
  "saved_at": "2026-09-27 23:14:37",
- "review": false
+ "review": false,
+ "book_table": 7,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

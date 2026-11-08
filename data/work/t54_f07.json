@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Demir",
+  "name_az": "dəmir",
   "name": "Демир",
   "translation": "Железо",
   "carpet": "Караязы",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "По-видимому, это музыкальный инструмент.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 54, рис. 7"
  },
  "grid": {
   "pw": 4.95,
@@ -141,5 +140,8 @@
  },
  "saved_at": "2026-09-27 22:36:44",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 54,
+ "book_fig": 7,
+ "kerimov_fix": "2026-10-31"
 }

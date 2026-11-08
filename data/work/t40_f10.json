@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Göbəlek",
+  "name_az": "göbələk",
   "name": "Гёбялек",
   "translation": "Гриб",
   "carpet": "Хан-Карабах",
   "type": "Кар.",
   "note": "Сильно стилизованный цветочный элемент.",
   "site_id": "gobelek",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 40, рис. 10"
  },
  "grid": {
   "pw": 4.9318,
@@ -140,5 +139,8 @@
  },
  "saved_at": "2026-09-26 20:30:57",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 40,
+ "book_fig": 10,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,15 +33,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Buta",
-  "name": "Бута",
-  "translation": "Бута",
-  "carpet": "Ханлыг",
-  "type": "Кар.",
-  "note": "Встречается также в верни и зили. Этот элемент напоминает летящую птицу.",
-  "site_id": "buta",
-  "source": "",
-  "name_az_auto": true
+  "name_az": "div",
+  "name": "Дев",
+  "translation": "Див. Сказочное существо",
+  "carpet": "Казах",
+  "type": "Г.—К",
+  "note": "Встречается также в китайских миниатюрах.",
+  "site_id": "div",
+  "source": "Табл. 16, рис. 6",
+  "site_id_prev": "buta"
  },
  "adjust": {
   "brightness": 0,
@@ -202,5 +202,8 @@
   ]
  },
  "saved_at": "2026-09-27 23:46:34",
- "review": false
+ "review": false,
+ "book_table": 16,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qarpic",
+  "name_az": "kərpic",
   "name": "Карпидж",
   "translation": "Кирпич",
   "carpet": "Фахралы",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "Напоминает глазурованный кирпич.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 117, рис. 1"
  },
  "grid": {
   "pw": 4.9079,
@@ -592,5 +591,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 117,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

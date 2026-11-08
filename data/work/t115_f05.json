@@ -37,11 +37,10 @@
   "name": "Мафраш",
   "translation": "Мафраш",
   "carpet": "Казах",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "Ковровый мешок для перевозки клади.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 115, рис. 5"
  },
  "grid": {
   "pw": 4.9054,
@@ -200,5 +199,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 115,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

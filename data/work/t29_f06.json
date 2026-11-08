@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Başmaq",
-  "name": "Башмаг",
-  "translation": "Башмак",
-  "carpet": "Конахкенд",
-  "type": "К.-Ш",
-  "note": "",
-  "site_id": "bashmaq",
-  "source": "",
-  "name_az_auto": true
+  "name_az": "möhür",
+  "name": "Мохур",
+  "translation": "Мохур",
+  "carpet": "Кюрд",
+  "type": "Кар.",
+  "note": "Плоский кружочек глины из святых мест (Кербала, Мекка, Мешхед), к которому прикладываются лбами при совершении земных поклонов во время молитвы. Большею частью встречается в коврах — намазлыках.",
+  "site_id": "mocur,mohur",
+  "source": "Табл. 29, рис. 8",
+  "site_id_prev": "bashmaq"
  },
  "grid": {
   "pw": 4.9365,
@@ -201,5 +201,8 @@
  },
  "saved_at": "2026-09-27 01:42:08",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 29,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

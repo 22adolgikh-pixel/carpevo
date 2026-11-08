@@ -37,11 +37,10 @@
   "name": "Тугбашы",
   "translation": "Голова",
   "carpet": "Гымыл",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Возможно это является изображением светильника. Встречается также в карабахских коврах.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 116, рис. 3"
  },
  "grid": {
   "pw": 4.9714,
@@ -233,5 +232,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 116,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

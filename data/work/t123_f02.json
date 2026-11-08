@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Geliçi",
+  "name_az": "göliçi",
   "name": "Геличи",
   "translation": "Внутримедальонный элемент",
   "carpet": "Фындыган",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 123, рис. 2"
  },
  "grid": {
   "pw": 4.96,
@@ -240,5 +239,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 123,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

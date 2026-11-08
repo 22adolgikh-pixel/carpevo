@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Vəl",
-  "name": "Вәл",
+  "name_az": "Vel",
+  "name": "Вел",
   "translation": "Молотильная доска",
   "carpet": "Самух",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "Напоминает узор украинских вышивок.",
-  "site_id": "vel",
-  "source": "",
-  "name_az_auto": true
+  "site_id": "",
+  "source": "Табл. 27, рис. 9",
+  "site_id_prev": "vel"
  },
  "adjust": {
   "brightness": 0,
@@ -118,5 +118,8 @@
    ".......111......."
   ]
  },
- "saved_at": "2026-09-26 16:29:31"
+ "saved_at": "2026-09-26 16:29:31",
+ "book_table": 27,
+ "book_fig": 9,
+ "kerimov_fix": "2026-10-31"
 }

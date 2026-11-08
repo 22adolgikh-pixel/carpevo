@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Başlıq",
+  "name_az": "başlıq",
   "name": "Башлыг",
   "translation": "Железный наконечник",
   "carpet": "Гасымушагы",
   "type": "Кар.",
   "note": "Головка топора или секиры.",
   "site_id": "bashliq-2",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 27, рис. 11"
  },
  "adjust": {
   "brightness": 0,
@@ -165,5 +164,8 @@
   ],
   "angle": -0.36,
   "reviewed": true
- }
+ },
+ "book_table": 27,
+ "book_fig": 11,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çiçək",
-  "name": "Чичек",
-  "translation": "Цветок",
-  "carpet": "Казах",
-  "type": "Г.-К",
-  "note": "",
+  "name_az": "qozalı islimi",
+  "name": "Гозалы ислими",
+  "translation": "Кайма с коробочкой",
+  "carpet": "Карабах",
+  "type": "Кар.",
+  "note": "Напоминает хлопковую коробочку.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 144, рис. 6"
  },
  "grid": {
   "pw": 4.8889,
@@ -288,5 +287,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 144,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

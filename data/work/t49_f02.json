@@ -36,13 +36,12 @@
   "section": "",
   "name_az": "Pul",
   "name": "Пул",
-  "translation": "Монета Кохна",
-  "carpet": "Куба",
-  "type": "К.-Ш",
+  "translation": "Монета",
+  "carpet": "Кохна Куба",
+  "type": "К.—Ш",
   "note": "Напоминает золотые пуговицы.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 49, рис. 2"
  },
  "grid": {
   "pw": 4.9123,
@@ -150,5 +149,8 @@
  },
  "saved_at": "2026-09-28 20:39:37",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 49,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

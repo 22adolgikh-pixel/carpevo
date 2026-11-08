@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Butaq",
+  "name_az": "budaq",
   "name": "Бутаг",
-  "translation": "",
-  "carpet": "Ветка",
+  "translation": "Ветка",
+  "carpet": "",
   "type": "К.—Ш",
   "note": "Напоминает китайские мотивы.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 84, рис. 1"
  },
  "grid": {
   "pw": 4.7213,
@@ -215,5 +214,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 84,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

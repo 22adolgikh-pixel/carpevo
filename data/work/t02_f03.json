@@ -33,14 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "",
-  "translation": "",
-  "carpet": "",
-  "type": "",
-  "note": "",
+  "name_az": "Dilikli",
+  "name": "Диликли",
+  "translation": "Зубчатый",
+  "carpet": "Тебризский килим",
+  "type": "Теб.",
+  "note": "Можно встретить также в килимах Ширвана и Карабаха.",
   "site_id": "",
-  "source": ""
+  "source": "Табл. 2, рис. 3"
  },
  "grid": {
   "pw": 4.9291,
@@ -1842,5 +1842,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 2,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

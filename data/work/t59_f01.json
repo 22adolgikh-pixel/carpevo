@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Ortuk",
+  "name_az": "örtük",
   "name": "Ортук",
   "translation": "Покрывало",
   "carpet": "Сор-сор",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Это сложная форма крючкообразных элементов.",
   "site_id": "ortuk",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 59, рис. 1"
  },
  "grid": {
   "pw": 4.9108,
@@ -197,5 +196,8 @@
  },
  "saved_at": "2026-09-27 01:36:23",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 59,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Moxur",
-  "name": "Мохур",
-  "translation": "Мохур",
-  "carpet": "Кобыстан",
-  "type": "К.-Ш",
+  "name_az": "cəftə",
+  "name": "Джефте",
+  "translation": "Скоба",
+  "carpet": "Карабах",
+  "type": "Кар.",
   "note": "",
-  "site_id": "mocur,mohur",
-  "source": "",
-  "name_az_auto": true
+  "site_id": "chefte",
+  "source": "Табл. 29, рис. 10",
+  "site_id_prev": "mocur,mohur"
  },
  "grid": {
   "pw": 4.9429,
@@ -126,5 +126,8 @@
  },
  "saved_at": "2026-09-27 01:42:33",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 29,
+ "book_fig": 10,
+ "kerimov_fix": "2026-10-31"
 }

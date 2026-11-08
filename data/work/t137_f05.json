@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qazax",
-  "name": "Казах",
-  "translation": "",
-  "carpet": "Г.",
-  "type": "—",
-  "note": "К",
+  "name_az": "qaragöz",
+  "name": "Гарагез",
+  "translation": "Черный глаз",
+  "carpet": "Губатлы",
+  "type": "Кар.",
+  "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 136, рис. 5"
  },
  "grid": {
   "pw": 4.9062,
@@ -4276,5 +4275,8 @@
   null
  ],
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 136,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

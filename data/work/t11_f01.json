@@ -35,13 +35,12 @@
   "section": "",
   "name_az": "Ağac",
   "name": "Агадж",
-  "translation": "Дерево Карабахский",
-  "carpet": "зили",
+  "translation": "Дерево",
+  "carpet": "Карабахский зили",
   "type": "Кар.",
   "note": "Напоминает летящего журавля спереди",
   "site_id": "agac",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 11, рис. 1"
  },
  "adjust": {
   "brightness": 0,
@@ -155,5 +154,8 @@
   "angle": -0.8,
   "reviewed": true
  },
- "review": false
+ "review": false,
+ "book_table": 11,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

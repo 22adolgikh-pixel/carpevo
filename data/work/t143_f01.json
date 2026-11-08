@@ -36,11 +36,11 @@
   "name_az": "",
   "name": "",
   "translation": "",
-  "carpet": "Кабала",
-  "type": "К.-Ш",
-  "note": "Встречается в коврах Дагестана см. табл. № 142, рис. 5.",
+  "carpet": "Казах",
+  "type": "Г.—К",
+  "note": "",
   "site_id": "",
-  "source": ""
+  "source": "Табл. 142, рис. 1"
  },
  "grid": {
   "pw": 4.9032,
@@ -6756,5 +6756,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 142,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

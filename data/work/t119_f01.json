@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qaşı",
+  "name_az": "kaşı",
   "name": "Кашы",
-  "translation": "Майолика Кохна",
-  "carpet": "Куба",
-  "type": "К.-Ш",
+  "translation": "Майолика",
+  "carpet": "Кохна Куба",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 119, рис. 1"
  },
  "grid": {
   "pw": 4.88,
@@ -356,5 +355,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 119,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

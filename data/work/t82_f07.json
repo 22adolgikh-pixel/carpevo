@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Palıt",
+  "name_az": "palıd",
   "name": "Палыт",
   "translation": "Дуб",
-  "carpet": "Нябекигюль",
+  "carpet": "Нялбекигюль",
   "type": "Кар.",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 82, рис. 7"
  },
  "grid": {
   "pw": 4.675,
@@ -152,5 +151,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 82,
+ "book_fig": 7,
+ "kerimov_fix": "2026-10-31"
 }

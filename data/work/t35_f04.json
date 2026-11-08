@@ -38,11 +38,10 @@
   "name": "Габ",
   "translation": "Посуда",
   "carpet": "Фахралы",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "Ваза с грушами.",
   "site_id": "qab",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 35, рис. 4"
  },
  "grid": {
   "pw": 4.88,
@@ -131,5 +130,8 @@
  },
  "saved_at": "2026-09-26 23:41:15",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 35,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

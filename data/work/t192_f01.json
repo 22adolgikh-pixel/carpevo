@@ -33,13 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Zivar",
-  "name": "Зивар",
-  "translation": "Украшение",
-  "carpet": "Баку",
-  "type": "К.—Ш",
+  "name_az": "kətəbə",
+  "name": "Кетебэ",
+  "translation": "Кетебэ",
+  "carpet": "Тебриз",
+  "type": "Теб.",
   "note": "",
-  "name_az_auto": true
+  "source": "Табл. 190, рис. 1"
  },
  "grid": {
   "pw": 4.9524,
@@ -309,5 +309,8 @@
   false,
   false,
   false
- ]
+ ],
+ "book_table": 190,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

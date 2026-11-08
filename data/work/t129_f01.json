@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Başlıq",
+  "name_az": "başlıq",
   "name": "Башлыг",
   "translation": "Наконечник",
   "carpet": "Гарадаг",
   "type": "Теб.",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 129, рис. 1"
  },
  "grid": {
   "pw": 4.9041,
@@ -1336,5 +1335,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 129,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

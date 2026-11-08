@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çengel",
+  "name_az": "çəngəl",
   "name": "Ченгель",
   "translation": "Крюк",
   "carpet": "Кедабек",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "",
   "site_id": "chengel",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 50, рис. 5"
  },
  "grid": {
   "pw": 5,
@@ -125,5 +124,8 @@
  },
  "saved_at": "2026-09-27 00:26:51",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 50,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

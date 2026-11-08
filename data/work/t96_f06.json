@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Xemlibuta",
-  "name": "Хемлибута",
-  "translation": "Бута беременная",
-  "carpet": "Баки",
+  "name_az": "Şirvanbuta",
+  "name": "Ширванбута",
+  "translation": "Бута Ширван",
+  "carpet": "Чуханлы",
   "type": "К.—Ш",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 96, рис. 7"
  },
  "grid": {
   "pw": 5,
@@ -1708,5 +1707,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 96,
+ "book_fig": 7,
+ "kerimov_fix": "2026-10-31"
 }

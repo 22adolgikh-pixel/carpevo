@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qarmaxlı",
+  "name_az": "qarmaqlı",
   "name": "Гармахлы",
-  "translation": "Крючкообразный Карабахский",
-  "carpet": "верни",
+  "translation": "Крючкообразный",
+  "carpet": "Карабахский верни",
   "type": "Кар.",
   "note": "",
   "site_id": "qarmaqli",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 12, рис. 7"
  },
  "grid": {
   "pw": 4.9174,
@@ -126,5 +125,8 @@
  },
  "saved_at": "2026-09-27 01:16:16",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 12,
+ "book_fig": 7,
+ "kerimov_fix": "2026-10-31"
 }

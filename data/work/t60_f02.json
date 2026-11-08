@@ -38,11 +38,10 @@
   "name": "Шамдан",
   "translation": "Подсвечник",
   "carpet": "Гырыз",
-  "type": "К.-Ш",
-  "note": "Наблюдается в безворсных коврах Индии.",
+  "type": "К.—Ш",
+  "note": "Наблюдается в безворсных коврах Индии",
   "site_id": "shamdan",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 60, рис. 2"
  },
  "grid": {
   "pw": 4.9783,
@@ -139,5 +138,8 @@
  },
  "saved_at": "2026-09-26 23:58:49",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 60,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

@@ -38,9 +38,9 @@
   "name": "Гоза",
   "translation": "Хлопковая коробочка",
   "carpet": "Кобыстан",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
-  "name_az_auto": true
+  "source": "Табл. 75, рис. 14"
  },
  "grid": {
   "pw": 4.9143,
@@ -146,5 +146,8 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 10:32:14"
+ "saved_at": "2026-10-03 10:32:14",
+ "book_table": 75,
+ "book_fig": 14,
+ "kerimov_fix": "2026-10-31"
 }

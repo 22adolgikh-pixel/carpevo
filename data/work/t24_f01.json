@@ -38,11 +38,10 @@
   "name": "Гуш",
   "translation": "Птица",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Напоминает черного ворона.",
   "site_id": "qush",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 24, рис. 1"
  },
  "grid": {
   "pw": 4.9474,
@@ -113,5 +112,8 @@
  },
  "saved_at": "2026-09-26 20:47:06",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 24,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

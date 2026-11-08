@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Uzüm",
+  "name_az": "üzüm",
   "name": "Узюм",
   "translation": "Виноград",
   "carpet": "Мараза",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Можно предположить, что это виноградный лист.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 79, рис. 1"
  },
  "grid": {
   "pw": 4.8929,
@@ -774,5 +773,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 79,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

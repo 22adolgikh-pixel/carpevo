@@ -38,11 +38,10 @@
   "name": "Фыр-фыра",
   "translation": "Вертушка",
   "carpet": "Пиребедиль",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "По форме своей напоминает ветряную мельницу.",
   "site_id": "firfira",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 27, рис. 7"
  },
  "grid": {
   "pw": 4.9333,
@@ -121,5 +120,8 @@
  },
  "saved_at": "2026-09-26 14:39:01",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 27,
+ "book_fig": 7,
+ "kerimov_fix": "2026-10-31"
 }

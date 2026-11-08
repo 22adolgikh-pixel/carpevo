@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Puşğu",
-  "name": "Пушгу",
-  "translation": "",
-  "carpet": "Пила",
-  "type": "Кар.",
-  "note": "Напоминает мотивы греческого архитектурного орнамента.",
+  "name_az": "zəncir",
+  "name": "Зенджир",
+  "translation": "Цепочка",
+  "carpet": "Баку",
+  "type": "К.—Ш",
+  "note": "Встречается в безворсных коврах — зили.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 136, рис. 3"
  },
  "grid": {
   "pw": 4.9048,
@@ -4528,5 +4527,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 136,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qoşağarmaq",
-  "name": "Гошагармаг",
-  "translation": "Парный крючек",
-  "carpet": "Кабала",
-  "type": "К.-Ш",
-  "note": "",
+  "name_az": "sümbül daraq",
+  "name": "Сюмбюльдараг",
+  "translation": "Колос гребень",
+  "carpet": "Биджо",
+  "type": "К.—Ш",
+  "note": "Иногда встречается в коврах кубинской группы.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 141, рис. 7"
  },
  "grid": {
   "pw": 4.8333,
@@ -1545,5 +1544,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 141,
+ "book_fig": 7,
+ "kerimov_fix": "2026-10-31"
 }

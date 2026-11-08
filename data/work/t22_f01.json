@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Dəvə",
-  "name": "Дәвә",
+  "name_az": "Deve",
+  "name": "Дэвэ",
   "translation": "Верблюд",
   "carpet": "Пиребедиль",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Скорее всего это индейка.",
   "site_id": "deve",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 22, рис. 1"
  },
  "grid": {
   "pw": 4.9184,
@@ -150,5 +149,8 @@
  },
  "saved_at": "2026-09-26 21:06:39",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 22,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

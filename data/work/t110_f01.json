@@ -33,13 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Minarebaşı",
+  "name_az": "minarə başı",
   "name": "Минаребашы",
-  "translation": "Купол",
-  "carpet": "минарета",
+  "translation": "Купол минарета",
+  "carpet": "",
   "type": "Кар.",
   "note": "Встречается в коврах Дагестана.",
-  "name_az_auto": true
+  "source": "Табл. 110, рис. 1"
  },
  "grid": {
   "pw": 4.9167,
@@ -175,5 +175,8 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 12:27:45"
+ "saved_at": "2026-10-03 12:27:45",
+ "book_table": 110,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

@@ -35,13 +35,12 @@
   "section": "",
   "name_az": "Xonça",
   "name": "Хонча",
-  "translation": "Медальон Кохна",
-  "carpet": "Куба",
-  "type": "К.-Ш",
+  "translation": "Медальон",
+  "carpet": "Кохна Куба",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 121, рис. 3"
  },
  "grid": {
   "pw": 4.935,
@@ -865,5 +864,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 121,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

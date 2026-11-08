@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qarmağlı",
-  "name": "Гармаглы",
-  "translation": "бута Бута крючкообразная",
-  "carpet": "Гасимушагы",
+  "name_az": "qarmaqlı buta",
+  "name": "Гармаглы бута",
+  "translation": "Бута крючкообразная",
+  "carpet": "Гасымушагы",
   "type": "Кар.",
   "note": "Взят из декора безворсных ковров.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 99, рис. 6"
  },
  "grid": {
   "pw": 4.9362,
@@ -2087,5 +2086,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 99,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,12 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "",
+  "name_az": "pərdə",
+  "name": "Занавеска",
   "translation": "",
-  "carpet": "",
-  "type": "",
-  "note": ""
+  "carpet": "Тебриз",
+  "type": "Теб.",
+  "note": "Занавеска (техника верни), Тебризский тип.",
+  "source": "Табл. 235, рис. 2"
  },
  "grid": {
   "pw": 22.3714,
@@ -6855,5 +6856,8 @@
   "ntiles": 24,
   "verified": []
  },
- "kind": "photo"
+ "kind": "photo",
+ "book_table": 235,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

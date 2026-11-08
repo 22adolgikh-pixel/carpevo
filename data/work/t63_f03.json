@@ -33,15 +33,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Zığ",
+  "name_az": "",
   "name": "Зыг",
-  "translation": "?",
+  "translation": "",
   "carpet": "Куба",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Это изображение шпината.",
-  "site_id": "ziq",
-  "source": "",
-  "name_az_auto": true
+  "site_id": "",
+  "source": "Табл. 63, рис. 3",
+  "site_id_prev": "ziq"
  },
  "adjust": {
   "brightness": 0,
@@ -172,5 +172,8 @@
   ],
   "angle": 0.72,
   "reviewed": true
- }
+ },
+ "book_table": 63,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

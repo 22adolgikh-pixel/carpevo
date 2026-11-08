@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qotazlı",
-  "name": "Готазлы",
-  "translation": "бута Бута с кисточкой",
+  "name_az": "qotazlı buta",
+  "name": "Готазлы бута",
+  "translation": "Бута с кисточкой",
   "carpet": "Джебраиль",
   "type": "Кар.",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 98, рис. 4"
  },
  "grid": {
   "pw": 4.9306,
@@ -2665,5 +2664,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 98,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

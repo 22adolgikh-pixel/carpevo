@@ -33,13 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çiçək",
-  "name": "Чичек",
-  "translation": "Цветок",
-  "carpet": "Ширван",
-  "type": "К.—Ш",
+  "name_az": "əvəlik",
+  "name": "Эвелик",
+  "translation": "Щавель",
+  "carpet": "Карабах",
+  "type": "Кар.",
   "note": "",
-  "name_az_auto": true
+  "source": "Табл. 168, рис. 4"
  },
  "grid": {
   "pw": 4.9333,
@@ -283,5 +283,8 @@
   false,
   false,
   false
- ]
+ ],
+ "book_table": 168,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

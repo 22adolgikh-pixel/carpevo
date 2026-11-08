@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çengelli",
+  "name_az": "çəngəlli",
   "name": "Ченгелли",
-  "translation": "Крючковатый Казахский",
-  "carpet": "зили",
-  "type": "Г.-К.",
-  "note": "Называется также «гюйрумлу хашийе»",
+  "translation": "Крючковатый",
+  "carpet": "Казахский зили",
+  "type": "Г.—К.",
+  "note": "Называется также «гуйрумлу хашийе»",
   "site_id": "chengelli",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 12, рис. 8"
  },
  "grid": {
   "pw": 4.9339,
@@ -132,5 +131,8 @@
  },
  "saved_at": "2026-09-27 23:25:24",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 12,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

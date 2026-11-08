@@ -35,13 +35,12 @@
   "section": "",
   "name_az": "Ağac",
   "name": "Агадж",
-  "translation": "Дерево Карабахский",
-  "carpet": "верни",
+  "translation": "Дерево",
+  "carpet": "Карабахский верни",
   "type": "Кар.",
-  "note": "Возможно это изображение спереди летящего удода.",
+  "note": "Возможно это изображение спереди летящего удода. Этот элемент встречается также в бакинском зили.",
   "site_id": "agac",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 7, рис. 2"
  },
  "adjust": {
   "brightness": 0,
@@ -207,5 +206,8 @@
   null
  ],
  "palette_v": 1,
- "rapport": null
+ "rapport": null,
+ "book_table": 7,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

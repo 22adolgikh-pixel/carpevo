@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Zencirə",
-  "name": "Зенджире",
-  "translation": "Галуны",
-  "carpet": "Балыг",
-  "type": "Кар.",
-  "note": "См. табл. № 141, рис. 2.",
+  "name_az": "Medaxil",
+  "name": "Медахил",
+  "translation": "Внутрен. кайма",
+  "carpet": "Баку",
+  "type": "К.—Ш",
+  "note": "См. табл. № 135, рис. 9.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 130, рис. 13"
  },
  "grid": {
   "pw": 4.9091,
@@ -155,5 +154,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 130,
+ "book_fig": 13,
+ "kerimov_fix": "2026-10-31"
 }

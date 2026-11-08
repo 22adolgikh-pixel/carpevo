@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Almaalem",
-  "name": "Алмаалем",
-  "translation": "Яблочная кайма",
-  "carpet": "Чичи",
-  "type": "К.-Ш",
+  "name_az": "Oxbaşı",
+  "name": "Охбашы",
+  "translation": "Наконечник стрелы",
+  "carpet": "Мараза",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 146, рис. 2"
  },
  "grid": {
   "pw": 4.9032,
@@ -3608,5 +3607,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 146,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

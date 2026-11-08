@@ -33,12 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "",
-  "translation": "",
-  "carpet": "",
+  "name_az": "Pitik",
+  "name": "Питик",
+  "translation": "Черточка",
+  "carpet": "Для всех азерб. ковров",
   "type": "",
-  "note": ""
+  "note": "В Карабахе называют «гердек габагы», т. е. узор на занавеси.",
+  "source": "Табл. 134, рис. 15"
  },
  "grid": {
   "pw": 4.9067,
@@ -1102,5 +1103,8 @@
   ],
   "ntiles": 8,
   "verified": []
- }
+ },
+ "book_table": 134,
+ "book_fig": 15,
+ "kerimov_fix": "2026-10-31"
 }

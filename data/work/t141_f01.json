@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Mollabaşı",
-  "name": "Моллабашы",
-  "translation": "Голова муллы Куба",
-  "carpet": "К.",
-  "type": "—",
-  "note": "Ш Применяется в частях бордюра «медахилях» и «джагах».",
+  "name_az": "zəncir",
+  "name": "Зенджир",
+  "translation": "Цепочка",
+  "carpet": "Карабах",
+  "type": "Кар.",
+  "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 140, рис. 1"
  },
  "grid": {
   "pw": 4.9259,
@@ -3474,5 +3473,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 140,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

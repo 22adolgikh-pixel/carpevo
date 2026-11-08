@@ -37,11 +37,11 @@
   "name": "Ярпаг",
   "translation": "Лист",
   "carpet": "Куба",
-  "type": "К.-Ш",
-  "note": "",
-  "site_id": "yarpaq",
-  "source": "",
-  "name_az_auto": true
+  "type": "К.—Ш",
+  "note": "Напоминает виноградный лист.",
+  "site_id": "",
+  "source": "Табл. 63, рис. 6",
+  "site_id_prev": "yarpaq"
  },
  "adjust": {
   "brightness": 0,
@@ -155,5 +155,8 @@
  },
  "saved_at": "2026-09-26 12:49:42",
  "review": false,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 63,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

@@ -34,12 +34,13 @@
  "meta": {
   "section": "",
   "name": "Хейван",
-  "translation": "Животное Карабахский",
-  "carpet": "зили",
+  "translation": "Животное",
+  "carpet": "Карабахский зили",
   "type": "Кар.",
   "note": "Видимо, это изображение зайца.",
   "site_id": "heyvan",
-  "source": ""
+  "source": "Табл. 9, рис. 6",
+  "name_az": "heyvan"
  },
  "adjust": {
   "brightness": 0,
@@ -114,5 +115,8 @@
    "1...1.....1...1.....1...1....1...1.."
   ]
  },
- "saved_at": "2026-09-24 22:52:48"
+ "saved_at": "2026-09-24 22:52:48",
+ "book_table": 9,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

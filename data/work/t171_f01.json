@@ -34,13 +34,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qamandar",
-  "name": "Камандар",
-  "translation": "Хранитель лука и стрел",
-  "carpet": "Арсалан",
-  "type": "К.—Ш",
+  "name_az": "Tuğbaşı",
+  "name": "Тугбашы",
+  "translation": "Голова туга",
+  "carpet": "",
+  "type": "Кар.",
   "note": "",
-  "name_az_auto": true
+  "source": "Табл. 169, рис. 1"
  },
  "grid": {
   "pw": 4.8551,
@@ -315,5 +315,8 @@
   false,
   false,
   false
- ]
+ ],
+ "book_table": 169,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

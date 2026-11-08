@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Boranı",
+  "name_az": "boranı",
   "name": "Бораны",
-  "translation": "",
-  "carpet": "Тыква",
+  "translation": "Тыква",
+  "carpet": "",
   "type": "Кар.",
   "note": "Встречается в кубинском ковре XVII в.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 88, рис. 4"
  },
  "grid": {
   "pw": 4.9,
@@ -204,5 +203,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 88,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

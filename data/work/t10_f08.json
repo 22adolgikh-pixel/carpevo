@@ -35,13 +35,12 @@
   "section": "",
   "name_az": "Şamdan",
   "name": "Шамдан",
-  "translation": "Подсвечник Бакинский",
-  "carpet": "зили",
-  "type": "К.-Ш.",
+  "translation": "Подсвечник",
+  "carpet": "Бакинский зили",
+  "type": "К.—Ш",
   "note": "Взято из карабахского зили (таблица 7, рисунок 2).",
   "site_id": "shamdan",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 10, рис. 8"
  },
  "adjust": {
   "brightness": 0,
@@ -153,5 +152,8 @@
  },
  "saved_at": "2026-09-26 15:24:42",
  "review": false,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 10,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Dəvə",
-  "name": "Дәвә",
+  "name_az": "Devə",
+  "name": "Дэве",
   "translation": "Верблюд",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
-  "site_id": "deve",
-  "source": "",
-  "name_az_auto": true
+  "site_id": "",
+  "source": "Табл. 19, рис. 12",
+  "site_id_prev": "deve"
  },
  "grid": {
   "pw": 4.8857,
@@ -127,5 +127,8 @@
   "invert": false
  },
  "saved_at": "2026-09-26 10:58:54",
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 19,
+ "book_fig": 12,
+ "kerimov_fix": "2026-10-31"
 }

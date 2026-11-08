@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çiraq",
+  "name_az": "çıraq",
   "name": "Чираг",
   "translation": "Светильник",
   "carpet": "Сальян",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Применяется в виде основного элемента в ковре «Гырыз».",
   "site_id": "chiraq",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 58, рис. 3"
  },
  "grid": {
   "pw": 4.9048,
@@ -187,5 +186,8 @@
  },
  "saved_at": "2026-09-27 01:20:08",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 58,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

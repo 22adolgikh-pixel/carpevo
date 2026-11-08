@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qoşauç",
-  "name": "Гошауч",
-  "translation": "Парные обведенные линии Баку",
-  "carpet": "К.",
-  "type": "-",
-  "note": "Ш Встречается большей частью в бакинских коврах.",
+  "name_az": "ara haşiyə",
+  "name": "Ара хашийе",
+  "translation": "Серединная кайма",
+  "carpet": "",
+  "type": "Кар.",
+  "note": "См. таблицу 149, рис. 1.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 132, рис. 3"
  },
  "grid": {
   "pw": 4.9688,
@@ -150,5 +149,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 132,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

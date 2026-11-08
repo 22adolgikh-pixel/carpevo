@@ -38,11 +38,10 @@
   "name": "Тахт",
   "translation": "Престол",
   "carpet": "Мараза",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Это основной элемент ковра «Мараза».",
   "site_id": "taxt",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 33, рис. 3"
  },
  "grid": {
   "pw": 4.9189,
@@ -188,5 +187,8 @@
  },
  "saved_at": "2026-09-26 23:53:32",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 33,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

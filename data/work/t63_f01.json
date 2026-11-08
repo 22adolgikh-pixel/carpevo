@@ -36,10 +36,12 @@
   "name": "Гюль",
   "translation": "Цветок",
   "carpet": "Куба",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
-  "site_id": "gul",
-  "source": ""
+  "site_id": "",
+  "source": "Табл. 63, рис. 1",
+  "name_az": "Gül",
+  "site_id_prev": "gul"
  },
  "adjust": {
   "brightness": 0,
@@ -121,5 +123,8 @@
    ".............11111............."
   ]
  },
- "saved_at": "2026-09-24 22:57:32"
+ "saved_at": "2026-09-24 22:57:32",
+ "book_table": 63,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

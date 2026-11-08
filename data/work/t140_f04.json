@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Xeyvagülü",
-  "name": "Хейвагюлю",
-  "translation": "Айвовый цветок Ширван",
-  "carpet": "К.",
-  "type": "—",
-  "note": "Ш",
+  "name_az": "zəncir",
+  "name": "Зенджир",
+  "translation": "Цепочка",
+  "carpet": "Гашед",
+  "type": "К.—Ш",
+  "note": "Напоминает ювелирное украшение.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 139, рис. 4"
  },
  "grid": {
   "pw": 4.8077,
@@ -3075,5 +3074,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 139,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

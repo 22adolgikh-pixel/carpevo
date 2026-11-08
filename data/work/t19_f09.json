@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Dəvə",
-  "name": "Дәвә",
-  "translation": "Верблюд",
-  "carpet": "Ширван",
-  "type": "К.-Ш",
-  "note": "",
-  "site_id": "deve",
-  "source": "",
-  "name_az_auto": true
+  "name_az": "keçi dabanı",
+  "name": "Кечидабаны",
+  "translation": "Козлиная пятка",
+  "carpet": "Гянджа",
+  "type": "Г.—К",
+  "note": "Означает след животного.",
+  "site_id": "kechidagbani,kechi-dirnagi",
+  "source": "Табл. 19, рис. 8",
+  "site_id_prev": "deve"
  },
  "grid": {
   "pw": 4.9118,
@@ -118,5 +118,8 @@
   "invert": false
  },
  "saved_at": "2026-09-26 10:58:03",
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 19,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

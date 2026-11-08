@@ -38,11 +38,10 @@
   "name": "Гуш",
   "translation": "Птица",
   "carpet": "Биджо",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "qush",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 24, рис. 3"
  },
  "grid": {
   "pw": 4.92,
@@ -117,5 +116,8 @@
  },
  "saved_at": "2026-09-26 20:48:03",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 24,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

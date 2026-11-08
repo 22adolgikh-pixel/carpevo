@@ -33,12 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "",
+  "name_az": "Qaraca",
+  "name": "Гараджа",
   "translation": "",
-  "carpet": "",
-  "type": "",
-  "note": ""
+  "carpet": "Гараджа",
+  "type": "Теб.",
+  "note": "«Гараджа», Тебризский тип, XVIII в. (из коллекции музея Восточных культур в Москве.",
+  "source": "Табл. 232, рис. 2"
  },
  "grid": {
   "pw": 5.4068,
@@ -1408,5 +1409,8 @@
   "ntiles": 12,
   "verified": []
  },
- "kind": "photo"
+ "kind": "photo",
+ "book_table": 232,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

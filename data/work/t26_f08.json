@@ -37,11 +37,10 @@
   "name": "Ары",
   "translation": "Оса",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Встречается и в муганских коврах.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 26, рис. 8"
  },
  "grid": {
   "pw": 4.9184,
@@ -207,5 +206,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 26,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

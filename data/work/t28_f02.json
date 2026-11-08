@@ -38,11 +38,10 @@
   "name": "Дараг",
   "translation": "Гребень",
   "carpet": "Биджо",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "daraq",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 28, рис. 2"
  },
  "grid": {
   "pw": 4.9412,
@@ -113,5 +112,8 @@
  },
  "saved_at": "2026-09-26 19:14:38",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 28,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

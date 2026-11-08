@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Tebriz",
-  "name": "Тебриз",
-  "translation": "гюлю Цветок Тебриза",
+  "name_az": "Təbriz gülü",
+  "name": "Тебриз гюлю",
+  "translation": "Цветок Тебриза",
   "carpet": "Карабах",
   "type": "Кар.",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 77, рис. 12"
  },
  "grid": {
   "pw": 4.913,
@@ -161,5 +160,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 77,
+ "book_fig": 12,
+ "kerimov_fix": "2026-10-31"
 }

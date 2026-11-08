@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Pencere",
-  "name": "Пенджерэ",
-  "translation": "",
-  "carpet": "Окно",
-  "type": "К.—Ш",
+  "name_az": "heyvan",
+  "name": "Хейван",
+  "translation": "Животное",
+  "carpet": "Казах",
+  "type": "Г.—К",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 167, рис. 3"
  },
  "grid": {
   "pw": 4.8734,
@@ -312,5 +311,8 @@
   true,
   true,
   true
- ]
+ ],
+ "book_table": 167,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

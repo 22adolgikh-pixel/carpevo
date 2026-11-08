@@ -33,12 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "",
+  "name_az": "pərdə",
+  "name": "Занавеска",
   "translation": "",
-  "carpet": "",
-  "type": "",
-  "note": ""
+  "carpet": "Карабах",
+  "type": "Кар.",
+  "note": "Занавеска, карабахский тип (из коллекции музея Восточных культур в Москве).",
+  "source": "Табл. 235, рис. 1"
  },
  "grid": {
   "pw": 21.6857,
@@ -1059,5 +1060,8 @@
   "ntiles": 8,
   "verified": []
  },
- "kind": "photo"
+ "kind": "photo",
+ "book_table": 235,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

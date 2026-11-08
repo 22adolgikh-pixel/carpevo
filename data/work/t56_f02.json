@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qotan",
+  "name_az": "kotan",
   "name": "Котан",
   "translation": "Плуг",
   "carpet": "Фахралы",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 56, рис. 2"
  },
  "grid": {
   "pw": 4.9535,
@@ -149,5 +148,8 @@
  },
  "saved_at": "2026-09-27 18:10:50",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 56,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

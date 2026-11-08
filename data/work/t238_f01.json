@@ -33,12 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "",
+  "name_az": "Təbriz gülü",
+  "name": "Тебриз",
   "translation": "",
-  "carpet": "",
-  "type": "",
-  "note": ""
+  "carpet": "Тебриз",
+  "type": "Теб.",
+  "note": "«Тебриз». Тебризский тип, нач. XVIII в.",
+  "source": "Табл. 234, рис. 1"
  },
  "grid": {
   "pw": 10.8889,
@@ -5335,5 +5336,8 @@
   "ntiles": 24,
   "verified": []
  },
- "kind": "photo"
+ "kind": "photo",
+ "book_table": 234,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Burma",
-  "name": "Бурма",
-  "translation": "Завиток Баку и Куба",
-  "carpet": "К.",
-  "type": "—",
-  "note": "Ш",
+  "name_az": "kəsmə su",
+  "name": "Кесмесу",
+  "translation": "Пунктирная линия",
+  "carpet": "Казах-Карабах",
+  "type": "Кар.",
+  "note": "Больше встречается в безворсных коврах — верни и зили.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 133, рис. 10"
  },
  "grid": {
   "pw": 4.9355,
@@ -1127,5 +1126,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 133,
+ "book_fig": 10,
+ "kerimov_fix": "2026-10-31"
 }

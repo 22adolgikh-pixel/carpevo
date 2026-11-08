@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qarmaxlı",
-  "name": "Гармахлы",
-  "translation": "Крючкообразный Куба",
-  "carpet": "К.",
-  "type": "—",
-  "note": "Ш Этот медахил, напоминающий меандр в греческой архитектуре, встречается в кубинских сумахах.",
+  "name_az": "dolama",
+  "name": "Долама",
+  "translation": "Завиток",
+  "carpet": "Казах",
+  "type": "Г.—К",
+  "note": "Встречается в фаянсовой посуде, найденной в Мингечауре.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 136, рис. 8"
  },
  "grid": {
   "pw": 4.9091,
@@ -3653,5 +3652,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 136,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

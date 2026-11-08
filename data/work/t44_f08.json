@@ -38,11 +38,10 @@
   "name": "Бешик",
   "translation": "Люлька",
   "carpet": "Казах",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "",
   "site_id": "beshik",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 44, рис. 8"
  },
  "grid": {
   "pw": 4.95,
@@ -150,5 +149,8 @@
  },
  "saved_at": "2026-09-26 20:20:39",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 44,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

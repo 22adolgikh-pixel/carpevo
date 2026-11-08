@@ -37,11 +37,10 @@
   "name": "Нахыш",
   "translation": "Узор",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Леденец в виде птицы.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 23, рис. 1"
  },
  "grid": {
   "pw": 4.9296,
@@ -2361,5 +2360,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 23,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

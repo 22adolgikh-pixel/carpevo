@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Sırğa",
+  "name_az": "sırğa",
   "name": "Сырга",
   "translation": "Сережка",
   "carpet": "Фахралы",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "Напоминает фигуру Будды в китайских миниатюрах.",
   "site_id": "sirga",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 31, рис. 11"
  },
  "grid": {
   "pw": 4.8644,
@@ -171,5 +170,8 @@
  },
  "saved_at": "2026-09-26 23:56:02",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 31,
+ "book_fig": 11,
+ "kerimov_fix": "2026-10-31"
 }

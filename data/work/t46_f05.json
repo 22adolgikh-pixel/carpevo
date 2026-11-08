@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Gez",
+  "name_az": "göz",
   "name": "Гез",
   "translation": "Глаз",
   "carpet": "Гянджа",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "Видимо, это изображение монеты.",
   "site_id": "goz",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 46, рис. 5"
  },
  "grid": {
   "pw": 4.9167,
@@ -118,5 +117,8 @@
  },
  "saved_at": "2026-09-27 00:47:26",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 46,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

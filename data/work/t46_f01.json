@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Xal",
+  "name_az": "xal",
   "name": "Хал",
   "translation": "Пятно",
   "carpet": "Гянджа",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "",
   "site_id": "xal-2",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 46, рис. 1"
  },
  "grid": {
   "pw": 4.913,
@@ -117,5 +116,8 @@
  },
  "saved_at": "2026-09-27 00:46:13",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 46,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

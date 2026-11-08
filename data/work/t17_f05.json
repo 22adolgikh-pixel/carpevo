@@ -37,11 +37,10 @@
   "name": "Чанахлы-бага",
   "translation": "Черепаха",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Изредка встречается также в бакинских коврах.",
   "site_id": "chanaqli-baga,tisbaga-2",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 17, рис. 5"
  },
  "grid": {
   "pw": 4.9615,
@@ -153,5 +152,8 @@
  },
  "saved_at": "2026-09-26 10:51:40",
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 17,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

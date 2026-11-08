@@ -38,11 +38,10 @@
   "name": "Тоюг",
   "translation": "Курица",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "toyuq",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 21, рис. 2"
  },
  "grid": {
   "pw": 4.8824,
@@ -133,5 +132,8 @@
  },
  "saved_at": "2026-09-27 23:54:29",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 21,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

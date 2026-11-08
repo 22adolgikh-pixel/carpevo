@@ -38,11 +38,10 @@
   "name": "Дамга",
   "translation": "Клеймо",
   "carpet": "Гянджа",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "",
   "site_id": "damga",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 36, рис. 2"
  },
  "grid": {
   "pw": 4.9355,
@@ -121,5 +120,8 @@
   "invert": false
  },
  "saved_at": "2026-09-26 10:39:01",
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 36,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

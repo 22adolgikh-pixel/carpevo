@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Dəvə",
-  "name": "Дәвә",
+  "name_az": "Deve",
+  "name": "Дэвэ",
   "translation": "Верблюд",
   "carpet": "Карабах",
   "type": "Кар.",
   "note": "",
   "site_id": "deve",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 19, рис. 15"
  },
  "grid": {
   "pw": 4.9048,
@@ -126,5 +125,8 @@
  },
  "saved_at": "2026-09-26 20:10:05",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 19,
+ "book_fig": 15,
+ "kerimov_fix": "2026-10-31"
 }

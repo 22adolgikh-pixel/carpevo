@@ -34,13 +34,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Toyuğağtı",
-  "name": "Тоюгагты",
+  "name_az": "Toyuğayağı",
+  "name": "Тоюгаягы",
   "translation": "Куриные ножки",
   "carpet": "Карабах",
   "type": "Кар.",
   "note": "Напоминает летящую птицу.",
-  "name_az_auto": true
+  "source": "Табл. 77, рис. 2"
  },
  "grid": {
   "pw": 4.9189,
@@ -132,5 +132,8 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 12:27:45"
+ "saved_at": "2026-10-03 12:27:45",
+ "book_table": 77,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

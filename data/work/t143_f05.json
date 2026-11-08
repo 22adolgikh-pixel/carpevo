@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Gezlü",
-  "name": "Гезлю",
-  "translation": "Глаз",
-  "carpet": "Зейва",
-  "type": "К.-Ш",
-  "note": "",
+  "name_az": "",
+  "name": "",
+  "translation": "",
+  "carpet": "Куба",
+  "type": "К.—Ш",
+  "note": "Встречается в коврах Южного Дагестана.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 142, рис. 5"
  },
  "grid": {
   "pw": 4.8918,
@@ -2781,5 +2780,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 142,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qadim",
-  "name": "Гадим",
-  "translation": "бута Бута древняя",
+  "name_az": "qədim buta",
+  "name": "Гадим бута",
+  "translation": "Бута древняя",
   "carpet": "Сор-сор",
   "type": "К.—Ш",
   "note": "Напоминает элементы муганских ковров.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 99, рис. 4"
  },
  "grid": {
   "pw": 4.9583,
@@ -1242,5 +1241,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 99,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

@@ -38,11 +38,10 @@
   "name": "Дамга",
   "translation": "Клеймо",
   "carpet": "Конахкенд",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Встречается и в ширванских коврах.",
   "site_id": "damga",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 36, рис. 3"
  },
  "grid": {
   "pw": 4.9348,
@@ -146,5 +145,8 @@
   "invert": false
  },
  "saved_at": "2026-09-26 10:39:36",
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 36,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

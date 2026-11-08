@@ -33,15 +33,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Quş",
-  "name": "Гуш",
-  "translation": "Птица Бакинский",
-  "carpet": "зили",
-  "type": "К.-Ш.",
-  "note": "Возможно это изображение индейки.",
-  "site_id": "qush",
-  "source": "",
-  "name_az_auto": true
+  "name_az": "Keçi",
+  "name": "Кечи",
+  "translation": "Козел",
+  "carpet": "Бакинский зили",
+  "type": "К.—Ш",
+  "note": "",
+  "site_id": "kechi",
+  "source": "Табл. 9, рис. 3",
+  "site_id_prev": "qush"
  },
  "adjust": {
   "brightness": 0,
@@ -155,5 +155,8 @@
  },
  "saved_at": "2026-09-27 23:17:14",
  "review": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 9,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

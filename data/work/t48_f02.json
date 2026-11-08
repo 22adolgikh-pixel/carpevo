@@ -35,13 +35,12 @@
   "section": "",
   "name_az": "Güzgü",
   "name": "Гюзгю",
-  "translation": "Зеркало Гянджа Г.-К Трехстворчатое",
-  "carpet": "зеркало",
-  "type": "—",
-  "note": "трельяж.",
+  "translation": "Зеркало",
+  "carpet": "Гянджа",
+  "type": "Г.—К",
+  "note": "Трехстворчатое зеркало — трельяж.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 48, рис. 2"
  },
  "grid": {
   "pw": 4.9783,
@@ -156,5 +155,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 48,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

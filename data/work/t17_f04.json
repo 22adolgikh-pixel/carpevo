@@ -37,11 +37,10 @@
   "name": "Тысбага",
   "translation": "Черепаха",
   "carpet": "Казах",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "",
   "site_id": "tisbaga-2,tisbaga",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 17, рис. 4"
  },
  "grid": {
   "pw": 4.9623,
@@ -175,5 +174,8 @@
  },
  "saved_at": "2026-09-26 10:51:19",
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 17,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

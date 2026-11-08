@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qaragez",
-  "name": "Гарагез",
-  "translation": "Черный глаз",
-  "carpet": "Губатлы",
+  "name_az": "əməkömənci",
+  "name": "Хаманкоманчи",
+  "translation": "Просвирняк",
+  "carpet": "Карабах",
   "type": "Кар.",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 135, рис. 5"
  },
  "grid": {
   "pw": 4.9,
@@ -1623,5 +1622,8 @@
   null
  ],
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 135,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

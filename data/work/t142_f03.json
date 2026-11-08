@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Dolamağarmaq",
-  "name": "Доламагармаг",
-  "translation": "Витой коготь",
-  "carpet": "Баку",
-  "type": "К.-Ш",
-  "note": "",
+  "name_az": "zəncirə",
+  "name": "Зенджире",
+  "translation": "Галуны",
+  "carpet": "Тебриз",
+  "type": "Теб.",
+  "note": "Встречается и в иранских коврах.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 141, рис. 3"
  },
  "grid": {
   "pw": 4.8571,
@@ -6136,5 +6135,8 @@
   null
  ],
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 141,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

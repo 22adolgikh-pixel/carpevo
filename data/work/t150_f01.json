@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Meşəl",
-  "name": "Мешәл",
-  "translation": "Факел",
+  "name_az": "Şamdanlı",
+  "name": "Шамданлы",
+  "translation": "Подсвечник",
   "carpet": "Карабах",
   "type": "Кар.",
-  "note": "В Карабахе называют «Шамданлы» «подсвечником», см. табл. 149, рис. 1.",
+  "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 149, рис. 1"
  },
  "grid": {
   "pw": 4.8354,
@@ -8136,5 +8135,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 149,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

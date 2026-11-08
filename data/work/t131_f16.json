@@ -34,13 +34,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Bala",
-  "name": "Бала",
-  "translation": "хашийе Малая кайма Баку",
-  "carpet": "К.",
-  "type": "-",
-  "note": "Ш См. таблицу 148, рис. 6.",
-  "name_az_auto": true
+  "name_az": "zəncirə",
+  "name": "Зенджире",
+  "translation": "Галуны",
+  "carpet": "Карабах",
+  "type": "Кар.",
+  "note": "См. табл. № 140, рис. 3. [в книге опечатка: строка помечена «131 26»]",
+  "source": "Табл. 130, рис. 26"
  },
  "grid": {
   "pw": 4.8621,
@@ -121,5 +121,8 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 12:27:45"
+ "saved_at": "2026-10-03 12:27:45",
+ "book_table": 130,
+ "book_fig": 26,
+ "kerimov_fix": "2026-10-31"
 }

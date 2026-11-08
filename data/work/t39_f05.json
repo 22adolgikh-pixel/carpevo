@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Xal",
+  "name_az": "xal",
   "name": "Хал",
-  "translation": "Пятно Биджо К.-Ш Этот элемент называется также",
-  "carpet": "«чар-пазы»",
-  "type": "—",
-  "note": "крестообразный.",
+  "translation": "Пятно",
+  "carpet": "Биджо",
+  "type": "К.—Ш",
+  "note": "Этот элемент называется также «чарпазы» — крестообразный.",
   "site_id": "xal-2",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 39, рис. 5"
  },
  "grid": {
   "pw": 4.9231,
@@ -136,5 +135,8 @@
  },
  "saved_at": "2026-09-26 20:24:43",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 39,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

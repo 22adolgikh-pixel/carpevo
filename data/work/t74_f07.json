@@ -37,11 +37,11 @@
   "name_az": "",
   "name": "",
   "translation": "",
-  "carpet": "Казах",
-  "type": "Г.-К",
-  "note": "",
+  "carpet": "Гырыз",
+  "type": "К.—Ш",
+  "note": "Некоторые принимают этот элемент за изображение погон.",
   "site_id": "",
-  "source": ""
+  "source": "Табл. 74, рис. 8"
  },
  "grid": {
   "pw": 4.9286,
@@ -227,5 +227,8 @@
   null
  ],
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 74,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Sümbüldaraq",
-  "name": "Сюмбюльдараг",
-  "translation": "Колос гребень Биджо",
-  "carpet": "К.",
-  "type": "—",
-  "note": "Ш Иногда встречается в коврах кубинской группы.",
+  "name_az": "heyvan",
+  "name": "Хейван",
+  "translation": "Животное",
+  "carpet": "Кабала",
+  "type": "К.—Ш",
+  "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 140, рис. 7"
  },
  "grid": {
   "pw": 4.9167,
@@ -3551,5 +3550,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 140,
+ "book_fig": 7,
+ "kerimov_fix": "2026-10-31"
 }

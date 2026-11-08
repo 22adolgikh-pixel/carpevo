@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Düymə",
-  "name": "Дюйме",
-  "translation": "Пуговица",
-  "carpet": "Карабах",
+  "name_az": "pəncərə",
+  "name": "Пенджерэ",
+  "translation": "Окно",
+  "carpet": "Талыш",
   "type": "Кар.",
-  "note": "В ювелирном искусстве рельефные кружочки на поясе называются пуговицей.",
-  "site_id": "duyme",
-  "source": "",
-  "name_az_auto": true
+  "note": "",
+  "site_id": "pencere,pencere-2",
+  "source": "Табл. 32, рис. 3",
+  "site_id_prev": "duyme"
  },
  "grid": {
   "pw": 4.96,
@@ -124,5 +124,8 @@
  },
  "saved_at": "2026-09-26 14:47:42",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 32,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

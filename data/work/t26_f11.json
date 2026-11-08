@@ -37,11 +37,10 @@
   "name": "Ары",
   "translation": "Оса",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Встречаются и в коврах Иранского Азербайджана.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 26, рис. 11"
  },
  "grid": {
   "pw": 4.92,
@@ -204,5 +203,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 26,
+ "book_fig": 11,
+ "kerimov_fix": "2026-10-31"
 }

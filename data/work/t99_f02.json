@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Şabalıtbuta",
+  "name_az": "şabalıd buta",
   "name": "Шабалытбута",
   "translation": "Бута каштан",
   "carpet": "Шабалытбута",
   "type": "Кар.",
   "note": "Флакон для розовой воды.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 99, рис. 2"
  },
  "grid": {
   "pw": 4.963,
@@ -731,5 +730,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 99,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

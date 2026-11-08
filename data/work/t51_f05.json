@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Dolama",
-  "name": "Долама",
-  "translation": "Завиток",
-  "carpet": "Ханкарванд",
-  "type": "Кар.",
+  "name_az": "Sallama",
+  "name": "Саллама",
+  "translation": "Висячка",
+  "carpet": "Кедабек",
+  "type": "Г.—К",
   "note": "",
-  "site_id": "qivrim,dolama",
-  "source": "",
-  "name_az_auto": true
+  "site_id": "sallama",
+  "source": "Табл. 51, рис. 6",
+  "site_id_prev": "qivrim,dolama"
  },
  "grid": {
   "pw": 4.9583,
@@ -152,5 +152,8 @@
  },
  "saved_at": "2026-09-27 00:25:30",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 51,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

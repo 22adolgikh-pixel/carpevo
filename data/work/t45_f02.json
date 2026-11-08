@@ -38,11 +38,10 @@
   "name": "Фыр",
   "translation": "Юла",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "fir",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 45, рис. 2"
  },
  "grid": {
   "pw": 4.9091,
@@ -144,5 +143,8 @@
  },
  "saved_at": "2026-09-27 00:51:00",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 45,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

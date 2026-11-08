@@ -36,13 +36,12 @@
   "section": "",
   "name_az": "Buynuz",
   "name": "Буйнуз",
-  "translation": "Рог Карабах Кар. Также называется",
-  "carpet": "«гошабуйнуз»",
-  "type": "—",
-  "note": "«парные рога».",
+  "translation": "Рог",
+  "carpet": "Карабах",
+  "type": "Кар.",
+  "note": "Также называется «гошабуйнуз» — «парные рога».",
   "site_id": "buynuz",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 54, рис. 2"
  },
  "grid": {
   "pw": 4.9412,
@@ -130,5 +129,8 @@
  },
  "saved_at": "2026-09-27 00:01:50",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 54,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,13 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Butaq",
+  "name_az": "budaq",
   "name": "Бутаг",
   "translation": "Ветка",
   "carpet": "Мугань",
   "type": "Кар.",
   "note": "",
-  "name_az_auto": true
+  "source": "Табл. 108, рис. 4"
  },
  "grid": {
   "pw": 4.913,
@@ -161,5 +161,8 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 12:27:45"
+ "saved_at": "2026-10-03 12:27:45",
+ "book_table": 108,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

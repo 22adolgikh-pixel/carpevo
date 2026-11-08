@@ -34,13 +34,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Ara",
-  "name": "Ара",
-  "translation": "хашийе Серединная кайма Для бакинских ковров",
-  "carpet": "К.",
-  "type": "-",
-  "note": "Ш См. таблицу 154, рис. 2.",
-  "name_az_auto": true
+  "name_az": "bala haşiyə",
+  "name": "Бала хашийе",
+  "translation": "Малая кайма",
+  "carpet": "Мараза",
+  "type": "К.—Ш",
+  "note": "См. табл. № 144, рис. 6.",
+  "source": "Табл. 131, рис. 10"
  },
  "grid": {
   "pw": 4.8529,
@@ -125,5 +125,8 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 12:27:45"
+ "saved_at": "2026-10-03 12:27:45",
+ "book_table": 131,
+ "book_fig": 10,
+ "kerimov_fix": "2026-10-31"
 }

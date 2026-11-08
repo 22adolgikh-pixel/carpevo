@@ -34,13 +34,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Pencere",
-  "name": "Пенджерэ",
-  "translation": "",
-  "carpet": "Окно",
-  "type": "К.—Ш",
+  "name_az": "Qıvrım",
+  "name": "Гыврым",
+  "translation": "Завиток",
+  "carpet": "Гянджа, Казах",
+  "type": "Г.—К",
   "note": "",
-  "name_az_auto": true
+  "source": "Табл. 167, рис. 2"
  },
  "grid": {
   "pw": 4.85,
@@ -216,5 +216,8 @@
   false,
   false,
   false
- ]
+ ],
+ "book_table": 167,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

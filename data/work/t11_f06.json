@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çeng",
+  "name_az": "çəng",
   "name": "Ченг",
-  "translation": "Музыкальный инструмент Карабахский",
-  "carpet": "зили",
+  "translation": "Музыкальный инструмент",
+  "carpet": "Карабахский зили",
   "type": "Кар.",
   "note": "Напоминает восточный музыкальный инструмент.",
   "site_id": "cheng",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 11, рис. 6"
  },
  "adjust": {
   "brightness": 0,
@@ -139,5 +138,8 @@
   ]
  },
  "saved_at": "2026-09-27 23:21:04",
- "review": false
+ "review": false,
+ "book_table": 11,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

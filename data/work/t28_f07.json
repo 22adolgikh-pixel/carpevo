@@ -38,11 +38,10 @@
   "name": "Готаз",
   "translation": "Кисточка",
   "carpet": "Гянджа",
-  "type": "Г.-К",
-  "note": "",
+  "type": "Г.—К",
+  "note": "Этот элемент встречается в занавесях, ширмах, подушках и др. предметах обихода.",
   "site_id": "qotaz",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 28, рис. 7"
  },
  "grid": {
   "pw": 4.9565,
@@ -184,5 +183,8 @@
  },
  "saved_at": "2026-09-26 19:15:19",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 28,
+ "book_fig": 7,
+ "kerimov_fix": "2026-10-31"
 }

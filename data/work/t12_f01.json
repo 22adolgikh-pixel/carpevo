@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Dolama",
-  "name": "Долама",
-  "translation": "хашийе Спиральная кайма Конская",
-  "carpet": "попона",
-  "type": "Г.-К.",
+  "name_az": "dolama haşiyə",
+  "name": "Долама хашийе",
+  "translation": "Спиральная кайма",
+  "carpet": "Конская попона",
+  "type": "Г.—К.",
   "note": "Напоминает узор русских вышивок.",
   "site_id": "dolama-hashiye",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 12, рис. 1"
  },
  "grid": {
   "pw": 4.9296,
@@ -118,5 +117,8 @@
  },
  "saved_at": "2026-09-27 01:09:26",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 12,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

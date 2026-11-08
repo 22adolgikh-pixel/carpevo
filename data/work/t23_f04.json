@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Göl",
-  "name": "Гёл",
-  "translation": "ортасы Центр медальона",
+  "name_az": "göl ortası",
+  "name": "Гёл ортасы",
+  "translation": "Центр медальона",
   "carpet": "Кабала",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Возможно, это летучая мышь.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 23, рис. 4"
  },
  "grid": {
   "pw": 4.9123,
@@ -8538,5 +8537,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 23,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

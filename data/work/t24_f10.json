@@ -37,12 +37,11 @@
   "name_az": "Bülbül",
   "name": "Бюльбюль",
   "translation": "Соловей",
-  "carpet": "Багчадагыоллер",
+  "carpet": "Багчадагюллер",
   "type": "Кар.",
   "note": "Этот элемент относится к XIX в.",
   "site_id": "bulbul",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 24, рис. 10"
  },
  "grid": {
   "pw": 4.932,
@@ -168,5 +167,8 @@
  },
  "saved_at": "2026-09-26 20:49:22",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 24,
+ "book_fig": 10,
+ "kerimov_fix": "2026-10-31"
 }

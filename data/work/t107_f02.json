@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Meşayarnağı",
-  "name": "Мешаярнагы",
-  "translation": "Лесное растение Гянджа и",
-  "carpet": "Казах",
+  "name_az": "Meşayarpağı",
+  "name": "Мешаярпагы",
+  "translation": "Лесное растение",
+  "carpet": "Гянджа и Казах",
   "type": "Г.—К",
   "note": "Не характерен для азербайджанских ковров.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 107, рис. 2"
  },
  "grid": {
   "pw": 4.9,
@@ -867,5 +866,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 107,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

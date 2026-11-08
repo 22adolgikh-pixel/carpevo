@@ -38,11 +38,10 @@
   "name": "Тогга",
   "translation": "Пояс",
   "carpet": "Казах",
-  "type": "Г.-К",
-  "note": "",
+  "type": "Г.—К",
+  "note": "(то же: здесь имеется в виду «пряжка»)",
   "site_id": "toqqa",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 30, рис. 6"
  },
  "grid": {
   "pw": 4.8696,
@@ -126,5 +125,8 @@
  },
  "saved_at": "2026-09-26 15:54:02",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 30,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

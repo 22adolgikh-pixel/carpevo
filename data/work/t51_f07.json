@@ -38,11 +38,10 @@
   "name": "Агадж",
   "translation": "Дерево",
   "carpet": "Кедабек",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "",
   "site_id": "agac",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 51, рис. 7"
  },
  "grid": {
   "pw": 4.9615,
@@ -142,5 +141,8 @@
  },
  "saved_at": "2026-09-27 00:25:39",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 51,
+ "book_fig": 7,
+ "kerimov_fix": "2026-10-31"
 }

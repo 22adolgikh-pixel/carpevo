@@ -38,11 +38,10 @@
   "name": "Гюльдан",
   "translation": "Цветочница",
   "carpet": "Карагашлы",
-  "type": "К.-Ш",
+  "type": "К.—Ш.",
   "note": "Основной элемент ковра «Карагашлы».",
   "site_id": "guldan",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 35, рис. 5"
  },
  "grid": {
   "pw": 4.8784,
@@ -165,5 +164,8 @@
  },
  "saved_at": "2026-09-26 23:43:44",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 35,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Ceftə",
-  "name": "Джефте",
-  "translation": "Дверная скоба",
-  "carpet": "Куба",
-  "type": "К.-Ш",
+  "name_az": "Başmaq",
+  "name": "Башмаг",
+  "translation": "Башмак",
+  "carpet": "Конахкенд",
+  "type": "К.—Ш",
   "note": "",
-  "site_id": "chefte",
-  "source": "",
-  "name_az_auto": true
+  "site_id": "bashmaq",
+  "source": "Табл. 29, рис. 6",
+  "site_id_prev": "chefte"
  },
  "grid": {
   "pw": 4.9524,
@@ -112,5 +112,8 @@
  },
  "saved_at": "2026-09-27 01:42:11",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 29,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

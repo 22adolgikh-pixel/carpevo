@@ -33,14 +33,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "Ылдыз",
-  "translation": "Звезда Кубинский",
-  "carpet": "сумах",
-  "type": "К.-Ш",
-  "note": "",
-  "site_id": "ulduz",
-  "source": ""
+  "name_az": "hörmə",
+  "name": "Хорме",
+  "translation": "Плетение",
+  "carpet": "Кубинский сумах",
+  "type": "К.—Ш",
+  "note": "Напоминает вязь куфического письма.",
+  "site_id": "horme",
+  "source": "Табл. 13, рис. 7",
+  "site_id_prev": "ulduz"
  },
  "adjust": {
   "brightness": 0,
@@ -128,5 +129,8 @@
    ".........................."
   ]
  },
- "saved_at": "2026-09-25 22:52:52"
+ "saved_at": "2026-09-25 22:52:52",
+ "book_table": 13,
+ "book_fig": 7,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,13 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Taxtamuja",
-  "name": "Тахтамужа",
-  "translation": "Деревянные ресницы Для всех азерб.",
-  "carpet": "ковр.",
-  "type": "-",
-  "note": "",
-  "name_az_auto": true
+  "name_az": "içli su",
+  "name": "Ичли су",
+  "translation": "Обведенная линия",
+  "carpet": "",
+  "type": "",
+  "note": "Встречается во всех коврах.",
+  "source": "Табл. 133, рис. 2"
  },
  "grid": {
   "pw": 4.8846,
@@ -137,5 +137,8 @@
    3
   ]
  },
- "saved_at": "2026-10-03 13:17:55"
+ "saved_at": "2026-10-03 13:17:55",
+ "book_table": 133,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

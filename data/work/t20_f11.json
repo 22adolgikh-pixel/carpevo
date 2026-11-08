@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Ordək",
-  "name": "Ордәк",
+  "name_az": "Ordek",
+  "name": "Ордэк",
   "translation": "Утка",
   "carpet": "Алпан",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Больше напоминает изображение гуся.",
   "site_id": "ordek",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 20, рис. 11"
  },
  "grid": {
   "pw": 4.9189,
@@ -131,5 +130,8 @@
  },
  "saved_at": "2026-09-26 12:44:35",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 20,
+ "book_fig": 11,
+ "kerimov_fix": "2026-10-31"
 }

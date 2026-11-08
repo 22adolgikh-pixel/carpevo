@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Xaşiyo",
-  "name": "Хашийо",
-  "translation": "Кайма",
-  "carpet": "Куба",
-  "type": "К.—Ш.",
-  "note": "В табл. 161—163 даны образцы общих построений бордюра.",
+  "name_az": "Cağ",
+  "name": "Джаг",
+  "translation": "Джаг",
+  "carpet": "Ханкарванд",
+  "type": "Кар.",
+  "note": "Взят из ковра «Кабала».",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 160, рис. 1"
  },
  "grid": {
   "pw": 4.92,
@@ -1310,5 +1309,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 160,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

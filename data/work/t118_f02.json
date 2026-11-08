@@ -37,11 +37,10 @@
   "name": "Баш",
   "translation": "Голова",
   "carpet": "Куба",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 118, рис. 2"
  },
  "grid": {
   "pw": 4.935,
@@ -240,5 +239,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 118,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

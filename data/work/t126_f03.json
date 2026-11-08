@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Göl",
+  "name_az": "göl",
   "name": "Гель",
-  "translation": "Медальон Кохна",
-  "carpet": "Куба",
-  "type": "Г.-К",
+  "translation": "Медальон",
+  "carpet": "Кохна Куба",
+  "type": "Г.—К",
   "note": "Этот медальон больше встречается в сумахах Дербента.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 126, рис. 3"
  },
  "grid": {
   "pw": 4.9286,
@@ -22888,5 +22887,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 126,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

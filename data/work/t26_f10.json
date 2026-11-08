@@ -37,11 +37,10 @@
   "name": "Ары",
   "translation": "Оса",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Вид осы спереди.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 26, рис. 10"
  },
  "grid": {
   "pw": 4.9385,
@@ -151,5 +150,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 26,
+ "book_fig": 10,
+ "kerimov_fix": "2026-10-31"
 }

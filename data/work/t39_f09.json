@@ -35,14 +35,14 @@
  "meta": {
   "section": "",
   "name_az": "Gülüyaylıq",
-  "name": "Гюлюйайлыг",
+  "name": "Гюлюяйлыг",
   "translation": "Платок с цветами",
   "carpet": "Гырыз",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Встречается также в декоре каламкара.",
-  "site_id": "gulu-yayliq",
-  "source": "",
-  "name_az_auto": true
+  "site_id": "",
+  "source": "Табл. 39, рис. 9",
+  "site_id_prev": "gulu-yayliq"
  },
  "grid": {
   "pw": 4.8975,
@@ -177,5 +177,8 @@
  },
  "saved_at": "2026-09-26 23:29:54",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 39,
+ "book_fig": 9,
+ "kerimov_fix": "2026-10-31"
 }

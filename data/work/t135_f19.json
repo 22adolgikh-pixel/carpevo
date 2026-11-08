@@ -33,12 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "",
-  "translation": "",
-  "carpet": "",
+  "name_az": "zəncir",
+  "name": "Зенджир",
+  "translation": "Цепочка",
+  "carpet": "Для безворсных ковров",
   "type": "",
-  "note": ""
+  "note": "",
+  "source": "Табл. 134, рис. 19"
  },
  "grid": {
   "pw": 4.9054,
@@ -1130,5 +1131,8 @@
     0
    ]
   ]
- }
+ },
+ "book_table": 134,
+ "book_fig": 19,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Geyçibalıq",
-  "name": "Гейчибалыг",
-  "translation": "Рыба-ножницы",
-  "carpet": "Куба",
+  "name_az": "Ocaq",
+  "name": "Оджаг",
+  "translation": "Очаг",
+  "carpet": "Джемджемли",
   "type": "К.—Ш",
-  "note": "Типичен для ковров Карабаха и Гянджа-Каказа.",
+  "note": "Встречается и в ковре «Пиргасанлы».",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 151, рис. 4"
  },
  "grid": {
   "pw": 4.8723,
@@ -2726,5 +2725,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 151,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

@@ -38,11 +38,10 @@
   "name": "Бага",
   "translation": "Черепаха",
   "carpet": "Сураханы",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "tisbaga-2,baga",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 54, рис. 4"
  },
  "grid": {
   "pw": 4.9524,
@@ -127,5 +126,8 @@
  },
  "saved_at": "2026-09-27 00:02:27",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 54,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

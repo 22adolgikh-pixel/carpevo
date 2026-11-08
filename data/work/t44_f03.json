@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Kerpiç",
+  "name_az": "kərpic",
   "name": "Керпич",
   "translation": "Кирпич",
   "carpet": "Куба",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Взят с формы глазурованного кирпича.",
   "site_id": "kerpich",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 44, рис. 3"
  },
  "grid": {
   "pw": 4.9362,
@@ -140,5 +139,8 @@
  },
  "saved_at": "2026-09-26 20:19:56",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 44,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

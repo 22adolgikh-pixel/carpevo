@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çarkezi",
-  "name": "Чаркези",
-  "translation": "Крест-на-крест",
-  "carpet": "Конахкенд",
-  "type": "К.-Ш",
-  "note": "Испорченная форма слова «чарнази».",
+  "name_az": "Duymeli",
+  "name": "Дуймели",
+  "translation": "Пуговица",
+  "carpet": "Зейва",
+  "type": "К.—Ш",
+  "note": "Напоминает ювелирное украшение.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 142, рис. 6"
  },
  "grid": {
   "pw": 4.9091,
@@ -5412,5 +5411,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 142,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

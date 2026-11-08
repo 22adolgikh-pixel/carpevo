@@ -33,13 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Geyçi",
-  "name": "Гейчи",
-  "translation": "Ножницы",
-  "carpet": "Пиребедиль",
+  "name_az": "alaqapı",
+  "name": "Алагапы",
+  "translation": "Ворота",
+  "carpet": "Мараза",
   "type": "К.—Ш",
   "note": "",
-  "name_az_auto": true
+  "source": "Табл. 168, рис. 1"
  },
  "grid": {
   "pw": 4.9155,
@@ -264,5 +264,8 @@
   false,
   false,
   false
- ]
+ ],
+ "book_table": 168,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

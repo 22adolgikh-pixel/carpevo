@@ -36,13 +36,12 @@
   "section": "",
   "name_az": "Qoşalar",
   "name": "Гошалар",
-  "translation": "Парные Карабах и",
-  "carpet": "Ширван",
+  "translation": "Парные",
+  "carpet": "Карабах и Ширван",
   "type": "",
-  "note": "",
+  "note": "Встречаются также в посуде, найденной во время раскопок Старой Гянджи (XII в.) (И. М. Джафар-заде Историко-археологический очерк Старой Гянджи, Баку, 1949, стр. 71—72).",
   "site_id": "qoshalar",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 25, рис. 2"
  },
  "grid": {
   "pw": 4.9118,
@@ -166,5 +165,8 @@
   "invert": false
  },
  "saved_at": "2026-09-26 11:04:50",
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 25,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

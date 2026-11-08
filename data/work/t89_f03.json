@@ -37,10 +37,10 @@
   "name_az": "Yarpaq",
   "name": "Ярпаг",
   "translation": "Лист",
-  "carpet": "Херис",
+  "carpet": "Лячектурундж",
   "type": "Теб.",
-  "note": "",
-  "name_az_auto": true
+  "note": "Можно встретить также в карабахских коврах.",
+  "source": "Табл. 89, рис. 2"
  },
  "grid": {
   "pw": 4.9375,
@@ -146,5 +146,8 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 18:12:11"
+ "saved_at": "2026-10-03 18:12:11",
+ "book_table": 89,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

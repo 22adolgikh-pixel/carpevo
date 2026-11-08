@@ -38,11 +38,10 @@
   "name": "Газ",
   "translation": "Гусь",
   "carpet": "Зейва",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "qaz",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 20, рис. 10"
  },
  "grid": {
   "pw": 4.9189,
@@ -130,5 +129,8 @@
  },
  "saved_at": "2026-09-26 12:44:14",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 20,
+ "book_fig": 10,
+ "kerimov_fix": "2026-10-31"
 }

@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Penca",
+  "name_az": "pəncə",
   "name": "Пенджа",
-  "translation": "Лапа Гянджа Г.-К Больше встречается в",
-  "carpet": "коврах",
-  "type": "—",
-  "note": "намазлыках.",
+  "translation": "Лапа",
+  "carpet": "Гянджа",
+  "type": "Г.—К",
+  "note": "Больше встречается в коврах — намазлыках.",
   "site_id": "pence",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 33, рис. 4"
  },
  "grid": {
   "pw": 4.9032,
@@ -172,5 +171,8 @@
  },
  "saved_at": "2026-09-26 23:53:52",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 33,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

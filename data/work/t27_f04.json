@@ -38,11 +38,10 @@
   "name": "Ягдан",
   "translation": "Масленка",
   "carpet": "Гаджигаиб",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Напоминает форму кувшинчика.",
   "site_id": "yagdan",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 27, рис. 4"
  },
  "grid": {
   "pw": 4.8636,
@@ -114,5 +113,8 @@
  },
  "saved_at": "2026-09-26 15:37:01",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 27,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qaragez",
-  "name": "Карагез",
-  "translation": "Черный глаз",
-  "carpet": "Джебраиль",
+  "name_az": "köhnə su",
+  "name": "Кохнасу",
+  "translation": "Старая линия",
+  "carpet": "Казах-Карабах",
   "type": "Кар.",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 133, рис. 9"
  },
  "grid": {
   "pw": 4.929,
@@ -620,5 +619,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 133,
+ "book_fig": 9,
+ "kerimov_fix": "2026-10-31"
 }

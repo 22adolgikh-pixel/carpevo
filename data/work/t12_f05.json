@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qarmaxlı",
-  "name": "Гармахлы",
-  "translation": "хашийе Крючкообразная кайма",
+  "name_az": "qarmaqlı haşiyə",
+  "name": "Гармахлы хашийе",
+  "translation": "Крючкообразная кайма",
   "carpet": "Карабах",
   "type": "Кар.",
   "note": "Эта кайма очень редко встречается.",
   "site_id": "qarmaqli-hashiye",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 12, рис. 5"
  },
  "grid": {
   "pw": 4.9293,
@@ -121,5 +120,8 @@
  },
  "saved_at": "2026-09-27 01:14:59",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 12,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

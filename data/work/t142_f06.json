@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Düymeli",
-  "name": "Дүймели",
-  "translation": "Пуговица",
-  "carpet": "Зейва",
-  "type": "К.-Ш",
-  "note": "Напоминает ювелирное украшение.",
+  "name_az": "zəncirə",
+  "name": "Зенджире",
+  "translation": "Галуны",
+  "carpet": "Гараджа",
+  "type": "Теб.",
+  "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 141, рис. 6"
  },
  "grid": {
   "pw": 4.8621,
@@ -903,5 +902,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 141,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

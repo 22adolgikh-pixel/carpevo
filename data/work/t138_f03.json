@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Dolamaqıynak",
-  "name": "Доламакыйнак",
-  "translation": "Кривой коготь Баку",
-  "carpet": "К.",
-  "type": "—",
-  "note": "Ш",
+  "name_az": "bıçqı",
+  "name": "Пушгу",
+  "translation": "Пила",
+  "carpet": "",
+  "type": "Кар.",
+  "note": "Напоминает мотивы греческого архитектурного орнамента.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 137, рис. 3"
  },
  "grid": {
   "pw": 4.8413,
@@ -180,5 +179,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 137,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

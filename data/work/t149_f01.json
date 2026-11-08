@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Şamdanlı",
-  "name": "Шамданлы",
-  "translation": "Подсвечник",
-  "carpet": "Карабах",
-  "type": "Кар.",
+  "name_az": "kətəbə haşiyə",
+  "name": "Кетебэ хашийе",
+  "translation": "Кайма-кетебэ",
+  "carpet": "Баку",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 148, рис. 1"
  },
  "grid": {
   "pw": 4.89,
@@ -3546,5 +3545,8 @@
   null
  ],
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 148,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

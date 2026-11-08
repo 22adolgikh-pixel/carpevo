@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qotazlı",
-  "name": "Готазлы",
-  "translation": "бута Бута с кисточкой",
+  "name_az": "qotazlı buta",
+  "name": "Готазлы бута",
+  "translation": "Бута с кисточкой",
   "carpet": "Хан-Карабах",
   "type": "Кар.",
   "note": "Встречается в коврах Хамадана.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 100, рис. 3"
  },
  "grid": {
   "pw": 4.9773,
@@ -2387,5 +2386,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 100,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

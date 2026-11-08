@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Xaştarxan",
-  "name": "Хаштархан",
-  "translation": "тоюгу Индейка",
+  "name_az": "həştərxan toyuğu",
+  "name": "Хаштархан тоюгу",
+  "translation": "Индейка",
   "carpet": "Карабах",
   "type": "Кар.",
   "note": "Взято из декора верни и зили.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 23, рис. 3"
  },
  "grid": {
   "pw": 4.9109,
@@ -185,5 +184,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 23,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

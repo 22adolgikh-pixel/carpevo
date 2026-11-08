@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Fetir",
+  "name_az": "fətir",
   "name": "Фетир",
   "translation": "Сдобный хлеб",
   "carpet": "Мугань",
   "type": "Кар.",
   "note": "Напоминает узор, который встречается на хлебе.",
   "site_id": "fetir",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 38, рис. 5"
  },
  "grid": {
   "pw": 4.918,
@@ -164,5 +163,8 @@
  },
  "saved_at": "2026-09-26 20:49:56",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 38,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

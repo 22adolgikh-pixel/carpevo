@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Gendil",
+  "name_az": "qəndil",
   "name": "Гендил",
   "translation": "Подсвечник",
   "carpet": "Ханлыг",
   "type": "Кар.",
   "note": "Встречается и в ардебильском ковре «Шейх Сефи».",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 128, рис. 1"
  },
  "grid": {
   "pw": 4.9783,
@@ -2713,5 +2712,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 128,
+ "book_fig": 1,
+ "kerimov_fix": "2026-10-31"
 }

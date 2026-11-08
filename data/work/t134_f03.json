@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Zencir",
-  "name": "Зенджир",
-  "translation": "Цепочка Для всех азерб.",
-  "carpet": "ковр.",
-  "type": "-",
-  "note": "",
+  "name_az": "Qoşaiç",
+  "name": "Гошаич",
+  "translation": "Парные обведенные линии",
+  "carpet": "Баку",
+  "type": "К.—Ш",
+  "note": "Встречается большей частью в бакинских коврах.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 133, рис. 3"
  },
  "grid": {
   "pw": 4.8974,
@@ -1392,5 +1391,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 133,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

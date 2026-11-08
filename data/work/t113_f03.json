@@ -37,11 +37,10 @@
   "name": "Чарх",
   "translation": "Колесо",
   "carpet": "Чичи",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 113, рис. 3"
  },
  "grid": {
   "pw": 4.9412,
@@ -184,5 +183,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 113,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

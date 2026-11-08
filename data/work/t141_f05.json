@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Sermə",
-  "name": "Сермә",
-  "translation": "Узор Кохне Куба",
-  "carpet": "К.",
-  "type": "—",
-  "note": "Ш Больше характерен для современных сумахов.",
+  "name_az": "Mişar",
+  "name": "Мишар",
+  "translation": "Пила",
+  "carpet": "Кохна Куба",
+  "type": "К.—Ш",
+  "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 140, рис. 5"
  },
  "grid": {
   "pw": 4.875,
@@ -2422,5 +2421,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 140,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

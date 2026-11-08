@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Butalı",
-  "name": "Буталы",
-  "translation": "Бута Казах",
-  "carpet": "Г.",
-  "type": "—",
-  "note": "К",
+  "name_az": "dolama",
+  "name": "Долама",
+  "translation": "Завиток",
+  "carpet": "Ширван",
+  "type": "К.—Ш",
+  "note": "В Карабахе называют «иланкач», что означает «след змеи».",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 138, рис. 5"
  },
  "grid": {
   "pw": 4.9048,
@@ -238,5 +237,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 138,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

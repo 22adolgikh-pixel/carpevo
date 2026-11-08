@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Simavar",
+  "name_az": "samovar",
   "name": "Симавар",
   "translation": "Самовар",
   "carpet": "Зейва",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "Относится к концу XIX в.",
   "site_id": "samavar-2,samavar",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 34, рис. 8"
  },
  "grid": {
   "pw": 4.9688,
@@ -145,5 +144,8 @@
  },
  "saved_at": "2026-09-26 23:51:56",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 34,
+ "book_fig": 8,
+ "kerimov_fix": "2026-10-31"
 }

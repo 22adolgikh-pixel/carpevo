@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qaman",
+  "name_az": "kaman",
   "name": "Каман",
   "translation": "Лук",
   "carpet": "Голлу-чичи",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "kaman",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 70, рис. 11"
  },
  "grid": {
   "pw": 7.7647,
@@ -122,5 +121,8 @@
  },
  "saved_at": "2026-09-26 23:57:17",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 70,
+ "book_fig": 11,
+ "kerimov_fix": "2026-10-31"
 }

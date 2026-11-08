@@ -34,15 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qarmaxlı",
-  "name": "Гармахлы",
-  "translation": "хашийе Крючкообразная кайма Бакинский",
-  "carpet": "зили",
-  "type": "К.-Ш.",
+  "name_az": "qarmaqlı haşiyə",
+  "name": "Гармахлы хашийе",
+  "translation": "Крючкообразная кайма",
+  "carpet": "Бакинский зили",
+  "type": "К.—Ш.",
   "note": "",
   "site_id": "qarmaqli-hashiye",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 12, рис. 2"
  },
  "grid": {
   "pw": 4.9158,
@@ -120,5 +119,8 @@
  },
  "saved_at": "2026-09-27 01:10:07",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 12,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

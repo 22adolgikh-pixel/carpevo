@@ -38,11 +38,10 @@
   "name": "Нишан",
   "translation": "Значок",
   "carpet": "Пиребедиль",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "nishan",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 42, рис. 2"
  },
  "grid": {
   "pw": 4.9444,
@@ -136,5 +135,8 @@
  },
  "saved_at": "2026-09-26 14:04:05",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 42,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

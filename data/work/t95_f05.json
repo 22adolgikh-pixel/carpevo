@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çinar",
+  "name_az": "çinar",
   "name": "Чинар",
   "translation": "Тополь",
   "carpet": "Ачма-юмма",
   "type": "Теб.",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 95, рис. 5"
  },
  "grid": {
   "pw": 4.89,
@@ -1881,5 +1880,8 @@
   null
  ],
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 95,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

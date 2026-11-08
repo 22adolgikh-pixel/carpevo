@@ -33,13 +33,15 @@
  ],
  "meta": {
   "section": "",
-  "name": "Ит",
-  "translation": "Собака Карабахский",
-  "carpet": "зили",
-  "type": "Кар.",
-  "note": "",
-  "site_id": "it",
-  "source": ""
+  "name": "Зили нахышы",
+  "translation": "Узор зили",
+  "carpet": "Казахский зили",
+  "type": "Г.—К.",
+  "note": "Напоминает стаю гусей.",
+  "site_id": "zili",
+  "source": "Табл. 10, рис. 6",
+  "name_az": "zili naxışı",
+  "site_id_prev": "it"
  },
  "adjust": {
   "brightness": 0,
@@ -104,5 +106,8 @@
    ".11...........11..........."
   ]
  },
- "saved_at": "2026-09-24 22:54:07"
+ "saved_at": "2026-09-24 22:54:07",
+ "book_table": 10,
+ "book_fig": 6,
+ "kerimov_fix": "2026-10-31"
 }

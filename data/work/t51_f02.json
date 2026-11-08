@@ -38,11 +38,10 @@
   "name": "Буйнуз",
   "translation": "Рог",
   "carpet": "Гырыз",
-  "type": "К.-Ш",
-  "note": "",
+  "type": "К.—Ш",
+  "note": "Эти изображения встречаются на посуде, найденной в Мингечауре.",
   "site_id": "buynuz",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 51, рис. 2"
  },
  "grid": {
   "pw": 4.9773,
@@ -135,5 +134,8 @@
  },
  "saved_at": "2026-09-27 00:24:37",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 51,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

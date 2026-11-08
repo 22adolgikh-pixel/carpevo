@@ -34,15 +34,15 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Sallama",
-  "name": "Саллама",
-  "translation": "Висячка",
-  "carpet": "Кедабек",
-  "type": "Г.-К",
-  "note": "",
-  "site_id": "sallama",
-  "source": "",
-  "name_az_auto": true
+  "name_az": "dolama",
+  "name": "Долама",
+  "translation": "Завиток",
+  "carpet": "Ханкарванд",
+  "type": "Кар.",
+  "note": "Изредка встречается в бордюре ширванских ковров.",
+  "site_id": "qivrim,dolama",
+  "source": "Табл. 51, рис. 5",
+  "site_id_prev": "sallama"
  },
  "grid": {
   "pw": 4.9787,
@@ -157,5 +157,8 @@
  },
  "saved_at": "2026-09-27 00:25:34",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 51,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

@@ -34,14 +34,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "",
-  "name": "",
-  "translation": "",
-  "carpet": "",
-  "type": "",
-  "note": "",
+  "name_az": "Keçirtmə",
+  "name": "Кечиртме",
+  "translation": "Продетый",
+  "carpet": "Карабахский верни",
+  "type": "Кар.",
+  "note": "Этот элемент взят из килима.",
   "site_id": "",
-  "source": ""
+  "source": "Табл. 6, рис. 4"
  },
  "grid": {
   "pw": 4.9259,
@@ -167,5 +167,8 @@
  },
  "saved_at": "2026-09-26 19:30:55",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 6,
+ "book_fig": 4,
+ "kerimov_fix": "2026-10-31"
 }

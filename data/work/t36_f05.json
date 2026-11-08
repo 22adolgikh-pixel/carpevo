@@ -38,11 +38,10 @@
   "name": "Килимгюлю",
   "translation": "Килимовый цветок",
   "carpet": "Салахлы",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "Взят из килимового узора.",
   "site_id": "kilim-gulu",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 36, рис. 5"
  },
  "grid": {
   "pw": 4.9074,
@@ -151,5 +150,8 @@
   "invert": false
  },
  "saved_at": "2026-09-26 10:40:07",
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 36,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

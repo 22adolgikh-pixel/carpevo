@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Çiçekli",
-  "name": "Чичекли",
-  "translation": "бута Бута с цветком Ширалибек К.—Ш Напоминает старинный музыкальный",
-  "carpet": "инструмент",
-  "type": "—",
-  "note": "ченг.",
+  "name_az": "çiçəkli buta",
+  "name": "Чичекли бута",
+  "translation": "Бута с цветком",
+  "carpet": "Ширалибек",
+  "type": "К.—Ш",
+  "note": "Напоминает старинный музыкальный инструмент — ченг.",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 98, рис. 3"
  },
  "grid": {
   "pw": 4.9189,
@@ -3060,5 +3059,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 98,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

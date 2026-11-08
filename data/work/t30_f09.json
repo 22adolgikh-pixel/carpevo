@@ -38,11 +38,10 @@
   "name": "Тогга",
   "translation": "Пояс",
   "carpet": "Казах",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "",
   "site_id": "toqqa",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 30, рис. 9"
  },
  "grid": {
   "pw": 4.9032,
@@ -156,5 +155,8 @@
  },
  "saved_at": "2026-09-26 19:29:18",
  "review": false,
- "transparent_bg": true
+ "transparent_bg": true,
+ "book_table": 30,
+ "book_fig": 9,
+ "kerimov_fix": "2026-10-31"
 }

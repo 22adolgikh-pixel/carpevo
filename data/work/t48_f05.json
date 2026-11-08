@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Dordtoxmaq",
+  "name_az": "dörd toxmaq",
   "name": "Дордтохмаг",
   "translation": "Четыре пики",
   "carpet": "Ширван",
-  "type": "К.-Ш",
+  "type": "К.—Ш",
   "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 48, рис. 5"
  },
  "grid": {
   "pw": 4.9773,
@@ -238,5 +237,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 48,
+ "book_fig": 5,
+ "kerimov_fix": "2026-10-31"
 }

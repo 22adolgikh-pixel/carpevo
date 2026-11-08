@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Qazaxça",
+  "name_az": "qazaxça",
   "name": "Казахча",
   "translation": "",
   "carpet": "Казах",
-  "type": "Г.-К",
+  "type": "Г.—К",
   "note": "В Казахе маленькие коврики называются «казахча».",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 126, рис. 2"
  },
  "grid": {
   "pw": 4.9189,
@@ -1918,5 +1917,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 126,
+ "book_fig": 2,
+ "kerimov_fix": "2026-10-31"
 }

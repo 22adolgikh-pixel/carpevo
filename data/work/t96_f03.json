@@ -33,13 +33,13 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Gülabdanbuta",
+  "name_az": "gülabdan buta",
   "name": "Гюлабданбута",
-  "translation": "",
-  "carpet": "Бута-графин",
+  "translation": "Бута-графин",
+  "carpet": "",
   "type": "Кар.",
   "note": "Встречается и в ширванских коврах.",
-  "name_az_auto": true
+  "source": "Табл. 96, рис. 3"
  },
  "grid": {
   "pw": 5.0,
@@ -132,5 +132,8 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-03 12:27:45"
+ "saved_at": "2026-10-03 12:27:45",
+ "book_table": 96,
+ "book_fig": 3,
+ "kerimov_fix": "2026-10-31"
 }

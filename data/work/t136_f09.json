@@ -33,15 +33,14 @@
  ],
  "meta": {
   "section": "",
-  "name_az": "Dolama",
-  "name": "Долама",
-  "translation": "Завиток Пиребедиль",
-  "carpet": "К.",
-  "type": "—",
-  "note": "Ш",
+  "name_az": "İldırım",
+  "name": "Илдырым",
+  "translation": "Молния",
+  "carpet": "Баку",
+  "type": "К.—Ш",
+  "note": "",
   "site_id": "",
-  "source": "",
-  "name_az_auto": true
+  "source": "Табл. 135, рис. 9"
  },
  "grid": {
   "pw": 4.9167,
@@ -262,5 +261,8 @@
  ],
  "review": false,
  "transparent_bg": true,
- "difficulty": null
+ "difficulty": null,
+ "book_table": 135,
+ "book_fig": 9,
+ "kerimov_fix": "2026-10-31"
 }
