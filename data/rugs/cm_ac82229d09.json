@@ -640,7 +640,7 @@
   }
  ],
  "created": 1791870026,
- "updated": 1792270079,
+ "updated": 1794149927,
  "cat": {
   "title": "Mugan carpet, Karabakh school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -689,7 +689,38 @@
   }
  },
  "_lib_t": "2026-10-12 22:38",
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0.00267,
+   1,
+   0.98733
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00353,
+    0.00267
+   ],
+   [
+    1.00012,
+    0.00282
+   ],
+   [
+    0.99,
+    0.99
+   ],
+   [
+    0.01,
+    0.99
+   ]
+  ],
+  "quad_status": "edited"
+ },
  "updated_by": "dolgikh",
  "from_twin": {
   "composition": "wikimedia_File_Muğan_xalçası_jpg",
