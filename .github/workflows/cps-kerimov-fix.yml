@@ -5,7 +5,7 @@
 name: "CPS: исправить Керимова"
 on:
   push:
-    branches: [ops/kerimov-fix-dry, ops/kerimov-fix-apply]
+    branches: [ops/kerimov-fix-dry, ops/kerimov-fix-apply, ops/cps-backup-now]
   workflow_dispatch:
     inputs:
       apply:
@@ -29,10 +29,14 @@ jobs:
           install -m 700 -d ~/.ssh
           if printf '%s' "$KEY" | grep -q "BEGIN"; then printf '%s\n' "$KEY" | tr -d '\r' > ~/.ssh/deploy_key; else printf '%s' "$KEY" | tr -d ' \r\n' | base64 -d > ~/.ssh/deploy_key; fi
           chmod 600 ~/.ssh/deploy_key
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 "$USER_@$HOST" bash -s "$DIR" "$APPLY" <<'REMOTE'
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 "$USER_@$HOST" bash -s "$DIR" "$APPLY" "${{ github.ref_name }}" <<'REMOTE'
           set -euo pipefail
           cd "$1"
           echo "на сервере: $(git log --oneline -1)"
           cd cps/deploy
-          docker compose -f docker-compose.existing-nginx.yml exec -T cps python tools/kerimov_fix/apply_kerimov_fix.py /app/data ${2:-}
+          if [ "${3:-}" = "ops/cps-backup-now" ]; then
+            docker compose -f docker-compose.existing-nginx.yml exec -T cps sh -c 'echo "токен задан: $([ -n "$CPS_GITHUB_TOKEN" ] && echo да || echo нет)"; python -c "import backup; print(backup.backup_once(\"/app\", \"/app/data\", \"вручную\"))"'
+          else
+            docker compose -f docker-compose.existing-nginx.yml exec -T cps python tools/kerimov_fix/apply_kerimov_fix.py /app/data ${2:-}
+          fi
           REMOTE
