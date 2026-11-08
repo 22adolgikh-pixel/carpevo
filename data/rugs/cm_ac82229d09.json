@@ -640,7 +640,7 @@
   }
  ],
  "created": 1791870026,
- "updated": 1794155752,
+ "updated": 1794155828,
  "cat": {
   "title": "Mugan carpet, Karabakh school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -692,23 +692,30 @@
  "layout": {
   "carpet": [
    0,
-   0.00267,
+   3e-05,
    1,
-   0.99733
+   0.99997
   ],
-  "bounds": [],
+  "bounds": [
+   {
+    "ix": 0.18339381449688508,
+    "iy": 0.1091264037436841,
+    "strength": 0
+   }
+  ],
   "rings": [
+   "border",
    "field"
   ],
-  "status": "auto",
+  "status": "edited",
   "quad": [
    [
-    -0.00353,
-    0.00267
+    -0.00454,
+    3e-05
    ],
    [
-    1.00012,
-    0.00282
+    0.9983,
+    0.00094
    ],
    [
     1.00362,
@@ -719,7 +726,7 @@
     1.00696
    ]
   ],
-  "quad_status": "confirmed",
+  "quad_status": "edited",
   "quad_by": "dolgikh"
  },
  "updated_by": "dolgikh",

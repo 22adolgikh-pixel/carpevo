@@ -2611,7 +2611,7 @@
   }
  ],
  "created": 1791870016,
- "updated": 1794149838,
+ "updated": 1794155892,
  "cat": {
   "title": "Knotted-pile wool carpet “Pirabadil”",
   "museum": "",
@@ -2678,7 +2678,38 @@
   "place": "azcm_30",
   "size": "azcm_30"
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.01,
+   0.01,
+   0.98,
+   0.98
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01,
+    0.01
+   ],
+   [
+    0.99,
+    0.01
+   ],
+   [
+    0.99,
+    0.99
+   ],
+   [
+    0.01,
+    0.99
+   ]
+  ],
+  "quad_status": "auto"
+ },
  "updated_by": "dolgikh",
  "people": {
   "n": 0,
