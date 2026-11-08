@@ -60,17 +60,18 @@ def _ring(lab, rect, d, nseg=32, per=10):
     return s.reshape(nseg, per, 3).mean(1)
 
 
-def detect(img):
+def detect(img, full=False):
     """→ {carpet:[x,y,w,h] в долях, bounds:[{ix, iy, strength}] — вложенные границы (отступы от края ковра в долях его ширины/высоты),
            rings:[zone…] (на одну больше, чем границ: последнее — поле), conf}
 
     Кайма — полоса, которая идёт вокруг всего ковра. Поэтому границу ищем не по одному месту, а по всему «кольцу»:
     кольцо на глубине d делим на 32 участка и смотрим, где цвет меняется одновременно на большинстве участков (медиана по участкам).
-    Медальоны и узоры поля меняют цвет лишь местами — медиана их не пропускает. Дальше 30% короткой стороны каймы не ищем."""
+    Медальоны и узоры поля меняют цвет лишь местами — медиана их не пропускает. Дальше 30% короткой стороны каймы не ищем.
+    full=True (v11.30): картинка уже выпрямлена по 4 углам — край ковра = край картинки, ищем только каймы."""
     H0, W0 = img.shape[:2]; s = 700 / max(H0, W0)
     a = cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else img.copy()
     h, w = a.shape[:2]
-    rect, conf = _carpet_rect(a)
+    rect, conf = ((0, 0, w, h), 1.0) if full else _carpet_rect(a)
     x, y, cw, ch = rect
     lab = cv2.cvtColor(cv2.GaussianBlur(a, (0, 0), 1.5), cv2.COLOR_BGR2LAB).astype(np.float32)
     short = min(cw, ch); dmax = max(10, int(short * 0.30))

@@ -54,6 +54,12 @@ def make_rugs(data):
         a[90:670, 90:470] = carpet(380, 580, 77)[:580, :380]
         return a
     save("frieze_1", frieze_rug(), title="Rug with border", cat={"src": "azerbaijanrugs"})
+    # v11.30: тот же ковёр с каймой, снятый в перспективе на сером фоне — для «4 углов»
+    fr = frieze_rug()[30:730, 30:530]; Wp, Hp = 900, 800
+    QT = np.float32([[239, 167], [624, 144], [628, 597], [325, 584]])   # проекция ковра 500×700 обычной камерой (фокус 900, наклон 28°, поворот 12°)
+    T = cv2.getPerspectiveTransform(np.float32([[0, 0], [500, 0], [500, 700], [0, 700]]), QT)
+    ph = cv2.warpPerspective(fr, T, (Wp, Hp), dst=np.full((Hp, Wp, 3), (205, 208, 212), np.uint8), borderMode=cv2.BORDER_TRANSPARENT)
+    save("persp_1", ph, title="Rug photographed at an angle", cat={"src": "azerbaijanrugs"})
     pg_ = np.full((1100, 800, 3), 238, np.uint8); rugimg = carpet(520, 700, 93); pg_[200:900, 140:660] = rugimg   # v11.22: лист книги и вырезанный с него ковёр
     save("kerimov_vol9_p050_1", pg_, title="Керимов, т. IX (стр. 50)", cat={"src": "kerimov_vol9"})
     save("kerimov_vol9_p050_2", cv2.resize(rugimg, (390, 525), interpolation=cv2.INTER_AREA), title="Керимов, т. IX (стр. 50), ковёр", cat={"src": "kerimov_vol9"},
@@ -207,6 +213,43 @@ def t03_pattern_hotkeys(pg, ctx):
     pg.keyboard.press('Escape'); pg.wait_for_timeout(800)
     assert pg.evaluate("S.mode") not in ('pix', 'grid'), 'Esc не закрывает редактор узора'
     errors_ok(ctx, 'редактор узора'); pg.screenshot(path=f'{OUT}/03_pattern.png')
+
+
+@test
+def t04b_rug_quad(pg, ctx):
+    """v11.30: 4 угла ковра → выпрямление → каймы на выпрямленном; контрольный набор"""
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
+    pg.evaluate("rugOpen('persp_1')"); pg.wait_for_timeout(1500)
+    pg.keyboard.press('z'); pg.wait_for_timeout(400)
+    assert pg.is_visible('#rgQAuto'), 'в «Поле и каймы» нет кнопки «найти 4 угла»'
+    pg.click('#rgQAuto'); pg.wait_for_timeout(2500)
+    q = pg.evaluate("R.rug.layout&&R.rug.layout.quad")
+    assert q and len(q) == 4, 'углы не найдены'
+    truth = [[x / 900, y / 800] for x, y in [[239, 167], [624, 144], [628, 597], [325, 584]]]
+    err = max(max(abs(a[0] - b[0]) * 900, abs(a[1] - b[1]) * 800) for a, b in zip(q, truth))
+    assert err < 15, f'углы найдены неточно: ошибка {err:.0f} px'
+    assert pg.evaluate("document.querySelectorAll('#rgSvg circle[data-q]').length") == 4, 'на фото нет 4 точек-углов'
+    pg.wait_for_function("(()=>{const i=document.getElementById('rgRectImg');return i&&i.complete&&i.naturalWidth>0})()", timeout=8000)
+    rw, rh = pg.evaluate("[document.getElementById('rgRectImg').naturalWidth,document.getElementById('rgRectImg').naturalHeight]")
+    assert abs(rw / rh - 500 / 700) < 0.06, f'пропорции выпрямленного ковра неверны: {rw}×{rh}'
+    # тянем угол мышью — статус «поправлены»
+    c = pg.query_selector('#rgSvg circle[data-q="0"]').bounding_box(); x, y = c['x'] + c['width'] / 2, c['y'] + c['height'] / 2
+    pg.mouse.move(x, y); pg.mouse.down(); pg.mouse.move(x + 12, y + 8, steps=4); pg.mouse.up(); pg.wait_for_timeout(1200)
+    assert pg.evaluate("R.rug.layout.quad_status") == 'edited', 'перетаскивание угла не меняет статус'
+    q2 = pg.evaluate("R.rug.layout.quad[0]"); assert abs(q2[0] - q[0][0]) > 0.003, 'угол не сдвинулся'
+    pg.click('#rgQOk'); pg.wait_for_timeout(300); assert pg.evaluate("R.rug.layout.quad_status") == 'confirmed', '«✓ углы верны» не подтверждает'
+    pg.click('#rgLayAuto'); pg.wait_for_timeout(2500)
+    nb = pg.evaluate("R.rug.layout.bounds.length"); assert nb >= 1, 'на выпрямленном ковре не найдено ни одной границы каймы'
+    bx = pg.evaluate("R.rug.layout.bounds.map(b=>b.ix)"); by = pg.evaluate("R.rug.layout.bounds.map(b=>b.iy)")
+    assert any(abs(v - 0.12) < 0.02 for v in bx) and any(abs(v - 60 / 700) < 0.02 for v in by), f'граница кайма/поле не найдена: ix={bx}, iy={by} (ждали ≈0.12 и ≈0.086)'
+    assert pg.evaluate("layZoneAt(R.rug.layout,0.5,0.5)") == 'field', 'центр ковра не попадает в поле'
+    assert pg.evaluate("layZoneAt(R.rug.layout,0.03,0.03)") is None, 'фон за углом ковра считается ковром'
+    pg.check('#rgCtl'); pg.wait_for_timeout(1500)
+    r = json.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/persp_1'))
+    assert r.get('control') is True, 'отметка «контрольный набор» не сохранилась'
+    assert (r.get('layout') or {}).get('quad_status') == 'confirmed' and len(r['layout']['quad']) == 4, 'углы не сохранились на сервере'
+    errors_ok(ctx, '4 угла'); pg.screenshot(path=f'{OUT}/04b_rug_quad.png')
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(300)
 
 
 @test

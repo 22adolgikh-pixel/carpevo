@@ -295,7 +295,8 @@ def install(app, DATA, D_WORK):
                 "same_link": same_link(r),
                 "part": (r.get("cat") or {}).get("part", 0),
                 "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", ""),
-                "people": (r.get("people") or {}).get("n", 0)}
+                "people": (r.get("people") or {}).get("n", 0),
+                "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -631,6 +632,7 @@ def install(app, DATA, D_WORK):
             if "obj" in b: r["obj"] = b["obj"] if b["obj"] in OBJ else ""            # v11.6: вид изделия (человек)
             if "hidden" in b: r["hidden"] = str(b["hidden"] or "")[:200]            # v11.6: скрыт из каталога (причина)
             if "fragment" in b: r["fragment"] = None if b["fragment"] is None else bool(b["fragment"])   # v11.22: фрагмент / остаток ковра (человек)
+            if "control" in b: r["control"] = bool(b["control"])                    # v11.30: в контрольном наборе (мерило разбора)
             if "marks" in b:
                 old = {m["id"]: m for m in r.get("marks", [])}; marks = []
                 for m in b["marks"]:
@@ -1050,6 +1052,44 @@ def install(app, DATA, D_WORK):
         if not r or a is None: return JSONResponse({"error": "нет такого ковра"}, 404)
         lay = rug_layout.detect(a); lay["status"] = "auto"
         return {"layout": lay}
+
+    D_RECT = os.path.join(DATA, "rug_rect")                 # v11.30: выпрямленные по 4 углам ковры (производные, в бэкап не идут)
+
+    @app.post("/api/rugs/{rid}/quad")
+    def api_rug_quad(rid: str):
+        """v11.30: предложить 4 угла ковра на фото (человек двигает и подтверждает)."""
+        import rug_rect
+        p = img_path(rid); a = read_small(p, 1400) if p else None
+        if a is None: return JSONResponse({"error": "нет такого ковра"}, 404)
+        return rug_rect.find_quad(a)
+
+    @app.post("/api/rugs/{rid}/rectify")
+    async def api_rug_rectify(rid: str, request: Request):
+        """v11.30: выпрямить ковёр по 4 углам → rug_rect/<id>.jpg; bands=1 — заодно найти каймы на выпрямленном
+        (границы — доли выпрямленного ковра, одинаковые для противоположных сторон)."""
+        import rug_rect, rug_layout
+        b = await request.json(); p = img_path(rid)
+        try: quad = [[max(-0.2, min(1.2, float(v[0]))), max(-0.2, min(1.2, float(v[1])))] for v in b["quad"]][:4]
+        except Exception: quad = []
+        if not p or len(quad) != 4: return JSONResponse({"error": "нужны 4 угла"}, 400)
+        def work():
+            a = cv2.imread(p)
+            if a is None: return {"error": "фото не читается"}
+            x = rug_rect.rectify(a, quad, 1600)
+            os.makedirs(D_RECT, exist_ok=True); tmp = os.path.join(D_RECT, rid + ".tmp.jpg")
+            cv2.imwrite(tmp, x, [cv2.IMWRITE_JPEG_QUALITY, 90]); os.replace(tmp, os.path.join(D_RECT, rid + ".jpg"))
+            out = {"w": int(x.shape[1]), "h": int(x.shape[0]), "t": int(time.time())}
+            if b.get("bands"):
+                d = rug_layout.detect(x, full=True); out.update(bounds=d["bounds"], rings=d["rings"])
+            return out
+        from starlette.concurrency import run_in_threadpool
+        res = await run_in_threadpool(work)                      # лёгкая работа (~0.2 с) — не в очередь тяжёлых задач
+        return JSONResponse(res, 500) if res.get("error") else res
+
+    @app.get("/rugrect/{rid}.jpg")
+    def rug_rect_img(rid: str):
+        p = os.path.join(D_RECT, os.path.basename(rid) + ".jpg")
+        return FileResponse(p, headers={"Cache-Control": "no-cache"}) if os.path.exists(p) else Response(status_code=404)
 
     @app.post("/api/rugs_from_figures")
     def api_rugs_from_figures(request: Request):
