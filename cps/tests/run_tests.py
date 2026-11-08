@@ -253,6 +253,15 @@ def t04b_rug_quad(pg, ctx):
     assert any(abs(v - 0.12) < 0.02 for v in bx) and any(abs(v - 60 / 700) < 0.02 for v in by), f'граница кайма/поле не найдена: ix={bx}, iy={by} (ждали ≈0.12 и ≈0.086)'
     assert pg.evaluate("layZoneAt(R.rug.layout,0.5,0.5)") == 'field', 'центр ковра не попадает в поле'
     assert pg.evaluate("layZoneAt(R.rug.layout,0.03,0.03)") is None, 'фон за углом ковра считается ковром'
+    # v11.33: два шага — на шаге 1 видна и берётся мышью только линия поля (последняя), на шаге 2 — все; «＋ слой» режет каймы
+    pg.evaluate("laySetStep(1)"); pg.wait_for_timeout(200)
+    assert pg.evaluate("document.querySelectorAll('#rgSvg path[fill-rule=evenodd]').length") >= 1, 'на шаге 1 нет заливки «все каймы»'
+    assert pg.is_visible('#rgStep2'), 'нет переключателя шагов'
+    pg.evaluate("laySetStep(2)"); pg.wait_for_timeout(200)
+    nb0 = pg.evaluate("R.rug.layout.bounds.length"); pg.click('#rgLayAdd'); pg.wait_for_timeout(300)
+    assert pg.evaluate("R.rug.layout.bounds.length") == nb0 + 1, '«＋ слой» не добавляет линию'
+    assert pg.evaluate("R.rug.layout.bounds.every((b,i,a)=>i==0||a[i-1].ix<=b.ix)"), 'линии после добавления слоя не по порядку'
+    pg.evaluate("R.layBound=R.rug.layout.bounds.length-2;layRemove(R.rug.layout)"); pg.wait_for_timeout(200)
     # v11.31: рамка элемента поверх линии каймы не мешает выбрать и удалить линию (кликом, Delete и кнопкой)
     def line_pt(i):
         return pg.evaluate(f"""(()=>{{const L=R.rug.layout,b=L.bounds[{i}],[x,y]=layToImg(L,b.ix,0.5),V=document.getElementById('rgView').getBoundingClientRect();

@@ -443,7 +443,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.32</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.33</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2563,7 +2563,7 @@ function rugMove(e){
   const p=rugPt(e),cl=v=>Math.max(0,Math.min(1,v));
   if(d.t==='new'||d.t==='sweep'){d.p1={x:cl(p.x),y:cl(p.y)};rugDraw();return;}
   if(d.t==='lay'){if(d.L.quad)layDrag(d,p.x,p.y);else layDrag(d,cl(p.x),cl(p.y));d.moved=true;rugDraw();return;}
-  if(d.t==='quad'){const c2=v=>Math.max(-0.6,Math.min(1.6,v));   // v11.32: угол можно вынести за край фото (ковёр обрезан кадром)
+  if(d.t==='quad'){const c2=v=>Math.max(-0.6,Math.min(1.6,v));   // v11.33: угол можно вынести за край фото (ковёр обрезан кадром)
   d.L.quad[d.i]=[+c2(p.x).toFixed(5),+c2(p.y).toFixed(5)];d.moved=true;rugDraw();return;}
   const dx=p.x-d.p0.x,dy=p.y-d.p0.y,b=d.b0;
   if(d.t==='smove'){R.split[d.i]=[cl(Math.min(b[0]+dx,1-b[2])),cl(Math.min(b[1]+dy,1-b[3])),b[2],b[3]];rugDraw();return;}
@@ -2614,9 +2614,12 @@ async function rugSamFix(ms){const rid=R.rug.id;let n=0,i=0;
   rugSaveSoon();rugDraw();rugSide();stat(n?('контур: '+n+(ms.length>1?' из '+ms.length:'')+' — рамка теперь по форме элемента'):'контур не найден — элемент сливается с фоном, поправьте рамку руками',n?'ok':'warn');}
 function rugSamNext(m){const s=m&&m._sam;if(!s||s.cands.length<2){stat('других вариантов контура нет — кликните инструментом «контур» (M) в другом месте элемента','warn');return;}
   s.i=(s.i+1)%s.cands.length;const c=s.cands[s.i];m.box=c.box.slice();m.poly=c.poly;rugSaveSoon();rugDraw();rugSide();stat('контур: вариант '+(s.i+1)+' из '+s.cands.length+' ('+(s.i===0?'самый маленький':s.i===s.cands.length-1?'самый большой':'средний')+')','ok');}
+// v11.33: два шага. 1 — одна линия: где кончаются каймы и начинается поле; 2 — каймы делятся на слои (полосы)
+function layStepOf(L){return R.rug&&R.layStepFor===R.rug.id&&R.layStep?R.layStep:((L&&L.bounds.length>2)?2:1);}
+function laySetStep(n){R.layStep=n;R.layStepFor=R.rug&&R.rug.id;R.layBound=null;rugTools&&rugTools();rugDraw();rugSide();}
 function layHit(L,p){
-  if(layH(L)){const[u,v]=layToUV(L,p.x,p.y),[qw,qh]=layQuadPx(L),tx=8/R.z/qw,ty=8/R.z/qh;let best=null;
-    for(let i=0;i<L.bounds.length;i++){const[a,c,w,h]=layRectUV(L,i);
+  if(layH(L)){const[u,v]=layToUV(L,p.x,p.y),[qw,qh]=layQuadPx(L),tx=8/R.z/qw,ty=8/R.z/qh;let best=null;const only=layStepOf(L)===1?L.bounds.length-1:-1;
+    for(let i=0;i<L.bounds.length;i++){if(only>=0&&i!==only)continue;const[a,c,w,h]=layRectUV(L,i);
       [['l',Math.abs(u-a),v>c&&v<c+h,tx],['r',Math.abs(u-a-w),v>c&&v<c+h,tx],['t',Math.abs(v-c),u>a&&u<a+w,ty],['b',Math.abs(v-c-h),u>a&&u<a+w,ty]].forEach(([s,dd,inside,tol])=>{
         if(inside&&dd<tol&&(!best||dd/tol<best.d))best={i,s,d:dd/tol};});}
     return best;}
@@ -2639,10 +2642,16 @@ function rugDraw(){
   const L=R.rug.layout;
   if(L&&layH(L)&&(R.showZones||R.tool==='zones')){const ok=L.status==='confirmed',dash=ok?'':`stroke-dasharray="${8/R.z} ${5/R.z}"`,P=(u,v)=>{const[x,y]=layToImg(L,u,v);return[x*R.iw,y*R.ih];};
     const poly=(a,c,w,hh)=>[[a,c],[a+w,c],[a+w,c+hh],[a,c+hh]].map(([u,v])=>P(u,v).map(t=>t.toFixed(1)).join(',')).join(' ');
-    for(let i=-1;i<L.bounds.length;i++){const act=R.tool==='zones'&&R.layBound===i&&i>=0,qok=L.quad_status==='confirmed';
-      h+=`<polygon points="${poly(...layRectUV(L,i))}" fill="none" stroke="${i<0?'#ffe066':'#4dd0e1'}" stroke-width="${(act?3:(i<0?2:1.4))/R.z}" ${i<0?(qok?'':`stroke-dasharray="${8/R.z} ${5/R.z}"`):dash} style="pointer-events:none" opacity=".9"/>`;}
-    (L.rings||[]).forEach((z,i)=>{const[a,c,w,hh]=layRectUV(L,i-1),nx=i<L.bounds.length?layRectUV(L,i):null,[tx,ty]=P(a+w/2,c+(nx?(nx[1]-c)/2:hh/2));
-      h+=`<text x="${tx}" y="${ty+fs/3}" font-size="${fs}" text-anchor="middle" fill="${(RZ[z]||RZ.other)[1]}" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">${(RZ[z]||RZ.other)[0]}</text>`;});
+    const st1=layStepOf(L)===1,nb=L.bounds.length,pth=(i)=>'M'+poly(...layRectUV(L,i)).replace(/ /g,'L')+'Z';
+    // заливка зон цветом их типа: сразу видно, что где отмечено
+    if(nb&&R.tool==='zones'){
+      if(st1){h+=`<path d="${pth(-1)} ${pth(nb-1)}" fill-rule="evenodd" fill="#ffb454" fill-opacity=".28" style="pointer-events:none"/><path d="${pth(nb-1)}" fill="#6cb6ff" fill-opacity=".16" style="pointer-events:none"/>`;}
+      else{(L.rings||[]).forEach((z,i)=>{const col=(RZ[z]||RZ.other)[1],op=z==='field'?.14:.3;
+        h+=`<path d="${i<nb?pth(i-1)+' '+pth(i):pth(i-1)}" fill-rule="evenodd" fill="${col}" fill-opacity="${op}" style="pointer-events:none"/>`;});}}
+    for(let i=-1;i<L.bounds.length;i++){if(st1&&i>=0&&i<nb-1)continue;const act=R.tool==='zones'&&R.layBound===i&&i>=0,qok=L.quad_status==='confirmed',fl=i===nb-1&&i>=0;
+      h+=`<polygon points="${poly(...layRectUV(L,i))}" fill="none" stroke="${i<0?'#ffe066':(fl?'#6cb6ff':'#4dd0e1')}" stroke-width="${(act?3:(i<0?2:(fl?2.6:1.4)))/R.z}" ${i<0?(qok?'':`stroke-dasharray="${8/R.z} ${5/R.z}"`):dash} style="pointer-events:none" opacity=".9"/>`;}
+    (st1?(nb?['border','field']:['field']):(L.rings||[])).forEach((z,i)=>{const[a,c,w,hh]=layRectUV(L,i-1),nx=i<L.bounds.length?layRectUV(L,st1?nb-1:i):null;if(st1&&!nb)return;const[tx,ty]=st1?(i===0?P(a+w/2,c+(layRectUV(L,nb-1)[1]-c)/2):P(.5,.5)):P(a+w/2,c+(nx?(nx[1]-c)/2:hh/2));
+      h+=`<text x="${tx}" y="${ty+fs/3}" font-size="${fs}" text-anchor="middle" fill="${(RZ[z]||RZ.other)[1]}" style="pointer-events:none;paint-order:stroke;stroke:#000;stroke-width:${3/R.z}px">${st1&&z==='border'?'все каймы вместе':(RZ[z]||RZ.other)[0]}</text>`;});
     if(R.tool==='zones'&&!rro()){const rr=9/R.z;L.quad.forEach((q,i)=>{const x=q[0]*R.iw,y=q[1]*R.ih;
       h+=`<circle data-q="${i}" cx="${x}" cy="${y}" r="${rr}" fill="#ffe066" fill-opacity=".85" stroke="#000" stroke-width="${1.5/R.z}" style="cursor:move"><title>угол ковра — тяните</title></circle><circle cx="${x}" cy="${y}" r="${1.8/R.z}" fill="#000" style="pointer-events:none"/>`;});}}
   else if(L&&L.carpet&&(R.showZones||R.tool==='zones')){const ok=L.status==='confirmed',dash=ok?'':`stroke-dasharray="${8/R.z} ${5/R.z}"`;
@@ -3013,9 +3022,10 @@ function rugZonesPanel(E,r){const C=r.cat||{},L=r.layout,Q=L&&L.quad,qs=L&&L.qua
     ${rro()?'':`<div class="rgrow"><button class="sm" id="rgQAuto">⚙ ${Q?'найти углы заново':'найти 4 угла'}</button>${!Q&&L&&L.carpet?'<button class="sm" id="rgQRect">углы = рамка ковра</button>':''}${Q&&qs!=='confirmed'?'<button class="sm" id="rgQOk">✓ углы верны</button>':''}</div>`}
     ${Q?`<div class="rgrect"><img id="rgRectImg" alt="выпрямленный ковёр" src="/rugrect/${encodeURIComponent(r.id)}.jpg?t=${R.rectT||0}" style="width:100%;border-radius:6px;background:#0002;min-height:40px"><small class="mut">выпрямленный ковёр — так его видит машина; если края кривые, подвиньте углы</small></div>`:''}
     <h4 style="margin:12px 0 4px">② Каймы и поле</h4>
+    ${L&&Q?`<div class="rgrow"><button class="sm" id="rgStep1" style="${layStepOf(L)===1?'outline:2px solid var(--acc,#6cb6ff)':''}">шаг 1 · где кончаются каймы</button><button class="sm" id="rgStep2" style="${layStepOf(L)===2?'outline:2px solid var(--acc,#6cb6ff)':''}">шаг 2 · слои кайм</button></div><small class="mut">${layStepOf(L)===1?'Шаг 1: одна голубая линия — внутренний край ВСЕХ кайм вместе (дальше начинается поле). Оранжевая заливка — каймы целиком, синяя — поле. Другие линии пока скрыты.':'Шаг 2: оранжевую область («все каймы») режем на слои линиями «＋ слой»: каждая линия — стык двух полос. Цвет заливки = тип полосы; жирная синяя линия — край поля, её двигать только на шаге 1.'}</small>`:''}
     <div class="rgrow">${L?`<span>${L.bounds.length} границ · ${L.status==='confirmed'?'<span style="color:var(--ok)">✓ проверено</span>':(L.status==='edited'?'поправлено, не подтверждено':'найдено автоматически, проверьте')}</span>`:'<i class="mut">не размечены</i>'}</div>
-    ${rro()?'':`<div class="rgrow">${(C.fragment||/безворс|палас|джеджим/.test(r.technique||''))?'<small style="color:var(--warn)">для фрагментов и безворсовых зоны ищутся плохо — лучше вручную</small>':''}<button class="sm" id="rgLayAuto">⚙ найти каймы${Q?' на выпрямленном':''}</button>${L?'<button class="sm" id="rgLayAdd">＋ граница</button>'+(R.layBound!=null&&R.layBound>=0&&R.layBound<L.bounds.length?'<button class="sm" id="rgLayRm" style="color:var(--bad)">✕ выбранную линию</button>':'')+'<button class="sm" id="rgLayOk">✓ зоны верны</button><button class="sm" id="rgLayDel" style="color:var(--bad)">убрать</button>':''}</div>`}
-    ${L?`<div class="rgrings">${L.rings.map((z,i)=>`<span class="rgring" data-ring="${i}" style="border-color:${(RZ[z]||RZ.other)[1]}">${i+1}. ${(RZ[z]||RZ.other)[0]}</span>`).join('')}</div><small class="mut">клик по полосе — сменить её тип (снаружи внутрь)</small>`:''}
+    ${rro()?'':`<div class="rgrow">${(C.fragment||/безворс|палас|джеджим/.test(r.technique||''))?'<small style="color:var(--warn)">для фрагментов и безворсовых зоны ищутся плохо — лучше вручную</small>':''}<button class="sm" id="rgLayAuto">⚙ найти каймы${Q?' на выпрямленном':''}</button>${L?'<button class="sm" id="rgLayAdd">'+(layStepOf(L)===1?'＋ линия поля':'＋ слой')+'</button>'+(R.layBound!=null&&R.layBound>=0&&R.layBound<L.bounds.length?'<button class="sm" id="rgLayRm" style="color:var(--bad)">✕ выбранную линию</button>':'')+'<button class="sm" id="rgLayOk">✓ зоны верны</button><button class="sm" id="rgLayDel" style="color:var(--bad)">убрать</button>':''}</div>`}
+    ${L&&layStepOf(L)===2?`<div class="rgrings">${L.rings.map((z,i)=>`<span class="rgring" data-ring="${i}" style="border-color:${(RZ[z]||RZ.other)[1]}">${i+1}. ${(RZ[z]||RZ.other)[0]}</span>`).join('')}</div><small class="mut">клик по полосе — сменить её тип (снаружи внутрь)</small>`:''}
     <label class="rgline" style="margin-top:10px"><input type="checkbox" id="rgCtl" ${rro()?'disabled':''} ${r.control?'checked':''}> ★ в контрольном наборе <small class="mut">— ковёр размечается полностью и служит мерилом разбора</small></label>
     <p class="mut" style="margin-top:10px">Зачем: по зонам рамки элементов сами получают «поле / главная кайма / …»; по выпрямленному ковру дальше ищутся повторы и сетка поля.</p>
     <div class="rgrow"><button id="rgZonesX">✓ готово — к разметке элементов</button></div></div>`;
@@ -3035,9 +3045,12 @@ function rugZonesPanel(E,r){const C=r.cat||{},L=r.layout,Q=L&&L.quad,qs=L&&L.qua
       else{const j=await api('/api/rugs/'+encodeURIComponent(r.id)+'/layout',{});r.layout=j.layout;}
       R.showZones=true;R.tool='zones';rugTools();rugDraw();rugSaveSoon();rugSide();stat('найдено границ: '+r.layout.bounds.length+' — проверьте и подвиньте линии','ok');}catch(e){fail(e);}};
   $('rgLayRm')&&($('rgLayRm').onclick=()=>layRemove(L));
+  $('rgStep1')&&($('rgStep1').onclick=()=>laySetStep(1));$('rgStep2')&&($('rgStep2').onclick=()=>laySetStep(2));
   $('rgLayOk')&&($('rgLayOk').onclick=()=>{L.status='confirmed';L.by=(window.ME&&ME.name)||'';rugSaveSoon();rugSide();rugDraw();});
   $('rgLayDel')&&($('rgLayDel').onclick=()=>{if(!confirm('Убрать разметку зон и углов?'))return;r.layout=null;rugSaveSoon();rugSide();rugDraw();});
-  $('rgLayAdd')&&($('rgLayAdd').onclick=()=>{const i=R.layBound!=null&&R.layBound>=0?R.layBound:L.bounds.length-1,a=i>=0?L.bounds[i]:{ix:0,iy:0},b=L.bounds[i+1]||{ix:Math.min(0.45,a.ix+0.08),iy:Math.min(0.45,a.iy+0.08)};
+  $('rgLayAdd')&&($('rgLayAdd').onclick=()=>{
+    if(layStepOf(L)===1){if(!L.bounds.length){L.bounds.push({ix:0.15,iy:0.1,strength:0});L.rings=['border','field'];L.status='edited';R.layBound=0;R.tool='zones';R.showZones=true;rugTools();rugDraw();rugSaveSoon();rugSide();}else stat('линия поля уже есть — тяните её; слои кайм добавляются на шаге 2','warn');return;}
+    const i=R.layBound!=null&&R.layBound>=0?R.layBound:L.bounds.length-2,a=i>=0?L.bounds[i]:{ix:0,iy:0},b=L.bounds[i+1]||{ix:Math.min(0.45,a.ix+0.08),iy:Math.min(0.45,a.iy+0.08)};
     L.bounds.splice(i+1,0,{ix:(a.ix+b.ix)/2||0.05,iy:(a.iy+b.iy)/2||0.05,strength:0});L.rings.splice(i+1,0,'minor');layFix(L);L.status='edited';R.tool='zones';R.showZones=true;R.layBound=i+1;rugTools();rugDraw();rugSaveSoon();rugSide();});
   E.querySelectorAll('[data-ring]').forEach(e=>e.onclick=()=>{const i=+e.dataset.ring,order=['border','minor','guard','end','field','other'];L.rings[i]=order[(order.indexOf(L.rings[i])+1)%order.length];L.status='edited';rugSaveSoon();rugSide();rugDraw();});
 }
