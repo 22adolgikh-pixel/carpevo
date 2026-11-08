@@ -1,8 +1,11 @@
 # Разовое исправление подписей схем Керимова т. I на сервере (cps/tools/kerimov_fix/README.md).
-# Запуск вручную: Actions → «CPS: исправить Керимова» → Run workflow. Без галочки apply — сухой прогон (только отчёт).
+# Запуск: push в ветку ops/kerimov-fix-dry (сухой прогон, только отчёт) или ops/kerimov-fix-apply (запись);
+# или вручную (Run workflow), когда файл есть в ветке по умолчанию.
 # Скрипт сам делает бэкап в data/backup_kerimov_fix_<время>/ и отказывается работать повторно.
 name: "CPS: исправить Керимова"
 on:
+  push:
+    branches: [ops/kerimov-fix-dry, ops/kerimov-fix-apply]
   workflow_dispatch:
     inputs:
       apply:
@@ -19,7 +22,7 @@ jobs:
       USER_: ${{ secrets.CPS_SSH_USER }}
       KEY: ${{ secrets.CPS_SSH_KEY }}
       DIR: ${{ vars.CPS_SERVER_DIR || '~/carpevo' }}
-      APPLY: ${{ inputs.apply && '--apply' || '' }}
+      APPLY: ${{ (inputs.apply || github.ref_name == 'ops/kerimov-fix-apply') && '--apply' || '' }}
     steps:
       - name: Прогон на сервере
         run: |
