@@ -1069,7 +1069,7 @@ def install(app, DATA, D_WORK):
         (границы — доли выпрямленного ковра, одинаковые для противоположных сторон)."""
         import rug_rect, rug_layout
         b = await request.json(); p = img_path(rid)
-        try: quad = [[max(-0.2, min(1.2, float(v[0]))), max(-0.2, min(1.2, float(v[1])))] for v in b["quad"]][:4]
+        try: quad = [[max(-0.6, min(1.6, float(v[0]))), max(-0.6, min(1.6, float(v[1])))] for v in b["quad"]][:4]
         except Exception: quad = []
         if not p or len(quad) != 4: return JSONResponse({"error": "нужны 4 угла"}, 400)
         def work():

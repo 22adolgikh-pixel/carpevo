@@ -371,7 +371,7 @@ label.btn{display:inline-block;border:1px solid var(--ln);border-radius:6px;padd
 .rgtxt{white-space:pre-wrap;font-size:13px;line-height:1.5;color:var(--tx)}
 #rgCenter{display:flex;flex-direction:column;min-width:0}.rgtools{display:flex;gap:4px;align-items:center;padding:6px 8px;border-bottom:1px solid var(--ln)}.rgtools .sep{width:10px}
 #rgView{flex:1;position:relative;overflow:hidden;background:var(--canvas);cursor:crosshair}#rgView.magic{cursor:cell}#rgStage{position:absolute;left:0;top:0;transform-origin:0 0}
-#rgImg{display:block;user-select:none}#rgSvg{position:absolute;left:0;top:0}
+#rgImg{display:block;user-select:none}#rgSvg{position:absolute;left:0;top:0;overflow:visible}
 .rgtabs{display:flex;gap:4px;margin-bottom:8px}.rgtabs button{flex:1}
 .rgform label,.rgform .lb{display:block;margin:7px 0;color:var(--mut);font-size:12px}.rgform input:not([type=checkbox]),.rgform select,.rgform textarea{display:block;width:100%;box-sizing:border-box;margin-top:2px}
 .rgform .rgrow{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin:6px 0;color:var(--tx)}
@@ -443,7 +443,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.31</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.32</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2562,8 +2562,9 @@ function rugMove(e){
   if(d.t==='pan'){R.ox=d.ox+e.clientX-d.sx;R.oy=d.oy+e.clientY-d.sy;rugApply();return;}
   const p=rugPt(e),cl=v=>Math.max(0,Math.min(1,v));
   if(d.t==='new'||d.t==='sweep'){d.p1={x:cl(p.x),y:cl(p.y)};rugDraw();return;}
-  if(d.t==='lay'){layDrag(d,cl(p.x),cl(p.y));d.moved=true;rugDraw();return;}
-  if(d.t==='quad'){const c2=v=>Math.max(-0.05,Math.min(1.05,v));d.L.quad[d.i]=[+c2(p.x).toFixed(5),+c2(p.y).toFixed(5)];d.moved=true;rugDraw();return;}
+  if(d.t==='lay'){if(d.L.quad)layDrag(d,p.x,p.y);else layDrag(d,cl(p.x),cl(p.y));d.moved=true;rugDraw();return;}
+  if(d.t==='quad'){const c2=v=>Math.max(-0.6,Math.min(1.6,v));   // v11.32: угол можно вынести за край фото (ковёр обрезан кадром)
+  d.L.quad[d.i]=[+c2(p.x).toFixed(5),+c2(p.y).toFixed(5)];d.moved=true;rugDraw();return;}
   const dx=p.x-d.p0.x,dy=p.y-d.p0.y,b=d.b0;
   if(d.t==='smove'){R.split[d.i]=[cl(Math.min(b[0]+dx,1-b[2])),cl(Math.min(b[1]+dy,1-b[3])),b[2],b[3]];rugDraw();return;}
   if(d.t==='sresize'){let[x,y,w,h]=b;if(d.h.includes('l')){x=b[0]+dx;w=b[2]-dx;}if(d.h.includes('r'))w=b[2]+dx;if(d.h.includes('t')){y=b[1]+dy;h=b[3]-dy;}if(d.h.includes('b'))h=b[3]+dy;if(w>0.02&&h>0.02)R.split[d.i]=[cl(x),cl(y),w,h];rugDraw();return;}

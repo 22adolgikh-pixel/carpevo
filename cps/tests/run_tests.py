@@ -237,6 +237,15 @@ def t04b_rug_quad(pg, ctx):
     pg.mouse.move(x, y); pg.mouse.down(); pg.mouse.move(x + 12, y + 8, steps=4); pg.mouse.up(); pg.wait_for_timeout(1200)
     assert pg.evaluate("R.rug.layout.quad_status") == 'edited', 'перетаскивание угла не меняет статус'
     q2 = pg.evaluate("R.rug.layout.quad[0]"); assert abs(q2[0] - q[0][0]) > 0.003, 'угол не сдвинулся'
+    # v11.32: угол можно вынести за край фото — точка и линии видны поверх тёмного поля
+    c = pg.query_selector('#rgSvg circle[data-q="3"]').bounding_box(); x, y = c['x'] + c['width'] / 2, c['y'] + c['height'] / 2
+    ib = pg.query_selector('#rgImg').bounding_box()
+    pg.mouse.move(x, y); pg.mouse.down(); pg.mouse.move(ib['x'] - 25, y, steps=5); pg.mouse.up(); pg.wait_for_timeout(1200)
+    assert pg.evaluate("R.rug.layout.quad[3][0]") < 0, 'угол нельзя вынести за край фото'
+    c2 = pg.query_selector('#rgSvg circle[data-q="3"]').bounding_box()
+    assert c2 and c2['width'] > 0 and c2['x'] + c2['width'] / 2 < ib['x'], 'точка угла за краем фото не видна'
+    assert pg.evaluate("getComputedStyle(document.getElementById('rgSvg')).overflow") == 'visible', 'линии за краем фото обрезаются'
+    pg.mouse.move(c2['x'] + c2['width'] / 2, c2['y'] + c2['height'] / 2); pg.mouse.down(); pg.mouse.move(x, y, steps=5); pg.mouse.up(); pg.wait_for_timeout(1200)
     pg.click('#rgQOk'); pg.wait_for_timeout(300); assert pg.evaluate("R.rug.layout.quad_status") == 'confirmed', '«✓ углы верны» не подтверждает'
     pg.click('#rgLayAuto'); pg.wait_for_timeout(2500)
     nb = pg.evaluate("R.rug.layout.bounds.length"); assert nb >= 1, 'на выпрямленном ковре не найдено ни одной границы каймы'

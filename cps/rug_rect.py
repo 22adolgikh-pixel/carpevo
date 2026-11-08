@@ -126,4 +126,4 @@ def rectify(img, quad, side=1600):
     W, H = rect_size(src, side, (w, h))
     dst = np.array([[0, 0], [W, 0], [W, H], [0, H]], np.float32)
     T = cv2.getPerspectiveTransform(src, dst)
-    return cv2.warpPerspective(img, T, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+    return cv2.warpPerspective(img, T, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=(40, 40, 40))   # за краем кадра — тёмно-серое (части ковра нет на фото)
