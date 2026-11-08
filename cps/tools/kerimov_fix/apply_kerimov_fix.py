@@ -41,6 +41,10 @@ def main(data, apply=False):
         bt, bf = book_ref(w.get("sheet"), w.get("table"), w.get("fig"))
         allw[fn] = (w, bt, bf)
         if bt is not None: by_book[(bt, bf)] = fn
+    done_before = [fn for fn, (w, _, _) in allw.items() if w.get("kerimov_fix")]
+    if done_before and "--force" not in sys.argv:
+        print(f"Исправление уже применено ({len(done_before)} схем с пометкой kerimov_fix) — повторный прогон перенёс бы привязки дважды. Ничего не делаю.")
+        return
     remap, moved_site = {}, {}
     for fn, (w, bt, bf) in allw.items():
         m = w.get("meta") or {}

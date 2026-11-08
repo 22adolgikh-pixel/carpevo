@@ -1,0 +1,35 @@
+# Разовое исправление подписей схем Керимова т. I на сервере (cps/tools/kerimov_fix/README.md).
+# Запуск вручную: Actions → «CPS: исправить Керимова» → Run workflow. Без галочки apply — сухой прогон (только отчёт).
+# Скрипт сам делает бэкап в data/backup_kerimov_fix_<время>/ и отказывается работать повторно.
+name: "CPS: исправить Керимова"
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: "записать изменения (иначе только отчёт)"
+        type: boolean
+        default: false
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency: cps-deploy
+    env:
+      HOST: ${{ secrets.CPS_SSH_HOST }}
+      USER_: ${{ secrets.CPS_SSH_USER }}
+      KEY: ${{ secrets.CPS_SSH_KEY }}
+      DIR: ${{ vars.CPS_SERVER_DIR || '~/carpevo' }}
+      APPLY: ${{ inputs.apply && '--apply' || '' }}
+    steps:
+      - name: Прогон на сервере
+        run: |
+          install -m 700 -d ~/.ssh
+          if printf '%s' "$KEY" | grep -q "BEGIN"; then printf '%s\n' "$KEY" | tr -d '\r' > ~/.ssh/deploy_key; else printf '%s' "$KEY" | tr -d ' \r\n' | base64 -d > ~/.ssh/deploy_key; fi
+          chmod 600 ~/.ssh/deploy_key
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 "$USER_@$HOST" bash -s "$DIR" "$APPLY" <<'REMOTE'
+          set -euo pipefail
+          cd "$1"
+          echo "на сервере: $(git log --oneline -1)"
+          cd cps/deploy
+          docker compose -f docker-compose.existing-nginx.yml exec -T cps python tools/kerimov_fix/apply_kerimov_fix.py /app/data $2
+          REMOTE
