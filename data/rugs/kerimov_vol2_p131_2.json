@@ -18,7 +18,7 @@
  "h": 590,
  "marks": [],
  "created": 1791736122,
- "updated": 1794148802,
+ "updated": 1794155021,
  "cat": {
   "title": "Керимов, т. II, 11 (стр. скана 131, печ. 11)",
   "museum": "",
@@ -133,11 +133,30 @@
    1,
    1
   ],
-  "bounds": [],
+  "bounds": [
+   {
+    "ix": 0.014285714285714285,
+    "iy": 0.02188183807439825,
+    "strength": 6.48
+   },
+   {
+    "ix": 0.03,
+    "iy": 0.045951859956236324,
+    "strength": 6.1
+   },
+   {
+    "ix": 0.1615663030624061,
+    "iy": 0.2269950539110781,
+    "strength": 2.76
+   }
+  ],
   "rings": [
+   "guard",
+   "guard",
+   "border",
    "field"
   ],
-  "status": "auto",
+  "status": "confirmed",
   "quad": [
    [
     0.00658,
@@ -157,7 +176,8 @@
    ]
   ],
   "quad_status": "confirmed",
-  "quad_by": "dolgikh"
+  "quad_by": "dolgikh",
+  "by": "dolgikh"
  },
  "updated_by": "dolgikh"
 }
