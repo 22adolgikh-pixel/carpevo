@@ -341,9 +341,9 @@ aside{min-height:0}
 .rgstat{padding:8px 14px 0;color:var(--mut);font-size:12px;display:flex;gap:14px;flex-wrap:wrap}.rgstat a{color:var(--blue)}
 .rgcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;padding:10px 14px 20px}
 .tri{position:absolute;inset:0;z-index:60;background:var(--bg);display:flex;flex-direction:column}.tri .trh{display:flex;gap:12px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--ln);flex-wrap:wrap}
-.tri .trg{flex:1;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;padding:12px;align-content:start}
-.tri .trt{position:relative;border:2px solid var(--ln);border-radius:8px;overflow:hidden;cursor:pointer;background:#000}.tri .trt.bad{border-color:var(--bad);box-shadow:0 0 0 2px var(--bad) inset}
-.tri .trt .ph{position:relative;width:100%;line-height:0;touch-action:none}.tri .trt img{display:block;width:100%;height:auto}.tri .trt svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.tri .trt .hd{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#ffe066;border:2px solid #000;cursor:grab;z-index:3}.tri .trt.ed{border-color:var(--ok)}
+.tri .trg{flex:1;overflow:auto;display:flex;flex-wrap:wrap;gap:10px;padding:12px;align-content:flex-start;align-items:flex-start}
+.tri .trt{position:relative;border:2px solid var(--ln);border-radius:8px;cursor:pointer;background:#000;width:220px;padding:14px 14px 22px;display:flex;justify-content:center}.tri .trt.bad{border-color:var(--bad);box-shadow:0 0 0 2px var(--bad) inset}
+.tri .trt .ph{position:relative;display:inline-block;line-height:0;touch-action:none}.tri .trt img{display:block;max-width:188px;max-height:340px;width:auto;height:auto}#triLoupe{position:fixed;z-index:200;width:180px;height:180px;border-radius:50%;border:3px solid #ffe066;box-shadow:0 4px 18px #000c;background-color:#111;background-repeat:no-repeat;pointer-events:none;display:none}#triLoupe:before,#triLoupe:after{content:'';position:absolute;background:#ff3b30}#triLoupe:before{left:50%;top:20%;bottom:20%;width:1px}#triLoupe:after{top:50%;left:20%;right:20%;height:1px}.tri .trt svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.tri .trt .hd{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#ffe066;border:2px solid #000;cursor:grab;z-index:3}.tri .trt.ed{border-color:var(--ok)}
 .tri .trt .bd{position:absolute;left:4px;top:4px;font-size:11px;padding:1px 6px;border-radius:9px;background:#000a;color:#fff}.tri .trt .bd.w{color:#ffd166}.tri .trt .nm{position:absolute;left:0;right:0;bottom:0;font-size:10px;padding:2px 5px;background:#000b;color:#ddd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rguse{display:flex;gap:8px;align-items:center;padding:6px 10px;flex-wrap:wrap}.rguc.on{outline:2px solid var(--acc);background:var(--pan)}.rguw{position:absolute;right:6px;top:6px;z-index:2;font-size:11px;padding:0 6px;border-radius:9px;background:#000c;color:#ffd166}
 .rgcard{position:relative;background:var(--pan);border:1px solid var(--ln);border-radius:8px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column}.rgcard:hover{border-color:var(--acc)}
@@ -449,7 +449,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.37</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.38</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2220,8 +2220,16 @@ document.addEventListener('error',e=>{const im=e.target;if(!(im instanceof HTMLI
 // v11.8: что сейчас считает сервер (тяжёлые расчёты идут по одному) — в строке состояния
 setInterval(async()=>{if(!R.on||document.hidden)return;try{const h=await api('/api/heavy');const hr=[h.ui_run&&(h.ui_run+(h.ui_wait?` · в очереди ${h.ui_wait}`:'')),h.run&&(h.run+(h.wait?` · в очереди ${h.wait}`:''))].filter(Boolean);R.busyHeavy=hr.join(' · ');const B=$('rgBusy')||(()=>{const b=document.createElement('span');b.id='rgBusy';b.className='mut';b.style.marginLeft='10px';$('sbar').appendChild(b);return b;})();B.innerHTML=R.busyHeavy?'<span class="spin"></span> сервер считает: '+esc(R.busyHeavy):'';}catch(e){}},4000);
 
-// v11.37: проверка пачкой — этапы 0–1 (вид кадра и 4 угла). Машина предлагает, человек кликает по неверным, остальное принимается
+// v11.38: проверка пачкой — этапы 0–1 (вид кадра и 4 угла). Машина предлагает, человек кликает по неверным, остальное принимается
 const TRI_FR={whole:'целый',cropped:'обрезан кадром',unsure:'не уверена'};
+function triLoupe(on,ph,id,x,y,cx,cy){      // v11.38: лупа ×6 у угла — точное место видно по полноразмерному фото, красный крест = положение угла
+  let L=$('triLoupe');if(!L){L=document.createElement('div');L.id='triLoupe';document.body.appendChild(L);}
+  if(!on){L.style.display='none';return;}
+  const r=ph.getBoundingClientRect(),Z=6,BW=r.width*Z,BH=r.height*Z,S=180,src='/rugimg/'+encodeURIComponent(id)+'.jpg';
+  if(L.dataset.src!==src){L.dataset.src=src;L.style.backgroundImage=`url("${src}")`;}
+  L.style.backgroundSize=`${BW}px ${BH}px`;L.style.backgroundPosition=`${S/2-x*BW}px ${S/2-y*BH}px`;
+  let lx=cx+30,ly=cy-S-30;if(ly<8)ly=cy+30;if(lx+S>innerWidth-8)lx=cx-S-30;   // над пальцем/курсором, не под ним
+  L.style.left=lx+'px';L.style.top=ly+'px';L.style.display='block';}
 async function triOpen(){
   let E=$('rgTri');if(E)E.remove();E=document.createElement('div');E.id='rgTri';E.className='tri';$('rugs').appendChild(E);
   E.innerHTML='<div class="trh"><b>▦ Проверка пачкой</b><span class="mut">машина ищет углы…</span></div>';
@@ -2236,13 +2244,15 @@ async function triOpen(){
       <div class="trg">${ids.map(i=>{const a=t.res[i],m=by[i]||{w:3,h:4},ar=(m.w&&m.h)?m.h/m.w:1.3,qd=a?a.quad.map(p=>p.join(',')).join(' '):'';
         return `<div class="trt${bad.has(i)?' bad':''}" data-i="${esc(i)}"><div class="ph"><img loading="lazy" src="/rugthumb/${encodeURIComponent(i)}.jpg" alt="">${a?`<svg viewBox="0 0 1 1" preserveAspectRatio="none"><polygon points="${qd}" fill="#ffe06622" stroke="#ffe066" stroke-width="2.2" vector-effect="non-scaling-stroke"/></svg>`+a.quad.map((p,k)=>`<i class="hd" data-k="${k}" style="left:${p[0]*100}%;top:${p[1]*100}%"></i>`).join(''):''}</div><span class="bd${a&&a.frame!=='whole'?' w':''}">${a?TRI_FR[a.frame]||a.frame:'—'}</span><span class="nm">${esc((by[i]||{}).title||i)}</span></div>`;}).join('')}</div>`;
       E.querySelectorAll('.trt').forEach(e=>{const i=e.dataset.i;e.onclick=ev=>{if(ev.target.classList.contains('hd'))return;bad.has(i)?bad.delete(i):bad.add(i);draw();};
-        const ph=e.querySelector('.ph');e.querySelectorAll('.hd').forEach(h=>h.onpointerdown=ev=>{       // тянуть угол прямо в плитке
+        const ph=e.querySelector('.ph');e.querySelectorAll('.hd').forEach(h=>{h.onpointerenter=ev=>{if(ev.buttons)return;const p=t.res[i].quad[+h.dataset.k];triLoupe(true,ph,i,p[0],p[1],ev.clientX,ev.clientY);};h.onpointerleave=ev=>{if(!ev.buttons)triLoupe(false);};});
+        e.querySelectorAll('.hd').forEach(h=>h.onpointerdown=ev=>{       // тянуть угол прямо в плитке
           ev.preventDefault();ev.stopPropagation();h.setPointerCapture(ev.pointerId);const k=+h.dataset.k,pg=e.querySelector('polygon');
-          const mv=m=>{const r=ph.getBoundingClientRect(),x=Math.max(0,Math.min(1,(m.clientX-r.left)/r.width)),y=Math.max(0,Math.min(1,(m.clientY-r.top)/r.height));
+          const mv=m=>{const r=ph.getBoundingClientRect(),x=Math.max(0,Math.min(1,(m.clientX-r.left)/r.width)),y=Math.max(0,Math.min(1,(m.clientY-r.top)/r.height));triLoupe(true,ph,i,x,y,m.clientX,m.clientY);
             t.res[i].quad[k]=[+x.toFixed(5),+y.toFixed(5)];h.style.left=x*100+'%';h.style.top=y*100+'%';pg.setAttribute('points',t.res[i].quad.map(p=>p.join(',')).join(' '));edited.add(i);bad.delete(i);e.classList.add('ed');e.classList.remove('bad');};
-          const up=()=>{h.removeEventListener('pointermove',mv);h.removeEventListener('pointerup',up);const b=$('triOk');if(b)b.textContent=`✓ принять ${ids.length-bad.size}${edited.size?` (из них поправлено ${edited.size})`:''}, проверить вручную ${bad.size}`;};
+          const p0=t.res[i].quad[k];triLoupe(true,ph,i,p0[0],p0[1],ev.clientX,ev.clientY);
+          const up=()=>{triLoupe(false);h.removeEventListener('pointermove',mv);h.removeEventListener('pointerup',up);const b=$('triOk');if(b)b.textContent=`✓ принять ${ids.length-bad.size}${edited.size?` (из них поправлено ${edited.size})`:''}, проверить вручную ${bad.size}`;};
           h.addEventListener('pointermove',mv);h.addEventListener('pointerup',up);});});
-      $('triX').onclick=()=>E.remove();
+      $('triX').onclick=()=>{triLoupe(false);E.remove();};
       $('triOk').onclick=async()=>{$('triOk').disabled=true;try{const quads={};edited.forEach(i=>quads[i]=t.res[i].quad);const j=await api('/api/rugs_triage_accept',{ids,bad:[...bad],quads});stat(`принято ${j.ok}, на ручную проверку ${j.bad}`,'ok');await rugsLoadList();triOpen();}catch(e){fail(e);E.remove();}};
     };draw();
   }catch(e){fail(e);E.remove();}
@@ -2603,7 +2613,7 @@ function rugMove(e){
   const p=rugPt(e),cl=v=>Math.max(0,Math.min(1,v));
   if(d.t==='new'||d.t==='sweep'){d.p1={x:cl(p.x),y:cl(p.y)};rugDraw();return;}
   if(d.t==='lay'){if(d.L.quad)layDrag(d,p.x,p.y);else layDrag(d,cl(p.x),cl(p.y));d.moved=true;rugDraw();return;}
-  if(d.t==='quad'){const c2=v=>Math.max(-0.6,Math.min(1.6,v));   // v11.37: угол можно вынести за край фото (ковёр обрезан кадром)
+  if(d.t==='quad'){const c2=v=>Math.max(-0.6,Math.min(1.6,v));   // v11.38: угол можно вынести за край фото (ковёр обрезан кадром)
   d.L.quad[d.i]=[+c2(p.x).toFixed(5),+c2(p.y).toFixed(5)];d.moved=true;rugDraw();return;}
   const dx=p.x-d.p0.x,dy=p.y-d.p0.y,b=d.b0;
   if(d.t==='smove'){R.split[d.i]=[cl(Math.min(b[0]+dx,1-b[2])),cl(Math.min(b[1]+dy,1-b[3])),b[2],b[3]];rugDraw();return;}
@@ -2654,7 +2664,7 @@ async function rugSamFix(ms){const rid=R.rug.id;let n=0,i=0;
   rugSaveSoon();rugDraw();rugSide();stat(n?('контур: '+n+(ms.length>1?' из '+ms.length:'')+' — рамка теперь по форме элемента'):'контур не найден — элемент сливается с фоном, поправьте рамку руками',n?'ok':'warn');}
 function rugSamNext(m){const s=m&&m._sam;if(!s||s.cands.length<2){stat('других вариантов контура нет — кликните инструментом «контур» (M) в другом месте элемента','warn');return;}
   s.i=(s.i+1)%s.cands.length;const c=s.cands[s.i];m.box=c.box.slice();m.poly=c.poly;rugSaveSoon();rugDraw();rugSide();stat('контур: вариант '+(s.i+1)+' из '+s.cands.length+' ('+(s.i===0?'самый маленький':s.i===s.cands.length-1?'самый большой':'средний')+')','ok');}
-// v11.37: два шага. 1 — одна линия: где кончаются каймы и начинается поле; 2 — каймы делятся на слои (полосы)
+// v11.38: два шага. 1 — одна линия: где кончаются каймы и начинается поле; 2 — каймы делятся на слои (полосы)
 function layStepOf(L){return R.rug&&R.layStepFor===R.rug.id&&R.layStep?R.layStep:((L&&L.bounds.length>2)?2:1);}
 function laySetStep(n){R.layStep=n;R.layStepFor=R.rug&&R.rug.id;R.layBound=null;rugTools&&rugTools();rugDraw();rugSide();}
 function layHit(L,p){

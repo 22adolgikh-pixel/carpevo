@@ -60,6 +60,8 @@ def make_rugs(data):
     T = cv2.getPerspectiveTransform(np.float32([[0, 0], [500, 0], [500, 700], [0, 700]]), QT)
     ph = cv2.warpPerspective(fr, T, (Wp, Hp), dst=np.full((Hp, Wp, 3), (205, 208, 212), np.uint8), borderMode=cv2.BORDER_TRANSPARENT)
     save("persp_1", ph, title="Rug photographed at an angle", cat={"src": "azerbaijanrugs"})
+    tl = np.full((1500, 700, 3), (210, 210, 214), np.uint8); tl[60:1440, 60:640] = cv2.resize(frieze_rug(), (580, 1380))   # v11.38: длинная дорожка 1:2 — в плитке видны все 4 угла
+    save("tall_1", tl, title="Long runner", cat={"src": "azerbaijanrugs"})
     pg_ = np.full((1100, 800, 3), 238, np.uint8); rugimg = carpet(520, 700, 93); pg_[200:900, 140:660] = rugimg   # v11.22: лист книги и вырезанный с него ковёр
     save("kerimov_vol9_p050_1", pg_, title="Керимов, т. IX (стр. 50)", cat={"src": "kerimov_vol9"})
     save("kerimov_vol9_p050_2", cv2.resize(rugimg, (390, 525), interpolation=cv2.INTER_AREA), title="Керимов, т. IX (стр. 50), ковёр", cat={"src": "kerimov_vol9"},
@@ -1205,10 +1207,18 @@ def t32_triage_batch(pg, ctx):
                 cx, cy = hb['x'] + hb['width'] / 2, hb['y'] + hb['height'] / 2
                 pg.mouse.move(cx, cy); pg.mouse.down(); pg.mouse.move(cx + 22, cy + 18, steps=6); pg.mouse.up(); pg.wait_for_timeout(200)
                 moved = pg.evaluate("document.querySelector('#rgTri .trt:nth-child(2)').classList.contains('ed')")
+                pg.mouse.move(cx + 22, cy + 18); pg.mouse.down(); pg.mouse.move(cx + 26, cy + 20, steps=3)
+                assert pg.evaluate("getComputedStyle(document.getElementById('triLoupe')).display") == 'block', 'при перетаскивании угла нет лупы'
+                pg.screenshot(path=f'{OUT}/32_triage_loupe.png'); pg.mouse.up(); pg.wait_for_timeout(150)
+                assert pg.evaluate("getComputedStyle(document.getElementById('triLoupe')).display") == 'none', 'лупа не прячется'
                 assert moved, 'перетаскивание угла в плитке не сработало'
         pg.evaluate("document.querySelector('#rgTri .trt').click()"); pg.wait_for_timeout(200)
         first_bad = pg.evaluate("document.querySelector('#rgTri .trt').classList.contains('bad')")
         pg.screenshot(path=f'{OUT}/32_triage.png')
+        if 'tall_1' in ids:          # все 4 угла длинной дорожки видны в пределах плитки
+            vis = pg.evaluate("""(()=>{const e=[...document.querySelectorAll('#rgTri .trt')].find(x=>x.dataset.i==='tall_1'),r=e.getBoundingClientRect();
+              return [...e.querySelectorAll('.hd')].map(h=>{const b=h.getBoundingClientRect(),y=b.top+b.height/2;return y>=r.top&&y<=r.bottom;});})()""")
+            assert vis and all(vis), f'в плитке длинного ковра видны не все углы: {vis}' 
         pg.click('#triOk'); pg.wait_for_timeout(2500)
         r0 = _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/' + ids[0]))
         if first_bad: assert r0.get('tri') == 'review', 'неверный ковёр не помечен «проверить вручную»'
