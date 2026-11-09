@@ -18,7 +18,7 @@
  "h": 624,
  "marks": [],
  "created": 1791736122,
- "updated": 1794256758,
+ "updated": 1794256852,
  "cat": {
   "title": "Carpet with Triple Lozenge-Medallion Design",
   "museum": "Метрополитен-музей",
@@ -108,6 +108,13 @@
      ]
     ]
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794256852
+   }
   }
  },
  "layout": {
@@ -143,5 +150,6 @@
   "quad_status": "confirmed"
  },
  "tri": "micro",
- "frame": "whole"
+ "frame": "whole",
+ "frame_by": "micro"
 }
