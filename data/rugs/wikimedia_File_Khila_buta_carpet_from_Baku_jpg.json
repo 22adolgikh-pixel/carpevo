@@ -18,7 +18,7 @@
  "h": 644,
  "marks": [],
  "created": 1791736123,
- "updated": 1794255946,
+ "updated": 1794256009,
  "cat": {
   "title": "Khila-buta carpet from Baku.jpg",
   "museum": "Wikimedia Commons",
@@ -104,8 +104,66 @@
     "w": 2,
     "t": 1794255946
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794256009,
+    "q": [
+     [
+      -0.00112,
+      -0.00081
+     ],
+     [
+      0.99919,
+      -0.00802
+     ],
+     [
+      0.99919,
+      1.00441
+     ],
+     [
+      0.01097,
+      0.9936
+     ]
+    ]
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00112,
+    -0.00081
+   ],
+   [
+    0.99919,
+    -0.00802
+   ],
+   [
+    0.99919,
+    1.00441
+   ],
+   [
+    0.01097,
+    0.9936
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
