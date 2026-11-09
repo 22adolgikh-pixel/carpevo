@@ -1263,6 +1263,7 @@ def t33_micro_phone(pg, ctx):
             bg = m.evaluate("getComputedStyle(document.querySelector('#cz .cz')).backgroundImage")
             assert 'rugmid' in bg, 'в карточке углов нет крупного вида угла'
             if not fixed:
+                m.check('#fd')                                   # отметка «край повреждён» переживает правку угла
                 m.click('#a2'); m.wait_for_selector('#fx'); m.wait_for_timeout(300)
                 b = m.query_selector('#fx').bounding_box(); cx, cy = b['x'] + b['width'] / 2, b['y'] + b['height'] / 2
                 m.mouse.move(cx, cy); m.mouse.down(); m.mouse.move(cx - 30, cy - 20, steps=5); m.mouse.up()
@@ -1277,6 +1278,8 @@ def t33_micro_phone(pg, ctx):
     assert sum(u['total'] for u in st.values()) >= len(kinds), f'ответы не записаны: {st}'
     ch = [i for i in ('tall_1', 'frieze_1', 'cm_shot_o') if (_j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/' + i)).get('layout') or {}).get('quad_status') == 'confirmed']
     assert ch, 'ответ админа об углах не применился сразу'
+    ed = [x['id'] for x in _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs'))['rugs'] if 'damaged' in (x.get('edge') or [])]
+    assert ed, 'отметка «край повреждён» не сохранилась'
     mc.close()
 
 def main():

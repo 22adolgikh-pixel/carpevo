@@ -31,6 +31,7 @@ button.wide{grid-column:1/-1}button.sm{min-height:40px;padding:8px}button:active
 .end{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;flex:1}.end .big{font-size:42px;font-weight:700}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#000d;padding:8px 14px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}.toast.on{opacity:1}
 .mut{color:var(--mut)}
+.flags{display:flex;gap:8px}.flags label{flex:1;display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--ln);border-radius:10px;font-size:13px;color:var(--mut)}.flags input{width:20px;height:20px;accent-color:var(--acc)}.flags label:has(input:checked){border-color:var(--acc);color:var(--tx)}
 </style></head><body>
 <header><b>Проверка ковров</b><span class="sp"></span><small id="me"></small><a href="/">студия</a></header>
 <div class="dots" id="dots"></div>
@@ -73,12 +74,14 @@ function zoomable(){const st=$('stage'),ph=$('ph');if(!st||!ph)return;let k=1,x=
     else if(k>1.02){x=x0+e.clientX-c0[0];y=y0+e.clientY-c0[1];apply();}};
   st.onpointerup=st.onpointercancel=e=>{P.delete(e.pointerId);if(P.size===1){const a=[...P.values()][0];c0=a;x0=x;y0=y;}if(k<=1.02)reset();};
   window.__zoom=()=>k;}
-async function answer(t,a,q){const k=S.i;S.i++;S.done++;show();
-  try{const j=await api('/api/micro/answer',{type:t.type,rid:t.rid,a,q,c:t.c});S.me.total=(S.me.total||0)+1;if(a!=='skip')S.me.today=(S.me.today||0)+1;
+function rdFlags(t){const w=$('fw'),d=$('fd');if(w)t.fl={wavy:w.checked,damaged:d.checked};}
+async function answer(t,a,q){rdFlags(t);const k=S.i;S.i++;S.done++;show();
+  try{const j=await api('/api/micro/answer',{type:t.type,rid:t.rid,a,q,c:t.c,flags:t.fl});S.me.total=(S.me.total||0)+1;if(a!=='skip')S.me.today=(S.me.today||0)+1;
     if(j.ctl===false)toast('контрольная карточка: тут была ошибка — смотрите внимательнее');else if(j.applied)toast('принято ✓');head();}
   catch(e){toast('не сохранилось: '+e.message);S.i=k;S.done--;show();}}
 function showFrame(t){document.documentElement.style.setProperty('--imh','52dvh');
   $('main').innerHTML=`<div class="q">Это целый ковёр?</div><div class="hint">целиком в кадре, все 4 края видны</div>${stage(t)}
+   <div class="flags"><label><input type="checkbox" id="fw">края сильно кривые</label><label><input type="checkbox" id="fd">край / угол повреждён</label></div>
    <div class="btns"><button class="yes" id="a1">✓ целый ковёр</button><button id="a2">обрезан кадром</button><button id="a3">фрагмент / кусок</button><button class="no" id="a4">не ковёр</button><button class="sm wide" id="a5">не знаю</button></div>
    <div class="hint" style="text-align:center">два пальца — увеличить фото, двойной тап — сбросить</div>`;
   S.im=$('im');$('a1').onclick=()=>answer(t,'whole');$('a2').onclick=()=>answer(t,'cropped');$('a3').onclick=()=>answer(t,'fragment');$('a4').onclick=()=>answer(t,'not_rug');$('a5').onclick=()=>answer(t,'skip');
@@ -88,13 +91,14 @@ function showQuad(t){t.q=t.q||t.quad.map(p=>[...p]);document.documentElement.sty
   $('main').innerHTML=`<div class="q">Рамка точно по краю ковра?</div><div class="hint">внизу углы крупно: крест — на углу ковра (бахрома не в счёт); тап по углу — поправить; два пальца — увеличить фото</div>
    ${stage(t,`<svg viewBox="0 0 1 1" preserveAspectRatio="none"><polygon id="pg" points="${poly(t.q)}" fill="#ffe0661a" stroke="#ffe066" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`)}
    <div class="corners" id="cz">${[0,1,3,2].map(k=>`<div class="cz" data-k="${k}"><span>${C_SH[k]}</span></div>`).join('')}</div>
+   <div class="flags"><label><input type="checkbox" id="fw">края сильно кривые</label><label><input type="checkbox" id="fd">край / угол повреждён</label></div>
    <div class="btns"><button class="yes" id="a1">✓ да, точно</button><button id="a2">✎ поправить</button><button class="no" id="a3">✗ не то / не ковёр</button><button class="sm" id="a4">не знаю</button></div>`;
-  S.im=$('im');const paint=()=>document.querySelectorAll('#cz .cz').forEach(e=>{const k=+e.dataset.k;zoomBg(e,t,t.q[k][0],t.q[k][1],6);});
+  if(t.fl){$('fw').checked=t.fl.wavy;$('fd').checked=t.fl.damaged;}S.im=$('im');const paint=()=>document.querySelectorAll('#cz .cz').forEach(e=>{const k=+e.dataset.k;zoomBg(e,t,t.q[k][0],t.q[k][1],6);});
   S.im.complete?paint():S.im.onload=paint;
   document.querySelectorAll('#cz .cz').forEach(e=>e.onclick=()=>fixQuad(t,+e.dataset.k));
   $('a1').onclick=()=>answer(t,'ok');$('a2').onclick=()=>fixQuad(t,0);$('a3').onclick=()=>answer(t,'bad');$('a4').onclick=()=>answer(t,'skip');
   zoomable();}
-function fixQuad(t,k){t.fixed=true;
+function fixQuad(t,k){t.fixed=true;rdFlags(t);
   $('main').innerHTML=`<div class="q">Угол: ${C_RU[k]}</div><div class="hint">двигайте фото пальцем, пока угол ковра не встанет под красный крест</div>
    <div class="fix" id="fx"></div>
    <div class="btns"><button class="sm" id="pv">← пред. угол</button><button class="sm" id="nx">след. угол →</button><button class="yes wide" id="ok">✓ сохранить углы</button><button class="sm wide" id="bk">отмена</button></div>`;

@@ -296,7 +296,7 @@ def install(app, DATA, D_WORK):
                 "part": (r.get("cat") or {}).get("part", 0),
                 "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", ""),
                 "people": (r.get("people") or {}).get("n", 0),
-                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "seen": bool(r.get("auto")), "use": use_of(r)[0], "use_why": use_of(r)[1], "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
+                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "seen": bool(r.get("auto")), "edge": sorted((r.get("edge") or {}).keys()), "use": use_of(r)[0], "use_why": use_of(r)[1], "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -1647,7 +1647,7 @@ def install(app, DATA, D_WORK):
         row = {"id": rid, "use": use_of(r)[0], "seen": bool(a), "conf": a.get("conf", 0), "aframe": a.get("frame"), "frame": r.get("frame", ""),
                "frame_by": r.get("frame_by", ""), "qs": L.get("quad_status", ""), "quad": L.get("quad"), "aquad": a.get("quad"),
                "who": {t: list((m.get(t) or {}).keys()) for t in ("frame", "quad")}, "title": r.get("title", ""), "w": r.get("w"), "h": r.get("h"),
-               "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad"))}
+               "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge")}
         _mc[rid] = (k, row); return row
 
     def _mrows():
@@ -1727,9 +1727,19 @@ def install(app, DATA, D_WORK):
             if not (isinstance(q, list) and len(q) == 4): return JSONResponse({"error": "углы?"}, status_code=400)
             q = [[round(max(-0.6, min(1.6, float(x))), 5), round(max(-0.6, min(1.6, float(y))), 5)] for x, y in q]; rec["q"] = q
         applied = None
+        fl = body.get("flags") or {}
         with _lock:
             r = load(rid)
             if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
+            # v11.43: отметки «края сильно кривые» / «край или угол повреждён» — не мешают ответу, копятся по людям
+            E = r.setdefault("edge", {})
+            for k in ("wavy", "damaged"):
+                us = set(E.get(k) or [])
+                (us.add if fl.get(k) else us.discard)(me)
+                if us: E[k] = sorted(us)
+                else: E.pop(k, None)
+            if not E: r.pop("edge", None)
+            if fl: rec["flags"] = {k: bool(fl.get(k)) for k in ("wavy", "damaged")}
             M = r.setdefault("micro", {}).setdefault(typ, {})
             M[me] = {"a": a, "w": _wt(role), "t": rec["t"], **({"q": q} if q else {})}
             votes = list(M.values())
