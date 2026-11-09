@@ -1,10 +1,10 @@
 {
- "at": "2026-11-09 14:18:40",
- "rss_mb": 3772,
- "avail_mb": 3260,
+ "at": "2026-11-09 14:18:50",
+ "rss_mb": 5924,
+ "avail_mb": 1107,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 30,
+ "up_s": 40,
  "threads": [
   "MainThread",
   "Thread-2 (<lambda>)",
@@ -13,11 +13,9 @@
   "Thread-6 (loop)",
   "cps-backup",
   "Thread-7 (_loop)",
-  "AnyIO worker thread",
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-09 14:16:20 rss=1164MB avail=6060/11925MB limit=0MB heavy=- wait=0",
   "2026-11-09 14:16:30 rss=1164MB avail=6038/11925MB limit=0MB heavy=- wait=0",
   "2026-11-09 14:16:40 rss=1164MB avail=6088/11925MB limit=0MB heavy=- wait=0",
   "2026-11-09 14:16:50 rss=1164MB avail=6072/11925MB limit=0MB heavy=- wait=0",
@@ -31,6 +29,7 @@
   "2026-11-09 14:18:10 rss=127MB avail=6958/11925MB limit=0MB heavy=- wait=0",
   "2026-11-09 14:18:20 rss=995MB avail=6131/11925MB limit=0MB heavy=- wait=0",
   "2026-11-09 14:18:30 rss=2478MB avail=4537/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-09 14:18:40 rss=3772MB avail=3260/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-09 14:18:40 rss=3772MB avail=3260/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-09 14:18:50 rss=5924MB avail=1107/11925MB limit=0MB heavy=- wait=0"
  ]
 }
