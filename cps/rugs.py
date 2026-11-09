@@ -296,7 +296,7 @@ def install(app, DATA, D_WORK):
                 "part": (r.get("cat") or {}).get("part", 0),
                 "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", ""),
                 "people": (r.get("people") or {}).get("n", 0),
-                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "use": use_of(r)[0], "use_why": use_of(r)[1], "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
+                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "seen": bool(r.get("auto")), "use": use_of(r)[0], "use_why": use_of(r)[1], "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -389,14 +389,19 @@ def install(app, DATA, D_WORK):
         if obj_guess(r)[0] != "carpet": return "skip", "не ковёр (сумка, предмет, сцена)"
         if r["fragment"] if r.get("fragment") is not None else bool((r.get("cat") or {}).get("fragment")): return "skip", "фрагмент"
         if (r.get("people") or {}).get("n"): return "skip", "на фото люди"
+        # Керимов — главный источник описаний (грейд A): вырезки из книги маленькие и без фона, рамка и размер для них не мерило
+        if (r.get("cat") or {}).get("src", "").startswith("kerimov") or r["id"].startswith("kerimov"):
+            if r.get("frame") in ("fragment", "not_rug"): return "skip", "отмечено вручную: " + ("фрагмент" if r["frame"] == "fragment" else "не ковёр")
+            return "work", "ковёр из книги Керимова (размер и рамка не проверяются)"
+        kl = any(str(x.get("id", "")).startswith("kerimov") for x in r.get("same") or [])   # то же фото, что у Керимова: не отбрасываем по картинке
         side = min(r.get("w") or 0, r.get("h") or 0)
-        if side and side < 400: return "skip", "фото слишком мелкое"
+        if side and side < 400: return ("maybe", "мелкое фото, но есть у Керимова") if kl else ("skip", "фото слишком мелкое")
         if r.get("frame") in ("fragment", "not_rug"): return "skip", "отмечено вручную: " + ("фрагмент" if r["frame"] == "fragment" else "не ковёр")
         a = r.get("auto")
         if not a: return "maybe", "кадр ещё не проверен машиной"
-        if a.get("frame") == "unsure": return "skip", "машина не видит целого ковра на фоне (интерьер, крупный план?)"
+        if a.get("frame") == "unsure": return ("maybe", "кадр без фона, но ковёр есть у Керимова") if kl else ("skip", "машина не видит целого ковра на фоне (интерьер, крупный план?)")
         w, h = r.get("w") or 0, r.get("h") or 0
-        if w and h and (w / h < 0.4 or w / h > 2.5): return "skip", "странные пропорции кадра"
+        if w and h and (w / h < 0.4 or w / h > 2.5): return ("maybe", "странные пропорции, но есть у Керимова") if kl else ("skip", "странные пропорции кадра")
         if a.get("frame") == "cropped": return "maybe", "ковёр обрезан кадром"
         if side < 600: return "maybe", "фото мелкое (<600 px)"
         return "work", "целый ковёр, хорошее фото"

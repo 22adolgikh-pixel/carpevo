@@ -1188,6 +1188,8 @@ def t32_triage_batch(pg, ctx):
     L = _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs'))['rugs']
     assert L and all(x.get('use') in ('work', 'maybe', 'skip') for x in L), 'у ковров нет отбора work/maybe/skip'
     assert any(x['use'] == 'skip' and x.get('use_why') for x in L) or len(L) < 3, 'отложенные без причины'
+    kp = [x for x in L if x['id'].startswith('kerimov') and not x.get('multi') and x['use'] != 'skip']
+    assert all(x['use'] == 'work' for x in kp), 'ковры из Керимова не должны отбрасываться по размеру и рамке'
     q = _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs_triage?limit=5'))
     assert 'ids' in q and 'stats' in q, 'нет очереди этапа 0–1'
     pg.click('#tab-rugs'); pg.wait_for_timeout(800)
