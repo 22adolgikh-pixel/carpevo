@@ -2098,7 +2098,7 @@
   }
  ],
  "created": 1791736124,
- "updated": 1792260786,
+ "updated": 1794253886,
  "cat": {
   "title": "«Шихлы».jpg",
   "museum": "Wikimedia Commons",
@@ -2184,7 +2184,38 @@
  },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00257,
+    -0.00288
+   ],
+   [
+    0.99769,
+    0.00272
+   ],
+   [
+    0.99657,
+    0.98172
+   ],
+   [
+    0.00073,
+    0.9728
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "same_chk": {
   "kerimov_vol1_p330_1": {
@@ -2254,5 +2285,42 @@
   "area": null,
   "ver": 1,
   "t": 1794238331
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794253810
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794253886,
+    "q": [
+     [
+      -0.00257,
+      -0.00288
+     ],
+     [
+      0.99769,
+      0.00272
+     ],
+     [
+      0.99657,
+      0.98172
+     ],
+     [
+      0.00073,
+      0.9728
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "tri": "micro"
 }
