@@ -18,7 +18,7 @@
  "h": 613,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1794260362,
  "cat": {
   "title": "Sale 2276 Lot 75 Moghan Rug, Southeast Caucasus, last quarter 19th century, 5 ft",
   "museum": "",
@@ -81,5 +81,74 @@
   "area": 0.864,
   "ver": 1,
   "t": 1794238337
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794260331
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794260362,
+    "q": [
+     [
+      0.04319,
+      0.0276
+     ],
+     [
+      0.95122,
+      0.02804
+     ],
+     [
+      0.95296,
+      0.95793
+     ],
+     [
+      0.02792,
+      0.95303
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04319,
+    0.0276
+   ],
+   [
+    0.95122,
+    0.02804
+   ],
+   [
+    0.95296,
+    0.95793
+   ],
+   [
+    0.02792,
+    0.95303
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791736140,
- "updated": 1791736140,
+ "updated": 1794260380,
  "cat": {
   "title": "Azerbaijan embroidery, XVIII century, Khanate Period",
   "museum": "",
@@ -81,5 +81,74 @@
   "area": 0.917,
   "ver": 1,
   "t": 1794238452
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794260316
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794260380,
+    "q": [
+     [
+      0.01064,
+      0.07062
+     ],
+     [
+      0.99454,
+      0.00864
+     ],
+     [
+      0.95592,
+      0.9768
+     ],
+     [
+      0.07454,
+      0.97795
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01064,
+    0.07062
+   ],
+   [
+    0.99454,
+    0.00864
+   ],
+   [
+    0.95592,
+    0.9768
+   ],
+   [
+    0.07454,
+    0.97795
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
