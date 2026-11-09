@@ -18,7 +18,7 @@
  "h": 637,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1794260247,
  "cat": {
   "title": "A MOGHAN RUG SOUTH EAST CAUCASUS, CIRCA 1900 Price Realized £2,151 ($3,439) Christie's Sale 6715, OR",
   "museum": "",
@@ -81,5 +81,74 @@
   "area": 0.877,
   "ver": 1,
   "t": 1794238273
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794260199
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794260247,
+    "q": [
+     [
+      0.02986,
+      0.0434
+     ],
+     [
+      0.97197,
+      0.02293
+     ],
+     [
+      0.95291,
+      0.97978
+     ],
+     [
+      0.05432,
+      0.97706
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02986,
+    0.0434
+   ],
+   [
+    0.97197,
+    0.02293
+   ],
+   [
+    0.95291,
+    0.97978
+   ],
+   [
+    0.05432,
+    0.97706
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
