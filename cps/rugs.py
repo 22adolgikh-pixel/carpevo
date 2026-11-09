@@ -1154,18 +1154,22 @@ def install(app, DATA, D_WORK):
         """v11.34: пачка проверена: ids — всё, что было на экране; bad — то, что человек отметил неверным.
         Остальное принимается: углы → layout.quad (quad_status="accepted"), r["frame"] = вид кадра; неверные → r["tri"]="review" (открыть и поправить)."""
         ids = [str(i) for i in (body.get("ids") or [])]; bad = set(str(i) for i in (body.get("bad") or []))
+        quads = body.get("quads") or {}
         ok = 0; now = int(time.time())
         with _lock:
             for rid in ids:
                 r = load(rid)
                 if not r or not r.get("auto"): continue
+                q = quads.get(rid)
+                if q and len(q) == 4 and rid not in bad:      # человек поправил углы в плитке
+                    r["auto"]["quad"] = [[max(0.0, min(1.0, float(x))), max(0.0, min(1.0, float(y)))] for x, y in q]; r["auto"]["hand"] = True
                 if rid in bad: r["tri"] = "review"
                 else:
                     a = r["auto"]; L = r.get("layout") or {"carpet": [0, 0, 1, 1], "bounds": [], "rings": ["field"], "status": "auto"}
                     L["quad"] = a["quad"]; L["quad_status"] = "accepted"
                     xs = [q[0] for q in a["quad"]]; ys = [q[1] for q in a["quad"]]; c = lambda v: max(0.0, min(1.0, v))
                     L["carpet"] = [c(min(xs)), c(min(ys)), c(max(xs)) - c(min(xs)), c(max(ys)) - c(min(ys))]
-                    r["layout"] = L; r["frame"] = a["frame"]; r["tri"] = "auto"; ok += 1
+                    r["layout"] = L; r["frame"] = a["frame"]; r["tri"] = "hand" if a.get("hand") else "auto"; ok += 1
                 r["updated"] = now; save(r)
             with open(D_TRI_LOG, "a", encoding="utf-8") as f:
                 f.write(json.dumps({"t": now, "n": len(ids), "bad": len(bad), "by": user(request)}, ensure_ascii=False) + "\n")

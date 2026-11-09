@@ -1196,12 +1196,23 @@ def t32_triage_batch(pg, ctx):
     if n:
         assert pg.evaluate("document.querySelectorAll('#rgTri .trt polygon').length") >= 1, 'на плитках нет контура ковра'
         ids = pg.evaluate("[...document.querySelectorAll('#rgTri .trt')].map(e=>e.dataset.i)")
+        moved = None
+        if n >= 2:
+            hb = pg.locator('#rgTri .trt:nth-child(2) .hd').first.bounding_box()
+            if hb:
+                cx, cy = hb['x'] + hb['width'] / 2, hb['y'] + hb['height'] / 2
+                pg.mouse.move(cx, cy); pg.mouse.down(); pg.mouse.move(cx + 22, cy + 18, steps=6); pg.mouse.up(); pg.wait_for_timeout(200)
+                moved = pg.evaluate("document.querySelector('#rgTri .trt:nth-child(2)').classList.contains('ed')")
+                assert moved, 'перетаскивание угла в плитке не сработало'
         pg.evaluate("document.querySelector('#rgTri .trt').click()"); pg.wait_for_timeout(200)
         first_bad = pg.evaluate("document.querySelector('#rgTri .trt').classList.contains('bad')")
         pg.screenshot(path=f'{OUT}/32_triage.png')
         pg.click('#triOk'); pg.wait_for_timeout(2500)
         r0 = _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/' + ids[0]))
         if first_bad: assert r0.get('tri') == 'review', 'неверный ковёр не помечен «проверить вручную»'
+        if moved:
+            r1 = _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/' + ids[1]))
+            assert r1.get('tri') == 'hand' and r1['layout']['quad_status'] == 'accepted', 'поправленные углы не сохранились'
         acc = [i for i in ids[1:] if ((_j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/' + i)).get('layout') or {}).get('quad_status') == 'accepted')]
         assert acc or n == 1, 'принятые ковры не получили углы'
     errors_ok(ctx, 'проверка пачкой')
