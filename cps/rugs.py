@@ -1683,7 +1683,11 @@ def install(app, DATA, D_WORK):
         me = user(request); n = max(1, min(12, n)); rows = _mrows()
         fr = [x for x in rows if x["use"] != "skip" and x["seen"] and x["frame_by"] not in ("micro", "hand") and me not in x["who"]["frame"]]
         fr.sort(key=lambda x: (x["use"] == "work", x["conf"]))                     # сомнительные — первыми
-        qd = [x for x in rows if x["use"] != "skip" and x["aquad"] and (x["frame"] or x["aframe"]) == "whole" and x["qs"] != "confirmed"
+        head, pool = fr[:60], fr[:]; random.shuffle(pool); mix = []                 # половина — сомнительные, половина — случайные (иначе выборка перекошена и точность машины не измерить)
+        for a, b in zip(head, pool): mix += [a, b]
+        fr = list({x["id"]: x for x in mix + fr}.values())
+        # v11.42: углы спрашиваем только у ковров, которые человек уже признал «целыми» (по данным 124 ответов машинное «целый» верно лишь в 2 из 11)
+        qd = [x for x in rows if x["use"] != "skip" and x["aquad"] and x["frame"] == "whole" and x["frame_by"] in ("micro", "hand") and x["qs"] != "confirmed"
               and me not in x["who"]["quad"]]
         qd.sort(key=lambda x: x["conf"])
         tasks = []; fi = qi = 0

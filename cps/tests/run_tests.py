@@ -1238,6 +1238,7 @@ def t33_micro_phone(pg, ctx):
         rq = urllib.request.Request(ctx['url'] + path, data=_j.dumps(body).encode(), headers={'Content-Type': 'application/json'})
         return _j.load(urllib.request.urlopen(rq))
     post('api/rugs_triage', {'ids': ['tall_1', 'frieze_1', 'cm_shot_o']})
+    for i in ('tall_1', 'frieze_1', 'cm_shot_o'): post('api/micro/answer', {'type': 'frame', 'rid': i, 'a': 'whole'})   # углы спрашиваем только у признанных целыми
     nx = _j.load(urllib.request.urlopen(ctx['url'] + 'api/micro/next?n=6'))
     assert nx['tasks'], f'нет карточек: {nx}'
     mc = pg.context.browser.new_context(viewport={'width': 390, 'height': 844}, has_touch=True); m = mc.new_page()
