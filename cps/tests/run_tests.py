@@ -1175,6 +1175,35 @@ def t31_etalon_shapes_v1129(pg, ctx):
 
 
 
+@test
+def t32_triage_batch(pg, ctx):
+    """v11.34: этап 0–1 — вид кадра и углы пачкой; клик по неверным, остальное принимается (последним: меняет разметку фикстур)"""
+    import urllib.request, json as _j
+    def post(path, body):
+        rq = urllib.request.Request(ctx['url'] + path, data=_j.dumps(body).encode(), headers={'Content-Type': 'application/json'})
+        return _j.load(urllib.request.urlopen(rq))
+    j = post('api/rugs_triage', {'ids': ['persp_1']})['res']['persp_1']
+    assert j['frame'] == 'whole', f'ковёр на сером фоне должен быть «целый», а не {j["frame"]}'
+    assert j['conf'] > 0.8 and len(j['quad']) == 4, 'углы не найдены уверенно'
+    q = _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs_triage?limit=5'))
+    assert 'ids' in q and 'stats' in q, 'нет очереди этапа 0–1'
+    pg.click('#tab-rugs'); pg.wait_for_timeout(800)
+    pg.click('#rgTriBtn'); pg.wait_for_timeout(4000)
+    n = pg.evaluate("document.querySelectorAll('#rgTri .trt').length")
+    if n:
+        assert pg.evaluate("document.querySelectorAll('#rgTri .trt polygon').length") >= 1, 'на плитках нет контура ковра'
+        ids = pg.evaluate("[...document.querySelectorAll('#rgTri .trt')].map(e=>e.dataset.i)")
+        pg.evaluate("document.querySelector('#rgTri .trt').click()"); pg.wait_for_timeout(200)
+        first_bad = pg.evaluate("document.querySelector('#rgTri .trt').classList.contains('bad')")
+        pg.screenshot(path=f'{OUT}/32_triage.png')
+        pg.click('#triOk'); pg.wait_for_timeout(2500)
+        r0 = _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/' + ids[0]))
+        if first_bad: assert r0.get('tri') == 'review', 'неверный ковёр не помечен «проверить вручную»'
+        acc = [i for i in ids[1:] if ((_j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/' + i)).get('layout') or {}).get('quad_status') == 'accepted')]
+        assert acc or n == 1, 'принятые ковры не получили углы'
+    errors_ok(ctx, 'проверка пачкой')
+    pg.evaluate("(document.getElementById('rgTri')||{remove(){}}).remove()")
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

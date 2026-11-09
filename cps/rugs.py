@@ -296,7 +296,7 @@ def install(app, DATA, D_WORK):
                 "part": (r.get("cat") or {}).get("part", 0),
                 "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", ""),
                 "people": (r.get("people") or {}).get("n", 0),
-                "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
+                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -632,6 +632,8 @@ def install(app, DATA, D_WORK):
             if "obj" in b: r["obj"] = b["obj"] if b["obj"] in OBJ else ""            # v11.6: вид изделия (человек)
             if "hidden" in b: r["hidden"] = str(b["hidden"] or "")[:200]            # v11.6: скрыт из каталога (причина)
             if "fragment" in b: r["fragment"] = None if b["fragment"] is None else bool(b["fragment"])   # v11.22: фрагмент / остаток ковра (человек)
+            if b.get("frame") in ("whole", "cropped", "fragment", "not_rug", "unsure", ""): r["frame"] = b["frame"]   # v11.34: вид кадра (этап 0)
+            if b.get("tri") in ("auto", "hand", "review", ""): r["tri"] = b["tri"]
             if "control" in b: r["control"] = bool(b["control"])                    # v11.30: в контрольном наборе (мерило разбора)
             if "marks" in b:
                 old = {m["id"]: m for m in r.get("marks", [])}; marks = []
@@ -1085,6 +1087,85 @@ def install(app, DATA, D_WORK):
         from starlette.concurrency import run_in_threadpool
         res = await run_in_threadpool(work)                      # лёгкая работа (~0.2 с) — не в очередь тяжёлых задач
         return JSONResponse(res, 500) if res.get("error") else res
+
+    D_TRI_LOG = os.path.join(DATA, "tri_log.jsonl")
+
+    def tri_todo(limit=36):
+        """ковры, которым ещё нужен этап 0–1: настоящие ковры (не сумки, не скрытые), без углов и без решения «проверить вручную»"""
+        out = []
+        for f in sorted(os.listdir(D_RUGS)):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("dup_of") or r.get("hidden") or obj_guess(r)[0] != "carpet": continue
+            if (r.get("layout") or {}).get("quad") or r.get("tri") or r.get("multi") or r.get("split_into"): continue   # развороты с несколькими коврами сначала делим
+            if r.get("fragment") or (r.get("cat") or {}).get("fragment"): continue
+            if not img_path(r["id"]): continue
+            out.append(r["id"])
+        return out
+
+    @app.get("/api/rugs_triage")
+    def api_rugs_triage_list(limit: int = 36):
+        ids = tri_todo()
+        return {"ids": ids[:max(1, min(60, limit))], "left": len(ids), "stats": tri_stats()}
+
+    @app.post("/api/rugs_triage")
+    async def api_rugs_triage(body: dict = Body(...)):
+        """v11.34: пачка ковров → {id: {frame, quad, conf, touch}}; результат кладётся в r["auto"] (предложение, не решение)"""
+        import rug_rect
+        ids = [str(i) for i in (body.get("ids") or [])][:60]
+        def work():
+            res = {}
+            for rid in ids:
+                p = img_path(rid); a = read_small(p, 1400) if p else None
+                if a is None: continue
+                t = rug_rect.triage(a); res[rid] = t
+                with _lock:
+                    r = load(rid)
+                    if r: r["auto"] = {"frame": t["frame"], "quad": t["quad"], "conf": t["conf"], "t": int(time.time())}; save(r)
+            return res
+        from starlette.concurrency import run_in_threadpool
+        return {"res": await run_in_threadpool(work)}
+
+    @app.post("/api/rugs_triage_accept")
+    def api_rugs_triage_accept(request: Request, body: dict = Body(...)):
+        """v11.34: пачка проверена: ids — всё, что было на экране; bad — то, что человек отметил неверным.
+        Остальное принимается: углы → layout.quad (quad_status="accepted"), r["frame"] = вид кадра; неверные → r["tri"]="review" (открыть и поправить)."""
+        ids = [str(i) for i in (body.get("ids") or [])]; bad = set(str(i) for i in (body.get("bad") or []))
+        ok = 0; now = int(time.time())
+        with _lock:
+            for rid in ids:
+                r = load(rid)
+                if not r or not r.get("auto"): continue
+                if rid in bad: r["tri"] = "review"
+                else:
+                    a = r["auto"]; L = r.get("layout") or {"carpet": [0, 0, 1, 1], "bounds": [], "rings": ["field"], "status": "auto"}
+                    L["quad"] = a["quad"]; L["quad_status"] = "accepted"
+                    xs = [q[0] for q in a["quad"]]; ys = [q[1] for q in a["quad"]]; c = lambda v: max(0.0, min(1.0, v))
+                    L["carpet"] = [c(min(xs)), c(min(ys)), c(max(xs)) - c(min(xs)), c(max(ys)) - c(min(ys))]
+                    r["layout"] = L; r["frame"] = a["frame"]; r["tri"] = "auto"; ok += 1
+                r["updated"] = now; save(r)
+            with open(D_TRI_LOG, "a", encoding="utf-8") as f:
+                f.write(json.dumps({"t": now, "n": len(ids), "bad": len(bad), "by": user(request)}, ensure_ascii=False) + "\n")
+        return {"ok": ok, "bad": len(bad)}
+
+    def tri_stats():
+        """доля принятых без правки по последним пакетам + расхождение предложения машины с подтверждёнными вручную углами"""
+        batches = []
+        try:
+            with open(D_TRI_LOG, encoding="utf-8") as f:
+                for ln in f.readlines()[-8:]:
+                    try: batches.append(json.loads(ln))
+                    except Exception: pass
+        except OSError: pass
+        errs = []
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5]) or {}
+            L = r.get("layout") or {}; a = r.get("auto")
+            if a and L.get("quad_status") == "confirmed" and L.get("quad") and a.get("quad"):
+                errs.append(sum(((x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2) ** 0.5 for x, y in zip(a["quad"], L["quad"])) / 4)
+        return {"batches": [{"n": b["n"], "bad": b["bad"]} for b in batches],
+                "hand": len(errs), "err": round(100 * sum(errs) / len(errs), 1) if errs else None}
 
     @app.get("/rugrect/{rid}.jpg")
     def rug_rect_img(rid: str):

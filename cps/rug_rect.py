@@ -127,3 +127,23 @@ def rectify(img, quad, side=1600):
     dst = np.array([[0, 0], [W, 0], [W, H], [0, H]], np.float32)
     T = cv2.getPerspectiveTransform(src, dst)
     return cv2.warpPerspective(img, T, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=(40, 40, 40))   # за краем кадра — тёмно-серое (части ковра нет на фото)
+
+
+def triage(img):
+    """v11.34: этап 0–1 конвейера — что на фото и где углы. → {frame, quad, conf, touch:[л,в,п,н]}
+    frame: whole — ковёр целиком, по краям кадра фон; cropped — край ковра выходит за кадр; unsure — ковёр от фона не отделяется.
+    touch — доля каждой стороны кадра, занятая ковром (0..1)."""
+    H0, W0 = img.shape[:2]; s = min(1.0, 900 / max(H0, W0))
+    a = cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else img
+    h, w = a.shape[:2]
+    M = _fg(a)
+    q = find_quad(img)
+    if M is None or M.mean() < 0.12:
+        return {"frame": "unsure", "quad": q["quad"], "conf": q["conf"], "touch": [1, 1, 1, 1]}
+    m = max(2, int(min(h, w) * 0.01))
+    touch = [float(M[:, :m].mean()), float(M[:m, :].mean()), float(M[:, -m:].mean()), float(M[-m:, :].mean())]
+    quad_out = any(x < 0.005 or x > 0.995 or y < 0.005 or y > 0.995 for x, y in q["quad"])
+    if q["conf"] < 0.6: frame = "unsure"
+    elif max(touch) > 0.45 or quad_out: frame = "cropped"
+    else: frame = "whole"
+    return {"frame": frame, "quad": q["quad"], "conf": q["conf"], "touch": [round(t, 3) for t in touch]}
