@@ -18,7 +18,7 @@
  "h": 979,
  "marks": [],
  "created": 1791736127,
- "updated": 1791736127,
+ "updated": 1794256711,
  "cat": {
   "title": "Metropoliten muzeyində 1700-cü illərə aid Quba xalçası.jpeg",
   "museum": "Wikimedia Commons",
@@ -96,5 +96,74 @@
   "area": 0.736,
   "ver": 1,
   "t": 1794238483
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794256666,
+    "q": [
+     [
+      0.0398,
+      0.00718
+     ],
+     [
+      0.99446,
+      0.01252
+     ],
+     [
+      0.98836,
+      0.98946
+     ],
+     [
+      0.01229,
+      0.97583
+     ]
+    ]
+   }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "cropped",
+    "w": 2,
+    "t": 1794256711
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0398,
+    0.00718
+   ],
+   [
+    0.99446,
+    0.01252
+   ],
+   [
+    0.98836,
+    0.98946
+   ],
+   [
+    0.01229,
+    0.97583
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "cropped",
+ "frame_by": "micro"
 }

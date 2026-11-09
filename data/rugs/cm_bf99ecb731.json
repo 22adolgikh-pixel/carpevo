@@ -18,7 +18,7 @@
  "h": 1373,
  "marks": [],
  "created": 1791870017,
- "updated": 1791997205,
+ "updated": 1794256800,
  "cat": {
   "title": "Carpet Patkeragorg (picture carpet), 1903, Norshen, Martuni region",
   "museum": "Национальный музей азербайджанского ковра",
@@ -114,5 +114,74 @@
   "area": 0.879,
   "ver": 1,
   "t": 1794238521
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794256761
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794256800,
+    "q": [
+     [
+      0.03,
+      0.03495
+     ],
+     [
+      0.96778,
+      0.03301
+     ],
+     [
+      0.99662,
+      0.93046
+     ],
+     [
+      0.02444,
+      0.97087
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03,
+    0.03495
+   ],
+   [
+    0.96778,
+    0.03301
+   ],
+   [
+    0.99662,
+    0.93046
+   ],
+   [
+    0.02444,
+    0.97087
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
