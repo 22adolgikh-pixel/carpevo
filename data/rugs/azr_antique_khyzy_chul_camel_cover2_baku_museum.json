@@ -18,7 +18,7 @@
  "h": 1027,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794256594,
  "cat": {
   "title": "antique khyzy chul camel cover2 baku museum",
   "museum": "",
@@ -79,5 +79,74 @@
   "area": 0.855,
   "ver": 1,
   "t": 1794238449
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794256548
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794256594,
+    "q": [
+     [
+      0.00483,
+      0.03474
+     ],
+     [
+      0.96745,
+      0.01205
+     ],
+     [
+      0.98649,
+      0.99526
+     ],
+     [
+      0.01549,
+      0.97669
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00483,
+    0.03474
+   ],
+   [
+    0.96745,
+    0.01205
+   ],
+   [
+    0.98649,
+    0.99526
+   ],
+   [
+    0.01549,
+    0.97669
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

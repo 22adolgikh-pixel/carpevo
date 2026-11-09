@@ -18,7 +18,7 @@
  "h": 850,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1794256630,
  "cat": {
   "title": "Early Caucasian rug",
   "museum": "",
@@ -81,5 +81,56 @@
   "area": 0.698,
   "ver": 1,
   "t": 1794238493
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794256598
+   }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "fragment",
+    "w": 2,
+    "t": 1794256630
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04808,
+    0.10588
+   ],
+   [
+    0.8,
+    0.02118
+   ],
+   [
+    0.92692,
+    0.98824
+   ],
+   [
+    0.11538,
+    0.92235
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "fragment",
+ "frame_by": "micro"
 }
