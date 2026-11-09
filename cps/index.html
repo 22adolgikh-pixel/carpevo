@@ -449,7 +449,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.43</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.44</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2220,9 +2220,9 @@ document.addEventListener('error',e=>{const im=e.target;if(!(im instanceof HTMLI
 // v11.8: что сейчас считает сервер (тяжёлые расчёты идут по одному) — в строке состояния
 setInterval(async()=>{if(!R.on||document.hidden)return;try{const h=await api('/api/heavy');const hr=[h.ui_run&&(h.ui_run+(h.ui_wait?` · в очереди ${h.ui_wait}`:'')),h.run&&(h.run+(h.wait?` · в очереди ${h.wait}`:''))].filter(Boolean);R.busyHeavy=hr.join(' · ');const B=$('rgBusy')||(()=>{const b=document.createElement('span');b.id='rgBusy';b.className='mut';b.style.marginLeft='10px';$('sbar').appendChild(b);return b;})();B.innerHTML=R.busyHeavy?'<span class="spin"></span> сервер считает: '+esc(R.busyHeavy):'';}catch(e){}},4000);
 
-// v11.43: проверка пачкой — этапы 0–1 (вид кадра и 4 угла). Машина предлагает, человек кликает по неверным, остальное принимается
+// v11.44: проверка пачкой — этапы 0–1 (вид кадра и 4 угла). Машина предлагает, человек кликает по неверным, остальное принимается
 const TRI_FR={whole:'целый',cropped:'обрезан кадром',unsure:'не уверена'};
-function triLoupe(on,ph,id,x,y,cx,cy){      // v11.43: лупа ×6 у угла — точное место видно по полноразмерному фото, красный крест = положение угла
+function triLoupe(on,ph,id,x,y,cx,cy){      // v11.44: лупа ×6 у угла — точное место видно по полноразмерному фото, красный крест = положение угла
   let L=$('triLoupe');if(!L){L=document.createElement('div');L.id='triLoupe';document.body.appendChild(L);}
   if(!on){L.style.display='none';return;}
   const r=ph.getBoundingClientRect(),Z=6,BW=r.width*Z,BH=r.height*Z,S=180,src='/rugimg/'+encodeURIComponent(id)+'.jpg';
@@ -2613,7 +2613,7 @@ function rugMove(e){
   const p=rugPt(e),cl=v=>Math.max(0,Math.min(1,v));
   if(d.t==='new'||d.t==='sweep'){d.p1={x:cl(p.x),y:cl(p.y)};rugDraw();return;}
   if(d.t==='lay'){if(d.L.quad)layDrag(d,p.x,p.y);else layDrag(d,cl(p.x),cl(p.y));d.moved=true;rugDraw();return;}
-  if(d.t==='quad'){const c2=v=>Math.max(-0.6,Math.min(1.6,v));   // v11.43: угол можно вынести за край фото (ковёр обрезан кадром)
+  if(d.t==='quad'){const c2=v=>Math.max(-0.6,Math.min(1.6,v));   // v11.44: угол можно вынести за край фото (ковёр обрезан кадром)
   d.L.quad[d.i]=[+c2(p.x).toFixed(5),+c2(p.y).toFixed(5)];d.moved=true;rugDraw();return;}
   const dx=p.x-d.p0.x,dy=p.y-d.p0.y,b=d.b0;
   if(d.t==='smove'){R.split[d.i]=[cl(Math.min(b[0]+dx,1-b[2])),cl(Math.min(b[1]+dy,1-b[3])),b[2],b[3]];rugDraw();return;}
@@ -2664,7 +2664,7 @@ async function rugSamFix(ms){const rid=R.rug.id;let n=0,i=0;
   rugSaveSoon();rugDraw();rugSide();stat(n?('контур: '+n+(ms.length>1?' из '+ms.length:'')+' — рамка теперь по форме элемента'):'контур не найден — элемент сливается с фоном, поправьте рамку руками',n?'ok':'warn');}
 function rugSamNext(m){const s=m&&m._sam;if(!s||s.cands.length<2){stat('других вариантов контура нет — кликните инструментом «контур» (M) в другом месте элемента','warn');return;}
   s.i=(s.i+1)%s.cands.length;const c=s.cands[s.i];m.box=c.box.slice();m.poly=c.poly;rugSaveSoon();rugDraw();rugSide();stat('контур: вариант '+(s.i+1)+' из '+s.cands.length+' ('+(s.i===0?'самый маленький':s.i===s.cands.length-1?'самый большой':'средний')+')','ok');}
-// v11.43: два шага. 1 — одна линия: где кончаются каймы и начинается поле; 2 — каймы делятся на слои (полосы)
+// v11.44: два шага. 1 — одна линия: где кончаются каймы и начинается поле; 2 — каймы делятся на слои (полосы)
 function layStepOf(L){return R.rug&&R.layStepFor===R.rug.id&&R.layStep?R.layStep:((L&&L.bounds.length>2)?2:1);}
 function laySetStep(n){R.layStep=n;R.layStepFor=R.rug&&R.rug.id;R.layBound=null;rugTools&&rugTools();rugDraw();rugSide();}
 function layHit(L,p){

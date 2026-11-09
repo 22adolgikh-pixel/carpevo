@@ -296,7 +296,7 @@ def install(app, DATA, D_WORK):
                 "part": (r.get("cat") or {}).get("part", 0),
                 "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", ""),
                 "people": (r.get("people") or {}).get("n", 0),
-                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "seen": bool(r.get("auto")), "edge": sorted((r.get("edge") or {}).keys()), "use": use_of(r)[0], "use_why": use_of(r)[1], "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
+                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "seen": bool(r.get("auto")), "pw": _pw(r), "edge": sorted((r.get("edge") or {}).keys()), "use": use_of(r)[0], "use_why": use_of(r)[1], "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -380,6 +380,12 @@ def install(app, DATA, D_WORK):
         if "сумка" in (C.get("object") or ""): return "bag", "каталог"
         return "carpet", ""
 
+    def _pw(r):
+        import frame_model
+        try: v = frame_model.p_whole(r)
+        except Exception: v = None
+        return None if v is None else round(v, 3)
+
     def use_of(r):
         """v11.35: что делать с фото — ("work"|"maybe"|"skip", причина). Не удаляет ничего: только сортирует каталог.
         work — целый ковёр, хорошее фото, без людей; maybe — обрезан кадром или фото мелкое; skip — не ковёр / двойник / фрагмент / разворот и т.п."""
@@ -397,10 +403,22 @@ def install(app, DATA, D_WORK):
         side = min(r.get("w") or 0, r.get("h") or 0)
         if side and side < 400: return ("maybe", "мелкое фото, но есть у Керимова") if kl else ("skip", "фото слишком мелкое")
         if r.get("frame") in ("fragment", "not_rug"): return "skip", "отмечено вручную: " + ("фрагмент" if r["frame"] == "fragment" else "не ковёр")
+        w, h = r.get("w") or 0, r.get("h") or 0
+        if r.get("frame_by") in ("micro", "hand"):                              # решение человека важнее машины
+            if r.get("frame") == "whole": return ("maybe", "целый (человек), но фото мелкое (<600 px)") if side < 600 else ("work", "целый ковёр — подтвердил человек")
+            if r.get("frame") == "cropped": return "maybe", "ковёр обрезан кадром (человек)"
         a = r.get("auto")
         if not a: return "maybe", "кадр ещё не проверен машиной"
+        # v11.44: «целый ли ковёр» — модель по ответам людей (frame_model, models/frame_v1.json); правила v11.35 — запасной путь
+        import frame_model
+        try: pw = frame_model.p_whole(r)
+        except Exception: pw = None
+        if pw is not None:
+            if w and h and (w / h < 0.4 or w / h > 2.5) and pw < 0.8 and not kl: return "skip", "странные пропорции кадра"
+            if pw >= 0.6: return ("maybe", "скорее целый (%d%%), но фото мелкое" % round(100 * pw)) if side < 600 else ("work", "скорее целый ковёр (машина, %d%%)" % round(100 * pw))
+            if pw < 0.3: return "maybe", "скорее обрезан или фрагмент (машина, целый %d%%)" % round(100 * pw)
+            return "maybe", "машина не уверена, целый ли ковёр (%d%%)" % round(100 * pw)
         if a.get("frame") == "unsure": return ("maybe", "кадр без фона, но ковёр есть у Керимова") if kl else ("skip", "машина не видит целого ковра на фоне (интерьер, крупный план?)")
-        w, h = r.get("w") or 0, r.get("h") or 0
         if w and h and (w / h < 0.4 or w / h > 2.5): return ("maybe", "странные пропорции, но есть у Керимова") if kl else ("skip", "странные пропорции кадра")
         if a.get("frame") == "cropped": return "maybe", "ковёр обрезан кадром"
         if side < 600: return "maybe", "фото мелкое (<600 px)"
@@ -1644,7 +1662,10 @@ def install(app, DATA, D_WORK):
         r = load(rid)
         if not r: return None
         L = r.get("layout") or {}; a = r.get("auto") or {}; m = r.get("micro") or {}
-        row = {"id": rid, "use": use_of(r)[0], "seen": bool(a), "conf": a.get("conf", 0), "aframe": a.get("frame"), "frame": r.get("frame", ""),
+        import frame_model
+        try: pw = frame_model.p_whole(r)
+        except Exception: pw = None
+        row = {"id": rid, "use": use_of(r)[0], "seen": bool(a), "pw": pw, "conf": a.get("conf", 0), "aframe": a.get("frame"), "frame": r.get("frame", ""),
                "frame_by": r.get("frame_by", ""), "qs": L.get("quad_status", ""), "quad": L.get("quad"), "aquad": a.get("quad"),
                "who": {t: list((m.get(t) or {}).keys()) for t in ("frame", "quad")}, "title": r.get("title", ""), "w": r.get("w"), "h": r.get("h"),
                "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge")}
@@ -1682,7 +1703,7 @@ def install(app, DATA, D_WORK):
         import random
         me = user(request); n = max(1, min(12, n)); rows = _mrows()
         fr = [x for x in rows if x["use"] != "skip" and x["seen"] and x["frame_by"] not in ("micro", "hand") and me not in x["who"]["frame"]]
-        fr.sort(key=lambda x: (x["use"] == "work", x["conf"]))                     # сомнительные — первыми
+        fr.sort(key=lambda x: (abs((x["pw"] if x["pw"] is not None else 0.5) - 0.5), x["conf"]))   # v11.44: где модель меньше всего уверена — первыми
         head, pool = fr[:60], fr[:]; random.shuffle(pool); mix = []                 # половина — сомнительные, половина — случайные (иначе выборка перекошена и точность машины не измерить)
         for a, b in zip(head, pool): mix += [a, b]
         fr = list({x["id"]: x for x in mix + fr}.values())
@@ -1770,7 +1791,9 @@ def install(app, DATA, D_WORK):
         return {"ok": True, "applied": applied}
 
     @app.get("/api/micro/stats")
-    def micro_stats(): return {"users": _mstats()}
+    def micro_stats():
+        import frame_model
+        return {"users": _mstats(), "frame_model": frame_model.info()}
 
     @app.get("/rugmid/{rid}.jpg")
     def rug_mid(rid: str):

@@ -1274,6 +1274,10 @@ def t33_micro_phone(pg, ctx):
     assert 'quad' in kinds, f'не было карточек углов: {kinds}'
     assert m.query_selector('.end'), 'пачка не закончилась экраном итога'
     assert not errs, f'ошибки на телефонном экране: {errs}'
+    fm = _j.load(urllib.request.urlopen(ctx['url'] + 'api/micro/stats')).get('frame_model')
+    assert fm and fm.get('n', 0) >= 40, f'модель «целый ли ковёр» не загрузилась: {fm}'
+    pws = [x['pw'] for x in _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs'))['rugs'] if x.get('seen')]
+    assert pws and all(p is not None and 0 <= p <= 1 for p in pws), f'нет вероятности «целый» у просмотренных: {pws[:5]}'
     st = _j.load(urllib.request.urlopen(ctx['url'] + 'api/micro/stats'))['users']
     assert sum(u['total'] for u in st.values()) >= len(kinds), f'ответы не записаны: {st}'
     ch = [i for i in ('tall_1', 'frieze_1', 'cm_shot_o') if (_j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/' + i)).get('layout') or {}).get('quad_status') == 'confirmed']
