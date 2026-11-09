@@ -1626,6 +1626,155 @@ def install(app, DATA, D_WORK):
         q = os.path.join(D_LIB, r.get("lib_img") or ("img/" + rid + ".jpg"))
         return q if os.path.exists(q) else None
 
+    # ---------- v11.39: микрозадачи для телефона (/m) ----------
+    # Каждая карточка — один вопрос про один ковёр. Отвечать может любой вошедший (и наблюдатель).
+    # Решение применяется, когда у одного ответа набрался вес ≥2: админ/редактор = 2, остальные = 1 (то есть двое согласных проверяющих).
+    # Контрольные карточки (≈1 из 6): ковёр с углами, подтверждёнными вручную, — показываем верные углы или нарочно сдвинутый угол; так считаем внимательность.
+    D_MICRO = os.path.join(DATA, "micro.jsonl")
+    _mc = {}; _ctl_tok = {}
+    FR_ANS = ("whole", "cropped", "fragment", "not_rug")
+
+    def _mrow(rid):
+        """короткая запись для очереди (кэш по времени изменения файла)"""
+        f = os.path.join(D_RUGS, rid + ".json")
+        try: st = os.stat(f); k = (st.st_mtime_ns, st.st_size)
+        except OSError: return None
+        c = _mc.get(rid)
+        if c and c[0] == k: return c[1]
+        r = load(rid)
+        if not r: return None
+        L = r.get("layout") or {}; a = r.get("auto") or {}; m = r.get("micro") or {}
+        row = {"id": rid, "use": use_of(r)[0], "seen": bool(a), "conf": a.get("conf", 0), "aframe": a.get("frame"), "frame": r.get("frame", ""),
+               "frame_by": r.get("frame_by", ""), "qs": L.get("quad_status", ""), "quad": L.get("quad"), "aquad": a.get("quad"),
+               "who": {t: list((m.get(t) or {}).keys()) for t in ("frame", "quad")}, "title": r.get("title", ""), "w": r.get("w"), "h": r.get("h"),
+               "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad"))}
+        _mc[rid] = (k, row); return row
+
+    def _mrows():
+        out = []
+        for f in os.listdir(D_RUGS):
+            if f.endswith(".json"):
+                x = _mrow(f[:-5])
+                if x: out.append(x)
+        return out
+
+    def _wt(role): return 2 if role in ("admin", "editor") else 1
+
+    def _mlog(rec):
+        with open(D_MICRO, "a", encoding="utf-8") as f: f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
+    def _mstats(name=None):
+        today = time.strftime("%Y-%m-%d"); S = {}
+        try:
+            with open(D_MICRO, encoding="utf-8") as f:
+                for ln in f:
+                    try: e = json.loads(ln)
+                    except Exception: continue
+                    u = S.setdefault(e.get("u"), {"total": 0, "today": 0, "ctl": 0, "ctl_ok": 0})
+                    u["total"] += 1; u["today"] += time.strftime("%Y-%m-%d", time.localtime(e.get("t", 0))) == today
+                    if "ctl" in e: u["ctl"] += 1; u["ctl_ok"] += bool(e["ctl"])
+        except OSError: pass
+        for u in S.values(): u["acc"] = round(100 * u["ctl_ok"] / u["ctl"]) if u["ctl"] else None
+        return S.get(name, {"total": 0, "today": 0, "ctl": 0, "ctl_ok": 0, "acc": None}) if name is not None else S
+
+    @app.get("/api/micro/next")
+    def micro_next(request: Request, n: int = 6):
+        import random
+        me = user(request); n = max(1, min(12, n)); rows = _mrows()
+        fr = [x for x in rows if x["use"] != "skip" and x["seen"] and x["frame_by"] not in ("micro", "hand") and me not in x["who"]["frame"]]
+        fr.sort(key=lambda x: (x["use"] == "work", x["conf"]))                     # сомнительные — первыми
+        qd = [x for x in rows if x["use"] != "skip" and x["aquad"] and (x["frame"] or x["aframe"]) == "whole" and x["qs"] != "confirmed"
+              and me not in x["who"]["quad"]]
+        qd.sort(key=lambda x: x["conf"])
+        tasks = []; fi = qi = 0
+        while len(tasks) < n and (fi < len(fr) or qi < len(qd)):
+            if qi < len(qd) and (len(tasks) % 2 == 0 or fi >= len(fr)): x = qd[qi]; qi += 1; tasks.append({"type": "quad", "rid": x["id"], "quad": x["aquad"]})
+            elif fi < len(fr): x = fr[fi]; fi += 1; tasks.append({"type": "frame", "rid": x["id"]})
+        ctl = [x for x in rows if x["ctl"]]
+        if ctl and len(tasks) >= 3:                                                 # контрольная карточка
+            x = random.choice(ctl); q = [list(p) for p in x["quad"]]; good = random.random() < 0.5
+            if not good:
+                k = random.randrange(4); q[k] = [q[k][0] + random.choice([-1, 1]) * 0.07, q[k][1] + random.choice([-1, 1]) * 0.07]
+            tok = "%x" % random.getrandbits(48); _ctl_tok[tok] = (me, "ok" if good else "notok", time.time())
+            tasks.insert(random.randrange(1, len(tasks)), {"type": "quad", "rid": x["id"], "quad": q, "c": tok})
+        by = {x["id"]: x for x in rows}
+        for t in tasks:
+            x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd)}, "me": {"name": me, **_mstats(me)}}
+
+    @app.post("/api/micro/answer")
+    def micro_answer(request: Request, body: dict = Body(...)):
+        me = user(request); role = getattr(request.state, "role", None) or "admin"
+        typ, rid, a = body.get("type"), os.path.basename(str(body.get("rid", ""))), str(body.get("a", ""))
+        rec = {"t": int(time.time()), "u": me, "type": typ, "rid": rid, "a": a}
+        tok = body.get("c")
+        if tok:                                                                  # контрольная: ничего не меняем в ковре
+            v = _ctl_tok.pop(tok, None)
+            if v and v[0] == me:
+                rec["ctl"] = (a == "ok") == (v[1] == "ok"); _mlog(rec)
+            return {"ok": True, "ctl": rec.get("ctl")}
+        if typ not in ("frame", "quad") or a == "skip":
+            if a == "skip": _mlog(rec)
+            return {"ok": True}
+        if typ == "frame" and a not in FR_ANS: return JSONResponse({"error": "ответ?"}, status_code=400)
+        if typ == "quad" and a not in ("ok", "fix", "bad"): return JSONResponse({"error": "ответ?"}, status_code=400)
+        q = body.get("q")
+        if typ == "quad" and a == "fix":
+            if not (isinstance(q, list) and len(q) == 4): return JSONResponse({"error": "углы?"}, status_code=400)
+            q = [[round(max(-0.6, min(1.6, float(x))), 5), round(max(-0.6, min(1.6, float(y))), 5)] for x, y in q]; rec["q"] = q
+        applied = None
+        with _lock:
+            r = load(rid)
+            if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
+            M = r.setdefault("micro", {}).setdefault(typ, {})
+            M[me] = {"a": a, "w": _wt(role), "t": rec["t"], **({"q": q} if q else {})}
+            votes = list(M.values())
+            if typ == "frame":
+                for v in FR_ANS:
+                    if sum(x["w"] for x in votes if x["a"] == v) >= 2:
+                        r["frame"] = v; r["frame_by"] = "micro"; applied = v; break
+            else:
+                ok = sum(x["w"] for x in votes if x["a"] == "ok"); bad = sum(x["w"] for x in votes if x["a"] == "bad")
+                fx = [x for x in votes if x["a"] == "fix"]
+                qq = None
+                if ok >= 2: qq = (r.get("auto") or {}).get("quad")
+                elif fx:
+                    strong = [x for x in fx if x["w"] >= 2]
+                    if strong: qq = strong[-1]["q"]
+                    elif len(fx) >= 2:                                           # два «поправил» сходятся (≤2% кадра на угол) → среднее
+                        A, B = fx[-1]["q"], fx[-2]["q"]
+                        if max(((a1[0] - b1[0]) ** 2 + (a1[1] - b1[1]) ** 2) ** 0.5 for a1, b1 in zip(A, B)) <= 0.02:
+                            qq = [[(a1[0] + b1[0]) / 2, (a1[1] + b1[1]) / 2] for a1, b1 in zip(A, B)]
+                if qq:
+                    L = r.get("layout") or {"carpet": [0, 0, 1, 1], "bounds": [], "rings": ["field"], "status": "auto"}
+                    L["quad"] = qq; L["quad_status"] = "confirmed"; r["layout"] = L; r["tri"] = "micro"; applied = "quad"
+                    if not r.get("frame"): r["frame"] = "whole"
+                elif bad >= 2: r["tri"] = "review"; applied = "review"
+            r["updated"] = rec["t"]; save(r)
+            if applied: rec["applied"] = applied
+            _mlog(rec)
+        return {"ok": True, "applied": applied}
+
+    @app.get("/api/micro/stats")
+    def micro_stats(): return {"users": _mstats()}
+
+    @app.get("/rugmid/{rid}.jpg")
+    def rug_mid(rid: str):
+        """фото для телефона: длинная сторона 1400 (оригиналы бывают по 10–20 МБ)"""
+        rid = os.path.basename(rid); p = os.path.join(D_TH, rid + ".m.jpg"); src = img_path(rid)
+        if not os.path.exists(p) and src:
+            with THUMB:
+                if not os.path.exists(p):
+                    a = read_small(src, 1400)
+                    if a is not None:
+                        k = 1400 / max(a.shape[:2])
+                        if k < 1: a = cv2.resize(a, None, fx=k, fy=k, interpolation=cv2.INTER_AREA)
+                        cv2.imwrite(p, a, [cv2.IMWRITE_JPEG_QUALITY, 85])
+        return FileResponse(p, headers={"Cache-Control": "max-age=3600"}) if os.path.exists(p) else Response(status_code=404)
+
+    @app.get("/m")
+    def micro_page(): return FileResponse(os.path.join(os.path.dirname(os.path.abspath(__file__)), "m.html"), headers={"Cache-Control": "no-store"})
+
     @app.get("/rugimg/{rid}.jpg")
     def rug_img(rid: str):
         p = img_path(os.path.basename(rid))

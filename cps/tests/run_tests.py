@@ -1230,6 +1230,47 @@ def t32_triage_batch(pg, ctx):
     errors_ok(ctx, 'проверка пачкой')
     pg.evaluate("(document.getElementById('rgTri')||{remove(){}}).remove()")
 
+@test
+def t33_micro_phone(pg, ctx):
+    """v11.39: телефонный экран /m — карточки «целый ли ковёр» и «углы верны», правка угла панорамой, контрольные карточки"""
+    import urllib.request, json as _j
+    def post(path, body):
+        rq = urllib.request.Request(ctx['url'] + path, data=_j.dumps(body).encode(), headers={'Content-Type': 'application/json'})
+        return _j.load(urllib.request.urlopen(rq))
+    post('api/rugs_triage', {'ids': ['tall_1', 'frieze_1', 'cm_shot_o']})
+    nx = _j.load(urllib.request.urlopen(ctx['url'] + 'api/micro/next?n=6'))
+    assert nx['tasks'], f'нет карточек: {nx}'
+    mc = pg.context.browser.new_context(viewport={'width': 390, 'height': 844}, has_touch=True); m = mc.new_page()
+    errs = []; m.on('pageerror', lambda e: errs.append(str(e)))
+    m.goto(ctx['url'] + 'm'); m.wait_for_selector('.q', timeout=15000); m.wait_for_timeout(800)
+    m.screenshot(path=f'{OUT}/33_micro_first.png')
+    kinds = []; fixed = False
+    for _ in range(10):
+        if m.query_selector('.end'): break
+        q = m.inner_text('.q')
+        if 'целый' in q:
+            kinds.append('frame'); m.click('#a1')
+        else:
+            kinds.append('quad'); m.wait_for_timeout(600)
+            bg = m.evaluate("getComputedStyle(document.querySelector('#cz .cz')).backgroundImage")
+            assert 'rugmid' in bg, 'в карточке углов нет крупного вида угла'
+            if not fixed:
+                m.click('#a2'); m.wait_for_selector('#fx'); m.wait_for_timeout(300)
+                b = m.query_selector('#fx').bounding_box(); cx, cy = b['x'] + b['width'] / 2, b['y'] + b['height'] / 2
+                m.mouse.move(cx, cy); m.mouse.down(); m.mouse.move(cx - 30, cy - 20, steps=5); m.mouse.up()
+                m.screenshot(path=f'{OUT}/33_micro_fix.png'); m.click('#ok'); fixed = True
+            else: m.click('#a1')
+        m.wait_for_timeout(700)
+    m.screenshot(path=f'{OUT}/33_micro_end.png')
+    assert 'quad' in kinds, f'не было карточек углов: {kinds}'
+    assert m.query_selector('.end'), 'пачка не закончилась экраном итога'
+    assert not errs, f'ошибки на телефонном экране: {errs}'
+    st = _j.load(urllib.request.urlopen(ctx['url'] + 'api/micro/stats'))['users']
+    assert sum(u['total'] for u in st.values()) >= len(kinds), f'ответы не записаны: {st}'
+    ch = [i for i in ('tall_1', 'frieze_1', 'cm_shot_o') if (_j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/' + i)).get('layout') or {}).get('quad_status') == 'confirmed']
+    assert ch, 'ответ админа об углах не применился сразу'
+    mc.close()
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

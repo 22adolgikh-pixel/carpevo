@@ -27,7 +27,7 @@ INITIAL = (("dolgikh", "admin"), ("lika", "editor"), ("guest1", "viewer"))
 NAME_RE = re.compile(r"^[a-z0-9_.\-]{3,24}$")
 ITER = 200_000
 # изменяющие запросы, которые журналировать не нужно / которые разрешены наблюдателю
-VIEWER_OK = ("/api/dashboard/seen", "/api/logout", "/api/login", "/api/register", "/api/me/password")
+VIEWER_OK = ("/api/dashboard/seen", "/api/logout", "/api/login", "/api/register", "/api/me/password", "/api/micro/answer")   # v11.39: микрозадачи — любой вошедший
 NO_LOG = VIEWER_OK + ("/api/users/role", "/api/users/reset")
 _lock = threading.Lock()
 _fails = {}      # ip → [время неудачных входов]
@@ -164,7 +164,7 @@ $('t1').onclick=()=>mode(false);$('t2').onclick=()=>mode(true);
 $('f').onsubmit=async ev=>{ev.preventDefault();
  if(reg&&$('p').value!==$('p2').value){$('e').textContent='Пароли не совпадают';return}
  const r=await fetch(reg?'/api/register':'/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:$('u').value,password:$('p').value})});
- const j=await r.json().catch(()=>({}));if(r.ok)location.href='/';else $('e').textContent=j.error||'Ошибка'};</script></body></html>"""
+ const j=await r.json().catch(()=>({}));if(r.ok)location.href=(location.pathname==='/login'?'/':location.pathname);else $('e').textContent=j.error||'Ошибка'};</script></body></html>"""
 
 
 def install(app):

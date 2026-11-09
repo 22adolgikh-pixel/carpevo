@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#16171b">
+<title>Проверка ковров</title>
+<style>
+:root{--bg:#16171b;--pan:#212329;--ln:#30333b;--tx:#eceef2;--mut:#9aa0ab;--acc:#ffe066;--ok:#3ecf8e;--bad:#ff5a5f;--blu:#6cb6ff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--tx);font:15px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+body{display:flex;flex-direction:column;min-height:100dvh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--ln)}
+header b{font-size:16px}header .sp{flex:1}header small{color:var(--mut)}header a{color:var(--mut);text-decoration:none;font-size:13px}
+.dots{display:flex;gap:5px;padding:8px 14px 0}.dots i{flex:1;height:4px;border-radius:2px;background:var(--ln)}.dots i.d{background:var(--ok)}.dots i.c{background:var(--acc)}
+main{flex:1;display:flex;flex-direction:column;padding:10px 14px 14px;gap:10px;min-height:0}
+.q{font-size:18px;font-weight:600}.hint{color:var(--mut);font-size:13px}
+.stage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;touch-action:pan-y;position:relative;overflow:hidden}
+.ph{position:relative;display:inline-block;line-height:0;transition:transform .18s}
+.ph img{display:block;max-width:calc(100vw - 28px);max-height:var(--imh,50dvh);width:auto;height:auto;border-radius:6px}
+.ph svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.corners{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.cz{position:relative;aspect-ratio:1;border-radius:10px;border:2px solid var(--ln);background-color:#000;background-repeat:no-repeat;overflow:hidden}
+.cz.sel{border-color:var(--acc)}.cz:before,.cz:after{content:'';position:absolute;background:var(--bad);opacity:.9}.cz:before{left:50%;top:22%;bottom:22%;width:1.5px}.cz:after{top:50%;left:22%;right:22%;height:1.5px}
+.cz span{position:absolute;left:3px;top:2px;font-size:10px;color:#fff;background:#0009;padding:0 5px;border-radius:6px;z-index:2}
+.fix{position:relative;width:min(92vw,52dvh);aspect-ratio:1;margin:0 auto;border-radius:12px;border:2px solid var(--acc);background-color:#000;background-repeat:no-repeat;touch-action:none}
+.fix:before,.fix:after{content:'';position:absolute;background:var(--bad)}.fix:before{left:50%;top:15%;bottom:15%;width:2px}.fix:after{top:50%;left:15%;right:15%;height:2px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+button{font:inherit;color:var(--tx);background:var(--pan);border:1px solid var(--ln);border-radius:12px;padding:14px 10px;min-height:52px}
+button.yes{background:var(--ok);color:#06210f;border-color:var(--ok);font-weight:600}button.no{border-color:var(--bad);color:#ffb3b5}
+button.wide{grid-column:1/-1}button.sm{min-height:40px;padding:8px}button:active{transform:scale(.98)}
+.end{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;flex:1}.end .big{font-size:42px;font-weight:700}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#000d;padding:8px 14px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}.toast.on{opacity:1}
+.mut{color:var(--mut)}
+</style></head><body>
+<header><b>Проверка ковров</b><span class="sp"></span><small id="me"></small><a href="/">студия</a></header>
+<div class="dots" id="dots"></div>
+<main id="main"><div class="end"><span class="mut">загружаю…</span></div></main>
+<div class="toast" id="toast"></div>
+<script>
+// v11.39: микрозадачи на телефоне. Одна карточка — один вопрос. Свайп вправо = «да», влево = «не знаю».
+const $=id=>document.getElementById(id);
+const S={tasks:[],i:0,done:0,me:null,left:null};
+const C_RU=['левый верхний','правый верхний','правый нижний','левый нижний'],C_SH=['ЛВ','ПВ','ПН','ЛН'];
+async function api(u,b){const r=await fetch(u,b?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}:{});
+  if(r.status===401){location.reload();throw new Error('auth');}const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||r.status);return j;}
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(S.tt);S.tt=setTimeout(()=>e.classList.remove('on'),1400);}
+function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'');
+  $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
+async function load(){$('main').innerHTML='<div class="end"><span class="mut">загружаю…</span></div>';
+  try{const j=await api('/api/micro/next?n=6');S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;head();show();}
+  catch(e){$('main').innerHTML=`<div class="end"><span>Не загрузилось: ${esc(e.message)}</span><button onclick="load()">ещё раз</button></div>`;}}
+const img=t=>'/rugmid/'+encodeURIComponent(t.rid)+'.jpg';
+function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!im.naturalWidth)return;
+  const BW=r.width*Z,BH=BW*im.naturalHeight/im.naturalWidth;
+  el.style.backgroundImage=`url("${img(t)}")`;el.style.backgroundSize=`${BW}px ${BH}px`;el.style.backgroundPosition=`${r.width/2-x*BW}px ${r.height/2-y*BH}px`;}
+function show(){head();const t=S.tasks[S.i];
+  if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
+    <div class="mut">в очереди: целый ли ковёр — ${L.frame||0}, углы — ${L.quad||0}</div>${(L.frame||L.quad)?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
+  t.type==='frame'?showFrame(t):showQuad(t);}
+function stage(t,extra=''){return `<div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="${img(t)}" alt="">${extra}</div></div>`;}
+function swipe(onYes,onSkip){const st=$('stage'),ph=$('ph');let x0=null,y0=0;
+  st.onpointerdown=e=>{x0=e.clientX;y0=e.clientY;};
+  st.onpointermove=e=>{if(x0==null)return;const dx=e.clientX-x0;if(Math.abs(dx)>Math.abs(e.clientY-y0))ph.style.transform=`translateX(${dx}px) rotate(${dx/40}deg)`;};
+  st.onpointerup=st.onpointercancel=e=>{if(x0==null)return;const dx=e.clientX-x0;x0=null;ph.style.transform='';if(dx>90)onYes();else if(dx<-90)onSkip();};}
+async function answer(t,a,q){const k=S.i;S.i++;S.done++;show();
+  try{const j=await api('/api/micro/answer',{type:t.type,rid:t.rid,a,q,c:t.c});S.me.total=(S.me.total||0)+1;if(a!=='skip')S.me.today=(S.me.today||0)+1;
+    if(j.ctl===false)toast('контрольная карточка: тут была ошибка — смотрите внимательнее');else if(j.applied)toast('принято ✓');head();}
+  catch(e){toast('не сохранилось: '+e.message);S.i=k;S.done--;show();}}
+function showFrame(t){document.documentElement.style.setProperty('--imh','52dvh');
+  $('main').innerHTML=`<div class="q">Это целый ковёр?</div><div class="hint">целиком в кадре, все 4 края видны</div>${stage(t)}
+   <div class="btns"><button class="yes" id="a1">✓ целый ковёр</button><button id="a2">обрезан кадром</button><button id="a3">фрагмент / кусок</button><button class="no" id="a4">не ковёр</button><button class="sm wide" id="a5">не знаю</button></div>
+   <div class="hint" style="text-align:center">свайп вправо — целый, влево — не знаю</div>`;
+  S.im=$('im');$('a1').onclick=()=>answer(t,'whole');$('a2').onclick=()=>answer(t,'cropped');$('a3').onclick=()=>answer(t,'fragment');$('a4').onclick=()=>answer(t,'not_rug');$('a5').onclick=()=>answer(t,'skip');
+  swipe(()=>answer(t,'whole'),()=>answer(t,'skip'));}
+function poly(q){return q.map(p=>p.join(',')).join(' ');}
+function showQuad(t){t.q=t.q||t.quad.map(p=>[...p]);document.documentElement.style.setProperty('--imh','36dvh');
+  $('main').innerHTML=`<div class="q">Рамка точно по краю ковра?</div><div class="hint">внизу углы крупно: крест — на углу ковра (бахрома не в счёт); тап по углу — поправить</div>
+   ${stage(t,`<svg viewBox="0 0 1 1" preserveAspectRatio="none"><polygon id="pg" points="${poly(t.q)}" fill="#ffe0661a" stroke="#ffe066" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`)}
+   <div class="corners" id="cz">${[0,1,3,2].map(k=>`<div class="cz" data-k="${k}"><span>${C_SH[k]}</span></div>`).join('')}</div>
+   <div class="btns"><button class="yes" id="a1">✓ да, точно</button><button id="a2">✎ поправить</button><button class="no" id="a3">✗ не то / не ковёр</button><button class="sm" id="a4">не знаю</button></div>`;
+  S.im=$('im');const paint=()=>document.querySelectorAll('#cz .cz').forEach(e=>{const k=+e.dataset.k;zoomBg(e,t,t.q[k][0],t.q[k][1],6);});
+  S.im.complete?paint():S.im.onload=paint;
+  document.querySelectorAll('#cz .cz').forEach(e=>e.onclick=()=>fixQuad(t,+e.dataset.k));
+  $('a1').onclick=()=>answer(t,'ok');$('a2').onclick=()=>fixQuad(t,0);$('a3').onclick=()=>answer(t,'bad');$('a4').onclick=()=>answer(t,'skip');
+  swipe(()=>answer(t,'ok'),()=>answer(t,'skip'));}
+function fixQuad(t,k){t.fixed=true;
+  $('main').innerHTML=`<div class="q">Угол: ${C_RU[k]}</div><div class="hint">двигайте фото пальцем, пока угол ковра не встанет под красный крест</div>
+   <div class="fix" id="fx"></div>
+   <div class="btns"><button class="sm" id="pv">← пред. угол</button><button class="sm" id="nx">след. угол →</button><button class="yes wide" id="ok">✓ сохранить углы</button><button class="sm wide" id="bk">отмена</button></div>`;
+  const fx=$('fx'),Z=6,paint=()=>zoomBg(fx,t,t.q[k][0],t.q[k][1],Z);paint();
+  let p0=null;fx.onpointerdown=e=>{fx.setPointerCapture(e.pointerId);p0=[e.clientX,e.clientY,...t.q[k]];};
+  fx.onpointermove=e=>{if(!p0)return;const r=fx.getBoundingClientRect(),BW=r.width*Z,BH=BW*S.im.naturalHeight/S.im.naturalWidth;
+    t.q[k]=[Math.max(-0.6,Math.min(1.6,p0[2]-(e.clientX-p0[0])/BW)),Math.max(-0.6,Math.min(1.6,p0[3]-(e.clientY-p0[1])/BH))];paint();};
+  fx.onpointerup=fx.onpointercancel=()=>{p0=null;};
+  $('pv').onclick=()=>fixQuad(t,(k+3)%4);$('nx').onclick=()=>fixQuad(t,(k+1)%4);
+  $('ok').onclick=()=>answer(t,'fix',t.q.map(p=>p.map(v=>+v.toFixed(5))));
+  $('bk').onclick=()=>{t.q=t.quad.map(p=>[...p]);showQuad(t);};}
+load();
+</script></body></html>
