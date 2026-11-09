@@ -18,7 +18,7 @@
  "h": 846,
  "marks": [],
  "created": 1791736128,
- "updated": 1794258713,
+ "updated": 1794258779,
  "cat": {
   "title": "pinwheel kazak kaukasische teppiche doris eder",
   "museum": "",
@@ -87,8 +87,66 @@
     "w": 2,
     "t": 1794258713
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794258779,
+    "q": [
+     [
+      0.02678,
+      0.0083
+     ],
+     [
+      0.95295,
+      0.01971
+     ],
+     [
+      0.98328,
+      0.95155
+     ],
+     [
+      0.01495,
+      0.96618
+     ]
+    ]
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02678,
+    0.0083
+   ],
+   [
+    0.95295,
+    0.01971
+   ],
+   [
+    0.98328,
+    0.95155
+   ],
+   [
+    0.01495,
+    0.96618
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
