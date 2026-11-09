@@ -226,5 +226,30 @@
  },
  "date": "1600sdate QS:P,+1600-00-00T00:00:00Z/8",
  "technique": "ворсовый",
- "school": "guba-shirvan"
+ "school": "guba-shirvan",
+ "auto": {
+  "frame": "unsure",
+  "quad": [
+   [
+    0.01,
+    0.01
+   ],
+   [
+    0.99,
+    0.01
+   ],
+   [
+    0.99,
+    0.99
+   ],
+   [
+    0.01,
+    0.99
+   ]
+  ],
+  "conf": 0.0,
+  "area": null,
+  "ver": 1,
+  "t": 1794238581
+ }
 }
