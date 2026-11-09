@@ -6,16 +6,16 @@
 <style>
 :root{--bg:#16171b;--pan:#212329;--ln:#30333b;--tx:#eceef2;--mut:#9aa0ab;--acc:#ffe066;--ok:#3ecf8e;--bad:#ff5a5f;--blu:#6cb6ff}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--tx);font:15px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+html,body{margin:0;height:100%;overflow-x:hidden;background:var(--bg);color:var(--tx);font:15px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
 body{display:flex;flex-direction:column;min-height:100dvh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--ln)}
 header b{font-size:16px}header .sp{flex:1}header small{color:var(--mut)}header a{color:var(--mut);text-decoration:none;font-size:13px}
 .dots{display:flex;gap:5px;padding:8px 14px 0}.dots i{flex:1;height:4px;border-radius:2px;background:var(--ln)}.dots i.d{background:var(--ok)}.dots i.c{background:var(--acc)}
 main{flex:1;display:flex;flex-direction:column;padding:10px 14px 14px;gap:10px;min-height:0}
 .q{font-size:18px;font-weight:600}.hint{color:var(--mut);font-size:13px}
-.stage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;touch-action:pan-y;position:relative;overflow:hidden}
-.ph{position:relative;display:inline-block;line-height:0;transition:transform .18s}
-.ph img{display:block;max-width:calc(100vw - 28px);max-height:var(--imh,50dvh);width:auto;height:auto;border-radius:6px}
+.stage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;touch-action:pan-y;position:relative}
+.ph{position:relative;display:inline-block;line-height:0;transition:transform .18s;margin:7% 9%;outline:1px dashed #ffffff33;outline-offset:0}   /* поле вокруг фото: углы обрезанного ковра за краем кадра тоже видны */
+.ph img{display:block;max-width:calc(100vw - 90px);max-height:var(--imh,50dvh);width:auto;height:auto;border-radius:6px}
 .ph svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .corners{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .cz{position:relative;aspect-ratio:1;border-radius:10px;border:2px solid var(--ln);background-color:#000;background-repeat:no-repeat;overflow:hidden}
