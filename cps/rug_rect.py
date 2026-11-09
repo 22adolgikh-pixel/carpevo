@@ -143,7 +143,8 @@ def triage(img):
     m = max(2, int(min(h, w) * 0.01))
     touch = [float(M[:, :m].mean()), float(M[:m, :].mean()), float(M[:, -m:].mean()), float(M[-m:, :].mean())]
     quad_out = any(x < 0.005 or x > 0.995 or y < 0.005 or y > 0.995 for x, y in q["quad"])
-    if q["conf"] < 0.6: frame = "unsure"
+    qa = float(cv2.contourArea(np.array(q["quad"], np.float32) * np.float32([w, h]))) / (w * h)
+    if q["conf"] < 0.6 or qa < 0.1: frame = "unsure"
     elif max(touch) > 0.45 or quad_out: frame = "cropped"
     else: frame = "whole"
-    return {"frame": frame, "quad": q["quad"], "conf": q["conf"], "touch": [round(t, 3) for t in touch]}
+    return {"frame": frame, "quad": q["quad"], "conf": q["conf"], "area": round(qa, 3), "touch": [round(t, 3) for t in touch]}

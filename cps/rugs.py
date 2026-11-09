@@ -296,7 +296,7 @@ def install(app, DATA, D_WORK):
                 "part": (r.get("cat") or {}).get("part", 0),
                 "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", ""),
                 "people": (r.get("people") or {}).get("n", 0),
-                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
+                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "use": use_of(r)[0], "use_why": use_of(r)[1], "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -379,6 +379,27 @@ def install(app, DATA, D_WORK):
                 if w in t: return k, w.strip(" ,()")
         if "сумка" in (C.get("object") or ""): return "bag", "каталог"
         return "carpet", ""
+
+    def use_of(r):
+        """v11.35: что делать с фото — ("work"|"maybe"|"skip", причина). Не удаляет ничего: только сортирует каталог.
+        work — целый ковёр, хорошее фото, без людей; maybe — обрезан кадром или фото мелкое; skip — не ковёр / двойник / фрагмент / разворот и т.п."""
+        if r.get("dup_of"): return "skip", "двойник другого фото"
+        if r.get("hidden"): return "skip", "скрыто вручную"
+        if r.get("split_into") or r.get("multi"): return "skip", "разворот: сначала разделить на ковры"
+        if obj_guess(r)[0] != "carpet": return "skip", "не ковёр (сумка, предмет, сцена)"
+        if r["fragment"] if r.get("fragment") is not None else bool((r.get("cat") or {}).get("fragment")): return "skip", "фрагмент"
+        if (r.get("people") or {}).get("n"): return "skip", "на фото люди"
+        side = min(r.get("w") or 0, r.get("h") or 0)
+        if side and side < 400: return "skip", "фото слишком мелкое"
+        if r.get("frame") in ("fragment", "not_rug"): return "skip", "отмечено вручную: " + ("фрагмент" if r["frame"] == "fragment" else "не ковёр")
+        a = r.get("auto")
+        if not a: return "maybe", "кадр ещё не проверен машиной"
+        if a.get("frame") == "unsure": return "skip", "машина не видит целого ковра на фоне (интерьер, крупный план?)"
+        w, h = r.get("w") or 0, r.get("h") or 0
+        if w and h and (w / h < 0.4 or w / h > 2.5): return "skip", "странные пропорции кадра"
+        if a.get("frame") == "cropped": return "maybe", "ковёр обрезан кадром"
+        if side < 600: return "maybe", "фото мелкое (<600 px)"
+        return "work", "целый ковёр, хорошее фото"
 
     CAT_FIELDS = ("title", "museum", "inv", "url", "license", "place", "date", "size", "technique", "school", "composition")
 
@@ -1100,8 +1121,10 @@ def install(app, DATA, D_WORK):
             if (r.get("layout") or {}).get("quad") or r.get("tri") or r.get("multi") or r.get("split_into"): continue   # развороты с несколькими коврами сначала делим
             if r.get("fragment") or (r.get("cat") or {}).get("fragment"): continue
             if not img_path(r["id"]): continue
-            out.append(r["id"])
-        return out
+            u = use_of(r)[0]
+            if u == "skip": continue
+            out.append((u != "work", r["id"]))
+        out.sort(); return [i for _, i in out]
 
     @app.get("/api/rugs_triage")
     def api_rugs_triage_list(limit: int = 36):
@@ -1121,7 +1144,7 @@ def install(app, DATA, D_WORK):
                 t = rug_rect.triage(a); res[rid] = t
                 with _lock:
                     r = load(rid)
-                    if r: r["auto"] = {"frame": t["frame"], "quad": t["quad"], "conf": t["conf"], "t": int(time.time())}; save(r)
+                    if r: r["auto"] = {"frame": t["frame"], "quad": t["quad"], "conf": t["conf"], "area": t.get("area"), "ver": CAT_VER, "t": int(time.time())}; save(r)
             return res
         from starlette.concurrency import run_in_threadpool
         return {"res": await run_in_threadpool(work)}
@@ -1166,6 +1189,52 @@ def install(app, DATA, D_WORK):
                 errs.append(sum(((x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2) ** 0.5 for x, y in zip(a["quad"], L["quad"])) / 4)
         return {"batches": [{"n": b["n"], "bad": b["bad"]} for b in batches],
                 "hand": len(errs), "err": round(100 * sum(errs) / len(errs), 1) if errs else None}
+
+    catst = {"running": False, "done": 0, "total": 0, "error": ""}
+    CAT_VER = 1
+
+    def catalog_run(force=False):
+        """v11.35: фоновый проход по каталогу — машина смотрит каждое фото (этап 0): целый ковёр / обрезан / не ковёр. ≈0,3 с на фото"""
+        if catst["running"]: return False
+        import rug_rect
+        ids = []
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("dup_of") or r.get("split_into") or r.get("hidden") or r.get("multi"): continue
+            if obj_guess(r)[0] != "carpet" or (r.get("people") or {}).get("n"): continue
+            if not force and (r.get("auto") or {}).get("ver", 0) >= CAT_VER: continue
+            ids.append(r["id"])
+        catst.update(running=True, done=0, total=len(ids), error="")
+        def run():
+            try:
+                for rid in ids:
+                    p = img_path(rid); a = read_small(p, 1400) if p else None
+                    if a is not None:
+                        try:
+                            t = rug_rect.triage(a)
+                            with _lock:
+                                r = load(rid)
+                                if r:
+                                    old = r.get("auto") or {}
+                                    r["auto"] = {"frame": t["frame"], "quad": t["quad"], "conf": t["conf"], "area": t.get("area"), "ver": CAT_VER, "t": int(time.time())}
+                                    save(r)
+                        except Exception as e: catst["error"] = str(e)[:200]
+                    catst["done"] += 1; time.sleep(0.03)
+            finally:
+                catst["running"] = False
+        threading.Thread(target=run, daemon=True).start()
+        return True
+
+    app.state.catalog_run = catalog_run
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=lambda: (time.sleep(150), catalog_run()), daemon=True).start()
+
+    @app.get("/api/rugs_catalog")
+    def api_catalog_state(): return catst
+
+    @app.post("/api/rugs_catalog")
+    def api_catalog_run(body: dict = Body(default={})):
+        catalog_run(bool(body.get("force"))); return catst
 
     @app.get("/rugrect/{rid}.jpg")
     def rug_rect_img(rid: str):
