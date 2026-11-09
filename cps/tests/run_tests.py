@@ -1244,6 +1244,13 @@ def t33_micro_phone(pg, ctx):
     errs = []; m.on('pageerror', lambda e: errs.append(str(e)))
     m.goto(ctx['url'] + 'm'); m.wait_for_selector('.q', timeout=15000); m.wait_for_timeout(800)
     m.screenshot(path=f'{OUT}/33_micro_first.png')
+    cdp = mc.new_cdp_session(m); sb = m.query_selector('#stage').bounding_box(); cx, cy = sb['x'] + sb['width'] / 2, sb['y'] + sb['height'] / 2
+    cdp.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [{'x': cx - 30, 'y': cy, 'id': 1}, {'x': cx + 30, 'y': cy, 'id': 2}]})
+    for st_ in range(1, 7): cdp.send('Input.dispatchTouchEvent', {'type': 'touchMove', 'touchPoints': [{'x': cx - 30 - st_ * 12, 'y': cy, 'id': 1}, {'x': cx + 30 + st_ * 12, 'y': cy, 'id': 2}]})
+    cdp.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []}); m.wait_for_timeout(200)
+    zk = m.evaluate("window.__zoom&&window.__zoom()"); m.screenshot(path=f'{OUT}/33_micro_zoom.png')
+    assert zk and zk > 2, f'щипок двумя пальцами не увеличил фото: {zk}'
+    m.click('.zb'); m.wait_for_timeout(150); assert m.evaluate("window.__zoom()") == 1, 'сброс масштаба не работает'
     kinds = []; fixed = False
     for _ in range(10):
         if m.query_selector('.end'): break
