@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1794260181,
  "cat": {
   "title": "antique-kuba-dragon-sumakh-tabibnia",
   "museum": "",
@@ -79,5 +79,74 @@
   "area": 0.872,
   "ver": 1,
   "t": 1794238543
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794260131
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794260181,
+    "q": [
+     [
+      0.0439,
+      0.02034
+     ],
+     [
+      0.94797,
+      0.0429
+     ],
+     [
+      0.98758,
+      0.92311
+     ],
+     [
+      0.04861,
+      0.96972
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0439,
+    0.02034
+   ],
+   [
+    0.94797,
+    0.0429
+   ],
+   [
+    0.98758,
+    0.92311
+   ],
+   [
+    0.04861,
+    0.96972
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 992,
  "marks": [],
  "created": 1791736123,
- "updated": 1794259910,
+ "updated": 1794260089,
  "cat": {
   "title": "Uzunsov medalyonlu Azərbaycan xalçası.jpg",
   "museum": "Wikimedia Commons",
@@ -89,8 +89,66 @@
     "w": 2,
     "t": 1794259910
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794260089,
+    "q": [
+     [
+      0.23083,
+      0.04071
+     ],
+     [
+      0.82658,
+      0.05082
+     ],
+     [
+      0.92302,
+      0.93362
+     ],
+     [
+      0.10956,
+      0.96807
+     ]
+    ]
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.23083,
+    0.04071
+   ],
+   [
+    0.82658,
+    0.05082
+   ],
+   [
+    0.92302,
+    0.93362
+   ],
+   [
+    0.10956,
+    0.96807
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
