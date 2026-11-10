@@ -1779,11 +1779,18 @@ def install(app, DATA, D_WORK):
         qd = [x for x in rows if x["use"] != "skip" and x["aquad"] and x["frame"] == "whole" and x["frame_by"] in ("micro", "hand") and x["qs"] != "confirmed"
               and me not in x["who"]["quad"]]
         qd.sort(key=lambda x: x["conf"])
+        # v11.47: углы модели считаются заранее. Пока модель работает исправно, карточку углов показываем только когда её углы уже готовы
+        # (иначе ковёр уйдёт к человеку со старыми углами, а расчёт пропадёт зря); ковры без углов модели ставятся в очередь расчёта.
+        # Если модель не отвечает (ошибка, пауза, лимит) — показываем прежние углы, чтобы очередь не вставала.
+        n_wait = 0
+        if vlm_corners.available():
+            wait = [x for x in qd if not x["vquad"]]; _vlm_enqueue([x["id"] for x in wait[:18]])
+            if not _vq["err"] and time.time() >= _vq["off"] and _vq["done"] < VLM_MAX:
+                n_wait = len(wait); qd = [x for x in qd if x["vquad"]]
         tasks = []; fi = qi = 0
         while len(tasks) < n and (fi < len(fr) or qi < len(qd)):
             if qi < len(qd) and (len(tasks) % 2 == 0 or fi >= len(fr)): x = qd[qi]; qi += 1; tasks.append({"type": "quad", "rid": x["id"], "quad": x["vquad"] or x["aquad"], "qsrc": "vlm" if x["vquad"] else "auto"})
             elif fi < len(fr): x = fr[fi]; fi += 1; tasks.append({"type": "frame", "rid": x["id"]})
-        _vlm_enqueue([x["id"] for x in qd[qi:qi + 18] if not x["vquad"]])          # v11.47: углы моделью — на следующие карточки, пока человек отвечает на эти
         ctl = [x for x in rows if x["ctl"]]
         if ctl and len(tasks) >= 3:                                                 # контрольная карточка
             x = random.choice(ctl); q = [list(p) for p in x["quad"]]; good = random.random() < 0.5
@@ -1794,7 +1801,7 @@ def install(app, DATA, D_WORK):
         by = {x["id"]: x for x in rows}
         for t in tasks:
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd)}, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait}, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
 
     @app.post("/api/micro/answer")
     def micro_answer(request: Request, body: dict = Body(...)):
