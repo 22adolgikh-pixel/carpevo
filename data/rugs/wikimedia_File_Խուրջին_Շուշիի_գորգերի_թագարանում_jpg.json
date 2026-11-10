@@ -18,7 +18,7 @@
  "h": 1283,
  "marks": [],
  "created": 1791736126,
- "updated": 1794335941,
+ "updated": 1794339245,
  "cat": {
   "title": "Խուրջին Շուշիի գորգերի թագարանում.jpg",
   "museum": "Wikimedia Commons",
@@ -86,12 +86,17 @@
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "fragment",
+    "a": "detail",
     "w": 2,
-    "t": 1794335941
+    "t": 1794339245
    }
   }
  },
- "frame": "fragment",
- "frame_by": "micro"
+ "frame": "detail",
+ "frame_by": "micro",
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ }
 }

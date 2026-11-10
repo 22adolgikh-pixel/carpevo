@@ -18,7 +18,7 @@
  "h": 1027,
  "marks": [],
  "created": 1791736128,
- "updated": 1794339128,
+ "updated": 1794339231,
  "cat": {
   "title": "pinwheel swastika kazak rug schurmann",
   "museum": "",
@@ -80,11 +80,6 @@
   "ver": 1,
   "t": 1794238562
  },
- "edge": {
-  "damaged": [
-   "dolgikh"
-  ]
- },
  "micro": {
   "frame": {
    "dolgikh": {
@@ -92,8 +87,66 @@
     "w": 2,
     "t": 1794339128
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794339231,
+    "q": [
+     [
+      0.07244,
+      0.02184
+     ],
+     [
+      0.96006,
+      0.02556
+     ],
+     [
+      0.94294,
+      0.95556
+     ],
+     [
+      0.06954,
+      0.97617
+     ]
+    ]
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.07244,
+    0.02184
+   ],
+   [
+    0.96006,
+    0.02556
+   ],
+   [
+    0.94294,
+    0.95556
+   ],
+   [
+    0.06954,
+    0.97617
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
