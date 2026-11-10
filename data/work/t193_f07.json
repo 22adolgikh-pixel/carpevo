@@ -39,6 +39,7 @@
   "carpet": "Ширван",
   "type": "К.—Ш",
   "note": "",
+  "site_id": "",
   "source": "Табл. 191, рис. 8"
  },
  "grid": {
@@ -53,7 +54,10 @@
  "classify": {
   "tones": 9,
   "inner": 45,
-  "mode": "color"
+  "thr": [
+   200,
+   110
+  ]
  },
  "matrix": {
   "w": 48,
@@ -247,7 +251,8 @@
    "n_suspects": 0
   },
   "risk": 0.8,
-  "difficulty_est": "ultra"
+  "difficulty_est": "ultra",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -257,7 +262,7 @@
   "invert": false
  },
  "rapport": null,
- "saved_at": "2026-10-07 06:50:41",
+ "saved_at": "2026-11-10 09:45:48",
  "palette_v": 1,
  "palette_scan": [
   "#cdcbbc",
@@ -285,5 +290,8 @@
  ],
  "book_table": 191,
  "book_fig": 8,
- "kerimov_fix": "2026-10-31"
+ "kerimov_fix": "2026-10-31",
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null
 }
