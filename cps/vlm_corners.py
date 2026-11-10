@@ -14,8 +14,16 @@
 import base64, json, math, os, re, time, urllib.request, urllib.error
 import cv2, numpy as np
 
-def _akey(): return os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("CPS_ANTHROPIC_KEY") or ""
-def _okey(): return os.environ.get("OPENROUTER_API_KEY") or ""
+def _clean(v):
+    """ключ из .env бывает с пробелом, переводом строки, кавычками или приставкой «Bearer» — всё лишнее убираем"""
+    v = (v or "").strip().strip("\"'").strip()
+    return v[7:].strip() if v.lower().startswith("bearer ") else v
+def _akey(): return _clean(os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("CPS_ANTHROPIC_KEY"))
+def _okey(): return _clean(os.environ.get("OPENROUTER_API_KEY"))
+def key_info():
+    """безопасное описание ключа для /api/vlm/status: только длина и начало формата, сам ключ не раскрывается"""
+    k = _akey() or _okey()
+    return {"len": len(k), "prefix": k[:6] if k.startswith("sk-") else ("?" if k else "")}
 def provider(): return "anthropic" if _akey() else "openrouter" if _okey() else ""
 MODEL = os.environ.get("CPS_VLM_MODEL") or ("anthropic/claude-sonnet-5.5" if provider() == "openrouter" else "claude-sonnet-5-5")
 WIN = 0.16            # окно уточнения — доля длинной стороны фото

@@ -1749,7 +1749,7 @@ def install(app, DATA, D_WORK):
     @app.get("/api/vlm/status")
     def vlm_status():
         """есть ли ключ (сам ключ не отдаётся), сколько ковров в очереди и сколько посчитано сегодня"""
-        return {"key": vlm_corners.available(), "provider": "mock" if os.environ.get("CPS_VLM_MOCK") else vlm_corners.provider(), "model": vlm_corners.MODEL, "queued": _vq["q"].qsize(), "done_today": _vq["done"] if _vq["day"] == time.strftime("%Y-%m-%d") else 0,
+        return {"key": vlm_corners.available(), "provider": "mock" if os.environ.get("CPS_VLM_MOCK") else vlm_corners.provider(), "model": vlm_corners.MODEL, "key_info": vlm_corners.key_info(), "queued": _vq["q"].qsize(), "done_today": _vq["done"] if _vq["day"] == time.strftime("%Y-%m-%d") else 0,
                 "limit": VLM_MAX, "last_error": _vq["err"], "paused": time.time() < _vq["off"]}
 
     _ver = {}
