@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870017,
- "updated": 1794336971,
+ "updated": 1794337104,
  "cat": {
   "title": "Carpet Metamorphosis, second half of the 19th century, Berdashen, Askeran region",
   "museum": "Национальный музей азербайджанского ковра",
@@ -70,7 +70,38 @@
   "ver": 1,
   "at": 1792262111
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06415,
+    0.0071
+   ],
+   [
+    0.93585,
+    0.0238
+   ],
+   [
+    0.98855,
+    0.9854
+   ],
+   [
+    0.04046,
+    0.96797
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "auto": {
   "frame": "unsure",
@@ -104,8 +135,34 @@
     "w": 2,
     "t": 1794336971
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794337104,
+    "q": [
+     [
+      0.06415,
+      0.0071
+     ],
+     [
+      0.93585,
+      0.0238
+     ],
+     [
+      0.98855,
+      0.9854
+     ],
+     [
+      0.04046,
+      0.96797
+     ]
+    ]
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "tri": "micro"
 }

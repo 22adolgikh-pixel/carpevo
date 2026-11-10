@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791870042,
- "updated": 1792272840,
+ "updated": 1794337212,
  "cat": {
   "title": "“Buynuz” («Буйнуз»), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -93,7 +93,38 @@
   "ver": 1,
   "at": 1792261886
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0907,
+    0.04333
+   ],
+   [
+    0.9093,
+    0.05778
+   ],
+   [
+    0.9093,
+    0.94
+   ],
+   [
+    0.06512,
+    0.96111
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "from_twin": {
   "composition": "wikimedia_File_Buynuz_carpet_jpg"
@@ -122,5 +153,24 @@
   "area": 0.748,
   "ver": 1,
   "t": 1794238340
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794337135
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794337212
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "tri": "micro"
 }
