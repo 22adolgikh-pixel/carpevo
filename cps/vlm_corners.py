@@ -6,25 +6,26 @@
 #         у каждого окна свои линейки 0–100, за краем фото — пурпурный фон; модель называет положение угла в окне.
 # Углы — в долях кадра 0..1, порядок: левый верхний, правый верхний, правый нижний, левый нижний (как r.layout.quad).
 #
-# Ключ берётся из переменной окружения ANTHROPIC_API_KEY (или CPS_ANTHROPIC_KEY) — только из окружения сервера, в данные не пишется.
-# Без ключа модуль сообщает «нет ключа» и ничего не вызывает. CPS_VLM_MOCK=1 — заглушка без сети (для автотестов).
+# Два способа подключения (ключ — только из окружения сервера, в данные и журналы не пишется):
+#   1) прямой API Anthropic: ANTHROPIC_API_KEY (или CPS_ANTHROPIC_KEY), модель по умолчанию claude-sonnet-5-5;
+#   2) OpenRouter (если есть OPENROUTER_API_KEY и нет ключа Anthropic): модель по умолчанию anthropic/claude-sonnet-5.5, та же цена ($2 / $10 за млн токенов).
+# CPS_VLM_MODEL — своя модель, CPS_VLM_URL — свой адрес (для проверок). Без ключа модуль ничего не вызывает.
+# CPS_VLM_MOCK=1 — заглушка без сети (для автотестов).
 import base64, json, math, os, re, time, urllib.request, urllib.error
 import cv2, numpy as np
 
-MODEL = os.environ.get("CPS_VLM_MODEL", "claude-sonnet-5-5")
-URL = "https://api.anthropic.com/v1/messages"
+def _akey(): return os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("CPS_ANTHROPIC_KEY") or ""
+def _okey(): return os.environ.get("OPENROUTER_API_KEY") or ""
+def provider(): return "anthropic" if _akey() else "openrouter" if _okey() else ""
+MODEL = os.environ.get("CPS_VLM_MODEL") or ("anthropic/claude-sonnet-5.5" if provider() == "openrouter" else "claude-sonnet-5-5")
 WIN = 0.16            # окно уточнения — доля длинной стороны фото
 MAX_MOVE = 0.12       # уточнение не должно уйти дальше этой доли кадра от грубого угла — иначе берём грубый
 COARSE_SIDE = 1000
 TILE = 480
 
 
-def key():
-    return os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("CPS_ANTHROPIC_KEY") or ""
-
-
 def available():
-    return bool(os.environ.get("CPS_VLM_MOCK")) or bool(key())
+    return bool(os.environ.get("CPS_VLM_MOCK")) or bool(provider())
 
 
 def _jpg(a, q=88):
@@ -36,15 +37,12 @@ def _ask(images, prompt, max_tokens=300):
     """один запрос к модели → текст ответа. images — список JPEG в base64"""
     if os.environ.get("CPS_VLM_MOCK"):
         return _mock(prompt)
-    body = {"model": MODEL, "max_tokens": max_tokens, "messages": [{"role": "user", "content":
-            [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": d}} for d in images] +
-            [{"type": "text", "text": prompt}]}]}
-    rq = urllib.request.Request(URL, data=json.dumps(body).encode(), headers={
-        "x-api-key": key(), "anthropic-version": "2023-06-01", "content-type": "application/json"})
+    rq, orouter = _request(images, prompt, max_tokens)
     for attempt in range(3):
         try:
             with urllib.request.urlopen(rq, timeout=90) as r:
                 j = json.load(r)
+            if orouter: return ((j.get("choices") or [{}])[0].get("message") or {}).get("content") or ""
             return "".join(b.get("text", "") for b in j.get("content", []) if b.get("type") == "text")
         except urllib.error.HTTPError as e:
             if e.code in (429, 500, 502, 503, 529) and attempt < 2: time.sleep(3 * (attempt + 1)); continue
@@ -53,6 +51,21 @@ def _ask(images, prompt, max_tokens=300):
             if attempt < 2: time.sleep(3); continue
             raise
     raise RuntimeError("API: не ответил")
+
+
+def _request(images, prompt, max_tokens):
+    """→ (запрос, это OpenRouter?) для выбранного способа подключения"""
+    if provider() == "anthropic":
+        body = {"model": MODEL, "max_tokens": max_tokens, "messages": [{"role": "user", "content":
+                [{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": d}} for d in images] +
+                [{"type": "text", "text": prompt}]}]}
+        return urllib.request.Request(os.environ.get("CPS_VLM_URL") or "https://api.anthropic.com/v1/messages", data=json.dumps(body).encode(), headers={
+            "x-api-key": _akey(), "anthropic-version": "2023-06-01", "content-type": "application/json"}), False
+    body = {"model": MODEL, "max_tokens": max_tokens, "messages": [{"role": "user", "content":
+            [{"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + d}} for d in images] +
+            [{"type": "text", "text": prompt}]}]}
+    return urllib.request.Request(os.environ.get("CPS_VLM_URL") or "https://openrouter.ai/api/v1/chat/completions", data=json.dumps(body).encode(), headers={
+        "Authorization": "Bearer " + _okey(), "content-type": "application/json", "X-Title": "Carpet Pattern Studio"}), True
 
 
 def _mock(prompt):
