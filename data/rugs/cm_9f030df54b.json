@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870032,
- "updated": 1791997184,
+ "updated": 1794337068,
  "cat": {
   "title": "Xilə-Əfşan xalçası, Azərbaycan Tarix Muzeyi, XIX əsr",
   "museum": "",
@@ -110,5 +110,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238202
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794337051
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794337068,
+    "q": [
+     [
+      0.05254,
+      0.02178
+     ],
+     [
+      0.95858,
+      0.02038
+     ],
+     [
+      0.95519,
+      0.98341
+     ],
+     [
+      0.0245,
+      0.97982
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05254,
+    0.02178
+   ],
+   [
+    0.95858,
+    0.02038
+   ],
+   [
+    0.95519,
+    0.98341
+   ],
+   [
+    0.0245,
+    0.97982
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

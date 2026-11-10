@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870015,
- "updated": 1791997191,
+ "updated": 1794336967,
  "cat": {
   "title": "This photo has been taken in the country: Armenia",
   "museum": "",
@@ -94,5 +94,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238269
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794336921
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794336967,
+    "q": [
+     [
+      0.06221,
+      0.04593
+     ],
+     [
+      0.94456,
+      0.05592
+     ],
+     [
+      0.92135,
+      0.95336
+     ],
+     [
+      0.06608,
+      0.9536
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06221,
+    0.04593
+   ],
+   [
+    0.94456,
+    0.05592
+   ],
+   [
+    0.92135,
+    0.95336
+   ],
+   [
+    0.06608,
+    0.9536
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
