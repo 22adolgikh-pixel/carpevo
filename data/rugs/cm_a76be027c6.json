@@ -694,7 +694,7 @@
   }
  ],
  "created": 1791870014,
- "updated": 1792269276,
+ "updated": 1794336087,
  "cat": {
   "title": "Alpan Kuba Rug, ca",
   "museum": "",
@@ -746,7 +746,38 @@
   "ver": 1,
   "at": 1792262095
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08986,
+    0.03941
+   ],
+   [
+    0.92704,
+    0.03726
+   ],
+   [
+    0.94686,
+    0.9597
+   ],
+   [
+    0.04687,
+    0.97214
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "auto": {
   "frame": "whole",
@@ -772,5 +803,42 @@
   "area": 0.825,
   "ver": 1,
   "t": 1794238567
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794336017
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794336087,
+    "q": [
+     [
+      0.08986,
+      0.03941
+     ],
+     [
+      0.92704,
+      0.03726
+     ],
+     [
+      0.94686,
+      0.9597
+     ],
+     [
+      0.04687,
+      0.97214
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "tri": "micro"
 }
