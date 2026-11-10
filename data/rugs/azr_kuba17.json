@@ -18,7 +18,7 @@
  "h": 1899,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1794336401,
  "cat": {
   "title": "Antique Caucasian Moghan Prayer rug (Namazlyg), 19th century, North East Azerbaijan, 152 x 94, Ziya ",
   "museum": "",
@@ -81,5 +81,74 @@
   "area": 0.9,
   "ver": 1,
   "t": 1794238573
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794336387
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794336401,
+    "q": [
+     [
+      0.03044,
+      0.02057
+     ],
+     [
+      0.97318,
+      0.03177
+     ],
+     [
+      0.97108,
+      0.96858
+     ],
+     [
+      0.03334,
+      0.96264
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03044,
+    0.02057
+   ],
+   [
+    0.97318,
+    0.03177
+   ],
+   [
+    0.97108,
+    0.96858
+   ],
+   [
+    0.03334,
+    0.96264
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
