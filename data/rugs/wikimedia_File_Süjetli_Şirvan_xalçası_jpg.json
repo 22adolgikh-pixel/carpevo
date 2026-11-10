@@ -18,7 +18,7 @@
  "h": 1154,
  "marks": [],
  "created": 1791736126,
- "updated": 1791736126,
+ "updated": 1794344872,
  "cat": {
   "title": "Süjetli Şirvan xalçası.jpg",
   "museum": "Wikimedia Commons",
@@ -82,5 +82,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238396
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794344821
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794344872,
+    "q": [
+     [
+      0.00903,
+      0.00316
+     ],
+     [
+      0.99483,
+      0.00357
+     ],
+     [
+      0.9987,
+      0.99
+     ],
+     [
+      0.00758,
+      0.99
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00903,
+    0.00316
+   ],
+   [
+    0.99483,
+    0.00357
+   ],
+   [
+    0.9987,
+    0.99
+   ],
+   [
+    0.00758,
+    0.99
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

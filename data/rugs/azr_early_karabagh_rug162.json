@@ -18,7 +18,7 @@
  "h": 1300,
  "marks": [],
  "created": 1791736139,
- "updated": 1794298231,
+ "updated": 1794344803,
  "cat": {
   "title": "Floral carpet (dark blue ground)",
   "museum": "",
@@ -85,12 +85,17 @@
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "fragment",
+    "a": "whole",
     "w": 2,
-    "t": 1794298231
+    "t": 1794344803
    }
   }
  },
- "frame": "fragment",
- "frame_by": "micro"
+ "frame": "whole",
+ "frame_by": "micro",
+ "edge": {
+  "damaged": [
+   "dolgikh"
+  ]
+ }
 }
