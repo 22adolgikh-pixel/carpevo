@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794339479,
  "cat": {
   "title": "antique kazak akstafa rug8",
   "museum": "",
@@ -79,5 +79,56 @@
   "area": 0.9,
   "ver": 1,
   "t": 1794238292
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794339474
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794339479
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03204,
+    0.015
+   ],
+   [
+    0.97254,
+    0.02
+   ],
+   [
+    0.96568,
+    0.97167
+   ],
+   [
+    0.02288,
+    0.975
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
