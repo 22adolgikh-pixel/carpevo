@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870015,
- "updated": 1794255716,
+ "updated": 1794343771,
  "cat": {
   "title": "Azerbaijani carpet of middle ages",
   "museum": "Национальный музей азербайджанского ковра",
@@ -102,7 +102,21 @@
     "w": 2,
     "t": 1794255716
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "cropped",
+    "w": 2,
+    "t": 1794343771
+   }
   }
  },
- "tri": "review"
+ "tri": "review",
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "frame": "cropped",
+ "frame_by": "micro"
 }
