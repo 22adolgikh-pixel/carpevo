@@ -18,7 +18,7 @@
  "h": 607,
  "marks": [],
  "created": 1791736127,
- "updated": 1791736127,
+ "updated": 1794336786,
  "cat": {
   "title": "Şəkil-Bico xalçası (1).jpg",
   "museum": "Wikimedia Commons",
@@ -106,5 +106,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238309
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794336759
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794336786,
+    "q": [
+     [
+      0.00662,
+      -0.00376
+     ],
+     [
+      1.01079,
+      -0.00835
+     ],
+     [
+      1.00015,
+      0.99994
+     ],
+     [
+      0.00662,
+      1.01064
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00662,
+    -0.00376
+   ],
+   [
+    1.01079,
+    -0.00835
+   ],
+   [
+    1.00015,
+    0.99994
+   ],
+   [
+    0.00662,
+    1.01064
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870029,
- "updated": 1791870029,
+ "updated": 1794336908,
  "cat": {
   "title": "Rugs and carpets in the Turkish and Islamic Arts Museum",
   "museum": "Музей турецкого и исламского искусства (Стамбул)",
@@ -114,5 +114,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238505
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794336857
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794336908,
+    "q": [
+     [
+      0.06415,
+      0.02579
+     ],
+     [
+      0.95471,
+      0.02
+     ],
+     [
+      0.94311,
+      0.9729
+     ],
+     [
+      0.07526,
+      0.97237
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06415,
+    0.02579
+   ],
+   [
+    0.95471,
+    0.02
+   ],
+   [
+    0.94311,
+    0.9729
+   ],
+   [
+    0.07526,
+    0.97237
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

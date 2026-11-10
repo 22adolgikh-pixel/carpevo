@@ -18,7 +18,7 @@
  "h": 1047,
  "marks": [],
  "created": 1791736131,
- "updated": 1791736131,
+ "updated": 1794336756,
  "cat": {
   "title": "kuba alpan61",
   "museum": "",
@@ -79,5 +79,56 @@
   "area": 0.883,
   "ver": 1,
   "t": 1794238479
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794336735
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794336756
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03322,
+    0.03778
+   ],
+   [
+    0.99834,
+    0.03222
+   ],
+   [
+    0.97841,
+    0.96
+   ],
+   [
+    0.0598,
+    0.98444
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
