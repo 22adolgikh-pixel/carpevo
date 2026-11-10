@@ -386,6 +386,10 @@ def install(app, DATA, D_WORK):
         except Exception: v = None
         return None if v is None else round(v, 3)
 
+    # v11.45: ответы «что на фото» (карточка /m). «fragment» — снятый ответ прежних версий, встречается в старых записях.
+    FRAME_RU = {"whole": "целый ковёр", "cropped": "обрезан кадром", "detail": "только деталь ковра", "not_rug": "не ковёр", "fragment": "фрагмент (прежний ответ)"}
+    FRAME_SKIP = ("detail", "not_rug", "fragment")
+
     def use_of(r):
         """v11.35: что делать с фото — ("work"|"maybe"|"skip", причина). Не удаляет ничего: только сортирует каталог.
         work — целый ковёр, хорошее фото, без людей; maybe — обрезан кадром или фото мелкое; skip — не ковёр / двойник / фрагмент / разворот и т.п."""
@@ -397,12 +401,12 @@ def install(app, DATA, D_WORK):
         if (r.get("people") or {}).get("n"): return "skip", "на фото люди"
         # Керимов — главный источник описаний (грейд A): вырезки из книги маленькие и без фона, рамка и размер для них не мерило
         if (r.get("cat") or {}).get("src", "").startswith("kerimov") or r["id"].startswith("kerimov"):
-            if r.get("frame") in ("fragment", "not_rug"): return "skip", "отмечено вручную: " + ("фрагмент" if r["frame"] == "fragment" else "не ковёр")
+            if r.get("frame") in FRAME_SKIP: return "skip", "отмечено вручную: " + FRAME_RU[r["frame"]]
             return "work", "ковёр из книги Керимова (размер и рамка не проверяются)"
         kl = any(str(x.get("id", "")).startswith("kerimov") for x in r.get("same") or [])   # то же фото, что у Керимова: не отбрасываем по картинке
         side = min(r.get("w") or 0, r.get("h") or 0)
         if side and side < 400: return ("maybe", "мелкое фото, но есть у Керимова") if kl else ("skip", "фото слишком мелкое")
-        if r.get("frame") in ("fragment", "not_rug"): return "skip", "отмечено вручную: " + ("фрагмент" if r["frame"] == "fragment" else "не ковёр")
+        if r.get("frame") in FRAME_SKIP: return "skip", "отмечено вручную: " + FRAME_RU[r["frame"]]
         w, h = r.get("w") or 0, r.get("h") or 0
         if r.get("frame_by") in ("micro", "hand"):                              # решение человека важнее машины
             if r.get("frame") == "whole": return ("maybe", "целый (человек), но фото мелкое (<600 px)") if side < 600 else ("work", "целый ковёр — подтвердил человек")
@@ -1650,7 +1654,12 @@ def install(app, DATA, D_WORK):
     # Контрольные карточки (≈1 из 6): ковёр с углами, подтверждёнными вручную, — показываем верные углы или нарочно сдвинутый угол; так считаем внимательность.
     D_MICRO = os.path.join(DATA, "micro.jsonl")
     _mc = {}; _ctl_tok = {}
-    FR_ANS = ("whole", "cropped", "fragment", "not_rug")
+    # v11.45: кадр — три значения плюс «не ковёр» (решение владельца 10.11). «Целый» включает «чуть вылез за кадр»:
+    # срезано меньше ~3 % по одному краю и узор не потерян. «Деталь» — снят кусок ковра, целого на фото нет.
+    # Прежний ответ «fragment» снят: им помечали в основном рваные ковры, а это теперь галочка «повреждён».
+    FR_ANS = ("whole", "cropped", "detail", "not_rug")
+    FR_OLD = ("fragment",)                                                       # спрашиваем заново: такого ответа больше нет
+    EDGE_FL = ("wavy", "skew", "damaged")
 
     def _mrow(rid):
         """короткая запись для очереди (кэш по времени изменения файла)"""
@@ -1668,6 +1677,8 @@ def install(app, DATA, D_WORK):
         row = {"id": rid, "use": use_of(r)[0], "seen": bool(a), "pw": pw, "conf": a.get("conf", 0), "aframe": a.get("frame"), "frame": r.get("frame", ""),
                "frame_by": r.get("frame_by", ""), "qs": L.get("quad_status", ""), "quad": L.get("quad"), "aquad": a.get("quad"),
                "who": {t: list((m.get(t) or {}).keys()) for t in ("frame", "quad")}, "title": r.get("title", ""), "w": r.get("w"), "h": r.get("h"),
+               "fr_old": r.get("frame") in FR_OLD,                                # применён снятый ответ — спросить заново
+               "old_who": [u for u, v in (m.get("frame") or {}).items() if (v or {}).get("a") in FR_OLD],
                "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge")}
         _mc[rid] = (k, row); return row
 
@@ -1702,7 +1713,9 @@ def install(app, DATA, D_WORK):
     def micro_next(request: Request, n: int = 6):
         import random
         me = user(request); n = max(1, min(12, n)); rows = _mrows()
-        fr = [x for x in rows if x["use"] != "skip" and x["seen"] and x["frame_by"] not in ("micro", "hand") and me not in x["who"]["frame"]]
+        # v11.45: ковры с прежним ответом «фрагмент» возвращаются в очередь — в новом наборе ответов такого больше нет
+        fr =[x for x in rows if (x["use"] != "skip" or x["fr_old"]) and x["seen"] and (x["frame_by"] not in ("micro", "hand") or x["fr_old"])
+              and (me not in x["who"]["frame"] or me in x["old_who"])]
         fr.sort(key=lambda x: (abs((x["pw"] if x["pw"] is not None else 0.5) - 0.5), x["conf"]))   # v11.44: где модель меньше всего уверена — первыми
         head, pool = fr[:60], fr[:]; random.shuffle(pool); mix = []                 # половина — сомнительные, половина — случайные (иначе выборка перекошена и точность машины не измерить)
         for a, b in zip(head, pool): mix += [a, b]
@@ -1752,16 +1765,20 @@ def install(app, DATA, D_WORK):
         with _lock:
             r = load(rid)
             if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
-            # v11.43: отметки «края сильно кривые» / «край или угол повреждён» — не мешают ответу, копятся по людям
+            # v11.43: отметки «края кривые» / «перспектива» / «повреждён» — не мешают ответу, копятся по людям
+            # v11.45: трогаем только те галочки, что пришли с карточки (у карточек они разные)
             E = r.setdefault("edge", {})
-            for k in ("wavy", "damaged"):
+            for k in EDGE_FL:
+                if k not in fl: continue
                 us = set(E.get(k) or [])
                 (us.add if fl.get(k) else us.discard)(me)
                 if us: E[k] = sorted(us)
                 else: E.pop(k, None)
             if not E: r.pop("edge", None)
-            if fl: rec["flags"] = {k: bool(fl.get(k)) for k in ("wavy", "damaged")}
+            if fl: rec["flags"] = {k: bool(fl[k]) for k in EDGE_FL if k in fl}
             M = r.setdefault("micro", {}).setdefault(typ, {})
+            if typ == "frame":                                                   # v11.45: снятые ответы не держат ковёр в очереди
+                for u in [u for u, v in M.items() if (v or {}).get("a") in FR_OLD]: M.pop(u)
             M[me] = {"a": a, "w": _wt(role), "t": rec["t"], **({"q": q} if q else {})}
             votes = list(M.values())
             if typ == "frame":

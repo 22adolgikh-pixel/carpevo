@@ -1233,7 +1233,7 @@ def t32_triage_batch(pg, ctx):
 @test
 def t33_micro_phone(pg, ctx):
     """v11.39: телефонный экран /m — карточки «целый ли ковёр» и «углы верны», правка угла панорамой, контрольные карточки"""
-    import urllib.request, json as _j
+    import urllib.request, urllib.error, json as _j
     def post(path, body):
         rq = urllib.request.Request(ctx['url'] + path, data=_j.dumps(body).encode(), headers={'Content-Type': 'application/json'})
         return _j.load(urllib.request.urlopen(rq))
@@ -1284,6 +1284,17 @@ def t33_micro_phone(pg, ctx):
     assert ch, 'ответ админа об углах не применился сразу'
     ed = [x['id'] for x in _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs'))['rugs'] if 'damaged' in (x.get('edge') or [])]
     assert ed, 'отметка «край повреждён» не сохранилась'
+    # v11.45: три значения кадра (целый / обрезан / деталь) и галочка «снят в перспективе»
+    post('api/micro/answer', {'type': 'frame', 'rid': 'persp_1', 'a': 'detail', 'flags': {'skew': True}})
+    d = _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs/persp_1'))
+    assert d.get('frame') == 'detail', f'ответ «только деталь» не сохранился: {d.get("frame")}'
+    pr = [x for x in _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs'))['rugs'] if x['id'] == 'persp_1'][0]
+    assert 'skew' in (pr.get('edge') or []), f'галочка «снят в перспективе» не сохранилась: {pr.get("edge")}'
+    assert pr['use'] == 'skip' and 'деталь' in pr['use_why'], f'деталь ковра должна уходить из рабочей очереди: {pr["use"], pr["use_why"]}'
+    assert 'damaged' not in (pr.get('edge') or []), 'карточка «что на фото» не должна трогать галочки другой карточки'
+    bad = urllib.request.Request(ctx['url'] + 'api/micro/answer', data=_j.dumps({'type': 'frame', 'rid': 'persp_1', 'a': 'fragment'}).encode(), headers={'Content-Type': 'application/json'})
+    try: urllib.request.urlopen(bad); assert False, 'снятый ответ «fragment» всё ещё принимается'
+    except urllib.error.HTTPError as e: assert e.code == 400, f'ожидали 400 на снятый ответ, получили {e.code}'
     mc.close()
 
 def main():
