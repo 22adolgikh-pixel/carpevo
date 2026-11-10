@@ -18,7 +18,7 @@
  "h": 823,
  "marks": [],
  "created": 1791736139,
- "updated": 1794342990,
+ "updated": 1794343047,
  "cat": {
   "title": "A finely woven Azerbaijan rug with silk in its foundation, 18th century",
   "museum": "",
@@ -89,8 +89,66 @@
     "w": 2,
     "t": 1794342990
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794343047,
+    "q": [
+     [
+      0.07414,
+      0.0256
+     ],
+     [
+      0.93916,
+      0.01944
+     ],
+     [
+      0.95057,
+      0.98906
+     ],
+     [
+      0.07985,
+      0.99878
+     ]
+    ]
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.07414,
+    0.0256
+   ],
+   [
+    0.93916,
+    0.01944
+   ],
+   [
+    0.95057,
+    0.98906
+   ],
+   [
+    0.07985,
+    0.99878
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

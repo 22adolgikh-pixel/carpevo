@@ -18,7 +18,7 @@
  "h": 1012,
  "marks": [],
  "created": 1791736123,
- "updated": 1794342977,
+ "updated": 1794343011,
  "cat": {
   "title": "Portrait-carpet-of-Tsar-Aleksandr-III-and-his-wife-Maria-Feodorovna.png",
   "museum": "Wikimedia Commons",
@@ -90,8 +90,66 @@
     "w": 2,
     "t": 1794342977
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794343011,
+    "q": [
+     [
+      0.01532,
+      0.01568
+     ],
+     [
+      0.99,
+      0.01
+     ],
+     [
+      0.99,
+      0.99
+     ],
+     [
+      0.01,
+      0.99
+     ]
+    ]
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01532,
+    0.01568
+   ],
+   [
+    0.99,
+    0.01
+   ],
+   [
+    0.99,
+    0.99
+   ],
+   [
+    0.01,
+    0.99
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

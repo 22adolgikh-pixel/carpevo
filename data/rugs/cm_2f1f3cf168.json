@@ -18,7 +18,7 @@
  "h": 1292,
  "marks": [],
  "created": 1791870015,
- "updated": 1791997199,
+ "updated": 1794343069,
  "cat": {
   "title": "Azerbaijani carpet \"Chelyabi\" (Barda group) of Karabakh carpet school from Shusha Carpet Gallery",
   "museum": "Шушинский музей ковра",
@@ -104,5 +104,79 @@
   "area": null,
   "ver": 1,
   "t": 1794238381
- }
+ },
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794343040
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794343069,
+    "q": [
+     [
+      0.24689,
+      0.05141
+     ],
+     [
+      0.77874,
+      0.06565
+     ],
+     [
+      0.82998,
+      0.89747
+     ],
+     [
+      0.20773,
+      0.88841
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.24689,
+    0.05141
+   ],
+   [
+    0.77874,
+    0.06565
+   ],
+   [
+    0.82998,
+    0.89747
+   ],
+   [
+    0.20773,
+    0.88841
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

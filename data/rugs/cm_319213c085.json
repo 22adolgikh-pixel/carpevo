@@ -505,7 +505,7 @@
   }
  ],
  "created": 1791870025,
- "updated": 1792275592,
+ "updated": 1794343083,
  "cat": {
   "title": "Carpet with Geometricized Floral Design Late 18th century Attributed to Caucasus This carpet is representative",
   "museum": "Метрополитен-музей",
@@ -567,7 +567,38 @@
    "ver": 2
   }
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00662,
+    0.01283
+   ],
+   [
+    0.99193,
+    0.00608
+   ],
+   [
+    1.00692,
+    0.99436
+   ],
+   [
+    0.01822,
+    0.99675
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "people": {
   "n": 0,
@@ -599,5 +630,42 @@
   "area": null,
   "ver": 1,
   "t": 1794238543
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794343050
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794343083,
+    "q": [
+     [
+      0.00662,
+      0.01283
+     ],
+     [
+      0.99193,
+      0.00608
+     ],
+     [
+      1.00692,
+      0.99436
+     ],
+     [
+      0.01822,
+      0.99675
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "tri": "micro"
 }
