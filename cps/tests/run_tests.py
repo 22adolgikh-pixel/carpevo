@@ -1300,13 +1300,42 @@ def t33_micro_phone(pg, ctx):
     except urllib.error.HTTPError as e: assert e.code == 400, f'ожидали 400 на снятый ответ, получили {e.code}'
     mc.close()
 
+
+@test
+def t34_vlm_corners(pg, ctx):
+    """v11.47: углы моделью в два шага — фоновый расчёт, подмена углов на карточке, «да» принимает именно их (модель — заглушка CPS_VLM_MOCK)"""
+    import urllib.request, json as _j
+    def post(path, body):
+        rq = urllib.request.Request(ctx['url'] + path, data=_j.dumps(body).encode(), headers={'Content-Type': 'application/json'})
+        return _j.load(urllib.request.urlopen(rq))
+    def get(path): return _j.load(urllib.request.urlopen(ctx['url'] + path))
+    st = get('api/vlm/status'); assert st['key'] and 'queued' in st, f'нет статуса модели: {st}'
+    ids = ['frieze_2', 'met_123', 'kerimov_vol9_p050_1']
+    post('api/rugs_triage', {'ids': ids})
+    for i in ids: post('api/micro/answer', {'type': 'frame', 'rid': i, 'a': 'whole'})
+    get('api/micro/next?n=1')                                    # первая карточка показана, остальные ставятся в очередь расчёта
+    for _ in range(60):
+        st = get('api/vlm/status')
+        if st['done_today'] >= 1 and st['queued'] == 0: break
+        time.sleep(0.5)
+    assert st['done_today'] >= 1, f'модель углов ничего не посчитала: {st}'
+    tk = [t for t in get('api/micro/next?n=8')['tasks'] if t['type'] == 'quad' and t.get('qsrc') == 'vlm']
+    assert tk, 'в очереди нет карточки с углами модели'
+    q = tk[0]['quad']; assert abs(q[0][0] - 0.1) < 1e-3 and abs(q[2][0] - 0.9) < 1e-3, f'углы модели не те: {q}'
+    r = post('api/micro/answer', {'type': 'quad', 'rid': tk[0]['rid'], 'a': 'ok', 's': 'vlm'})
+    L = get('api/rugs/' + tk[0]['rid']).get('layout') or {}
+    assert r.get('applied') == 'quad' and abs(L['quad'][0][0] - 0.1) < 1e-3, f'«да» не приняло углы модели: {r} {L.get("quad")}'
+    ml = [_j.loads(x) for x in open(os.path.join(ctx['app'], 'data', 'micro.jsonl'), encoding='utf-8') if x.strip()]
+    assert any(x.get('s') == 'vlm' for x in ml), 'в журнале нет пометки, что углы были от модели'
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
     shutil.copytree(CPS, app, ignore=shutil.ignore_patterns('tests', '__pycache__', '*.pyc', 'rug_lib', 'rug_img', 'rugs', 'rug_thumbs'))
     make_rugs(os.path.join(app, 'data')); make_color_fig(os.path.join(app, 'data')); make_crops(os.path.join(app, 'data')); make_auto_sheet(os.path.join(app, 'data'))
     port = free_port(); url = f'http://127.0.0.1:{port}/'
-    env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': '', 'CPS_NO_SCHED': '1', 'CPS_MOTIF_FAKE': '1', 'CPS_SAM': '0'}   # CPS_NO_SCHED: автоматические задачи не запускаются сами
+    env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': '', 'CPS_NO_SCHED': '1', 'CPS_MOTIF_FAKE': '1', 'CPS_SAM': '0', 'CPS_VLM_MOCK': '1'}   # CPS_NO_SCHED: автоматические задачи не запускаются сами
     log = open(os.path.join(OUT, 'server.log'), 'w')
     srv = subprocess.Popen([sys.executable, '-m', 'uvicorn', 'backend:app', '--port', str(port)], cwd=app, env=env, stdout=log, stderr=subprocess.STDOUT)
     ok = fail = 0

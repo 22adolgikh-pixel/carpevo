@@ -1677,6 +1677,7 @@ def install(app, DATA, D_WORK):
         row = {"id": rid, "use": use_of(r)[0], "seen": bool(a), "pw": pw, "conf": a.get("conf", 0), "aframe": a.get("frame"), "frame": r.get("frame", ""),
                "frame_by": r.get("frame_by", ""), "qs": L.get("quad_status", ""), "quad": L.get("quad"), "aquad": a.get("quad"),
                "who": {t: list((m.get(t) or {}).keys()) for t in ("frame", "quad")}, "title": r.get("title", ""), "w": r.get("w"), "h": r.get("h"),
+               "vquad": ((a.get("vlm_quad") or {}).get("quad")),                   # v11.47: углы, предложенные моделью в два шага
                "fr_old": r.get("frame") in FR_OLD,                                # применён снятый ответ — спросить заново
                "old_who": [u for u, v in (m.get("frame") or {}).items() if (v or {}).get("a") in FR_OLD],
                "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge")}
@@ -1709,6 +1710,48 @@ def install(app, DATA, D_WORK):
         for u in S.values(): u["acc"] = round(100 * u["ctl_ok"] / u["ctl"]) if u["ctl"] else None
         return S.get(name, {"total": 0, "today": 0, "ctl": 0, "ctl_ok": 0, "acc": None}) if name is not None else S
 
+    # ---------- v11.47: углы моделью в два шага (vlm_corners.py) — в фоне, по очереди, с дневным лимитом ----------
+    import queue, vlm_corners
+    _vq = {"q": queue.Queue(), "seen": set(), "thr": None, "done": 0, "day": "", "err": "", "bad": 0, "off": 0}
+    VLM_MAX = int(os.environ.get("CPS_VLM_MAX", "400"))                           # ковров в сутки (≈2 запроса на ковёр)
+
+    def _vlm_worker():
+        while True:
+            rid = _vq["q"].get()
+            try:
+                today = time.strftime("%Y-%m-%d")
+                if _vq["day"] != today: _vq["day"] = today; _vq["done"] = 0
+                if _vq["done"] >= VLM_MAX or time.time() < _vq["off"]: _vq["seen"].discard(rid); continue
+                r = load(rid); src = img_path(rid)
+                if not r or not src or (r.get("auto") or {}).get("vlm_quad"): continue
+                a = read_small(src, 1400)
+                if a is None: continue
+                res = vlm_corners.two_step(a); _vq["done"] += 1
+                if not res: _vq["seen"].discard(rid); continue
+                with _lock:
+                    r = load(rid)
+                    if not r: continue
+                    r.setdefault("auto", {})["vlm_quad"] = {**res, "t": int(time.time())}; save(r)
+                _vq["bad"] = 0; _vq["err"] = ""
+            except Exception as e:                                                 # сбой сети/ключа: после 5 подряд пауза 10 минут
+                _vq["seen"].discard(rid); _vq["err"] = str(e)[:160]; _vq["bad"] += 1
+                if _vq["bad"] >= 5: _vq["off"] = time.time() + 600; _vq["bad"] = 0
+            finally:
+                _vq["q"].task_done()
+
+    def _vlm_enqueue(rids):
+        if not vlm_corners.available(): return
+        if _vq["thr"] is None:
+            _vq["thr"] = threading.Thread(target=_vlm_worker, daemon=True, name="vlm-corners"); _vq["thr"].start()
+        for rid in rids:
+            if rid not in _vq["seen"]: _vq["seen"].add(rid); _vq["q"].put(rid)
+
+    @app.get("/api/vlm/status")
+    def vlm_status():
+        """есть ли ключ (сам ключ не отдаётся), сколько ковров в очереди и сколько посчитано сегодня"""
+        return {"key": vlm_corners.available(), "model": vlm_corners.MODEL, "queued": _vq["q"].qsize(), "done_today": _vq["done"] if _vq["day"] == time.strftime("%Y-%m-%d") else 0,
+                "limit": VLM_MAX, "last_error": _vq["err"], "paused": time.time() < _vq["off"]}
+
     _ver = {}
 
     def _app_ver():
@@ -1738,8 +1781,9 @@ def install(app, DATA, D_WORK):
         qd.sort(key=lambda x: x["conf"])
         tasks = []; fi = qi = 0
         while len(tasks) < n and (fi < len(fr) or qi < len(qd)):
-            if qi < len(qd) and (len(tasks) % 2 == 0 or fi >= len(fr)): x = qd[qi]; qi += 1; tasks.append({"type": "quad", "rid": x["id"], "quad": x["aquad"]})
+            if qi < len(qd) and (len(tasks) % 2 == 0 or fi >= len(fr)): x = qd[qi]; qi += 1; tasks.append({"type": "quad", "rid": x["id"], "quad": x["vquad"] or x["aquad"], "qsrc": "vlm" if x["vquad"] else "auto"})
             elif fi < len(fr): x = fr[fi]; fi += 1; tasks.append({"type": "frame", "rid": x["id"]})
+        _vlm_enqueue([x["id"] for x in qd[qi:qi + 18] if not x["vquad"]])          # v11.47: углы моделью — на следующие карточки, пока человек отвечает на эти
         ctl = [x for x in rows if x["ctl"]]
         if ctl and len(tasks) >= 3:                                                 # контрольная карточка
             x = random.choice(ctl); q = [list(p) for p in x["quad"]]; good = random.random() < 0.5
@@ -1757,6 +1801,8 @@ def install(app, DATA, D_WORK):
         me = user(request); role = getattr(request.state, "role", None) or "admin"
         typ, rid, a = body.get("type"), os.path.basename(str(body.get("rid", ""))), str(body.get("a", ""))
         rec = {"t": int(time.time()), "u": me, "type": typ, "rid": rid, "a": a}
+        qsrc = "vlm" if body.get("s") == "vlm" else None
+        if typ == "quad" and qsrc: rec["s"] = qsrc                                  # v11.47: человек видел углы модели (для сравнения точности)
         tok = body.get("c")
         if tok:                                                                  # контрольная: ничего не меняем в ковре
             v = _ctl_tok.pop(tok, None)
@@ -1791,7 +1837,7 @@ def install(app, DATA, D_WORK):
             M = r.setdefault("micro", {}).setdefault(typ, {})
             if typ == "frame":                                                   # v11.45: снятые ответы не держат ковёр в очереди
                 for u in [u for u, v in M.items() if (v or {}).get("a") in FR_OLD]: M.pop(u)
-            M[me] = {"a": a, "w": _wt(role), "t": rec["t"], **({"q": q} if q else {})}
+            M[me] = {"a": a, "w": _wt(role), "t": rec["t"], **({"q": q} if q else {}), **({"s": qsrc} if qsrc else {})}
             votes = list(M.values())
             if typ == "frame":
                 for v in FR_ANS:
@@ -1801,7 +1847,9 @@ def install(app, DATA, D_WORK):
                 ok = sum(x["w"] for x in votes if x["a"] == "ok"); bad = sum(x["w"] for x in votes if x["a"] == "bad")
                 fx = [x for x in votes if x["a"] == "fix"]
                 qq = None
-                if ok >= 2: qq = (r.get("auto") or {}).get("quad")
+                if ok >= 2:
+                    oks = [x for x in votes if x["a"] == "ok"]; vq = ((r.get("auto") or {}).get("vlm_quad") or {}).get("quad")
+                    qq = vq if (vq and all(x.get("s") == "vlm" for x in oks)) else (r.get("auto") or {}).get("quad")   # «да» к углам модели — берём их
                 elif fx:
                     strong = [x for x in fx if x["w"] >= 2]
                     if strong: qq = strong[-1]["q"]

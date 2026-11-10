@@ -83,7 +83,7 @@ function zoomable(){const st=$('stage'),ph=$('ph');if(!st||!ph)return;let k=1,x=
 // v11.45: на каждой карточке свои галочки; отправляем только их, чтобы не стирать отметки с другой карточки
 function rdFlags(t){const o={},m={fw:'wavy',fs:'skew',fd:'damaged'};for(const k in m){const e=$(k);if(e)o[m[k]]=e.checked;}if(Object.keys(o).length)t.fl=o;}
 async function answer(t,a,q){rdFlags(t);const k=S.i;S.i++;S.done++;show();
-  try{const j=await api('/api/micro/answer',{type:t.type,rid:t.rid,a,q,c:t.c,flags:t.fl});S.me.total=(S.me.total||0)+1;if(a!=='skip')S.me.today=(S.me.today||0)+1;
+  try{const j=await api('/api/micro/answer',{type:t.type,rid:t.rid,a,q,c:t.c,flags:t.fl,s:t.qsrc});S.me.total=(S.me.total||0)+1;if(a!=='skip')S.me.today=(S.me.today||0)+1;
     if(j.ctl===false)toast('контрольная карточка: тут была ошибка — смотрите внимательнее');else if(j.applied)toast('принято ✓');head();}
   catch(e){toast('не сохранилось: '+e.message);S.i=k;S.done--;show();}}
 // v11.45: кадр — три ответа (целый / обрезан / деталь) плюс «не ковёр»; порог «чуть вылез» — 3 % по одному краю.
