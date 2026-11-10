@@ -18,7 +18,7 @@
  "h": 1234,
  "marks": [],
  "created": 1791736125,
- "updated": 1792272840,
+ "updated": 1794340620,
  "cat": {
   "title": "Gendje rug from Azerbaijan 999a.jpg",
   "museum": "Wikimedia Commons",
@@ -96,5 +96,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238497
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794340541
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794340620,
+    "q": [
+     [
+      0.01,
+      0.01
+     ],
+     [
+      0.99,
+      0.01
+     ],
+     [
+      0.98275,
+      0.95458
+     ],
+     [
+      -0.0074,
+      0.9502
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01,
+    0.01
+   ],
+   [
+    0.99,
+    0.01
+   ],
+   [
+    0.98275,
+    0.95458
+   ],
+   [
+    -0.0074,
+    0.9502
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
