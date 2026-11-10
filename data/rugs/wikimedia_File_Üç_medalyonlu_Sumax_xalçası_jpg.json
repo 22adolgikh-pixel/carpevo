@@ -18,7 +18,7 @@
  "h": 824,
  "marks": [],
  "created": 1791736126,
- "updated": 1794260511,
+ "updated": 1794297316,
  "cat": {
   "title": "Üç medalyonlu \"Sumax\" xalçası.jpg",
   "museum": "Wikimedia Commons",
@@ -90,8 +90,66 @@
     "w": 2,
     "t": 1794260511
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794297316,
+    "q": [
+     [
+      0.17381,
+      0.04838
+     ],
+     [
+      0.77118,
+      0.04917
+     ],
+     [
+      0.97193,
+      0.93198
+     ],
+     [
+      0.03466,
+      0.87557
+     ]
+    ]
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.17381,
+    0.04838
+   ],
+   [
+    0.77118,
+    0.04917
+   ],
+   [
+    0.97193,
+    0.93198
+   ],
+   [
+    0.03466,
+    0.87557
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
