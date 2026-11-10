@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870017,
- "updated": 1791997188,
+ "updated": 1794336660,
  "cat": {
   "title": "Carpet Astghatap (Starfall), mid-19th century, Mushkapat, Martuni region",
   "museum": "Национальный музей азербайджанского ковра",
@@ -94,5 +94,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238432
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794336642
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794336660,
+    "q": [
+     [
+      0.083,
+      0.02137
+     ],
+     [
+      0.95132,
+      0.02369
+     ],
+     [
+      0.98565,
+      0.95891
+     ],
+     [
+      0.00903,
+      0.94916
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.083,
+    0.02137
+   ],
+   [
+    0.95132,
+    0.02369
+   ],
+   [
+    0.98565,
+    0.95891
+   ],
+   [
+    0.00903,
+    0.94916
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

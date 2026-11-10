@@ -18,7 +18,7 @@
  "h": 1719,
  "marks": [],
  "created": 1791736137,
- "updated": 1791736137,
+ "updated": 1794336619,
  "cat": {
   "title": "Floral carpet (Khila Afshan design), 19th century, Kuba Region, Azerbaijan",
   "museum": "",
@@ -81,5 +81,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238456
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794336558
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794336619,
+    "q": [
+     [
+      -0.00209,
+      0.0166
+     ],
+     [
+      0.96873,
+      0.0104
+     ],
+     [
+      0.9755,
+      0.9862
+     ],
+     [
+      -0.00015,
+      0.9834
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00209,
+    0.0166
+   ],
+   [
+    0.96873,
+    0.0104
+   ],
+   [
+    0.9755,
+    0.9862
+   ],
+   [
+    -0.00015,
+    0.9834
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

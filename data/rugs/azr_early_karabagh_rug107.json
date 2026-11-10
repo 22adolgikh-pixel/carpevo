@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1794336666,
  "cat": {
   "title": "Early Floral carpet, 18th century, Ulu Camii at Dicrigi, Sivas",
   "museum": "",
@@ -81,5 +81,61 @@
   "area": null,
   "ver": 1,
   "t": 1794238576
- }
+ },
+ "edge": {
+  "damaged": [
+   "dolgikh"
+  ]
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794336608
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794336666
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01,
+    0.01
+   ],
+   [
+    0.99,
+    0.01
+   ],
+   [
+    0.99,
+    0.99
+   ],
+   [
+    0.01,
+    0.99
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
