@@ -18,7 +18,7 @@
  "h": 694,
  "marks": [],
  "created": 1791736123,
- "updated": 1794337263,
+ "updated": 1794339051,
  "cat": {
   "title": "Azerbaijani Afshan rug.jpg",
   "museum": "Wikimedia Commons",
@@ -90,8 +90,66 @@
     "w": 2,
     "t": 1794337263
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794339051,
+    "q": [
+     [
+      0.00517,
+      0.00733
+     ],
+     [
+      0.99145,
+      0.00666
+     ],
+     [
+      0.99387,
+      0.99602
+     ],
+     [
+      -0.00064,
+      0.99669
+     ]
+    ]
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00517,
+    0.00733
+   ],
+   [
+    0.99145,
+    0.00666
+   ],
+   [
+    0.99387,
+    0.99602
+   ],
+   [
+    -0.00064,
+    0.99669
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
