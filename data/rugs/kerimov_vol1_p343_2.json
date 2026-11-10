@@ -18,7 +18,7 @@
  "h": 547,
  "marks": [],
  "created": 1791736121,
- "updated": 1794343774,
+ "updated": 1794343792,
  "cat": {
   "title": "Керимов, т. I, 2. СУМАХ (стр. скана 343, печ. 220)",
   "museum": "",
@@ -114,8 +114,48 @@
     "w": 2,
     "t": 1794343774
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794343792
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01,
+    0.01
+   ],
+   [
+    0.99,
+    0.01
+   ],
+   [
+    0.99,
+    0.99
+   ],
+   [
+    0.01,
+    0.99
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
