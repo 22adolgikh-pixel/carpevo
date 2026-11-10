@@ -18,7 +18,7 @@
  "h": 1281,
  "marks": [],
  "created": 1791736123,
- "updated": 1791736123,
+ "updated": 1794342988,
  "cat": {
   "title": "Shirvan 01.jpg",
   "museum": "Wikimedia Commons",
@@ -82,5 +82,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238307
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794342964
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794342988,
+    "q": [
+     [
+      0.02402,
+      0.01476
+     ],
+     [
+      0.99435,
+      0.01917
+     ],
+     [
+      0.95471,
+      0.98898
+     ],
+     [
+      0.02982,
+      0.97981
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02402,
+    0.01476
+   ],
+   [
+    0.99435,
+    0.01917
+   ],
+   [
+    0.95471,
+    0.98898
+   ],
+   [
+    0.02982,
+    0.97981
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
