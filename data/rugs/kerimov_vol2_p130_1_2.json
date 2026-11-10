@@ -18,7 +18,7 @@
  "h": 750,
  "marks": [],
  "created": 1792272263,
- "updated": 1792272283,
+ "updated": 1794343252,
  "cat": {
   "title": "Керимов, т. II (стр. скана 130, печ. 8 9)",
   "museum": "",
@@ -55,7 +55,38 @@
  ],
  "split_n": 1,
  "src_id": "cat:kerimov_vol2_p130_1#2",
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06463,
+    0.0218
+   ],
+   [
+    0.99677,
+    0.03638
+   ],
+   [
+    0.9726,
+    1.01985
+   ],
+   [
+    0.04529,
+    0.95807
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "_repaired": 1,
  "people": {
@@ -88,5 +119,42 @@
   "area": null,
   "ver": 1,
   "t": 1794238290
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794343241
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794343252,
+    "q": [
+     [
+      0.06463,
+      0.0218
+     ],
+     [
+      0.99677,
+      0.03638
+     ],
+     [
+      0.9726,
+      1.01985
+     ],
+     [
+      0.04529,
+      0.95807
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "tri": "micro"
 }

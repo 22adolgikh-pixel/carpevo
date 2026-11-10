@@ -18,7 +18,7 @@
  "h": 520,
  "marks": [],
  "created": 1791736121,
- "updated": 1791736121,
+ "updated": 1794343289,
  "cat": {
   "title": "Керимов, т. I, 1. 1 «ТЕБРИЗ» (стр. скана 357, печ. ?)",
   "museum": "",
@@ -107,5 +107,56 @@
   "area": null,
   "ver": 1,
   "t": 1794238256
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794343282
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794343289
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01,
+    0.01
+   ],
+   [
+    0.99,
+    0.01
+   ],
+   [
+    0.99,
+    0.99
+   ],
+   [
+    0.01,
+    0.99
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791736139,
- "updated": 1794343153,
+ "updated": 1794343190,
  "cat": {
   "title": "Azerbaijan carpet, transitional type, dated AH 1156 (1734 AD)",
   "museum": "",
@@ -89,8 +89,48 @@
     "w": 2,
     "t": 1794343153
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794343190
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.10633,
+    0.02
+   ],
+   [
+    0.90724,
+    0.03
+   ],
+   [
+    0.94796,
+    0.96667
+   ],
+   [
+    0.05204,
+    0.97556
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
