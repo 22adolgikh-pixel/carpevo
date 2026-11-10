@@ -1709,6 +1709,18 @@ def install(app, DATA, D_WORK):
         for u in S.values(): u["acc"] = round(100 * u["ctl_ok"] / u["ctl"]) if u["ctl"] else None
         return S.get(name, {"total": 0, "today": 0, "ctl": 0, "ctl_ok": 0, "acc": None}) if name is not None else S
 
+    _ver = {}
+
+    def _app_ver():
+        """номер версии студии из index.html (единственное место, где он записан); читаем один раз"""
+        if "v" not in _ver:
+            try:
+                with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "index.html"), encoding="utf-8") as f:
+                    m = re.search(r'id="appVer"[^>]*>([^<]+)<', f.read())
+                _ver["v"] = m.group(1).strip() if m else ""
+            except OSError: _ver["v"] = ""
+        return _ver["v"]
+
     @app.get("/api/micro/next")
     def micro_next(request: Request, n: int = 6):
         import random
@@ -1738,7 +1750,7 @@ def install(app, DATA, D_WORK):
         by = {x["id"]: x for x in rows}
         for t in tasks:
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd)}, "me": {"name": me, **_mstats(me)}}
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd)}, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
 
     @app.post("/api/micro/answer")
     def micro_answer(request: Request, body: dict = Body(...)):

@@ -8,11 +8,15 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow-x:hidden;background:var(--bg);color:var(--tx);font:15px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
 body{display:flex;flex-direction:column;min-height:100dvh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--ln)}
-header b{font-size:16px}header .sp{flex:1}header small{color:var(--mut)}header a{color:var(--mut);text-decoration:none;font-size:13px}
-.dots{display:flex;gap:5px;padding:8px 14px 0}.dots i{flex:1;height:4px;border-radius:2px;background:var(--ln)}.dots i.d{background:var(--ok)}.dots i.c{background:var(--acc)}
+header{display:flex;align-items:center;gap:8px;padding:6px 14px;border-bottom:1px solid var(--ln);font-size:12px;color:var(--mut);white-space:nowrap}
+header b{font-weight:600;color:var(--tx)}header .sp{flex:1}header small{font-size:12px}header a{color:var(--mut);text-decoration:none}
+.dots{display:flex;gap:5px;padding:6px 14px 0}.dots i{flex:1;height:4px;border-radius:2px;background:var(--ln)}.dots i.d{background:var(--ok)}.dots i.c{background:var(--acc)}
 main{flex:1;display:flex;flex-direction:column;padding:10px 14px 14px;gap:10px;min-height:0}
-.q{font-size:18px;font-weight:600}.hint{color:var(--mut);font-size:13px}
+.qrow{display:flex;align-items:center;gap:8px;font-size:12px}.q{flex:1;font-size:12px;font-weight:600}.hint{color:var(--mut);font-size:12px}
+.ib{flex:none;width:24px;height:24px;min-height:0;padding:0;border-radius:50%;font-size:13px;line-height:1;color:var(--mut)}.ib.on{border-color:var(--acc);color:var(--acc)}
+.tip{display:none;background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:8px 10px}.tip.on{display:block}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.row3 button{font-size:22px;font-weight:700;padding:8px}
+button.unk{color:var(--mut)}
 .stage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;touch-action:none;position:relative}.stage.z{overflow:hidden;border-radius:10px;background:#0d0e11}
 .zb{position:absolute;right:6px;top:6px;z-index:5;min-height:0;padding:4px 10px;font-size:12px;border-radius:14px;display:none}.stage.z .zb{display:block}
 .ph{position:relative;display:inline-block;line-height:0;transform-origin:0 0;margin:7% 9%;outline:1px dashed #ffffff33;outline-offset:0}   /* поле вокруг фото: углы обрезанного ковра за краем кадра тоже видны */
@@ -46,10 +50,10 @@ async function api(u,b){const r=await fetch(u,b?{method:'POST',headers:{'Content
   if(r.status===401){location.reload();throw new Error('auth');}const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||r.status);return j;}
 function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(S.tt);S.tt=setTimeout(()=>e.classList.remove('on'),1400);}
 function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'');
+function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
 async function load(){$('main').innerHTML='<div class="end"><span class="mut">загружаю…</span></div>';
-  try{const j=await api('/api/micro/next?n=6');S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;head();show();}
+  try{const j=await api('/api/micro/next?n=6');S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;S.ver=j.ver||S.ver;head();show();}
   catch(e){$('main').innerHTML=`<div class="end"><span>Не загрузилось: ${esc(e.message)}</span><button onclick="load()">ещё раз</button></div>`;}}
 const img=t=>'/rugmid/'+encodeURIComponent(t.rid)+'.jpg';
 function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!im.naturalWidth)return;
@@ -59,6 +63,8 @@ function show(){head();const t=S.tasks[S.i];
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
     <div class="mut">в очереди: целый ли ковёр — ${L.frame||0}, углы — ${L.quad||0}</div>${(L.frame||L.quad)?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
   t.type==='frame'?showFrame(t):showQuad(t);}
+function qhead(q,tip){return `<div class="qrow"><span class="q">${q}</span><button class="ib" id="ib" aria-label="подсказка">i</button></div><div class="tip hint" id="tip">${tip}</div>`;}
+function qtip(){const b=$('ib'),t=$('tip');if(b&&t)b.onclick=()=>{t.classList.toggle('on');b.classList.toggle('on');};}
 function stage(t,extra=''){return `<div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="${img(t)}" alt="">${extra}</div></div>`;}
 // два пальца — масштаб и сдвиг фото (проверить кромку и узор); один палец при увеличении — сдвиг; двойной тап — сброс
 function zoomable(){const st=$('stage'),ph=$('ph');if(!st||!ph)return;let k=1,x=0,y=0;const P=new Map();let d0=0,k0=1,c0=null,x0=0,y0=0,tap=0;
@@ -83,24 +89,24 @@ async function answer(t,a,q){rdFlags(t);const k=S.i;S.i++;S.done++;show();
 // v11.45: кадр — три ответа (целый / обрезан / деталь) плюс «не ковёр»; порог «чуть вылез» — 3 % по одному краю.
 // Рваные края и перспектива — отдельные галочки: такой ковёр остаётся целым и в работе.
 function showFrame(t){document.documentElement.style.setProperty('--imh','40dvh');
-  $('main').innerHTML=`<div class="q">Это целый ковёр?</div><div class="hint">целиком в кадре; срезано меньше ~3 % одного края — тоже целый</div>${stage(t)}
+  $('main').innerHTML=`${qhead('Это целый ковёр?','Целиком в кадре; срезано меньше ~3 % одного края — тоже целый. «Деталь» — снят кусок ковра, целого не видно. Два пальца — увеличить, двойной тап — сбросить.')}${stage(t)}
    <div class="flags"><label><input type="checkbox" id="fs">снят в перспективе</label><label><input type="checkbox" id="fd">рваные края / дыры</label></div>
    <div class="btns"><button class="yes wide" id="a1">✓ целый ковёр</button><button id="a2">обрезан заметно</button><button id="a3">только деталь</button><button class="no" id="a4">не ковёр</button><button class="sm" id="a5">не знаю</button></div>
-   <div class="hint" style="text-align:center">«деталь» — снят кусок ковра, целого не видно; два пальца — увеличить</div>`;
+  `;qtip();
   if(t.fl){$('fs').checked=!!t.fl.skew;$('fd').checked=!!t.fl.damaged;}
   S.im=$('im');$('a1').onclick=()=>answer(t,'whole');$('a2').onclick=()=>answer(t,'cropped');$('a3').onclick=()=>answer(t,'detail');$('a4').onclick=()=>answer(t,'not_rug');$('a5').onclick=()=>answer(t,'skip');
   zoomable();}
 function poly(q){return q.map(p=>p.join(',')).join(' ');}
 function showQuad(t){t.q=t.q||t.quad.map(p=>[...p]);document.documentElement.style.setProperty('--imh','36dvh');
-  $('main').innerHTML=`<div class="q">Рамка точно по краю ковра?</div><div class="hint">внизу углы крупно: крест — на углу ковра (бахрома не в счёт); тап по углу — поправить; два пальца — увеличить фото</div>
+  $('main').innerHTML=`${qhead('Рамка точно по краю ковра?','Внизу углы крупно: крест должен стоять на углу ковра (бахрома не в счёт). Чтобы поправить угол — тап по нему. Два пальца — увеличить фото.')}
    ${stage(t,`<svg viewBox="0 0 1 1" preserveAspectRatio="none"><polygon id="pg" points="${poly(t.q)}" fill="#ffe0661a" stroke="#ffe066" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`)}
    <div class="corners" id="cz">${[0,1,3,2].map(k=>`<div class="cz" data-k="${k}"><span>${C_SH[k]}</span></div>`).join('')}</div>
    <div class="flags"><label><input type="checkbox" id="fw">края сильно кривые</label><label><input type="checkbox" id="fd">край / угол повреждён</label></div>
-   <div class="btns"><button class="yes" id="a1">✓ да, точно</button><button id="a2">✎ поправить</button><button class="no" id="a3">✗ не то / не ковёр</button><button class="sm" id="a4">не знаю</button></div>`;
+   <div class="row3"><button class="yes" id="a1" aria-label="да, точно">✓</button><button class="no" id="a3" aria-label="не то / не ковёр">✗</button><button class="unk" id="a4" aria-label="не знаю">?</button></div>`;qtip();
   if(t.fl){$('fw').checked=!!t.fl.wavy;$('fd').checked=!!t.fl.damaged;}S.im=$('im');const paint=()=>document.querySelectorAll('#cz .cz').forEach(e=>{const k=+e.dataset.k;zoomBg(e,t,t.q[k][0],t.q[k][1],6);});
   S.im.complete?paint():S.im.onload=paint;
   document.querySelectorAll('#cz .cz').forEach(e=>e.onclick=()=>fixQuad(t,+e.dataset.k));
-  $('a1').onclick=()=>answer(t,'ok');$('a2').onclick=()=>fixQuad(t,0);$('a3').onclick=()=>answer(t,'bad');$('a4').onclick=()=>answer(t,'skip');
+  $('a1').onclick=()=>answer(t,'ok');$('a3').onclick=()=>answer(t,'bad');$('a4').onclick=()=>answer(t,'skip');
   zoomable();}
 function fixQuad(t,k){t.fixed=true;rdFlags(t);
   $('main').innerHTML=`<div class="q">Угол: ${C_RU[k]}</div><div class="hint">двигайте фото пальцем, пока угол ковра не встанет под красный крест</div>

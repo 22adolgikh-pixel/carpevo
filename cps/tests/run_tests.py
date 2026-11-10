@@ -1245,6 +1245,9 @@ def t33_micro_phone(pg, ctx):
     errs = []; m.on('pageerror', lambda e: errs.append(str(e)))
     m.goto(ctx['url'] + 'm'); m.wait_for_selector('.q', timeout=15000); m.wait_for_timeout(800)
     m.screenshot(path=f'{OUT}/33_micro_first.png')
+    hv = m.inner_text('#me'); assert 'v11.' in hv, f'в шапке /m нет номера версии: {hv!r}'      # v11.46
+    assert m.query_selector('#ib') and not m.is_visible('#tip'), 'подсказка должна быть спрятана под «i»'
+    m.click('#ib'); assert m.is_visible('#tip'), '«i» не раскрывает подсказку'; m.click('#ib')
     cdp = mc.new_cdp_session(m); sb = m.query_selector('#stage').bounding_box(); cx, cy = sb['x'] + sb['width'] / 2, sb['y'] + sb['height'] / 2
     cdp.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [{'x': cx - 30, 'y': cy, 'id': 1}, {'x': cx + 30, 'y': cy, 'id': 2}]})
     for st_ in range(1, 7): cdp.send('Input.dispatchTouchEvent', {'type': 'touchMove', 'touchPoints': [{'x': cx - 30 - st_ * 12, 'y': cy, 'id': 1}, {'x': cx + 30 + st_ * 12, 'y': cy, 'id': 2}]})
@@ -1264,7 +1267,7 @@ def t33_micro_phone(pg, ctx):
             assert 'rugmid' in bg, 'в карточке углов нет крупного вида угла'
             if not fixed:
                 m.check('#fd')                                   # отметка «край повреждён» переживает правку угла
-                m.click('#a2'); m.wait_for_selector('#fx'); m.wait_for_timeout(300)
+                m.click('#cz .cz'); m.wait_for_selector('#fx')                                   # v11.46: кнопки «поправить» нет — правка по тапу на угол; m.wait_for_timeout(300)
                 b = m.query_selector('#fx').bounding_box(); cx, cy = b['x'] + b['width'] / 2, b['y'] + b['height'] / 2
                 m.mouse.move(cx, cy); m.mouse.down(); m.mouse.move(cx - 30, cy - 20, steps=5); m.mouse.up()
                 m.screenshot(path=f'{OUT}/33_micro_fix.png'); m.click('#ok'); fixed = True
