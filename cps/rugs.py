@@ -403,6 +403,10 @@ def install(app, DATA, D_WORK):
         if (r.get("cat") or {}).get("src", "").startswith("kerimov") or r["id"].startswith("kerimov"):
             if r.get("frame") in FRAME_SKIP: return "skip", "отмечено вручную: " + FRAME_RU[r["frame"]]
             return "work", "ковёр из книги Керимова (размер и рамка не проверяются)"
+        if (r.get("cat") or {}).get("src", "").startswith("book:"):           # v11.48: вырезки из книг-каталогов (энциклопедия, Мурадов): чистое фото на белом
+            if r.get("frame") in FRAME_SKIP: return "skip", "отмечено вручную: " + FRAME_RU[r["frame"]]
+            if "копия" in ((r.get("cat") or {}).get("object") or ""): return "maybe", "современная копия из книги"
+            return "work", "ковёр из книги-каталога (вырезка целиком, рамка не проверяется)"
         kl = any(str(x.get("id", "")).startswith("kerimov") for x in r.get("same") or [])   # то же фото, что у Керимова: не отбрасываем по картинке
         side = min(r.get("w") or 0, r.get("h") or 0)
         if side and side < 400: return ("maybe", "мелкое фото, но есть у Керимова") if kl else ("skip", "фото слишком мелкое")
@@ -466,7 +470,8 @@ def install(app, DATA, D_WORK):
                     r["cat"] = {**val, "text": it.get("text", ""), "names": it.get("names", []), "src": it.get("src", ""), "school_why": it.get("school_why", ""),
                                 "composition_name": it.get("composition", ""), "fragment": bool(it.get("fragment")), "object": it.get("object", ""),
                                 "ambiguous": bool(it.get("ambiguous")), "folder": it.get("folder", ""),
-                                "page_figs": it.get("page_figs") or [], "page_box": it.get("page_box") or 0}
+                                "page_figs": it.get("page_figs") or [], "page_box": it.get("page_box") or 0,
+                                **({"book": it["book"], "page": it.get("page"), "author": it.get("author", "")} if it.get("book") else {})}
                     r["src_id"] = "cat:" + it["id"]; r["lib_img"] = it.get("img", "")
                     g = groups.get(it.get("same_group") or "")
                     if g:
@@ -486,7 +491,11 @@ def install(app, DATA, D_WORK):
                     r["_lib_t"] = cat.get("built")
                     save(r)
                 sync["made" if new else "updated"] += 1; sync["done"] = n + 1
-            st = settings(); st.update(bundle_id=bid, last_sync=time.strftime("%Y-%m-%d %H:%M"), built=cat.get("built"), by=who)
+            st = settings()
+            if cat.get("extra"):                                  # v11.48: пакет-дополнение (книги) — основной пакет остаётся тем же
+                st.setdefault("extra_bundles", {})[bid] = {"built": cat.get("built"), "at": time.strftime("%Y-%m-%d %H:%M"), "by": who, "n": len(items)}
+                st.update(last_sync=time.strftime("%Y-%m-%d %H:%M"), by=who)
+            else: st.update(bundle_id=bid, last_sync=time.strftime("%Y-%m-%d %H:%M"), built=cat.get("built"), by=who)
             with open(SETF, "w", encoding="utf-8") as f: json.dump(st, f, ensure_ascii=False)
             sync.update(stage="склеиваю одинаковые файлы")
             dedupe_files()
@@ -2502,24 +2511,30 @@ def install(app, DATA, D_WORK):
 
     def inv_norm(v):
         v = re.sub(r"[\s\-–—./№]", "", (v or "").upper()).replace("УТ", "UT")
+        v = re.sub(r"^(DDK|ДДК)(?=\d)", "", v)                     # v11.48: «DDK 508» (энциклопедия) = «508» (сайт музея)
         return v if re.search(r"\d", v) else ""
 
     def link_by_inv():
-        """v11.7: ковёр из Керимова и фото музея с тем же инвентарным номером того же музея — один и тот же ковёр (двойник «по номеру»)"""
+        """v11.7: ковёр из Керимова и фото музея с тем же инвентарным номером того же музея — один и тот же ковёр (двойник «по номеру»).
+        v11.48: опорные источники — Керимов и книги-каталоги (src «book:…», напр. энциклопедия с номерами DDK музея ковра);
+        связь ставится между записями разных источников."""
         A = {}
         for f in os.listdir(D_RUGS):
             if f.endswith(".json"):
                 r = load(f[:-5])
                 if r and not r.get("dup_of") and not r.get("split_into"): A[r["id"]] = r
+        src = lambda r: (r.get("cat") or {}).get("src", "") or ""
+        anchor = lambda r: src(r).startswith("kerimov") or src(r).startswith("book:")
         idx = {}
         for r in A.values():
             k = (mus_family(r), inv_norm(r.get("inv")))
-            if k[0] and k[1] and not (r.get("cat") or {}).get("src", "").startswith("kerimov"): idx.setdefault(k, []).append(r["id"])
+            if k[0] and k[1]: idx.setdefault(k, []).append(r["id"])
         n = 0
         for r in A.values():
-            if not (r.get("cat") or {}).get("src", "").startswith("kerimov"): continue
+            if not anchor(r): continue
             k = (mus_family(r), inv_norm(r.get("inv")))
             for o in idx.get(k, []) if k[0] and k[1] else []:
+                if o == r["id"] or src(A[o]) == src(r): continue
                 with _lock:
                     for a, b in ((r["id"], o), (o, r["id"])):
                         t = load(a)

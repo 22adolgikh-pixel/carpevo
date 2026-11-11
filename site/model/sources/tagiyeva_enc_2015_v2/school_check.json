@@ -1,0 +1,55 @@
+{
+ "_about": "Сверка школ: книга против модели (carpet_schools.json — привязка ковров; concepts.schools — таблицы Керимова) и против сайта музея. Правило 4: расхождение фиксируется, не выбирается.",
+ "items": [
+  {
+   "concept": "qaraqoyunlu",
+   "book_school": "Газах",
+   "book_type": "ganja-gazakh",
+   "where": "подпись",
+   "page": 70,
+   "model_carpet_schools": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "ganja-gazakh": 1,
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qaraqoyunlu",
+   "book_school": "Газах",
+   "book_type": "ganja-gazakh",
+   "where": "подпись",
+   "page": 72,
+   "model_carpet_schools": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "ganja-gazakh": 1,
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shedde",
+   "book_school": "Нахчыван",
+   "museum_school": "Карабах",
+   "inv": "DDK 450",
+   "page": 123,
+   "status": "расходится с сайтом музея"
+  },
+  {
+   "concept": "verni",
+   "book_school": "Карабах",
+   "museum_school": "Губа",
+   "inv": "DDK 6",
+   "page": 130,
+   "status": "расходится с сайтом музея"
+  }
+ ]
+}

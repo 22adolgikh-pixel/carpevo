@@ -1,0 +1,537 @@
+{
+ "_about": "Сверка школ: книга против модели (carpet_schools.json — привязка ковров; concepts.schools — таблицы Керимова) и против сайта музея. Правило 4: расхождение фиксируется, не выбирается.",
+ "items": [
+  {
+   "concept": "xetai",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "introduction",
+   "page": 33,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "qasimushagi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "introduction",
+   "page": 36,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "chelebi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "introduction",
+   "page": 38,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": null,
+   "status": "совпадает"
+  },
+  {
+   "concept": "xetai",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "introduction",
+   "page": 40,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "xetai",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "introduction",
+   "page": 42,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "chelebi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 45,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": null,
+   "status": "совпадает"
+  },
+  {
+   "concept": "chelebi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 46,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": null,
+   "status": "совпадает"
+  },
+  {
+   "concept": "chelebi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 47,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": null,
+   "status": "совпадает"
+  },
+  {
+   "concept": "chelebi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 48,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": null,
+   "status": "совпадает"
+  },
+  {
+   "concept": "buynuz-carpet",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 49,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "guba-shirvan": 1,
+    "karabakh": 1,
+    "ganja-gazakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "baliq-carpet",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 51,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "baliq-carpet",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 53,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "achma-yumma",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 56,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "karabakh": 1,
+    "tabriz": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "deryanur",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 57,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "karabakh": 2
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "deryanur",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 58,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "karabakh": 2
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shabalidbuta",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 60,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "behmenli",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 62,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 2
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qasimushagi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 64,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "malibeyli",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 70,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "lempe",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 71,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "lempe",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 72,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "lempe",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 73,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "bagchada-guller",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 75,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 2
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "bagchada-guller",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 76,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 2
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "bagchada-guller",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 76,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 2
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "bagchada-guller",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 77,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 2
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "saxsida-guller",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 78,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 3
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "lempe",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 81,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "lempe",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 81,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "lempe",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 83,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "lempe",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 84,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "atli-itli",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_collection",
+   "page": 88,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "chelebi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_new",
+   "page": 121,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": null,
+   "status": "совпадает"
+  },
+  {
+   "concept": "qasimushagi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_new",
+   "page": 124,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "malibeyli",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_new",
+   "page": 125,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "bulud-carpet",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_new",
+   "page": 126,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "chelebi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_new",
+   "page": 127,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": null,
+   "status": "совпадает"
+  },
+  {
+   "concept": "mugan",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "where": "azerilme_new",
+   "page": 128,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": "mugan",
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "guba-shirvan": 1,
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  }
+ ]
+}

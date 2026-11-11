@@ -1,0 +1,564 @@
+{
+ "_about": "Типы изделий и названия композиций из подписей к фото энциклопедии, т. II; concept — понятие модели; new_candidate — понятия нет. Определения статей энциклопедии (словник) добавятся после полного OCR книги.",
+ "terms": [
+  {
+   "term": "Buriya",
+   "concept": null,
+   "definition_ru": "бурья (циновка)",
+   "confidence": "medium",
+   "new_candidate": true,
+   "pages": [
+    15
+   ],
+   "schools": {
+    "Ленкорань (Талыш)": 1
+   },
+   "n": 1
+  },
+  {
+   "term": "Cecim",
+   "concept": "cecim",
+   "definition_ru": "джеджим",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    18,
+    19,
+    20,
+    22,
+    23,
+    24
+   ],
+   "schools": {
+    "Карабах": 6
+   },
+   "n": 6
+  },
+  {
+   "term": "Çətən",
+   "concept": null,
+   "definition_ru": "чатан (камыш)",
+   "confidence": "medium",
+   "new_candidate": true,
+   "pages": [
+    27,
+    28
+   ],
+   "schools": {},
+   "n": 2
+  },
+  {
+   "term": "Çiyi palaz",
+   "concept": "chichi-palaz",
+   "definition_ru": "палас «чийи»",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    30,
+    31,
+    32,
+    33
+   ],
+   "schools": {
+    "Баку": 1,
+    "Ширван": 2,
+    "Карабах": 1
+   },
+   "n": 4
+  },
+  {
+   "term": "Dəstərxan",
+   "concept": "desterxan",
+   "definition_ru": "дастархан (скатерть)",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    37
+   ],
+   "schools": {
+    "Карабах": 1
+   },
+   "n": 1
+  },
+  {
+   "term": "Keçə",
+   "concept": null,
+   "definition_ru": "войлок",
+   "confidence": "medium",
+   "new_candidate": true,
+   "pages": [
+    41,
+    42
+   ],
+   "schools": {
+    "Газах": 1
+   },
+   "n": 2
+  },
+  {
+   "term": "Buta",
+   "concept": "buta",
+   "definition_ru": "название композиции (по подписям к фото)",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    41
+   ],
+   "schools": {},
+   "n": 1
+  },
+  {
+   "term": "Kilim",
+   "concept": "kilim",
+   "definition_ru": "килим",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    47,
+    48,
+    49,
+    51,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    70,
+    72,
+    73,
+    74,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86
+   ],
+   "schools": {
+    "Ширван": 12,
+    "Баку": 7,
+    "Газах": 4,
+    "Карабах": 6,
+    "Тебриз": 3
+   },
+   "n": 32
+  },
+  {
+   "term": "Paşalı",
+   "concept": null,
+   "definition_ru": "название композиции (по подписям к фото)",
+   "confidence": "medium",
+   "new_candidate": true,
+   "pages": [
+    56,
+    57,
+    58,
+    59,
+    60
+   ],
+   "schools": {
+    "Ширван": 5
+   },
+   "n": 5
+  },
+  {
+   "term": "Qaraqoyunlu",
+   "concept": "qaraqoyunlu",
+   "definition_ru": "название композиции (по подписям к фото)",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    70,
+    72
+   ],
+   "schools": {
+    "Газах": 2
+   },
+   "n": 2
+  },
+  {
+   "term": "Qədirqə",
+   "concept": null,
+   "definition_ru": "гадырга",
+   "confidence": "medium",
+   "new_candidate": true,
+   "pages": [
+    88,
+    89
+   ],
+   "schools": {
+    "Газах": 2
+   },
+   "n": 2
+  },
+  {
+   "term": "Ladı",
+   "concept": "ladi",
+   "definition_ru": "лады",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    91
+   ],
+   "schools": {
+    "Карабах": 1
+   },
+   "n": 1
+  },
+  {
+   "term": "Palaz",
+   "concept": "palaz",
+   "definition_ru": "палас",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    95
+   ],
+   "schools": {
+    "Ширван": 1
+   },
+   "n": 1
+  },
+  {
+   "term": "Sumax",
+   "concept": "sumax",
+   "definition_ru": "сумах",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    99,
+    100,
+    101,
+    102,
+    103,
+    105,
+    106,
+    108,
+    109,
+    110
+   ],
+   "schools": {
+    "Губа": 9,
+    "Ширван": 1
+   },
+   "n": 10
+  },
+  {
+   "term": "Şəddə",
+   "concept": "shedde",
+   "definition_ru": "шадда",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    114,
+    115,
+    116,
+    117,
+    119,
+    120,
+    121,
+    122,
+    123
+   ],
+   "schools": {
+    "Газах": 4,
+    "Нахчыван": 2,
+    "Карабах": 3
+   },
+   "n": 9
+  },
+  {
+   "term": "Vərni",
+   "concept": "verni",
+   "definition_ru": "верни",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    127,
+    128,
+    129,
+    130
+   ],
+   "schools": {
+    "Карабах": 4
+   },
+   "n": 4
+  },
+  {
+   "term": "Zili",
+   "concept": "zili",
+   "definition_ru": "зили",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    145,
+    147,
+    148,
+    149,
+    150,
+    151,
+    154
+   ],
+   "schools": {
+    "Ширван": 2,
+    "Баку": 2,
+    "Газах": 4,
+    "Карабах": 9,
+    "Тебриз": 1
+   },
+   "n": 18
+  },
+  {
+   "term": "Corab",
+   "concept": "corab",
+   "definition_ru": "носки",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    161,
+    163,
+    164,
+    165
+   ],
+   "schools": {
+    "Карабах": 4,
+    "Ширван": 2
+   },
+   "n": 6
+  },
+  {
+   "term": "Çanta",
+   "concept": "chanta-carpet",
+   "definition_ru": "сумка",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    168,
+    169
+   ],
+   "schools": {
+    "Карабах": 1,
+    "Баку": 1
+   },
+   "n": 2
+  },
+  {
+   "term": "Çul",
+   "concept": "chul",
+   "definition_ru": "чул (попона)",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    172,
+    173,
+    174,
+    175,
+    179
+   ],
+   "schools": {
+    "Ширван": 1,
+    "Карабах": 2,
+    "Газах": 3,
+    "Баку": 2
+   },
+   "n": 8
+  },
+  {
+   "term": "Dəvə çulu",
+   "concept": null,
+   "definition_ru": "попона для верблюда",
+   "confidence": "medium",
+   "new_candidate": true,
+   "pages": [
+    177,
+    178
+   ],
+   "schools": {
+    "Ширван": 2
+   },
+   "n": 2
+  },
+  {
+   "term": "Döşəkçə",
+   "concept": null,
+   "definition_ru": "тюфячок",
+   "confidence": "medium",
+   "new_candidate": true,
+   "pages": [
+    186
+   ],
+   "schools": {
+    "Ширван": 1
+   },
+   "n": 1
+  },
+  {
+   "term": "Duz torbası",
+   "concept": "duz-torbasi",
+   "definition_ru": "солонка (дуз торбасы)",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    188,
+    189,
+    190,
+    191
+   ],
+   "schools": {
+    "Карабах": 4,
+    "Ширван": 1
+   },
+   "n": 5
+  },
+  {
+   "term": "Heybə",
+   "concept": "heybe",
+   "definition_ru": "хейбе (перемётная сума)",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    192,
+    193,
+    194,
+    195
+   ],
+   "schools": {
+    "Карабах": 1,
+    "Баку": 2,
+    "Губа": 1,
+    "Ширван": 2
+   },
+   "n": 6
+  },
+  {
+   "term": "Xurcun",
+   "concept": "xurcun",
+   "definition_ru": "хурджин",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    196,
+    197,
+    199
+   ],
+   "schools": {
+    "Баку": 2,
+    "Газах": 1,
+    "Ширван": 3
+   },
+   "n": 7
+  },
+  {
+   "term": "Ləməqabağı",
+   "concept": "lemeqabagi",
+   "definition_ru": "ламаганабагы",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    207,
+    208
+   ],
+   "schools": {
+    "Ширван": 2,
+    "Баку": 1
+   },
+   "n": 3
+  },
+  {
+   "term": "Məfrəş",
+   "concept": "mefresh-carpet",
+   "definition_ru": "мафраш",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    208,
+    211,
+    212
+   ],
+   "schools": {
+    "Баку": 1,
+    "Карабах": 1,
+    "Губа": 1
+   },
+   "n": 3
+  },
+  {
+   "term": "Pərdə",
+   "concept": null,
+   "definition_ru": "занавес",
+   "confidence": "medium",
+   "new_candidate": true,
+   "pages": [
+    217
+   ],
+   "schools": {
+    "Ширван": 1
+   },
+   "n": 1
+  },
+  {
+   "term": "Taxtüstü",
+   "concept": null,
+   "definition_ru": "покрывало на тахту",
+   "confidence": "medium",
+   "new_candidate": true,
+   "pages": [
+    221
+   ],
+   "schools": {
+    "Карабах": 1
+   },
+   "n": 1
+  },
+  {
+   "term": "Yəhərüstü",
+   "concept": "yeherustu",
+   "definition_ru": "чепрак (на седло)",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    223
+   ],
+   "schools": {
+    "Ширван": 1
+   },
+   "n": 1
+  }
+ ],
+ "borders": [],
+ "type_candidates": [
+  "Buriya",
+  "Çətən",
+  "Keçə",
+  "Paşalı",
+  "Qədirqə",
+  "Dəvə çulu",
+  "Döşəkçə",
+  "Pərdə",
+  "Taxtüstü"
+ ]
+}
