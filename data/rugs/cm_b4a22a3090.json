@@ -18,7 +18,7 @@
  "h": 1252,
  "marks": [],
  "created": 1791870029,
- "updated": 1794430399,
+ "updated": 1794430437,
  "cat": {
   "title": "Ardabil Carpet 1539-40, the World's oldest dated Carpet",
   "museum": "",
@@ -152,8 +152,67 @@
     "w": 2,
     "t": 1794430399
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794430437,
+    "q": [
+     [
+      0.00841,
+      0.00348
+     ],
+     [
+      0.99546,
+      0.01533
+     ],
+     [
+      0.99207,
+      0.98354
+     ],
+     [
+      0.00503,
+      0.98891
+     ]
+    ],
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00841,
+    0.00348
+   ],
+   [
+    0.99546,
+    0.01533
+   ],
+   [
+    0.99207,
+    0.98354
+   ],
+   [
+    0.00503,
+    0.98891
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
