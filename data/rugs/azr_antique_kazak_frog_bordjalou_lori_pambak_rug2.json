@@ -18,7 +18,7 @@
  "h": 1230,
  "marks": [],
  "created": 1791736128,
- "updated": 1794429667,
+ "updated": 1794429915,
  "cat": {
   "title": "antique-kazak-frog-bordjalou-lori-pambak-rug2",
   "museum": "",
@@ -127,8 +127,67 @@
     "w": 2,
     "t": 1794429667
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794429915,
+    "q": [
+     [
+      0.03452,
+      0.02557
+     ],
+     [
+      0.975,
+      0.045
+     ],
+     [
+      0.9742,
+      0.98814
+     ],
+     [
+      0.01388,
+      0.98736
+     ]
+    ],
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03452,
+    0.02557
+   ],
+   [
+    0.975,
+    0.045
+   ],
+   [
+    0.9742,
+    0.98814
+   ],
+   [
+    0.01388,
+    0.98736
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
