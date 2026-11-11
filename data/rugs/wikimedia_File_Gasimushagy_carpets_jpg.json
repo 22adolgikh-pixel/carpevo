@@ -18,7 +18,7 @@
  "h": 914,
  "marks": [],
  "created": 1791736127,
- "updated": 1791736127,
+ "updated": 1794428807,
  "cat": {
   "title": "Gasimushagy carpets.jpg",
   "museum": "Wikimedia Commons",
@@ -82,5 +82,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238318
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794428782
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794428807,
+    "q": [
+     [
+      0.01,
+      0.01
+     ],
+     [
+      0.95906,
+      0.01159
+     ],
+     [
+      0.95906,
+      0.96567
+     ],
+     [
+      0.01338,
+      0.96964
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01,
+    0.01
+   ],
+   [
+    0.95906,
+    0.01159
+   ],
+   [
+    0.95906,
+    0.96567
+   ],
+   [
+    0.01338,
+    0.96964
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

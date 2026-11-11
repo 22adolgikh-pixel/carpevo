@@ -18,7 +18,7 @@
  "h": 1332,
  "marks": [],
  "created": 1791736123,
- "updated": 1791736123,
+ "updated": 1794428793,
  "cat": {
   "title": "Jek rug.jpg",
   "museum": "Wikimedia Commons",
@@ -82,5 +82,74 @@
   "area": null,
   "ver": 1,
   "t": 1794238271
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794428731
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794428793,
+    "q": [
+     [
+      0.01725,
+      0.01104
+     ],
+     [
+      0.9871,
+      0.00508
+     ],
+     [
+      0.97888,
+      0.96175
+     ],
+     [
+      0.0158,
+      0.97886
+     ]
+    ]
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01725,
+    0.01104
+   ],
+   [
+    0.9871,
+    0.00508
+   ],
+   [
+    0.97888,
+    0.96175
+   ],
+   [
+    0.0158,
+    0.97886
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
