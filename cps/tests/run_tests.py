@@ -1329,6 +1329,20 @@ def t34_vlm_corners(pg, ctx):
     assert any(x.get('s') == 'vlm' for x in ml), 'в журнале нет пометки, что углы были от модели'
 
 
+@test
+def t35_micro_hide(pg, ctx):
+    """v11.49: ковры из micro_hide.json не попадают в очередь «что на фото», данные ковра не меняются"""
+    import urllib.request, json as _j
+    hid = _j.load(open(os.path.join(ctx['app'], 'micro_hide.json'), encoding='utf-8'))['ids']
+    assert len(hid) > 100, f'список скрытых подозрительно мал: {len(hid)}'
+    seen = set()
+    for _ in range(4):
+        j = _j.load(urllib.request.urlopen(ctx['url'] + 'api/micro/next?n=12'))
+        seen |= {t['rid'] for t in j['tasks'] if t['type'] == 'frame'}
+    assert not (seen & set(hid)), f'скрытые ковры попали в очередь: {sorted(seen & set(hid))[:5]}'
+    assert j['left'].get('hidden') == len(hid), f'в left нет числа скрытых: {j["left"]}'
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

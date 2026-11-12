@@ -1773,13 +1773,24 @@ def install(app, DATA, D_WORK):
             except OSError: _ver["v"] = ""
         return _ver["v"]
 
+    # v11.49: ковры, убранные из очереди «что на фото» без участия человека (ч/б и тонированные фото; «не ковёр»,
+    # «несколько ковров», «деталь» — по просмотру листов моделью). Сами ковры и их данные не трогаются: только не показываются в /m.
+    _hide = {}
+
+    def _micro_hide():
+        if "d" not in _hide:
+            try:
+                with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "micro_hide.json"), encoding="utf-8") as f: _hide["d"] = json.load(f).get("ids", {})
+            except (OSError, ValueError): _hide["d"] = {}
+        return _hide["d"]
+
     @app.get("/api/micro/next")
     def micro_next(request: Request, n: int = 6):
         import random
-        me = user(request); n = max(1, min(12, n)); rows = _mrows()
+        me = user(request); n = max(1, min(12, n)); rows = _mrows(); H = _micro_hide()
         # v11.45: ковры с прежним ответом «фрагмент» возвращаются в очередь — в новом наборе ответов такого больше нет
         fr =[x for x in rows if (x["use"] != "skip" or x["fr_old"]) and x["seen"] and (x["frame_by"] not in ("micro", "hand") or x["fr_old"])
-              and (me not in x["who"]["frame"] or me in x["old_who"])]
+              and (me not in x["who"]["frame"] or me in x["old_who"]) and x["id"] not in H]
         fr.sort(key=lambda x: (abs((x["pw"] if x["pw"] is not None else 0.5) - 0.5), x["conf"]))   # v11.44: где модель меньше всего уверена — первыми
         head, pool = fr[:60], fr[:]; random.shuffle(pool); mix = []                 # половина — сомнительные, половина — случайные (иначе выборка перекошена и точность машины не измерить)
         for a, b in zip(head, pool): mix += [a, b]
@@ -1810,7 +1821,7 @@ def install(app, DATA, D_WORK):
         by = {x["id"]: x for x in rows}
         for t in tasks:
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait}, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H)}, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
 
     @app.post("/api/micro/answer")
     def micro_answer(request: Request, body: dict = Body(...)):
