@@ -7,6 +7,12 @@ sys.path.insert(0, '.')
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from parse_enc import fold, NAME, OBJ_RU, TYPE_OF
 enc = json.load(open(os.path.join(WORK, 'enc_parsed.json')))
+if os.path.exists(os.path.join(WORK, 'enc_fix.json')):          # тип/школа, восстановленные по полному OCR (build_glossary.py)
+    _fx = json.load(open(os.path.join(WORK, 'enc_fix.json')))
+    for o in enc:
+        for k, v in (_fx.get(o['id']) or {}).items():
+            if k == 'caption_full': o['caption'] = v if len(v) > len(o.get('caption') or '') else o['caption']
+            elif not o.get(k): o[k] = v
 mur = [json.loads(l) for l in open(os.path.join(WORK, 'items_passport.jsonl'))]
 azcm = json.load(open(REPO + '/cps/tools/colab/data/azcarpetmuseum_items.json'))
 ENC = 'azerbaycan_xalchasi_ensiklopediyasi_ii_cild'; MUR = 'azerbaycan_xalchalari_qarabag_qrupu'

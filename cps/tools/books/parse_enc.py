@@ -36,7 +36,7 @@ def parse(cap):
     for k, v in OBJ:
         if re.search(r'(^|[\s.“"])' + re.escape(k) + r'\b', hl): p['obj'] = v; break
     m = re.search(r'[“"«]\s*([^”"»]{2,40}?)\s*[”"»]', head)
-    if m: p['name'] = m.group(1).strip()
+    if m and re.fullmatch(r"[A-Za-zƏəÖöÜüÇçŞşĞğİıI' \-]{3,30}", m.group(1).strip()): p['name'] = m.group(1).strip()   # без мусора OCR
     for k, sid, ru in SCH:
         if re.search(r'\b' + k, hl): p['school'] = sid; p['school_ru'] = ru; break
     m = re.search(r'Müəllif:\s*([^.]+(?:\.[A-ZƏÖÜÇŞ][a-zəöüçşığ]+)?)', t)
