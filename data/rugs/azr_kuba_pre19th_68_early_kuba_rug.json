@@ -18,7 +18,7 @@
  "h": 1236,
  "marks": [],
  "created": 1791736138,
- "updated": 1794257025,
+ "updated": 1794509052,
  "cat": {
   "title": "Floral carpet with afshan guls (dark blue ground), early 19th century, Azerbaijan",
   "museum": "",
@@ -85,12 +85,17 @@
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "fragment",
+    "a": "whole",
     "w": 2,
-    "t": 1794257025
+    "t": 1794509052
    }
   }
  },
- "frame": "fragment",
- "frame_by": "micro"
+ "frame": "whole",
+ "frame_by": "micro",
+ "edge": {
+  "damaged": [
+   "dolgikh"
+  ]
+ }
 }

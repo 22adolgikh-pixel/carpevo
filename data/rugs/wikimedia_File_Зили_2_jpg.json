@@ -18,7 +18,7 @@
  "h": 1350,
  "marks": [],
  "created": 1791736124,
- "updated": 1794508862,
+ "updated": 1794508987,
  "cat": {
   "title": "Зили 2.jpg",
   "museum": "Wikimedia Commons",
@@ -130,8 +130,67 @@
     "w": 2,
     "t": 1794508862
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794508987,
+    "q": [
+     [
+      -0.00156,
+      0.0112
+     ],
+     [
+      0.95,
+      0.035
+     ],
+     [
+      0.95,
+      0.965
+     ],
+     [
+      0.055,
+      0.965
+     ]
+    ],
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00156,
+    0.0112
+   ],
+   [
+    0.95,
+    0.035
+   ],
+   [
+    0.95,
+    0.965
+   ],
+   [
+    0.055,
+    0.965
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
