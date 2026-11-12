@@ -18,7 +18,7 @@
  "h": 636,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1794509380,
  "cat": {
   "title": "antique-kazak-frog-bordjalou-lori-pambak-rug8",
   "museum": "",
@@ -78,6 +78,59 @@
   "conf": 0.963,
   "area": 0.855,
   "ver": 1,
-  "t": 1794238311
- }
+  "t": 1794238311,
+  "vlm_quad": {
+   "quad": [
+    [
+     0.07,
+     0.05
+    ],
+    [
+     0.93,
+     0.08
+    ],
+    [
+     0.95,
+     0.94
+    ],
+    [
+     0.09,
+     0.97
+    ]
+   ],
+   "coarse": [
+    [
+     0.07,
+     0.05
+    ],
+    [
+     0.93,
+     0.08
+    ],
+    [
+     0.95,
+     0.94
+    ],
+    [
+     0.09,
+     0.97
+    ]
+   ],
+   "refine": "не разобран ответ: ",
+   "v": 2,
+   "model": "anthropic/claude-sonnet-5.5",
+   "t": 1794509484
+  }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794509380
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro"
 }
