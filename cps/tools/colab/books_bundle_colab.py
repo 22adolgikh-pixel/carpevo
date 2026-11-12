@@ -18,6 +18,7 @@ D = '/content/drive/MyDrive/carpet-dna'
 BOOKS = f'{D}/output/books'
 STEPS = os.environ.get('STEPS', 'bundle,ocr').split(',')
 ENC, MUR = 'azerbaycan_xalchasi_ensiklopediyasi_ii_cild', 'azerbaycan_xalchalari_qarabag_qrupu'
+NEW = ['intangible_2849', 'intangible_2850', 'intangible_2851', 'intangible_2854', 'azerbaycan_xalchasi', 'intangible_2885']   # альбомы/книги 12.11.2026 (build_series.py)
 t0 = time.time()
 def log(*a): print(f'[{time.time() - t0:5.0f} c]', *a, flush=True)
 subprocess.run('apt-get -qq install -y tesseract-ocr tesseract-ocr-aze tesseract-ocr-rus > /dev/null 2>&1; pip -q install pymupdf pytesseract', shell=True)
@@ -29,6 +30,7 @@ def find_zip(slug):
 
 if 'bundle' in STEPS:
     zips = {ENC: find_zip(ENC), MUR: find_zip(MUR)}
+    for _s in NEW: zips[_s] = find_zip(_s)
     if not zips[MUR]:
         log('архива Мурадова нет — режу книгу заново (≈3 мин)')
         ex = sorted(glob.glob(f'{D}/output/drive_audit/book_extract_colab_v5.py') + glob.glob(f'{D}/tools/book_extract_colab*.py'))[0]
