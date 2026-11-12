@@ -18,7 +18,7 @@
  "h": 2109,
  "marks": [],
  "created": 1791870015,
- "updated": 1794260135,
+ "updated": 1794508781,
  "cat": {
   "title": "Azerbaijanian rug \"Kazakh\"",
   "museum": "",
@@ -93,17 +93,62 @@
   "conf": 0.927,
   "area": 0.881,
   "ver": 1,
-  "t": 1794238573
+  "t": 1794238573,
+  "vlm_quad": {
+   "quad": [
+    [
+     0.08,
+     0.06
+    ],
+    [
+     0.95,
+     0.04
+    ],
+    [
+     0.96,
+     0.99
+    ],
+    [
+     0.04,
+     0.97
+    ]
+   ],
+   "coarse": [
+    [
+     0.08,
+     0.06
+    ],
+    [
+     0.95,
+     0.04
+    ],
+    [
+     0.96,
+     0.99
+    ],
+    [
+     0.04,
+     0.97
+    ]
+   ],
+   "model": "anthropic/claude-sonnet-5.5",
+   "t": 1794508881
+  }
  },
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "fragment",
+    "a": "whole",
     "w": 2,
-    "t": 1794260135
+    "t": 1794508781
    }
   }
  },
- "frame": "fragment",
- "frame_by": "micro"
+ "frame": "whole",
+ "frame_by": "micro",
+ "edge": {
+  "damaged": [
+   "dolgikh"
+  ]
+ }
 }
