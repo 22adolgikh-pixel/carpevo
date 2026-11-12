@@ -1319,6 +1319,7 @@ def t34_vlm_corners(pg, ctx):
         if st['done_today'] >= 1 and st['queued'] == 0: break
         time.sleep(0.5)
     assert st['done_today'] >= 1, f'модель углов ничего не посчитала: {st}'
+    assert st['refine']['ok'] >= 1 and st['refine']['fail'] == 0, f'уточнение углов не сработало: {st}'   # v11.50
     tk = [t for t in get('api/micro/next?n=8')['tasks'] if t['type'] == 'quad' and t.get('qsrc') == 'vlm']
     assert tk, 'в очереди нет карточки с углами модели'
     q = tk[0]['quad']; assert abs(q[0][0] - 0.1) < 1e-3 and abs(q[2][0] - 0.9) < 1e-3, f'углы модели не те: {q}'

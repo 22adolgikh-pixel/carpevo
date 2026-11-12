@@ -1686,7 +1686,7 @@ def install(app, DATA, D_WORK):
         row = {"id": rid, "use": use_of(r)[0], "seen": bool(a), "pw": pw, "conf": a.get("conf", 0), "aframe": a.get("frame"), "frame": r.get("frame", ""),
                "frame_by": r.get("frame_by", ""), "qs": L.get("quad_status", ""), "quad": L.get("quad"), "aquad": a.get("quad"),
                "who": {t: list((m.get(t) or {}).keys()) for t in ("frame", "quad")}, "title": r.get("title", ""), "w": r.get("w"), "h": r.get("h"),
-               "vquad": ((a.get("vlm_quad") or {}).get("quad")),                   # v11.47: углы, предложенные моделью в два шага
+               "vquad": ((a.get("vlm_quad") or {}).get("quad")) if ((a.get("vlm_quad") or {}).get("v", 1) >= vlm_corners.VERSION) else None,   # v11.47/v11.50: углы модели (старые v1 — без уточнения — пересчитываются)
                "fr_old": r.get("frame") in FR_OLD,                                # применён снятый ответ — спросить заново
                "old_who": [u for u, v in (m.get("frame") or {}).items() if (v or {}).get("a") in FR_OLD],
                "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge")}
@@ -1721,7 +1721,7 @@ def install(app, DATA, D_WORK):
 
     # ---------- v11.47: углы моделью в два шага (vlm_corners.py) — в фоне, по очереди, с дневным лимитом ----------
     import queue, vlm_corners
-    _vq = {"q": queue.Queue(), "seen": set(), "thr": None, "done": 0, "day": "", "err": "", "bad": 0, "off": 0}
+    _vq = {"q": queue.Queue(), "seen": set(), "thr": None, "done": 0, "day": "", "err": "", "bad": 0, "off": 0, "ref": {"ok": 0, "fail": 0}, "ref_last": ""}
     VLM_MAX = int(os.environ.get("CPS_VLM_MAX", "400"))                           # ковров в сутки (≈2 запроса на ковёр)
 
     def _vlm_worker():
@@ -1732,7 +1732,7 @@ def install(app, DATA, D_WORK):
                 if _vq["day"] != today: _vq["day"] = today; _vq["done"] = 0
                 if _vq["done"] >= VLM_MAX or time.time() < _vq["off"]: _vq["seen"].discard(rid); continue
                 r = load(rid); src = img_path(rid)
-                if not r or not src or (r.get("auto") or {}).get("vlm_quad"): continue
+                if not r or not src or ((r.get("auto") or {}).get("vlm_quad") or {}).get("v", 1) >= vlm_corners.VERSION: continue
                 a = read_small(src, 1400)
                 if a is None: continue
                 res = vlm_corners.two_step(a); _vq["done"] += 1
@@ -1742,6 +1742,8 @@ def install(app, DATA, D_WORK):
                     if not r: continue
                     r.setdefault("auto", {})["vlm_quad"] = {**res, "t": int(time.time())}; save(r)
                 _vq["bad"] = 0; _vq["err"] = ""
+                rf = res.get("refine") or ""; _vq["ref"]["ok" if rf.startswith("ok") else "fail"] += 1
+                if not rf.startswith("ok"): _vq["ref_last"] = rf
             except Exception as e:                                                 # сбой сети/ключа: после 5 подряд пауза 10 минут
                 _vq["seen"].discard(rid); _vq["err"] = str(e)[:160]; _vq["bad"] += 1
                 if _vq["bad"] >= 5: _vq["off"] = time.time() + 600; _vq["bad"] = 0
@@ -1759,7 +1761,7 @@ def install(app, DATA, D_WORK):
     def vlm_status():
         """есть ли ключ (сам ключ не отдаётся), сколько ковров в очереди и сколько посчитано сегодня"""
         return {"key": vlm_corners.available(), "provider": "mock" if os.environ.get("CPS_VLM_MOCK") else vlm_corners.provider(), "model": vlm_corners.MODEL, "key_info": vlm_corners.key_info(), "queued": _vq["q"].qsize(), "done_today": _vq["done"] if _vq["day"] == time.strftime("%Y-%m-%d") else 0,
-                "limit": VLM_MAX, "last_error": _vq["err"], "paused": time.time() < _vq["off"]}
+                "limit": VLM_MAX, "last_error": _vq["err"], "refine": _vq["ref"], "refine_last_fail": _vq["ref_last"], "paused": time.time() < _vq["off"]}
 
     _ver = {}
 

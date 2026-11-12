@@ -119,6 +119,20 @@ def _window(im, cx, cy):
     return c, (x0, y0, s)
 
 
+VERSION = 2           # v2: разбор ответа уточнения стал терпимым к формату, исход уточнения пишется в результат
+
+
+def _pts(v):
+    """точки из ответа модели в любом из встречающихся видов: [[x,y]..], [{"x":..,"y":..}..], {"tl":[x,y],..}"""
+    if isinstance(v, dict):
+        v = [v[k] for k in sorted(v, key=lambda k: ["tl", "tr", "br", "bl"].index(k.lower()) if k.lower() in ("tl", "tr", "br", "bl") else 9)]
+    out = []
+    for p in v or []:
+        if isinstance(p, dict): p = [p.get("x"), p.get("y")]
+        out.append([float(p[0]), float(p[1])])
+    return out
+
+
 def _poly_ok(q):
     """выпуклый четырёхугольник нормальной площади"""
     s = 0; sg = 0
@@ -144,24 +158,29 @@ def two_step(im):
     """im — BGR фото (любого размера). → {"quad": [[x,y]*4] доли кадра, "coarse": [...], "model": ..} или None, если модель не дала внятного ответа"""
     h, w = im.shape[:2]
     j = _json(_ask([_jpg(_coarse_img(im))], COARSE_PROMPT))
-    q = (j or {}).get("quad")
-    if not (isinstance(q, list) and len(q) == 4): return None
-    coarse = [[float(p[0]) / 100, float(p[1]) / 100] for p in q]
+    try: q = _pts((j or {}).get("quad") or (j or {}).get("corners"))
+    except (TypeError, ValueError, IndexError, KeyError): return None
+    if len(q) != 4: return None
+    coarse = [[p[0] / 100, p[1] / 100] for p in q]
     if not _poly_ok(coarse): return None
     tiles, wins = [], []
     for cx, cy in coarse:
         t, wn = _window(im, cx, cy); tiles.append(t); wins.append(wn)
     m = np.vstack([np.hstack(tiles[:2]), np.hstack(tiles[2:])])
-    out = list(coarse)
+    out = list(coarse); refine = ""
     try:
-        j2 = _json(_ask([_jpg(m)], REFINE_PROMPT))
-        cs = (j2 or {}).get("corners")
-        if isinstance(cs, list) and len(cs) == 4:
-            ref = []
+        txt = _ask([_jpg(m)], REFINE_PROMPT); j2 = _json(txt)
+        cs = _pts((j2 or {}).get("corners") or (j2 or {}).get("quad"))
+        if len(cs) == 4:
+            ref = []; far = 0
             for (x0, y0, s), c, p in zip(wins, coarse, cs):
-                x = (x0 + s * float(p[0]) / 100) / w; y = (y0 + s * float(p[1]) / 100) / h
-                ref.append([x, y] if math.hypot(x - c[0], y - c[1]) <= MAX_MOVE else list(c))   # ушло слишком далеко — оставляем грубый
-            if _poly_ok(ref): out = ref
-    except Exception:
-        pass                                                      # уточнение не вышло — остаётся грубый ответ
-    return {"quad": [[round(x, 5), round(y, 5)] for x, y in out], "coarse": [[round(x, 5), round(y, 5)] for x, y in coarse], "model": "mock" if os.environ.get("CPS_VLM_MOCK") else MODEL}
+                x = (x0 + s * p[0] / 100) / w; y = (y0 + s * p[1] / 100) / h
+                if math.hypot(x - c[0], y - c[1]) <= MAX_MOVE: ref.append([x, y])
+                else: ref.append(list(c)); far += 1                      # ушло слишком далеко — оставляем грубый
+            if _poly_ok(ref): out = ref; refine = "ok" if not far else "ok, далеко: %d" % far
+            else: refine = "невыпуклая рамка"
+        else: refine = "не разобран ответ: " + (txt or "")[:120]
+    except Exception as e:
+        refine = "ошибка: " + str(e)[:120]                       # уточнение не вышло — остаётся грубый ответ
+    return {"quad": [[round(x, 5), round(y, 5)] for x, y in out], "coarse": [[round(x, 5), round(y, 5)] for x, y in coarse],
+            "refine": refine, "v": VERSION, "model": "mock" if os.environ.get("CPS_VLM_MOCK") else MODEL}
