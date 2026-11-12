@@ -449,7 +449,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.50</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.51</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2290,6 +2290,7 @@ const SRCRU={kerimov_vol1:'Керимов т. I',kerimov_vol2:'Керимов т
 async function catPoll(){try{const j=await api('/api/rugs_catalog',undefined,'GET'),E=$('rgCatSt');if(E)E.textContent=j.running?`машина смотрит фото: ${j.done} / ${j.total}`:'';if(j.running){clearTimeout(R.catT);R.catT=setTimeout(async()=>{await catPoll();},5000);}else if(R.catWas){R.catWas=false;await rugsLoadList();}R.catWas=!!j.running;}catch(e){}}
 async function rugsLoadList(){const j=await api('/api/rugs');R.list=j.rugs;R.imp=j.import;R.elx=j.elx||{};
   try{R.sync=await api('/api/rugs_sync');}catch(e){}
+  {const E=$('rgSyncSt');if(E){const y=R.sync||{};E.textContent=y.running?`загрузка с Диска: ${y.stage||''}${y.total?` ${y.done}/${y.total}`:''}`:(y.error?`ошибка загрузки: ${y.error}`:'');}}
   rugList();catPoll();if((R.imp&&R.imp.running)||(R.sync&&R.sync.running)){clearTimeout(R.impT);R.impT=setTimeout(rugsLoadList,3000);}}
 // у ковра из книги Керимова есть двойник с фото крупнее (музей, другой источник)? → {id,src,k} или null
 function rugBigTwin(r,byId){if(srcKind(r.src)!=='kerimov')return null;const a=(r.w||0)*(r.h||0);if(!a)return null;const no=new Set(r.same_no||[]);let best=null;
@@ -3438,6 +3439,8 @@ window.addEventListener('blur',()=>{if(R.on){R.space=false;$('rgSvg')&&$('rgSvg'
     <button class="sm" id="rgEtBtn" data-tip="Эталоны: лучшие ковры каждого типа размечаются полностью, детектор учится на проверенных рамках и сам ищет элементы на коврах того же типа" style="border-color:var(--ok)">🎯 эталоны</button>
     <button class="sm" id="rgSignsBtn" data-tip="Словарь знаков кайм: машина находит раппорты кайм на всех фото и собирает похожие в группы. Назовите группу — имя и разметка перейдут на все её ковры">🧩 знаки кайм</button>
     <button class="sm" id="rgSync" data-tip="Загрузить/обновить каталог ковров с Диска (пакет rugs_bundle.zip из Colab)" style="border-color:var(--acc)">⟳ из Диска</button>
+    <button class="sm" id="rgSyncBooks" data-tip="Загрузить/обновить ковры из книг (Энциклопедия, альбомы Мурадова и др.): пакет books_bundle.zip из Colab. Id спросит один раз и запомнит" style="border-color:var(--acc)">⟳ книги</button>
+    <span id="rgSyncSt" class="mut" style="font-size:12px"></span>
     <label class="btn sm" data-tip="Загрузить фото ковров (можно несколько)">＋ фото<input type="file" id="rgUp" accept="image/*" multiple hidden></label>
     <label class="btn sm" data-tip="Каталог музея: catalog.json из Colab (museum_open) — фото скачает сервер">⇪ каталог<input type="file" id="rgCat" accept=".json" hidden></label>
     <label class="btn sm" data-tip="Архив .zip: фото + одноимённые .txt с описаниями (например, azerbaijanrugs). Школа предлагается по папке и описанию">🗜 архив<input type="file" id="rgZip" accept=".zip" hidden></label>
@@ -3471,9 +3474,18 @@ window.addEventListener('blur',()=>{if(R.on){R.space=false;$('rgSvg')&&$('rgSvg'
   $('rgFCheck').onchange=async e=>{const v=e.target.value;R.fmulti=v==='multi';R.fppl=v==='ppl';R.gridN=150;rugList();if(!R.fmulti)return;
     const poll=async()=>{const j=await api('/api/rugs_multi');if(j.running){stat(`ищу развороты: ${j.done} / ${j.total} фото, найдено ${j.found}`,'busy');await rugsLoadList();setTimeout(poll,3000);}else{await rugsLoadList();stat(`фото с несколькими коврами: ${j.found}`,'ok');}};
     try{await api('/api/rugs_multi',{});poll();}catch(err){fail(err);}};
+  const BOOKS_ID_DEFAULT='11_dvp0EsR7a4riVHQnTnEuNByvCnj0mR';   // books_bundle.zip (пакет книг); при пересборке Colab обновляет файл на месте, id тот же
+  const syncRun=async(bid,what)=>{try{await api('/api/rugs_sync',{bundle_id:bid});stat('загружаю '+what+' с Диска…','busy');rugsLoadList();}catch(err){fail(err);}};
   $('rgSync').onclick=async()=>{let st={};try{st=await api('/api/rugs_sync');}catch(e){}
+    if(st.running){stat('загрузка уже идёт: '+(st.stage||'')+(st.total?` ${st.done}/${st.total}`:''),'busy');rugsLoadList();return;}
     let bid=st.bundle_id||'';if(!bid){bid=prompt('Ссылка или id файла rugs_bundle.zip на Диске (его печатает Colab в конце: «id пакета для студии»). Вводится один раз.')||'';if(!bid)return;}
-    try{await api('/api/rugs_sync',{bundle_id:bid});stat('загружаю каталог с Диска…','busy');rugsLoadList();}catch(err){fail(err);}};
+    await syncRun(bid,'каталог');};
+  // v11.51: пакет книг — отдельная кнопка (раньше id книг вписать было некуда: «из Диска» всегда брала основной пакет)
+  $('rgSyncBooks').onclick=async()=>{let st={};try{st=await api('/api/rugs_sync');}catch(e){}
+    if(st.running){stat('загрузка уже идёт: '+(st.stage||'')+(st.total?` ${st.done}/${st.total}`:''),'busy');rugsLoadList();return;}
+    const known=Object.keys(st.extra||{});let bid=st.books_id||known[known.length-1]||'';
+    if(!bid){bid=prompt('Ссылка или id файла books_bundle.zip (Colab печатает его в конце). Вводится один раз.',BOOKS_ID_DEFAULT)||'';if(!bid)return;}
+    await syncRun(bid,'ковры из книг');};
   $('rgCat').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const items=JSON.parse(await f.text());const j=await api('/api/rugs_import',items);stat(`импорт: ${j.started} новых, пропущено ${j.skipped}`,'ok');rugsLoadList();}catch(err){fail(err);}e.target.value='';};
   window.addEventListener('resize',()=>{if(R.on)rugsPlace();});
 })();

@@ -508,7 +508,8 @@ def install(app, DATA, D_WORK):
 
     @app.get("/api/rugs_sync")
     def api_rugs_sync_state():
-        st = settings(); return {**sync, "bundle_id": st.get("bundle_id", ""), "last_sync": st.get("last_sync"), "built": st.get("built")}
+        st = settings(); return {**sync, "bundle_id": st.get("bundle_id", ""), "last_sync": st.get("last_sync"), "built": st.get("built"),
+                                 "extra": st.get("extra_bundles") or {}}      # v11.51: пакеты-дополнения (книги) — для кнопки «⟳ книги»
 
     @app.post("/api/rugs_sync")
     async def api_rugs_sync(request: Request):
