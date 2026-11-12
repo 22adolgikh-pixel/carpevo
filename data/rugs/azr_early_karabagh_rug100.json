@@ -18,7 +18,7 @@
  "h": 1212,
  "marks": [],
  "created": 1791736138,
- "updated": 1794430424,
+ "updated": 1794508306,
  "cat": {
   "title": "The Wher collection rug with stylized animals, Azerbaijan, late 18th/early 19th century",
   "museum": "",
@@ -129,8 +129,67 @@
     "w": 2,
     "t": 1794430424
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794508306,
+    "q": [
+     [
+      0.04098,
+      0.01584
+     ],
+     [
+      0.95757,
+      0.01937
+     ],
+     [
+      0.93373,
+      0.99315
+     ],
+     [
+      0.03291,
+      0.98836
+     ]
+    ],
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04098,
+    0.01584
+   ],
+   [
+    0.95757,
+    0.01937
+   ],
+   [
+    0.93373,
+    0.99315
+   ],
+   [
+    0.03291,
+    0.98836
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

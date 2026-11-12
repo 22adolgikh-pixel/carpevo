@@ -3203,7 +3203,7 @@
   }
  ],
  "created": 1791870027,
- "updated": 1794430441,
+ "updated": 1794508237,
  "cat": {
   "title": "Pirəbədil carpet, Quba group of Azerbaijani carpets",
   "museum": "Национальный музей искусств Азербайджана",
@@ -3281,7 +3281,38 @@
   "ver": 1,
   "at": 1792261828
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0195,
+    -0.01025
+   ],
+   [
+    0.98678,
+    0.01392
+   ],
+   [
+    1.00854,
+    0.93914
+   ],
+   [
+    -0.01289,
+    0.94403
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "auto": {
   "frame": "unsure",
@@ -3355,8 +3386,35 @@
     "w": 2,
     "t": 1794430441
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794508237,
+    "q": [
+     [
+      0.0195,
+      -0.01025
+     ],
+     [
+      0.98678,
+      0.01392
+     ],
+     [
+      1.00854,
+      0.93914
+     ],
+     [
+      -0.01289,
+      0.94403
+     ]
+    ],
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "tri": "micro"
 }
