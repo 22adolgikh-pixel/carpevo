@@ -18,7 +18,7 @@
  "h": 1055,
  "marks": [],
  "created": 1791736124,
- "updated": 1794596792,
+ "updated": 1794597038,
  "cat": {
   "title": "«Гаджикабул».jpg",
   "museum": "Wikimedia Commons",
@@ -155,8 +155,49 @@
     "w": 2,
     "t": 1794596792
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794597038,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00092,
+    -0.00153
+   ],
+   [
+    0.99652,
+    -0.00193
+   ],
+   [
+    0.99937,
+    0.97731
+   ],
+   [
+    0.00576,
+    0.97819
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

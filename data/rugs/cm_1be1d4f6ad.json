@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870020,
- "updated": 1794596794,
+ "updated": 1794597025,
  "cat": {
   "title": "Dağkəsəmən xalçası, Gəncə məktəbi Qazax qrupu, XVIII əsr, 1222x230 sm",
   "museum": "Музей турецкого и исламского искусства (Стамбул)",
@@ -168,8 +168,49 @@
     "w": 2,
     "t": 1794596794
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794597025,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05211,
+    0.03128
+   ],
+   [
+    0.95904,
+    0.03957
+   ],
+   [
+    0.94705,
+    0.97333
+   ],
+   [
+    0.0389,
+    0.97321
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

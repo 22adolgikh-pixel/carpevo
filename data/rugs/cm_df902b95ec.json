@@ -18,7 +18,7 @@
  "h": 1799,
  "marks": [],
  "created": 1791870033,
- "updated": 1794596811,
+ "updated": 1794597053,
  "cat": {
   "title": "Lacadi rug, Guba school, XVIII c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -168,8 +168,49 @@
     "w": 2,
     "t": 1794596811
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794597053,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00502,
+    0.00389
+   ],
+   [
+    0.99224,
+    0.0031
+   ],
+   [
+    0.99325,
+    0.95793
+   ],
+   [
+    -0.00267,
+    0.94642
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

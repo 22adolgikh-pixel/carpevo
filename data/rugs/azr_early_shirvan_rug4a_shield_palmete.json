@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791736140,
- "updated": 1794589276,
+ "updated": 1794597117,
  "cat": {
   "title": "early shirvan rug4a shield palmete",
   "museum": "",
@@ -157,8 +157,49 @@
     "w": 2,
     "t": 1794589276
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794597117,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.24373,
+    0.02291
+   ],
+   [
+    0.77303,
+    0.03026
+   ],
+   [
+    0.95557,
+    0.95092
+   ],
+   [
+    0.06504,
+    0.94221
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

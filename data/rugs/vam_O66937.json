@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736128,
- "updated": 1794589293,
+ "updated": 1794597077,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -177,8 +177,49 @@
     "w": 2,
     "t": 1794589293
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794597077,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06928,
+    0.02272
+   ],
+   [
+    0.93713,
+    0.02521
+   ],
+   [
+    0.88064,
+    0.97296
+   ],
+   [
+    0.11321,
+    0.95353
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
