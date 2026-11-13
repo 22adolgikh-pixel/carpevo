@@ -89,7 +89,11 @@ async def job_wait(fn, name, ui=True, wait=20.0):
 
 
 imp = {"running": False, "done": 0, "total": 0, "errors": 0, "last": ""}
-sync = {"running": False, "stage": "", "done": 0, "total": 0, "error": "", "last_ok": None, "made": 0, "updated": 0}
+class _Sync(dict):
+    """v11.52: состояние загрузки с Диска; каждое изменение двигает метку ts (по ней интерфейс видит, что загрузка жива, а не зависла)."""
+    def update(self, *a, **k): super().update(*a, **k); super().__setitem__("ts", time.time())
+    def __setitem__(self, key, v): super().__setitem__(key, v); super().__setitem__("ts", time.time())
+sync = _Sync({"running": False, "stage": "", "done": 0, "total": 0, "error": "", "last_ok": None, "made": 0, "updated": 0, "t0": 0, "ts": 0})
 
 
 def drive_fetch(file_id, dest, progress=None):
@@ -436,7 +440,7 @@ def install(app, DATA, D_WORK):
 
     def run_sync(bid, who):
         import zipfile, shutil
-        sync.update(running=True, stage="скачиваю пакет с Диска", done=0, total=0, error="", made=0, updated=0)
+        sync.update(running=True, stage="скачиваю пакет с Диска", done=0, total=0, error="", made=0, updated=0, t0=time.time(), bid=bid)
         try:
             os.makedirs(D_LIB, exist_ok=True); tmp = os.path.join(D_LIB, "_bundle.zip")
             if os.environ.get("CPS_RUGS_TEST") and os.path.exists(bid): shutil.copy(bid, tmp)
@@ -450,8 +454,10 @@ def install(app, DATA, D_WORK):
             else:
                 with zipfile.ZipFile(tmp) as z:
                     cat = json.loads(z.read("catalog.json").decode("utf-8"))
-                    for n in z.namelist():
-                        if n.startswith("img/"): z.extract(n, D_LIB)
+                    imgs = [n for n in z.namelist() if n.startswith("img/")]; sync.update(done=0, total=len(imgs))
+                    for k, n in enumerate(imgs, 1):
+                        z.extract(n, D_LIB)
+                        if k % 20 == 0 or k == len(imgs): sync.update(done=k)
             os.remove(tmp)
             groups = {g["id"]: g for g in cat.get("groups", [])}
             items = cat.get("items", []); sync.update(stage="обновляю карточки ковров", done=0, total=len(items))
@@ -508,7 +514,7 @@ def install(app, DATA, D_WORK):
 
     @app.get("/api/rugs_sync")
     def api_rugs_sync_state():
-        st = settings(); return {**sync, "bundle_id": st.get("bundle_id", ""), "last_sync": st.get("last_sync"), "built": st.get("built"),
+        st = settings(); return {**sync, "now": time.time(), "bundle_id": st.get("bundle_id", ""), "last_sync": st.get("last_sync"), "built": st.get("built"),
                                  "extra": st.get("extra_bundles") or {}}      # v11.51: пакеты-дополнения (книги) — для кнопки «⟳ книги»
 
     @app.post("/api/rugs_sync")
