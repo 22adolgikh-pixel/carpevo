@@ -18,7 +18,7 @@
  "h": 1800,
  "marks": [],
  "created": 1791870029,
- "updated": 1794509694,
+ "updated": 1794547758,
  "cat": {
   "title": "Sharoy historic & architectural complex 37",
   "museum": "",
@@ -93,8 +93,66 @@
     "w": 2,
     "t": 1794509694
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794547758,
+    "q": [
+     [
+      0.04577,
+      0.02289
+     ],
+     [
+      0.99,
+      0.12989
+     ],
+     [
+      0.96389,
+      0.71476
+     ],
+     [
+      0.09315,
+      0.84368
+     ]
+    ]
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04577,
+    0.02289
+   ],
+   [
+    0.99,
+    0.12989
+   ],
+   [
+    0.96389,
+    0.71476
+   ],
+   [
+    0.09315,
+    0.84368
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
