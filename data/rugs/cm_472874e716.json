@@ -18,7 +18,7 @@
  "h": 1566,
  "marks": [],
  "created": 1791870025,
- "updated": 1794588616,
+ "updated": 1794588761,
  "cat": {
   "title": "Lezgian napped carpet",
   "museum": "",
@@ -79,7 +79,49 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238392
+  "t": 1794238392,
+  "vlm_quad": {
+   "quad": [
+    [
+     0.05,
+     0.05
+    ],
+    [
+     0.99,
+     0.05
+    ],
+    [
+     0.99,
+     0.99
+    ],
+    [
+     0.05,
+     0.99
+    ]
+   ],
+   "coarse": [
+    [
+     0.05,
+     0.05
+    ],
+    [
+     0.99,
+     0.05
+    ],
+    [
+     0.99,
+     0.99
+    ],
+    [
+     0.05,
+     0.99
+    ]
+   ],
+   "refine": "не разобран ответ: ",
+   "v": 2,
+   "model": "anthropic/claude-sonnet-5.5",
+   "t": 1794588719
+  }
  },
  "multi": [],
  "micro": {
@@ -89,8 +131,49 @@
     "w": 2,
     "t": 1794588616
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794588761,
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05,
+    0.05
+   ],
+   [
+    0.99,
+    0.05
+   ],
+   [
+    0.99,
+    0.99
+   ],
+   [
+    0.05,
+    0.99
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

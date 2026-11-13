@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794588453,
+ "updated": 1794588662,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "The R. Mustafayev State Museum of Arts",
@@ -135,8 +135,67 @@
     "w": 2,
     "t": 1794588453
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794588662,
+    "q": [
+     [
+      0.0347,
+      0.06479
+     ],
+     [
+      0.94627,
+      0.0585
+     ],
+     [
+      0.97174,
+      0.94816
+     ],
+     [
+      0.05099,
+      0.96889
+     ]
+    ],
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0347,
+    0.06479
+   ],
+   [
+    0.94627,
+    0.0585
+   ],
+   [
+    0.97174,
+    0.94816
+   ],
+   [
+    0.05099,
+    0.96889
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

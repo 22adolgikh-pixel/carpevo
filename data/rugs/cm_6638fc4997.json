@@ -31,7 +31,7 @@
    "scheme": "",
    "group": "mmvcyng34",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -41,8 +41,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792275657,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588782
   },
   {
    "id": "mmvcyni960",
@@ -58,7 +58,7 @@
    "scheme": "",
    "group": "mmvcyng34",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -68,8 +68,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792275661,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588782
   },
   {
    "id": "mmvcyni961",
@@ -85,7 +85,7 @@
    "scheme": "",
    "group": "mmvcyng34",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -95,8 +95,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792275661,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588782
   },
   {
    "id": "mmvcyni962",
@@ -112,7 +112,7 @@
    "scheme": "",
    "group": "mmvcyng34",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -122,8 +122,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792275661,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588782
   },
   {
    "id": "mmvcyni963",
@@ -139,7 +139,7 @@
    "scheme": "",
    "group": "mmvcyng34",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -149,8 +149,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792275661,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588782
   },
   {
    "id": "mmvcyo1et0",
@@ -166,7 +166,7 @@
    "scheme": "",
    "group": "mmvcyng34",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -176,12 +176,12 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792275686,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588782
   }
  ],
  "created": 1791870033,
- "updated": 1794156109,
+ "updated": 1794588782,
  "cat": {
   "title": "Samukh rug, XVIII c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -337,5 +337,51 @@
   "ver": 1,
   "t": 1794238315
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "marks": {
+   "mmvcyng34": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588782
+    }
+   },
+   "mmvcyni960": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588782
+    }
+   },
+   "mmvcyni961": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588782
+    }
+   },
+   "mmvcyni962": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588782
+    }
+   },
+   "mmvcyni963": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588782
+    }
+   },
+   "mmvcyo1et0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588782
+    }
+   }
+  }
+ }
 }
