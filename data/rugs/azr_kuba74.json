@@ -31,7 +31,7 @@
    "scheme": "",
    "group": "mmv47xr7b",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -41,8 +41,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1791747059,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588392
   },
   {
    "id": "mmv47xsim0",
@@ -58,7 +58,7 @@
    "scheme": "",
    "group": "mmv47xr7b",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -68,8 +68,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791747061,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588392
   },
   {
    "id": "mmv47xsim1",
@@ -85,7 +85,7 @@
    "scheme": "",
    "group": "mmv47xr7b",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -112,7 +112,7 @@
    "scheme": "",
    "group": "mmv47xr7b",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 1,
@@ -139,7 +139,7 @@
    "scheme": "",
    "group": "mmv47xr7b",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -154,7 +154,7 @@
   }
  ],
  "created": 1791736136,
- "updated": 1792258933,
+ "updated": 1794588392,
  "cat": {
   "title": "kuba74",
   "museum": "",
@@ -252,5 +252,44 @@
   "area": 0.925,
   "ver": 1,
   "t": 1794238311
+ },
+ "micro": {
+  "marks": {
+   "mmv47xr7b": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588392
+    }
+   },
+   "mmv47xsim0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588392
+    }
+   },
+   "mmv47xsim1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794588392
+    }
+   },
+   "mmv47xsim2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794588392
+    }
+   },
+   "mmv47xsim3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794588392
+    }
+   }
+  }
  }
 }

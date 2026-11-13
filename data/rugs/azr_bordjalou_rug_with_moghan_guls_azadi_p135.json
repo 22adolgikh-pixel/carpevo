@@ -31,7 +31,7 @@
    "scheme": "",
    "group": "mmv8h4b4d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -41,8 +41,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792004346,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588359
   },
   {
    "id": "mmv8h4de90",
@@ -58,7 +58,7 @@
    "scheme": "",
    "group": "mmv8h4b4d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -68,8 +68,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792004350,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588359
   },
   {
    "id": "mmv8h4de91",
@@ -85,7 +85,7 @@
    "scheme": "",
    "group": "mmv8h4b4d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -95,8 +95,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792004350,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588359
   },
   {
    "id": "mmv8h4de92",
@@ -112,7 +112,7 @@
    "scheme": "",
    "group": "mmv8h4b4d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -122,8 +122,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792004350,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588359
   },
   {
    "id": "mmv8h59sz",
@@ -154,7 +154,7 @@
   }
  ],
  "created": 1791736128,
- "updated": 1792258891,
+ "updated": 1794588371,
  "cat": {
   "title": "bordjalou rug with moghan guls azadi p135",
   "museum": "",
@@ -252,5 +252,44 @@
   "area": 0.891,
   "ver": 1,
   "t": 1794238568
+ },
+ "micro": {
+  "marks": {
+   "mmv8h4b4d": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588359
+    }
+   },
+   "mmv8h4de90": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588359
+    }
+   },
+   "mmv8h4de91": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588359
+    }
+   },
+   "mmv8h4de92": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588359
+    }
+   },
+   "mmv8h59sz": {
+    "dolgikh": {
+     "a": "skip",
+     "w": 0,
+     "t": 1794588371
+    }
+   }
+  }
  }
 }

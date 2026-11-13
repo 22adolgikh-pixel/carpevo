@@ -18,7 +18,7 @@
  "h": 1170,
  "marks": [],
  "created": 1791736123,
- "updated": 1794588243,
+ "updated": 1794588332,
  "cat": {
   "title": "Borchali rug.png",
   "museum": "Wikimedia Commons",
@@ -81,7 +81,49 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238369
+  "t": 1794238369,
+  "vlm_quad": {
+   "quad": [
+    [
+     0.005,
+     0.003
+    ],
+    [
+     0.99,
+     0.003
+    ],
+    [
+     0.988,
+     0.975
+    ],
+    [
+     0.007,
+     0.975
+    ]
+   ],
+   "coarse": [
+    [
+     0.005,
+     0.003
+    ],
+    [
+     0.99,
+     0.003
+    ],
+    [
+     0.988,
+     0.975
+    ],
+    [
+     0.007,
+     0.975
+    ]
+   ],
+   "refine": "не разобран ответ: ",
+   "v": 2,
+   "model": "anthropic/claude-sonnet-5.5",
+   "t": 1794588324
+  }
  },
  "micro": {
   "frame": {
@@ -90,8 +132,49 @@
     "w": 2,
     "t": 1794588243
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794588332,
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.005,
+    0.003
+   ],
+   [
+    0.99,
+    0.003
+   ],
+   [
+    0.988,
+    0.975
+   ],
+   [
+    0.007,
+    0.975
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
