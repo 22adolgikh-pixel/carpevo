@@ -6,12 +6,12 @@ import os, json, re, collections, time
 WORK = os.environ.get('BOOKS_WORK', '.')
 VLM = os.environ.get('VLM_WORK', WORK)
 BOOKS = {  # slug -> (подпись книги для school_why, доверие)
-    'intangible_2849': 'альбом Мурадова из серии «Азербайджанские ковры», т. «intangible_2849»',
-    'intangible_2850': 'альбом Мурадова из серии «Азербайджанские ковры», т. «intangible_2850»',
-    'intangible_2851': 'книга intangible_2851 (тексты, мало таблиц)',
-    'intangible_2854': 'книга intangible_2854 (тексты, Иреван)',
-    'azerbaycan_xalchasi': 'книга «Azərbaycan xalçası» (общий альбом)',
-    'intangible_2885': 'сборник симпозиума 2007 (подписи иллюстраций)',
+    'intangible_2849': 'Мурадов, «Азербайджанские ковры» (2008), ч. 1',
+    'intangible_2850': 'Мурадов, «Азербайджанские ковры» (2008), ч. 2',
+    'intangible_2851': 'Мурадов, «Azərbaycan xalça sənəti» (2013)',
+    'intangible_2854': 'книга об Иреванской группе (файл 2854)',
+    'azerbaycan_xalchasi': 'сборник к 100-летию Л. Керимова (Музей ковра)',
+    'intangible_2885': 'Музей истории Азербайджана, «Ковры и ковровые изделия» (АН АзССР)',
 }
 KEEP = {'rug': 'ковёр', 'prayer_rug': 'молитвенный ковёр', 'flatweave': 'безворсовый', 'bag': 'мешок / сумка'}
 TYPE_OF = {'guba': 'guba-shirvan', 'shirvan': 'guba-shirvan', 'baku': 'guba-shirvan', 'shaki': 'guba-shirvan', 'ganja': 'ganja-gazakh', 'gazakh': 'ganja-gazakh',
@@ -54,7 +54,7 @@ for r in rows:
         title = ' '.join(x for x in [KEEP[k] if k != 'rug' else 'Ковёр', f'«{name}»' if name else '', place] if x)
         d = dict(id=iid, src='book:' + slug, img=f'img/{iid}.jpg', title=title,
                  names=[x for x in (name, name_en) if x], composition=name, date=date, school=TYPE_OF.get(sch, ''),
-                 school_why=(f'подпись в {BOOKS[slug]}: школа «{place or sch}»' if sch else ''),
+                 school_why=(f'подпись: школа «{place or sch}» — {BOOKS[slug]}' if sch else ''),
                  technique=('ворсовый' if k in ('rug', 'prayer_rug') else ('безворсовый' if k == 'flatweave' else '')),
                  fragment=False, text=(it.get('caption') or '').strip(), museum=(it.get('museum') or '').strip(), inv=(it.get('inv') or '').strip(),
                  place=place, url='', license='книга: только анализ/обучение, не публиковать', size=sz,
@@ -72,7 +72,7 @@ items = list({i['id']: i for i in items}.values())
 cat['items'] = old + items
 cat['groups'] = [g for g in cat.get('groups', []) if g['members'][0] in {i['id'] for i in cat['items']}]
 cat['built'] = time.strftime('%Y-%m-%d %H:%M')
-cat['about'] = 'Книги: Энциклопедия т. II; Мурадов «Qarabağ qrupu» (2010); альбомы Мурадова 2849/2850, 2851, 2854, «Azərbaycan xalçası», сборник симпозиума 2007 (подписи прочитаны VLM). Фото только для анализа.'
+cat['about'] = 'Книги: Энциклопедия т. II; Мурадов «Qarabağ qrupu» (2010); Мурадов 2008 (2 ч.) и 2013, Иреванская группа, сборник к 100-летию Л. Керимова, альбом Музея истории Азербайджана (подписи прочитаны VLM). Фото только для анализа.'
 json.dump(cat, open(os.path.join(WORK, 'books_catalog.json'), 'w', encoding='utf-8'), ensure_ascii=False)
 for s, p in plates.items(): json.dump(p, open(os.path.join(WORK, f'plates_{s}.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('всего карточек', len(cat['items']), '| новых', len(items), '| дубликатов id', sum(v - 1 for v in ids.values()))
