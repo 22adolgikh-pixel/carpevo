@@ -349,15 +349,17 @@ def install(app, DATA, D_WORK):
     def comp_guess(r, others=None):
         """предположение типа для ковра без типа: сначала двойник с указанным типом (кроме отклонённых ✗), потом название"""
         if r.get("composition") in BYID: return None
+        cno = set(r.get("comp_no") or [])                                        # v11.52: «нет, не этот тип» с карточки /m
         no = {k for k, v in (r.get("same_ok") or {}).items() if v and not v.get("ok")}
         ids = [x.get("id") for x in r.get("same") or [] if x.get("id") and x.get("id") not in no]
         for i in ids:
             o = (others or {}).get(i) or load(i) or {}
             c = o.get("composition")
-            if c in BYID:
+            if c in BYID and c not in cno:
                 okd = ((r.get("same_ok") or {}).get(i) or {}).get("ok")
                 return {"id": c, "why": f"у двойника{' (проверен ✓)' if okd else ''}: {(o.get('title') or i)[:60]}", "kind": "twin", "from": i}
-        return comp_guess_text(r)
+        g = comp_guess_text(r)
+        return g if g and g["id"] not in cno else None
 
     # ---- v11.6: что на фото — ковёр, изделие (сумка, конское снаряжение, бытовое) или вообще не фото ковра ----
     OBJ = {"carpet": "ковёр", "bag": "сумка, мешок", "horse": "конское снаряжение", "home": "бытовое изделие", "scene": "не фото ковра"}
@@ -522,12 +524,9 @@ def install(app, DATA, D_WORK):
         threading.Thread(target=run_sync, args=(bid, user(request)), daemon=True).start()
         return {"started": True, "bundle_id": bid}
 
-    @app.post("/api/rugs/{rid}/same")
-    async def api_rug_same(rid: str, request: Request):
-        """Подтвердить / отклонить «это тот же ковёр» (отметка ставится у обоих)."""
-        b = await request.json(); other = b.get("other"); ok = b.get("ok"); sim = bool(b.get("similar"))
+    def same_set(rid, other, ok, sim, who):
+        """отметка «тот же ковёр / разные» у обоих ковров пары (ok=None — снять); общая для студии и карточки /m"""
         if sim: ok = False          # v11.8: «похожи, но не одинаковые» — разные ковры одного рисунка (паспорт не переносится)
-        who = user(request)
         filled = {}
         with _lock:
             ra, rb = load(rid), load(other)
@@ -549,6 +548,13 @@ def install(app, DATA, D_WORK):
                     if got: filled[a] = got
                 save(r)
         _dcl["t"] = 0
+        return filled
+
+    @app.post("/api/rugs/{rid}/same")
+    async def api_rug_same(rid: str, request: Request):
+        """Подтвердить / отклонить «это тот же ковёр» (отметка ставится у обоих)."""
+        b = await request.json()
+        filled = same_set(rid, b.get("other"), b.get("ok"), bool(b.get("similar")), user(request))
         out = api_rug(rid); out["filled"] = filled
         return out
 
@@ -1670,6 +1676,9 @@ def install(app, DATA, D_WORK):
     FR_ANS = ("whole", "cropped", "detail", "not_rug")
     FR_OLD = ("fragment",)                                                       # спрашиваем заново: такого ответа больше нет
     EDGE_FL = ("wavy", "skew", "damaged")
+    # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
+    MORE = ("marks", "name", "comp", "same")
+    KINDS = ("quad", "frame") + MORE
 
     def _mrow(rid):
         """короткая запись для очереди (кэш по времени изменения файла)"""
@@ -1691,6 +1700,25 @@ def install(app, DATA, D_WORK):
                "fr_old": r.get("frame") in FR_OLD,                                # применён снятый ответ — спросить заново
                "old_who": [u for u, v in (m.get("frame") or {}).items() if (v or {}).get("a") in FR_OLD],
                "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge")}
+        # v11.52: карточки «элементы», «имена», «тип», «двойники» — всё нужное для очередей берём здесь же, чтобы не читать ковры заново
+        dead = bool(r.get("dup_of") or r.get("hidden") or r.get("split_into") or r.get("multi"))
+        mk = [{"id": x["id"], "g": x.get("group") or x["id"], "st": x.get("status"), "box": x["box"], "sc": x.get("scheme") or "",
+               "nm": bool(x.get("motif") or x.get("motif_text")), "mach": bool(x.get("machine"))}
+              for x in r.get("marks") or [] if x.get("id") and isinstance(x.get("box"), list) and len(x["box"]) == 4]
+        cg = None
+        if not dead and r.get("composition") not in BYID:
+            try: cg = comp_guess(r)
+            except Exception: cg = None
+        ok_, ch_ = r.get("same_ok") or {}, r.get("same_chk") or {}; sm = []
+        for x in r.get("same") or []:
+            o = x.get("id")
+            if not o or ok_.get(o) is not None: continue                         # человек уже решил
+            c = ch_.get(o) or {}
+            und = (c.get("v") == "maybe") if (c.get("ver") or 1) >= 2 else not ((x.get("score") or 0) >= 60 or x.get("inv"))
+            if und: sm.append(o)                                                 # машина не уверена — спросить человека
+        row.update(dead=dead, mk=mk, comp=r.get("composition") if r.get("composition") in BYID else "", cg=cg, sm=sm,
+                   nn=list(r.get("name_none") or []), src=(r.get("cat") or {}).get("src", ""),
+                   mv={t: {key: list((d or {}).keys()) for key, d in (m.get(t) or {}).items()} for t in MORE})
         _mc[rid] = (k, row); return row
 
     def _mrows():
@@ -1787,8 +1815,143 @@ def install(app, DATA, D_WORK):
             except (OSError, ValueError): _hide["d"] = {}
         return _hide["d"]
 
+    def _exp_opts(cid):
+        """закрытый список типа: схемы Керимова этого типа ковра, у которых есть картинка"""
+        out = []
+        for e in expected_of(cid):
+            f = next((e["id"] + x for x in ("_x12.png", ".png") if os.path.exists(os.path.join(D_OUT, e["id"] + x))), None)
+            if not f: continue
+            d = BYID.get(e.get("motif") or "")
+            out.append({"id": e["id"], "img": "/out/" + f, "name": (d["az"] if d else "") or e.get("name") or e["id"]})
+        return out
+
+    def _more_queues(me, rows, by, want):
+        """очереди карточек v11.52. Все четыре работают на том, что в коврах уже лежит: новых расчётов не нужно.
+        marks — рамки, предложенные машиной (повторы, раппорты, элементы Керимова), ждут ✓/✗: одна карточка — одна группа, до 9 рамок;
+        name  — подтверждённый элемент без имени у ковра с известным типом: выбрать схему из закрытого списка типа;
+        comp  — тип ковра, предложенный по названию или по двойнику: да / нет;
+        same  — пара «возможно, тот же ковёр», в которой машина не уверена."""
+        out = {t: [] for t in MORE}; out["name_wait"] = 0; opts = {}
+        for x in rows:
+            if x["dead"]: continue
+            G = {}
+            for m in x["mk"]: G.setdefault(m["g"], []).append(m)
+            if "marks" in want:
+                for g, ms in G.items():
+                    pr = [m for m in ms if m["st"] == "proposed" and me not in x["mv"]["marks"].get(m["id"], [])]
+                    if not pr: continue
+                    cf = sorted([m for m in ms if m["st"] == "confirmed"], key=lambda m: m["mach"])     # образец: сначала рамка, нарисованная рукой
+                    sc = next((m["sc"] for m in cf + ms if m["sc"]), "")
+                    f = next((sc + e for e in ("_x12.png", ".png") if sc and os.path.exists(os.path.join(D_OUT, sc + e))), None)
+                    out["marks"].append({"type": "marks", "rid": x["id"], "g": g, "sample": cf[0]["box"] if cf else None, "scheme": ("/out/" + f) if f else "",
+                                         "items": [{"id": m["id"], "box": m["box"]} for m in pr[:9]], "more": max(0, len(pr) - 9)})
+            if "name" in want:
+                for g, ms in G.items():
+                    cf = [m for m in ms if m["st"] == "confirmed"]
+                    if not cf or any(m["sc"] or m["nm"] for m in ms if m["st"] != "rejected") or g in x["nn"] or me in x["mv"]["name"].get(g, []): continue
+                    if not x["comp"]: out["name_wait"] += 1; continue           # тип ковра не указан — закрытого списка нет
+                    if x["comp"] not in opts: opts[x["comp"]] = _exp_opts(x["comp"])
+                    if not opts[x["comp"]]: out["name_wait"] += 1; continue
+                    cf.sort(key=lambda m: -(m["box"][2] * m["box"][3])); d = BYID[x["comp"]]
+                    out["name"].append({"type": "name", "rid": x["id"], "g": g, "sample": cf[0]["box"], "also": [m["box"] for m in cf[1:3]],
+                                        "comp": d["az"] or d["ru"], "opts": opts[x["comp"]]})
+            if "comp" in want and x["cg"] and x["use"] != "skip" and me not in x["mv"]["comp"].get(x["cg"]["id"], []):
+                d = BYID[x["cg"]["id"]]
+                out["comp"].append({"type": "comp", "rid": x["id"], "cid": d["id"], "az": d["az"], "ru": d["ru"], "why": x["cg"]["why"], "kind": x["cg"]["kind"]})
+            if "same" in want:
+                for o in x["sm"]:
+                    y = by.get(o)
+                    if not y or y["dead"]: continue
+                    a, b = sorted((x["id"], o))
+                    if me in by[a]["mv"]["same"].get(b, []) or any(t["rid"] == a and t["other"] == b for t in out["same"]): continue
+                    out["same"].append({"type": "same", "rid": a, "other": b, "title2": by[b]["title"], "src": by[a]["src"], "src2": by[b]["src"]})
+        out["marks"].sort(key=lambda t: (t["sample"] is None, t["rid"]))          # сначала группы с образцом: вопрос «тот же?» проще, чем «элемент ли это?»
+        out["comp"].sort(key=lambda t: (t["kind"] != "twin", t["cid"]))            # по двойнику надёжнее; дальше подряд один тип — глаз привыкает
+        if out["comp"]:                                                           # образцы типа: до двух ковров, у которых этот тип уже стоит (Керимов — первым)
+            ref = {}
+            for x in sorted(rows, key=lambda x: not x["id"].startswith("kerimov")):
+                if x["comp"] and not x["dead"] and len(ref.setdefault(x["comp"], [])) < 2: ref[x["comp"]].append(x["id"])
+            for t in out["comp"]: t["refs"] = ref.get(t["cid"], [])
+        return out
+
+    def _marks_trap(me, t, x):
+        """контрольная рамка в карточке «элементы» (примерно в каждой третьей): отклонённая рамка той же группы (её надо отметить ✗)
+        или уже подтверждённая (её трогать не надо). В ковре ничего не меняет — считает внимательность."""
+        import random
+        if not t.get("sample") or random.random() > 0.35: return
+        ms = [m for m in x["mk"] if m["g"] == t["g"] and m["box"] != t["sample"]]
+        bad = [m for m in ms if m["st"] == "rejected"]; good = [m for m in ms if m["st"] == "confirmed"]
+        pool = ([("bad", m) for m in bad] + [("ok", m) for m in good])
+        if not pool: return
+        exp, m = random.choice(pool); tok = "%x" % random.getrandbits(48); _ctl_tok[tok] = (me, exp, time.time())
+        t["items"] = t["items"][:8]; t["items"].insert(random.randrange(len(t["items"]) + 1), {"id": "c:" + tok, "box": m["box"]})
+
+    def _micro_more(me, role, typ, rid, a, body, rec):
+        """ответ на карточки v11.52; решение применяется при весе ≥2 (как у кадра и углов)"""
+        now = rec["t"]; skip = a == "skip"; w = 0 if skip else _wt(role); applied = None; ctl = None; pair = None
+        # «не знаю» тоже записываем (с весом 0): иначе та же карточка возвращалась бы этому человеку в каждой пачке
+        if typ == "same":
+            other = os.path.basename(str(body.get("other", "")))
+            if a not in ("same", "similar", "diff", "skip") or not other: return JSONResponse({"error": "ответ?"}, status_code=400)
+            rec["other"] = other
+        with _lock:
+            r = load(rid)
+            if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
+            M = r.setdefault("micro", {}).setdefault(typ, {})
+            sumw = lambda d, v: sum(x["w"] for x in d.values() if x["a"] == v)
+            if typ == "marks":
+                ans = {str(i): "ok" for i in body.get("ok") or []}; ans.update({str(i): "bad" for i in body.get("bad") or []})
+                if skip: ans = {str(i): "skip" for i in body.get("ids") or []}
+                for i in [i for i in ans if i.startswith("c:")]:                 # контрольные рамки: в ковёр не идут
+                    v = _ctl_tok.pop(i[2:], None); got = ans.pop(i)
+                    if v and v[0] == me: ctl = (ctl is not False) and got == v[1]
+                byid = {m.get("id"): m for m in r.get("marks") or []}; n = 0
+                for mid, v in ans.items():
+                    m = byid.get(mid)
+                    if not m or m.get("status") != "proposed": continue
+                    d = M.setdefault(mid, {}); d[me] = {"a": v, "w": w, "t": now}
+                    if sumw(d, "ok") >= 2: m["status"] = "confirmed"; m["confirmed_by"] = "/m: " + ", ".join(sorted(u for u, x in d.items() if x["a"] == "ok")); m["confirmed_at"] = now; n += 1
+                    elif sumw(d, "bad") >= 2: m["status"] = "rejected"; n += 1
+                rec["ok"] = [i for i, v in ans.items() if v == "ok"]; rec["bad"] = [i for i, v in ans.items() if v == "bad"]
+                if ctl is not None: rec["ctl"] = ctl
+                if n: applied = "marks:%d" % n
+            elif typ == "name":
+                g = str(body.get("g", "")); ids = {e["id"]: e for e in expected_of(r.get("composition"))} if r.get("composition") in BYID else {}
+                if not g or (a not in ("none", "skip") and a not in ids): return JSONResponse({"error": "ответ?"}, status_code=400)
+                d = M.setdefault(g, {}); d[me] = {"a": a, "w": w, "t": now}; rec["g"] = g
+                if a not in ("none", "skip") and sumw(d, a) >= 2:
+                    e = ids[a]
+                    for m in r.get("marks") or []:
+                        if (m.get("group") or m.get("id")) != g or m.get("status") == "rejected" or m.get("scheme"): continue
+                        m["scheme"] = a; m["named_by"] = "/m"
+                        if e.get("motif") in BYID: m["motif"] = m.get("motif") or e["motif"]
+                        elif not m.get("motif_text"): m["motif_text"] = e.get("name") or ""
+                    applied = "name"
+                elif a == "none" and sumw(d, "none") >= 2:
+                    if g not in (r.get("name_none") or []): r.setdefault("name_none", []).append(g)
+                    applied = "none"
+            elif typ == "comp":
+                cid = str(body.get("cid", ""))
+                if a not in ("yes", "no", "skip") or cid not in BYID: return JSONResponse({"error": "ответ?"}, status_code=400)
+                d = M.setdefault(cid, {}); d[me] = {"a": a, "w": w, "t": now}; rec["cid"] = cid
+                if sumw(d, "yes") >= 2 and r.get("composition") not in BYID:
+                    r["composition"] = cid; r["composition_by"] = "/m: " + ", ".join(sorted(u for u, x in d.items() if x["a"] == "yes")); applied = "comp"
+                elif sumw(d, "no") >= 2:
+                    if cid not in (r.get("comp_no") or []): r.setdefault("comp_no", []).append(cid)
+                    applied = "comp_no"
+            else:
+                d = M.setdefault(rec["other"], {}); d[me] = {"a": a, "w": w, "t": now}
+                v = next((v for v in ("same", "similar", "diff") if sumw(d, v) >= 2), None)
+                if v: pair = (rec["other"], v, ", ".join(sorted(u for u, x in d.items() if x["a"] == v))); applied = "same:" + v
+            r["updated"] = now; save(r)
+            if applied: rec["applied"] = applied
+            _mlog(rec)
+        if pair: same_set(rid, pair[0], pair[1] == "same", pair[1] == "similar", "/m: " + pair[2])   # вне замка: функция берёт его сама
+        _ty["t"] = 0
+        return {"ok": True, "applied": applied, **({"ctl": ctl} if ctl is not None else {})}
+
     @app.get("/api/micro/next")
-    def micro_next(request: Request, n: int = 6):
+    def micro_next(request: Request, n: int = 6, k: str = ""):
         import random
         me = user(request); n = max(1, min(12, n)); rows = _mrows(); H = _micro_hide()
         # v11.45: ковры с прежним ответом «фрагмент» возвращаются в очередь — в новом наборе ответов такого больше нет
@@ -1810,21 +1973,31 @@ def install(app, DATA, D_WORK):
             wait = [x for x in qd if not x["vquad"]]; _vlm_enqueue([x["id"] for x in wait[:18]])
             if not _vq["err"] and time.time() >= _vq["off"] and _vq["done"] < VLM_MAX:
                 n_wait = len(wait); qd = [x for x in qd if x["vquad"]]
-        tasks = []; fi = qi = 0
-        while len(tasks) < n and (fi < len(fr) or qi < len(qd)):
-            if qi < len(qd) and (len(tasks) % 2 == 0 or fi >= len(fr)): x = qd[qi]; qi += 1; tasks.append({"type": "quad", "rid": x["id"], "quad": x["vquad"] or x["aquad"], "qsrc": "vlm" if x["vquad"] else "auto"})
-            elif fi < len(fr): x = fr[fi]; fi += 1; tasks.append({"type": "frame", "rid": x["id"]})
+        want = [x for x in KINDS if x in k.split(",")] or list(KINDS)             # v11.52: какие виды карточек показывать (кнопки вверху /m)
+        by = {x["id"]: x for x in rows}
+        more = _more_queues(me, rows, by, want)
+        Q = {"quad": [{"type": "quad", "rid": x["id"], "quad": x["vquad"] or x["aquad"], "qsrc": "vlm" if x["vquad"] else "auto"} for x in qd[:n]],
+             "frame": [{"type": "frame", "rid": x["id"]} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
+        tasks = []; order = [t for t in want if Q[t]]
+        while len(tasks) < n and order:                                           # по кругу: по одной карточке каждого вида
+            for t in list(order):
+                if len(tasks) >= n: break
+                tasks.append(Q[t].pop(0))
+                if not Q[t]: order.remove(t)
+        for t in tasks:
+            if t["type"] == "marks": _marks_trap(me, t, by[t["rid"]])
         ctl = [x for x in rows if x["ctl"]]
-        if ctl and len(tasks) >= 3:                                                 # контрольная карточка
+        if ctl and len(tasks) >= 3 and "quad" in want:                             # контрольная карточка
             x = random.choice(ctl); q = [list(p) for p in x["quad"]]; good = random.random() < 0.5
             if not good:
-                k = random.randrange(4); q[k] = [q[k][0] + random.choice([-1, 1]) * 0.07, q[k][1] + random.choice([-1, 1]) * 0.07]
+                kk = random.randrange(4); q[kk] = [q[kk][0] + random.choice([-1, 1]) * 0.07, q[kk][1] + random.choice([-1, 1]) * 0.07]
             tok = "%x" % random.getrandbits(48); _ctl_tok[tok] = (me, "ok" if good else "notok", time.time())
             tasks.insert(random.randrange(1, len(tasks)), {"type": "quad", "rid": x["id"], "quad": q, "c": tok})
         by = {x["id"]: x for x in rows}
         for t in tasks:
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H)}, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "name_wait": more["name_wait"]},
+                "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
 
     @app.post("/api/micro/answer")
     def micro_answer(request: Request, body: dict = Body(...)):
@@ -1839,6 +2012,7 @@ def install(app, DATA, D_WORK):
             if v and v[0] == me:
                 rec["ctl"] = (a == "ok") == (v[1] == "ok"); _mlog(rec)
             return {"ok": True, "ctl": rec.get("ctl")}
+        if typ in MORE: return _micro_more(me, role, typ, rid, a, body, rec)
         if typ not in ("frame", "quad") or a == "skip":
             if a == "skip": _mlog(rec)
             return {"ok": True}
@@ -1936,10 +2110,24 @@ def install(app, DATA, D_WORK):
                         cv2.imwrite(p, a, [cv2.IMWRITE_JPEG_QUALITY, 80])
         return FileResponse(p, headers={"Cache-Control": "max-age=3600"}) if os.path.exists(p) else Response(status_code=404)
 
+    _imc = {"k": None, "a": None}; _imc_lock = threading.Lock()
+
+    def _img_full(rid):
+        """оригинал фото; последний прочитанный держим в памяти (v11.52: карточка /m просит до 10 вырезок одного ковра подряд)"""
+        p = img_path(rid)
+        if not p: return None
+        try: k = (p, os.stat(p).st_mtime_ns)
+        except OSError: return None
+        with _imc_lock:
+            if _imc["k"] == k: return _imc["a"]
+            a = cv2.imread(p)
+            if a is not None and a.nbytes <= 120_000_000: _imc.update(k=k, a=a)   # очень большие фото в памяти не держим
+            return a
+
     @app.get("/api/rugs/{rid}/crop")
     def rug_crop(rid: str, b: str = Query(...), s: int = 160, pad: float = 0.0, mark: int = 0):
         """вырезка рамки; pad — поля вокруг (доля размера рамки), mark=1 — сама рамка обведена (видно, что вокруг)"""
-        p = img_path(os.path.basename(rid)); a = cv2.imread(p) if p else None
+        a = _img_full(os.path.basename(rid))
         if a is None: return Response(status_code=404)
         try: x, y, w, h = [float(v) for v in b.split(",")]
         except Exception: return Response(status_code=400)

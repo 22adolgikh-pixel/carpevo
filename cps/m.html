@@ -35,9 +35,21 @@ button.wide{grid-column:1/-1}button.sm{min-height:40px;padding:8px}button:active
 .end{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;flex:1}.end .big{font-size:42px;font-weight:700}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#000d;padding:8px 14px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}.toast.on{opacity:1}
 .mut{color:var(--mut)}
+/* v11.52: карточки «элементы», «имена», «тип», «двойники» и выбор вида карточек */
+.chips{display:flex;gap:6px;padding:6px 14px 0;overflow-x:auto;scrollbar-width:none}.chips button{flex:none;min-height:0;padding:4px 10px;border-radius:14px;font-size:12px;white-space:nowrap;color:var(--mut)}.chips button.on{border-color:var(--acc);color:var(--tx)}
+.smp{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--mut)}.smp img{flex:none;height:76px;width:76px;object-fit:contain;border-radius:8px;border:2px solid var(--acc);background:#000}.smp img.sch{image-rendering:pixelated;background:#fff;border-color:var(--ln)}.smp img.big{height:120px;width:120px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1;min-height:0;overflow-y:auto;align-content:start}
+.tl{position:relative;aspect-ratio:1;min-height:0;padding:0;border-radius:10px;border:2px solid var(--ln);overflow:hidden;background:#000}.tl img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
+.tl.x{border-color:var(--bad)}.tl.x:after{content:'✗';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:var(--bad);background:#000a}
+.tl.sch{background:#fff}.tl.sch img{image-rendering:pixelated;padding:4px 4px 16px}.tl.sel{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
+.tl b{position:absolute;left:0;right:0;bottom:0;font-size:10px;font-weight:500;line-height:1.5;background:#000b;color:#fff;padding:0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:1;min-height:0;align-items:center}.pair figure{margin:0;display:flex;flex-direction:column;gap:4px;align-items:center;min-width:0}.pair img{max-width:100%;max-height:54dvh;object-fit:contain;border-radius:6px}.pair figcaption{font-size:11px;color:var(--mut);text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.typ{background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:8px 10px;display:flex;gap:8px;align-items:center}.typ b{font-size:16px}.typ .refs{margin-left:auto;display:flex;gap:4px}.typ .refs img{height:64px;border-radius:4px}
+button:disabled{opacity:.4}
 .flags{display:flex;gap:8px}.flags label{flex:1;display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--ln);border-radius:10px;font-size:13px;color:var(--mut)}.flags input{width:20px;height:20px;accent-color:var(--acc)}.flags label:has(input:checked){border-color:var(--acc);color:var(--tx)}
 </style></head><body>
 <header><b>Проверка ковров</b><span class="sp"></span><small id="me"></small><a href="/">студия</a></header>
+<div class="chips" id="chips"></div>
 <div class="dots" id="dots"></div>
 <main id="main"><div class="end"><span class="mut">загружаю…</span></div></main>
 <div class="toast" id="toast"></div>
@@ -52,8 +64,17 @@ function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clear
 function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
+// v11.52: виды карточек. Кнопки вверху включают и выключают вид; выбор помнится на этом телефоне. /m?k=quad,frame — задать выбор ссылкой.
+const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['same','двойники']];
+function kindsInit(){let k=new URLSearchParams(location.search).get('k');
+  if(!k){try{k=localStorage.getItem('cps_m_k');}catch(e){}}
+  S.k=(k||'').split(',').filter(x=>KINDS.some(a=>a[0]===x));if(!S.k.length)S.k=KINDS.map(a=>a[0]);}
+function chips(){const L=S.left||{};$('chips').innerHTML=KINDS.map(([k,n])=>`<button data-k="${k}" class="${S.k.includes(k)?'on':''}">${n}${L[k]!=null?' '+L[k]:''}</button>`).join('');
+  document.querySelectorAll('#chips button').forEach(b=>b.onclick=()=>{const k=b.dataset.k;
+    if(S.k.includes(k)){if(S.k.length===1)return toast('хотя бы один вид карточек');S.k=S.k.filter(x=>x!==k);}else S.k.push(k);
+    try{localStorage.setItem('cps_m_k',S.k.join(','));}catch(e){}load();});}
 async function load(){$('main').innerHTML='<div class="end"><span class="mut">загружаю…</span></div>';
-  try{const j=await api('/api/micro/next?n=6');S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;S.ver=j.ver||S.ver;head();show();}
+  try{const j=await api('/api/micro/next?n=6&k='+S.k.join(','));S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;S.ver=j.ver||S.ver;chips();head();show();}
   catch(e){$('main').innerHTML=`<div class="end"><span>Не загрузилось: ${esc(e.message)}</span><button onclick="load()">ещё раз</button></div>`;}}
 const img=t=>'/rugmid/'+encodeURIComponent(t.rid)+'.jpg';
 function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!im.naturalWidth)return;
@@ -61,8 +82,9 @@ function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!
   el.style.backgroundImage=`url("${img(t)}")`;el.style.backgroundSize=`${BW}px ${BH}px`;el.style.backgroundPosition=`${r.width/2-x*BW}px ${r.height/2-y*BH}px`;}
 function show(){head();const t=S.tasks[S.i];
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
-    <div class="mut">в очереди: целый ли ковёр — ${L.frame||0}, углы — ${L.quad||0}</div>${(L.frame||L.quad)?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
-  t.type==='frame'?showFrame(t):showQuad(t);}
+    <div class="mut">в очереди: ${KINDS.filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
+    ${S.k.some(k=>L[k])?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
+  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame})[t.type](t);}
 function qhead(q,tip){return `<div class="qrow"><span class="q">${q}</span><button class="ib" id="ib" aria-label="подсказка">i</button></div><div class="tip hint" id="tip">${tip}</div>`;}
 function qtip(){const b=$('ib'),t=$('tip');if(b&&t)b.onclick=()=>{t.classList.toggle('on');b.classList.toggle('on');};}
 function stage(t,extra=''){return `<div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="${img(t)}" alt="">${extra}</div></div>`;}
@@ -82,8 +104,8 @@ function zoomable(){const st=$('stage'),ph=$('ph');if(!st||!ph)return;let k=1,x=
   window.__zoom=()=>k;}
 // v11.45: на каждой карточке свои галочки; отправляем только их, чтобы не стирать отметки с другой карточки
 function rdFlags(t){const o={},m={fw:'wavy',fs:'skew',fd:'damaged'};for(const k in m){const e=$(k);if(e)o[m[k]]=e.checked;}if(Object.keys(o).length)t.fl=o;}
-async function answer(t,a,q){rdFlags(t);const k=S.i;S.i++;S.done++;show();
-  try{const j=await api('/api/micro/answer',{type:t.type,rid:t.rid,a,q,c:t.c,flags:t.fl,s:t.qsrc});S.me.total=(S.me.total||0)+1;if(a!=='skip')S.me.today=(S.me.today||0)+1;
+async function answer(t,a,q,x){rdFlags(t);const k=S.i;S.i++;S.done++;show();
+  try{const j=await api('/api/micro/answer',{type:t.type,rid:t.rid,a,q,c:t.c,flags:t.fl,s:t.qsrc,...(x||{})});S.me.total=(S.me.total||0)+1;if(a!=='skip')S.me.today=(S.me.today||0)+1;
     if(j.ctl===false)toast('контрольная карточка: тут была ошибка — смотрите внимательнее');else if(j.applied)toast('принято ✓');head();}
   catch(e){toast('не сохранилось: '+e.message);S.i=k;S.done--;show();}}
 // v11.45: кадр — три ответа (целый / обрезан / деталь) плюс «не ковёр»; порог «чуть вылез» — 3 % по одному краю.
@@ -120,5 +142,39 @@ function fixQuad(t,k){t.fixed=true;rdFlags(t);
   $('pv').onclick=()=>fixQuad(t,(k+3)%4);$('nx').onclick=()=>fixQuad(t,(k+1)%4);
   $('ok').onclick=()=>answer(t,'fix',t.q.map(p=>p.map(v=>+v.toFixed(5))));
   $('bk').onclick=()=>{t.q=t.quad.map(p=>[...p]);showQuad(t);};}
-load();
+// ---------- v11.52: новые карточки ----------
+const crop=(rid,b,s,pad,mark)=>`/api/rugs/${encodeURIComponent(rid)}/crop?b=${b.join(',')}&s=${s}&pad=${pad}&mark=${mark}`;
+// «элементы»: рамки, которые предложила машина. Тап по плитке — «это не то»; ✓ принимает остальные.
+function showMarks(t){t.x=t.x||{};const hasS=!!t.sample;
+  $('main').innerHTML=`${qhead(hasS?'Это тот же элемент? Нажмите на лишние':'Это отдельные элементы узора? Нажмите на лишние',
+     'Машина нашла на ковре похожие места. Жёлтая рамка — что именно предложено, вокруг — соседний узор. Тап — отметить ✗ (не то, криво обведено, захвачено лишнее). ✓ — остальные верны.')}
+   ${hasS||t.scheme?`<div class="smp">${hasS?`<img src="${crop(t.rid,t.sample,200,0.15,0)}" alt="образец">`:''}${t.scheme?`<img class="sch" src="${t.scheme}" alt="схема">`:''}<span>${hasS?'образец':'схема Керимова'}${t.more?` · в группе ещё ${t.more}`:''}<br>${esc(t.title||'')}</span></div>`:''}
+   <div class="grid" id="gr">${t.items.map(m=>`<button class="tl${t.x[m.id]?' x':''}" data-id="${esc(m.id)}"><img src="${crop(t.rid,m.box,240,0.35,1)}" alt=""></button>`).join('')}</div>
+   <div class="row3"><button class="yes" id="a1" aria-label="готово: неотмеченные верны">✓</button><button class="no" id="a3" aria-label="все не то">✗ все</button><button class="unk" id="a4" aria-label="не знаю">?</button></div>`;qtip();
+  document.querySelectorAll('#gr .tl').forEach(e=>e.onclick=()=>{const i=e.dataset.id;t.x[i]=!t.x[i];e.classList.toggle('x',!!t.x[i]);});
+  const ids=t.items.map(m=>m.id);
+  $('a1').onclick=()=>answer(t,'done',null,{ok:ids.filter(i=>!t.x[i]),bad:ids.filter(i=>t.x[i])});
+  $('a3').onclick=()=>answer(t,'done',null,{ok:[],bad:ids});$('a4').onclick=()=>answer(t,'skip',null,{ids});}
+// «имена»: подтверждённый элемент без названия; выбор из схем Керимова для типа этого ковра (закрытый список)
+function showName(t){
+  $('main').innerHTML=`${qhead('Какой это элемент?','Сверху элемент с ковра (жёлтая рамка). Ниже — все схемы Керимова для ковров типа «'+esc(t.comp)+'». Выберите схему и нажмите ✓. Поворот и цвет не важны, важна форма.')}
+   <div class="smp"><img class="big" src="${crop(t.rid,t.sample,260,0.3,1)}" alt="элемент">${(t.also||[]).map(b=>`<img src="${crop(t.rid,b,160,0.15,0)}" alt="">`).join('')}<span>тип: ${esc(t.comp)}</span></div>
+   <div class="grid" id="gr">${t.opts.map(o=>`<button class="tl sch${t.sel===o.id?' sel':''}" data-id="${esc(o.id)}"><img src="${o.img}" alt=""><b>${esc(o.name)}</b></button>`).join('')}</div>
+   <div class="row3"><button class="yes" id="a1" aria-label="это выбранная схема" ${t.sel?'':'disabled'}>✓</button><button class="no" id="a3" style="font-size:13px">нет в списке</button><button class="unk" id="a4" aria-label="не знаю">?</button></div>`;qtip();
+  document.querySelectorAll('#gr .tl').forEach(e=>e.onclick=()=>{t.sel=e.dataset.id;document.querySelectorAll('#gr .tl').forEach(x=>x.classList.toggle('sel',x===e));$('a1').disabled=false;});
+  $('a1').onclick=()=>t.sel&&answer(t,t.sel,null,{g:t.g});$('a3').onclick=()=>answer(t,'none',null,{g:t.g});$('a4').onclick=()=>answer(t,'skip',null,{g:t.g});}
+// «тип»: машина предложила тип ковра по названию или по двойнику
+function showComp(t){document.documentElement.style.setProperty('--imh','44dvh');
+  $('main').innerHTML=`${qhead('Это ковёр такого типа?','Тип предложен машиной: '+esc(t.why)+'. Справа — ковры, у которых этот тип уже указан (если есть). Не уверены — «?».')}
+   <div class="typ"><div><b>${esc(t.az||t.ru)}</b><div class="hint">${esc(t.ru&&t.az?t.ru+' · ':'')}${esc(t.why)}</div></div><div class="refs">${(t.refs||[]).map(i=>`<img src="/rugthumb/${encodeURIComponent(i)}.jpg" alt="">`).join('')}</div></div>
+   ${stage(t)}
+   <div class="row3"><button class="yes" id="a1" aria-label="да">✓</button><button class="no" id="a3" aria-label="нет">✗</button><button class="unk" id="a4" aria-label="не знаю">?</button></div>`;qtip();
+  S.im=$('im');$('a1').onclick=()=>answer(t,'yes',null,{cid:t.cid});$('a3').onclick=()=>answer(t,'no',null,{cid:t.cid});$('a4').onclick=()=>answer(t,'skip',null,{cid:t.cid});zoomable();}
+// «двойники»: пара фото, в которой машина не уверена
+function showSame(t){const o={rid:t.other};
+  $('main').innerHTML=`${qhead('Это один и тот же ковёр?','Один и тот же предмет на двух фото (другой свет, другой музейный снимок) — «тот же». Тот же рисунок, но другой ковёр (другие мелочи, потёртости, размер) — «похожи».')}
+   <div class="pair"><figure><img src="${img(t)}" alt=""><figcaption>${esc(t.title||t.rid)}${t.src?' · '+esc(t.src):''}</figcaption></figure><figure><img src="${img(o)}" alt=""><figcaption>${esc(t.title2||t.other)}${t.src2?' · '+esc(t.src2):''}</figcaption></figure></div>
+   <div class="btns"><button class="yes" id="a1">✓ тот же ковёр</button><button id="a2">похожи, но разные</button><button class="no" id="a3">✗ разные</button><button class="sm unk" id="a4">не знаю</button></div>`;qtip();
+  const x={other:t.other};$('a1').onclick=()=>answer(t,'same',null,x);$('a2').onclick=()=>answer(t,'similar',null,x);$('a3').onclick=()=>answer(t,'diff',null,x);$('a4').onclick=()=>answer(t,'skip',null,x);}
+kindsInit();load();
 </script></body></html>

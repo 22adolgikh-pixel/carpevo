@@ -1243,7 +1243,7 @@ def t33_micro_phone(pg, ctx):
     assert nx['tasks'], f'нет карточек: {nx}'
     mc = pg.context.browser.new_context(viewport={'width': 390, 'height': 844}, has_touch=True); m = mc.new_page()
     errs = []; m.on('pageerror', lambda e: errs.append(str(e)))
-    m.goto(ctx['url'] + 'm'); m.wait_for_selector('.q', timeout=15000); m.wait_for_timeout(800)
+    m.goto(ctx['url'] + 'm?k=quad,frame'); m.wait_for_selector('.q', timeout=15000); m.wait_for_timeout(800)   # v11.52: остальные виды карточек — в t36
     m.screenshot(path=f'{OUT}/33_micro_first.png')
     hv = m.inner_text('#me'); assert 'v11.' in hv, f'в шапке /m нет номера версии: {hv!r}'      # v11.46
     assert m.query_selector('#ib') and not m.is_visible('#tip'), 'подсказка должна быть спрятана под «i»'
@@ -1342,6 +1342,82 @@ def t35_micro_hide(pg, ctx):
         seen |= {t['rid'] for t in j['tasks'] if t['type'] == 'frame'}
     assert not (seen & set(hid)), f'скрытые ковры попали в очередь: {sorted(seen & set(hid))[:5]}'
     assert j['left'].get('hidden') == len(hid), f'в left нет числа скрытых: {j["left"]}'
+
+
+@test
+def t36_micro_more_cards(pg, ctx):
+    """v11.52: карточки /m «элементы» (✓/✗ рамок машины), «имена» (схема из закрытого списка типа), «тип» (да/нет), «двойники» (пара фото);
+    выбор видов карточек, «не знаю» не возвращает карточку, отклонённый тип больше не предлагается"""
+    import cv2
+    u = ctx['url']; D = ctx['app'] + '/data'
+    T = get(u + 'api/types')['types']
+    ty = next((t for t in T if not t['region'] and t['el'] >= 2 and len([e for e in get(u + 'api/types/' + t['id'])['elements'] if os.path.exists(f"{D}/out/{e['id']}.png")]) >= 2), None)
+    assert ty, 'нет типа с двумя схемами с картинкой'
+    els = [e for e in get(u + 'api/types/' + ty['id'])['elements'] if os.path.exists(f"{D}/out/{e['id']}.png")]
+    src = cv2.imread(f'{D}/rug_img/frieze_1.jpg'); now = int(time.time())
+    def rug(rid, **kw):
+        cv2.imwrite(f'{D}/rug_img/{rid}.jpg', src)
+        r = {"id": rid, "title": rid, "source": "тест", "museum": "", "inv": "", "url": "", "license": "", "place": "", "date": "", "school": "", "composition": "",
+             "technique": "", "size": "", "notes": "", "status": "new", "w": src.shape[1], "h": src.shape[0], "marks": [], "cat": {"src": "upload"}, "created": now, "updated": now}
+        r.update(kw); json.dump(r, open(f'{D}/rugs/{rid}.json', 'w'), ensure_ascii=False)
+    def mk(i, box, st, g, **kw): return {"id": i, "box": box, "zone": "border", "motif": "", "motif_text": "", "scheme": "", "group": g, "status": st, **kw}
+    rug('mc_marks', composition=ty['id'], marks=[
+        mk('a1', [.06, .10, .10, .05], 'confirmed', 'gA', motif_text='уже назван'), mk('a2', [.06, .15, .10, .05], 'proposed', 'gA', machine=1), mk('a3', [.06, .20, .10, .05], 'proposed', 'gA', machine=1),
+        mk('a4', [.30, .40, .10, .05], 'rejected', 'gA', machine=1), mk('b1', [.40, .30, .12, .08], 'confirmed', 'gB'), mk('b2', [.55, .30, .12, .08], 'confirmed', 'gB')])
+    rug('mc_comp', title='Pirəbədil carpet, Quba'); rug('mc_comp2', title='Pirebedil rug')
+    rug('mc_s1', same=[{"id": "mc_s2", "score": 30}]); rug('mc_s2', same=[{"id": "mc_s1", "score": 30}])
+    rug('mc_s3', same=[{"id": "mc_s4", "score": 25}]); rug('mc_s4')
+    K = 'marks,name,comp,same'
+    nx = get(u + 'api/micro/next?n=12&k=' + K); kinds = [t['type'] for t in nx['tasks']]
+    assert set(kinds) == set(K.split(',')), f'в очереди не все виды карточек: {kinds} {nx["left"]}'
+    assert nx['left']['marks'] >= 1 and nx['left']['comp'] >= 2 and nx['left']['same'] >= 2 and nx['left']['name'] >= 1, nx['left']
+    tm = next(t for t in nx['tasks'] if t['type'] == 'marks' and t['rid'] == 'mc_marks')
+    assert tm['sample'] == [.06, .10, .10, .05] and {'a2', 'a3'} <= {i['id'] for i in tm['items']}, f'карточка элементов: {tm}'
+    tn = next(t for t in nx['tasks'] if t['type'] == 'name' and t['rid'] == 'mc_marks')
+    assert tn['g'] == 'gB' and len(tn['opts']) >= 2 and tn['opts'][0]['img'].startswith('/out/'), f'карточка имён: {tn}'
+    tc = next(t for t in nx['tasks'] if t['type'] == 'comp' and t['rid'] == 'mc_comp'); assert tc['cid'] == 'pirebedil', tc
+    assert get(u + 'api/micro/next?n=6&k=quad,frame')['kinds'] == ['quad', 'frame'], 'выбор видов карточек не работает'
+    # «не знаю» и «нет»: карточка не возвращается, отклонённый тип больше не предлагается
+    post(u + 'api/micro/answer', {'type': 'same', 'rid': 'mc_s3', 'other': 'mc_s4', 'a': 'skip'})
+    r = post(u + 'api/micro/answer', {'type': 'comp', 'rid': 'mc_comp2', 'cid': 'pirebedil', 'a': 'no'}); assert r.get('applied') == 'comp_no', r
+    n2 = get(u + 'api/micro/next?n=12&k=' + K)['tasks']
+    assert not [t for t in n2 if (t['type'] == 'same' and t['rid'] == 'mc_s3') or (t['type'] == 'comp' and t['rid'] == 'mc_comp2')], 'отвеченные карточки вернулись в очередь'
+    assert get(u + 'api/rugs/mc_comp2').get('comp_no') == ['pirebedil'] and not get(u + 'api/rugs/mc_comp2').get('composition')
+    # телефон: проходим по одной карточке каждого вида
+    mc = pg.context.browser.new_context(viewport={'width': 390, 'height': 844}, has_touch=True); m = mc.new_page()
+    errs = []; m.on('pageerror', lambda e: errs.append(str(e)))
+    m.goto(u + 'm?k=' + K); m.wait_for_selector('.q', timeout=15000)
+    assert m.eval_on_selector_all('#chips button.on', 'e=>e.length') == 4, 'кнопки видов карточек не отражают выбор'
+    seen = set()
+    for _ in range(14):
+        m.wait_for_timeout(500)
+        if m.query_selector('.end'):
+            if len(seen) == 4 or not m.query_selector('.end button'): break
+            m.click('.end button'); m.wait_for_selector('.q, .end', timeout=15000); continue
+        q = m.inner_text('.q')
+        kind = 'marks' if 'элемент' in q and 'Какой' not in q else 'name' if 'Какой' in q else 'comp' if 'типа' in q else 'same'
+        rid = m.evaluate("S.tasks[S.i].rid")
+        if kind not in seen:
+            m.wait_for_function("[...document.querySelectorAll('#main img')].every(i=>i.complete&&i.naturalWidth>0)", timeout=15000)
+            m.screenshot(path=f'{OUT}/36_micro_{kind}.png'); seen.add(kind)
+        if kind == 'marks':
+            if rid == 'mc_marks': m.click('#gr .tl[data-id="a3"]'); assert m.query_selector('#gr .tl.x'), 'тап по плитке не ставит ✗'
+            m.click('#a1')
+        elif kind == 'name':
+            assert m.is_disabled('#a1'), '✓ должна ждать выбора схемы'
+            m.click('#gr .tl'); m.click('#a1')
+        else: m.click('#a1')
+    assert seen == set(K.split(',')), f'на телефоне показаны не все виды карточек: {seen}'
+    assert not errs, f'ошибки на телефонном экране: {errs}'
+    mc.close(); time.sleep(0.5)
+    R = get(u + 'api/rugs/mc_marks'); st = {x['id']: x for x in R['marks']}
+    assert st['a2']['status'] == 'confirmed' and st['a3']['status'] == 'rejected' and st['a4']['status'] == 'rejected', f'ответ по рамкам не применился: {[(i, x["status"]) for i, x in st.items()]}'
+    assert st['b1']['scheme'] == tn['opts'][0]['id'] and st['b2']['scheme'] == st['b1']['scheme'] and not st['a1']['scheme'], 'имя не поставлено на всю группу (или задело чужую)'
+    assert get(u + 'api/rugs/mc_comp')['composition'] == 'pirebedil', 'тип ковра не принят'
+    a, b = get(u + 'api/rugs/mc_s1'), get(u + 'api/rugs/mc_s2')
+    assert (a.get('same_ok') or {}).get('mc_s2', {}).get('ok') and (b.get('same_ok') or {}).get('mc_s1', {}).get('ok'), '«тот же ковёр» не записан у обоих'
+    lg = [json.loads(x) for x in open(f'{D}/micro.jsonl', encoding='utf-8') if x.strip()]
+    assert {'marks', 'name', 'comp', 'same'} <= {x.get('type') for x in lg}, 'ответы новых карточек не попали в журнал'
 
 
 def main():
