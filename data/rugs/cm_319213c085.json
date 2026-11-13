@@ -409,7 +409,7 @@
    "scheme": "",
    "group": "mmvcyh6jt",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -419,8 +419,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792275365,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588491
   },
   {
    "id": "mmvcyh7m00",
@@ -436,7 +436,7 @@
    "scheme": "",
    "group": "mmvcyh6jt",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -446,8 +446,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792275367,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588491
   },
   {
    "id": "mmvcyl31m",
@@ -463,7 +463,7 @@
    "scheme": "",
    "group": "mmvcyh6jt",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -473,8 +473,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792275548,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588491
   },
   {
    "id": "mmvcyl7fh",
@@ -490,7 +490,7 @@
    "scheme": "",
    "group": "mmvcyh6jt",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -500,12 +500,12 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792275553,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588491
   }
  ],
  "created": 1791870025,
- "updated": 1794563245,
+ "updated": 1794588582,
  "cat": {
   "title": "Carpet with Geometricized Floral Design Late 18th century Attributed to Caucasus This carpet is representative",
   "museum": "Метрополитен-музей",
@@ -678,6 +678,43 @@
      "w": 2,
      "t": 1794563245
     }
+   },
+   "mmvcyh6jt": {
+    "dolgikh": {
+     "a": "none",
+     "w": 2,
+     "t": 1794588582
+    }
+   }
+  },
+  "marks": {
+   "mmvcyh6jt": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588491
+    }
+   },
+   "mmvcyh7m00": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588491
+    }
+   },
+   "mmvcyl31m": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588491
+    }
+   },
+   "mmvcyl7fh": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588491
+    }
    }
   }
  },
@@ -687,6 +724,7 @@
  "multi": [],
  "name_none": [
   "mmvcq3xxy",
-  "mmvcq8cm2"
+  "mmvcq8cm2",
+  "mmvcyh6jt"
  ]
 }

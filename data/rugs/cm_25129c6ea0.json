@@ -1381,7 +1381,7 @@
    "scheme": "",
    "group": "mmv8cxhb1",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -1391,8 +1391,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1791997309,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588448
   },
   {
    "id": "mmv8cxiv10",
@@ -1408,7 +1408,7 @@
    "scheme": "",
    "group": "mmv8cxhb1",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -1418,8 +1418,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791997312,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588448
   },
   {
    "id": "mmv8cxiv12",
@@ -1435,7 +1435,7 @@
    "scheme": "",
    "group": "mmv8cxhb1",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -1445,8 +1445,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791997312,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588448
   },
   {
    "id": "mmv8cxiv14",
@@ -1462,7 +1462,7 @@
    "scheme": "",
    "group": "mmv8cxhb1",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -1472,8 +1472,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791997312,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588448
   },
   {
    "id": "mmv8cxiv16",
@@ -1489,7 +1489,7 @@
    "scheme": "",
    "group": "mmv8cxhb1",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -1499,8 +1499,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791997312,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588448
   },
   {
    "id": "mmv8cyda70",
@@ -1516,7 +1516,7 @@
    "scheme": "",
    "group": "mmv8cxhb1",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 1,
@@ -1526,8 +1526,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791997351,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588448
   },
   {
    "id": "mmv8cyda71",
@@ -1543,7 +1543,7 @@
    "scheme": "",
    "group": "mmv8cxhb1",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -1553,8 +1553,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791997351,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588448
   },
   {
    "id": "mmv8cyda72",
@@ -1570,7 +1570,7 @@
    "scheme": "",
    "group": "mmv8cxhb1",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -1580,8 +1580,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791997351,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588448
   },
   {
    "id": "mmv8czomi0",
@@ -1624,7 +1624,7 @@
    "scheme": "",
    "group": "mmv8cxhb1",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -1634,8 +1634,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791997439,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588448
   },
   {
    "id": "mmv8d09652",
@@ -2152,7 +2152,7 @@
   }
  ],
  "created": 1791870033,
- "updated": 1794588426,
+ "updated": 1794588510,
  "cat": {
   "title": "Hajigayib rug, Guba school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -2321,6 +2321,83 @@
      "w": 2,
      "t": 1794588426
     }
+   },
+   "mmv44qvgd": {
+    "dolgikh": {
+     "a": "skip",
+     "w": 0,
+     "t": 1794588440
+    }
+   },
+   "mmv8cxhb1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588448
+    }
+   },
+   "mmv8cxiv10": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588448
+    }
+   },
+   "mmv8cxiv12": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588448
+    }
+   },
+   "mmv8cxiv14": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588448
+    }
+   },
+   "mmv8cxiv16": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588448
+    }
+   },
+   "mmv8cyda70": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588448
+    }
+   },
+   "mmv8cyda71": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588448
+    }
+   },
+   "mmv8cyda72": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588448
+    }
+   },
+   "mmv8d09650": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588448
+    }
+   },
+   "mmv8czomi0": {
+    "dolgikh": {
+     "a": "skip",
+     "w": 0,
+     "t": 1794588456
+    }
    }
   },
   "name": {
@@ -2329,6 +2406,13 @@
      "a": "none",
      "w": 2,
      "t": 1794553153
+    }
+   },
+   "mmv8cxhb1": {
+    "dolgikh": {
+     "a": "skip",
+     "w": 0,
+     "t": 1794588510
     }
    }
   }
