@@ -1697,7 +1697,7 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE + ("cdup",)
+    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame")
 
     # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
     # ответы лежат отдельно от ковров, в DATA/concept_dups_votes.json; решение (вес ≥2) читает /api/concept_dups, слияние делается в модели вручную.
@@ -1949,6 +1949,105 @@ def install(app, DATA, D_WORK):
             finally:
                 _es["q"].task_done()
 
+    # ---------- v11.59: элементы между коврами (план «группы элементов», шаги 1–2) ----------
+    # Единица — одна группа повторов на одном ковре (есть подтверждённая рамка); её образец — рамка руки или самая крупная.
+    # Отпечаток образца — сеть element_embed во всех 8 положениях. Для каждой единицы ищутся 3 ближайшие на других коврах;
+    # пары идут в /m карточкой «xsame»: «тот же элемент?». Ответы — DATA/xsame_votes.json (вес ≥2 — решение); они же —
+    # замер, насколько сеть права между коврами (/api/xsame: доля «тот же» по полосам близости). Ковры ничем не меняются.
+    F_XS = os.path.join(DATA, "xsame_votes.json"); _xu = {"t": 0, "run": False, "U": [], "P": [], "err": ""}
+
+    def _xs_votes():
+        try:
+            with open(F_XS, encoding="utf-8") as f: return json.load(f)
+        except (OSError, ValueError): return {}
+
+    def _xs_verdict(d): return next((v for v in ("same", "similar", "diff") if sum(x["w"] for x in d.values() if x["a"] == v) >= 2), None)
+
+    def _xs_build(units):
+        import element_embed as EE
+        try:
+            V8, V0, keep = [], [], []
+            for rid in sorted({u["rid"] for u in units}):
+                src = img_path(rid); a = read_small(src, 1400) if src else None
+                if a is None: continue
+                a = EE.small(a)
+                for u in [u for u in units if u["rid"] == rid]:
+                    e = EE.emb_rot(a, u["box"]); V8.append(e); V0.append(e[0]); keep.append(u)
+            P = {}
+            if keep:
+                A8 = np.stack(V8); A0 = np.stack(V0)
+                S = np.einsum("irk,jk->ijr", A8, A0).max(2)                      # близость: лучшее из 8 положений
+                for i, u in enumerate(keep):
+                    o = [j for j in np.argsort(-S[i]) if keep[j]["rid"] != u["rid"]][:3]
+                    for j in o:
+                        v = float(max(S[i, j], S[j, i]))
+                        if v < 0.4: continue
+                        k = "~".join(sorted((u["key"], keep[j]["key"])))
+                        if k not in P or P[k]["sim"] < v: P[k] = {"key": k, "a": u if u["key"] < keep[j]["key"] else keep[j], "b": keep[j] if u["key"] < keep[j]["key"] else u, "sim": round(v, 3)}
+            _xu.update(U=keep, P=sorted(P.values(), key=lambda p: -p["sim"]), t=time.time(), err="")
+        except Exception as e:
+            _xu["err"] = str(e)[:200]
+        finally:
+            _xu["run"] = False
+
+    def _xs_queue(me, rows):
+        try:
+            import element_embed as EE
+            if not EE.available(): return []
+        except Exception: return []
+        if not _xu["run"] and time.time() - _xu["t"] > 1800:                        # единицы пересчитываются раз в 30 минут
+            units = []
+            for x in rows:
+                if x["dead"]: continue
+                G = {}
+                for m in x["mk"]:
+                    if m["st"] == "confirmed": G.setdefault(m["g"], []).append(m)
+                for g, ms in G.items():
+                    ms.sort(key=lambda m: (m["mach"], -m["box"][2] * m["box"][3]))
+                    units.append({"rid": x["id"], "g": g, "box": ms[0]["box"], "key": x["id"] + "|" + g, "title": x["title"], "n": len(ms)})
+            _xu["run"] = True; threading.Thread(target=_xs_build, args=(units,), daemon=True, name="xsame-units").start()
+        V = _xs_votes(); out = []
+        for p in _xu["P"]:
+            d = V.get(p["key"], {})
+            if me in d or _xs_verdict(d): continue
+            out.append({"type": "xsame", "rid": p["a"]["rid"], "key": p["key"], "sim": p["sim"],
+                        "a": {k: p["a"][k] for k in ("rid", "g", "box", "title", "n")}, "b": {k: p["b"][k] for k in ("rid", "g", "box", "title", "n")}})
+        import random  # чтобы замер был честным, каждая четвёртая карточка — из нижней половины по близости
+        if len(out) > 8:
+            hi, lo = out[:len(out) // 2], out[len(out) // 2:]; mixed = []
+            while hi or lo:
+                mixed += hi[:3]; hi = hi[3:]
+                if lo: mixed.append(lo.pop(random.randrange(len(lo))))
+            out = mixed
+        return out
+
+    def _xs_answer(me, role, a, body, rec):
+        k = str(body.get("key", ""))
+        if a not in ("same", "similar", "diff", "skip") or "~" not in k: return JSONResponse({"error": "ответ?"}, status_code=400)
+        p = next((p for p in _xu["P"] if p["key"] == k), None)
+        with _lock:
+            V = _xs_votes(); d = V.setdefault(k, {}); d[me] = {"a": a, "w": 0 if a == "skip" else _wt(role), "t": rec["t"], **({"sim": p["sim"]} if p else {})}
+            tmp = F_XS + ".tmp"
+            with open(tmp, "w", encoding="utf-8") as f: json.dump(V, f, ensure_ascii=False, indent=1)
+            os.replace(tmp, F_XS)
+            v = _xs_verdict(d); rec["key"] = k
+            if p: rec["sim"] = p["sim"]
+            if v: rec["applied"] = "xsame:" + v
+            _mlog(rec)
+        return {"ok": True, "applied": ("xsame:" + v) if v else None}
+
+    @app.get("/api/xsame")
+    def api_xsame():
+        """единицы, пары и ответы людей; «bands» — замер: доля «тот же» по полосам близости сети"""
+        V = _xs_votes(); bands = {}
+        for k, d in V.items():
+            v = _xs_verdict(d); sim = next((x.get("sim") for x in d.values() if x.get("sim") is not None), None)
+            if not v or sim is None: continue
+            b = "%.1f" % (int(sim * 10) / 10); c = bands.setdefault(b, {"same": 0, "similar": 0, "diff": 0}); c[v] += 1
+        return {"units": len(_xu["U"]), "pairs": len(_xu["P"]), "built": int(_xu["t"]), "running": _xu["run"], "error": _xu["err"],
+                "answered": sum(1 for d in V.values() if _xs_verdict(d)), "bands": dict(sorted(bands.items(), reverse=True)),
+                "same": [k for k, d in V.items() if _xs_verdict(d) == "same"]}
+
     @app.get("/api/element_embed/status")
     def element_embed_status():
         try:
@@ -2196,6 +2295,7 @@ def install(app, DATA, D_WORK):
         Q = {"quad": [_ref_task(x) for x in qd[:n]],
              "frame": [{"type": "frame", "rid": x["id"]} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
         cdq = _cdup_queue(me) if "cdup" in want else []; Q["cdup"] = cdq[:n]
+        xsq = _xs_queue(me, rows) if "xsame" in want else []; Q["xsame"] = xsq[:n]
         tasks = []; order = [t for t in want if Q[t]]
         while len(tasks) < n and order:                                           # по кругу: по одной карточке каждого вида
             for t in list(order):
@@ -2216,7 +2316,7 @@ def install(app, DATA, D_WORK):
         for t in tasks:
             if t["type"] == "cdup": continue                                     # карточка о словах: ковра у неё нет
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "name_wait": more["name_wait"]},
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "name_wait": more["name_wait"]},
                 "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
 
     @app.post("/api/micro/answer")
@@ -2233,6 +2333,7 @@ def install(app, DATA, D_WORK):
                 rec["ctl"] = (a == "ok") == (v[1] == "ok"); _mlog(rec)
             return {"ok": True, "ctl": rec.get("ctl")}
         if typ == "cdup": return _cdup_answer(me, role, a, body, rec)
+        if typ == "xsame": return _xs_answer(me, role, a, body, rec)
         if typ in MORE: return _micro_more(me, role, typ, rid, a, body, rec)
         if typ not in ("frame", "quad") or a == "skip":
             if a == "skip": _mlog(rec)
