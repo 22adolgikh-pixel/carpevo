@@ -247,7 +247,7 @@
    "scheme": "",
    "group": "mmvcti91n",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -257,8 +257,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792267017,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794553428
   },
   {
    "id": "mmvctiae40",
@@ -274,7 +274,7 @@
    "scheme": "",
    "group": "mmvcti91n",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -284,8 +284,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792267019,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794553428
   },
   {
    "id": "mmvctiae41",
@@ -301,7 +301,7 @@
    "scheme": "",
    "group": "mmvcti91n",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -311,12 +311,12 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792267019,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794553428
   }
  ],
  "created": 1791870041,
- "updated": 1794553392,
+ "updated": 1794553433,
  "cat": {
   "title": "“Aşağı Salahlı” («Ашагы Салахлы»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -474,6 +474,27 @@
      "w": 2,
      "t": 1794553392
     }
+   },
+   "mmvcti91n": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794553428
+    }
+   },
+   "mmvctiae40": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794553428
+    }
+   },
+   "mmvctiae41": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794553428
+    }
    }
   },
   "name": {
@@ -490,11 +511,27 @@
      "w": 2,
      "t": 1794553364
     }
+   },
+   "mmvcthq6y": {
+    "dolgikh": {
+     "a": "none",
+     "w": 2,
+     "t": 1794553399
+    }
+   },
+   "mmvcthzk7": {
+    "dolgikh": {
+     "a": "none",
+     "w": 2,
+     "t": 1794553433
+    }
    }
   }
  },
  "name_none": [
   "mmvctgbew",
-  "mmvcth6o7"
+  "mmvcth6o7",
+  "mmvcthq6y",
+  "mmvcthzk7"
  ]
 }
