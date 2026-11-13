@@ -247,7 +247,7 @@
    "scheme": "",
    "group": "mmvcwgl8k",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -257,8 +257,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792271978,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588976
   },
   {
    "id": "mmvcwgnjc0",
@@ -274,7 +274,7 @@
    "scheme": "",
    "group": "mmvcwgl8k",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -284,8 +284,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792271982,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588976
   },
   {
    "id": "mmvcwgnjc1",
@@ -301,7 +301,7 @@
    "scheme": "",
    "group": "mmvcwgl8k",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -311,8 +311,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792271982,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588976
   },
   {
    "id": "mmvcwgnjc2",
@@ -328,7 +328,7 @@
    "scheme": "",
    "group": "mmvcwgl8k",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -338,8 +338,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792271982,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588976
   },
   {
    "id": "mmvcwi6s91",
@@ -652,7 +652,7 @@
    "scheme": "",
    "group": "mmvcwgl8k",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -662,8 +662,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792272193,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588976
   },
   {
    "id": "mmvcwl6yf1",
@@ -679,7 +679,7 @@
    "scheme": "",
    "group": "mmvcwgl8k",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -689,12 +689,12 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792272193,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588976
   }
  ],
  "created": 1791870033,
- "updated": 1794255712,
+ "updated": 1794588976,
  "cat": {
   "title": "Chiragli rug, XVII c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -810,6 +810,50 @@
     "a": "cropped",
     "w": 2,
     "t": 1794255712
+   }
+  },
+  "marks": {
+   "mmvcwgl8k": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588976
+    }
+   },
+   "mmvcwgnjc0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588976
+    }
+   },
+   "mmvcwgnjc1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588976
+    }
+   },
+   "mmvcwgnjc2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588976
+    }
+   },
+   "mmvcwl6yf0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588976
+    }
+   },
+   "mmvcwl6yf1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588976
+    }
    }
   }
  },

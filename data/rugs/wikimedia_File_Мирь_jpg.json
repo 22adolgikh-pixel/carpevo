@@ -18,7 +18,7 @@
  "h": 1107,
  "marks": [],
  "created": 1791736124,
- "updated": 1794588702,
+ "updated": 1794588813,
  "cat": {
   "title": "«Мирь».jpg",
   "museum": "Wikimedia Commons",
@@ -132,8 +132,49 @@
     "w": 2,
     "t": 1794588702
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794588813,
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.003,
+    0.003
+   ],
+   [
+    0.995,
+    0.003
+   ],
+   [
+    0.992,
+    0.965
+   ],
+   [
+    0.003,
+    0.965
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

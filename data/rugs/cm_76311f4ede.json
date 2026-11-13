@@ -85,7 +85,7 @@
    "scheme": "",
    "group": "mmvcx8rkf",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -95,8 +95,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792273293,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588819
   },
   {
    "id": "mmvcx8s3y0",
@@ -112,7 +112,7 @@
    "scheme": "",
    "group": "mmvcx8rkf",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -122,12 +122,12 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792273294,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588819
   }
  ],
  "created": 1791870017,
- "updated": 1794588795,
+ "updated": 1794588819,
  "cat": {
   "title": "Borchali carpet,Qazakh group of Azerbaijani carpet",
   "museum": "",
@@ -221,6 +221,20 @@
      "a": "ok",
      "w": 2,
      "t": 1794588795
+    }
+   },
+   "mmvcx8rkf": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588819
+    }
+   },
+   "mmvcx8s3y0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588819
     }
    }
   }

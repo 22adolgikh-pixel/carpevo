@@ -31,7 +31,7 @@
    "scheme": "",
    "group": "mmvcpebfp0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -41,8 +41,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792260115,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588878
   },
   {
    "id": "mmvcpebfp1",
@@ -58,7 +58,7 @@
    "scheme": "",
    "group": "mmvcpebfp0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -68,12 +68,12 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792260115,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588878
   }
  ],
  "created": 1791870025,
- "updated": 1792260144,
+ "updated": 1794588940,
  "cat": {
   "title": "Konakend carpet, Caucasus, late 19th century",
   "museum": "",
@@ -152,5 +152,35 @@
   "ver": 1,
   "t": 1794238548
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "marks": {
+   "mmvcpebfp0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588878
+    }
+   },
+   "mmvcpebfp1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588878
+    }
+   }
+  },
+  "name": {
+   "mmvcpebfp0": {
+    "dolgikh": {
+     "a": "none",
+     "w": 2,
+     "t": 1794588940
+    }
+   }
+  }
+ },
+ "name_none": [
+  "mmvcpebfp0"
+ ]
 }
