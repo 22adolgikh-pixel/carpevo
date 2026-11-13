@@ -46,7 +46,13 @@ button.wide{grid-column:1/-1}button.sm{min-height:40px;padding:8px}button:active
 .tl b{position:absolute;left:0;right:0;bottom:0;font-size:10px;font-weight:500;line-height:1.5;background:#000b;color:#fff;padding:0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:1;min-height:0;align-items:center}.pair figure{margin:0;display:flex;flex-direction:column;gap:4px;align-items:center;min-width:0}.pair img{max-width:100%;max-height:54dvh;object-fit:contain;border-radius:6px}.pair figcaption{font-size:11px;color:var(--mut);text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cds{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow-y:auto}.cd{background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;font-size:13px}.cd b{font-size:18px}.cd blockquote{margin:4px 0 0;padding-left:8px;border-left:2px solid var(--ln);font-size:12.5px}.cd cite{display:block;color:var(--mut);font-size:11.5px;font-style:normal}
-.typ{background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:8px 10px;display:flex;gap:8px;align-items:center}.typ b{font-size:16px}.typ .refs{margin-left:auto;display:flex;gap:4px}.typ .refs img{height:64px;border-radius:4px}
+/* v11.57: карточка «тип» — описание из книг, ковры этого типа и главные элементы; по тапу пример открывается крупно */
+.typ{background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;max-height:36dvh;overflow-y:auto}.typ b{font-size:16px}
+.typ .ds{font-size:13px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}.typ .ds.on{display:block}
+.typ .lb{font-size:11px;color:var(--mut)}.typ .strip{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.typ .strip img{flex:none;height:84px;max-width:120px;object-fit:contain;border-radius:6px;border:1px solid var(--ln);background:var(--bg)}
+.typ .strip.el img{height:52px;width:52px;background:#fff;image-rendering:pixelated;padding:2px}
+.ovl{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px}.ovl img{max-width:100%;max-height:80dvh;object-fit:contain}
 button:disabled{opacity:.4}
 .flags{display:flex;gap:8px}.flags label{flex:1;display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--ln);border-radius:10px;font-size:13px;color:var(--mut)}.flags input{width:20px;height:20px;accent-color:var(--acc)}.flags label:has(input:checked){border-color:var(--acc);color:var(--tx)}
 </style></head><body>
@@ -166,11 +172,19 @@ function showName(t){
   document.querySelectorAll('#gr .tl').forEach(e=>e.onclick=()=>{t.sel=e.dataset.id;document.querySelectorAll('#gr .tl').forEach(x=>x.classList.toggle('sel',x===e));$('a1').disabled=false;});
   $('a1').onclick=()=>t.sel&&answer(t,t.sel,null,{g:t.g});$('a3').onclick=()=>answer(t,'none',null,{g:t.g});$('a4').onclick=()=>answer(t,'skip',null,{g:t.g});}
 // «тип»: машина предложила тип ковра по названию или по двойнику
-function showComp(t){document.documentElement.style.setProperty('--imh','44dvh');
-  $('main').innerHTML=`${qhead('Это ковёр такого типа?','Тип предложен машиной: '+esc(t.why)+'. Справа — ковры, у которых этот тип уже указан (если есть). Не уверены — «?».')}
-   <div class="typ"><div><b>${esc(t.az||t.ru)}</b><div class="hint">${esc(t.ru&&t.az?t.ru+' · ':'')}${esc(t.why)}</div></div><div class="refs">${(t.refs||[]).map(i=>`<img src="/rugthumb/${encodeURIComponent(i)}.jpg" alt="">`).join('')}</div></div>
+function showComp(t){document.documentElement.style.setProperty('--imh','30dvh');
+  const h=(t.hint||[])[0],refs=t.refs||[],els=t.els||[];
+  $('main').innerHTML=`${qhead('Похож на ковры типа «'+esc(t.az||t.ru)+'»?','Сравните фото внизу с примерами этого типа и с описанием. Похож по устройству поля и главным элементам — ✓. Явно другой — ✗. Не понятно — «?». Пример можно открыть крупно тапом. Описания — черновики ИИ по книгам.')}
+   <div class="typ"><div><b>${esc(t.az||t.ru)}</b> <span class="lb">${esc([t.ru&&t.az?t.ru:'',t.school].filter(Boolean).join(' · '))}</span></div>
+    ${h?`<div class="ds" id="ds">${esc(h.text)}</div><div class="lb">${esc(h.src)}${h.pages&&h.pages.length?', с. '+esc(h.pages.join(', ')):''} · черновик ИИ</div>`:'<div class="lb">описания типа в книгах пока нет — сравните с примерами</div>'}
+    ${refs.length?`<div class="lb">ковры этого типа</div><div class="strip" id="refs">${refs.map(i=>`<img src="/rugthumb/${encodeURIComponent(i)}.jpg" data-r="${esc(i)}" alt="пример">`).join('')}</div>`:'<div class="lb">подтверждённых ковров этого типа пока нет</div>'}
+    ${els.length?`<div class="lb">главные элементы (схемы Керимова)</div><div class="strip el">${els.map(e=>`<img src="${esc(e.img)}" alt="" title="${esc(e.name||'')}">`).join('')}</div>`:''}
+    <div class="lb">почему предложено: ${esc(t.why||'')}</div></div>
    ${stage(t)}
-   <div class="row3"><button class="yes" id="a1" aria-label="да">✓</button><button class="no" id="a3" aria-label="нет">✗</button><button class="unk" id="a4" aria-label="не знаю">?</button></div>`;qtip();
+   <div class="row3"><button class="yes" id="a1" aria-label="похож">✓</button><button class="no" id="a3" aria-label="не похож">✗</button><button class="unk" id="a4" aria-label="не знаю">?</button></div>`;qtip();
+  const ds=$('ds');if(ds)ds.onclick=()=>ds.classList.toggle('on');
+  const rf=$('refs');if(rf)rf.onclick=e=>{const r=e.target.dataset&&e.target.dataset.r;if(!r)return;const o=document.createElement('div');o.className='ovl';
+    o.innerHTML=`<img src="/rugmid/${encodeURIComponent(r)}.jpg" alt=""><span class="mut">пример типа «${esc(t.az||t.ru)}» · тап — закрыть</span>`;o.onclick=()=>o.remove();document.body.appendChild(o);};
   S.im=$('im');$('a1').onclick=()=>answer(t,'yes',null,{cid:t.cid});$('a3').onclick=()=>answer(t,'no',null,{cid:t.cid});$('a4').onclick=()=>answer(t,'skip',null,{cid:t.cid});zoomable();}
 // «двойники»: пара фото, в которой машина не уверена
 function showSame(t){const o={rid:t.other};

@@ -1848,6 +1848,33 @@ def install(app, DATA, D_WORK):
         for rid in rids:
             if rid not in _vq["seen"]: _vq["seen"].add(rid); _vq["q"].put(rid)
 
+    def _ref_task(x):
+        """v11.57: карточка углов. Если есть сеть уточнения углов (corner_refine, обучена на правках в /m) — показываем её углы,
+        посчитанные от углов модели по картинке (или find_quad). Результат кешируется в r.auto.ref_quad."""
+        t = {"type": "quad", "rid": x["id"], "quad": x["vquad"] or x["aquad"], "qsrc": "vlm" if x["vquad"] else "auto"}
+        if not t["quad"]: return t
+        try:
+            import corner_refine
+            if not corner_refine.available(): return t
+            r = load(x["id"]) or {}; rq = (r.get("auto") or {}).get("ref_quad") or {}
+            if rq.get("v") == corner_refine.VERSION and rq.get("from") == t["qsrc"] and rq.get("quad"): t["quad"], t["qsrc"] = rq["quad"], "ref"; return t
+            src = img_path(x["id"]); a = read_small(src, 1400) if src else None
+            q = corner_refine.refine(a, t["quad"]) if a is not None else None
+            if not q: return t
+            with _lock:
+                r = load(x["id"])
+                if r: r.setdefault("auto", {})["ref_quad"] = {"quad": q, "v": corner_refine.VERSION, "from": t["qsrc"], "t": int(time.time())}; save(r)
+            t["quad"], t["qsrc"] = q, "ref"
+        except Exception:
+            pass
+        return t
+
+    @app.get("/api/corner_refine/status")
+    def corner_refine_status():
+        try:
+            import corner_refine; return corner_refine.info()
+        except Exception as e: return {"ok": False, "error": str(e)[:160]}
+
     @app.get("/api/vlm/status")
     def vlm_status():
         """есть ли ключ (сам ключ не отдаётся), сколько ковров в очереди и сколько посчитано сегодня"""
@@ -1876,6 +1903,16 @@ def install(app, DATA, D_WORK):
                 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "micro_hide.json"), encoding="utf-8") as f: _hide["d"] = json.load(f).get("ids", {})
             except (OSError, ValueError): _hide["d"] = {}
         return _hide["d"]
+
+    _ch = {}
+
+    def _comp_hints():
+        """v11.57: cps/comp_hints.json — короткие описания типов ковра по книгам (tools/books/build_comp_hints.py)"""
+        if "d" not in _ch:
+            try:
+                with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "comp_hints.json"), encoding="utf-8") as f: _ch["d"] = json.load(f).get("items", {})
+            except (OSError, ValueError): _ch["d"] = {}
+        return _ch["d"]
 
     def _exp_opts(cid):
         """закрытый список типа: схемы Керимова этого типа ковра, у которых есть картинка"""
@@ -1932,11 +1969,19 @@ def install(app, DATA, D_WORK):
         out["split"].sort(key=lambda t: (not t["cat"].startswith("kerimov"), t["rid"]))        # Керимов — главный источник: его развороты первыми
         out["marks"].sort(key=lambda t: (t["sample"] is None, t["rid"]))          # сначала группы с образцом: вопрос «тот же?» проще, чем «элемент ли это?»
         out["comp"].sort(key=lambda t: (t["kind"] != "twin", t["cid"]))            # по двойнику надёжнее; дальше подряд один тип — глаз привыкает
-        if out["comp"]:                                                           # образцы типа: до двух ковров, у которых этот тип уже стоит (Керимов — первым)
+        if out["comp"]:                                                           # образцы типа: до четырёх ковров, у которых этот тип уже стоит (Керимов — первым)
             ref = {}
             for x in sorted(rows, key=lambda x: not x["id"].startswith("kerimov")):
-                if x["comp"] and not x["dead"] and len(ref.setdefault(x["comp"], [])) < 2: ref[x["comp"]].append(x["id"])
-            for t in out["comp"]: t["refs"] = ref.get(t["cid"], [])
+                if x["comp"] and not x["dead"] and len(ref.setdefault(x["comp"], [])) < 4: ref[x["comp"]].append(x["id"])
+            H = _comp_hints(); el = {}
+            for t in out["comp"]:                                                 # v11.57: подсказки — что пишут книги о типе и его главные элементы (схемы Керимова)
+                t["refs"] = [i for i in ref.get(t["cid"], []) if i != t["rid"]][:4]
+                t["hint"] = H.get(t["cid"], [])
+                if t["cid"] not in el: el[t["cid"]] = _exp_opts(t["cid"])[:8]
+                t["els"] = el[t["cid"]]
+                d = BYID[t["cid"]]; t["school"] = ", ".join(d.get("schools") or [])
+            # сначала карточки, где есть с чем сравнить: образцы + описание; без образцов и без описания — в конец
+            out["comp"].sort(key=lambda t: (-(bool(t["refs"]) + bool(t["hint"]) + bool(t["els"])), t["kind"] != "twin", t["cid"]))
         return out
 
     def _marks_trap(me, t, x):
@@ -2055,7 +2100,7 @@ def install(app, DATA, D_WORK):
         want = [x for x in KINDS if x in k.split(",")] or list(KINDS)             # v11.52: какие виды карточек показывать (кнопки вверху /m)
         by = {x["id"]: x for x in rows}
         more = _more_queues(me, rows, by, want)
-        Q = {"quad": [{"type": "quad", "rid": x["id"], "quad": x["vquad"] or x["aquad"], "qsrc": "vlm" if x["vquad"] else "auto"} for x in qd[:n]],
+        Q = {"quad": [_ref_task(x) for x in qd[:n]],
              "frame": [{"type": "frame", "rid": x["id"]} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
         cdq = _cdup_queue(me) if "cdup" in want else []; Q["cdup"] = cdq[:n]
         tasks = []; order = [t for t in want if Q[t]]
@@ -2085,7 +2130,7 @@ def install(app, DATA, D_WORK):
         me = user(request); role = getattr(request.state, "role", None) or "admin"
         typ, rid, a = body.get("type"), os.path.basename(str(body.get("rid", ""))), str(body.get("a", ""))
         rec = {"t": int(time.time()), "u": me, "type": typ, "rid": rid, "a": a}
-        qsrc = "vlm" if body.get("s") == "vlm" else None
+        qsrc = body.get("s") if body.get("s") in ("vlm", "ref") else None             # v11.57: "ref" — углы сети уточнения
         if typ == "quad" and qsrc: rec["s"] = qsrc                                  # v11.47: человек видел углы модели (для сравнения точности)
         tok = body.get("c")
         if tok:                                                                  # контрольная: ничего не меняем в ковре
@@ -2142,7 +2187,8 @@ def install(app, DATA, D_WORK):
                 qq = None
                 if ok >= 2:
                     oks = [x for x in votes if x["a"] == "ok"]; vq = ((r.get("auto") or {}).get("vlm_quad") or {}).get("quad")
-                    qq = vq if (vq and all(x.get("s") == "vlm" for x in oks)) else (r.get("auto") or {}).get("quad")   # «да» к углам модели — берём их
+                    rq = ((r.get("auto") or {}).get("ref_quad") or {}).get("quad")
+                    qq = rq if (rq and all(x.get("s") == "ref" for x in oks)) else vq if (vq and all(x.get("s") == "vlm" for x in oks)) else (r.get("auto") or {}).get("quad")   # «да» — к тем углам, что человек видел
                 elif fx:
                     strong = [x for x in fx if x["w"] >= 2]
                     if strong: qq = strong[-1]["q"]
@@ -2163,7 +2209,25 @@ def install(app, DATA, D_WORK):
     @app.get("/api/micro/stats")
     def micro_stats():
         import frame_model
-        return {"users": _mstats(), "frame_model": frame_model.info()}
+        try:
+            import corner_refine; cr = corner_refine.info()
+        except Exception: cr = {"ok": False}
+        return {"users": _mstats(), "frame_model": frame_model.info(), "corner_refine": cr, "quad_by_day": _quad_days()}
+
+    def _quad_days():
+        """v11.57: карточки углов по дням и по тому, чьи углы показаны (auto — find_quad, vlm — модель по картинке, ref — сеть уточнения):
+        сколько раз ответили «да» сразу, сколько поправили. Растёт доля «да» — значит, углы стали точнее."""
+        out = {}
+        try:
+            with open(D_MICRO, encoding="utf-8") as f:
+                for l in f:
+                    try: r = json.loads(l)
+                    except ValueError: continue
+                    if r.get("type") != "quad" or r.get("a") not in ("ok", "fix", "bad") or r.get("ctl") is not None: continue
+                    d = time.strftime("%Y-%m-%d", time.localtime(r.get("t", 0))); k = r.get("s") or "auto"
+                    c = out.setdefault(d, {}).setdefault(k, {"ok": 0, "fix": 0, "bad": 0}); c[r["a"]] += 1
+        except OSError: pass
+        return dict(sorted(out.items())[-10:])
 
     @app.get("/rugmid/{rid}.jpg")
     def rug_mid(rid: str):
