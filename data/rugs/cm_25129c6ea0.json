@@ -922,7 +922,7 @@
    "scheme": "",
    "group": "mmv746bcu",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -932,8 +932,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1791922139,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794552797
   },
   {
    "id": "mmv746cok0",
@@ -949,7 +949,7 @@
    "scheme": "",
    "group": "mmv746bcu",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -959,8 +959,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791922141,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794552797
   },
   {
    "id": "mmv746cok1",
@@ -976,7 +976,7 @@
    "scheme": "",
    "group": "mmv746bcu",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -986,8 +986,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1791922141,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794552797
   },
   {
    "id": "mmv746cok2",
@@ -2152,7 +2152,7 @@
   }
  ],
  "created": 1791870033,
- "updated": 1794255840,
+ "updated": 1794552797,
  "cat": {
   "title": "Hajigayib rug, Guba school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -2284,6 +2284,29 @@
     "a": "cropped",
     "w": 2,
     "t": 1794255840
+   }
+  },
+  "marks": {
+   "mmv746bcu": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794552797
+    }
+   },
+   "mmv746cok0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794552797
+    }
+   },
+   "mmv746cok1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794552797
+    }
    }
   }
  },
