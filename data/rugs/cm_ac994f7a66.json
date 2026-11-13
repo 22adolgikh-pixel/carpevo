@@ -355,7 +355,7 @@
    "scheme": "t40_f03",
    "group": "mmvcwi6s91",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -365,8 +365,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792272053,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588991
   },
   {
    "id": "mmvcwi6s92",
@@ -382,7 +382,7 @@
    "scheme": "t40_f03",
    "group": "mmvcwi6s91",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -392,8 +392,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792272053,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794588991
   },
   {
    "id": "mmvcwiphg",
@@ -694,7 +694,7 @@
   }
  ],
  "created": 1791870033,
- "updated": 1794588976,
+ "updated": 1794589006,
  "cat": {
   "title": "Chiragli rug, XVII c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -854,10 +854,43 @@
      "w": 2,
      "t": 1794588976
     }
+   },
+   "mmvcwi6s91": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588991
+    }
+   },
+   "mmvcwi6s92": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794588991
+    }
+   },
+   "mmvcwk9270": {
+    "dolgikh": {
+     "a": "skip",
+     "w": 0,
+     "t": 1794589006
+    }
+   }
+  },
+  "name": {
+   "mmvcwgl8k": {
+    "dolgikh": {
+     "a": "none",
+     "w": 2,
+     "t": 1794588994
+    }
    }
   }
  },
  "frame": "cropped",
  "frame_by": "micro",
- "multi": []
+ "multi": [],
+ "name_none": [
+  "mmvcwgl8k"
+ ]
 }

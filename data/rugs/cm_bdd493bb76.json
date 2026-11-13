@@ -31,7 +31,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e798996_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.763,
@@ -85,7 +85,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e798996_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.721,
@@ -139,7 +139,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e798996_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.703,
@@ -193,7 +193,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e798996_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.693,
@@ -259,7 +259,7 @@
   }
  ],
  "created": 1791870027,
- "updated": 1792317929,
+ "updated": 1794589087,
  "cat": {
   "title": "Azərbaycan xalçaçılıq məktəblərindən olan Qarabağ xalçaçılıq məktəbinin Cəbrayıl qrupuna aid edilən xovlu xalç",
   "museum": "",
@@ -356,5 +356,37 @@
   "ver": 1,
   "t": 1794238425
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "marks": {
+   "m6ad499e9e798996_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794589087
+    }
+   },
+   "m6ad499e9e798996_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794589087
+    }
+   },
+   "m6ad499e9e798996_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794589087
+    }
+   },
+   "m6ad499e9e798996_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794589087
+    }
+   }
+  }
+ }
 }
