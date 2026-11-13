@@ -1418,6 +1418,16 @@ def t36_micro_more_cards(pg, ctx):
     assert (a.get('same_ok') or {}).get('mc_s2', {}).get('ok') and (b.get('same_ok') or {}).get('mc_s1', {}).get('ok'), '«тот же ковёр» не записан у обоих'
     lg = [json.loads(x) for x in open(f'{D}/micro.jsonl', encoding='utf-8') if x.strip()]
     assert {'marks', 'name', 'comp', 'same'} <= {x.get('type') for x in lg}, 'ответы новых карточек не попали в журнал'
+    # v11.56: «дубли» — пары почти одинаковых названий из словаря; ответ лежит отдельно от ковров
+    q = get(u + 'api/micro/next?n=3&k=cdup'); assert q['tasks'] and q['tasks'][0]['type'] == 'cdup' and q['left']['cdup'] >= 1, 'нет карточек «дубли»'
+    t0 = q['tasks'][0]; n0 = q['left']['cdup']
+    assert post(u + 'api/micro/answer', {'type': 'cdup', 'a': 'same', 'pid': t0['pid']}).get('applied') == 'cdup:same', 'ответ «одно и то же» не принят'
+    q2 = get(u + 'api/micro/next?n=3&k=cdup'); assert q2['left']['cdup'] == n0 - 1 and all(x['pid'] != t0['pid'] for x in q2['tasks']), 'решённая пара вернулась в очередь'
+    assert next(x for x in get(u + 'api/concept_dups')['pairs'] if x['id'] == t0['pid'])['verdict'] == 'same', 'решение не видно в /api/concept_dups'
+    mc = pg.context.browser.new_context(viewport={'width': 390, 'height': 844}, has_touch=True); m = mc.new_page(); errs2 = []
+    m.on('pageerror', lambda e: errs2.append(str(e))); m.goto(u + 'm?k=cdup'); m.wait_for_selector('.cds .cd'); m.screenshot(path=f'{OUT}/36_micro_cdup.png')
+    assert m.locator('.cds .cd').count() == 2 and not errs2, f'карточка «дубли» не показана: {errs2}'
+    m.click('#a3'); time.sleep(0.4); mc.close()
 
 
 @test

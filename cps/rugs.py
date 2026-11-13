@@ -1697,7 +1697,50 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE
+    KINDS = ("quad", "frame") + MORE + ("cdup",)
+
+    # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
+    # ответы лежат отдельно от ковров, в DATA/concept_dups_votes.json; решение (вес ≥2) читает /api/concept_dups, слияние делается в модели вручную.
+    F_CDUP = os.path.join(DATA, "concept_dups_votes.json"); _cd = {}
+
+    def _cdup_pairs():
+        if "p" not in _cd:
+            try:
+                with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "concept_dups.json"), encoding="utf-8") as f: _cd["p"] = json.load(f).get("pairs", [])
+            except (OSError, ValueError): _cd["p"] = []
+        return _cd["p"]
+
+    def _cdup_votes():
+        try:
+            with open(F_CDUP, encoding="utf-8") as f: return json.load(f)
+        except (OSError, ValueError): return {}
+
+    def _cdup_verdict(d):
+        return next((v for v in ("same", "diff") if sum(x["w"] for x in d.values() if x["a"] == v) >= 2), None)
+
+    def _cdup_queue(me):
+        V = _cdup_votes()
+        return [{"type": "cdup", "pid": p["id"], "a": p["a"], "b": p["b"]} for p in _cdup_pairs() if me not in V.get(p["id"], {}) and not _cdup_verdict(V.get(p["id"], {}))]
+
+    def _cdup_answer(me, role, a, body, rec):
+        pid = str(body.get("pid", ""))
+        if a not in ("same", "diff", "skip") or not any(p["id"] == pid for p in _cdup_pairs()): return JSONResponse({"error": "ответ?"}, status_code=400)
+        with _lock:
+            V = _cdup_votes(); d = V.setdefault(pid, {}); d[me] = {"a": a, "w": 0 if a == "skip" else _wt(role), "t": rec["t"]}
+            tmp = F_CDUP + ".tmp"
+            with open(tmp, "w", encoding="utf-8") as f: json.dump(V, f, ensure_ascii=False, indent=1)
+            os.replace(tmp, F_CDUP)
+            v = _cdup_verdict(d); rec["pid"] = pid
+            if v: rec["applied"] = "cdup:" + v
+            _mlog(rec)
+        return {"ok": True, "applied": ("cdup:" + v) if v else None}
+
+    @app.get("/api/concept_dups")
+    def api_concept_dups():
+        """пары-кандидаты и что по ним решили люди (для переноса решений в модель Carpet DNA)"""
+        V = _cdup_votes()
+        return {"pairs": [{"id": p["id"], "a": p["a"]["az"], "b": p["b"]["az"], "verdict": _cdup_verdict(V.get(p["id"], {})),
+                           "votes": {u: x["a"] for u, x in V.get(p["id"], {}).items()}} for p in _cdup_pairs()]}
 
     def _mrow(rid):
         """короткая запись для очереди (кэш по времени изменения файла)"""
@@ -1841,7 +1884,7 @@ def install(app, DATA, D_WORK):
             f = next((e["id"] + x for x in ("_x12.png", ".png") if os.path.exists(os.path.join(D_OUT, e["id"] + x))), None)
             if not f: continue
             d = BYID.get(e.get("motif") or "")
-            out.append({"id": e["id"], "img": "/out/" + f, "name": (d["az"] if d else "") or e.get("name") or e["id"]})
+            out.append({"id": e["id"], "img": "/out/" + f, "name": (d["az"] if d else "") or e.get("name") or ""})     # v11.56: без названия — без подписи (раньше показывался служебный номер схемы)
         return out
 
     def _more_queues(me, rows, by, want):
@@ -2014,6 +2057,7 @@ def install(app, DATA, D_WORK):
         more = _more_queues(me, rows, by, want)
         Q = {"quad": [{"type": "quad", "rid": x["id"], "quad": x["vquad"] or x["aquad"], "qsrc": "vlm" if x["vquad"] else "auto"} for x in qd[:n]],
              "frame": [{"type": "frame", "rid": x["id"]} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
+        cdq = _cdup_queue(me) if "cdup" in want else []; Q["cdup"] = cdq[:n]
         tasks = []; order = [t for t in want if Q[t]]
         while len(tasks) < n and order:                                           # по кругу: по одной карточке каждого вида
             for t in list(order):
@@ -2031,8 +2075,9 @@ def install(app, DATA, D_WORK):
             tasks.insert(random.randrange(1, len(tasks)), {"type": "quad", "rid": x["id"], "quad": q, "c": tok})
         by = {x["id"]: x for x in rows}
         for t in tasks:
+            if t["type"] == "cdup": continue                                     # карточка о словах: ковра у неё нет
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "name_wait": more["name_wait"]},
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "name_wait": more["name_wait"]},
                 "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
 
     @app.post("/api/micro/answer")
@@ -2048,6 +2093,7 @@ def install(app, DATA, D_WORK):
             if v and v[0] == me:
                 rec["ctl"] = (a == "ok") == (v[1] == "ok"); _mlog(rec)
             return {"ok": True, "ctl": rec.get("ctl")}
+        if typ == "cdup": return _cdup_answer(me, role, a, body, rec)
         if typ in MORE: return _micro_more(me, role, typ, rid, a, body, rec)
         if typ not in ("frame", "quad") or a == "skip":
             if a == "skip": _mlog(rec)

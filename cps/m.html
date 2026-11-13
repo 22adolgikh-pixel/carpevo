@@ -39,11 +39,13 @@ button.wide{grid-column:1/-1}button.sm{min-height:40px;padding:8px}button:active
 .chips{display:flex;gap:6px;padding:6px 14px 0;overflow-x:auto;scrollbar-width:none}.chips button{flex:none;min-height:0;padding:4px 10px;border-radius:14px;font-size:12px;white-space:nowrap;color:var(--mut)}.chips button.on{border-color:var(--acc);color:var(--tx)}
 .smp{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--mut)}.smp img{flex:none;height:76px;width:76px;object-fit:contain;border-radius:8px;border:2px solid var(--acc);background:#000}.smp img.sch{image-rendering:pixelated;background:#fff;border-color:var(--ln)}.smp img.big{height:120px;width:120px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1;min-height:0;overflow-y:auto;align-content:start}
-.tl{position:relative;aspect-ratio:1;min-height:0;padding:0;border-radius:10px;border:2px solid var(--ln);overflow:hidden;background:#000}.tl img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
+/* v11.56: квадрат через padding, а не aspect-ratio — в Safari на iPhone ряды сетки схлопывались и плитки наезжали друг на друга */
+.tl{position:relative;height:0;min-height:0;padding:0 0 100%;border-radius:10px;border:2px solid var(--ln);overflow:hidden;background:#000;box-sizing:content-box}.tl img{position:absolute;inset:0;width:100%;height:100%;box-sizing:border-box;object-fit:contain;display:block;pointer-events:none}
 .tl.x{border-color:var(--bad)}.tl.x:after{content:'✗';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:var(--bad);background:#000a}
 .tl.sch{background:#fff}.tl.sch img{image-rendering:pixelated;padding:4px 4px 16px}.tl.sel{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
 .tl b{position:absolute;left:0;right:0;bottom:0;font-size:10px;font-weight:500;line-height:1.5;background:#000b;color:#fff;padding:0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:1;min-height:0;align-items:center}.pair figure{margin:0;display:flex;flex-direction:column;gap:4px;align-items:center;min-width:0}.pair img{max-width:100%;max-height:54dvh;object-fit:contain;border-radius:6px}.pair figcaption{font-size:11px;color:var(--mut);text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cds{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow-y:auto}.cd{background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;font-size:13px}.cd b{font-size:18px}.cd blockquote{margin:4px 0 0;padding-left:8px;border-left:2px solid var(--ln);font-size:12.5px}.cd cite{display:block;color:var(--mut);font-size:11.5px;font-style:normal}
 .typ{background:var(--pan);border:1px solid var(--ln);border-radius:10px;padding:8px 10px;display:flex;gap:8px;align-items:center}.typ b{font-size:16px}.typ .refs{margin-left:auto;display:flex;gap:4px}.typ .refs img{height:64px;border-radius:4px}
 button:disabled{opacity:.4}
 .flags{display:flex;gap:8px}.flags label{flex:1;display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--ln);border-radius:10px;font-size:13px;color:var(--mut)}.flags input{width:20px;height:20px;accent-color:var(--acc)}.flags label:has(input:checked){border-color:var(--acc);color:var(--tx)}
@@ -65,7 +67,7 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
 // v11.52: виды карточек. Кнопки вверху включают и выключают вид; выбор помнится на этом телефоне. /m?k=quad,frame — задать выбор ссылкой.
-const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['same','двойники'],['split','развороты']];
+const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['same','двойники'],['split','развороты'],['cdup','дубли']];
 function kindsInit(){let k=new URLSearchParams(location.search).get('k');
   if(!k){try{k=localStorage.getItem('cps_m_k');}catch(e){}}
   S.k=(k||'').split(',').filter(x=>KINDS.some(a=>a[0]===x));if(!S.k.length)S.k=KINDS.map(a=>a[0]);}
@@ -84,7 +86,7 @@ function show(){head();const t=S.tasks[S.i];
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
     <div class="mut">в очереди: ${KINDS.filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
     ${S.k.some(k=>L[k])?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
-  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,split:showSplit})[t.type](t);}
+  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,split:showSplit,cdup:showCdup})[t.type](t);}
 function qhead(q,tip){return `<div class="qrow"><span class="q">${q}</span><button class="ib" id="ib" aria-label="подсказка">i</button></div><div class="tip hint" id="tip">${tip}</div>`;}
 function qtip(){const b=$('ib'),t=$('tip');if(b&&t)b.onclick=()=>{t.classList.toggle('on');b.classList.toggle('on');};}
 function stage(t,extra=''){return `<div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="${img(t)}" alt="">${extra}</div></div>`;}
@@ -159,7 +161,7 @@ function showMarks(t){t.x=t.x||{};const hasS=!!t.sample;
 function showName(t){
   $('main').innerHTML=`${qhead('Какой это элемент?','Сверху элемент с ковра (жёлтая рамка). Ниже — все схемы Керимова для ковров типа «'+esc(t.comp)+'». Выберите схему и нажмите ✓. Поворот и цвет не важны, важна форма.')}
    <div class="smp"><img class="big" src="${crop(t.rid,t.sample,260,0.3,1)}" alt="элемент">${(t.also||[]).map(b=>`<img src="${crop(t.rid,b,160,0.15,0)}" alt="">`).join('')}<span>тип: ${esc(t.comp)}</span></div>
-   <div class="grid" id="gr">${t.opts.map(o=>`<button class="tl sch${t.sel===o.id?' sel':''}" data-id="${esc(o.id)}"><img src="${o.img}" alt=""><b>${esc(o.name)}</b></button>`).join('')}</div>
+   <div class="grid" id="gr">${t.opts.map(o=>`<button class="tl sch${t.sel===o.id?' sel':''}" data-id="${esc(o.id)}"><img src="${o.img}" alt="">${o.name?`<b>${esc(o.name)}</b>`:''}</button>`).join('')}</div>
    <div class="row3"><button class="yes" id="a1" aria-label="это выбранная схема" ${t.sel?'':'disabled'}>✓</button><button class="no" id="a3" style="font-size:13px">нет в списке</button><button class="unk" id="a4" aria-label="не знаю">?</button></div>`;qtip();
   document.querySelectorAll('#gr .tl').forEach(e=>e.onclick=()=>{t.sel=e.dataset.id;document.querySelectorAll('#gr .tl').forEach(x=>x.classList.toggle('sel',x===e));$('a1').disabled=false;});
   $('a1').onclick=()=>t.sel&&answer(t,t.sel,null,{g:t.g});$('a3').onclick=()=>answer(t,'none',null,{g:t.g});$('a4').onclick=()=>answer(t,'skip',null,{g:t.g});}
@@ -183,5 +185,14 @@ function showSplit(t){document.documentElement.style.setProperty('--imh','50dvh'
    ${stage(t,`<svg viewBox="0 0 1 1" preserveAspectRatio="none">${t.parts.map((b,i)=>`<rect x="${b[0]}" y="${b[1]}" width="${b[2]}" height="${b[3]}" fill="${PC[i%6]}22" stroke="${PC[i%6]}" stroke-width="3" vector-effect="non-scaling-stroke"/>`).join('')}</svg>`)}
    <div class="btns"><button class="yes wide" id="a1">✓ разрезать так</button><button id="a2">один ковёр</button><button class="sm unk" id="a4">не знаю</button></div>`;qtip();
   S.im=$('im');$('a1').onclick=()=>answer(t,'split');$('a2').onclick=()=>answer(t,'one');$('a4').onclick=()=>answer(t,'skip');zoomable();}
+// v11.56 «дубли»: два названия ковра из словаря Carpet DNA, которые почти совпадают. Вопрос о словах, фото нет.
+function showCdup(t){const sd=x=>`<div class="cd"><b>${esc(x.az)}</b>${x.ru.length?`<div>${esc(x.ru.join(' · '))}</div>`:''}
+    ${x.names.length>1?`<div class="hint">ещё пишут: ${esc(x.names.filter(n=>n!==x.az).join(', '))}</div>`:''}
+    <div class="hint">${x.school?'школа: '+esc(x.school)+' · ':''}${esc(x.sources.join(', ')||'источник не указан')}${x.schemes?' · схем '+x.schemes:''}</div>
+    ${x.quotes.map(q=>`<blockquote>${esc(q.quote)}<cite>${esc(q.where)}</cite></blockquote>`).join('')}</div>`;
+  $('main').innerHTML=`${qhead('Это одно и то же название ковра?','В словаре два слова, которые различаются одной-двумя буквами. Если это одно и то же село или ковёр, записанные по-разному, — «одно и то же». Если это разные сёла или разные ковры — «разные». Ниже — что о каждом сказано в книгах. Решение в словарь вносится не сразу: его потом проверят.')}
+   <div class="cds">${sd(t.a)}${sd(t.b)}</div>
+   <div class="btns"><button class="yes" id="a1">✓ одно и то же</button><button class="no" id="a3">✗ разные</button><button class="sm unk" id="a4">не знаю</button></div>`;qtip();
+  const x={pid:t.pid};$('a1').onclick=()=>answer(t,'same',null,x);$('a3').onclick=()=>answer(t,'diff',null,x);$('a4').onclick=()=>answer(t,'skip',null,x);}
 kindsInit();load();
 </script></body></html>
