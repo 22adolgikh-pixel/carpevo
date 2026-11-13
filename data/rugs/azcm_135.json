@@ -31,7 +31,7 @@
    "scheme": "",
    "group": "mmv8ds82c",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -40,8 +40,8 @@
    "xfer": "",
    "by": "dolgikh",
    "at": 1791998744,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794554223
   },
   {
    "id": "mmv8dsass0",
@@ -57,7 +57,7 @@
    "scheme": "",
    "group": "mmv8ds82c",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -66,8 +66,8 @@
    "xfer": "",
    "by": "машина → dolgikh",
    "at": 1791998748,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794554223
   },
   {
    "id": "mmv8dsass1",
@@ -83,7 +83,7 @@
    "scheme": "",
    "group": "mmv8ds82c",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -92,8 +92,8 @@
    "xfer": "",
    "by": "машина → dolgikh",
    "at": 1791998748,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794554223
   },
   {
    "id": "mmv8dsass2",
@@ -109,7 +109,7 @@
    "scheme": "",
    "group": "mmv8ds82c",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -118,12 +118,12 @@
    "xfer": "",
    "by": "машина → dolgikh",
    "at": 1791998748,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794554223
   }
  ],
  "created": 1791870042,
- "updated": 1791998802,
+ "updated": 1794554223,
  "cat": {
   "title": "“Gədəbəy” («Гедабей»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -190,5 +190,37 @@
   "ver": 1,
   "t": 1794251773
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "marks": {
+   "mmv8ds82c": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794554223
+    }
+   },
+   "mmv8dsass0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794554223
+    }
+   },
+   "mmv8dsass1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794554223
+    }
+   },
+   "mmv8dsass2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794554223
+    }
+   }
+  }
+ }
 }

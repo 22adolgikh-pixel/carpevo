@@ -18,7 +18,7 @@
  "h": 1878,
  "marks": [],
  "created": 1791736125,
- "updated": 1794553238,
+ "updated": 1794554214,
  "cat": {
   "title": "Malibeyli carpet XIXcentury.gif",
   "museum": "Wikimedia Commons",
@@ -177,8 +177,67 @@
     "w": 2,
     "t": 1794553238
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794554214,
+    "q": [
+     [
+      0.00613,
+      0.00806
+     ],
+     [
+      0.99193,
+      0.00417
+     ],
+     [
+      0.99677,
+      0.99194
+     ],
+     [
+      0.0129,
+      0.99486
+     ]
+    ],
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00613,
+    0.00806
+   ],
+   [
+    0.99193,
+    0.00417
+   ],
+   [
+    0.99677,
+    0.99194
+   ],
+   [
+    0.0129,
+    0.99486
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
