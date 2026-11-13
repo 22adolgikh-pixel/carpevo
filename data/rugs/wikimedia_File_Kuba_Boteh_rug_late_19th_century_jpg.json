@@ -18,7 +18,7 @@
  "h": 957,
  "marks": [],
  "created": 1791736126,
- "updated": 1794509648,
+ "updated": 1794547843,
  "cat": {
   "title": "Kuba Boteh rug late 19th century.jpg",
   "museum": "Wikimedia Commons",
@@ -132,8 +132,67 @@
     "w": 2,
     "t": 1794509648
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794547843,
+    "q": [
+     [
+      0.06083,
+      0.04034
+     ],
+     [
+      0.94981,
+      0.05058
+     ],
+     [
+      0.95917,
+      0.9599
+     ],
+     [
+      0.05358,
+      0.93828
+     ]
+    ],
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06083,
+    0.04034
+   ],
+   [
+    0.94981,
+    0.05058
+   ],
+   [
+    0.95917,
+    0.9599
+   ],
+   [
+    0.05358,
+    0.93828
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
