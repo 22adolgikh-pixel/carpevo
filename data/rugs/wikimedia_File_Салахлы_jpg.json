@@ -382,7 +382,7 @@
    "scheme": "t36_f05",
    "group": "mmvcslgnm",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -392,8 +392,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792265487,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794553194
   },
   {
    "id": "mmvcslinp0",
@@ -478,7 +478,7 @@
   }
  ],
  "created": 1791736124,
- "updated": 1794340355,
+ "updated": 1794553194,
  "cat": {
   "title": "«Салахлы».jpg",
   "museum": "Wikimedia Commons",
@@ -607,6 +607,15 @@
       0.97735
      ]
     ]
+   }
+  },
+  "marks": {
+   "mmvcslgnm": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794553194
+    }
    }
   }
  },

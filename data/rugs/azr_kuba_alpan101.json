@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791736131,
- "updated": 1794339110,
+ "updated": 1794553056,
  "cat": {
   "title": "kuba alpan101",
   "museum": "",
@@ -52,7 +52,14 @@
    "score": 47
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_kuba_alpan9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794553056,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -125,6 +132,15 @@
       0.9525
      ]
     ]
+   }
+  },
+  "same": {
+   "azr_kuba_alpan9": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794553056
+    }
    }
   }
  },

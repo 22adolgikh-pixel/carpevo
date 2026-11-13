@@ -83,7 +83,7 @@
    "scheme": "",
    "group": "mmv6af58o",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -92,8 +92,8 @@
    "xfer": "",
    "by": "dolgikh",
    "at": 1791872279,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794553146
   },
   {
    "id": "mmv6ai8as",
@@ -109,7 +109,7 @@
    "scheme": "",
    "group": "mmv6af58o",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -118,8 +118,8 @@
    "xfer": "",
    "by": "dolgikh",
    "at": 1791872307,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794553146
   },
   {
    "id": "mmv6aigkx",
@@ -135,7 +135,7 @@
    "scheme": "",
    "group": "mmv6af58o",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -144,8 +144,8 @@
    "xfer": "",
    "by": "dolgikh",
    "at": 1791872317,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794553146
   },
   {
    "id": "mmv6aijfp",
@@ -175,7 +175,7 @@
   }
  ],
  "created": 1791736127,
- "updated": 1791998507,
+ "updated": 1794553146,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -338,5 +338,30 @@
   "area": 0.691,
   "ver": 1,
   "t": 1794238519
+ },
+ "micro": {
+  "marks": {
+   "mmv6ahmz7": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794553146
+    }
+   },
+   "mmv6ai8as": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794553146
+    }
+   },
+   "mmv6aigkx": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794553146
+    }
+   }
+  }
  }
 }

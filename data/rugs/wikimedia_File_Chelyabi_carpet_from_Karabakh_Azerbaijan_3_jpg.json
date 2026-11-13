@@ -18,7 +18,7 @@
  "h": 983,
  "marks": [],
  "created": 1791736125,
- "updated": 1794552944,
+ "updated": 1794553067,
  "cat": {
   "title": "\"Chelyabi\" carpet from Karabakh (Azerbaijan) 3.jpg",
   "museum": "Wikimedia Commons",
@@ -132,8 +132,67 @@
     "w": 2,
     "t": 1794552944
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794553067,
+    "q": [
+     [
+      0.02841,
+      0.00797
+     ],
+     [
+      0.96851,
+      0.0418
+     ],
+     [
+      0.96999,
+      0.93262
+     ],
+     [
+      0.00134,
+      0.9539
+     ]
+    ],
+    "s": "vlm"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02841,
+    0.00797
+   ],
+   [
+    0.96851,
+    0.0418
+   ],
+   [
+    0.96999,
+    0.93262
+   ],
+   [
+    0.00134,
+    0.9539
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
