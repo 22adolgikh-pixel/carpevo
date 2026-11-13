@@ -1,0 +1,44 @@
+{
+ "_about": "Сверка школ: подпись книги против модели (carpet_schools.json; concepts.schools — таблицы Керимова). Ковры XXI в. не сверяются. Правило 4: расхождение фиксируется, не выбирается.",
+ "items": [
+  {
+   "concept": "ovchuluq",
+   "book_school": "Тебриз",
+   "book_type": "tabriz",
+   "page": 7,
+   "model_carpet_schools": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "tabriz": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xirdagul",
+   "book_school": "Губа",
+   "book_type": "guba-shirvan",
+   "page": 14,
+   "model_carpet_schools": null,
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "shahnezerli",
+   "book_school": "Губа",
+   "book_type": "guba-shirvan",
+   "page": 19,
+   "model_carpet_schools": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "guba-shirvan": 1
+   },
+   "status": "совпадает"
+  }
+ ]
+}

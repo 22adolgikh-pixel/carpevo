@@ -1,0 +1,73 @@
+{
+ "_about": "Ковры из подписей альбома Музея истории Азербайджана. concept — понятие модели (auto — точное совпадение имени, proposed — нечёткое); new_candidate — понятия в модели нет.",
+ "terms": [
+  {
+   "term": "Ovçuluq",
+   "term_en": null,
+   "term_ru": "Овчулуг",
+   "concept": "ovchuluq",
+   "definition_ru": "название по подписи к фото (ворсовый ковёр)",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    7
+   ],
+   "schools": {
+    "Тебриз": 1
+   },
+   "n": 1
+  },
+  {
+   "term": "Xırdagül",
+   "term_en": null,
+   "term_ru": "Хырда гюль",
+   "concept": "xirdagul",
+   "definition_ru": "название по подписи к фото (ворсовый ковёр)",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    14
+   ],
+   "schools": {
+    "Губа": 1
+   },
+   "n": 1
+  },
+  {
+   "term": "Xançeşni",
+   "term_en": "Khan Cheshni",
+   "term_ru": "Хан чешня",
+   "concept": null,
+   "definition_ru": "название по подписи к фото (ворсовый ковёр)",
+   "confidence": "medium",
+   "new_candidate": true,
+   "pages": [
+    18
+   ],
+   "schools": {
+    "Губа": 1
+   },
+   "n": 1
+  },
+  {
+   "term": "Şahnəzərli",
+   "term_en": "Shakhnezerli",
+   "term_ru": "Шахнезерли",
+   "concept": "shahnezerli",
+   "definition_ru": "название по подписи к фото (ворсовый ковёр)",
+   "confidence": "high",
+   "new_candidate": false,
+   "pages": [
+    19
+   ],
+   "schools": {
+    "Губа": 1
+   },
+   "n": 1
+  }
+ ],
+ "borders": [],
+ "type_candidates": [
+  "Xançeşni"
+ ]
+}

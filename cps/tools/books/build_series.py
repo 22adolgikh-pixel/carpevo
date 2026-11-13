@@ -9,8 +9,8 @@ BOOKS = {  # slug -> (подпись книги для school_why, довери�
     'intangible_2849': 'Мурадов, «Азербайджанские ковры» (2008), ч. 1',
     'intangible_2850': 'Мурадов, «Азербайджанские ковры» (2008), ч. 2',
     'intangible_2851': 'Мурадов, «Azərbaycan xalça sənəti» (2013)',
-    'intangible_2854': 'книга об Иреванской группе (файл 2854)',
-    'azerbaycan_xalchasi': 'сборник к 100-летию Л. Керимова (Музей ковра)',
+    'intangible_2854': '«İrəvan qrupu» (Иреванская группа)',
+    'azerbaycan_xalchasi': 'сборник IV симпозиума (Париж, 2007)',
     'intangible_2885': 'Музей истории Азербайджана, «Ковры и ковровые изделия» (АН АзССР)',
 }
 KEEP = {'rug': 'ковёр', 'prayer_rug': 'молитвенный ковёр', 'flatweave': 'безворсовый', 'bag': 'мешок / сумка'}
@@ -72,7 +72,7 @@ items = list({i['id']: i for i in items}.values())
 cat['items'] = old + items
 cat['groups'] = [g for g in cat.get('groups', []) if g['members'][0] in {i['id'] for i in cat['items']}]
 cat['built'] = time.strftime('%Y-%m-%d %H:%M')
-cat['about'] = 'Книги: Энциклопедия т. II; Мурадов «Qarabağ qrupu» (2010); Мурадов 2008 (2 ч.) и 2013, Иреванская группа, сборник к 100-летию Л. Керимова, альбом Музея истории Азербайджана (подписи прочитаны VLM). Фото только для анализа.'
+cat['about'] = 'Книги: Энциклопедия т. II; Мурадов «Qarabağ qrupu» (2010); Мурадов 2008 (2 ч.) и 2013, Иреванская группа, сборник IV симпозиума (Париж 2007), альбом Музея истории Азербайджана (подписи прочитаны VLM). Фото только для анализа.'
 json.dump(cat, open(os.path.join(WORK, 'books_catalog.json'), 'w', encoding='utf-8'), ensure_ascii=False)
 for s, p in plates.items(): json.dump(p, open(os.path.join(WORK, f'plates_{s}.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('всего карточек', len(cat['items']), '| новых', len(items), '| дубликатов id', sum(v - 1 for v in ids.values()))

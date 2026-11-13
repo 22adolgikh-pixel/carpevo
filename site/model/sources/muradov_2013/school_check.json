@@ -1,0 +1,276 @@
+{
+ "_about": "Сверка школ: подпись книги против модели (carpet_schools.json; concepts.schools — таблицы Керимова). Ковры XXI в. не сверяются. Правило 4: расхождение фиксируется, не выбирается.",
+ "items": [
+  {
+   "concept": "palaz",
+   "book_school": "Газах",
+   "book_type": "ganja-gazakh",
+   "page": 16,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "guba-shirvan": 1
+   },
+   "status": "расходится"
+  },
+  {
+   "concept": "palaz",
+   "book_school": "Баку",
+   "book_type": "guba-shirvan",
+   "page": 16,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "guba-shirvan": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "kilim",
+   "book_school": "Баку",
+   "book_type": "guba-shirvan",
+   "page": 17,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "guba-shirvan": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sumax",
+   "book_school": "Губа",
+   "book_type": "guba-shirvan",
+   "page": 18,
+   "model_carpet_schools": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "guba-shirvan": 1,
+    "ganja-gazakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sumax",
+   "book_school": "Губа",
+   "book_type": "guba-shirvan",
+   "page": 18,
+   "model_carpet_schools": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "guba-shirvan": 1,
+    "ganja-gazakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "zili",
+   "book_school": "Газах",
+   "book_type": "ganja-gazakh",
+   "page": 19,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "baku": 1,
+    "ganja-gazakh": 1,
+    "guba-shirvan": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "zili",
+   "book_school": "Баку",
+   "book_type": "guba-shirvan",
+   "page": 19,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "baku": 1,
+    "ganja-gazakh": 1,
+    "guba-shirvan": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shedde",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "page": 20,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "karabakh": 1,
+    "guba-shirvan": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "verni",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "page": 21,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "ganja-gazakh": 1,
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "ladi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "page": 23,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "low"
+   },
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "ladi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "page": 23,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "low"
+   },
+   "model_tables_schools": null,
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "atli-itli",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "page": 24,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": {
+    "karabakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "zili",
+   "book_school": "Баку",
+   "book_type": "guba-shirvan",
+   "page": 111,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "baku": 1,
+    "ganja-gazakh": 1,
+    "guba-shirvan": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sumax",
+   "book_school": "Губа",
+   "book_type": "guba-shirvan",
+   "page": 113,
+   "model_carpet_schools": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "guba-shirvan": 1,
+    "ganja-gazakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "kilim",
+   "book_school": "Ширван",
+   "book_type": "guba-shirvan",
+   "page": 115,
+   "model_carpet_schools": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "guba-shirvan": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "tirme-sayagi",
+   "book_school": "Гянджа",
+   "book_type": "ganja-gazakh",
+   "page": 117,
+   "model_carpet_schools": null,
+   "model_tables_schools": {
+    "guba-shirvan": 1
+   },
+   "status": "расходится"
+  },
+  {
+   "concept": "faxrali",
+   "book_school": "Газах",
+   "book_type": "ganja-gazakh",
+   "page": 119,
+   "model_carpet_schools": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "medium"
+   },
+   "model_tables_schools": {
+    "ganja-gazakh": 1
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "chelebi",
+   "book_school": "Карабах",
+   "book_type": "karabakh",
+   "page": 123,
+   "model_carpet_schools": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "model_tables_schools": null,
+   "status": "совпадает"
+  }
+ ]
+}
