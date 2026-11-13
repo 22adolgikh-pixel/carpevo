@@ -96,7 +96,7 @@ def main(site_data, schemes_path, out_html, label=None):
             dj = json.load(open(os.path.join(ddir, f)))
             for cid, d in dj['items'].items():
                 d = {**d, 'src': dj['source']['short']}
-                if cid in desc and not cid.startswith('school:'):     # второй источник — добавить разделы с его подписью
+                if cid in desc:     # второй источник — добавить разделы с его подписью (с 2026-11-13 и для школ: раньше последний файл затирал предыдущие)
                     desc[cid].setdefault('more', []).append(d)
                 else:
                     desc[cid] = d

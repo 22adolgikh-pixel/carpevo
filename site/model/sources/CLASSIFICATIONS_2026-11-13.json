@@ -1,0 +1,6793 @@
+{
+ "_about": "Классификации ковров из текстов книг и их сверка с моделью и с подписями к фото. Составлено 2026-11-13 по распознанному тексту; человек не проверял. Правило 4: расхождения записаны, не решены.",
+ "classifications": [
+  {
+   "id": "kerimov_1984_in_symposium_2007",
+   "short": "Керимов 1984 (перепечатка в сборнике симпозиума 2007)",
+   "where": "symposium_2007_paris: с. 14–16 файла (az), 24–25 (en); в конце статьи указано: из «Rugs & Carpets from the Caucasus», Aurora, Ленинград, 1984",
+   "levels": "тип → группа → подгруппа (район)",
+   "groups": [
+    {
+     "school": "guba",
+     "group_az": "Quba",
+     "subgroup_az": "Quba",
+     "names": [
+      {
+       "name": "Köhnə Quba",
+       "concept": "kohne-quba",
+       "match": "exact"
+      },
+      {
+       "name": "Quba",
+       "concept": "quba",
+       "match": "exact"
+      },
+      {
+       "name": "Alpan",
+       "concept": "alpan",
+       "match": "exact"
+      },
+      {
+       "name": "Xırdagül-çiçi",
+       "concept": "xirdagul-chichi",
+       "match": "exact"
+      },
+      {
+       "name": "Sırt-çiçi",
+       "concept": "sirt-chichi",
+       "match": "exact"
+      },
+      {
+       "name": "Alçagül-çiçi",
+       "concept": "agchaqgulchichi",
+       "match": "exact"
+      },
+      {
+       "name": "Qollu-çiçi",
+       "concept": "qollu-chichi",
+       "match": "exact"
+      },
+      {
+       "name": "Qımıl",
+       "concept": "qimil",
+       "match": "exact"
+      },
+      {
+       "name": "Qədim minarə",
+       "concept": "qedim-minare",
+       "match": "exact"
+      },
+      {
+       "name": "Hacıqayıb",
+       "concept": "haciqayib",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "guba",
+     "group_az": "Quba",
+     "subgroup_az": "Dəvəçi",
+     "names": [
+      {
+       "name": "Qaraqaşlı",
+       "concept": "qaraqashli",
+       "match": "exact"
+      },
+      {
+       "name": "Şahnəzərli",
+       "concept": "shahnezerli",
+       "match": "exact"
+      },
+      {
+       "name": "Mollakamallı",
+       "concept": "mollakamalli",
+       "match": "exact"
+      },
+      {
+       "name": "Ləcədi",
+       "concept": "lecedi",
+       "match": "exact"
+      },
+      {
+       "name": "Pirəbədil",
+       "concept": "pirebedil",
+       "match": "exact"
+      },
+      {
+       "name": "Herat-Pirəbədil",
+       "concept": "herat-pirebedil",
+       "match": "exact"
+      },
+      {
+       "name": "Zeyvə",
+       "concept": "zeyve",
+       "match": "exact"
+      },
+      {
+       "name": "Zağlı",
+       "concept": "zagli",
+       "match": "exact"
+      },
+      {
+       "name": "Əlixanlı",
+       "concept": "elixanli",
+       "match": "exact"
+      },
+      {
+       "name": "Bilici",
+       "concept": "bilici",
+       "match": "exact"
+      },
+      {
+       "name": "Uqah",
+       "concept": "ugax",
+       "match": "alias"
+      },
+      {
+       "name": "Çarax",
+       "concept": "charx-carpet",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "guba",
+     "group_az": "Quba",
+     "subgroup_az": "Qonaqkənd",
+     "names": [
+      {
+       "name": "Orduc",
+       "concept": "orduc",
+       "match": "exact"
+      },
+      {
+       "name": "Afurca",
+       "concept": "afurca",
+       "match": "exact"
+      },
+      {
+       "name": "Yerfi",
+       "concept": "yerfi",
+       "match": "exact"
+      },
+      {
+       "name": "Cek",
+       "concept": "cek",
+       "match": "exact"
+      },
+      {
+       "name": "Qırız",
+       "concept": "giriz",
+       "match": "exact"
+      },
+      {
+       "name": "Cimi",
+       "concept": "cimi",
+       "match": "exact"
+      },
+      {
+       "name": "Xaşı",
+       "concept": "xashi",
+       "match": "exact"
+      },
+      {
+       "name": "Qonaqkənd",
+       "concept": "qonaqkend",
+       "match": "exact"
+      },
+      {
+       "name": "Arsalan",
+       "concept": "arsalan",
+       "match": "exact"
+      },
+      {
+       "name": "Xan",
+       "concept": "xan",
+       "match": "exact"
+      },
+      {
+       "name": "Salmasöyüd",
+       "concept": "salmasoyud",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "shirvan",
+     "group_az": "Şirvan",
+     "subgroup_az": "Şamaxı",
+     "names": [
+      {
+       "name": "Şirvan",
+       "concept": "shirvan",
+       "match": "exact"
+      },
+      {
+       "name": "Qobustan",
+       "concept": "qobustan",
+       "match": "exact"
+      },
+      {
+       "name": "Şamaxı",
+       "concept": "shamaxi",
+       "match": "exact"
+      },
+      {
+       "name": "İsrafil",
+       "concept": "israfil",
+       "match": "exact"
+      },
+      {
+       "name": "Ərçiman",
+       "concept": "arciman",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "shirvan",
+     "group_az": "Şirvan",
+     "subgroup_az": "Mərəzə",
+     "names": [
+      {
+       "name": "Mərəzə",
+       "concept": "mereze-carpet",
+       "match": "exact"
+      },
+      {
+       "name": "Nabur",
+       "concept": "nebur",
+       "match": "exact"
+      },
+      {
+       "name": "Çuxanlı",
+       "concept": "chuxanli",
+       "match": "exact"
+      },
+      {
+       "name": "Cağırlı",
+       "concept": "cagirili",
+       "match": "exact"
+      },
+      {
+       "name": "Cəmcəmli",
+       "concept": "cemcemli",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "shirvan",
+     "group_az": "Şirvan",
+     "subgroup_az": "Ağsu",
+     "names": [
+      {
+       "name": "Bico",
+       "concept": "bico",
+       "match": "exact"
+      },
+      {
+       "name": "Qəşəd",
+       "concept": "qashad",
+       "match": "alias"
+      },
+      {
+       "name": "Pirhəsənli",
+       "concept": "pirhesenli",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "shirvan",
+     "group_az": "Şirvan",
+     "subgroup_az": "Kürdəmir",
+     "names": [
+      {
+       "name": "Kürdəmir",
+       "concept": "kurdemir",
+       "match": "exact"
+      },
+      {
+       "name": "Şilyan",
+       "concept": "shilyan",
+       "match": "exact"
+      },
+      {
+       "name": "Sor-sor",
+       "concept": "sor-sor",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "shirvan",
+     "group_az": "Şirvan",
+     "subgroup_az": "Hacıqabul",
+     "names": [
+      {
+       "name": "Hacıqabul",
+       "concept": "haciqabul",
+       "match": "exact"
+      },
+      {
+       "name": "Şirəlibəy",
+       "concept": "shirelibey",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "shirvan",
+     "group_az": "Şirvan",
+     "subgroup_az": "(похожи на ширванские)",
+     "names": [
+      {
+       "name": "Qəbələ",
+       "concept": "qebele",
+       "match": "exact"
+      },
+      {
+       "name": "Salyan",
+       "concept": "salyan",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "baku",
+     "group_az": "Bakı",
+     "subgroup_az": "Abşeron",
+     "names": [
+      {
+       "name": "Bakı",
+       "concept": "baki",
+       "match": "exact"
+      },
+      {
+       "name": "Xilə-buta",
+       "concept": "xilebuta",
+       "match": "exact"
+      },
+      {
+       "name": "Xilə-əfşan",
+       "concept": "xileafshan",
+       "match": "exact"
+      },
+      {
+       "name": "Suraxanı",
+       "concept": "suraxani",
+       "match": "exact"
+      },
+      {
+       "name": "Novxanı",
+       "concept": "novxani",
+       "match": "exact"
+      },
+      {
+       "name": "Goradil",
+       "concept": "geradil",
+       "match": "alias"
+      },
+      {
+       "name": "Qala",
+       "concept": "qala",
+       "match": "exact"
+      },
+      {
+       "name": "Fatmayı",
+       "concept": "fatmayi",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "baku",
+     "group_az": "Bakı",
+     "subgroup_az": "Xızı",
+     "names": [
+      {
+       "name": "Fındıqan",
+       "concept": "findiqan",
+       "match": "exact"
+      },
+      {
+       "name": "Qədi",
+       "concept": "qadi",
+       "match": "alias"
+      }
+     ]
+    },
+    {
+     "school": "ganja",
+     "group_az": "Gəncə",
+     "subgroup_az": "Gəncə",
+     "names": [
+      {
+       "name": "Gəncə",
+       "concept": "gence-carpet",
+       "match": "exact"
+      },
+      {
+       "name": "Qədim minarə",
+       "concept": "qedim-minare",
+       "match": "exact"
+      },
+      {
+       "name": "Samux",
+       "concept": "samux",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "ganja",
+     "group_az": "Gəncə",
+     "subgroup_az": "Goranboy",
+     "names": [
+      {
+       "name": "Çaylı",
+       "concept": "chayli",
+       "match": "exact"
+      },
+      {
+       "name": "Şadılı",
+       "concept": "shadli",
+       "match": "fuzzy:sadli"
+      },
+      {
+       "name": "Faxralı",
+       "concept": "faxrali",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "ganja",
+     "group_az": "Gəncə",
+     "subgroup_az": "Gədəbəy",
+     "names": [
+      {
+       "name": "Gədəbəy",
+       "concept": "gedebey",
+       "match": "exact"
+      },
+      {
+       "name": "Çıraqlı",
+       "concept": "chiraqli",
+       "match": "exact"
+      },
+      {
+       "name": "Qaraqoyunlu",
+       "concept": "qaraqoyunlu",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "gazakh",
+     "group_az": "Qazax",
+     "subgroup_az": "Qazax",
+     "names": [
+      {
+       "name": "Qazax",
+       "concept": "qazax",
+       "match": "exact"
+      },
+      {
+       "name": "Salahlı",
+       "concept": "salahli",
+       "match": "exact"
+      },
+      {
+       "name": "Şıxlı",
+       "concept": "shixli",
+       "match": "exact"
+      },
+      {
+       "name": "Kəmərli",
+       "concept": "kemerli",
+       "match": "exact"
+      },
+      {
+       "name": "Dəmirçilər",
+       "concept": "demirchiler",
+       "match": "exact"
+      },
+      {
+       "name": "Qaymaqlı",
+       "concept": "qaymaqli",
+       "match": "exact"
+      },
+      {
+       "name": "Göyçəli",
+       "concept": "goycheli",
+       "match": "exact"
+      },
+      {
+       "name": "Dağkəsəmən",
+       "concept": "dagkesemen",
+       "match": "exact"
+      },
+      {
+       "name": "Öysüzlü",
+       "concept": "oysuzlu",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "gazakh",
+     "group_az": "Qazax",
+     "subgroup_az": "Borçalı",
+     "names": [
+      {
+       "name": "Borçalı",
+       "concept": "borchali",
+       "match": "exact"
+      },
+      {
+       "name": "Qarayazı",
+       "concept": "qarayazi",
+       "match": "exact"
+      },
+      {
+       "name": "Qaçağan",
+       "concept": "qachagan",
+       "match": "exact"
+      },
+      {
+       "name": "Qaraçöp",
+       "concept": "qarachop",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "karabakh",
+     "group_az": "Qarabağ",
+     "subgroup_az": "Bərdə",
+     "names": [
+      {
+       "name": "Bərdə",
+       "concept": "berde",
+       "match": "exact"
+      },
+      {
+       "name": "Xanqərvənd",
+       "concept": "xanqervend",
+       "match": "exact"
+      },
+      {
+       "name": "Aran",
+       "concept": "aran",
+       "match": "exact"
+      },
+      {
+       "name": "Qoca",
+       "concept": "qoca",
+       "match": "exact"
+      },
+      {
+       "name": "Buynuz",
+       "concept": "buynuz-carpet",
+       "match": "exact"
+      },
+      {
+       "name": "Dəryanur",
+       "concept": "deryanur",
+       "match": "exact"
+      },
+      {
+       "name": "Açma-yumma",
+       "concept": "achma-yumma",
+       "match": "exact"
+      },
+      {
+       "name": "Şabalıd-buta",
+       "concept": "shabalidbuta-carpet",
+       "match": "exact"
+      },
+      {
+       "name": "Balıq",
+       "concept": "baliq-carpet",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "karabakh",
+     "group_az": "Qarabağ",
+     "subgroup_az": "Ağcabədi",
+     "names": [
+      {
+       "name": "Ləmbəran",
+       "concept": "lemberan",
+       "match": "exact"
+      },
+      {
+       "name": "Qarabağ",
+       "concept": "qarabag",
+       "match": "exact"
+      },
+      {
+       "name": "Xantirmə",
+       "concept": "xantirme",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "karabakh",
+     "group_az": "Şuşa",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Malıbəyli",
+       "concept": "malibeyli",
+       "match": "exact"
+      },
+      {
+       "name": "Ləmpə",
+       "concept": "lempe",
+       "match": "не ковёр в модели: ornament"
+      },
+      {
+       "name": "Bağçadagüllər",
+       "concept": "bagchada-guller",
+       "match": "exact"
+      },
+      {
+       "name": "Bulud",
+       "concept": "bulud-carpet",
+       "match": "exact"
+      },
+      {
+       "name": "Saxsıdagüllər",
+       "concept": "saxsida-guller",
+       "match": "exact"
+      },
+      {
+       "name": "Nəlbəkigül",
+       "concept": "nelbeki-gul",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "karabakh",
+     "group_az": "Cəbrayıl",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Xanlıq",
+       "concept": "xanliq",
+       "match": "exact"
+      },
+      {
+       "name": "Qaraqoyunlu",
+       "concept": "qaraqoyunlu",
+       "match": "exact"
+      },
+      {
+       "name": "Qubadlı",
+       "concept": "qubadli",
+       "match": "exact"
+      },
+      {
+       "name": "Kürd",
+       "concept": "kurd",
+       "match": "exact"
+      },
+      {
+       "name": "Qasımuşağı",
+       "concept": "qasimushagi",
+       "match": "exact"
+      },
+      {
+       "name": "Bəhmənli",
+       "concept": "behmenli",
+       "match": "exact"
+      },
+      {
+       "name": "Muğan",
+       "concept": "mugan",
+       "match": "exact"
+      },
+      {
+       "name": "Talış",
+       "concept": "talish",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "tabriz",
+     "group_az": "Təbriz",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Təbriz",
+       "concept": "tebriz",
+       "match": "exact"
+      },
+      {
+       "name": "Bəxşayiş",
+       "concept": "baxshayish",
+       "match": "alias"
+      },
+      {
+       "name": "Qaraca",
+       "concept": "qaraca",
+       "match": "exact"
+      },
+      {
+       "name": "Gəravan",
+       "concept": "geravan",
+       "match": "exact"
+      },
+      {
+       "name": "Heris",
+       "concept": "heris",
+       "match": "exact"
+      },
+      {
+       "name": "Ləçək-turunc",
+       "concept": "lechekturunc",
+       "match": "exact"
+      },
+      {
+       "name": "Əfşan",
+       "concept": "efshan-carpet",
+       "match": "exact"
+      },
+      {
+       "name": "Ağaclı",
+       "concept": "agacli",
+       "match": "exact"
+      },
+      {
+       "name": "Ovçuluq",
+       "concept": "ovchuluq",
+       "match": "exact"
+      },
+      {
+       "name": "Dörd fəsil",
+       "concept": "dordfesil",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "ardabil",
+     "group_az": "Ərdəbil",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Ərdəbil",
+       "concept": "erdebil",
+       "match": "exact"
+      },
+      {
+       "name": "Şeyx Səfi",
+       "concept": "sheyx-sefi",
+       "match": "exact"
+      },
+      {
+       "name": "Şah Abbası",
+       "concept": "shahabbasi",
+       "match": "exact"
+      },
+      {
+       "name": "Sərabi",
+       "concept": "sarabi",
+       "match": "exact"
+      },
+      {
+       "name": "Zəncan",
+       "concept": "zencan",
+       "match": "exact"
+      },
+      {
+       "name": "Mir",
+       "concept": "mir",
+       "match": "exact"
+      },
+      {
+       "name": "Açma-yumma",
+       "concept": "achma-yumma",
+       "match": "exact"
+      }
+     ]
+    }
+   ],
+   "tech": {
+    "guba-shirvan": {
+     "area_m2": "1–4 (редко 10–15)",
+     "knots_per_m2": "160 000–300 000 (до 359 000)",
+     "pile_mm": "3–6"
+    },
+    "ganja-gazakh": {
+     "area_m2": "3–10",
+     "knots_per_m2": "60 000–120 000",
+     "pile_mm": "6–12"
+    },
+    "karabakh": {
+     "area_m2": "2–20 (до 25–30)",
+     "knots_per_m2": "90 000–160 000 (до 200 000)",
+     "pile_mm": "6–10"
+    },
+    "tabriz": {
+     "area_m2": "1–40 (до 50)",
+     "knots_per_m2": "60 000–360 000 (редко 400 000)",
+     "pile_mm": "2–15"
+    }
+   },
+   "notes": [
+    "В азерб. тексте в подгруппе «Gəncə» стоит «Sumax» — по смыслу и по Керимову т. II это «Samux» (ошибка перевода/набора сборника); англ. страница с этой частью в скане не читается.",
+    "В англ. тексте в подгруппе Quba есть «Golluchichi», в азерб. — нет (пропуск при переводе).",
+    "«Qaraqoyunlu» назван дважды: при Гедабее (сёла Чайкенд и Гёлькенд, «в южном Иджеване») и в Джебраильской группе Карабаха.",
+    "«Açma-yumma» назван дважды: Барда (Карабах) и Ардебильская группа.",
+    "«Qədim minarə» назван дважды: Губа и Гянджа.",
+    "Нахчыванские ковры по технике и рисунку отнесены к подгруппе Барда (Карабахский тип). Сёла Гусара (Хиль, Ясаб, Имамкуликенд, Зейхур): ковры «характерны для Дагестана»."
+   ]
+  },
+  {
+   "id": "muradov_2013",
+   "short": "Мурадов 2013, «Azərbaycan xalça sənəti»",
+   "where": "intangible_2851: с. 28–56 (девять групп), 110–127 (характеристика группы + образец)",
+   "levels": "девять групп (школ), без типов и подгрупп",
+   "groups": [
+    {
+     "school": "baku",
+     "group_az": "Bakı",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Novxanı",
+       "concept": "novxani",
+       "match": "exact"
+      },
+      {
+       "name": "Suraxanı",
+       "concept": "suraxani",
+       "match": "exact"
+      },
+      {
+       "name": "Fatmayı",
+       "concept": "fatmayi",
+       "match": "exact"
+      },
+      {
+       "name": "Goradil",
+       "concept": "geradil",
+       "match": "alias"
+      },
+      {
+       "name": "Xilə-buta",
+       "concept": "xilebuta",
+       "match": "exact"
+      },
+      {
+       "name": "Xilə-əfşan",
+       "concept": "xileafshan",
+       "match": "exact"
+      },
+      {
+       "name": "Bakı",
+       "concept": "baki",
+       "match": "exact"
+      },
+      {
+       "name": "Qala",
+       "concept": "qala",
+       "match": "exact"
+      },
+      {
+       "name": "Fındıqan",
+       "concept": "findiqan",
+       "match": "exact"
+      },
+      {
+       "name": "Qədi",
+       "concept": "qadi",
+       "match": "alias"
+      }
+     ]
+    },
+    {
+     "school": "guba",
+     "group_az": "Quba",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Qımıl",
+       "concept": "qimil",
+       "match": "exact"
+      },
+      {
+       "name": "Qonaqkənd",
+       "concept": "qonaqkend",
+       "match": "exact"
+      },
+      {
+       "name": "Sırt-çiçi",
+       "concept": "sirt-chichi",
+       "match": "exact"
+      },
+      {
+       "name": "Əjdahalı",
+       "concept": "ejdahali",
+       "match": "exact"
+      },
+      {
+       "name": "Qədim minarə",
+       "concept": "qedim-minare",
+       "match": "exact"
+      },
+      {
+       "name": "Bilici",
+       "concept": "bilici",
+       "match": "exact"
+      },
+      {
+       "name": "Qaraqaşlı",
+       "concept": "qaraqashli",
+       "match": "exact"
+      },
+      {
+       "name": "Mollakamallı",
+       "concept": "mollakamalli",
+       "match": "exact"
+      },
+      {
+       "name": "Pirəbədil",
+       "concept": "pirebedil",
+       "match": "exact"
+      },
+      {
+       "name": "Təkyə",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Uqah",
+       "concept": "ugax",
+       "match": "alias"
+      },
+      {
+       "name": "Zeyvə",
+       "concept": "zeyve",
+       "match": "exact"
+      },
+      {
+       "name": "Şahnəzərli",
+       "concept": "shahnezerli",
+       "match": "exact"
+      },
+      {
+       "name": "Həsənqala",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Afurca",
+       "concept": "afurca",
+       "match": "exact"
+      },
+      {
+       "name": "Cek",
+       "concept": "cek",
+       "match": "exact"
+      },
+      {
+       "name": "Alpan",
+       "concept": "alpan",
+       "match": "exact"
+      },
+      {
+       "name": "Cimi",
+       "concept": "cimi",
+       "match": "exact"
+      },
+      {
+       "name": "Hacıqayıb",
+       "concept": "haciqayib",
+       "match": "exact"
+      },
+      {
+       "name": "Hil",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Yerfi",
+       "concept": "yerfi",
+       "match": "exact"
+      },
+      {
+       "name": "Xaşı",
+       "concept": "xashi",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "shirvan",
+     "group_az": "Şirvan",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Şilyan",
+       "concept": "shilyan",
+       "match": "exact"
+      },
+      {
+       "name": "Kürdəmir",
+       "concept": "kurdemir",
+       "match": "exact"
+      },
+      {
+       "name": "Sor-sor",
+       "concept": "sor-sor",
+       "match": "exact"
+      },
+      {
+       "name": "Nabur",
+       "concept": "nebur",
+       "match": "exact"
+      },
+      {
+       "name": "Mərəzə",
+       "concept": "mereze-carpet",
+       "match": "exact"
+      },
+      {
+       "name": "Ərçiman",
+       "concept": "arciman",
+       "match": "exact"
+      },
+      {
+       "name": "Qobustan",
+       "concept": "qobustan",
+       "match": "exact"
+      },
+      {
+       "name": "Şirvan",
+       "concept": "shirvan",
+       "match": "exact"
+      },
+      {
+       "name": "Məkkə-Mədinə",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Qəşəd",
+       "concept": "qashad",
+       "match": "alias"
+      },
+      {
+       "name": "Bico",
+       "concept": "bico",
+       "match": "exact"
+      },
+      {
+       "name": "Şamaxı",
+       "concept": "shamaxi",
+       "match": "exact"
+      },
+      {
+       "name": "Pirhəsənli",
+       "concept": "pirhesenli",
+       "match": "exact"
+      },
+      {
+       "name": "Qəbələ",
+       "concept": "qebele",
+       "match": "exact"
+      },
+      {
+       "name": "Salyan",
+       "concept": "salyan",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "ganja",
+     "group_az": "Gəncə",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Qaraqoyunlu",
+       "concept": "qaraqoyunlu",
+       "match": "exact"
+      },
+      {
+       "name": "Qaracəmirli",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Faxralı",
+       "concept": "faxrali",
+       "match": "exact"
+      },
+      {
+       "name": "Topalhəsənli",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Mollabayramlı",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Samux",
+       "concept": "samux",
+       "match": "exact"
+      },
+      {
+       "name": "Çaylı",
+       "concept": "chayli",
+       "match": "exact"
+      },
+      {
+       "name": "Tirməsayağı",
+       "concept": "tirme-sayagi",
+       "match": "не ковёр в модели: ornament"
+      }
+     ]
+    },
+    {
+     "school": "gazakh",
+     "group_az": "Qazax-Borçalı",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Muğanlı",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Ulduzlu Qazax",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Şıxlı",
+       "concept": "shixli",
+       "match": "exact"
+      },
+      {
+       "name": "Daş Salahlı",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Öysüzlü",
+       "concept": "oysuzlu",
+       "match": "exact"
+      },
+      {
+       "name": "Qaraçöp",
+       "concept": "qarachop",
+       "match": "exact"
+      },
+      {
+       "name": "Ləmbəli",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Qarayazı",
+       "concept": "qarayazi",
+       "match": "exact"
+      },
+      {
+       "name": "Borçalı",
+       "concept": "borchali",
+       "match": "exact"
+      },
+      {
+       "name": "Faxralı",
+       "concept": "faxrali",
+       "match": "exact"
+      },
+      {
+       "name": "Qazax",
+       "concept": "qazax",
+       "match": "exact"
+      },
+      {
+       "name": "Namazlıq",
+       "concept": "namazliq",
+       "match": "exact"
+      },
+      {
+       "name": "Qədirqə kilim",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Qoçbuynuz kilim",
+       "concept": null,
+       "match": null
+      },
+      {
+       "name": "Daraxlı kilim",
+       "concept": null,
+       "match": null
+      }
+     ]
+    },
+    {
+     "school": "irevan",
+     "group_az": "İrəvan",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Ləmbəli",
+       "concept": null,
+       "match": null
+      }
+     ]
+    },
+    {
+     "school": "karabakh",
+     "group_az": "Qarabağ",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Çələbi",
+       "concept": "chelebi",
+       "match": "exact"
+      },
+      {
+       "name": "Malıbəyli",
+       "concept": "malibeyli",
+       "match": "exact"
+      },
+      {
+       "name": "Açma-yumma",
+       "concept": "achma-yumma",
+       "match": "exact"
+      },
+      {
+       "name": "Bəhmənli",
+       "concept": "behmenli",
+       "match": "exact"
+      },
+      {
+       "name": "Xanqərvənd",
+       "concept": "xanqervend",
+       "match": "exact"
+      },
+      {
+       "name": "Xanlıq",
+       "concept": "xanliq",
+       "match": "exact"
+      },
+      {
+       "name": "Qasımuşağı",
+       "concept": "qasimushagi",
+       "match": "exact"
+      },
+      {
+       "name": "Qoca",
+       "concept": "qoca",
+       "match": "exact"
+      },
+      {
+       "name": "Şabalıd-buta",
+       "concept": "shabalidbuta-carpet",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "nakhchivan",
+     "group_az": "Naxçıvan",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Açma-yumma",
+       "concept": "achma-yumma",
+       "match": "exact"
+      },
+      {
+       "name": "Qoca",
+       "concept": "qoca",
+       "match": "exact"
+      },
+      {
+       "name": "Buynuz",
+       "concept": "buynuz-carpet",
+       "match": "exact"
+      },
+      {
+       "name": "Dəryanur",
+       "concept": "deryanur",
+       "match": "exact"
+      },
+      {
+       "name": "Balıq",
+       "concept": "baliq-carpet",
+       "match": "exact"
+      },
+      {
+       "name": "Şabalıd-buta",
+       "concept": "shabalidbuta-carpet",
+       "match": "exact"
+      },
+      {
+       "name": "Namazlıq",
+       "concept": "namazliq",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "tabriz",
+     "group_az": "Təbriz",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Təbriz",
+       "concept": "tebriz",
+       "match": "exact"
+      },
+      {
+       "name": "Bəxşayiş",
+       "concept": "baxshayish",
+       "match": "alias"
+      },
+      {
+       "name": "Qaraca",
+       "concept": "qaraca",
+       "match": "exact"
+      },
+      {
+       "name": "Gəravan",
+       "concept": "geravan",
+       "match": "exact"
+      },
+      {
+       "name": "Heris",
+       "concept": "heris",
+       "match": "exact"
+      },
+      {
+       "name": "Ovçuluq",
+       "concept": "ovchuluq",
+       "match": "exact"
+      },
+      {
+       "name": "Ləçək-turunc",
+       "concept": "lechekturunc",
+       "match": "exact"
+      },
+      {
+       "name": "Əfşan",
+       "concept": "efshan-carpet",
+       "match": "exact"
+      }
+     ]
+    },
+    {
+     "school": "ardabil",
+     "group_az": "Təbriz / Ərdəbil",
+     "subgroup_az": "",
+     "names": [
+      {
+       "name": "Ərdəbil",
+       "concept": "erdebil",
+       "match": "exact"
+      },
+      {
+       "name": "Şeyx Səfi",
+       "concept": "sheyx-sefi",
+       "match": "exact"
+      },
+      {
+       "name": "Sərabi",
+       "concept": "sarabi",
+       "match": "exact"
+      },
+      {
+       "name": "Zəncan",
+       "concept": "zencan",
+       "match": "exact"
+      }
+     ]
+    }
+   ],
+   "tech": {
+    "baku": {
+     "density_text": "36×60 … 40×70 (с. 28)",
+     "density_spec": "38×38–45×45 на дм², 145–200 тыс./м², ворс 5–7 мм, 100×150–110×180 см (с. 111)"
+    },
+    "guba": {
+     "density_text": "30×60, 35×55, 38×50, 40×45, 40×60, 35×70 (с. 32)"
+    },
+    "shirvan": {
+     "density_text": "ворсовые 35×60, 37×50, 40×55; безворсовые 22×60, 18×50, 15×60, 33×50, 30×55 (с. 34)"
+    },
+    "ganja": {
+     "density_text": "25×40, 27×35, 32×30 (с. 37)",
+     "density_spec": "35×35–40×40 на дм², ворс 6–8 мм (с. 117)"
+    },
+    "gazakh": {
+     "density_text": "20×35, 25×30, 27×32 (с. 40)",
+     "density_spec": "25×25–35×35, 60–120 тыс./м², ворс до 12 мм (с. 119)"
+    },
+    "irevan": {
+     "density_text": "22×32, 25×35 (в OCR «25x55»), 29×30 (с. 44)"
+    },
+    "karabakh": {
+     "density_text": "23×36, 27×30, 29×32; 90–160 тыс./м² (до 200 тыс.); ворс 6–10 мм; 2–20 м² (до 25–30) (с. 45)"
+    },
+    "nakhchivan": {
+     "density_text": "25×40 … 27×36, 29×30; 87–100 тыс./м²; ворс 6–10 мм; 6–12 м² (с. 48, 50)",
+     "density_spec": "35×35 на дм², ворс 6–8 мм, 100×150–160×260 см (с. 125)"
+    },
+    "tabriz": {
+     "density_text": "от 30×30 до 80×80 (с. 56; в OCR «30x80»)"
+    }
+   },
+   "notes": [
+    "Иреван выделен отдельной (девятой) группой; сказано, что по рисунку он ближе всего к Газаху, Гяндже, Карабаху, Нахчывану, Восточной Анатолии и Тебризу (с. 44).",
+    "Нахчыван выделен отдельной группой, но перечень его ковров (Açma-yumma, Qoca, Buynuz, Dəryanur, Balıq, Şabalıd buta) дословно совпадает с подгруппой «Барда» у Керимова 1984; сказано, что по технике он близок Карабаху (с. 48–49).",
+    "Числа о Карабахе (90–160 тыс. узлов, ворс 6–10 мм, 2–20 м²) и перечень Тебриз/Ардебиль совпадают с Керимовым 1984: текст 2013 г. в этих местах не самостоятельное свидетельство.",
+    "«Faxralı» назван и в Гянджинской (с. 37), и в Газах-Борчалинской группе (с. 40; образец на с. 119–120 подписан «Borçalı mahalı, Faxralı kəndi»): это два разных села — в Геранбое и в Борчалы.",
+    "«Ləmbəli»: в тексте — Газах-Борчалы (с. 40), а подпись к фото на с. 24 — «İrəvan qrupu». Расхождение внутри одной книги.",
+    "Плотность в одной и той же книге дана дважды и не сходится для Гянджи (25×40…32×30 против 35×35–40×40) и Нахчывана (25×40…29×30 против 35×35): в главах — «узлов на дм по ширине × по длине», в приложении — другие числа. Брать числа только с указанием страницы.",
+    "«Çələbi» = «Bərdə»: старые ткачи называют ковёр «Барда», главный центр — село Челебиляр Бардинского района; с XIX в. ткали и в Газахе (с. 123).",
+    "«Borçalı» в народе называют «Çanaqlı bağa» (по крупному гёлю); «Qədirqə kilim» в Газахе называют «Qara ağac» (с. 40–41).",
+    "В губинском перечне (с. 32) шесть названий OCR не прочитал («Kukal», «huts», «Zeyid», «нах», «Tum km», «айс») — нужна сверка по скану."
+   ]
+  }
+ ],
+ "vs_model": [
+  {
+   "concept": "kohne-quba",
+   "name": "Köhnə Quba",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "quba",
+   "name": "Quba",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "alpan",
+   "name": "Alpan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xirdagul-chichi",
+   "name": "Xırdagül-çiçi",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sirt-chichi",
+   "name": "Sırt-çiçi",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "agchaqgulchichi",
+   "name": "Alçagül-çiçi",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qollu-chichi",
+   "name": "Qollu-çiçi",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qimil",
+   "name": "Qımıl",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qedim-minare",
+   "name": "Qədim minarə",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "haciqayib",
+   "name": "Hacıqayıb",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qaraqashli",
+   "name": "Qaraqaşlı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shahnezerli",
+   "name": "Şahnəzərli",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "mollakamalli",
+   "name": "Mollakamallı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "lecedi",
+   "name": "Ləcədi",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "pirebedil",
+   "name": "Pirəbədil",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "herat-pirebedil",
+   "name": "Herat-Pirəbədil",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "zeyve",
+   "name": "Zeyvə",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "zagli",
+   "name": "Zağlı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "elixanli",
+   "name": "Əlixanlı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "bilici",
+   "name": "Bilici",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "ugax",
+   "name": "Uqah",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "charx-carpet",
+   "name": "Çarax",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Dəvəçi",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "orduc",
+   "name": "Orduc",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "afurca",
+   "name": "Afurca",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "yerfi",
+   "name": "Yerfi",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "cek",
+   "name": "Cek",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "giriz",
+   "name": "Qırız",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "cimi",
+   "name": "Cimi",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xashi",
+   "name": "Xaşı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qonaqkend",
+   "name": "Qonaqkənd",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "arsalan",
+   "name": "Arsalan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xan",
+   "name": "Xan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "salmasoyud",
+   "name": "Salmasöyüd",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "guba",
+   "text_group": "Quba / Qonaqkənd",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shirvan",
+   "name": "Şirvan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Şamaxı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qobustan",
+   "name": "Qobustan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Şamaxı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shamaxi",
+   "name": "Şamaxı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Şamaxı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "israfil",
+   "name": "İsrafil",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Şamaxı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "arciman",
+   "name": "Ərçiman",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Şamaxı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "mereze-carpet",
+   "name": "Mərəzə",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Mərəzə",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "nebur",
+   "name": "Nabur",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Mərəzə",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "chuxanli",
+   "name": "Çuxanlı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Mərəzə",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "cagirili",
+   "name": "Cağırlı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Mərəzə",
+   "model": {
+    "type": "guba-shirvan",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "cemcemli",
+   "name": "Cəmcəmli",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Mərəzə",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "bico",
+   "name": "Bico",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Ağsu",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qashad",
+   "name": "Qəşəd",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Ağsu",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "pirhesenli",
+   "name": "Pirhəsənli",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Ağsu",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "kurdemir",
+   "name": "Kürdəmir",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Kürdəmir",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shilyan",
+   "name": "Şilyan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Kürdəmir",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sor-sor",
+   "name": "Sor-sor",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Kürdəmir",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "haciqabul",
+   "name": "Hacıqabul",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Hacıqabul",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shirelibey",
+   "name": "Şirəlibəy",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / Hacıqabul",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qebele",
+   "name": "Qəbələ",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / (похожи на ширванские)",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "salyan",
+   "name": "Salyan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "shirvan",
+   "text_group": "Şirvan / (похожи на ширванские)",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "baki",
+   "name": "Bakı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "baku",
+   "text_group": "Bakı / Abşeron",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xilebuta",
+   "name": "Xilə-buta",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "baku",
+   "text_group": "Bakı / Abşeron",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xileafshan",
+   "name": "Xilə-əfşan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "baku",
+   "text_group": "Bakı / Abşeron",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "suraxani",
+   "name": "Suraxanı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "baku",
+   "text_group": "Bakı / Abşeron",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "novxani",
+   "name": "Novxanı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "baku",
+   "text_group": "Bakı / Abşeron",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "geradil",
+   "name": "Goradil",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "baku",
+   "text_group": "Bakı / Abşeron",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qala",
+   "name": "Qala",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "baku",
+   "text_group": "Bakı / Abşeron",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "fatmayi",
+   "name": "Fatmayı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "baku",
+   "text_group": "Bakı / Abşeron",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "findiqan",
+   "name": "Fındıqan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "baku",
+   "text_group": "Bakı / Xızı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qadi",
+   "name": "Qədi",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "baku",
+   "text_group": "Bakı / Xızı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "gence-carpet",
+   "name": "Gəncə",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ganja",
+   "text_group": "Gəncə / Gəncə",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qedim-minare",
+   "name": "Qədim minarə",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ganja",
+   "text_group": "Gəncə / Gəncə",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "расходится"
+  },
+  {
+   "concept": "samux",
+   "name": "Samux",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ganja",
+   "text_group": "Gəncə / Gəncə",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "chayli",
+   "name": "Çaylı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ganja",
+   "text_group": "Gəncə / Goranboy",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shadli",
+   "name": "Şadılı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ganja",
+   "text_group": "Gəncə / Goranboy",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "faxrali",
+   "name": "Faxralı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ganja",
+   "text_group": "Gəncə / Goranboy",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "gedebey",
+   "name": "Gədəbəy",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ganja",
+   "text_group": "Gəncə / Gədəbəy",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "chiraqli",
+   "name": "Çıraqlı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ganja",
+   "text_group": "Gəncə / Gədəbəy",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qaraqoyunlu",
+   "name": "Qaraqoyunlu",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ganja",
+   "text_group": "Gəncə / Gədəbəy",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "тот же тип, другая группа"
+  },
+  {
+   "concept": "qazax",
+   "name": "Qazax",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Qazax",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "salahli",
+   "name": "Salahlı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Qazax",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shixli",
+   "name": "Şıxlı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Qazax",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "kemerli",
+   "name": "Kəmərli",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Qazax",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "demirchiler",
+   "name": "Dəmirçilər",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Qazax",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qaymaqli",
+   "name": "Qaymaqlı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Qazax",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "goycheli",
+   "name": "Göyçəli",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Qazax",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "dagkesemen",
+   "name": "Dağkəsəmən",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Qazax",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "oysuzlu",
+   "name": "Öysüzlü",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Qazax",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "borchali",
+   "name": "Borçalı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qarayazi",
+   "name": "Qarayazı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qachagan",
+   "name": "Qaçağan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qarachop",
+   "name": "Qaraçöp",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "gazakh",
+   "text_group": "Qazax / Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "berde",
+   "name": "Bərdə",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Bərdə",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xanqervend",
+   "name": "Xanqərvənd",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Bərdə",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "aran",
+   "name": "Aran",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Bərdə",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qoca",
+   "name": "Qoca",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Bərdə",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "buynuz-carpet",
+   "name": "Buynuz",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Bərdə",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "deryanur",
+   "name": "Dəryanur",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Bərdə",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "achma-yumma",
+   "name": "Açma-yumma",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Bərdə",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shabalidbuta-carpet",
+   "name": "Şabalıd-buta",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Bərdə",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "baliq-carpet",
+   "name": "Balıq",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Bərdə",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "lemberan",
+   "name": "Ləmbəran",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Ağcabədi",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qarabag",
+   "name": "Qarabağ",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Ağcabədi",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xantirme",
+   "name": "Xantirmə",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ / Ağcabədi",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "malibeyli",
+   "name": "Malıbəyli",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Şuşa",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "lempe",
+   "name": "Ləmpə",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Şuşa",
+   "model": {
+    "type": null,
+    "group": null,
+    "confidence": null
+   },
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "bagchada-guller",
+   "name": "Bağçadagüllər",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Şuşa",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "bulud-carpet",
+   "name": "Bulud",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Şuşa",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "saxsida-guller",
+   "name": "Saxsıdagüllər",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Şuşa",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "nelbeki-gul",
+   "name": "Nəlbəkigül",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Şuşa",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xanliq",
+   "name": "Xanlıq",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Cəbrayıl",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qaraqoyunlu",
+   "name": "Qaraqoyunlu",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Cəbrayıl",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "расходится"
+  },
+  {
+   "concept": "qubadli",
+   "name": "Qubadlı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Cəbrayıl",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "kurd",
+   "name": "Kürd",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Cəbrayıl",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qasimushagi",
+   "name": "Qasımuşağı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Cəbrayıl",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "behmenli",
+   "name": "Bəhmənli",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Cəbrayıl",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "mugan",
+   "name": "Muğan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Cəbrayıl",
+   "model": {
+    "type": "karabakh",
+    "group": "mugan",
+    "confidence": "medium"
+   },
+   "status": "тот же тип, другая группа"
+  },
+  {
+   "concept": "talish",
+   "name": "Talış",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "karabakh",
+   "text_group": "Cəbrayıl",
+   "model": {
+    "type": "karabakh",
+    "group": "talysh",
+    "confidence": "high"
+   },
+   "status": "тот же тип, другая группа"
+  },
+  {
+   "concept": "tebriz",
+   "name": "Təbriz",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "baxshayish",
+   "name": "Bəxşayiş",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qaraca",
+   "name": "Qaraca",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "geravan",
+   "name": "Gəravan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "heris",
+   "name": "Heris",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "lechekturunc",
+   "name": "Ləçək-turunc",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "efshan-carpet",
+   "name": "Əfşan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "agacli",
+   "name": "Ağaclı",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "ovchuluq",
+   "name": "Ovçuluq",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "dordfesil",
+   "name": "Dörd fəsil",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "erdebil",
+   "name": "Ərdəbil",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ardabil",
+   "text_group": "Ərdəbil",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sheyx-sefi",
+   "name": "Şeyx Səfi",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ardabil",
+   "text_group": "Ərdəbil",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shahabbasi",
+   "name": "Şah Abbası",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ardabil",
+   "text_group": "Ərdəbil",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sarabi",
+   "name": "Sərabi",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ardabil",
+   "text_group": "Ərdəbil",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "zencan",
+   "name": "Zəncan",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ardabil",
+   "text_group": "Ərdəbil",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "mir",
+   "name": "Mir",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ardabil",
+   "text_group": "Ərdəbil",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "achma-yumma",
+   "name": "Açma-yumma",
+   "source": "kerimov_1984_in_symposium_2007",
+   "text_school": "ardabil",
+   "text_group": "Ərdəbil",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "расходится"
+  },
+  {
+   "concept": "novxani",
+   "name": "Novxanı",
+   "source": "muradov_2013",
+   "text_school": "baku",
+   "text_group": "Bakı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "suraxani",
+   "name": "Suraxanı",
+   "source": "muradov_2013",
+   "text_school": "baku",
+   "text_group": "Bakı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "fatmayi",
+   "name": "Fatmayı",
+   "source": "muradov_2013",
+   "text_school": "baku",
+   "text_group": "Bakı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "geradil",
+   "name": "Goradil",
+   "source": "muradov_2013",
+   "text_school": "baku",
+   "text_group": "Bakı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xilebuta",
+   "name": "Xilə-buta",
+   "source": "muradov_2013",
+   "text_school": "baku",
+   "text_group": "Bakı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xileafshan",
+   "name": "Xilə-əfşan",
+   "source": "muradov_2013",
+   "text_school": "baku",
+   "text_group": "Bakı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "baki",
+   "name": "Bakı",
+   "source": "muradov_2013",
+   "text_school": "baku",
+   "text_group": "Bakı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qala",
+   "name": "Qala",
+   "source": "muradov_2013",
+   "text_school": "baku",
+   "text_group": "Bakı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "findiqan",
+   "name": "Fındıqan",
+   "source": "muradov_2013",
+   "text_school": "baku",
+   "text_group": "Bakı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qadi",
+   "name": "Qədi",
+   "source": "muradov_2013",
+   "text_school": "baku",
+   "text_group": "Bakı",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "baku",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qimil",
+   "name": "Qımıl",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qonaqkend",
+   "name": "Qonaqkənd",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sirt-chichi",
+   "name": "Sırt-çiçi",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "ejdahali",
+   "name": "Əjdahalı",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qedim-minare",
+   "name": "Qədim minarə",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "bilici",
+   "name": "Bilici",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qaraqashli",
+   "name": "Qaraqaşlı",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "mollakamalli",
+   "name": "Mollakamallı",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "pirebedil",
+   "name": "Pirəbədil",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "ugax",
+   "name": "Uqah",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "zeyve",
+   "name": "Zeyvə",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shahnezerli",
+   "name": "Şahnəzərli",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "afurca",
+   "name": "Afurca",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "cek",
+   "name": "Cek",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "alpan",
+   "name": "Alpan",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "cimi",
+   "name": "Cimi",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "haciqayib",
+   "name": "Hacıqayıb",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "yerfi",
+   "name": "Yerfi",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xashi",
+   "name": "Xaşı",
+   "source": "muradov_2013",
+   "text_school": "guba",
+   "text_group": "Quba",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "guba",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shilyan",
+   "name": "Şilyan",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "kurdemir",
+   "name": "Kürdəmir",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sor-sor",
+   "name": "Sor-sor",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "nebur",
+   "name": "Nabur",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "mereze-carpet",
+   "name": "Mərəzə",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "arciman",
+   "name": "Ərçiman",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qobustan",
+   "name": "Qobustan",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shirvan",
+   "name": "Şirvan",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qashad",
+   "name": "Qəşəd",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "bico",
+   "name": "Bico",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shamaxi",
+   "name": "Şamaxı",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "pirhesenli",
+   "name": "Pirhəsənli",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qebele",
+   "name": "Qəbələ",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "salyan",
+   "name": "Salyan",
+   "source": "muradov_2013",
+   "text_school": "shirvan",
+   "text_group": "Şirvan",
+   "model": {
+    "type": "guba-shirvan",
+    "group": "shirvan",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qaraqoyunlu",
+   "name": "Qaraqoyunlu",
+   "source": "muradov_2013",
+   "text_school": "ganja",
+   "text_group": "Gəncə",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "тот же тип, другая группа"
+  },
+  {
+   "concept": "faxrali",
+   "name": "Faxralı",
+   "source": "muradov_2013",
+   "text_school": "ganja",
+   "text_group": "Gəncə",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "samux",
+   "name": "Samux",
+   "source": "muradov_2013",
+   "text_school": "ganja",
+   "text_group": "Gəncə",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "chayli",
+   "name": "Çaylı",
+   "source": "muradov_2013",
+   "text_school": "ganja",
+   "text_group": "Gəncə",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "tirme-sayagi",
+   "name": "Tirməsayağı",
+   "source": "muradov_2013",
+   "text_school": "ganja",
+   "text_group": "Gəncə",
+   "model": {
+    "type": null,
+    "group": null,
+    "confidence": null
+   },
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "shixli",
+   "name": "Şıxlı",
+   "source": "muradov_2013",
+   "text_school": "gazakh",
+   "text_group": "Qazax-Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "oysuzlu",
+   "name": "Öysüzlü",
+   "source": "muradov_2013",
+   "text_school": "gazakh",
+   "text_group": "Qazax-Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qarachop",
+   "name": "Qaraçöp",
+   "source": "muradov_2013",
+   "text_school": "gazakh",
+   "text_group": "Qazax-Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qarayazi",
+   "name": "Qarayazı",
+   "source": "muradov_2013",
+   "text_school": "gazakh",
+   "text_group": "Qazax-Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "borchali",
+   "name": "Borçalı",
+   "source": "muradov_2013",
+   "text_school": "gazakh",
+   "text_group": "Qazax-Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "faxrali",
+   "name": "Faxralı",
+   "source": "muradov_2013",
+   "text_school": "gazakh",
+   "text_group": "Qazax-Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "ganja",
+    "confidence": "medium"
+   },
+   "status": "тот же тип, другая группа"
+  },
+  {
+   "concept": "qazax",
+   "name": "Qazax",
+   "source": "muradov_2013",
+   "text_school": "gazakh",
+   "text_group": "Qazax-Borçalı",
+   "model": {
+    "type": "ganja-gazakh",
+    "group": "gazakh",
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "namazliq",
+   "name": "Namazlıq",
+   "source": "muradov_2013",
+   "text_school": "gazakh",
+   "text_group": "Qazax-Borçalı",
+   "model": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "chelebi",
+   "name": "Çələbi",
+   "source": "muradov_2013",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "malibeyli",
+   "name": "Malıbəyli",
+   "source": "muradov_2013",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "achma-yumma",
+   "name": "Açma-yumma",
+   "source": "muradov_2013",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "behmenli",
+   "name": "Bəhmənli",
+   "source": "muradov_2013",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xanqervend",
+   "name": "Xanqərvənd",
+   "source": "muradov_2013",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "xanliq",
+   "name": "Xanlıq",
+   "source": "muradov_2013",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qasimushagi",
+   "name": "Qasımuşağı",
+   "source": "muradov_2013",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qoca",
+   "name": "Qoca",
+   "source": "muradov_2013",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shabalidbuta-carpet",
+   "name": "Şabalıd-buta",
+   "source": "muradov_2013",
+   "text_school": "karabakh",
+   "text_group": "Qarabağ",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "achma-yumma",
+   "name": "Açma-yumma",
+   "source": "muradov_2013",
+   "text_school": "nakhchivan",
+   "text_group": "Naxçıvan",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qoca",
+   "name": "Qoca",
+   "source": "muradov_2013",
+   "text_school": "nakhchivan",
+   "text_group": "Naxçıvan",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "buynuz-carpet",
+   "name": "Buynuz",
+   "source": "muradov_2013",
+   "text_school": "nakhchivan",
+   "text_group": "Naxçıvan",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "deryanur",
+   "name": "Dəryanur",
+   "source": "muradov_2013",
+   "text_school": "nakhchivan",
+   "text_group": "Naxçıvan",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "baliq-carpet",
+   "name": "Balıq",
+   "source": "muradov_2013",
+   "text_school": "nakhchivan",
+   "text_group": "Naxçıvan",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "shabalidbuta-carpet",
+   "name": "Şabalıd-buta",
+   "source": "muradov_2013",
+   "text_school": "nakhchivan",
+   "text_group": "Naxçıvan",
+   "model": {
+    "type": "karabakh",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "namazliq",
+   "name": "Namazlıq",
+   "source": "muradov_2013",
+   "text_school": "nakhchivan",
+   "text_group": "Naxçıvan",
+   "model": {
+    "type": null,
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "нет данных в модели"
+  },
+  {
+   "concept": "tebriz",
+   "name": "Təbriz",
+   "source": "muradov_2013",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "baxshayish",
+   "name": "Bəxşayiş",
+   "source": "muradov_2013",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "qaraca",
+   "name": "Qaraca",
+   "source": "muradov_2013",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "geravan",
+   "name": "Gəravan",
+   "source": "muradov_2013",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "heris",
+   "name": "Heris",
+   "source": "muradov_2013",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "ovchuluq",
+   "name": "Ovçuluq",
+   "source": "muradov_2013",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "lechekturunc",
+   "name": "Ləçək-turunc",
+   "source": "muradov_2013",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "efshan-carpet",
+   "name": "Əfşan",
+   "source": "muradov_2013",
+   "text_school": "tabriz",
+   "text_group": "Təbriz",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "erdebil",
+   "name": "Ərdəbil",
+   "source": "muradov_2013",
+   "text_school": "ardabil",
+   "text_group": "Təbriz / Ərdəbil",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sheyx-sefi",
+   "name": "Şeyx Səfi",
+   "source": "muradov_2013",
+   "text_school": "ardabil",
+   "text_group": "Təbriz / Ərdəbil",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "sarabi",
+   "name": "Sərabi",
+   "source": "muradov_2013",
+   "text_school": "ardabil",
+   "text_group": "Təbriz / Ərdəbil",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "high"
+   },
+   "status": "совпадает"
+  },
+  {
+   "concept": "zencan",
+   "name": "Zəncan",
+   "source": "muradov_2013",
+   "text_school": "ardabil",
+   "text_group": "Təbriz / Ərdəbil",
+   "model": {
+    "type": "tabriz",
+    "group": null,
+    "confidence": "medium"
+   },
+   "status": "совпадает"
+  }
+ ],
+ "new_names": [
+  {
+   "name": "Təkyə",
+   "source": "muradov_2013",
+   "school": "guba",
+   "group": "Quba",
+   "subgroup": ""
+  },
+  {
+   "name": "Həsənqala",
+   "source": "muradov_2013",
+   "school": "guba",
+   "group": "Quba",
+   "subgroup": ""
+  },
+  {
+   "name": "Hil",
+   "source": "muradov_2013",
+   "school": "guba",
+   "group": "Quba",
+   "subgroup": ""
+  },
+  {
+   "name": "Məkkə-Mədinə",
+   "source": "muradov_2013",
+   "school": "shirvan",
+   "group": "Şirvan",
+   "subgroup": ""
+  },
+  {
+   "name": "Qaracəmirli",
+   "source": "muradov_2013",
+   "school": "ganja",
+   "group": "Gəncə",
+   "subgroup": ""
+  },
+  {
+   "name": "Topalhəsənli",
+   "source": "muradov_2013",
+   "school": "ganja",
+   "group": "Gəncə",
+   "subgroup": ""
+  },
+  {
+   "name": "Mollabayramlı",
+   "source": "muradov_2013",
+   "school": "ganja",
+   "group": "Gəncə",
+   "subgroup": ""
+  },
+  {
+   "name": "Muğanlı",
+   "source": "muradov_2013",
+   "school": "gazakh",
+   "group": "Qazax-Borçalı",
+   "subgroup": ""
+  },
+  {
+   "name": "Ulduzlu Qazax",
+   "source": "muradov_2013",
+   "school": "gazakh",
+   "group": "Qazax-Borçalı",
+   "subgroup": ""
+  },
+  {
+   "name": "Daş Salahlı",
+   "source": "muradov_2013",
+   "school": "gazakh",
+   "group": "Qazax-Borçalı",
+   "subgroup": ""
+  },
+  {
+   "name": "Ləmbəli",
+   "source": "muradov_2013",
+   "school": "gazakh",
+   "group": "Qazax-Borçalı",
+   "subgroup": ""
+  },
+  {
+   "name": "Qədirqə kilim",
+   "source": "muradov_2013",
+   "school": "gazakh",
+   "group": "Qazax-Borçalı",
+   "subgroup": ""
+  },
+  {
+   "name": "Qoçbuynuz kilim",
+   "source": "muradov_2013",
+   "school": "gazakh",
+   "group": "Qazax-Borçalı",
+   "subgroup": ""
+  },
+  {
+   "name": "Daraxlı kilim",
+   "source": "muradov_2013",
+   "school": "gazakh",
+   "group": "Qazax-Borçalı",
+   "subgroup": ""
+  },
+  {
+   "name": "Ləmbəli",
+   "source": "muradov_2013",
+   "school": "irevan",
+   "group": "İrəvan",
+   "subgroup": ""
+  }
+ ],
+ "captions_vs_lists": [
+  {
+   "plate": "ahm_p0007_1",
+   "source": "ahm_kovry",
+   "page": 7,
+   "concept": "ovchuluq",
+   "caption_name": "Ovçuluq",
+   "caption_school": "tabriz",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: tabriz",
+    "muradov_2013: tabriz"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "ahm_p0019_1",
+   "source": "ahm_kovry",
+   "page": 19,
+   "concept": "shahnezerli",
+   "caption_name": "Şahnəzərli",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "irv_p0040_1",
+   "source": "irevan_qrupu",
+   "page": 40,
+   "concept": "borchali",
+   "caption_name": "Borçalı",
+   "caption_school": "irevan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh",
+    "muradov_2013: gazakh"
+   ],
+   "status": "подпись: Иреван (у Керимова такой группы нет)"
+  },
+  {
+   "plate": "mur081_p0066_1",
+   "source": "muradov_2008",
+   "page": 66,
+   "concept": "zeyve",
+   "caption_name": "Zeyvə",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0067_1",
+   "source": "muradov_2008",
+   "page": 67,
+   "concept": "zeyve",
+   "caption_name": "Zeyvə",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0070_1",
+   "source": "muradov_2008",
+   "page": 70,
+   "concept": "pirebedil",
+   "caption_name": "Pirəbədil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0072_1",
+   "source": "muradov_2008",
+   "page": 72,
+   "concept": "pirebedil",
+   "caption_name": "Pirəbədil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0074_1",
+   "source": "muradov_2008",
+   "page": 74,
+   "concept": "mollakamalli",
+   "caption_name": "Mollakamallı",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0075_1",
+   "source": "muradov_2008",
+   "page": 75,
+   "concept": "pirebedil",
+   "caption_name": "Pirəbədil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0076_1",
+   "source": "muradov_2008",
+   "page": 76,
+   "concept": "zeyve",
+   "caption_name": "Zeyvə",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0077_1",
+   "source": "muradov_2008",
+   "page": 77,
+   "concept": "xan",
+   "caption_name": "Xan",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0078_1",
+   "source": "muradov_2008",
+   "page": 78,
+   "concept": "bilici",
+   "caption_name": "Bilici",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0079_1",
+   "source": "muradov_2008",
+   "page": 79,
+   "concept": "ejdahali",
+   "caption_name": "Əjdahalı",
+   "caption_school": "guba",
+   "lists": [
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0080_1",
+   "source": "muradov_2008",
+   "page": 80,
+   "concept": "herat-pirebedil",
+   "caption_name": "Herat Pirəbədil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0081_1",
+   "source": "muradov_2008",
+   "page": 81,
+   "concept": "alpan",
+   "caption_name": "Alpan",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0082_1",
+   "source": "muradov_2008",
+   "page": 82,
+   "concept": "alpan",
+   "caption_name": "Alpan",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0083_1",
+   "source": "muradov_2008",
+   "page": 83,
+   "concept": "alpan",
+   "caption_name": "Alpan",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0085_1",
+   "source": "muradov_2008",
+   "page": 85,
+   "concept": "pirebedil",
+   "caption_name": "Pirəbədil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0086_1",
+   "source": "muradov_2008",
+   "page": 86,
+   "concept": "pirebedil",
+   "caption_name": "Pirəbədil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0088_1",
+   "source": "muradov_2008",
+   "page": 88,
+   "concept": "qedim-minare",
+   "caption_name": "Qədim minarə",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0089_1",
+   "source": "muradov_2008",
+   "page": 89,
+   "concept": "sirt-chichi",
+   "caption_name": "Sırt-çiçi",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0090_1",
+   "source": "muradov_2008",
+   "page": 90,
+   "concept": "pirebedil",
+   "caption_name": "Pirəbədil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0091_1",
+   "source": "muradov_2008",
+   "page": 91,
+   "concept": "qaraqashli",
+   "caption_name": "Qaraqaşlı",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0092_1",
+   "source": "muradov_2008",
+   "page": 92,
+   "concept": "arsalan",
+   "caption_name": "Arsalan",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0094_1",
+   "source": "muradov_2008",
+   "page": 94,
+   "concept": "quba",
+   "caption_name": "Quba",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0095_1",
+   "source": "muradov_2008",
+   "page": 95,
+   "concept": "haciqayib",
+   "caption_name": "Hacıqayıb",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0096_1",
+   "source": "muradov_2008",
+   "page": 96,
+   "concept": "zeyve",
+   "caption_name": "Zeyvə",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0097_1",
+   "source": "muradov_2008",
+   "page": 97,
+   "concept": "qaraqashli",
+   "caption_name": "Qaraqaşlı",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0098_1",
+   "source": "muradov_2008",
+   "page": 98,
+   "concept": "cimi",
+   "caption_name": "Cimi",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0099_1",
+   "source": "muradov_2008",
+   "page": 99,
+   "concept": "qollu-chichi",
+   "caption_name": "Qollu Çiçi",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0100_1",
+   "source": "muradov_2008",
+   "page": 100,
+   "concept": "ugax",
+   "caption_name": "Ugah",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0101_1",
+   "source": "muradov_2008",
+   "page": 101,
+   "concept": "shahnezerli",
+   "caption_name": "Şahnəzərli",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0102_1",
+   "source": "muradov_2008",
+   "page": 102,
+   "concept": "zeyve",
+   "caption_name": "Zeyvə",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0103_1",
+   "source": "muradov_2008",
+   "page": 103,
+   "concept": "bilici",
+   "caption_name": "Bilici",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0104_1",
+   "source": "muradov_2008",
+   "page": 104,
+   "concept": "pirebedil",
+   "caption_name": "Pirəbədil (Namazlıq)",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0107_1",
+   "source": "muradov_2008",
+   "page": 107,
+   "concept": "qollu-chichi",
+   "caption_name": "Qollu Çiçi",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0128_1",
+   "source": "muradov_2008",
+   "page": 128,
+   "concept": "qobustan",
+   "caption_name": "Qabıstan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0130_1",
+   "source": "muradov_2008",
+   "page": 130,
+   "concept": "qobustan",
+   "caption_name": "Qabıstan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0131_1",
+   "source": "muradov_2008",
+   "page": 131,
+   "concept": "shirvan",
+   "caption_name": "Şirvan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0132_1",
+   "source": "muradov_2008",
+   "page": 132,
+   "concept": "kurdemir",
+   "caption_name": "Kürdəmir",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0133_1",
+   "source": "muradov_2008",
+   "page": 133,
+   "concept": "qobustan",
+   "caption_name": "Qabistan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0134_1",
+   "source": "muradov_2008",
+   "page": 134,
+   "concept": "qobustan",
+   "caption_name": "Qabıstan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0135_1",
+   "source": "muradov_2008",
+   "page": 135,
+   "concept": "namazliq",
+   "caption_name": "Namazlıq",
+   "caption_school": "shirvan",
+   "lists": [
+    "muradov_2013: gazakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "общее название (ткут в разных школах)"
+  },
+  {
+   "plate": "mur081_p0136_1",
+   "source": "muradov_2008",
+   "page": 136,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0137_1",
+   "source": "muradov_2008",
+   "page": 137,
+   "concept": "mereze-carpet",
+   "caption_name": "Mərəzə",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0138_1",
+   "source": "muradov_2008",
+   "page": 138,
+   "concept": "shirvan",
+   "caption_name": "Şirvan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0139_1",
+   "source": "muradov_2008",
+   "page": 139,
+   "concept": "agacli",
+   "caption_name": "Ağaclı",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: tabriz"
+   ],
+   "status": "общее название (ткут в разных школах)"
+  },
+  {
+   "plate": "mur081_p0140_1",
+   "source": "muradov_2008",
+   "page": 140,
+   "concept": "bico",
+   "caption_name": "Bico",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0141_1",
+   "source": "muradov_2008",
+   "page": 141,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0142_1",
+   "source": "muradov_2008",
+   "page": 142,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0144_1",
+   "source": "muradov_2008",
+   "page": 144,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0145_1",
+   "source": "muradov_2008",
+   "page": 145,
+   "concept": "namazliq",
+   "caption_name": "Namazlıq",
+   "caption_school": "shirvan",
+   "lists": [
+    "muradov_2013: gazakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "общее название (ткут в разных школах)"
+  },
+  {
+   "plate": "mur081_p0146_1",
+   "source": "muradov_2008",
+   "page": 146,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0148_1",
+   "source": "muradov_2008",
+   "page": 148,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0149_1",
+   "source": "muradov_2008",
+   "page": 149,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0150_1",
+   "source": "muradov_2008",
+   "page": 150,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0151_1",
+   "source": "muradov_2008",
+   "page": 151,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0152_1",
+   "source": "muradov_2008",
+   "page": 152,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0153_1",
+   "source": "muradov_2008",
+   "page": 153,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0154_1",
+   "source": "muradov_2008",
+   "page": 154,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0155_1",
+   "source": "muradov_2008",
+   "page": 155,
+   "concept": "salyan",
+   "caption_name": "Salyan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0156_1",
+   "source": "muradov_2008",
+   "page": 156,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0159_1",
+   "source": "muradov_2008",
+   "page": 159,
+   "concept": "shirvan",
+   "caption_name": "Şirvan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0160_1",
+   "source": "muradov_2008",
+   "page": 160,
+   "concept": "shirvan",
+   "caption_name": "Şirvan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0172_1",
+   "source": "muradov_2008",
+   "page": 172,
+   "concept": "novxani",
+   "caption_name": "Novxanı",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0173_1",
+   "source": "muradov_2008",
+   "page": 173,
+   "concept": "xileafshan",
+   "caption_name": "Xilə-əfşan",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0174_1",
+   "source": "muradov_2008",
+   "page": 174,
+   "concept": "novxani",
+   "caption_name": "Novxanı",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0175_1",
+   "source": "muradov_2008",
+   "page": 175,
+   "concept": "xileafshan",
+   "caption_name": "Xilə-əfşan",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0176_1",
+   "source": "muradov_2008",
+   "page": 176,
+   "concept": "suraxani",
+   "caption_name": "Suraxanı",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0177_1",
+   "source": "muradov_2008",
+   "page": 177,
+   "concept": "novxani",
+   "caption_name": "Novxanı",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0178_1",
+   "source": "muradov_2008",
+   "page": 178,
+   "concept": "fatmayi",
+   "caption_name": "Fatmayı",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0179_1",
+   "source": "muradov_2008",
+   "page": 179,
+   "concept": "xileafshan",
+   "caption_name": "Xilə-əfşan",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0180_1",
+   "source": "muradov_2008",
+   "page": 180,
+   "concept": "suraxani",
+   "caption_name": "Suraxanı",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0183_1",
+   "source": "muradov_2008",
+   "page": 183,
+   "concept": "suraxani",
+   "caption_name": "Suraxanı",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0184_1",
+   "source": "muradov_2008",
+   "page": 184,
+   "concept": "findiqan",
+   "caption_name": "Fındıqan",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0185_1",
+   "source": "muradov_2008",
+   "page": 185,
+   "concept": "suraxani",
+   "caption_name": "Suraxanı",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0186_1",
+   "source": "muradov_2008",
+   "page": 186,
+   "concept": "suraxani",
+   "caption_name": "Suraxanı",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0200_1",
+   "source": "muradov_2008",
+   "page": 200,
+   "concept": "faxrali",
+   "caption_name": "Faxralı",
+   "caption_school": "ganja",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "muradov_2013: ganja",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0201_1",
+   "source": "muradov_2008",
+   "page": 201,
+   "concept": "gence-carpet",
+   "caption_name": "Gəncə",
+   "caption_school": "ganja",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0202_1",
+   "source": "muradov_2008",
+   "page": 202,
+   "concept": "gence-carpet",
+   "caption_name": "Gəncə",
+   "caption_school": "ganja",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0204_1",
+   "source": "muradov_2008",
+   "page": 204,
+   "concept": "gence-carpet",
+   "caption_name": "Gəncə",
+   "caption_school": "ganja",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0206_1",
+   "source": "muradov_2008",
+   "page": 206,
+   "concept": "gence-carpet",
+   "caption_name": "Gəncə",
+   "caption_school": "ganja",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0207_1",
+   "source": "muradov_2008",
+   "page": 207,
+   "concept": "gence-carpet",
+   "caption_name": "Gəncə",
+   "caption_school": "ganja",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0222_1",
+   "source": "muradov_2008",
+   "page": 222,
+   "concept": "qaraqoyunlu",
+   "caption_name": "Qaraqoyunlu",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: ganja"
+   ],
+   "status": "тот же тип, другая группа"
+  },
+  {
+   "plate": "mur081_p0224_1",
+   "source": "muradov_2008",
+   "page": 224,
+   "concept": "qazax",
+   "caption_name": "Qazax",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0226_1",
+   "source": "muradov_2008",
+   "page": 226,
+   "concept": "kemerli",
+   "caption_name": "Kəmərli",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0227_1",
+   "source": "muradov_2008",
+   "page": 227,
+   "concept": "kemerli",
+   "caption_name": "Kəmərli",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0228_1",
+   "source": "muradov_2008",
+   "page": 228,
+   "concept": "qarachop",
+   "caption_name": "Qaraçöp",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0229_1",
+   "source": "muradov_2008",
+   "page": 229,
+   "concept": "demirchiler",
+   "caption_name": "Dəmirçilər",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0231_1",
+   "source": "muradov_2008",
+   "page": 231,
+   "concept": "qazax",
+   "caption_name": "Qazax",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0233_1",
+   "source": "muradov_2008",
+   "page": 233,
+   "concept": "qazax",
+   "caption_name": "Qazax",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0234_1",
+   "source": "muradov_2008",
+   "page": 234,
+   "concept": "qachagan",
+   "caption_name": "Qaçağan",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur081_p0235_1",
+   "source": "muradov_2008",
+   "page": 235,
+   "concept": "goycheli",
+   "caption_name": "Göyçəli",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0019_1",
+   "source": "muradov_2008",
+   "page": 19,
+   "concept": "lempe",
+   "caption_name": "Ləmpə",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0020_1",
+   "source": "muradov_2008",
+   "page": 20,
+   "concept": "qarabag",
+   "caption_name": "Qarabağ",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0021_1",
+   "source": "muradov_2008",
+   "page": 21,
+   "concept": "xantirme",
+   "caption_name": "Xantirmə",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0022_1",
+   "source": "muradov_2008",
+   "page": 22,
+   "concept": "shabalidbuta-carpet",
+   "caption_name": "Şabalıd buta",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0023_1",
+   "source": "muradov_2008",
+   "page": 23,
+   "concept": "malibeyli",
+   "caption_name": "Malıbəyli",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0024_1",
+   "source": "muradov_2008",
+   "page": 24,
+   "concept": "talish",
+   "caption_name": "Talış",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0025_1",
+   "source": "muradov_2008",
+   "page": 25,
+   "concept": "xanliq",
+   "caption_name": "Xanlıq",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0026_1",
+   "source": "muradov_2008",
+   "page": 26,
+   "concept": "shabalidbuta-carpet",
+   "caption_name": "Şabalıd buta",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0028_1",
+   "source": "muradov_2008",
+   "page": 28,
+   "concept": "mugan",
+   "caption_name": "Muğan",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0029_1",
+   "source": "muradov_2008",
+   "page": 29,
+   "concept": "qasimushagi",
+   "caption_name": "Qasımuşağı",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0064_1",
+   "source": "muradov_2008",
+   "page": 64,
+   "concept": "ovchuluq",
+   "caption_name": "Ovçuluq",
+   "caption_school": "tabriz",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: tabriz",
+    "muradov_2013: tabriz"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0065_1",
+   "source": "muradov_2008",
+   "page": 65,
+   "concept": "agacli",
+   "caption_name": "Ağaclı",
+   "caption_school": "tabriz",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: tabriz"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0066_1",
+   "source": "muradov_2008",
+   "page": 66,
+   "concept": "agacli",
+   "caption_name": "Ağaclı",
+   "caption_school": "tabriz",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: tabriz"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0069_1",
+   "source": "muradov_2008",
+   "page": 69,
+   "concept": "baliq-carpet",
+   "caption_name": "Balıq",
+   "caption_school": "tabriz",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "расходится"
+  },
+  {
+   "plate": "mur082_p0121_1",
+   "source": "muradov_2008",
+   "page": 121,
+   "concept": "qollu-chichi",
+   "caption_name": "Qollu-Çiçi",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0122_1",
+   "source": "muradov_2008",
+   "page": 122,
+   "concept": "sirt-chichi",
+   "caption_name": "Sırt-Çiçi",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0123_1",
+   "source": "muradov_2008",
+   "page": 123,
+   "concept": "ugax",
+   "caption_name": "Uqah",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0125_1",
+   "source": "muradov_2008",
+   "page": 125,
+   "concept": "elixanli",
+   "caption_name": "Əlixanlı",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0126_1",
+   "source": "muradov_2008",
+   "page": 126,
+   "concept": "qobustan",
+   "caption_name": "Qobustan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0129_1",
+   "source": "muradov_2008",
+   "page": 129,
+   "concept": "shirvan",
+   "caption_name": "Şirvan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0132_1",
+   "source": "muradov_2008",
+   "page": 132,
+   "concept": "pirebedil",
+   "caption_name": "Pirəbədil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0134_1",
+   "source": "muradov_2008",
+   "page": 134,
+   "concept": "qedim-minare",
+   "caption_name": "Qədim minarə",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0135_1",
+   "source": "muradov_2008",
+   "page": 135,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0137_1",
+   "source": "muradov_2008",
+   "page": 137,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0146_1",
+   "source": "muradov_2008",
+   "page": 146,
+   "concept": "behmenli",
+   "caption_name": "Bəhmənli",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0154_1",
+   "source": "muradov_2008",
+   "page": 154,
+   "concept": "faxrali",
+   "caption_name": "Faxralı",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "muradov_2013: ganja",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0156_1",
+   "source": "muradov_2008",
+   "page": 156,
+   "concept": "sirt-chichi",
+   "caption_name": "Sırt-Çiçi",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0161_1",
+   "source": "muradov_2008",
+   "page": 161,
+   "concept": "shixli",
+   "caption_name": "Şıxlı",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0164_1",
+   "source": "muradov_2008",
+   "page": 164,
+   "concept": "pirebedil",
+   "caption_name": "Pirəbədil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0165_1",
+   "source": "muradov_2008",
+   "page": 165,
+   "concept": "ugax",
+   "caption_name": "Ugah",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0166_1",
+   "source": "muradov_2008",
+   "page": 166,
+   "concept": "xanliq",
+   "caption_name": "Xanlıq",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0169_1",
+   "source": "muradov_2008",
+   "page": 169,
+   "concept": "cimi",
+   "caption_name": "Cimi",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0172_1",
+   "source": "muradov_2008",
+   "page": 172,
+   "concept": "qaraqashli",
+   "caption_name": "Qaraqaşlı",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0174_1",
+   "source": "muradov_2008",
+   "page": 174,
+   "concept": "qobustan",
+   "caption_name": "Qabıstan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0175_1",
+   "source": "muradov_2008",
+   "page": 175,
+   "concept": "salyan",
+   "caption_name": "Salyan",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0176_1",
+   "source": "muradov_2008",
+   "page": 176,
+   "concept": "sor-sor",
+   "caption_name": "Sor-sor",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0178_1",
+   "source": "muradov_2008",
+   "page": 178,
+   "concept": "xileafshan",
+   "caption_name": "Xilə-əfşan",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0181_1",
+   "source": "muradov_2008",
+   "page": 181,
+   "concept": "borchali",
+   "caption_name": "Borçalı",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0182_1",
+   "source": "muradov_2008",
+   "page": 182,
+   "concept": "qollu-chichi",
+   "caption_name": "Qollu-Çiçi",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0183_1",
+   "source": "muradov_2008",
+   "page": 183,
+   "concept": "bagchada-guller",
+   "caption_name": "Bağçadagüllər",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur082_p0186_1",
+   "source": "muradov_2008",
+   "page": 186,
+   "concept": "namazliq",
+   "caption_name": "Namazlıq",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: gazakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "общее название (ткут в разных школах)"
+  },
+  {
+   "plate": "mur10_p0036_1",
+   "source": "muradov_2010_qarabag",
+   "page": 36,
+   "concept": "qasimushagi",
+   "caption_name": "Qasımuşağı",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0038_1",
+   "source": "muradov_2010_qarabag",
+   "page": 38,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0045_1",
+   "source": "muradov_2010_qarabag",
+   "page": 45,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0046_1",
+   "source": "muradov_2010_qarabag",
+   "page": 46,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0047_1",
+   "source": "muradov_2010_qarabag",
+   "page": 47,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0048_1",
+   "source": "muradov_2010_qarabag",
+   "page": 48,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0049_1",
+   "source": "muradov_2010_qarabag",
+   "page": 49,
+   "concept": "buynuz-carpet",
+   "caption_name": "Buynuz",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0051_1",
+   "source": "muradov_2010_qarabag",
+   "page": 51,
+   "concept": "baliq-carpet",
+   "caption_name": "Balıq",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0053_1",
+   "source": "muradov_2010_qarabag",
+   "page": 53,
+   "concept": "baliq-carpet",
+   "caption_name": "Balıq",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0056_1",
+   "source": "muradov_2010_qarabag",
+   "page": 56,
+   "concept": "achma-yumma",
+   "caption_name": "Açma -yumma",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ardabil",
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0057_1",
+   "source": "muradov_2010_qarabag",
+   "page": 57,
+   "concept": "deryanur",
+   "caption_name": "Dəryanur",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0058_1",
+   "source": "muradov_2010_qarabag",
+   "page": 58,
+   "concept": "deryanur",
+   "caption_name": "Dəryanur",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0062_1",
+   "source": "muradov_2010_qarabag",
+   "page": 62,
+   "concept": "behmenli",
+   "caption_name": "Bəhmənli",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0064_1",
+   "source": "muradov_2010_qarabag",
+   "page": 64,
+   "concept": "qasimushagi",
+   "caption_name": "Qasımuşağı",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0070_1",
+   "source": "muradov_2010_qarabag",
+   "page": 70,
+   "concept": "malibeyli",
+   "caption_name": "Malıbəyli",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0071_1",
+   "source": "muradov_2010_qarabag",
+   "page": 71,
+   "concept": "lempe",
+   "caption_name": "Ləmpə",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0072_1",
+   "source": "muradov_2010_qarabag",
+   "page": 72,
+   "concept": "lempe",
+   "caption_name": "Ləmpə",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0073_1",
+   "source": "muradov_2010_qarabag",
+   "page": 73,
+   "concept": "lempe",
+   "caption_name": "Ləmpə",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0075_1",
+   "source": "muradov_2010_qarabag",
+   "page": 75,
+   "concept": "bagchada-guller",
+   "caption_name": "Bağçada güllər",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0076_1",
+   "source": "muradov_2010_qarabag",
+   "page": 76,
+   "concept": "bagchada-guller",
+   "caption_name": "Bağçada güiiər",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0076_2",
+   "source": "muradov_2010_qarabag",
+   "page": 76,
+   "concept": "bagchada-guller",
+   "caption_name": "Bağçada güiiər",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0077_1",
+   "source": "muradov_2010_qarabag",
+   "page": 77,
+   "concept": "bagchada-guller",
+   "caption_name": "Bağçada güllər",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0078_1",
+   "source": "muradov_2010_qarabag",
+   "page": 78,
+   "concept": "saxsida-guller",
+   "caption_name": "Saxsıda güliər",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0081_1",
+   "source": "muradov_2010_qarabag",
+   "page": 81,
+   "concept": "lempe",
+   "caption_name": "Ləmpə",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0081_2",
+   "source": "muradov_2010_qarabag",
+   "page": 81,
+   "concept": "lempe",
+   "caption_name": "Ləmpə",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0083_1",
+   "source": "muradov_2010_qarabag",
+   "page": 83,
+   "concept": "lempe",
+   "caption_name": "Ləmpə",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0084_1",
+   "source": "muradov_2010_qarabag",
+   "page": 84,
+   "concept": "lempe",
+   "caption_name": "Ləmpə",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0121_1",
+   "source": "muradov_2010_qarabag",
+   "page": 121,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0124_1",
+   "source": "muradov_2010_qarabag",
+   "page": 124,
+   "concept": "qasimushagi",
+   "caption_name": "Qasımuşağı",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0125_1",
+   "source": "muradov_2010_qarabag",
+   "page": 125,
+   "concept": "malibeyli",
+   "caption_name": "Malıbəyli",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0126_1",
+   "source": "muradov_2010_qarabag",
+   "page": 126,
+   "concept": "bulud-carpet",
+   "caption_name": "Bulud",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0127_1",
+   "source": "muradov_2010_qarabag",
+   "page": 127,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur10_p0128_1",
+   "source": "muradov_2010_qarabag",
+   "page": 128,
+   "concept": "mugan",
+   "caption_name": "Muğan",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur13_p0117_1",
+   "source": "muradov_2013",
+   "page": 117,
+   "concept": "tirme-sayagi",
+   "caption_name": "Tirməsayağı",
+   "caption_school": "ganja",
+   "lists": [
+    "muradov_2013: ganja"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur13_p0119_1",
+   "source": "muradov_2013",
+   "page": 119,
+   "concept": "faxrali",
+   "caption_name": "Faxralı",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "muradov_2013: ganja",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "mur13_p0123_1",
+   "source": "muradov_2013",
+   "page": 123,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0005_1",
+   "source": "symposium_2007_paris",
+   "page": 5,
+   "concept": "suraxani",
+   "caption_name": "Suraxanı",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0006_1",
+   "source": "symposium_2007_paris",
+   "page": 6,
+   "concept": "qimil",
+   "caption_name": "Qimil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0007_1",
+   "source": "symposium_2007_paris",
+   "page": 7,
+   "concept": "pirebedil",
+   "caption_name": "Pirəbədil",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0009_1",
+   "source": "symposium_2007_paris",
+   "page": 9,
+   "concept": "sheyx-sefi",
+   "caption_name": "Şeyx Səfi",
+   "caption_school": "tabriz",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ardabil",
+    "muradov_2013: ardabil"
+   ],
+   "status": "тот же тип, другая группа"
+  },
+  {
+   "plate": "sym07_p0014_1",
+   "source": "symposium_2007_paris",
+   "page": 14,
+   "concept": "ejdahali",
+   "caption_name": "Əjdahalı",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: guba"
+   ],
+   "status": "общее название (ткут в разных школах)"
+  },
+  {
+   "plate": "sym07_p0016_1",
+   "source": "symposium_2007_paris",
+   "page": 16,
+   "concept": "namazliq",
+   "caption_name": "Namazlıq",
+   "caption_school": "tabriz",
+   "lists": [
+    "muradov_2013: gazakh",
+    "muradov_2013: nakhchivan"
+   ],
+   "status": "общее название (ткут в разных школах)"
+  },
+  {
+   "plate": "sym07_p0017_1",
+   "source": "symposium_2007_paris",
+   "page": 17,
+   "concept": "qaraqoyunlu",
+   "caption_name": "Qaraqoyunlu",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: ganja"
+   ],
+   "status": "тот же тип, другая группа"
+  },
+  {
+   "plate": "sym07_p0020_1",
+   "source": "symposium_2007_paris",
+   "page": 20,
+   "concept": "qazax",
+   "caption_name": "Qazax",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0024_1",
+   "source": "symposium_2007_paris",
+   "page": 24,
+   "concept": "ovchuluq",
+   "caption_name": "Ovçuluq",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: tabriz",
+    "muradov_2013: tabriz"
+   ],
+   "status": "общее название (ткут в разных школах)"
+  },
+  {
+   "plate": "sym07_p0031_1",
+   "source": "symposium_2007_paris",
+   "page": 31,
+   "concept": "borchali",
+   "caption_name": "Borçalı",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: gazakh",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0045_1",
+   "source": "symposium_2007_paris",
+   "page": 45,
+   "concept": "xileafshan",
+   "caption_name": "Xilə-Afşan",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0051_1",
+   "source": "symposium_2007_paris",
+   "page": 51,
+   "concept": "heris",
+   "caption_name": null,
+   "caption_school": "tabriz",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: tabriz",
+    "muradov_2013: tabriz"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0053_1",
+   "source": "symposium_2007_paris",
+   "page": 53,
+   "concept": "faxrali",
+   "caption_name": "Faxralı",
+   "caption_school": "ganja",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "muradov_2013: ganja",
+    "muradov_2013: gazakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0056_1",
+   "source": "symposium_2007_paris",
+   "page": 56,
+   "concept": "agacli",
+   "caption_name": "Ağaclı",
+   "caption_school": "tabriz",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: tabriz"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0057_3",
+   "source": "symposium_2007_paris",
+   "page": 57,
+   "concept": "arciman",
+   "caption_name": "Ərciman",
+   "caption_school": "shirvan",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: shirvan",
+    "muradov_2013: shirvan"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0064_1",
+   "source": "symposium_2007_paris",
+   "page": 64,
+   "concept": "chelebi",
+   "caption_name": "Çələbi",
+   "caption_school": "karabakh",
+   "lists": [
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0066_1",
+   "source": "symposium_2007_paris",
+   "page": 66,
+   "concept": "shahnezerli",
+   "caption_name": "Şahnəzərli",
+   "caption_school": "guba",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: guba",
+    "muradov_2013: guba"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0068_1",
+   "source": "symposium_2007_paris",
+   "page": 68,
+   "concept": "malibeyli",
+   "caption_name": "Malıbəyli",
+   "caption_school": "karabakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: karabakh"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "sym07_p0071_1",
+   "source": "symposium_2007_paris",
+   "page": 71,
+   "concept": "findiqan",
+   "caption_name": "Fındıqan",
+   "caption_school": "baku",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: baku",
+    "muradov_2013: baku"
+   ],
+   "status": "совпадает"
+  },
+  {
+   "plate": "enc2_p0070_1",
+   "source": "tagiyeva_enc_2015_v2",
+   "page": 70,
+   "concept": "qaraqoyunlu",
+   "caption_name": "Qaraqoyunlu",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: ganja"
+   ],
+   "status": "тот же тип, другая группа"
+  },
+  {
+   "plate": "enc2_p0071_1",
+   "source": "tagiyeva_enc_2015_v2",
+   "page": 71,
+   "concept": "qaraqoyunlu",
+   "caption_name": "Qaraqoyunlu",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: ganja"
+   ],
+   "status": "тот же тип, другая группа"
+  },
+  {
+   "plate": "enc2_p0072_1",
+   "source": "tagiyeva_enc_2015_v2",
+   "page": 72,
+   "concept": "qaraqoyunlu",
+   "caption_name": "Qaraqoyunlu",
+   "caption_school": "gazakh",
+   "lists": [
+    "kerimov_1984_in_symposium_2007: ganja",
+    "kerimov_1984_in_symposium_2007: karabakh",
+    "muradov_2013: ganja"
+   ],
+   "status": "тот же тип, другая группа"
+  }
+ ],
+ "summary": {
+  "names_in_lists": 227,
+  "vs_model": {
+   "совпадает": 200,
+   "расходится": 3,
+   "тот же тип, другая группа": 5,
+   "нет данных в модели": 4
+  },
+  "new_names": 15,
+  "captions_checked": 192,
+  "captions": {
+   "совпадает": 177,
+   "подпись: Иреван (у Керимова такой группы нет)": 1,
+   "общее название (ткут в разных школах)": 7,
+   "тот же тип, другая группа": 6,
+   "расходится": 1
+  }
+ }
+}

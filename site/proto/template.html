@@ -348,11 +348,11 @@ function schoolCarpets(type, group) {
 }
 function schoolDesc(k) {
   const d = (DATA.school_desc || {})[k]; if (!d) return '';
-  return `<details style="margin:4px 0 8px"><summary class="muted" style="cursor:pointer">описание школы — ${esc(d.src)} <span class="pill auto">черновик ИИ</span></summary>${descHTML(d)}</details>`;
+  return [d].concat(d.more || []).map(x => `<details style="margin:4px 0 8px"><summary class="muted" style="cursor:pointer">описание школы — ${esc(x.src)} <span class="pill auto">черновик ИИ</span></summary>${descHTML(x)}</details>`).join('');
 }
 function otherSchoolsHTML() {
   const used = new Set(); DATA.school_types.forEach(([id, , , groups]) => { used.add(id); groups.forEach(g => used.add(g[0])); });
-  const NM = {nakhchivan: 'Нахчыван', shusha: 'Шуша'};
+  const NM = {nakhchivan: 'Нахчыван', shusha: 'Шуша', irevan: 'Иреван'};
   const rest = Object.keys(DATA.school_desc || {}).filter(k => !used.has(k));
   return rest.length ? `<h2>Другие школы в литературе</h2><ul class="tree">${rest.map(k => `<li><b>${esc(NM[k] || k)}</b>${schoolDesc(k)}</li>`).join('')}</ul>` : '';
 }
@@ -362,7 +362,7 @@ function renderSchools() {
   $('#app').innerHTML = `<div style="max-width:900px"><h1>Школы</h1>
   <div class="note">Основная схема — <b>Керимов</b>: 4 типа → группы → композиции (≈144 стиля по сёлам). Популярная схема «7 школ» (Губа, Ширван, Баку, Гянджа, Газах, Карабах, Тебриз) — это те же типы, раздробленные на группы. Западные классификации (Schürmann, Wright) хранятся будущим фасетом «альтернативная классификация» с указанием источника, а не смешиваются с основной.</div>
   <ul class="tree">${DATA.school_types.map(([id, ru, az, groups]) => `<li><b><a href="#/" data-school="${id}">${ru}</a></b> <span class="muted">${az} · понятий ${cnt(id)}, схем ${scnt(id)}</span>
-    ${groups.length ? `<ul>${groups.map(([g, gru, gaz]) => `<li><a href="#/" data-school="${id}/${g}">${gru}</a> <span class="muted">${gaz} · понятий ${cnt(id + '/' + g)}</span>${schoolDesc(g)}${schoolCarpets(id, g)}</li>`).join('')}${schoolCarpets(id, null) ? `<li><i>без группы</i>${schoolCarpets(id, null)}</li>` : ''}</ul>` : schoolDesc(id) + schoolCarpets(id, null)}</li>`).join('')}</ul>
+    ${groups.length ? `${schoolDesc(id)}<ul>${groups.map(([g, gru, gaz]) => `<li><a href="#/" data-school="${id}/${g}">${gru}</a> <span class="muted">${gaz} · понятий ${cnt(id + '/' + g)}</span>${schoolDesc(g)}${schoolCarpets(id, g)}</li>`).join('')}${schoolCarpets(id, null) ? `<li><i>без группы</i>${schoolCarpets(id, null)}</li>` : ''}</ul>` : schoolDesc(id) + schoolCarpets(id, null)}</li>`).join('')}</ul>
   <h2>Соответствие схем</h2><table class="t"><tr><th>Керимов (тип)</th><th>«7 школ»</th><th>Wright (Iranica)</th><th>Рынок / Schürmann</th></tr>
   <tr><td>Губа-Ширван</td><td>Губа · Ширван · Баку</td><td>Kuba/Shirvan</td><td>Kuba · Shirvan · Baku (+Moghan, Talish)</td></tr>
   <tr><td>Гянджа-Газах</td><td>Гянджа · Газах</td><td>Ganja/Karabakh · Kazakh/Borchaly</td><td>Gendje · Kazak</td></tr>
