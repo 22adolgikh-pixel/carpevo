@@ -1875,6 +1875,12 @@ def install(app, DATA, D_WORK):
             import corner_refine; return corner_refine.info()
         except Exception as e: return {"ok": False, "error": str(e)[:160]}
 
+    @app.post("/api/corner_refine/fetch")
+    def corner_refine_fetch():
+        """перекачать веса сети углов с Диска (после переобучения в Colab)"""
+        import corner_refine
+        ok = corner_refine.fetch(force=True); return {"ok": ok, **corner_refine.info()}
+
     @app.get("/api/vlm/status")
     def vlm_status():
         """есть ли ключ (сам ключ не отдаётся), сколько ковров в очереди и сколько посчитано сегодня"""

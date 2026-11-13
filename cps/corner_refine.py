@@ -3,17 +3,40 @@
 # Обучение — tools/colab/corner_refine_colab.py (метки — tools/corners/make_labels.py из резервной копии студии).
 # Сеть смотрит на окно фото вокруг угла и говорит, куда его сдвинуть; три прохода: окно 24 %, 12 %, 6 % длинной стороны.
 # Стартовые углы — углы модели по картинке (vlm_quad), иначе find_quad. Все четыре угла приводятся зеркалом к «левому верхнему».
-# Веса — models/corner_refine_v1.pt (TorchScript; нужен только torch, он в образе есть ради cnn.py) и corner_refine_v1.json (замеры).
+# Веса — DATA или models/corner_refine_v1.pt, сервер сам качает их с Диска (TorchScript; нужен только torch, он в образе есть ради cnn.py) и corner_refine_v1.json (замеры).
 # Нет torch или весов — available() = False, карточки углов работают как раньше.
 import json, os, threading
 import numpy as np, cv2
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PATH = os.path.join(HERE, "models", "corner_refine_v1.pt")
+DATA = os.environ.get("CPS_DATA") or os.path.join(HERE, "data")
+# веса лежат на Диске (carpet-dna/models, доступ «по ссылке»); сервер скачивает их сам в DATA при первом обращении
+DRIVE = {"pt": "1Rj5r3nPzqGe5qMamkKzyimVkqzj_yW9H", "json": "1-G5e0UXSIz_Ohy2-Z7LwXEnw9BLtl8L1"}
 VERSION = 1
+
+
+def _path():
+    for p in (os.path.join(DATA, "corner_refine_v1.pt"), os.path.join(HERE, "models", "corner_refine_v1.pt")):
+        if os.path.exists(p): return p
+    return None
+
+
+def fetch(force=False):
+    """скачать веса с Диска в DATA (нужен доступ «по ссылке»); после успеха сеть перечитывается"""
+    from rugs import drive_fetch
+    dst = os.path.join(DATA, "corner_refine_v1.pt")
+    if os.path.exists(dst) and not force: return True
+    try:
+        drive_fetch(DRIVE["pt"], dst + ".part"); os.replace(dst + ".part", dst)
+        try: drive_fetch(DRIVE["json"], dst[:-3] + ".json")
+        except Exception: pass
+        _S["tried"] = False; _S["net"] = None; _S["err"] = ""
+        return True
+    except Exception as e:
+        _S["err"] = str(e)[:200]; return False
 FLIP = [(1, 1), (-1, 1), (-1, -1), (1, -1)]      # ЛВ, ПВ, ПН, ЛН
 MEAN = np.array([0.485, 0.456, 0.406], np.float32); STD = np.array([0.229, 0.224, 0.225], np.float32)
-_lock = threading.Lock(); _S = {"net": None, "tried": False, "meta": None}
+_lock = threading.Lock(); _S = {"net": None, "tried": False, "meta": None, "err": ""}
 
 
 def _load():
@@ -23,13 +46,15 @@ def _load():
         _S["tried"] = True
         try:
             import torch
-            if os.path.exists(PATH):
+            P = _path()
+            if P is None and fetch(): P = _path()
+            if P:
                 torch.set_num_threads(2)
-                _S["net"] = torch.jit.load(PATH, map_location="cpu").eval()
-                try: _S["meta"] = json.load(open(PATH[:-3] + ".json", encoding="utf-8"))
+                _S["net"] = torch.jit.load(P, map_location="cpu").eval()
+                try: _S["meta"] = json.load(open(P[:-3] + ".json", encoding="utf-8"))
                 except (OSError, ValueError): _S["meta"] = {}
-        except Exception:
-            _S["net"] = None
+        except Exception as e:
+            _S["net"] = None; _S["err"] = _S["err"] or str(e)[:200]
     return _S["net"]
 
 
@@ -38,7 +63,7 @@ def available(): return _load() is not None
 
 def info():
     _load(); m = _S["meta"] or {}
-    return {"ok": _S["net"] is not None, **{k: m.get(k) for k in ("ver", "trained", "n_train", "n_test", "test")}} if _S["net"] is not None else {"ok": False}
+    return {"ok": _S["net"] is not None, **{k: m.get(k) for k in ("ver", "trained", "n_train", "n_test", "test")}} if _S["net"] is not None else {"ok": False, "error": _S["err"]}
 
 
 def _window(a, cx, cy, half, k, W, mag):
