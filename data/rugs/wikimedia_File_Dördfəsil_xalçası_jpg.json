@@ -18,7 +18,7 @@
  "h": 837,
  "marks": [],
  "created": 1791736126,
- "updated": 1794597104,
+ "updated": 1794597401,
  "cat": {
   "title": "Dördfəsil xalçası.jpg",
   "museum": "Wikimedia Commons",
@@ -167,6 +167,29 @@
    "v": 2,
    "model": "anthropic/claude-sonnet-5.5",
    "t": 1794597370
+  },
+  "ref_quad": {
+   "quad": [
+    [
+     0.01026,
+     -0.00078
+    ],
+    [
+     0.99521,
+     0.00012
+    ],
+    [
+     0.99763,
+     0.99502
+    ],
+    [
+     -0.00811,
+     0.98927
+    ]
+   ],
+   "v": 1,
+   "from": "vlm",
+   "t": 1794597391
   }
  },
  "micro": {
@@ -176,8 +199,49 @@
     "w": 2,
     "t": 1794597104
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794597401,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01026,
+    -0.00078
+   ],
+   [
+    0.99521,
+    0.00012
+   ],
+   [
+    0.99763,
+    0.99502
+   ],
+   [
+    -0.00811,
+    0.98927
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
