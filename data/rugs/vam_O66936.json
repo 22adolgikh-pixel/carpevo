@@ -9,7 +9,7 @@
  "place": "Azerbaijan",
  "date": "1870-1879",
  "school": "",
- "composition": "",
+ "composition": "qedim-gence",
  "technique": "",
  "size": "",
  "notes": "",
@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736128,
- "updated": 1794260077,
+ "updated": 1794563367,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -128,6 +128,15 @@
      ]
     ]
    }
+  },
+  "comp": {
+   "qedim-gence": {
+    "dolgikh": {
+     "a": "yes",
+     "w": 2,
+     "t": 1794563367
+    }
+   }
   }
  },
  "frame": "whole",
@@ -164,5 +173,6 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "composition_by": "/m: dolgikh"
 }
