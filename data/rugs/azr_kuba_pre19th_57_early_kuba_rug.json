@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736137,
- "updated": 1794258393,
+ "updated": 1794596995,
  "cat": {
   "title": "Afshan Pattern floral carpet (blue ground), late 18th/early 19th century, Kuba or Baku Region, Azerb",
   "museum": "",
@@ -92,13 +92,18 @@
   },
   "frame": {
    "dolgikh": {
-    "a": "fragment",
+    "a": "whole",
     "w": 2,
-    "t": 1794258393
+    "t": 1794596995
    }
   }
  },
  "tri": "review",
- "frame": "fragment",
- "frame_by": "micro"
+ "frame": "whole",
+ "frame_by": "micro",
+ "edge": {
+  "damaged": [
+   "dolgikh"
+  ]
+ }
 }
