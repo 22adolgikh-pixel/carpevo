@@ -598,7 +598,7 @@
    "scheme": "",
    "group": "mmv73tjty",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -608,8 +608,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1791921701,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794552894
   },
   {
    "id": "mmv73x86e",
@@ -625,7 +625,7 @@
    "scheme": "",
    "group": "mmv73tjty",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -635,12 +635,12 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1791921715,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794552894
   }
  ],
  "created": 1791870026,
- "updated": 1794155828,
+ "updated": 1794552894,
  "cat": {
   "title": "Mugan carpet, Karabakh school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -773,5 +773,23 @@
   "ver": 1,
   "t": 1794238580
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "marks": {
+   "mmv73wxfp": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794552894
+    }
+   },
+   "mmv73x86e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794552894
+    }
+   }
+  }
+ }
 }

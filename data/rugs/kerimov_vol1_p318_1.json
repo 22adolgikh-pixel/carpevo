@@ -31,7 +31,7 @@
    "scheme": "t08_f03",
    "group": "mmvcxom3s",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -41,8 +41,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792274033,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794553006
   },
   {
    "id": "mmvcxpgth0",
@@ -262,7 +262,7 @@
   }
  ],
  "created": 1791736121,
- "updated": 1794429987,
+ "updated": 1794553006,
  "cat": {
   "title": "Керимов, т. I, Табл. 197. КАРАБАХ «ВЕРНИ» (стр. скана 318, печ. ?)",
   "museum": "",
@@ -432,6 +432,15 @@
      ]
     ],
     "s": "vlm"
+   }
+  },
+  "marks": {
+   "mmvcxom3s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794553006
+    }
    }
   }
  },

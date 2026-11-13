@@ -31,7 +31,7 @@
    "scheme": "t40_f03",
    "group": "mmv8d4f6a",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -41,8 +41,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1791997633,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794552953
   },
   {
    "id": "mmv8d4hom0",
@@ -2125,7 +2125,7 @@
   }
  ],
  "created": 1791870033,
- "updated": 1794253844,
+ "updated": 1794552953,
  "cat": {
   "title": "Guba rug, Guba school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -2273,6 +2273,15 @@
     "a": "whole",
     "w": 2,
     "t": 1794253844
+   }
+  },
+  "marks": {
+   "mmv8d4f6a": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794552953
+    }
    }
   }
  },

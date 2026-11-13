@@ -760,7 +760,7 @@
    "scheme": "t22_f03",
    "group": "mmv9v52ct",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -770,8 +770,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792093355,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794552850
   },
   {
    "id": "mmv9y42bb15",
@@ -814,7 +814,7 @@
    "scheme": "t22_f03",
    "group": "mmv9v52ct",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -841,7 +841,7 @@
    "scheme": "t22_f03",
    "group": "mmv9v52ct",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 1,
@@ -1003,7 +1003,7 @@
    "scheme": "t22_f03",
    "group": "mmv9v52ct",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -1013,8 +1013,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792093386,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794552850
   },
   {
    "id": "mmv9y4q536",
@@ -1057,7 +1057,7 @@
    "scheme": "t22_f03",
    "group": "mmv9v52ct",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -2611,7 +2611,7 @@
   }
  ],
  "created": 1791870016,
- "updated": 1794155892,
+ "updated": 1794552850,
  "cat": {
   "title": "Knotted-pile wool carpet “Pirabadil”",
   "museum": "",
@@ -2742,5 +2742,44 @@
   "ver": 1,
   "t": 1794238366
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "marks": {
+   "mmv9y42bb14": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794552850
+    }
+   },
+   "mmv9y4q535": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794552850
+    }
+   },
+   "mmv9y42bb16": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794552850
+    }
+   },
+   "mmv9y42bb17": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794552850
+    }
+   },
+   "mmv9y4q537": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794552850
+    }
+   }
+  }
+ }
 }
