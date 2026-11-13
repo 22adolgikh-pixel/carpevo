@@ -1761,7 +1761,8 @@ def install(app, DATA, D_WORK):
                "vquad": ((a.get("vlm_quad") or {}).get("quad")) if ((a.get("vlm_quad") or {}).get("v", 1) >= vlm_corners.VERSION) else None,   # v11.47/v11.50: углы модели (старые v1 — без уточнения — пересчитываются)
                "fr_old": r.get("frame") in FR_OLD,                                # применён снятый ответ — спросить заново
                "old_who": [u for u, v in (m.get("frame") or {}).items() if (v or {}).get("a") in FR_OLD],
-               "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge")}
+               "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge"),
+               "es": r.get("esearch") or {}}                                       # v11.58: группы, где сеть уже искала повторы
         # v11.52: карточки «элементы», «имена», «тип», «двойники» — всё нужное для очередей берём здесь же, чтобы не читать ковры заново
         dead = bool(r.get("dup_of") or r.get("hidden") or r.get("split_into") or r.get("multi") or r.get("frame") == "multi")
         mk = [{"id": x["id"], "g": x.get("group") or x["id"], "st": x.get("status"), "box": x["box"], "sc": x.get("scheme") or "",
@@ -1874,6 +1875,91 @@ def install(app, DATA, D_WORK):
         try:
             import corner_refine; return corner_refine.info()
         except Exception as e: return {"ok": False, "error": str(e)[:160]}
+
+    # ---------- v11.58: сеть «отпечатков» элементов (element_embed): проверка предложений и поиск повторов ----------
+    _esim = {}; _es = {"q": None, "thr": None, "seen": set(), "done": 0, "added": 0, "err": ""}
+
+    def _emb_marks(t):
+        """карточка «элементы» с образцом: близость каждой рамки к образцу; лучшие — первыми, ниже порога — заранее ✗"""
+        if not t.get("sample"): return
+        try:
+            import element_embed as EE
+            if not EE.available(): return
+            key = (t["rid"], t["g"], tuple(m["id"] for m in t["items"]), tuple(t["sample"]))
+            if key not in _esim:
+                src = img_path(t["rid"]); a = read_small(src, 1400) if src else None
+                if a is None: return
+                a = EE.small(a); _esim[key] = EE.verify(a, t["sample"], [m["box"] for m in t["items"]])
+                if len(_esim) > 3000: _esim.clear()
+            v = _esim.get(key)
+            if not v: return
+            thr = EE.meta().get("thr_bad")
+            for m, x in zip(t["items"], v): m["sim"] = round(x, 3)
+            t["items"].sort(key=lambda m: -m["sim"])
+            t["pre"] = [m["id"] for m in t["items"] if thr is not None and m["sim"] < thr]
+        except Exception:
+            pass
+
+    def _es_enqueue(rows, left, n):
+        """когда карточек «элементы» мало — поиск повторов по образцу в группах, где сеть ещё не искала"""
+        try:
+            import element_embed as EE
+            if left >= 3 * n or not EE.available(): return
+        except Exception: return
+        if _es["thr"] is None:
+            import queue as _qm
+            _es["q"] = _qm.Queue(); _es["thr"] = threading.Thread(target=_es_worker, daemon=True, name="element-search"); _es["thr"].start()
+        k = 0
+        for x in rows:
+            if x["dead"] or x["use"] == "skip": continue
+            G = {}
+            for m in x["mk"]: G.setdefault(m["g"], []).append(m["st"])
+            for g, st in G.items():
+                if "confirmed" in st and "proposed" not in st and str(x["es"].get(g)) != str(EE.VERSION) and (x["id"], g) not in _es["seen"]:
+                    _es["seen"].add((x["id"], g)); _es["q"].put((x["id"], g)); k += 1
+                    if k >= 6: return
+
+    def _es_worker():
+        import element_embed as EE
+        while True:
+            rid, g = _es["q"].get()
+            try:
+                r = load(rid); src = img_path(rid)
+                if not r or not src: continue
+                ms = [m for m in r.get("marks") or [] if (m.get("group") or m.get("id")) == g and isinstance(m.get("box"), list)]
+                cf = sorted([m for m in ms if m.get("status") == "confirmed"], key=lambda m: (bool(m.get("machine")), -m["box"][2] * m["box"][3]))
+                if not cf: continue
+                a = read_small(src, 1400)
+                if a is None: continue
+                a = EE.small(a); q = ((r.get("layout") or {}).get("quad"))
+                found = heavy(lambda: EE.search(a, cf[0]["box"], exclude=[m["box"] for m in r.get("marks") or [] if isinstance(m.get("box"), list)], quad=q), "поиск элементов (сеть)")
+                now = int(time.time())
+                with _lock:
+                    r = load(rid)
+                    if not r: continue
+                    for i, (v, b) in enumerate(found):
+                        r.setdefault("marks", []).append({"id": f"m{now}{i}e", "box": b, "zone": cf[0].get("zone") or "other", "motif": cf[0].get("motif") or "",
+                            "motif_text": cf[0].get("motif_text") or "", "scheme": cf[0].get("scheme") or "", "group": g, "certainty": "maybe", "status": "proposed",
+                            "note": "", "angle": 0, "flip": 0, "machine": "embed", "score": round(v, 3), "xfer": "", "by": "машина (поиск по образцу, сеть)", "at": now,
+                            "confirmed_by": "", "confirmed_at": 0})
+                    r.setdefault("esearch", {})[g] = EE.VERSION; r["updated"] = now; save(r)
+                _es["done"] += 1; _es["added"] += len(found)
+            except Exception as e:
+                _es["err"] = str(e)[:200]
+            finally:
+                _es["q"].task_done()
+
+    @app.get("/api/element_embed/status")
+    def element_embed_status():
+        try:
+            import element_embed as EE
+            return {**EE.info(), "search": {"queued": _es["q"].qsize() if _es["q"] else 0, "groups_done": _es["done"], "added": _es["added"], "error": _es["err"]}}
+        except Exception as e: return {"ok": False, "error": str(e)[:160]}
+
+    @app.post("/api/element_embed/fetch")
+    def element_embed_fetch():
+        import element_embed as EE
+        return {"ok": EE.fetch(force=True), **EE.info()}
 
     @app.post("/api/corner_refine/fetch")
     def corner_refine_fetch():
@@ -2031,6 +2117,7 @@ def install(app, DATA, D_WORK):
                     if sumw(d, "ok") >= 2: m["status"] = "confirmed"; m["confirmed_by"] = "/m: " + ", ".join(sorted(u for u, x in d.items() if x["a"] == "ok")); m["confirmed_at"] = now; n += 1
                     elif sumw(d, "bad") >= 2: m["status"] = "rejected"; n += 1
                 rec["ok"] = [i for i, v in ans.items() if v == "ok"]; rec["bad"] = [i for i, v in ans.items() if v == "bad"]
+                if body.get("pre"): rec["pre"] = [str(i) for i in body["pre"]][:20]          # v11.58: где ✗ заранее поставила сеть — для замера, сколько снимают
                 if ctl is not None: rec["ctl"] = ctl
                 if n: applied = "marks:%d" % n
             elif typ == "name":
@@ -2116,7 +2203,8 @@ def install(app, DATA, D_WORK):
                 tasks.append(Q[t].pop(0))
                 if not Q[t]: order.remove(t)
         for t in tasks:
-            if t["type"] == "marks": _marks_trap(me, t, by[t["rid"]])
+            if t["type"] == "marks": _emb_marks(t); _marks_trap(me, t, by[t["rid"]])
+        if "marks" in want: _es_enqueue(rows, len(more["marks"]), n)
         ctl = [x for x in rows if x["ctl"]]
         if ctl and len(tasks) >= 3 and "quad" in want:                             # контрольная карточка
             x = random.choice(ctl); q = [list(p) for p in x["quad"]]; good = random.random() < 0.5
@@ -2218,7 +2306,18 @@ def install(app, DATA, D_WORK):
         try:
             import corner_refine; cr = corner_refine.info()
         except Exception: cr = {"ok": False}
-        return {"users": _mstats(), "frame_model": frame_model.info(), "corner_refine": cr, "quad_by_day": _quad_days()}
+        pre = {"kept": 0, "removed": 0, "cards": 0}                                # v11.58: заранее поставленные сетью ✗ — сколько люди сняли
+        try:
+            with open(D_MICRO, encoding="utf-8") as f:
+                for l in f:
+                    if '"pre"' not in l: continue
+                    r = json.loads(l); P = set(r.get("pre") or []); B = set(r.get("bad") or [])
+                    pre["cards"] += 1; pre["kept"] += len(P & B); pre["removed"] += len(P - B)
+        except (OSError, ValueError): pass
+        try:
+            import element_embed as EE; ee = EE.info() if EE._S["tried"] else {"ok": None}
+        except Exception: ee = {"ok": False}
+        return {"users": _mstats(), "frame_model": frame_model.info(), "corner_refine": cr, "quad_by_day": _quad_days(), "element_embed": ee, "marks_pre": pre}
 
     def _quad_days():
         """v11.57: карточки углов по дням и по тому, чьи углы показаны (auto — find_quad, vlm — модель по картинке, ref — сеть уточнения):

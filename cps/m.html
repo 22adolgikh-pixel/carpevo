@@ -41,7 +41,7 @@ button.wide{grid-column:1/-1}button.sm{min-height:40px;padding:8px}button:active
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1;min-height:0;overflow-y:auto;align-content:start}
 /* v11.56: квадрат через padding, а не aspect-ratio — в Safari на iPhone ряды сетки схлопывались и плитки наезжали друг на друга */
 .tl{position:relative;height:0;min-height:0;padding:0 0 100%;border-radius:10px;border:2px solid var(--ln);overflow:hidden;background:#000;box-sizing:content-box}.tl img{position:absolute;inset:0;width:100%;height:100%;box-sizing:border-box;object-fit:contain;display:block;pointer-events:none}
-.tl.x{border-color:var(--bad)}.tl.x:after{content:'✗';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:var(--bad);background:#000a}
+.tl.pre:before{content:'?';position:absolute;right:3px;top:2px;z-index:3;font-size:11px;font-weight:700;color:var(--tx);background:var(--pan);border:1px solid var(--ln);border-radius:8px;padding:0 5px}.tl.x{border-color:var(--bad)}.tl.x:after{content:'✗';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:var(--bad);background:#000a}
 .tl.sch{background:#fff}.tl.sch img{image-rendering:pixelated;padding:4px 4px 16px}.tl.sel{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
 .tl b{position:absolute;left:0;right:0;bottom:0;font-size:10px;font-weight:500;line-height:1.5;background:#000b;color:#fff;padding:0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:1;min-height:0;align-items:center}.pair figure{margin:0;display:flex;flex-direction:column;gap:4px;align-items:center;min-width:0}.pair img{max-width:100%;max-height:54dvh;object-fit:contain;border-radius:6px}.pair figcaption{font-size:11px;color:var(--mut);text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -153,15 +153,15 @@ function fixQuad(t,k){t.fixed=true;rdFlags(t);
 // ---------- v11.52: новые карточки ----------
 const crop=(rid,b,s,pad,mark)=>`/api/rugs/${encodeURIComponent(rid)}/crop?b=${b.join(',')}&s=${s}&pad=${pad}&mark=${mark}`;
 // «элементы»: рамки, которые предложила машина. Тап по плитке — «это не то»; ✓ принимает остальные.
-function showMarks(t){t.x=t.x||{};const hasS=!!t.sample;
+function showMarks(t){t.x=t.x||Object.fromEntries((t.pre||[]).map(i=>[i,true]));const hasS=!!t.sample,pre=new Set(t.pre||[]);
   $('main').innerHTML=`${qhead(hasS?'Это тот же элемент? Нажмите на лишние':'Это отдельные элементы узора? Нажмите на лишние',
-     'Машина нашла на ковре похожие места. Жёлтая рамка — что именно предложено, вокруг — соседний узор. Тап — отметить ✗ (не то, криво обведено, захвачено лишнее). ✓ — остальные верны.')}
+     'Машина нашла на ковре похожие места. Жёлтая рамка — что именно предложено, вокруг — соседний узор. Тап — отметить ✗ (не то, криво обведено, захвачено лишнее). ✓ — остальные верны.'+(t.pre?' Самые похожие на образец идут первыми; где сеть сомневается, ✗ уже стоит (с пометкой «?») — снимите, если это тот же элемент.':''))}
    ${hasS||t.scheme?`<div class="smp">${hasS?`<img src="${crop(t.rid,t.sample,200,0.15,0)}" alt="образец">`:''}${t.scheme?`<img class="sch" src="${t.scheme}" alt="схема">`:''}<span>${hasS?'образец':'схема Керимова'}${t.more?` · в группе ещё ${t.more}`:''}<br>${esc(t.title||'')}</span></div>`:''}
-   <div class="grid" id="gr">${t.items.map(m=>`<button class="tl${t.x[m.id]?' x':''}" data-id="${esc(m.id)}"><img src="${crop(t.rid,m.box,240,0.35,1)}" alt=""></button>`).join('')}</div>
+   <div class="grid" id="gr">${t.items.map(m=>`<button class="tl${t.x[m.id]?' x':''}${pre.has(m.id)?' pre':''}" data-id="${esc(m.id)}"><img src="${crop(t.rid,m.box,240,0.35,1)}" alt=""></button>`).join('')}</div>
    <div class="row3"><button class="yes" id="a1" aria-label="готово: неотмеченные верны">✓</button><button class="no" id="a3" aria-label="все не то">✗ все</button><button class="unk" id="a4" aria-label="не знаю">?</button></div>`;qtip();
   document.querySelectorAll('#gr .tl').forEach(e=>e.onclick=()=>{const i=e.dataset.id;t.x[i]=!t.x[i];e.classList.toggle('x',!!t.x[i]);});
   const ids=t.items.map(m=>m.id);
-  $('a1').onclick=()=>answer(t,'done',null,{ok:ids.filter(i=>!t.x[i]),bad:ids.filter(i=>t.x[i])});
+  $('a1').onclick=()=>answer(t,'done',null,{ok:ids.filter(i=>!t.x[i]),bad:ids.filter(i=>t.x[i]),pre:t.pre||[]});
   $('a3').onclick=()=>answer(t,'done',null,{ok:[],bad:ids});$('a4').onclick=()=>answer(t,'skip',null,{ids});}
 // «имена»: подтверждённый элемент без названия; выбор из схем Керимова для типа этого ковра (закрытый список)
 function showName(t){
