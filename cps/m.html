@@ -65,7 +65,7 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
 // v11.52: виды карточек. Кнопки вверху включают и выключают вид; выбор помнится на этом телефоне. /m?k=quad,frame — задать выбор ссылкой.
-const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['same','двойники']];
+const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['same','двойники'],['split','развороты']];
 function kindsInit(){let k=new URLSearchParams(location.search).get('k');
   if(!k){try{k=localStorage.getItem('cps_m_k');}catch(e){}}
   S.k=(k||'').split(',').filter(x=>KINDS.some(a=>a[0]===x));if(!S.k.length)S.k=KINDS.map(a=>a[0]);}
@@ -84,7 +84,7 @@ function show(){head();const t=S.tasks[S.i];
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
     <div class="mut">в очереди: ${KINDS.filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
     ${S.k.some(k=>L[k])?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
-  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame})[t.type](t);}
+  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,split:showSplit})[t.type](t);}
 function qhead(q,tip){return `<div class="qrow"><span class="q">${q}</span><button class="ib" id="ib" aria-label="подсказка">i</button></div><div class="tip hint" id="tip">${tip}</div>`;}
 function qtip(){const b=$('ib'),t=$('tip');if(b&&t)b.onclick=()=>{t.classList.toggle('on');b.classList.toggle('on');};}
 function stage(t,extra=''){return `<div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="${img(t)}" alt="">${extra}</div></div>`;}
@@ -111,12 +111,12 @@ async function answer(t,a,q,x){rdFlags(t);const k=S.i;S.i++;S.done++;show();
 // v11.45: кадр — три ответа (целый / обрезан / деталь) плюс «не ковёр»; порог «чуть вылез» — 3 % по одному краю.
 // Рваные края и перспектива — отдельные галочки: такой ковёр остаётся целым и в работе.
 function showFrame(t){document.documentElement.style.setProperty('--imh','40dvh');
-  $('main').innerHTML=`${qhead('Это целый ковёр?','Целиком в кадре; срезано меньше ~3 % одного края — тоже целый. «Деталь» — снят кусок ковра, целого не видно. Два пальца — увеличить, двойной тап — сбросить.')}${stage(t)}
+  $('main').innerHTML=`${qhead('Это целый ковёр?','Целиком в кадре; срезано меньше ~3 % одного края — тоже целый. «Деталь» — снят кусок ковра, целого не видно. «Несколько ковров» — разворот книги или коллаж: потом такое фото разделим на ковры. Два пальца — увеличить, двойной тап — сбросить.')}${stage(t)}
    <div class="flags"><label><input type="checkbox" id="fs">снят в перспективе</label><label><input type="checkbox" id="fd">рваные края / дыры</label></div>
-   <div class="btns"><button class="yes wide" id="a1">✓ целый ковёр</button><button id="a2">обрезан заметно</button><button id="a3">только деталь</button><button class="no" id="a4">не ковёр</button><button class="sm" id="a5">не знаю</button></div>
+   <div class="btns"><button class="yes wide" id="a1">✓ целый ковёр</button><button id="a2">обрезан заметно</button><button id="a3">только деталь</button><button class="no" id="a4">не ковёр</button><button id="a6">несколько ковров</button><button class="sm wide" id="a5">не знаю</button></div>
   `;qtip();
   if(t.fl){$('fs').checked=!!t.fl.skew;$('fd').checked=!!t.fl.damaged;}
-  S.im=$('im');$('a1').onclick=()=>answer(t,'whole');$('a2').onclick=()=>answer(t,'cropped');$('a3').onclick=()=>answer(t,'detail');$('a4').onclick=()=>answer(t,'not_rug');$('a5').onclick=()=>answer(t,'skip');
+  S.im=$('im');$('a1').onclick=()=>answer(t,'whole');$('a2').onclick=()=>answer(t,'cropped');$('a3').onclick=()=>answer(t,'detail');$('a4').onclick=()=>answer(t,'not_rug');$('a6').onclick=()=>answer(t,'multi');$('a5').onclick=()=>answer(t,'skip');
   zoomable();}
 function poly(q){return q.map(p=>p.join(',')).join(' ');}
 function showQuad(t){t.q=t.q||t.quad.map(p=>[...p]);document.documentElement.style.setProperty('--imh','36dvh');
@@ -176,5 +176,12 @@ function showSame(t){const o={rid:t.other};
    <div class="pair"><figure><img src="${img(t)}" alt=""><figcaption>${esc(t.title||t.rid)}${t.src?' · '+esc(t.src):''}</figcaption></figure><figure><img src="${img(o)}" alt=""><figcaption>${esc(t.title2||t.other)}${t.src2?' · '+esc(t.src2):''}</figcaption></figure></div>
    <div class="btns"><button class="yes" id="a1">✓ тот же ковёр</button><button id="a2">похожи, но разные</button><button class="no" id="a3">✗ разные</button><button class="sm unk" id="a4">не знаю</button></div>`;qtip();
   const x={other:t.other};$('a1').onclick=()=>answer(t,'same',null,x);$('a2').onclick=()=>answer(t,'similar',null,x);$('a3').onclick=()=>answer(t,'diff',null,x);$('a4').onclick=()=>answer(t,'skip',null,x);}
+// «развороты»: на фото несколько ковров; показываем, как машина предлагает разрезать
+const PC=['#ffe066','#6cb6ff','#3ecf8e','#ff8fd0','#ffa94d','#b39dff'];
+function showSplit(t){document.documentElement.style.setProperty('--imh','50dvh');
+  $('main').innerHTML=`${qhead('Разрезать так — на '+t.parts.length+' ковр'+(t.parts.length<5?'а':'ов')+'?','Каждая цветная рамка станет отдельным ковром. ✓ — разрезано правильно (каждый ковёр целиком в своей рамке, лишнего нет). «Один ковёр» — фото не надо резать. Если рамки не те, но ковров несколько, — «не знаю»: поправим в студии.')}
+   ${stage(t,`<svg viewBox="0 0 1 1" preserveAspectRatio="none">${t.parts.map((b,i)=>`<rect x="${b[0]}" y="${b[1]}" width="${b[2]}" height="${b[3]}" fill="${PC[i%6]}22" stroke="${PC[i%6]}" stroke-width="3" vector-effect="non-scaling-stroke"/>`).join('')}</svg>`)}
+   <div class="btns"><button class="yes wide" id="a1">✓ разрезать так</button><button id="a2">один ковёр</button><button class="sm unk" id="a4">не знаю</button></div>`;qtip();
+  S.im=$('im');$('a1').onclick=()=>answer(t,'split');$('a2').onclick=()=>answer(t,'one');$('a4').onclick=()=>answer(t,'skip');zoomable();}
 kindsInit();load();
 </script></body></html>

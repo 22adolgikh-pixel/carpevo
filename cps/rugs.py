@@ -393,8 +393,8 @@ def install(app, DATA, D_WORK):
         return None if v is None else round(v, 3)
 
     # v11.45: ответы «что на фото» (карточка /m). «fragment» — снятый ответ прежних версий, встречается в старых записях.
-    FRAME_RU = {"whole": "целый ковёр", "cropped": "обрезан кадром", "detail": "только деталь ковра", "not_rug": "не ковёр", "fragment": "фрагмент (прежний ответ)"}
-    FRAME_SKIP = ("detail", "not_rug", "fragment")
+    FRAME_RU = {"whole": "целый ковёр", "cropped": "обрезан кадром", "detail": "только деталь ковра", "not_rug": "не ковёр", "multi": "несколько ковров на фото (разворот)", "fragment": "фрагмент (прежний ответ)"}
+    FRAME_SKIP = ("detail", "not_rug", "fragment", "multi")
 
     def use_of(r):
         """v11.35: что делать с фото — ("work"|"maybe"|"skip", причина). Не удаляет ничего: только сортирует каталог.
@@ -1256,15 +1256,25 @@ def install(app, DATA, D_WORK):
             r = load(f[:-5])
             if not r or r.get("dup_of") or r.get("split_into") or r.get("hidden") or r.get("multi"): continue
             if obj_guess(r)[0] != "carpet" or (r.get("people") or {}).get("n"): continue
-            if not force and (r.get("auto") or {}).get("ver", 0) >= CAT_VER: continue
+            # v11.54: «несколько ковров на фото» ищем сами у всех, кого ещё не смотрели (раньше — только кнопкой «развороты»)
+            if not force and (r.get("auto") or {}).get("ver", 0) >= CAT_VER and ("multi" in r or r.get("split_from")): continue
             ids.append(r["id"])
-        catst.update(running=True, done=0, total=len(ids), error="")
+        catst.update(running=True, done=0, total=len(ids), error="", multi=0)
         def run():
             try:
                 for rid in ids:
                     p = img_path(rid); a = read_small(p, 1400) if p else None
                     if a is not None:
                         try:
+                            r0 = load(rid)
+                            if r0 and "multi" not in r0 and not r0.get("split_from") and (r0.get("cat") or {}).get("part", 0) == 0:
+                                import rug_match
+                                parts = rug_match.find_carpets(a)
+                                with _lock:
+                                    r = load(rid)
+                                    if r and "multi" not in r: r["multi"] = parts; save(r)
+                                if parts: catst["multi"] = catst.get("multi", 0) + 1; catst["done"] += 1; continue    # разворот: углы и кадр здесь не нужны
+                            if r0 and (r0.get("auto") or {}).get("ver", 0) >= CAT_VER and not force: catst["done"] += 1; continue
                             t = rug_rect.triage(a)
                             with _lock:
                                 r = load(rid)
@@ -1537,13 +1547,12 @@ def install(app, DATA, D_WORK):
                 save(r); n += 1
         return {"ok": True, "n": n}
 
-    @app.post("/api/rugs/{rid}/split")
-    async def api_rug_split(rid: str, request: Request):
+    def split_do(rid, b, who):
         """Фото с несколькими коврами (разворот книги) → отдельные карточки, в порядке, который задал человек.
         Каждая часть получает паспорт разворота и, если есть, подпись своего рисунка из книги (figs — номер подписи для каждой части).
         Повторный вызов = правка разделения: части с указанным id перерезаются (их рамки переносятся), лишние удаляются.
         Исходная карточка скрывается, не удаляется."""
-        b = await request.json(); parts = b.get("parts") or []; ids = b.get("ids") or []; fsel = b.get("figs") or []; who = user(request)
+        parts = b.get("parts") or []; ids = b.get("ids") or []; fsel = b.get("figs") or []
         r = load(rid); p = img_path(rid); a = cv2.imread(p) if p else None
         if not r or a is None: return JSONResponse({"error": "нет такого ковра"}, 404)
         if len(parts) < 1: return JSONResponse({"error": "нет частей"}, 400)
@@ -1582,6 +1591,10 @@ def install(app, DATA, D_WORK):
                 if c not in keep: api_rug_del(c)
             r["split_into"] = made; r["split_by"] = who; r["updated"] = int(time.time()); save(r)
         return {"made": made}
+
+    @app.post("/api/rugs/{rid}/split")
+    async def api_rug_split(rid: str, request: Request):
+        return split_do(rid, await request.json(), user(request))
 
     @app.get("/api/rugs/{rid}/split_parts")
     def api_rug_split_parts(rid: str):
@@ -1679,11 +1692,11 @@ def install(app, DATA, D_WORK):
     # v11.45: кадр — три значения плюс «не ковёр» (решение владельца 10.11). «Целый» включает «чуть вылез за кадр»:
     # срезано меньше ~3 % по одному краю и узор не потерян. «Деталь» — снят кусок ковра, целого на фото нет.
     # Прежний ответ «fragment» снят: им помечали в основном рваные ковры, а это теперь галочка «повреждён».
-    FR_ANS = ("whole", "cropped", "detail", "not_rug")
+    FR_ANS = ("whole", "cropped", "detail", "not_rug", "multi")
     FR_OLD = ("fragment",)                                                       # спрашиваем заново: такого ответа больше нет
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
-    MORE = ("marks", "name", "comp", "same")
+    MORE = ("marks", "name", "comp", "same", "split")
     KINDS = ("quad", "frame") + MORE
 
     def _mrow(rid):
@@ -1707,7 +1720,7 @@ def install(app, DATA, D_WORK):
                "old_who": [u for u, v in (m.get("frame") or {}).items() if (v or {}).get("a") in FR_OLD],
                "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge")}
         # v11.52: карточки «элементы», «имена», «тип», «двойники» — всё нужное для очередей берём здесь же, чтобы не читать ковры заново
-        dead = bool(r.get("dup_of") or r.get("hidden") or r.get("split_into") or r.get("multi"))
+        dead = bool(r.get("dup_of") or r.get("hidden") or r.get("split_into") or r.get("multi") or r.get("frame") == "multi")
         mk = [{"id": x["id"], "g": x.get("group") or x["id"], "st": x.get("status"), "box": x["box"], "sc": x.get("scheme") or "",
                "nm": bool(x.get("motif") or x.get("motif_text")), "mach": bool(x.get("machine"))}
               for x in r.get("marks") or [] if x.get("id") and isinstance(x.get("box"), list) and len(x["box"]) == 4]
@@ -1722,7 +1735,7 @@ def install(app, DATA, D_WORK):
             c = ch_.get(o) or {}
             und = (c.get("v") == "maybe") if (c.get("ver") or 1) >= 2 else not ((x.get("score") or 0) >= 60 or x.get("inv"))
             if und: sm.append(o)                                                 # машина не уверена — спросить человека
-        row.update(dead=dead, mk=mk, comp=r.get("composition") if r.get("composition") in BYID else "", cg=cg, sm=sm,
+        row.update(dead=dead, mp=(r.get("multi") or []) if not (r.get("dup_of") or r.get("hidden") or r.get("split_into")) else [], mk=mk, comp=r.get("composition") if r.get("composition") in BYID else "", cg=cg, sm=sm,
                    nn=list(r.get("name_none") or []), src=(r.get("cat") or {}).get("src", ""),
                    mv={t: {key: list((d or {}).keys()) for key, d in (m.get(t) or {}).items()} for t in MORE})
         _mc[rid] = (k, row); return row
@@ -1839,6 +1852,8 @@ def install(app, DATA, D_WORK):
         same  — пара «возможно, тот же ковёр», в которой машина не уверена."""
         out = {t: [] for t in MORE}; out["name_wait"] = 0; opts = {}
         for x in rows:
+            if "split" in want and len(x["mp"]) >= 2 and me not in x["mv"]["split"].get("p", []):
+                out["split"].append({"type": "split", "rid": x["id"], "parts": x["mp"], "cat": x["src"]})
             if x["dead"]: continue
             G = {}
             for m in x["mk"]: G.setdefault(m["g"], []).append(m)
@@ -1871,6 +1886,7 @@ def install(app, DATA, D_WORK):
                     a, b = sorted((x["id"], o))
                     if me in by[a]["mv"]["same"].get(b, []) or any(t["rid"] == a and t["other"] == b for t in out["same"]): continue
                     out["same"].append({"type": "same", "rid": a, "other": b, "title2": by[b]["title"], "src": by[a]["src"], "src2": by[b]["src"]})
+        out["split"].sort(key=lambda t: (not t["cat"].startswith("kerimov"), t["rid"]))        # Керимов — главный источник: его развороты первыми
         out["marks"].sort(key=lambda t: (t["sample"] is None, t["rid"]))          # сначала группы с образцом: вопрос «тот же?» проще, чем «элемент ли это?»
         out["comp"].sort(key=lambda t: (t["kind"] != "twin", t["cid"]))            # по двойнику надёжнее; дальше подряд один тип — глаз привыкает
         if out["comp"]:                                                           # образцы типа: до двух ковров, у которых этот тип уже стоит (Керимов — первым)
@@ -1900,6 +1916,8 @@ def install(app, DATA, D_WORK):
             other = os.path.basename(str(body.get("other", "")))
             if a not in ("same", "similar", "diff", "skip") or not other: return JSONResponse({"error": "ответ?"}, status_code=400)
             rec["other"] = other
+        if typ == "split" and a not in ("split", "one", "skip"): return JSONResponse({"error": "ответ?"}, status_code=400)
+        split_parts = None
         with _lock:
             r = load(rid)
             if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
@@ -1945,6 +1963,15 @@ def install(app, DATA, D_WORK):
                 elif sumw(d, "no") >= 2:
                     if cid not in (r.get("comp_no") or []): r.setdefault("comp_no", []).append(cid)
                     applied = "comp_no"
+            elif typ == "split":
+                # «разделить»: рамки берём те, что показывали на карточке (r.multi); «один ковёр» — снять пометку разворота, ковёр вернётся в очереди
+                d = M.setdefault("p", {}); d[me] = {"a": a, "w": w, "t": now}
+                if sumw(d, "split") >= 2 and len(r.get("multi") or []) >= 2 and not r.get("split_into"):
+                    split_parts = list(r["multi"]); applied = "split"
+                elif sumw(d, "one") >= 2:
+                    r["multi"] = []
+                    if r.get("frame") == "multi": r["frame"] = ""; r.pop("frame_by", None)
+                    applied = "one"
             else:
                 d = M.setdefault(rec["other"], {}); d[me] = {"a": a, "w": w, "t": now}
                 v = next((v for v in ("same", "similar", "diff") if sumw(d, v) >= 2), None)
@@ -1952,6 +1979,9 @@ def install(app, DATA, D_WORK):
             r["updated"] = now; save(r)
             if applied: rec["applied"] = applied
             _mlog(rec)
+        if split_parts:
+            res = split_do(rid, {"parts": split_parts}, "/m")                          # вне замка: функция берёт его сама
+            if isinstance(res, dict): rec["made"] = res.get("made")
         if pair: same_set(rid, pair[0], pair[1] == "same", pair[1] == "similar", "/m: " + pair[2])   # вне замка: функция берёт его сама
         _ty["t"] = 0
         return {"ok": True, "applied": applied, **({"ctl": ctl} if ctl is not None else {})}
@@ -2052,7 +2082,14 @@ def install(app, DATA, D_WORK):
             if typ == "frame":
                 for v in FR_ANS:
                     if sum(x["w"] for x in votes if x["a"] == v) >= 2:
-                        r["frame"] = v; r["frame_by"] = "micro"; applied = v; break
+                        r["frame"] = v; r["frame_by"] = "micro"; applied = v
+                        if v == "multi" and not r.get("multi"):                      # v11.54: разворот — найти рамки ковров (≈50 мс), дальше карточка «разделить»
+                            try:
+                                import rug_match
+                                pa = img_path(rid); im = read_small(pa, 1400) if pa else None
+                                r["multi"] = rug_match.find_carpets(im) if im is not None else []
+                            except Exception: r["multi"] = []
+                        break
             else:
                 ok = sum(x["w"] for x in votes if x["a"] == "ok"); bad = sum(x["w"] for x in votes if x["a"] == "bad")
                 fx = [x for x in votes if x["a"] == "fix"]

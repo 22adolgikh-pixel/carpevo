@@ -1346,7 +1346,7 @@ def t35_micro_hide(pg, ctx):
 
 @test
 def t36_micro_more_cards(pg, ctx):
-    """v11.52: карточки /m «элементы» (✓/✗ рамок машины), «имена» (схема из закрытого списка типа), «тип» (да/нет), «двойники» (пара фото);
+    """v11.54: карточки /m «элементы» (✓/✗ рамок машины), «имена» (схема из закрытого списка типа), «тип» (да/нет), «двойники» (пара фото);
     выбор видов карточек, «не знаю» не возвращает карточку, отклонённый тип больше не предлагается"""
     import cv2
     u = ctx['url']; D = ctx['app'] + '/data'
@@ -1418,6 +1418,58 @@ def t36_micro_more_cards(pg, ctx):
     assert (a.get('same_ok') or {}).get('mc_s2', {}).get('ok') and (b.get('same_ok') or {}).get('mc_s1', {}).get('ok'), '«тот же ковёр» не записан у обоих'
     lg = [json.loads(x) for x in open(f'{D}/micro.jsonl', encoding='utf-8') if x.strip()]
     assert {'marks', 'name', 'comp', 'same'} <= {x.get('type') for x in lg}, 'ответы новых карточек не попали в журнал'
+
+
+@test
+def t37_micro_split_spreads(pg, ctx):
+    """v11.54: «несколько ковров» в карточке кадра убирает фото из очередей и ищет рамки; карточка «развороты»: ✓ режет на отдельные ковры, «один ковёр» снимает пометку;
+    фоновый проход сам находит развороты у фото, которых ещё не смотрели"""
+    import cv2, numpy as np
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    one = cv2.imread(f'{D}/rug_img/frieze_1.jpg'); gap = np.full((one.shape[0], 120, 3), 235, np.uint8)
+    two = np.hstack([one, gap, one])
+    def rug(rid, **kw):
+        cv2.imwrite(f'{D}/rug_img/{rid}.jpg', two)
+        r = {"id": rid, "title": rid, "source": "тест", "museum": "", "inv": "", "url": "", "license": "", "place": "", "date": "", "school": "", "composition": "",
+             "technique": "", "size": "", "notes": "", "status": "new", "w": two.shape[1], "h": two.shape[0], "marks": [], "cat": {"src": "upload"}, "created": now, "updated": now}
+        r.update(kw); json.dump(r, open(f'{D}/rugs/{rid}.json', 'w'), ensure_ascii=False)
+    P = [[0.03, 0.04, 0.44, 0.92], [0.53, 0.04, 0.44, 0.92]]
+    rug('sp_a', multi=P); rug('sp_b', multi=P); rug('sp_c')
+    rug('sp_d', auto={'frame': 'cropped', 'quad': [[.1, .1], [.9, .1], [.9, .9], [.1, .9]], 'conf': .5, 'area': .6, 'ver': 1, 't': now}, multi=[])   # для карточки кадра
+    # 1. «несколько ковров» из карточки кадра: фото уходит из рабочих, рамки находятся сами
+    r = post(u + 'api/micro/answer', {'type': 'frame', 'rid': 'sp_c', 'a': 'multi'}); assert r.get('applied') == 'multi', r
+    c = get(u + 'api/rugs/sp_c'); assert c.get('frame') == 'multi' and len(c.get('multi') or []) == 2, f'рамки ковров не найдены: {c.get("frame")} {c.get("multi")}'
+    row = [x for x in get(u + 'api/rugs')['rugs'] if x['id'] == 'sp_c'][0]; assert row['use'] == 'skip' and 'разворот' in row['use_why'] or 'несколько' in row['use_why'], row['use_why']
+    # 2. карточки «развороты»
+    nx = get(u + 'api/micro/next?n=12&k=split'); tk = {t['rid']: t for t in nx['tasks'] if t['type'] == 'split'}
+    assert {'sp_a', 'sp_b', 'sp_c'} <= set(tk) and len(tk['sp_a']['parts']) == 2 and nx['left']['split'] >= 3, f'очередь разворотов: {list(tk)} {nx["left"]}'
+    assert 'sp_c' not in [t['rid'] for t in get(u + 'api/micro/next?n=12&k=frame,marks,name,comp,same')['tasks']], 'разворот остался в других очередях'
+    r = post(u + 'api/micro/answer', {'type': 'split', 'rid': 'sp_a', 'a': 'split'}); assert r.get('applied') == 'split', r
+    a = get(u + 'api/rugs/sp_a'); assert len(a.get('split_into') or []) == 2, f'разворот не разрезан: {a.get("split_into")}'
+    assert all(get(u + 'api/rugs/' + i).get('split_from') == 'sp_a' for i in a['split_into']), 'части без ссылки на разворот'
+    r = post(u + 'api/micro/answer', {'type': 'split', 'rid': 'sp_b', 'a': 'one'}); assert r.get('applied') == 'one', r
+    assert get(u + 'api/rugs/sp_b').get('multi') == [], 'пометка разворота не снята'
+    post(u + 'api/micro/answer', {'type': 'split', 'rid': 'sp_c', 'a': 'skip'})
+    assert 'sp_c' not in [t['rid'] for t in get(u + 'api/micro/next?n=12&k=split')['tasks']], '«не знаю» вернул карточку'
+    # 3. телефон
+    mc = pg.context.browser.new_context(viewport={'width': 390, 'height': 844}, has_touch=True); m = mc.new_page()
+    errs = []; m.on('pageerror', lambda e: errs.append(str(e)))
+    m.goto(u + 'm?k=frame'); m.wait_for_selector('#a6', timeout=15000)
+    assert 'несколько ковров' in m.inner_text('#a6'), 'в карточке кадра нет кнопки «несколько ковров»'
+    m.screenshot(path=f'{OUT}/37_micro_frame_multi.png')
+    rug('sp_e', multi=P); m.goto(u + 'm?k=split'); m.wait_for_selector('#pg, svg rect', timeout=15000)
+    m.wait_for_function("[...document.querySelectorAll('#main img')].every(i=>i.complete&&i.naturalWidth>0)", timeout=15000)
+    assert m.eval_on_selector_all('svg rect', 'e=>e.length') >= 2, 'на карточке нет рамок разрезания'
+    m.screenshot(path=f'{OUT}/37_micro_split.png'); mc.close()
+    assert not errs, errs
+    # 4. фоновый проход сам находит развороты и не трогает уже решённые
+    rug('sp_f')
+    st = post(u + 'api/rugs_catalog', {'force': False})
+    for _ in range(120):
+        if not get(u + 'api/rugs_catalog').get('running'): break
+        time.sleep(0.5)
+    f = get(u + 'api/rugs/sp_f'); assert len(f.get('multi') or []) == 2, f'проход не нашёл разворот: {f.get("multi")}'
+    assert get(u + 'api/rugs/sp_b').get('multi') == [], 'проход перезаписал решение человека'
 
 
 def main():
