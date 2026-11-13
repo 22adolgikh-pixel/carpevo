@@ -14,9 +14,23 @@ import numpy as np, cv2
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.environ.get("CPS_DATA") or os.path.join(HERE, "data")
-NAME = "element_embed_v1"
-DRIVE = {"pt": "", "json": ""}                       # заполняется после обучения в Colab
-VERSION = 1
+# v11.60: две сети на выбор — своя (обучена на ответах, element_search_colab.py) и готовая DINOv2 ViT-S/14 (dino_elements_colab.py).
+# Какая используется: DATA/element_model.txt (одно имя), иначе первая, у которой есть файл или id на Диске.
+MODELS = {"dinov2_s14": {"pt": "", "json": ""}, "element_embed_v1": {"pt": "", "json": ""}}
+
+
+def _choice():
+    try:
+        n = open(os.path.join(DATA, "element_model.txt"), encoding="utf-8").read().strip()
+        if n in MODELS: return n
+    except OSError: pass
+    for n in MODELS:
+        if any(os.path.exists(os.path.join(d, n + ".pt")) for d in (DATA, os.path.join(HERE, "models"))) or MODELS[n]["pt"]: return n
+    return "element_embed_v1"
+
+
+NAME = _choice(); DRIVE = MODELS[NAME]
+VERSION = {"dinov2_s14": 101, "element_embed_v1": 1}.get(NAME, 1)          # другая сеть — другие «отпечатки»: поиск и пары пересчитываются
 MEAN = np.array([0.485, 0.456, 0.406], np.float32); STD = np.array([0.229, 0.224, 0.225], np.float32)
 _lock = threading.Lock(); _S = {"net": None, "tried": False, "meta": {}, "err": ""}
 
@@ -49,6 +63,7 @@ def _load():
         _S["tried"] = True
         try:
             import torch
+            if not DRIVE["pt"] and _path() is None: _S["err"] = "у сети %s ещё нет файла" % NAME; return None
             P = _path()
             if P is None and fetch(): P = _path()
             if P:
@@ -70,7 +85,7 @@ def meta(): _load(); return _S["meta"] or {}
 def info():
     if _load() is None: return {"ok": False, "error": _S["err"]}
     m = _S["meta"] or {}
-    return {"ok": True, **{k: m.get(k) for k in ("ver", "trained", "n_rugs_train", "n_rugs_test", "thr_bad", "thr_search", "test")}}
+    return {"ok": True, "model": NAME, **{k: m.get(k) for k in ("ver", "kind", "S", "trained", "n_rugs_train", "n_rugs_test", "thr_bad", "thr_search", "test")}}
 
 
 def small(img):
@@ -120,7 +135,8 @@ def _iou(a, b):
 def search(img, sample_box, exclude=(), quad=None, thr=None, limit=24):
     """найти на ковре повторы образца → [(близость, рамка)], без наложений и без уже отмеченных мест"""
     if _load() is None: return []
-    thr = thr if thr is not None else float(meta().get("thr_search") or 0.8)
+    if thr is None and meta().get("thr_search") is None: return []          # порог поиска не замерен (DINOv2 — только сравнение вырезок)
+    thr = thr if thr is not None else float(meta()["thr_search"])
     h, w = img.shape[:2]; bw, bh = sample_box[2], sample_box[3]; q = emb_rot(img, sample_box); C = []
     X0, X1, Y0, Y1 = 0.0, 1.0, 0.0, 1.0
     if quad:

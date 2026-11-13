@@ -1904,7 +1904,7 @@ def install(app, DATA, D_WORK):
         """когда карточек «элементы» мало — поиск повторов по образцу в группах, где сеть ещё не искала"""
         try:
             import element_embed as EE
-            if left >= 3 * n or not EE.available(): return
+            if left >= 3 * n or not EE.available() or EE.meta().get("thr_search") is None: return
         except Exception: return
         if _es["thr"] is None:
             import queue as _qm
