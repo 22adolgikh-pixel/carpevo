@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736140,
- "updated": 1794589210,
+ "updated": 1794596751,
  "cat": {
   "title": "Early Caucasian textile, late 18th-early 19th century, Azerbaijan",
   "museum": "",
@@ -122,6 +122,29 @@
    "v": 2,
    "model": "anthropic/claude-sonnet-5.5",
    "t": 1794595986
+  },
+  "ref_quad": {
+   "quad": [
+    [
+     0.03773,
+     0.05501
+    ],
+    [
+     0.9056,
+     0.07121
+    ],
+    [
+     0.94203,
+     0.96919
+    ],
+    [
+     0.07593,
+     0.95771
+    ]
+   ],
+   "v": 1,
+   "from": "vlm",
+   "t": 1794596725
   }
  },
  "micro": {
@@ -131,8 +154,49 @@
     "w": 2,
     "t": 1794589210
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794596751,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03773,
+    0.05501
+   ],
+   [
+    0.9056,
+    0.07121
+   ],
+   [
+    0.94203,
+    0.96919
+   ],
+   [
+    0.07593,
+    0.95771
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

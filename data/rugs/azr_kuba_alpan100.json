@@ -18,7 +18,7 @@
  "h": 1086,
  "marks": [],
  "created": 1791736131,
- "updated": 1794590595,
+ "updated": 1794596763,
  "cat": {
   "title": "kuba alpan100",
   "museum": "",
@@ -120,6 +120,29 @@
    "v": 2,
    "model": "anthropic/claude-sonnet-5.5",
    "t": 1794596018
+  },
+  "ref_quad": {
+   "quad": [
+    [
+     0.13274,
+     0.05995
+    ],
+    [
+     0.8551,
+     0.04479
+    ],
+    [
+     0.95495,
+     0.92232
+    ],
+    [
+     0.03584,
+     0.92009
+    ]
+   ],
+   "v": 1,
+   "from": "vlm",
+   "t": 1794596725
   }
  },
  "micro": {
@@ -138,9 +161,50 @@
     "w": 2,
     "t": 1794590595
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794596763,
+    "s": "ref"
+   }
   }
  },
  "composition_by": "/m: dolgikh",
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.13274,
+    0.05995
+   ],
+   [
+    0.8551,
+    0.04479
+   ],
+   [
+    0.95495,
+    0.92232
+   ],
+   [
+    0.03584,
+    0.92009
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
