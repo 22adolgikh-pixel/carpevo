@@ -18,7 +18,7 @@
  "h": 1076,
  "marks": [],
  "created": 1791736125,
- "updated": 1794597208,
+ "updated": 1794658249,
  "cat": {
   "title": "Azerbaijanian carpet from Shusha.jpg",
   "museum": "Wikimedia Commons",
@@ -175,8 +175,49 @@
     "w": 2,
     "t": 1794597208
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794658249,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00048,
+    0.00113
+   ],
+   [
+    0.99982,
+    0.00203
+   ],
+   [
+    0.9904,
+    0.99889
+   ],
+   [
+    0.0,
+    0.99561
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
