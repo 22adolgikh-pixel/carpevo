@@ -162,6 +162,9 @@ def emb_net(name):
         Mx = np.array([[side / S, 0, cx - side / 2], [0, side / S, cy - side / 2]], np.float32)
         c = cv2.warpAffine(a, Mx, (S, S), flags=cv2.INTER_LINEAR | cv2.WARP_INVERSE_MAP, borderMode=cv2.BORDER_REPLICATE)
         if gray: g = CL.apply(cv2.cvtColor(c, cv2.COLOR_BGR2GRAY)); c = cv2.merge([g, g, g])
+        if name == 'dinov3_elem':      # v11.64: овал, снаружи серое (как в студии)
+            m = np.zeros((S, S), np.uint8); cv2.ellipse(m, (S // 2, S // 2), (max(2, int(round(bw * w / side * S / 2))), max(2, int(round(bh * h / side * S / 2)))), 0, 0, 360, 255, -1)
+            c = np.where(m[:, :, None] > 0, c, np.uint8(127))
         return c
 
     @torch.no_grad()

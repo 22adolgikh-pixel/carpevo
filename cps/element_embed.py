@@ -20,7 +20,10 @@ DATA = os.environ.get("CPS_DATA") or os.path.join(HERE, "data")
 #              среди 5 ближайших на других коврах — в 56 % случаев;
 #   "search" — своя сеть (обучена на 35 коврах): поиск повторов по образцу, порог 0,875.
 # Роль можно переназначить файлом DATA/element_model.json {"match": "...", "search": "..."}.
-MODELS = {"dinov3_elem": {"pt": "1O7MGlYcgyGDhAIiqGNZvaQHJjccjmVu1", "json": "1hMGl3iZXI483CRBcJfl_2JUV9IlSlKxx", "ver": 201},   # v11.62: DINOv3 ViT-S/16, вход 112, цвет (замер: AUC 0,785, any5 0,72)
+MODELS = {"dinov3_elem": {"pt": "1O7MGlYcgyGDhAIiqGNZvaQHJjccjmVu1", "json": "1hMGl3iZXI483CRBcJfl_2JUV9IlSlKxx", "ver": 202,
+                     # v11.64: вырезка ОВАЛОМ (вне овала серый) + 15 % поля — соседи в плотных узорах не мешают: AUC 0,785→0,956, any5 0,72→0,84;
+                     # «заранее ✗»: при 5 % потерь верных ловит 75 % неверных (порог 0,844; замер 14.11 на 755 рамках, dino3_shape_colab.py)
+                     "meta": {"S": 112, "ctx": 0.15, "shape": "ellipse", "thr_pre": 0.844}},
           "dinov2_s14": {"pt": "1ztqy9QC8c5RfN_Fi92H9nN3GA1JVwU_9", "json": "1Tdd1UjunQlB6fTKkFNV7xirg2OibwP6c", "ver": 101},
           "element_embed_v1": {"pt": "1M_5g-sChZHlGhzNYyiuiL3xzq81ybX-V", "json": "11_NpAjRhHnZSYBgln7JZxetOebGKWQ0J", "ver": 1}}
 ROLE = {"match": "dinov3_elem", "search": "element_embed_v1"}
@@ -74,6 +77,7 @@ def _load(m="match"):
                 S["net"] = torch.jit.load(P, map_location="cpu").eval()
                 try: S["meta"] = json.load(open(P[:-3] + ".json", encoding="utf-8"))
                 except (OSError, ValueError): S["meta"] = {}
+                S["meta"].update(MODELS[n].get("meta") or {})                   # v11.64: параметры вырезки, замеренные позже выгрузки весов
         except Exception as e:
             S["net"] = None; S["err"] = S["err"] or str(e)[:200]
     return S["net"]
@@ -95,7 +99,7 @@ def info():
     out = {"ok": any(_load(r) is not None for r in ROLE), "roles": dict(ROLE)}
     for r in ROLE:
         n = _n(r); S = _ST[n]; M = S["meta"] or {}
-        out[r] = {"model": n, "ok": S["net"] is not None, "error": S["err"], **{k: M.get(k) for k in ("kind", "S", "trained", "thr_search")}}
+        out[r] = {"model": n, "ok": S["net"] is not None, "error": S["err"], **{k: M.get(k) for k in ("kind", "S", "trained", "thr_search", "shape", "thr_pre")}}
     return out
 
 
@@ -107,13 +111,18 @@ def small(img, m="match"):
 _CL = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(4, 4))
 
 
-def _crop(a, box, S, ctx, gray=False):
+def _crop(a, box, S, ctx, gray=False, shape="rect"):
     if gray:
-        c = _crop(a, box, S, ctx); g = _CL.apply(cv2.cvtColor(c, cv2.COLOR_BGR2GRAY)); return cv2.merge([g, g, g])
+        c = _crop(a, box, S, ctx, False, shape); g = _CL.apply(cv2.cvtColor(c, cv2.COLOR_BGR2GRAY)); return cv2.merge([g, g, g])
     h, w = a.shape[:2]; x, y, bw, bh = box
     cx, cy = (x + bw / 2) * w, (y + bh / 2) * h; side = max(bw * w, bh * h) * (1 + 2 * ctx)
     M = np.array([[side / S, 0, cx - side / 2], [0, side / S, cy - side / 2]], np.float32)
-    return cv2.warpAffine(a, M, (S, S), flags=cv2.INTER_LINEAR | cv2.WARP_INVERSE_MAP, borderMode=cv2.BORDER_REPLICATE)
+    c = cv2.warpAffine(a, M, (S, S), flags=cv2.INTER_LINEAR | cv2.WARP_INVERSE_MAP, borderMode=cv2.BORDER_REPLICATE)
+    if shape == "ellipse":                                                      # v11.64: овал по рамке, снаружи серое — чужие соседи не попадают в отпечаток
+        m = np.zeros((S, S), np.uint8)
+        cv2.ellipse(m, (S // 2, S // 2), (max(2, int(round(bw * w / side * S / 2))), max(2, int(round(bh * h / side * S / 2)))), 0, 0, 360, 255, -1)
+        c = np.where(m[:, :, None] > 0, c, np.uint8(127))
+    return c
 
 
 def _prep(c): return ((np.ascontiguousarray(c)[:, :, ::-1].astype(np.float32) / 255 - MEAN) / STD).transpose(2, 0, 1)
@@ -129,11 +138,11 @@ def _run(arr, m):
 
 def emb(a, boxes, m="match"):
     M = meta(m); S, ctx = int(M.get("S", 96)), float(M.get("ctx", 0.15))
-    return _run([_prep(_crop(a, b, S, ctx, bool(M.get("gray")))) for b in boxes], m)
+    return _run([_prep(_crop(a, b, S, ctx, bool(M.get("gray")), M.get("shape", "rect"))) for b in boxes], m)
 
 
 def emb_rot(a, box, m="match"):
-    M = meta(m); S, ctx = int(M.get("S", 96)), float(M.get("ctx", 0.15)); c = _crop(a, box, S, ctx, bool(M.get("gray")))
+    M = meta(m); S, ctx = int(M.get("S", 96)), float(M.get("ctx", 0.15)); c = _crop(a, box, S, ctx, bool(M.get("gray")), M.get("shape", "rect"))
     return _run([_prep(np.rot90(c[:, ::-1] if f else c, r)) for f in (0, 1) for r in range(4)], m)
 
 
