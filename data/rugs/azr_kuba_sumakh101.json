@@ -18,7 +18,7 @@
  "h": 1166,
  "marks": [],
  "created": 1791736130,
- "updated": 1794645306,
+ "updated": 1794650433,
  "cat": {
   "title": "kuba sumakh101",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794645306
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794650433,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00791,
+    0.01354
+   ],
+   [
+    0.96438,
+    0.00801
+   ],
+   [
+    0.98141,
+    0.98033
+   ],
+   [
+    0.02069,
+    0.98145
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
