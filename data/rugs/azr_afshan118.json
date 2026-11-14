@@ -18,7 +18,7 @@
  "h": 961,
  "marks": [],
  "created": 1791736128,
- "updated": 1794650250,
+ "updated": 1794658024,
  "cat": {
   "title": "afshan118",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794650250
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794658024,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00719,
+    0.00659
+   ],
+   [
+    0.99016,
+    0.00822
+   ],
+   [
+    0.98938,
+    0.98431
+   ],
+   [
+    0.01153,
+    0.98357
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
