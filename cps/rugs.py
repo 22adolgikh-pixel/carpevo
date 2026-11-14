@@ -1400,6 +1400,66 @@ def install(app, DATA, D_WORK):
             return {"cands": c, "templates": len(boxes)}
         return await job_wait(work, "поиск повторов")
 
+    def _sym_find(r, a, g, src_ids=None):
+        """v11.69: парные места по симметрии ковра. Каждая подтверждённая рамка группы g (или src_ids) зеркалится относительно
+        осей ковра (по 4 углам: слева↔справа, сверху↔снизу, по диагонали = поворот на 180°); вокруг предсказанного места
+        ищется лучшее совпадение сетью сравнения (DINOv3, овал) по всем образцам группы. a — фото (BGR, любой размер).
+        → [{box, score, angle, flip, ref, why}] — angle/flip относительно рамки-источника ref."""
+        import element_embed as EE
+        q = (r.get("layout") or {}).get("quad") or ((r.get("auto") or {}).get("ref_quad") or {}).get("quad")
+        if not q or len(q) != 4 or not EE.available("match"): return []
+        a = EE.small(a, "match"); h, w = a.shape[:2]
+        Qp = np.float32([[p[0] * w, p[1] * h] for p in q]); U = np.float32([[0, 0], [1, 0], [1, 1], [0, 1]])
+        Hf = cv2.getPerspectiveTransform(Qp, U); Hb = cv2.getPerspectiveTransform(U, Qp)
+        ms = [m for m in r.get("marks") or [] if isinstance(m.get("box"), list)]
+        grp = [m for m in ms if (m.get("group") or m["id"]) == g]
+        cf = sorted([m for m in grp if m.get("status") == "confirmed"], key=lambda m: (bool(m.get("machine")), -m["box"][2] * m["box"][3]))
+        src = [m for m in grp if m["id"] in set(src_ids)] if src_ids else cf
+        src = [m for m in src if m.get("status") != "rejected"]
+        if not src: return []
+        S0 = (cf or src)[0]["box"]; more = [m["box"] for m in (cf or src)[1:5]]
+        thr = EE.meta("match").get("thr_pre"); thr = 0.8 if thr is None else float(thr)
+        taken = [m["box"] for m in ms if m.get("status") != "rejected" or (m.get("group") or m["id"]) == g]
+        def iou(p, s):
+            ix = max(0, min(p[0] + p[2], s[0] + s[2]) - max(p[0], s[0])); iy = max(0, min(p[1] + p[3], s[1] + s[3]) - max(p[1], s[1])); i = ix * iy
+            return i / (p[2] * p[3] + s[2] * s[3] - i + 1e-9)
+        out = []
+        for m in src:
+            x, y, bw, bh = m["box"]
+            pts = cv2.perspectiveTransform(np.float32([[[x * w, y * h], [(x + bw) * w, y * h], [(x + bw) * w, (y + bh) * h], [x * w, (y + bh) * h]]]), Hf)[0]
+            for why, f, (ra, rf) in (("слева↔справа", lambda u, v: (1 - u, v), (0, 1)), ("сверху↔снизу", lambda u, v: (u, 1 - v), (180, 1)), ("напротив (180°)", lambda u, v: (1 - u, 1 - v), (180, 0))):
+                mp = cv2.perspectiveTransform(np.float32([[f(float(u), float(v)) for u, v in pts]]), Hb)[0]
+                x0, y0 = mp[:, 0].min() / w, mp[:, 1].min() / h; pb = [float(x0), float(y0), float(mp[:, 0].max() / w - x0), float(mp[:, 1].max() / h - y0)]
+                if pb[2] <= 0 or pb[3] <= 0 or iou(pb, m["box"]) >= 0.3: continue           # элемент на оси (медальон) — пары нет
+                if any(iou(pb, t) >= 0.3 for t in taken): continue                         # там уже есть рамка
+                C = [[pb[0] + dx * pb[2], pb[1] + dy * pb[3], pb[2] * k, pb[3] * k] for k in (0.9, 1.0, 1.1) for dx in (-0.25, -0.12, 0, 0.12, 0.25) for dy in (-0.25, -0.12, 0, 0.12, 0.25)]
+                C = [c for c in C if c[0] >= 0 and c[1] >= 0 and c[0] + c[2] <= 1 and c[1] + c[3] <= 1]
+                if not C: continue
+                sv = EE.verify(a, S0, C, more) or []
+                if not sv: continue
+                i = int(np.argmax(sv))
+                if sv[i] < thr: continue
+                bb = [round(v, 5) for v in C[i]]
+                if any(iou(bb, t) >= 0.3 for t in taken + [o["box"] for o in out]): continue
+                out.append({"box": bb, "score": round(float(sv[i]), 3), "angle": ra, "flip": rf, "ref": m["id"], "why": why})
+        return out
+
+    @app.post("/api/rugs/{rid}/symmetry")
+    async def api_rug_symmetry(rid: str, request: Request):
+        """v11.69: «парные места» — по симметрии ковра предложить, где ещё стоит этот элемент (см. _sym_find)"""
+        b = await request.json(); r = load(rid); p = img_path(rid)
+        if not r or not p: return JSONResponse({"error": "нет такого ковра"}, 404)
+        me = next((m for m in r.get("marks", []) if m["id"] == b.get("mark")), None)
+        if not me: return JSONResponse({"error": "нет такой рамки"}, 404)
+        if not ((r.get("layout") or {}).get("quad") or ((r.get("auto") or {}).get("ref_quad") or {}).get("quad")):
+            return {"cands": [], "error": "нужны 4 угла ковра — поставьте их (Z)"}
+        g = me.get("group") or me["id"]; ids = None if me.get("status") == "confirmed" else [me["id"]]
+        def work():
+            a = read_small(p, 1400)
+            if a is None: return {"cands": []}
+            return {"cands": _sym_find(r, a, g, ids)}
+        return await job_wait(work, "парные места (симметрия)")
+
     def scale_of(r, W, H):
         """Сколько пикселей фото на один узел: по любой рамке со схемой (лучше подтверждённой)."""
         ms = sorted([m for m in r.get("marks", []) if m.get("scheme") and m.get("status") != "rejected"], key=lambda m: m.get("status") != "confirmed")
@@ -1925,6 +1985,10 @@ def install(app, DATA, D_WORK):
                     _es["seen"].add((x["id"], g, stamp)); _es["q"].put((x["id"], g, stamp)); k += 1
                     if k >= 6: return
 
+    def _iou_b(p, s):
+        ix = max(0, min(p[0] + p[2], s[0] + s[2]) - max(p[0], s[0])); iy = max(0, min(p[1] + p[3], s[1] + s[3]) - max(p[1], s[1])); i = ix * iy
+        return i / (p[2] * p[3] + s[2] * s[3] - i + 1e-9)
+
     def _es_worker():
         import element_embed as EE
         while True:
@@ -1941,10 +2005,21 @@ def install(app, DATA, D_WORK):
                 ng = [m["box"] for m in ms if m.get("status") == "rejected"]
                 found = heavy(lambda: EE.search(a, cf[0]["box"], exclude=[m["box"] for m in r.get("marks") or [] if isinstance(m.get("box"), list)], quad=q,
                                                 more=[m["box"] for m in cf[1:5]], neg=ng), "поиск элементов (сеть)")
+                try: sym = heavy(lambda: _sym_find(r, a, g), "парные места (симметрия)")          # v11.69
+                except Exception: sym = []
                 now = int(time.time())
                 with _lock:
                     r = load(rid)
                     if not r: continue
+                    for i, s_ in enumerate(sym):
+                        src_m = next((m for m in r.get("marks") or [] if m["id"] == s_["ref"]), cf[0])
+                        if any(_iou_b(s_["box"], m["box"]) >= 0.3 for m in r.get("marks") or [] if isinstance(m.get("box"), list)): continue
+                        a0, f0 = int(src_m.get("angle") or 0), int(src_m.get("flip") or 0)
+                        na, nf = (s_["angle"] + (-a0 if s_["flip"] else a0)) % 360, s_["flip"] ^ f0          # как rugCompose в студии
+                        r.setdefault("marks", []).append({"id": f"m{now}{i}s", "box": s_["box"], "zone": src_m.get("zone") or "other", "motif": src_m.get("motif") or "",
+                            "motif_text": src_m.get("motif_text") or "", "scheme": src_m.get("scheme") or "", "group": g, "certainty": "maybe", "status": "proposed",
+                            "note": "парное место: " + s_["why"], "angle": na, "flip": nf, "machine": "sym", "score": s_["score"], "xfer": "", "by": "машина (симметрия ковра)",
+                            "at": now, "confirmed_by": "", "confirmed_at": 0})
                     for i, (v, b) in enumerate(found):
                         r.setdefault("marks", []).append({"id": f"m{now}{i}e", "box": b, "zone": cf[0].get("zone") or "other", "motif": cf[0].get("motif") or "",
                             "motif_text": cf[0].get("motif_text") or "", "scheme": cf[0].get("scheme") or "", "group": g, "certainty": "maybe", "status": "proposed",
