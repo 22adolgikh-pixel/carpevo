@@ -1,3 +1,4 @@
+import os, sys, json, random, time, zipfile, glob, subprocess
 # elements_bench_colab.py — общий замер поиска повторов элемента (v11.63): SAM 3, наша сеть, DINOv3, (по желанию) OWLv2.
 #
 # Задача для всех одна: дан образец (одна рамка элемента) — найти на ковре все его повторы.
@@ -13,7 +14,8 @@
 #  • кусками: фото режется на куски, к каждому справа приклеивается образец, рамка — на нём (мелкие элементы видны крупнее).
 # Нужен секрет HF_TOKEN (доступ к facebook/sam3 одобрен). GPU (T4) обязательно. Время: 20–45 мин.
 RUN_OWL = False      # True — добавить OWLv2 (ещё ~15 мин)
-import os, sys, json, random, time, zipfile, glob, subprocess
+RUN_CROSS = os.environ.get('CPS_CROSS', '0') == '1'   # «между коврами» — ещё ~20 мин; по умолчанию выключено
+# Тестовые ковры можно указать и без флажка в студии: os.environ['CPS_TEST_RUGS'] = 'id1,id2' в ячейке перед %run
 import numpy as np, cv2, torch
 from PIL import Image
 from google.colab import drive, userdata
@@ -51,7 +53,8 @@ for x in LAB:
 miss = [x['id'] for x in LAB if x['id'] not in IM and x.get('eltest')]
 if miss: log('!!! нет фото в пакетах для тестовых ковров:', miss, '— их нужно добавить в rugs_bundle (скажите Claude)')
 LAB = [x for x in LAB if x['id'] in IM]; log('ковров с фото', len(LAB))
-ELT = [x for x in LAB if x.get('eltest')]
+_tr = {v.strip() for v in os.environ.get('CPS_TEST_RUGS', '').split(',') if v.strip()}
+ELT = [x for x in LAB if x.get('eltest') or x['id'] in _tr]
 STRICT = bool(ELT)
 if STRICT: EVAL = {x['id'] for x in ELT}; log('режим: СТРОГИЙ, ковров «тест сетей»', len(ELT))
 else:
@@ -77,11 +80,12 @@ for x in LAB:
     if x['id'] not in EVAL: continue
     G = x['groups']
     for gk, g in G.items():
-        cf = [m for m in g if m['st'] == 'confirmed']
+        # в строгом режиме верны и подтверждённые, и нарисованные рукой (человек обвёл сам — ✓ ставить не обязательно)
+        cf = [m for m in g if m['st'] == 'confirmed' or (STRICT and m['k'] == 'hand' and m['st'] != 'rejected')]
         if len(cf) < (2 if STRICT else 3): continue
         cf.sort(key=lambda m: (m['k'] != 'hand', -m['box'][2] * m['box'][3])); ref = cf[0]
         TASKS.append({'rug': x['id'], 'ref': ref['box'], 'targets': [m['box'] for m in cf[1:]], 'rej': [m['box'] for m in g if m['st'] == 'rejected'],
-                      'other': [m['box'] for k2, g2 in G.items() if k2 != gk for m in g2 if m['st'] == 'confirmed'],
+                      'other': [m['box'] for k2, g2 in G.items() if k2 != gk for m in g2 if m['st'] == 'confirmed' or m['k'] == 'hand'],
                       'known': [m['box'] for g2 in G.values() for m in g2]})
 log('групп-задач', len(TASKS), '| повторов искать', sum(len(t['targets']) for t in TASKS))
 if not TASKS: raise SystemExit('нет групп с ≥2 подтверждёнными рамками на тестовых коврах')
@@ -275,7 +279,7 @@ for x in LAB:
     for g in x['groups'].values():
         cf = [m for m in g if m['st'] == 'confirmed']; n = next((m['motif'] or m['scheme'] for m in cf if m['motif'] or m['scheme']), '')
         if n and cf: cf.sort(key=lambda m: (m['k'] != 'hand', -m['box'][2] * m['box'][3])); U.setdefault(n, []).append((x['id'], cf[0]['box'], [m['box'] for m in cf]))
-pairs = [(p, q) for us in U.values() for p in us for q in us if p[0] != q[0]]; random.shuffle(pairs); pairs = pairs[:40]
+pairs = [(p, q) for us in U.values() for p in us for q in us if p[0] != q[0]]; random.shuffle(pairs); pairs = pairs[:40] if RUN_CROSS else []
 
 
 def rank(D, tb):
@@ -293,9 +297,15 @@ for (ra, qa, _), (rb, _, tb) in pairs:
     for label in RAW:
         (q_, f_), _ = RAW[label]; XS.setdefault(label, []).append(rank(f_(B, q_(A, qa), tw_, th_), tb))
     XS.setdefault('SAM 3 кусками', []).append(rank(sam_tiles(B, cut(A, qa), ef, tw_ * th_), tb))
-REP['между коврами'] = {k: xs_sum(v) for k, v in XS.items()}
+REP['между коврами'] = {k: xs_sum(v) for k, v in XS.items()} if pairs else 'выключено (CPS_CROSS=1 — включить)'
 log('между коврами (на каком месте первое верное):', REP['между коврами'])
 
+if STRICT:
+    for label, raw in [(k, v[1]) for k, v in RAW.items()] + [('SAM 3 целиком', raw_w)]:
+        thr = (REP.get(label) or {}).get('best', {}) or {}
+        if 'thr' not in thr: continue
+        rows = [score(t, D, [thr['thr']])[0] for t, D in zip(TASKS, raw)]
+        log(label, 'по группам (найдено/всего, ошибок):', ' | '.join(f"{h}/{n}" + (f" ✗{b}" if b else '') for h, n, b, _ in rows))
 print('\nИТОГ:', json.dumps({k: (v['best'] if isinstance(v, dict) and 'best' in v else v) for k, v in REP.items()}, ensure_ascii=False))
 json.dump(REP, open(f'{MD}/elements_bench.json', 'w'), ensure_ascii=False, indent=1)
 print('полный отчёт: carpet-dna/models/elements_bench.json')
