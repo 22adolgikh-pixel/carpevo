@@ -18,7 +18,7 @@
  "h": 1145,
  "marks": [],
  "created": 1791736124,
- "updated": 1794597200,
+ "updated": 1794642693,
  "cat": {
   "title": "«Муган».jpg",
   "museum": "Wikimedia Commons",
@@ -123,6 +123,29 @@
    "v": 2,
    "model": "anthropic/claude-sonnet-5.5",
    "t": 1794597552
+  },
+  "ref_quad": {
+   "quad": [
+    [
+     0.00379,
+     0.00493
+    ],
+    [
+     0.99308,
+     0.0031
+    ],
+    [
+     0.99321,
+     0.94305
+    ],
+    [
+     0.01798,
+     0.95682
+    ]
+   ],
+   "v": 1,
+   "from": "vlm",
+   "t": 1794642647
   }
  },
  "micro": {
@@ -132,8 +155,49 @@
     "w": 2,
     "t": 1794597200
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794642693,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00379,
+    0.00493
+   ],
+   [
+    0.99308,
+    0.0031
+   ],
+   [
+    0.99321,
+    0.94305
+   ],
+   [
+    0.01798,
+    0.95682
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

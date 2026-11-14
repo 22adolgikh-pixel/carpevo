@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736138,
- "updated": 1794597271,
+ "updated": 1794642670,
  "cat": {
   "title": "Antique Moghan (Mughan) rug, second half 19th century, Azerbaijan, 105 x 320 cm",
   "museum": "",
@@ -122,13 +122,33 @@
    "v": 2,
    "model": "anthropic/claude-sonnet-5.5",
    "t": 1794597616
+  },
+  "ref_quad": {
+   "quad": [
+    [
+     0.27304,
+     0.01783
+    ],
+    [
+     0.71985,
+     0.01471
+    ],
+    [
+     0.98862,
+     0.97835
+    ],
+    [
+     -0.00581,
+     1.00203
+    ]
+   ],
+   "v": 1,
+   "from": "vlm",
+   "t": 1794642646
   }
  },
  "edge": {
   "skew": [
-   "dolgikh"
-  ],
-  "damaged": [
    "dolgikh"
   ]
  },
@@ -139,8 +159,49 @@
     "w": 2,
     "t": 1794597271
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794642670,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.27304,
+    0.01783
+   ],
+   [
+    0.71985,
+    0.01471
+   ],
+   [
+    0.98862,
+    0.97835
+   ],
+   [
+    -0.00581,
+    1.00203
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
