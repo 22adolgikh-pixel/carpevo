@@ -20,10 +20,10 @@ DATA = os.environ.get("CPS_DATA") or os.path.join(HERE, "data")
 #              среди 5 ближайших на других коврах — в 56 % случаев;
 #   "search" — своя сеть (обучена на 35 коврах): поиск повторов по образцу, порог 0,875.
 # Роль можно переназначить файлом DATA/element_model.json {"match": "...", "search": "..."}.
-MODELS = {"dinov3_elem": {"pt": "", "json": "", "ver": 201},                 # v11.62: DINOv3 (dino3_elements_colab.py), id — после выгрузки
+MODELS = {"dinov3_elem": {"pt": "1O7MGlYcgyGDhAIiqGNZvaQHJjccjmVu1", "json": "1hMGl3iZXI483CRBcJfl_2JUV9IlSlKxx", "ver": 201},   # v11.62: DINOv3 ViT-S/16, вход 112, цвет (замер: AUC 0,785, any5 0,72)
           "dinov2_s14": {"pt": "1ztqy9QC8c5RfN_Fi92H9nN3GA1JVwU_9", "json": "1Tdd1UjunQlB6fTKkFNV7xirg2OibwP6c", "ver": 101},
           "element_embed_v1": {"pt": "1M_5g-sChZHlGhzNYyiuiL3xzq81ybX-V", "json": "11_NpAjRhHnZSYBgln7JZxetOebGKWQ0J", "ver": 1}}
-ROLE = {"match": "dinov2_s14", "search": "element_embed_v1"}
+ROLE = {"match": "dinov3_elem", "search": "element_embed_v1"}
 try:
     ROLE.update({k: v for k, v in json.load(open(os.path.join(DATA, "element_model.json"), encoding="utf-8")).items() if v in MODELS})
 except (OSError, ValueError): pass
