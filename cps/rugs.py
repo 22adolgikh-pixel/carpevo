@@ -1886,11 +1886,11 @@ def install(app, DATA, D_WORK):
         try:
             import element_embed as EE
             if not EE.available(): return
-            key = (t["rid"], t["g"], tuple(m["id"] for m in t["items"]), tuple(t["sample"]))
+            key = (t["rid"], t["g"], tuple(m["id"] for m in t["items"]), tuple(t["sample"]), len(t.get("more_samples") or ()))
             if key not in _esim:
                 src = img_path(t["rid"]); a = read_small(src, 1400) if src else None
                 if a is None: return
-                a = EE.small(a); _esim[key] = EE.verify(a, t["sample"], [m["box"] for m in t["items"]])
+                a = EE.small(a); _esim[key] = EE.verify(a, t["sample"], [m["box"] for m in t["items"]], t.get("more_samples") or ())
                 if len(_esim) > 3000: _esim.clear()
             v = _esim.get(key)
             if not v: return
@@ -1900,6 +1900,10 @@ def install(app, DATA, D_WORK):
             t["pre"] = [m["id"] for m in t["items"] if thr is not None and m["sim"] < thr]
         except Exception:
             pass
+
+    def _es_stamp(ver, nc):
+        """v11.65: поиск повторяется по мере подтверждений в группе (1, 2, 3, 4, 5–7, 8+ образцов) — образцов больше, находок точнее"""
+        return f"{ver}:{nc if nc < 5 else 5 if nc < 8 else 8}"
 
     def _es_enqueue(rows, left, n):
         """когда карточек «элементы» мало — поиск повторов по образцу в группах, где сеть ещё не искала"""
@@ -1916,14 +1920,15 @@ def install(app, DATA, D_WORK):
             G = {}
             for m in x["mk"]: G.setdefault(m["g"], []).append(m["st"])
             for g, st in G.items():
-                if "confirmed" in st and "proposed" not in st and str(x["es"].get(g)) != str(EE.VERSION) and (x["id"], g) not in _es["seen"]:
-                    _es["seen"].add((x["id"], g)); _es["q"].put((x["id"], g)); k += 1
+                nc = st.count("confirmed"); stamp = _es_stamp(EE.VERSION, nc); old = x["es"].get(g)
+                if nc and "proposed" not in st and str(old) != stamp and not (nc == 1 and str(old) == str(EE.VERSION)) and (x["id"], g, stamp) not in _es["seen"]:
+                    _es["seen"].add((x["id"], g, stamp)); _es["q"].put((x["id"], g, stamp)); k += 1
                     if k >= 6: return
 
     def _es_worker():
         import element_embed as EE
         while True:
-            rid, g = _es["q"].get()
+            rid, g, stamp = _es["q"].get()
             try:
                 r = load(rid); src = img_path(rid)
                 if not r or not src: continue
@@ -1933,7 +1938,9 @@ def install(app, DATA, D_WORK):
                 a = read_small(src, 1400)
                 if a is None: continue
                 a = EE.small(a, "search"); q = ((r.get("layout") or {}).get("quad"))
-                found = heavy(lambda: EE.search(a, cf[0]["box"], exclude=[m["box"] for m in r.get("marks") or [] if isinstance(m.get("box"), list)], quad=q), "поиск элементов (сеть)")
+                ng = [m["box"] for m in ms if m.get("status") == "rejected"]
+                found = heavy(lambda: EE.search(a, cf[0]["box"], exclude=[m["box"] for m in r.get("marks") or [] if isinstance(m.get("box"), list)], quad=q,
+                                                more=[m["box"] for m in cf[1:5]], neg=ng), "поиск элементов (сеть)")
                 now = int(time.time())
                 with _lock:
                     r = load(rid)
@@ -1943,7 +1950,7 @@ def install(app, DATA, D_WORK):
                             "motif_text": cf[0].get("motif_text") or "", "scheme": cf[0].get("scheme") or "", "group": g, "certainty": "maybe", "status": "proposed",
                             "note": "", "angle": 0, "flip": 0, "machine": "embed", "score": round(v, 3), "xfer": "", "by": "машина (поиск по образцу, сеть)", "at": now,
                             "confirmed_by": "", "confirmed_at": 0})
-                    r.setdefault("esearch", {})[g] = EE.VERSION; r["updated"] = now; save(r)
+                    r.setdefault("esearch", {})[g] = stamp; r["updated"] = now; save(r)
                 _es["done"] += 1; _es["added"] += len(found)
             except Exception as e:
                 _es["err"] = str(e)[:200]
@@ -2136,7 +2143,7 @@ def install(app, DATA, D_WORK):
                     cf = sorted([m for m in ms if m["st"] == "confirmed"], key=lambda m: m["mach"])     # образец: сначала рамка, нарисованная рукой
                     sc = next((m["sc"] for m in cf + ms if m["sc"]), "")
                     f = next((sc + e for e in ("_x12.png", ".png") if sc and os.path.exists(os.path.join(D_OUT, sc + e))), None)
-                    out["marks"].append({"type": "marks", "rid": x["id"], "g": g, "sample": cf[0]["box"] if cf else None, "scheme": ("/out/" + f) if f else "",
+                    out["marks"].append({"type": "marks", "rid": x["id"], "g": g, "sample": cf[0]["box"] if cf else None, "more_samples": [m["box"] for m in cf[1:5]], "scheme": ("/out/" + f) if f else "",
                                          "items": [{"id": m["id"], "box": m["box"]} for m in pr[:9]], "more": max(0, len(pr) - 9)})
             if "name" in want:
                 for g, ms in G.items():

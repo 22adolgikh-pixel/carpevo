@@ -147,10 +147,10 @@ def emb_rot(a, box, m="match"):
     return _run([_prep(np.rot90(c[:, ::-1] if f else c, r)) for f in (0, 1) for r in range(4)], m)
 
 
-def verify(img, sample_box, boxes):
-    """близость рамок к образцу (−1..1, выше — похожее); img — уже уменьшенное small()"""
+def verify(img, sample_box, boxes, more=()):
+    """близость рамок к образцу (−1..1, выше — похожее); img — уже уменьшенное small(); more — ещё подтверждённые образцы (v11.65: берётся лучший)"""
     if _load("match") is None or not boxes: return None
-    q = emb_rot(img, sample_box, "match"); return [float(v) for v in (emb(img, boxes, "match") @ q.T).max(1)]
+    q = np.concatenate([emb_rot(img, b, "match") for b in [sample_box, *list(more)[:4]]]); return [float(v) for v in (emb(img, boxes, "match") @ q.T).max(1)]
 
 
 def _iou(a, b):
@@ -158,13 +158,16 @@ def _iou(a, b):
     i = ix * iy; return i / (a[2] * a[3] + b[2] * b[3] - i + 1e-9)
 
 
-def search(img, sample_box, exclude=(), quad=None, thr=None, limit=24):
-    """найти на ковре повторы образца → [(близость, рамка)], без наложений и без уже отмеченных мест"""
+def search(img, sample_box, exclude=(), quad=None, thr=None, limit=24, more=(), neg=()):
+    """найти на ковре повторы образца → [(близость, рамка)], без наложений и без уже отмеченных мест.
+    v11.65: more — другие подтверждённые рамки группы (образцов несколько: близость — по лучшему); neg — отклонённые рамки группы:
+    находка, которая похожа на «не то» не меньше, чем на образец, отбрасывается"""
     m = "search"
     if _load(m) is None: return []
     if thr is None and meta(m).get("thr_search") is None: return []
     thr = thr if thr is not None else float(meta(m)["thr_search"])
-    h, w = img.shape[:2]; bw, bh = sample_box[2], sample_box[3]; q = emb_rot(img, sample_box, m); C = []
+    h, w = img.shape[:2]; S_ = [sample_box, *list(more)[:4]]; bw, bh = float(np.median([b[2] for b in S_])), float(np.median([b[3] for b in S_]))
+    q = np.concatenate([emb_rot(img, b, m) for b in S_]); qn = np.concatenate([emb_rot(img, b, m) for b in list(neg)[:6]]) if neg else None; C = []
     X0, X1, Y0, Y1 = 0.0, 1.0, 0.0, 1.0
     if quad:
         X0, X1 = max(0.0, min(p[0] for p in quad)), min(1.0, max(p[0] for p in quad)); Y0, Y1 = max(0.0, min(p[1] for p in quad)), min(1.0, max(p[1] for p in quad))
@@ -173,10 +176,10 @@ def search(img, sample_box, exclude=(), quad=None, thr=None, limit=24):
             xs = np.arange(X0, X1 - ww, ww / 3); ys = np.arange(Y0, Y1 - hh, hh / 3)
             bs = [[float(x), float(y), ww, hh] for y in ys for x in xs]
             if not bs or len(bs) > 20000: continue
-            s = (emb(img, bs, m) @ q.T).max(1)
-            C += [(float(v), b) for v, b in zip(s, bs) if v >= thr]
+            e = emb(img, bs, m); s = (e @ q.T).max(1); sn = (e @ qn.T).max(1) if qn is not None else None
+            C += [(float(v), b) for i, (v, b) in enumerate(zip(s, bs)) if v >= thr and (sn is None or sn[i] < v)]
     C.sort(key=lambda t: -t[0]); keep = []
-    ex = list(exclude) + [sample_box]
+    ex = list(exclude) + S_
     for v, b in C:
         if any(_iou(b, e) >= 0.3 for e in ex) or any(_iou(b, k[1]) >= 0.3 for k in keep): continue
         keep.append((v, [round(x, 5) for x in b]))
