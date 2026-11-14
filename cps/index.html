@@ -115,6 +115,7 @@ textarea{width:100%;min-height:60px;resize:vertical}
 #stat{font-size:12px;color:var(--mut)}#stat.err{color:var(--bad)}#stat.ok{color:var(--ok)}
 .spin{display:inline-block;width:10px;height:10px;border:2px solid var(--acc);border-top-color:transparent;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-1px;margin-right:6px}
 @keyframes sp{to{transform:rotate(360deg)}}
+.rgbusy{position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:10px;max-width:70%;padding:9px 16px;border-radius:22px;background:var(--pan);color:var(--tx);border:1px solid var(--acc);box-shadow:0 6px 24px rgba(0,0,0,.45);font-size:13px;pointer-events:none}.rgbusy.done{border-color:var(--ln2)}.rgbusy .spin{width:16px;height:16px;border-width:3px;flex:none}.rgbusy.pulse{animation:rgbp 1.4s ease-in-out infinite}@keyframes rgbp{50%{box-shadow:0 6px 24px rgba(0,0,0,.45),0 0 0 4px var(--ln2)}}@media (prefers-reduced-motion:reduce){.rgbusy.pulse{animation:none}.spin{animation-duration:2s}}
 #catalog{position:absolute;inset:0;overflow:auto;padding:14px;display:none;background:var(--bg)}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
 .pstep{display:flex;gap:12px;padding:12px;margin-bottom:10px;border:1px solid var(--ln);border-radius:10px;background:var(--pan)}.pn{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#1a1405;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}.pb{flex:1;min-width:0}.pt{color:var(--mut);margin-top:4px;line-height:1.45}.mut{color:var(--mut)}
@@ -449,7 +450,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.66</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.68</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -3015,7 +3016,7 @@ function rugSideFill(E,side,r){
           ${rro()?'':`<div class="rgrow"><button id="rgJoin" class="sm" data-tip="эта рамка и её повторы — тот же узор, что другая рамка: кликните по ней (J)">тот же узор, что…</button>${g.length>1?'<button id="rgSplitM" class="sm" data-tip="эта рамка — другой элемент, не повтор остальных (U)">отделить от повторов</button>':''}${m.motif||m.scheme?`<button class="sm" id="rgMotSearchAll" data-tip="Искать на других коврах по всем подтверждённым рамкам с этим ${m.motif?'узором':'схемой'} — чем больше ✓, тем точнее">на других коврах по всем образцам</button>`:''}</div>
           <div class="rgrow">${m.status!=='proposed'?'<button id="rgUn" class="sm">↺ снять отметку проверки</button>':''}<button id="rgDelM" class="sm" style="color:var(--bad)" data-tip="Delete">удалить рамку</button>${g.length>1?`<button id="rgDelG" class="sm" style="color:var(--bad)">удалить элемент со всеми повторами (${g.length})</button>`:''}</div>`}</details>
         <label class="rgnote">Комментарий<textarea id="rgNote" rows="2" ${dis}>${esc(m.note||'')}</textarea></label>
-        ${rro()?'':`<div class="rgverd">${named?`<button id="rgOk" class="big ${m.status==='confirmed'?'on':''}" data-tip="Отметить верным и перейти к следующей непроверенной рамке (C — только отметить)">✓ Верно → следующая</button><button id="rgNo" class="big ${m.status==='rejected'?'on':''}" data-tip="Отметить неверным и перейти к следующей (X — только отметить)">✗ Неверно → следующая</button>`:'<p class="mut">Проверять пока нечего: у рамки нет названия и схемы — выберите их слева.</p>'}</div>`}</div>`;
+        ${rro()?'':`<div class="rgverd"><button id="rgOk" class="big ${m.status==='confirmed'?'on':''}" data-tip="Отметить верным и перейти к следующей непроверенной рамке (C — только отметить)">✓ Верно → следующая</button><button id="rgNo" class="big ${m.status==='rejected'?'on':''}" data-tip="Отметить неверным и перейти к следующей (X — только отметить)">✗ Неверно → следующая</button>${named?'':'<p class="mut">Название и схему можно не выбирать — проверять рамку (верно / неверно) можно и без них (C / X).</p>'}</div>`}</div>`;
     }
   }
   E.innerHTML=body;
@@ -3305,7 +3306,19 @@ const rugCompose=(a0,f0,a,f)=>[(((a+(f?-a0:a0))%360)+360)%360,(f^f0)?1:0];
 function rugOrient(m,da,df){
   // только у этой рамки: у каждого повтора своё положение (машина определяет его сама при поиске повторов)
   if(df){m.flip=m.flip?0:1;m.angle=(360-(m.angle||0))%360;}if(da)m.angle=((m.angle||0)+da)%360;rugSaveSoon();rugDraw();rugSide();}   // (180, 1) — отражение сверху вниз
+// v11.68: заметный индикатор «машина ищет места» над фото + итог поиска (раньше был только мелкий кружок в строке состояния)
+let rugBusyN=0,rugBusyT=0;
+function rugBusy(text,done){const v=$('rgView');if(!v)return;let e=$('rgBusy');
+  if(!e){e=document.createElement('div');e.id='rgBusy';e.setAttribute('role','status');e.setAttribute('aria-live','polite');v.appendChild(e);}
+  clearTimeout(rugBusyT);
+  if(!text){e.hidden=true;return;}
+  e.hidden=false;e.className='rgbusy '+(done?'done':'pulse');e.innerHTML=(done?'':'<span class="spin"></span>')+'<span>'+esc(text)+'</span>';
+  if(done)rugBusyT=setTimeout(()=>{const x=$('rgBusy');if(x)x.hidden=true;},6000);}
 async function rugFindRepeats(m0,auto,loose){
+  if(rro()||!m0)return;rugBusyN++;rugBusy(loose?'Машина ищет ещё похожие места (порог ниже)…':'Машина ищет повторы этого элемента на фото…');
+  try{await rugFindRepeats0(m0,auto,loose);}
+  finally{rugBusyN=Math.max(0,rugBusyN-1);if(!rugBusyN){const t=($('stat')||{}).title||'';rugBusy(t&&!/^ищу/.test(t)?t:'',true);}}}
+async function rugFindRepeats0(m0,auto,loose){
   if(rro()||!m0)return;stat(loose?'ищу ещё похожие места (порог ниже)…':'ищу повторы этого элемента на фото…','busy');const mid=m0.id,rid=R.rug.id;
   try{if(R.saveT)await rugSaveNow();
     // после сохранения карточка приходит с сервера заново — ищем рамку по id, а не по старому объекту

@@ -881,7 +881,7 @@ def t22_rug_mark_panel_v1115(pg, ctx):
     pg.click('#tab-rugs'); pg.wait_for_timeout(1000); pg.evaluate("rugOpen('vam_3')"); pg.wait_for_timeout(1500)
     v = pg.query_selector('#rgView').bounding_box(); x, y = v['x'] + v['width'] * .45, v['y'] + v['height'] * .5
     pg.mouse.move(x, y); pg.mouse.down(); pg.mouse.move(x + 50, y + 50, steps=5); pg.mouse.up(); pg.wait_for_timeout(2500)
-    assert not pg.query_selector('#rgOk'), 'у рамки без названия есть «Верно / Неверно»'
+    assert pg.query_selector('#rgOk') and pg.query_selector('#rgNo'), 'у рамки без названия нет «Верно / Неверно» (с v11.67 проверять можно и без названия)'
     assert pg.is_visible('#rgSide .rghead2 .pair'), 'нет пары «на фото / схема»'
     assert pg.is_visible('#rgZone') and not pg.query_selector('#rgSide [data-z]'), 'зона не выпадающим списком'
     assert not pg.query_selector('#rgSide #rgMotQ') and pg.is_visible('#rgLeft #rgMotQ'), 'поиск узора не слева'
