@@ -7284,9 +7284,9 @@
    "id": "mmwgsr95p2",
    "box": [
     0.25072,
-    0.36444,
-    0.03089,
-    0.01486
+    0.36543,
+    0.03079,
+    0.01522
    ],
    "zone": "field",
    "motif": "",
@@ -7305,7 +7305,7 @@
    "by": "машина → dolgikh",
    "at": 1794684405,
    "confirmed_by": "dolgikh",
-   "confirmed_at": 1794684430
+   "confirmed_at": 1794684596
   },
   {
    "id": "mmwgsr95p3",
@@ -7510,7 +7510,7 @@
    "scheme": "",
    "group": "mmwgsr61y",
    "certainty": "sure",
-   "status": "confirmed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -7521,11 +7521,92 @@
    "by": "машина → dolgikh",
    "at": 1794684475,
    "confirmed_by": "dolgikh",
-   "confirmed_at": 1794684500
+   "confirmed_at": 1794684609
+  },
+  {
+   "id": "mmwgsw30r",
+   "box": [
+    0.69033,
+    0.35277,
+    0.02979,
+    0.0167
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwgsr61y",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1794684630,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "mmwgsx4ek",
+   "box": [
+    0.75218,
+    0.89792,
+    0.03103,
+    0.01325
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwgsr61y",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1794684679,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "mmwgsxokc",
+   "box": [
+    0.26747,
+    0.81045,
+    0.02814,
+    0.01615
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwgsr61y",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1794684705,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791736131,
- "updated": 1794684500,
+ "updated": 1794684705,
  "cat": {
   "title": "kuba sumakh7",
   "museum": "",
