@@ -18,7 +18,7 @@
  "h": 1999,
  "marks": [],
  "created": 1794547278,
- "updated": 1794597369,
+ "updated": 1794650583,
  "cat": {
   "title": "безворсовый «Quşlu zili» Баку",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -116,8 +116,67 @@
     "w": 2,
     "t": 1794597369
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794650583,
+    "q": [
+     [
+      0.11969,
+      0.09438
+     ],
+     [
+      0.87555,
+      0.10831
+     ],
+     [
+      0.84653,
+      0.84963
+     ],
+     [
+      0.11483,
+      0.83785
+     ]
+    ],
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.11969,
+    0.09438
+   ],
+   [
+    0.87555,
+    0.10831
+   ],
+   [
+    0.84653,
+    0.84963
+   ],
+   [
+    0.11483,
+    0.83785
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

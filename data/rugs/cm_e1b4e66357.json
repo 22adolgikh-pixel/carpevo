@@ -18,7 +18,7 @@
  "h": 1800,
  "marks": [],
  "created": 1791870018,
- "updated": 1794650230,
+ "updated": 1794650472,
  "cat": {
   "title": "Müasir Laçın rayonunun mərkəzindən 65 km şimalda yerləşən Şamkənd kəndində toxunmuş \"İtli-atlı\"xalçası",
   "museum": "",
@@ -126,8 +126,67 @@
     "w": 2,
     "t": 1794650230
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794650472,
+    "q": [
+     [
+      0.04678,
+      0.27827
+     ],
+     [
+      0.96839,
+      0.29728
+     ],
+     [
+      1.00494,
+      0.93198
+     ],
+     [
+      0.01056,
+      0.96834
+     ]
+    ],
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04678,
+    0.27827
+   ],
+   [
+    0.96839,
+    0.29728
+   ],
+   [
+    1.00494,
+    0.93198
+   ],
+   [
+    0.01056,
+    0.96834
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

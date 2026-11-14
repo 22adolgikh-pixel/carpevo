@@ -18,7 +18,7 @@
  "h": 1107,
  "marks": [],
  "created": 1791736134,
- "updated": 1794650220,
+ "updated": 1794650457,
  "cat": {
   "title": "kuba perepedil72 double niche prayer rug",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794650220
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794650457,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00725,
+    0.00522
+   ],
+   [
+    0.99119,
+    0.00563
+   ],
+   [
+    0.99044,
+    0.99238
+   ],
+   [
+    0.00546,
+    0.99338
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
