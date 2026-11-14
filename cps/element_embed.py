@@ -20,7 +20,8 @@ DATA = os.environ.get("CPS_DATA") or os.path.join(HERE, "data")
 #              среди 5 ближайших на других коврах — в 56 % случаев;
 #   "search" — своя сеть (обучена на 35 коврах): поиск повторов по образцу, порог 0,875.
 # Роль можно переназначить файлом DATA/element_model.json {"match": "...", "search": "..."}.
-MODELS = {"dinov2_s14": {"pt": "1ztqy9QC8c5RfN_Fi92H9nN3GA1JVwU_9", "json": "1Tdd1UjunQlB6fTKkFNV7xirg2OibwP6c", "ver": 101},
+MODELS = {"dinov3_elem": {"pt": "", "json": "", "ver": 201},                 # v11.62: DINOv3 (dino3_elements_colab.py), id — после выгрузки
+          "dinov2_s14": {"pt": "1ztqy9QC8c5RfN_Fi92H9nN3GA1JVwU_9", "json": "1Tdd1UjunQlB6fTKkFNV7xirg2OibwP6c", "ver": 101},
           "element_embed_v1": {"pt": "1M_5g-sChZHlGhzNYyiuiL3xzq81ybX-V", "json": "11_NpAjRhHnZSYBgln7JZxetOebGKWQ0J", "ver": 1}}
 ROLE = {"match": "dinov2_s14", "search": "element_embed_v1"}
 try:
@@ -103,7 +104,12 @@ def small(img, m="match"):
     return cv2.resize(img, None, fx=k, fy=k, interpolation=cv2.INTER_AREA) if k < 1 else img
 
 
-def _crop(a, box, S, ctx):
+_CL = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(4, 4))
+
+
+def _crop(a, box, S, ctx, gray=False):
+    if gray:
+        c = _crop(a, box, S, ctx); g = _CL.apply(cv2.cvtColor(c, cv2.COLOR_BGR2GRAY)); return cv2.merge([g, g, g])
     h, w = a.shape[:2]; x, y, bw, bh = box
     cx, cy = (x + bw / 2) * w, (y + bh / 2) * h; side = max(bw * w, bh * h) * (1 + 2 * ctx)
     M = np.array([[side / S, 0, cx - side / 2], [0, side / S, cy - side / 2]], np.float32)
@@ -123,11 +129,11 @@ def _run(arr, m):
 
 def emb(a, boxes, m="match"):
     M = meta(m); S, ctx = int(M.get("S", 96)), float(M.get("ctx", 0.15))
-    return _run([_prep(_crop(a, b, S, ctx)) for b in boxes], m)
+    return _run([_prep(_crop(a, b, S, ctx, bool(M.get("gray")))) for b in boxes], m)
 
 
 def emb_rot(a, box, m="match"):
-    M = meta(m); S, ctx = int(M.get("S", 96)), float(M.get("ctx", 0.15)); c = _crop(a, box, S, ctx)
+    M = meta(m); S, ctx = int(M.get("S", 96)), float(M.get("ctx", 0.15)); c = _crop(a, box, S, ctx, bool(M.get("gray")))
     return _run([_prep(np.rot90(c[:, ::-1] if f else c, r)) for f in (0, 1) for r in range(4)], m)
 
 
