@@ -18,7 +18,7 @@
  "h": 698,
  "marks": [],
  "created": 1791736123,
- "updated": 1794597110,
+ "updated": 1794642749,
  "cat": {
   "title": "Dragon carpet from Azerbaijan, 17-18th century, 212 x 184 cm, T84-1909.jpg",
   "museum": "Wikimedia Commons",
@@ -179,8 +179,49 @@
     "w": 2,
     "t": 1794597110
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794642749,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00631,
+    0.01758
+   ],
+   [
+    0.98993,
+    0.01259
+   ],
+   [
+    0.99675,
+    0.98269
+   ],
+   [
+    -0.00517,
+    0.98466
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
