@@ -300,7 +300,7 @@ def install(app, DATA, D_WORK):
                 "part": (r.get("cat") or {}).get("part", 0),
                 "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", ""),
                 "people": (r.get("people") or {}).get("n", 0),
-                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "seen": bool(r.get("auto")), "pw": _pw(r), "edge": sorted((r.get("edge") or {}).keys()), "use": use_of(r)[0], "use_why": use_of(r)[1], "control": bool(r.get("control")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
+                "tri": r.get("tri", ""), "frame": r.get("frame", ""), "seen": bool(r.get("auto")), "pw": _pw(r), "edge": sorted((r.get("edge") or {}).keys()), "use": use_of(r)[0], "use_why": use_of(r)[1], "control": bool(r.get("control")), "eltest": bool(r.get("eltest")), "quad": ((r.get("layout") or {}).get("quad_status") or "") if (r.get("layout") or {}).get("quad") else ""}
 
     D_LIB = os.path.join(DATA, "rug_lib"); SETF = os.path.join(DATA, "rugs_settings.json")
 
@@ -705,6 +705,7 @@ def install(app, DATA, D_WORK):
             if b.get("frame") in ("whole", "cropped", "fragment", "not_rug", "unsure", ""): r["frame"] = b["frame"]   # v11.34: вид кадра (этап 0)
             if b.get("tri") in ("auto", "hand", "review", ""): r["tri"] = b["tri"]
             if "control" in b: r["control"] = bool(b["control"])                    # v11.30: в контрольном наборе (мерило разбора)
+            if "eltest" in b: r["eltest"] = bool(b["eltest"])                       # v11.63: тест сетей элементов — на ковре отмечены ВСЕ повторы всех элементов
             if "marks" in b:
                 old = {m["id"]: m for m in r.get("marks", [])}; marks = []
                 for m in b["marks"]:

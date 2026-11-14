@@ -68,6 +68,7 @@ def iou(a, b):
 
 rugs = sorted(LAB, key=lambda x: x['id']); random.shuffle(rugs)
 cut = int(len(rugs) * 0.8); TR, TE = rugs[:cut], rugs[cut:]
+TR = [x for x in TR if not x.get('eltest')]   # v11.63: ковры «тест сетей» не учим — на них мерим
 log('ковров: обучение', len(TR), '| проверка', len(TE))
 
 

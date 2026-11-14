@@ -31,11 +31,11 @@ def main():
                                                                "sc": m.get("score"), "ang": m.get("angle", 0), "fl": m.get("flip", 0), "scheme": m.get("scheme") or "", "motif": m.get("motif") or ""})
         if not any(x["st"] in ("confirmed", "rejected") for g in G.values() for x in g): continue
         out.append({"id": r["id"], "img": r.get("lib_img") or ("img/" + r["id"] + ".jpg"), "w": r.get("w"), "h": r.get("h"),
-                    "quad": (r.get("layout") or {}).get("quad"), "groups": G})
+                    "quad": (r.get("layout") or {}).get("quad"), "eltest": bool(r.get("eltest")), "groups": G})
     p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "labels.json")
     json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False)
     n = lambda s: sum(1 for x in out for g in x["groups"].values() for m in g if m["st"] == s)
-    print(len(out), "ковров;", "подтверждено", n("confirmed"), "отклонено", n("rejected"), "ждут", n("proposed"), "→", p)
+    print(len(out), "ковров;", "из них тест сетей", sum(x["eltest"] for x in out), ";", "подтверждено", n("confirmed"), "отклонено", n("rejected"), "ждут", n("proposed"), "→", p)
 
 
 if __name__ == "__main__": main()
