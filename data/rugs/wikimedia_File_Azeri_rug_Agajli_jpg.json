@@ -18,7 +18,7 @@
  "h": 982,
  "marks": [],
  "created": 1791736123,
- "updated": 1794658257,
+ "updated": 1794662059,
  "cat": {
   "title": "Azeri rug Agajli.jpg",
   "museum": "Wikimedia Commons",
@@ -127,8 +127,49 @@
     "w": 2,
     "t": 1794658257
    }
+  },
+  "quad": {
+   "lika": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794662059,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0277,
+    0.01939
+   ],
+   [
+    0.99403,
+    0.01726
+   ],
+   [
+    0.99299,
+    0.92929
+   ],
+   [
+    0.00619,
+    0.93794
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
