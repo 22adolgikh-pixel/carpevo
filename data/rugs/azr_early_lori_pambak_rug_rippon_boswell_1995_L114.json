@@ -18,7 +18,7 @@
  "h": 1100,
  "marks": [],
  "created": 1791736129,
- "updated": 1794650459,
+ "updated": 1794658117,
  "cat": {
   "title": "early lori pambak rug rippon boswell 1995 L114",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794650459
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794658117,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0118,
+    0.00902
+   ],
+   [
+    0.99036,
+    0.00698
+   ],
+   [
+    1.00054,
+    1.00314
+   ],
+   [
+    -0.00065,
+    1.00546
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

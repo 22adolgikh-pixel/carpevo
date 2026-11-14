@@ -18,7 +18,7 @@
  "h": 964,
  "marks": [],
  "created": 1791736138,
- "updated": 1794597004,
+ "updated": 1794658171,
  "cat": {
   "title": "Antique Moghan (Mughan) long rug, 10",
   "museum": "",
@@ -154,8 +154,49 @@
     "w": 2,
     "t": 1794597004
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794658171,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01296,
+    0.03196
+   ],
+   [
+    0.96109,
+    0.00992
+   ],
+   [
+    0.97637,
+    1.00295
+   ],
+   [
+    0.0042,
+    1.00252
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

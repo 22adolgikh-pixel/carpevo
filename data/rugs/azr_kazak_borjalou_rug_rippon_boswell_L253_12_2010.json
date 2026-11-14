@@ -18,7 +18,7 @@
  "h": 991,
  "marks": [],
  "created": 1791736128,
- "updated": 1794597009,
+ "updated": 1794658238,
  "cat": {
   "title": "kazak borjalou rug rippon boswell L253 12 2010",
   "museum": "",
@@ -78,7 +78,30 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238504
+  "t": 1794238504,
+  "ref_quad": {
+   "quad": [
+    [
+     0.01547,
+     0.01433
+    ],
+    [
+     0.94771,
+     0.00574
+    ],
+    [
+     0.98747,
+     0.99299
+    ],
+    [
+     0.00203,
+     0.98285
+    ]
+   ],
+   "v": 1,
+   "from": "auto",
+   "t": 1794658140
+  }
  },
  "micro": {
   "frame": {
@@ -87,8 +110,49 @@
     "w": 2,
     "t": 1794597009
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794658238,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01547,
+    0.01433
+   ],
+   [
+    0.94771,
+    0.00574
+   ],
+   [
+    0.98747,
+    0.99299
+   ],
+   [
+    0.00203,
+    0.98285
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
