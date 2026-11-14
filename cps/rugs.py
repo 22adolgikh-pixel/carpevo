@@ -1893,7 +1893,7 @@ def install(app, DATA, D_WORK):
                 if len(_esim) > 3000: _esim.clear()
             v = _esim.get(key)
             if not v: return
-            thr = EE.meta().get("thr_bad")
+            thr = EE.meta("match").get("thr_pre")                               # v11.61: заранее ✗ — только если порог замерен и полезен; у DINOv2 пока нет
             for m, x in zip(t["items"], v): m["sim"] = round(x, 3)
             t["items"].sort(key=lambda m: -m["sim"])
             t["pre"] = [m["id"] for m in t["items"] if thr is not None and m["sim"] < thr]
@@ -1904,7 +1904,7 @@ def install(app, DATA, D_WORK):
         """когда карточек «элементы» мало — поиск повторов по образцу в группах, где сеть ещё не искала"""
         try:
             import element_embed as EE
-            if left >= 3 * n or not EE.available() or EE.meta().get("thr_search") is None: return
+            if left >= 3 * n or not EE.available("search") or EE.meta("search").get("thr_search") is None: return
         except Exception: return
         if _es["thr"] is None:
             import queue as _qm
@@ -1931,7 +1931,7 @@ def install(app, DATA, D_WORK):
                 if not cf: continue
                 a = read_small(src, 1400)
                 if a is None: continue
-                a = EE.small(a); q = ((r.get("layout") or {}).get("quad"))
+                a = EE.small(a, "search"); q = ((r.get("layout") or {}).get("quad"))
                 found = heavy(lambda: EE.search(a, cf[0]["box"], exclude=[m["box"] for m in r.get("marks") or [] if isinstance(m.get("box"), list)], quad=q), "поиск элементов (сеть)")
                 now = int(time.time())
                 with _lock:
@@ -1984,7 +1984,7 @@ def install(app, DATA, D_WORK):
                         if v < 0.4: continue
                         k = "~".join(sorted((u["key"], keep[j]["key"])))
                         if k not in P or P[k]["sim"] < v: P[k] = {"key": k, "a": u if u["key"] < keep[j]["key"] else keep[j], "b": keep[j] if u["key"] < keep[j]["key"] else u, "sim": round(v, 3)}
-            _xu.update(U=keep, P=sorted(P.values(), key=lambda p: -p["sim"]), t=time.time(), err="")
+            _xu.update(U=keep, P=sorted(P.values(), key=lambda p: -p["sim"]), t=time.time(), err="", v=EE.version("match"))
         except Exception as e:
             _xu["err"] = str(e)[:200]
         finally:
@@ -1995,7 +1995,7 @@ def install(app, DATA, D_WORK):
             import element_embed as EE
             if not EE.available(): return []
         except Exception: return []
-        if not _xu["run"] and time.time() - _xu["t"] > 1800:                        # единицы пересчитываются раз в 30 минут
+        if not _xu["run"] and (time.time() - _xu["t"] > 1800 or _xu.get("v") != EE.version("match")):                        # единицы пересчитываются раз в 30 минут
             units = []
             for x in rows:
                 if x["dead"]: continue
@@ -2058,7 +2058,7 @@ def install(app, DATA, D_WORK):
     @app.post("/api/element_embed/fetch")
     def element_embed_fetch():
         import element_embed as EE
-        return {"ok": EE.fetch(force=True), **EE.info()}
+        return {"ok": all(EE.fetch(r, force=True) for r in EE.ROLE), **EE.info()}
 
     @app.post("/api/corner_refine/fetch")
     def corner_refine_fetch():
@@ -2416,7 +2416,7 @@ def install(app, DATA, D_WORK):
                     pre["cards"] += 1; pre["kept"] += len(P & B); pre["removed"] += len(P - B)
         except (OSError, ValueError): pass
         try:
-            import element_embed as EE; ee = EE.info() if EE._S["tried"] else {"ok": None}
+            import element_embed as EE; ee = {"roles": EE.ROLE, "loaded": {k: v["net"] is not None for k, v in EE._ST.items()}}
         except Exception: ee = {"ok": False}
         return {"users": _mstats(), "frame_model": frame_model.info(), "corner_refine": cr, "quad_by_day": _quad_days(), "element_embed": ee, "marks_pre": pre}
 

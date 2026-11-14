@@ -14,82 +14,92 @@ import numpy as np, cv2
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.environ.get("CPS_DATA") or os.path.join(HERE, "data")
-# v11.60: две сети на выбор — своя (обучена на ответах, element_search_colab.py) и готовая DINOv2 ViT-S/14 (dino_elements_colab.py).
-# Какая используется: DATA/element_model.txt (одно имя), иначе первая, у которой есть файл или id на Диске.
-MODELS = {"dinov2_s14": {"pt": "", "json": ""}, "element_embed_v1": {"pt": "", "json": ""}}
-
-
-def _choice():
-    try:
-        n = open(os.path.join(DATA, "element_model.txt"), encoding="utf-8").read().strip()
-        if n in MODELS: return n
-    except OSError: pass
-    for n in MODELS:
-        if any(os.path.exists(os.path.join(d, n + ".pt")) for d in (DATA, os.path.join(HERE, "models"))) or MODELS[n]["pt"]: return n
-    return "element_embed_v1"
-
-
-NAME = _choice(); DRIVE = MODELS[NAME]
-VERSION = {"dinov2_s14": 101, "element_embed_v1": 1}.get(NAME, 1)          # другая сеть — другие «отпечатки»: поиск и пары пересчитываются
+# v11.61: две сети, у каждой своя роль (замеры 13–14.11 на ответах людей):
+#   "match"  — DINOv2 ViT-S/14 без обучения: сравнение вырезок (сортировка в «элементах», пары «между коврами»);
+#              AUC «верная / отклонённая рамка» 0,733 против 0,704 у оценки машины; у элемента с именем тот же элемент
+#              среди 5 ближайших на других коврах — в 56 % случаев;
+#   "search" — своя сеть (обучена на 35 коврах): поиск повторов по образцу, порог 0,875.
+# Роль можно переназначить файлом DATA/element_model.json {"match": "...", "search": "..."}.
+MODELS = {"dinov2_s14": {"pt": "1ztqy9QC8c5RfN_Fi92H9nN3GA1JVwU_9", "json": "1Tdd1UjunQlB6fTKkFNV7xirg2OibwP6c", "ver": 101},
+          "element_embed_v1": {"pt": "1M_5g-sChZHlGhzNYyiuiL3xzq81ybX-V", "json": "11_NpAjRhHnZSYBgln7JZxetOebGKWQ0J", "ver": 1}}
+ROLE = {"match": "dinov2_s14", "search": "element_embed_v1"}
+try:
+    ROLE.update({k: v for k, v in json.load(open(os.path.join(DATA, "element_model.json"), encoding="utf-8")).items() if v in MODELS})
+except (OSError, ValueError): pass
 MEAN = np.array([0.485, 0.456, 0.406], np.float32); STD = np.array([0.229, 0.224, 0.225], np.float32)
-_lock = threading.Lock(); _S = {"net": None, "tried": False, "meta": {}, "err": ""}
+_lock = threading.Lock(); _ST = {n: {"net": None, "tried": False, "meta": {}, "err": ""} for n in MODELS}
 
 
-def _path():
-    for p in (os.path.join(DATA, NAME + ".pt"), os.path.join(HERE, "models", NAME + ".pt")):
+def _n(m): return ROLE.get(m, m) if m else ROLE["match"]
+
+
+def version(m="match"): return MODELS[_n(m)]["ver"]
+
+
+VERSION = version("search")
+
+
+def _path(n):
+    for p in (os.path.join(DATA, n + ".pt"), os.path.join(HERE, "models", n + ".pt")):
         if os.path.exists(p): return p
     return None
 
 
-def fetch(force=False):
+def fetch(m="match", force=False):
     from rugs import drive_fetch
-    dst = os.path.join(DATA, NAME + ".pt")
+    n = _n(m); D = MODELS[n]; S = _ST[n]; dst = os.path.join(DATA, n + ".pt")
     if os.path.exists(dst) and not force: return True
-    if not DRIVE["pt"]: _S["err"] = "сеть ещё не обучена (нет id на Диске)"; return False
     try:
-        drive_fetch(DRIVE["pt"], dst + ".part"); os.replace(dst + ".part", dst)
-        if DRIVE["json"]:
-            try: drive_fetch(DRIVE["json"], dst[:-3] + ".json")
-            except Exception: pass
-        _S.update(tried=False, net=None, err=""); return True
+        drive_fetch(D["pt"], dst + ".part"); os.replace(dst + ".part", dst)
+        try: drive_fetch(D["json"], dst[:-3] + ".json")
+        except Exception: pass
+        S.update(tried=False, net=None, err=""); return True
     except Exception as e:
-        _S["err"] = str(e)[:200]; return False
+        S["err"] = str(e)[:200]; return False
 
 
-def _load():
-    if _S["tried"]: return _S["net"]
+def _load(m="match"):
+    n = _n(m); S = _ST[n]
+    if S["tried"]: return S["net"]
     with _lock:
-        if _S["tried"]: return _S["net"]
-        _S["tried"] = True
+        if S["tried"]: return S["net"]
+        S["tried"] = True
         try:
             import torch
-            if not DRIVE["pt"] and _path() is None: _S["err"] = "у сети %s ещё нет файла" % NAME; return None
-            P = _path()
-            if P is None and fetch(): P = _path()
+            P = _path(n)
+            if P is None and fetch(n): P = _path(n)
             if P:
                 torch.set_num_threads(2)
-                _S["net"] = torch.jit.load(P, map_location="cpu").eval()
-                try: _S["meta"] = json.load(open(P[:-3] + ".json", encoding="utf-8"))
-                except (OSError, ValueError): _S["meta"] = {}
+                S["net"] = torch.jit.load(P, map_location="cpu").eval()
+                try: S["meta"] = json.load(open(P[:-3] + ".json", encoding="utf-8"))
+                except (OSError, ValueError): S["meta"] = {}
         except Exception as e:
-            _S["net"] = None; _S["err"] = _S["err"] or str(e)[:200]
-    return _S["net"]
+            S["net"] = None; S["err"] = S["err"] or str(e)[:200]
+    return S["net"]
 
 
-def available(): return _load() is not None
+def available(m="match"):
+    """готова ли сеть; первый вызов не ждёт загрузки (88 МБ у DINOv2) — качает в фоне, а пока отвечает «нет»"""
+    S = _ST[_n(m)]
+    if S["tried"]: return S["net"] is not None
+    if not S.get("warming"):
+        S["warming"] = True; threading.Thread(target=_load, args=(m,), daemon=True, name="element-embed-load").start()
+    return False
 
 
-def meta(): _load(); return _S["meta"] or {}
+def meta(m="match"): _load(m); return _ST[_n(m)]["meta"] or {}
 
 
 def info():
-    if _load() is None: return {"ok": False, "error": _S["err"]}
-    m = _S["meta"] or {}
-    return {"ok": True, "model": NAME, **{k: m.get(k) for k in ("ver", "kind", "S", "trained", "n_rugs_train", "n_rugs_test", "thr_bad", "thr_search", "test")}}
+    out = {"ok": any(_load(r) is not None for r in ROLE), "roles": dict(ROLE)}
+    for r in ROLE:
+        n = _n(r); S = _ST[n]; M = S["meta"] or {}
+        out[r] = {"model": n, "ok": S["net"] is not None, "error": S["err"], **{k: M.get(k) for k in ("kind", "S", "trained", "thr_search")}}
+    return out
 
 
-def small(img):
-    L = int(meta().get("long", 1400)); k = L / max(img.shape[:2])
+def small(img, m="match"):
+    L = int(meta(m).get("long", 1400)); k = L / max(img.shape[:2])
     return cv2.resize(img, None, fx=k, fy=k, interpolation=cv2.INTER_AREA) if k < 1 else img
 
 
@@ -103,28 +113,28 @@ def _crop(a, box, S, ctx):
 def _prep(c): return ((np.ascontiguousarray(c)[:, :, ::-1].astype(np.float32) / 255 - MEAN) / STD).transpose(2, 0, 1)
 
 
-def _run(arr):
+def _run(arr, m):
     import torch
-    net = _load(); out = []
+    net = _load(m); out = []
     with torch.no_grad():
         for i in range(0, len(arr), 128): out.append(net(torch.from_numpy(np.ascontiguousarray(np.stack(arr[i:i + 128])))).numpy())
     return np.concatenate(out) if out else np.zeros((0, 128), np.float32)
 
 
-def emb(a, boxes):
-    m = meta(); S, ctx = int(m.get("S", 96)), float(m.get("ctx", 0.15))
-    return _run([_prep(_crop(a, b, S, ctx)) for b in boxes])
+def emb(a, boxes, m="match"):
+    M = meta(m); S, ctx = int(M.get("S", 96)), float(M.get("ctx", 0.15))
+    return _run([_prep(_crop(a, b, S, ctx)) for b in boxes], m)
 
 
-def emb_rot(a, box):
-    m = meta(); S, ctx = int(m.get("S", 96)), float(m.get("ctx", 0.15)); c = _crop(a, box, S, ctx)
-    return _run([_prep(np.rot90(c[:, ::-1] if f else c, r)) for f in (0, 1) for r in range(4)])
+def emb_rot(a, box, m="match"):
+    M = meta(m); S, ctx = int(M.get("S", 96)), float(M.get("ctx", 0.15)); c = _crop(a, box, S, ctx)
+    return _run([_prep(np.rot90(c[:, ::-1] if f else c, r)) for f in (0, 1) for r in range(4)], m)
 
 
 def verify(img, sample_box, boxes):
     """близость рамок к образцу (−1..1, выше — похожее); img — уже уменьшенное small()"""
-    if _load() is None or not boxes: return None
-    q = emb_rot(img, sample_box); return [float(v) for v in (emb(img, boxes) @ q.T).max(1)]
+    if _load("match") is None or not boxes: return None
+    q = emb_rot(img, sample_box, "match"); return [float(v) for v in (emb(img, boxes, "match") @ q.T).max(1)]
 
 
 def _iou(a, b):
@@ -134,10 +144,11 @@ def _iou(a, b):
 
 def search(img, sample_box, exclude=(), quad=None, thr=None, limit=24):
     """найти на ковре повторы образца → [(близость, рамка)], без наложений и без уже отмеченных мест"""
-    if _load() is None: return []
-    if thr is None and meta().get("thr_search") is None: return []          # порог поиска не замерен (DINOv2 — только сравнение вырезок)
-    thr = thr if thr is not None else float(meta()["thr_search"])
-    h, w = img.shape[:2]; bw, bh = sample_box[2], sample_box[3]; q = emb_rot(img, sample_box); C = []
+    m = "search"
+    if _load(m) is None: return []
+    if thr is None and meta(m).get("thr_search") is None: return []
+    thr = thr if thr is not None else float(meta(m)["thr_search"])
+    h, w = img.shape[:2]; bw, bh = sample_box[2], sample_box[3]; q = emb_rot(img, sample_box, m); C = []
     X0, X1, Y0, Y1 = 0.0, 1.0, 0.0, 1.0
     if quad:
         X0, X1 = max(0.0, min(p[0] for p in quad)), min(1.0, max(p[0] for p in quad)); Y0, Y1 = max(0.0, min(p[1] for p in quad)), min(1.0, max(p[1] for p in quad))
@@ -146,7 +157,7 @@ def search(img, sample_box, exclude=(), quad=None, thr=None, limit=24):
             xs = np.arange(X0, X1 - ww, ww / 3); ys = np.arange(Y0, Y1 - hh, hh / 3)
             bs = [[float(x), float(y), ww, hh] for y in ys for x in xs]
             if not bs or len(bs) > 20000: continue
-            s = (emb(img, bs) @ q.T).max(1)
+            s = (emb(img, bs, m) @ q.T).max(1)
             C += [(float(v), b) for v, b in zip(s, bs) if v >= thr]
     C.sort(key=lambda t: -t[0]); keep = []
     ex = list(exclude) + [sample_box]
