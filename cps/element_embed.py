@@ -25,6 +25,7 @@ MODELS = {"dinov3_elem": {"pt": "1O7MGlYcgyGDhAIiqGNZvaQHJjccjmVu1", "json": "1h
                      # «заранее ✗»: при 5 % потерь верных ловит 75 % неверных (порог 0,844; замер 14.11 на 755 рамках, dino3_shape_colab.py)
                      "meta": {"S": 112, "ctx": 0.15, "shape": "ellipse", "thr_pre": 0.844}},
           "dinov2_s14": {"pt": "1ztqy9QC8c5RfN_Fi92H9nN3GA1JVwU_9", "json": "1Tdd1UjunQlB6fTKkFNV7xirg2OibwP6c", "ver": 101},
+          "element_embed_v2": {"pt": "", "json": "", "ver": 2},                   # v11.65: своя сеть на овальных вырезках (element_search_colab.py) — id после выгрузки
           "element_embed_v1": {"pt": "1M_5g-sChZHlGhzNYyiuiL3xzq81ybX-V", "json": "11_NpAjRhHnZSYBgln7JZxetOebGKWQ0J", "ver": 1}}
 ROLE = {"match": "dinov3_elem", "search": "element_embed_v1"}
 try:

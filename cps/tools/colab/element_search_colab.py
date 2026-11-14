@@ -7,7 +7,8 @@
 # Проверка — на 20 % ковров, которых сеть не видела:
 #   1) проверка предложений: отличает ли сеть верные рамки от отклонённых лучше, чем нынешняя оценка машины;
 #   2) поиск: по одному образцу найти на ковре остальные повторы — сколько подтверждённых найдено и сколько лишнего.
-# Итог: carpet-dna/models/element_embed_v1.pt (TorchScript) и element_embed_v1.json (замеры и пороги).
+# v11.65: вырезка ОВАЛОМ (вне овала серый, как у DINOv3: соседи в плотных узорах не мешают) → новая сеть element_embed_v2.
+# Итог: carpet-dna/models/element_embed_v2.pt (TorchScript) и element_embed_v2.json (замеры и пороги). v1 не трогается.
 # Время: GPU (T4) — 20–35 мин. Ключи не нужны.
 import os, json, math, random, time, zipfile, glob
 import numpy as np, cv2, torch, torch.nn as nn, torch.nn.functional as F, torchvision
@@ -37,6 +38,7 @@ LAB = [x for x in LAB if x['id'] in IM]
 log('фото найдено', len(LAB))
 assert len(LAB) >= 20, 'мало фото — проверь пакеты в carpet-dna/rug_catalog'
 
+SHAPE = 'ellipse'                                      # 'rect' — как в v1
 S = 96; CTX = 0.15                                     # вход сети 96×96; вокруг рамки 15 % поля
 MEAN = np.array([0.485, 0.456, 0.406], np.float32); STD = np.array([0.229, 0.224, 0.225], np.float32)
 
@@ -44,11 +46,16 @@ MEAN = np.array([0.485, 0.456, 0.406], np.float32); STD = np.array([0.229, 0.224
 def crop(a, box, jit=0.0, ctx=CTX):
     """рамка (доли кадра x,y,w,h) → квадрат S×S с полем вокруг; jit — случайный сдвиг/масштаб рамки"""
     h, w = a.shape[:2]; x, y, bw, bh = box
-    cx, cy = (x + bw / 2) * w, (y + bh / 2) * h; side = max(bw * w, bh * h) * (1 + 2 * ctx)
+    cx, cy = (x + bw / 2) * w, (y + bh / 2) * h; side = max(bw * w, bh * h) * (1 + 2 * ctx); bx, by = cx, cy      # bx, by — центр самой рамки
     if jit:
         side *= math.exp(random.uniform(-jit, jit)); cx += random.uniform(-jit, jit) * side * 0.5; cy += random.uniform(-jit, jit) * side * 0.5
     M = np.array([[side / S, 0, cx - side / 2], [0, side / S, cy - side / 2]], np.float32)
-    return cv2.warpAffine(a, M, (S, S), flags=cv2.INTER_LINEAR | cv2.WARP_INVERSE_MAP, borderMode=cv2.BORDER_REPLICATE)
+    c = cv2.warpAffine(a, M, (S, S), flags=cv2.INTER_LINEAR | cv2.WARP_INVERSE_MAP, borderMode=cv2.BORDER_REPLICATE)
+    if SHAPE == 'ellipse':                                                  # овал по рамке (при сдвиге — вместе с рамкой), снаружи серое
+        m = np.zeros((S, S), np.uint8); ex, ey = (bx - (cx - side / 2)) / side * S, (by - (cy - side / 2)) / side * S
+        cv2.ellipse(m, (int(round(ex)), int(round(ey))), (max(2, int(round(bw * w / side * S / 2))), max(2, int(round(bh * h / side * S / 2)))), 0, 0, 360, 255, -1)
+        c = np.where(m[:, :, None] > 0, c, np.uint8(127))
+    return c
 
 
 def aug(c):
@@ -220,14 +227,14 @@ log('выбран порог поиска:', rep['search'].get('pick'))
 log('(«share_confirmed» — доля находок, совпавших с подтверждёнными; остальные находки — не обязательно ошибки: часть повторов люди ещё не отмечали)')
 
 net.cpu().eval()
-ts = torch.jit.trace(net, torch.zeros(8, 3, S, S)); p = f'{OUT}/element_embed_v1.pt'; ts.save(p)
-meta = {'ver': 1, 'S': S, 'ctx': CTX, 'long': LONG, 'trained': time.strftime('%Y-%m-%d %H:%M'), 'n_rugs_train': len(TR), 'n_rugs_test': len(TE),
+ts = torch.jit.trace(net, torch.zeros(8, 3, S, S)); p = f'{OUT}/element_embed_v2.pt'; ts.save(p)
+meta = {'ver': 2, 'S': S, 'ctx': CTX, 'shape': SHAPE, 'long': LONG, 'trained': time.strftime('%Y-%m-%d %H:%M'), 'n_rugs_train': len(TR), 'n_rugs_test': len(TE),
         'thr_bad': rep['verify'].get('thr_bad'), 'thr_search': (rep['search'].get('pick') or {}).get('thr'), 'test': rep}
-json.dump(meta, open(f'{OUT}/element_embed_v1.json', 'w'), ensure_ascii=False, indent=1)
+json.dump(meta, open(f'{OUT}/element_embed_v2.json', 'w'), ensure_ascii=False, indent=1)
 from google.colab import auth; auth.authenticate_user()                                 # доступ «по ссылке» — студия скачает сама
 from googleapiclient.discovery import build
 svc = build('drive', 'v3'); ids = {}
-for fn in ('element_embed_v1.pt', 'element_embed_v1.json'):
+for fn in ('element_embed_v2.pt', 'element_embed_v2.json'):
     f = svc.files().list(q=f"name='{fn}' and trashed=false", fields='files(id,modifiedTime)', orderBy='modifiedTime desc').execute()['files']
     if f: svc.permissions().create(fileId=f[0]['id'], body={'type': 'anyone', 'role': 'reader'}).execute(); ids[fn] = f[0]['id']
 print('\nИТОГ:', json.dumps({k: meta[k] for k in ('trained', 'thr_bad', 'thr_search')} | {'verify': rep['verify'], 'search_pick': rep['search'].get('pick'), 'drive': ids}, ensure_ascii=False))
