@@ -145,7 +145,17 @@ def emb_net(name):
     M = {}
     try: M = json.load(open(p[:-3] + '.json', encoding='utf-8'))
     except Exception: pass
-    net = torch.jit.load(p, map_location=DEV).eval(); S, ctx, gray = int(M.get('S', 96)), float(M.get('ctx', 0.15)), bool(M.get('gray'))
+    if name == 'dinov3_elem':          # файл .pt записан на процессоре (в нём зашит cpu для координат) — на GPU собираем ту же сеть из весов Hugging Face
+        import torch.nn as nn, torch.nn.functional as F
+        from transformers import AutoModel
+        class V3(nn.Module):
+            def __init__(s, m): super().__init__(); s.m = m; s.nr = int(getattr(m.config, 'num_register_tokens', 4))
+            def forward(s, x):
+                h = s.m(pixel_values=x).last_hidden_state
+                return F.normalize(torch.cat([h[:, 0], h[:, 1 + s.nr:].mean(1)], 1), dim=1)
+        net = V3(AutoModel.from_pretrained('facebook/dinov3-vits16-pretrain-lvd1689m', token=HF)).to(DEV).eval()
+    else: net = torch.jit.load(p, map_location=DEV).eval()
+    S, ctx, gray = int(M.get('S', 96)), float(M.get('ctx', 0.15)), bool(M.get('gray'))
 
     def crop(a, box):
         h, w = a.shape[:2]; x, y, bw, bh = box; cx, cy = (x + bw / 2) * w, (y + bh / 2) * h; side = max(bw * w, bh * h) * (1 + 2 * ctx)
