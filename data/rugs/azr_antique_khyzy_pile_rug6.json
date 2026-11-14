@@ -18,7 +18,7 @@
  "h": 842,
  "marks": [],
  "created": 1791736129,
- "updated": 1794642799,
+ "updated": 1794650257,
  "cat": {
   "title": "antique-khyzy-pile-rug6",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794642799
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794650257,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.16463,
+    0.02247
+   ],
+   [
+    0.87557,
+    0.03158
+   ],
+   [
+    0.96811,
+    0.959
+   ],
+   [
+    0.04569,
+    0.97662
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
