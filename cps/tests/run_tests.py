@@ -925,7 +925,7 @@ def t23_tab_group_sweep(pg, ctx):
     pg.evaluate("R.z=1;R.ox=0;R.oy=0;rugApply()"); pg.wait_for_timeout(200)
     p0 = pg.evaluate("(()=>{const r=document.getElementById('rgView').getBoundingClientRect(),i=document.getElementById('rgSvg').getBoundingClientRect();return [i.left,i.top,i.width,i.height]})()")
     x0, y0, w, h = p0
-    pg.keyboard.down('Shift'); pg.mouse.move(x0 + w * .05, y0 + h * .40); pg.mouse.down(); pg.mouse.move(x0 + w * .45, y0 + h * .65, steps=4); pg.mouse.up(); pg.keyboard.up('Shift'); pg.wait_for_timeout(300)
+    pg.keyboard.down('Shift'); pg.mouse.move(x0 + w * .2, y0 + h * .40); pg.mouse.down(); pg.mouse.move(x0 + w * .45, y0 + h * .65, steps=4); pg.mouse.up(); pg.keyboard.up('Shift'); pg.wait_for_timeout(300)
     ids = pg.evaluate("R.rug.marks.map(m=>m.id)")
     assert 'b2' not in ids and 'b1' in ids, f'Shift+протяжка: {ids}'
     errors_ok(ctx, "t23")
@@ -1480,6 +1480,37 @@ def t37_micro_split_spreads(pg, ctx):
         time.sleep(0.5)
     f = get(u + 'api/rugs/sp_f'); assert len(f.get('multi') or []) == 2, f'проход не нашёл разворот: {f.get("multi")}'
     assert get(u + 'api/rugs/sp_b').get('multi') == [], 'проход перезаписал решение человека'
+
+
+@test
+def t38_rect_view_v1170(pg, ctx):
+    """v11.70: выпрямленный вид (T): картинка /rugrect/, рамка, нарисованная на ровном ковре, ложится на фото по 4 углам; непроверенные — бледно/скрыть (N)"""
+    pg.goto(ctx['url']); pg.wait_for_timeout(2000)
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1200); pg.evaluate("rugOpen('border_rep')"); pg.wait_for_timeout(1500)
+    pg.evaluate("""(async()=>{R.rug.marks=[];R.rug.layout={quad:[[.06,.05],[.95,.09],[.92,.95],[.08,.91]],quad_status:'confirmed',bounds:[],rings:[],status:'auto',carpet:[.05,.05,.9,.9]};rugSaveSoon();await rugSaveNow();await rugRectify();})()""")
+    pg.wait_for_timeout(800); pg.keyboard.press('t'); pg.wait_for_timeout(1500)
+    assert '/rugrect/' in pg.evaluate("document.getElementById('rgImg').src"), 'T не включил выпрямленный ковёр'
+    assert pg.evaluate("rugRectOn()"), 'выпрямленный режим не включён'
+    i = pg.evaluate("(()=>{const r=document.getElementById('rgSvg').getBoundingClientRect();return [r.left,r.top,r.width,r.height]})()")
+    x0, y0, w, h = i
+    pg.mouse.move(x0 + w * .40, y0 + h * .40); pg.mouse.down(); pg.mouse.move(x0 + w * .55, y0 + h * .52, steps=5); pg.mouse.up(); pg.wait_for_timeout(800)
+    pg.screenshot(path=f'{OUT}/rect_view.png')
+    b = pg.evaluate("R.sel&&R.sel.box")
+    assert b, 'рамка не создана в выпрямленном виде'
+    # центр новой рамки на фото = центр нарисованного прямоугольника, пересчитанный по углам
+    c = pg.evaluate("layToImg(R.rug.layout,.475,.46)")
+    assert abs(b[0] + b[2] / 2 - c[0]) < .02 and abs(b[1] + b[3] / 2 - c[1]) < .02, f'рамка легла не туда: {b} центр должен быть {c}'
+    d = pg.evaluate("rugPx(R.sel.box)")
+    assert abs(d[0] / pg.evaluate("R.iw") - .40) < .03 and abs(d[1] / pg.evaluate("R.ih") - .40) < .03, f'на экране рамка не там, где нарисована: {d}'
+    # непроверенные чужие: скрыть
+    pg.evaluate("R.rug.marks.push({...R.sel,id:'zz',group:'zz',box:[.2,.2,.05,.05],status:'proposed',machine:1});rugSelect(R.rug.marks[0]);")
+    pg.evaluate("rugPropSet('hide')"); n_hide = pg.evaluate("document.querySelectorAll('#rgSvg [data-m=\"zz\"]').length")
+    pg.evaluate("rugPropSet('show')"); n_show = pg.evaluate("document.querySelectorAll('#rgSvg [data-m=\"zz\"]').length")
+    assert n_hide == 0 and n_show == 1, f'скрытие непроверенных не работает: {n_hide} {n_show}'
+    pg.evaluate("rugPropSet('faint')")
+    pg.keyboard.press('t'); pg.wait_for_timeout(1200)
+    assert '/rugimg/' in pg.evaluate("document.getElementById('rgImg').src"), 'T не вернул обычное фото'
+    errors_ok(ctx, 'выпрямленный вид v11.70')
 
 
 def main():
