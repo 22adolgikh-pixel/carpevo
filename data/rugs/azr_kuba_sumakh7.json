@@ -5701,7 +5701,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -5711,8 +5711,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683814
   },
   {
    "id": "mmwgsdzyr1",
@@ -5728,18 +5728,18 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
    "machine": 1,
    "score": 0.758,
    "xfer": "",
-   "variant": "",
+   "variant": "color",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683818
   },
   {
    "id": "mmwgsdzyr2",
@@ -5755,18 +5755,18 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 1,
    "machine": 1,
    "score": 0.741,
    "xfer": "",
-   "variant": "",
+   "variant": "color",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683820
   },
   {
    "id": "mmwgsdzyr3",
@@ -5782,7 +5782,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -5792,8 +5792,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683822
   },
   {
    "id": "mmwgsdzyr4",
@@ -5809,7 +5809,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -5819,16 +5819,16 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683824
   },
   {
    "id": "mmwgsdzyr5",
    "box": [
-    0.20393,
-    0.07556,
-    0.0266,
-    0.01667
+    0.19919,
+    0.07566,
+    0.03134,
+    0.01489
    ],
    "zone": "field",
    "motif": "",
@@ -5836,7 +5836,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -5846,8 +5846,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683831
   },
   {
    "id": "mmwgsdzyr6",
@@ -5863,7 +5863,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -5873,15 +5873,15 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683833
   },
   {
    "id": "mmwgsdzyr7",
    "box": [
     0.37873,
     0.89778,
-    0.03167,
+    0.02919,
     0.01889
    ],
    "zone": "field",
@@ -5890,23 +5890,23 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
    "machine": 1,
    "score": 0.692,
    "xfer": "",
-   "variant": "",
+   "variant": "color",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683840
   },
   {
    "id": "mmwgsdzyr8",
    "box": [
-    0.55733,
+    0.55925,
     0.65333,
     0.03167,
     0.01889
@@ -5917,7 +5917,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -5927,15 +5927,15 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683846
   },
   {
    "id": "mmwgsdzyr9",
    "box": [
-    0.46613,
+    0.46309,
     0.06,
-    0.03167,
+    0.03471,
     0.01889
    ],
    "zone": "field",
@@ -5944,18 +5944,18 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
    "machine": 1,
    "score": 0.679,
    "xfer": "",
-   "variant": "",
+   "variant": "color",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683865
   },
   {
    "id": "mmwgsdzyr10",
@@ -5971,7 +5971,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -5981,15 +5981,15 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683866
   },
   {
    "id": "mmwgsdzyr11",
    "box": [
-    0.39647,
+    0.39692,
     0.65222,
-    0.03167,
+    0.03246,
     0.01889
    ],
    "zone": "field",
@@ -5998,18 +5998,18 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
    "machine": 1,
    "score": 0.66,
    "xfer": "",
-   "variant": "",
+   "variant": "color",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683874
   },
   {
    "id": "mmwgsdzyr12",
@@ -6025,7 +6025,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -6035,16 +6035,16 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683879
   },
   {
    "id": "mmwgsdzyr13",
    "box": [
     0.69287,
     0.81667,
-    0.03167,
-    0.01889
+    0.02795,
+    0.01701
    ],
    "zone": "field",
    "motif": "",
@@ -6052,7 +6052,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -6062,8 +6062,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683883
   },
   {
    "id": "mmwgsdzyr14",
@@ -6079,7 +6079,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6089,8 +6089,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683884
   },
   {
    "id": "mmwgsdzyr15",
@@ -6106,7 +6106,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -6116,8 +6116,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683885
   },
   {
    "id": "mmwgsdzyr16",
@@ -6133,7 +6133,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -6143,8 +6143,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683888
   },
   {
    "id": "mmwgsdzyr17",
@@ -6160,7 +6160,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6170,8 +6170,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683894
   },
   {
    "id": "mmwgsdzyr18",
@@ -6187,7 +6187,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6197,16 +6197,16 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683895
   },
   {
    "id": "mmwgsdzyr19",
    "box": [
-    0.36987,
+    0.36536,
     0.12667,
-    0.03167,
-    0.01889
+    0.03618,
+    0.01909
    ],
    "zone": "field",
    "motif": "",
@@ -6214,7 +6214,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6224,8 +6224,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683900
   },
   {
    "id": "mmwgsdzyr20",
@@ -6241,7 +6241,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 90,
    "flip": 0,
@@ -6251,8 +6251,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683901
   },
   {
    "id": "mmwgsdzyr21",
@@ -6268,7 +6268,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -6278,8 +6278,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683904
   },
   {
    "id": "mmwgsdzyr22",
@@ -6295,7 +6295,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6305,8 +6305,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683905
   },
   {
    "id": "mmwgsdzyr23",
@@ -6322,7 +6322,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6332,8 +6332,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683908
   },
   {
    "id": "mmwgsdzyr24",
@@ -6349,7 +6349,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -6359,8 +6359,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683909
   },
   {
    "id": "mmwgsdzyr25",
@@ -6376,7 +6376,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6386,8 +6386,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683910
   },
   {
    "id": "mmwgsdzyr26",
@@ -6403,7 +6403,7 @@
    "scheme": "",
    "group": "mmwgs9mqy",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -6413,12 +6413,93 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794683786,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683911
+  },
+  {
+   "id": "mmwgsho27",
+   "box": [
+    0.15936,
+    0.06376,
+    0.03242,
+    0.01369
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwgs9mqy",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1794683958,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683970
+  },
+  {
+   "id": "mmwgshua2",
+   "box": [
+    0.37852,
+    0.06162,
+    0.03194,
+    0.01647
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwgs9mqy",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "color",
+   "by": "dolgikh",
+   "at": 1794683966,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683969
+  },
+  {
+   "id": "mmwgsi35i",
+   "box": [
+    0.55005,
+    0.05974,
+    0.03116,
+    0.01726
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwgs9mqy",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1794683977,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794683979
   }
  ],
  "created": 1791736131,
- "updated": 1794683786,
+ "updated": 1794683979,
  "cat": {
   "title": "kuba sumakh7",
   "museum": "",
