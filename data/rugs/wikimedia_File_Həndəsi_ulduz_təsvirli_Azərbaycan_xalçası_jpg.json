@@ -18,7 +18,7 @@
  "h": 1222,
  "marks": [],
  "created": 1791736123,
- "updated": 1794776653,
+ "updated": 1794776680,
  "cat": {
   "title": "Həndəsi ulduz təsvirli Azərbaycan xalçası.jpg",
   "museum": "Wikimedia Commons",
@@ -80,7 +80,30 @@
   "conf": 0.92,
   "area": 0.548,
   "ver": 1,
-  "t": 1794238350
+  "t": 1794238350,
+  "ref_quad": {
+   "quad": [
+    [
+     0.22117,
+     0.06088
+    ],
+    [
+     0.67781,
+     0.04232
+    ],
+    [
+     0.89771,
+     0.92688
+    ],
+    [
+     0.11068,
+     0.90492
+    ]
+   ],
+   "v": 2,
+   "from": "auto",
+   "t": 1794776675
+  }
  },
  "micro": {
   "frame": {
@@ -89,8 +112,54 @@
     "w": 2,
     "t": 1794776653
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794776680,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "edge": {
+  "wavy": [
+   "dolgikh"
+  ]
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.22117,
+    0.06088
+   ],
+   [
+    0.67781,
+    0.04232
+   ],
+   [
+    0.89771,
+    0.92688
+   ],
+   [
+    0.11068,
+    0.90492
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

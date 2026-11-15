@@ -2623,7 +2623,7 @@
    "scheme": "t104_f04",
    "group": "m6af789aee906059_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.71,
@@ -2767,11 +2767,13 @@
      0.67285
     ]
    ],
-   "sam": 0.917
+   "sam": 0.917,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794776722
   }
  ],
  "created": 1791870016,
- "updated": 1794607537,
+ "updated": 1794776722,
  "cat": {
   "title": "Knotted-pile wool carpet “Pirabadil”",
   "museum": "",
@@ -2945,6 +2947,13 @@
      "a": "bad",
      "w": 2,
      "t": 1794588933
+    }
+   },
+   "m6af789aee906059_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794776722
     }
    }
   },
