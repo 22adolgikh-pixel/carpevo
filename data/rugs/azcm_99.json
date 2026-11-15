@@ -16,9 +16,64 @@
  "status": "new",
  "w": 1255,
  "h": 2400,
- "marks": [],
+ "marks": [
+  {
+   "id": "mmwhsi6zh",
+   "box": [
+    0.18051,
+    0.44064,
+    0.20015,
+    0.10709
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwhsi6zh",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1794744448,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794744452
+  },
+  {
+   "id": "mmwhsi86z0",
+   "box": [
+    0.63998,
+    0.4494,
+    0.18651,
+    0.09944
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwhsi6zh",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 1,
+   "score": 0.723,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1794744450,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1794744452
+  }
+ ],
  "created": 1791870043,
- "updated": 1791870043,
+ "updated": 1794744452,
  "cat": {
   "title": "“Malıbəyli” («Малыбейли»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -106,5 +161,7 @@
   "ver": 1,
   "t": 1794238359
  },
- "multi": []
+ "multi": [],
+ "layout": null,
+ "updated_by": "dolgikh"
 }
