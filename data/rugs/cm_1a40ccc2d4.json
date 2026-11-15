@@ -18,7 +18,7 @@
  "h": 1981,
  "marks": [],
  "created": 1791870020,
- "updated": 1794767272,
+ "updated": 1794784858,
  "cat": {
   "title": "Cek xalçası, XIX əsr",
   "museum": "",
@@ -145,11 +145,24 @@
    1,
    1
   ],
-  "bounds": [],
+  "bounds": [
+   {
+    "ix": 0.03023758099352052,
+    "iy": 0.02,
+    "strength": 2.59
+   },
+   {
+    "ix": 0.2871593594416536,
+    "iy": 0.1919691651112193,
+    "strength": 2.91
+   }
+  ],
   "rings": [
+   "guard",
+   "border",
    "field"
   ],
-  "status": "auto",
+  "status": "edited",
   "quad": [
    [
     0.00147,
@@ -170,5 +183,6 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "updated_by": "dolgikh"
 }

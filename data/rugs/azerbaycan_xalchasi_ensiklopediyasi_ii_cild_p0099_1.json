@@ -9,7 +9,7 @@
  "place": "Губа",
  "date": "19 в., начало",
  "school": "guba-shirvan",
- "composition": "",
+ "composition": "sumax",
  "technique": "безворсовый: сумах",
  "size": "246x299 см",
  "notes": "Sumax. Quba. Azərbaycan. 19-cu əsrin əvvəli. Material: yun. Ölçü: 246x299 sm. Azərbaycan Xalça Muzeyi. DDK 544.",
@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794567348,
+ "updated": 1794784926,
  "cat": {
   "title": "Sumax Губа",
   "museum": "Национальный музей азербайджанского ковра",
@@ -58,7 +58,13 @@
    "inv": true
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_148": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1794784887
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -110,5 +116,10 @@
    "at": 1794618040,
    "ver": 2
   }
+ },
+ "layout": null,
+ "updated_by": "dolgikh",
+ "from_twin": {
+  "composition": "azcm_148"
  }
 }
