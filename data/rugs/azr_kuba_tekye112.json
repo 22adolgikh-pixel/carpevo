@@ -18,7 +18,7 @@
  "h": 601,
  "marks": [],
  "created": 1791736135,
- "updated": 1794642797,
+ "updated": 1794772340,
  "cat": {
   "title": "kuba tekye112",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794642797
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794772340,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.031,
+    0.10406
+   ],
+   [
+    0.97942,
+    0.05588
+   ],
+   [
+    0.97143,
+    0.95486
+   ],
+   [
+    0.0223,
+    0.94331
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

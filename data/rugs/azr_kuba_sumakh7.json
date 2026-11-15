@@ -31,7 +31,7 @@
    "scheme": "",
    "group": "mmwgme5ju",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -41,8 +41,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1794673715,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772276
   },
   {
    "id": "mmwgme8700",
@@ -247,7 +247,7 @@
    "scheme": "",
    "group": "mmwgmf330",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -257,8 +257,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1794673759,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772345
   },
   {
    "id": "mmwgmf5xp0",
@@ -517,7 +517,7 @@
    "scheme": "",
    "group": "mmwgmh26v",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -527,8 +527,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1794673851,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772361
   },
   {
    "id": "mmwgmh3fd0",
@@ -895,7 +895,7 @@
    "scheme": "",
    "group": "mmwgmu0m7",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -905,8 +905,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1794674456,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772401
   },
   {
    "id": "mmwgmu2ds0",
@@ -1273,7 +1273,7 @@
    "scheme": "",
    "group": "mmwgmu0m7",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -1283,8 +1283,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1794674500,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772401
   },
   {
    "id": "mmwgmv4j7",
@@ -1300,7 +1300,7 @@
    "scheme": "",
    "group": "mmwgmu0m7",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -1310,8 +1310,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1794674508,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772401
   },
   {
    "id": "mmwgmwsvd",
@@ -9712,7 +9712,7 @@
   }
  ],
  "created": 1791736131,
- "updated": 1794687691,
+ "updated": 1794772401,
  "cat": {
   "title": "kuba sumakh7",
   "museum": "",
@@ -9853,6 +9853,50 @@
     "w": 2,
     "t": 1794645297,
     "s": "ref"
+   }
+  },
+  "marks": {
+   "mmwgme5ju": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772276
+    }
+   },
+   "mmwgmf330": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772345
+    }
+   },
+   "mmwgmh26v": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772361
+    }
+   },
+   "mmwgmu0m7": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772401
+    }
+   },
+   "mmwgmuyq6": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772401
+    }
+   },
+   "mmwgmv4j7": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772401
+    }
    }
   }
  },
