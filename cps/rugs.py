@@ -2650,7 +2650,7 @@ def install(app, DATA, D_WORK):
             if t["type"] == "cdup": continue                                     # карточка о словах: ковра у неё нет
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
         return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "name_wait": more["name_wait"]},
-                "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
+                "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver(), "rs": {k: rpr[k] for k in ("running", "done", "total", "found", "t", "err")}}
 
     @app.post("/api/micro/answer")
     def micro_answer(request: Request, body: dict = Body(...)):

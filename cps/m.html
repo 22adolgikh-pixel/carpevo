@@ -82,7 +82,7 @@ function chips(){const L=S.left||{};$('chips').innerHTML=KINDS.map(([k,n])=>`<bu
     if(S.k.includes(k)){if(S.k.length===1)return toast('хотя бы один вид карточек');S.k=S.k.filter(x=>x!==k);}else S.k.push(k);
     try{localStorage.setItem('cps_m_k',S.k.join(','));}catch(e){}load();});}
 async function load(){$('main').innerHTML='<div class="end"><span class="mut">загружаю…</span></div>';
-  try{const j=await api('/api/micro/next?n=6&k='+S.k.join(','));S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;S.ver=j.ver||S.ver;chips();head();show();}
+  try{const j=await api('/api/micro/next?n=6&k='+S.k.join(','));S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;S.rs=j.rs;S.ver=j.ver||S.ver;chips();head();show();}
   catch(e){$('main').innerHTML=`<div class="end"><span>Не загрузилось: ${esc(e.message)}</span><button onclick="load()">ещё раз</button></div>`;}}
 const img=t=>'/rugmid/'+encodeURIComponent(t.rid)+'.jpg';
 function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!im.naturalWidth)return;
@@ -90,7 +90,7 @@ function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!
   el.style.backgroundImage=`url("${img(t)}")`;el.style.backgroundSize=`${BW}px ${BH}px`;el.style.backgroundPosition=`${r.width/2-x*BW}px ${r.height/2-y*BH}px`;}
 function show(){head();const t=S.tasks[S.i];
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
-    <div class="mut">в очереди: ${KINDS.filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
+    <div class="mut">в очереди: ${KINDS.filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${S.k.includes('rsame')&&S.rs?`<div class="mut">поиск новых дублей: ${S.rs.running?`идёт, проверено ${S.rs.done} из ${S.rs.total||'…'} пар`:(S.rs.t?'проход закончен':'ещё не запускался')}${S.rs.err?' · ошибка: '+S.rs.err:''}</div>`:''}${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
     ${S.k.some(k=>L[k])?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
   ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,split:showSplit,cdup:showCdup,xsame:showXsame})[t.type](t);}
 function qhead(q,tip){return `<div class="qrow"><span class="q">${q}</span><button class="ib" id="ib" aria-label="подсказка">i</button></div><div class="tip hint" id="tip">${tip}</div>`;}
