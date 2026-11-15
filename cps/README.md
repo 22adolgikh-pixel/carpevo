@@ -811,3 +811,6 @@
 ### v11.77 — «новые дубли»: ход поиска виден в `/m`, `rect_pairs.json` уходит в резервную копию
 - `/api/micro/next` отдаёт `rs` (идёт ли поиск, проверено/всего пар, найдено, ошибка); на пустой карточке вида «новые дубли» `/m` пишет, что поиск идёт или не запускался.
 - `rect_pairs.json` добавлен в `backup.ITEMS` (ветка `cps-data`).
+
+### Переобучение сети углов (15.11)
+- `tools/corners/labels.json` пересобран по резервной копии 15.11 17:29: 627 ковров с подтверждёнными углами (было 474). `tools/colab/corner_refine_colab.py` пишет `corner_refine_v2.pt/.json` (v1 не трогается). Запуск в Colab: `!rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo`, затем скрипт целиком (GPU T4, 10–20 мин). После — подключить v2 на сервере (`DRIVE`, `VERSION = 2`, `POST /api/corner_refine/fetch`).

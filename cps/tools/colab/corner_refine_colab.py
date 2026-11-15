@@ -6,7 +6,7 @@
 # Все четыре угла приводятся к виду «левый верхний» (зеркалом), поэтому сеть одна.
 # Сеть — MobileNetV3-small (предобучена на ImageNet), выход — сдвиг (dx, dy) в долях окна.
 # Проверка — 20 % ковров, которых сеть не видела (последние по времени правки): ошибка до и после, как в отчёте Claude.
-# Итог: carpet-dna/models/corner_refine_v1.pt (TorchScript, ~6 МБ) и corner_refine_v1.json (замеры).
+# Итог: carpet-dna/models/corner_refine_v{VER}.pt (TorchScript, ~6 МБ) и corner_refine_v{VER}.json (замеры).
 # Время: GPU (T4) — 10–20 мин; чтение пакетов с Диска — ещё 2–5 мин. Ключи не нужны.
 import os, io, json, math, random, time, zipfile, glob
 import numpy as np, cv2, torch, torch.nn as nn, torchvision
@@ -15,6 +15,7 @@ drive.mount('/content/drive')
 T0 = time.time(); log = lambda *a: print(f'[{time.time() - T0:5.0f} c]', *a, flush=True)
 REPO = '/content/carpevo'
 LAB = json.load(open(f'{REPO}/cps/tools/corners/labels.json', encoding='utf-8'))
+VER = 2                                    # v1 — 13.11 (365 ковров); v2 — 15.11 (≈630 ковров). Старые веса не перезаписываются
 DEV = 'cuda' if torch.cuda.is_available() else 'cpu'; log('устройство', DEV, '| ковров с метками', len(LAB))
 OUT = '/content/drive/MyDrive/carpet-dna/models'; os.makedirs(OUT, exist_ok=True)
 
@@ -134,9 +135,9 @@ for start in ('auto', 'vlm'):
 # ---------- выгрузка ----------
 net.cpu().eval()
 ts = torch.jit.trace(net, torch.zeros(4, 3, W, W))
-p = f'{OUT}/corner_refine_v1.pt'; ts.save(p)
-meta = {'ver': 1, 'W': W, 'halves': HALVES, 'mag': MAG, 'long': LONG, 'trained': time.strftime('%Y-%m-%d %H:%M'),
+p = f'{OUT}/corner_refine_v{VER}.pt'; ts.save(p)
+meta = {'ver': VER, 'W': W, 'halves': HALVES, 'mag': MAG, 'long': LONG, 'trained': time.strftime('%Y-%m-%d %H:%M'),
         'n_train': len(TR), 'n_test': len(TE), 'test': rep}
-json.dump(meta, open(f'{OUT}/corner_refine_v1.json', 'w'), ensure_ascii=False, indent=1)
+json.dump(meta, open(f'{OUT}/corner_refine_v{VER}.json', 'w'), ensure_ascii=False, indent=1)
 print('\nИТОГ:', json.dumps(meta, ensure_ascii=False))
-print('файлы:', p, f'({os.path.getsize(p) / 1e6:.1f} МБ) и corner_refine_v1.json — Claude заберёт их с Диска')
+print('файлы:', p, f'({os.path.getsize(p) / 1e6:.1f} МБ) и corner_refine_v{VER}.json — Claude заберёт их с Диска')
