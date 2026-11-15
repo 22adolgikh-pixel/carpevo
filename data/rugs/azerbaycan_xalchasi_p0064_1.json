@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794597334,
+ "updated": 1794771503,
  "cat": {
   "title": "Ковёр «Çələbi» Карабах",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -116,8 +116,49 @@
     "w": 2,
     "t": 1794597334
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794771503,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03656,
+    0.02878
+   ],
+   [
+    0.9528,
+    0.03004
+   ],
+   [
+    0.95485,
+    0.95629
+   ],
+   [
+    0.06172,
+    0.97155
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 1054,
  "marks": [],
  "created": 1791736137,
- "updated": 1794740768,
+ "updated": 1794771559,
  "cat": {
   "title": "kuba zeyve lesghi star167",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794740768
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794771559,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02205,
+    0.05156
+   ],
+   [
+    0.96665,
+    0.04954
+   ],
+   [
+    0.94168,
+    0.95768
+   ],
+   [
+    0.04194,
+    0.97221
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

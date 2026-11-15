@@ -18,7 +18,7 @@
  "h": 1392,
  "marks": [],
  "created": 1791736129,
- "updated": 1794596861,
+ "updated": 1794771526,
  "cat": {
   "title": "antique kazak prayer rug14",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794596861
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794771526,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05498,
+    0.02267
+   ],
+   [
+    0.94234,
+    0.02259
+   ],
+   [
+    0.92541,
+    0.96042
+   ],
+   [
+    0.07701,
+    0.964
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
