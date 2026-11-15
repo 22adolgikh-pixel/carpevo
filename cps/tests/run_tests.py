@@ -1513,6 +1513,49 @@ def t38_rect_view_v1170(pg, ctx):
     errors_ok(ctx, 'выпрямленный вид v11.70')
 
 
+@test
+def t39_rect_working_v1172(pg, ctx):
+    """v11.72: выпрямленный ковёр — рабочая картинка: по подтверждённым углам редактор открывает /rugrect/ сам, миниатюра каталога — выпрямленная
+    (?raw=1 — исходная), поиск повторов идёт по выпрямленному и отвечает в долях фото, «похожие ковры» по выпрямленным"""
+    import urllib.request as U, json as _j, cv2, numpy as np
+    pg.goto(ctx['url']); pg.wait_for_timeout(2000); pg.evaluate("localStorage.removeItem('cpsRect')")
+    pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
+    Q = "[[.06,.05],[.95,.09],[.92,.95],[.08,.91]]"
+    for rid in ('frieze_1', 'tall_1', 'persp_1'):
+        pg.evaluate(f"(async()=>{{await rugOpen('{rid}');R.rug.layout={{quad:{Q},quad_status:'confirmed',bounds:[],rings:[],status:'auto',carpet:[.05,.05,.9,.9]}};rugSaveSoon();await rugSaveNow();}})()")
+        pg.wait_for_timeout(900)
+    pg.evaluate("rugOpen('frieze_1')"); pg.wait_for_timeout(1800)
+    assert '/rugrect/' in pg.evaluate("document.getElementById('rgImg').src"), 'редактор не открыл выпрямленный ковёр по подтверждённым углам'
+    pg.keyboard.press('t'); pg.wait_for_timeout(900)
+    assert pg.evaluate("localStorage.getItem('cpsRect')") == '0', 'выбор «обычное фото» не запомнился'
+    pg.evaluate("rugOpen('tall_1')"); pg.wait_for_timeout(1500)
+    assert '/rugimg/' in pg.evaluate("document.getElementById('rgImg').src"), 'после T редактор всё равно открывает выпрямленный'
+    pg.keyboard.press('t'); pg.wait_for_timeout(600)
+    # миниатюры
+    rd = lambda u: cv2.imdecode(np.frombuffer(U.urlopen(ctx['url'] + u).read(), np.uint8), 1)
+    a, b = rd('rugthumb/persp_1.jpg'), rd('rugthumb/persp_1.jpg?raw=1')
+    assert a is not None and b is not None and a.shape != b.shape or not np.array_equal(a, b), 'миниатюра не выпрямленная'
+    # повторы на выпрямленном: рамка-образец находит хоть что-то, ответ — в долях исходного фото
+    req = U.Request(ctx['url'] + 'api/rugs/frieze_1/repeats', data=_j.dumps({"box": [.3, .3, .1, .1]}).encode(), headers={'Content-Type': 'application/json'})
+    j = _j.load(U.urlopen(req))
+    j = j.get('result', j)
+    assert 'cands' in j, f'поиск повторов упал: {str(j)[:200]}'
+    assert all(0 <= c['box'][0] <= 1 and 0 <= c['box'][1] <= 1 for c in j['cands']), 'кандидаты не в долях фото'
+    # похожие
+    s = _j.load(U.urlopen(ctx['url'] + 'api/rugs/frieze_1/rect_similar?n=48'))
+    ids = [x['id'] for x in s['items']]
+    dbg = {i: (lambda r: [(r.get('layout') or {}).get('quad_status'), r.get('hidden'), r.get('dup_of'), r.get('split_into')])(_j.load(U.urlopen(ctx['url'] + 'api/rugs/' + i))) for i in ('tall_1', 'persp_1')}
+    assert s['pool'] >= 2 and {'tall_1', 'persp_1'} <= set(ids), f'похожие по выпрямленным: {dbg} {ids}'
+    pg.evaluate("rugOpen('frieze_1')"); pg.wait_for_timeout(1500)
+    pg.click('#rgSim'); pg.wait_for_timeout(1500)
+    assert pg.evaluate("document.querySelectorAll('#modal [data-simok]').length") >= 1, 'окно похожих ковров пустое'
+    pg.screenshot(path=f'{OUT}/rect_similar.png')
+    pg.click('#modal [data-simok="persp_1"]'); pg.wait_for_timeout(1000)
+    assert pg.evaluate("((R.rug.same_ok||{})['persp_1']||{}).ok") is True, '«тот же» из окна похожих не записался'
+    pg.click('#mClose')
+    errors_ok(ctx, 'выпрямленный ковёр — рабочая картинка v11.72')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

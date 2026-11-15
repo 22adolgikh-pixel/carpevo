@@ -450,7 +450,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.70</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.72</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Открыть текущий рисунок поверх списка">✎ Редактор</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2243,7 +2243,7 @@ async function triOpen(){
     const draw=()=>{
       E.innerHTML=`<div class="trh"><b>▦ Проверка пачкой</b><span class="mut">углы чуть мимо — потяните жёлтую точку; совсем не то (не ковёр, обрезан, контур не найден) — клик по плитке, красная рамка. Остальное будет принято.</span><span class="mut">осталось ${q.left}</span><span class="mut">${esc(sline)}</span><span style="flex:1"></span><button id="triOk">✓ принять ${ids.length-bad.size}, проверить вручную ${bad.size}</button><button class="sm" id="triX">закрыть</button></div>
       <div class="trg">${ids.map(i=>{const a=t.res[i],m=by[i]||{w:3,h:4},ar=(m.w&&m.h)?m.h/m.w:1.3,qd=a?a.quad.map(p=>p.join(',')).join(' '):'';
-        return `<div class="trt${bad.has(i)?' bad':''}" data-i="${esc(i)}"><div class="ph"><img loading="lazy" src="/rugthumb/${encodeURIComponent(i)}.jpg" alt="">${a?`<svg viewBox="0 0 1 1" preserveAspectRatio="none"><polygon points="${qd}" fill="#ffe06622" stroke="#ffe066" stroke-width="2.2" vector-effect="non-scaling-stroke"/></svg>`+a.quad.map((p,k)=>`<i class="hd" data-k="${k}" style="left:${p[0]*100}%;top:${p[1]*100}%"></i>`).join(''):''}</div><span class="bd${a&&a.frame!=='whole'?' w':''}">${a?TRI_FR[a.frame]||a.frame:'—'}</span><span class="nm">${esc((by[i]||{}).title||i)}</span></div>`;}).join('')}</div>`;
+        return `<div class="trt${bad.has(i)?' bad':''}" data-i="${esc(i)}"><div class="ph"><img loading="lazy" src="/rugthumb/${encodeURIComponent(i)}.jpg?raw=1" alt="">${a?`<svg viewBox="0 0 1 1" preserveAspectRatio="none"><polygon points="${qd}" fill="#ffe06622" stroke="#ffe066" stroke-width="2.2" vector-effect="non-scaling-stroke"/></svg>`+a.quad.map((p,k)=>`<i class="hd" data-k="${k}" style="left:${p[0]*100}%;top:${p[1]*100}%"></i>`).join(''):''}</div><span class="bd${a&&a.frame!=='whole'?' w':''}">${a?TRI_FR[a.frame]||a.frame:'—'}</span><span class="nm">${esc((by[i]||{}).title||i)}</span></div>`;}).join('')}</div>`;
       E.querySelectorAll('.trt').forEach(e=>{const i=e.dataset.i;e.onclick=ev=>{if(ev.target.classList.contains('hd'))return;bad.has(i)?bad.delete(i):bad.add(i);draw();};
         const ph=e.querySelector('.ph');e.querySelectorAll('.hd').forEach(h=>{h.onpointerenter=ev=>{if(ev.buttons)return;const p=t.res[i].quad[+h.dataset.k];triLoupe(true,ph,i,p[0],p[1],ev.clientX,ev.clientY);};h.onpointerleave=ev=>{if(!ev.buttons)triLoupe(false);};});
         e.querySelectorAll('.hd').forEach(h=>h.onpointerdown=ev=>{       // тянуть угол прямо в плитке
@@ -2405,7 +2405,7 @@ function rugList(){
   const mb=$('rgMore');if(mb){mb.onclick=()=>{R.gridN=N+150;rugList();};try{const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){io.disconnect();R.gridN=N+150;rugList();}},{root:document.querySelector('#rgGridV .rgmid'),rootMargin:'400px'});io.observe(mb);}catch(e){}}
 }
 async function rugOpen(id){const V=$('rgView');if(V&&R.view==='edit'){let o=$('rgLoad');if(!o){o=document.createElement('div');o.id='rgLoad';V.appendChild(o);}o.innerHTML='<span class="spin"></span> открываю ковёр…'+(R.busyHeavy?' <small>(сервер занят: '+esc(R.busyHeavy)+')</small>':'');}
-  try{if(R.saveT)await rugSaveNow();R.rug=await api('/api/rugs/'+encodeURIComponent(id));}finally{const o=$('rgLoad');o&&o.remove();}R.sel=null;R.repeatOf=null;R.preset=null;R.split=null;if(R.tool==='split'||R.tool==='zones')R.tool='box';R.side='rug';R.fitNext=true;R.view='edit';rugView();rugRender();}
+  try{if(R.saveT)await rugSaveNow();R.rug=await api('/api/rugs/'+encodeURIComponent(id));}finally{const o=$('rgLoad');o&&o.remove();}R.sel=null;R.repeatOf=null;R.preset=null;R.split=null;if(R.tool==='split'||R.tool==='zones')R.tool='box';R.rect=rugRectPref()&&!!rugRectReady(R.rug);R.side='rug';R.fitNext=true;R.view='edit';rugView();rugRender();}
 function rugSaveSoon(){if(rro())return;R.ver=(R.ver||0)+1;clearTimeout(R.saveT);$('rgSaved')&&($('rgSaved').textContent='…');R.saveT=setTimeout(rugSaveNow,500);}
 async function rugSaveNow(){
   clearTimeout(R.saveT);const r=R.rug;if(!r)return;
@@ -2467,6 +2467,20 @@ function rugRender(){
   rugViewEvents();rugTools();rugSide();rugStrip();   // v11.23: вопрос про двойников сам не всплывает (мешал размечать) — кнопка в ленте снизу
 }
 // поле и каймы — отдельный режим: свои инструменты справа, на фото только линии границ
+// v11.72: похожие ковры по выпрямленным картинкам → «тот же ковёр?» (ответ ставится у обоих, как в списке двойников)
+async function rugSimilar(r){if(R.saveT)await rugSaveNow();stat('ищу похожие ковры…','busy');let j;
+  try{j=await api('/api/rugs/'+encodeURIComponent(r.id)+'/rect_similar?n=18');}catch(e){fail(e);return;}
+  stat('похожих показано: '+j.items.length+' из '+j.pool+' выпрямленных','ok');
+  const W=$('modal'),lab=x=>x.ok===true?'<b style="color:var(--ok)">✓ тот же</b>':x.ok===false?'<span style="color:var(--bad)">✗ другой</span>':x.known?'<span class="mut">уже в двойниках</span>':'';
+  const draw=()=>{W.innerHTML=`<div class="mbox" style="width:min(900px,95vw)" role="dialog" aria-modal="true" aria-labelledby="simH"><div class="flex" style="margin-bottom:8px;gap:10px"><img src="/rugthumb/${encodeURIComponent(r.id)}.jpg" style="width:60px;border-radius:4px"><b id="simH" style="font-size:15px">Похожие ковры (по выпрямленным)</b><span class="sp"></span><button class="sm" id="mClose">Закрыть</button></div>
+    <p class="mut" style="margin:0 0 10px;font-size:12.5px">Сравниваются выпрямленные ковры целиком (с поворотами и отражениями). Чем выше — тем похожее. Это кандидаты: решает человек.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px">${j.items.map(x=>`<div class="rgsimc" style="background:#0002;border-radius:6px;padding:6px"><img loading="lazy" src="/rugthumb/${encodeURIComponent(x.id)}.jpg" data-open="${esc(x.id)}" style="width:100%;height:150px;object-fit:contain;cursor:pointer" data-tip="${esc(x.title||x.id)} — открыть"><small class="mut">${esc(SRCRU[x.src]||x.src||'')} · ${Math.round(x.score*100)}%</small><div>${lab(x)}</div>${rro()||x.ok!=null?'':`<div class="rgrow"><button class="sm" data-simok="${esc(x.id)}">✓ тот же</button><button class="sm" data-simno="${esc(x.id)}">✗</button></div>`}</div>`).join('')||'<p class="mut">Нет других выпрямленных ковров.</p>'}</div></div>`;
+    $('mClose').onclick=close;
+    W.querySelectorAll('[data-open]').forEach(e=>e.onclick=()=>{close();rugOpen(e.dataset.open);});
+    W.querySelectorAll('[data-simok],[data-simno]').forEach(b=>b.onclick=async()=>{const o=b.dataset.simok||b.dataset.simno,ok=!!b.dataset.simok;
+      try{const n=await api('/api/rugs/'+encodeURIComponent(r.id)+'/same',{other:o,ok});const x=j.items.find(t=>t.id===o);x.ok=ok;x.known=true;if(R.rug&&R.rug.id===r.id){R.rug=n;rugSide();}draw();stat(ok?'отмечено: тот же ковёр':'отмечено: другой ковёр','ok');}catch(e){fail(e);}});};
+  const close=()=>{W.hidden=true;W.innerHTML='';W.onclick=null;};
+  draw();W.hidden=false;W.onclick=e=>{if(e.target===W)close();};}
 // v11.19: каймы как фризы — машина находит раппорты сама (без базы), человек размечает одним кликом и называет
 async function rugFriezes(r){if(R.saveT)await rugSaveNow();stat('ищу каймы и шаг повтора…','busy');let j;
   try{j=await apiJob('/api/rugs/'+encodeURIComponent(r.id)+'/friezes',{});}catch(e){fail(e);return;}
@@ -2620,7 +2634,10 @@ function rugPx(b){if(!rugRectOn())return b.map((v,j)=>v*(j%2?R.ih:R.iw));
 function rugBoxFromD(u0,v0,u1,v1){const a=Math.min(u0,u1),b=Math.max(u0,u1),c=Math.min(v0,v1),d=Math.max(v0,v1);   // прямоугольник на экране → рамка на фото
   const P=[[a,c],[b,c],[b,d],[a,d]].map(p=>rugO(p[0],p[1])),xs=P.map(p=>p[0]),ys=P.map(p=>p[1]),cl=v=>Math.max(0,Math.min(1,v)),x0=cl(Math.min(...xs)),y0=cl(Math.min(...ys));
   return[x0,y0,cl(Math.max(...xs))-x0,cl(Math.max(...ys))-y0];}
-function rugRectToggle(on){if(!R.rug)return;if(on&&!layH(R.rug.layout)){stat('сначала 4 угла ковра (Z) — по ним ковёр выпрямляется','warn');return;}
+// v11.72: выпрямленный ковёр — рабочая картинка: редактор открывает его сам, если углы подтверждены (выключить — T, выбор запоминается)
+function rugRectPref(){try{return localStorage.getItem('cpsRect')!=='0';}catch(e){return true;}}
+function rugRectReady(r){const L=r&&r.layout;return L&&layH(L)&&['confirmed','accepted','edited'].includes(L.quad_status);}
+function rugRectToggle(on){if(!R.rug)return;try{localStorage.setItem('cpsRect',on?'1':'0');}catch(e){}if(on&&!layH(R.rug.layout)){stat('сначала 4 угла ковра (Z) — по ним ковёр выпрямляется','warn');return;}
   if(on&&(R.tool==='zones'||R.tool==='split'))R.tool='box';R.rect=!!on;R.fitNext=true;rugRender();stat(on?'выпрямленный ковёр: размечайте как обычно (T — обычное фото)':'обычное фото','ok');}
 function rugPt(e){const V=$('rgView').getBoundingClientRect(),u=(e.clientX-V.left-R.ox)/R.z/R.iw,v=(e.clientY-V.top-R.oy)/R.z/R.ih,[x,y]=rugO(u,v);return{x,y,u,v};}
 function rugViewEvents(){
@@ -2803,6 +2820,7 @@ function rugSide(){
   $('rgTRect')&&($('rgTRect').onclick=()=>rugRectToggle(!R.rect));
   $('rgTbSplit')&&($('rgTbSplit').onclick=()=>rugSplitStart(R.rug));
   $('rgFriez')&&($('rgFriez').onclick=()=>rugFriezes(R.rug));
+  $('rgSim')&&($('rgSim').onclick=()=>rugSimilar(R.rug));
   $('rgElt')&&($('rgElt').onchange=e=>{const r=R.rug;r.eltest=e.target.checked;const x=R.list.find(y=>y.id===r.id);if(x)x.eltest=r.eltest;rugSaveSoon();stat(r.eltest?'ковёр — тест сетей элементов: в обучение не пойдёт, на нём мерим сети':'ковёр больше не тестовый','ok');});
   $('rgTbHide')&&($('rgTbHide').onclick=()=>{if(R.rug.hidden){R.rug.hidden='';rugSaveSoon();rugRender();}else rugHide(R.rug);});
   $('rgPropV')&&($('rgPropV').onchange=e=>rugPropSet(e.target.value));
@@ -3012,6 +3030,7 @@ function rugSideFill(E,side,r){
         <div class="rgsec"><h5>Фото</h5><div class="rgacts">
           <button class="sm" id="rgTZones" data-tip="4 угла ковра (выпрямление), полосы кайм и поле — зоны рамок ставятся сами">▭ Углы, поле и каймы <kbd>Z</kbd></button>
           ${rro()||r.split_from||(r.split_into||[]).length?'':`<button class="sm" id="rgTbSplit">✂ Несколько ковров на фото — разделить <kbd>K</kbd></button>`}
+          ${rugRectReady(r)?`<button class="sm" id="rgSim" data-tip="Похожие ковры по выпрямленной картинке — кандидаты в «тот же ковёр» (ищутся среди ковров с подтверждёнными углами)">🔎 Похожие ковры (по выпрямленным)</button>`:''}
           ${rro()?'':`<button class="sm" id="rgFriez" data-tip="Машина сама находит полосы кайм, шаг повтора и «чистый» раппорт каждой (медиана всех повторов). Узор не обязан быть в базе: раппорт можно разметить как новый элемент и назвать позже">🧩 Каймы: найти раппорты <small class="mut">тест</small></button>`}
           ${rro()?'':`<button class="sm" id="rgTbHide">${r.hidden?'↺ Вернуть фото в каталог':'🚫 Не подходит: скрыть фото…'}</button>`}</div>    <label class="rgline" style="margin-top:6px"><input type="checkbox" id="rgElt" ${rro()?'disabled':''} ${r.eltest?'checked':''}> 🧪 тест сетей элементов <small class="mut">— на ковре отмечены <b>все</b> повторы <b>всех</b> элементов (каждый элемент — своя группа, названия не нужны). Такие ковры не идут в обучение, на них честно мерим все сети: любая «лишняя» находка — ошибка</small></label><div></div></div>
         <div class="rgsec"><h5>Вид рамок</h5>

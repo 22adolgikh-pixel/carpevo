@@ -1128,6 +1128,126 @@ def install(app, DATA, D_WORK):
 
     D_RECT = os.path.join(DATA, "rug_rect")                 # v11.30: выпрямленные по 4 углам ковры (производные, в бэкап не идут)
 
+    # ---- v11.72: выпрямленный ковёр — рабочая картинка ----
+    # Если у ковра углы подтверждены (руками, пачкой или с телефона), всё, что человек и машина делают с ковром, идёт по выпрямленной
+    # картинке: миниатюры каталога, редактор (по умолчанию), поиск повторов, поиск похожих ковров. Рамки по-прежнему хранятся
+    # в долях исходного фото (их пересчёт — по 4 углам), поэтому старая разметка не ломается, а выпрямление можно пересчитать в любой момент.
+    # Файл rug_rect/<id>.jpg строится заново, когда углы изменились (углы, по которым он построен, — в <id>.q.json).
+    RECT_OK = ("confirmed", "accepted", "edited")
+    _rsig = {}
+
+    def rect_quad(r):
+        L = (r or {}).get("layout") or {}; q = L.get("quad")
+        return q if q and len(q) == 4 and L.get("quad_status") in RECT_OK else None
+
+    def _rect_write(rid, a, quad):
+        import rug_rect
+        x = rug_rect.rectify(a, quad, 1600)
+        os.makedirs(D_RECT, exist_ok=True); tmp = os.path.join(D_RECT, rid + ".tmp.jpg")
+        cv2.imwrite(tmp, x, [cv2.IMWRITE_JPEG_QUALITY, 90]); os.replace(tmp, os.path.join(D_RECT, rid + ".jpg"))
+        try: json.dump({"quad": [[float(u), float(v)] for u, v in quad], "w": int(x.shape[1]), "h": int(x.shape[0]), "t": int(time.time())},
+                       open(os.path.join(D_RECT, rid + ".q.json"), "w"))
+        except OSError: pass
+        for f in (os.path.join(D_TH, rid + ".r.jpg"),):
+            try: os.remove(f)
+            except OSError: pass
+        _rsig.pop(rid, None)
+        return x
+
+    def rect_path(rid, r=None, build=True):
+        """путь к выпрямленному ковру (рабочей картинке) или None, если углы не подтверждены / фото нет"""
+        rid = os.path.basename(rid); r = r or load(rid); q = rect_quad(r)
+        if not q: return None
+        p = os.path.join(D_RECT, rid + ".jpg")
+        try: cur = json.load(open(os.path.join(D_RECT, rid + ".q.json")))["quad"]
+        except Exception: cur = None
+        if os.path.exists(p) and cur and max(abs(float(a) - float(b)) for u, v in zip(cur, q) for a, b in zip(u, v)) < 1e-5: return p
+        if not build: return None
+        src = img_path(rid); a = cv2.imread(src) if src else None
+        if a is None: return None
+        _rect_write(rid, a, q); return p
+
+    def rect_boxmap(q):
+        """доли исходного фото ↔ доли выпрямленного ковра: (fwd, back), каждая — рамка [x,y,w,h] → рамка (описанный прямоугольник)"""
+        U = np.float32([[0, 0], [1, 0], [1, 1], [0, 1]]); Q = np.float32(q)
+        Hf = cv2.getPerspectiveTransform(Q, U); Hb = cv2.getPerspectiveTransform(U, Q)
+        def mk(Hm):
+            def f(b):
+                P = np.float32([[b[0], b[1]], [b[0] + b[2], b[1]], [b[0] + b[2], b[1] + b[3]], [b[0], b[1] + b[3]]]).reshape(-1, 1, 2)
+                T = cv2.perspectiveTransform(P, Hm).reshape(-1, 2); x0, y0 = np.clip(T.min(0), 0, 1); x1, y1 = np.clip(T.max(0), 0, 1)
+                return [round(float(x0), 5), round(float(y0), 5), round(float(x1 - x0), 5), round(float(y1 - y0), 5)]
+            return f
+        return mk(Hf), mk(Hb)
+
+    def rect_sig(rid):
+        """отпечаток выпрямленного ковра: 24×24 в Lab, 8 поворотов/отражений (снимок мог быть повёрнут). Проба 15.11 на 22 парах дублей:
+        медианное место близнеца среди 618 ковров — 5 (по целому фото — 75)."""
+        p = rect_path(rid)                                       # устаревший (углы поменяли) пересобирается, кэш отпечатка при этом сбрасывается
+        if rid in _rsig: return _rsig[rid]
+        a = read_small(p, 200) if p else None
+        if a is None: return None
+        t = cv2.cvtColor(cv2.resize(a, (24, 24), interpolation=cv2.INTER_AREA), cv2.COLOR_BGR2LAB).astype(np.float32)
+        V = []
+        for k in range(4):
+            for fl in (False, True):
+                x = np.rot90(t, k); x = x[:, ::-1] if fl else x
+                v = x.ravel() - x.mean(); V.append(v / (np.linalg.norm(v) + 1e-6))
+        _rsig[rid] = np.stack(V).astype(np.float32); return _rsig[rid]
+
+    rects = {"running": False, "done": 0, "total": 0, "built": 0, "t": 0}
+
+    def rect_all():
+        if rects["running"]: return
+        rects.update(running=True, done=0, built=0)
+        def run():
+            try:
+                ids = [f[:-5] for f in sorted(os.listdir(D_RUGS)) if f.endswith(".json")]
+                todo = [i for i in ids if rect_quad(load(i))]; rects["total"] = len(todo)
+                for i in todo:
+                    try:
+                        if not rect_path(i, build=False): rect_path(i); rects["built"] += 1
+                        rect_sig(i)
+                    except Exception as e: print("rect_all:", i, e)
+                    rects["done"] += 1
+                rects["t"] = int(time.time())
+            finally: rects["running"] = False
+        threading.Thread(target=run, daemon=True, name="rect-all").start()
+
+    @app.get("/api/rugs_rect_all")
+    def api_rugs_rect_all_state(): return rects
+
+    @app.post("/api/rugs_rect_all")
+    def api_rugs_rect_all():
+        rect_all(); return rects
+
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=lambda: (time.sleep(200), rect_all()), daemon=True).start()
+
+    @app.get("/api/rugs/{rid}/rect_similar")
+    async def api_rug_rect_similar(rid: str, n: int = 12):
+        """v11.72: ковры, похожие на этот по выпрямленной картинке (кандидаты в «тот же ковёр»). Только среди ковров с подтверждёнными углами."""
+        r = load(rid)
+        if not r: return JSONResponse({"error": "нет такого ковра"}, 404)
+        def work():
+            if not rect_path(rid, r): return {"error": "у ковра нет подтверждённых углов — выпрямить не по чему"}
+            q = rect_sig(rid)
+            if q is None: return {"error": "выпрямленный ковёр не читается"}
+            pool = []
+            for f in os.listdir(D_RUGS):
+                i = f[:-5]
+                if not f.endswith(".json") or i == rid: continue
+                o = load(i)
+                if not o or o.get("dup_of") or o.get("hidden") or o.get("split_into") or not rect_quad(o): continue
+                s = rect_sig(i)
+                if s is not None: pool.append((float((q @ s[0]).max()), i, o))
+            pool.sort(key=lambda t: -t[0])
+            same = {x.get("id") for x in r.get("same") or []}; so = r.get("same_ok") or {}
+            out = [{"id": i, "score": round(sc, 3), "title": (o.get("title") or "")[:80], "src": (o.get("cat") or {}).get("src", ""),
+                    "known": i in same, "ok": (so.get(i) or {}).get("ok")} for sc, i, o in pool[:max(1, min(48, n))]]
+            return {"items": out, "pool": len(pool)}
+        from starlette.concurrency import run_in_threadpool
+        res = await run_in_threadpool(work)
+        return JSONResponse(res, 400) if res.get("error") else res
+
     @app.post("/api/rugs/{rid}/quad")
     def api_rug_quad(rid: str):
         """v11.30: предложить 4 угла ковра на фото (человек двигает и подтверждает)."""
@@ -1148,9 +1268,7 @@ def install(app, DATA, D_WORK):
         def work():
             a = cv2.imread(p)
             if a is None: return {"error": "фото не читается"}
-            x = rug_rect.rectify(a, quad, 1600)
-            os.makedirs(D_RECT, exist_ok=True); tmp = os.path.join(D_RECT, rid + ".tmp.jpg")
-            cv2.imwrite(tmp, x, [cv2.IMWRITE_JPEG_QUALITY, 90]); os.replace(tmp, os.path.join(D_RECT, rid + ".jpg"))
+            x = _rect_write(rid, a, quad)
             out = {"w": int(x.shape[1]), "h": int(x.shape[0]), "t": int(time.time())}
             if b.get("bands"):
                 d = rug_layout.detect(x, full=True); out.update(bounds=d["bounds"], rings=d["rings"])
@@ -1303,6 +1421,7 @@ def install(app, DATA, D_WORK):
     @app.get("/rugrect/{rid}.jpg")
     def rug_rect_img(rid: str):
         p = os.path.join(D_RECT, os.path.basename(rid) + ".jpg")
+        if not os.path.exists(p): p = rect_path(rid) or p                 # v11.72: строится по подтверждённым углам, если его ещё нет
         return FileResponse(p, headers={"Cache-Control": "no-cache"}) if os.path.exists(p) else Response(status_code=404)
 
     @app.post("/api/rugs_from_figures")
@@ -1391,7 +1510,14 @@ def install(app, DATA, D_WORK):
         loose = bool(b.get("loose"))
         # тяжёлый расчёт — в отдельном потоке: иначе, пока он идёт, сервер не отвечает никому (пропадают миниатюры и т. п.)
         def work():
-            c = rug_match.find_repeats(a, box, marks_boxes(r) + rejected, boxes=boxes, loose=loose, limit=30 if loose else 60)
+            rq = rect_quad(r); rp = rect_path(rid, r) if rq else None; ra = cv2.imread(rp) if rp else None
+            if ra is not None:                                   # v11.72: ищем на выпрямленном ковре (повторы одного размера и наклона), ответ — в долях фото
+                fw, bk = rect_boxmap(rq); tb = {}
+                def F(b): x = fw(b); tb[tuple(x)] = b; return x
+                c = rug_match.find_repeats(ra, F(box), [fw(b) for b in marks_boxes(r) + rejected], boxes=[F(b) for b in boxes], loose=loose, limit=30 if loose else 60)
+                for x in c: x["box"] = bk(x["box"]); x["tpl"] = tb.get(tuple(x["tpl"]), x["tpl"])
+            else:
+                c = rug_match.find_repeats(a, box, marks_boxes(r) + rejected, boxes=boxes, loose=loose, limit=30 if loose else 60)
             best = max([x["score"] for x in c] or [0])
             byb = {tuple(m["box"]): m["id"] for m in tpl}
             for x in c:
@@ -2541,8 +2667,22 @@ def install(app, DATA, D_WORK):
         return FileResponse(p) if p else Response(status_code=404)
 
     @app.get("/rugthumb/{rid}.jpg")
-    def rug_thumb(rid: str):
-        rid = os.path.basename(rid); p = os.path.join(D_TH, rid + ".jpg"); src = img_path(rid)
+    def rug_thumb(rid: str, raw: int = 0):
+        rid = os.path.basename(rid)
+        if not raw:                                              # v11.72: у ковров с подтверждёнными углами миниатюра — выпрямленный ковёр
+            rp = rect_path(rid, build=False)
+            if not rp and rect_quad(load(rid)):
+                with THUMB: rp = rect_path(rid)
+            if rp:
+                p = os.path.join(D_TH, rid + ".r.jpg")
+                if not os.path.exists(p):
+                    with THUMB:
+                        a = read_small(rp, 220)
+                        if a is not None:
+                            s = 220 / max(a.shape[:2]); a = cv2.resize(a, None, fx=s, fy=s, interpolation=cv2.INTER_AREA)
+                            os.makedirs(D_TH, exist_ok=True); cv2.imwrite(p, a, [cv2.IMWRITE_JPEG_QUALITY, 80])
+                if os.path.exists(p): return FileResponse(p, headers={"Cache-Control": "no-cache"})
+        p = os.path.join(D_TH, rid + ".jpg"); src = img_path(rid)
         if not os.path.exists(p) and src:
             with THUMB:                                          # не больше двух разверток одновременно: страница просит сотни миниатюр сразу
                 if not os.path.exists(p):
