@@ -2413,18 +2413,21 @@ def install(app, DATA, D_WORK):
             sumw = lambda d, v: sum(x["w"] for x in d.values() if x["a"] == v)
             if typ == "marks":
                 ans = {str(i): "ok" for i in body.get("ok") or []}; ans.update({str(i): "bad" for i in body.get("bad") or []})
+                ans.update({str(i): "var" for i in body.get("var") or []})      # v11.75: «≈ тот же, но иначе» — подтверждение с отметкой «другие детали"
                 if skip: ans = {str(i): "skip" for i in body.get("ids") or []}
                 for i in [i for i in ans if i.startswith("c:")]:                 # контрольные рамки: в ковёр не идут
                     v = _ctl_tok.pop(i[2:], None); got = ans.pop(i)
-                    if v and v[0] == me: ctl = (ctl is not False) and got == v[1]
+                    if v and v[0] == me: ctl = (ctl is not False) and ("ok" if got == "var" else got) == v[1]
                 byid = {m.get("id"): m for m in r.get("marks") or []}; n = 0
                 for mid, v in ans.items():
                     m = byid.get(mid)
                     if not m or m.get("status") != "proposed": continue
                     d = M.setdefault(mid, {}); d[me] = {"a": v, "w": w, "t": now}
-                    if sumw(d, "ok") >= 2: m["status"] = "confirmed"; m["confirmed_by"] = "/m: " + ", ".join(sorted(u for u, x in d.items() if x["a"] == "ok")); m["confirmed_at"] = now; n += 1
+                    if sumw(d, "ok") + sumw(d, "var") >= 2:
+                        m["status"] = "confirmed"; m["confirmed_by"] = "/m: " + ", ".join(sorted(u for u, x in d.items() if x["a"] in ("ok", "var"))); m["confirmed_at"] = now; n += 1
+                        if sumw(d, "var") >= sumw(d, "ok") and not m.get("variant"): m["variant"] = "detail"; m["variant_by"] = "/m"
                     elif sumw(d, "bad") >= 2: m["status"] = "rejected"; n += 1
-                rec["ok"] = [i for i, v in ans.items() if v == "ok"]; rec["bad"] = [i for i, v in ans.items() if v == "bad"]
+                rec["ok"] = [i for i, v in ans.items() if v == "ok"]; rec["var"] = [i for i, v in ans.items() if v == "var"]; rec["bad"] = [i for i, v in ans.items() if v == "bad"]
                 if body.get("pre"): rec["pre"] = [str(i) for i in body["pre"]][:20]          # v11.58: где ✗ заранее поставила сеть — для замера, сколько снимают
                 if ctl is not None: rec["ctl"] = ctl
                 if n: applied = "marks:%d" % n

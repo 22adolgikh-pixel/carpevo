@@ -1362,7 +1362,7 @@ def t36_micro_more_cards(pg, ctx):
         r.update(kw); json.dump(r, open(f'{D}/rugs/{rid}.json', 'w'), ensure_ascii=False)
     def mk(i, box, st, g, **kw): return {"id": i, "box": box, "zone": "border", "motif": "", "motif_text": "", "scheme": "", "group": g, "status": st, **kw}
     rug('mc_marks', composition=ty['id'], marks=[
-        mk('a1', [.06, .10, .10, .05], 'confirmed', 'gA', motif_text='уже назван'), mk('a2', [.06, .15, .10, .05], 'proposed', 'gA', machine=1), mk('a3', [.06, .20, .10, .05], 'proposed', 'gA', machine=1),
+        mk('a1', [.06, .10, .10, .05], 'confirmed', 'gA', motif_text='уже назван'), mk('a2', [.06, .15, .10, .05], 'proposed', 'gA', machine=1), mk('a3', [.06, .20, .10, .05], 'proposed', 'gA', machine=1), mk('a5', [.06, .25, .10, .05], 'proposed', 'gA', machine=1),
         mk('a4', [.30, .40, .10, .05], 'rejected', 'gA', machine=1), mk('b1', [.40, .30, .12, .08], 'confirmed', 'gB'), mk('b2', [.55, .30, .12, .08], 'confirmed', 'gB')])
     rug('mc_comp', title='Pirəbədil carpet, Quba'); rug('mc_comp2', title='Pirebedil rug')
     rug('mc_s1', same=[{"id": "mc_s2", "score": 30}]); rug('mc_s2', same=[{"id": "mc_s1", "score": 30}])
@@ -1395,13 +1395,17 @@ def t36_micro_more_cards(pg, ctx):
             if len(seen) == 4 or not m.query_selector('.end button'): break
             m.click('.end button'); m.wait_for_selector('.q, .end', timeout=15000); continue
         q = m.inner_text('.q')
-        kind = 'marks' if 'элемент' in q and 'Какой' not in q else 'name' if 'Какой' in q else 'comp' if 'типа' in q else 'same'
+        kind = 'marks' if ('элемент' in q or 'Тап' in q) and 'Какой' not in q else 'name' if 'Какой' in q else 'comp' if 'типа' in q else 'same'
         rid = m.evaluate("S.tasks[S.i].rid")
         if kind not in seen:
             m.wait_for_function("[...document.querySelectorAll('#main img')].every(i=>i.complete&&i.naturalWidth>0)", timeout=15000)
             m.screenshot(path=f'{OUT}/36_micro_{kind}.png'); seen.add(kind)
         if kind == 'marks':
-            if rid == 'mc_marks': m.click('#gr .tl[data-id="a3"]'); assert m.query_selector('#gr .tl.x'), 'тап по плитке не ставит ✗'
+            if rid == 'mc_marks':
+                m.click('#gr .tl[data-id="a3"]'); assert m.query_selector('#gr .tl.x'), 'тап по плитке не ставит ✗'
+                m.click('#gr .tl[data-id="a5"]'); m.click('#gr .tl[data-id="a5"]')                       # v11.75: второй тап — ≈ «тот же, но иначе»
+                assert m.query_selector('#gr .tl.v[data-id="a5"]') and not m.query_selector('#gr .tl.x[data-id="a5"]'), 'второй тап не ставит ≈'
+                m.screenshot(path=f'{OUT}/36_micro_marks_var.png')
             m.click('#a1')
         elif kind == 'name':
             assert m.is_disabled('#a1'), '✓ должна ждать выбора схемы'
@@ -1412,6 +1416,7 @@ def t36_micro_more_cards(pg, ctx):
     mc.close(); time.sleep(0.5)
     R = get(u + 'api/rugs/mc_marks'); st = {x['id']: x for x in R['marks']}
     assert st['a2']['status'] == 'confirmed' and st['a3']['status'] == 'rejected' and st['a4']['status'] == 'rejected', f'ответ по рамкам не применился: {[(i, x["status"]) for i, x in st.items()]}'
+    assert st['a5']['status'] == 'confirmed' and st['a5'].get('variant') == 'detail' and not st['a2'].get('variant'), f'«≈ тот же, но иначе» не применился: {st["a5"]}'
     assert st['b1']['scheme'] == tn['opts'][0]['id'] and st['b2']['scheme'] == st['b1']['scheme'] and not st['a1']['scheme'], 'имя не поставлено на всю группу (или задело чужую)'
     assert get(u + 'api/rugs/mc_comp')['composition'] == 'pirebedil', 'тип ковра не принят'
     a, b = get(u + 'api/rugs/mc_s1'), get(u + 'api/rugs/mc_s2')
