@@ -18,7 +18,7 @@
  "h": 1896,
  "marks": [],
  "created": 1791736131,
- "updated": 1794658157,
+ "updated": 1794772487,
  "cat": {
   "title": "kuba afurja1",
   "museum": "",
@@ -119,9 +119,50 @@
     "w": 2,
     "t": 1794658157
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794772487,
+    "s": "ref"
+   }
   }
  },
  "composition_by": "/m: dolgikh",
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03968,
+    0.03054
+   ],
+   [
+    0.92194,
+    0.01756
+   ],
+   [
+    0.92562,
+    0.95774
+   ],
+   [
+    0.06949,
+    0.97103
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -188,7 +188,16 @@
     0.94778
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "accepted",
+  "mesh_bad": {
+   "by": "dolgikh",
+   "t": 1794772442
+  },
+  "field": {
+   "none": "edges",
+   "by": "dolgikh",
+   "t": 1794772442
+  }
  },
  "frame": "whole",
  "tri": "auto",
@@ -238,6 +247,9 @@
      "t": 1794750702
     }
    }
+  },
+  "field": {
+   "dolgikh": "edges"
   }
  },
  "comp_no": [

@@ -18,7 +18,7 @@
  "h": 500,
  "marks": [],
  "created": 1791736134,
- "updated": 1794508380,
+ "updated": 1794772539,
  "cat": {
   "title": "kuba shield70",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794508380
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794772539,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03278,
+    0.04172
+   ],
+   [
+    0.95964,
+    0.02995
+   ],
+   [
+    0.9814,
+    0.94559
+   ],
+   [
+    0.01165,
+    0.96258
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
