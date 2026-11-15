@@ -319,6 +319,21 @@ def align(a, b):
     return _spread_homography(pa, pb)
 
 
+def cover_iou(H):
+    """v11.79: насколько совмещение накладывает фото a на фото b целиком (оба — выпрямленные ковры): углы кадра a через H,
+    пересечение с кадром b / объединение. Один и тот же ковёр — ≈0,9; разные ковры с общими мотивами каймы — 0
+    (проба 15.11 на 107 парах выпрямленных: настоящий двойник 0,94, у остальных 106 — 0, даже при 289 «совпавших» точках)."""
+    if H is None: return 0.0
+    sq = np.float32([[0, 0], [1, 0], [1, 1], [0, 1]])
+    try: c = cv2.perspectiveTransform(sq.reshape(-1, 1, 2), np.float64(H)).reshape(-1, 2).astype(np.float32)
+    except cv2.error: return 0.0
+    if not np.isfinite(c).all() or not cv2.isContourConvex(c.reshape(-1, 1, 2)): return 0.0
+    a = abs(cv2.contourArea(c))
+    if a <= 0: return 0.0
+    inter, _ = cv2.intersectConvexConvex(sq, c)
+    return float(inter / (1.0 + a - inter))
+
+
 def _hull_area(p):
     """площадь выпуклой оболочки точек (координаты в долях фото)"""
     if len(p) < 3: return 0.0

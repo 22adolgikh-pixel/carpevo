@@ -1243,6 +1243,7 @@ def install(app, DATA, D_WORK):
     # 3) пары с ≥20 точек, которых нет в «двойниках» и по которым нет ответа, идут в /m карточкой «двойники» (вид «новые дубли»).
     # Результат — DATA/rect_pairs.json {"a~b": {n, sim, t}}, считается один раз на пару; 25 с на 66 пар (≈0,4 с на пару).
     F_RP = os.path.join(DATA, "rect_pairs.json"); RP_K, RP_MAYBE, RP_SAME = 10, 20, 60
+    RP_GEO = 0.6          # v11.79: совмещение накладывает ковёр на ковёр не меньше чем на 60 % (rug_match.cover_iou), иначе это общий мотив, а не двойник
     rpr = {"running": False, "done": 0, "total": 0, "found": 0, "t": 0, "err": ""}
 
     def rp_load():
@@ -1278,16 +1279,20 @@ def install(app, DATA, D_WORK):
                         k = tuple(sorted((i, ids[b])))
                         if k in known or "~".join(k) in done: continue
                         todo[k] = float(S[a, b])
+                for k, v in done.items():                                         # v11.79: найденные раньше без проверки «ковёр на ковёр» — проверить заново
+                    if v.get("n", 0) >= RP_MAYBE and "geo" not in v and "~" in k:
+                        a, b = k.split("~", 1)
+                        if a in sig and b in sig: todo[(a, b)] = v.get("sim", 0)
                 rpr["total"] = len(todo)
                 for (a, b), sim in sorted(todo.items(), key=lambda t: -t[1]):
                     A = cv2.imread(rect_path(a, build=False) or ""); B = cv2.imread(rect_path(b, build=False) or "")
-                    n = 0
+                    n = 0; geo = 0.0
                     if A is not None and B is not None:
-                        try: _, n = heavy(lambda: rug_match.align(A, B), "новые двойники")
+                        try: H, n = heavy(lambda: rug_match.align(A, B), "новые двойники"); geo = rug_match.cover_iou(H)
                         except Exception: n = 0
                     del A, B
-                    done["~".join((a, b))] = {"n": int(n), "sim": round(sim, 3), "t": int(time.time())}
-                    rpr["done"] += 1; rpr["found"] += n >= RP_MAYBE
+                    done["~".join((a, b))] = {"n": int(n), "sim": round(sim, 3), "geo": round(geo, 3), "t": int(time.time())}
+                    rpr["done"] += 1; rpr["found"] += n >= RP_MAYBE and geo >= RP_GEO
                     if rpr["done"] % 25 == 0:
                         tmp = F_RP + ".tmp"
                         with open(tmp, "w", encoding="utf-8") as f: json.dump(done, f)
@@ -1304,7 +1309,7 @@ def install(app, DATA, D_WORK):
     @app.get("/api/rugs_rect_dups")
     def api_rect_dups_state():
         P = rp_load()
-        return {**rpr, "pairs": len(P), "maybe": sum(1 for v in P.values() if RP_MAYBE <= v["n"] < RP_SAME), "same": sum(1 for v in P.values() if v["n"] >= RP_SAME)}
+        return {**rpr, "pairs": len(P), "maybe": sum(1 for v in P.values() if RP_MAYBE <= v["n"] < RP_SAME), "same": sum(1 for v in P.values() if v["n"] >= RP_SAME), "geo_ok": sum(1 for v in P.values() if v["n"] >= RP_MAYBE and v.get("geo", 0) >= RP_GEO), "geo_wait": sum(1 for v in P.values() if v["n"] >= RP_MAYBE and "geo" not in v)}
 
     @app.post("/api/rugs_rect_dups")
     def api_rect_dups_run():
@@ -2063,14 +2068,16 @@ def install(app, DATA, D_WORK):
         if not dead and r.get("composition") not in BYID:
             try: cg = comp_guess(r)
             except Exception: cg = None
-        ok_, ch_ = r.get("same_ok") or {}, r.get("same_chk") or {}; sm = []
+        ok_, ch_ = r.get("same_ok") or {}, r.get("same_chk") or {}; sm = []; sev = {}
         for x in r.get("same") or []:
             o = x.get("id")
             if not o or ok_.get(o) is not None: continue                         # человек уже решил
             c = ch_.get(o) or {}
             und = (c.get("v") == "maybe") if (c.get("ver") or 1) >= 2 else not ((x.get("score") or 0) >= 60 or x.get("inv"))
-            if und: sm.append(o)                                                 # машина не уверена — спросить человека
-        row.update(sd=[o for o, v in ok_.items() if v is not None], dead=dead, mp=(r.get("multi") or []) if not (r.get("dup_of") or r.get("hidden") or r.get("split_into")) else [], mk=mk, comp=r.get("composition") if r.get("composition") in BYID else "", cg=cg, sm=sm,
+            if und:                                                              # машина не уверена — спросить человека
+                sm.append(o); sev[o] = {"sc": x.get("score") or 0, "inv": bool(x.get("inv")), "inl": c.get("inl")}
+        row.update(sd=[o for o, v in ok_.items() if v is not None], sy=[o for o, v in ok_.items() if v and v.get("ok")], sev=sev,
+                   size=r.get("size") or (r.get("cat") or {}).get("size") or "", dead=dead, mp=(r.get("multi") or []) if not (r.get("dup_of") or r.get("hidden") or r.get("split_into")) else [], mk=mk, comp=r.get("composition") if r.get("composition") in BYID else "", cg=cg, sm=sm,
                    nn=list(r.get("name_none") or []), src=(r.get("cat") or {}).get("src", ""),
                    mv={t: {key: list((d or {}).keys()) for key, d in (m.get(t) or {}).items()} for t in MORE})
         _mc[rid] = (k, row); return row
@@ -2428,20 +2435,69 @@ def install(app, DATA, D_WORK):
             out.append({"id": e["id"], "img": "/out/" + f, "name": (d["az"] if d else "") or e.get("name") or ""})     # v11.56: без названия — без подписи (раньше показывался служебный номер схемы)
         return out
 
+    # v11.79: базовые признаки двойника — пропорции, размер, цвет. Калибровка 15.11 на ответах владельца (406 «тот же», 158 «разные», 1500 случайных пар):
+    #   пропорции выпрямленных: у всех «тот же» расхождение ≤7 %, у «разных» чаще больше → порог 15 %; по сырому фото (фон, поворот) — 40 %;
+    #   цвет (пересечение гистограмм a,b по Lab, оба цветные): <0,25 у 1 % «тот же» и 10 % случайных;
+    #   размер из паспорта (длинная сторона): расхождение >25 % — разные ковры.
+    _gc = {}
+
+    def _gfeat(x):
+        rid = x["id"]; key = (rid, x.get("qs"), str(x.get("quad")), x.get("size")); c = _gc.get(key)   # углы поменяли — признаки пересчитываются
+        if c is not None: return c
+        import rug_rect, math
+        asp, rect = None, False
+        q = x.get("quad") if x.get("qs") in RECT_OK else None
+        if q and x.get("w") and x.get("h"):
+            try:
+                W, H = rug_rect.rect_size([[u * x["w"], v * x["h"]] for u, v in q], 1000, (x["w"], x["h"])); asp, rect = max(W, H) / min(W, H), True
+            except Exception: asp = None
+        if asp is None and x.get("w") and x.get("h"): asp = max(x["w"], x["h"]) / min(x["w"], x["h"])
+        hab, colr = None, False
+        try:
+            p = img_path(rid); a = read_small(p, 160) if p else None
+            if a is not None:
+                h, w = a.shape[:2]; a = a[int(h * .06):int(h * .94), int(w * .06):int(w * .94)]
+                L8 = cv2.cvtColor(cv2.resize(a, (64, 64), interpolation=cv2.INTER_AREA), cv2.COLOR_BGR2LAB)
+                hab = cv2.calcHist([L8], [1, 2], None, [12, 12], [0, 256, 0, 256]).ravel(); hab /= hab.sum() + 1e-9
+                f = L8.astype(np.float32); colr = float(np.hypot(f[..., 1] - 128, f[..., 2] - 128).mean()) >= 6
+        except Exception: hab = None
+        m = re.findall(r"(\d+(?:[.,]\d+)?)\s*(?:x|×|х)\s*(\d+(?:[.,]\d+)?)\s*(cm|см|m|м)?", x.get("size") or "", re.I); sz = None
+        if m:
+            u, v, un = m[0]; u, v = float(u.replace(",", ".")), float(v.replace(",", "."))
+            if un.lower() in ("m", "м") or max(u, v) < 10: u, v = u * 100, v * 100
+            sz = max(u, v) if min(u, v) > 0 else None
+        c = _gc[key] = {"asp": asp, "rect": rect, "hab": hab, "col": colr, "sz": sz}; return c
+
+    def _pair_gate(x, y):
+        """None — пару можно показывать; иначе причина, почему это точно не двойник (карточка не показывается)"""
+        import math
+        a, b = _gfeat(x), _gfeat(y)
+        if a["asp"] and b["asp"]:
+            d = abs(math.log(a["asp"] / b["asp"]))
+            if d > (0.15 if a["rect"] and b["rect"] else 0.4): return "пропорции"
+        if a["sz"] and b["sz"] and abs(math.log(a["sz"] / b["sz"])) > 0.25: return "размер"
+        if a["hab"] is not None and b["hab"] is not None and a["col"] and b["col"] and float(np.minimum(a["hab"], b["hab"]).sum()) < 0.25: return "цвет"
+        return None
+
     def _both_rect(x, y):
         """у обоих ковров углы подтверждены — карточка показывает выпрямленные картинки (/rectmid)"""
         return bool(x.get("quad") and y.get("quad") and x.get("qs") in RECT_OK and y.get("qs") in RECT_OK)
 
     def _rsame_queue(me, by):
         """v11.73: пары, найденные по выпрямленным (rect_pairs.json): ≥20 общих точек, нет в «двойниках», ответа нет. «Возможно» (20–59) — первыми."""
-        out = []
-        for k, v in rp_load().items():
-            if v["n"] < RP_MAYBE or "~" not in k: continue
+        out = []; P = rp_load(); hub = {}
+        for k, v in P.items():                                                    # v11.79: «магниты» — ковёр с ≥4 «возможными» парами (шкала, линейка, мелкий
+            if RP_MAYBE <= v["n"] < RP_SAME and "~" in k:                          # сплошной узор); по ответам 15.11 все такие пары — «разные»
+                for i in k.split("~", 1): hub[i] = hub.get(i, 0) + 1
+        for k, v in P.items():
+            if v["n"] < RP_MAYBE or "~" not in k or v.get("geo", 0) < RP_GEO: continue    # v11.79: без проверки «ковёр на ковёр» не показываем
+            if v["n"] < RP_SAME and any(hub.get(i, 0) >= 4 for i in k.split("~", 1)): continue
             a, b = k.split("~", 1); x, y = by.get(a), by.get(b)
             if not x or not y or x["dead"] or y["dead"] or b in x["sd"] or a in y["sd"] or b in x["sm"] or a in y["sm"]: continue
             if me in x["mv"]["same"].get(b, []) or me in y["mv"]["same"].get(a, []): continue
+            if _pair_gate(x, y): continue                                        # v11.79: пропорции / размер / цвет не сходятся
             out.append({"type": "same", "rid": a, "other": b, "title2": y["title"], "src": x["src"], "src2": y["src"], "rect": True, "inl": v["n"], "sim": v["sim"]})
-        out.sort(key=lambda t: (t["inl"] >= RP_SAME, -t["inl"] if t["inl"] >= RP_SAME else -t["sim"]))
+        out.sort(key=lambda t: -t["inl"])                                         # v11.79: самые надёжные — первыми (раньше «возможно» шли первыми)
         return out
 
     def _more_queues(me, rows, by, want):
@@ -2485,7 +2541,14 @@ def install(app, DATA, D_WORK):
                     if not y or y["dead"]: continue
                     a, b = sorted((x["id"], o))
                     if me in by[a]["mv"]["same"].get(b, []) or any(t["rid"] == a and t["other"] == b for t in out["same"]): continue
-                    out["same"].append({"type": "same", "rid": a, "other": b, "title2": by[b]["title"], "src": by[a]["src"], "src2": by[b]["src"], "rect": _both_rect(by[a], by[b])})
+                    ev = x["sev"].get(o) or {}
+                    # v11.79: пара без своего сравнения (попала в группу «по цепочке» A~B~C) — спрашиваем, только если оба уже подтверждены
+                    # как «тот же» с одним и тем же третьим ковром; иначе цепочка из одной ложной склейки тянет в карточки совсем разные ковры
+                    if not ev.get("sc") and not ev.get("inv") and not (ev.get("inl") or 0) >= RP_MAYBE and not (set(x["sy"]) & set(y["sy"])): continue
+                    if _pair_gate(by[a], by[b]): out["same_gated"] = out.get("same_gated", 0) + 1; continue
+                    out["same"].append({"type": "same", "rid": a, "other": b, "title2": by[b]["title"], "src": by[a]["src"], "src2": by[b]["src"], "rect": _both_rect(by[a], by[b]),
+                                        "inl": max(ev.get("inl") or 0, ev.get("sc") or 0) or None})
+        out["same"].sort(key=lambda t: -(t.get("inl") or 0))                       # v11.79: где больше общих точек — первыми
         out["split"].sort(key=lambda t: (not t["cat"].startswith("kerimov"), t["rid"]))        # Керимов — главный источник: его развороты первыми
         out["marks"].sort(key=lambda t: (t["sample"] is None, t["rid"]))          # сначала группы с образцом: вопрос «тот же?» проще, чем «элемент ли это?»
         out["comp"].sort(key=lambda t: (t["kind"] != "twin", t["cid"]))            # по двойнику надёжнее; дальше подряд один тип — глаз привыкает
