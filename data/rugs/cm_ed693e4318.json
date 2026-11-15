@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870036,
- "updated": 1791997197,
+ "updated": 1794786853,
  "cat": {
   "title": "\"Kasym ushagy carpets\" - Azerbaijanian fleecy carpet, Karabakh school, Jabrayi (Cəbrayıl) group ",
   "museum": "",
@@ -95,5 +95,53 @@
   "ver": 1,
   "t": 1794238443
  },
- "multi": []
+ "multi": [],
+ "layout": {
+  "carpet": [
+   0.0384,
+   0.03743,
+   0.91264,
+   0.92184
+  ],
+  "bounds": [
+   {
+    "ix": 0.031026252983293555,
+    "iy": 0.018571428571428572,
+    "strength": 4.14
+   },
+   {
+    "ix": 0.11230878531101496,
+    "iy": 0.05561592668923998,
+    "strength": 3.33
+   }
+  ],
+  "rings": [
+   "minor",
+   "border",
+   "field"
+  ],
+  "status": "confirmed",
+  "quad": [
+   [
+    0.0384,
+    0.03743
+   ],
+   [
+    0.95104,
+    0.03853
+   ],
+   [
+    0.94814,
+    0.95927
+   ],
+   [
+    0.0385,
+    0.95018
+   ]
+  ],
+  "quad_status": "confirmed",
+  "by": "dolgikh",
+  "quad_by": "dolgikh"
+ },
+ "updated_by": "dolgikh"
 }
