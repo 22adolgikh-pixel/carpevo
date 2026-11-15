@@ -18,7 +18,7 @@
  "h": 720,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1794750726,
  "cat": {
   "title": "shirvan-akstafa-prayer-rug29",
   "museum": "",
@@ -78,6 +78,86 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238396
- }
+  "t": 1794238396,
+  "ref_quad": {
+   "quad": [
+    [
+     0.12745,
+     0.00942
+    ],
+    [
+     0.858,
+     0.0216
+    ],
+    [
+     0.98772,
+     0.98419
+    ],
+    [
+     0.01703,
+     0.97542
+    ]
+   ],
+   "v": 1,
+   "from": "auto",
+   "t": 1794750725
+  }
+ },
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794750700
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794750726,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.12745,
+    0.00942
+   ],
+   [
+    0.858,
+    0.0216
+   ],
+   [
+    0.98772,
+    0.98419
+   ],
+   [
+    0.01703,
+    0.97542
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

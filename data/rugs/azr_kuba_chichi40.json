@@ -18,7 +18,7 @@
  "h": 981,
  "marks": [],
  "created": 1791736132,
- "updated": 1794596871,
+ "updated": 1794750676,
  "cat": {
   "title": "kuba chichi40",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794596871
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794750676,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01589,
+    0.03323
+   ],
+   [
+    0.99037,
+    0.03896
+   ],
+   [
+    0.97423,
+    0.9509
+   ],
+   [
+    0.00874,
+    0.93729
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

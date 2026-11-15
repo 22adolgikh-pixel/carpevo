@@ -18,7 +18,7 @@
  "h": 613,
  "marks": [],
  "created": 1791736138,
- "updated": 1794260362,
+ "updated": 1794750741,
  "cat": {
   "title": "Sale 2276 Lot 75 Moghan Rug, Southeast Caucasus, last quarter 19th century, 5 ft",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug112",
  "lib_img": "img/azr_antique_caucasian_moghan_rug112.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_tekye110",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_tekye110": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750741
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -113,6 +124,15 @@
       0.95303
      ]
     ]
+   }
+  },
+  "same": {
+   "azr_kuba_tekye110": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794750741
+    }
    }
   }
  },
