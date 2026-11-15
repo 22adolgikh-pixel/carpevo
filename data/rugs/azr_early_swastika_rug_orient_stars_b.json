@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736140,
- "updated": 1791736140,
+ "updated": 1794748032,
  "cat": {
   "title": "'Pinwheel' rug, early to mid 19th century, Azerbaijan",
   "museum": "",
@@ -80,6 +80,40 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238296
- }
+  "t": 1794238296,
+  "ref_quad": {
+   "quad": [
+    [
+     0.00428,
+     0.00594
+    ],
+    [
+     0.99765,
+     0.03194
+    ],
+    [
+     0.98878,
+     0.99144
+    ],
+    [
+     0.02218,
+     0.99151
+    ]
+   ],
+   "v": 1,
+   "from": "auto",
+   "t": 1794748046
+  }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794748032
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro"
 }
