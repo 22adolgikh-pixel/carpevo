@@ -7,7 +7,7 @@
 # Проверка — на 20 % ковров, которых сеть не видела:
 #   1) проверка предложений: отличает ли сеть верные рамки от отклонённых лучше, чем нынешняя оценка машины;
 #   2) поиск: по одному образцу найти на ковре остальные повторы — сколько подтверждённых найдено и сколько лишнего.
-# v11.71: полнота — каждая цель один раз; ковры 🧪 всегда в проверке; в конце — сравнение с v1 на тех же коврах тем же кодом.
+# v11.71: метки берутся свежими из автокопии студии (ветка cps-data); полнота — каждая цель один раз; ковры 🧪 всегда в проверке; в конце — сравнение с v1 на тех же коврах тем же кодом.
 # v11.65: вырезка ОВАЛОМ (вне овала серый, как у DINOv3: соседи в плотных узорах не мешают) → новая сеть element_embed_v2.
 # Итог: carpet-dna/models/element_embed_v2.pt (TorchScript) и element_embed_v2.json (замеры и пороги). v1 не трогается.
 # Время: GPU (T4) — 20–35 мин. Ключи не нужны.
@@ -17,6 +17,16 @@ from google.colab import drive
 drive.mount('/content/drive')
 T0 = time.time(); log = lambda *a: print(f'[{time.time() - T0:5.0f} c]', *a, flush=True)
 REPO = '/content/carpevo'
+import subprocess
+try:                                                    # v11.71: свежие метки — из автокопии студии (ветка cps-data, обновляется раз в 10 мин)
+    D = '/content/cpsdata'
+    if not os.path.exists(D):
+        subprocess.run(['git', 'clone', '-q', '--depth', '1', '--filter=blob:none', '--sparse', '-b', 'cps-data',
+                        'https://github.com/22adolgikh-pixel/carpevo', D], check=True, timeout=600)
+        subprocess.run(['git', '-C', D, 'sparse-checkout', 'set', 'data/rugs'], check=True, timeout=600)
+    else: subprocess.run(['git', '-C', D, 'pull', '-q'], timeout=600)
+    print(subprocess.run(['python3', f'{REPO}/cps/tools/elements/make_labels.py', f'{D}/data/rugs'], capture_output=True, text=True, timeout=600).stdout.strip())
+except Exception as e: print('свежие метки не взялись, беру из репозитория:', e)
 LAB = json.load(open(f'{REPO}/cps/tools/elements/labels.json', encoding='utf-8'))
 DEV = 'cuda' if torch.cuda.is_available() else 'cpu'; log('устройство', DEV, '| ковров', len(LAB))
 if DEV == 'cpu': print('!!! видеокарты нет — будет очень долго. Среда выполнения → Сменить среду → T4 GPU')
