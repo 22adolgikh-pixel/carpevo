@@ -748,7 +748,7 @@
   }
  ],
  "created": 1791870021,
- "updated": 1792261272,
+ "updated": 1794784736,
  "cat": {
   "title": "Textiles-Rugs; Carpet",
   "museum": "Метрополитен-музей",
@@ -1160,7 +1160,38 @@
    "ver": 2
   }
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.025,
+   0.03387,
+   0.94762,
+   0.94057
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02925,
+    0.03387
+   ],
+   [
+    0.96982,
+    0.04277
+   ],
+   [
+    0.97262,
+    0.97402
+   ],
+   [
+    0.025,
+    0.97444
+   ]
+  ],
+  "quad_status": "edited"
+ },
  "updated_by": "dolgikh",
  "from_twin": {
   "date": "cm_1332fbb9a0",
