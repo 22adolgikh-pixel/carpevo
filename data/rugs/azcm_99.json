@@ -1813,7 +1813,7 @@
    "scheme": "",
    "group": "mmwhtozel",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -1823,8 +1823,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1794746444,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772661,
    "edited_by": "dolgikh",
    "edited_at": 1794746447
   },
@@ -1842,7 +1842,7 @@
    "scheme": "",
    "group": "mmwhtozel",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -1852,8 +1852,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794746447,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772661
   },
   {
    "id": "mmwhtp1731",
@@ -1869,7 +1869,7 @@
    "scheme": "",
    "group": "mmwhtozel",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -1879,8 +1879,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794746447,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772661
   },
   {
    "id": "mmwhtp1732",
@@ -1896,7 +1896,7 @@
    "scheme": "",
    "group": "mmwhtozel",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -1906,8 +1906,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794746447,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772661
   },
   {
    "id": "mmwhtp1733",
@@ -1923,7 +1923,7 @@
    "scheme": "",
    "group": "mmwhtozel",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -1933,12 +1933,12 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1794746447,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794772661
   }
  ],
  "created": 1791870043,
- "updated": 1794746447,
+ "updated": 1794772661,
  "cat": {
   "title": "“Malıbəyli” («Малыбейли»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -2067,5 +2067,44 @@
   "quad_status": "edited"
  },
  "updated_by": "dolgikh",
- "eltest": true
+ "eltest": true,
+ "micro": {
+  "marks": {
+   "mmwhtozel": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772661
+    }
+   },
+   "mmwhtp1730": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772661
+    }
+   },
+   "mmwhtp1731": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772661
+    }
+   },
+   "mmwhtp1732": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772661
+    }
+   },
+   "mmwhtp1733": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794772661
+    }
+   }
+  }
+ }
 }

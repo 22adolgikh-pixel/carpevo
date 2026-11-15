@@ -18,7 +18,7 @@
  "h": 745,
  "marks": [],
  "created": 1791736123,
- "updated": 1794596982,
+ "updated": 1794772628,
  "cat": {
   "title": "Baku Zilli carpet.jpg",
   "museum": "Wikimedia Commons",
@@ -113,8 +113,49 @@
     "w": 2,
     "t": 1794596982
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794772628,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03207,
+    0.01886
+   ],
+   [
+    0.96578,
+    0.02167
+   ],
+   [
+    0.97943,
+    0.96428
+   ],
+   [
+    0.01684,
+    0.98562
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
