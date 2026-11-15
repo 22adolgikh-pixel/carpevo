@@ -1642,6 +1642,60 @@ def t41_mesh_field_v1181(pg, ctx):
     errors_ok(ctx, '/m поле v11.81')
 
 
+@test
+def t42_marks_near_fix_v1182(pg, ctx):
+    """v11.82: карточка «элементы»: рамка, промахнувшаяся мимо элемента, перед показом сдвигается к нему (по образцу группы, с поворотом);
+    ответ «⌖ рядом» сам находит элемент рядом и возвращает рамку на проверку; долгое нажатие на плитку — правка рамки пальцем, ✓ пишет новую рамку"""
+    import cv2, numpy as np
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    rng = np.random.default_rng(0)
+    img = cv2.GaussianBlur(rng.integers(60, 120, (800, 800, 3)).astype(np.uint8), (0, 0), 3)
+    mot = np.zeros((60, 90, 3), np.uint8); mot[:] = (30, 30, 150); cv2.rectangle(mot, (10, 10), (50, 50), (220, 220, 240), -1); cv2.circle(mot, (70, 30), 12, (40, 200, 240), -1)
+    def put(x, y, m): img[y:y + m.shape[0], x:x + m.shape[1]] = m
+    put(100, 100, mot); put(500, 200, mot); put(300, 550, np.ascontiguousarray(np.rot90(mot))); put(560, 600, mot); put(150, 400, mot)
+    cv2.imwrite(f'{D}/rug_img/mk_ref.jpg', img)
+    f = lambda x, y, w, h: [x / 800, y / 800, w / 800, h / 800]
+    def mk(i, box, st, **kw): return {"id": i, "box": box, "zone": "field", "motif": "", "motif_text": "", "scheme": "", "group": "gR", "status": st, **kw}
+    r = {"id": "mk_ref", "title": "mk_ref", "source": "тест", "museum": "", "inv": "", "url": "", "license": "", "place": "", "date": "", "school": "", "composition": "",
+         "technique": "", "size": "", "notes": "", "status": "new", "w": 800, "h": 800, "cat": {"src": "upload"}, "created": now, "updated": now,
+         "marks": [mk('r0', f(100, 100, 90, 60), 'confirmed'),
+                   mk('r1', f(536, 215, 90, 60), 'proposed', machine=1),          # промах на 40 % — должна сама встать на элемент (500,200)
+                   mk('r2', f(318, 520, 60, 90), 'proposed', machine=1),          # повёрнутый элемент (300,550), промах
+                   mk('r3', f(600, 600, 90, 60), 'proposed', machine=1, rf=1),    # для «⌖ рядом»: элемент (560,600); подгонка до показа уже была
+                   mk('r4', f(150, 400, 90, 60), 'proposed', machine=1)]}         # для правки пальцем
+    json.dump(r, open(f'{D}/rugs/mk_ref.json', 'w'), ensure_ascii=False)
+    nx = get(u + 'api/micro/next?n=12&k=marks')
+    tm = next((t for t in nx['tasks'] if t['rid'] == 'mk_ref'), None); assert tm, f"нет карточки: {[t['rid'] for t in nx['tasks']]}"
+    iou = lambda p, s: (lambda ix, iy: ix * iy / (p[2] * p[3] + s[2] * s[3] - ix * iy))(max(0, min(p[0] + p[2], s[0] + s[2]) - max(p[0], s[0])), max(0, min(p[1] + p[3], s[1] + s[3]) - max(p[1], s[1])))
+    B = {i['id']: i['box'] for i in tm['items']}
+    assert iou(B['r1'], f(500, 200, 90, 60)) > 0.8, f"рамка r1 не подогнана: {B['r1']}"
+    assert iou(B['r2'], f(300, 550, 60, 90)) > 0.8, f"рамка r2 (повёрнутый элемент) не подогнана: {B['r2']}"
+    d = get(u + 'api/rugs/mk_ref'); m1 = next(m for m in d['marks'] if m['id'] == 'r1'); assert m1.get('box0') and m1.get('rf') == 1, f'подгонка не записана: {m1}'
+    # «⌖ рядом» через API: r3 — элемент на 40 px левее
+    post(u + 'api/micro/answer', {'type': 'marks', 'rid': 'mk_ref', 'g': 'gR', 'a': 'done', 'ok': [], 'bad': [], 'var': [], 'near': ['r3'], 'fix': {}})
+    d = get(u + 'api/rugs/mk_ref'); m3 = next(m for m in d['marks'] if m['id'] == 'r3')
+    assert m3['status'] == 'proposed' and iou(m3['box'], f(560, 600, 90, 60)) > 0.7 and m3.get('near_by'), f'«рядом» не нашёл элемент: {m3}'
+    # телефон: долгое нажатие на плитку r4 → редактор → сдвиг → готово → ✓
+    mc = pg.context.browser.new_context(viewport={'width': 390, 'height': 844}, has_touch=True); m = mc.new_page()
+    errs = []; m.on('pageerror', lambda e: errs.append(str(e)))
+    m.goto(u + 'm?k=marks'); m.wait_for_selector('.q', timeout=15000)
+    for _ in range(12):
+        if m.evaluate("S.tasks[S.i]&&S.tasks[S.i].rid") == 'mk_ref': break
+        m.evaluate("S.i++;show()"); m.wait_for_timeout(200)
+    tile = m.query_selector('#gr .tl[data-id="r4"]'); assert tile, 'нет плитки r4'
+    bb = tile.bounding_box(); m.mouse.move(bb['x'] + bb['width'] / 2, bb['y'] + bb['height'] / 2); m.mouse.down(); m.wait_for_timeout(700); m.mouse.up()
+    m.wait_for_selector('#ed', timeout=3000); m.wait_for_timeout(500)
+    eb = m.query_selector('#eb').bounding_box(); ei = m.query_selector('#ei').bounding_box()
+    m.mouse.move(eb['x'] + eb['width'] / 2, eb['y'] + eb['height'] / 2); m.mouse.down(); m.mouse.move(eb['x'] + eb['width'] / 2 + ei['width'] * 0.1, eb['y'] + eb['height'] / 2, steps=5); m.mouse.up()
+    m.screenshot(path=os.path.join(OUT, 't42_edit.png')); m.click('#eo'); m.wait_for_timeout(300)
+    assert 'f' in (m.get_attribute('#gr .tl[data-id="r4"]', 'class') or '').split(), 'после правки плитка не отмечена ✎'
+    m.click('#a1'); m.wait_for_timeout(1200)
+    d = get(u + 'api/rugs/mk_ref'); m4 = next(x for x in d['marks'] if x['id'] == 'r4')
+    assert m4.get('fixed_by') and m4['status'] == 'confirmed' and m4['box'][0] > f(150, 400, 90, 60)[0] + 0.02, f'правка рамки не записалась: {m4}'
+    assert not errs, f'ошибки JS: {errs[:2]}'
+    mc.close()
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

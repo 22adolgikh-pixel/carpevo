@@ -2167,7 +2167,7 @@ def install(app, DATA, D_WORK):
         # v11.52: карточки «элементы», «имена», «тип», «двойники» — всё нужное для очередей берём здесь же, чтобы не читать ковры заново
         dead = bool(r.get("dup_of") or r.get("hidden") or r.get("split_into") or r.get("multi") or r.get("frame") == "multi")
         mk = [{"id": x["id"], "g": x.get("group") or x["id"], "st": x.get("status"), "box": x["box"], "sc": x.get("scheme") or "",
-               "nm": bool(x.get("motif") or x.get("motif_text")), "mach": bool(x.get("machine"))}
+               "nm": bool(x.get("motif") or x.get("motif_text")), "mach": bool(x.get("machine")), "nw": bool(x.get("near_wait"))}
               for x in r.get("marks") or [] if x.get("id") and isinstance(x.get("box"), list) and len(x["box"]) == 4]
         cg = None
         if not dead and r.get("composition") not in BYID:
@@ -2661,7 +2661,7 @@ def install(app, DATA, D_WORK):
                     sc = next((m["sc"] for m in cf + ms if m["sc"]), "")
                     f = next((sc + e for e in ("_x12.png", ".png") if sc and os.path.exists(os.path.join(D_OUT, sc + e))), None)
                     out["marks"].append({"type": "marks", "rid": x["id"], "g": g, "sample": cf[0]["box"] if cf else None, "more_samples": [m["box"] for m in cf[1:5]], "scheme": ("/out/" + f) if f else "",
-                                         "items": [{"id": m["id"], "box": m["box"]} for m in pr[:9]], "more": max(0, len(pr) - 9)})
+                                         "items": [{"id": m["id"], "box": m["box"], **({"nw": 1} if m.get("nw") else {})} for m in pr[:9]], "more": max(0, len(pr) - 9)})
             if "name" in want:
                 for g, ms in G.items():
                     cf = [m for m in ms if m["st"] == "confirmed"]
@@ -2707,6 +2707,45 @@ def install(app, DATA, D_WORK):
             out["comp"].sort(key=lambda t: (-(bool(t["refs"]) + bool(t["hint"]) + bool(t["els"])), t["kind"] != "twin", t["cid"]))
         return out
 
+    # ---- v11.82: подгонка рамок элементов (mark_refine) ----
+    REF_VER = 1; REF_MOVE_IOU, REF_GAIN = 0.85, 0.08       # рамку двигаем, если на новом месте совпадение лучше хотя бы на 0,08 и место заметно другое
+    REF_WEAK_ABS, REF_WEAK_REL = 0.2, 0.5                  # «слабая» — совпадение <0,2 и меньше половины медианы карточки: не показываем (рамка остаётся в ковре)
+
+    def _refine_marks(t):
+        """перед показом: каждую предложенную рамку карточки сдвинуть к лучшему месту рядом (по образцам группы), слабые убрать из карточки.
+        Делается один раз на рамку (m["rf"]); исходная рамка — в m["box0"]. Без образца (группа только со схемой Керимова) — ничего не делаем."""
+        refs = [b for b in [t.get("sample")] + list(t.get("more_samples") or []) if b]
+        if not refs: return
+        try:
+            import mark_refine as MR
+            a = _img_full(t["rid"])
+            if a is None: return
+            r0 = load(t["rid"]); b0 = {m.get("id"): m for m in (r0 or {}).get("marks") or []}; calc = {}
+            for it in t["items"]:                                                 # считаем без замка (до 1 с на карточку), записываем под замком
+                m = b0.get(it["id"])
+                if m and m.get("status") == "proposed" and m.get("rf") != REF_VER: calc[it["id"]] = (list(m["box"]), MR.refine(a, refs, m["box"]))
+            with _lock:
+                r = load(t["rid"]); byid = {m.get("id"): m for m in (r or {}).get("marks") or []}; ch = False
+                for it in t["items"]:
+                    m = byid.get(it["id"])
+                    if not m: continue
+                    if it["id"] in calc and m.get("status") == "proposed" and m.get("rf") != REF_VER and m["box"] == calc[it["id"]][0]:
+                        res = calc[it["id"]][1]; m["rf"] = REF_VER; ch = True
+                        if res:
+                            m["rf_s"] = res["s"]
+                            if MR.iou(res["box"], m["box"]) < REF_MOVE_IOU and res["s"] - (res["s0"] if res["s0"] is not None else -1) >= REF_GAIN:
+                                m.setdefault("box0", m["box"]); m["box"] = res["box"]; m["rf_moved"] = res["moved"]
+                    it["box"] = m["box"]; it["rs"] = m.get("rf_s")
+                if ch: save(r)
+            ss = sorted(x["rs"] for x in t["items"] if x.get("rs") is not None)
+            if len(ss) >= 3:
+                med = ss[len(ss) // 2]
+                weak = [x for x in t["items"] if x.get("rs") is not None and x["rs"] < REF_WEAK_ABS and x["rs"] < REF_WEAK_REL * med]
+                if weak and len(weak) < len(t["items"]):
+                    t["items"] = [x for x in t["items"] if x not in weak]; t["weak"] = len(weak)
+        except Exception as e:
+            print("refine_marks:", e)
+
     def _marks_trap(me, t, x):
         """контрольная рамка в карточке «элементы» (примерно в каждой третьей): отклонённая рамка той же группы (её надо отметить ✗)
         или уже подтверждённая (её трогать не надо). В ковре ничего не меняет — считает внимательность."""
@@ -2737,11 +2776,39 @@ def install(app, DATA, D_WORK):
             if typ == "marks":
                 ans = {str(i): "ok" for i in body.get("ok") or []}; ans.update({str(i): "bad" for i in body.get("bad") or []})
                 ans.update({str(i): "var" for i in body.get("var") or []})      # v11.75: «≈ тот же, но иначе» — подтверждение с отметкой «другие детали"
+                near = [str(i) for i in body.get("near") or [] if not str(i).startswith("c:")]          # v11.82: «рядом, но промах»
+                fix = {str(k): v for k, v in (body.get("fix") or {}).items() if not str(k).startswith("c:")}   # v11.82: рамка поправлена пальцем
+                for i in near + list(fix): ans.pop(i, None)
                 if skip: ans = {str(i): "skip" for i in body.get("ids") or []}
                 for i in [i for i in ans if i.startswith("c:")]:                 # контрольные рамки: в ковёр не идут
                     v = _ctl_tok.pop(i[2:], None); got = ans.pop(i)
                     if v and v[0] == me: ctl = (ctl is not False) and ("ok" if got == "var" else got) == v[1]
                 byid = {m.get("id"): m for m in r.get("marks") or []}; n = 0
+                fixed = {}
+                for mid, b in fix.items():                                        # поправленная рамка — это ответ «верно» по новой рамке
+                    m = byid.get(mid)
+                    try: b = [round(max(0.0, min(1.0, float(v))), 5) for v in b][:4]
+                    except Exception: continue
+                    if not m or m.get("status") != "proposed" or len(b) != 4 or b[2] < 0.003 or b[3] < 0.003: continue
+                    m.setdefault("box0", m["box"]); m["box"] = b; m["fixed_by"] = me; m["fixed_at"] = now; fixed[mid] = b; ans[mid] = "ok"
+                near_ok = {}
+                if near:
+                    a_img = _img_full(rid)
+                    for mid in near:
+                        m = byid.get(mid)
+                        if not m or m.get("status") != "proposed": continue
+                        res = None
+                        if a_img is not None:
+                            import mark_refine as MR
+                            gk = m.get("group") or m.get("id")
+                            grp = [x["box"] for x in r.get("marks") or [] if x.get("status") == "confirmed" and (x.get("group") or x.get("id")) == gk]
+                            res = MR.refine(a_img, grp, m["box"], search=1.0, exclude=m["box"]) if grp else None
+                        M.pop(mid, None)                                         # голоса по старой рамке больше не считаются: рамка вернётся на проверку
+                        m.setdefault("box0", m["box"]); m["near_by"] = me; m["near_at"] = now
+                        if res and res["s"] > 0.2:
+                            m["box"] = res["box"]; m["rf_s"] = res["s"]; m["rf"] = REF_VER; m.pop("near_wait", None); near_ok[mid] = res["box"]
+                        else:
+                            m["near_wait"] = True                                # сравнить не с чем или ничего похожего — пусть человек поправит пальцем
                 for mid, v in ans.items():
                     m = byid.get(mid)
                     if not m or m.get("status") != "proposed": continue
@@ -2751,6 +2818,9 @@ def install(app, DATA, D_WORK):
                         if sumw(d, "var") >= sumw(d, "ok") and not m.get("variant"): m["variant"] = "detail"; m["variant_by"] = "/m"
                     elif sumw(d, "bad") >= 2: m["status"] = "rejected"; n += 1
                 rec["ok"] = [i for i, v in ans.items() if v == "ok"]; rec["var"] = [i for i, v in ans.items() if v == "var"]; rec["bad"] = [i for i, v in ans.items() if v == "bad"]
+                if fixed: rec["fix"] = fixed                                      # v11.82: точные рамки от человека — лучшие данные для обучения поиска
+                if near: rec["near"] = near; rec["near_box"] = near_ok
+                if near or fixed: n += len(near_ok) + len(fixed)
                 if body.get("pre"): rec["pre"] = [str(i) for i in body["pre"]][:20]          # v11.58: где ✗ заранее поставила сеть — для замера, сколько снимают
                 if ctl is not None: rec["ctl"] = ctl
                 if n: applied = "marks:%d" % n
@@ -2840,7 +2910,7 @@ def install(app, DATA, D_WORK):
                 tasks.append(Q[t].pop(0))
                 if not Q[t]: order.remove(t)
         for t in tasks:
-            if t["type"] == "marks": _emb_marks(t); _marks_trap(me, t, by[t["rid"]])
+            if t["type"] == "marks": _refine_marks(t); _emb_marks(t); _marks_trap(me, t, by[t["rid"]])
         if "marks" in want: _es_enqueue(rows, len(more["marks"]), n)
         ctl = [x for x in rows if x["ctl"]]
         if ctl and len(tasks) >= 3 and "quad" in want:                             # контрольная карточка

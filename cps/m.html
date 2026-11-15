@@ -42,6 +42,13 @@ button.wide{grid-column:1/-1}button.sm{min-height:40px;padding:8px}button:active
 /* v11.56: квадрат через padding, а не aspect-ratio — в Safari на iPhone ряды сетки схлопывались и плитки наезжали друг на друга */
 .tl{position:relative;height:0;min-height:0;padding:0 0 100%;border-radius:10px;border:2px solid var(--ln);overflow:hidden;background:#000;box-sizing:content-box}.tl img{position:absolute;inset:0;width:100%;height:100%;box-sizing:border-box;object-fit:contain;display:block;pointer-events:none}
 .tl.pre:before{content:'?';position:absolute;right:3px;top:2px;z-index:3;font-size:11px;font-weight:700;color:var(--tx);background:var(--pan);border:1px solid var(--ln);border-radius:8px;padding:0 5px}.tl.v{border-color:var(--blu)}.tl.v:after{content:'≈';position:absolute;right:4px;bottom:2px;font-size:30px;font-weight:700;color:var(--blu);text-shadow:0 0 4px #000}.tl.x{border-color:var(--bad)}.tl.x:after{content:'✗';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:var(--bad);background:#000a}
+.tl.n{border-color:var(--acc)}.tl.n:after{content:'⌖';position:absolute;right:4px;bottom:0;font-size:30px;font-weight:700;color:var(--acc);text-shadow:0 0 4px #000}
+.tl.f{border-color:var(--ok,#3ecf8e)}.tl.f:after{content:'✎';position:absolute;right:5px;bottom:2px;font-size:24px;color:var(--ok,#3ecf8e);text-shadow:0 0 4px #000}
+.tl.nw{border-style:dashed}.tl.nw:before{content:'поправьте';position:absolute;left:3px;top:2px;z-index:3;font-size:10px;color:var(--acc);background:#000b;border-radius:6px;padding:0 4px}
+#ed{position:fixed;inset:0;z-index:50;background:#000;display:flex;flex-direction:column;touch-action:none}#ed .ew{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#ed .ei{position:relative;line-height:0}#ed .ei img{max-width:100vw;max-height:calc(100dvh - 130px);display:block;user-select:none;-webkit-user-select:none;pointer-events:none}
+#ed .eb{position:absolute;border:2px solid #ffe066;box-shadow:0 0 0 1px #000,0 0 0 9999px #0006}#ed .eh{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:#ffe066;border:2px solid #000}
+#ed .er{display:flex;gap:8px;padding:10px}#ed .er button{flex:1;min-height:52px;font-size:17px}#ed .et{color:#ccc;font-size:13px;padding:8px 12px}
 .tl.sch{background:#fff}.tl.sch img{image-rendering:pixelated;padding:4px 4px 16px}.tl.sel{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
 .tl b{position:absolute;left:0;right:0;bottom:0;font-size:10px;font-weight:500;line-height:1.5;background:#000b;color:#fff;padding:0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:1;min-height:0;align-items:center}.pair figure{margin:0;display:flex;flex-direction:column;gap:4px;align-items:center;min-width:0}.pair img{max-width:100%;max-height:54dvh;object-fit:contain;border-radius:6px}.pair figcaption{font-size:11px;color:var(--mut);text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -154,16 +161,48 @@ function fixQuad(t,k){t.fixed=true;rdFlags(t);
 const crop=(rid,b,s,pad,mark)=>`/api/rugs/${encodeURIComponent(rid)}/crop?b=${b.join(',')}&s=${s}&pad=${pad}&mark=${mark}`;
 // «элементы»: рамки, которые предложила машина. Тап по плитке — «это не то»; ✓ принимает остальные.
 function showMarks(t){t.x=t.x||Object.fromEntries((t.pre||[]).map(i=>[i,true]));const hasS=!!t.sample,pre=new Set(t.pre||[]);
-  $('main').innerHTML=`${qhead(hasS?'Тот же элемент? Тап — ✗, ещё тап — ≈ иначе':'Отдельные элементы узора? Тап — ✗, ещё тап — ≈ иначе',
-     'Машина нашла на ковре похожие места. Жёлтая рамка — что именно предложено, вокруг — соседний узор. Тап — ✗ (не то, криво обведено, захвачено лишнее); второй тап — ≈ (тот же элемент, но иначе: другие детали или краски); третий — снова верно. ✓ — сохранить.'+(t.pre?' Самые похожие на образец идут первыми; где сеть сомневается, ✗ уже стоит (с пометкой «?») — снимите, если это тот же элемент.':''))}
+  $('main').innerHTML=`${qhead(hasS?'Тот же элемент? Тап: ✗ → ≈ → ⌖ рядом; держать — поправить':'Отдельные элементы узора? Тап: ✗ → ≈ → ⌖ рядом; держать — поправить',
+     'Машина нашла на ковре похожие места. Жёлтая рамка — что именно предложено, вокруг — соседний узор. Тап — ✗ (не то, криво обведено, захвачено лишнее); второй тап — ≈ (тот же элемент, но иначе: другие детали или краски); третий — ⌖ «рядом, но промах» (элемент сбоку, в рамку влез кусок: машина сама найдёт его рядом и вернёт рамку на проверку); четвёртый — снова верно. Долгое нажатие на плитку — поправить рамку пальцем (двигать, тянуть за углы). Правило: верно, если элемент узнаётся и в рамке не меньше половины его; иначе ⌖ или поправить. ✓ — сохранить.'+(t.pre?' Самые похожие на образец идут первыми; где сеть сомневается, ✗ уже стоит (с пометкой «?») — снимите, если это тот же элемент.':''))}
    ${hasS||t.scheme?`<div class="smp">${hasS?`<img src="${crop(t.rid,t.sample,200,0.15,0)}" alt="образец">`:''}${t.scheme?`<img class="sch" src="${t.scheme}" alt="схема">`:''}<span>${hasS?'образец':'схема Керимова'}${t.more?` · в группе ещё ${t.more}`:''}<br>${esc(t.title||'')}</span></div>`:''}
-   <div class="grid" id="gr">${t.items.map(m=>`<button class="tl${t.x[m.id]===true?' x':t.x[m.id]==='v'?' v':''}${pre.has(m.id)?' pre':''}" data-id="${esc(m.id)}"><img src="${crop(t.rid,m.box,240,0.35,1)}" alt=""></button>`).join('')}</div>
+   <div class="grid" id="gr">${t.items.map(m=>`<button class="tl${t.x[m.id]===true?' x':t.x[m.id]==='v'?' v':t.x[m.id]==='n'?' n':t.x[m.id]==='f'?' f':''}${pre.has(m.id)?' pre':''}${m.nw?' nw':''}" data-id="${esc(m.id)}"><img src="${crop(t.rid,(t.fix&&t.fix[m.id])||m.box,240,0.35,1)}" alt=""></button>`).join('')}</div>
    <div class="row3"><button class="yes" id="a1" aria-label="готово: неотмеченные верны">✓</button><button class="no" id="a3" aria-label="все не то">✗ все</button><button class="unk" id="a4" aria-label="не знаю">?</button></div>`;qtip();
-  document.querySelectorAll('#gr .tl').forEach(e=>e.onclick=()=>{const i=e.dataset.id;t.x[i]=t.x[i]===true?'v':t.x[i]==='v'?false:true;   // v11.75: верно → ✗ → ≈ → верно
-    e.classList.toggle('x',t.x[i]===true);e.classList.toggle('v',t.x[i]==='v');});
+  t.fix=t.fix||{};
+  const paint=e=>{const i=e.dataset.id;['x','v','n','f'].forEach(c=>e.classList.toggle(c,(c==='x'?t.x[i]===true:t.x[i]===c)));};
+  document.querySelectorAll('#gr .tl').forEach(e=>{let lp=null,fired=false;const i=e.dataset.id;
+    // v11.82: долгое нажатие — правка рамки пальцем
+    e.addEventListener('pointerdown',ev=>{fired=false;clearTimeout(lp);lp=setTimeout(()=>{fired=true;if(navigator.vibrate)navigator.vibrate(15);
+      const m=t.items.find(x=>x.id===i);markEdit(t,m,b=>{t.fix[i]=b;t.x[i]='f';e.querySelector('img').src=crop(t.rid,b,240,0.35,1);paint(e);});},480);});
+    ['pointerup','pointerleave','pointercancel','pointermove'].forEach(k=>e.addEventListener(k,ev=>{if(k!=='pointermove'||Math.abs(ev.movementX)+Math.abs(ev.movementY)>6)clearTimeout(lp);}));
+    e.addEventListener('contextmenu',ev=>ev.preventDefault());
+    e.onclick=()=>{if(fired){fired=false;return;}   // v11.82: верно → ✗ → ≈ → ⌖ рядом → верно (поправленная пальцем — снова верно по исходной)
+      if(t.x[i]==='f'){delete t.fix[i];e.querySelector('img').src=crop(t.rid,t.items.find(x=>x.id===i).box,240,0.35,1);t.x[i]=false;}
+      else t.x[i]=t.x[i]===true?'v':t.x[i]==='v'?'n':t.x[i]==='n'?false:true;paint(e);};});
   const ids=t.items.map(m=>m.id);
-  $('a1').onclick=()=>answer(t,'done',null,{ok:ids.filter(i=>!t.x[i]),bad:ids.filter(i=>t.x[i]===true),var:ids.filter(i=>t.x[i]==='v'),pre:t.pre||[]});
+  $('a1').onclick=()=>answer(t,'done',null,{ok:ids.filter(i=>!t.x[i]),bad:ids.filter(i=>t.x[i]===true),var:ids.filter(i=>t.x[i]==='v'),near:ids.filter(i=>t.x[i]==='n'),
+    fix:Object.fromEntries(ids.filter(i=>t.x[i]==='f'&&t.fix[i]).map(i=>[i,t.fix[i]])),pre:t.pre||[]});
   $('a3').onclick=()=>answer(t,'done',null,{ok:[],bad:ids});$('a4').onclick=()=>answer(t,'skip',null,{ids});}
+// v11.82: правка рамки элемента: вокруг рамки показан узор (по рамке с каждой стороны), рамку двигать пальцем, размер — за углы
+function markEdit(t,m,done){const P=1.0,b=m&&((t.fix&&t.fix[m.id])||m.box);if(!b)return;
+  const R=[Math.max(0,b[0]-P*b[2]),Math.max(0,b[1]-P*b[3])];R.push(Math.min(1,b[0]+b[2]*(1+P))-R[0],Math.min(1,b[1]+b[3]*(1+P))-R[1]);   // видимая область в долях фото (как у /crop)
+  let B=[(b[0]-R[0])/R[2],(b[1]-R[1])/R[3],b[2]/R[2],b[3]/R[3]];
+  const ed=document.createElement('div');ed.id='ed';
+  ed.innerHTML=`<div class="et">Сдвиньте рамку на элемент, размер — за жёлтые углы. Рамка должна охватить элемент целиком.</div><div class="ew"><div class="ei" id="ei"><img id="eim" src="${crop(t.rid,b,1000,P,0)}" alt=""><div class="eb" id="eb"></div>${[0,1,2,3].map(k=>`<div class="eh" data-k="${k}"></div>`).join('')}</div></div>
+    <div class="er"><button class="no" id="ec">отмена</button><button class="yes" id="eo">готово</button></div>`;
+  document.body.appendChild(ed);const ei=$('ei'),eb=$('eb'),hs=[...ed.querySelectorAll('.eh')];
+  const draw=()=>{eb.style.left=B[0]*100+'%';eb.style.top=B[1]*100+'%';eb.style.width=B[2]*100+'%';eb.style.height=B[3]*100+'%';
+    const c=[[B[0],B[1]],[B[0]+B[2],B[1]],[B[0]+B[2],B[1]+B[3]],[B[0],B[1]+B[3]]];hs.forEach((h,k)=>{h.style.left=c[k][0]*100+'%';h.style.top=c[k][1]*100+'%';});};
+  draw();let drag=null;
+  const pos=ev=>{const r=ei.getBoundingClientRect();return [(ev.clientX-r.left)/r.width,(ev.clientY-r.top)/r.height];};
+  ed.addEventListener('pointerdown',ev=>{if(ev.target.closest('.er'))return;const p=pos(ev),h=ev.target.closest('.eh');
+    drag={k:h?+h.dataset.k:-1,p0:p,B0:B.slice()};ev.preventDefault();});
+  ed.addEventListener('pointermove',ev=>{if(!drag)return;const p=pos(ev),dx=p[0]-drag.p0[0],dy=p[1]-drag.p0[1],o=drag.B0,mn=.04;let x0=o[0],y0=o[1],x1=o[0]+o[2],y1=o[1]+o[3];
+    if(drag.k<0){const w=o[2],h=o[3];x0=Math.min(1-w,Math.max(0,x0+dx));y0=Math.min(1-h,Math.max(0,y0+dy));B=[x0,y0,w,h];}
+    else{if(drag.k===0||drag.k===3)x0=Math.min(x1-mn,Math.max(0,x0+dx));else x1=Math.max(x0+mn,Math.min(1,x1+dx));
+      if(drag.k<2)y0=Math.min(y1-mn,Math.max(0,y0+dy));else y1=Math.max(y0+mn,Math.min(1,y1+dy));B=[x0,y0,x1-x0,y1-y0];}
+    draw();});
+  ['pointerup','pointercancel'].forEach(k=>ed.addEventListener(k,()=>drag=null));
+  $('ec').onclick=()=>ed.remove();
+  $('eo').onclick=()=>{const nb=[R[0]+B[0]*R[2],R[1]+B[1]*R[3],B[2]*R[2],B[3]*R[3]].map(v=>Math.round(v*1e5)/1e5);ed.remove();done(nb);};}
 // «имена»: подтверждённый элемент без названия; выбор из схем Керимова для типа этого ковра (закрытый список)
 function showName(t){
   $('main').innerHTML=`${qhead('Какой это элемент?','Сверху элемент с ковра (жёлтая рамка). Ниже — все схемы Керимова для ковров типа «'+esc(t.comp)+'». Выберите схему и нажмите ✓. Поворот и цвет не важны, важна форма.')}
