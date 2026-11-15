@@ -18,7 +18,7 @@
  "h": 640,
  "marks": [],
  "created": 1791736135,
- "updated": 1794766930,
+ "updated": 1794767234,
  "cat": {
   "title": "kuba seychour66",
   "museum": "",
@@ -90,7 +90,38 @@
   "ver": 1,
   "at": 1792261793
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0472,
+    0.09377
+   ],
+   [
+    0.92822,
+    0.0063
+   ],
+   [
+    0.95224,
+    0.99246
+   ],
+   [
+    0.00325,
+    0.85405
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "from_twin": {
   "composition": "azcm_60",
@@ -161,8 +192,17 @@
     "w": 2,
     "t": 1794766930
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794767234,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "tri": "micro"
 }

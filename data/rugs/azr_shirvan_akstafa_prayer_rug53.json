@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736138,
- "updated": 1794766919,
+ "updated": 1794767238,
  "cat": {
   "title": "shirvan-akstafa-prayer-rug53",
   "museum": "",
@@ -115,8 +115,49 @@
     "w": 2,
     "t": 1794766919
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794767238,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.1495,
+    0.00323
+   ],
+   [
+    0.80213,
+    0.01296
+   ],
+   [
+    1.00759,
+    0.95527
+   ],
+   [
+    0.01005,
+    0.98034
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

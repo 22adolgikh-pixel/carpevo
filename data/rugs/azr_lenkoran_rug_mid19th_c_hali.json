@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736138,
- "updated": 1794750680,
+ "updated": 1794767243,
  "cat": {
   "title": "\"Lenkoran\" rug, mid 19th century",
   "museum": "",
@@ -112,8 +112,49 @@
     "w": 2,
     "t": 1794750680
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794767243,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04675,
+    0.01091
+   ],
+   [
+    0.96178,
+    0.01337
+   ],
+   [
+    0.96201,
+    0.97303
+   ],
+   [
+    0.03478,
+    0.98143
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

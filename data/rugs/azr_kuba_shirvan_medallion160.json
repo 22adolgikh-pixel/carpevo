@@ -18,7 +18,7 @@
  "h": 764,
  "marks": [],
  "created": 1791736130,
- "updated": 1794766886,
+ "updated": 1794767257,
  "cat": {
   "title": "kuba shirvan medallion160",
   "museum": "",
@@ -115,8 +115,49 @@
     "w": 2,
     "t": 1794766886
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794767257,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.13373,
+    0.00747
+   ],
+   [
+    0.73714,
+    0.00724
+   ],
+   [
+    0.98223,
+    0.92848
+   ],
+   [
+    0.00976,
+    0.95801
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

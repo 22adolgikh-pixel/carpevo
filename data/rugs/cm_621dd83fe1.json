@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870016,
- "updated": 1791997191,
+ "updated": 1794767283,
  "cat": {
   "title": "Collection VOK: Caucasus - Persia 22 The exceptional quality of this red- and blue-ground Azeri cover (shadda)",
   "museum": "",
@@ -93,7 +93,82 @@
   "conf": 0.954,
   "area": 0.807,
   "ver": 1,
-  "t": 1794238269
+  "t": 1794238269,
+  "ref_quad": {
+   "quad": [
+    [
+     0.11098,
+     0.02846
+    ],
+    [
+     0.94475,
+     0.03699
+    ],
+    [
+     0.95366,
+     0.94967
+    ],
+    [
+     0.04234,
+     0.82353
+    ]
+   ],
+   "v": 2,
+   "from": "auto",
+   "t": 1794767266
+  }
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794767251
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794767283,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.11098,
+    0.02846
+   ],
+   [
+    0.94475,
+    0.03699
+   ],
+   [
+    0.95366,
+    0.94967
+   ],
+   [
+    0.04234,
+    0.82353
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
