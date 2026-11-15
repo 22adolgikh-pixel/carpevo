@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870027,
- "updated": 1794772684,
+ "updated": 1794773533,
  "cat": {
   "title": "Ovçuluq carpet, Tabriz group of Azerbaijani carpets",
   "museum": "Национальный музей искусств Азербайджана",
@@ -141,8 +141,49 @@
     "w": 2,
     "t": 1794772684
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794773533,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00434,
+    0.00025
+   ],
+   [
+    0.99969,
+    0.00869
+   ],
+   [
+    1.00482,
+    0.98606
+   ],
+   [
+    -0.00731,
+    0.99982
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

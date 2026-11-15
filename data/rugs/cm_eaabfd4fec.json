@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870028,
- "updated": 1791997199,
+ "updated": 1794773567,
  "cat": {
   "title": "Qollu çiçi xalçası, Quba xalçaçılıq məktəbi, XIX əsr",
   "museum": "",
@@ -109,7 +109,82 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238561
+  "t": 1794238561,
+  "ref_quad": {
+   "quad": [
+    [
+     0.05896,
+     0.01501
+    ],
+    [
+     0.98978,
+     0.01181
+    ],
+    [
+     0.97069,
+     0.92838
+    ],
+    [
+     0.01705,
+     0.91608
+    ]
+   ],
+   "v": 2,
+   "from": "auto",
+   "t": 1794773559
+  }
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794773536
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794773567,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05896,
+    0.01501
+   ],
+   [
+    0.98978,
+    0.01181
+   ],
+   [
+    0.97069,
+    0.92838
+   ],
+   [
+    0.01705,
+    0.91608
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
