@@ -814,3 +814,7 @@
 
 ### Переобучение сети углов (15.11)
 - `tools/corners/labels.json` пересобран по резервной копии 15.11 17:29: 627 ковров с подтверждёнными углами (было 474). `tools/colab/corner_refine_colab.py` пишет `corner_refine_v2.pt/.json` (v1 не трогается). Запуск в Colab: `!rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo`, затем скрипт целиком (GPU T4, 10–20 мин). После — подключить v2 на сервере (`DRIVE`, `VERSION = 2`, `POST /api/corner_refine/fetch`).
+
+### v11.78 — сеть углов v2
+- Обучение 15.11 (Colab, 488 ковров, проверка 122 последних): от углов find_quad медиана ошибки **1,73 % → 0,15 %** (было 0,35 % у v1), в пределах 1 % — 20 → 80 % (120 из 122 лучше, хуже 0); от углов модели по картинке 2,42 % → 0,13 %, в пределах 1 % — 16 → 95 % (60 из 61 лучше). Файлы `carpet-dna/models/corner_refine_v2.pt/.json` (id в `corner_refine.DRIVES`). Нужен доступ «по ссылке».
+- Сервер берёт v2, при недоступности — v1; `corner_refine.VERSION` = версия загруженных весов, кеш `auto.ref_quad` другой версии пересчитывается. Подключить: открыть файлы на Диске по ссылке, затем `POST /api/corner_refine/fetch`.

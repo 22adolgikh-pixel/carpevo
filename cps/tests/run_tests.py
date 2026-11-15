@@ -1569,7 +1569,11 @@ def t40_rect_dups_m_v1173(pg, ctx):
     D = os.path.join(ctx['app'], 'data')
     src = cv2.imread(f'{D}/rug_img/frieze_1.jpg'); cp = cv2.resize(src, None, fx=.6, fy=.6, interpolation=cv2.INTER_AREA)
     cv2.imwrite(f'{D}/rug_img/frieze_copy.jpg', cp)
-    r = _j.load(open(f'{D}/rugs/frieze_1.json', encoding='utf-8')); r2 = {**r, 'id': 'frieze_copy', 'title': 'Frieze copy', 'w': cp.shape[1], 'h': cp.shape[0], 'marks': [], 'same': [], 'same_ok': {}, 'micro': {}}
+    r = _j.load(open(f'{D}/rugs/frieze_1.json', encoding='utf-8'))
+    if (r.get('layout') or {}).get('quad_status') != 'confirmed':                       # не зависим от порядка тестов (t39 ставит те же углы)
+        r['layout'] = {'quad': [[.06, .05], [.95, .09], [.92, .95], [.08, .91]], 'quad_status': 'confirmed', 'bounds': [], 'rings': [], 'status': 'auto', 'carpet': [.05, .05, .9, .9]}
+        _j.dump(r, open(f'{D}/rugs/frieze_1.json', 'w', encoding='utf-8'), ensure_ascii=False)
+    r2 = {**r, 'id': 'frieze_copy', 'title': 'Frieze copy', 'w': cp.shape[1], 'h': cp.shape[0], 'marks': [], 'same': [], 'same_ok': {}, 'micro': {}}
     _j.dump(r2, open(f'{D}/rugs/frieze_copy.json', 'w', encoding='utf-8'), ensure_ascii=False)
     get = lambda path: _j.load(U.urlopen(ctx['url'] + path))
     def post(path, body):
