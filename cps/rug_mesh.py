@@ -185,3 +185,111 @@ def mesh_rectify2(img, quad, side=1200):
     sh = min(out.shape[:2])
     info["field"] = {"median_px": med, "range_pct": {k: float((v.max() - v.min()) / sh * 100) for k, v in fc.items()}}
     return out2, info
+
+# ---------- v11.81: граница «поле / кайма» по контрасту (идея владельца: она обычно самая контрастная) ----------
+def _depth_score(lab, side, W, H, d0, d1, band, nst):
+    """S[станция, глубина d] — разница цвета «ближе к краю / глубже» на расстоянии d от края, глубины d0..d1 px"""
+    ts = np.linspace(0.06, 0.94, nst); ds = np.arange(d0, d1 + 1)
+    L = W if side in ("top", "bot") else H
+    strip = max(4, int(L / nst * 0.45)); ks = np.arange(-strip, strip + 1, 2)
+    S = np.zeros((nst, len(ds)), np.float32)
+    for i, t in enumerate(ts):
+        c = t * L
+        if side in ("top", "bot"):
+            xs = np.clip((c + ks).astype(int), 0, W - 1)
+            ys = ds if side == "top" else H - 1 - ds
+            prof = lab[np.clip(ys, 0, H - 1)[:, None], xs[None, :]].mean(1)          # глубина × 3
+        else:
+            ys = np.clip((c + ks).astype(int), 0, H - 1)
+            xs = ds if side == "left" else W - 1 - ds
+            prof = lab[ys[None, :], np.clip(xs, 0, W - 1)[:, None]].mean(1)
+        cs = np.concatenate([np.zeros((1, 3)), np.cumsum(prof, 0)])
+        for j in range(band, len(ds) - band):
+            a = (cs[j] - cs[j - band]) / band; b = (cs[j + band] - cs[j]) / band
+            S[i, j] = np.linalg.norm(b - a)
+    return ts, ds, S
+
+
+def field_line(rect, lo=0.04, hi=0.38, nst=48, wob_pct=0.012, cont=20, rel=0.5, pick=None):
+    """→ {"depth": общая глубина (px), "curves": {сторона: глубина линии на nst станциях t∈[0,1]}, "strength": сила (0..1), "cands": [...]}, или None.
+    Глубину ищем общую для 4 сторон (ширина каймы по кругу одинакова): профиль силы по глубине суммируется по сторонам,
+    берётся самый глубокий сильный пик (≥rel от максимума) — кайм несколько, поле внутри всех. Затем изгиб вдоль каждой стороны — Витерби около этой глубины."""
+    H, W = rect.shape[:2]; sh = min(W, H)
+    lab = cv2.cvtColor(cv2.GaussianBlur(rect, (0, 0), 1.5), cv2.COLOR_BGR2LAB).astype(np.float32)
+    d0, d1 = int(lo * sh), int(hi * sh); band = max(3, int(0.008 * sh)); wob = max(2, int(wob_pct * sh))
+    prof = {}; maps = {}
+    for sd in ("top", "bot", "left", "right"):
+        ts, ds, S = _depth_score(lab, sd, W, H, d0, d1, band, nst)
+        loc = np.stack([np.roll(S, k, 1) for k in range(-wob, wob + 1)]).max(0)       # изгиб линии ±1,2 % — всё ещё «та же глубина»
+        # сплошность: перепад должен быть почти на всей длине стороны (cont-й перцентиль по станциям) — края мотивов в поле прерывисты,
+        # граница поля и полосы каймы — непрерывны
+        prof[sd] = np.percentile(loc, cont, 0) / (np.percentile(S, 99) + 1e-6); maps[sd] = (ts, ds, S)
+    P = sum(prof.values()) / 4
+    P = _smooth(P, max(1.0, band / 2))
+    if P.max() <= 0: return None
+    pk = [j for j in range(1, len(P) - 1) if P[j] >= P[j - 1] and P[j] >= P[j + 1] and P[j] >= rel * P.max()]
+    if not pk: return None
+    pick = pick or "deep"
+    if pick == "deep": j0 = max(pk)
+    else:                                                    # "strong": самый сильный (сплошной) пик глубже наружной охранной полосы
+        inner = [j for j in pk if ds[j] >= 0.07 * sh] or pk; j0 = max(inner, key=lambda j: P[j])
+    depth = int(ds[j0])
+    cands = [int(ds[j]) for j in pk]; cand_p = [round(float(P[j] / P.max()), 2) for j in pk]
+    curves = {}; tt = np.linspace(0, 1, nst); R = max(3, int(0.025 * sh)); strg = []
+    for sd, (ts, dsv, S) in maps.items():
+        lo_, hi_ = max(0, j0 - R), min(len(dsv), j0 + R + 1)
+        js = np.arange(lo_ - j0, hi_ - j0)
+        off, sc = _viterbi(S[:, lo_:hi_], js, mu=0.04)
+        off = _smooth(np.median(np.stack([np.roll(off, s) for s in (-2, -1, 0, 1, 2)]), 0), 1.6)
+        curves[sd] = depth + np.interp(tt, ts, off)
+        strg.append(float(np.median(S[np.arange(len(ts)), np.clip((off + j0).astype(int), 0, len(dsv) - 1)]) / (np.percentile(S, 99) + 1e-6)))
+    return {"depth": depth, "depth_pct": depth / sh * 100, "curves": curves, "strength": float(np.median(strg)), "cands": cands, "cand_p": cand_p}
+
+
+def mesh_rectify3(img, quad, side=1200, pick=None):
+    """v11.81: перспектива → края к артборду (сетка) → граница поля по контрасту → поле параллельно краям.
+    → (картинка, сведения: края, поле, их изгиб в % короткой стороны)"""
+    out, info = mesh_rectify(img, quad, side)
+    fl = field_line(out, pick=pick)
+    info["field"] = None
+    if fl is None: return out, info
+    sh = min(out.shape[:2])
+    out2, med = field_warp(out, fl["curves"])
+    info["field"] = {"depth_pct": round(fl["depth_pct"], 1), "strength": round(fl["strength"], 2), "cands_pct": [round(c / sh * 100, 1) for c in fl["cands"]], "cand_p": fl["cand_p"],
+                     "range_pct": {k: round(float((v.max() - v.min()) / sh * 100), 2) for k, v in fl["curves"].items()},
+                     "curves": {k: v.tolist() for k, v in fl["curves"].items()}}
+    return out2, info
+
+
+def field_cands(rect, k=3, lo=0.04, hi=0.38, nst=48, wob_pct=0.012, cont=20, rel=0.5, sep=0.025):
+    """v11.81: до k кандидатов в границу «поле / кайма» — для выбора человеком (/m, вид «поле»).
+    Проба 15.11 на 38 коврах: ни «самая глубокая», ни «самая сильная» сплошная линия не угадывают надёжно
+    (глубокая уходит в поле со сплошным узором, сильная цепляется за наружную полосу), но верная почти всегда среди 2–3 сильнейших.
+    → [{"depth": px, "depth_pct", "p": сила 0..1, "curves": {сторона: глубина на nst станциях}}], по глубине; [] — нет сплошных линий"""
+    H, W = rect.shape[:2]; sh = min(W, H)
+    lab = cv2.cvtColor(cv2.GaussianBlur(rect, (0, 0), 1.5), cv2.COLOR_BGR2LAB).astype(np.float32)
+    d0, d1 = int(lo * sh), int(hi * sh); band = max(3, int(0.008 * sh)); wob = max(2, int(wob_pct * sh))
+    prof, maps = {}, {}
+    for sd in ("top", "bot", "left", "right"):
+        ts, ds, S = _depth_score(lab, sd, W, H, d0, d1, band, nst)
+        loc = np.stack([np.roll(S, kk, 1) for kk in range(-wob, wob + 1)]).max(0)
+        prof[sd] = np.percentile(loc, cont, 0) / (np.percentile(S, 99) + 1e-6); maps[sd] = (ts, ds, S)
+    P = _smooth(sum(prof.values()) / 4, max(1.0, band / 2))
+    if P.max() <= 0: return []
+    pk = [j for j in range(1, len(P) - 1) if P[j] >= P[j - 1] and P[j] >= P[j + 1] and P[j] >= rel * P.max() and ds[j] >= 0.06 * sh]
+    pk.sort(key=lambda j: -P[j]); pick = []
+    for j in pk:
+        if all(abs(ds[j] - ds[i]) >= sep * sh for i in pick): pick.append(j)
+        if len(pick) >= k: break
+    out = []; tt = np.linspace(0, 1, nst); R = max(3, int(0.025 * sh))
+    for j0 in sorted(pick):
+        cur = {}
+        for sd, (ts, dsv, S) in maps.items():
+            lo_, hi_ = max(0, j0 - R), min(len(dsv), j0 + R + 1)
+            off, _ = _viterbi(S[:, lo_:hi_], np.arange(lo_ - j0, hi_ - j0), mu=0.04)
+            off = _smooth(np.median(np.stack([np.roll(off, s2) for s2 in (-2, -1, 0, 1, 2)]), 0), 1.6)
+            v = int(ds[j0]) + np.interp(tt, ts, off)
+            m = float(np.median(v)); w = np.clip(np.minimum(tt, 1 - tt) / 0.08, 0, 1); w = w * w * (3 - 2 * w)
+            cur[sd] = [round(float(x), 1) for x in m + (v - m) * w]       # у углов линия идёт к своему среднему (углы рамки прямые)
+        out.append({"depth": int(ds[j0]), "depth_pct": round(float(ds[j0]) / sh * 100, 1), "p": round(float(P[j0] / P.max()), 2), "curves": cur})
+    return out

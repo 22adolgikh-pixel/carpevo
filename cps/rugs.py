@@ -1331,6 +1331,111 @@ def install(app, DATA, D_WORK):
 
     if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_rect, daemon=True, name="rect-periodic").start()
 
+    # ---- v11.81: края к артборду (сетка) и граница «поле / кайма» — выбор человеком ----
+    # Для ковра с подтверждёнными углами: перспектива с запасом → линия края по каждой стороне → лоскут Кунса (края — прямые стороны артборда),
+    # затем до 3 кандидатов в границу поля (сплошные контрастные линии на одной глубине по всем 4 сторонам, rug_mesh.field_cands).
+    # Человек в /m (вид «поле») выбирает верную линию или отвечает «нет нужной» / «края испорчены». По выбранной линии поле выравнивается
+    # параллельно краям (rug_mesh.field_warp) — rug_mesh/<id>.f.jpg. Рабочей картинкой (редактор, рамки) пока остаётся простое выпрямление:
+    # сетку ещё надо научиться переводить в доли фото (рамки). Ответы — в micro.jsonl (type "field") для обучения выбора линии.
+    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 1
+    mesh_st = {"running": False, "done": 0, "total": 0, "err": "", "t": 0}
+
+    def mesh_info(rid, r=None, build=False):
+        """сведения о сетке ковра (кандидаты поля) или None; build — построить, если нет или углы поменялись"""
+        rid = os.path.basename(rid); r = r or load(rid); q = rect_quad(r)
+        if not q: return None
+        pj = os.path.join(D_MESH, rid + ".json")
+        try:
+            m = json.load(open(pj))
+            if m.get("v") == MESH_VER and max(abs(float(a) - float(b)) for u, v in zip(m["quad"], q) for a, b in zip(u, v)) < 1e-5: return m
+        except Exception: pass
+        if not build: return None
+        import rug_mesh
+        src = img_path(rid); a = cv2.imread(src) if src else None
+        if a is None: return None
+        def work():
+            img, info = rug_mesh.mesh_rectify(a, q, 1200)
+            return img, info, rug_mesh.field_cands(img)
+        img, info, cands = heavy(work, "края и поле")
+        os.makedirs(D_MESH, exist_ok=True)
+        tmp = os.path.join(D_MESH, "%s.%d.tmp.jpg" % (rid, threading.get_ident())); cv2.imwrite(tmp, img, [cv2.IMWRITE_JPEG_QUALITY, 88]); os.replace(tmp, os.path.join(D_MESH, rid + ".jpg"))
+        m = {"v": MESH_VER, "quad": [[float(u), float(v)] for u, v in q], "w": int(img.shape[1]), "h": int(img.shape[0]),
+             "edge_pct": {k: round(v, 2) for k, v in info["range_pct"].items()}, "cands": cands, "t": int(time.time())}
+        tj = pj + ".%d.tmp" % threading.get_ident(); json.dump(m, open(tj, "w")); os.replace(tj, pj)
+        for f in (os.path.join(D_MESH, rid + ".f.jpg"), os.path.join(D_TH, rid + ".mm.jpg")):
+            try: os.remove(f)
+            except OSError: pass
+        return m
+
+    def mesh_field_img(rid, r=None):
+        """выровненный ковёр по выбранной человеком линии поля (rug_mesh/<id>.f.jpg) или None"""
+        rid = os.path.basename(rid); r = r or load(rid); F = ((r or {}).get("layout") or {}).get("field") or {}
+        m = mesh_info(rid, r)
+        if not m or not F.get("curves"): return None
+        p = os.path.join(D_MESH, rid + ".f.jpg")
+        if os.path.exists(p) and os.path.getmtime(p) >= max(os.path.getmtime(os.path.join(D_MESH, rid + ".jpg")), F.get("t", 0)): return p
+        import rug_mesh
+        a = cv2.imread(os.path.join(D_MESH, rid + ".jpg"))
+        if a is None: return None
+        out, _ = heavy(lambda: rug_mesh.field_warp(a, {k: np.array(v, float) for k, v in F["curves"].items()}), "поле")
+        cv2.imwrite(p, out, [cv2.IMWRITE_JPEG_QUALITY, 88]); return p
+
+    def mesh_all():
+        """фон: подготовить сетку и кандидатов поля для ковров с углами, у которых поле ещё не отвечено"""
+        if mesh_st["running"]: return
+        mesh_st.update(running=True, done=0, err="", t=int(time.time()))
+        try:
+            ids = [f[:-5] for f in os.listdir(D_RUGS) if f.endswith(".json")]
+            todo = []
+            for i in ids:
+                r = load(i)
+                if r and rect_quad(r) and not ((r.get("layout") or {}).get("field")) and not r.get("dup_of") and not r.get("hidden") and mesh_info(i, r) is None: todo.append(i)
+            mesh_st["total"] = len(todo)
+            for i in todo:
+                try: mesh_info(i, build=True)
+                except Exception as e: mesh_st["err"] = f"{i}: {str(e)[:160]}"
+                mesh_st["done"] += 1
+        finally:
+            mesh_st["running"] = False
+
+    def _periodic_mesh():
+        time.sleep(300)
+        while True:
+            try: mesh_all()
+            except Exception as e: print("mesh_all:", e)
+            time.sleep(3 * 3600)
+
+    @app.get("/api/rugs_mesh_all")
+    def api_mesh_all_state(): return mesh_st
+
+    @app.post("/api/rugs_mesh_all")
+    def api_mesh_all():
+        threading.Thread(target=mesh_all, daemon=True).start(); return mesh_st
+
+    @app.get("/rugmesh/{rid}.jpg")
+    def rug_mesh_img(rid: str, f: int = 0, s: int = 1400):
+        """v11.81: ковёр с ровными краями (f=1 — и с выровненным полем, если линия поля выбрана); s — длинная сторона"""
+        rid = os.path.basename(rid); r = load(rid)
+        p = mesh_field_img(rid, r) if f else (os.path.join(D_MESH, rid + ".jpg") if mesh_info(rid, r, build=True) else None)
+        if not p or not os.path.exists(p): return Response(status_code=404)
+        s = max(200, min(2400, s)); t = os.path.join(D_TH, "%s.mm%s%d.jpg" % (rid, "f" if f else "", s))
+        if not os.path.exists(t) or os.path.getmtime(t) < os.path.getmtime(p):
+            with THUMB:
+                a = read_small(p, s)
+                if a is None: return Response(status_code=404)
+                os.makedirs(D_TH, exist_ok=True); cv2.imwrite(t, a, [cv2.IMWRITE_JPEG_QUALITY, 85])
+        return FileResponse(t, headers={"Cache-Control": "no-cache"})
+
+    @app.get("/api/rugs/{rid}/mesh")
+    def api_rug_mesh(rid: str):
+        r = load(rid)
+        if not r: return JSONResponse({"error": "нет такого ковра"}, 404)
+        m = mesh_info(rid, r, build=True)
+        if not m: return JSONResponse({"error": "у ковра нет подтверждённых углов или фото"}, 400)
+        return {**m, "field": (r.get("layout") or {}).get("field")}
+
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_mesh, daemon=True, name="mesh-periodic").start()
+
     @app.get("/api/rugs/{rid}/rect_similar")
     async def api_rug_rect_similar(rid: str, n: int = 12):
         """v11.72: ковры, похожие на этот по выпрямленной картинке (кандидаты в «тот же ковёр»). Только среди ковров с подтверждёнными углами."""
@@ -1993,7 +2098,7 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame")
+    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field")
 
     # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
     # ответы лежат отдельно от ковров, в DATA/concept_dups_votes.json; решение (вес ≥2) читает /api/concept_dups, слияние делается в модели вручную.
@@ -2076,7 +2181,7 @@ def install(app, DATA, D_WORK):
             und = (c.get("v") == "maybe") if (c.get("ver") or 1) >= 2 else not ((x.get("score") or 0) >= 60 or x.get("inv"))
             if und:                                                              # машина не уверена — спросить человека
                 sm.append(o); sev[o] = {"sc": x.get("score") or 0, "inv": bool(x.get("inv")), "inl": c.get("inl")}
-        row.update(sd=[o for o, v in ok_.items() if v is not None], sy=[o for o, v in ok_.items() if v and v.get("ok")], sev=sev,
+        row.update(fld=bool((r.get("layout") or {}).get("field")), fv=list(((r.get("micro") or {}).get("field") or {}).keys()), sd=[o for o, v in ok_.items() if v is not None], sy=[o for o, v in ok_.items() if v and v.get("ok")], sev=sev,
                    size=r.get("size") or (r.get("cat") or {}).get("size") or "", dead=dead, mp=(r.get("multi") or []) if not (r.get("dup_of") or r.get("hidden") or r.get("split_into")) else [], mk=mk, comp=r.get("composition") if r.get("composition") in BYID else "", cg=cg, sm=sm,
                    nn=list(r.get("name_none") or []), src=(r.get("cat") or {}).get("src", ""),
                    mv={t: {key: list((d or {}).keys()) for key, d in (m.get(t) or {}).items()} for t in MORE})
@@ -2483,6 +2588,41 @@ def install(app, DATA, D_WORK):
         """у обоих ковров углы подтверждены — карточка показывает выпрямленные картинки (/rectmid)"""
         return bool(x.get("quad") and y.get("quad") and x.get("qs") in RECT_OK and y.get("qs") in RECT_OK)
 
+    def _field_queue(me, rows):
+        """v11.81: «где граница поля?» — ковры с углами, у которых сетка уже построена, поле не отвечено и этот человек не отвечал"""
+        out = []
+        for x in rows:
+            if x["dead"] or x["qs"] not in RECT_OK or x.get("fld"): continue
+            if me in x.get("fv", []): continue
+            m = mesh_info(x["id"])
+            if not m: continue
+            out.append({"type": "field", "rid": x["id"], "mw": m["w"], "mh": m["h"], "edge": m["edge_pct"],
+                        "cands": [{"d": c["depth"], "pct": c["depth_pct"], "p": c["p"], "curves": c["curves"]} for c in m["cands"]]})
+        out.sort(key=lambda t: (len(t["cands"]) == 0, t["rid"]))
+        return out
+
+    def _field_answer(me, role, rid, a, body, rec):
+        """a: "0".."2" — номер кандидата; "none" — верной линии нет; "nofield" — у ковра нет каймы/поля; "edges" — края испорчены; "skip" """
+        if a == "skip": _mlog(rec); return {"ok": True}
+        if a not in ("0", "1", "2", "none", "nofield", "edges"): return JSONResponse({"error": "ответ?"}, status_code=400)
+        m = mesh_info(rid)
+        if not m: return JSONResponse({"error": "сетка не построена"}, status_code=400)
+        rec["cands"] = [c["depth_pct"] for c in m["cands"]]
+        with _lock:
+            r = load(rid)
+            if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
+            L = r.setdefault("layout", {}); M = r.setdefault("micro", {}).setdefault("field", {}); M[me] = a
+            if a.isdigit():
+                k = int(a)
+                if k >= len(m["cands"]): return JSONResponse({"error": "нет такой линии"}, status_code=400)
+                c = m["cands"][k]
+                L["field"] = {"depth_pct": c["depth_pct"], "curves": c["curves"], "w": m["w"], "h": m["h"], "by": me, "t": int(time.time()), "src": "cand%d" % k}
+            elif a == "edges": L["mesh_bad"] = {"by": me, "t": int(time.time())}; L["field"] = {"none": "edges", "by": me, "t": int(time.time())}
+            else: L["field"] = {"none": a, "by": me, "t": int(time.time())}
+            save(r)
+        _mlog(rec); _ty["t"] = 0
+        return {"ok": True}
+
     def _rsame_queue(me, by):
         """v11.73: пары, найденные по выпрямленным (rect_pairs.json): ≥20 общих точек, нет в «двойниках», ответа нет. «Возможно» (20–59) — первыми."""
         out = []; P = rp_load(); hub = {}
@@ -2692,6 +2832,7 @@ def install(app, DATA, D_WORK):
         cdq = _cdup_queue(me) if "cdup" in want else []; Q["cdup"] = cdq[:n]
         xsq = _xs_queue(me, rows) if "xsame" in want else []; Q["xsame"] = xsq[:n]
         rsq = _rsame_queue(me, by) if "rsame" in want else []; Q["rsame"] = rsq[:n]
+        fdq = _field_queue(me, rows) if "field" in want else []; Q["field"] = fdq[:n]
         tasks = []; order = [t for t in want if Q[t]]
         while len(tasks) < n and order:                                           # по кругу: по одной карточке каждого вида
             for t in list(order):
@@ -2712,8 +2853,8 @@ def install(app, DATA, D_WORK):
         for t in tasks:
             if t["type"] == "cdup": continue                                     # карточка о словах: ковра у неё нет
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "name_wait": more["name_wait"]},
-                "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver(), "rs": {k: rpr[k] for k in ("running", "done", "total", "found", "t", "err")}}
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "name_wait": more["name_wait"]},
+                "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver(), "rs": {k: rpr[k] for k in ("running", "done", "total", "found", "t", "err")}, "ms": dict(mesh_st)}
 
     @app.post("/api/micro/answer")
     def micro_answer(request: Request, body: dict = Body(...)):
@@ -2730,6 +2871,7 @@ def install(app, DATA, D_WORK):
             return {"ok": True, "ctl": rec.get("ctl")}
         if typ == "cdup": return _cdup_answer(me, role, a, body, rec)
         if typ == "xsame": return _xs_answer(me, role, a, body, rec)
+        if typ == "field": return _field_answer(me, role, rid, a, body, rec)
         if typ in MORE: return _micro_more(me, role, typ, rid, a, body, rec)
         if typ not in ("frame", "quad") or a == "skip":
             if a == "skip": _mlog(rec)

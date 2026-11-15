@@ -73,7 +73,7 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
 // v11.52: виды карточек. Кнопки вверху включают и выключают вид; выбор помнится на этом телефоне. /m?k=quad,frame — задать выбор ссылкой.
-const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['same','двойники'],['split','развороты'],['rsame','новые дубли'],['cdup','дубли слов'],['xsame','между коврами']];
+const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['same','двойники'],['split','развороты'],['rsame','новые дубли'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле']];
 function kindsInit(){let k=new URLSearchParams(location.search).get('k');
   if(!k){try{k=localStorage.getItem('cps_m_k');}catch(e){}}
   S.k=(k||'').split(',').filter(x=>KINDS.some(a=>a[0]===x));if(!S.k.length)S.k=KINDS.map(a=>a[0]);}
@@ -82,7 +82,7 @@ function chips(){const L=S.left||{};$('chips').innerHTML=KINDS.map(([k,n])=>`<bu
     if(S.k.includes(k)){if(S.k.length===1)return toast('хотя бы один вид карточек');S.k=S.k.filter(x=>x!==k);}else S.k.push(k);
     try{localStorage.setItem('cps_m_k',S.k.join(','));}catch(e){}load();});}
 async function load(){$('main').innerHTML='<div class="end"><span class="mut">загружаю…</span></div>';
-  try{const j=await api('/api/micro/next?n=6&k='+S.k.join(','));S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;S.rs=j.rs;S.ver=j.ver||S.ver;chips();head();show();}
+  try{const j=await api('/api/micro/next?n=6&k='+S.k.join(','));S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;S.rs=j.rs;S.ms=j.ms;S.ver=j.ver||S.ver;chips();head();show();}
   catch(e){$('main').innerHTML=`<div class="end"><span>Не загрузилось: ${esc(e.message)}</span><button onclick="load()">ещё раз</button></div>`;}}
 const img=t=>'/rugmid/'+encodeURIComponent(t.rid)+'.jpg';
 function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!im.naturalWidth)return;
@@ -90,9 +90,9 @@ function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!
   el.style.backgroundImage=`url("${img(t)}")`;el.style.backgroundSize=`${BW}px ${BH}px`;el.style.backgroundPosition=`${r.width/2-x*BW}px ${r.height/2-y*BH}px`;}
 function show(){head();const t=S.tasks[S.i];
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
-    <div class="mut">в очереди: ${KINDS.filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${S.k.includes('rsame')&&S.rs?`<div class="mut">поиск новых дублей: ${S.rs.running?`идёт, проверено ${S.rs.done} из ${S.rs.total||'…'} пар`:(S.rs.t?'проход закончен':'ещё не запускался')}${S.rs.err?' · ошибка: '+S.rs.err:''}</div>`:''}${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
+    <div class="mut">в очереди: ${KINDS.filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${S.k.includes('field')&&S.ms&&S.ms.running?`<div class="mut">готовлю карточки «поле»: ${S.ms.done} из ${S.ms.total}</div>`:''}${S.k.includes('rsame')&&S.rs?`<div class="mut">поиск новых дублей: ${S.rs.running?`идёт, проверено ${S.rs.done} из ${S.rs.total||'…'} пар`:(S.rs.t?'проход закончен':'ещё не запускался')}${S.rs.err?' · ошибка: '+S.rs.err:''}</div>`:''}${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
     ${S.k.some(k=>L[k])?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
-  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,split:showSplit,cdup:showCdup,xsame:showXsame})[t.type](t);}
+  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,split:showSplit,cdup:showCdup,xsame:showXsame,field:showField})[t.type](t);}
 function qhead(q,tip){return `<div class="qrow"><span class="q">${q}</span><button class="ib" id="ib" aria-label="подсказка">i</button></div><div class="tip hint" id="tip">${tip}</div>`;}
 function qtip(){const b=$('ib'),t=$('tip');if(b&&t)b.onclick=()=>{t.classList.toggle('on');b.classList.toggle('on');};}
 function stage(t,extra=''){return `<div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="${img(t)}" alt="">${extra}</div></div>`;}
@@ -193,6 +193,20 @@ function showSame(t){const o={rid:t.other},pi=r=>t.rect?'/rectmid/'+encodeURICom
    <div class="pair"><figure><img src="${pi(t.rid)}" alt=""><figcaption>${esc(t.title||t.rid)}${t.src?' · '+esc(t.src):''}</figcaption></figure><figure><img src="${pi(t.other)}" alt=""><figcaption>${esc(t.title2||t.other)}${t.src2?' · '+esc(t.src2):''}</figcaption></figure></div>
    <div class="btns"><button class="yes" id="a1">✓ тот же ковёр</button><button id="a2">похожи, но разные</button><button class="no" id="a3">✗ разные</button><button class="sm unk" id="a4">не знаю</button></div>`;qtip();
   const x={other:t.other};$('a1').onclick=()=>answer(t,'same',null,x);$('a2').onclick=()=>answer(t,'similar',null,x);$('a3').onclick=()=>answer(t,'diff',null,x);$('a4').onclick=()=>answer(t,'skip',null,x);}
+// v11.81: «где граница поля?» — ковёр с ровными краями (сетка) и до 3 линий-кандидатов; выбор одной — поле выровняется по ней
+const FC=['#ffe066','#3ecf8e','#ff6bd6'];
+function showField(t){document.documentElement.style.setProperty('--imh','58dvh');const W=t.mw,H=t.mh,n=t.cands.length;
+  const line=(c,i)=>{const C=c.curves,m=C.top.length,pt=(k,j)=>{const u=j/(m-1),d=C[k][j];return k==='top'?[u*W,d]:k==='bot'?[u*W,H-1-d]:k==='left'?[d,u*H]:[W-1-d,u*H];};
+    const av=k=>C[k].reduce((a,b)=>a+b,0)/m,lim={top:[av('left')/W,1-av('right')/W],bot:[av('left')/W,1-av('right')/W],left:[av('top')/H,1-av('bot')/H],right:[av('top')/H,1-av('bot')/H]};
+    const P=k=>Array.from({length:m},(_,j)=>j).filter(j=>{const u=j/(m-1);return u>=lim[k][0]-.01&&u<=lim[k][1]+.01;}).map(j=>pt(k,j).map(v=>v.toFixed(1)).join(',')).join(' ');const sw=Math.max(W,H)/220;   // рамка, а не крест
+    return ['top','bot','left','right'].map(k=>`<polyline points="${P(k)}" fill="none" stroke="${FC[i]}" stroke-width="${sw}" opacity=".95"/>`).join('')+
+      `<text x="${c.d+sw*2}" y="${c.d+sw*9}" font-size="${sw*9}" fill="${FC[i]}" stroke="#000" stroke-width="${sw*.6}" paint-order="stroke" font-weight="700">${i+1}</text>`;};
+  $('main').innerHTML=`${qhead(n?'Какая линия — граница поля?':'Граница поля не найдена','Поле — середина ковра, кайма — полосы вокруг. Выберите линию, где кончается кайма и начинается поле (самая внутренняя линия каймы). Края ковра уже прижаты к рамке картинки: если края ковра на картинке испорчены (волна, обрезан кусок узора) — «края испорчены». По выбранной линии поле выровняется параллельно краям; ответы учат машину.')}
+   <div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="/rugmesh/${encodeURIComponent(t.rid)}.jpg" alt=""><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">${t.cands.map(line).join('')}</svg></div></div>
+   <div class="btns">${t.cands.map((c,i)=>`<button class="yes" id="f${i}" style="background:${FC[i]};color:#111">${i+1}</button>`).join('')}
+     <button id="fn">нет нужной</button><button id="fz">нет каймы</button><button class="no" id="fe">края испорчены</button><button class="sm unk" id="fs">пропустить</button></div>`;
+  qtip();zoomable();t.cands.forEach((c,i)=>$('f'+i).onclick=()=>answer(t,String(i)));
+  $('fn').onclick=()=>answer(t,'none');$('fz').onclick=()=>answer(t,'nofield');$('fe').onclick=()=>answer(t,'edges');$('fs').onclick=()=>answer(t,'skip');}
 // «развороты»: на фото несколько ковров; показываем, как машина предлагает разрезать
 const PC=['#ffe066','#6cb6ff','#3ecf8e','#ff8fd0','#ffa94d','#b39dff'];
 function showSplit(t){document.documentElement.style.setProperty('--imh','50dvh');

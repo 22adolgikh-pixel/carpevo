@@ -1602,6 +1602,46 @@ def t40_rect_dups_m_v1173(pg, ctx):
     errors_ok(ctx, '/m новые дубли v11.73')
 
 
+@test
+def t41_mesh_field_v1181(pg, ctx):
+    """v11.81: края к рамке (сетка) и граница поля: у ковра с подтверждёнными углами строятся кандидаты в границу «поле / кайма»,
+    в /m вид «поле» показывает линии; выбор линии пишется в layout.field, по нему строится выровненный ковёр (/rugmesh/<id>.jpg?f=1)"""
+    import urllib.request as U, json as _j, cv2, numpy as np
+    D = os.path.join(ctx['app'], 'data')
+    img = np.full((900, 700, 3), (60, 60, 60), np.uint8); cv2.rectangle(img, (100, 100), (600, 800), (30, 30, 160), -1)
+    pts = [[180 + int(10 * np.sin(y / 60)), y] for y in range(180, 721)] + [[520 + int(10 * np.sin(y / 60)), y] for y in range(720, 179, -1)]
+    cv2.fillPoly(img, [np.array(pts, np.int32)], (170, 200, 220)); cv2.imwrite(f'{D}/rug_img/fieldrug.jpg', img)
+    r = _j.load(open(f'{D}/rugs/frieze_1.json', encoding='utf-8'))
+    r2 = {**r, 'id': 'fieldrug', 'title': 'Field rug', 'w': 700, 'h': 900, 'marks': [], 'same': [], 'same_ok': {}, 'micro': {}, 'frame': 'whole', 'frame_by': 'micro',
+          'layout': {'quad': [[1 / 7, 1 / 9], [6 / 7, 1 / 9], [6 / 7, 8 / 9], [1 / 7, 8 / 9]], 'quad_status': 'confirmed', 'bounds': [], 'rings': [], 'status': 'auto', 'carpet': [.14, .11, .72, .78]}}
+    for k in ('dup_of', 'hidden', 'split_into', 'split_from', 'multi', 'lib_img'): r2.pop(k, None)
+    _j.dump(r2, open(f'{D}/rugs/fieldrug.json', 'w', encoding='utf-8'), ensure_ascii=False)
+    get = lambda path: _j.load(U.urlopen(ctx['url'] + path))
+    def post(path, body):
+        return _j.load(U.urlopen(U.Request(ctx['url'] + path, data=_j.dumps(body).encode(), headers={'Content-Type': 'application/json'})))
+    time.sleep(1.5)
+    m = get('api/rugs/fieldrug/mesh')
+    assert m['cands'], f'кандидатов поля нет: {m}'
+    c0 = min(m['cands'], key=lambda c: abs(c['depth_pct'] - 16))
+    assert abs(c0['depth_pct'] - 16) < 3, f"граница поля не там (ожидалось ≈16 %): {[c['depth_pct'] for c in m['cands']]}"
+    a = U.urlopen(ctx['url'] + 'rugmesh/fieldrug.jpg').read(); assert a[:2] == b'\xff\xd8', '/rugmesh не отдал картинку'
+    j = get('api/micro/next?n=12&k=field')
+    ts = [t for t in j['tasks'] if t['rid'] == 'fieldrug']
+    assert ts and ts[0]['type'] == 'field' and ts[0]['cands'], f"нет карточки «поле»: {[t['rid'] for t in j['tasks']]} left={j['left']}"
+    pg.goto(ctx['url'] + 'm?k=field'); pg.wait_for_timeout(1500)
+    for _ in range(12):
+        if pg.evaluate("S.tasks[S.i]&&S.tasks[S.i].rid") == 'fieldrug': break
+        pg.evaluate("S.i++;show()"); pg.wait_for_timeout(200)
+    assert pg.query_selector('#f0') and pg.query_selector('#ph svg polyline'), 'карточка «поле» не нарисовала линии и кнопки'
+    pg.screenshot(path=os.path.join(OUT, 't41_field.png'))
+    k = m['cands'].index(c0); pg.click('#f%d' % k); pg.wait_for_timeout(1200)
+    d = get('api/rugs/fieldrug'); F = (d.get('layout') or {}).get('field') or {}
+    assert F.get('curves') and abs(F['depth_pct'] - c0['depth_pct']) < 0.01, f'выбор линии не записался: {F}'
+    a = U.urlopen(ctx['url'] + 'rugmesh/fieldrug.jpg?f=1').read(); assert a[:2] == b'\xff\xd8', 'выровненный по полю ковёр не построен'
+    j = get('api/micro/next?n=12&k=field'); assert not [t for t in j['tasks'] if t['rid'] == 'fieldrug'], 'отвеченный ковёр вернулся в очередь'
+    errors_ok(ctx, '/m поле v11.81')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
