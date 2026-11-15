@@ -18,7 +18,7 @@
  "h": 525,
  "marks": [],
  "created": 1791736123,
- "updated": 1794597131,
+ "updated": 1794740718,
  "cat": {
   "title": "Karaja 1103L4.jpg",
   "museum": "Wikimedia Commons",
@@ -123,6 +123,29 @@
    "v": 2,
    "model": "anthropic/claude-sonnet-5.5",
    "t": 1794645333
+  },
+  "ref_quad": {
+   "quad": [
+    [
+     0.00662,
+     -0.00283
+    ],
+    [
+     0.99405,
+     -0.00071
+    ],
+    [
+     0.99437,
+     0.99948
+    ],
+    [
+     0.00201,
+     1.00285
+    ]
+   ],
+   "v": 1,
+   "from": "vlm",
+   "t": 1794740685
   }
  },
  "micro": {
@@ -132,8 +155,49 @@
     "w": 2,
     "t": 1794597131
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794740718,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00662,
+    -0.00283
+   ],
+   [
+    0.99405,
+    -0.00071
+   ],
+   [
+    0.99437,
+    0.99948
+   ],
+   [
+    0.00201,
+    1.00285
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

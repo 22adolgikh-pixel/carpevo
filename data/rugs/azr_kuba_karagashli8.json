@@ -18,7 +18,7 @@
  "h": 1041,
  "marks": [],
  "created": 1791736133,
- "updated": 1794658025,
+ "updated": 1794740782,
  "cat": {
   "title": "kuba karagashli8",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794658025
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794740782,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00581,
+    0.03198
+   ],
+   [
+    0.98327,
+    0.03283
+   ],
+   [
+    0.99329,
+    0.95719
+   ],
+   [
+    0.02213,
+    0.97117
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

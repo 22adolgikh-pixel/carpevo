@@ -18,7 +18,7 @@
  "h": 1117,
  "marks": [],
  "created": 1791736123,
- "updated": 1794597227,
+ "updated": 1794740799,
  "cat": {
   "title": "Jairli rug.gif",
   "museum": "Wikimedia Commons",
@@ -81,7 +81,30 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238554
+  "t": 1794238554,
+  "ref_quad": {
+   "quad": [
+    [
+     -0.00257,
+     0.0046
+    ],
+    [
+     1.00724,
+     0.00263
+    ],
+    [
+     0.99729,
+     0.99779
+    ],
+    [
+     0.00024,
+     0.99453
+    ]
+   ],
+   "v": 1,
+   "from": "auto",
+   "t": 1794740720
+  }
  },
  "micro": {
   "frame": {
@@ -90,8 +113,49 @@
     "w": 2,
     "t": 1794597227
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794740799,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00257,
+    0.0046
+   ],
+   [
+    1.00724,
+    0.00263
+   ],
+   [
+    0.99729,
+    0.99779
+   ],
+   [
+    0.00024,
+    0.99453
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

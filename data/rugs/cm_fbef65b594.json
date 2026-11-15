@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870022,
- "updated": 1794597359,
+ "updated": 1794740699,
  "cat": {
   "title": "Vishapagorg (Carpet with dragons), early 19th century, Taghut, Hadrut region",
   "museum": "Национальный музей азербайджанского ковра",
@@ -164,9 +164,6 @@
  "edge": {
   "skew": [
    "dolgikh"
-  ],
-  "damaged": [
-   "dolgikh"
   ]
  },
  "micro": {
@@ -176,8 +173,67 @@
     "w": 2,
     "t": 1794597359
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794740699,
+    "q": [
+     [
+      0.00765,
+      0.00876
+     ],
+     [
+      0.95109,
+      -0.00031
+     ],
+     [
+      0.87695,
+      0.98326
+     ],
+     [
+      0.05101,
+      1.00842
+     ]
+    ],
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00765,
+    0.00876
+   ],
+   [
+    0.95109,
+    -0.00031
+   ],
+   [
+    0.87695,
+    0.98326
+   ],
+   [
+    0.05101,
+    1.00842
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

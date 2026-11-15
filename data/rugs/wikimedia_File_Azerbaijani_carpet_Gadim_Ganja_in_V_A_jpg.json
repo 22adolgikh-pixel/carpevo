@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791736125,
- "updated": 1794597125,
+ "updated": 1794740705,
  "cat": {
   "title": "Azerbaijani carpet \"Gadim Ganja\" in V&A.jpg",
   "museum": "Wikimedia Commons",
@@ -169,8 +169,49 @@
     "w": 2,
     "t": 1794597125
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794740705,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.33122,
+    0.04616
+   ],
+   [
+    0.72071,
+    0.05007
+   ],
+   [
+    0.73549,
+    0.96055
+   ],
+   [
+    0.28105,
+    0.95455
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
