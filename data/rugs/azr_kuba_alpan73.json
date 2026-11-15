@@ -18,7 +18,7 @@
  "h": 868,
  "marks": [],
  "created": 1791736131,
- "updated": 1794750739,
+ "updated": 1794771463,
  "cat": {
   "title": "kuba alpan73",
   "museum": "",
@@ -119,11 +119,52 @@
     "w": 2,
     "t": 1794750739
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794771463,
+    "s": "ref"
+   }
   }
  },
  "comp_no": [
   "alpan"
  ],
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03346,
+    0.01859
+   ],
+   [
+    0.96651,
+    0.02901
+   ],
+   [
+    0.96341,
+    0.96927
+   ],
+   [
+    0.02188,
+    0.97418
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
