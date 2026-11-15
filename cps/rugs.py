@@ -1134,7 +1134,7 @@ def install(app, DATA, D_WORK):
     # в долях исходного фото (их пересчёт — по 4 углам), поэтому старая разметка не ломается, а выпрямление можно пересчитать в любой момент.
     # Файл rug_rect/<id>.jpg строится заново, когда углы изменились (углы, по которым он построен, — в <id>.q.json).
     RECT_OK = ("confirmed", "accepted", "edited")
-    _rsig = {}
+    _rsig = {}; _rlock = threading.RLock()                   # построение одного и того же выпрямления из двух потоков (фон, страница, телефон) не должно мешать друг другу
 
     def rect_quad(r):
         L = (r or {}).get("layout") or {}; q = L.get("quad")
@@ -1143,12 +1143,15 @@ def install(app, DATA, D_WORK):
     def _rect_write(rid, a, quad):
         import rug_rect
         x = rug_rect.rectify(a, quad, 1600)
-        os.makedirs(D_RECT, exist_ok=True); tmp = os.path.join(D_RECT, rid + ".tmp.jpg")
-        cv2.imwrite(tmp, x, [cv2.IMWRITE_JPEG_QUALITY, 90]); os.replace(tmp, os.path.join(D_RECT, rid + ".jpg"))
-        try: json.dump({"quad": [[float(u), float(v)] for u, v in quad], "w": int(x.shape[1]), "h": int(x.shape[0]), "t": int(time.time())},
-                       open(os.path.join(D_RECT, rid + ".q.json"), "w"))
-        except OSError: pass
-        for f in (os.path.join(D_TH, rid + ".r.jpg"),):
+        with _rlock:
+            os.makedirs(D_RECT, exist_ok=True); tmp = os.path.join(D_RECT, "%s.%d.tmp.jpg" % (rid, threading.get_ident()))
+            cv2.imwrite(tmp, x, [cv2.IMWRITE_JPEG_QUALITY, 90]); os.replace(tmp, os.path.join(D_RECT, rid + ".jpg"))
+            try:
+                tq = os.path.join(D_RECT, "%s.%d.tmp.json" % (rid, threading.get_ident()))
+                json.dump({"quad": [[float(u), float(v)] for u, v in quad], "w": int(x.shape[1]), "h": int(x.shape[0]), "t": int(time.time())}, open(tq, "w"))
+                os.replace(tq, os.path.join(D_RECT, rid + ".q.json"))
+            except OSError: pass
+        for f in (os.path.join(D_TH, rid + ".r.jpg"), os.path.join(D_TH, rid + ".rm.jpg")):
             try: os.remove(f)
             except OSError: pass
         _rsig.pop(rid, None)
@@ -1163,9 +1166,13 @@ def install(app, DATA, D_WORK):
         except Exception: cur = None
         if os.path.exists(p) and cur and max(abs(float(a) - float(b)) for u, v in zip(cur, q) for a, b in zip(u, v)) < 1e-5: return p
         if not build: return None
-        src = img_path(rid); a = cv2.imread(src) if src else None
-        if a is None: return None
-        _rect_write(rid, a, q); return p
+        with _rlock:                                             # пока ждали замок, другой поток мог уже построить — проверяем ещё раз
+            try: cur = json.load(open(os.path.join(D_RECT, rid + ".q.json")))["quad"]
+            except Exception: cur = None
+            if os.path.exists(p) and cur and max(abs(float(a) - float(b)) for u, v in zip(cur, q) for a, b in zip(u, v)) < 1e-5: return p
+            src = img_path(rid); a = cv2.imread(src) if src else None
+            if a is None: return None
+            _rect_write(rid, a, q); return p
 
     def rect_boxmap(q):
         """доли исходного фото ↔ доли выпрямленного ковра: (fwd, back), каждая — рамка [x,y,w,h] → рамка (описанный прямоугольник)"""
@@ -1194,6 +1201,20 @@ def install(app, DATA, D_WORK):
                 v = x.ravel() - x.mean(); V.append(v / (np.linalg.norm(v) + 1e-6))
         _rsig[rid] = np.stack(V).astype(np.float32); return _rsig[rid]
 
+    @app.get("/rectmid/{rid}.jpg")
+    def rect_mid(rid: str):
+        """v11.73: выпрямленный ковёр для телефона (длинная сторона 1400); 404, если углы не подтверждены"""
+        rid = os.path.basename(rid); p = os.path.join(D_TH, rid + ".rm.jpg"); rp = rect_path(rid, build=False)
+        if not rp and rect_quad(load(rid)):
+            with THUMB: rp = rect_path(rid)
+        if not rp: return Response(status_code=404)
+        if not os.path.exists(p) or os.path.getmtime(p) < os.path.getmtime(rp):
+            with THUMB:
+                a = read_small(rp, 1400)
+                if a is None: return Response(status_code=404)
+                os.makedirs(D_TH, exist_ok=True); cv2.imwrite(p, a, [cv2.IMWRITE_JPEG_QUALITY, 85])
+        return FileResponse(p, headers={"Cache-Control": "no-cache"})
+
     rects = {"running": False, "done": 0, "total": 0, "built": 0, "t": 0}
 
     def rect_all():
@@ -1211,7 +1232,90 @@ def install(app, DATA, D_WORK):
                     rects["done"] += 1
                 rects["t"] = int(time.time())
             finally: rects["running"] = False
+            if not os.environ.get("CPS_NO_SCHED"): rect_dups_run()
         threading.Thread(target=run, daemon=True, name="rect-all").start()
+
+    # ---- v11.73: новые двойники по выпрямленным ----
+    # 1) кандидаты: у каждого ковра с подтверждёнными углами — 10 ближайших по отпечатку выпрямленной картинки (rect_sig; грубо, но близнец
+    #    в первую десятку попадает чаще, чем в первую пятёрку из пробы 15.11);
+    # 2) проверка: SIFT + гомография (rug_match.align) на выпрямленных; в пробе у настоящих пар от 28 до 4000 общих точек, у разных ковров — до 11
+    #    (два «разных» по ответу человека — 43 и 47, это тоже очень похожие узоры), пороги те же, что у dup_check_run: ≥60 «тот же», 20–59 «возможно»;
+    # 3) пары с ≥20 точек, которых нет в «двойниках» и по которым нет ответа, идут в /m карточкой «двойники» (вид «новые дубли»).
+    # Результат — DATA/rect_pairs.json {"a~b": {n, sim, t}}, считается один раз на пару; 25 с на 66 пар (≈0,4 с на пару).
+    F_RP = os.path.join(DATA, "rect_pairs.json"); RP_K, RP_MAYBE, RP_SAME = 10, 20, 60
+    rpr = {"running": False, "done": 0, "total": 0, "found": 0, "t": 0, "err": ""}
+
+    def rp_load():
+        try:
+            with open(F_RP, encoding="utf-8") as f: return json.load(f)
+        except (OSError, ValueError): return {}
+
+    def rect_dups_run():
+        import rug_match
+        if rpr["running"]: return False
+        rpr.update(running=True, done=0, total=0, found=0, err="")
+        def run():
+            try:
+                rows = {}
+                for f in os.listdir(D_RUGS):
+                    if not f.endswith(".json"): continue
+                    r = load(f[:-5])
+                    if r and rect_quad(r) and not (r.get("dup_of") or r.get("hidden") or r.get("split_into") or r.get("multi")): rows[r["id"]] = r
+                ids = sorted(rows); sig = {}
+                for i in ids:
+                    v = rect_sig(i)
+                    if v is not None: sig[i] = v
+                ids = sorted(sig)
+                if len(ids) < 2: return
+                A8 = np.stack([sig[i] for i in ids]); A0 = A8[:, 0]
+                S = np.einsum("irk,jk->ijr", A8, A0).max(2); S = np.maximum(S, S.T); np.fill_diagonal(S, -1)
+                done = rp_load(); known = set()
+                for i in ids:
+                    for x in rows[i].get("same") or []: known.add(tuple(sorted((i, x.get("id")))))
+                todo = {}
+                for a, i in enumerate(ids):
+                    for b in np.argsort(-S[a])[:RP_K]:
+                        k = tuple(sorted((i, ids[b])))
+                        if k in known or "~".join(k) in done: continue
+                        todo[k] = float(S[a, b])
+                rpr["total"] = len(todo)
+                for (a, b), sim in sorted(todo.items(), key=lambda t: -t[1]):
+                    A = cv2.imread(rect_path(a, build=False) or ""); B = cv2.imread(rect_path(b, build=False) or "")
+                    n = 0
+                    if A is not None and B is not None:
+                        try: _, n = heavy(lambda: rug_match.align(A, B), "новые двойники")
+                        except Exception: n = 0
+                    del A, B
+                    done["~".join((a, b))] = {"n": int(n), "sim": round(sim, 3), "t": int(time.time())}
+                    rpr["done"] += 1; rpr["found"] += n >= RP_MAYBE
+                    if rpr["done"] % 25 == 0:
+                        tmp = F_RP + ".tmp"
+                        with open(tmp, "w", encoding="utf-8") as f: json.dump(done, f)
+                        os.replace(tmp, F_RP)
+                    time.sleep(0.02)
+                tmp = F_RP + ".tmp"
+                with open(tmp, "w", encoding="utf-8") as f: json.dump(done, f)
+                os.replace(tmp, F_RP); rpr["t"] = int(time.time())
+            except Exception as e: rpr["err"] = str(e)[:300]; print("rect_dups:", e)
+            finally: rpr["running"] = False
+        threading.Thread(target=run, daemon=True, name="rect-dups").start()
+        return True
+
+    @app.get("/api/rugs_rect_dups")
+    def api_rect_dups_state():
+        P = rp_load()
+        return {**rpr, "pairs": len(P), "maybe": sum(1 for v in P.values() if RP_MAYBE <= v["n"] < RP_SAME), "same": sum(1 for v in P.values() if v["n"] >= RP_SAME)}
+
+    @app.post("/api/rugs_rect_dups")
+    def api_rect_dups_run():
+        rect_dups_run(); return rpr
+
+    def _periodic_rect():
+        time.sleep(200)
+        while True:
+            try: rect_all()
+            except Exception as e: print("rect_all:", e)
+            time.sleep(6 * 3600)
 
     @app.get("/api/rugs_rect_all")
     def api_rugs_rect_all_state(): return rects
@@ -1220,7 +1324,7 @@ def install(app, DATA, D_WORK):
     def api_rugs_rect_all():
         rect_all(); return rects
 
-    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=lambda: (time.sleep(200), rect_all()), daemon=True).start()
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_rect, daemon=True, name="rect-periodic").start()
 
     @app.get("/api/rugs/{rid}/rect_similar")
     async def api_rug_rect_similar(rid: str, n: int = 12):
@@ -1884,7 +1988,7 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame")
+    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame")
 
     # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
     # ответы лежат отдельно от ковров, в DATA/concept_dups_votes.json; решение (вес ≥2) читает /api/concept_dups, слияние делается в модели вручную.
@@ -1966,7 +2070,7 @@ def install(app, DATA, D_WORK):
             c = ch_.get(o) or {}
             und = (c.get("v") == "maybe") if (c.get("ver") or 1) >= 2 else not ((x.get("score") or 0) >= 60 or x.get("inv"))
             if und: sm.append(o)                                                 # машина не уверена — спросить человека
-        row.update(dead=dead, mp=(r.get("multi") or []) if not (r.get("dup_of") or r.get("hidden") or r.get("split_into")) else [], mk=mk, comp=r.get("composition") if r.get("composition") in BYID else "", cg=cg, sm=sm,
+        row.update(sd=[o for o, v in ok_.items() if v is not None], dead=dead, mp=(r.get("multi") or []) if not (r.get("dup_of") or r.get("hidden") or r.get("split_into")) else [], mk=mk, comp=r.get("composition") if r.get("composition") in BYID else "", cg=cg, sm=sm,
                    nn=list(r.get("name_none") or []), src=(r.get("cat") or {}).get("src", ""),
                    mv={t: {key: list((d or {}).keys()) for key, d in (m.get(t) or {}).items()} for t in MORE})
         _mc[rid] = (k, row); return row
@@ -2324,6 +2428,22 @@ def install(app, DATA, D_WORK):
             out.append({"id": e["id"], "img": "/out/" + f, "name": (d["az"] if d else "") or e.get("name") or ""})     # v11.56: без названия — без подписи (раньше показывался служебный номер схемы)
         return out
 
+    def _both_rect(x, y):
+        """у обоих ковров углы подтверждены — карточка показывает выпрямленные картинки (/rectmid)"""
+        return bool(x.get("quad") and y.get("quad") and x.get("qs") in RECT_OK and y.get("qs") in RECT_OK)
+
+    def _rsame_queue(me, by):
+        """v11.73: пары, найденные по выпрямленным (rect_pairs.json): ≥20 общих точек, нет в «двойниках», ответа нет. «Возможно» (20–59) — первыми."""
+        out = []
+        for k, v in rp_load().items():
+            if v["n"] < RP_MAYBE or "~" not in k: continue
+            a, b = k.split("~", 1); x, y = by.get(a), by.get(b)
+            if not x or not y or x["dead"] or y["dead"] or b in x["sd"] or a in y["sd"] or b in x["sm"] or a in y["sm"]: continue
+            if me in x["mv"]["same"].get(b, []) or me in y["mv"]["same"].get(a, []): continue
+            out.append({"type": "same", "rid": a, "other": b, "title2": y["title"], "src": x["src"], "src2": y["src"], "rect": True, "inl": v["n"], "sim": v["sim"]})
+        out.sort(key=lambda t: (t["inl"] >= RP_SAME, -t["inl"] if t["inl"] >= RP_SAME else -t["sim"]))
+        return out
+
     def _more_queues(me, rows, by, want):
         """очереди карточек v11.52. Все четыре работают на том, что в коврах уже лежит: новых расчётов не нужно.
         marks — рамки, предложенные машиной (повторы, раппорты, элементы Керимова), ждут ✓/✗: одна карточка — одна группа, до 9 рамок;
@@ -2365,7 +2485,7 @@ def install(app, DATA, D_WORK):
                     if not y or y["dead"]: continue
                     a, b = sorted((x["id"], o))
                     if me in by[a]["mv"]["same"].get(b, []) or any(t["rid"] == a and t["other"] == b for t in out["same"]): continue
-                    out["same"].append({"type": "same", "rid": a, "other": b, "title2": by[b]["title"], "src": by[a]["src"], "src2": by[b]["src"]})
+                    out["same"].append({"type": "same", "rid": a, "other": b, "title2": by[b]["title"], "src": by[a]["src"], "src2": by[b]["src"], "rect": _both_rect(by[a], by[b])})
         out["split"].sort(key=lambda t: (not t["cat"].startswith("kerimov"), t["rid"]))        # Керимов — главный источник: его развороты первыми
         out["marks"].sort(key=lambda t: (t["sample"] is None, t["rid"]))          # сначала группы с образцом: вопрос «тот же?» проще, чем «элемент ли это?»
         out["comp"].sort(key=lambda t: (t["kind"] != "twin", t["cid"]))            # по двойнику надёжнее; дальше подряд один тип — глаз привыкает
@@ -2508,6 +2628,7 @@ def install(app, DATA, D_WORK):
              "frame": [{"type": "frame", "rid": x["id"]} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
         cdq = _cdup_queue(me) if "cdup" in want else []; Q["cdup"] = cdq[:n]
         xsq = _xs_queue(me, rows) if "xsame" in want else []; Q["xsame"] = xsq[:n]
+        rsq = _rsame_queue(me, by) if "rsame" in want else []; Q["rsame"] = rsq[:n]
         tasks = []; order = [t for t in want if Q[t]]
         while len(tasks) < n and order:                                           # по кругу: по одной карточке каждого вида
             for t in list(order):
@@ -2528,7 +2649,7 @@ def install(app, DATA, D_WORK):
         for t in tasks:
             if t["type"] == "cdup": continue                                     # карточка о словах: ковра у неё нет
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "name_wait": more["name_wait"]},
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "name_wait": more["name_wait"]},
                 "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver()}
 
     @app.post("/api/micro/answer")

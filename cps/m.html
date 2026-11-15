@@ -73,7 +73,7 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
 // v11.52: виды карточек. Кнопки вверху включают и выключают вид; выбор помнится на этом телефоне. /m?k=quad,frame — задать выбор ссылкой.
-const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['same','двойники'],['split','развороты'],['cdup','дубли'],['xsame','между коврами']];
+const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['same','двойники'],['split','развороты'],['rsame','новые дубли'],['cdup','дубли слов'],['xsame','между коврами']];
 function kindsInit(){let k=new URLSearchParams(location.search).get('k');
   if(!k){try{k=localStorage.getItem('cps_m_k');}catch(e){}}
   S.k=(k||'').split(',').filter(x=>KINDS.some(a=>a[0]===x));if(!S.k.length)S.k=KINDS.map(a=>a[0]);}
@@ -188,9 +188,9 @@ function showComp(t){document.documentElement.style.setProperty('--imh','30dvh')
     o.innerHTML=`<img src="/rugmid/${encodeURIComponent(r)}.jpg" alt=""><span class="mut">пример типа «${esc(t.az||t.ru)}» · тап — закрыть</span>`;o.onclick=()=>o.remove();document.body.appendChild(o);};
   S.im=$('im');$('a1').onclick=()=>answer(t,'yes',null,{cid:t.cid});$('a3').onclick=()=>answer(t,'no',null,{cid:t.cid});$('a4').onclick=()=>answer(t,'skip',null,{cid:t.cid});zoomable();}
 // «двойники»: пара фото, в которой машина не уверена
-function showSame(t){const o={rid:t.other};
-  $('main').innerHTML=`${qhead('Это один и тот же ковёр?','Один и тот же предмет на двух фото (другой свет, другой музейный снимок) — «тот же». Тот же рисунок, но другой ковёр (другие мелочи, потёртости, размер) — «похожи».')}
-   <div class="pair"><figure><img src="${img(t)}" alt=""><figcaption>${esc(t.title||t.rid)}${t.src?' · '+esc(t.src):''}</figcaption></figure><figure><img src="${img(o)}" alt=""><figcaption>${esc(t.title2||t.other)}${t.src2?' · '+esc(t.src2):''}</figcaption></figure></div>
+function showSame(t){const o={rid:t.other},pi=r=>t.rect?'/rectmid/'+encodeURIComponent(r)+'.jpg':'/rugmid/'+encodeURIComponent(r)+'.jpg';
+  $('main').innerHTML=`${qhead('Это один и тот же ковёр?','Один и тот же предмет на двух фото (другой свет, другой музейный снимок) — «тот же». Тот же рисунок, но другой ковёр (другие мелочи, потёртости, размер) — «похожи».'+(t.rect?' Ковры показаны выпрямленными по углам: сравнивайте рисунок и мелочи, а не наклон фото.':'')+(t.inl!=null?' Машина нашла '+t.inl+' общих точек'+(t.inl>=60?' — почти наверняка один ковёр.':' — возможно, один ковёр.'):''))}
+   <div class="pair"><figure><img src="${pi(t.rid)}" alt=""><figcaption>${esc(t.title||t.rid)}${t.src?' · '+esc(t.src):''}</figcaption></figure><figure><img src="${pi(t.other)}" alt=""><figcaption>${esc(t.title2||t.other)}${t.src2?' · '+esc(t.src2):''}</figcaption></figure></div>
    <div class="btns"><button class="yes" id="a1">✓ тот же ковёр</button><button id="a2">похожи, но разные</button><button class="no" id="a3">✗ разные</button><button class="sm unk" id="a4">не знаю</button></div>`;qtip();
   const x={other:t.other};$('a1').onclick=()=>answer(t,'same',null,x);$('a2').onclick=()=>answer(t,'similar',null,x);$('a3').onclick=()=>answer(t,'diff',null,x);$('a4').onclick=()=>answer(t,'skip',null,x);}
 // «развороты»: на фото несколько ковров; показываем, как машина предлагает разрезать

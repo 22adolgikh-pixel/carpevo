@@ -1561,6 +1561,43 @@ def t39_rect_working_v1172(pg, ctx):
     errors_ok(ctx, 'выпрямленный ковёр — рабочая картинка v11.72')
 
 
+@test
+def t40_rect_dups_m_v1173(pg, ctx):
+    """v11.73: новые двойники по выпрямленным: копия ковра другого размера находится фоновым поиском, попадает в /m вид «rsame»
+    выпрямленными (rect=true, /rectmid/), ответ «тот же» дважды (вес ≥2) ставит двойников обоим коврам"""
+    import urllib.request as U, json as _j, cv2, numpy as np, shutil
+    D = os.path.join(ctx['app'], 'data')
+    src = cv2.imread(f'{D}/rug_img/frieze_1.jpg'); cp = cv2.resize(src, None, fx=.6, fy=.6, interpolation=cv2.INTER_AREA)
+    cv2.imwrite(f'{D}/rug_img/frieze_copy.jpg', cp)
+    r = _j.load(open(f'{D}/rugs/frieze_1.json', encoding='utf-8')); r2 = {**r, 'id': 'frieze_copy', 'title': 'Frieze copy', 'w': cp.shape[1], 'h': cp.shape[0], 'marks': [], 'same': [], 'same_ok': {}, 'micro': {}}
+    _j.dump(r2, open(f'{D}/rugs/frieze_copy.json', 'w', encoding='utf-8'), ensure_ascii=False)
+    get = lambda path: _j.load(U.urlopen(ctx['url'] + path))
+    def post(path, body):
+        return _j.load(U.urlopen(U.Request(ctx['url'] + path, data=_j.dumps(body).encode(), headers={'Content-Type': 'application/json'})))
+    assert (r.get('layout') or {}).get('quad_status') == 'confirmed', 'углы frieze_1 должны быть подтверждены (тест t39)'
+    time.sleep(1.5)
+    img = U.urlopen(ctx['url'] + 'rectmid/frieze_1.jpg').read(); assert img[:2] == b'\xff\xd8', '/rectmid не отдал картинку'
+    post('api/rugs_rect_all', {}); post('api/rugs_rect_dups', {})
+    for _ in range(120):
+        st = get('api/rugs_rect_dups')
+        if not st['running'] and st['pairs']: break
+        time.sleep(0.5)
+    assert not st['err'], f"поиск упал: {st['err']}"
+    P = _j.load(open(f'{D}/rect_pairs.json')); k = 'frieze_1~frieze_copy'
+    assert k in P and P[k]['n'] >= 60, f'копия не найдена по выпрямленным: {P.get(k)} всего пар {len(P)}'
+    j = get('api/micro/next?n=12&k=rsame')
+    ts = [t for t in j['tasks'] if {t['rid'], t['other']} == {'frieze_1', 'frieze_copy'}]
+    assert ts and ts[0]['rect'] and ts[0]['inl'] >= 60 and ts[0]['type'] == 'same', f"пара не попала в очередь /m: {j['tasks'][:2]} left={j['left']}"
+    assert j['left']['rsame'] >= 1
+    # две телефонные карточки: в тесте один пользователь с весом 2 (админ без пароля) — решение применяется сразу
+    t0 = ts[0]; post('api/micro/answer', {'type': 'same', 'rid': t0['rid'], 'other': t0['other'], 'a': 'same'})
+    d = get('api/rugs/' + t0['rid']); assert (d.get('same_ok') or {}).get(t0['other'], {}).get('ok') is True, f"«тот же» не записался: {d.get('same_ok')}"
+    j = get('api/micro/next?n=12&k=rsame'); assert not [t for t in j['tasks'] if {t['rid'], t['other']} == {'frieze_1', 'frieze_copy'}], 'отвеченная пара вернулась в очередь'
+    pg.goto(ctx['url'] + 'm?k=rsame'); pg.wait_for_timeout(1500)
+    assert pg.evaluate("[...document.querySelectorAll('#chips button')].some(b=>b.dataset.k==='rsame')"), 'нет кнопки «новые дубли» в /m'
+    errors_ok(ctx, '/m новые дубли v11.73')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
