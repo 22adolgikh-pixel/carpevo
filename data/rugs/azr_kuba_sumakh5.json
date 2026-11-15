@@ -18,7 +18,7 @@
  "h": 1671,
  "marks": [],
  "created": 1791736130,
- "updated": 1794784916,
+ "updated": 1794785026,
  "cat": {
   "title": "kuba sumakh5",
   "museum": "",
@@ -117,7 +117,52 @@
   }
  },
  "composition_by": "/m: lika",
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.0228,
+   0.01516,
+   0.97027,
+   0.9597600000000001
+  ],
+  "bounds": [
+   {
+    "ix": 0.021922428330522766,
+    "iy": 0.018571428571428572,
+    "strength": 2.87
+   },
+   {
+    "ix": 0.1399662731871838,
+    "iy": 0.0727584460636328,
+    "strength": 2.96
+   }
+  ],
+  "rings": [
+   "guard",
+   "border",
+   "field"
+  ],
+  "status": "confirmed",
+  "quad": [
+   [
+    0.0228,
+    0.02803
+   ],
+   [
+    0.99307,
+    0.01516
+   ],
+   [
+    0.97973,
+    0.96909
+   ],
+   [
+    0.02763,
+    0.97492
+   ]
+  ],
+  "quad_status": "edited",
+  "by": "dolgikh"
+ },
  "updated_by": "dolgikh",
  "from_twin": {
   "museum": "azcm_148",
