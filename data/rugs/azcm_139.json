@@ -7,10 +7,10 @@
  "url": "https://azcarpetmuseum.az/",
  "license": "Нац. музей ковра (только анализ)",
  "place": "Карабах,",
- "date": "",
+ "date": "начало XX века",
  "school": "karabakh",
  "composition": "",
- "technique": "",
+ "technique": "безворсовый: лады",
  "size": "138 x 267sm",
  "notes": "шерсть; нетканый материал, ручная работа",
  "status": "new",
@@ -64,7 +64,18 @@
    "inv": true
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_176": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1794783960
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1794783962
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "azcm_151": {
@@ -151,5 +162,9 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "from_twin": {
+  "date": "azcm_176",
+  "technique": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1"
+ }
 }

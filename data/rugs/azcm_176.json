@@ -10,7 +10,7 @@
  "date": "начало XX века",
  "school": "karabakh",
  "composition": "",
- "technique": "",
+ "technique": "безворсовый: лады",
  "size": "138x267 sm",
  "notes": "основа, уток – хлопок; переплетение",
  "status": "new",
@@ -65,7 +65,18 @@
    "inv": true
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_139": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1794783960
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1794783988
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "azcm_139": {
@@ -152,5 +163,8 @@
   "quad_status": "accepted"
  },
  "frame": "cropped",
- "tri": "auto"
+ "tri": "auto",
+ "from_twin": {
+  "technique": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1"
+ }
 }
