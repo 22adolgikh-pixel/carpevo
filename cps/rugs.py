@@ -1351,7 +1351,7 @@ def install(app, DATA, D_WORK):
             pool.sort(key=lambda t: -t[0])
             same = {x.get("id") for x in r.get("same") or []}; so = r.get("same_ok") or {}
             out = [{"id": i, "score": round(sc, 3), "title": (o.get("title") or "")[:80], "src": (o.get("cat") or {}).get("src", ""),
-                    "known": i in same, "ok": (so.get(i) or {}).get("ok")} for sc, i, o in pool if (so.get(i) or {}).get("ok") is not False][:max(1, min(48, n))]   # v11.80: отклонённые не показываем
+                    "known": i in same, "ok": (so.get(i) or {}).get("ok")} for sc, i, o in pool if not ((so.get(i) or {}).get("ok") is False and not (so.get(i) or {}).get("similar"))][:max(1, min(48, n))]   # v11.80: отклонённые не показываем
             return {"items": out, "pool": len(pool)}
         from starlette.concurrency import run_in_threadpool
         res = await run_in_threadpool(work)
