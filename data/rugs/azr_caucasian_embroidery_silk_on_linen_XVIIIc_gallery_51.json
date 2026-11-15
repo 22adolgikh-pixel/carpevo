@@ -18,7 +18,7 @@
  "h": 480,
  "marks": [],
  "created": 1791736140,
- "updated": 1794740991,
+ "updated": 1794741016,
  "cat": {
   "title": "Caucasian Embroidery, silk on linen, 18th century, private collection",
   "museum": "",
@@ -112,8 +112,49 @@
     "w": 2,
     "t": 1794740991
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794741016,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01371,
+    0.01739
+   ],
+   [
+    0.98296,
+    0.01021
+   ],
+   [
+    0.97966,
+    0.97718
+   ],
+   [
+    0.0517,
+    0.96547
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
