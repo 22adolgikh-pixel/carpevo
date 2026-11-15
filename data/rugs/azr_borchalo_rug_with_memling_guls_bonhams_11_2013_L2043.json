@@ -18,7 +18,7 @@
  "h": 900,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1794766650,
  "cat": {
   "title": "borchalo rug with memling guls bonhams 11 2013 L2043",
   "museum": "",
@@ -78,6 +78,81 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238452
- }
+  "t": 1794238452,
+  "ref_quad": {
+   "quad": [
+    [
+     0.03621,
+     0.00189
+    ],
+    [
+     0.9724,
+     0.00295
+    ],
+    [
+     0.99763,
+     0.97682
+    ],
+    [
+     0.0022,
+     0.97593
+    ]
+   ],
+   "v": 2,
+   "from": "auto",
+   "t": 1794766648
+  }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794766627
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794766650,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03621,
+    0.00189
+   ],
+   [
+    0.9724,
+    0.00295
+   ],
+   [
+    0.99763,
+    0.97682
+   ],
+   [
+    0.0022,
+    0.97593
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 1006,
  "marks": [],
  "created": 1791736138,
- "updated": 1794597457,
+ "updated": 1794766754,
  "cat": {
   "title": "Antique Moghan (Mughan) long rug, Southern Salyan District, late 19th century",
   "museum": "",
@@ -80,10 +80,36 @@
   "conf": 0.951,
   "area": 0.742,
   "ver": 1,
-  "t": 1794238562
+  "t": 1794238562,
+  "ref_quad": {
+   "quad": [
+    [
+     0.1505,
+     0.00125
+    ],
+    [
+     0.86271,
+     -0.00108
+    ],
+    [
+     0.99301,
+     0.99973
+    ],
+    [
+     0.00546,
+     0.99675
+    ]
+   ],
+   "v": 2,
+   "from": "auto",
+   "t": 1794766670
+  }
  },
  "edge": {
   "skew": [
+   "dolgikh"
+  ],
+  "wavy": [
    "dolgikh"
   ]
  },
@@ -94,8 +120,49 @@
     "w": 2,
     "t": 1794597457
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794766754,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.1505,
+    0.00125
+   ],
+   [
+    0.86271,
+    -0.00108
+   ],
+   [
+    0.99301,
+    0.99973
+   ],
+   [
+    0.00546,
+    0.99675
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

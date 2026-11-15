@@ -2,15 +2,15 @@
  "id": "kerimov_vol1_p334_1",
  "title": "Керимов, т. I, Табл. 212. «ХАН-КАРАБАХ» (стр. скана 334, печ. ?)",
  "source": "каталог: kerimov_vol1",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
+ "date": "2010-03-12 16:15:18",
  "school": "karabakh",
  "composition": "xan-qarabag",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 1269,
  "marks": [],
  "created": 1791736121,
- "updated": 1794740842,
+ "updated": 1794766595,
  "cat": {
   "title": "Керимов, т. I, Табл. 212. «ХАН-КАРАБАХ» (стр. скана 334, печ. ?)",
   "museum": "",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:kerimov_vol1_p334_1",
  "lib_img": "img/kerimov_vol1_p334_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Карабах_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Карабах_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794766595
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -121,6 +132,15 @@
     "t": 1794740842,
     "s": "ref"
    }
+  },
+  "same": {
+   "wikimedia_File_Карабах_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794766595
+    }
+   }
   }
  },
  "frame": "whole",
@@ -157,5 +177,10 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "technique": "wikimedia_File_Карабах_jpg",
+  "museum": "wikimedia_File_Карабах_jpg",
+  "date": "wikimedia_File_Карабах_jpg"
+ }
 }

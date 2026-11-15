@@ -18,7 +18,7 @@
  "h": 1103,
  "marks": [],
  "created": 1791736132,
- "updated": 1794597141,
+ "updated": 1794766607,
  "cat": {
   "title": "kuba lb26",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794597141
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794766607,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06848,
+    0.04314
+   ],
+   [
+    0.95878,
+    0.05621
+   ],
+   [
+    0.97303,
+    0.9424
+   ],
+   [
+    0.02522,
+    0.96146
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

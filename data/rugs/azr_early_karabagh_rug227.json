@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1794766657,
  "cat": {
   "title": "Floral carpet, late 18th / early 19th century, Azerbaijan",
   "museum": "",
@@ -80,6 +80,81 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238479
- }
+  "t": 1794238479,
+  "ref_quad": {
+   "quad": [
+    [
+     0.0164,
+     0.02401
+    ],
+    [
+     0.99465,
+     0.04598
+    ],
+    [
+     0.99852,
+     0.98134
+    ],
+    [
+     0.00368,
+     0.97808
+    ]
+   ],
+   "v": 2,
+   "from": "auto",
+   "t": 1794766648
+  }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794766647
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794766657,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0164,
+    0.02401
+   ],
+   [
+    0.99465,
+    0.04598
+   ],
+   [
+    0.99852,
+    0.98134
+   ],
+   [
+    0.00368,
+    0.97808
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
