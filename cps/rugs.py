@@ -1242,7 +1242,7 @@ def install(app, DATA, D_WORK):
     #    (два «разных» по ответу человека — 43 и 47, это тоже очень похожие узоры), пороги те же, что у dup_check_run: ≥60 «тот же», 20–59 «возможно»;
     # 3) пары с ≥20 точек, которых нет в «двойниках» и по которым нет ответа, идут в /m карточкой «двойники» (вид «новые дубли»).
     # Результат — DATA/rect_pairs.json {"a~b": {n, sim, t}}, считается один раз на пару; 25 с на 66 пар (≈0,4 с на пару).
-    F_RP = os.path.join(DATA, "rect_pairs.json"); RP_K, RP_MAYBE, RP_SAME = 10, 20, 60
+    F_RP = os.path.join(DATA, "rect_pairs.json"); RP_K, RP_MAYBE, RP_SAME = 40, 20, 60     # v11.80: K 10 → 40 — с проверкой «ковёр на ковёр» шире охват без мусора
     RP_GEO = 0.6          # v11.79: совмещение накладывает ковёр на ковёр не меньше чем на 60 % (rug_match.cover_iou), иначе это общий мотив, а не двойник
     rpr = {"running": False, "done": 0, "total": 0, "found": 0, "t": 0, "err": ""}
 
@@ -1351,7 +1351,7 @@ def install(app, DATA, D_WORK):
             pool.sort(key=lambda t: -t[0])
             same = {x.get("id") for x in r.get("same") or []}; so = r.get("same_ok") or {}
             out = [{"id": i, "score": round(sc, 3), "title": (o.get("title") or "")[:80], "src": (o.get("cat") or {}).get("src", ""),
-                    "known": i in same, "ok": (so.get(i) or {}).get("ok")} for sc, i, o in pool[:max(1, min(48, n))]]
+                    "known": i in same, "ok": (so.get(i) or {}).get("ok")} for sc, i, o in pool if (so.get(i) or {}).get("ok") is not False][:max(1, min(48, n))]   # v11.80: отклонённые не показываем
             return {"items": out, "pool": len(pool)}
         from starlette.concurrency import run_in_threadpool
         res = await run_in_threadpool(work)
