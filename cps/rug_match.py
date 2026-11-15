@@ -48,10 +48,13 @@ def _nms(c, iou=0.3, cap=200):
     return keep
 
 
-def _overlaps(px, boxes, W, H, thr=0.35):
+def _overlaps(px, boxes, W, H, thr=0.35, nest=3.0):
+    """v11.71: рамка в nest раз больше (или меньше) по площади — другой уровень узора (мелкий элемент внутри медальона,
+    медальон вокруг мелких): такие не мешают. Раньше мелкий элемент на ковре, где поле покрыто рамками медальонов, не находился нигде."""
     x, y, w, h = px
     for b in boxes:
         bx, by, bw, bh = b[0] * W, b[1] * H, b[2] * W, b[3] * H
+        if nest and max(w * h, bw * bh) > nest * max(1e-6, min(w * h, bw * bh)): continue
         inter = max(0, min(x + w, bx + bw) - max(x, bx)) * max(0, min(y + h, by + bh) - max(y, by))
         if inter / min(w * h, bw * bh + 1e-6) > thr: return True
     return False
