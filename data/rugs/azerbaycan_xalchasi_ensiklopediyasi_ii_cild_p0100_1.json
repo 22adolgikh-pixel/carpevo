@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794567415,
+ "updated": 1794750489,
  "cat": {
   "title": "Sumax Губа",
   "museum": "Национальный музей азербайджанского ковра",
@@ -51,8 +51,37 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_150",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Salahli_rug_jpg",
+   "score": 0
+  },
+  {
+   "id": "azcm_128",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_150": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750474
+  },
+  "wikimedia_File_Salahli_rug_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750489
+  },
+  "azcm_128": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750521
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -159,6 +188,15 @@
      ]
     ],
     "s": "vlm"
+   }
+  },
+  "same": {
+   "wikimedia_File_Salahli_rug_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794750489
+    }
    }
   }
  },

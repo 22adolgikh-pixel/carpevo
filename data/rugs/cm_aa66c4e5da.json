@@ -18,7 +18,7 @@
  "h": 998,
  "marks": [],
  "created": 1791870027,
- "updated": 1794642800,
+ "updated": 1794750638,
  "cat": {
   "title": "Prayer rug with floral trellis called \"Marasali\", Şirvan, Azerbaijan, around 1850, 116x126",
   "museum": "Лувр",
@@ -93,7 +93,30 @@
   "conf": 0.946,
   "area": 0.456,
   "ver": 1,
-  "t": 1794238499
+  "t": 1794238499,
+  "ref_quad": {
+   "quad": [
+    [
+     0.27283,
+     0.0487
+    ],
+    [
+     0.77913,
+     0.08543
+    ],
+    [
+     0.77365,
+     0.94565
+    ],
+    [
+     0.24252,
+     0.91555
+    ]
+   ],
+   "v": 1,
+   "from": "auto",
+   "t": 1794750552
+  }
  },
  "multi": [],
  "micro": {
@@ -103,8 +126,49 @@
     "w": 2,
     "t": 1794642800
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794750638,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.27283,
+    0.0487
+   ],
+   [
+    0.77913,
+    0.08543
+   ],
+   [
+    0.77365,
+    0.94565
+   ],
+   [
+    0.24252,
+    0.91555
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

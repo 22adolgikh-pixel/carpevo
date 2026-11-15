@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870035,
- "updated": 1794597403,
+ "updated": 1794750563,
  "cat": {
   "title": "Şirvanşahlar sarayında xalça",
   "museum": "",
@@ -131,8 +131,49 @@
     "w": 2,
     "t": 1794597403
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794750563,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.22782,
+    0.01576
+   ],
+   [
+    0.75847,
+    0.02049
+   ],
+   [
+    0.87709,
+    0.96342
+   ],
+   [
+    0.06917,
+    1.00047
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

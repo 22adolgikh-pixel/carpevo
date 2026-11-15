@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736128,
- "updated": 1794256910,
+ "updated": 1794750627,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -47,8 +47,37 @@
  },
  "src_id": "cat:vam_O67132",
  "lib_img": "img/vam_O67132.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_cfa0af42d7",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Shamakhi_rug_jpg",
+   "score": 0
+  },
+  {
+   "id": "azcm_128",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_cfa0af42d7": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750619
+  },
+  "wikimedia_File_Shamakhi_rug_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750627
+  },
+  "azcm_128": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750646
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -113,6 +142,15 @@
       0.8609
      ]
     ]
+   }
+  },
+  "same": {
+   "wikimedia_File_Shamakhi_rug_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794750627
+    }
    }
   }
  },

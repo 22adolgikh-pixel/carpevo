@@ -18,7 +18,7 @@
  "h": 1157,
  "marks": [],
  "created": 1791736122,
- "updated": 1794563252,
+ "updated": 1794750637,
  "cat": {
   "title": "Sewan Kazak Rug",
   "museum": "Институт искусств Чикаго",
@@ -56,6 +56,18 @@
   {
    "id": "wikimedia_File_Qasımuşağı_jpg",
    "score": 0
+  },
+  {
+   "id": "vam_O120765",
+   "score": 0
+  },
+  {
+   "id": "cm_d71221ed77",
+   "score": 0
+  },
+  {
+   "id": "vam_O117936",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -63,6 +75,21 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1794236592
+  },
+  "vam_O120765": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750504
+  },
+  "cm_d71221ed77": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750589
+  },
+  "vam_O117936": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750637
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -154,6 +181,29 @@
      "a": "no",
      "w": 2,
      "t": 1794563252
+    }
+   }
+  },
+  "same": {
+   "vam_O120765": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794750504
+    }
+   },
+   "cm_d71221ed77": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794750589
+    }
+   },
+   "vam_O117936": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794750637
     }
    }
   }

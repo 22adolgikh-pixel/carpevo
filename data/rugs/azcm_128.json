@@ -18,7 +18,7 @@
  "h": 1500,
  "marks": [],
  "created": 1791870042,
- "updated": 1794236973,
+ "updated": 1794750646,
  "cat": {
   "title": "“Qazax” («Газах»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -58,6 +58,18 @@
   {
    "id": "azcm_91",
    "score": 46
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Kuba_Boteh_rug_late_19th_century_jpg",
+   "score": 0
+  },
+  {
+   "id": "vam_O67132",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -70,6 +82,21 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792271479
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750521
+  },
+  "wikimedia_File_Kuba_Boteh_rug_late_19th_century_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750541
+  },
+  "vam_O67132": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750646
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -152,5 +179,30 @@
  },
  "frame": "whole",
  "tri": "auto",
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794750521
+    }
+   },
+   "wikimedia_File_Kuba_Boteh_rug_late_19th_century_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794750541
+    }
+   },
+   "vam_O67132": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794750646
+    }
+   }
+  }
+ }
 }

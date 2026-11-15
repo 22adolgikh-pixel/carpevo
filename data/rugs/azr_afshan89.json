@@ -18,7 +18,7 @@
  "h": 883,
  "marks": [],
  "created": 1791736137,
- "updated": 1791736137,
+ "updated": 1794750650,
  "cat": {
   "title": "An important Kuba Khanate Period carpet, 18th century, 71\" x 23'3'' (215x709 cm) Murray L Eiland Jr",
   "museum": "",
@@ -80,6 +80,81 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238361
- }
+  "t": 1794238361,
+  "ref_quad": {
+   "quad": [
+    [
+     0.05501,
+     -0.00218
+    ],
+    [
+     0.95033,
+     -0.00364
+    ],
+    [
+     0.95482,
+     0.97655
+    ],
+    [
+     0.06465,
+     0.99522
+    ]
+   ],
+   "v": 1,
+   "from": "auto",
+   "t": 1794750647
+  }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794750633
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794750650,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05501,
+    -0.00218
+   ],
+   [
+    0.95033,
+    -0.00364
+   ],
+   [
+    0.95482,
+    0.97655
+   ],
+   [
+    0.06465,
+    0.99522
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
