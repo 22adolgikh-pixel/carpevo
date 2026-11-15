@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870042,
- "updated": 1794236973,
+ "updated": 1794750420,
  "cat": {
   "title": "“Göyçəli” («Гёйчали»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,19 @@
  },
  "src_id": "cat:azcm_132",
  "lib_img": "img/azcm_132.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Kuba_Boteh_rug_late_19th_century_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Kuba_Boteh_rug_late_19th_century_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750420
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -117,5 +128,16 @@
  },
  "frame": "whole",
  "tri": "auto",
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "wikimedia_File_Kuba_Boteh_rug_late_19th_century_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794750420
+    }
+   }
+  }
+ }
 }

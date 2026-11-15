@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870021,
- "updated": 1794428775,
+ "updated": 1794750451,
  "cat": {
   "title": "Carpet; Textiles-Rugs",
   "museum": "Метрополитен-музей",
@@ -68,6 +68,10 @@
   {
    "id": "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_2_jpeg",
    "score": 0
+  },
+  {
+   "id": "cm_d71221ed77",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -85,6 +89,12 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1792258763
+  },
+  "cm_d71221ed77": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794750451,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -182,6 +192,15 @@
       0.94413
      ]
     ]
+   }
+  },
+  "same": {
+   "cm_d71221ed77": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794750451
+    }
    }
   }
  },
