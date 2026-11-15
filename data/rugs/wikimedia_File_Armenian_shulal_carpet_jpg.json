@@ -18,7 +18,7 @@
  "h": 484,
  "marks": [],
  "created": 1791736125,
- "updated": 1794596893,
+ "updated": 1794740911,
  "cat": {
   "title": "Armenian shulal carpet.jpg",
   "museum": "Wikimedia Commons",
@@ -81,7 +81,30 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238595
+  "t": 1794238595,
+  "ref_quad": {
+   "quad": [
+    [
+     0.03218,
+     0.08438
+    ],
+    [
+     0.95476,
+     0.07033
+    ],
+    [
+     0.97445,
+     0.87598
+    ],
+    [
+     0.01618,
+     0.83787
+    ]
+   ],
+   "v": 1,
+   "from": "auto",
+   "t": 1794740862
+  }
  },
  "micro": {
   "frame": {
@@ -90,8 +113,49 @@
     "w": 2,
     "t": 1794596893
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794740911,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03218,
+    0.08438
+   ],
+   [
+    0.95476,
+    0.07033
+   ],
+   [
+    0.97445,
+    0.87598
+   ],
+   [
+    0.01618,
+    0.83787
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

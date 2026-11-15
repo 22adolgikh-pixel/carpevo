@@ -18,7 +18,7 @@
  "h": 1113,
  "marks": [],
  "created": 1791736124,
- "updated": 1794661421,
+ "updated": 1794740859,
  "cat": {
   "title": "«Губадлы».jpg",
   "museum": "Wikimedia Commons",
@@ -113,8 +113,49 @@
     "w": 2,
     "t": 1794661421
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794740859,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00301,
+    0.00293
+   ],
+   [
+    1.00006,
+    7e-05
+   ],
+   [
+    0.99772,
+    0.99465
+   ],
+   [
+    0.00239,
+    0.99787
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

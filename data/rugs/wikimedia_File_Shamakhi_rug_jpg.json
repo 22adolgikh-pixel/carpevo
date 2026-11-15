@@ -18,7 +18,7 @@
  "h": 1096,
  "marks": [],
  "created": 1791736124,
- "updated": 1794597139,
+ "updated": 1794740837,
  "cat": {
   "title": "Shamakhi rug.jpg",
   "museum": "Wikimedia Commons",
@@ -113,8 +113,49 @@
     "w": 2,
     "t": 1794597139
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794740837,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00025,
+    0.00663
+   ],
+   [
+    0.99475,
+    0.00281
+   ],
+   [
+    0.98348,
+    0.99122
+   ],
+   [
+    0.01203,
+    0.99125
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
