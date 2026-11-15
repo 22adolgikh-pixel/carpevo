@@ -103,7 +103,8 @@ def find_repeats(img, box, exclude=(), limit=60, min_score=None, boxes=None, loo
         x0, y0 = max(0, min(W - tw, x0)), max(0, min(H - th, y0))
         tg, te, tc, ts = (M[y0:y0 + th, x0:x0 + tw] for M in (G, E, C, S))
         if tg.shape[0] < 5 or tg.shape[1] < 5: continue
-        for sc in (0.92, 1.0, 1.08):                     # повторы на ковре бывают чуть разного размера (ручная работа)
+        # v11.74: «вижу ещё» (loose) — шире размеры (элемент исполнен в других пропорциях) и без яркости (см. ниже)
+        for sc in ((0.82, 0.92, 1.0, 1.08, 1.2) if loose else (0.92, 1.0, 1.08)):   # повторы бывают разного размера (ручная работа)
             for ang, fl in TF:
                 g = _tf(tg, ang, fl); e = _tf(te, ang, fl); c, ss = _tf_ori(tc, ts, ang, fl)
                 if sc != 1.0:
@@ -113,7 +114,10 @@ def find_repeats(img, box, exclude=(), limit=60, min_score=None, boxes=None, loo
                 num = cv2.matchTemplate(C, c, cv2.TM_CCORR) + cv2.matchTemplate(S, ss, cv2.TM_CCORR)
                 en = cv2.boxFilter(EN, -1, (ww, hh), normalize=False, anchor=(0, 0))[:H - hh + 1, :W - ww + 1]
                 ro = num / np.sqrt(np.maximum(en, 1e-6) * (float((c * c + ss * ss).sum()) + 1e-6))
-                r = 0.2 * cv2.matchTemplate(G, g, cv2.TM_CCOEFF_NORMED) + 0.35 * cv2.matchTemplate(E, e, cv2.TM_CCOEFF_NORMED) + 0.45 * ro
+                if loose:   # v11.74: только форма (края + направление линий) — тот же элемент в других красках (белый на синем ↔ синий на жёлтом)
+                    r = 0.4 * cv2.matchTemplate(E, e, cv2.TM_CCOEFF_NORMED) + 0.6 * ro      # azcm_99: попаданий 39 → 61 из 128, лишних 9 → 48
+                else:
+                    r = 0.2 * cv2.matchTemplate(G, g, cv2.TM_CCOEFF_NORMED) + 0.35 * cv2.matchTemplate(E, e, cv2.TM_CCOEFF_NORMED) + 0.45 * ro
                 # локальные максимумы
                 k = max(3, int(min(hh, ww) * 0.5) | 1)
                 mx = cv2.dilate(r, np.ones((k, k), np.uint8))
