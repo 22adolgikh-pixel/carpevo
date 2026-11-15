@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "19 в.",
  "school": "karabakh",
- "composition": "",
+ "composition": "qarabag-vernisi",
  "technique": "безворсовый: верни",
  "size": "202x284 см",
  "notes": "Vərni. Qarabağ. Azərbaycan. 19-cu əsr. Material: yun. Ölçü: 202x284 sm. Azərbaycan Xalça Muzeyi. DDK 356",
@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794784310,
  "cat": {
   "title": "Vərni Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -59,7 +59,13 @@
    "inv": true
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_169": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1794784261
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -100,5 +106,51 @@
    "at": 1794618035,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.02751,
+   0.031,
+   0.93689,
+   0.94567
+  ],
+  "bounds": [
+   {
+    "ix": 0.027253668763102725,
+    "iy": 0.018571428571428572,
+    "strength": 3.29
+   },
+   {
+    "ix": 0.03331632578210153,
+    "iy": 0.014112073041233993,
+    "strength": 7.05
+   }
+  ],
+  "rings": [
+   "guard",
+   "border",
+   "field"
+  ],
+  "status": "edited",
+  "quad": [
+   [
+    0.05016,
+    0.04
+   ],
+   [
+    0.95917,
+    0.031
+   ],
+   [
+    0.9644,
+    0.95222
+   ],
+   [
+    0.02751,
+    0.97667
+   ]
+  ],
+  "quad_status": "edited"
+ },
+ "updated_by": "dolgikh"
 }

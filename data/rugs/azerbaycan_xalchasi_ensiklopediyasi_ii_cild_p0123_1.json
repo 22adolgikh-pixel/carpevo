@@ -8,7 +8,7 @@
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Нахчыван",
  "date": "19 в., конец",
- "school": "",
+ "school": "karabakh",
  "composition": "",
  "technique": "безворсовый: шадда",
  "size": "180x400 см",
@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794784346,
  "cat": {
   "title": "Şəddə Нахчыван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -59,7 +59,13 @@
    "inv": true
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_183": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1794784353
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -100,5 +106,10 @@
    "at": 1794618033,
    "ver": 2
   }
+ },
+ "layout": null,
+ "updated_by": "dolgikh",
+ "from_twin": {
+  "school": "azcm_183"
  }
 }
