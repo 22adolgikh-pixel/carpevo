@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736126,
- "updated": 1794597283,
+ "updated": 1794766844,
  "cat": {
   "title": "Gregory Kimble carpet from Kazak lot 46.jpg",
   "museum": "Wikimedia Commons",
@@ -127,8 +127,49 @@
     "w": 2,
     "t": 1794597283
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794766844,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02735,
+    0.03037
+   ],
+   [
+    0.87238,
+    0.01325
+   ],
+   [
+    0.97745,
+    0.97105
+   ],
+   [
+    0.02238,
+    0.96866
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

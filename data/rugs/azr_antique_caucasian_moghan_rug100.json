@@ -18,7 +18,7 @@
  "h": 779,
  "marks": [],
  "created": 1791736138,
- "updated": 1794596930,
+ "updated": 1794766781,
  "cat": {
   "title": "Antique Moghan rug in a yellow ground, 19th century, Azerbaijan Lot 121 Moghan Rug, Southeast Caucas",
   "museum": "",
@@ -112,8 +112,49 @@
     "w": 2,
     "t": 1794596930
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794766781,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08577,
+    0.03359
+   ],
+   [
+    0.89059,
+    0.0345
+   ],
+   [
+    0.94422,
+    0.91081
+   ],
+   [
+    0.06887,
+    0.92868
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

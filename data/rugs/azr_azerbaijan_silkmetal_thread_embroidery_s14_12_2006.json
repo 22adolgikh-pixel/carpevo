@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791736140,
- "updated": 1794597000,
+ "updated": 1794766854,
  "cat": {
   "title": "azerbaijan-silkmetal-thread-embroidery-s14-12-2006",
   "museum": "",
@@ -124,8 +124,49 @@
     "w": 2,
     "t": 1794597000
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794766854,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04602,
+    0.05175
+   ],
+   [
+    0.94909,
+    0.05578
+   ],
+   [
+    0.95243,
+    0.93364
+   ],
+   [
+    0.04502,
+    0.92678
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 1932,
  "marks": [],
  "created": 1791736135,
- "updated": 1794645301,
+ "updated": 1794766907,
  "cat": {
   "title": "kuba seychour187 sothebys BERGI20ANDONIAN20AND20JOSEPH20W.20FELL",
   "museum": "",
@@ -78,7 +78,30 @@
   "conf": 0.957,
   "area": 0.853,
   "ver": 1,
-  "t": 1794238565
+  "t": 1794238565,
+  "ref_quad": {
+   "quad": [
+    [
+     0.05808,
+     0.05194
+    ],
+    [
+     0.92219,
+     0.04997
+    ],
+    [
+     0.94389,
+     0.90407
+    ],
+    [
+     0.05968,
+     0.94045
+    ]
+   ],
+   "v": 2,
+   "from": "auto",
+   "t": 1794766881
+  }
  },
  "micro": {
   "frame": {
@@ -87,8 +110,49 @@
     "w": 2,
     "t": 1794645301
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794766907,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05808,
+    0.05194
+   ],
+   [
+    0.92219,
+    0.04997
+   ],
+   [
+    0.94389,
+    0.90407
+   ],
+   [
+    0.05968,
+    0.94045
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

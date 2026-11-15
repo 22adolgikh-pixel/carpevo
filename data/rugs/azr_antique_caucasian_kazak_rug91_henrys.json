@@ -18,7 +18,7 @@
  "h": 1024,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794766875,
  "cat": {
   "title": "antique caucasian kazak rug91 henrys",
   "museum": "",
@@ -78,6 +78,81 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238430
- }
+  "t": 1794238430,
+  "ref_quad": {
+   "quad": [
+    [
+     0.01971,
+     0.01373
+    ],
+    [
+     0.97821,
+     0.01902
+    ],
+    [
+     0.99674,
+     0.9819
+    ],
+    [
+     0.00758,
+     0.98506
+    ]
+   ],
+   "v": 2,
+   "from": "auto",
+   "t": 1794766868
+  }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794766867
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794766875,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01971,
+    0.01373
+   ],
+   [
+    0.97821,
+    0.01902
+   ],
+   [
+    0.99674,
+    0.9819
+   ],
+   [
+    0.00758,
+    0.98506
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
