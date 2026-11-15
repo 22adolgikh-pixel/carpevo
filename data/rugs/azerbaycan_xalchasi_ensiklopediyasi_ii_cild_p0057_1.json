@@ -9,7 +9,7 @@
  "place": "Ширван",
  "date": "20 в., начало",
  "school": "guba-shirvan",
- "composition": "",
+ "composition": "pashali-kilimi",
  "technique": "безворсовый: килим",
  "size": "186x376 см",
  "notes": "Kilim“ Paşalı”. Şirvan. Azərbaycamn. 20-ci əsrin əvvəli. Materlal: yun. Ölçü: 186x376 sm. Azərbaycan Xalça Muzeyi. DDK 1811.",
@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794596973,
+ "updated": 1794784179,
  "cat": {
   "title": "Kilim «Paşalı» Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -60,7 +60,13 @@
    "inv": true
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_162": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1794784152
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -112,5 +118,46 @@
    "at": 1794618052,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.03557,
+   0.01949,
+   0.9280700000000001,
+   0.9482
+  ],
+  "bounds": [
+   {
+    "ix": 0.2357125087965787,
+    "iy": 0.06745876198659921,
+    "strength": 2.69
+   }
+  ],
+  "rings": [
+   "border",
+   "field"
+  ],
+  "status": "edited",
+  "quad": [
+   [
+    0.04765,
+    0.02714
+   ],
+   [
+    0.94552,
+    0.01949
+   ],
+   [
+    0.96364,
+    0.96514
+   ],
+   [
+    0.03557,
+    0.96769
+   ]
+  ],
+  "quad_status": "confirmed",
+  "quad_by": "dolgikh"
+ },
+ "updated_by": "dolgikh"
 }
