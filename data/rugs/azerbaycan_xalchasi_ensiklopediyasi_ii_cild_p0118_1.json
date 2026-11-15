@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "19 в., конец",
  "school": "karabakh",
- "composition": "",
+ "composition": "qarabag-sheddesi",
  "technique": "безворсовый: шадда",
  "size": "164x246 см",
  "notes": "118 Dama-dama Şəddə. Qarabaş. Azərbaycan. 19-cu əsrin sonu. Matertal: yun. Ölçü: 164x246 sm. Azərbaycan Xalça Muzeyi. DDK 5787. AZ",
@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794776714,
+ "updated": 1794784490,
  "cat": {
   "title": "Şəddə Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -59,7 +59,13 @@
    "inv": true
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_199": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1794784453
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -175,5 +181,6 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "updated_by": "dolgikh"
 }

@@ -10,7 +10,7 @@
  "date": "20 в., начало",
  "school": "guba-shirvan",
  "composition": "",
- "technique": "",
+ "technique": "безворсовый: зили",
  "size": "95x264 см",
  "notes": "Pərdə (qapı örtüyü). Şirvan. Azərbaycan. 20-ci əsrin əvvəli. Material: yun. Ölçü: 95x264 sm. Azərbaycan Xalça Muzeyi. DDK 6532.",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794784542,
  "cat": {
   "title": "Pərdə Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -59,7 +59,13 @@
    "inv": true
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_187": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1794784504
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -100,5 +106,10 @@
    "at": 1794618044,
    "ver": 2
   }
+ },
+ "layout": null,
+ "updated_by": "dolgikh",
+ "from_twin": {
+  "technique": "azcm_187"
  }
 }
