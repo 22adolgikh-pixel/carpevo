@@ -48,8 +48,19 @@
  },
  "src_id": "cat:kerimov_vol1_p321_1",
  "lib_img": "img/kerimov_vol1_p321_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "k_t202_f01",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "k_t202_f01": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794766522
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

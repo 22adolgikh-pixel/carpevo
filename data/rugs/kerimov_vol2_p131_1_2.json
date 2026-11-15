@@ -2,15 +2,15 @@
  "id": "kerimov_vol2_p131_1_2",
  "title": "Керимов, т. II, 10 (стр. скана 131, печ. 11) · ковёр 2 из 2",
  "source": "каталог: kerimov_vol2",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
+ "date": "19th centurydate QS:P,+1850-00-00T00:00:00Z/7",
+ "school": "guba-shirvan",
+ "composition": "qimil",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 512,
  "marks": [],
  "created": 1791745496,
- "updated": 1794508367,
+ "updated": 1794766568,
  "cat": {
   "title": "Керимов, т. II, 10 (стр. скана 131, печ. 11)",
   "museum": "",
@@ -63,6 +63,10 @@
    "id": "wikimedia_File_Gimil_rug_gif",
    "score": 0,
    "via": "kerimov_vol2_p131_1"
+  },
+  {
+   "id": "wikimedia_File_Гымыл1_jpg",
+   "score": 0
   }
  ],
  "_repaired": 1,
@@ -90,6 +94,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792271409
+  },
+  "wikimedia_File_Гымыл1_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794766568
   }
  },
  "people": {
@@ -196,6 +205,15 @@
     ],
     "s": "vlm"
    }
+  },
+  "same": {
+   "wikimedia_File_Гымыл1_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794766568
+    }
+   }
   }
  },
  "frame": "whole",
@@ -232,5 +250,12 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "school": "wikimedia_File_Гымыл1_jpg",
+  "composition": "wikimedia_File_Гымыл1_jpg",
+  "technique": "wikimedia_File_Гымыл1_jpg",
+  "museum": "wikimedia_File_Гымыл1_jpg",
+  "date": "wikimedia_File_Гымыл1_jpg"
+ }
 }

@@ -8,8 +8,8 @@
  "license": "",
  "place": "",
  "date": "",
- "school": "",
- "composition": "",
+ "school": "guba-shirvan",
+ "composition": "xirdagul-chichi",
  "technique": "",
  "size": "",
  "notes": "",
@@ -18,7 +18,7 @@
  "h": 1415,
  "marks": [],
  "created": 1791567610,
- "updated": 1794567367,
+ "updated": 1794766522,
  "src_id": "fig:t202_f01",
  "multi": [],
  "people": {
@@ -127,6 +127,15 @@
     ],
     "s": "vlm"
    }
+  },
+  "same": {
+   "kerimov_vol1_p321_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794766522
+    }
+   }
   }
  },
  "frame": "whole",
@@ -163,5 +172,22 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "kerimov_vol1_p321_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794766522
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p321_1",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "kerimov_vol1_p321_1",
+  "composition": "kerimov_vol1_p321_1"
+ }
 }

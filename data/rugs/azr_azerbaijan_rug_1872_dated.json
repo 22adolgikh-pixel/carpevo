@@ -8,7 +8,7 @@
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
  "date": "",
- "school": "",
+ "school": "guba-shirvan",
  "composition": "",
  "technique": "",
  "size": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_azerbaijan_rug_1872_dated",
  "lib_img": "img/azr_azerbaijan_rug_1872_dated.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_afshan95",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_afshan95": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794766547
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -150,5 +161,8 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "school": "azr_afshan95"
+ }
 }

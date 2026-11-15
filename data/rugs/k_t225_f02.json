@@ -8,8 +8,8 @@
  "license": "",
  "place": "",
  "date": "",
- "school": "",
- "composition": "",
+ "school": "guba-shirvan",
+ "composition": "qollu-chichi",
  "technique": "",
  "size": "",
  "notes": "",
@@ -18,7 +18,7 @@
  "h": 503,
  "marks": [],
  "created": 1791567611,
- "updated": 1794508255,
+ "updated": 1794766528,
  "src_id": "fig:t225_f02",
  "multi": [],
  "people": {
@@ -125,6 +125,15 @@
     ],
     "s": "vlm"
    }
+  },
+  "same": {
+   "kerimov_vol1_p344_2": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794766528
+    }
+   }
   }
  },
  "frame": "whole",
@@ -161,5 +170,22 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "kerimov_vol1_p344_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794766528
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p344_2",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "kerimov_vol1_p344_2",
+  "composition": "kerimov_vol1_p344_2"
+ }
 }

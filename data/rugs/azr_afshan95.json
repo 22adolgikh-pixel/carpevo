@@ -18,7 +18,7 @@
  "h": 1552,
  "marks": [],
  "created": 1791736137,
- "updated": 1794336352,
+ "updated": 1794766547,
  "cat": {
   "title": "afshan95",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_afshan95",
  "lib_img": "img/azr_afshan95.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_azerbaijan_rug_1872_dated",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_azerbaijan_rug_1872_dated": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794766547
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -111,6 +122,15 @@
       0.95138
      ]
     ]
+   }
+  },
+  "same": {
+   "azr_azerbaijan_rug_1872_dated": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794766547
+    }
    }
   }
  },
