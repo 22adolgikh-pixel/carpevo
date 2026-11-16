@@ -2645,7 +2645,7 @@
    "scheme": "t22_f03",
    "group": "m6af8da86e376552_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.696,
@@ -2753,7 +2753,7 @@
    "scheme": "t22_f03",
    "group": "m6af8da86e376552_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.693,
@@ -2837,7 +2837,9 @@
      0.72754
     ]
    ],
-   "sam": 0.894
+   "sam": 0.894,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858053
   },
   {
    "id": "m6af8da86e376552_10",
@@ -2853,7 +2855,7 @@
    "scheme": "t22_f03",
    "group": "m6af8da86e376552_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.692,
@@ -2973,7 +2975,9 @@
      0.6416
     ]
    ],
-   "sam": 0.911
+   "sam": 0.911,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858053
   },
   {
    "id": "m6af8da86e376552_11",
@@ -2989,7 +2993,7 @@
    "scheme": "t22_f03",
    "group": "m6af8da86e376552_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.691,
@@ -3061,7 +3065,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c1fe141155_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.68,
@@ -3177,7 +3181,9 @@
      0.79102
     ]
    ],
-   "sam": 0.898
+   "sam": 0.898,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858070
   },
   {
    "id": "m6afa2cbce141155_1",
@@ -3193,7 +3199,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2cbce141155_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.709,
@@ -3250,10 +3256,10 @@
   {
    "id": "m6afa2cbce141155_3",
    "box": [
-    0.51655,
-    0.69141,
-    0.05899,
-    0.0332
+    0.50929,
+    0.68737,
+    0.10754,
+    0.03569
    ],
    "zone": "other",
    "motif": "deve",
@@ -3261,7 +3267,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2cbce141155_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.696,
@@ -3333,7 +3339,11 @@
      0.69336
     ]
    ],
-   "sam": 0.801
+   "sam": 0.801,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794858121,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858121
   },
   {
    "id": "m6afa2cbce141155_5",
@@ -3349,7 +3359,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2cbce141155_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.691,
@@ -3577,7 +3587,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2cbce141155_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.684,
@@ -3713,7 +3723,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2cbce141155_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.679,
@@ -3869,7 +3879,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d54e487733_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.67,
@@ -4069,7 +4079,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d98e487733_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.771,
@@ -4217,7 +4227,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d98e487733_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.77,
@@ -4369,7 +4379,9 @@
      0.67578
     ]
    ],
-   "sam": 0.856
+   "sam": 0.856,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858172
   },
   {
    "id": "m6afa2d98e487733_3",
@@ -4385,7 +4397,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d98e487733_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.72,
@@ -4585,7 +4597,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d98e487733_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.711,
@@ -4729,7 +4741,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d98e487733_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.7,
@@ -4897,11 +4909,13 @@
      0.49219
     ]
    ],
-   "sam": 0.878
+   "sam": 0.878,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858172
   }
  ],
  "created": 1794547278,
- "updated": 1794858012,
+ "updated": 1794858172,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -5102,6 +5116,118 @@
      "a": "bad",
      "w": 2,
      "t": 1794858012
+    }
+   },
+   "m6af8da86e376552_8": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858053
+    }
+   },
+   "m6af8da86e376552_10": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858053
+    }
+   },
+   "m6af8da86e376552_7": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858053
+    }
+   },
+   "m6af8da86e376552_11": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858053
+    }
+   },
+   "m6afa2c1fe141155_10": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858070
+    }
+   },
+   "m6afa2cbce141155_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858121
+    }
+   },
+   "m6afa2cbce141155_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858121
+    }
+   },
+   "m6afa2cbce141155_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858121
+    }
+   },
+   "m6afa2cbce141155_9": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858121
+    }
+   },
+   "m6afa2cbce141155_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858121
+    }
+   },
+   "m6afa2d54e487733_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858141
+    }
+   },
+   "m6afa2d98e487733_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858172
+    }
+   },
+   "m6afa2d98e487733_5": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858172
+    }
+   },
+   "m6afa2d98e487733_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858172
+    }
+   },
+   "m6afa2d98e487733_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858172
+    }
+   },
+   "m6afa2d98e487733_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858172
     }
    }
   }

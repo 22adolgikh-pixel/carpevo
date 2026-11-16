@@ -31,7 +31,7 @@
    "scheme": "t22_f03",
    "group": "m6af78921e526229_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.737,
@@ -87,7 +87,9 @@
      0.22168
     ]
    ],
-   "sam": 0.927
+   "sam": 0.927,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858205
   },
   {
    "id": "m6af78921e526229_1",
@@ -103,7 +105,7 @@
    "scheme": "t22_f03",
    "group": "m6af78921e526229_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.713,
@@ -219,7 +221,7 @@
    "scheme": "t22_f03",
    "group": "m6af78921e526229_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.71,
@@ -323,7 +325,7 @@
    "scheme": "t22_f03",
    "group": "m6af78921e526229_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.705,
@@ -379,7 +381,9 @@
      0.23047
     ]
    ],
-   "sam": 0.917
+   "sam": 0.917,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858205
   },
   {
    "id": "m6af78921e526229_4",
@@ -395,7 +399,7 @@
    "scheme": "t22_f03",
    "group": "m6af78921e526229_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.702,
@@ -467,7 +471,9 @@
      0.71777
     ]
    ],
-   "sam": 0.921
+   "sam": 0.921,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858205
   },
   {
    "id": "m6af78921e526229_5",
@@ -483,7 +489,7 @@
    "scheme": "t22_f03",
    "group": "m6af78921e526229_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.701,
@@ -611,7 +617,7 @@
    "scheme": "t22_f03",
    "group": "m6af78921e526229_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.694,
@@ -679,7 +685,9 @@
      0.57324
     ]
    ],
-   "sam": 0.96
+   "sam": 0.96,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858205
   },
   {
    "id": "m6af78921e526229_8",
@@ -695,7 +703,7 @@
    "scheme": "t22_f03",
    "group": "m6af78921e526229_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.691,
@@ -823,7 +831,7 @@
    "scheme": "t22_f03",
    "group": "m6af78921e526229_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.691,
@@ -883,7 +891,9 @@
      0.62109
     ]
    ],
-   "sam": 0.938
+   "sam": 0.938,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794858205
   },
   {
    "id": "m6af78921e526229_10",
@@ -2523,7 +2533,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794780588,
+ "updated": 1794858205,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -2590,5 +2600,72 @@
   "ver": 1,
   "at": 1794547535
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "marks": {
+   "m6af78921e526229_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858205
+    }
+   },
+   "m6af78921e526229_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858205
+    }
+   },
+   "m6af78921e526229_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858205
+    }
+   },
+   "m6af78921e526229_7": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858205
+    }
+   },
+   "m6af78921e526229_9": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794858205
+    }
+   },
+   "m6af78921e526229_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858205
+    }
+   },
+   "m6af78921e526229_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858205
+    }
+   },
+   "m6af78921e526229_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858205
+    }
+   },
+   "m6af78921e526229_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794858205
+    }
+   }
+  }
+ }
 }

@@ -18,7 +18,7 @@
  "h": 670,
  "marks": [],
  "created": 1791736131,
- "updated": 1794589258,
+ "updated": 1794858190,
  "cat": {
   "title": "kuba alpan84",
   "museum": "",
@@ -78,7 +78,30 @@
   "conf": 0.938,
   "area": 0.909,
   "ver": 1,
-  "t": 1794238408
+  "t": 1794238408,
+  "ref_quad": {
+   "quad": [
+    [
+     0.03184,
+     0.03645
+    ],
+    [
+     0.98172,
+     0.03062
+    ],
+    [
+     0.97118,
+     0.93689
+    ],
+    [
+     0.02101,
+     0.93557
+    ]
+   ],
+   "v": 2,
+   "from": "auto",
+   "t": 1794858188
+  }
  },
  "micro": {
   "comp": {
@@ -89,7 +112,57 @@
      "t": 1794589258
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794858164
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794858190,
+    "s": "ref"
+   }
   }
  },
- "composition_by": "/m: dolgikh"
+ "composition_by": "/m: dolgikh",
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03184,
+    0.03645
+   ],
+   [
+    0.98172,
+    0.03062
+   ],
+   [
+    0.97118,
+    0.93689
+   ],
+   [
+    0.02101,
+    0.93557
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
