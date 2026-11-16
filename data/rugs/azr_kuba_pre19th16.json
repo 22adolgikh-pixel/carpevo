@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736137,
- "updated": 1794597013,
+ "updated": 1794857159,
  "cat": {
   "title": "Kuba long rug, late 18th/early 19th century (Khanate Period), Azerbaijan",
   "museum": "",
@@ -117,8 +117,49 @@
     "w": 2,
     "t": 1794597013
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794857159,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.20791,
+    0.00708
+   ],
+   [
+    0.75146,
+    0.02825
+   ],
+   [
+    0.97924,
+    1.0004
+   ],
+   [
+    0.01822,
+    0.99989
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

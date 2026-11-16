@@ -18,7 +18,7 @@
  "h": 1161,
  "marks": [],
  "created": 1791736138,
- "updated": 1794771390,
+ "updated": 1794857173,
  "cat": {
   "title": "Antique Nakhchivan rug, Shahbuz district (Nursu village), Azerbaijan",
   "museum": "",
@@ -112,8 +112,49 @@
     "w": 2,
     "t": 1794771390
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794857173,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.10454,
+    0.03229
+   ],
+   [
+    0.8965,
+    0.02948
+   ],
+   [
+    0.88828,
+    0.96824
+   ],
+   [
+    0.12121,
+    0.96531
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

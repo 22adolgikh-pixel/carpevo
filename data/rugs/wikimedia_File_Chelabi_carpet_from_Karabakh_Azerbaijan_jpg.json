@@ -18,7 +18,7 @@
  "h": 922,
  "marks": [],
  "created": 1791736125,
- "updated": 1794596975,
+ "updated": 1794857226,
  "cat": {
   "title": "Chelabi carpet from Karabakh (Azerbaijan).jpg",
   "museum": "Wikimedia Commons",
@@ -113,8 +113,49 @@
     "w": 2,
     "t": 1794596975
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794857226,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04134,
+    0.01742
+   ],
+   [
+    0.93962,
+    0.0076
+   ],
+   [
+    0.97725,
+    0.9818
+   ],
+   [
+    0.01546,
+    0.98789
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

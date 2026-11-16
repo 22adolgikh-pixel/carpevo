@@ -18,7 +18,7 @@
  "h": 1100,
  "marks": [],
  "created": 1791736133,
- "updated": 1794642695,
+ "updated": 1794857195,
  "cat": {
   "title": "kuba gollu chichi4",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794642695
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794857195,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05674,
+    0.03758
+   ],
+   [
+    0.94938,
+    0.02097
+   ],
+   [
+    0.97752,
+    0.96151
+   ],
+   [
+    0.03345,
+    0.96159
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

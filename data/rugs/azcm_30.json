@@ -2950,10 +2950,10 @@
   {
    "id": "m6afa2c61e389652_3",
    "box": [
-    0.51027,
-    0.64551,
-    0.06003,
-    0.0293
+    0.52789,
+    0.6451,
+    0.10244,
+    0.03215
    ],
    "zone": "other",
    "motif": "deve",
@@ -2961,7 +2961,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c61e389652_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.663,
@@ -3017,7 +3017,11 @@
      0.64551
     ]
    ],
-   "sam": 0.805
+   "sam": 0.805,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794857155,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794857155
   },
   {
    "id": "m6afa2c61e389652_5",
@@ -3033,7 +3037,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c61e389652_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.659,
@@ -3081,7 +3085,7 @@
   }
  ],
  "created": 1791870040,
- "updated": 1794780262,
+ "updated": 1794857155,
  "cat": {
   "title": "“Pirəbədil” («Пиребедиль»), Губа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -3577,6 +3581,20 @@
      "a": "bad",
      "w": 2,
      "t": 1794567500
+    }
+   },
+   "m6afa2c61e389652_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857155
+    }
+   },
+   "m6afa2c61e389652_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794857155
     }
    }
   }
