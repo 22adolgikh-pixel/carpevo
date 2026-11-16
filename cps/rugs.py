@@ -1337,7 +1337,7 @@ def install(app, DATA, D_WORK):
     # Человек в /m (вид «поле») выбирает верную линию или отвечает «нет нужной» / «края испорчены». По выбранной линии поле выравнивается
     # параллельно краям (rug_mesh.field_warp) — rug_mesh/<id>.f.jpg. Рабочей картинкой (редактор, рамки) пока остаётся простое выпрямление:
     # сетку ещё надо научиться переводить в доли фото (рамки). Ответы — в micro.jsonl (type "field") для обучения выбора линии.
-    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 1
+    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 2     # v11.83: глубина линии поля своя у каждой стороны
     mesh_st = {"running": False, "done": 0, "total": 0, "err": "", "t": 0}
 
     def mesh_info(rid, r=None, build=False):
@@ -2520,6 +2520,58 @@ def install(app, DATA, D_WORK):
             except (OSError, ValueError): _hide["d"] = {}
         return _hide["d"]
 
+    # v11.83: ч/б и тонированные (сепия) фото — не в очередях /m. Раньше был только список от 12.11 (micro_hide.json) и только для «кадра»;
+    # ковры, добавленные позже, и остальные очереди он не закрывал. Признак: разброс цвета поперёк главной оси в плоскости a,b (Lab):
+    # у одноцветного (серого, коричневого) фото все пиксели лежат на одной линии — малая ось ≈ 0–2; у цветного ковра (красный + синий) — 3 и больше.
+    # Просмотр 16.11 на 4 032 фото: порог 2,0 — около 10 % каталога, почти все ч/б/сепия (редкие исключения — двухцветные ковры). Данные ковров не трогаются.
+    F_TONE = os.path.join(DATA, "tone.json"); TONE_BW = 2.0; _tone = {"d": None, "run": False}
+
+    def _tone_d():
+        if _tone["d"] is None:
+            try: _tone["d"] = json.load(open(F_TONE))
+            except (OSError, ValueError): _tone["d"] = {}
+        return _tone["d"]
+
+    def tone_of(p):
+        a = read_small(p, 256)
+        if a is None: return None
+        L = cv2.cvtColor(cv2.resize(a, (96, 96), interpolation=cv2.INTER_AREA), cv2.COLOR_BGR2LAB).reshape(-1, 3).astype(np.float32)
+        m = (L[:, 0] > 20) & (L[:, 0] < 240)
+        if m.sum() < 200: return None
+        return round(float(np.sqrt(max(float(np.linalg.eigvalsh(np.cov(L[m, 1:].T))[0]), 0.0))), 2)
+
+    def is_bw(rid):
+        v = _tone_d().get(rid); return v is not None and v >= 0 and v < TONE_BW
+
+    def tone_all():
+        if _tone["run"]: return
+        _tone["run"] = True
+        try:
+            d = _tone_d(); k = 0
+            for f in os.listdir(D_RUGS):
+                rid = f[:-5]
+                if not f.endswith(".json") or rid in d: continue
+                p = img_path(rid); v = tone_of(p) if p else None
+                d[rid] = -1 if v is None else v; k += 1
+                if k % 200 == 0: json.dump(d, open(F_TONE + ".tmp", "w")); os.replace(F_TONE + ".tmp", F_TONE)
+            if k: json.dump(d, open(F_TONE + ".tmp", "w")); os.replace(F_TONE + ".tmp", F_TONE)
+        finally: _tone["run"] = False
+
+    def _periodic_tone():
+        time.sleep(60)
+        while True:
+            try: tone_all()
+            except Exception as e: print("tone_all:", e)
+            time.sleep(1800)
+
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_tone, daemon=True, name="tone").start()
+
+    @app.get("/api/rugs_tone")
+    def api_tone(): d = _tone_d(); return {"n": len(d), "bw": sum(1 for v in d.values() if 0 <= v < TONE_BW), "running": _tone["run"]}
+
+    @app.post("/api/rugs_tone")
+    def api_tone_run(): tone_all(); return api_tone()
+
     _ch = {}
 
     def _comp_hints():
@@ -2592,7 +2644,7 @@ def install(app, DATA, D_WORK):
         """v11.81: «где граница поля?» — ковры с углами, у которых сетка уже построена, поле не отвечено и этот человек не отвечал"""
         out = []
         for x in rows:
-            if x["dead"] or x["qs"] not in RECT_OK or x.get("fld"): continue
+            if x["dead"] or x["qs"] not in RECT_OK or x.get("fld") or is_bw(x["id"]): continue
             if me in x.get("fv", []): continue
             m = mesh_info(x["id"])
             if not m: continue
@@ -2750,7 +2802,7 @@ def install(app, DATA, D_WORK):
         """контрольная рамка в карточке «элементы» (примерно в каждой третьей): отклонённая рамка той же группы (её надо отметить ✗)
         или уже подтверждённая (её трогать не надо). В ковре ничего не меняет — считает внимательность."""
         import random
-        if not t.get("sample") or random.random() > 0.35: return
+        if not t.get("sample") or random.random() > 0.12: return                  # v11.83: 35 % → 12 % карточек
         ms = [m for m in x["mk"] if m["g"] == t["g"] and m["box"] != t["sample"]]
         bad = [m for m in ms if m["st"] == "rejected"]; good = [m for m in ms if m["st"] == "confirmed"]
         pool = ([("bad", m) for m in bad] + [("ok", m) for m in good])
@@ -2877,14 +2929,14 @@ def install(app, DATA, D_WORK):
         me = user(request); n = max(1, min(12, n)); rows = _mrows(); H = _micro_hide()
         # v11.45: ковры с прежним ответом «фрагмент» возвращаются в очередь — в новом наборе ответов такого больше нет
         fr =[x for x in rows if (x["use"] != "skip" or x["fr_old"]) and x["seen"] and (x["frame_by"] not in ("micro", "hand") or x["fr_old"])
-              and (me not in x["who"]["frame"] or me in x["old_who"]) and x["id"] not in H]
+              and (me not in x["who"]["frame"] or me in x["old_who"]) and x["id"] not in H and not is_bw(x["id"])]
         fr.sort(key=lambda x: (abs((x["pw"] if x["pw"] is not None else 0.5) - 0.5), x["conf"]))   # v11.44: где модель меньше всего уверена — первыми
         head, pool = fr[:60], fr[:]; random.shuffle(pool); mix = []                 # половина — сомнительные, половина — случайные (иначе выборка перекошена и точность машины не измерить)
         for a, b in zip(head, pool): mix += [a, b]
         fr = list({x["id"]: x for x in mix + fr}.values())
         # v11.42: углы спрашиваем только у ковров, которые человек уже признал «целыми» (по данным 124 ответов машинное «целый» верно лишь в 2 из 11)
         qd = [x for x in rows if x["use"] != "skip" and x["aquad"] and x["frame"] == "whole" and x["frame_by"] in ("micro", "hand") and x["qs"] != "confirmed"
-              and me not in x["who"]["quad"]]
+              and me not in x["who"]["quad"] and not is_bw(x["id"])]
         qd.sort(key=lambda x: x["conf"])
         # v11.47: углы модели считаются заранее. Пока модель работает исправно, карточку углов показываем только когда её углы уже готовы
         # (иначе ковёр уйдёт к человеку со старыми углами, а расчёт пропадёт зря); ковры без углов модели ставятся в очередь расчёта.
@@ -2913,7 +2965,7 @@ def install(app, DATA, D_WORK):
             if t["type"] == "marks": _refine_marks(t); _emb_marks(t); _marks_trap(me, t, by[t["rid"]])
         if "marks" in want: _es_enqueue(rows, len(more["marks"]), n)
         ctl = [x for x in rows if x["ctl"]]
-        if ctl and len(tasks) >= 3 and "quad" in want:                             # контрольная карточка
+        if ctl and len(tasks) >= 3 and "quad" in want and random.random() < 0.3:   # контрольная карточка; v11.83: в 3 пачках из 10 (была в каждой — владелец: «уже сделанные попадаются слишком часто»)
             x = random.choice(ctl); q = [list(p) for p in x["quad"]]; good = random.random() < 0.5
             if not good:
                 kk = random.randrange(4); q[kk] = [q[kk][0] + random.choice([-1, 1]) * 0.07, q[kk][1] + random.choice([-1, 1]) * 0.07]

@@ -12,14 +12,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.environ.get("CPS_DATA") or os.path.join(HERE, "data")
 # веса лежат на Диске (carpet-dna/models, доступ «по ссылке»); сервер скачивает их сам в DATA при первом обращении
 # v11.78: v2 (15.11, 610 ковров). Файл v2 на Диске должен быть открыт «по ссылке»; пока его нет — работает v1 (если уже скачан или доступен).
-DRIVES = {2: {"pt": "1WFHexCSUZgnAGKza3Bu-_325-zdXOJQC", "json": "10kmffekFWnX6zqqfg5XnsPi7eFDdd3BH"},
+DRIVES = {3: {"pt": "1Np4KD3-NfaCn6gkGPgminSOlCK3-PefS", "json": "1-kzO7jZoc3W5kdo4o2D5UZQVsJmEvpex"},   # v11.83: v3 (16.11, 610 ковров в обучении)
+          2: {"pt": "1WFHexCSUZgnAGKza3Bu-_325-zdXOJQC", "json": "10kmffekFWnX6zqqfg5XnsPi7eFDdd3BH"},
           1: {"pt": "1Rj5r3nPzqGe5qMamkKzyimVkqzj_yW9H", "json": "1-G5e0UXSIz_Ohy2-Z7LwXEnw9BLtl8L1"}}
 DRIVE = DRIVES[1]
-VERSION = 2          # версия загруженных весов (меняется при загрузке: 2, а если v2 недоступна — 1)
+VERSION = 3          # версия загруженных весов (меняется при загрузке: 2, а если v2 недоступна — 1)
 
 
 def _path():
-    for v in (2, 1):
+    for v in (3, 2, 1):
         for p in (os.path.join(DATA, f"corner_refine_v{v}.pt"), os.path.join(HERE, "models", f"corner_refine_v{v}.pt")):
             if os.path.exists(p): return p
     return None
@@ -28,7 +29,7 @@ def _path():
 def fetch(force=False):
     """скачать веса с Диска в DATA (нужен доступ «по ссылке»): сначала v2, при неудаче v1; после успеха сеть перечитывается"""
     from rugs import drive_fetch
-    for v in (2, 1):
+    for v in (3, 2, 1):
         dst = os.path.join(DATA, f"corner_refine_v{v}.pt")
         if os.path.exists(dst) and not force: return True
         try:
@@ -53,11 +54,11 @@ def _load():
         try:
             import torch
             P = _path()
-            if (P is None or "_v2" not in P) and fetch(): P = _path()
+            if (P is None or "_v3" not in P) and fetch(): P = _path()
             if P:
                 torch.set_num_threads(2)
                 _S["net"] = torch.jit.load(P, map_location="cpu").eval()
-                global VERSION; VERSION = 2 if P.endswith("_v2.pt") else 1
+                global VERSION; VERSION = int(P[-4])
                 try: _S["meta"] = json.load(open(P[:-3] + ".json", encoding="utf-8"))
                 except (OSError, ValueError): _S["meta"] = {}
         except Exception as e:

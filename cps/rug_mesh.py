@@ -261,7 +261,7 @@ def mesh_rectify3(img, quad, side=1200, pick=None):
     return out2, info
 
 
-def field_cands(rect, k=3, lo=0.04, hi=0.38, nst=48, wob_pct=0.012, cont=20, rel=0.5, sep=0.025):
+def field_cands(rect, k=3, lo=0.04, hi=0.38, nst=48, wob_pct=0.012, cont=20, rel=0.5, sep=0.025, side_tol=0.08):
     """v11.81: до k кандидатов в границу «поле / кайма» — для выбора человеком (/m, вид «поле»).
     Проба 15.11 на 38 коврах: ни «самая глубокая», ни «самая сильная» сплошная линия не угадывают надёжно
     (глубокая уходит в поле со сплошным узором, сильная цепляется за наружную полосу), но верная почти всегда среди 2–3 сильнейших.
@@ -285,10 +285,15 @@ def field_cands(rect, k=3, lo=0.04, hi=0.38, nst=48, wob_pct=0.012, cont=20, rel
     for j0 in sorted(pick):
         cur = {}
         for sd, (ts, dsv, S) in maps.items():
-            lo_, hi_ = max(0, j0 - R), min(len(dsv), j0 + R + 1)
-            off, _ = _viterbi(S[:, lo_:hi_], np.arange(lo_ - j0, hi_ - j0), mu=0.04)
+            # v11.83: кайма не одинаковой ширины по сторонам (замечание владельца: три стороны попадают, верх или низ мимо) —
+            # у каждой стороны своя глубина: ближайший сильный сплошной пик её собственного профиля в пределах ±side_tol (8 %) от общей
+            js = j0; T = int(side_tol * sh); pr = _smooth(prof[sd], max(1.0, band / 2)); a0, a1 = max(1, j0 - T), min(len(pr) - 1, j0 + T + 1)
+            loc = [j for j in range(a0, a1) if pr[j] >= pr[j - 1] and pr[j] >= pr[j + 1] and pr[j] >= 0.6 * pr[a0:a1].max()]
+            if loc: js = min(loc, key=lambda j: abs(j - j0))
+            lo_, hi_ = max(0, js - R), min(len(dsv), js + R + 1)
+            off, _ = _viterbi(S[:, lo_:hi_], np.arange(lo_ - js, hi_ - js), mu=0.04)
             off = _smooth(np.median(np.stack([np.roll(off, s2) for s2 in (-2, -1, 0, 1, 2)]), 0), 1.6)
-            v = int(ds[j0]) + np.interp(tt, ts, off)
+            v = int(ds[js]) + np.interp(tt, ts, off)
             m = float(np.median(v)); w = np.clip(np.minimum(tt, 1 - tt) / 0.08, 0, 1); w = w * w * (3 - 2 * w)
             cur[sd] = [round(float(x), 1) for x in m + (v - m) * w]       # у углов линия идёт к своему среднему (углы рамки прямые)
         out.append({"depth": int(ds[j0]), "depth_pct": round(float(ds[j0]) / sh * 100, 1), "p": round(float(P[j0] / P.max()), 2), "curves": cur})
