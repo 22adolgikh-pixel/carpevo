@@ -3231,7 +3231,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d94e520365_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.732,
@@ -3376,10 +3376,10 @@
   {
    "id": "m6afa2d94e520365_1",
    "box": [
-    0.32677,
-    0.73535,
-    0.32677,
-    0.06738
+    0.32174,
+    0.74149,
+    0.34185,
+    0.07335
    ],
    "zone": "other",
    "motif": "qeychi",
@@ -3387,7 +3387,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d94e520365_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.717,
@@ -3539,11 +3539,15 @@
      0.76758
     ]
    ],
-   "sam": 0.927
+   "sam": 0.927,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794857366,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794857366
   }
  ],
  "created": 1791870027,
- "updated": 1794780568,
+ "updated": 1794857366,
  "cat": {
   "title": "Pirəbədil carpet, Quba group of Azerbaijani carpets",
   "museum": "Национальный музей искусств Азербайджана",
@@ -3955,6 +3959,20 @@
      "a": "bad",
      "w": 2,
      "t": 1794588752
+    }
+   },
+   "m6afa2d94e520365_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857366
+    }
+   },
+   "m6afa2d94e520365_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794857366
     }
    }
   }

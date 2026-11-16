@@ -2785,7 +2785,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c96e985448_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.702,
@@ -2929,7 +2929,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c96e985448_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.685,
@@ -3053,7 +3053,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c96e985448_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.674,
@@ -3149,7 +3149,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c96e985448_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.669,
@@ -3242,10 +3242,10 @@
   {
    "id": "m6afa2c96e985448_4",
    "box": [
-    0.53811,
-    0.56055,
-    0.04421,
-    0.01953
+    0.5143,
+    0.57107,
+    0.08672,
+    0.02854
    ],
    "zone": "other",
    "motif": "deve",
@@ -3253,7 +3253,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c96e985448_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.661,
@@ -3329,7 +3329,11 @@
      0.57031
     ]
    ],
-   "sam": 0.77
+   "sam": 0.77,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794857415,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794857415
   },
   {
    "id": "m6afa2c96e985448_6",
@@ -3345,7 +3349,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c96e985448_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.656,
@@ -3405,7 +3409,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c96e985448_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.656,
@@ -3469,7 +3473,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c96e985448_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.652,
@@ -3549,7 +3553,7 @@
   }
  ],
  "created": 1791870016,
- "updated": 1794780317,
+ "updated": 1794857415,
  "cat": {
   "title": "Knotted-pile wool carpet “Pirabadil”",
   "museum": "",
@@ -3730,6 +3734,62 @@
      "a": "ok",
      "w": 2,
      "t": 1794776722
+    }
+   },
+   "m6afa2c96e985448_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857415
+    }
+   },
+   "m6afa2c96e985448_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857415
+    }
+   },
+   "m6afa2c96e985448_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857415
+    }
+   },
+   "m6afa2c96e985448_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857415
+    }
+   },
+   "m6afa2c96e985448_6": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857415
+    }
+   },
+   "m6afa2c96e985448_7": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857415
+    }
+   },
+   "m6afa2c96e985448_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857415
+    }
+   },
+   "m6afa2c96e985448_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794857415
     }
    }
   },

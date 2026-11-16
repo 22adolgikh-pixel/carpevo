@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736138,
- "updated": 1794596864,
+ "updated": 1794857382,
  "cat": {
   "title": "antique caucasian shirvan marasali mosque prayer rug150",
   "museum": "",
@@ -115,8 +115,49 @@
     "w": 2,
     "t": 1794596864
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794857382,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.24541,
+    0.02567
+   ],
+   [
+    0.79052,
+    0.02913
+   ],
+   [
+    0.96981,
+    0.94354
+   ],
+   [
+    0.01755,
+    0.92008
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 1756,
  "marks": [],
  "created": 1791736138,
- "updated": 1794740895,
+ "updated": 1794857454,
  "cat": {
   "title": "A Moghan long rug, South Caucasus CIRCA 1880, Price Realized £2,000 ($3,014) Christie's Sale 5372, 1",
   "museum": "",
@@ -112,8 +112,49 @@
     "w": 2,
     "t": 1794740895
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794857454,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04859,
+    0.00939
+   ],
+   [
+    0.98143,
+    0.01448
+   ],
+   [
+    0.97581,
+    0.98057
+   ],
+   [
+    0.0374,
+    0.98297
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

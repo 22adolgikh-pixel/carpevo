@@ -18,7 +18,7 @@
  "h": 1536,
  "marks": [],
  "created": 1791870023,
- "updated": 1794597387,
+ "updated": 1794857336,
  "cat": {
   "title": "This third quarter 19th century Facralo Kazak southwestern Caucasus Oriental rug measures 4’3” X 4’9”",
   "museum": "",
@@ -112,8 +112,49 @@
     "w": 2,
     "t": 1794597387
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794857336,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04809,
+    0.02899
+   ],
+   [
+    0.9674,
+    0.03283
+   ],
+   [
+    0.9822,
+    0.95846
+   ],
+   [
+    0.04044,
+    0.96608
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
