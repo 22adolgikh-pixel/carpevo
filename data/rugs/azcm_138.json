@@ -31,7 +31,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.934,
@@ -131,7 +131,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.927,
@@ -303,7 +303,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.927,
@@ -379,7 +379,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.923,
@@ -487,7 +487,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.921,
@@ -563,7 +563,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.919,
@@ -671,7 +671,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.917,
@@ -743,7 +743,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.917,
@@ -879,7 +879,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.916,
@@ -1051,7 +1051,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.913,
@@ -1131,7 +1131,7 @@
    "scheme": "t155_f03",
    "group": "m6af78aa1e804759_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.913,
@@ -1427,7 +1427,7 @@
   }
  ],
  "created": 1791870042,
- "updated": 1794780794,
+ "updated": 1794857651,
  "cat": {
   "title": "“Şıxlı” («Шихлы»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -1525,24 +1525,95 @@
   "ver": 1,
   "t": 1794238254
  },
- "multi": [
-  [
-   0.0,
-   0.0,
-   0.1885,
-   0.985
-  ],
-  [
-   0.2213,
-   0.0,
-   0.541,
-   0.9883
-  ],
-  [
-   0.7951,
-   0.0,
-   0.2049,
-   0.9883
-  ]
- ]
+ "multi": [],
+ "micro": {
+  "split": {
+   "p": {
+    "dolgikh": {
+     "a": "one",
+     "w": 2,
+     "t": 1794857592
+    }
+   }
+  },
+  "marks": {
+   "m6af78aa1e804759_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857623
+    }
+   },
+   "m6af78aa1e804759_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857623
+    }
+   },
+   "m6af78aa1e804759_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857623
+    }
+   },
+   "m6af78aa1e804759_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857623
+    }
+   },
+   "m6af78aa1e804759_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857623
+    }
+   },
+   "m6af78aa1e804759_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857623
+    }
+   },
+   "m6af78aa1e804759_6": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857623
+    }
+   },
+   "m6af78aa1e804759_7": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857623
+    }
+   },
+   "m6af78aa1e804759_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857623
+    }
+   },
+   "m6af78aa1e804759_9": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857651
+    }
+   },
+   "m6af78aa1e804759_10": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794857651
+    }
+   }
+  }
+ }
 }
