@@ -18,7 +18,7 @@
  "h": 916,
  "marks": [],
  "created": 1791736138,
- "updated": 1794597421,
+ "updated": 1794858355,
  "cat": {
   "title": "antique shirvan prayer rug126 Eberhart20Herrmann",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794597421
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794858355,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03427,
+    0.04535
+   ],
+   [
+    0.94962,
+    0.04205
+   ],
+   [
+    0.97473,
+    0.95384
+   ],
+   [
+    0.02354,
+    0.94912
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

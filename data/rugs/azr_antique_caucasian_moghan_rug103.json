@@ -18,7 +18,7 @@
  "h": 992,
  "marks": [],
  "created": 1791736138,
- "updated": 1794858192,
+ "updated": 1794858223,
  "cat": {
   "title": "Lot 32: Moghan Long Rug, Southeast Caucasus, last quarter 19th century, 10 ft",
   "museum": "",
@@ -80,7 +80,30 @@
   "conf": 0.963,
   "area": 0.791,
   "ver": 1,
-  "t": 1794238244
+  "t": 1794238244,
+  "ref_quad": {
+   "quad": [
+    [
+     0.1246,
+     0.01387
+    ],
+    [
+     0.90392,
+     0.02255
+    ],
+    [
+     0.89988,
+     0.98308
+    ],
+    [
+     0.09439,
+     0.98099
+    ]
+   ],
+   "v": 2,
+   "from": "auto",
+   "t": 1794858218
+  }
  },
  "micro": {
   "frame": {
@@ -89,8 +112,49 @@
     "w": 2,
     "t": 1794858192
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794858223,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.1246,
+    0.01387
+   ],
+   [
+    0.90392,
+    0.02255
+   ],
+   [
+    0.89988,
+    0.98308
+   ],
+   [
+    0.09439,
+    0.98099
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
