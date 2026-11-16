@@ -15,7 +15,7 @@ drive.mount('/content/drive')
 T0 = time.time(); log = lambda *a: print(f'[{time.time() - T0:5.0f} c]', *a, flush=True)
 REPO = '/content/carpevo'
 LAB = json.load(open(f'{REPO}/cps/tools/corners/labels.json', encoding='utf-8'))
-VER = 2                                    # v1 — 13.11 (365 ковров); v2 — 15.11 (≈630 ковров). Старые веса не перезаписываются
+VER = 3                                    # v1 — 13.11 (365 ковров); v2 — 15.11 (488); v3 — 16.11 (≈830 меток). Старые веса не перезаписываются
 DEV = 'cuda' if torch.cuda.is_available() else 'cpu'; log('устройство', DEV, '| ковров с метками', len(LAB))
 OUT = '/content/drive/MyDrive/carpet-dna/models'; os.makedirs(OUT, exist_ok=True)
 
@@ -131,6 +131,38 @@ for start in ('auto', 'vlm'):
                   'better': int((E1 < E0 - 0.002).sum()), 'worse': int((E1 > E0 + 0.002).sum()),
                   'within_1pct_before': round(float((E0 <= 0.01).mean()), 3), 'within_1pct_after': round(float((E1 <= 0.01).mean()), 3)}
     log(start, rep[start])
+
+# ---------- v3: можно ли принимать углы без человека? ----------
+# Уверенность = согласие сети с самой собой: уточняем из 6 слегка сдвинутых стартов (до 1,5 % длинной стороны) и смотрим разброс ответов.
+# Если разброс мал — сеть «видит» угол; таблица ниже показывает, какую долю ковров можно принять автоматически и сколько среди них ошибок.
+def spread_run(a, quad, n=6, jit=0.015):
+    h, w = a.shape[:2]; L = max(h, w); rs = np.random.RandomState(0); Q = []
+    for i in range(n):
+        q0 = [[p[0] + (rs.uniform(-jit, jit) * L / w if i else 0), p[1] + (rs.uniform(-jit, jit) * L / h if i else 0)] for p in quad]
+        Q.append(refine(a, q0))
+    Q = np.array(Q); med = np.median(Q, 0)
+    d = np.hypot((Q[..., 0] - med[:, 0]) * w / L, (Q[..., 1] - med[:, 1]) * h / L)      # n × 4
+    return med.tolist(), float(d.max())
+
+
+def maxerr(q, t, a):
+    h, w = a.shape[:2]; L = max(h, w)
+    return float(max(math.hypot((q[k][0] - t[k][0]) * w / L, (q[k][1] - t[k][1]) * h / L) for k in range(4)))
+
+
+SP = []
+for x in TE:
+    st = x.get('vlm') or x.get('auto')
+    if not st: continue
+    a = IM[x['id']]; med, sp = spread_run(a, st); SP.append((sp, maxerr(med, x['quad'], a), err(med, x['quad'], a)))
+SP = np.array(SP); conf = []
+for thr in (0.002, 0.003, 0.005, 0.008, 0.012, 0.02, 1.0):
+    m = SP[:, 0] <= thr
+    if m.sum() == 0: continue
+    conf.append({'spread_le': thr, 'share': round(float(m.mean()), 3), 'n': int(m.sum()), 'bad_max_gt_2pct': int((SP[m, 1] > 0.02).sum()), 'bad_max_gt_1pct': int((SP[m, 1] > 0.01).sum()),
+                 'median_err': round(float(np.median(SP[m, 2])), 4)})
+    log('разброс ≤', thr, conf[-1])
+rep['confidence'] = conf
 
 # ---------- выгрузка ----------
 net.cpu().eval()
