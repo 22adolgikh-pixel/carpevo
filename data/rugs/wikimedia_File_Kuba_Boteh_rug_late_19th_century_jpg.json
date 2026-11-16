@@ -223,5 +223,25 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_chk": {
+  "azcm_132": {
+   "inl": 4,
+   "v": "diff",
+   "at": 1794790837,
+   "ver": 2
+  },
+  "azcm_128": {
+   "inl": 0,
+   "v": "diff",
+   "at": 1794790838,
+   "ver": 2
+  },
+  "aic_226150": {
+   "inl": 42,
+   "v": "maybe",
+   "at": 1794790840,
+   "ver": 2
+  }
+ }
 }
