@@ -1639,6 +1639,31 @@ def t41_mesh_field_v1181(pg, ctx):
     assert F.get('curves') and abs(F['depth_pct'] - c0['depth_pct']) < 0.01, f'выбор линии не записался: {F}'
     a = U.urlopen(ctx['url'] + 'rugmesh/fieldrug.jpg?f=1').read(); assert a[:2] == b'\xff\xd8', 'выровненный по полю ковёр не построен'
     j = get('api/micro/next?n=12&k=field'); assert not [t for t in j['tasks'] if t['rid'] == 'fieldrug'], 'отвеченный ковёр вернулся в очередь'
+    # v11.84: части ковра (поле и ленты каймы) и перевод точки части в доли фото
+    pm = get('api/rugs/fieldrug/parts'); assert set(pm['boxes']) == {'field', 'top', 'bot', 'left', 'right'}, pm
+    for k in pm['boxes']:
+        a = U.urlopen(ctx['url'] + 'rugpart/fieldrug/%s.jpg' % k).read(); assert a[:2] == b'\xff\xd8', f'часть {k} не отдана'
+    fw, fh = pm['size']['field']; mp = get('api/rugs/fieldrug/part_map?part=field&b=0,0,%d,%d' % (fw, fh))
+    bx = mp['box']; exp = [180 / 700, 180 / 900, 340 / 700, 540 / 900]
+    assert all(abs(a - b) < 0.03 for a, b in zip(bx, exp)), f'поле в долях фото не там: {bx} ожидалось {exp}'
+    assert pm['size']['left'][0] > pm['size']['left'][1] * 3, f"левая лента не повёрнута вдоль: {pm['size']['left']}"
+    assert b'rugpart/fieldrug/field.jpg' in U.urlopen(ctx['url'] + 'rugparts/fieldrug').read(), 'страница частей'
+    # v11.84: «нет нужной» возвращает ковёр — линию можно поставить самому; четыре стороны отдельно
+    r3 = {**r2, 'id': 'fieldrug2', 'title': 'Field rug 2'}; cv2.imwrite(f'{D}/rug_img/fieldrug2.jpg', img)
+    _j.dump(r3, open(f'{D}/rugs/fieldrug2.json', 'w', encoding='utf-8'), ensure_ascii=False); time.sleep(1.5); get('api/rugs/fieldrug2/mesh')
+    post('api/micro/answer', {'type': 'field', 'rid': 'fieldrug2', 'a': 'none'})
+    assert [t for t in get('api/micro/next?n=12&k=field')['tasks'] if t['rid'] == 'fieldrug2'], '«нет нужной» не вернул ковёр в очередь'
+    pg.goto(ctx['url'] + 'm?k=field'); pg.wait_for_timeout(1500)
+    for _ in range(12):
+        if pg.evaluate("S.tasks[S.i]&&S.tasks[S.i].rid") == 'fieldrug2': break
+        pg.evaluate("S.i++;show()"); pg.wait_for_timeout(200)
+    pg.click('#fn'); pg.wait_for_selector('#ed', timeout=3000); pg.wait_for_timeout(600)
+    ei = pg.query_selector('#ei').bounding_box(); h = pg.query_selector('#ed .eh[data-k="top"]').bounding_box()
+    pg.mouse.move(h['x'] + h['width'] / 2, h['y'] + h['height'] / 2); pg.mouse.down(); pg.mouse.move(h['x'] + h['width'] / 2, ei['y'] + ei['height'] * 0.30, steps=5); pg.mouse.up()
+    pg.screenshot(path=os.path.join(OUT, 't41_field_edit.png')); pg.click('#eo'); pg.wait_for_timeout(1200)
+    F2 = (get('api/rugs/fieldrug2').get('layout') or {}).get('field') or {}
+    assert F2.get('src') == 'hand' and abs(F2['curves']['top'][0] / F2['h'] - 0.30) < 0.03 and abs(F2['curves']['bot'][0] / F2['h'] - 0.30) > 0.05, f'линия вручную не записалась: {F2.get("src")} {F2.get("curves", {}).get("top", [0])[0]}'
+    assert get('api/rugs/fieldrug2/parts')['size']['top'][1] > 200, 'части по ручной линии не построены'
     errors_ok(ctx, '/m поле v11.81')
 
 

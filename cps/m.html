@@ -240,12 +240,31 @@ function showField(t){document.documentElement.style.setProperty('--imh','58dvh'
     const P=k=>Array.from({length:m},(_,j)=>j).filter(j=>{const u=j/(m-1);return u>=lim[k][0]-.01&&u<=lim[k][1]+.01;}).map(j=>pt(k,j).map(v=>v.toFixed(1)).join(',')).join(' ');const sw=Math.max(W,H)/220;   // рамка, а не крест
     return ['top','bot','left','right'].map(k=>`<polyline points="${P(k)}" fill="none" stroke="${FC[i]}" stroke-width="${sw}" opacity=".95"/>`).join('')+
       `<text x="${c.d+sw*2}" y="${c.d+sw*9}" font-size="${sw*9}" fill="${FC[i]}" stroke="#000" stroke-width="${sw*.6}" paint-order="stroke" font-weight="700">${i+1}</text>`;};
-  $('main').innerHTML=`${qhead(n?'Какая линия — граница поля?':'Граница поля не найдена','Поле — середина ковра, кайма — полосы вокруг. Выберите линию, где кончается кайма и начинается поле (самая внутренняя линия каймы). Края ковра уже прижаты к рамке картинки: если края ковра на картинке испорчены (волна, обрезан кусок узора) — «края испорчены». По выбранной линии поле выровняется параллельно краям; ответы учат машину.')}
+  $('main').innerHTML=`${qhead(n?'Какая линия — граница поля?':'Граница поля не найдена','Поле — середина ковра, кайма — полосы вокруг. Выберите линию, где кончается кайма и начинается поле (самая внутренняя линия каймы). Если ни одна не подходит или одна сторона мимо — «поставить самому»: четыре стороны двигаются пальцем по отдельности. Края ковра уже прижаты к рамке картинки: если края ковра на картинке испорчены (волна, обрезан кусок узора) — «края испорчены». По выбранной линии поле выровняется параллельно краям; ответы учат машину.')}
    <div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="/rugmesh/${encodeURIComponent(t.rid)}.jpg" alt=""><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">${t.cands.map(line).join('')}</svg></div></div>
    <div class="btns">${t.cands.map((c,i)=>`<button class="yes" id="f${i}" style="background:${FC[i]};color:#111">${i+1}</button>`).join('')}
-     <button id="fn">нет нужной</button><button id="fz">нет каймы</button><button class="no" id="fe">края испорчены</button><button class="sm unk" id="fs">пропустить</button></div>`;
+     <button id="fn">поставить самому</button><button id="fz">нет каймы</button><button class="no" id="fe">края испорчены</button><button class="sm unk" id="fs">пропустить</button></div>`;
   qtip();zoomable();t.cands.forEach((c,i)=>$('f'+i).onclick=()=>answer(t,String(i)));
-  $('fn').onclick=()=>answer(t,'none');$('fz').onclick=()=>answer(t,'nofield');$('fe').onclick=()=>answer(t,'edges');$('fs').onclick=()=>answer(t,'skip');}
+  $('fn').onclick=()=>fieldEdit(t);$('fz').onclick=()=>answer(t,'nofield');$('fe').onclick=()=>answer(t,'edges');$('fs').onclick=()=>answer(t,'skip');}
+// v11.84: границу поля ставит человек — четыре стороны рамки двигаются по отдельности (кайма бывает разной ширины сверху и снизу)
+function fieldEdit(t){const W=t.mw,H=t.mh,c=t.cands.length?t.cands[t.cands.length-1]:null,av=a=>a.reduce((x,y)=>x+y,0)/a.length;
+  let D=c?{top:av(c.curves.top)/H,bot:av(c.curves.bot)/H,left:av(c.curves.left)/W,right:av(c.curves.right)/W}:{top:.15*Math.min(W,H)/H,bot:.15*Math.min(W,H)/H,left:.15*Math.min(W,H)/W,right:.15*Math.min(W,H)/W};
+  const ed=document.createElement('div');ed.id='ed';
+  ed.innerHTML=`<div class="et">Подвиньте каждую сторону рамки на границу поля и каймы: тяните за жёлтую линию или кружок.</div><div class="ew"><div class="ei" id="ei"><img src="/rugmesh/${encodeURIComponent(t.rid)}.jpg" alt=""><div class="eb" id="eb" style="box-shadow:0 0 0 1px #000"></div>${['top','bot','left','right'].map(k=>`<div class="eh" data-k="${k}"></div>`).join('')}</div></div>
+    <div class="er"><button class="no" id="ec">отмена</button><button class="yes" id="eo">готово</button></div>`;
+  document.body.appendChild(ed);const ei=$('ei'),eb=$('eb'),hs=[...ed.querySelectorAll('.eh')];
+  const draw=()=>{eb.style.left=D.left*100+'%';eb.style.top=D.top*100+'%';eb.style.width=(1-D.left-D.right)*100+'%';eb.style.height=(1-D.top-D.bot)*100+'%';
+    const mx=(D.left+1-D.right)/2,my=(D.top+1-D.bot)/2,P={top:[mx,D.top],bot:[mx,1-D.bot],left:[D.left,my],right:[1-D.right,my]};
+    hs.forEach(h=>{h.style.left=P[h.dataset.k][0]*100+'%';h.style.top=P[h.dataset.k][1]*100+'%';});};
+  draw();let k=null;
+  const pos=ev=>{const r=ei.getBoundingClientRect();return [(ev.clientX-r.left)/r.width,(ev.clientY-r.top)/r.height];};
+  ed.addEventListener('pointerdown',ev=>{if(ev.target.closest('.er'))return;const p=pos(ev);   // ближайшая сторона
+    const d={top:Math.abs(p[1]-D.top),bot:Math.abs(p[1]-(1-D.bot)),left:Math.abs(p[0]-D.left),right:Math.abs(p[0]-(1-D.right))};k=Object.keys(d).sort((a,b)=>d[a]-d[b])[0];ev.preventDefault();});
+  ed.addEventListener('pointermove',ev=>{if(!k)return;const p=pos(ev),cl=v=>Math.min(.47,Math.max(.012,v));
+    if(k==='top')D.top=cl(p[1]);else if(k==='bot')D.bot=cl(1-p[1]);else if(k==='left')D.left=cl(p[0]);else D.right=cl(1-p[0]);draw();});
+  ['pointerup','pointercancel'].forEach(e=>ed.addEventListener(e,()=>k=null));
+  $('ec').onclick=()=>ed.remove();
+  $('eo').onclick=()=>{ed.remove();answer(t,'draw',null,{d:Object.fromEntries(Object.entries(D).map(([a,v])=>[a,Math.round(v*1e4)/1e4]))});};}
 // «развороты»: на фото несколько ковров; показываем, как машина предлагает разрезать
 const PC=['#ffe066','#6cb6ff','#3ecf8e','#ff8fd0','#ffa94d','#b39dff'];
 function showSplit(t){document.documentElement.style.setProperty('--imh','50dvh');

@@ -115,6 +115,7 @@ def coons_warp(canvas, geo, curves):
                 - ((1 - U) * (1 - V) * c00 + U * (1 - V) * c10 + (1 - U) * V * c01 + U * V * c11))
     X = blend(None, None, None, None, px, px + W, px, px + W, Tx, Bx, Lx, Rx)
     Y = blend(None, None, None, None, py, py, py + H, py + H, Ty, By, Ly, Ry)
+    if canvas is None: return X.astype(np.float32), Y.astype(np.float32)          # v11.84: только карты (точка ровного ковра → точка полотна)
     return cv2.remap(canvas, X.astype(np.float32), Y.astype(np.float32), cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
 
 
@@ -156,10 +157,11 @@ def field_curves(rect, nst=64, search=0.035, taper=0.08):
     return out
 
 
-def field_warp(rect, fc):
+def field_warp(rect, fc, maps=False):
     """внутренняя рамка → прямоугольник: у каждой стороны линия поля становится прямой на своём среднем расстоянии от края;
     смещение плавно гаснет к краю ковра и (противоположными сторонами) в глубине поля"""
-    H, W = rect.shape[:2]; nst = len(fc["top"]); tt = np.linspace(0, 1, nst)
+    H, W = rect.shape[:2] if hasattr(rect, "shape") else rect; nst = len(fc["top"]); tt = np.linspace(0, 1, nst)
+    fc = {k: np.asarray(x, float) for k, x in fc.items()}
     u = (np.arange(W) + 0.5) / W; v = (np.arange(H) + 0.5) / H
     med = {k: float(np.median(x)) for k, x in fc.items()}
     et = np.interp(u, tt, fc["top"] - med["top"]); eb = np.interp(u, tt, fc["bot"] - med["bot"])
@@ -173,6 +175,7 @@ def field_warp(rect, fc):
     al = prof(x, med["left"], med["right"], W); ar = prof(W - 1 - x, med["right"], med["left"], W)
     Y = y[:, None] + at[:, None] * et[None, :] - ab[:, None] * eb[None, :]
     X = x[None, :] + al[None, :] * el[:, None] - ar[None, :] * er[:, None]
+    if maps: return X.astype(np.float32), Y.astype(np.float32), med
     return cv2.remap(rect, X.astype(np.float32), Y.astype(np.float32), cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE), med
 
 
@@ -298,3 +301,64 @@ def field_cands(rect, k=3, lo=0.04, hi=0.38, nst=48, wob_pct=0.012, cont=20, rel
             cur[sd] = [round(float(x), 1) for x in m + (v - m) * w]       # у углов линия идёт к своему среднему (углы рамки прямые)
         out.append({"depth": int(ds[j0]), "depth_pct": round(float(ds[j0]) / sh * 100, 1), "p": round(float(P[j0] / P.max()), 2), "curves": cur})
     return out
+
+
+# ---------- v11.84: разрезка ковра на материалы — поле и четыре ленты каймы ----------
+# После mesh_rectify (края ровные) и field_warp (граница поля — прямые на своей глубине у каждой стороны) ковёр режется на части:
+#   field — поле (ровный прямоугольник); top / bot / left / right — ленты каймы. Ленты повёрнуты так, что внешний край ковра сверху,
+#   а узор идёт слева направо: в ленте каймы узор повторяется вдоль неё с постоянным шагом — так его и искать.
+#   Углы каймы входят в ленты top и bot (они во всю ширину ковра), left и right — только между ними.
+# Каймы НЕ растягиваются до одинаковой ширины (это исказило бы узор) — у каждой ленты своя высота.
+PARTS = ("field", "top", "bot", "left", "right")
+
+
+def part_boxes(W, H, med):
+    """→ {часть: (x, y, w, h)} в пикселях ковра после field_warp; med — глубина границы поля по сторонам"""
+    t, b, l, r = [int(round(med[k])) for k in ("top", "bot", "left", "right")]
+    t, b = max(2, min(t, H // 2 - 2)), max(2, min(b, H // 2 - 2)); l, r = max(2, min(l, W // 2 - 2)), max(2, min(r, W // 2 - 2))
+    return {"field": (l, t, W - l - r, H - t - b), "top": (0, 0, W, t), "bot": (0, H - b, W, b), "left": (0, t, l, H - t - b), "right": (W - r, t, r, H - t - b)}
+
+
+_ROT = {"field": None, "top": None, "bot": cv2.ROTATE_180, "left": cv2.ROTATE_90_CLOCKWISE, "right": cv2.ROTATE_90_COUNTERCLOCKWISE}
+
+
+def cut_parts(mesh_img, fc):
+    """mesh_img — ковёр с ровными краями, fc — граница поля (кривые по сторонам, px). → ({часть: картинка}, {часть: (x,y,w,h)}, med)"""
+    out, med = field_warp(mesh_img, fc); H, W = out.shape[:2]; B = part_boxes(W, H, med); P = {}
+    for k, (x, y, w, h) in B.items():
+        c = out[y:y + h, x:x + w]; P[k] = np.ascontiguousarray(c if _ROT[k] is None else cv2.rotate(c, _ROT[k]))
+    return P, B, med
+
+
+def part_to_mesh(part, pts, box):
+    """точки части (px картинки части) → точки ковра после field_warp (px)"""
+    x, y, w, h = box; out = []
+    for px_, py_ in pts:
+        if part == "bot": u, v = w - px_, h - py_
+        elif part == "left": u, v = py_, h - px_                  # ROTATE_90_CLOCKWISE: (u, v) → (h - v, u)
+        elif part == "right": u, v = w - py_, px_                 # ROTATE_90_COUNTERCLOCKWISE: (u, v) → (v, w - u)
+        else: u, v = px_, py_
+        out.append((x + u, y + v))
+    return out
+
+
+def _lookup(X, Y, pts):
+    H, W = X.shape; out = []
+    for x, y in pts:
+        m = np.float32([[min(max(x, 0), W - 1)]]), np.float32([[min(max(y, 0), H - 1)]])
+        out.append((float(cv2.remap(X, m[0], m[1], cv2.INTER_LINEAR)[0, 0]), float(cv2.remap(Y, m[0], m[1], cv2.INTER_LINEAR)[0, 0])))
+    return out
+
+
+def to_photo(part, pts, box, fc, geo, edge, quad):
+    """точки части → доли исходного фото. Цепочка: часть → ковёр после выравнивания поля → ковёр с ровными краями (карта field_warp)
+    → полотно с запасом (карта coons_warp) → фото (обратная перспектива по 4 углам). geo, edge — из mesh_rectify, quad — углы (доли фото)."""
+    W, H = geo["W"], geo["H"]
+    p = part_to_mesh(part, pts, box)
+    if fc is not None:
+        X, Y, _ = field_warp((H, W), fc, maps=True); p = _lookup(X, Y, p)
+    X, Y = coons_warp(None, geo, {k: np.asarray(v, float) for k, v in edge.items()}); p = _lookup(X, Y, p)
+    px, py = geo["px"], geo["py"]
+    T = cv2.getPerspectiveTransform(np.float32([[px, py], [px + W, py], [px + W, py + H], [px, py + H]]), np.float32(quad))
+    q = cv2.perspectiveTransform(np.float32(p).reshape(-1, 1, 2), T).reshape(-1, 2)
+    return [[round(float(a), 5), round(float(b), 5)] for a, b in q]

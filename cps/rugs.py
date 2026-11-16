@@ -7,7 +7,7 @@
 import os, re, json, time, threading, io, urllib.request, urllib.parse, hashlib
 import cv2, numpy as np
 from fastapi import Request, UploadFile, File, Body, Query
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from starlette.concurrency import run_in_threadpool
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -1337,7 +1337,7 @@ def install(app, DATA, D_WORK):
     # Человек в /m (вид «поле») выбирает верную линию или отвечает «нет нужной» / «края испорчены». По выбранной линии поле выравнивается
     # параллельно краям (rug_mesh.field_warp) — rug_mesh/<id>.f.jpg. Рабочей картинкой (редактор, рамки) пока остаётся простое выпрямление:
     # сетку ещё надо научиться переводить в доли фото (рамки). Ответы — в micro.jsonl (type "field") для обучения выбора линии.
-    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 2     # v11.83: глубина линии поля своя у каждой стороны
+    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 3     # v11.83: глубина линии поля своя у каждой стороны; v11.84: в .json — geo и кривые краёв (для перевода точек в фото)
     mesh_st = {"running": False, "done": 0, "total": 0, "err": "", "t": 0}
 
     def mesh_info(rid, r=None, build=False):
@@ -1360,9 +1360,10 @@ def install(app, DATA, D_WORK):
         os.makedirs(D_MESH, exist_ok=True)
         tmp = os.path.join(D_MESH, "%s.%d.tmp.jpg" % (rid, threading.get_ident())); cv2.imwrite(tmp, img, [cv2.IMWRITE_JPEG_QUALITY, 88]); os.replace(tmp, os.path.join(D_MESH, rid + ".jpg"))
         m = {"v": MESH_VER, "quad": [[float(u), float(v)] for u, v in q], "w": int(img.shape[1]), "h": int(img.shape[0]),
-             "edge_pct": {k: round(v, 2) for k, v in info["range_pct"].items()}, "cands": cands, "t": int(time.time())}
+             "edge_pct": {k: round(v, 2) for k, v in info["range_pct"].items()}, "cands": cands, "t": int(time.time()),
+             "geo": info["geo"], "edge": {k: [round(float(x), 2) for x in v] for k, v in info["curves"].items()}}
         tj = pj + ".%d.tmp" % threading.get_ident(); json.dump(m, open(tj, "w")); os.replace(tj, pj)
-        for f in (os.path.join(D_MESH, rid + ".f.jpg"), os.path.join(D_TH, rid + ".mm.jpg")):
+        for f in [os.path.join(D_MESH, rid + ".f.jpg"), os.path.join(D_TH, rid + ".mm.jpg")] + [os.path.join(D_MESH, "%s.p.%s.jpg" % (rid, k)) for k in ("field", "top", "bot", "left", "right")]:
             try: os.remove(f)
             except OSError: pass
         return m
@@ -1379,6 +1380,60 @@ def install(app, DATA, D_WORK):
         if a is None: return None
         out, _ = heavy(lambda: rug_mesh.field_warp(a, {k: np.array(v, float) for k, v in F["curves"].items()}), "поле")
         cv2.imwrite(p, out, [cv2.IMWRITE_JPEG_QUALITY, 88]); return p
+
+    # ---- v11.84: части ковра — поле и четыре ленты каймы (rug_mesh.cut_parts) ----
+    def rug_parts(rid, r=None):
+        """→ {"boxes": {часть: [x,y,w,h]}, "med": …, "w","h"} и файлы rug_mesh/<id>.p.<часть>.jpg; None — нет сетки или границы поля"""
+        rid = os.path.basename(rid); r = r or load(rid); F = ((r or {}).get("layout") or {}).get("field") or {}
+        m = mesh_info(rid, r)
+        if not m or not F.get("curves"): return None
+        import rug_mesh
+        pj = os.path.join(D_MESH, rid + ".p.json"); src = os.path.join(D_MESH, rid + ".jpg")
+        try:
+            pm = json.load(open(pj))
+            if pm.get("ft") == F.get("t") and pm.get("mt") == m.get("t") and all(os.path.exists(os.path.join(D_MESH, "%s.p.%s.jpg" % (rid, k))) for k in rug_mesh.PARTS): return pm
+        except Exception: pass
+        a = cv2.imread(src)
+        if a is None: return None
+        P, B, med = heavy(lambda: rug_mesh.cut_parts(a, F["curves"]), "части ковра")
+        for k, im in P.items(): cv2.imwrite(os.path.join(D_MESH, "%s.p.%s.jpg" % (rid, k)), im, [cv2.IMWRITE_JPEG_QUALITY, 90])
+        pm = {"boxes": {k: [int(x) for x in v] for k, v in B.items()}, "med": med, "w": m["w"], "h": m["h"], "ft": F.get("t"), "mt": m.get("t"),
+              "size": {k: [int(im.shape[1]), int(im.shape[0])] for k, im in P.items()}}
+        json.dump(pm, open(pj, "w")); return pm
+
+    @app.get("/api/rugs/{rid}/parts")
+    def api_rug_parts(rid: str):
+        pm = rug_parts(rid)
+        if not pm: return JSONResponse({"error": "нужны подтверждённые углы и выбранная граница поля (/m, вид «поле»)"}, 400)
+        return {**pm, "img": {k: "/rugpart/%s/%s.jpg" % (rid, k) for k in pm["boxes"]}}
+
+    @app.get("/rugpart/{rid}/{part}.jpg")
+    def rug_part_img(rid: str, part: str):
+        rid = os.path.basename(rid)
+        if part not in ("field", "top", "bot", "left", "right") or not rug_parts(rid): return Response(status_code=404)
+        return FileResponse(os.path.join(D_MESH, "%s.p.%s.jpg" % (rid, part)), headers={"Cache-Control": "no-cache"})
+
+    @app.get("/api/rugs/{rid}/part_map")
+    def api_part_map(rid: str, part: str, b: str):
+        """рамка на части (x,y,w,h в пикселях картинки части) → четырёхугольник и рамка в долях исходного фото"""
+        r = load(rid); pm = rug_parts(rid, r); m = mesh_info(rid, r) if pm else None
+        if not pm or part not in pm["boxes"]: return JSONResponse({"error": "нет частей"}, 400)
+        try: x, y, w, h = [float(v) for v in b.split(",")]
+        except Exception: return JSONResponse({"error": "b=x,y,w,h"}, 400)
+        import rug_mesh
+        q = rug_mesh.to_photo(part, [(x, y), (x + w, y), (x + w, y + h), (x, y + h)], pm["boxes"][part], r["layout"]["field"]["curves"], m["geo"], m["edge"], m["quad"])
+        xs, ys = [p[0] for p in q], [p[1] for p in q]
+        return {"quad": q, "box": [round(min(xs), 5), round(min(ys), 5), round(max(xs) - min(xs), 5), round(max(ys) - min(ys), 5)]}
+
+    @app.get("/rugparts/{rid}")
+    def rug_parts_page(rid: str):
+        """простая страница: поле и ленты каймы одного ковра"""
+        import html as _h
+        rid = os.path.basename(rid); pm = rug_parts(rid); e = _h.escape(rid)
+        if not pm: return HTMLResponse("<p style='font:16px sans-serif'>Нужны подтверждённые углы и выбранная граница поля (/m, вид «поле»).</p>", 404)
+        im = lambda k, st: "<h3>%s</h3><img src='/rugpart/%s/%s.jpg' style='%s'>" % ({"field": "Поле", "top": "Кайма: верх", "bot": "Кайма: низ (повёрнута)", "left": "Кайма: левая (повёрнута)", "right": "Кайма: правая (повёрнута)"}[k], e, k, st)
+        return HTMLResponse("<meta charset='utf-8'><meta name='viewport' content='width=device-width'><body style='background:#16171b;color:#eee;font:14px sans-serif;padding:12px'><h2>%s — части</h2>%s%s<p style='color:#999'>Ленты каймы повёрнуты: внешний край ковра сверху, узор идёт слева направо.</p></body>" % (
+            e, "".join(im(k, "max-width:100%;display:block") for k in ("top", "bot", "left", "right")), im("field", "max-width:100%;max-height:90vh;display:block")))
 
     def mesh_all():
         """фон: подготовить сетку и кандидатов поля для ковров с углами, у которых поле ещё не отвечено"""
@@ -2181,7 +2236,8 @@ def install(app, DATA, D_WORK):
             und = (c.get("v") == "maybe") if (c.get("ver") or 1) >= 2 else not ((x.get("score") or 0) >= 60 or x.get("inv"))
             if und:                                                              # машина не уверена — спросить человека
                 sm.append(o); sev[o] = {"sc": x.get("score") or 0, "inv": bool(x.get("inv")), "inl": c.get("inl")}
-        row.update(fld=bool((r.get("layout") or {}).get("field")), fv=list(((r.get("micro") or {}).get("field") or {}).keys()), sd=[o for o, v in ok_.items() if v is not None], sy=[o for o, v in ok_.items() if v and v.get("ok")], sev=sev,
+        row.update(fld=bool((r.get("layout") or {}).get("field")) and ((r.get("layout") or {}).get("field") or {}).get("none") != "none",   # v11.84: «нет нужной» возвращается — линию можно поставить самому
+                   fv=[u for u, v in ((r.get("micro") or {}).get("field") or {}).items() if v != "none"], sd=[o for o, v in ok_.items() if v is not None], sy=[o for o, v in ok_.items() if v and v.get("ok")], sev=sev,
                    size=r.get("size") or (r.get("cat") or {}).get("size") or "", dead=dead, mp=(r.get("multi") or []) if not (r.get("dup_of") or r.get("hidden") or r.get("split_into")) else [], mk=mk, comp=r.get("composition") if r.get("composition") in BYID else "", cg=cg, sm=sm,
                    nn=list(r.get("name_none") or []), src=(r.get("cat") or {}).get("src", ""),
                    mv={t: {key: list((d or {}).keys()) for key, d in (m.get(t) or {}).items()} for t in MORE})
@@ -2656,7 +2712,7 @@ def install(app, DATA, D_WORK):
     def _field_answer(me, role, rid, a, body, rec):
         """a: "0".."2" — номер кандидата; "none" — верной линии нет; "nofield" — у ковра нет каймы/поля; "edges" — края испорчены; "skip" """
         if a == "skip": _mlog(rec); return {"ok": True}
-        if a not in ("0", "1", "2", "none", "nofield", "edges"): return JSONResponse({"error": "ответ?"}, status_code=400)
+        if a not in ("0", "1", "2", "none", "nofield", "edges", "draw"): return JSONResponse({"error": "ответ?"}, status_code=400)
         m = mesh_info(rid)
         if not m: return JSONResponse({"error": "сетка не построена"}, status_code=400)
         rec["cands"] = [c["depth_pct"] for c in m["cands"]]
@@ -2669,6 +2725,14 @@ def install(app, DATA, D_WORK):
                 if k >= len(m["cands"]): return JSONResponse({"error": "нет такой линии"}, status_code=400)
                 c = m["cands"][k]
                 L["field"] = {"depth_pct": c["depth_pct"], "curves": c["curves"], "w": m["w"], "h": m["h"], "by": me, "t": int(time.time()), "src": "cand%d" % k}
+            elif a == "draw":                                                    # v11.84: границу поля человек поставил сам — четыре стороны, каждая отдельно (доли ширины/высоты)
+                try: d = {k: float((body.get("d") or {})[k]) for k in ("top", "bot", "left", "right")}
+                except Exception: return JSONResponse({"error": "d?"}, status_code=400)
+                if not all(0.01 <= v <= 0.48 for v in d.values()): return JSONResponse({"error": "линия вне ковра"}, status_code=400)
+                px = {"top": d["top"] * m["h"], "bot": d["bot"] * m["h"], "left": d["left"] * m["w"], "right": d["right"] * m["w"]}
+                L["field"] = {"depth_pct": round(100 * min(px.values()) / min(m["w"], m["h"]), 1), "curves": {k: [round(v, 1)] * 48 for k, v in px.items()}, "w": m["w"], "h": m["h"],
+                              "by": me, "t": int(time.time()), "src": "hand"}
+                rec["d"] = d
             elif a == "edges": L["mesh_bad"] = {"by": me, "t": int(time.time())}; L["field"] = {"none": "edges", "by": me, "t": int(time.time())}
             else: L["field"] = {"none": a, "by": me, "t": int(time.time())}
             save(r)
