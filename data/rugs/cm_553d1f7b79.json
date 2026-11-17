@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870014,
- "updated": 1791997199,
+ "updated": 1794935373,
  "cat": {
   "title": "This photo has been taken in the country: Azerbaijan",
   "museum": "",
@@ -93,7 +93,82 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238387
+  "t": 1794238387,
+  "ref_quad": {
+   "quad": [
+    [
+     0.08,
+     0.03125
+    ],
+    [
+     0.87237,
+     0.02445
+    ],
+    [
+     0.90352,
+     0.98279
+    ],
+    [
+     0.09111,
+     0.97146
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1794935368
+  }
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794935346
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794935373,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08,
+    0.03125
+   ],
+   [
+    0.87237,
+    0.02445
+   ],
+   [
+    0.90352,
+    0.98279
+   ],
+   [
+    0.09111,
+    0.97146
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

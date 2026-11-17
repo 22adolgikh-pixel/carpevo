@@ -18,7 +18,7 @@
  "h": 900,
  "marks": [],
  "created": 1791736127,
- "updated": 1794750564,
+ "updated": 1794935342,
  "cat": {
   "title": "Carpet",
   "museum": "Кливлендский музей искусств",
@@ -113,8 +113,49 @@
     "w": 2,
     "t": 1794750564
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794935342,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02233,
+    0.03502
+   ],
+   [
+    0.9606,
+    0.05048
+   ],
+   [
+    0.9774,
+    0.96408
+   ],
+   [
+    0.00905,
+    0.93904
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
