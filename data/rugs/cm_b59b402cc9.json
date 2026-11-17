@@ -262,7 +262,7 @@
   }
  ],
  "created": 1791870022,
- "updated": 1794589068,
+ "updated": 1794929904,
  "cat": {
   "title": "Eagle carpet, 20th century, Arpi village",
   "museum": "",
@@ -328,7 +328,38 @@
   }
  },
  "_lib_t": "2026-10-12 22:38",
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.16196,
+    0.0867
+   ],
+   [
+    0.84962,
+    0.07949
+   ],
+   [
+    0.85868,
+    0.91335
+   ],
+   [
+    0.15351,
+    0.90606
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "from_twin": {
   "school": "azcm_51",
@@ -394,7 +425,30 @@
   "conf": 0.946,
   "area": 0.577,
   "ver": 1,
-  "t": 1794238366
+  "t": 1794238366,
+  "ref_quad": {
+   "quad": [
+    [
+     0.16196,
+     0.0867
+    ],
+    [
+     0.84962,
+     0.07949
+    ],
+    [
+     0.85868,
+     0.91335
+    ],
+    [
+     0.15351,
+     0.90606
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1794929902
+  }
  },
  "multi": [],
  "micro": {
@@ -462,6 +516,24 @@
      "t": 1794589068
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794929880
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794929904,
+    "s": "ref"
+   }
   }
- }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "tri": "micro"
 }

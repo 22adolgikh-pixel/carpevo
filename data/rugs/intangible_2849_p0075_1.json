@@ -3614,7 +3614,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c01e326874_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.656,
@@ -3750,7 +3750,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c7ae326874_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.696,
@@ -3822,7 +3822,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c7ae326874_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.696,
@@ -3914,7 +3914,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c7ae326874_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.696,
@@ -3986,7 +3986,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c7ae326874_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.69,
@@ -4054,7 +4054,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c7ae326874_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.686,
@@ -4151,10 +4151,10 @@
   {
    "id": "m6afa2c7ae326874_9",
    "box": [
-    0.43226,
-    0.67188,
-    0.03484,
-    0.03223
+    0.32458,
+    0.63049,
+    0.1511,
+    0.06003
    ],
    "zone": "other",
    "motif": "deve",
@@ -4162,7 +4162,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2c7ae326874_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.658,
@@ -4214,7 +4214,11 @@
      0.68066
     ]
    ],
-   "sam": 0.803
+   "sam": 0.803,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794929948,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794929948
   },
   {
    "id": "m6afa2d3ae302014_5",
@@ -5334,7 +5338,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794929762,
+ "updated": 1794929948,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -5586,6 +5590,55 @@
      "a": "ok",
      "w": 2,
      "t": 1794929762
+    }
+   },
+   "m6afa2c01e326874_11": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794929883
+    }
+   },
+   "m6afa2c7ae326874_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794929948
+    }
+   },
+   "m6afa2c7ae326874_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794929948
+    }
+   },
+   "m6afa2c7ae326874_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794929948
+    }
+   },
+   "m6afa2c7ae326874_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794929948
+    }
+   },
+   "m6afa2c7ae326874_6": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794929948
+    }
+   },
+   "m6afa2c7ae326874_9": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794929948
     }
    }
   }
