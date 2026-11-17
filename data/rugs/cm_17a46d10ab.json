@@ -18,7 +18,7 @@
  "h": 2100,
  "marks": [],
  "created": 1791870016,
- "updated": 1791997195,
+ "updated": 1794929651,
  "cat": {
   "title": "Azerbaijanian Gabala Carpet",
   "museum": "",
@@ -103,7 +103,82 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238595
+  "t": 1794238595,
+  "ref_quad": {
+   "quad": [
+    [
+     -0.00377,
+     0.00133
+    ],
+    [
+     0.9959,
+     0.00184
+    ],
+    [
+     0.99783,
+     0.99937
+    ],
+    [
+     -0.00334,
+     0.9984
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1794929648
+  }
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794929623
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794929651,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00377,
+    0.00133
+   ],
+   [
+    0.9959,
+    0.00184
+   ],
+   [
+    0.99783,
+    0.99937
+   ],
+   [
+    -0.00334,
+    0.9984
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

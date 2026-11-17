@@ -18,7 +18,7 @@
  "h": 755,
  "marks": [],
  "created": 1791736135,
- "updated": 1794596857,
+ "updated": 1794929507,
  "cat": {
   "title": "kuba seychour5",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794596857
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794929507,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03666,
+    0.04255
+   ],
+   [
+    0.93845,
+    0.0642
+   ],
+   [
+    0.92429,
+    0.96043
+   ],
+   [
+    0.07816,
+    0.97022
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
