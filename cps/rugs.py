@@ -6,6 +6,7 @@
 # кто отметил и кто подтвердил. Повторы одного элемента — метки с одинаковой group.
 import os, re, json, time, threading, io, urllib.request, urllib.parse, hashlib
 import cv2, numpy as np
+import twins
 from fastapi import Request, UploadFile, File, Body, Query
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from starlette.concurrency import run_in_threadpool
@@ -2230,7 +2231,8 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field")
+    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw")
+    KINDS_OFF = ("same", "rsame")             # v11.86: пары по одной заменены карточкой «двойники ковра» (tw); старые виды — только по выбору
 
     # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
     # ответы лежат отдельно от ковров, в DATA/concept_dups_votes.json; решение (вес ≥2) читает /api/concept_dups, слияние делается в модели вручную.
@@ -3090,7 +3092,7 @@ def install(app, DATA, D_WORK):
             wait = [x for x in qd if not x["vquad"]]; _vlm_enqueue([x["id"] for x in wait[:18]])
             if not _vq["err"] and time.time() >= _vq["off"] and _vq["done"] < VLM_MAX:
                 n_wait = len(wait); qd = [x for x in qd if x["vquad"]]
-        want = [x for x in KINDS if x in k.split(",")] or list(KINDS)             # v11.52: какие виды карточек показывать (кнопки вверху /m)
+        want = [x for x in KINDS if x in k.split(",")] or [x for x in KINDS if x not in KINDS_OFF]   # v11.52: какие виды карточек показывать (кнопки вверху /m)
         by = {x["id"]: x for x in rows}
         more = _more_queues(me, rows, by, want)
         Q = {"quad": [_ref_task(x) for x in qd[:n]],
@@ -3099,6 +3101,7 @@ def install(app, DATA, D_WORK):
         xsq = _xs_queue(me, rows) if "xsame" in want else []; Q["xsame"] = xsq[:n]
         rsq = _rsame_queue(me, by) if "rsame" in want else []; Q["rsame"] = rsq[:n]
         fdq = _field_queue(me, rows) if "field" in want else []; Q["field"] = fdq[:n]
+        twq = _tw_queue(me, by) if "tw" in want else []; Q["tw"] = twq[:n]
         tasks = []; order = [t for t in want if Q[t]]
         while len(tasks) < n and order:                                           # по кругу: по одной карточке каждого вида
             for t in list(order):
@@ -3118,8 +3121,10 @@ def install(app, DATA, D_WORK):
         by = {x["id"]: x for x in rows}
         for t in tasks:
             if t["type"] == "cdup": continue                                     # карточка о словах: ковра у неё нет
+            if t["type"] == "tw":
+                for it in t["items"]: it.update(w=by[it["id"]]["w"], h=by[it["id"]]["h"])
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "name_wait": more["name_wait"]},
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "tw": len(twq), "name_wait": more["name_wait"]},
                 "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver(), "rs": {k: rpr[k] for k in ("running", "done", "total", "found", "t", "err")}, "ms": dict(mesh_st)}
 
     @app.post("/api/micro/answer")
@@ -3138,6 +3143,7 @@ def install(app, DATA, D_WORK):
         if typ == "cdup": return _cdup_answer(me, role, a, body, rec)
         if typ == "xsame": return _xs_answer(me, role, a, body, rec)
         if typ == "field": return _field_answer(me, role, rid, a, body, rec)
+        if typ == "tw": return _tw_answer(me, role, rid, a, body, rec)
         if typ in MORE: return _micro_more(me, role, typ, rid, a, body, rec)
         if typ not in ("frame", "quad") or a == "skip":
             if a == "skip": _mlog(rec)
@@ -4004,6 +4010,256 @@ def install(app, DATA, D_WORK):
         return True
 
     app.state.dup_check_run = dup_check_run; app.state.dup_pairs = dup_pairs
+
+    # ---- v11.86: двойники быстрее (twins.py): кандидаты из разных источников → совмещение → авторешение по порогу с ответов людей → цепочки ----
+    F_TW = os.path.join(DATA, "twin_pairs.json"); F_TWS = os.path.join(DATA, "twin_state.json")
+    twins.MIN_SAME = int(os.environ.get("CPS_TW_MIN_SAME") or twins.MIN_SAME)     # тесты: на паре синтетических ковров
+    twr = {"running": False, "done": 0, "total": 0, "t": 0, "err": "", "stage": ""}
+    _twc = {"m": 0, "v": {}}
+
+    def tw_load():
+        try: m = os.path.getmtime(F_TW)
+        except OSError: return {}
+        if _twc["m"] != m:
+            try:
+                with open(F_TW, encoding="utf-8") as f: _twc["v"] = json.load(f)
+            except (OSError, ValueError): _twc["v"] = {}
+            _twc["m"] = m
+        return _twc["v"]
+
+    def tw_save(P):
+        tmp = F_TW + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f: json.dump(P, f)
+        os.replace(tmp, F_TW); _twc["m"] = 0
+
+    def tw_state():
+        try:
+            with open(F_TWS, encoding="utf-8") as f: return json.load(f)
+        except (OSError, ValueError): return {}
+
+    def tw_nn():
+        """соседи по отпечатку всего фото (Colab twin_embed_colab.py): DATA/twin_nn_v1.json, иначе models/twin_nn_v1.json → (nn, порог)"""
+        for p in (os.path.join(DATA, "twin_nn_v1.json"), os.path.join(HERE, "models", "twin_nn_v1.json")):
+            try:
+                with open(p, encoding="utf-8") as f: j = json.load(f)
+                return j.get("nn") or {}, float(j.get("thr") or 1.0)
+            except (OSError, ValueError): continue
+        return {}, 1.0
+
+    def tw_alive(r):
+        return bool(r) and not (r.get("dup_of") or r.get("hidden") or r.get("split_into") or r.get("multi")) and obj_guess(r)[0] == "carpet" \
+            and r.get("frame") not in ("not_rug",)
+
+    def tw_measure(a, b, ra, rb):
+        import rug_match
+        pa, pb = img_path(a), img_path(b)
+        A, B = (cv2.imread(pa) if pa else None), (cv2.imread(pb) if pb else None)
+        if A is None or B is None: return None
+        try: H, n = heavy(lambda: rug_match.align(A, B), "двойники")
+        except Exception: return {"n": 0, "cov": 0.0}
+        qa, qb = ((ra.get("layout") or {}).get("quad") or None), ((rb.get("layout") or {}).get("quad") or None)
+        return {"n": int(n), "cov": round(rug_match.quad_iou(H, qa, qb), 3)}
+
+    def tw_rows(R, P):
+        """ответы людей с измерениями — для порога"""
+        rows = []
+        for k, v in P.items():
+            if "n" not in v: continue
+            a, b = k.split("~", 1)
+            if a not in R or b not in R: continue
+            d = (R[a].get("same_ok") or {}).get(b)
+            if d is not None and twins.human(d): rows.append((v["n"], v.get("cov", 0), twins.decided(R[a], b), k))
+        return rows
+
+    def tw_apply(R, P, thr):
+        """над порогом: ставим «тот же» (кроме контрольных); затем цепочки. → (поставлено, цепочкой same, цепочкой diff, противоречий, больших групп)"""
+        n_auto = 0
+        if thr:
+            for k, v in P.items():
+                a, b = k.split("~", 1)
+                if a not in R or b not in R or twins.decided(R[a], b) is not None or not twins.over(v, thr): continue
+                br = R[a].get("composition"), R[b].get("composition")
+                if br[0] in BYID and br[1] in BYID and br[0] != br[1]: continue
+                if twins.is_ctl(k): v["ctl"] = 1; continue
+                same_set(a, b, True, False, f"машина: {v['n']} общих точек, перекрытие {v.get('cov', 0):.2f} (порог {thr['n']} / {thr['cov']})")
+                v["auto"] = int(time.time()); n_auto += 1
+                R[a], R[b] = load(a) or R[a], load(b) or R[b]
+        ns, nd, cf, big = twins.closure(R)
+        for a, b, g in ns:
+            same_set(a, b, True, False, "по цепочке: " + " = ".join(g[:6]) + (" …" if len(g) > 6 else ""))
+        for a, b, why in nd:
+            same_set(a, b, False, False, f"по цепочке: {why[0]} ≠ {why[1]}")
+        return n_auto, len(ns), len(nd), len(cf), len(big)
+
+    def twins_run(only_new=True):
+        if twr["running"]: return False
+        twr.update(running=True, done=0, total=0, err="", stage="ищу кандидатов")
+
+        def run():
+            try:
+                R = {}
+                for f in os.listdir(D_RUGS):
+                    if f.endswith(".json"):
+                        r = load(f[:-5])
+                        if tw_alive(r): R[r["id"]] = r
+                P = tw_load(); P = {k: dict(v) for k, v in P.items()}
+                nn, nthr = tw_nn(); C = twins.candidates(R, nn, lambda r: True, nthr)
+                todo = []
+                for k, why in C.items():
+                    v = P.setdefault(k, {}); v["why"] = sorted(set(v.get("why") or []) | why)
+                    if "n" not in v or v.get("ver") != twins.VER or not only_new: todo.append(k)
+                def prio(k):                                                    # сначала ответы людей (порог), затем каталог/номер/размер, затем соседи
+                    w = P[k]["why"]; return (0 if "calib" in w else 1 if ("inv" in w or "catalog" in w) else 2 if "size" in w else 3, k)
+                todo.sort(key=prio); twr.update(total=len(todo), stage="совмещаю фото пар")
+                for i, k in enumerate(todo):
+                    a, b = k.split("~", 1)
+                    m = tw_measure(a, b, R[a], R[b])
+                    if m is None: P[k].update(n=0, cov=0.0, noimg=1)
+                    else: P[k].update(m); P[k].pop("noimg", None)
+                    P[k].update(ver=twins.VER, t=int(time.time())); twr["done"] = i + 1
+                    if (i + 1) % 25 == 0: tw_save(P)
+                    time.sleep(0.02)
+                twr["stage"] = "порог и цепочки"
+                rk = tw_rows(R, P); rows = [x[:3] for x in rk]; thr = twins.calibrate(rows)
+                n_auto, n_cs, n_cd, n_cf, n_big = tw_apply(R, P, thr)
+                tw_save(P)
+                st = {"t": int(time.time()), "thr": thr, "rows": len(rows), "rows_same": sum(1 for *_, x in rows if x == "same"), "pairs": len(P),
+                      "auto": n_auto, "chain_same": n_cs, "chain_diff": n_cd, "conflicts": n_cf, "big_groups": n_big, "nn": bool(nn),
+                      "suspects": twins.suspects([(k, n, c, x) for n, c, x, k in rk])}
+                with open(F_TWS, "w", encoding="utf-8") as f: json.dump(st, f, ensure_ascii=False)
+                twr["t"] = st["t"]
+                try:
+                    import events
+                    events.add("Двойники: " + (f"поставлено машиной {n_auto}" if thr else "порог авторешения пока не найден") +
+                               f", по цепочке {n_cs + n_cd}", f"проверено пар {len(todo)}; порог: " + (f"≥{thr['n']} точек и перекрытие ≥{thr['cov']} (над ним {thr['same']} подтверждённых, «разные» — {thr['bad']})" if thr else
+                               f"на {len(rows)} ответах нет порога, где ошибок ≤1 % и подтверждённых ≥{twins.MIN_SAME}") + (f"; противоречий в цепочках: {n_cf}" if n_cf else ""),
+                               link={"to": "rugs-dup"})
+                except Exception: pass
+            except Exception as e:
+                twr["err"] = str(e)[:300]; print("twins:", e)
+            finally: twr.update(running=False, stage=""); _ty["t"] = 0
+        threading.Thread(target=run, daemon=True, name="twins").start()
+        return True
+
+    def _periodic_twins():
+        time.sleep(600)
+        while True:
+            try: twins_run()
+            except Exception as e: print("twins:", e)
+            time.sleep(6 * 3600)
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_twins, daemon=True, name="twins-periodic").start()
+
+    @app.get("/api/twins")
+    def api_twins():
+        P = tw_load(); st = tw_state()
+        meas = [v for v in P.values() if "n" in v]
+        return {"state": twr, "last": st, "pairs": len(P), "measured": len(meas),
+                "by_why": {w: sum(1 for v in P.values() if w in (v.get("why") or [])) for w in ("catalog", "size", "inv", "nn", "calib")},
+                "auto": sum(1 for v in P.values() if v.get("auto")), "ctl": sum(1 for v in P.values() if v.get("ctl")),
+                "ctl_answered": [v.get("ctl_ans") for v in P.values() if v.get("ctl") and v.get("ctl_ans")]}
+
+    @app.post("/api/twins_run")
+    async def api_twins_run(request: Request):
+        b = {}
+        try: b = await request.json()
+        except Exception: pass
+        twins_run(only_new=not b.get("all")); return {"state": twr}
+
+    @app.post("/api/twins_nn")
+    async def api_twins_nn(request: Request):
+        """загрузить соседей по отпечаткам из Colab (twin_nn_v1.json) — затем проход двойников"""
+        b = await request.json()
+        if not isinstance(b.get("nn"), dict): return JSONResponse({"error": "нужен файл twin_nn_v1.json (поле nn)"}, status_code=400)
+        with open(os.path.join(DATA, "twin_nn_v1.json"), "w", encoding="utf-8") as f: json.dump(b, f)
+        twins_run(); return {"ok": True, "n": len(b["nn"]), "state": twr}
+
+    def _tw_answer(me, role, rid, a, body, rec):
+        """v11.86: «двойники ковра»: same — отмеченные плитки (тот же ковёр), diff — остальные показанные; skip — «не знаю» на всю карточку.
+        Голоса пишутся туда же, где у прежней карточки пар (r.micro.same), решение — при весе ≥ 2."""
+        now = rec["t"]; skip = a == "skip"; w = 0 if skip else _wt(role)
+        ids = [os.path.basename(str(x)) for x in body.get("ids") or []]
+        yes = {os.path.basename(str(x)) for x in body.get("same") or []}
+        if not ids: return JSONResponse({"error": "нет кандидатов"}, status_code=400)
+        rec.update(same=sorted(yes), ids=ids); pairs = []; P = None; ctl = None
+        with _lock:
+            r = load(rid)
+            if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
+            M = r.setdefault("micro", {}).setdefault("same", {})
+            for o in ids:
+                v = "skip" if skip else ("same" if o in yes else "diff")
+                d = M.setdefault(o, {}); d[me] = {"a": v, "w": w, "t": now}
+                got = next((x for x in ("same", "diff") if sum(y["w"] for y in d.values() if y["a"] == x) >= 2), None)
+                if got: pairs.append((o, got, ", ".join(sorted(u for u, y in d.items() if y["a"] == got))))
+            r["updated"] = now; save(r)
+        if not skip:                                                            # контрольные пары (над порогом, но не поставлены): ответ человека — мерило авторешения
+            P0 = tw_load(); hit = [twins.key(rid, o) for o in ids if (P0.get(twins.key(rid, o)) or {}).get("ctl") and not P0[twins.key(rid, o)].get("ctl_ans")]
+            if hit:
+                P = {k: dict(v) for k, v in P0.items()}
+                for k in hit:
+                    o = k.split("~", 1)[1] if k.split("~", 1)[0] == rid else k.split("~", 1)[0]
+                    P[k]["ctl_ans"] = "same" if o in yes else "diff"; ctl = (ctl is not False) and o in yes
+                tw_save(P)
+        for o, v, who in pairs: same_set(rid, o, v == "same", False, "/m: " + who)
+        if pairs: rec["applied"] = ",".join(f"{o}:{v}" for o, v, _ in pairs); _tw_chain_soon()
+        if ctl is not None: rec["tw_ctl"] = ctl                                 # здесь проверяется машина, а не человек: в ответ не отдаём
+        _mlog(rec); _ty["t"] = 0
+        return {"ok": True, "applied": rec.get("applied")}
+
+    _twch = {"due": 0, "run": False}
+
+    def _tw_chain_soon():
+        """цепочки после ответов: через 20 с после последнего ответа (одна пачка — один пересчёт)"""
+        _twch["due"] = time.time() + 20
+        if _twch["run"]: return
+        _twch["run"] = True
+        def run():
+            try:
+                while time.time() < _twch["due"]: time.sleep(2)
+                R = {}
+                for f in os.listdir(D_RUGS):
+                    if f.endswith(".json"):
+                        r = load(f[:-5])
+                        if tw_alive(r): R[r["id"]] = r
+                tw_apply(R, tw_load(), None)
+            except Exception as e: print("twins chain:", e)
+            finally: _twch["run"] = False
+        threading.Thread(target=run, daemon=True, name="twins-chain").start()
+
+    def _tw_queue(me, by):
+        """карточки «двойники этого ковра»: ковёр + до 8 кандидатов. Кандидаты: пары twin_pairs (точек ≥ 20 или общий номер / размер / группа каталога),
+        контрольные (над порогом, не поставлены), старые пары каталога, где машина не уверена, и «новые дубли» по выпрямленным."""
+        P = tw_load(); C = {}
+
+        def add(a, b, ev):
+            x, y = by.get(a), by.get(b)
+            if not x or not y or x["dead"] or y["dead"] or b in x["sd"] or a in y["sd"]: return
+            if me in x["mv"]["same"].get(b, []) or me in y["mv"]["same"].get(a, []): return
+            if x["comp"] and y["comp"] and x["comp"] != y["comp"]: return
+            for p, q in ((a, b), (b, a)):
+                o = C.setdefault(p, {})
+                if q not in o or (ev.get("n") or 0) > (o[q].get("n") or 0): o[q] = ev
+        for k, v in P.items():
+            if v.get("auto") or "n" not in v: continue
+            w = set(v.get("why") or []) - {"calib"}
+            if not w: continue
+            if v.get("ctl") or v["n"] >= 20 or (w & {"inv", "catalog"}) or ("size" in w and v["n"] >= 8):
+                a, b = k.split("~", 1); add(a, b, {"n": v["n"], "cov": v.get("cov", 0), "why": sorted(w), **({"c": 1} if v.get("ctl") else {})})
+        for x in by.values():
+            for o in x["sm"]:
+                ev = x["sev"].get(o) or {}
+                add(x["id"], o, {"n": max(ev.get("inl") or 0, ev.get("sc") or 0), "why": ["catalog"]})
+        for k, v in rp_load().items():
+            if v.get("n", 0) >= RP_MAYBE and v.get("geo", 0) >= RP_GEO and "~" in k:
+                a, b = k.split("~", 1); add(a, b, {"n": v["n"], "cov": v.get("geo", 0), "why": ["rect"]})
+        out = []; used = set()
+        for a in sorted(C, key=lambda i: (-max(e.get("n") or 0 for e in C[i].values()), -len(C[i]), i)):
+            items = sorted(((b, e) for b, e in C[a].items() if (a, b) not in used), key=lambda t: -(t[1].get("n") or 0))[:8]
+            if not items: continue
+            for b, _ in items: used.add((a, b)); used.add((b, a))
+            out.append({"type": "tw", "rid": a, "items": [{"id": b, "title": by[b]["title"], "src": by[b]["src"], "n": e.get("n"), "why": e.get("why"), **({"c": 1} if e.get("c") else {})}
+                                                          for b, e in items], "src": by[a]["src"]})
+        return out
+
 
     _dcl = {"t": 0, "v": None}
 

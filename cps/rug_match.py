@@ -334,6 +334,21 @@ def cover_iou(H):
     return float(inter / (1.0 + a - inter))
 
 
+def quad_iou(H, qa=None, qb=None):
+    """v11.86: насколько ковёр фото a ложится на ковёр фото b после совмещения H (доли a → доли b).
+    qa, qb — 4 угла ковра в долях фото (если известны), иначе берётся весь кадр. 1 — совпали целиком, 0 — нет."""
+    if H is None: return 0.0
+    sq = [[0, 0], [1, 0], [1, 1], [0, 1]]
+    A = np.float32(qa if qa and len(qa) == 4 else sq); B = np.float32(qb if qb and len(qb) == 4 else sq)
+    try: c = cv2.perspectiveTransform(A.reshape(-1, 1, 2), np.float64(H)).reshape(-1, 2).astype(np.float32)
+    except cv2.error: return 0.0
+    if not np.isfinite(c).all() or not cv2.isContourConvex(c.reshape(-1, 1, 2)) or not cv2.isContourConvex(B.reshape(-1, 1, 2)): return 0.0
+    a, b = abs(cv2.contourArea(c)), abs(cv2.contourArea(B))
+    if a <= 0 or b <= 0: return 0.0
+    inter, _ = cv2.intersectConvexConvex(B, c)
+    return float(inter / (a + b - inter + 1e-9))
+
+
 def _hull_area(p):
     """площадь выпуклой оболочки точек (координаты в долях фото)"""
     if len(p) < 3: return 0.0

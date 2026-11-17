@@ -1768,13 +1768,82 @@ def t43_rug_names_v1185(pg, ctx):
     errors_ok(ctx, 'названия ковров')
 
 
+@test
+def t44_twins_fast_v1186(pg, ctx):
+    """v11.86: двойники — кандидаты по размеру и музейному номеру, совмещение фото, порог по ответам людей, авторешение, цепочка,
+    карточка /m «двойники ковра» (отмеченные — тот же, остальные — другой)"""
+    import cv2, numpy as np, sys as _s
+    _s.path.insert(0, CPS); import twins as TW
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    def rug_img(seed):
+        rng = np.random.default_rng(seed); a = cv2.GaussianBlur(rng.integers(0, 255, (60, 40, 3)).astype(np.uint8), (0, 0), 0.6)
+        a = cv2.resize(a, (400, 600), interpolation=cv2.INTER_NEAREST)
+        for _ in range(40):
+            c = tuple(int(v) for v in rng.integers(0, 255, 3)); x, y = int(rng.integers(20, 380)), int(rng.integers(20, 580))
+            cv2.drawMarker(a, (x, y), c, int(rng.integers(0, 6)), int(rng.integers(15, 50)), 3)
+        b = np.full((700, 520, 3), 230, np.uint8); b[50:650, 60:460] = a; return b
+    def warp(a, k=0.06, gain=1.1):
+        h, w = a.shape[:2]; src = np.float32([[0, 0], [w, 0], [w, h], [0, h]]); dst = np.float32([[w * k, h * k * .5], [w * (1 - k * .3), 0], [w, h * (1 - k)], [w * k * .4, h]])
+        return np.clip(cv2.warpPerspective(a, cv2.getPerspectiveTransform(src, dst), (w, h), borderValue=(200, 200, 200)) * gain, 0, 255).astype(np.uint8)
+    def mk(rid, img, **kw):
+        cv2.imwrite(f'{D}/rug_img/{rid}.jpg', img)
+        r = {"id": rid, "title": rid, "source": "тест", "museum": "", "inv": "", "school": "", "composition": "", "status": "new", "w": img.shape[1], "h": img.shape[0],
+             "marks": [], "created": now, "updated": now, "cat": {"src": kw.pop("src", "azcarpetmuseum")}}
+        r.update(kw); json.dump(r, open(f'{D}/rugs/{rid}.json', 'w'), ensure_ascii=False)
+    # авторешение должно сработать на паре, которая не контрольная
+    a1, a2 = next((f"tw_a{i}", f"tw_b{i}") for i in range(100) if not TW.is_ctl(TW.key(f"tw_a{i}", f"tw_b{i}")))
+    P1 = rug_img(11)
+    mk(a1, P1, size="150×230 см", src="azcarpetmuseum"); mk(a2, warp(P1), size="151×229 см", src="wikimedia")
+    mk("tw_c", cv2.resize(warp(P1, 0.03, 0.95), None, fx=0.8, fy=0.8), same=[{"id": a2, "score": 0}], same_ok={a2: {"ok": True, "by": "dolgikh", "at": now}})
+    js = json.load(open(f'{D}/rugs/{a2}.json')); js["same"] = [{"id": "tw_c", "score": 0}]; js["same_ok"] = {"tw_c": {"ok": True, "by": "dolgikh", "at": now}}
+    json.dump(js, open(f'{D}/rugs/{a2}.json', 'w'), ensure_ascii=False)
+    mk("tw_x", rug_img(99), size="150×231 см", src="book:intangible_2849")      # тот же размер, другой ковёр
+    # ответы людей для порога: 2 «тот же» (фото одного ковра), 1 «разные»
+    for i, sd in enumerate((21, 22)):
+        P = rug_img(sd); mk(f"tw_h{i}a", P, same=[{"id": f"tw_h{i}b"}], same_ok={f"tw_h{i}b": {"ok": True, "by": "dolgikh", "at": now}})
+        mk(f"tw_h{i}b", warp(P, 0.05), same=[{"id": f"tw_h{i}a"}], same_ok={f"tw_h{i}a": {"ok": True, "by": "dolgikh", "at": now}})
+    mk("tw_hda", rug_img(31), same=[{"id": "tw_hdb"}], same_ok={"tw_hdb": {"ok": False, "by": "dolgikh", "at": now}})
+    mk("tw_hdb", rug_img(32), same=[{"id": "tw_hda"}], same_ok={"tw_hda": {"ok": False, "by": "dolgikh", "at": now}})
+    # один музей и номер — кандидат, хотя фото разные
+    mk("tw_m1", rug_img(41), museum="Национальный музей ковра", inv="№ 777"); mk("tw_m2", rug_img(42), museum="Национальный музей ковра", inv="777", src="book:x")
+    post(u + 'api/twins_run', {})
+    for _ in range(240):
+        j = get(u + 'api/twins')
+        if not j["state"]["running"] and j["last"].get("t"): break
+        time.sleep(1)
+    else: raise AssertionError(("проход двойников не закончился", j["state"]))
+    L = j["last"]; assert L["thr"], ("порог не найден", L.get("suspects"), L)
+    assert j["by_why"]["size"] >= 1 and j["by_why"]["inv"] >= 1 and j["by_why"]["calib"] >= 3, j["by_why"]
+    ra = get(u + f'api/rugs/{a1}'); ok = (ra.get("same_ok") or {}).get(a2)
+    assert ok and ok["ok"] and ok["by"].startswith("машина"), ("авторешение", ok, L)
+    assert ((ra.get("same_ok") or {}).get("tw_c") or {}).get("by", "").startswith("по цепочке"), ("цепочка a1 = a2 = c", ra.get("same_ok"))
+    assert "tw_x" not in (ra.get("same_ok") or {}), "другой ковёр того же размера не должен решиться сам"
+    # /m: карточка «двойники ковра» с парой по музейному номеру
+    t = [t for t in get(u + 'api/micro/next?k=tw&n=12')["tasks"] if t["type"] == "tw" and {t["rid"]} | {x["id"] for x in t["items"]} >= {"tw_m1", "tw_m2"}]
+    assert t, "нет карточки с парой по музейному номеру"
+    t = t[0]; r = post(u + 'api/micro/answer', {"type": "tw", "rid": t["rid"], "a": "done", "ids": [x["id"] for x in t["items"]], "same": []})
+    assert r.get("applied"), r
+    assert (get(u + 'api/rugs/tw_m1').get("same_ok") or {}).get("tw_m2", {}).get("ok") is False
+    # телефон: карточка показывается, отметка плитки меняет кнопку
+    mk("tw_n1", rug_img(51), museum="Музей", inv="1"); mk("tw_n2", warp(rug_img(51)), museum="Музей", inv="1", src="book:y")
+    p2 = pg
+    p2.goto(u + 'm?k=tw'); p2.wait_for_timeout(2500)
+    assert p2.locator('.grid.tw .tl').count() >= 1, p2.inner_text('main')[:300]
+    p2.locator('.grid.tw .tl').first.click(); p2.wait_for_timeout(200)
+    assert 'готово' in p2.inner_text('#a1'), p2.inner_text('#a1')
+    p2.screenshot(path=os.path.join(OUT, 't44_m_tw.png'))
+    pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(3000)
+    assert 'двойники' in pg.inner_text('#rgKpi'), pg.inner_text('#rgKpi')
+    errors_ok(ctx, 'двойники')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
     shutil.copytree(CPS, app, ignore=shutil.ignore_patterns('tests', '__pycache__', '*.pyc', 'rug_lib', 'rug_img', 'rugs', 'rug_thumbs'))
     make_rugs(os.path.join(app, 'data')); make_color_fig(os.path.join(app, 'data')); make_crops(os.path.join(app, 'data')); make_auto_sheet(os.path.join(app, 'data'))
     port = free_port(); url = f'http://127.0.0.1:{port}/'
-    env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': '', 'CPS_NO_SCHED': '1', 'CPS_MOTIF_FAKE': '1', 'CPS_SAM': '0', 'CPS_VLM_MOCK': '1'}   # CPS_NO_SCHED: автоматические задачи не запускаются сами
+    env = {**os.environ, 'CPS_RUGS_TEST': '1', 'CPS_PASSWORD': '', 'CPS_GITHUB_TOKEN': '', 'CPS_NO_SCHED': '1', 'CPS_MOTIF_FAKE': '1', 'CPS_SAM': '0', 'CPS_VLM_MOCK': '1', 'CPS_TW_MIN_SAME': '2'}   # CPS_NO_SCHED: автоматические задачи не запускаются сами
     log = open(os.path.join(OUT, 'server.log'), 'w')
     srv = subprocess.Popen([sys.executable, '-m', 'uvicorn', 'backend:app', '--port', str(port)], cwd=app, env=env, stdout=log, stderr=subprocess.STDOUT)
     ok = fail = 0

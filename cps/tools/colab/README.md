@@ -86,3 +86,15 @@ museum_open (V&A/Met), azerbaijan_rugs_guide. Паспорт: названия, 
 %run /content/carpevo/cps/tools/colab/rug_catalog_colab.py
 ```
 В конце Colab попросит разрешение на Google Drive (чтобы открыть доступ к пакету по ссылке) и напечатает «id пакета для студии».
+
+# Отпечатки фото для поиска двойников — twin_embed_colab.py (v11.86)
+
+T4 GPU, ≈5–10 минут. Отпечатки DINOv2 (ViT-B/14) всех фото каталога: фото целиком и центр, в 4 поворотах; у каждого ковра 12 ближайших.
+Проверяет себя на парах, решённых человеком (`tools/twins/photos.json`): на каком месте стоит настоящий двойник, какое сходство у «тот же» и «разные».
+
+```
+!rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
+%run /content/carpevo/cps/tools/colab/twin_embed_colab.py
+```
+
+Итог — `carpet-dna/models/twin_nn_v1.json` на Диске. Загрузить в студии: «Ковры» → строка «двойники» → «⬆ отпечатки» (сервер сразу проверит новых кандидатов).
