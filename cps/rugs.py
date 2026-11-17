@@ -4108,8 +4108,8 @@ def install(app, DATA, D_WORK):
                 for k, why in C.items():
                     v = P.setdefault(k, {}); v["why"] = sorted(set(v.get("why") or []) | why)
                     if "n" not in v or v.get("ver") != twins.VER or not only_new: todo.append(k)
-                def prio(k):                                                    # сначала ответы людей (порог), затем каталог/номер/размер, затем соседи
-                    w = P[k]["why"]; return (0 if "calib" in w else 1 if ("inv" in w or "catalog" in w) else 2 if "size" in w else 3, k)
+                def prio(k):                                                    # v11.87: сначала то, что пойдёт в /m (номер, каталог, размер), затем ответы людей (порог), затем соседи
+                    w = P[k]["why"]; return (0 if ("inv" in w or "catalog" in w) else 1 if "size" in w else 2 if "calib" in w else 3, k)
                 todo.sort(key=prio); twr.update(total=len(todo), stage="совмещаю фото пар")
                 for i, k in enumerate(todo):
                     a, b = k.split("~", 1)
