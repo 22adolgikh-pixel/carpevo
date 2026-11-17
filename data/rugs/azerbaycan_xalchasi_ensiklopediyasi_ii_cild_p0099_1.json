@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794784934,
+ "updated": 1794935016,
  "cat": {
   "title": "Sumax Губа",
   "museum": "Национальный музей азербайджанского ковра",
@@ -128,7 +128,39 @@
    "ver": 2
   }
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.02269,
+   0.03785,
+   0.95462,
+   0.9242999999999999
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03938,
+    0.04665
+   ],
+   [
+    0.97731,
+    0.03785
+   ],
+   [
+    0.96618,
+    0.95775
+   ],
+   [
+    0.02269,
+    0.96215
+   ]
+  ],
+  "quad_status": "confirmed",
+  "quad_by": "dolgikh"
+ },
  "updated_by": "dolgikh",
  "from_twin": {
   "composition": "azcm_148"
