@@ -18,7 +18,7 @@
  "h": 1600,
  "marks": [],
  "created": 1791567608,
- "updated": 1794596866,
+ "updated": 1794935634,
  "src_id": "fig:az_carpets_magazine_33_patterns_page_098_jpg_f01",
  "multi": [],
  "people": {
@@ -89,23 +89,23 @@
   "status": "auto",
   "quad": [
    [
-    0.06643,
-    0.06222
+    0.07541,
+    0.08311
    ],
    [
-    0.9246,
-    0.05556
+    0.9288,
+    0.07727
    ],
    [
-    0.91562,
-    0.93556
+    0.91148,
+    0.91811
    ],
    [
-    0.07899,
-    0.92444
+    0.07772,
+    0.91272
    ]
   ],
-  "quad_status": "accepted",
+  "quad_status": "confirmed",
   "field": {
    "depth_pct": 22.8,
    "curves": {
@@ -318,7 +318,7 @@
   }
  },
  "frame": "whole",
- "tri": "auto",
+ "tri": "micro",
  "micro": {
   "frame": {
    "dolgikh": {
@@ -329,6 +329,32 @@
   },
   "field": {
    "dolgikh": "2"
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794935634,
+    "q": [
+     [
+      0.07541,
+      0.08311
+     ],
+     [
+      0.9288,
+      0.07727
+     ],
+     [
+      0.91148,
+      0.91811
+     ],
+     [
+      0.07772,
+      0.91272
+     ]
+    ],
+    "s": "ref"
+   }
   }
  },
  "frame_by": "micro"

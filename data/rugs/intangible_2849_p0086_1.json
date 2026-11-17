@@ -3594,8 +3594,8 @@
    "box": [
     0.59545,
     0.24902,
-    0.16818,
-    0.04004
+    0.0621,
+    0.03751
    ],
    "zone": "other",
    "motif": "deve",
@@ -3603,7 +3603,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d9de758067_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.701,
@@ -3727,15 +3727,19 @@
      0.25
     ]
    ],
-   "sam": 0.821
+   "sam": 0.821,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794935501,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794935501
   },
   {
    "id": "m6afb7d9de758067_6",
    "box": [
-    0.25606,
-    0.23633,
-    0.17576,
-    0.04395
+    0.30744,
+    0.24066,
+    0.0649,
+    0.04308
    ],
    "zone": "other",
    "motif": "deve",
@@ -3743,7 +3747,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d9de758067_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.688,
@@ -3927,15 +3931,19 @@
      0.2373
     ]
    ],
-   "sam": 0.776
+   "sam": 0.776,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794935501,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794935501
   },
   {
    "id": "m6afb7d9de758067_8",
    "box": [
-    0.3803,
+    0.41163,
     0.32324,
-    0.09697,
-    0.03125
+    0.06564,
+    0.03076
    ],
    "zone": "other",
    "motif": "deve",
@@ -3943,7 +3951,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d9de758067_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.679,
@@ -4035,13 +4043,17 @@
      0.32422
     ]
    ],
-   "sam": 0.816
+   "sam": 0.816,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794935501,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794935501
   },
   {
    "id": "m6afb7d9de758067_9",
    "box": [
-    0.31061,
-    0.19043,
+    0.32852,
+    0.18648,
     0.0803,
     0.0293
    ],
@@ -4051,7 +4063,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d9de758067_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.676,
@@ -4123,7 +4135,11 @@
      0.20801
     ]
    ],
-   "sam": 0.881
+   "sam": 0.881,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794935501,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794935501
   },
   {
    "id": "m6afb7e8fe803347_4",
@@ -4139,7 +4155,7 @@
    "scheme": "t104_f04",
    "group": "m6afb7e8fe803347_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.717,
@@ -4231,7 +4247,7 @@
    "scheme": "t104_f04",
    "group": "m6afb7e8fe803347_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.681,
@@ -4367,11 +4383,13 @@
      0.42871
     ]
    ],
-   "sam": 0.85
+   "sam": 0.85,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794935519
   }
  ],
  "created": 1794547278,
- "updated": 1794935461,
+ "updated": 1794935519,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -4635,6 +4653,48 @@
      "a": "ok",
      "w": 2,
      "t": 1794935461
+    }
+   },
+   "m6afb7d9de758067_2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794935501
+    }
+   },
+   "m6afb7d9de758067_6": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794935501
+    }
+   },
+   "m6afb7d9de758067_8": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794935501
+    }
+   },
+   "m6afb7d9de758067_9": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794935501
+    }
+   },
+   "m6afb7e8fe803347_8": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794935519
+    }
+   },
+   "m6afb7e8fe803347_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794935519
     }
    }
   }

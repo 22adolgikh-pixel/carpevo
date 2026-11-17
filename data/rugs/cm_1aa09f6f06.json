@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870018,
- "updated": 1794935447,
+ "updated": 1794935480,
  "cat": {
   "title": "Carpet of Guba group of Azerbaijan carpets in Heydar Aliyev Center",
   "museum": "",
@@ -126,8 +126,67 @@
     "w": 2,
     "t": 1794935447
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794935480,
+    "q": [
+     [
+      0.12589,
+      0.04512
+     ],
+     [
+      0.83559,
+      0.05778
+     ],
+     [
+      0.9078,
+      0.92054
+     ],
+     [
+      0.03266,
+      0.93233
+     ]
+    ],
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.12589,
+    0.04512
+   ],
+   [
+    0.83559,
+    0.05778
+   ],
+   [
+    0.9078,
+    0.92054
+   ],
+   [
+    0.03266,
+    0.93233
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
