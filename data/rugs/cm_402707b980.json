@@ -3,15 +3,15 @@
  "title": "Lempe azeri rug, XIX c",
  "source": "каталог: commons",
  "museum": "Национальный музей азербайджанского ковра",
- "inv": "",
+ "inv": "2516",
  "url": "https://commons.wikimedia.org/wiki/File:Lempe_rug.jpg",
  "license": "CC BY-SA 3.0 · Urek Meniashvili",
- "place": "",
+ "place": "Тебриз",
  "date": "XIX c",
  "school": "tabriz",
  "composition": "",
  "technique": "ворсовый",
- "size": "",
+ "size": "260x580 sm",
  "notes": "Lempe azeri rug, XIX c. Tabriz school, State Museum of Azerbaijan Carpet and Applied Art",
  "status": "new",
  "w": 711,
@@ -58,7 +58,13 @@
    "score": 1500
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_111": {
+   "ok": true,
+   "by": "машина: 1476 общих точек, перекрытие 0.95 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "azcm_111": {
@@ -105,5 +111,10 @@
   "ver": 1,
   "t": 1794238364
  },
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "inv": "azcm_111",
+  "place": "azcm_111",
+  "size": "azcm_111"
+ }
 }

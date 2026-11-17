@@ -3,15 +3,15 @@
  "title": "Jairli carpet XIXcentury.gif",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "7331",
  "url": "https://commons.wikimedia.org/wiki/File:Jairli_carpet_XIXcentury.gif",
  "license": "Public domain",
- "place": "",
+ "place": "Ширван, Азербайджан",
  "date": "Late 19th century",
  "school": "guba-shirvan",
  "composition": "ceyirli",
  "technique": "ворсовый",
- "size": "",
+ "size": "122x161 sm",
  "notes": "",
  "status": "new",
  "w": 250,
@@ -54,7 +54,13 @@
    "score": 151
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_7": {
+   "ok": true,
+   "by": "машина: 672 общих точек, перекрытие 0.92 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_group": "g0297",
@@ -96,5 +102,10 @@
   "area": null,
   "ver": 1,
   "t": 1794238325
+ },
+ "from_twin": {
+  "inv": "azcm_7",
+  "place": "azcm_7",
+  "size": "azcm_7"
  }
 }

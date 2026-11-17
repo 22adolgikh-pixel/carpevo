@@ -10,7 +10,7 @@
  "date": "20 в., начало",
  "school": "ganja-gazakh",
  "composition": "",
- "technique": "",
+ "technique": "безворсовый: килим",
  "size": "223x295 см",
  "notes": "Qazax. Azərbaycan. 20-ci əsrin əvvəli. Material: yun. Ölçü: 223x295 sm. Azərbaycan Xalça Muzeyi. DDK 840.",
  "status": "new",
@@ -56,7 +56,13 @@
    "inv": true
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_141": {
+   "ok": true,
+   "by": "машина: 1939 общих точек, перекрытие 0.83 (порог 40 / 0.7)",
+   "at": 1794940139
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -104,5 +110,8 @@
    "at": 1794618077,
    "ver": 2
   }
+ },
+ "from_twin": {
+  "technique": "azcm_141"
  }
 }

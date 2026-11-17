@@ -2,11 +2,11 @@
  "id": "azr_early_karabagh_rug184",
  "title": "Early Azerbaijan carpet fragment, 17th-18th century, Victoria and Albert Museum",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
- "inv": "",
+ "museum": "V&A",
+ "inv": "T.78-1964",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
+ "place": "Azerbaijan",
  "date": "18th century",
  "school": "karabakh",
  "composition": "",
@@ -58,7 +58,13 @@
    "score": 495
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "vam_O154775": {
+   "ok": true,
+   "by": "машина: 1066 общих точек, перекрытие 0.72 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -105,5 +111,10 @@
   "area": 0.833,
   "ver": 1,
   "t": 1794238238
+ },
+ "from_twin": {
+  "museum": "vam_O154775",
+  "inv": "vam_O154775",
+  "place": "vam_O154775"
  }
 }

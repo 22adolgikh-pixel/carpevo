@@ -70,12 +70,22 @@
  },
  "src_id": "cat:kerimov_vol2_p127_2",
  "lib_img": "img/kerimov_vol2_p127_2.jpg",
- "same": [],
+ "same": [
+  {
+   "id": "cm_de088aa11d",
+   "score": 0
+  }
+ ],
  "same_ok": {
   "kerimov_vol2_p127_3": {
    "ok": false,
    "by": "dolgikh",
    "at": 1792153090
+  },
+  "cm_de088aa11d": {
+   "ok": false,
+   "by": "по цепочке: kerimov_vol2_p127_2 ≠ kerimov_vol2_p127_3",
+   "at": 1794940139
   }
  },
  "_lib_t": "2026-10-12 22:38",

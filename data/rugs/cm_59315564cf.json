@@ -3,11 +3,11 @@
  "title": "Rugs and carpets in the Turkish and Islamic Arts Museum",
  "source": "каталог: commons",
  "museum": "Музей турецкого и исламского искусства (Стамбул)",
- "inv": "",
+ "inv": "681",
  "url": "https://commons.wikimedia.org/wiki/File:Selgiuchidi_d%27anatolia,_tappeto,_konya_xiii_secolo,_10.jpg",
  "license": "CC BY-SA 4.0 · Francesco Bini",
  "place": "",
- "date": "",
+ "date": "century",
  "school": "",
  "composition": "",
  "technique": "",
@@ -62,7 +62,18 @@
    "score": 208
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_3b64fa3c2c": {
+   "ok": true,
+   "by": "машина: 1801 общих точек, перекрытие 0.97 (порог 40 / 0.7)",
+   "at": 1794940138
+  },
+  "cm_65ea848668": {
+   "ok": true,
+   "by": "машина: 1234 общих точек, перекрытие 0.82 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_3b64fa3c2c": {
@@ -184,5 +195,9 @@
   "quad_status": "confirmed"
  },
  "tri": "micro",
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "inv": "cm_3b64fa3c2c",
+  "date": "cm_3b64fa3c2c"
+ }
 }

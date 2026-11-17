@@ -7,11 +7,11 @@
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "18th century",
  "school": "guba-shirvan",
  "composition": "",
  "technique": "",
- "size": "",
+ "size": "215×460 см",
  "notes": "",
  "status": "new",
  "w": 1028,
@@ -52,7 +52,13 @@
    "score": 428
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_kuba_pre19th_67_early_kuba_rug": {
+   "ok": true,
+   "by": "машина: 1691 общих точек, перекрытие 0.93 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -93,5 +99,9 @@
   "area": 0.855,
   "ver": 1,
   "t": 1794238241
+ },
+ "from_twin": {
+  "date": "azr_kuba_pre19th_67_early_kuba_rug",
+  "size": "azr_kuba_pre19th_67_early_kuba_rug"
  }
 }

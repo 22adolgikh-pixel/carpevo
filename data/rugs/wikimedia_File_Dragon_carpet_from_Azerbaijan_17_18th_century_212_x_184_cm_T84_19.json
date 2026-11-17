@@ -3,10 +3,10 @@
  "title": "Dragon carpet from Azerbaijan, 17-18th century, 212 x 184 cm, T84-1909.jpg",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "T.84-1909",
  "url": "https://commons.wikimedia.org/wiki/File:Dragon_carpet_from_Azerbaijan,_17-18th_century,_212_x_184_cm,_T84-1909.jpg",
  "license": "Public domain",
- "place": "",
+ "place": "Azerbaijan",
  "date": "17-18th centuries",
  "school": "",
  "composition": "ejdahali",
@@ -59,7 +59,13 @@
    "score": 158
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "vam_O76593": {
+   "ok": true,
+   "by": "машина: 1224 общих точек, перекрытие 0.99 (порог 40 / 0.7)",
+   "at": 1794940139
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -223,5 +229,9 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "inv": "vam_O76593",
+  "place": "vam_O76593"
+ }
 }

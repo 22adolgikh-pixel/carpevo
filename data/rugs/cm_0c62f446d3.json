@@ -2,16 +2,16 @@
  "id": "cm_0c62f446d3",
  "title": "Caucasus, Daghestan, 19th century - Prayer Rug - 1945.166 - Cleveland Museum of Art",
  "source": "каталог: commons",
- "museum": "",
+ "museum": "Кливлендский музей искусств",
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Caucasus,_Daghestan,_19th_century_-_Prayer_Rug_-_1945.166_-_Cleveland_Museum_of_Art.tif",
  "license": "CC0",
- "place": "",
+ "place": "Caucasus, Daghestan, 19th century",
  "date": "19th century",
  "school": "guba-shirvan",
- "composition": "",
- "technique": "",
- "size": "",
+ "composition": "namazliq",
+ "technique": "ворсовый",
+ "size": "102.9 x 127 cm",
  "notes": "",
  "status": "new",
  "w": 1896,
@@ -63,6 +63,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792258643
+  },
+  "cleveland_124162": {
+   "ok": true,
+   "by": "машина: 2543 общих точек, перекрытие 0.95 (порог 40 / 0.7)",
+   "at": 1794940138
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -122,5 +127,12 @@
     }
    }
   }
+ },
+ "from_twin": {
+  "composition": "cleveland_124162",
+  "technique": "cleveland_124162",
+  "museum": "cleveland_124162",
+  "place": "cleveland_124162",
+  "size": "cleveland_124162"
  }
 }

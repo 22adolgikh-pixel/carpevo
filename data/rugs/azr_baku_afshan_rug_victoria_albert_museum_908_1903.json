@@ -2,12 +2,12 @@
  "id": "azr_baku_afshan_rug_victoria_albert_museum_908_1903",
  "title": "baku-afshan-rug-victoria albert museum-908-1903",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
- "inv": "",
+ "museum": "V&A",
+ "inv": "908-1903",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "Caucasus",
+ "date": "18th century",
  "school": "guba-shirvan",
  "composition": "",
  "technique": "",
@@ -52,7 +52,13 @@
    "score": 648
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "vam_O153309": {
+   "ok": true,
+   "by": "машина: 2843 общих точек, перекрытие 0.88 (порог 40 / 0.7)",
+   "at": 1794940139
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -205,5 +211,11 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "museum": "vam_O153309",
+  "inv": "vam_O153309",
+  "place": "vam_O153309",
+  "date": "vam_O153309"
+ }
 }

@@ -2,12 +2,12 @@
  "id": "azr_kuba_karagashli49",
  "title": "kuba karagashli49",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
- "inv": "",
+ "museum": "V&A",
+ "inv": "361-1897",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "Azerbaijan",
+ "date": "1800-1880",
  "school": "guba-shirvan",
  "composition": "",
  "technique": "",
@@ -52,7 +52,13 @@
    "score": 249
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "vam_O117923": {
+   "ok": true,
+   "by": "машина: 631 общих точек, перекрытие 0.87 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -93,5 +99,11 @@
   "area": 0.914,
   "ver": 1,
   "t": 1794238346
+ },
+ "from_twin": {
+  "museum": "vam_O117923",
+  "inv": "vam_O117923",
+  "place": "vam_O117923",
+  "date": "vam_O117923"
  }
 }

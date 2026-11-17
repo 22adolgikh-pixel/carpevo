@@ -9,7 +9,7 @@
  "place": "Ширван",
  "date": "19 в., конец",
  "school": "guba-shirvan",
- "composition": "",
+ "composition": "sumax",
  "technique": "безворсовый: сумах",
  "size": "200x278 см",
  "notes": "Sumax. Şirvan. Azərbaycan. 19-cu əsrin sonu. Material: yun. Ölçü: 200x278 sm. Azərbaycan Xalça Muzeyl. DDK 2589.",
@@ -59,7 +59,13 @@
    "inv": true
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_158": {
+   "ok": true,
+   "by": "машина: 2728 общих точек, перекрытие 0.91 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -114,5 +120,8 @@
    "at": 1794618043,
    "ver": 2
   }
+ },
+ "from_twin": {
+  "composition": "azcm_158"
  }
 }

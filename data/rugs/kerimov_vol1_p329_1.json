@@ -2,15 +2,15 @@
  "id": "kerimov_vol1_p329_1",
  "title": "Керимов, т. I, Табл. 207. «ХИЛАБУТА» (стр. скана 329, печ. ?)",
  "source": "каталог: kerimov_vol1",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
+ "date": "18th centurydate QS:P,+1750-00-00T00:00:00Z/7",
  "school": "guba-shirvan",
  "composition": "xilebuta",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -55,7 +55,13 @@
    "score": 99
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Khila_buta_carpet_from_Baku_jpg": {
+   "ok": true,
+   "by": "машина: 536 общих точек, перекрытие 0.94 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -96,5 +102,10 @@
   "area": null,
   "ver": 1,
   "t": 1794238399
+ },
+ "from_twin": {
+  "technique": "wikimedia_File_Khila_buta_carpet_from_Baku_jpg",
+  "museum": "wikimedia_File_Khila_buta_carpet_from_Baku_jpg",
+  "date": "wikimedia_File_Khila_buta_carpet_from_Baku_jpg"
  }
 }

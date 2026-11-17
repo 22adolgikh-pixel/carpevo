@@ -8,7 +8,7 @@
  "license": "CC0",
  "place": "Caucasus",
  "date": "17th century",
- "school": "",
+ "school": "guba-shirvan",
  "composition": "ejdahali",
  "technique": "ворсовый",
  "size": "H. 170 in. (431.8 cm)\r\nW.  90.00 in. (228.6 cm)",
@@ -68,6 +68,10 @@
   {
    "id": "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_2_jpeg",
    "score": 177
+  },
+  {
+   "id": "azcm_128",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -75,6 +79,26 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1792258763
+  },
+  "cm_ec44c9893f": {
+   "ok": true,
+   "by": "машина: 3511 общих точек, перекрытие 0.81 (порог 40 / 0.7)",
+   "at": 1794940138
+  },
+  "cm_ea07ad4c5c": {
+   "ok": true,
+   "by": "по цепочке: cm_a38c54d791 = cm_dceb9ab95f = cm_ea07ad4c5c = cm_ec44c9893f = wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_2_jpeg",
+   "at": 1794940139
+  },
+  "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_2_jpeg": {
+   "ok": true,
+   "by": "по цепочке: cm_a38c54d791 = cm_dceb9ab95f = cm_ea07ad4c5c = cm_ec44c9893f = wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_2_jpeg",
+   "at": 1794940139
+  },
+  "azcm_128": {
+   "ok": false,
+   "by": "по цепочке: azcm_128 ≠ cm_a38c54d791",
+   "at": 1794940139
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -115,7 +139,8 @@
   "technique": "met_447580",
   "place": "met_447580",
   "date": "met_447580",
-  "size": "met_447580"
+  "size": "met_447580",
+  "school": "cm_ec44c9893f"
  },
  "people": {
   "n": 0,

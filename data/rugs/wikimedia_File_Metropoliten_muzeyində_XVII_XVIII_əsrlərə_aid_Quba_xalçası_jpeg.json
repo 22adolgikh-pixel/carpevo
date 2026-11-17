@@ -6,12 +6,12 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Metropoliten_muzeyind%C9%99_XVII-XVIII_%C9%99srl%C9%99r%C9%99_aid_Quba_xal%C3%A7as%C4%B1.jpeg",
  "license": "Public domain",
- "place": "",
+ "place": "probably Kuba, present-day Azerbaijan",
  "date": "1600sdate QS:P,+1600-00-00T00:00:00Z/8 - 1700s",
  "school": "guba-shirvan",
  "composition": "",
  "technique": "ворсовый",
- "size": "",
+ "size": "H. 158 in. (401.3 cm)\r\nW. 74 1/4 in.  (188.6 cm)",
  "notes": "",
  "status": "new",
  "w": 534,
@@ -55,7 +55,13 @@
    "score": 250
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "met_445363": {
+   "ok": true,
+   "by": "машина: 484 общих точек, перекрытие 0.92 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -165,5 +171,9 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "place": "met_445363",
+  "size": "met_445363"
+ }
 }

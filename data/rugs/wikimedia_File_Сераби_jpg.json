@@ -3,15 +3,15 @@
  "title": "«Сераби».jpg",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "519",
  "url": "https://commons.wikimedia.org/wiki/File:%C2%AB%D0%A1%D0%B5%D1%80%D0%B0%D0%B1%D0%B8%C2%BB.jpg",
  "license": "CC BY-SA 3.0",
- "place": "",
+ "place": "Ардебиль",
  "date": "2010-03-12 16:13:50",
  "school": "tabriz",
  "composition": "sarabi",
  "technique": "ворсовый",
- "size": "",
+ "size": "133x192 sm",
  "notes": "",
  "status": "new",
  "w": 795,
@@ -54,7 +54,13 @@
    "score": 340
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_112": {
+   "ok": true,
+   "by": "машина: 900 общих точек, перекрытие 0.98 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_group": "g0201",
@@ -206,5 +212,10 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "inv": "azcm_112",
+  "place": "azcm_112",
+  "size": "azcm_112"
+ }
 }

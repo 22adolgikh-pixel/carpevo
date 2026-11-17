@@ -3,15 +3,15 @@
  "title": "Carpet Shusha gallery2.jpg",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "2630",
  "url": "https://commons.wikimedia.org/wiki/File:Carpet_Shusha_gallery2.jpg",
  "license": "CC BY-SA 4.0",
- "place": "",
+ "place": "Карабах, Азербайджан",
  "date": "2025-10-25 11:51:29",
  "school": "karabakh",
  "composition": "",
  "technique": "ворсовый",
- "size": "",
+ "size": "196x127 sm",
  "notes": "",
  "status": "new",
  "w": 960,
@@ -53,7 +53,13 @@
    "score": 593
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_81": {
+   "ok": true,
+   "by": "машина: 1676 общих точек, перекрытие 0.89 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_group": "g0142",
@@ -212,5 +218,10 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "inv": "azcm_81",
+  "place": "azcm_81",
+  "size": "azcm_81"
+ }
 }

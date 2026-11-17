@@ -2,15 +2,15 @@
  "id": "azr_early_karabagh_rug112",
  "title": "The Louvre Museum early rug with the alternation of two dragon rug palmettes, Azerbaijan",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Лувр",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "1800",
  "school": "karabakh",
  "composition": "",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "The Louvre Museum early rug with the alternation of two dragon rug palmettes, Azerbaijan. Paris",
  "status": "new",
@@ -58,7 +58,13 @@
    "score": 186
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_3c352893b6": {
+   "ok": true,
+   "by": "машина: 888 общих точек, перекрытие 0.92 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -105,5 +111,10 @@
   "area": 0.841,
   "ver": 1,
   "t": 1794238461
+ },
+ "from_twin": {
+  "technique": "cm_3c352893b6",
+  "museum": "cm_3c352893b6",
+  "date": "cm_3c352893b6"
  }
 }

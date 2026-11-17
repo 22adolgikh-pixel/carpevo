@@ -7,7 +7,7 @@
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "18th Century",
  "school": "guba-shirvan",
  "composition": "",
  "technique": "",
@@ -52,7 +52,13 @@
    "score": 930
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_early_karabagh_rug179": {
+   "ok": true,
+   "by": "машина: 3638 общих точек, перекрытие 0.96 (порог 40 / 0.7)",
+   "at": 1794940138
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -93,5 +99,8 @@
   "area": 0.887,
   "ver": 1,
   "t": 1794238253
+ },
+ "from_twin": {
+  "date": "azr_early_karabagh_rug179"
  }
 }
