@@ -31,7 +31,7 @@
    "scheme": "t40_f03",
    "group": "m6af789dbe883852_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qapı naxışı",
    "angle": 0,
    "flip": 0,
@@ -87,8 +87,8 @@
    ],
    "by": "машина",
    "at": 1794756258,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794935930,
    "box0": [
     0.59674,
     0.465,
@@ -112,7 +112,7 @@
    "scheme": "t40_f03",
    "group": "m6af789dbe883852_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qapı naxışı",
    "angle": 90,
    "flip": 1,
@@ -205,7 +205,7 @@
    "scheme": "t40_f03",
    "group": "m6af789dbe883852_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qapı naxışı",
    "angle": 180,
    "flip": 0,
@@ -286,7 +286,7 @@
    "scheme": "t40_f03",
    "group": "m6af789dbe883852_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qapı naxışı",
    "angle": 0,
    "flip": 1,
@@ -330,8 +330,8 @@
    ],
    "by": "машина",
    "at": 1794756258,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794935930,
    "box0": [
     0.59239,
     0.38429,
@@ -355,7 +355,7 @@
    "scheme": "t40_f03",
    "group": "m6af8db49e881096_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qapı naxışı",
    "angle": 0,
    "flip": 0,
@@ -428,7 +428,7 @@
    "scheme": "t40_f03",
    "group": "m6af8db49e881096_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qapı naxışı",
    "angle": 180,
    "flip": 0,
@@ -1564,7 +1564,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794866897,
+ "updated": 1794935956,
  "cat": {
   "title": "Ковёр «Hacıqayıb» Губа",
   "museum": "",
@@ -1641,6 +1641,50 @@
      "a": "t60_f04",
      "w": 2,
      "t": 1794772308
+    }
+   }
+  },
+  "marks": {
+   "m6af789dbe883852_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794935930
+    }
+   },
+   "m6af789dbe883852_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794935930
+    }
+   },
+   "m6af789dbe883852_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794935930
+    }
+   },
+   "m6af789dbe883852_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794935930
+    }
+   },
+   "m6af8db49e881096_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794935956
+    }
+   },
+   "m6af8db49e881096_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794935956
     }
    }
   }

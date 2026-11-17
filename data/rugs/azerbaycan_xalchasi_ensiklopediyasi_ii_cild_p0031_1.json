@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794597094,
+ "updated": 1794935887,
  "cat": {
   "title": "Çiyi palaz Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -116,8 +116,49 @@
     "w": 2,
     "t": 1794597094
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794935887,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04182,
+    0.02612
+   ],
+   [
+    0.95367,
+    0.02546
+   ],
+   [
+    0.97051,
+    0.95157
+   ],
+   [
+    0.02985,
+    0.96797
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
