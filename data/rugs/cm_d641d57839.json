@@ -18,7 +18,7 @@
  "h": 1781,
  "marks": [],
  "created": 1791870033,
- "updated": 1794642754,
+ "updated": 1794929439,
  "cat": {
   "title": "Gimil rug, Guba school, XVIII c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -76,6 +76,10 @@
   {
    "id": "azr_kuba_zeyve_lesghi_star67",
    "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p132_1_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -103,6 +107,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792271381
+  },
+  "kerimov_vol2_p132_1_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794929439
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -261,6 +270,15 @@
     "w": 2,
     "t": 1794642754,
     "s": "ref"
+   }
+  },
+  "same": {
+   "kerimov_vol2_p132_1_2": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794929439
+    }
    }
   }
  },

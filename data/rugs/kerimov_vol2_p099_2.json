@@ -2,12 +2,12 @@
  "id": "kerimov_vol2_p099_2",
  "title": "Керимов, т. II (стр. скана 99, печ. 198, 199)",
  "source": "каталог: kerimov_vol2",
- "museum": "",
- "inv": "",
+ "museum": "V&A",
+ "inv": "149-1884",
  "url": "",
  "license": "книга (не публиковать фото)",
- "place": "",
- "date": "",
+ "place": "Caucasus",
+ "date": "19th century",
  "school": "",
  "composition": "",
  "technique": "",
@@ -18,7 +18,7 @@
  "h": 463,
  "marks": [],
  "created": 1791736122,
- "updated": 1794857574,
+ "updated": 1794929470,
  "cat": {
   "title": "Керимов, т. II (стр. скана 99, печ. 198, 199)",
   "museum": "",
@@ -70,8 +70,19 @@
  },
  "src_id": "cat:kerimov_vol2_p099_2",
  "lib_img": "img/kerimov_vol2_p099_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O117775",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O117775": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794929470
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -103,6 +114,15 @@
     "w": 2,
     "t": 1794857574,
     "s": "ref"
+   }
+  },
+  "same": {
+   "vam_O117775": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794929470
+    }
    }
   }
  },
@@ -188,5 +208,11 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "museum": "vam_O117775",
+  "inv": "vam_O117775",
+  "place": "vam_O117775",
+  "date": "vam_O117775"
+ }
 }
