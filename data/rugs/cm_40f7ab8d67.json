@@ -18,7 +18,7 @@
  "h": 1885,
  "marks": [],
  "created": 1791870020,
- "updated": 1794771432,
+ "updated": 1794935285,
  "cat": {
   "title": "Chi Chi rug, Caucasus, ca",
   "museum": "",
@@ -112,8 +112,49 @@
     "w": 2,
     "t": 1794771432
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794935285,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01594,
+    0.02731
+   ],
+   [
+    0.96567,
+    0.03675
+   ],
+   [
+    0.95966,
+    0.97825
+   ],
+   [
+    0.01324,
+    0.9748
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

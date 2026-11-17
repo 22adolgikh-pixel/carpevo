@@ -18,7 +18,7 @@
  "h": 1981,
  "marks": [],
  "created": 1791870020,
- "updated": 1794784858,
+ "updated": 1794935146,
  "cat": {
   "title": "Cek xalçası, XIX əsr",
   "museum": "",
@@ -52,9 +52,19 @@
   {
    "id": "wikimedia_File_Cek_xalçası_XIX_əsr_jpg",
    "score": 1117
+  },
+  {
+   "id": "kerimov_vol2_p140_1_2",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "kerimov_vol2_p140_1_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794935146
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Cek_xalçası_XIX_əsr_jpg": {
@@ -133,6 +143,15 @@
     "w": 2,
     "t": 1794767272,
     "s": "ref"
+   }
+  },
+  "same": {
+   "kerimov_vol2_p140_1_2": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794935146
+    }
    }
   }
  },
