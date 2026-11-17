@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870018,
- "updated": 1791997196,
+ "updated": 1794930548,
  "cat": {
   "title": "Carpet of Gazakh group of Azerbaijan carpets in Heydar Aliyev Center",
   "museum": "",
@@ -93,7 +93,100 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238333
+  "t": 1794238333,
+  "ref_quad": {
+   "quad": [
+    [
+     0.03824,
+     0.00766
+    ],
+    [
+     0.85705,
+     0.01943
+    ],
+    [
+     0.8796,
+     0.96069
+    ],
+    [
+     -8e-05,
+     0.99418
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1794930535
+  }
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794930521
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794930548,
+    "q": [
+     [
+      0.23984,
+      0.00113
+     ],
+     [
+      0.82176,
+      0.01363
+     ],
+     [
+      0.8796,
+      0.96069
+     ],
+     [
+      0.19523,
+      0.95973
+     ]
+    ],
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.23984,
+    0.00113
+   ],
+   [
+    0.82176,
+    0.01363
+   ],
+   [
+    0.8796,
+    0.96069
+   ],
+   [
+    0.19523,
+    0.95973
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

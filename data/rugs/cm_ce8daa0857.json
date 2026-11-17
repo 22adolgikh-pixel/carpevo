@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870015,
- "updated": 1791997197,
+ "updated": 1794930599,
  "cat": {
   "title": "A picture of an Azerbaijani capret in Museum of History and Ethnography in Guba, taken by Aykhan Zayedzadeh fo",
   "museum": "",
@@ -113,7 +113,105 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238339
+  "t": 1794238339,
+  "ref_quad": {
+   "quad": [
+    [
+     0.12368,
+     0.06352
+    ],
+    [
+     0.96762,
+     0.0156
+    ],
+    [
+     0.89013,
+     0.9867
+    ],
+    [
+     0.09762,
+     1.00363
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1794930594
+  }
  },
- "multi": []
+ "multi": [],
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794930550
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1794930599,
+    "q": [
+     [
+      0.12368,
+      0.06352
+     ],
+     [
+      0.83419,
+      0.0185
+     ],
+     [
+      0.89013,
+      0.9867
+     ],
+     [
+      0.09762,
+      1.00363
+     ]
+    ],
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.12368,
+    0.06352
+   ],
+   [
+    0.83419,
+    0.0185
+   ],
+   [
+    0.89013,
+    0.9867
+   ],
+   [
+    0.09762,
+    1.00363
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

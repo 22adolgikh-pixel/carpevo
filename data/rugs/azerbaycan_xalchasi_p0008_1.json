@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794930603,
  "cat": {
   "title": "Ковёр «Simurqla əjdahanın döyüşü» Газах",
   "museum": "Museum of Arts, Berlin",
@@ -85,18 +85,25 @@
   "ver": 1,
   "at": 1794547458
  },
- "multi": [
-  [
-   0.0,
-   0.0,
-   0.9564,
-   0.6633
-  ],
-  [
-   0.0,
-   0.6683,
-   0.9331,
-   0.3133
-  ]
- ]
+ "multi": [],
+ "micro": {
+  "split": {
+   "p": {
+    "dolgikh": {
+     "a": "one",
+     "w": 2,
+     "t": 1794930587
+    }
+   }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "cropped",
+    "w": 2,
+    "t": 1794930603
+   }
+  }
+ },
+ "frame": "cropped",
+ "frame_by": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 611,
  "marks": [],
  "created": 1791736128,
- "updated": 1794597054,
+ "updated": 1794930493,
  "cat": {
   "title": "antique kazak pinwheel swastika rug1",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794597054
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794930493,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06032,
+    0.01672
+   ],
+   [
+    0.92225,
+    0.02711
+   ],
+   [
+    0.95947,
+    0.97208
+   ],
+   [
+    0.04119,
+    0.97965
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
