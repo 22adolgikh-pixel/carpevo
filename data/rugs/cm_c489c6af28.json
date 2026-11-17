@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870017,
- "updated": 1791997208,
+ "updated": 1794935718,
  "cat": {
   "title": "Carpet Khachagorg (Carpet with crosses), second half of the 19th century, Stepanakert",
   "museum": "Национальный музей азербайджанского ковра",
@@ -93,7 +93,82 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238549
+  "t": 1794238549,
+  "ref_quad": {
+   "quad": [
+    [
+     0.11789,
+     0.01946
+    ],
+    [
+     0.90422,
+     0.03053
+    ],
+    [
+     0.98456,
+     0.92183
+    ],
+    [
+     0.00709,
+     0.94371
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1794935714
+  }
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794935700
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794935718,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.11789,
+    0.01946
+   ],
+   [
+    0.90422,
+    0.03053
+   ],
+   [
+    0.98456,
+    0.92183
+   ],
+   [
+    0.00709,
+    0.94371
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

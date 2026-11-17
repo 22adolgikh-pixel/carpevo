@@ -1182,7 +1182,7 @@
   }
  ],
  "created": 1791736128,
- "updated": 1794597177,
+ "updated": 1794935796,
  "cat": {
   "title": "baku-khila-afshan-rug-state museum of azerbaijan carpet",
   "museum": "",
@@ -1252,7 +1252,38 @@
   "date": "azcm_32",
   "size": "azcm_32"
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08654,
+    0.02747
+   ],
+   [
+    0.91884,
+    0.03726
+   ],
+   [
+    0.91723,
+    0.96141
+   ],
+   [
+    0.07289,
+    0.98031
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "people": {
   "n": 0,
@@ -1627,11 +1658,20 @@
     "w": 2,
     "t": 1794597177
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794935796,
+    "s": "ref"
+   }
   }
  },
  "name_none": [
   "xmmv8g7pvf"
  ],
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "tri": "micro"
 }

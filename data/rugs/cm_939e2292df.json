@@ -18,7 +18,7 @@
  "h": 1904,
  "marks": [],
  "created": 1791870025,
- "updated": 1791870025,
+ "updated": 1794935752,
  "cat": {
   "title": "Rugs and carpets in the Calouste Gulbenkian Museum",
   "museum": "",
@@ -79,7 +79,87 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238555
+  "t": 1794238555,
+  "ref_quad": {
+   "quad": [
+    [
+     -0.00061,
+     0.01074
+    ],
+    [
+     0.99685,
+     0.01071
+    ],
+    [
+     0.98705,
+     0.97352
+    ],
+    [
+     0.00927,
+     0.97347
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1794935747
+  }
  },
- "multi": []
+ "multi": [],
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1794935721
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794935752,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00061,
+    0.01074
+   ],
+   [
+    0.99685,
+    0.01071
+   ],
+   [
+    0.98705,
+    0.97352
+   ],
+   [
+    0.00927,
+    0.97347
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
