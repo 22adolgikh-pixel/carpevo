@@ -319,26 +319,41 @@ def install(app, DATA, D_WORK):
     NOT_COMP = {"baku", "baki", "absheron", "abseron", "guba", "kuba", "sirvan", "karabah", "karabag", "garabag", "karabak", "tebriz", "tabriz",
                 "gazah", "kazah", "kazak", "gence", "ganja", "genje", "nahcivan", "nakhcivan", "talis", "mugan", "sumah", "sumag", "sumak", "palaz",
                 "kilim", "zili", "cecim", "verni", "hunting", "susa", "shusha", "lenkeran", "lenkoran", "derbend", "dagestan", "zagatala", "ardabil",
-                "ardebil", "heriz", "salyan", "sahdag", "carpet", "rugs", "xalca", "halca"}
+                "ardebil", "heriz", "salyan", "sahdag", "carpet", "rugs", "xalca", "halca", "nahicevan", "nahcevan"}
     CV = {}
     for d in DICT:
         if d["type"] != "composition": continue
         for n in [d["az"], d["ru"], d.get("tr") or ""] + d["names"]:
             if not n or n.startswith("motif_") or "?" in n: continue
             k = re.sub(r"[^a-z]", "", fold(n).replace("j", "c"))
-            if len(k) >= 4 and k not in NOT_COMP: CV.setdefault(k, d["id"])
+            if len(k) >= 4 and k not in NOT_COMP and d["id"] not in CV.setdefault(k, []): CV[k].append(d["id"])
+    # v11.85: fold сводит q и g, поэтому «qollu çiçi» и «göllü çiçi» дают один ключ. При совпадении ключа выбираем тип,
+    # чьё написание (с q/g) стоит в тексте; иначе тот, что чаще уже подтверждён в каталоге (CPOP считает api_rugs).
+    CPOP = {}
+    GROUP_WORDS = {"group", "grupu", "qrupu", "grubu", "school", "mektebi", "region", "district", "rayonu", "village", "kendi"}
+
+    def _qfold(s):
+        return re.sub(r"[^a-zq]", "", fold((s or "").lower().replace("q", "ǫ")).replace("ǫ", "q").replace("j", "c"))
+
+    def _pick(ids, raw):
+        if len(ids) == 1: return ids[0]
+        rq = _qfold(raw)
+        hit = [i for i in ids if any(_qfold(n) and _qfold(n) in rq for n in [BYID[i]["az"]] + BYID[i]["names"] if n and "?" not in n and not n.startswith("motif_"))]
+        cand = hit if len(hit) == 1 else (hit or ids)
+        return max(cand, key=lambda i: CPOP.get(i, 0))
 
     def comp_from_text(*texts):
         """«Pirəbədil carpet, Quba group», «Ковёр Касымушагы», «Hajigayib rug» → (id, слово) или ("", ""). Самое длинное совпадение
         (1–3 слова подряд): «Qollu çiçi» важнее «çiçi»."""
-        best = ("", "", 0)
+        best = ("", "", 0, "")
         for t in texts:
             toks = re.findall(r"[a-z]+", fold(t or "").replace("j", "c"))
             for n in (3, 2, 1):
                 for i in range(len(toks) - n + 1):
                     k = "".join(toks[i:i + n])
-                    if k in CV and len(k) > best[2]: best = (CV[k], " ".join(toks[i:i + n]), len(k))
-        return best[0], best[1]
+                    if i + n < len(toks) and toks[i + n] in GROUP_WORDS: continue     # v11.85: «Barda group», «Bərdə qrupu» — это группа, не тип
+                    if k in CV and len(k) > best[2]: best = (CV[k], " ".join(toks[i:i + n]), len(k), t)
+        return (_pick(best[0], best[3]) if best[0] else ""), best[1]
 
     _cg = {}
 
@@ -364,6 +379,44 @@ def install(app, DATA, D_WORK):
                 return {"id": c, "why": f"у двойника{' (проверен ✓)' if okd else ''}: {(o.get('title') or i)[:60]}", "kind": "twin", "from": i}
         g = comp_guess_text(r)
         return g if g and g["id"] not in cno else None
+
+    # ---- v11.85: название ковра = его тип (композиция); подпись источника остаётся в title ----
+    def comp_school(cid):
+        """школа типа по словарю, если она одна (у 168 из 228 типов); иначе пусто"""
+        sc = {{"baku": "guba-shirvan"}.get(x, x) for x in (BYID.get(cid) or {}).get("schools") or []}   # Баку у Керимова — в группе Губа-Ширван
+        return next(iter(sc)) if len(sc) == 1 and next(iter(sc)) in SCHOOLS else ""
+
+    def school_by_type(r):
+        """пустая школа + тип с одной школой → ставим школу по типу. Заполненную не трогаем (расхождение видно в паспорте)."""
+        if r.get("school") or r.get("composition") not in BYID: return False
+        s = comp_school(r["composition"])
+        if not s: return False
+        r["school"] = s; r["school_by"] = f"по типу ковра «{BYID[r['composition']]['az']}»"
+        return True
+
+    def _mtitle(r):
+        """подпись ковра на карточках /m: подтверждённый тип + музей/книга, иначе подпись источника"""
+        d = disp_name(r)
+        return (d["nm"] + (" · " + d["nm_sub"] if d["nm_sub"] else "")) if d["nm"] else r.get("title", "")
+
+    BOOK_RE = re.compile(r"^((?:Керимов|Журнал)[^,(]*(?:,\s*т\.\s*[IVX]+)?)(?:,\s*((?:табл|Табл|Рис|рис)\.?\s*\d+))?")
+
+    def disp_name(r, guess=None):
+        """{nm, nm_sub, nm_q}: тип ковра (подтверждённый или предположенный, nm_q=1) и то, чем этот ковёр отличается от других
+        того же типа: музей и инв. номер, иначе ссылка на книгу. Нет типа — nm пустое, показывается подпись источника."""
+        cid = r.get("composition") if r.get("composition") in BYID else ""
+        q = 0
+        if not cid and guess and guess.get("id") in BYID: cid, q = guess["id"], 1
+        d = BYID.get(cid) or {}
+        sub = ""
+        mus, inv = (r.get("museum") or "").strip(), (r.get("inv") or "").strip()
+        if re.search(r"wikimedia|commons|wikipedia", mus, re.I): mus = ""          # это хостинг фото, а не собрание
+        if mus: sub = mus[:50] + (f", инв. {inv[:20]}" if inv else "")
+        else:
+            m = BOOK_RE.match(r.get("title") or "")
+            if m: sub = m.group(1) + (", " + m.group(2) if m.group(2) else "")
+        nm = d.get("az") or d.get("ru") or ""
+        return {"nm": nm[:1].upper() + nm[1:], "nm_sub": sub, "nm_q": q}
 
     # ---- v11.6: что на фото — ковёр, изделие (сумка, конское снаряжение, бытовое) или вообще не фото ковра ----
     OBJ = {"carpet": "ковёр", "bag": "сумка, мешок", "horse": "конское снаряжение", "home": "бытовое изделие", "scene": "не фото ковра"}
@@ -654,18 +707,27 @@ def install(app, DATA, D_WORK):
                 r = load(rid)
                 if not r: continue
                 c = _sum[rid] = (k, None if r.get("dup_of") else summary(r), {"composition": r.get("composition"), "title": r.get("title"), "same": r.get("same"),
-                                  "same_ok": r.get("same_ok"), "cat": {x: (r.get("cat") or {}).get(x) for x in ("names", "composition_name")}, "id": rid, "updated": r.get("updated", 0)})
+                                  "same_ok": r.get("same_ok"), "cat": {x: (r.get("cat") or {}).get(x) for x in ("names", "composition_name")}, "id": rid, "updated": r.get("updated", 0),
+                                  "museum": r.get("museum", ""), "inv": r.get("inv", ""), "school": r.get("school", "")})
             if c[1]: out.append(dict(c[1])); full[rid] = c[2]
         for rid in [x for x in _sum if x not in seen]: _sum.pop(rid, None)
         for sm in out: sm["q"] = photo_q(sm)                    # v11.22: качество фото — не в кэше сводки (кэш отпечатков обновляется отдельно)
+        pop = {}
+        for sm in out:
+            if sm["composition"] in BYID: pop[sm["composition"]] = pop.get(sm["composition"], 0) + 1
+        if pop != CPOP: CPOP.clear(); CPOP.update(pop); _cg.clear()      # v11.85: частота типов — для выбора между q/g-двойниками словаря
+        nsch = 0
         for sm in out:                                          # v11.5: предположение типа ковра
-            if sm["composition"] in BYID: continue
-            g = comp_guess(full[sm["id"]], {i: {"composition": full[i].get("composition"), "title": full[i].get("title")} for i in sm["same_ids"] if i in full})
-            if g: sm["comp_sug"] = g["id"]; sm["comp_sug_kind"] = g["kind"]
+            g = None
+            if sm["composition"] not in BYID:
+                g = comp_guess(full[sm["id"]], {i: {"composition": full[i].get("composition"), "title": full[i].get("title")} for i in sm["same_ids"] if i in full})
+                if g: sm["comp_sug"] = g["id"]; sm["comp_sug_kind"] = g["kind"]
+            elif not sm["school"] and comp_school(sm["composition"]): sm["sch_by_type"] = comp_school(sm["composition"]); nsch += 1
+            sm.update(disp_name(full[sm["id"]], g))             # v11.85: название = тип ковра + музей/книга
         out.sort(key=lambda s: (s["status"] == "done", -s["updated"]))
         try: figures_by_concept(); elx = {k: len(v) for k, v in figcache["exp"].items() if v}
         except Exception: elx = {}
-        return {"rugs": out, "import": imp, "zones": ZONES, "schools": SCHOOLS, "elx": elx}
+        return {"rugs": out, "import": imp, "zones": ZONES, "schools": SCHOOLS, "elx": elx, "sch_by_type": nsch}
 
     @app.get("/api/rugs/{rid}")
     def api_rug(rid: str):
@@ -675,9 +737,10 @@ def install(app, DATA, D_WORK):
             d = BYID.get(m.get("motif") or "")
             m["_motif"] = {"az": d["az"], "ru": d["ru"], "tr": d["tr"]} if d else None
         c = BYID.get(r.get("composition") or "")
-        r["_composition"] = {"az": c["az"], "ru": c["ru"]} if c else None
+        r["_composition"] = {"az": c["az"], "ru": c["ru"], "school": comp_school(c["id"])} if c else None
         g = comp_guess(r)
         if g: g["az"], g["ru"] = BYID[g["id"]]["az"], BYID[g["id"]]["ru"]; r["comp_suggest"] = g
+        r["_nm"] = disp_name(r, g)
         r["same"] = [x for x in r.get("same") or [] if not (load(x.get("id") or "") or {}).get("dup_of")]
         for x in r.get("same") or []:
             o = load(x["id"]) or {}
@@ -696,6 +759,8 @@ def install(app, DATA, D_WORK):
             if not r: return JSONResponse({"error": "нет такого ковра"}, 404)
             for k in ("title", "museum", "inv", "url", "license", "place", "date", "school", "composition", "technique", "size", "notes", "status"):
                 if k in b: r[k] = str(b[k] or "")[:2000]
+            if "composition" in b and r.get("composition") and r.get("composition") not in BYID: r["composition"] = comp_id(r["composition"]) or r["composition"]
+            if school_by_type(r): r["updated_by"] = who                     # v11.85: пустая школа ← школа типа
             if b.get("school_suggest") is None and "school_suggest" in b: r.pop("school_suggest", None)
             if "layout" in b: r["layout"] = b["layout"] if isinstance(b["layout"], dict) else None
             if b.get("multi_no"): r["multi"] = []                     # «это один ковёр, не делить»
@@ -2000,7 +2065,19 @@ def install(app, DATA, D_WORK):
                 g = comp_guess(r)
                 if not g or (b.get("kind") and g["kind"] != b["kind"]): continue
                 r["composition"] = g["id"]; r["composition_by"] = f"{who} (предложено: {g['why']})"; r["updated"], r["updated_by"] = now, who
-                save(r); n += 1
+                school_by_type(r); save(r); n += 1
+        return {"ok": True, "n": n}
+
+    @app.post("/api/rugs_school_from_type")
+    async def api_rugs_school_from_type(request: Request):
+        """v11.85: у всех ковров с типом и без школы ставит школу типа (если у типа по словарю одна школа)"""
+        who = user(request); n = 0; now = int(time.time())
+        with _lock:
+            for f in os.listdir(D_RUGS):
+                if not f.endswith(".json"): continue
+                r = load(f[:-5])
+                if not r or r.get("dup_of") or not school_by_type(r): continue
+                r["updated"], r["updated_by"] = now, who; save(r); n += 1
         return {"ok": True, "n": n}
 
     def split_do(rid, b, who):
@@ -2213,7 +2290,7 @@ def install(app, DATA, D_WORK):
         except Exception: pw = None
         row = {"id": rid, "use": use_of(r)[0], "seen": bool(a), "pw": pw, "conf": a.get("conf", 0), "aframe": a.get("frame"), "frame": r.get("frame", ""),
                "frame_by": r.get("frame_by", ""), "qs": L.get("quad_status", ""), "quad": L.get("quad"), "aquad": a.get("quad"),
-               "who": {t: list((m.get(t) or {}).keys()) for t in ("frame", "quad")}, "title": r.get("title", ""), "w": r.get("w"), "h": r.get("h"),
+               "who": {t: list((m.get(t) or {}).keys()) for t in ("frame", "quad")}, "title": _mtitle(r), "w": r.get("w"), "h": r.get("h"),
                "vquad": ((a.get("vlm_quad") or {}).get("quad")) if ((a.get("vlm_quad") or {}).get("v", 1) >= vlm_corners.VERSION) else None,   # v11.47/v11.50: углы модели (старые v1 — без уточнения — пересчитываются)
                "fr_old": r.get("frame") in FR_OLD,                                # применён снятый ответ — спросить заново
                "old_who": [u for u, v in (m.get("frame") or {}).items() if (v or {}).get("a") in FR_OLD],
@@ -2752,6 +2829,7 @@ def install(app, DATA, D_WORK):
             if not x or not y or x["dead"] or y["dead"] or b in x["sd"] or a in y["sd"] or b in x["sm"] or a in y["sm"]: continue
             if me in x["mv"]["same"].get(b, []) or me in y["mv"]["same"].get(a, []): continue
             if _pair_gate(x, y): continue                                        # v11.79: пропорции / размер / цвет не сходятся
+            if x["comp"] and y["comp"] and x["comp"] != y["comp"]: continue     # v11.85: типы подтверждены и разные — это разные ковры
             out.append({"type": "same", "rid": a, "other": b, "title2": y["title"], "src": x["src"], "src2": y["src"], "rect": True, "inl": v["n"], "sim": v["sim"]})
         out.sort(key=lambda t: -t["inl"])                                         # v11.79: самые надёжные — первыми (раньше «возможно» шли первыми)
         return out
@@ -2802,9 +2880,10 @@ def install(app, DATA, D_WORK):
                     # как «тот же» с одним и тем же третьим ковром; иначе цепочка из одной ложной склейки тянет в карточки совсем разные ковры
                     if not ev.get("sc") and not ev.get("inv") and not (ev.get("inl") or 0) >= RP_MAYBE and not (set(x["sy"]) & set(y["sy"])): continue
                     if _pair_gate(by[a], by[b]): out["same_gated"] = out.get("same_gated", 0) + 1; continue
+                    if by[a]["comp"] and by[b]["comp"] and by[a]["comp"] != by[b]["comp"]: out["same_typed"] = out.get("same_typed", 0) + 1; continue   # v11.85
                     out["same"].append({"type": "same", "rid": a, "other": b, "title2": by[b]["title"], "src": by[a]["src"], "src2": by[b]["src"], "rect": _both_rect(by[a], by[b]),
                                         "inl": max(ev.get("inl") or 0, ev.get("sc") or 0) or None})
-        out["same"].sort(key=lambda t: -(t.get("inl") or 0))                       # v11.79: где больше общих точек — первыми
+        out["same"].sort(key=lambda t: (not (by[t["rid"]]["comp"] and by[t["rid"]]["comp"] == by[t["other"]]["comp"]), -(t.get("inl") or 0)))   # v11.85: один тип — первыми; дальше где больше общих точек
         out["split"].sort(key=lambda t: (not t["cat"].startswith("kerimov"), t["rid"]))        # Керимов — главный источник: его развороты первыми
         out["marks"].sort(key=lambda t: (t["sample"] is None, t["rid"]))          # сначала группы с образцом: вопрос «тот же?» проще, чем «элемент ли это?»
         out["comp"].sort(key=lambda t: (t["kind"] != "twin", t["cid"]))            # по двойнику надёжнее; дальше подряд один тип — глаз привыкает
@@ -2961,6 +3040,7 @@ def install(app, DATA, D_WORK):
                 d = M.setdefault(cid, {}); d[me] = {"a": a, "w": w, "t": now}; rec["cid"] = cid
                 if sumw(d, "yes") >= 2 and r.get("composition") not in BYID:
                     r["composition"] = cid; r["composition_by"] = "/m: " + ", ".join(sorted(u for u, x in d.items() if x["a"] == "yes")); applied = "comp"
+                    school_by_type(r)
                 elif sumw(d, "no") >= 2:
                     if cid not in (r.get("comp_no") or []): r.setdefault("comp_no", []).append(cid)
                     applied = "comp_no"

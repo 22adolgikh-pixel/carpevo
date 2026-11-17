@@ -1721,6 +1721,53 @@ def t42_marks_near_fix_v1182(pg, ctx):
     mc.close()
 
 
+@test
+def t43_rug_names_v1185(pg, ctx):
+    """v11.85: название ковра = тип (композиция) + музей/книга; подпись источника остаётся в title. Q/G-двойники словаря различаются
+    по написанию; «X group» — не тип; школа ставится по типу; пара двойников с разными подтверждёнными типами не идёт в /m."""
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    import cv2, numpy as np
+    img = np.full((300, 200, 3), 120, np.uint8)
+    def mk(rid, **kw):
+        cv2.imwrite(f'{D}/rug_img/{rid}.jpg', img)
+        r = {"id": rid, "title": "", "source": "тест", "museum": "", "inv": "", "school": "", "composition": "", "status": "new", "w": 200, "h": 300,
+             "marks": [], "created": now, "updated": now, "cat": {"src": "azcarpetmuseum"}}
+        r.update(kw); json.dump(r, open(f'{D}/rugs/{rid}.json', 'w'), ensure_ascii=False)
+    mk("nm_q", title="Ковёр «Qollu Çiçi» Губа")
+    mk("nm_g", title="Göllü çiçi xalçası")
+    mk("nm_grp", title="Azerbaijani carpet \"Unknown\" (Barda group) of Karabakh")
+    mk("nm_ok", title="Pirəbədil carpet, Quba", composition="pirebedil", museum="Национальный музей азербайджанского ковра", inv="1234")
+    mk("nm_book", title="Керимов, т. I, табл. 202, фото 1 (стр. скана 324)", composition="zeyve", cat={"src": "kerimov_vol1"})
+    mk("nm_w1", title="twin a", composition="pirebedil", same=[{"id": "nm_w2", "score": 40}])
+    mk("nm_w2", title="twin b", composition="zeyve", same=[{"id": "nm_w1", "score": 40}])
+    mk("nm_w3", title="twin c", composition="pirebedil", same=[{"id": "nm_w4", "score": 40}])
+    mk("nm_w4", title="twin d", composition="pirebedil", same=[{"id": "nm_w3", "score": 40}])
+    by = {r["id"]: r for r in get(u + 'api/rugs')["rugs"]}
+    q, g, grp, ok, bk = by["nm_q"], by["nm_g"], by["nm_grp"], by["nm_ok"], by["nm_book"]
+    assert q.get("comp_sug") == "qollu-chichi" and q["nm_q"] == 1 and q["nm"].lower() == "qollu çiçi", q
+    assert g.get("comp_sug") == "golluchichi", g
+    assert not grp.get("comp_sug"), ("«Barda group» — группа, не тип", grp.get("comp_sug"))
+    assert ok["nm"] == "Pirəbədil" and ok["nm_q"] == 0 and ok["nm_sub"] == "Национальный музей азербайджанского ковра, инв. 1234", ok
+    assert ok["title"] == "Pirəbədil carpet, Quba"                       # подпись источника не тронута
+    assert bk["nm_sub"] == "Керимов, т. I, табл. 202", bk
+    assert ok.get("sch_by_type") == "guba-shirvan"
+    n = post(u + 'api/rugs_school_from_type', {})["n"]; assert n >= 2, n
+    r = get(u + 'api/rugs/nm_ok'); assert r["school"] == "guba-shirvan" and "по типу" in r.get("school_by", ""), r.get("school")
+    assert r["_nm"]["nm"] == "Pirəbədil" and r["_composition"]["school"] == "guba-shirvan"
+    # тип, поставленный в паспорте, заполняет пустую школу
+    r = post(u + 'api/rugs/nm_g', {"composition": "berde", "school": ""}); assert r["school"] == "karabakh", r["school"]
+    # /m: пара двойников с разными подтверждёнными типами не спрашивается
+    j = get(u + 'api/micro/next?k=same&n=50')
+    pairs = [{t["rid"], t["other"]} for t in j.get("tasks", []) if t.get("type") == "same"]
+    assert {"nm_w1", "nm_w2"} not in pairs, pairs
+    assert {"nm_w3", "nm_w4"} in pairs, ("контроль: пара одного типа спрашивается", pairs)
+    # студия: в плитке название — тип, подпись — во всплывающей подсказке
+    pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(2500)
+    pg.evaluate("()=>{R.fuse='';R.q='pirəbədil carpet';rugList();}"); pg.wait_for_timeout(600)
+    t = pg.inner_text('.rgcard[data-id="nm_ok"] .t'); assert t.startswith("Pirəbədil") and "инв. 1234" in t, t
+    errors_ok(ctx, 'названия ковров')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
