@@ -3159,10 +3159,10 @@
   {
    "id": "m6af8da6ce735008_10",
    "box": [
-    0.52387,
-    0.61328,
-    0.11355,
-    0.04395
+    0.54483,
+    0.63159,
+    0.13713,
+    0.05964
    ],
    "zone": "other",
    "motif": "deve",
@@ -3170,7 +3170,7 @@
    "scheme": "t22_f03",
    "group": "m6af8da6ce735008_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "angle": 0,
    "flip": 0,
@@ -3274,8 +3274,8 @@
    ],
    "by": "машина",
    "at": 1794756014,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794929707,
    "box0": [
     0.53571,
     0.62162,
@@ -3283,7 +3283,9 @@
     0.02703
    ],
    "refined": 4,
-   "sam": 0.884
+   "sam": 0.884,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794929707
   },
   {
    "id": "m6af8da6ce735008_11",
@@ -3299,7 +3301,7 @@
    "scheme": "t22_f03",
    "group": "m6af8da6ce735008_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "angle": 0,
    "flip": 0,
@@ -3396,7 +3398,7 @@
    "scheme": "t104_f04",
    "group": "m6af8daf2e287103_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 1",
    "angle": 0,
    "flip": 0,
@@ -3585,7 +3587,7 @@
    "scheme": "",
    "group": "",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -3595,8 +3597,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1794756014,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794929762
   },
   {
    "id": "m6afa2c01e326874_11",
@@ -5332,7 +5334,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794929671,
+ "updated": 1794929762,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -5556,6 +5558,34 @@
      "a": "ok",
      "w": 2,
      "t": 1794929671
+    }
+   },
+   "m6af8da6ce735008_11": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794929707
+    }
+   },
+   "m6af8da6ce735008_10": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794929707
+    }
+   },
+   "m6af8daf2e287103_11": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794929743
+    }
+   },
+   "mmwhze3d8": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794929762
     }
    }
   }

@@ -18,7 +18,7 @@
  "h": 1799,
  "marks": [],
  "created": 1794547278,
- "updated": 1794773599,
+ "updated": 1794929754,
  "cat": {
   "title": "Ковёр «Novxanı» Баку",
   "museum": "",
@@ -116,8 +116,49 @@
     "w": 2,
     "t": 1794773599
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794929754,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04289,
+    0.04546
+   ],
+   [
+    0.96105,
+    0.04085
+   ],
+   [
+    0.95894,
+    0.96101
+   ],
+   [
+    0.04123,
+    0.95941
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

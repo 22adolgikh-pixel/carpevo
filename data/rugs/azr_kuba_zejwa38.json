@@ -18,7 +18,7 @@
  "h": 1884,
  "marks": [],
  "created": 1791736134,
- "updated": 1794597210,
+ "updated": 1794929733,
  "cat": {
   "title": "kuba zejwa38",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794597210
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794929733,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04595,
+    0.02894
+   ],
+   [
+    0.93032,
+    0.01903
+   ],
+   [
+    0.97079,
+    0.96887
+   ],
+   [
+    0.02273,
+    0.96071
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

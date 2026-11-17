@@ -18,7 +18,7 @@
  "h": 1024,
  "marks": [],
  "created": 1791736136,
- "updated": 1794597265,
+ "updated": 1794929691,
  "cat": {
   "title": "kuba119",
   "museum": "",
@@ -110,8 +110,49 @@
     "w": 2,
     "t": 1794597265
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794929691,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05758,
+    0.02807
+   ],
+   [
+    0.92713,
+    0.01648
+   ],
+   [
+    0.92955,
+    0.95559
+   ],
+   [
+    0.07033,
+    0.97373
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
