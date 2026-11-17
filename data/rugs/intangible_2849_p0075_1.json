@@ -4234,7 +4234,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d3ae302014_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.682,
@@ -4422,7 +4422,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d3ae302014_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.669,
@@ -4614,7 +4614,7 @@
    "scheme": "t104_f04",
    "group": "m6afa2d89e302014_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.716,
@@ -4766,7 +4766,9 @@
      0.60645
     ]
    ],
-   "sam": 0.912
+   "sam": 0.912,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794930077
   },
   {
    "id": "m6afb7d98e926517_1",
@@ -4782,7 +4784,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.692,
@@ -4847,10 +4849,10 @@
   {
    "id": "m6afb7d98e926517_4",
    "box": [
-    0.53548,
-    0.4248,
-    0.1329,
-    0.04395
+    0.52628,
+    0.41705,
+    0.16357,
+    0.05636
    ],
    "zone": "other",
    "motif": "deve",
@@ -4858,7 +4860,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.661,
@@ -4962,15 +4964,19 @@
      0.4248
     ]
    ],
-   "sam": 0.938
+   "sam": 0.938,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794930143,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794930143
   },
   {
    "id": "m6afb7d98e926517_5",
    "box": [
     0.32258,
-    0.19824,
-    0.10968,
-    0.04004
+    0.18023,
+    0.1409,
+    0.05805
    ],
    "zone": "other",
    "motif": "deve",
@@ -4978,7 +4984,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.658,
@@ -5062,15 +5068,19 @@
      0.2207
     ]
    ],
-   "sam": 0.83
+   "sam": 0.83,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794930143,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794930143
   },
   {
    "id": "m6afb7dc7e926517_3",
    "box": [
     0.32129,
-    0.58301,
-    0.14839,
-    0.10352
+    0.63224,
+    0.16551,
+    0.05429
    ],
    "zone": "other",
    "motif": "deve",
@@ -5078,7 +5088,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7dc7e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.654,
@@ -5194,7 +5204,11 @@
      0.58398
     ]
    ],
-   "sam": 0.938
+   "sam": 0.938,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794930162,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794930162
   },
   {
    "id": "m6afb7e89e63685_6",
@@ -5210,7 +5224,7 @@
    "scheme": "t104_f04",
    "group": "m6afb7e89e63685_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.682,
@@ -5338,7 +5352,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794929948,
+ "updated": 1794930197,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -5639,6 +5653,62 @@
      "a": "ok",
      "w": 2,
      "t": 1794929948
+    }
+   },
+   "m6afa2d3ae302014_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794930065
+    }
+   },
+   "m6afa2d3ae302014_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794930065
+    }
+   },
+   "m6afa2d89e302014_5": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794930077
+    }
+   },
+   "m6afb7d98e926517_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794930143
+    }
+   },
+   "m6afb7d98e926517_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794930143
+    }
+   },
+   "m6afb7d98e926517_5": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794930143
+    }
+   },
+   "m6afb7dc7e926517_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794930162
+    }
+   },
+   "m6afb7e89e63685_6": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794930197
     }
    }
   }

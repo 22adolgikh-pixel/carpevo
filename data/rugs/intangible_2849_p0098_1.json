@@ -18,7 +18,7 @@
  "h": 1811,
  "marks": [],
  "created": 1794547278,
- "updated": 1794597190,
+ "updated": 1794930172,
  "cat": {
   "title": "Ковёр «Cimi» Губа",
   "museum": "",
@@ -116,8 +116,49 @@
     "w": 2,
     "t": 1794597190
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1794930172,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0892,
+    0.02184
+   ],
+   [
+    0.92535,
+    0.01924
+   ],
+   [
+    0.92525,
+    0.97816
+   ],
+   [
+    0.08554,
+    0.97153
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
