@@ -31,7 +31,7 @@
    "scheme": "t155_f03",
    "group": "m6af78ab2e945050_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.89,
@@ -151,7 +151,7 @@
    "scheme": "t155_f03",
    "group": "m6af78ab2e945050_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.881,
@@ -327,7 +327,7 @@
    "scheme": "t155_f03",
    "group": "m6af78ab2e945050_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.879,
@@ -479,7 +479,7 @@
    "scheme": "t155_f03",
    "group": "m6af78ab2e945050_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.878,
@@ -615,7 +615,7 @@
    "scheme": "t155_f03",
    "group": "m6af78ab2e945050_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.868,
@@ -715,7 +715,7 @@
    "scheme": "t155_f03",
    "group": "m6af78ab2e945050_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.868,
@@ -875,7 +875,7 @@
    "scheme": "t155_f03",
    "group": "m6af78ab2e945050_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.867,
@@ -991,7 +991,7 @@
    "scheme": "t155_f03",
    "group": "m6afa2e89e259547_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.846,
@@ -1139,7 +1139,7 @@
    "scheme": "t155_f03",
    "group": "m6afa2e89e259547_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.837,
@@ -1295,7 +1295,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794780816,
+ "updated": 1794936454,
  "cat": {
   "title": "Ковёр «Şıxlı» Газах",
   "museum": "",
@@ -1362,5 +1362,72 @@
   "ver": 1,
   "at": 1794547482
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "marks": {
+   "m6af78ab2e945050_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936439
+    }
+   },
+   "m6af78ab2e945050_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936439
+    }
+   },
+   "m6af78ab2e945050_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936439
+    }
+   },
+   "m6af78ab2e945050_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936439
+    }
+   },
+   "m6af78ab2e945050_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936439
+    }
+   },
+   "m6af78ab2e945050_6": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936439
+    }
+   },
+   "m6af78ab2e945050_7": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936439
+    }
+   },
+   "m6afa2e89e259547_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936454
+    }
+   },
+   "m6afa2e89e259547_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936454
+    }
+   }
+  }
+ }
 }
