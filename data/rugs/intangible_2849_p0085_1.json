@@ -1930,10 +1930,10 @@
   {
    "id": "m6afb7da7e215698_6",
    "box": [
-    0.52739,
-    0.26172,
-    0.08138,
-    0.03711
+    0.53741,
+    0.27369,
+    0.077,
+    0.02938
    ],
    "zone": "other",
    "motif": "deve",
@@ -1941,7 +1941,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7da7e215698_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.703,
@@ -2029,7 +2029,11 @@
      0.2666
     ]
    ],
-   "sam": 0.872
+   "sam": 0.872,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794930616,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794930616
   },
   {
    "id": "m6afb7da7e215698_8",
@@ -2045,7 +2049,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7da7e215698_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.694,
@@ -2125,7 +2129,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7da7e215698_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.676,
@@ -2289,7 +2293,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7da7e215698_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 1",
    "machine": 1,
    "score": 0.674,
@@ -2357,7 +2361,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794930585,
+ "updated": 1794930616,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -2558,6 +2562,34 @@
      "a": "ok",
      "w": 2,
      "t": 1794930585
+    }
+   },
+   "m6afb7da7e215698_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794930616
+    }
+   },
+   "m6afb7da7e215698_10": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794930616
+    }
+   },
+   "m6afb7da7e215698_11": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794930616
+    }
+   },
+   "m6afb7da7e215698_6": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794930616
     }
    }
   }
