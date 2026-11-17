@@ -20,10 +20,10 @@
   {
    "id": "m6af788dae599391_0",
    "box": [
-    0.3267,
-    0.2959,
-    0.07955,
-    0.03027
+    0.39641,
+    0.31327,
+    0.08045,
+    0.03494
    ],
    "zone": "other",
    "motif": "deve",
@@ -31,7 +31,7 @@
    "scheme": "t22_f03",
    "group": "m6af788dae599391_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.709,
@@ -115,15 +115,25 @@
      0.29883
     ]
    ],
-   "sam": 0.837
+   "sam": 0.837,
+   "near_by": "dolgikh",
+   "near_at": 1794936171,
+   "near_wait": true,
+   "rf": 1,
+   "rf_s": 0.549,
+   "rf_moved": 0.85,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794936208,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794936208
   },
   {
    "id": "m6af788dae599391_1",
    "box": [
-    0.48153,
-    0.7793,
-    0.18182,
-    0.04688
+    0.53608,
+    0.76594,
+    0.06294,
+    0.04116
    ],
    "zone": "other",
    "motif": "deve",
@@ -131,7 +141,7 @@
    "scheme": "t22_f03",
    "group": "m6af788dae599391_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.705,
@@ -271,7 +281,11 @@
      0.7832
     ]
    ],
-   "sam": 0.795
+   "sam": 0.795,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794936171,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794936171
   },
   {
    "id": "m6af788dae599391_2",
@@ -287,7 +301,7 @@
    "scheme": "t22_f03",
    "group": "m6af788dae599391_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.696,
@@ -399,7 +413,7 @@
    "scheme": "t22_f03",
    "group": "m6af788dae599391_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.693,
@@ -552,10 +566,10 @@
   {
    "id": "m6af788dae599391_4",
    "box": [
-    0.54403,
-    0.31836,
-    0.05114,
-    0.02246
+    0.53262,
+    0.31162,
+    0.07199,
+    0.03594
    ],
    "zone": "other",
    "motif": "deve",
@@ -563,7 +577,7 @@
    "scheme": "t22_f03",
    "group": "m6af788dae599391_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.693,
@@ -619,7 +633,11 @@
      0.32031
     ]
    ],
-   "sam": 0.92
+   "sam": 0.92,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794936171,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794936171
   },
   {
    "id": "m6af788dae599391_5",
@@ -635,7 +653,7 @@
    "scheme": "t22_f03",
    "group": "m6af788dae599391_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.691,
@@ -764,10 +782,10 @@
   {
    "id": "m6af788dae599391_7",
    "box": [
-    0.31818,
-    0.6709,
-    0.1321,
-    0.04004
+    0.38829,
+    0.66605,
+    0.08028,
+    0.03312
    ],
    "zone": "other",
    "motif": "deve",
@@ -775,7 +793,7 @@
    "scheme": "t22_f03",
    "group": "m6af788dae599391_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.669,
@@ -911,15 +929,19 @@
      0.68848
     ]
    ],
-   "sam": 0.888
+   "sam": 0.888,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794936171,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794936171
   },
   {
    "id": "m6af788dae599391_8",
    "box": [
-    0.44318,
-    0.375,
-    0.11364,
-    0.03223
+    0.35897,
+    0.38281,
+    0.09687,
+    0.04688
    ],
    "zone": "other",
    "motif": "deve",
@@ -927,7 +949,7 @@
    "scheme": "t22_f03",
    "group": "m6af788dae599391_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.669,
@@ -1055,15 +1077,21 @@
      0.37988
     ]
    ],
-   "sam": 0.854
+   "sam": 0.854,
+   "near_by": "dolgikh",
+   "near_at": 1794936171,
+   "near_wait": true,
+   "rf": 1,
+   "rf_s": 0.547,
+   "rf_moved": 0.826
   },
   {
    "id": "m6af788dae599391_10",
    "box": [
-    0.26989,
-    0.64258,
-    0.12926,
-    0.03027
+    0.39517,
+    0.66763,
+    0.07954,
+    0.03298
    ],
    "zone": "other",
    "motif": "deve",
@@ -1071,7 +1099,7 @@
    "scheme": "t22_f03",
    "group": "m6af788dae599391_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.666,
@@ -1191,15 +1219,19 @@
      0.64258
     ]
    ],
-   "sam": 0.786
+   "sam": 0.786,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1794936171,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794936171
   },
   {
    "id": "m6af788dae599391_11",
    "box": [
-    0.55398,
-    0.42871,
-    0.12216,
-    0.04297
+    0.55352,
+    0.39496,
+    0.08257,
+    0.03992
    ],
    "zone": "other",
    "motif": "deve",
@@ -1207,7 +1239,7 @@
    "scheme": "t22_f03",
    "group": "m6af788dae599391_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.664,
@@ -1303,7 +1335,10 @@
      0.42969
     ]
    ],
-   "sam": 0.843
+   "sam": 0.843,
+   "rf": 1,
+   "rf_s": 0.53,
+   "rf_moved": 0.333
   },
   {
    "id": "m6af78971e610078_0",
@@ -3315,7 +3350,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794866825,
+ "updated": 1794936208,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -3382,5 +3417,79 @@
   "ver": 1,
   "at": 1794547441
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "marks": {
+   "m6af788dae599391_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936171
+    }
+   },
+   "m6af788dae599391_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936171
+    }
+   },
+   "m6af788dae599391_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936171
+    }
+   },
+   "m6af788dae599391_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794936171
+    }
+   },
+   "m6af788dae599391_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794936171
+    }
+   },
+   "m6af788dae599391_7": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794936171
+    }
+   },
+   "m6af788dae599391_10": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794936171
+    }
+   },
+   "m6af788dae599391_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936208
+    }
+   },
+   "m6af788dae599391_11": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936208
+    }
+   },
+   "m6af788dae599391_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794936208
+    }
+   }
+  }
+ }
 }

@@ -18,7 +18,7 @@
  "h": 1134,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794936076,
  "cat": {
   "title": "antique kazak prayer rug47",
   "museum": "",
@@ -50,6 +50,14 @@
   {
    "id": "azr_antique_kazak_sewan_rug107",
    "score": 54
+  },
+  {
+   "id": "azr_antique_kazak_sewan_rug107_1",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_sewan_rug107_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +65,18 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1792271544
+  },
+  "azr_antique_kazak_sewan_rug107_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794936060,
+   "similar": true
+  },
+  "azr_antique_kazak_sewan_rug107_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794936076,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -99,5 +119,23 @@
   "area": 0.846,
   "ver": 1,
   "t": 1794238325
+ },
+ "micro": {
+  "same": {
+   "azr_antique_kazak_sewan_rug107_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794936060
+    }
+   },
+   "azr_antique_kazak_sewan_rug107_2": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794936076
+    }
+   }
+  }
  }
 }

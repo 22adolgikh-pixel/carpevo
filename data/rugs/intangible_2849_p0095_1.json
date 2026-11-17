@@ -1432,7 +1432,7 @@
    "scheme": "t40_f03",
    "group": "m6afa2ddee563781_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qapı naxışı",
    "machine": 1,
    "score": 0.603,
@@ -1508,7 +1508,7 @@
    "scheme": "t40_f03",
    "group": "m6afb7ecde962908_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qapı naxışı",
    "machine": 1,
    "score": 0.621,
@@ -1560,11 +1560,13 @@
      0.46484
     ]
    ],
-   "sam": 0.937
+   "sam": 0.937,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1794936072
   }
  ],
  "created": 1794547278,
- "updated": 1794935956,
+ "updated": 1794936072,
  "cat": {
   "title": "Ковёр «Hacıqayıb» Губа",
   "museum": "",
@@ -1685,6 +1687,20 @@
      "a": "bad",
      "w": 2,
      "t": 1794935956
+    }
+   },
+   "m6afa2ddee563781_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1794936049
+    }
+   },
+   "m6afb7ecde962908_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1794936072
     }
    }
   }
