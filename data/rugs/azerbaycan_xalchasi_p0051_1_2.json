@@ -18,7 +18,7 @@
  "h": 799,
  "marks": [],
  "created": 1794935141,
- "updated": 1795029544,
+ "updated": 1795033008,
  "cat": {
   "title": "Ковёр Тебриз",
   "museum": "",
@@ -121,8 +121,49 @@
     "w": 2,
     "t": 1795029544
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795033008,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02987,
+    0.0237
+   ],
+   [
+    0.98923,
+    0.01009
+   ],
+   [
+    0.98048,
+    0.97581
+   ],
+   [
+    0.01795,
+    0.97251
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

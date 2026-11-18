@@ -18,7 +18,7 @@
  "h": 626,
  "marks": [],
  "created": 1791736129,
- "updated": 1795029587,
+ "updated": 1795032979,
  "cat": {
   "title": "antique kazak prayer rug20",
   "museum": "",
@@ -70,6 +70,14 @@
     "a": "whole",
     "w": 2,
     "t": 1795029587
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795032979,
+    "s": "ref"
    }
   }
  },
@@ -124,5 +132,38 @@
  "frame": "whole",
  "frame_by": "micro",
  "school_prev": "ganja-gazakh",
- "school_by": "уточнено по слову «kazak» в подписи"
+ "school_by": "уточнено по слову «kazak» в подписи",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05632,
+    0.01165
+   ],
+   [
+    0.94233,
+    0.01453
+   ],
+   [
+    0.97577,
+    0.97919
+   ],
+   [
+    0.00567,
+    0.95456
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

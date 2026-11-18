@@ -18,7 +18,7 @@
  "h": 1084,
  "marks": [],
  "created": 1791736128,
- "updated": 1795029532,
+ "updated": 1795032954,
  "cat": {
   "title": "antique-bordjalou-flatweave-nooter-p207",
   "museum": "",
@@ -70,6 +70,32 @@
     "a": "whole",
     "w": 2,
     "t": 1795029532
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1795032954,
+    "q": [
+     [
+      0.03677,
+      0.01067
+     ],
+     [
+      0.97905,
+      0.00618
+     ],
+     [
+      0.95443,
+      0.99298
+     ],
+     [
+      -0.00434,
+      0.95013
+     ]
+    ],
+    "s": "ref"
    }
   }
  },
@@ -124,5 +150,38 @@
  "frame": "whole",
  "frame_by": "micro",
  "school_prev": "ganja-gazakh",
- "school_by": "уточнено по слову «borcal» в подписи"
+ "school_by": "уточнено по слову «borcal» в подписи",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03677,
+    0.01067
+   ],
+   [
+    0.97905,
+    0.00618
+   ],
+   [
+    0.95443,
+    0.99298
+   ],
+   [
+    -0.00434,
+    0.95013
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 640,
  "marks": [],
  "created": 1791736128,
- "updated": 1795029585,
+ "updated": 1795032977,
  "cat": {
   "title": "antique-borchali-flatweave-qapiliq-james-allen201",
   "museum": "",
@@ -101,6 +101,32 @@
     "w": 2,
     "t": 1795029585
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1795032977,
+    "q": [
+     [
+      -0.00138,
+      -0.0001
+     ],
+     [
+      0.98221,
+      0.00442
+     ],
+     [
+      1.00026,
+      0.99341
+     ],
+     [
+      -0.00217,
+      0.97872
+     ]
+    ],
+    "s": "ref"
+   }
   }
  },
  "auto": {
@@ -154,5 +180,38 @@
  "frame": "whole",
  "frame_by": "micro",
  "school_prev": "ganja-gazakh",
- "school_by": "уточнено по слову «borcal» в подписи"
+ "school_by": "уточнено по слову «borcal» в подписи",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00138,
+    -0.0001
+   ],
+   [
+    0.98221,
+    0.00442
+   ],
+   [
+    1.00026,
+    0.99341
+   ],
+   [
+    -0.00217,
+    0.97872
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

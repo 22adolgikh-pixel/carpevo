@@ -18,7 +18,7 @@
  "h": 1255,
  "marks": [],
  "created": 1791736121,
- "updated": 1795029670,
+ "updated": 1795032962,
  "cat": {
   "title": "Керимов, т. I, Табл. 207. «ХИЛАБУТА» (стр. скана 329, печ. ?)",
   "museum": "",
@@ -138,10 +138,51 @@
     "w": 2,
     "t": 1795029670
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795032962,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
  "frame_by": "micro",
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по типу ковра «xiləbuta»"
+ "school_by": "уточнено по типу ковра «xiləbuta»",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00296,
+    0.00062
+   ],
+   [
+    0.99754,
+    0.00634
+   ],
+   [
+    0.99536,
+    0.97184
+   ],
+   [
+    0.0064,
+    0.97005
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
