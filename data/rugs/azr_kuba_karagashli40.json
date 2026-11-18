@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_karagashli40",
  "lib_img": "img/azr_kuba_karagashli40.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_karagashli28",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug100",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_karagashli28": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978751
+  },
+  "azr_antique_caucasian_moghan_rug100": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978782
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

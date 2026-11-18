@@ -18,7 +18,7 @@
  "h": 1997,
  "marks": [],
  "created": 1791870023,
- "updated": 1794785074,
+ "updated": 1794978912,
  "cat": {
   "title": "Ganja rug, Ganja school, XVIII c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -52,9 +52,19 @@
   {
    "id": "wikimedia_File_Ganja_rug_jpg",
    "score": 1259
+  },
+  {
+   "id": "intangible_2849_p0207_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "intangible_2849_p0207_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978912
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Ganja_rug_jpg": {
@@ -167,6 +177,15 @@
      ]
     ],
     "s": "vlm"
+   }
+  },
+  "same": {
+   "intangible_2849_p0207_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978912
+    }
    }
   }
  },

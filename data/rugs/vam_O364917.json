@@ -47,8 +47,28 @@
  },
  "src_id": "cat:vam_O364917",
  "lib_img": "img/vam_O364917.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_a06c6044a8",
+   "score": 0
+  },
+  {
+   "id": "azcm_57",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_a06c6044a8": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978765
+  },
+  "azcm_57": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978802
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

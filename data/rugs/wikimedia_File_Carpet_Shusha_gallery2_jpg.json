@@ -18,7 +18,7 @@
  "h": 583,
  "marks": [],
  "created": 1791736123,
- "updated": 1794597203,
+ "updated": 1794978790,
  "cat": {
   "title": "Carpet Shusha gallery2.jpg",
   "museum": "Wikimedia Commons",
@@ -51,6 +51,18 @@
   {
    "id": "azcm_81",
    "score": 593
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0003_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0155_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0086_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -58,6 +70,22 @@
    "ok": true,
    "by": "машина: 1676 общих точек, перекрытие 0.89 (порог 40 / 0.7)",
    "at": 1794940138
+  },
+  "azerbaycan_xalchasi_p0003_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978756
+  },
+  "intangible_2849_p0155_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978790
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0086_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978790,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -181,6 +209,22 @@
     "w": 2,
     "t": 1794597203,
     "s": "ref"
+   }
+  },
+  "same": {
+   "intangible_2849_p0155_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978790
+    }
+   },
+   "azerbaycan_xalchalari_qarabag_qrupu_p0086_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978790
+    }
    }
   }
  },

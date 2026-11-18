@@ -18,7 +18,7 @@
  "h": 1138,
  "marks": [],
  "created": 1791736140,
- "updated": 1791736140,
+ "updated": 1794978895,
  "cat": {
   "title": "A SILK EMBROIDERED AZERBAIJAN RUG, 18TH CENTURY Price Realized £21,250 ($33,809) Sale 7872, Christie",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_silk_embroidery_medallion_birds_XVIIIc_christies_07_10_2010",
  "lib_img": "img/azr_silk_embroidery_medallion_birds_XVIIIc_christies_07_10_2010.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0137_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0137_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978895
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +92,16 @@
   "area": 0.923,
   "ver": 1,
   "t": 1794238392
+ },
+ "micro": {
+  "same": {
+   "intangible_2850_p0137_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978895
+    }
+   }
+  }
  }
 }

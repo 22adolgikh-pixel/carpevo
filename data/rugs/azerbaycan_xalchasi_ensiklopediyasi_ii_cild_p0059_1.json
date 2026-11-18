@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794978812,
  "cat": {
   "title": "Kilim «Paşalı» Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -52,8 +52,48 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0059_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0059_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_kilim20",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0057_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_kilim11",
+   "score": 0
+  },
+  {
+   "id": "aic_214907",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_kilim20": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978812,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0057_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978812,
+   "similar": true
+  },
+  "azr_kuba_kilim11": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978812
+  },
+  "aic_214907": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978812
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -86,5 +126,37 @@
   "ver": 1,
   "at": 1794547508
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azr_kuba_kilim20": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978812
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0057_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978812
+    }
+   },
+   "azr_kuba_kilim11": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978812
+    }
+   },
+   "aic_214907": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978812
+    }
+   }
+  }
+ }
 }

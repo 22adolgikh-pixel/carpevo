@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870025,
- "updated": 1791997189,
+ "updated": 1794978765,
  "cat": {
   "title": "Kuba Kilim, Caucasus, circa 1900",
   "museum": "Метрополитен-музей",
@@ -56,6 +56,34 @@
   {
    "id": "azr_early_shirvan_rug17",
    "score": 0
+  },
+  {
+   "id": "intangible_2850_p0155_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_122",
+   "score": 0
+  },
+  {
+   "id": "azr_lori_pambak_lambali_rug_switzerland_private_collection",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_borchali_flatweave_qapiliq",
+   "score": 0
+  },
+  {
+   "id": "azcm_4",
+   "score": 0
+  },
+  {
+   "id": "azcm_130",
+   "score": 0
+  },
+  {
+   "id": "vam_O364917",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -63,6 +91,42 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792271577
+  },
+  "intangible_2850_p0155_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978765
+  },
+  "azcm_122": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978765,
+   "similar": true
+  },
+  "azr_lori_pambak_lambali_rug_switzerland_private_collection": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978765
+  },
+  "azr_antique_borchali_flatweave_qapiliq": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978765
+  },
+  "azcm_4": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978765
+  },
+  "azcm_130": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978765
+  },
+  "vam_O364917": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978765
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -111,5 +175,58 @@
   "ver": 1,
   "t": 1794238385
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "intangible_2850_p0155_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978765
+    }
+   },
+   "azcm_122": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978765
+    }
+   },
+   "azr_lori_pambak_lambali_rug_switzerland_private_collection": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978765
+    }
+   },
+   "azr_antique_borchali_flatweave_qapiliq": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978765
+    }
+   },
+   "azcm_4": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978765
+    }
+   },
+   "azcm_130": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978765
+    }
+   },
+   "vam_O364917": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978765
+    }
+   }
+  }
+ }
 }

@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_kilim21",
  "lib_img": "img/azr_kuba_kilim21.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_57",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_57": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978802
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

@@ -18,7 +18,7 @@
  "h": 719,
  "marks": [],
  "created": 1791736121,
- "updated": 1794740961,
+ "updated": 1794978820,
  "cat": {
   "title": "Керимов, т. I, Табл. 217. ПАЛАС (с простыми полосами) (стр. скана 340, печ. 88)",
   "museum": "",
@@ -48,8 +48,29 @@
  },
  "src_id": "cat:kerimov_vol1_p340_1",
  "lib_img": "img/kerimov_vol1_p340_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0095_1",
+   "score": 0
+  },
+  {
+   "id": "azr_baku_jejim_XIXc",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0095_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978817,
+   "similar": true
+  },
+  "azr_baku_jejim_XIXc": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978820
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -73,6 +94,15 @@
     "a": "detail",
     "w": 2,
     "t": 1794740961
+   }
+  },
+  "same": {
+   "azr_baku_jejim_XIXc": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978820
+    }
    }
   }
  },

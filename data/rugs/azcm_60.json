@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791870042,
- "updated": 1794337212,
+ "updated": 1794978873,
  "cat": {
   "title": "“Buynuz” («Буйнуз»), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -58,6 +58,18 @@
   {
    "id": "azr_kuba_seychour66",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Armenian_Dragon_carpet_of_Khndzoresk_type19th_century_Syunik_299_",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion29",
+   "score": 0
+  },
+  {
+   "id": "azcm_98",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -70,6 +82,21 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1792269747
+  },
+  "wikimedia_File_Armenian_Dragon_carpet_of_Khndzoresk_type19th_century_Syunik_299_": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978873
+  },
+  "azr_kuba_shirvan_medallion29": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978873
+  },
+  "azcm_98": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978873
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -167,6 +194,29 @@
     "a": "ok",
     "w": 2,
     "t": 1794337212
+   }
+  },
+  "same": {
+   "wikimedia_File_Armenian_Dragon_carpet_of_Khndzoresk_type19th_century_Syunik_299_": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978873
+    }
+   },
+   "azr_kuba_shirvan_medallion29": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978873
+    }
+   },
+   "azcm_98": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978873
+    }
    }
   }
  },

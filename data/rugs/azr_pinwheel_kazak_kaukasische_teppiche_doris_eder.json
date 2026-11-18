@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_pinwheel_kazak_kaukasische_teppiche_doris_eder",
  "lib_img": "img/azr_pinwheel_kazak_kaukasische_teppiche_doris_eder.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_57",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_57": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978802
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

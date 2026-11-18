@@ -53,8 +53,20 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0086_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0086_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Carpet_Shusha_gallery2_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Carpet_Shusha_gallery2_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978790,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",

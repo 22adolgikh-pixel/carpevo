@@ -18,7 +18,7 @@
  "h": 779,
  "marks": [],
  "created": 1791736138,
- "updated": 1794766781,
+ "updated": 1794978782,
  "cat": {
   "title": "Antique Moghan rug in a yellow ground, 19th century, Azerbaijan Lot 121 Moghan Rug, Southeast Caucas",
   "museum": "",
@@ -47,8 +47,37 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug100",
  "lib_img": "img/azr_antique_caucasian_moghan_rug100.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_hajigaib8",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_karagashli40",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol3_p005_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_hajigaib8": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978782
+  },
+  "azr_kuba_karagashli40": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978782
+  },
+  "kerimov_vol3_p005_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978782
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -119,6 +148,29 @@
     "w": 2,
     "t": 1794766781,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_hajigaib8": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978782
+    }
+   },
+   "azr_kuba_karagashli40": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978782
+    }
+   },
+   "kerimov_vol3_p005_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978782
+    }
    }
   }
  },

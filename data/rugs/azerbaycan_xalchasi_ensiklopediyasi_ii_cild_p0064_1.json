@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794978841,
  "cat": {
   "title": "Kilim Баку",
   "museum": "Национальный музей азербайджанского ковра",
@@ -59,6 +59,42 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1",
    "score": 0
+  },
+  {
+   "id": "azcm_164",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0058_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0154_1",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_khyzy_kilim7",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0065_1",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol1_p359_3",
+   "score": 0
+  },
+  {
+   "id": "azcm_141",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0061_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -71,6 +107,53 @@
    "ok": false,
    "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0064_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
    "at": 1794976280
+  },
+  "azcm_164": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978836,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_p0058_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978841,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0154_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978841
+  },
+  "azr_antique_khyzy_kilim7": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978841
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0065_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978841
+  },
+  "kerimov_vol1_p359_3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978841
+  },
+  "azcm_141": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978841
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978841
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0061_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978841
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -105,5 +188,65 @@
   "ver": 1,
   "at": 1794547436
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_p0058_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978841
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0154_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978841
+    }
+   },
+   "azr_antique_khyzy_kilim7": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978841
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0065_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978841
+    }
+   },
+   "kerimov_vol1_p359_3": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978841
+    }
+   },
+   "azcm_141": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978841
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978841
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0061_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978841
+    }
+   }
+  }
+ }
 }
