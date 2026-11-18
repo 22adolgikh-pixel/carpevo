@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_zejwa24",
  "lib_img": "img/azr_kuba_zejwa24.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_nakhchivan_rug7",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0046_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_nakhchivan_rug7": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982836
+  },
+  "intangible_2850_p0046_1": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_nakhchivan_rug7 ≠ azr_kuba_zejwa24",
+   "at": 1794982857
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

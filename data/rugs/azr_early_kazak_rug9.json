@@ -18,7 +18,7 @@
  "h": 770,
  "marks": [],
  "created": 1791736129,
- "updated": 1794509703,
+ "updated": 1794982893,
  "cat": {
   "title": "early kazak rug9",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_early_kazak_rug9",
  "lib_img": "img/azr_early_kazak_rug9.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_kazak_prayer_rug30",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star121",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_kazak_prayer_rug30": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982893
+  },
+  "azr_kuba_zeyve_lesghi_star121": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982893
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -154,6 +174,22 @@
      ]
     ],
     "s": "vlm"
+   }
+  },
+  "same": {
+   "azr_antique_kazak_prayer_rug30": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982893
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star121": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982893
+    }
    }
   }
  },

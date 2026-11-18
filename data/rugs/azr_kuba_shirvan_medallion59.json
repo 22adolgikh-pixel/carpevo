@@ -18,7 +18,7 @@
  "h": 678,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1794982875,
  "cat": {
   "title": "kuba shirvan medallion59",
   "museum": "",
@@ -54,6 +54,14 @@
   {
    "id": "kerimov_vol1_p328_1",
    "score": 0
+  },
+  {
+   "id": "met_447470",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba28",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -66,6 +74,17 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794976819
+  },
+  "met_447470": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982875,
+   "similar": true
+  },
+  "azr_kuba28": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982875
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -108,5 +127,23 @@
   "area": 0.887,
   "ver": 1,
   "t": 1794238550
+ },
+ "micro": {
+  "same": {
+   "met_447470": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982875
+    }
+   },
+   "azr_kuba28": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982875
+    }
+   }
+  }
  }
 }

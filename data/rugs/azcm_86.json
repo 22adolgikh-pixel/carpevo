@@ -18,7 +18,7 @@
  "h": 1980,
  "marks": [],
  "created": 1791870043,
- "updated": 1791870043,
+ "updated": 1794982820,
  "cat": {
   "title": "“Malıbəyli” («Малыбейли»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,47 @@
  },
  "src_id": "cat:azcm_86",
  "lib_img": "img/azcm_86.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Borchali_carpet_gif",
+   "score": 0
+  },
+  {
+   "id": "azcm_77",
+   "score": 0
+  },
+  {
+   "id": "azcm_118",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0031_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Borchali_carpet_gif": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982820
+  },
+  "azcm_77": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982820,
+   "similar": true
+  },
+  "azcm_118": {
+   "ok": false,
+   "by": "по цепочке: azcm_86 ≠ wikimedia_File_Borchali_carpet_gif",
+   "at": 1794982857
+  },
+  "azerbaycan_xalchasi_p0031_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_86 ≠ wikimedia_File_Borchali_carpet_gif",
+   "at": 1794982857
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -83,5 +122,23 @@
   "ver": 1,
   "t": 1794238533
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "wikimedia_File_Borchali_carpet_gif": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982820
+    }
+   },
+   "azcm_77": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982820
+    }
+   }
+  }
+ }
 }

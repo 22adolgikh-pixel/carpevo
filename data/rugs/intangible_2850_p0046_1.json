@@ -55,6 +55,10 @@
   {
    "id": "azr_antique_nakhchivan_rug7",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_zejwa24",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -62,6 +66,11 @@
    "ok": true,
    "by": "машина: 2796 общих точек, перекрытие 0.94 (порог 40 / 0.7)",
    "at": 1794940139
+  },
+  "azr_kuba_zejwa24": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_nakhchivan_rug7 ≠ azr_kuba_zejwa24",
+   "at": 1794982857
   }
  },
  "_lib_t": "2026-11-13 10:08",

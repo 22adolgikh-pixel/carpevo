@@ -18,7 +18,7 @@
  "h": 740,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1794982871,
  "cat": {
   "title": "Antique Moghan (Mughan) long rug, Southern Salyan (falls into Mughan Region), late 19th century, 109",
   "museum": "",
@@ -64,6 +64,22 @@
   {
    "id": "azr_kuba_shirvan_medallion160",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star116",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shield28",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug12",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug66",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -86,6 +102,28 @@
    "ok": false,
    "by": "по цепочке: azr_antique_caucasian_moghan_rug4 ≠ azr_kuba_shirvan_medallion146",
    "at": 1794973823
+  },
+  "azr_kuba_zeyve_lesghi_star116": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982871
+  },
+  "azr_kuba_shield28": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982871
+  },
+  "azr_antique_caucasian_moghan_rug12": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982871,
+   "similar": true
+  },
+  "azr_antique_caucasian_moghan_rug66": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982871,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -140,5 +178,37 @@
   "area": 0.935,
   "ver": 1,
   "t": 1794238582
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_zeyve_lesghi_star116": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982871
+    }
+   },
+   "azr_kuba_shield28": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982871
+    }
+   },
+   "azr_antique_caucasian_moghan_rug12": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982871
+    }
+   },
+   "azr_antique_caucasian_moghan_rug66": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982871
+    }
+   }
+  }
  }
 }

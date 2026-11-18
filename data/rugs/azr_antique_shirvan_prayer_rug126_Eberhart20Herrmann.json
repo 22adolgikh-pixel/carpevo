@@ -45,8 +45,20 @@
  },
  "src_id": "cat:azr_antique_shirvan_prayer_rug126_Eberhart20Herrmann",
  "lib_img": "img/azr_antique_shirvan_prayer_rug126_Eberhart20Herrmann.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug48",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_shirvan_akstafa_prayer_rug48": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982901,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

@@ -18,7 +18,7 @@
  "h": 888,
  "marks": [],
  "created": 1791736123,
- "updated": 1791736123,
+ "updated": 1794982886,
  "cat": {
   "title": "Nizami Rug Crop.jpg",
   "museum": "Wikimedia Commons",
@@ -48,8 +48,29 @@
  },
  "src_id": "cat:wikimedia_File_Nizami_Rug_Crop_jpg",
  "lib_img": "img/wikimedia_File_Nizami_Rug_Crop_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_4cb188ad7b",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0323_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_4cb188ad7b": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982886,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0323_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982886
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -65,5 +86,23 @@
   ],
   "ver": 1,
   "at": 1792261897
+ },
+ "micro": {
+  "same": {
+   "cm_4cb188ad7b": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982886
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0323_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982886
+    }
+   }
+  }
  }
 }

@@ -18,7 +18,7 @@
  "h": 624,
  "marks": [],
  "created": 1791736122,
- "updated": 1794750561,
+ "updated": 1794982880,
  "cat": {
   "title": "Carpet with Triple Lozenge-Medallion Design",
   "museum": "Метрополитен-музей",
@@ -56,6 +56,14 @@
   {
    "id": "wikimedia_File_Азербайджанський_килим_типу_зілі_jpg",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion59",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion55",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -68,6 +76,18 @@
    "ok": false,
    "by": "по цепочке: met_447470 ≠ wikimedia_File_Зили_3_jpg",
    "at": 1794979664
+  },
+  "azr_kuba_shirvan_medallion59": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982875,
+   "similar": true
+  },
+  "azr_kuba_shirvan_medallion55": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982880,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -142,6 +162,13 @@
      "a": "diff",
      "w": 2,
      "t": 1794750561
+    }
+   },
+   "azr_kuba_shirvan_medallion55": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982880
     }
    }
   }

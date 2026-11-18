@@ -18,7 +18,7 @@
  "h": 948,
  "marks": [],
  "created": 1791736138,
- "updated": 1794588530,
+ "updated": 1794982901,
  "cat": {
   "title": "shirvan-akstafa-prayer-rug48",
   "museum": "",
@@ -45,8 +45,30 @@
  },
  "src_id": "cat:azr_shirvan_akstafa_prayer_rug48",
  "lib_img": "img/azr_shirvan_akstafa_prayer_rug48.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug3",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_shirvan_prayer_rug126_Eberhart20Herrmann",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_shirvan_akstafa_prayer_rug3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982901,
+   "similar": true
+  },
+  "azr_antique_shirvan_prayer_rug126_Eberhart20Herrmann": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982901,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -154,6 +176,22 @@
      ]
     ],
     "s": "vlm"
+   }
+  },
+  "same": {
+   "azr_shirvan_akstafa_prayer_rug3": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982901
+    }
+   },
+   "azr_antique_shirvan_prayer_rug126_Eberhart20Herrmann": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982901
+    }
    }
   }
  },

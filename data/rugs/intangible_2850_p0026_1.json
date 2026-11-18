@@ -18,7 +18,7 @@
  "h": 1796,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794982979,
  "cat": {
   "title": "Ковёр «Şabalıd buta» Карабах",
   "museum": "",
@@ -51,8 +51,39 @@
  },
  "src_id": "cat:intangible_2850_p0026_1",
  "lib_img": "img/intangible_2850_p0026_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_alpan73",
+   "score": 0
+  },
+  {
+   "id": "cm_e256377168",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_baku_khila_buta_carpet_azerbaijan_carpet_museum",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_alpan73": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982979,
+   "similar": true
+  },
+  "cm_e256377168": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982979
+  },
+  "azr_antique_baku_khila_buta_carpet_azerbaijan_carpet_museum": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982979,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +116,30 @@
   "ver": 1,
   "at": 1794547499
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azr_kuba_alpan73": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982979
+    }
+   },
+   "cm_e256377168": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982979
+    }
+   },
+   "azr_antique_baku_khila_buta_carpet_azerbaijan_carpet_museum": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982979
+    }
+   }
+  }
+ }
 }

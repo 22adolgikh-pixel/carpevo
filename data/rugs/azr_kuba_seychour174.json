@@ -18,7 +18,7 @@
  "h": 500,
  "marks": [],
  "created": 1791736135,
- "updated": 1794343304,
+ "updated": 1794982830,
  "cat": {
   "title": "kuba seychour174",
   "museum": "",
@@ -45,8 +45,30 @@
  },
  "src_id": "cat:azr_kuba_seychour174",
  "lib_img": "img/azr_kuba_seychour174.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0068_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_seychour45",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0068_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982830,
+   "similar": true
+  },
+  "azr_kuba_seychour45": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982830,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -111,6 +133,22 @@
       0.96267
      ]
     ]
+   }
+  },
+  "same": {
+   "intangible_2849_p0068_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982830
+    }
+   },
+   "azr_kuba_seychour45": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982830
+    }
    }
   }
  },

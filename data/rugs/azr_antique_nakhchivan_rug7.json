@@ -18,7 +18,7 @@
  "h": 458,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1794982836,
  "cat": {
   "title": "Antique Nakhchivan rug, Azerbaijan",
   "museum": "",
@@ -51,6 +51,10 @@
   {
    "id": "intangible_2850_p0046_1",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_zejwa24",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -58,6 +62,11 @@
    "ok": true,
    "by": "машина: 2796 общих точек, перекрытие 0.94 (порог 40 / 0.7)",
    "at": 1794940139
+  },
+  "azr_kuba_zejwa24": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982836
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -105,6 +114,17 @@
    "v": "same",
    "at": 1794963682,
    "ver": 2
+  }
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_zejwa24": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982836
+    }
+   }
   }
  }
 }
