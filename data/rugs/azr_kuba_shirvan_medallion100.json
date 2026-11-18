@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion100",
  "lib_img": "img/azr_kuba_shirvan_medallion100.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_Borjalou_hooked_motif_rug_nagel_47T_L35",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_Borjalou_hooked_motif_rug_nagel_47T_L35": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983801
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

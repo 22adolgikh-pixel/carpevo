@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_chichi44",
  "lib_img": "img/azr_kuba_chichi44.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_kazak_prayer_rug35",
+   "score": 0
+  },
+  {
+   "id": "azr_van_ham_borchalo_rug_with_memling_guls_L92_10_2012",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_kazak_prayer_rug35": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983811
+  },
+  "azr_van_ham_borchalo_rug_with_memling_guls_L92_10_2012": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_kazak_prayer_rug35 ≠ azr_kuba_chichi44",
+   "at": 1794983850
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

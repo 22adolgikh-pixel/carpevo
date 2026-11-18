@@ -62,6 +62,10 @@
   {
    "id": "azr_kuba_shirvan_medallion160",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion147",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -84,6 +88,12 @@
    "ok": true,
    "by": "машина: 1030 общих точек, перекрытие 0.86 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "azr_kuba_shirvan_medallion147": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983805,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",

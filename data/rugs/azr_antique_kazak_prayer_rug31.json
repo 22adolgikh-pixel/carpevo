@@ -18,7 +18,7 @@
  "h": 900,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794983821,
  "cat": {
   "title": "antique kazak prayer rug31",
   "museum": "",
@@ -45,8 +45,64 @@
  },
  "src_id": "cat:azr_antique_kazak_prayer_rug31",
  "lib_img": "img/azr_antique_kazak_prayer_rug31.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_zeyve_lesghi_star46",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_karagashli51",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug28",
+   "score": 0
+  },
+  {
+   "id": "azr_rippon_boswell_05_2009_L113_lori_pambak_rug",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug10",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_lori_pambak_kazak_rug1_chateau_de_gourdon",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_zeyve_lesghi_star46": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983821
+  },
+  "azr_kuba_karagashli51": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983821
+  },
+  "azr_antique_kazak_prayer_rug28": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983821
+  },
+  "azr_rippon_boswell_05_2009_L113_lori_pambak_rug": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983821
+  },
+  "azr_antique_kazak_prayer_rug10": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983821
+  },
+  "azr_antique_lori_pambak_kazak_rug1_chateau_de_gourdon": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_kazak_prayer_rug31 ≠ azr_rippon_boswell_05_2009_L113_lori_pambak_rug",
+   "at": 1794983850
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +135,44 @@
   "area": 0.891,
   "ver": 1,
   "t": 1794238474
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_zeyve_lesghi_star46": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983821
+    }
+   },
+   "azr_kuba_karagashli51": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983821
+    }
+   },
+   "azr_antique_kazak_prayer_rug28": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983821
+    }
+   },
+   "azr_rippon_boswell_05_2009_L113_lori_pambak_rug": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983821
+    }
+   },
+   "azr_antique_kazak_prayer_rug10": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983821
+    }
+   }
+  }
  }
 }

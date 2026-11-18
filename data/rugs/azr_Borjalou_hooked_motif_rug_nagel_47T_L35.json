@@ -18,7 +18,7 @@
  "h": 640,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1794983801,
  "cat": {
   "title": "Borjalou hooked motif rug nagel 47T L35",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_Borjalou_hooked_motif_rug_nagel_47T_L35",
  "lib_img": "img/azr_Borjalou_hooked_motif_rug_nagel_47T_L35.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion100",
+   "score": 0
+  },
+  {
+   "id": "azcm_133",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion100": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983801
+  },
+  "azcm_133": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983801
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +99,23 @@
   "area": 0.92,
   "ver": 1,
   "t": 1794238352
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shirvan_medallion100": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983801
+    }
+   },
+   "azcm_133": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983801
+    }
+   }
+  }
  }
 }

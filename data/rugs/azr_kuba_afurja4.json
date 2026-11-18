@@ -18,7 +18,7 @@
  "h": 1427,
  "marks": [],
  "created": 1791736131,
- "updated": 1794567466,
+ "updated": 1794983780,
  "cat": {
   "title": "kuba afurja4",
   "museum": "",
@@ -45,8 +45,38 @@
  },
  "src_id": "cat:azr_kuba_afurja4",
  "lib_img": "img/azr_kuba_afurja4.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion147",
+   "score": 0
+  },
+  {
+   "id": "azr_afshan22",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_baku_shield_rug2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion147": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983780
+  },
+  "azr_afshan22": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983780
+  },
+  "azr_antique_baku_shield_rug2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983780,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -87,6 +117,29 @@
      "a": "skip",
      "w": 0,
      "t": 1794567466
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_shirvan_medallion147": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983780
+    }
+   },
+   "azr_afshan22": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983780
+    }
+   },
+   "azr_antique_baku_shield_rug2": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983780
     }
    }
   }

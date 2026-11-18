@@ -18,7 +18,7 @@
  "h": 595,
  "marks": [],
  "created": 1791736132,
- "updated": 1791736132,
+ "updated": 1794983852,
  "cat": {
   "title": "kuba chichi71",
   "museum": "",
@@ -45,8 +45,49 @@
  },
  "src_id": "cat:azr_kuba_chichi71",
  "lib_img": "img/azr_kuba_chichi71.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_chichi6",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi54",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi19",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi34",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_chichi6": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983828
+  },
+  "azr_kuba_chichi54": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983852,
+   "similar": true
+  },
+  "azr_kuba_chichi19": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983852,
+   "similar": true
+  },
+  "azr_kuba_chichi34": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983852,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +120,30 @@
   "area": 0.885,
   "ver": 1,
   "t": 1794238320
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_chichi54": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983852
+    }
+   },
+   "azr_kuba_chichi19": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983852
+    }
+   },
+   "azr_kuba_chichi34": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983852
+    }
+   }
+  }
  }
 }

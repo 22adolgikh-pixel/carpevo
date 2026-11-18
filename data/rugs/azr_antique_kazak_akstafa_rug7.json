@@ -18,7 +18,7 @@
  "h": 1341,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794983871,
  "cat": {
   "title": "antique kazak akstafa rug7",
   "museum": "",
@@ -45,8 +45,38 @@
  },
  "src_id": "cat:azr_antique_kazak_akstafa_rug7",
  "lib_img": "img/azr_antique_kazak_akstafa_rug7.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shield8",
+   "score": 0
+  },
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug12",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_akstafa_rug2_antique_carpets",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shield8": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983871
+  },
+  "azr_shirvan_akstafa_prayer_rug12": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983871
+  },
+  "azr_antique_kazak_akstafa_rug2_antique_carpets": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983871,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +109,30 @@
   "area": 0.875,
   "ver": 1,
   "t": 1794238372
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shield8": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983871
+    }
+   },
+   "azr_shirvan_akstafa_prayer_rug12": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983871
+    }
+   },
+   "azr_antique_kazak_akstafa_rug2_antique_carpets": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983871
+    }
+   }
+  }
  }
 }
