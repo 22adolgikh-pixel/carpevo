@@ -18,7 +18,7 @@
  "h": 2127,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1794981598,
  "cat": {
   "title": "kuba karagashli22",
   "museum": "",
@@ -45,8 +45,39 @@
  },
  "src_id": "cat:azr_kuba_karagashli22",
  "lib_img": "img/azr_kuba_karagashli22.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_karagashli25",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_karagashli39",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion104",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_karagashli25": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981598,
+   "similar": true
+  },
+  "azr_kuba_karagashli39": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981598,
+   "similar": true
+  },
+  "azr_kuba_shirvan_medallion104": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981598
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +110,30 @@
   "area": 0.935,
   "ver": 1,
   "t": 1794238571
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_karagashli25": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794981598
+    }
+   },
+   "azr_kuba_karagashli39": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794981598
+    }
+   },
+   "azr_kuba_shirvan_medallion104": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794981598
+    }
+   }
+  }
  }
 }

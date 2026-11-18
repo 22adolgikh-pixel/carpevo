@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_karagashli_rug_hali75_private_collection",
  "lib_img": "img/azr_kuba_karagashli_rug_hali75_private_collection.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_194",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0076_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_194": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981608
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0076_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_194 ≠ azr_kuba_karagashli_rug_hali75_private_collection",
+   "at": 1794981631
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
