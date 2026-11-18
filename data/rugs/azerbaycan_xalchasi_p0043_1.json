@@ -18,7 +18,7 @@
  "h": 1089,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794975806,
  "cat": {
   "title": "Ковёр Баку",
   "museum": "Baku Carpet Museum",
@@ -50,8 +50,19 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0043_1",
  "lib_img": "img/azerbaycan_xalchasi_p0043_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_92a87cc480",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_92a87cc480": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975807
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -91,5 +102,16 @@
   ],
   "ver": 1,
   "at": 1794547557
+ },
+ "micro": {
+  "same": {
+   "cm_92a87cc480": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975806
+    }
+   }
+  }
  }
 }

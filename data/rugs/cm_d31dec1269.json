@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870025,
- "updated": 1791997187,
+ "updated": 1794975782,
  "cat": {
   "title": "Qasımuşağı xalçası — Azərbaycan xalçaçılıq məktəblərindən olan Qarabağ xalçaçılıq məktəbinin Cəbrayıl qrupuna ",
   "museum": "",
@@ -60,9 +60,24 @@
   {
    "id": "wikimedia_File_Kasymushagy_jpg",
    "score": 699
+  },
+  {
+   "id": "cm_b11bd2ee23",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_2d904d6055": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975782
+  },
+  "cm_b11bd2ee23": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975782
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_2d904d6055": {
@@ -115,5 +130,23 @@
   "ver": 1,
   "t": 1794238226
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "cm_2d904d6055": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975782
+    }
+   },
+   "cm_b11bd2ee23": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975782
+    }
+   }
+  }
+ }
 }

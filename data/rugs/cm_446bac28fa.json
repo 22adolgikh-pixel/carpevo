@@ -18,7 +18,7 @@
  "h": 1962,
  "marks": [],
  "created": 1791870033,
- "updated": 1794786774,
+ "updated": 1794975812,
  "cat": {
   "title": "Arsalan rug, Guba school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -52,9 +52,19 @@
   {
    "id": "wikimedia_File_Арсалан_jpg",
    "score": 1342
+  },
+  {
+   "id": "kerimov_vol2_p141_1_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "kerimov_vol2_p141_1_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975812
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Арсалан_jpg": {
@@ -126,6 +136,15 @@
       0.94668
      ]
     ]
+   }
+  },
+  "same": {
+   "kerimov_vol2_p141_1_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975812
+    }
    }
   }
  },

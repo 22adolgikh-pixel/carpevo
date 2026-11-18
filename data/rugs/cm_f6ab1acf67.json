@@ -3,15 +3,15 @@
  "title": "Achman-Yumma Carpet, Karabakh, Azerbaijan, early 209th century",
  "source": "каталог: commons",
  "museum": "Национальный музей азербайджанского ковра",
- "inv": "",
+ "inv": "6857",
  "url": "https://commons.wikimedia.org/wiki/File:Achma-Yumma_Carpet,_Azerbaijani_National_Carpet_Museum.jpg",
  "license": "Public domain · Unknown artist Unknown artist",
- "place": "",
+ "place": "Карабах, Азербайджан",
  "date": "century",
  "school": "karabakh",
  "composition": "achma-yumma",
  "technique": "ворсовый",
- "size": "",
+ "size": "108x349 sm",
  "notes": "Achman-Yumma Carpet, Karabakh, Azerbaijan, early 209th century",
  "status": "new",
  "w": 759,
@@ -58,7 +58,13 @@
    "score": 1291
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_75": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975772
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "azcm_75": {
@@ -174,5 +180,10 @@
   "quad_status": "confirmed"
  },
  "tri": "micro",
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "inv": "azcm_75",
+  "place": "azcm_75",
+  "size": "azcm_75"
+ }
 }

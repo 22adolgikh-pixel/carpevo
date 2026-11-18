@@ -2,15 +2,15 @@
  "id": "kerimov_vol2_p141_1_1",
  "title": "Керимов, т. II, 31 (стр. скана 141, печ. 31)",
  "source": "каталог: kerimov_vol2",
- "museum": "",
+ "museum": "Национальный музей азербайджанского ковра",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
+ "date": "XIX c",
+ "school": "guba-shirvan",
+ "composition": "arsalan",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -161,5 +161,25 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "cm_446bac28fa": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975812
+  }
+ },
+ "same": [
+  {
+   "id": "cm_446bac28fa",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "cm_446bac28fa",
+  "composition": "cm_446bac28fa",
+  "technique": "cm_446bac28fa",
+  "museum": "cm_446bac28fa",
+  "date": "cm_446bac28fa"
+ }
 }

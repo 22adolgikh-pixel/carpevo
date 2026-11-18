@@ -2,15 +2,15 @@
  "id": "azr_kuba44",
  "title": "kuba44",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "middle of the 19 century",
  "school": "guba-shirvan",
  "composition": "",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 650,
  "marks": [],
  "created": 1791736136,
- "updated": 1791736136,
+ "updated": 1794975790,
  "cat": {
   "title": "kuba44",
   "museum": "",
@@ -52,7 +52,13 @@
    "score": 538
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Kuba_rug_Uzun_dere_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975790
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -93,5 +99,21 @@
   "area": 0.859,
   "ver": 1,
   "t": 1794238549
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Kuba_rug_Uzun_dere_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975790
+    }
+   }
+  }
+ },
+ "from_twin": {
+  "technique": "wikimedia_File_Kuba_rug_Uzun_dere_jpg",
+  "museum": "wikimedia_File_Kuba_rug_Uzun_dere_jpg",
+  "date": "wikimedia_File_Kuba_rug_Uzun_dere_jpg"
  }
 }

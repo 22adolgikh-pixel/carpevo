@@ -10,7 +10,7 @@
  "date": "2012-12-02 02:21:34",
  "school": "karabakh",
  "composition": "qasimushagi",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "Azərbaycan xalçaçılıq məktəblərindən olan Qarabağ xalçaçılıq məktəbinin Cəbrayıl qrupuna aid edilən xovlu xalçanın qol adlanan naxış elrmentlərinin birlikdə görnüşü.",
  "status": "new",
@@ -261,9 +261,19 @@
   {
    "id": "wikimedia_File_Parts_of_carpets_Kasim_Ushagy_qollar_jpg",
    "score": 957
+  },
+  {
+   "id": "cm_d31dec1269",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_d31dec1269": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975782
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_bdd493bb76": {
@@ -334,5 +344,8 @@
     }
    }
   }
+ },
+ "from_twin": {
+  "technique": "cm_d31dec1269"
  }
 }
