@@ -11,7 +11,7 @@
  "school": "karabakh",
  "composition": "chelebi",
  "technique": "ворсовый",
- "size": "",
+ "size": "219.4 x 154.9 cm",
  "notes": "",
  "status": "new",
  "w": 235,
@@ -53,9 +53,37 @@
   {
    "id": "wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Barda_town_of",
    "score": 118
+  },
+  {
+   "id": "cleveland_154908",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0135_1",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cleveland_154908": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794983994
+  },
+  "intangible_2850_p0135_1": {
+   "ok": false,
+   "by": "по цепочке: cleveland_154908 ≠ intangible_2850_p0135_1",
+   "at": 1794984035
+  },
+  "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg": {
+   "ok": false,
+   "by": "по цепочке: cleveland_154908 ≠ wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg",
+   "at": 1794984035
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -96,5 +124,8 @@
   "area": null,
   "ver": 1,
   "t": 1794238556
+ },
+ "from_twin": {
+  "size": "cleveland_154908"
  }
 }

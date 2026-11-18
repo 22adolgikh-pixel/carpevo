@@ -18,7 +18,7 @@
  "h": 1108,
  "marks": [],
  "created": 1791870042,
- "updated": 1794783470,
+ "updated": 1794984007,
  "cat": {
   "title": "“Qaymaqlı” («Гаймаглы»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -53,6 +53,14 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1",
    "score": 0
+  },
+  {
+   "id": "azr_kuba21",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi78",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -60,6 +68,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794980108
+  },
+  "azr_kuba21": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984007
+  },
+  "azr_kuba_chichi78": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984007
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -137,6 +155,22 @@
  "micro": {
   "field": {
    "dolgikh": "nofield"
+  },
+  "same": {
+   "azr_kuba21": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984007
+    }
+   },
+   "azr_kuba_chichi78": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984007
+    }
+   }
   }
  }
 }

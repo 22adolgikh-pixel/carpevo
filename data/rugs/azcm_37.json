@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870041,
- "updated": 1794858212,
+ "updated": 1794984012,
  "cat": {
   "title": "“Suraxanı” («Сураханы»), Баку, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,28 @@
  },
  "src_id": "cat:azcm_37",
  "lib_img": "img/azcm_37.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol1_p344_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0156_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol1_p344_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984012
+  },
+  "intangible_2849_p0156_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984012
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -91,6 +111,22 @@
      "a": "one",
      "w": 2,
      "t": 1794858212
+    }
+   }
+  },
+  "same": {
+   "kerimov_vol1_p344_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984012
+    }
+   },
+   "intangible_2849_p0156_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984012
     }
    }
   }

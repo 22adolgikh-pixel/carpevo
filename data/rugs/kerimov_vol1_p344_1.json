@@ -1590,8 +1590,19 @@
  },
  "src_id": "cat:kerimov_vol1_p344_1",
  "lib_img": "img/kerimov_vol1_p344_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_37",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_37": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984012
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

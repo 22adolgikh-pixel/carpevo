@@ -51,8 +51,29 @@
  },
  "src_id": "cat:intangible_2850_p0135_1",
  "lib_img": "img/intangible_2850_p0135_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cleveland_154908",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Barda_town_of",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cleveland_154908": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983994,
+   "similar": true
+  },
+  "wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Barda_town_of": {
+   "ok": false,
+   "by": "по цепочке: cleveland_154908 ≠ intangible_2850_p0135_1",
+   "at": 1794984035
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

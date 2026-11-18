@@ -18,7 +18,7 @@
  "h": 500,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1794984036,
  "cat": {
   "title": "kuba karagashli33",
   "museum": "",
@@ -45,8 +45,30 @@
  },
  "src_id": "cat:azr_kuba_karagashli33",
  "lib_img": "img/azr_kuba_karagashli33.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0097_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_karagashli39",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0097_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984036,
+   "similar": true
+  },
+  "azr_kuba_karagashli39": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984036,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +101,23 @@
   "area": null,
   "ver": 1,
   "t": 1794238354
+ },
+ "micro": {
+  "same": {
+   "intangible_2849_p0097_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984036
+    }
+   },
+   "azr_kuba_karagashli39": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984036
+    }
+   }
+  }
  }
 }

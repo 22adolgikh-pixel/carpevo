@@ -18,7 +18,7 @@
  "h": 1786,
  "marks": [],
  "created": 1791736131,
- "updated": 1794588874,
+ "updated": 1794983910,
  "cat": {
   "title": "kuba alpan58",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_alpan58",
  "lib_img": "img/azr_kuba_alpan58.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_chichi57",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi50",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_chichi57": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983910
+  },
+  "azr_kuba_chichi50": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983910
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -87,6 +107,22 @@
      "a": "skip",
      "w": 0,
      "t": 1794588874
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_chichi57": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983910
+    }
+   },
+   "azr_kuba_chichi50": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983910
     }
    }
   }
