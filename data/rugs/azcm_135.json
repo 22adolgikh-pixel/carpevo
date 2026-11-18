@@ -154,8 +154,19 @@
  },
  "src_id": "cat:azcm_135",
  "lib_img": "img/azcm_135.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_93",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_93": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007228
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "layout": {
   "carpet": [

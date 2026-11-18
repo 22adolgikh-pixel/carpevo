@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1795007253,
  "cat": {
   "title": "kuba perepedil44",
   "museum": "",
@@ -49,6 +49,18 @@
   {
    "id": "azr_kuba_shield73",
    "score": 0
+  },
+  {
+   "id": "cm_fcbef7be41",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil49",
+   "score": 0
+  },
+  {
+   "id": "cm_6522d62bed",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +68,23 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794997922
+  },
+  "cm_fcbef7be41": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007253,
+   "similar": true
+  },
+  "azr_kuba_perepedil49": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007253,
+   "similar": true
+  },
+  "cm_6522d62bed": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil44 ≠ cm_fcbef7be41",
+   "at": 1795007276
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -90,5 +119,23 @@
   "area": 0.858,
   "ver": 1,
   "t": 1794238346
+ },
+ "micro": {
+  "same": {
+   "cm_fcbef7be41": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795007253
+    }
+   },
+   "azr_kuba_perepedil49": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795007253
+    }
+   }
+  }
  }
 }

@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0008_1",
  "lib_img": "img/azerbaycan_xalchasi_p0008_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_93",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_93": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007228
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "unsure",

@@ -18,7 +18,7 @@
  "h": 1052,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1795007201,
  "cat": {
   "title": "kuba karagashli10",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_karagashli10",
  "lib_img": "img/azr_kuba_karagashli10.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_zeyve_lesghi_star67",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_zeyve_lesghi_star67": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007201
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": 0.923,
   "ver": 1,
   "t": 1794238532
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_zeyve_lesghi_star67": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007201
+    }
+   }
+  }
  }
 }

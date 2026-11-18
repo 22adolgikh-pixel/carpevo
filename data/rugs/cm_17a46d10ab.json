@@ -18,7 +18,7 @@
  "h": 2100,
  "marks": [],
  "created": 1791870016,
- "updated": 1794929651,
+ "updated": 1795007204,
  "cat": {
   "title": "Azerbaijanian Gabala Carpet",
   "museum": "",
@@ -68,6 +68,10 @@
   {
    "id": "kerimov_vol2_p131_2",
    "score": 0
+  },
+  {
+   "id": "kerimov_vol3_p034_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -90,6 +94,11 @@
    "ok": false,
    "by": "по цепочке: kerimov_vol2_p131_1_2 ≠ kerimov_vol2_p131_2",
    "at": 1794940139
+  },
+  "kerimov_vol3_p034_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007204
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -194,6 +203,15 @@
     "w": 2,
     "t": 1794929651,
     "s": "ref"
+   }
+  },
+  "same": {
+   "kerimov_vol3_p034_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007204
+    }
    }
   }
  },

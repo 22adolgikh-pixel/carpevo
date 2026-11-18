@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870043,
- "updated": 1791870043,
+ "updated": 1795007228,
  "cat": {
   "title": "“Malıbəyli” («Малыбейли»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -57,6 +57,22 @@
   {
    "id": "azcm_120",
    "score": 0
+  },
+  {
+   "id": "azcm_135",
+   "score": 0
+  },
+  {
+   "id": "azcm_77",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0008_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0151_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -64,6 +80,32 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794979721
+  },
+  "azcm_135": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007228
+  },
+  "azcm_77": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007228,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_p0008_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007228
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0151_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007228
+  },
+  "azcm_68": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007228
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -98,5 +140,44 @@
   "ver": 1,
   "t": 1794238536
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azcm_135": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007228
+    }
+   },
+   "azcm_77": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795007228
+    }
+   },
+   "azerbaycan_xalchasi_p0008_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007228
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0151_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007228
+    }
+   },
+   "azcm_68": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007228
+    }
+   }
+  }
+ }
 }

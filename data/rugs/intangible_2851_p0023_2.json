@@ -73,6 +73,18 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0133_1",
    "score": 0
+  },
+  {
+   "id": "intangible_2851_p0018_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0038_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0174_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -100,6 +112,21 @@
    "ok": false,
    "by": "по цепочке: azcm_139 ≠ azcm_186",
    "at": 1794998130
+  },
+  "intangible_2851_p0018_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
+   "at": 1795007276
+  },
+  "intangible_2849_p0038_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
+   "at": 1795007276
+  },
+  "intangible_2849_p0174_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0174_1",
+   "at": 1795007276
   }
  },
  "_lib_t": "2026-11-13 10:08",

@@ -54,6 +54,22 @@
   {
    "id": "intangible_2849_p0038_1",
    "score": 0
+  },
+  {
+   "id": "azcm_176",
+   "score": 0
+  },
+  {
+   "id": "azcm_139",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2851_p0023_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -61,6 +77,26 @@
    "ok": true,
    "by": "машина: 917 общих точек, перекрытие 0.97 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "azcm_176": {
+   "ok": false,
+   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
+   "at": 1795007276
+  },
+  "azcm_139": {
+   "ok": false,
+   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
+   "at": 1795007276
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
+   "at": 1795007276
+  },
+  "intangible_2851_p0023_2": {
+   "ok": false,
+   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
+   "at": 1795007276
   }
  },
  "_lib_t": "2026-11-13 10:08",
