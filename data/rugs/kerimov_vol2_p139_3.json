@@ -9,7 +9,7 @@
  "place": "",
  "date": "",
  "school": "",
- "composition": "",
+ "composition": "qonaqkend",
  "technique": "",
  "size": "",
  "notes": "",
@@ -1966,6 +1966,10 @@
   {
    "id": "kerimov_vol2_p139_1",
    "score": 368
+  },
+  {
+   "id": "kerimov_vol1_p346_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -1978,6 +1982,11 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1792270512
+  },
+  "kerimov_vol1_p346_2": {
+   "ok": true,
+   "by": "машина: 85 общих точек, перекрытие 0.93 (порог 40 / 0.7)",
+   "at": 1794973823
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -2090,5 +2099,8 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "composition": "kerimov_vol1_p346_2"
+ }
 }

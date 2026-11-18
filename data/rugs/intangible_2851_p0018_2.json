@@ -7,11 +7,11 @@
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Губа",
- "date": "",
+ "date": "20 в.",
  "school": "guba-shirvan",
  "composition": "sumax",
  "technique": "безворсовый",
- "size": "",
+ "size": "190x120 см",
  "notes": "Şəkil 11. Sumax. Quba qrupu",
  "status": "new",
  "w": 753,
@@ -50,8 +50,19 @@
  },
  "src_id": "cat:intangible_2851_p0018_2",
  "lib_img": "img/intangible_2851_p0018_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0108_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0108_1": {
+   "ok": true,
+   "by": "машина: 1372 общих точек, перекрытие 0.91 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "unsure",
@@ -84,5 +95,9 @@
   "ver": 1,
   "at": 1794547467
  },
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "date": "intangible_2849_p0108_1",
+  "size": "intangible_2849_p0108_1"
+ }
 }

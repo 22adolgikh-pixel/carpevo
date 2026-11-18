@@ -3,7 +3,7 @@
  "title": "Ковёр «Malıbəyli» Карабах",
  "source": "каталог: book:azerbaycan_xalchasi",
  "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
- "inv": "",
+ "inv": "3341",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Карабах",
@@ -11,7 +11,7 @@
  "school": "karabakh",
  "composition": "malibeyli",
  "technique": "ворсовый",
- "size": "",
+ "size": "126х249 sm",
  "notes": "Xalça \"Malıbəyli\". Qarabağ, Azərbaycan. 1229 hicri/1813-cü il. Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi\n\"Malibeyli\" carpet. Garabagh, Azerbaijan. 1229 Hijra/1813. Azerbaijanian Carpet & Applied Art State Museum",
  "status": "new",
  "w": 1058,
@@ -51,8 +51,28 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0068_1",
  "lib_img": "img/azerbaycan_xalchasi_p0068_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Karabakh_carpet_malibayli_1813_jpg",
+   "score": 0
+  },
+  {
+   "id": "azcm_99",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Karabakh_carpet_malibayli_1813_jpg": {
+   "ok": true,
+   "by": "машина: 67 общих точек, перекрытие 0.87 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "azcm_99": {
+   "ok": true,
+   "by": "по цепочке: azcm_99 = azerbaycan_xalchasi_p0068_1 = wikimedia_File_Karabakh_carpet_malibayli_1813_jpg",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +105,9 @@
   "ver": 1,
   "at": 1794547502
  },
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "inv": "wikimedia_File_Karabakh_carpet_malibayli_1813_jpg",
+  "size": "wikimedia_File_Karabakh_carpet_malibayli_1813_jpg"
+ }
 }

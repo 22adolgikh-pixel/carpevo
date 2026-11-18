@@ -3,7 +3,7 @@
  "title": "Ковёр «Suraxanı» Баку",
  "source": "каталог: book:azerbaycan_xalchasi",
  "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
- "inv": "",
+ "inv": "847",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Баку",
@@ -11,7 +11,7 @@
  "school": "guba-shirvan",
  "composition": "suraxani",
  "technique": "ворсовый",
- "size": "",
+ "size": "130x193 sm",
  "notes": "Xalça \"Suraxanı\" Bakı, Azərbaycan. XIX əsr. Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi\n“Surakhani” carpet. Baku, Azerbaijan. 19th century. Azerbaijan Carpet & Applied Art State Museum",
  "status": "new",
  "w": 1356,
@@ -51,8 +51,28 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0005_1",
  "lib_img": "img/azerbaycan_xalchasi_p0005_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_36",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_baku_surahani_rug1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_36": {
+   "ok": true,
+   "by": "машина: 2245 общих точек, перекрытие 0.91 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "azr_antique_baku_surahani_rug1": {
+   "ok": true,
+   "by": "машина: 2739 общих точек, перекрытие 0.96 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -96,5 +116,9 @@
     }
    }
   }
+ },
+ "from_twin": {
+  "inv": "azcm_36",
+  "size": "azcm_36"
  }
 }

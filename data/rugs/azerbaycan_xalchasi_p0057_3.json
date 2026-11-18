@@ -2,7 +2,7 @@
  "id": "azerbaycan_xalchasi_p0057_3",
  "title": "Ковёр «Ərciman» Ширван",
  "source": "каталог: book:azerbaycan_xalchasi",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0057_3",
  "lib_img": "img/azerbaycan_xalchasi_p0057_3.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Арджиман_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Арджиман_jpg": {
+   "ok": true,
+   "by": "машина: 988 общих точек, перекрытие 0.76 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +96,8 @@
   "ver": 1,
   "at": 1794547527
  },
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "museum": "wikimedia_File_Арджиман_jpg"
+ }
 }

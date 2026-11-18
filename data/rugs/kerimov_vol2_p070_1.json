@@ -2,15 +2,15 @@
  "id": "kerimov_vol2_p070_1",
  "title": "Керимов, т. II, Рис. 116 (стр. скана 70, печ. 140)",
  "source": "каталог: kerimov_vol2",
- "museum": "",
- "inv": "",
+ "museum": "Wikimedia Commons",
+ "inv": "292-1878",
  "url": "",
  "license": "книга (не публиковать фото)",
- "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
+ "place": "Caucasus",
+ "date": "первая половина XIX века",
+ "school": "guba-shirvan",
+ "composition": "xirdagul-chichi",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -70,8 +70,28 @@
  },
  "src_id": "cat:kerimov_vol2_p070_1",
  "lib_img": "img/kerimov_vol2_p070_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Хырдагюль_чичи_jpg",
+   "score": 0
+  },
+  {
+   "id": "vam_O117753",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Хырдагюль_чичи_jpg": {
+   "ok": true,
+   "by": "машина: 1399 общих точек, перекрытие 0.96 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "vam_O117753": {
+   "ok": true,
+   "by": "по цепочке: kerimov_vol2_p070_1 = vam_O117753 = wikimedia_File_Хырдагюль_чичи_jpg",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -115,5 +135,14 @@
   }
  },
  "frame": "cropped",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "school": "wikimedia_File_Хырдагюль_чичи_jpg",
+  "composition": "wikimedia_File_Хырдагюль_чичи_jpg",
+  "technique": "wikimedia_File_Хырдагюль_чичи_jpg",
+  "museum": "wikimedia_File_Хырдагюль_чичи_jpg",
+  "date": "wikimedia_File_Хырдагюль_чичи_jpg",
+  "inv": "vam_O117753",
+  "place": "vam_O117753"
+ }
 }

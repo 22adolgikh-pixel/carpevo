@@ -6,12 +6,12 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Kuba_type_carpet,_late_18th_century,_attributed_to_Caucasus,_Metmuseum.jpg",
  "license": "Public domain · Unknown author Unknown author",
- "place": "",
+ "place": "Caucasus",
  "date": "18th century",
  "school": "karabakh",
  "composition": "qarabag",
  "technique": "ворсовый",
- "size": "",
+ "size": "Textile:\r\nTop length: 113 1/4 in. (287.7 cm)\r\nBottom length: 114 1/2 in. (290.8 cm)\r\nLeft edge length: 258 in. (655.3 cm)\r\nRight edge length: 252 1/4 in. (640.7 cm)\r\n\r\nTube:\r\n          L. 126 in. (320 cm)\r\n          Diam. 10 in. (25.4 cm)",
  "notes": "Carpet with Geometricized Floral Design Late 18th century Attributed to Caucasus This carpet is representative of the Caucasian weaving tradition with its geometricized motifs and overall design, red ground and other warm colors. The field is composed of repeating large-scale medallion-motifs formed",
  "status": "new",
  "w": 1081,
@@ -543,6 +543,10 @@
   {
    "id": "azr_early_karabagh_rug19",
    "score": 447
+  },
+  {
+   "id": "met_452195",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -550,6 +554,11 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1792261296
+  },
+  "met_452195": {
+   "ok": true,
+   "by": "машина: 118 общих точек, перекрытие 0.88 (порог 40 / 0.7)",
+   "at": 1794973823
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -726,5 +735,9 @@
   "mmvcq3xxy",
   "mmvcq8cm2",
   "mmvcyh6jt"
- ]
+ ],
+ "from_twin": {
+  "place": "met_452195",
+  "size": "met_452195"
+ }
 }

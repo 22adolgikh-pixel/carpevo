@@ -48,8 +48,19 @@
  },
  "src_id": "cat:wikimedia_File_Зили_jpg",
  "lib_img": "img/wikimedia_File_Зили_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol1_p342_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol1_p342_2": {
+   "ok": true,
+   "by": "машина: 44 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

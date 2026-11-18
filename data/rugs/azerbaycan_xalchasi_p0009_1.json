@@ -51,8 +51,37 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0009_1",
  "lib_img": "img/azerbaycan_xalchasi_p0009_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_b4a22a3090",
+   "score": 0
+  },
+  {
+   "id": "cm_07e94e6c69",
+   "score": 0
+  },
+  {
+   "id": "cm_bd532a2656",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_b4a22a3090": {
+   "ok": true,
+   "by": "машина: 2162 общих точек, перекрытие 0.83 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "cm_07e94e6c69": {
+   "ok": true,
+   "by": "машина: 2262 общих точек, перекрытие 0.83 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "cm_bd532a2656": {
+   "ok": true,
+   "by": "по цепочке: azerbaycan_xalchasi_p0009_1 = cm_07e94e6c69 = cm_b4a22a3090 = cm_bd532a2656",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

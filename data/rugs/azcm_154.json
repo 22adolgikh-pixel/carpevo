@@ -3,14 +3,14 @@
  "title": "Həsir (Гасир), Масаллы, Азербайджан",
  "source": "каталог: azcarpetmuseum",
  "museum": "Национальный музей азербайджанского ковра",
- "inv": "",
+ "inv": "8659",
  "url": "https://azcarpetmuseum.az/",
  "license": "Нац. музей ковра (только анализ)",
  "place": "Масаллы, Азербайджан",
  "date": "начало ХХ века",
  "school": "",
  "composition": "",
- "technique": "",
+ "technique": "плетение (камыш)",
  "size": "73x160 sm",
  "notes": "камыш; переплетение",
  "status": "new",
@@ -49,8 +49,19 @@
  },
  "src_id": "cat:azcm_154",
  "lib_img": "img/azcm_154.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0015_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0015_1": {
+   "ok": true,
+   "by": "машина: 1332 общих точек, перекрытие 0.93 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -103,5 +114,9 @@
  },
  "frame": "cropped",
  "frame_by": "micro",
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "technique": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0015_1",
+  "inv": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0015_1"
+ }
 }

@@ -2,15 +2,15 @@
  "id": "kerimov_vol1_p342_2",
  "title": "Керимов, т. I, 2. ШЕДДЕ (стр. скана 342, печ. 88*)",
  "source": "каталог: kerimov_vol1",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
+ "date": "2010-03-12 16:23:12",
+ "school": "ganja-gazakh",
+ "composition": "zili",
+ "technique": "безворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -73,8 +73,19 @@
  },
  "src_id": "cat:kerimov_vol1_p342_2",
  "lib_img": "img/kerimov_vol1_p342_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Зили_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Зили_jpg": {
+   "ok": true,
+   "by": "машина: 44 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -107,5 +118,12 @@
   "area": null,
   "ver": 1,
   "t": 1794238578
+ },
+ "from_twin": {
+  "school": "wikimedia_File_Зили_jpg",
+  "composition": "wikimedia_File_Зили_jpg",
+  "technique": "wikimedia_File_Зили_jpg",
+  "museum": "wikimedia_File_Зили_jpg",
+  "date": "wikimedia_File_Зили_jpg"
  }
 }

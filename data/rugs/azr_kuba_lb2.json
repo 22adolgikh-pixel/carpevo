@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_lb2",
  "lib_img": "img/azr_kuba_lb2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol2_p090_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol2_p090_1": {
+   "ok": true,
+   "by": "машина: 244 общих точек, перекрытие 0.71 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

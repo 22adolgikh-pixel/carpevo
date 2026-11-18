@@ -3,7 +3,7 @@
  "title": "Ковёр «Borçalı» Газах",
  "source": "каталог: book:azerbaycan_xalchasi",
  "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
- "inv": "",
+ "inv": "6565",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Газах",
@@ -11,7 +11,7 @@
  "school": "ganja-gazakh",
  "composition": "borchali",
  "technique": "ворсовый",
- "size": "",
+ "size": "155x202 sm",
  "notes": "► Xalça “Borçalı”. Qazax, Azərbaycan. XX əsrin əvvəli. Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi\n► \"Borchali\" carpet. Gazakh, Azerbaijan. Early 20th century. Azerbaijan Carpet & Applied Art State Museum",
  "status": "new",
  "w": 1535,
@@ -51,8 +51,28 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0031_1",
  "lib_img": "img/azerbaycan_xalchasi_p0031_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Borchali_carpet_gif",
+   "score": 0
+  },
+  {
+   "id": "azcm_118",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Borchali_carpet_gif": {
+   "ok": true,
+   "by": "машина: 459 общих точек, перекрытие 0.93 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "azcm_118": {
+   "ok": true,
+   "by": "машина: 1872 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +105,9 @@
   "ver": 1,
   "at": 1794547556
  },
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "inv": "wikimedia_File_Borchali_carpet_gif",
+  "size": "wikimedia_File_Borchali_carpet_gif"
+ }
 }

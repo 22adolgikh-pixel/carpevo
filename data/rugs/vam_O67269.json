@@ -8,7 +8,7 @@
  "license": "V&A non-commercial",
  "place": "Azerbaijan",
  "date": "1700-1850",
- "school": "",
+ "school": "guba-shirvan",
  "composition": "",
  "technique": "",
  "size": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:vam_O67269",
  "lib_img": "img/vam_O67269.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_early_shirvan_rug9_shield_palmette_carpet",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_early_shirvan_rug9_shield_palmette_carpet": {
+   "ok": true,
+   "by": "машина: 1066 общих точек, перекрытие 0.86 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -142,5 +153,8 @@
   "quad_status": "confirmed"
  },
  "tri": "micro",
- "frame": "whole"
+ "frame": "whole",
+ "from_twin": {
+  "school": "azr_early_shirvan_rug9_shield_palmette_carpet"
+ }
 }

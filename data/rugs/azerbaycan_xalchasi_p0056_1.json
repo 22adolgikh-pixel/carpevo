@@ -3,7 +3,7 @@
  "title": "Ковёр «Ağaclı» Тебриз",
  "source": "каталог: book:azerbaycan_xalchasi",
  "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
- "inv": "",
+ "inv": "5535",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Тебриз",
@@ -11,7 +11,7 @@
  "school": "tabriz",
  "composition": "agacli",
  "technique": "ворсовый",
- "size": "",
+ "size": "129x159 sm",
  "notes": "Xalça \"Ağaclı\". Təbriz, Azərbaycan. XIX əsr. Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi\n\"Agajli\" Tree carpet. Tabriz, Azerbaijan. 19th century. Azerbaijanian Carpet & Applied Art State Museum",
  "status": "new",
  "w": 1580,
@@ -51,8 +51,28 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0056_1",
  "lib_img": "img/azerbaycan_xalchasi_p0056_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Azeri_rug_Agajli_jpg",
+   "score": 0
+  },
+  {
+   "id": "azcm_109",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Azeri_rug_Agajli_jpg": {
+   "ok": true,
+   "by": "машина: 2096 общих точек, перекрытие 0.83 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "azcm_109": {
+   "ok": true,
+   "by": "машина: 2758 общих точек, перекрытие 0.82 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "cropped",
@@ -119,5 +139,9 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "inv": "azcm_109",
+  "size": "azcm_109"
+ }
 }

@@ -6,11 +6,11 @@
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "Губа",
+ "date": "19 в., конец",
  "school": "guba-shirvan",
- "composition": "",
- "technique": "",
+ "composition": "shahnezerli",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion133",
  "lib_img": "img/azr_kuba_shirvan_medallion133.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_p0066_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_p0066_1": {
+   "ok": true,
+   "by": "машина: 1049 общих точек, перекрытие 0.92 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,11 @@
   "area": 0.922,
   "ver": 1,
   "t": 1794238296
+ },
+ "from_twin": {
+  "composition": "azerbaycan_xalchasi_p0066_1",
+  "technique": "azerbaycan_xalchasi_p0066_1",
+  "place": "azerbaycan_xalchasi_p0066_1",
+  "date": "azerbaycan_xalchasi_p0066_1"
  }
 }

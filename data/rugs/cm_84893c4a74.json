@@ -6,7 +6,7 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Azerbaijan_rug_Kazakh_18c.jpg",
  "license": "Public domain · Unknown author Unknown author",
- "place": "",
+ "place": "Газах",
  "date": "18 century",
  "school": "ganja-gazakh",
  "composition": "qazax",
@@ -52,9 +52,19 @@
   {
    "id": "wikimedia_File_Azerbaijan_rug_Kazakh_18c_jpg",
    "score": 996
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0020_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azerbaycan_xalchasi_p0020_1": {
+   "ok": true,
+   "by": "машина: 2346 общих точек, перекрытие 0.83 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Azerbaijan_rug_Kazakh_18c_jpg": {
@@ -205,5 +215,8 @@
   "quad_status": "confirmed"
  },
  "tri": "micro",
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "place": "azerbaycan_xalchasi_p0020_1"
+ }
 }

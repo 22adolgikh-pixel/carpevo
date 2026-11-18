@@ -3,7 +3,7 @@
  "title": "Ковёр «Çələbi» Карабах",
  "source": "каталог: book:azerbaycan_xalchasi",
  "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
- "inv": "",
+ "inv": "3863",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Карабах",
@@ -11,7 +11,7 @@
  "school": "karabakh",
  "composition": "chelebi",
  "technique": "ворсовый",
- "size": "",
+ "size": "156х288 sm",
  "notes": "Xalça \"Çələbi\". Qarabağ, Azərbaycan. 1342 hicri/1924-cü il. Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi\n\"Chalabi\" carpet. Garabagh, Azerbaijan. 1342 Hijra/1924. Azerbaijanian Carpet & Applied Art State Museum",
  "status": "new",
  "w": 1113,
@@ -51,8 +51,55 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0064_1",
  "lib_img": "img/azerbaycan_xalchasi_p0064_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Azerbaijani_rug_Chelyabi_jpg",
+   "score": 0
+  },
+  {
+   "id": "azcm_51",
+   "score": 0
+  },
+  {
+   "id": "cm_c07233e54a",
+   "score": 0
+  },
+  {
+   "id": "cm_3cb8b598f2",
+   "score": 0
+  },
+  {
+   "id": "cm_b59b402cc9",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Azerbaijani_rug_Chelyabi_jpg": {
+   "ok": true,
+   "by": "машина: 2455 общих точек, перекрытие 0.88 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "azcm_51": {
+   "ok": false,
+   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_rug_Chelyabi_jpg",
+   "at": 1794973823
+  },
+  "cm_c07233e54a": {
+   "ok": false,
+   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_rug_Chelyabi_jpg",
+   "at": 1794973823
+  },
+  "cm_3cb8b598f2": {
+   "ok": false,
+   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_rug_Chelyabi_jpg",
+   "at": 1794973823
+  },
+  "cm_b59b402cc9": {
+   "ok": false,
+   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_rug_Chelyabi_jpg",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -160,5 +207,9 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "inv": "wikimedia_File_Azerbaijani_rug_Chelyabi_jpg",
+  "size": "wikimedia_File_Azerbaijani_rug_Chelyabi_jpg"
+ }
 }

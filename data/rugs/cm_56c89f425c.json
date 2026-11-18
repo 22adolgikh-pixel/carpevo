@@ -3,15 +3,15 @@
  "title": "Zili rug, Tabriz school, XIX c",
  "source": "каталог: commons",
  "museum": "Национальный музей азербайджанского ковра",
- "inv": "",
+ "inv": "394",
  "url": "https://commons.wikimedia.org/wiki/File:%D0%97%D0%B8%D0%BB%D0%B8_6.jpg",
  "license": "CC BY-SA 3.0 · Urek Meniashvili",
- "place": "",
+ "place": "Карабах",
  "date": "XIX c",
  "school": "tabriz",
  "composition": "zili",
  "technique": "безворсовый: зили",
- "size": "",
+ "size": "93x310 см",
  "notes": "Zili rug, Tabriz school, XIX c.",
  "status": "new",
  "w": 734,
@@ -52,9 +52,19 @@
   {
    "id": "wikimedia_File_Зили_6_jpg",
    "score": 1500
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1": {
+   "ok": true,
+   "by": "машина: 185 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Зили_6_jpg": {
@@ -95,5 +105,10 @@
   "ver": 1,
   "t": 1794238454
  },
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "inv": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1",
+  "place": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1",
+  "size": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1"
+ }
 }

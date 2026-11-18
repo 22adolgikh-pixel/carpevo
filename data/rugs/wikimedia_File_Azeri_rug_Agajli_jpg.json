@@ -3,15 +3,15 @@
  "title": "Azeri rug Agajli.jpg",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "5535",
  "url": "https://commons.wikimedia.org/wiki/File:Azeri_rug_Agajli.jpg",
  "license": "Public domain",
- "place": "",
+ "place": "Тебриз",
  "date": "2010-03-12 16:45:28",
  "school": "tabriz",
  "composition": "agacli",
  "technique": "ворсовый",
- "size": "",
+ "size": "129x159 sm",
  "notes": "",
  "status": "new",
  "w": 750,
@@ -52,9 +52,24 @@
   {
    "id": "azcm_109",
    "score": 558
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0056_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azerbaycan_xalchasi_p0056_1": {
+   "ok": true,
+   "by": "машина: 2096 общих точек, перекрытие 0.83 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "azcm_109": {
+   "ok": true,
+   "by": "по цепочке: azcm_109 = azerbaycan_xalchasi_p0056_1 = wikimedia_File_Azeri_rug_Agajli_jpg",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_group": "g0172",
@@ -171,5 +186,10 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "place": "azerbaycan_xalchasi_p0056_1",
+  "inv": "azcm_109",
+  "size": "azcm_109"
+ }
 }

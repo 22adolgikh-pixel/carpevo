@@ -9,7 +9,7 @@
  "place": "Тебриз",
  "date": "конец XIX века",
  "school": "tabriz",
- "composition": "",
+ "composition": "agacli",
  "technique": "ворсовый",
  "size": "129x159 sm",
  "notes": "основа, ворс – шерсть, уток – хлопок; ",
@@ -54,9 +54,24 @@
   {
    "id": "wikimedia_File_Azeri_rug_Agajli_jpg",
    "score": 558
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0056_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azerbaycan_xalchasi_p0056_1": {
+   "ok": true,
+   "by": "машина: 2758 общих точек, перекрытие 0.82 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "wikimedia_File_Azeri_rug_Agajli_jpg": {
+   "ok": true,
+   "by": "по цепочке: azcm_109 = azerbaycan_xalchasi_p0056_1 = wikimedia_File_Azeri_rug_Agajli_jpg",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Azeri_rug_Agajli_jpg": {
@@ -391,5 +406,8 @@
    "t": 1794857636,
    "src": "cand2"
   }
+ },
+ "from_twin": {
+  "composition": "azerbaycan_xalchasi_p0056_1"
  }
 }

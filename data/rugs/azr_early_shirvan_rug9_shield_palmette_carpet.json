@@ -2,12 +2,12 @@
  "id": "azr_early_shirvan_rug9_shield_palmette_carpet",
  "title": "early shirvan rug9 shield palmette carpet",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
- "inv": "",
+ "museum": "V&A",
+ "inv": "T.13-1944",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "Azerbaijan",
+ "date": "1700-1850",
  "school": "guba-shirvan",
  "composition": "",
  "technique": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_early_shirvan_rug9_shield_palmette_carpet",
  "lib_img": "img/azr_early_shirvan_rug9_shield_palmette_carpet.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O67269",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O67269": {
+   "ok": true,
+   "by": "машина: 1066 общих точек, перекрытие 0.86 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,11 @@
   "area": 0.882,
   "ver": 1,
   "t": 1794238451
+ },
+ "from_twin": {
+  "museum": "vam_O67269",
+  "inv": "vam_O67269",
+  "place": "vam_O67269",
+  "date": "vam_O67269"
  }
 }

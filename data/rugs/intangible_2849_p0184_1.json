@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2849_p0184_1",
  "lib_img": "img/intangible_2849_p0184_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_khizi_findigan_rug11",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_khizi_findigan_rug11": {
+   "ok": true,
+   "by": "машина: 1550 общих точек, перекрытие 0.89 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

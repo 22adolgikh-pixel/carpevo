@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0066_1",
  "lib_img": "img/azerbaycan_xalchasi_p0066_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion133",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion133": {
+   "ok": true,
+   "by": "машина: 1049 общих точек, перекрытие 0.92 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

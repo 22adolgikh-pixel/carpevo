@@ -6,7 +6,7 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Ovchulug_rug,_shirvan_school.jpg",
  "license": "CC BY-SA 3.0",
- "place": "",
+ "place": "Ширван",
  "date": "2010-03-12 16:49:32",
  "school": "guba-shirvan",
  "composition": "ovchuluq",
@@ -57,6 +57,10 @@
   {
    "id": "wikimedia_File_Ovçuluq_carpet_Tabriz_group_of_Azerbaijani_carpets_jpg",
    "score": 301
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0024_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -64,6 +68,11 @@
    "ok": true,
    "by": "машина: 1335 общих точек, перекрытие 0.83 (порог 40 / 0.7)",
    "at": 1794940138
+  },
+  "azerbaycan_xalchasi_p0024_1": {
+   "ok": true,
+   "by": "машина: 1888 общих точек, перекрытие 0.90 (порог 40 / 0.7)",
+   "at": 1794973823
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -95,5 +104,8 @@
   ],
   "ver": 1,
   "at": 1792261939
+ },
+ "from_twin": {
+  "place": "azerbaycan_xalchasi_p0024_1"
  }
 }

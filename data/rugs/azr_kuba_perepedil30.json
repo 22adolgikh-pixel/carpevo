@@ -2,15 +2,15 @@
  "id": "azr_kuba_perepedil30",
  "title": "kuba perepedil30",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "The R. Mustafayev State Museum of Arts",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "Губа",
+ "date": "19 в., конец",
  "school": "guba-shirvan",
- "composition": "",
- "technique": "",
+ "composition": "pirebedil",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_perepedil30",
  "lib_img": "img/azr_kuba_perepedil30.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_p0007_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_p0007_1": {
+   "ok": true,
+   "by": "машина: 2411 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,12 @@
   "area": 0.904,
   "ver": 1,
   "t": 1794238351
+ },
+ "from_twin": {
+  "composition": "azerbaycan_xalchasi_p0007_1",
+  "technique": "azerbaycan_xalchasi_p0007_1",
+  "museum": "azerbaycan_xalchasi_p0007_1",
+  "place": "azerbaycan_xalchasi_p0007_1",
+  "date": "azerbaycan_xalchasi_p0007_1"
  }
 }

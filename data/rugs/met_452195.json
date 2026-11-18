@@ -8,8 +8,8 @@
  "license": "CC0",
  "place": "Caucasus",
  "date": "late 18th century",
- "school": "",
- "composition": "",
+ "school": "karabakh",
+ "composition": "qarabag",
  "technique": "ворсовый",
  "size": "Textile:\r\nTop length: 113 1/4 in. (287.7 cm)\r\nBottom length: 114 1/2 in. (290.8 cm)\r\nLeft edge length: 258 in. (655.3 cm)\r\nRight edge length: 252 1/4 in. (640.7 cm)\r\n\r\nTube:\r\n          L. 126 in. (320 cm)\r\n          Diam. 10 in. (25.4 cm)",
  "notes": "",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:met_452195",
  "lib_img": "img/met_452195.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_319213c085",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_319213c085": {
+   "ok": true,
+   "by": "машина: 118 общих точек, перекрытие 0.88 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -82,5 +93,9 @@
   "area": 0.905,
   "ver": 1,
   "t": 1794238469
+ },
+ "from_twin": {
+  "school": "cm_319213c085",
+  "composition": "cm_319213c085"
  }
 }

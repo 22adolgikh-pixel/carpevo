@@ -3,7 +3,7 @@
  "title": "Ковёр «Xilə-Afşan» Баку",
  "source": "каталог: book:azerbaycan_xalchasi",
  "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
- "inv": "",
+ "inv": "8247",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Баку",
@@ -11,7 +11,7 @@
  "school": "guba-shirvan",
  "composition": "xileafshan",
  "technique": "ворсовый",
- "size": "",
+ "size": "149x349 sm",
  "notes": "Xalça \"Xilə-Afşan\". Bakı, Azərbaycan. XVIII əsr. Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi\n\"Khila-Afshan\" carpet. Baku, Azerbaijan. 18th century. Azerbaijanian Carpet & Applied Art State Museum",
  "status": "new",
  "w": 883,
@@ -51,8 +51,37 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0045_1",
  "lib_img": "img/azerbaycan_xalchasi_p0045_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_afshan113",
+   "score": 0
+  },
+  {
+   "id": "azr_baku_khila_afshan_rug_state_museum_of_azerbaijan_carpet",
+   "score": 0
+  },
+  {
+   "id": "azcm_32",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_afshan113": {
+   "ok": true,
+   "by": "машина: 3208 общих точек, перекрытие 0.86 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "azr_baku_khila_afshan_rug_state_museum_of_azerbaijan_carpet": {
+   "ok": true,
+   "by": "машина: 3282 общих точек, перекрытие 0.86 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "azcm_32": {
+   "ok": true,
+   "by": "по цепочке: azcm_32 = azerbaycan_xalchasi_p0045_1 = azr_afshan113 = azr_baku_khila_afshan_rug_state_museum_of_azerbaijan_carpet",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -96,5 +125,9 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "inv": "azr_afshan113",
+  "size": "azr_afshan113"
+ }
 }

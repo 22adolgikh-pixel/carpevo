@@ -6,7 +6,7 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Gimil_carpet_1902.gif",
  "license": "Public domain",
- "place": "",
+ "place": "Губа",
  "date": "1902",
  "school": "guba-shirvan",
  "composition": "qimil",
@@ -53,6 +53,10 @@
   {
    "id": "azr_kuba_gymyl1",
    "score": 72
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0006_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -60,6 +64,11 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1792258734
+  },
+  "azerbaycan_xalchasi_p0006_1": {
+   "ok": true,
+   "by": "машина: 162 общих точек, перекрытие 0.88 (порог 40 / 0.7)",
+   "at": 1794973823
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -102,5 +111,8 @@
   "area": null,
   "ver": 1,
   "t": 1794238568
+ },
+ "from_twin": {
+  "place": "azerbaycan_xalchasi_p0006_1"
  }
 }

@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "19 в.",
  "school": "karabakh",
- "composition": "",
+ "composition": "zili",
  "technique": "безворсовый: зили",
  "size": "93x310 см",
  "notes": "Zili. Qarabağ. Azərbaycan. 19-cu əsr. Material: yun. Ölçü: 93x310 sm. Azərbaycan Xalça Muzeyi. DDK 394.",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_56c89f425c",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_56c89f425c": {
+   "ok": true,
+   "by": "машина: 185 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +96,8 @@
   "ver": 1,
   "at": 1794547506
  },
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "composition": "cm_56c89f425c"
+ }
 }

@@ -8,7 +8,7 @@
  "license": "книга (не публиковать фото)",
  "place": "",
  "date": "",
- "school": "",
+ "school": "guba-shirvan",
  "composition": "",
  "technique": "",
  "size": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:kerimov_vol2_p090_1",
  "lib_img": "img/kerimov_vol2_p090_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_lb2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_lb2": {
+   "ok": true,
+   "by": "машина: 244 общих точек, перекрытие 0.71 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,8 @@
   "area": null,
   "ver": 1,
   "t": 1794238535
+ },
+ "from_twin": {
+  "school": "azr_kuba_lb2"
  }
 }

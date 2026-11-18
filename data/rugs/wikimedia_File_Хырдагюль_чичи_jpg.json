@@ -3,10 +3,10 @@
  "title": "«Хырдагюль чичи».jpg",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "292-1878",
  "url": "https://commons.wikimedia.org/wiki/File:%C2%AB%D0%A5%D1%8B%D1%80%D0%B4%D0%B0%D0%B3%D1%8E%D0%BB%D1%8C_%D1%87%D0%B8%D1%87%D0%B8%C2%BB.jpg",
  "license": "Public domain",
- "place": "",
+ "place": "Caucasus",
  "date": "первая половина XIX века",
  "school": "guba-shirvan",
  "composition": "xirdagul-chichi",
@@ -48,8 +48,28 @@
  },
  "src_id": "cat:wikimedia_File_Хырдагюль_чичи_jpg",
  "lib_img": "img/wikimedia_File_Хырдагюль_чичи_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol2_p070_1",
+   "score": 0
+  },
+  {
+   "id": "vam_O117753",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol2_p070_1": {
+   "ok": true,
+   "by": "машина: 1399 общих точек, перекрытие 0.96 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "vam_O117753": {
+   "ok": true,
+   "by": "машина: 1338 общих точек, перекрытие 0.96 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -82,5 +102,9 @@
   "area": null,
   "ver": 1,
   "t": 1794238343
+ },
+ "from_twin": {
+  "inv": "vam_O117753",
+  "place": "vam_O117753"
  }
 }

@@ -8,7 +8,7 @@
  "license": "CC0",
  "place": "Caucasus",
  "date": "probably early 19th century",
- "school": "",
+ "school": "guba-shirvan",
  "composition": "",
  "technique": "ворсовый",
  "size": "Rug: L. 122 1/2 in. (311.2 cm)\r\n         W. 65 in. (165.1 cm)",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:met_448419",
  "lib_img": "img/met_448419.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_early_shirvan_rug5_palmette",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_early_shirvan_rug5_palmette": {
+   "ok": true,
+   "by": "машина: 1632 общих точек, перекрытие 0.93 (порог 40 / 0.7)",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -82,5 +93,8 @@
   "area": 0.86,
   "ver": 1,
   "t": 1794238309
+ },
+ "from_twin": {
+  "school": "azr_early_shirvan_rug5_palmette"
  }
 }

@@ -51,8 +51,28 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0024_1",
  "lib_img": "img/azerbaycan_xalchasi_p0024_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Ovchulug_rug_shirvan_school_jpg",
+   "score": 0
+  },
+  {
+   "id": "cm_be50f4d137",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Ovchulug_rug_shirvan_school_jpg": {
+   "ok": true,
+   "by": "машина: 1888 общих точек, перекрытие 0.90 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "cm_be50f4d137": {
+   "ok": true,
+   "by": "по цепочке: azerbaycan_xalchasi_p0024_1 = cm_be50f4d137 = wikimedia_File_Ovchulug_rug_shirvan_school_jpg",
+   "at": 1794973823
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

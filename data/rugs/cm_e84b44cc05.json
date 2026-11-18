@@ -3,15 +3,15 @@
  "title": "Sumakh rug, Guba school, XVI c",
  "source": "каталог: commons",
  "museum": "Национальный музей азербайджанского ковра",
- "inv": "",
+ "inv": "544",
  "url": "https://commons.wikimedia.org/wiki/File:%C2%AB%D0%A1%D1%83%D0%BC%D0%B0%D1%85%C2%BB.jpg",
  "license": "CC BY-SA 3.0 · Urek Meniashvili",
- "place": "",
+ "place": "Губа, Азербайджан",
  "date": "XVI c",
  "school": "guba-shirvan",
  "composition": "sumax",
  "technique": "безворсовый: сумах",
- "size": "",
+ "size": "214х291 sm",
  "notes": "Sumakh rug, Guba school, XVI c.",
  "status": "new",
  "w": 1427,
@@ -60,6 +60,18 @@
   {
    "id": "cm_25129c6ea0",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_sumakh5",
+   "score": 0
+  },
+  {
+   "id": "azcm_148",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0099_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -77,6 +89,21 @@
    "ok": false,
    "by": "по цепочке: cm_e84b44cc05 ≠ kerimov_vol2_p133_3",
    "at": 1794940139
+  },
+  "azr_kuba_sumakh5": {
+   "ok": true,
+   "by": "машина: 161 общих точек, перекрытие 0.92 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "azcm_148": {
+   "ok": true,
+   "by": "машина: 167 общих точек, перекрытие 0.89 (порог 40 / 0.7)",
+   "at": 1794973823
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0099_1": {
+   "ok": true,
+   "by": "машина: 130 общих точек, перекрытие 0.91 (порог 40 / 0.7)",
+   "at": 1794973823
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -139,5 +166,10 @@
   "ver": 1,
   "t": 1794238209
  },
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "inv": "azr_kuba_sumakh5",
+  "place": "azr_kuba_sumakh5",
+  "size": "azr_kuba_sumakh5"
+ }
 }
