@@ -18,7 +18,7 @@
  "h": 591,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1795009128,
  "cat": {
   "title": "kuba konagkend18",
   "museum": "",
@@ -45,8 +45,30 @@
  },
  "src_id": "cat:azr_kuba_konagkend18",
  "lib_img": "img/azr_kuba_konagkend18.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "met_447472",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend20",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "met_447472": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795009128,
+   "similar": true
+  },
+  "azr_kuba_konagkend20": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795009128,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +101,23 @@
   "area": 0.81,
   "ver": 1,
   "t": 1794238355
+ },
+ "micro": {
+  "same": {
+   "met_447472": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795009128
+    }
+   },
+   "azr_kuba_konagkend20": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795009128
+    }
+   }
+  }
  }
 }

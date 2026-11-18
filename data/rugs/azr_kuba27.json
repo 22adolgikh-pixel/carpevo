@@ -18,7 +18,7 @@
  "h": 1154,
  "marks": [],
  "created": 1791736136,
- "updated": 1794936568,
+ "updated": 1795009071,
  "cat": {
   "title": "kuba27",
   "museum": "",
@@ -53,6 +53,10 @@
   {
    "id": "azr_kuba97",
    "score": 0
+  },
+  {
+   "id": "azr_kuba12",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -60,6 +64,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794982737
+  },
+  "azr_kuba12": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795009071
+  },
+  "azr_kuba_shirvan_medallion148": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795009071
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -132,6 +146,22 @@
     "w": 2,
     "t": 1794936568,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba12": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795009071
+    }
+   },
+   "azr_kuba_shirvan_medallion148": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795009071
+    }
    }
   }
  },

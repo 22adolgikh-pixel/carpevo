@@ -18,7 +18,7 @@
  "h": 2362,
  "marks": [],
  "created": 1791870032,
- "updated": 1791997197,
+ "updated": 1795009043,
  "cat": {
   "title": "Zili carpet, Baku group of Azerbaijani carpets",
   "museum": "Национальный музей искусств Азербайджана",
@@ -60,6 +60,10 @@
   {
    "id": "wikimedia_File_Zili_carpet_Baku_group_of_Azerbaijani_carpets_jpg",
    "score": 879
+  },
+  {
+   "id": "kerimov_vol1_p358_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -67,6 +71,11 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1794515255
+  },
+  "kerimov_vol1_p358_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795009043
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -121,5 +130,16 @@
   "ver": 1,
   "t": 1794238343
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "kerimov_vol1_p358_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795009043
+    }
+   }
+  }
+ }
 }
