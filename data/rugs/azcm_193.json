@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870038,
- "updated": 1794929417,
+ "updated": 1794976731,
  "cat": {
   "title": "Cecim (Джеджим), село Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,55 @@
  },
  "src_id": "cat:azcm_193",
  "lib_img": "img/azcm_193.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0116_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0018_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2851_p0020_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0019_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0095_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0116_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976731
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0018_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976731
+  },
+  "intangible_2851_p0020_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976731
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0019_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976731
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0095_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976731
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -175,6 +222,43 @@
   },
   "field": {
    "dolgikh": "nofield"
+  },
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0116_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976731
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0018_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976731
+    }
+   },
+   "intangible_2851_p0020_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976731
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0019_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976731
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0095_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976731
+    }
+   }
   }
  },
  "frame": "whole",

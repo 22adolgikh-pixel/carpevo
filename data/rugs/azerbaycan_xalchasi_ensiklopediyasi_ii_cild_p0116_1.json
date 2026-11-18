@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794976734,
  "cat": {
   "title": "Şəddə Газах",
   "museum": "",
@@ -51,8 +51,37 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0116_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0116_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_193",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0019_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_167",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_193": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976731
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0019_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976734
+  },
+  "azcm_167": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976734
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +114,23 @@
   "ver": 1,
   "at": 1794547537
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0019_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976734
+    }
+   },
+   "azcm_167": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976734
+    }
+   }
+  }
+ }
 }
