@@ -18,7 +18,7 @@
  "h": 641,
  "marks": [],
  "created": 1791736132,
- "updated": 1791736132,
+ "updated": 1795027494,
  "cat": {
   "title": "kuba chichi76",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_chichi76",
  "lib_img": "img/azr_kuba_chichi76.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_konagkend10",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_konagkend10": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027494
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": 0.777,
   "ver": 1,
   "t": 1794238440
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_konagkend10": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027494
+    }
+   }
+  }
  }
 }
