@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_kazak_prayer_rug30",
  "lib_img": "img/azr_antique_kazak_prayer_rug30.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_zeyve_lesghi_star93",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_zeyve_lesghi_star93": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982742
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

@@ -18,7 +18,7 @@
  "h": 1700,
  "marks": [],
  "created": 1791736136,
- "updated": 1791736136,
+ "updated": 1794982737,
  "cat": {
   "title": "kuba97",
   "museum": "",
@@ -45,8 +45,37 @@
  },
  "src_id": "cat:azr_kuba97",
  "lib_img": "img/azr_kuba97.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_tekye112",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba27",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug9",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_tekye112": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982737
+  },
+  "azr_kuba27": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982737
+  },
+  "azr_antique_caucasian_moghan_rug9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982737
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +108,30 @@
   "area": 0.846,
   "ver": 1,
   "t": 1794238397
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_tekye112": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982737
+    }
+   },
+   "azr_kuba27": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982737
+    }
+   },
+   "azr_antique_caucasian_moghan_rug9": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982737
+    }
+   }
+  }
  }
 }

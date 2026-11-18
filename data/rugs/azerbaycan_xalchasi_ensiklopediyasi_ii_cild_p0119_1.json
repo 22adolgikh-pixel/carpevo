@@ -51,8 +51,55 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0119_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0119_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_182",
+   "score": 0
+  },
+  {
+   "id": "azcm_189",
+   "score": 0
+  },
+  {
+   "id": "intangible_2851_p0020_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_144",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_182": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794982655
+  },
+  "azcm_189": {
+   "ok": false,
+   "by": "по цепочке: azcm_182 ≠ azcm_189",
+   "at": 1794982712
+  },
+  "intangible_2851_p0020_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_182 ≠ intangible_2851_p0020_1",
+   "at": 1794982712
+  },
+  "azcm_144": {
+   "ok": false,
+   "by": "по цепочке: azcm_182 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1",
+   "at": 1794982712
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_182 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1",
+   "at": 1794982712
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

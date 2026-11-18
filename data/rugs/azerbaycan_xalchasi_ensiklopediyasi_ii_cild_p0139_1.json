@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794982771,
  "cat": {
   "title": "Zili Газах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -59,6 +59,10 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0148_1",
    "score": 0
+  },
+  {
+   "id": "vam_O117947",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -71,6 +75,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794978962
+  },
+  "vam_O117947": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982771
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -105,5 +114,16 @@
   "ver": 1,
   "at": 1794547503
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "vam_O117947": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982771
+    }
+   }
+  }
+ }
 }

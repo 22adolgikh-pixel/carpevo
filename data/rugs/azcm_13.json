@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870041,
- "updated": 1794236973,
+ "updated": 1794982683,
  "cat": {
   "title": "“Mərəzə” («Мараза»), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -53,9 +53,42 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend15",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0088_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0098_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_kuba_konagkend15": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982683
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982683
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0088_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982683
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0098_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982683
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -131,6 +164,36 @@
  "micro": {
   "field": {
    "dolgikh": "none"
+  },
+  "same": {
+   "azr_kuba_konagkend15": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982683
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982683
+    }
+   },
+   "azerbaycan_xalchalari_qarabag_qrupu_p0088_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982683
+    }
+   },
+   "azerbaycan_xalchalari_qarabag_qrupu_p0098_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982683
+    }
+   }
   }
  }
 }

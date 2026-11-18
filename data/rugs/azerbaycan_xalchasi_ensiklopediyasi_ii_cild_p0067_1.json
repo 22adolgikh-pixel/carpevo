@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794982793,
  "cat": {
   "title": "Kilim Баку",
   "museum": "Национальный музей азербайджанского ковра",
@@ -71,6 +71,30 @@
   {
    "id": "azcm_141",
    "score": 0
+  },
+  {
+   "id": "azr_antique_baku_flatweave1_curtain",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Antique_Caucasian_Gendje_Rug_Boteh_Symbology_jpg",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol3_p037_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -93,6 +117,43 @@
    "ok": false,
    "by": "по цепочке: azcm_141 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1",
    "at": 1794981395
+  },
+  "azr_antique_baku_flatweave1_curtain": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982793
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982793
+  },
+  "wikimedia_File_Antique_Caucasian_Gendje_Rug_Boteh_Symbology_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982793
+  },
+  "kerimov_vol3_p037_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982793,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0064_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982793,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982793
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
+   "at": 1794982794
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -127,5 +188,51 @@
   "ver": 1,
   "at": 1794547518
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azr_antique_baku_flatweave1_curtain": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982793
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982793
+    }
+   },
+   "wikimedia_File_Antique_Caucasian_Gendje_Rug_Boteh_Symbology_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982793
+    }
+   },
+   "kerimov_vol3_p037_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982793
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0064_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982793
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982793
+    }
+   }
+  }
+ }
 }

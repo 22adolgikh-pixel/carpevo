@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736129,
- "updated": 1794936078,
+ "updated": 1794982767,
  "cat": {
   "title": "antique khizi findigan rug17",
   "museum": "",
@@ -54,6 +54,26 @@
   {
    "id": "azr_kuba_gollu_chichi6",
    "score": 45
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star93",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0071_1",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_khizi_findigan_rug13",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Фындыган_jpg",
+   "score": 0
+  },
+  {
+   "id": "azcm_33",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -66,6 +86,32 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792002309
+  },
+  "azr_kuba_zeyve_lesghi_star93": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982742
+  },
+  "azerbaycan_xalchasi_p0071_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982767,
+   "similar": true
+  },
+  "azr_antique_khizi_findigan_rug13": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_p0071_1 ≠ azr_antique_khizi_findigan_rug17",
+   "at": 1794982794
+  },
+  "wikimedia_File_Фындыган_jpg": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_p0071_1 ≠ azr_antique_khizi_findigan_rug17",
+   "at": 1794982794
+  },
+  "azcm_33": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_p0071_1 ≠ azr_antique_khizi_findigan_rug17",
+   "at": 1794982794
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -97,6 +143,15 @@
      "a": "one",
      "w": 2,
      "t": 1794936078
+    }
+   }
+  },
+  "same": {
+   "azerbaycan_xalchasi_p0071_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982767
     }
    }
   }

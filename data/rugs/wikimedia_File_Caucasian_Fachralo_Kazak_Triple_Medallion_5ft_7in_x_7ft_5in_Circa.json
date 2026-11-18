@@ -851,7 +851,7 @@
   }
  ],
  "created": 1791736125,
- "updated": 1794233453,
+ "updated": 1794982753,
  "cat": {
   "title": "Caucasian Fachralo Kazak 'Triple Medallion'. 5ft 7in x 7ft 5in, Circa 1825.jpg",
   "museum": "Wikimedia Commons",
@@ -898,6 +898,18 @@
   {
    "id": "azr_antique_kazak_moghan_rug54a_christies",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend69",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star145",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug68",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -920,6 +932,22 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794982564
+  },
+  "azr_kuba_konagkend69": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982753
+  },
+  "azr_kuba_zeyve_lesghi_star145": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982753
+  },
+  "azr_antique_caucasian_moghan_rug68": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982753,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -1016,5 +1044,30 @@
   "area": 0.93,
   "ver": 1,
   "t": 1794238379
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_konagkend69": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982753
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star145": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982753
+    }
+   },
+   "azr_antique_caucasian_moghan_rug68": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982753
+    }
+   }
+  }
  }
 }
