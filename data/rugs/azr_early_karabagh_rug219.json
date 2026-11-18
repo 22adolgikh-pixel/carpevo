@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1794979592,
  "cat": {
   "title": "Floral carpet, early 18th century, Azerbaijan",
   "museum": "",
@@ -47,8 +47,28 @@
  },
  "src_id": "cat:azr_early_karabagh_rug219",
  "lib_img": "img/azr_early_karabagh_rug219.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_pre19th_64_early_kuba_rug",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_pre19th_73_early_kuba_rug",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_pre19th_64_early_kuba_rug": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979592
+  },
+  "azr_kuba_pre19th_73_early_kuba_rug": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979592
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +101,23 @@
   "area": 0.829,
   "ver": 1,
   "t": 1794238247
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_pre19th_64_early_kuba_rug": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979592
+    }
+   },
+   "azr_kuba_pre19th_73_early_kuba_rug": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979592
+    }
+   }
+  }
  }
 }

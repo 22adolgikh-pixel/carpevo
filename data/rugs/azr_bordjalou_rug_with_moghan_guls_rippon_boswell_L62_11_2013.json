@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1794979605,
  "cat": {
   "title": "bordjalou rug with moghan guls rippon boswell L62 11 2013",
   "museum": "",
@@ -62,6 +62,22 @@
   {
    "id": "azr_kuba_shirvan_medallion160",
    "score": 0
+  },
+  {
+   "id": "azr_kuba77",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star119",
+   "score": 0
+  },
+  {
+   "id": "azr_bordjalou_rug_with_moghan_memling_guls_sothebys_05_2011_L137",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0159_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -84,6 +100,26 @@
    "ok": false,
    "by": "по цепочке: azr_bordjalou_rug_with_moghan_guls_rippon_boswell_L62_11_2013 ≠ azr_kuba_shirvan_medallion146",
    "at": 1794973823
+  },
+  "azr_kuba77": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979605
+  },
+  "azr_kuba_zeyve_lesghi_star119": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979605
+  },
+  "azr_bordjalou_rug_with_moghan_memling_guls_sothebys_05_2011_L137": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979605
+  },
+  "intangible_2850_p0159_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979605
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -138,5 +174,37 @@
   "area": 0.894,
   "ver": 1,
   "t": 1794238500
+ },
+ "micro": {
+  "same": {
+   "azr_kuba77": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979605
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star119": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979605
+    }
+   },
+   "azr_bordjalou_rug_with_moghan_memling_guls_sothebys_05_2011_L137": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979605
+    }
+   },
+   "intangible_2850_p0159_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979605
+    }
+   }
+  }
  }
 }

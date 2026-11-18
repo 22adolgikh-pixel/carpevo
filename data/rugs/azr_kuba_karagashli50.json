@@ -18,7 +18,7 @@
  "h": 1622,
  "marks": [],
  "created": 1791736133,
- "updated": 1794260262,
+ "updated": 1794979638,
  "cat": {
   "title": "kuba karagashli50",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_karagashli50",
  "lib_img": "img/azr_kuba_karagashli50.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug34a",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_shirvan_akstafa_prayer_rug34a": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979638
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -111,6 +122,15 @@
       0.95028
      ]
     ]
+   }
+  },
+  "same": {
+   "azr_shirvan_akstafa_prayer_rug34a": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979638
+    }
    }
   }
  },

@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870020,
- "updated": 1794597025,
+ "updated": 1794979624,
  "cat": {
   "title": "Dağkəsəmən xalçası, Gəncə məktəbi Qazax qrupu, XVIII əsr, 1222x230 sm",
   "museum": "Музей турецкого и исламского искусства (Стамбул)",
@@ -52,9 +52,37 @@
   {
    "id": "wikimedia_File_Dağkəsəmən_xalçası_Gəncə_məktəbi_Qazax_qrupu_jpg",
    "score": 1091
+  },
+  {
+   "id": "cm_fbef65b594",
+   "score": 0
+  },
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug52",
+   "score": 0
+  },
+  {
+   "id": "cm_ce7b40342b",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_fbef65b594": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979624
+  },
+  "azr_shirvan_akstafa_prayer_rug52": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979624
+  },
+  "cm_ce7b40342b": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979624
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Dağkəsəmən_xalçası_Gəncə_məktəbi_Qazax_qrupu_jpg": {
@@ -175,6 +203,29 @@
     "w": 2,
     "t": 1794597025,
     "s": "ref"
+   }
+  },
+  "same": {
+   "cm_fbef65b594": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979624
+    }
+   },
+   "azr_shirvan_akstafa_prayer_rug52": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979624
+    }
+   },
+   "cm_ce7b40342b": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979624
+    }
    }
   }
  },

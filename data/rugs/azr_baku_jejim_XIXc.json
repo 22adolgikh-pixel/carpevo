@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791736138,
- "updated": 1794339238,
+ "updated": 1794979545,
  "cat": {
   "title": "Antique Azerbaijan jajim, 19th century",
   "museum": "",
@@ -59,6 +59,18 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0033_1",
    "score": 0
+  },
+  {
+   "id": "azr_azerbaijan_shahsavan_jajim_mm",
+   "score": 0
+  },
+  {
+   "id": "azr_azerbaijan_jajim1",
+   "score": 0
+  },
+  {
+   "id": "azcm_143",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -76,6 +88,21 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794979007
+  },
+  "azr_azerbaijan_shahsavan_jajim_mm": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979545
+  },
+  "azr_azerbaijan_jajim1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979545
+  },
+  "azcm_143": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979545
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -117,6 +144,29 @@
     "a": "detail",
     "w": 2,
     "t": 1794339238
+   }
+  },
+  "same": {
+   "azr_azerbaijan_shahsavan_jajim_mm": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979545
+    }
+   },
+   "azr_azerbaijan_jajim1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979545
+    }
+   },
+   "azcm_143": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979545
+    }
    }
   }
  },
