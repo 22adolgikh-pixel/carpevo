@@ -18,7 +18,7 @@
  "h": 701,
  "marks": [],
  "created": 1791736135,
- "updated": 1794256134,
+ "updated": 1795027160,
  "cat": {
   "title": "kuba afshan ugah2",
   "museum": "",
@@ -45,8 +45,20 @@
  },
  "src_id": "cat:azr_kuba_afshan_ugah2",
  "lib_img": "img/azr_kuba_afshan_ugah2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_afshan_ugah8",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_afshan_ugah8": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027160,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -93,6 +105,15 @@
     "a": "cropped",
     "w": 2,
     "t": 1794256134
+   }
+  },
+  "same": {
+   "azr_kuba_afshan_ugah8": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795027160
+    }
    }
   }
  },
