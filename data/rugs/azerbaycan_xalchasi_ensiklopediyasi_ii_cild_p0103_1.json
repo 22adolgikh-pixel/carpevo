@@ -57,6 +57,22 @@
    "id": "azcm_158",
    "score": 999,
    "inv": true
+  },
+  {
+   "id": "azr_kuba_sumakh5",
+   "score": 0
+  },
+  {
+   "id": "cm_e84b44cc05",
+   "score": 0
+  },
+  {
+   "id": "azcm_148",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0099_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -64,6 +80,26 @@
    "ok": true,
    "by": "машина: 2728 общих точек, перекрытие 0.91 (порог 40 / 0.7)",
    "at": 1794940138
+  },
+  "azr_kuba_sumakh5": {
+   "ok": false,
+   "by": "по цепочке: azcm_158 ≠ cm_e84b44cc05",
+   "at": 1795028084
+  },
+  "cm_e84b44cc05": {
+   "ok": false,
+   "by": "по цепочке: azcm_158 ≠ cm_e84b44cc05",
+   "at": 1795028084
+  },
+  "azcm_148": {
+   "ok": false,
+   "by": "по цепочке: azcm_158 ≠ cm_e84b44cc05",
+   "at": 1795028084
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0099_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_158 ≠ cm_e84b44cc05",
+   "at": 1795028084
   }
  },
  "_lib_t": "2026-11-13 10:08",

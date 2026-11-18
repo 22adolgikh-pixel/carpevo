@@ -66,6 +66,14 @@
   {
    "id": "kerimov_vol2_p133_3",
    "score": 0
+  },
+  {
+   "id": "azcm_158",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0103_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -93,6 +101,16 @@
    "ok": false,
    "by": "по цепочке: cm_e84b44cc05 ≠ kerimov_vol2_p133_3",
    "at": 1794973823
+  },
+  "azcm_158": {
+   "ok": false,
+   "by": "по цепочке: azcm_158 ≠ cm_e84b44cc05",
+   "at": 1795028084
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0103_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_158 ≠ cm_e84b44cc05",
+   "at": 1795028084
   }
  },
  "_lib_t": "2026-10-12 22:38",
