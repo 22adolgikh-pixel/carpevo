@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870042,
- "updated": 1794236973,
+ "updated": 1794997680,
  "cat": {
   "title": "“Qaraqoyunlu” («Кара-Коюнлу»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,37 @@
  },
  "src_id": "cat:azcm_126",
  "lib_img": "img/azcm_126.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O117944",
+   "score": 0
+  },
+  {
+   "id": "vam_O117775",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p099_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O117944": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997680
+  },
+  "vam_O117775": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997680
+  },
+  "kerimov_vol2_p099_2": {
+   "ok": false,
+   "by": "по цепочке: azcm_126 ≠ vam_O117775",
+   "at": 1794997733
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -126,6 +155,22 @@
  "micro": {
   "field": {
    "dolgikh": "none"
+  },
+  "same": {
+   "vam_O117944": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997680
+    }
+   },
+   "vam_O117775": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997680
+    }
+   }
   }
  }
 }

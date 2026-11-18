@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791736132,
- "updated": 1791736132,
+ "updated": 1794997704,
  "cat": {
   "title": "kuba chichi78",
   "museum": "",
@@ -49,6 +49,14 @@
   {
    "id": "azcm_137",
    "score": 0
+  },
+  {
+   "id": "azr_antique_ganja_rug18_genje",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi35",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +64,17 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794984007
+  },
+  "azr_antique_ganja_rug18_genje": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997704
+  },
+  "azr_kuba_chichi35": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997704,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -90,5 +109,23 @@
   "area": 0.745,
   "ver": 1,
   "t": 1794238484
+ },
+ "micro": {
+  "same": {
+   "azr_antique_ganja_rug18_genje": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997704
+    }
+   },
+   "azr_kuba_chichi35": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997704
+    }
+   }
+  }
  }
 }

@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870019,
- "updated": 1791870019,
+ "updated": 1794997676,
  "cat": {
   "title": "Carpet, Dagestan, 19th-20th century, Cleveland Museum of Art 1961.393",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:cm_aa6a93132f",
  "lib_img": "img/cm_aa6a93132f.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_c9d86fdc3e",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_c9d86fdc3e": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997676
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -81,5 +92,16 @@
   "ver": 1,
   "t": 1794238512
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "cm_c9d86fdc3e": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997676
+    }
+   }
+  }
+ }
 }

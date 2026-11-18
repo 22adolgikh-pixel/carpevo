@@ -18,7 +18,7 @@
  "h": 1094,
  "marks": [],
  "created": 1791736128,
- "updated": 1794260007,
+ "updated": 1794997659,
  "cat": {
   "title": "antique baku village rug6",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_baku_village_rug6",
  "lib_img": "img/azr_antique_baku_village_rug6.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_genje_prayer_rug_dated1286",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_genje_prayer_rug_dated1286": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997659
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -111,6 +122,15 @@
       0.93817
      ]
     ]
+   }
+  },
+  "same": {
+   "azr_antique_genje_prayer_rug_dated1286": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997659
+    }
    }
   }
  },

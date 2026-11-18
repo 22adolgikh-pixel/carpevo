@@ -51,8 +51,29 @@
  },
  "src_id": "cat:intangible_2849_p0235_1",
  "lib_img": "img/intangible_2849_p0235_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_09a6dbc243",
+   "score": 0
+  },
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug45",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_09a6dbc243": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997559,
+   "similar": true
+  },
+  "azr_shirvan_akstafa_prayer_rug45": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997600
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

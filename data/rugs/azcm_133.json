@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870042,
- "updated": 1794563131,
+ "updated": 1794997686,
  "cat": {
   "title": "“Öysüzlü” («Ойсузлу»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -70,6 +70,14 @@
   {
    "id": "azr_Borjalou_hooked_motif_rug_nagel_47T_L35",
    "score": 0
+  },
+  {
+   "id": "azr_antique_borchali_flatweave_qapiliq_james_allen201",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0224_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -93,6 +101,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794983801
+  },
+  "azr_antique_borchali_flatweave_qapiliq_james_allen201": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997686
+  },
+  "intangible_2849_p0224_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997686
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -404,6 +422,22 @@
   },
   "field": {
    "dolgikh": "draw"
+  },
+  "same": {
+   "azr_antique_borchali_flatweave_qapiliq_james_allen201": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997686
+    }
+   },
+   "intangible_2849_p0224_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997686
+    }
+   }
   }
  },
  "comp_no": [

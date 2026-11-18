@@ -18,7 +18,7 @@
  "h": 640,
  "marks": [],
  "created": 1791736128,
- "updated": 1794935520,
+ "updated": 1794997697,
  "cat": {
   "title": "antique-borchali-flatweave-qapiliq-james-allen201",
   "museum": "",
@@ -45,8 +45,29 @@
  },
  "src_id": "cat:azr_antique_borchali_flatweave_qapiliq_james_allen201",
  "lib_img": "img/azr_antique_borchali_flatweave_qapiliq_james_allen201.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_133",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_borchali_flatweave_baku_private_collection207",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_133": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997686
+  },
+  "azr_antique_borchali_flatweave_baku_private_collection207": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997697,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -62,6 +83,15 @@
      "a": "one",
      "w": 2,
      "t": 1794935520
+    }
+   }
+  },
+  "same": {
+   "azr_antique_borchali_flatweave_baku_private_collection207": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997697
     }
    }
   }

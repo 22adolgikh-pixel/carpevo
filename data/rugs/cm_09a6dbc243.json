@@ -18,7 +18,7 @@
  "h": 1860,
  "marks": [],
  "created": 1791870025,
- "updated": 1791870025,
+ "updated": 1794997559,
  "cat": {
   "title": "Karagashli rug or carpet, Karagashli, Quba school, Azerbaijan, ca",
   "museum": "",
@@ -51,6 +51,22 @@
   {
    "id": "azr_kuba_shirvan_medallion138",
    "score": 0
+  },
+  {
+   "id": "intangible_2849_p0133_1",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Гараджа_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Ширван_jpg",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0235_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -58,6 +74,27 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794984118,
+   "similar": true
+  },
+  "intangible_2849_p0133_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997559
+  },
+  "wikimedia_File_Гараджа_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997559
+  },
+  "wikimedia_File_Ширван_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997559
+  },
+  "intangible_2849_p0235_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997559,
    "similar": true
   }
  },
@@ -93,5 +130,37 @@
   "ver": 1,
   "t": 1794238285
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "intangible_2849_p0133_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997559
+    }
+   },
+   "wikimedia_File_Гараджа_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997559
+    }
+   },
+   "wikimedia_File_Ширван_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997559
+    }
+   },
+   "intangible_2849_p0235_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997559
+    }
+   }
+  }
+ }
 }

@@ -47,8 +47,28 @@
  },
  "src_id": "cat:azr_kuba_pre19th_74_early_kuba_rug",
  "lib_img": "img/azr_kuba_pre19th_74_early_kuba_rug.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_early_karabagh_rug95",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_pre19th4",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_early_karabagh_rug95": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997624
+  },
+  "azr_kuba_pre19th4": {
+   "ok": false,
+   "by": "по цепочке: azr_early_karabagh_rug95 ≠ azr_kuba_pre19th_74_early_kuba_rug",
+   "at": 1794997733
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

@@ -18,7 +18,7 @@
  "h": 988,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1794997615,
  "cat": {
   "title": "Sotheby's Sale: AU0731 | Location: Melbourne Auction Dates: Session 2: Wed, 28 Oct 09 6:00 PM LOT 30",
   "museum": "",
@@ -47,8 +47,30 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug76",
  "lib_img": "img/azr_antique_caucasian_moghan_rug76.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_caucasian_moghan_rug12",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug120",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_caucasian_moghan_rug12": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997615,
+   "similar": true
+  },
+  "azr_antique_caucasian_moghan_rug120": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997615,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +103,23 @@
   "area": 0.864,
   "ver": 1,
   "t": 1794238485
+ },
+ "micro": {
+  "same": {
+   "azr_antique_caucasian_moghan_rug12": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997615
+    }
+   },
+   "azr_antique_caucasian_moghan_rug120": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997615
+    }
+   }
+  }
  }
 }

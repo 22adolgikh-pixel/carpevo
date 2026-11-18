@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2849_p0229_1",
  "lib_img": "img/intangible_2849_p0229_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_88",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_88": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997646
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
