@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870015,
- "updated": 1794298213,
+ "updated": 1794984234,
  "cat": {
   "title": "Latif Kerimov",
   "museum": "",
@@ -52,9 +52,20 @@
   {
    "id": "wikimedia_File_Azerbaijani_carpet_BAHAR_Latif_Kerimov_jpg",
    "score": 1007
+  },
+  {
+   "id": "wikimedia_File_Хила_бута_jpg",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Хила_бута_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984234,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Azerbaijani_carpet_BAHAR_Latif_Kerimov_jpg": {
@@ -126,6 +137,15 @@
       1.00413
      ]
     ]
+   }
+  },
+  "same": {
+   "wikimedia_File_Хила_бута_jpg": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984234
+    }
    }
   }
  },

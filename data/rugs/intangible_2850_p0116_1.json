@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2850_p0116_1",
  "lib_img": "img/intangible_2850_p0116_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_tekye100",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_tekye100": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984186
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "cropped",

@@ -53,6 +53,14 @@
   {
    "id": "azr_kuba_perepedil64",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil30",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0007_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -66,6 +74,17 @@
    "ok": false,
    "by": "по цепочке: azr_kuba_perepedil16 ≠ azr_kuba_perepedil61",
    "at": 1794979928
+  },
+  "azr_kuba_perepedil30": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984135,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_p0007_1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil30 ≠ azr_kuba_perepedil61",
+   "at": 1794984174
   }
  },
  "_lib_t": "2026-10-12 22:38",

@@ -18,7 +18,7 @@
  "h": 1139,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1794984144,
  "cat": {
   "title": "kuba perepedil60",
   "museum": "",
@@ -45,8 +45,48 @@
  },
  "src_id": "cat:azr_kuba_perepedil60",
  "lib_img": "img/azr_kuba_perepedil60.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_perepedil30",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil49",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0078_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0007_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_perepedil30": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984135,
+   "similar": true
+  },
+  "azr_kuba_perepedil49": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984144,
+   "similar": true
+  },
+  "intangible_2849_p0078_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984144
+  },
+  "azerbaycan_xalchasi_p0007_1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil30 ≠ azr_kuba_perepedil60",
+   "at": 1794984174
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +119,23 @@
   "area": 0.915,
   "ver": 1,
   "t": 1794238455
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_perepedil49": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984144
+    }
+   },
+   "intangible_2849_p0078_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984144
+    }
+   }
+  }
  }
 }

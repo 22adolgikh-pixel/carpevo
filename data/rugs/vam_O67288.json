@@ -47,8 +47,20 @@
  },
  "src_id": "cat:vam_O67288",
  "lib_img": "img/vam_O67288.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_tekye64",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_tekye64": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984226,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

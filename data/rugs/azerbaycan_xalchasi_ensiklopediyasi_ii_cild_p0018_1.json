@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794858432,
+ "updated": 1794984244,
  "cat": {
   "title": "Cecim Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -55,6 +55,18 @@
   {
    "id": "azcm_193",
    "score": 0
+  },
+  {
+   "id": "azcm_167",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0019_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -62,6 +74,22 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794976731
+  },
+  "azcm_167": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984244
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0019_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984244,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984244
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -104,6 +132,29 @@
      "a": "one",
      "w": 2,
      "t": 1794858432
+    }
+   }
+  },
+  "same": {
+   "azcm_167": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984244
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0019_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984244
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984244
     }
    }
   }

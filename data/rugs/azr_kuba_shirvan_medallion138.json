@@ -18,7 +18,7 @@
  "h": 1526,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1794984118,
  "cat": {
   "title": "kuba shirvan medallion138",
   "museum": "",
@@ -45,8 +45,68 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion138",
  "lib_img": "img/azr_kuba_shirvan_medallion138.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_sumakh53",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Герадиль_1_jpg",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0152_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0156_1",
+   "score": 0
+  },
+  {
+   "id": "cm_09a6dbc243",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion154",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_sumakh53": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984118
+  },
+  "wikimedia_File_Герадиль_1_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984118
+  },
+  "intangible_2849_p0152_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984118,
+   "similar": true
+  },
+  "intangible_2849_p0156_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984118,
+   "similar": true
+  },
+  "cm_09a6dbc243": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984118,
+   "similar": true
+  },
+  "azr_kuba_shirvan_medallion154": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984118,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +139,51 @@
   "area": 0.926,
   "ver": 1,
   "t": 1794238422
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_sumakh53": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984118
+    }
+   },
+   "wikimedia_File_Герадиль_1_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984118
+    }
+   },
+   "intangible_2849_p0152_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984118
+    }
+   },
+   "intangible_2849_p0156_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984118
+    }
+   },
+   "cm_09a6dbc243": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984118
+    }
+   },
+   "azr_kuba_shirvan_medallion154": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984118
+    }
+   }
+  }
  }
 }

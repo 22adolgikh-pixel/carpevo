@@ -18,7 +18,7 @@
  "h": 1878,
  "marks": [],
  "created": 1791736135,
- "updated": 1794642715,
+ "updated": 1794984186,
  "cat": {
   "title": "kuba tekye100",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_tekye100",
  "lib_img": "img/azr_kuba_tekye100.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_hajigaib6",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0116_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_hajigaib6": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984186
+  },
+  "intangible_2850_p0116_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984186
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -159,6 +179,22 @@
     "w": 2,
     "t": 1794642715,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_hajigaib6": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984186
+    }
+   },
+   "intangible_2850_p0116_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984186
+    }
    }
   }
  },

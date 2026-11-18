@@ -18,7 +18,7 @@
  "h": 568,
  "marks": [],
  "created": 1791736131,
- "updated": 1794567517,
+ "updated": 1794984202,
  "cat": {
   "title": "kuba afurja9",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_afurja9",
  "lib_img": "img/azr_kuba_afurja9.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_perepedil70",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_perepedil70": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984202
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -94,6 +105,15 @@
      "a": "skip",
      "w": 0,
      "t": 1794567517
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_perepedil70": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984202
     }
    }
   }

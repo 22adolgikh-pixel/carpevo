@@ -18,7 +18,7 @@
  "h": 1500,
  "marks": [],
  "created": 1791870040,
- "updated": 1794260153,
+ "updated": 1794984257,
  "cat": {
   "title": "“Xan” («Хан»), Губа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,28 @@
  },
  "src_id": "cat:azcm_23",
  "lib_img": "img/azcm_23.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_chichi15",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend28",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_chichi15": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984257
+  },
+  "azr_kuba_konagkend28": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984257
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -114,6 +134,22 @@
       0.93926
      ]
     ]
+   }
+  },
+  "same": {
+   "azr_kuba_chichi15": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984257
+    }
+   },
+   "azr_kuba_konagkend28": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984257
+    }
    }
   }
  },

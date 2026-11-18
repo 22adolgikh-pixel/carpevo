@@ -8,7 +8,7 @@
  "license": "книга (не публиковать фото)",
  "place": "",
  "date": "",
- "school": "",
+ "school": "guba-shirvan",
  "composition": "salmasoyud",
  "technique": "",
  "size": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:kerimov_vol2_p102_1",
  "lib_img": "img/kerimov_vol2_p102_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_salmasoyud11",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_salmasoyud11": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794984219
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +92,8 @@
   "area": null,
   "ver": 1,
   "t": 1794238241
+ },
+ "from_twin": {
+  "school": "azr_kuba_salmasoyud11"
  }
 }

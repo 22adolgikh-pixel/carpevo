@@ -18,7 +18,7 @@
  "h": 678,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1794984200,
  "cat": {
   "title": "chateau de gourdon green fachralo rug sothebys 04 2014 L45",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_chateau_de_gourdon_green_fachralo_rug_sothebys_04_2014_L45",
  "lib_img": "img/azr_chateau_de_gourdon_green_fachralo_rug_sothebys_04_2014_L45.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_afurja3",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_afurja3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984200
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": 0.902,
   "ver": 1,
   "t": 1794238477
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_afurja3": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984200
+    }
+   }
+  }
  }
 }

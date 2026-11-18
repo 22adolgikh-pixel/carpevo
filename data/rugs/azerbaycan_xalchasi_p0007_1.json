@@ -3666,6 +3666,26 @@
   {
    "id": "azr_kuba_perepedil30",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil60",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil53",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil61",
+   "score": 0
+  },
+  {
+   "id": "cm_fcbef7be41",
+   "score": 0
+  },
+  {
+   "id": "cm_6522d62bed",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -3673,6 +3693,31 @@
    "ok": true,
    "by": "машина: 2411 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "azr_kuba_perepedil60": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil30 ≠ azr_kuba_perepedil60",
+   "at": 1794984174
+  },
+  "azr_kuba_perepedil53": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil30 ≠ azr_kuba_perepedil53",
+   "at": 1794984174
+  },
+  "azr_kuba_perepedil61": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil30 ≠ azr_kuba_perepedil61",
+   "at": 1794984174
+  },
+  "cm_fcbef7be41": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil30 ≠ cm_6522d62bed",
+   "at": 1794984174
+  },
+  "cm_6522d62bed": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil30 ≠ cm_6522d62bed",
+   "at": 1794984174
   }
  },
  "_lib_t": "2026-11-13 10:08",

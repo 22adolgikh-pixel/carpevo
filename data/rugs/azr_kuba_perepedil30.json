@@ -18,7 +18,7 @@
  "h": 1407,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1794984135,
  "cat": {
   "title": "kuba perepedil30",
   "museum": "",
@@ -49,6 +49,26 @@
   {
    "id": "azerbaycan_xalchasi_p0007_1",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil60",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil53",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil61",
+   "score": 0
+  },
+  {
+   "id": "cm_6522d62bed",
+   "score": 0
+  },
+  {
+   "id": "cm_fcbef7be41",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +76,35 @@
    "ok": true,
    "by": "машина: 2411 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "azr_kuba_perepedil60": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984135,
+   "similar": true
+  },
+  "azr_kuba_perepedil53": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984135,
+   "similar": true
+  },
+  "azr_kuba_perepedil61": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984135,
+   "similar": true
+  },
+  "cm_6522d62bed": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984135,
+   "similar": true
+  },
+  "cm_fcbef7be41": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil30 ≠ cm_6522d62bed",
+   "at": 1794984174
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -97,5 +146,37 @@
   "museum": "azerbaycan_xalchasi_p0007_1",
   "place": "azerbaycan_xalchasi_p0007_1",
   "date": "azerbaycan_xalchasi_p0007_1"
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_perepedil60": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984135
+    }
+   },
+   "azr_kuba_perepedil53": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984135
+    }
+   },
+   "azr_kuba_perepedil61": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984135
+    }
+   },
+   "cm_6522d62bed": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984135
+    }
+   }
+  }
  }
 }

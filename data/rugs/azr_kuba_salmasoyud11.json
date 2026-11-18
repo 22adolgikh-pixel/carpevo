@@ -9,7 +9,7 @@
  "place": "",
  "date": "",
  "school": "guba-shirvan",
- "composition": "",
+ "composition": "salmasoyud",
  "technique": "",
  "size": "",
  "notes": "",
@@ -18,7 +18,7 @@
  "h": 1369,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1794984219,
  "cat": {
   "title": "kuba salmasoyud11",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_salmasoyud11",
  "lib_img": "img/azr_kuba_salmasoyud11.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol2_p102_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol2_p102_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794984219
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,19 @@
   "area": 0.904,
   "ver": 1,
   "t": 1794238364
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol2_p102_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794984219
+    }
+   }
+  }
+ },
+ "from_twin": {
+  "composition": "kerimov_vol2_p102_1"
  }
 }
