@@ -18,7 +18,7 @@
  "h": 700,
  "marks": [],
  "created": 1791736131,
- "updated": 1794597360,
+ "updated": 1794984359,
  "cat": {
   "title": "kuba alpan48",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_alpan48",
  "lib_img": "img/azr_kuba_alpan48.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_zeyve_lesghi_star61",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_zeyve_lesghi_star61": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984359
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -168,6 +179,15 @@
     "w": 2,
     "t": 1794597360,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_zeyve_lesghi_star61": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984359
+    }
    }
   }
  },

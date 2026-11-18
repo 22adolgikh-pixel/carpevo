@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1794984363,
  "cat": {
   "title": "kuba dragon7",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_dragon7",
  "lib_img": "img/azr_kuba_dragon7.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Dragon_carpet_from_Azerbaijan_17_18th_century_212_x_184_cm_T84_19",
+   "score": 0
+  },
+  {
+   "id": "vam_O76593",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Dragon_carpet_from_Azerbaijan_17_18th_century_212_x_184_cm_T84_19": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984363
+  },
+  "vam_O76593": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_dragon7 ≠ wikimedia_File_Dragon_carpet_from_Azerbaijan_17_18th_century_212_x_184_cm_T84_19",
+   "at": 1794984387
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +99,16 @@
   "area": 0.882,
   "ver": 1,
   "t": 1794238365
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Dragon_carpet_from_Azerbaijan_17_18th_century_212_x_184_cm_T84_19": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984363
+    }
+   }
+  }
  }
 }

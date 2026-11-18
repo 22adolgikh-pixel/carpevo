@@ -48,8 +48,28 @@
  },
  "src_id": "cat:wikimedia_File_Heris_azeri_rug_jpg",
  "lib_img": "img/wikimedia_File_Heris_azeri_rug_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O154775",
+   "score": 0
+  },
+  {
+   "id": "azr_early_karabagh_rug184",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O154775": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984365
+  },
+  "azr_early_karabagh_rug184": {
+   "ok": false,
+   "by": "по цепочке: vam_O154775 ≠ wikimedia_File_Heris_azeri_rug_jpg",
+   "at": 1794984387
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

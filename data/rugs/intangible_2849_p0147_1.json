@@ -18,7 +18,7 @@
  "h": 1792,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794984330,
  "cat": {
   "title": "безворсовый «Kilim» Ширван",
   "museum": "",
@@ -55,6 +55,14 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0076_2",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0151_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -62,6 +70,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794980099
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0076_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984330
+  },
+  "intangible_2849_p0151_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984330
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -96,5 +114,23 @@
   "ver": 1,
   "at": 1794547490
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchalari_qarabag_qrupu_p0076_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984330
+    }
+   },
+   "intangible_2849_p0151_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984330
+    }
+   }
+  }
+ }
 }

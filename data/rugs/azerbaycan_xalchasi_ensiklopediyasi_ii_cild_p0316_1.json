@@ -52,8 +52,19 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0316_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0316_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0091_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0091_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984432
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

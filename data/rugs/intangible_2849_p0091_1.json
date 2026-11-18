@@ -18,7 +18,7 @@
  "h": 1771,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794984432,
  "cat": {
   "title": "Ковёр «Qaraqaşlı» Губа",
   "museum": "",
@@ -51,8 +51,38 @@
  },
  "src_id": "cat:intangible_2849_p0091_1",
  "lib_img": "img/intangible_2849_p0091_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_karagashli55",
+   "score": 0
+  },
+  {
+   "id": "azcm_24",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0316_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_karagashli55": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984432,
+   "similar": true
+  },
+  "azcm_24": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984432
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0316_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984432
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +115,30 @@
   "ver": 1,
   "at": 1794547521
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azr_kuba_karagashli55": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794984432
+    }
+   },
+   "azcm_24": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984432
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0316_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984432
+    }
+   }
+  }
+ }
 }

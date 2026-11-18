@@ -18,7 +18,7 @@
  "h": 941,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794984326,
  "cat": {
   "title": "Ковёр «Süjetli xalça» Губа",
   "museum": "",
@@ -51,8 +51,28 @@
  },
  "src_id": "cat:intangible_2849_p0105_1",
  "lib_img": "img/intangible_2849_p0105_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_27d5be5839",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0153_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_27d5be5839": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984326
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0153_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984326
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -92,5 +112,23 @@
   ],
   "ver": 1,
   "at": 1794547558
+ },
+ "micro": {
+  "same": {
+   "cm_27d5be5839": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984326
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0153_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984326
+    }
+   }
+  }
  }
 }

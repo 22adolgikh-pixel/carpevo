@@ -18,7 +18,7 @@
  "h": 1024,
  "marks": [],
  "created": 1791870044,
- "updated": 1794766642,
+ "updated": 1794984356,
  "cat": {
   "title": "“Bəhmənli” («Бахманлы»), Джебраил, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,19 @@
  },
  "src_id": "cat:azcm_62",
  "lib_img": "img/azcm_62.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_zeyve_lesghi_star148",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_zeyve_lesghi_star148": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794984356
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -121,6 +132,15 @@
     "w": 2,
     "t": 1794766642,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_zeyve_lesghi_star148": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794984356
+    }
    }
   }
  },
