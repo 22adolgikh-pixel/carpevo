@@ -18,7 +18,7 @@
  "h": 728,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1794978988,
  "cat": {
   "title": "kuba konagkend26",
   "museum": "",
@@ -45,8 +45,37 @@
  },
  "src_id": "cat:azr_kuba_konagkend26",
  "lib_img": "img/azr_kuba_konagkend26.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol2_p079_2",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend77",
+   "score": 0
+  },
+  {
+   "id": "cm_903f30d3f9",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol2_p079_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978988
+  },
+  "azr_kuba_konagkend77": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978988
+  },
+  "cm_903f30d3f9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978988
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +108,30 @@
   "area": 0.832,
   "ver": 1,
   "t": 1794238563
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol2_p079_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978988
+    }
+   },
+   "azr_kuba_konagkend77": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978988
+    }
+   },
+   "cm_903f30d3f9": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978988
+    }
+   }
+  }
  }
 }

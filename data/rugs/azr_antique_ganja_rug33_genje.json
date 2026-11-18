@@ -18,7 +18,7 @@
  "h": 2103,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794978971,
  "cat": {
   "title": "antique ganja rug33 genje",
   "museum": "",
@@ -45,8 +45,30 @@
  },
  "src_id": "cat:azr_antique_ganja_rug33_genje",
  "lib_img": "img/azr_antique_ganja_rug33_genje.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug63",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_ganja_rug15_genje",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_shirvan_akstafa_prayer_rug63": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978971,
+   "similar": true
+  },
+  "azr_antique_ganja_rug15_genje": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978971,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +101,23 @@
   "area": 0.866,
   "ver": 1,
   "t": 1794238238
+ },
+ "micro": {
+  "same": {
+   "azr_shirvan_akstafa_prayer_rug63": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978971
+    }
+   },
+   "azr_antique_ganja_rug15_genje": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978971
+    }
+   }
+  }
  }
 }

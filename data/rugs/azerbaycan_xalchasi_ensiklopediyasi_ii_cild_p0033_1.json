@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794929462,
+ "updated": 1794979007,
  "cat": {
   "title": "Çiyi palaz Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -59,6 +59,30 @@
   {
    "id": "azcm_168",
    "score": 0
+  },
+  {
+   "id": "azr_antique_khyzy_kilim5",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0089_1",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_khyzy_kilim3",
+   "score": 0
+  },
+  {
+   "id": "azr_baku_jejim_XIXc",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0068_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0061_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -71,6 +95,37 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794976860
+  },
+  "azr_antique_khyzy_kilim5": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979007,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0089_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979007
+  },
+  "azr_antique_khyzy_kilim3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979007
+  },
+  "azr_baku_jejim_XIXc": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979007
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0068_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979007
+  },
+  "intangible_2850_p0061_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979007
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -113,6 +168,50 @@
      "a": "one",
      "w": 2,
      "t": 1794929462
+    }
+   }
+  },
+  "same": {
+   "azr_antique_khyzy_kilim5": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794979007
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0089_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979007
+    }
+   },
+   "azr_antique_khyzy_kilim3": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979007
+    }
+   },
+   "azr_baku_jejim_XIXc": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979007
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0068_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979007
+    }
+   },
+   "intangible_2850_p0061_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979007
     }
    }
   }

@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870037,
- "updated": 1794783470,
+ "updated": 1794978957,
  "cat": {
   "title": "Çiyi Palaz (Чийи-Палас), село Гюздек, Баку, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -61,6 +61,22 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0031_1",
    "score": 0
+  },
+  {
+   "id": "azr_antique_khyzy_kilim5",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0132_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0129_1",
+   "score": 0
+  },
+  {
+   "id": "azr_azerbaijan_jajim1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -78,6 +94,27 @@
    "ok": false,
    "by": "по цепочке: azcm_174 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0030_1",
    "at": 1794977086
+  },
+  "azr_antique_khyzy_kilim5": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978957,
+   "similar": true
+  },
+  "intangible_2850_p0132_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978957
+  },
+  "intangible_2850_p0129_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978957
+  },
+  "azr_azerbaijan_jajim1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978957
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -155,6 +192,36 @@
  "micro": {
   "field": {
    "dolgikh": "nofield"
+  },
+  "same": {
+   "azr_antique_khyzy_kilim5": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978957
+    }
+   },
+   "intangible_2850_p0132_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978957
+    }
+   },
+   "intangible_2850_p0129_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978957
+    }
+   },
+   "azr_azerbaijan_jajim1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978957
+    }
+   }
   }
  }
 }

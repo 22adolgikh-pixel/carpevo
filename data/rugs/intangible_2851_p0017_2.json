@@ -18,7 +18,7 @@
  "h": 1159,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794978999,
  "cat": {
   "title": "безворсовый «Kilim» Иреван",
   "museum": "",
@@ -50,8 +50,76 @@
  },
  "src_id": "cat:intangible_2851_p0017_2",
  "lib_img": "img/intangible_2851_p0017_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0071_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_141",
+   "score": 0
+  },
+  {
+   "id": "cm_2c2bf81153",
+   "score": 0
+  },
+  {
+   "id": "cm_553d1f7b79",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0065_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion6",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978994,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0071_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978999,
+   "similar": true
+  },
+  "azcm_141": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978999,
+   "similar": true
+  },
+  "cm_2c2bf81153": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978999
+  },
+  "cm_553d1f7b79": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978999
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0065_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978999
+  },
+  "azr_kuba_shirvan_medallion6": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978999
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -84,5 +152,51 @@
   "ver": 1,
   "at": 1794547556
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0071_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978999
+    }
+   },
+   "azcm_141": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978999
+    }
+   },
+   "cm_2c2bf81153": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978999
+    }
+   },
+   "cm_553d1f7b79": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978999
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0065_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978999
+    }
+   },
+   "azr_kuba_shirvan_medallion6": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978999
+    }
+   }
+  }
+ }
 }

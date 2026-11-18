@@ -18,7 +18,7 @@
  "h": 468,
  "marks": [],
  "created": 1791736122,
- "updated": 1794857808,
+ "updated": 1794978990,
  "cat": {
   "title": "Керимов, т. II (стр. скана 79, печ. 158, 159)",
   "museum": "",
@@ -70,8 +70,28 @@
  },
  "src_id": "cat:kerimov_vol2_p079_2",
  "lib_img": "img/kerimov_vol2_p079_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_konagkend26",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0145_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_konagkend26": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978988
+  },
+  "intangible_2849_p0145_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978990
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -103,6 +123,15 @@
     "w": 2,
     "t": 1794857808,
     "s": "ref"
+   }
+  },
+  "same": {
+   "intangible_2849_p0145_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978990
+    }
    }
   }
  },

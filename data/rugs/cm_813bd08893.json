@@ -18,7 +18,7 @@
  "h": 1600,
  "marks": [],
  "created": 1791870036,
- "updated": 1791997192,
+ "updated": 1794978915,
  "cat": {
   "title": "Գորգեր2",
   "museum": "",
@@ -60,6 +60,10 @@
   {
    "id": "wikimedia_File_Գորգեր2_jpg",
    "score": 944
+  },
+  {
+   "id": "cm_edcd95d111",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -67,6 +71,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792258770
+  },
+  "cm_edcd95d111": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978915
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -121,5 +130,16 @@
   "ver": 1,
   "t": 1794238282
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "cm_edcd95d111": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978915
+    }
+   }
+  }
+ }
 }

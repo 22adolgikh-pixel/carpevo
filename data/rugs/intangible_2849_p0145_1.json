@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2849_p0145_1",
  "lib_img": "img/intangible_2849_p0145_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol2_p079_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol2_p079_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978990
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

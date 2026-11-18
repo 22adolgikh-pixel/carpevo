@@ -18,7 +18,7 @@
  "h": 1318,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1794978940,
  "cat": {
   "title": "kuba shirvan medallion148",
   "museum": "",
@@ -45,8 +45,39 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion148",
  "lib_img": "img/azr_kuba_shirvan_medallion148.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion159",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion68",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba27",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion159": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978940,
+   "similar": true
+  },
+  "azr_kuba_shirvan_medallion68": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978940,
+   "similar": true
+  },
+  "azr_kuba27": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794978940
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +110,30 @@
   "area": 0.91,
   "ver": 1,
   "t": 1794238540
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shirvan_medallion159": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978940
+    }
+   },
+   "azr_kuba_shirvan_medallion68": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794978940
+    }
+   },
+   "azr_kuba27": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794978940
+    }
+   }
+  }
  }
 }
