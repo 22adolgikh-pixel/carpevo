@@ -54,6 +54,14 @@
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0123_1",
    "score": 999,
    "inv": true
+  },
+  {
+   "id": "azcm_186",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0133_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -61,6 +69,16 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1794784353
+  },
+  "azcm_186": {
+   "ok": false,
+   "by": "по цепочке: azcm_186 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0123_1",
+   "at": 1794998130
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0133_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_186 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0123_1",
+   "at": 1794998130
   }
  },
  "_lib_t": "2026-10-12 22:38",

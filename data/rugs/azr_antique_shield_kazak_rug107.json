@@ -18,7 +18,7 @@
  "h": 960,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794998109,
  "cat": {
   "title": "antique shield kazak rug107",
   "museum": "",
@@ -50,6 +50,10 @@
   {
    "id": "met_452315",
    "score": 49
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star46",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +61,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792258664
+  },
+  "azr_kuba_zeyve_lesghi_star46": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998109
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -99,5 +108,16 @@
   "area": 0.346,
   "ver": 1,
   "t": 1794238239
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_zeyve_lesghi_star46": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998109
+    }
+   }
+  }
  }
 }

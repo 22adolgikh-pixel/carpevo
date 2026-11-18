@@ -59,6 +59,14 @@
   {
    "id": "azr_antique_baku_surahani_rug1",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion46",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0158_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -71,6 +79,16 @@
    "ok": true,
    "by": "машина: 2739 общих точек, перекрытие 0.96 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "azr_kuba_shirvan_medallion46": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_baku_surahani_rug1 ≠ azr_kuba_shirvan_medallion46",
+   "at": 1794998130
+  },
+  "intangible_2849_p0158_1": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_baku_surahani_rug1 ≠ intangible_2849_p0158_1",
+   "at": 1794998130
   }
  },
  "_lib_t": "2026-11-13 10:08",
