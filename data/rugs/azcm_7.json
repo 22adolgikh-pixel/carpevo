@@ -8,7 +8,7 @@
  "license": "Нац. музей ковра (только анализ)",
  "place": "Ширван, Азербайджан",
  "date": "начало XIX века",
- "school": "guba-shirvan",
+ "school": "shirvan",
  "composition": "ceyirli",
  "technique": "ворсовый",
  "size": "122x161 sm",
@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791870040,
- "updated": 1794552929,
+ "updated": 1795030538,
  "cat": {
   "title": "“Cəyirli” («Джейирли»), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -113,7 +113,18 @@
      "t": 1794552929
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795030538
+   }
   }
  },
- "composition_by": "/m: dolgikh"
+ "composition_by": "/m: dolgikh",
+ "frame": "whole",
+ "frame_by": "micro",
+ "school_prev": "guba-shirvan",
+ "school_by": "уточнено по слову «sirvan» в подписи"
 }

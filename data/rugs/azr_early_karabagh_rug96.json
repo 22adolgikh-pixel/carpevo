@@ -18,7 +18,7 @@
  "h": 1100,
  "marks": [],
  "created": 1791736139,
- "updated": 1794258952,
+ "updated": 1795030472,
  "cat": {
   "title": "Early floral rug, Afshan pattern, late 18th century, Khanates Period, Azerbaijan",
   "museum": "",
@@ -123,12 +123,17 @@
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "fragment",
+    "a": "cropped",
     "w": 2,
-    "t": 1794258952
+    "t": 1795030472
    }
   }
  },
- "frame": "fragment",
- "frame_by": "micro"
+ "frame": "cropped",
+ "frame_by": "micro",
+ "edge": {
+  "damaged": [
+   "dolgikh"
+  ]
+ }
 }
