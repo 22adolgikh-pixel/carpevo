@@ -49,6 +49,22 @@
   {
    "id": "azr_kuba_afshan_ugah3",
    "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug12",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_hajigaib12",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion141",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion124",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +72,26 @@
    "ok": true,
    "by": "/m: dolgikh",
    "at": 1794980079
+  },
+  "azr_antique_caucasian_moghan_rug12": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_caucasian_moghan_rug12 ≠ azr_kuba_afshan_ugah3",
+   "at": 1794980242
+  },
+  "azr_kuba_hajigaib12": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_afshan_ugah3 ≠ azr_kuba_hajigaib12",
+   "at": 1794980242
+  },
+  "azr_kuba_shirvan_medallion141": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_afshan_ugah3 ≠ azr_kuba_shirvan_medallion141",
+   "at": 1794980242
+  },
+  "azr_kuba_shirvan_medallion124": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_afshan_ugah3 ≠ azr_kuba_shirvan_medallion124",
+   "at": 1794980242
   }
  },
  "_lib_t": "2026-10-12 22:38",

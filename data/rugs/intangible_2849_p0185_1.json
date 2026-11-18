@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2849_p0185_1",
  "lib_img": "img/intangible_2849_p0185_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O117764",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O117764": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980211
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "cropped",

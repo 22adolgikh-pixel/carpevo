@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736127,
- "updated": 1791736127,
+ "updated": 1794980211,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -47,8 +47,37 @@
  },
  "src_id": "cat:vam_O117764",
  "lib_img": "img/vam_O117764.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Qımıl_carpet_Baku_group_of_Azerbaijani_carpets_jpg",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zejwa9",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0185_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Qımıl_carpet_Baku_group_of_Azerbaijani_carpets_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980211
+  },
+  "azr_kuba_zejwa9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980211
+  },
+  "intangible_2849_p0185_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980211
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +110,30 @@
   "area": 0.849,
   "ver": 1,
   "t": 1794238591
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Qımıl_carpet_Baku_group_of_Azerbaijani_carpets_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980211
+    }
+   },
+   "azr_kuba_zejwa9": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980211
+    }
+   },
+   "intangible_2849_p0185_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980211
+    }
+   }
+  }
  }
 }
