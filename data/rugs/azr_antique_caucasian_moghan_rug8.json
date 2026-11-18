@@ -18,7 +18,7 @@
  "h": 576,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795007412,
  "cat": {
   "title": "Antique Moghan long rug, second half 19th century, Azerbaijan",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug8",
  "lib_img": "img/azr_antique_caucasian_moghan_rug8.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_nakhchivan_rug20_ordubad",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_nakhchivan_rug20_ordubad": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007412
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +92,16 @@
   "area": null,
   "ver": 1,
   "t": 1794238469
+ },
+ "micro": {
+  "same": {
+   "azr_antique_nakhchivan_rug20_ordubad": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007412
+    }
+   }
+  }
  }
 }

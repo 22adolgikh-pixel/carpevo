@@ -18,7 +18,7 @@
  "h": 1341,
  "marks": [],
  "created": 1791870042,
- "updated": 1791870042,
+ "updated": 1795007395,
  "cat": {
   "title": "“Xətai” («Хатаи»), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,19 @@
  },
  "src_id": "cat:azcm_48",
  "lib_img": "img/azcm_48.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_pre19th14",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_pre19th14": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007395
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -83,5 +94,16 @@
   "ver": 1,
   "t": 1794783479
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azr_kuba_pre19th14": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007395
+    }
+   }
+  }
+ }
 }

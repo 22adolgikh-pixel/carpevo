@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_khizi_findigan_rug3",
  "lib_img": "img/azr_antique_khizi_findigan_rug3.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Armenian_rug_Ganja_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Armenian_rug_Ganja_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007392
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

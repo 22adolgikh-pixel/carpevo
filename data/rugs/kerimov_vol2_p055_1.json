@@ -94,8 +94,19 @@
  },
  "src_id": "cat:kerimov_vol2_p055_1",
  "lib_img": "img/kerimov_vol2_p055_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_p0059_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_p0059_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007404
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

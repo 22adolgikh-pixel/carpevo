@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_antique_nakhchivan_rug20_ordubad",
  "lib_img": "img/azr_antique_nakhchivan_rug20_ordubad.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_caucasian_moghan_rug8",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_caucasian_moghan_rug8": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007412
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
