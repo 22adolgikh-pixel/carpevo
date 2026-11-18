@@ -18,7 +18,7 @@
  "h": 1264,
  "marks": [],
  "created": 1791736140,
- "updated": 1791736140,
+ "updated": 1795018942,
  "cat": {
   "title": "Early Azerbaijan silk embroidery, 17-18th century, Victoria and Albert Museum",
   "museum": "",
@@ -47,8 +47,20 @@
  },
  "src_id": "cat:azr_azerbaijan_silk_embroidery_XVIIIc_burns_collection",
  "lib_img": "img/azr_azerbaijan_silk_embroidery_XVIIIc_burns_collection.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795018942,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +93,16 @@
   "area": 0.919,
   "ver": 1,
   "t": 1794238533
+ },
+ "micro": {
+  "same": {
+   "azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795018942
+    }
+   }
+  }
  }
 }
