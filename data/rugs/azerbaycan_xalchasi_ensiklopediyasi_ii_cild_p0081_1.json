@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795007757,
  "cat": {
   "title": "Kilim Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -67,6 +67,14 @@
   {
    "id": "azr_kuba_shirvan_medallion98",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0065_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion14",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -89,6 +97,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794998017
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0065_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007757
+  },
+  "azr_kuba_shirvan_medallion14": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007757
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -123,5 +141,23 @@
   "ver": 1,
   "at": 1794547558
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0065_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007757
+    }
+   },
+   "azr_kuba_shirvan_medallion14": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007757
+    }
+   }
+  }
+ }
 }
