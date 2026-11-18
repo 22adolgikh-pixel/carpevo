@@ -18,7 +18,7 @@
  "h": 751,
  "marks": [],
  "created": 1791736135,
- "updated": 1794337150,
+ "updated": 1795007035,
  "cat": {
   "title": "kuba tekye39",
   "museum": "",
@@ -45,8 +45,37 @@
  },
  "src_id": "cat:azr_kuba_tekye39",
  "lib_img": "img/azr_kuba_tekye39.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_afshan_ugah25",
+   "score": 0
+  },
+  {
+   "id": "vam_O117929",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye22",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_afshan_ugah25": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007036
+  },
+  "vam_O117929": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007036
+  },
+  "azr_kuba_tekye22": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007036
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -111,6 +140,29 @@
       0.9732
      ]
     ]
+   }
+  },
+  "same": {
+   "azr_kuba_afshan_ugah25": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007035
+    }
+   },
+   "vam_O117929": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007035
+    }
+   },
+   "azr_kuba_tekye22": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007035
+    }
    }
   }
  },

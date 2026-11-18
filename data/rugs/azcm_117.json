@@ -316,7 +316,7 @@
   }
  ],
  "created": 1791870041,
- "updated": 1794563110,
+ "updated": 1795007177,
  "cat": {
   "title": "“Aşağı Salahlı” («Ашагы Салахлы»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -347,8 +347,19 @@
  },
  "src_id": "cat:azcm_117",
  "lib_img": "img/azcm_117.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O117768",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O117768": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007177
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -541,6 +552,15 @@
   },
   "field": {
    "dolgikh": "none"
+  },
+  "same": {
+   "vam_O117768": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007177
+    }
+   }
   }
  },
  "name_none": [

@@ -18,7 +18,7 @@
  "h": 1876,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1795007190,
  "cat": {
   "title": "antique baku shield rug2",
   "museum": "",
@@ -53,6 +53,10 @@
   {
    "id": "azr_kuba_shield73",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_alpan104",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -67,6 +71,11 @@
    "by": "/m: dolgikh",
    "at": 1794997922,
    "similar": true
+  },
+  "azr_kuba_alpan104": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007190
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -101,5 +110,16 @@
   "area": 0.921,
   "ver": 1,
   "t": 1794238461
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_alpan104": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007190
+    }
+   }
+  }
  }
 }

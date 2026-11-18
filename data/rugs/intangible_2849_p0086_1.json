@@ -4389,7 +4389,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794935519,
+ "updated": 1795007164,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -4422,8 +4422,29 @@
  },
  "src_id": "cat:intangible_2849_p0086_1",
  "lib_img": "img/intangible_2849_p0086_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_perepedil7",
+   "score": 0
+  },
+  {
+   "id": "azcm_124",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_perepedil7": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007164,
+   "similar": true
+  },
+  "azcm_124": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007164
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -4695,6 +4716,22 @@
      "a": "bad",
      "w": 2,
      "t": 1794935519
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_perepedil7": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795007164
+    }
+   },
+   "azcm_124": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007164
     }
    }
   }

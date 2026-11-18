@@ -18,7 +18,7 @@
  "h": 1799,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795007170,
  "cat": {
   "title": "Ковёр «Ərciman» Ширван",
   "museum": "",
@@ -71,6 +71,14 @@
   {
    "id": "azr_kuba_shirvan_medallion138",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion154",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0148_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -98,6 +106,18 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794984118,
+   "similar": true
+  },
+  "azr_kuba_shirvan_medallion154": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007158,
+   "similar": true
+  },
+  "intangible_2849_p0148_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007170,
    "similar": true
   }
  },
@@ -133,5 +153,16 @@
   "ver": 1,
   "at": 1794547501
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "intangible_2849_p0148_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795007170
+    }
+   }
+  }
+ }
 }

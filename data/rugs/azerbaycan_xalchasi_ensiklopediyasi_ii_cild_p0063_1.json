@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795007181,
  "cat": {
   "title": "Kilim Баку",
   "museum": "Национальный музей азербайджанского ковра",
@@ -80,6 +80,10 @@
   {
    "id": "azcm_141",
    "score": 0
+  },
+  {
+   "id": "intangible_2849_p0154_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -118,6 +122,11 @@
    "by": "/m: dolgikh",
    "at": 1794981408,
    "similar": true
+  },
+  "intangible_2849_p0154_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007181
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -152,5 +161,16 @@
   "ver": 1,
   "at": 1794547499
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "intangible_2849_p0154_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007181
+    }
+   }
+  }
+ }
 }

@@ -18,7 +18,7 @@
  "h": 883,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1795007158,
  "cat": {
   "title": "kuba shirvan medallion154",
   "museum": "",
@@ -49,6 +49,14 @@
   {
    "id": "azr_kuba_shirvan_medallion138",
    "score": 0
+  },
+  {
+   "id": "intangible_2849_p0156_1",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_shirvan_prayer_rug13_Arizona20Collections",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +65,17 @@
    "by": "/m: dolgikh",
    "at": 1794984118,
    "similar": true
+  },
+  "intangible_2849_p0156_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007158,
+   "similar": true
+  },
+  "azr_antique_shirvan_prayer_rug13_Arizona20Collections": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007158
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -91,5 +110,23 @@
   "area": 0.852,
   "ver": 1,
   "t": 1794238334
+ },
+ "micro": {
+  "same": {
+   "intangible_2849_p0156_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795007158
+    }
+   },
+   "azr_antique_shirvan_prayer_rug13_Arizona20Collections": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007158
+    }
+   }
+  }
  }
 }
