@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870038,
- "updated": 1794783470,
+ "updated": 1795030342,
  "cat": {
   "title": "Kilim (Килим), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -345,11 +345,19 @@
    "src": "hand"
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "micro": {
   "field": {
    "dolgikh": "draw"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795030342
+   }
   }
- }
+ },
+ "frame_by": "micro"
 }
