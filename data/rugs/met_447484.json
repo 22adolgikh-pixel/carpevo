@@ -48,8 +48,19 @@
  },
  "src_id": "cat:met_447484",
  "lib_img": "img/met_447484.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_68a97b0843",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_68a97b0843": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976151
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

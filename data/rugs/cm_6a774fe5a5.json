@@ -52,9 +52,28 @@
   {
    "id": "wikimedia_File_Carpet_Shining_Cross_jpg",
    "score": 1255
+  },
+  {
+   "id": "vam_O66937",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "vam_O66937": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976050
+  },
+  "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg": {
+   "ok": false,
+   "by": "по цепочке: cm_6a774fe5a5 ≠ vam_O66937",
+   "at": 1794976086
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Carpet_Shining_Cross_jpg": {

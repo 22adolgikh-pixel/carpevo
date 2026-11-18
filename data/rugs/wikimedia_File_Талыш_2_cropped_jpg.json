@@ -10,7 +10,7 @@
  "date": "2010-03-12 16:26:32",
  "school": "guba-shirvan",
  "composition": "talish",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -57,9 +57,42 @@
   {
    "id": "wikimedia_File_Талыш_2_jpg",
    "score": 97
+  },
+  {
+   "id": "wikimedia_File_Муган_1_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Salahli_rug_jpg",
+   "score": 0
+  },
+  {
+   "id": "cm_cfa0af42d7",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_84382de3de": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976042
+  },
+  "wikimedia_File_Муган_1_jpg": {
+   "ok": false,
+   "by": "по цепочке: cm_84382de3de ≠ wikimedia_File_Муган_1_jpg",
+   "at": 1794976086
+  },
+  "wikimedia_File_Salahli_rug_jpg": {
+   "ok": false,
+   "by": "по цепочке: cm_84382de3de ≠ wikimedia_File_Salahli_rug_jpg",
+   "at": 1794976086
+  },
+  "cm_cfa0af42d7": {
+   "ok": false,
+   "by": "по цепочке: cm_84382de3de ≠ cm_cfa0af42d7",
+   "at": 1794976086
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -106,5 +139,8 @@
   "area": null,
   "ver": 1,
   "t": 1794238437
+ },
+ "from_twin": {
+  "technique": "cm_84382de3de"
  }
 }

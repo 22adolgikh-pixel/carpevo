@@ -51,8 +51,28 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0078_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0078_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O66937",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O66937": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976050
+  },
+  "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0078_1 ≠ vam_O66937",
+   "at": 1794976086
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

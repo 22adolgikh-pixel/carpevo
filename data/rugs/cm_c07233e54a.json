@@ -68,6 +68,14 @@
   {
    "id": "azerbaycan_xalchasi_p0064_1",
    "score": 0
+  },
+  {
+   "id": "cm_82a5abb840",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_2_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -96,6 +104,16 @@
    "ok": false,
    "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_rug_Chelyabi_jpg",
    "at": 1794973823
+  },
+  "cm_82a5abb840": {
+   "ok": false,
+   "by": "по цепочке: azcm_51 ≠ wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_2_jpg",
+   "at": 1794976029
+  },
+  "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_2_jpg": {
+   "ok": false,
+   "by": "по цепочке: azcm_51 ≠ wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_2_jpg",
+   "at": 1794976029
   }
  },
  "_lib_t": "2026-10-12 22:38",

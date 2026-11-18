@@ -2,12 +2,12 @@
  "id": "intangible_2851_p0017_1",
  "title": "безворсовый «Kilim» Баку",
  "source": "каталог: book:intangible_2851",
- "museum": "",
+ "museum": "Şəxsi kolleksiya",
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Баку",
- "date": "",
+ "date": "19 в., конец",
  "school": "guba-shirvan",
  "composition": "",
  "technique": "безворсовый",
@@ -18,7 +18,7 @@
  "h": 497,
  "marks": [],
  "created": 1794547278,
- "updated": 1794552834,
+ "updated": 1794976032,
  "cat": {
   "title": "безворсовый «Kilim» Баку",
   "museum": "",
@@ -50,8 +50,64 @@
  },
  "src_id": "cat:intangible_2851_p0017_1",
  "lib_img": "img/intangible_2851_p0017_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2851_p0115_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1",
+   "score": 0
+  },
+  {
+   "id": "cm_53fcd514ed",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_141",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2851_p0115_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976032
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976032
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976032
+  },
+  "cm_53fcd514ed": {
+   "ok": false,
+   "by": "по цепочке: cm_53fcd514ed ≠ intangible_2851_p0115_1",
+   "at": 1794976086
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1 ≠ intangible_2851_p0115_1",
+   "at": 1794976086
+  },
+  "azcm_141": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1 ≠ intangible_2851_p0115_1",
+   "at": 1794976086
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "unsure",
@@ -160,6 +216,29 @@
     ],
     "s": "vlm"
    }
+  },
+  "same": {
+   "intangible_2851_p0115_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976032
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976032
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976032
+    }
+   }
   }
  },
  "frame": "whole",
@@ -196,5 +275,9 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "museum": "intangible_2851_p0115_1",
+  "date": "intangible_2851_p0115_1"
+ }
 }

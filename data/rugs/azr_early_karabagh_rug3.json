@@ -7,7 +7,7 @@
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "19th century",
  "school": "karabakh",
  "composition": "",
  "technique": "",
@@ -18,7 +18,7 @@
  "h": 512,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1794976052,
  "cat": {
   "title": "Azerbaijan carpet fragment in a golden yellow field with palmettes, South of Urmia Lake, Iranian Aze",
   "museum": "",
@@ -54,7 +54,13 @@
    "score": 288
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_kuba_pre19th35": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976053
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -95,5 +101,19 @@
   "area": 0.809,
   "ver": 1,
   "t": 1794238546
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_pre19th35": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976052
+    }
+   }
+  }
+ },
+ "from_twin": {
+  "date": "azr_kuba_pre19th35"
  }
 }

@@ -8,9 +8,9 @@
  "license": "V&A non-commercial",
  "place": "Azerbaijan",
  "date": "1870-1879",
- "school": "",
- "composition": "",
- "technique": "",
+ "school": "guba-shirvan",
+ "composition": "geradil",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736128,
- "updated": 1794597077,
+ "updated": 1794976049,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -52,9 +52,51 @@
   {
    "id": "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg",
    "score": 331
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1",
+   "score": 0
+  },
+  {
+   "id": "cm_6a774fe5a5",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0078_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976050
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976050
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976050
+  },
+  "cm_6a774fe5a5": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976050
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0078_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976050
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -185,6 +227,43 @@
     "t": 1794597077,
     "s": "ref"
    }
+  },
+  "same": {
+   "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976049
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976049
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976049
+    }
+   },
+   "cm_6a774fe5a5": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976049
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0078_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976049
+    }
+   }
   }
  },
  "frame": "whole",
@@ -221,5 +300,10 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "school": "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg",
+  "composition": "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg",
+  "technique": "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg"
+ }
 }

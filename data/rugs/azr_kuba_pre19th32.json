@@ -2,23 +2,23 @@
  "id": "azr_kuba_pre19th32",
  "title": "Metropolitan Museum of Art",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Метрополитен-музей",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
+ "place": "Caucasus",
  "date": "17th century",
  "school": "guba-shirvan",
- "composition": "",
- "technique": "",
- "size": "",
+ "composition": "ejdahali",
+ "technique": "ворсовый",
+ "size": "H. 170 in. (431.8 cm)\r\nW.  90.00 in. (228.6 cm)",
  "notes": "Metropolitan Museum of Art. Dragon Rug, late 17th century Caucasus (Kuba). The James F. Ballard Collection, Gift of James F. Ballard, 1922 (22.100.122)",
  "status": "new",
  "w": 650,
  "h": 631,
  "marks": [],
  "created": 1791736137,
- "updated": 1794750494,
+ "updated": 1794976060,
  "cat": {
   "title": "Metropolitan Museum of Art",
   "museum": "",
@@ -47,8 +47,82 @@
  },
  "src_id": "cat:azr_kuba_pre19th32",
  "lib_img": "img/azr_kuba_pre19th32.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_dceb9ab95f",
+   "score": 0
+  },
+  {
+   "id": "cm_ec44c9893f",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_2_jpeg",
+   "score": 0
+  },
+  {
+   "id": "cm_ea07ad4c5c",
+   "score": 0
+  },
+  {
+   "id": "cm_59c0a6ea5e",
+   "score": 0
+  },
+  {
+   "id": "cm_a38c54d791",
+   "score": 0
+  },
+  {
+   "id": "cm_e0c880ca68",
+   "score": 0
+  },
+  {
+   "id": "azcm_128",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_dceb9ab95f": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976058
+  },
+  "cm_ec44c9893f": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976060
+  },
+  "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_2_jpeg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976060
+  },
+  "cm_ea07ad4c5c": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976060
+  },
+  "cm_59c0a6ea5e": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_pre19th32 = cm_59c0a6ea5e = cm_a38c54d791 = cm_dceb9ab95f = cm_e0c880ca68 = cm_ea07ad4c5c …",
+   "at": 1794976086
+  },
+  "cm_a38c54d791": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_pre19th32 = cm_59c0a6ea5e = cm_a38c54d791 = cm_dceb9ab95f = cm_e0c880ca68 = cm_ea07ad4c5c …",
+   "at": 1794976086
+  },
+  "cm_e0c880ca68": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_pre19th32 = cm_59c0a6ea5e = cm_a38c54d791 = cm_dceb9ab95f = cm_e0c880ca68 = cm_ea07ad4c5c …",
+   "at": 1794976086
+  },
+  "azcm_128": {
+   "ok": false,
+   "by": "по цепочке: azcm_128 ≠ cm_a38c54d791",
+   "at": 1794976086
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -89,8 +163,38 @@
     "w": 2,
     "t": 1794750494
    }
+  },
+  "same": {
+   "cm_ec44c9893f": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976060
+    }
+   },
+   "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_2_jpeg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976060
+    }
+   },
+   "cm_ea07ad4c5c": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976060
+    }
+   }
   }
  },
  "frame": "detail",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "composition": "cm_dceb9ab95f",
+  "technique": "cm_dceb9ab95f",
+  "museum": "cm_dceb9ab95f",
+  "place": "cm_dceb9ab95f",
+  "size": "cm_dceb9ab95f"
+ }
 }

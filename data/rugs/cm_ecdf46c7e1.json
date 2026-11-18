@@ -18,7 +18,7 @@
  "h": 1125,
  "marks": [],
  "created": 1791870014,
- "updated": 1794596950,
+ "updated": 1794976085,
  "cat": {
   "title": "17th century Shirvan carpet, 161x249 cm",
   "museum": "Лувр",
@@ -52,9 +52,19 @@
   {
    "id": "wikimedia_File_17th_century_Shirvan_carpet_Louvre_jpg",
    "score": 693
+  },
+  {
+   "id": "kerimov_vol3_p012_2",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "kerimov_vol3_p012_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976085
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_17th_century_Shirvan_carpet_Louvre_jpg": {
@@ -102,6 +112,15 @@
     "a": "whole",
     "w": 2,
     "t": 1794596950
+   }
+  },
+  "same": {
+   "kerimov_vol3_p012_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976085
+    }
    }
   }
  },

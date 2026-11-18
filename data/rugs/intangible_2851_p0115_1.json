@@ -18,7 +18,7 @@
  "h": 1192,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794976038,
  "cat": {
   "title": "безворсовый «Kilim» Ширван",
   "museum": "Şəxsi kolleksiya",
@@ -50,8 +50,64 @@
  },
  "src_id": "cat:intangible_2851_p0115_1",
  "lib_img": "img/intangible_2851_p0115_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2851_p0017_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1",
+   "score": 0
+  },
+  {
+   "id": "cm_53fcd514ed",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_141",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2851_p0017_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976032
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976039
+  },
+  "cm_53fcd514ed": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976039
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1 ≠ intangible_2851_p0017_1",
+   "at": 1794976086
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0067_1 ≠ intangible_2851_p0017_1",
+   "at": 1794976086
+  },
+  "azcm_141": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1 ≠ intangible_2851_p0115_1",
+   "at": 1794976086
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "cropped",
@@ -84,5 +140,23 @@
   "ver": 1,
   "at": 1794547467
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976038
+    }
+   },
+   "cm_53fcd514ed": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976038
+    }
+   }
+  }
+ }
 }

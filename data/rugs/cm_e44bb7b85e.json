@@ -59,6 +59,18 @@
   {
    "id": "cm_a7f4d62972",
    "score": 0
+  },
+  {
+   "id": "cm_a8c3332dec",
+   "score": 0
+  },
+  {
+   "id": "cm_dca3d7ad50",
+   "score": 0
+  },
+  {
+   "id": "cm_21bd70c998",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -76,6 +88,21 @@
    "ok": false,
    "by": "по цепочке: cm_978f4e3b74 ≠ cm_e44bb7b85e",
    "at": 1794975895
+  },
+  "cm_a8c3332dec": {
+   "ok": false,
+   "by": "по цепочке: cm_a8c3332dec ≠ cm_a9d2a004ec",
+   "at": 1794976029
+  },
+  "cm_dca3d7ad50": {
+   "ok": false,
+   "by": "по цепочке: cm_a7f4d62972 ≠ cm_dca3d7ad50",
+   "at": 1794976029
+  },
+  "cm_21bd70c998": {
+   "ok": false,
+   "by": "по цепочке: cm_a7f4d62972 ≠ cm_dca3d7ad50",
+   "at": 1794976029
   }
  },
  "_lib_t": "2026-10-12 22:38",

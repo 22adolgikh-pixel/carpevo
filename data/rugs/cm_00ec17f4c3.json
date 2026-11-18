@@ -18,7 +18,7 @@
  "h": 1800,
  "marks": [],
  "created": 1791870015,
- "updated": 1794509639,
+ "updated": 1794976142,
  "cat": {
   "title": "A picture of an Azerbaijani capret in Museum of History and Ethnography in Guba, taken by Aykhan Zayedzadeh fo",
   "museum": "",
@@ -62,7 +62,13 @@
    "score": 247
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_ce8daa0857": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976142
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_ce8daa0857": {
@@ -126,6 +132,15 @@
     "a": "cropped",
     "w": 2,
     "t": 1794509639
+   }
+  },
+  "same": {
+   "cm_ce8daa0857": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976142
+    }
    }
   }
  },

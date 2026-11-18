@@ -3,10 +3,10 @@
  "title": "Azerbaijani carpet \"Goradil\" in V&A.jpg",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "53-1880",
  "url": "https://commons.wikimedia.org/wiki/File:Azerbaijani_carpet_%22Goradil%22_in_V%26A.jpg",
  "license": "Public domain",
- "place": "",
+ "place": "Azerbaijan",
  "date": "between 1870 and 1879date QS:P,+1870-00-00T00:00:00Z/8,P1319,+1870-00-00T00:00:00Z/9,P1326,+1879-00-00T00:00:00Z/9",
  "school": "guba-shirvan",
  "composition": "geradil",
@@ -53,9 +53,51 @@
   {
    "id": "vam_O66937",
    "score": 331
+  },
+  {
+   "id": "cm_6a774fe5a5",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0078_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "vam_O66937": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976050
+  },
+  "cm_6a774fe5a5": {
+   "ok": false,
+   "by": "по цепочке: cm_6a774fe5a5 ≠ vam_O66937",
+   "at": 1794976086
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1 ≠ vam_O66937",
+   "at": 1794976086
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0078_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0078_1 ≠ vam_O66937",
+   "at": 1794976086
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1 ≠ vam_O66937",
+   "at": 1794976086
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -213,5 +255,9 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "inv": "vam_O66937",
+  "place": "vam_O66937"
+ }
 }

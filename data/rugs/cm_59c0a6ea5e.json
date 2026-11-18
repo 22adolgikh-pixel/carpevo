@@ -6,12 +6,12 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Dragon_Carpet_MET_wb-22.100.122g.jpeg",
  "license": "CC0",
- "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
- "size": "",
+ "place": "Caucasus",
+ "date": "17th century",
+ "school": "guba-shirvan",
+ "composition": "ejdahali",
+ "technique": "ворсовый",
+ "size": "H. 170 in. (431.8 cm)\r\nW.  90.00 in. (228.6 cm)",
  "notes": "Carpet; Textiles-Rugs",
  "status": "new",
  "w": 1939,
@@ -52,6 +52,34 @@
   {
    "id": "cm_e0c880ca68",
    "score": 59
+  },
+  {
+   "id": "azr_kuba_pre19th32",
+   "score": 0
+  },
+  {
+   "id": "cm_a38c54d791",
+   "score": 0
+  },
+  {
+   "id": "cm_dceb9ab95f",
+   "score": 0
+  },
+  {
+   "id": "cm_ea07ad4c5c",
+   "score": 0
+  },
+  {
+   "id": "cm_ec44c9893f",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_2_jpeg",
+   "score": 0
+  },
+  {
+   "id": "azcm_128",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -59,6 +87,41 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1794236579
+  },
+  "azr_kuba_pre19th32": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_pre19th32 = cm_59c0a6ea5e = cm_a38c54d791 = cm_dceb9ab95f = cm_e0c880ca68 = cm_ea07ad4c5c …",
+   "at": 1794976086
+  },
+  "cm_a38c54d791": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_pre19th32 = cm_59c0a6ea5e = cm_a38c54d791 = cm_dceb9ab95f = cm_e0c880ca68 = cm_ea07ad4c5c …",
+   "at": 1794976086
+  },
+  "cm_dceb9ab95f": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_pre19th32 = cm_59c0a6ea5e = cm_a38c54d791 = cm_dceb9ab95f = cm_e0c880ca68 = cm_ea07ad4c5c …",
+   "at": 1794976086
+  },
+  "cm_ea07ad4c5c": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_pre19th32 = cm_59c0a6ea5e = cm_a38c54d791 = cm_dceb9ab95f = cm_e0c880ca68 = cm_ea07ad4c5c …",
+   "at": 1794976086
+  },
+  "cm_ec44c9893f": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_pre19th32 = cm_59c0a6ea5e = cm_a38c54d791 = cm_dceb9ab95f = cm_e0c880ca68 = cm_ea07ad4c5c …",
+   "at": 1794976086
+  },
+  "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_2_jpeg": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_pre19th32 = cm_59c0a6ea5e = cm_a38c54d791 = cm_dceb9ab95f = cm_e0c880ca68 = cm_ea07ad4c5c …",
+   "at": 1794976086
+  },
+  "azcm_128": {
+   "ok": false,
+   "by": "по цепочке: azcm_128 ≠ cm_a38c54d791",
+   "at": 1794976086
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -120,5 +183,13 @@
  },
  "frame": "detail",
  "frame_by": "micro",
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "school": "azr_kuba_pre19th32",
+  "composition": "azr_kuba_pre19th32",
+  "technique": "azr_kuba_pre19th32",
+  "place": "azr_kuba_pre19th32",
+  "date": "azr_kuba_pre19th32",
+  "size": "azr_kuba_pre19th32"
+ }
 }
