@@ -4151,7 +4151,46 @@ def install(app, DATA, D_WORK):
         threading.Thread(target=run, daemon=True, name="twins").start()
         return True
 
+    def tw_reopen():
+        """v11.89: раньше в карточке «двойники» были видны только первые 2 плитки, остальные записывались как «другой ковёр», хотя человек их не видел.
+        Один раз: у таких пар снять непоказанный голос «diff» (и решение «разные», если оно держалось только на нём) — пары вернутся в очередь."""
+        mark = os.path.join(DATA, "twins_reopen_v1.done")
+        if os.path.exists(mark): return
+        hid = {}                                                                # (ковёр, другой) → пользователи, у которых плитка была ниже первых двух
+        try:
+            with open(D_MICRO, encoding="utf-8") as f:
+                for ln in f:
+                    try: e = json.loads(ln)
+                    except Exception: continue
+                    if e.get("type") != "tw" or e.get("a") != "done": continue
+                    ids = e.get("ids") or []; ok = set(e.get("same") or []) | set(e.get("similar") or [])
+                    for o in ids[2:]:
+                        if o not in ok: hid.setdefault((e["rid"], o), set()).add(e.get("u"))
+        except FileNotFoundError: pass
+        n = back = 0; P = None
+        for (rid, o), users in hid.items():
+            with _lock:
+                r = load(rid)
+                if not r: continue
+                d = (r.get("micro") or {}).get("same", {}).get(o) or {}
+                for u in users:
+                    if (d.get(u) or {}).get("a") == "diff": d.pop(u); n += 1
+                if d or o in (r.get("micro") or {}).get("same", {}): r["micro"]["same"][o] = d
+                left = sum(y["w"] for y in d.values() if y["a"] == "diff")
+                dec = (r.get("same_ok") or {}).get(o)
+                undo = bool(dec) and not dec.get("ok") and not dec.get("similar") and str(dec.get("by") or "").startswith("/m:") and left < 2
+                save(r)
+            if undo: same_set(rid, o, None, False, ""); back += 1
+            k = twins.key(rid, o)
+            if P is None: P = {kk: dict(v) for kk, v in tw_load().items()}
+            if k in P and P[k].get("ctl_ans") == "diff": P[k].pop("ctl_ans", None)
+        if P is not None: tw_save(P)
+        open(mark, "w").write(f"{n} голосов, {back} решений\n"); print(f"twins reopen: {n} голосов, {back} решений")
+        _ty["t"] = 0
+
     def _periodic_twins():
+        try: tw_reopen()
+        except Exception as e: print("twins reopen:", e)
         time.sleep(600)
         while True:
             try: twins_run()

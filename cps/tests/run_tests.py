@@ -1853,6 +1853,12 @@ def t44_twins_fast_v1186(pg, ctx):
     assert p2.locator('.grid.tw .tl.v, .grid.tw .tl.sel').count() == 0
     p2.locator('.grid.tw .tl').first.click(); p2.wait_for_timeout(200)
     p2.screenshot(path=os.path.join(OUT, 't44_m_tw.png'))
+    wc = pg.context.browser.new_context(viewport={'width': 1440, 'height': 800}); pw = wc.new_page(); pw.goto(u + 'm?k=tw'); pw.wait_for_timeout(2500)   # v11.89: широкий экран — ковёр слева, кандидаты справа
+    bl = pw.locator('.twl-l').bounding_box(); bg = pw.locator('.grid.tw').bounding_box()
+    assert bl and bg and bg['x'] > bl['x'] + bl['width'] - 5 and bg['width'] > bl['width'] * 1.6, (bl, bg)
+    pw.screenshot(path=os.path.join(OUT, 't44_m_tw_wide.png'))
+    pw.click('#hz'); pw.wait_for_timeout(600); assert pw.locator('.grid.tw.hz').count() == 1
+    pw.screenshot(path=os.path.join(OUT, 't44_m_tw_wide_hz.png')); wc.close()
     pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(3000)
     assert 'двойники' in pg.inner_text('#rgKpi'), pg.inner_text('#rgKpi')
     errors_ok(ctx, 'двойники')
