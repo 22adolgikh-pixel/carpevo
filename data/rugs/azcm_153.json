@@ -18,7 +18,7 @@
  "h": 2048,
  "marks": [],
  "created": 1791870037,
- "updated": 1794783470,
+ "updated": 1794998056,
  "cat": {
   "title": "“Parmaklı” («Пармаклы»), Анатолия, Турция",
   "museum": "Национальный музей азербайджанского ковра",
@@ -53,6 +53,10 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0089_1",
    "score": 0
+  },
+  {
+   "id": "azr_antique_khyzy_chul_camel_cover2_baku_museum",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -60,6 +64,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794979554
+  },
+  "azr_antique_khyzy_chul_camel_cover2_baku_museum": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998056
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -137,6 +146,15 @@
  "micro": {
   "field": {
    "dolgikh": "nofield"
+  },
+  "same": {
+   "azr_antique_khyzy_chul_camel_cover2_baku_museum": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998056
+    }
+   }
   }
  }
 }

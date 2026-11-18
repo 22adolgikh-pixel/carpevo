@@ -18,7 +18,7 @@
  "h": 1388,
  "marks": [],
  "created": 1791736135,
- "updated": 1791736135,
+ "updated": 1794998025,
  "cat": {
   "title": "kuba tekye10",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_tekye10",
  "lib_img": "img/azr_kuba_tekye10.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol3_p020_1",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p073_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol3_p020_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998025
+  },
+  "kerimov_vol2_p073_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998025
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +99,23 @@
   "area": 0.907,
   "ver": 1,
   "t": 1794238203
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol3_p020_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998025
+    }
+   },
+   "kerimov_vol2_p073_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998025
+    }
+   }
+  }
  }
 }

@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kazak_borjalou_rug_rippon_boswell_L253_12_2010",
  "lib_img": "img/azr_kazak_borjalou_rug_rippon_boswell_L253_12_2010.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_rippon_boswell_05_2009_L113_lori_pambak_rug",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_rippon_boswell_05_2009_L113_lori_pambak_rug": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998041
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

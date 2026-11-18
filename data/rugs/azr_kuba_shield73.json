@@ -18,7 +18,7 @@
  "h": 455,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1794997922,
  "cat": {
   "title": "kuba shield73",
   "museum": "",
@@ -50,6 +50,18 @@
   {
    "id": "azr_kuba_shield55",
    "score": 96
+  },
+  {
+   "id": "azr_antique_baku_shield_rug2",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil44",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shield34",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +69,23 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792272871
+  },
+  "azr_antique_baku_shield_rug2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997922,
+   "similar": true
+  },
+  "azr_kuba_perepedil44": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997922
+  },
+  "azr_kuba_shield34": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997922,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -99,5 +128,30 @@
   "area": 0.85,
   "ver": 1,
   "t": 1794238570
+ },
+ "micro": {
+  "same": {
+   "azr_antique_baku_shield_rug2": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997922
+    }
+   },
+   "azr_kuba_perepedil44": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997922
+    }
+   },
+   "azr_kuba_shield34": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997922
+    }
+   }
+  }
  }
 }

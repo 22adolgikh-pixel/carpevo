@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736128,
- "updated": 1794642661,
+ "updated": 1794998052,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -47,8 +47,28 @@
  },
  "src_id": "cat:vam_O153402",
  "lib_img": "img/vam_O153402.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O66935",
+   "score": 0
+  },
+  {
+   "id": "vam_O67264",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O66935": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998052
+  },
+  "vam_O67264": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998052
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -161,6 +181,22 @@
     "w": 2,
     "t": 1794642661,
     "s": "ref"
+   }
+  },
+  "same": {
+   "vam_O66935": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998052
+    }
+   },
+   "vam_O67264": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998052
+    }
    }
   }
  },

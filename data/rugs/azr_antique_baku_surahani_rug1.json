@@ -18,7 +18,7 @@
  "h": 1428,
  "marks": [],
  "created": 1791736128,
- "updated": 1794935465,
+ "updated": 1794998000,
  "cat": {
   "title": "antique baku surahani rug1",
   "museum": "",
@@ -53,6 +53,14 @@
   {
    "id": "azerbaycan_xalchasi_p0005_1",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion46",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0158_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -65,6 +73,16 @@
    "ok": true,
    "by": "машина: 2739 общих точек, перекрытие 0.96 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "azr_kuba_shirvan_medallion46": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998000
+  },
+  "intangible_2849_p0158_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998000
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -91,6 +109,22 @@
      "a": "one",
      "w": 2,
      "t": 1794935465
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_shirvan_medallion46": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998000
+    }
+   },
+   "intangible_2849_p0158_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998000
     }
    }
   }

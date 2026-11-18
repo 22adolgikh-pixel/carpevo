@@ -18,7 +18,7 @@
  "h": 1100,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1794998081,
  "cat": {
   "title": "Antique Moghan (Mughan) rug, 19th century, Azerbaijan, 252x115 cm",
   "museum": "",
@@ -51,6 +51,10 @@
   {
    "id": "azr_antique_caucasian_moghan_rug76",
    "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug22",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -59,6 +63,11 @@
    "by": "/m: dolgikh",
    "at": 1794997615,
    "similar": true
+  },
+  "azr_antique_caucasian_moghan_rug22": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794998081
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -93,5 +102,16 @@
   "area": 0.874,
   "ver": 1,
   "t": 1794238237
+ },
+ "micro": {
+  "same": {
+   "azr_antique_caucasian_moghan_rug22": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794998081
+    }
+   }
+  }
  }
 }

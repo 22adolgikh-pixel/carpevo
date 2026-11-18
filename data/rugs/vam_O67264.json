@@ -47,8 +47,19 @@
  },
  "src_id": "cat:vam_O67264",
  "lib_img": "img/vam_O67264.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O153402",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O153402": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998052
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

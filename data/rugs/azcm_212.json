@@ -49,8 +49,19 @@
  },
  "src_id": "cat:azcm_212",
  "lib_img": "img/azcm_212.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion98",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion98": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998017
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,

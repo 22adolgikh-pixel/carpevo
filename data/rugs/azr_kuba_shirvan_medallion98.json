@@ -18,7 +18,7 @@
  "h": 560,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1794998017,
  "cat": {
   "title": "kuba shirvan medallion98",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion98",
  "lib_img": "img/azr_kuba_shirvan_medallion98.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_212",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_212": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998017
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998017
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +99,23 @@
   "area": null,
   "ver": 1,
   "t": 1794238363
+ },
+ "micro": {
+  "same": {
+   "azcm_212": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998017
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0081_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998017
+    }
+   }
+  }
  }
 }

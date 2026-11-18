@@ -18,7 +18,7 @@
  "h": 1279,
  "marks": [],
  "created": 1791736132,
- "updated": 1794588692,
+ "updated": 1794998012,
  "cat": {
   "title": "kuba alpan93",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_alpan93",
  "lib_img": "img/azr_kuba_alpan93.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion120",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_hajigaib9",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion120": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998012
+  },
+  "azr_kuba_hajigaib9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794998012
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -162,6 +182,22 @@
      "a": "skip",
      "w": 0,
      "t": 1794588692
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_shirvan_medallion120": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998012
+    }
+   },
+   "azr_kuba_hajigaib9": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794998012
     }
    }
   }
