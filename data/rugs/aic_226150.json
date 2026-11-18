@@ -18,7 +18,7 @@
  "h": 1157,
  "marks": [],
  "created": 1791736122,
- "updated": 1794784800,
+ "updated": 1794980067,
  "cat": {
   "title": "Sewan Kazak Rug",
   "museum": "Институт искусств Чикаго",
@@ -80,6 +80,38 @@
   {
    "id": "cm_1d005616a0",
    "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p097_2",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_shield_kazak_rug18_vakiflar_museum_ankara",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0029_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shield75",
+   "score": 0
+  },
+  {
+   "id": "azcm_118",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0031_1",
+   "score": 0
+  },
+  {
+   "id": "cm_9c5764b767",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_gymyl33",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -117,6 +149,50 @@
    "ok": false,
    "by": "по цепочке: aic_226150 ≠ kerimov_vol2_p126_1_1",
    "at": 1794940139
+  },
+  "kerimov_vol2_p097_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980067
+  },
+  "azr_antique_shield_kazak_rug18_vakiflar_museum_ankara": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980067,
+   "similar": true
+  },
+  "intangible_2850_p0029_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980067
+  },
+  "azr_kuba_shield75": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980067,
+   "similar": true
+  },
+  "azcm_118": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980067,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_p0031_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980067,
+   "similar": true
+  },
+  "cm_9c5764b767": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980067
+  },
+  "azr_kuba_gymyl33": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980067
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -290,6 +366,62 @@
      "a": "diff",
      "w": 2,
      "t": 1794750702
+    }
+   },
+   "kerimov_vol2_p097_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980067
+    }
+   },
+   "azr_antique_shield_kazak_rug18_vakiflar_museum_ankara": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794980067
+    }
+   },
+   "intangible_2850_p0029_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980067
+    }
+   },
+   "azr_kuba_shield75": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794980067
+    }
+   },
+   "azcm_118": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794980067
+    }
+   },
+   "azerbaycan_xalchasi_p0031_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794980067
+    }
+   },
+   "cm_9c5764b767": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980067
+    }
+   },
+   "azr_kuba_gymyl33": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980067
     }
    }
   },

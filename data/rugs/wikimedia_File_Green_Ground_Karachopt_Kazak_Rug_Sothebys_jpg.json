@@ -18,7 +18,7 @@
  "h": 1174,
  "marks": [],
  "created": 1791736127,
- "updated": 1794343237,
+ "updated": 1794980157,
  "cat": {
   "title": "Green Ground Karachopt Kazak Rug Sothebys.jpg",
   "museum": "Wikimedia Commons",
@@ -48,8 +48,46 @@
  },
  "src_id": "cat:wikimedia_File_Green_Ground_Karachopt_Kazak_Rug_Sothebys_jpg",
  "lib_img": "img/wikimedia_File_Green_Ground_Karachopt_Kazak_Rug_Sothebys_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_karagashli_rug_rippon_boswell_199952016",
+   "score": 0
+  },
+  {
+   "id": "cm_7fb05cb0f5",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star145",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Karachov_Kazak_rug_mid_19th_C_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_karagashli_rug_rippon_boswell_199952016": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980157
+  },
+  "cm_7fb05cb0f5": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980157
+  },
+  "azr_kuba_zeyve_lesghi_star145": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980157
+  },
+  "wikimedia_File_Karachov_Kazak_rug_mid_19th_C_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794980157
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -114,6 +152,36 @@
       0.95627
      ]
     ]
+   }
+  },
+  "same": {
+   "azr_kuba_karagashli_rug_rippon_boswell_199952016": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980157
+    }
+   },
+   "cm_7fb05cb0f5": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980157
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star145": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980157
+    }
+   },
+   "wikimedia_File_Karachov_Kazak_rug_mid_19th_C_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794980157
+    }
    }
   }
  },

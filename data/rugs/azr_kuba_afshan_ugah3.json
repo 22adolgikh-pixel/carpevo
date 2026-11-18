@@ -18,7 +18,7 @@
  "h": 1225,
  "marks": [],
  "created": 1791736135,
- "updated": 1791736135,
+ "updated": 1794980079,
  "cat": {
   "title": "kuba afshan ugah3",
   "museum": "",
@@ -50,6 +50,22 @@
   {
    "id": "azr_kuba_hajigaib12",
    "score": 84
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion141",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_afshan_ugah4",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion124",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug12",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +73,26 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792258615
+  },
+  "azr_kuba_shirvan_medallion141": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980079
+  },
+  "azr_kuba_afshan_ugah4": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794980079
+  },
+  "azr_kuba_shirvan_medallion124": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980079
+  },
+  "azr_antique_caucasian_moghan_rug12": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980079
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -99,5 +135,37 @@
   "area": 0.967,
   "ver": 1,
   "t": 1794238536
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shirvan_medallion141": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980079
+    }
+   },
+   "azr_kuba_afshan_ugah4": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794980079
+    }
+   },
+   "azr_kuba_shirvan_medallion124": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980079
+    }
+   },
+   "azr_antique_caucasian_moghan_rug12": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980079
+    }
+   }
+  }
  }
 }

@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug12",
  "lib_img": "img/azr_antique_caucasian_moghan_rug12.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_afshan_ugah3",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_afshan_ugah3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980079
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

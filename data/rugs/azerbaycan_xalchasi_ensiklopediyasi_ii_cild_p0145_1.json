@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794980129,
  "cat": {
   "title": "Zili Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -51,8 +51,39 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0145_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0145_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_198",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0232_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0149_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_198": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980129,
+   "similar": true
+  },
+  "intangible_2849_p0232_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980129,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0149_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794980129
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +116,30 @@
   "ver": 1,
   "at": 1794547490
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azcm_198": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794980129
+    }
+   },
+   "intangible_2849_p0232_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794980129
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0149_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794980129
+    }
+   }
+  }
+ }
 }

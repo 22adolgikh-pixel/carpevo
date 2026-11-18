@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_karagashli20",
  "lib_img": "img/azr_kuba_karagashli20.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_145",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_145": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980180
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

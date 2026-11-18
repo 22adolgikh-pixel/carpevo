@@ -18,7 +18,7 @@
  "h": 1400,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1794980178,
  "cat": {
   "title": "kuba-karagashli-rug-rippon-boswell-199952016",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_karagashli_rug_rippon_boswell_199952016",
  "lib_img": "img/azr_kuba_karagashli_rug_rippon_boswell_199952016.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Green_Ground_Karachopt_Kazak_Rug_Sothebys_jpg",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug24",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Green_Ground_Karachopt_Kazak_Rug_Sothebys_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980157
+  },
+  "azr_antique_kazak_prayer_rug24": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980178
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +99,16 @@
   "area": 0.874,
   "ver": 1,
   "t": 1794238300
+ },
+ "micro": {
+  "same": {
+   "azr_antique_kazak_prayer_rug24": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980178
+    }
+   }
+  }
  }
 }

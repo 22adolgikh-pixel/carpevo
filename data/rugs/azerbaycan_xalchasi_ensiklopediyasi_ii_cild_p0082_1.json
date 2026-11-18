@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794980099,
  "cat": {
   "title": "Kilim Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -59,6 +59,18 @@
   {
    "id": "wikimedia_File_Azerbaijani_carpet_Goradil_in_V_A_jpg",
    "score": 0
+  },
+  {
+   "id": "intangible_2849_p0147_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0066_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_kilim7",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -71,6 +83,23 @@
    "ok": false,
    "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1 ≠ vam_O66937",
    "at": 1794976086
+  },
+  "intangible_2849_p0147_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980099
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0066_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980099,
+   "similar": true
+  },
+  "azr_kuba_kilim7": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980099,
+   "similar": true
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -105,5 +134,30 @@
   "ver": 1,
   "at": 1794547453
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "intangible_2849_p0147_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794980099
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0066_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794980099
+    }
+   },
+   "azr_kuba_kilim7": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794980099
+    }
+   }
+  }
+ }
 }

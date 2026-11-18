@@ -45,8 +45,20 @@
  },
  "src_id": "cat:azr_kuba_shield75",
  "lib_img": "img/azr_kuba_shield75.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "aic_226150",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "aic_226150": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794980067,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
