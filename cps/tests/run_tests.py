@@ -1910,6 +1910,48 @@ def t45_schools_7_v1190(pg, ctx):
     errors_ok(ctx, 'школы 7')
 
 
+@test
+def t46_frame_auto_v1191(pg, ctx):
+    """v11.91: «целый ковёр» — очевидные решает машина (вероятность ≥ auto_thr): в карточке «кадр» их нет, кроме контрольных (1 из 10),
+    они идут дальше в «углы»; ответ человека пишет вероятность машины (pw) для подсчёта контрольных."""
+    u = ctx['url']; D = ctx['app'] + '/data'; MP = ctx['app'] + '/models/frame_v1.json'; now = int(time.time())
+    old = open(MP).read(); M = json.loads(old)
+    leaf = lambda v: {"l": [-1], "r": [-1], "f": [-2], "th": [-2.0], "v": [v]}
+    split = {"l": [1, -1, -1], "r": [2, -1, -1], "f": [0, -2, -2], "th": [0.5, -2.0, -2.0], "v": [0, -50.0, 50.0]}   # conf > 0.5 → целый
+    json.dump({**M, "auto_thr": 0.95, "trained": "2000-01-01 00:00", "init": 0.0, "lr": 1.0, "trees": [split]}, open(MP, 'w'))
+    try:
+        import cv2, numpy as np, hashlib
+        img = np.full((900, 600, 3), 120, np.uint8)
+        ids = []
+        for i in range(40):
+            rid = f"fa_{i}"; ids.append(rid)
+            cv2.imwrite(f'{D}/rug_img/{rid}.jpg', img)
+            r = {"id": rid, "title": "rug", "source": "тест", "school": "", "composition": "", "status": "new", "w": 600, "h": 900, "marks": [],
+                 "created": now, "updated": now, "cat": {"src": "azerbaijanrugs"},
+                 "auto": {"frame": "whole", "quad": [[.05, .05], [.95, .05], [.95, .95], [.05, .95]], "conf": 0.9 if i < 30 else 0.1, "area": .8, "ver": 99, "t": now}}
+            json.dump(r, open(f'{D}/rugs/{rid}.json', 'w'), ensure_ascii=False)
+        ctl = {x for x in ids[:30] if int(hashlib.md5(("frctl:" + x).encode()).hexdigest(), 16) % 10 == 0}
+        time.sleep(31)                                                           # кэш времени модели — 30 с
+        j = get(u + 'api/micro/next?k=frame&n=12')
+        got = {t["rid"] for t in j["tasks"] if t["type"] == "frame" and t["rid"].startswith("fa_")}
+        auto = set(ids[:30]) - ctl
+        assert not (got & auto), ("очевидные «целый» не должны идти в кадр", sorted(got & auto))
+        assert got & set(ids[30:]), ("сомнительные — в кадр", sorted(got))
+        assert j["left"]["frame_auto"] >= len(auto) and j["left"]["frame_auto_on"], j["left"]
+        assert all(t.get("ctl") for t in j["tasks"] if t.get("rid") in ctl)
+        q = get(u + 'api/micro/next?k=quad&n=12')
+        assert q["left"]["quad"] >= len(auto), ("решённые машиной идут в «углы»", q["left"])
+        st = get(u + 'api/micro/stats')["frame_model"]["auto"]; assert st["thr"] == 0.95 and st["on"], st
+        if ctl:
+            c = sorted(ctl)[0]; post(u + 'api/micro/answer', {"type": "frame", "rid": c, "a": "whole"})
+            rec = [json.loads(l) for l in open(f'{D}/micro.jsonl', encoding='utf-8') if c in l][-1]; assert rec.get("pw", 0) >= 0.95, rec
+        pg.goto(u + 'm?k=frame'); pg.wait_for_timeout(2500)
+        assert 'машина решила сама' in pg.inner_html('main'), pg.inner_html('main')[:500]
+    finally:
+        open(MP, 'w').write(old)
+    errors_ok(ctx, 'кадр авто')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

@@ -4,7 +4,7 @@
 # четырёхугольника, как близко углы к краям кадра), размеры фото, источник, слова в названии.
 # Обучение — tools/train_frame_model.py (sklearn, градиентный бустинг, неглубокие деревья); на сервере sklearn нет,
 # поэтому деревья выгружены в models/frame_v1.json и считаются здесь на чистом Python.
-import json, math, os
+import json, math, os, struct
 
 SRC = ("azerbaijanrugs", "wikimedia", "commons", "azcarpetmuseum", "kerimov", "met", "vam", "fig")
 NAMES = ["conf", "area", "minmx", "minmy", "meanmx", "meanmy", "maxangdev", "logasp", "logside", "auto_whole", "auto_cropped"] + \
@@ -54,11 +54,11 @@ def p_whole(r):
     """вероятность «целый ковёр» 0..1 или None (модели нет / машина ещё не смотрела фото)"""
     m = _load()
     if not m or not r.get("auto"): return None
-    x = feat(r)
+    x = [struct.unpack("f", struct.pack("f", v))[0] for v in feat(r)]       # как sklearn: признаки во float32
     z = m["init"] + m["lr"] * sum(_tree(t, x) for t in m["trees"])
     return 1 / (1 + math.exp(-z))
 
 
 def info():
     m = _load()
-    return {k: m.get(k) for k in ("ver", "n", "cv_acc", "trained", "thr")} if m else None
+    return {k: m.get(k) for k in ("ver", "n", "cv_acc", "trained", "thr", "auto_thr")} if m else None

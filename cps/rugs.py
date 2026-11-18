@@ -2271,6 +2271,16 @@ def install(app, DATA, D_WORK):
     # Контрольные карточки (≈1 из 6): ковёр с углами, подтверждёнными вручную, — показываем верные углы или нарочно сдвинутый угол; так считаем внимательность.
     D_MICRO = os.path.join(DATA, "micro.jsonl")
     _mc = {}; _ctl_tok = {}
+    _fmm = {"t": 0, "m": 0}
+
+    def _fm_mtime():
+        if time.time() - _fmm["t"] > 30:
+            import frame_model
+            try: _fmm["m"] = os.path.getmtime(frame_model.PATH)
+            except OSError: _fmm["m"] = 0
+            _fmm["t"] = time.time()
+        return _fmm["m"]
+
     # v11.45: кадр — три значения плюс «не ковёр» (решение владельца 10.11). «Целый» включает «чуть вылез за кадр»:
     # срезано меньше ~3 % по одному краю и узор не потерян. «Деталь» — снят кусок ковра, целого на фото нет.
     # Прежний ответ «fragment» снят: им помечали в основном рваные ковры, а это теперь галочка «повреждён».
@@ -2328,7 +2338,8 @@ def install(app, DATA, D_WORK):
     def _mrow(rid):
         """короткая запись для очереди (кэш по времени изменения файла)"""
         f = os.path.join(D_RUGS, rid + ".json")
-        try: st = os.stat(f); k = (st.st_mtime_ns, st.st_size)
+        import frame_model
+        try: st = os.stat(f); k = (st.st_mtime_ns, st.st_size, _fm_mtime())     # v11.91: новая модель «кадр» — пересчитать вероятность
         except OSError: return None
         c = _mc.get(rid)
         if c and c[0] == k: return c[1]
@@ -3117,6 +3128,44 @@ def install(app, DATA, D_WORK):
         _ty["t"] = 0
         return {"ok": True, "applied": applied, **({"ctl": ctl} if ctl is not None else {})}
 
+    # ---- v11.91: «целый ковёр» — авторешение машины по порогу модели (frame_model auto_thr: на перекрёстной проверке ≥ 98,5 % верных).
+    # Такие фото не идут в карточку «кадр», кроме контрольных (каждое 10-е). Если люди на контрольных не согласны с машиной
+    # чаще 3 % (при ≥ 20 ответах) — авторешение выключается само, фото возвращаются в очередь.
+    FR_CTL_EVERY = 10
+    _frs = {"t": 0, "v": None}
+
+    def fr_ctl(rid):
+        return int(hashlib.md5(("frctl:" + rid).encode()).hexdigest(), 16) % FR_CTL_EVERY == 0
+
+    def fr_auto_state():
+        import frame_model
+        if _frs["v"] and time.time() - _frs["t"] < 60: return _frs["v"]
+        m = frame_model._load() or {}
+        thr = m.get("auto_thr")
+        st = {"thr": thr, "on": bool(thr), "ctl_n": 0, "ctl_bad": 0, "trained": m.get("trained")}
+        if thr:
+            try: t0 = time.mktime(time.strptime(m.get("trained") or "2000-01-01 00:00", "%Y-%m-%d %H:%M"))
+            except ValueError: t0 = 0
+            last = {}
+            try:
+                with open(D_MICRO, encoding="utf-8") as f:
+                    for ln in f:
+                        if '"frame"' not in ln: continue
+                        try: e = json.loads(ln)
+                        except Exception: continue
+                        if e.get("type") == "frame" and e.get("t", 0) > t0 and e.get("a") in FR_ANS and e.get("pw") is not None and e["pw"] >= thr:
+                            last[e["rid"]] = e["a"]
+            except OSError: pass
+            st["ctl_n"] = len(last); st["ctl_bad"] = sum(1 for v in last.values() if v != "whole")
+            if st["ctl_n"] >= 20 and st["ctl_bad"] > 0.03 * st["ctl_n"]: st["on"] = False; st["off_why"] = f"люди не согласны с машиной на {st['ctl_bad']} из {st['ctl_n']} контрольных"
+        _frs.update(t=time.time(), v=st)
+        return st
+
+    def fr_auto(x, st=None):
+        """решила машина: «целый ковёр» (человек ещё не отвечал, вероятность ≥ порога, авторешение включено)"""
+        st = st or fr_auto_state()
+        return bool(st["on"] and st["thr"] and x.get("pw") is not None and x["pw"] >= st["thr"] and x.get("frame_by") not in ("micro", "hand") and not x.get("frame"))
+
     @app.get("/api/micro/next")
     def micro_next(request: Request, n: int = 6, k: str = ""):
         import random
@@ -3124,12 +3173,14 @@ def install(app, DATA, D_WORK):
         # v11.45: ковры с прежним ответом «фрагмент» возвращаются в очередь — в новом наборе ответов такого больше нет
         fr =[x for x in rows if (x["use"] != "skip" or x["fr_old"]) and x["seen"] and (x["frame_by"] not in ("micro", "hand") or x["fr_old"])
               and (me not in x["who"]["frame"] or me in x["old_who"]) and x["id"] not in H and not is_bw(x["id"])]
+        fst = fr_auto_state()
+        fr = [x for x in fr if not fr_auto(x, fst) or fr_ctl(x["id"])]             # v11.91: очевидные «целый» решает машина; человеку — контрольные
         fr.sort(key=lambda x: (abs((x["pw"] if x["pw"] is not None else 0.5) - 0.5), x["conf"]))   # v11.44: где модель меньше всего уверена — первыми
         head, pool = fr[:60], fr[:]; random.shuffle(pool); mix = []                 # половина — сомнительные, половина — случайные (иначе выборка перекошена и точность машины не измерить)
         for a, b in zip(head, pool): mix += [a, b]
         fr = list({x["id"]: x for x in mix + fr}.values())
         # v11.42: углы спрашиваем только у ковров, которые человек уже признал «целыми» (по данным 124 ответов машинное «целый» верно лишь в 2 из 11)
-        qd = [x for x in rows if x["use"] != "skip" and x["aquad"] and x["frame"] == "whole" and x["frame_by"] in ("micro", "hand") and x["qs"] != "confirmed"
+        qd = [x for x in rows if x["use"] != "skip" and x["aquad"] and ((x["frame"] == "whole" and x["frame_by"] in ("micro", "hand")) or (fr_auto(x, fst) and not fr_ctl(x["id"]))) and x["qs"] != "confirmed"
               and me not in x["who"]["quad"] and not is_bw(x["id"])]
         qd.sort(key=lambda x: x["conf"])
         # v11.47: углы модели считаются заранее. Пока модель работает исправно, карточку углов показываем только когда её углы уже готовы
@@ -3144,7 +3195,7 @@ def install(app, DATA, D_WORK):
         by = {x["id"]: x for x in rows}
         more = _more_queues(me, rows, by, want)
         Q = {"quad": [_ref_task(x) for x in qd[:n]],
-             "frame": [{"type": "frame", "rid": x["id"]} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
+             "frame": [{"type": "frame", "rid": x["id"], **({"ctl": 1} if fr_auto(x, fst) else {})} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
         cdq = _cdup_queue(me) if "cdup" in want else []; Q["cdup"] = cdq[:n]
         xsq = _xs_queue(me, rows) if "xsame" in want else []; Q["xsame"] = xsq[:n]
         rsq = _rsame_queue(me, by) if "rsame" in want else []; Q["rsame"] = rsq[:n]
@@ -3172,7 +3223,7 @@ def install(app, DATA, D_WORK):
             if t["type"] == "tw":
                 for it in t["items"]: it.update(w=by[it["id"]]["w"], h=by[it["id"]]["h"])
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "tw": len(twq), "name_wait": more["name_wait"]},
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "tw": len(twq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]},
                 "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver(), "rs": {k: rpr[k] for k in ("running", "done", "total", "found", "t", "err")}, "ms": dict(mesh_st)}
 
     @app.post("/api/micro/answer")
@@ -3220,6 +3271,7 @@ def install(app, DATA, D_WORK):
             if fl: rec["flags"] = {k: bool(fl[k]) for k in EDGE_FL if k in fl}
             M = r.setdefault("micro", {}).setdefault(typ, {})
             if typ == "frame":                                                   # v11.45: снятые ответы не держат ковёр в очереди
+                rec["pw"] = _pw(r)                                               # v11.91: для подсчёта контрольных (машина ≥ порога, что сказал человек)
                 for u in [u for u, v in M.items() if (v or {}).get("a") in FR_OLD]: M.pop(u)
             M[me] = {"a": a, "w": _wt(role), "t": rec["t"], **({"q": q} if q else {}), **({"s": qsrc} if qsrc else {})}
             votes = list(M.values())
@@ -3276,7 +3328,7 @@ def install(app, DATA, D_WORK):
         try:
             import element_embed as EE; ee = {"roles": EE.ROLE, "loaded": {k: v["net"] is not None for k, v in EE._ST.items()}}
         except Exception: ee = {"ok": False}
-        return {"users": _mstats(), "frame_model": frame_model.info(), "corner_refine": cr, "quad_by_day": _quad_days(), "element_embed": ee, "marks_pre": pre}
+        return {"users": _mstats(), "frame_model": {**(frame_model.info() or {}), "auto": fr_auto_state()}, "corner_refine": cr, "quad_by_day": _quad_days(), "element_embed": ee, "marks_pre": pre}
 
     def _quad_days():
         """v11.57: карточки углов по дням и по тому, чьи углы показаны (auto — find_quad, vlm — модель по картинке, ref — сеть уточнения):

@@ -35,21 +35,24 @@ def main():
     X, Y = np.array(X), np.array(Y)
     print(f"примеров {len(Y)}, целых {int(Y.sum())}")
     if len(Y) < 40: sys.exit("мало ответов — нужно хотя бы 40")
-    mk = lambda s: GradientBoostingClassifier(n_estimators=80, max_depth=2, learning_rate=0.1, subsample=0.8, random_state=s)
+    mk = lambda s: GradientBoostingClassifier(n_estimators=150, max_depth=3, learning_rate=0.05, subsample=0.8, random_state=s)   # v11.91: ответов стало 1 200+
     P = np.mean([cross_val_predict(mk(s), X, Y, cv=StratifiedKFold(5, shuffle=True, random_state=s), method="predict_proba")[:, 1] for s in range(5)], 0)
     acc = float(((P > 0.5) == Y).mean()); rule = float(((X[:, FM.NAMES.index("auto_whole")] > 0.5) == Y).mean())
     thr = {}
-    for t in (0.5, 0.6, 0.7, 0.8):
+    for t in (0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.93, 0.95, 0.97):
         s = P >= t; thr[str(t)] = {"picked": int(s.sum()), "precision": round(float(Y[s].mean()), 3) if s.any() else None, "missed_whole": int((Y & ~s).sum())}
+    # v11.91: порог авторешения «целый» — наименьший, при котором на перекрёстной проверке «не целых» ≤ 1,5 % и выбрано ≥ 100
+    auto = next((float(t) for t in sorted(thr, key=float) if float(t) >= 0.85 and thr[t]["precision"] and thr[t]["precision"] >= 0.985 and thr[t]["picked"] >= 100), None)
+    print(f"порог авторешения: {auto}")
     print(f"CV точность {acc:.3f} (правило машины {rule:.3f}, «всегда целый» {Y.mean():.3f})"); print(thr)
     m = mk(0).fit(X, Y)
     trees = []
     for est in m.estimators_[:, 0]:
         t = est.tree_
         trees.append({"l": t.children_left.tolist(), "r": t.children_right.tolist(), "f": t.feature.tolist(),
-                      "th": [round(float(v), 6) for v in t.threshold], "v": [round(float(v[0][0]), 6) for v in t.value]})
+                      "th": [float(v) for v in t.threshold], "v": [round(float(v[0][0]), 6) for v in t.value]})
     p0 = float(np.clip(Y.mean(), 1e-6, 1 - 1e-6))
-    out = {"ver": 1, "trained": time.strftime("%Y-%m-%d %H:%M"), "n": int(len(Y)), "n_whole": int(Y.sum()), "cv_acc": round(acc, 3), "rule_acc": round(rule, 3),
+    out = {"ver": 2, "auto_thr": auto, "trained": time.strftime("%Y-%m-%d %H:%M"), "n": int(len(Y)), "n_whole": int(Y.sum()), "cv_acc": round(acc, 3), "rule_acc": round(rule, 3),
            "thr": thr, "names": FM.NAMES, "init": float(np.log(p0 / (1 - p0))), "lr": m.learning_rate, "trees": trees}
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     json.dump(out, open(a.out, "w", encoding="utf-8"))
