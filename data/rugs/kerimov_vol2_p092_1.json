@@ -47,8 +47,19 @@
  },
  "src_id": "cat:kerimov_vol2_p092_1",
  "lib_img": "img/kerimov_vol2_p092_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_hajigaib12",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_hajigaib12": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979979
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

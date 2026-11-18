@@ -45,8 +45,64 @@
  },
  "src_id": "cat:azr_rippon_boswell_05_2009_L113_lori_pambak_rug",
  "lib_img": "img/azr_rippon_boswell_05_2009_L113_lori_pambak_rug.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_lori_pambak_kazak_rug1_chateau_de_gourdon",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug9",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug81",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug38",
+   "score": 0
+  },
+  {
+   "id": "azcm_24",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_hajigaib12",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_lori_pambak_kazak_rug1_chateau_de_gourdon": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794979890
+  },
+  "azr_antique_kazak_prayer_rug9": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_kazak_prayer_rug9 ≠ azr_antique_lori_pambak_kazak_rug1_chateau_de_gourdon",
+   "at": 1794979928
+  },
+  "azr_antique_caucasian_moghan_rug81": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_caucasian_moghan_rug81 ≠ azr_antique_lori_pambak_kazak_rug1_chateau_de_gourdon",
+   "at": 1794979928
+  },
+  "azr_antique_kazak_prayer_rug38": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_kazak_prayer_rug38 ≠ azr_antique_lori_pambak_kazak_rug1_chateau_de_gourdon",
+   "at": 1794979928
+  },
+  "azcm_24": {
+   "ok": false,
+   "by": "по цепочке: azcm_24 ≠ azr_antique_lori_pambak_kazak_rug1_chateau_de_gourdon",
+   "at": 1794979928
+  },
+  "azr_kuba_hajigaib12": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979979
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

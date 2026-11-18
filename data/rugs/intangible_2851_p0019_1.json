@@ -50,8 +50,19 @@
  },
  "src_id": "cat:intangible_2851_p0019_1",
  "lib_img": "img/intangible_2851_p0019_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_shirvan_akstafa_prayer_rug1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979996
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

@@ -18,7 +18,7 @@
  "h": 1002,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1794979838,
  "cat": {
   "title": "kuba perepedil16",
   "museum": "",
@@ -45,8 +45,49 @@
  },
  "src_id": "cat:azr_kuba_perepedil16",
  "lib_img": "img/azr_kuba_perepedil16.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_perepedil64",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil29",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil61",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Азербайджанский_ковёр_Пирабадил_датированный_1325_Хиджры_1907_по_",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_perepedil64": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794979838
+  },
+  "azr_kuba_perepedil29": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979838,
+   "similar": true
+  },
+  "azr_kuba_perepedil61": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979838,
+   "similar": true
+  },
+  "wikimedia_File_Азербайджанский_ковёр_Пирабадил_датированный_1325_Хиджры_1907_по_": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979838,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +120,37 @@
   "area": 0.919,
   "ver": 1,
   "t": 1794238328
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_perepedil64": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794979838
+    }
+   },
+   "azr_kuba_perepedil29": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794979838
+    }
+   },
+   "azr_kuba_perepedil61": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794979838
+    }
+   },
+   "wikimedia_File_Азербайджанский_ковёр_Пирабадил_датированный_1325_Хиджры_1907_по_": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794979838
+    }
+   }
+  }
  }
 }

@@ -45,8 +45,29 @@
  },
  "src_id": "cat:azr_kuba_perepedil61",
  "lib_img": "img/azr_kuba_perepedil61.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_perepedil16",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil64",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_perepedil16": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979838,
+   "similar": true
+  },
+  "azr_kuba_perepedil64": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil16 ≠ azr_kuba_perepedil61",
+   "at": 1794979928
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

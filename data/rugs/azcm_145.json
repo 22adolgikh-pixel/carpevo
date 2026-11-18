@@ -57,6 +57,18 @@
   {
    "id": "azerbaycan_xalchasi_p0003_1",
    "score": 0
+  },
+  {
+   "id": "azr_gushlu_zili_christies_2060_L124",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0053_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0097_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -69,6 +81,21 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794978756
+  },
+  "azr_gushlu_zili_christies_2060_L124": {
+   "ok": true,
+   "by": "по цепочке: azcm_145 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1 = azr_gushlu_zili_christies_2060_L124",
+   "at": 1794979928
+  },
+  "intangible_2850_p0053_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1 ≠ intangible_2850_p0053_1",
+   "at": 1794979928
+  },
+  "intangible_2849_p0097_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1 ≠ intangible_2849_p0097_1",
+   "at": 1794979928
   }
  },
  "_lib_t": "2026-10-12 22:38",

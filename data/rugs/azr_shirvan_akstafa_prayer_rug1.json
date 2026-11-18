@@ -18,7 +18,7 @@
  "h": 1284,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1794979995,
  "cat": {
   "title": "shirvan-akstafa-prayer-rug1",
   "museum": "",
@@ -45,8 +45,29 @@
  },
  "src_id": "cat:azr_shirvan_akstafa_prayer_rug1",
  "lib_img": "img/azr_shirvan_akstafa_prayer_rug1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug18",
+   "score": 0
+  },
+  {
+   "id": "intangible_2851_p0019_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_shirvan_akstafa_prayer_rug18": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979996,
+   "similar": true
+  },
+  "intangible_2851_p0019_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979996
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +100,23 @@
   "area": 0.774,
   "ver": 1,
   "t": 1794238328
+ },
+ "micro": {
+  "same": {
+   "azr_shirvan_akstafa_prayer_rug18": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794979995
+    }
+   },
+   "intangible_2851_p0019_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979995
+    }
+   }
+  }
  }
 }

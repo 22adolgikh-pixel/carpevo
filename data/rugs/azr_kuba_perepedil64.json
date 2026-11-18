@@ -45,8 +45,46 @@
  },
  "src_id": "cat:azr_kuba_perepedil64",
  "lib_img": "img/azr_kuba_perepedil64.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_perepedil16",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil29",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil61",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Азербайджанский_ковёр_Пирабадил_датированный_1325_Хиджры_1907_по_",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_perepedil16": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794979838
+  },
+  "azr_kuba_perepedil29": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil16 ≠ azr_kuba_perepedil29",
+   "at": 1794979928
+  },
+  "azr_kuba_perepedil61": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil16 ≠ azr_kuba_perepedil61",
+   "at": 1794979928
+  },
+  "wikimedia_File_Азербайджанский_ковёр_Пирабадил_датированный_1325_Хиджры_1907_по_": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil16 ≠ wikimedia_File_Азербайджанский_ковёр_Пирабадил_датированный_1325_Хиджры_1907_по_",
+   "at": 1794979928
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

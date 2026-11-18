@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870044,
- "updated": 1794930151,
+ "updated": 1794979865,
  "cat": {
   "title": "“Bəhmənli” («Бахманлы»), Джебраил, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -58,6 +58,22 @@
   {
    "id": "azcm_130",
    "score": 73
+  },
+  {
+   "id": "azr_kuba_zejwa35",
+   "score": 0
+  },
+  {
+   "id": "azr_lori_pambak_lambali_rug_switzerland_private_collection",
+   "score": 0
+  },
+  {
+   "id": "cm_a6836a71b7",
+   "score": 0
+  },
+  {
+   "id": "azcm_30",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -70,6 +86,26 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792271479
+  },
+  "azr_kuba_zejwa35": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979866
+  },
+  "azr_lori_pambak_lambali_rug_switzerland_private_collection": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979866
+  },
+  "cm_a6836a71b7": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979866
+  },
+  "azcm_30": {
+   "ok": false,
+   "by": "по цепочке: azcm_91 ≠ cm_a6836a71b7",
+   "at": 1794979928
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -164,6 +200,29 @@
     "w": 2,
     "t": 1794930151,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_zejwa35": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979865
+    }
+   },
+   "azr_lori_pambak_lambali_rug_switzerland_private_collection": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979865
+    }
+   },
+   "cm_a6836a71b7": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979865
+    }
    }
   }
  },

@@ -18,7 +18,7 @@
  "h": 650,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1794979890,
  "cat": {
   "title": "antique lori pambak kazak rug1 chateau de gourdon",
   "museum": "",
@@ -45,8 +45,55 @@
  },
  "src_id": "cat:azr_antique_lori_pambak_kazak_rug1_chateau_de_gourdon",
  "lib_img": "img/azr_antique_lori_pambak_kazak_rug1_chateau_de_gourdon.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_kazak_prayer_rug9",
+   "score": 0
+  },
+  {
+   "id": "azcm_24",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug81",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug38",
+   "score": 0
+  },
+  {
+   "id": "azr_rippon_boswell_05_2009_L113_lori_pambak_rug",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_kazak_prayer_rug9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979890
+  },
+  "azcm_24": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979890
+  },
+  "azr_antique_caucasian_moghan_rug81": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979890
+  },
+  "azr_antique_kazak_prayer_rug38": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979890
+  },
+  "azr_rippon_boswell_05_2009_L113_lori_pambak_rug": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794979890
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +126,44 @@
   "area": 0.902,
   "ver": 1,
   "t": 1794238233
+ },
+ "micro": {
+  "same": {
+   "azr_antique_kazak_prayer_rug9": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979890
+    }
+   },
+   "azcm_24": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979890
+    }
+   },
+   "azr_antique_caucasian_moghan_rug81": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979890
+    }
+   },
+   "azr_antique_kazak_prayer_rug38": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979890
+    }
+   },
+   "azr_rippon_boswell_05_2009_L113_lori_pambak_rug": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794979890
+    }
+   }
+  }
  }
 }

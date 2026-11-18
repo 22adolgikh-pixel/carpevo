@@ -18,7 +18,7 @@
  "h": 900,
  "marks": [],
  "created": 1791736127,
- "updated": 1794339346,
+ "updated": 1794979855,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -55,6 +55,30 @@
   {
    "id": "azcm_57",
    "score": 0
+  },
+  {
+   "id": "azr_antique_borchali_flatweave_qapiliq",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0320_1",
+   "score": 0
+  },
+  {
+   "id": "cm_621dd83fe1",
+   "score": 0
+  },
+  {
+   "id": "azcm_194",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0075_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0076_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -67,6 +91,36 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794978802
+  },
+  "azr_antique_borchali_flatweave_qapiliq": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979855
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0320_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979855
+  },
+  "cm_621dd83fe1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979855
+  },
+  "azcm_194": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979855
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0075_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979855
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0076_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_194 ≠ vam_O364917",
+   "at": 1794979928
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -108,6 +162,43 @@
     "a": "detail",
     "w": 2,
     "t": 1794339346
+   }
+  },
+  "same": {
+   "azr_antique_borchali_flatweave_qapiliq": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979855
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0320_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979855
+    }
+   },
+   "cm_621dd83fe1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979855
+    }
+   },
+   "azcm_194": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979855
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0075_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979855
+    }
    }
   }
  },

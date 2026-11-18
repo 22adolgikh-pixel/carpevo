@@ -18,7 +18,7 @@
  "h": 1072,
  "marks": [],
  "created": 1791736128,
- "updated": 1794935503,
+ "updated": 1794979868,
  "cat": {
   "title": "antique-borchali-flatweave-qapiliq",
   "museum": "",
@@ -54,6 +54,14 @@
   {
    "id": "cm_a06c6044a8",
    "score": 0
+  },
+  {
+   "id": "vam_O364917",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -66,6 +74,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794978765
+  },
+  "vam_O364917": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979855
+  },
+  "azr_antique_caucasian_moghan_rug2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979868
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -91,6 +109,15 @@
      "a": "one",
      "w": 2,
      "t": 1794935503
+    }
+   }
+  },
+  "same": {
+   "azr_antique_caucasian_moghan_rug2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979868
     }
    }
   }
