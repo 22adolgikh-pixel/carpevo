@@ -45,8 +45,37 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion33",
  "lib_img": "img/azr_kuba_shirvan_medallion33.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_gushlu_zili_christies_2060_L124",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_145",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_gushlu_zili_christies_2060_L124": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008533
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1": {
+   "ok": false,
+   "by": "по цепочке: azr_gushlu_zili_christies_2060_L124 ≠ azr_kuba_shirvan_medallion33",
+   "at": 1795008584
+  },
+  "azcm_145": {
+   "ok": false,
+   "by": "по цепочке: azr_gushlu_zili_christies_2060_L124 ≠ azr_kuba_shirvan_medallion33",
+   "at": 1795008584
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

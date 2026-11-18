@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_alpan74",
  "lib_img": "img/azr_kuba_alpan74.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba38",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba38": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008540
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

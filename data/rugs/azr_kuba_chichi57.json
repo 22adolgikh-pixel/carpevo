@@ -18,7 +18,7 @@
  "h": 1137,
  "marks": [],
  "created": 1791736132,
- "updated": 1791736132,
+ "updated": 1795008556,
  "cat": {
   "title": "kuba chichi57",
   "museum": "",
@@ -49,6 +49,10 @@
   {
    "id": "azr_kuba_alpan58",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi92",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +60,12 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794983910
+  },
+  "azr_kuba_chichi92": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008556,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -90,5 +100,16 @@
   "area": 0.914,
   "ver": 1,
   "t": 1794238557
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_chichi92": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795008556
+    }
+   }
+  }
  }
 }

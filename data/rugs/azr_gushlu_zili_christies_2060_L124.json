@@ -18,7 +18,7 @@
  "h": 1637,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1795008533,
  "cat": {
   "title": "gushlu zili christies-2060-L124",
   "museum": "",
@@ -70,6 +70,10 @@
   {
    "id": "azr_kuba_karagashli20",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion33",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -102,6 +106,11 @@
    "ok": false,
    "by": "по цепочке: azcm_145 ≠ azr_kuba_karagashli20",
    "at": 1794980242
+  },
+  "azr_kuba_shirvan_medallion33": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008533
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -143,5 +152,16 @@
   "place": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1",
   "date": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1",
   "size": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1"
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shirvan_medallion33": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795008533
+    }
+   }
+  }
  }
 }

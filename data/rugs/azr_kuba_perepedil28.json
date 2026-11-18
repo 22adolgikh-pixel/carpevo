@@ -18,7 +18,7 @@
  "h": 1350,
  "marks": [],
  "created": 1791736134,
- "updated": 1794929455,
+ "updated": 1795008562,
  "cat": {
   "title": "kuba perepedil28",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_perepedil28",
  "lib_img": "img/azr_kuba_perepedil28.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_seychour151",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_seychour151": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008562
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -117,6 +128,15 @@
     "w": 2,
     "t": 1794929455,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_seychour151": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795008562
+    }
    }
   }
  },
