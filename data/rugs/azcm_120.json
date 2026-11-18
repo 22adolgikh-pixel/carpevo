@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870041,
- "updated": 1794430366,
+ "updated": 1794979721,
  "cat": {
   "title": "“Dəmirçilər” («Дямирчиляр»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,37 @@
  },
  "src_id": "cat:azcm_120",
  "lib_img": "img/azcm_120.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_konagkend58",
+   "score": 0
+  },
+  {
+   "id": "azcm_93",
+   "score": 0
+  },
+  {
+   "id": "azr_pinwheel_kazak_rug_fragment",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_konagkend58": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979721
+  },
+  "azcm_93": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979721
+  },
+  "azr_pinwheel_kazak_rug_fragment": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979721
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -198,6 +227,29 @@
   },
   "field": {
    "dolgikh": "none"
+  },
+  "same": {
+   "azr_kuba_konagkend58": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979721
+    }
+   },
+   "azcm_93": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979721
+    }
+   },
+   "azr_pinwheel_kazak_rug_fragment": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979721
+    }
+   }
   }
  },
  "frame_by": "micro",

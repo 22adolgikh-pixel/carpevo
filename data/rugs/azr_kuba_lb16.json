@@ -18,7 +18,7 @@
  "h": 640,
  "marks": [],
  "created": 1791736132,
- "updated": 1791736132,
+ "updated": 1794979725,
  "cat": {
   "title": "kuba lb16",
   "museum": "",
@@ -45,8 +45,37 @@
  },
  "src_id": "cat:azr_kuba_lb16",
  "lib_img": "img/azr_kuba_lb16.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_lb28",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil26",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0185_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_lb28": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794979725
+  },
+  "azr_kuba_perepedil26": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979725
+  },
+  "intangible_2850_p0185_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979725
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +108,30 @@
   "area": 0.917,
   "ver": 1,
   "t": 1794238464
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_lb28": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794979725
+    }
+   },
+   "azr_kuba_perepedil26": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979725
+    }
+   },
+   "intangible_2850_p0185_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979725
+    }
+   }
+  }
  }
 }

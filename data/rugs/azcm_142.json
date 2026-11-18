@@ -18,7 +18,7 @@
  "h": 1163,
  "marks": [],
  "created": 1791870038,
- "updated": 1794766898,
+ "updated": 1794979747,
  "cat": {
   "title": "Сecim (Джеджим), село Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -82,6 +82,14 @@
   {
    "id": "azr_azerbaijan_shahsavan_jajim_mm",
    "score": 0
+  },
+  {
+   "id": "azcm_152",
+   "score": 0
+  },
+  {
+   "id": "azcm_191",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -124,6 +132,18 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794979582,
+   "similar": true
+  },
+  "azcm_152": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979747,
+   "similar": true
+  },
+  "azcm_191": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979747,
    "similar": true
   }
  },
@@ -209,6 +229,22 @@
   },
   "field": {
    "dolgikh": "nofield"
+  },
+  "same": {
+   "azcm_152": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794979747
+    }
+   },
+   "azcm_191": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794979747
+    }
+   }
   }
  },
  "frame": "whole",

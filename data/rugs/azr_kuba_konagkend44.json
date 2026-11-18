@@ -18,7 +18,7 @@
  "h": 1201,
  "marks": [],
  "created": 1791736133,
- "updated": 1794588354,
+ "updated": 1794979767,
  "cat": {
   "title": "kuba konagkend44",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_konagkend44",
  "lib_img": "img/azr_kuba_konagkend44.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_afshan104",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil63",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_afshan104": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979767
+  },
+  "azr_kuba_perepedil63": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794979767
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -86,6 +106,22 @@
     "a": "whole",
     "w": 2,
     "t": 1794588354
+   }
+  },
+  "same": {
+   "azr_afshan104": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979767
+    }
+   },
+   "azr_kuba_perepedil63": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794979767
+    }
    }
   }
  },
