@@ -18,7 +18,7 @@
  "h": 980,
  "marks": [],
  "created": 1791736138,
- "updated": 1794935776,
+ "updated": 1795029534,
  "cat": {
   "title": "Antique Moghan rug, 115 x 196 cm, late 19th century, Azerbaijan",
   "museum": "",
@@ -78,6 +78,13 @@
      "t": 1794935776
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795029534
+   }
   }
  },
  "auto": {
@@ -103,6 +110,31 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794938258
- }
+  "t": 1794938258,
+  "ref_quad": {
+   "quad": [
+    [
+     0.01313,
+     0.01163
+    ],
+    [
+     0.98959,
+     0.00249
+    ],
+    [
+     0.98571,
+     0.99147
+    ],
+    [
+     0.00155,
+     0.97767
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1795029538
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro"
 }

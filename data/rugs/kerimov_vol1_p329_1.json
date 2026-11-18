@@ -18,7 +18,7 @@
  "h": 1255,
  "marks": [],
  "created": 1791736121,
- "updated": 1791736121,
+ "updated": 1795029670,
  "cat": {
   "title": "Керимов, т. I, Табл. 207. «ХИЛАБУТА» (стр. скана 329, печ. ?)",
   "museum": "",
@@ -101,11 +101,45 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238399
+  "t": 1794238399,
+  "ref_quad": {
+   "quad": [
+    [
+     0.00296,
+     0.00062
+    ],
+    [
+     0.99754,
+     0.00634
+    ],
+    [
+     0.99536,
+     0.97184
+    ],
+    [
+     0.0064,
+     0.97005
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1795029679
+  }
  },
  "from_twin": {
   "technique": "wikimedia_File_Khila_buta_carpet_from_Baku_jpg",
   "museum": "wikimedia_File_Khila_buta_carpet_from_Baku_jpg",
   "date": "wikimedia_File_Khila_buta_carpet_from_Baku_jpg"
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795029670
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro"
 }

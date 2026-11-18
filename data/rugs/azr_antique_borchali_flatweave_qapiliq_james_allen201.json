@@ -18,7 +18,7 @@
  "h": 640,
  "marks": [],
  "created": 1791736128,
- "updated": 1794997697,
+ "updated": 1795029585,
  "cat": {
   "title": "antique-borchali-flatweave-qapiliq-james-allen201",
   "museum": "",
@@ -94,6 +94,13 @@
      "t": 1794997697
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795029585
+   }
   }
  },
  "auto": {
@@ -119,6 +126,31 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794938258
- }
+  "t": 1794938258,
+  "ref_quad": {
+   "quad": [
+    [
+     -0.00138,
+     -0.0001
+    ],
+    [
+     0.98221,
+     0.00442
+    ],
+    [
+     1.00413,
+     0.97673
+    ],
+    [
+     -0.00507,
+     0.96313
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1795029590
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro"
 }

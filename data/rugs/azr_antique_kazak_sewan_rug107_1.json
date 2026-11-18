@@ -18,7 +18,7 @@
  "h": 575,
  "marks": [],
  "created": 1794935961,
- "updated": 1794935961,
+ "updated": 1795029559,
  "cat": {
   "title": "antique-kazak-sewan-rug107",
   "museum": "",
@@ -99,7 +99,30 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794938257
+  "t": 1794938257,
+  "ref_quad": {
+   "quad": [
+    [
+     0.0869,
+     0.00387
+    ],
+    [
+     0.92512,
+     0.01464
+    ],
+    [
+     0.99482,
+     0.99132
+    ],
+    [
+     -0.00439,
+     0.95319
+    ]
+   ],
+   "v": 3,
+   "from": "auto",
+   "t": 1795029567
+  }
  },
  "same_chk": {
   "azr_antique_kazak_prayer_rug47": {
@@ -108,5 +131,21 @@
    "at": 1794963671,
    "ver": 2
   }
- }
+ },
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795029559
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro"
 }

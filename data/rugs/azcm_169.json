@@ -18,7 +18,7 @@
  "h": 2048,
  "marks": [],
  "created": 1791870038,
- "updated": 1794977005,
+ "updated": 1795029610,
  "cat": {
   "title": "Vərni (Вярни), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -213,7 +213,7 @@
    "t": 1794935746
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "updated_by": "dolgikh",
  "micro": {
@@ -236,9 +236,17 @@
     }
    },
    "azcm_170": {}
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795029610
+   }
   }
  },
  "from_twin": {
   "composition": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1"
- }
+ },
+ "frame_by": "micro"
 }
