@@ -742,6 +742,16 @@ def install(app, DATA, D_WORK):
         g = comp_guess(r)
         if g: g["az"], g["ru"] = BYID[g["id"]]["az"], BYID[g["id"]]["ru"]; r["comp_suggest"] = g
         r["_nm"] = disp_name(r, g)
+        if not r.get("school") and not r.get("school_suggest") and not r.get("school_sim_no"):             # v11.88: школа у «очень похожих» ковров — подсказка (не сохраняется, пока не принята)
+            sv = {}
+            for o, v in (r.get("same_ok") or {}).items():
+                if v and v.get("similar"):
+                    so = (load(o) or {}).get("school")
+                    if so: sv.setdefault(so, []).append(o)
+            if sv:
+                best = max(sv, key=lambda k: len(sv[k]))
+                if len(sv) == 1 or len(sv[best]) > sum(len(x) for x in sv.values()) / 2:
+                    r["school_suggest"] = {"school": best, "why": f"у {len(sv[best])} очень похож{'его' if len(sv[best]) == 1 else 'их'} ковр{'а' if len(sv[best]) == 1 else 'ов'}"}
         r["same"] = [x for x in r.get("same") or [] if not (load(x.get("id") or "") or {}).get("dup_of")]
         for x in r.get("same") or []:
             o = load(x["id"]) or {}
@@ -762,7 +772,7 @@ def install(app, DATA, D_WORK):
                 if k in b: r[k] = str(b[k] or "")[:2000]
             if "composition" in b and r.get("composition") and r.get("composition") not in BYID: r["composition"] = comp_id(r["composition"]) or r["composition"]
             if school_by_type(r): r["updated_by"] = who                     # v11.85: пустая школа ← школа типа
-            if b.get("school_suggest") is None and "school_suggest" in b: r.pop("school_suggest", None)
+            if b.get("school_suggest") is None and "school_suggest" in b: r.pop("school_suggest", None); r["school_sim_no"] = 1   # v11.88: подсказку по похожим больше не показывать
             if "layout" in b: r["layout"] = b["layout"] if isinstance(b["layout"], dict) else None
             if b.get("multi_no"): r["multi"] = []                     # «это один ковёр, не делить»
             if "obj" in b: r["obj"] = b["obj"] if b["obj"] in OBJ else ""            # v11.6: вид изделия (человек)
@@ -4179,16 +4189,17 @@ def install(app, DATA, D_WORK):
         now = rec["t"]; skip = a == "skip"; w = 0 if skip else _wt(role)
         ids = [os.path.basename(str(x)) for x in body.get("ids") or []]
         yes = {os.path.basename(str(x)) for x in body.get("same") or []}
+        sim = {os.path.basename(str(x)) for x in body.get("similar") or []} - yes    # v11.88: ≈ очень похож, но другой ковёр
         if not ids: return JSONResponse({"error": "нет кандидатов"}, status_code=400)
-        rec.update(same=sorted(yes), ids=ids); pairs = []; P = None; ctl = None
+        rec.update(same=sorted(yes), similar=sorted(sim), ids=ids); pairs = []; P = None; ctl = None
         with _lock:
             r = load(rid)
             if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
             M = r.setdefault("micro", {}).setdefault("same", {})
             for o in ids:
-                v = "skip" if skip else ("same" if o in yes else "diff")
+                v = "skip" if skip else ("same" if o in yes else "similar" if o in sim else "diff")
                 d = M.setdefault(o, {}); d[me] = {"a": v, "w": w, "t": now}
-                got = next((x for x in ("same", "diff") if sum(y["w"] for y in d.values() if y["a"] == x) >= 2), None)
+                got = next((x for x in ("same", "similar", "diff") if sum(y["w"] for y in d.values() if y["a"] == x) >= 2), None)
                 if got: pairs.append((o, got, ", ".join(sorted(u for u, y in d.items() if y["a"] == got))))
             r["updated"] = now; save(r)
         if not skip:                                                            # контрольные пары (над порогом, но не поставлены): ответ человека — мерило авторешения
@@ -4197,9 +4208,9 @@ def install(app, DATA, D_WORK):
                 P = {k: dict(v) for k, v in P0.items()}
                 for k in hit:
                     o = k.split("~", 1)[1] if k.split("~", 1)[0] == rid else k.split("~", 1)[0]
-                    P[k]["ctl_ans"] = "same" if o in yes else "diff"; ctl = (ctl is not False) and o in yes
+                    P[k]["ctl_ans"] = "same" if o in yes else "similar" if o in sim else "diff"; ctl = (ctl is not False) and o in yes
                 tw_save(P)
-        for o, v, who in pairs: same_set(rid, o, v == "same", False, "/m: " + who)
+        for o, v, who in pairs: same_set(rid, o, v == "same", v == "similar", "/m: " + who)
         if pairs: rec["applied"] = ",".join(f"{o}:{v}" for o, v, _ in pairs); _tw_chain_soon()
         if ctl is not None: rec["tw_ctl"] = ctl                                 # здесь проверяется машина, а не человек: в ответ не отдаём
         _mlog(rec); _ty["t"] = 0

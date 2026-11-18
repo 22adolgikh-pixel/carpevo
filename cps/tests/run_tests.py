@@ -1824,6 +1824,21 @@ def t44_twins_fast_v1186(pg, ctx):
     t = t[0]; r = post(u + 'api/micro/answer', {"type": "tw", "rid": t["rid"], "a": "done", "ids": [x["id"] for x in t["items"]], "same": []})
     assert r.get("applied"), r
     assert (get(u + 'api/rugs/tw_m1').get("same_ok") or {}).get("tw_m2", {}).get("ok") is False
+    # v11.88: ≈ очень похож, но другой ковёр → связь similar; школа похожего — подсказкой
+    mk("tw_s1", rug_img(61), museum="Музей Б", inv="55"); mk("tw_s2", rug_img(62), museum="Музей Б", inv="55", src="book:z", school="karabakh")
+    t0 = get(u + 'api/twins')["last"]["t"]; post(u + 'api/twins_run', {})
+    for _ in range(120):
+        j = get(u + 'api/twins')
+        if not j["state"]["running"] and j["last"].get("t", 0) > t0: break
+        time.sleep(1)
+    t = [t for t in get(u + 'api/micro/next?k=tw&n=12')["tasks"] if t["type"] == "tw" and {t["rid"]} | {x["id"] for x in t["items"]} >= {"tw_s1", "tw_s2"}]
+    assert t, "нет карточки tw_s1/tw_s2"
+    t = t[0]; o = "tw_s2" if t["rid"] == "tw_s1" else "tw_s1"
+    post(u + 'api/micro/answer', {"type": "tw", "rid": t["rid"], "a": "done", "ids": [x["id"] for x in t["items"]], "same": [], "similar": [o]})
+    v = (get(u + 'api/rugs/tw_s1').get("same_ok") or {}).get("tw_s2") or {}
+    assert v.get("similar") and v.get("ok") is False, v
+    sg = get(u + 'api/rugs/tw_s1').get("school_suggest") or {}
+    assert sg.get("school") == "karabakh" and "похож" in sg.get("why", ""), sg
     # телефон: карточка показывается, отметка плитки меняет кнопку
     mk("tw_n1", rug_img(51), museum="Музей", inv="1"); mk("tw_n2", warp(rug_img(51)), museum="Музей", inv="1", src="book:y")
     p2 = pg
@@ -1831,6 +1846,12 @@ def t44_twins_fast_v1186(pg, ctx):
     assert p2.locator('.grid.tw .tl').count() >= 1, p2.inner_text('main')[:300]
     p2.locator('.grid.tw .tl').first.click(); p2.wait_for_timeout(200)
     assert 'готово' in p2.inner_text('#a1'), p2.inner_text('#a1')
+    p2.locator('.grid.tw .tl').first.click(); p2.wait_for_timeout(200)          # второй тап — ≈ похож
+    assert p2.locator('.grid.tw .tl.v').count() == 1 and 'похож' in p2.inner_text('#a1'), p2.inner_text('#a1')
+    p2.screenshot(path=os.path.join(OUT, 't44_m_tw_sim.png'))
+    p2.locator('.grid.tw .tl').first.click(); p2.wait_for_timeout(200)          # третий — снять
+    assert p2.locator('.grid.tw .tl.v, .grid.tw .tl.sel').count() == 0
+    p2.locator('.grid.tw .tl').first.click(); p2.wait_for_timeout(200)
     p2.screenshot(path=os.path.join(OUT, 't44_m_tw.png'))
     pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(3000)
     assert 'двойники' in pg.inner_text('#rgKpi'), pg.inner_text('#rgKpi')

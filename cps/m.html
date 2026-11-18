@@ -61,7 +61,7 @@ button.wide{grid-column:1/-1}button.sm{min-height:40px;padding:8px}button:active
 .typ .strip.el img{height:52px;width:52px;background:#fff;image-rendering:pixelated;padding:2px}
 .ovl{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px}.ovl img{max-width:100%;max-height:80dvh;object-fit:contain}
 button:disabled{opacity:.4}
-.grid.tw{grid-template-columns:repeat(2,1fr)}.grid.tw .tl.sel{border-color:var(--ok);box-shadow:0 0 0 2px var(--ok)}.grid.tw .tl.sel:after{content:'✓';position:absolute;right:6px;top:2px;font-size:26px;font-weight:700;color:var(--ok);text-shadow:0 0 4px #000}
+.grid.tw{grid-template-columns:repeat(2,1fr)}.grid.tw .tl.v:after{top:0;bottom:auto;right:6px}.grid.tw .tl.sel{border-color:var(--ok);box-shadow:0 0 0 2px var(--ok)}.grid.tw .tl.sel:after{content:'✓';position:absolute;right:6px;top:2px;font-size:26px;font-weight:700;color:var(--ok);text-shadow:0 0 4px #000}
 .zz{position:absolute;left:4px;top:4px;z-index:4;min-height:0;padding:2px 8px;font-size:14px;border-radius:10px;background:#000b}
 .flags{display:flex;gap:8px}.flags label{flex:1;display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--ln);border-radius:10px;font-size:13px;color:var(--mut)}.flags input{width:20px;height:20px;accent-color:var(--acc)}.flags label:has(input:checked){border-color:var(--acc);color:var(--tx)}
 </style></head><body>
@@ -231,17 +231,20 @@ function showComp(t){document.documentElement.style.setProperty('--imh','30dvh')
     o.innerHTML=`<img src="/rugmid/${encodeURIComponent(r)}.jpg" alt=""><span class="mut">пример типа «${esc(t.az||t.ru)}» · тап — закрыть</span>`;o.onclick=()=>o.remove();document.body.appendChild(o);};
   S.im=$('im');$('a1').onclick=()=>answer(t,'yes',null,{cid:t.cid});$('a3').onclick=()=>answer(t,'no',null,{cid:t.cid});$('a4').onclick=()=>answer(t,'skip',null,{cid:t.cid});zoomable();}
 // v11.86: «двойники ковра»: сверху ковёр, ниже до 8 фото-кандидатов; отметить те, где ТОТ ЖЕ ковёр. Неотмеченные = другой ковёр.
-function showTw(t){document.documentElement.style.setProperty('--imh','28dvh');const sel=new Set();const pi=r=>'/rugmid/'+encodeURIComponent(r)+'.jpg';
-  $('main').innerHTML=`${qhead('Где тот же самый ковёр?','Нажмите на фото, где ТОТ ЖЕ предмет, что сверху: другой снимок, другой свет, обрезка, скан из книги — неважно. Тот же рисунок, но другой ковёр (другие мелочи, потёртости, пропорции) — не отмечайте. Неотмеченные будут записаны как «другой ковёр». ⤢ — сравнить крупно.')}
+function showTw(t){document.documentElement.style.setProperty('--imh','28dvh');const sel=new Map();   // i → 'same' | 'sim'
+const pi=r=>'/rugmid/'+encodeURIComponent(r)+'.jpg';
+  $('main').innerHTML=`${qhead('Где тот же самый ковёр?','Один тап — ✓ ТОТ ЖЕ предмет, что сверху: другой снимок, другой свет, обрезка, крупный план, скан из книги — неважно. Второй тап — ≈ очень похож, но другой ковёр (тот же рисунок, отличаются мелочи, потёртости, пропорции): такие связи помогают определять школу и тип. Третий тап — снять. Неотмеченные будут записаны как «другой ковёр». ⤢ — сравнить крупно.')}
    ${stage(t)}<div class="mut" style="font-size:11px;text-align:center">${esc(t.title||t.rid)}${t.src?' · '+esc(t.src):''}</div>
    <div class="grid tw">${t.items.map((x,i)=>`<div class="tl" data-i="${i}"><img loading="lazy" src="${pi(x.id)}" alt=""><b>${esc((x.title||x.id).slice(0,40))}</b><button class="zz" data-z="${i}" aria-label="сравнить крупно">⤢</button></div>`).join('')}</div>
    <div class="btns"><button class="yes" id="a1">ни один не тот же</button><button class="sm unk" id="a4">не знаю</button></div>`;qtip();
-  const upd=()=>{$('a1').textContent=sel.size?`✓ готово: тот же — ${sel.size}`:'ни один не тот же';};
-  document.querySelectorAll('.grid.tw .tl').forEach(e=>e.onclick=ev=>{if(ev.target.closest('.zz'))return;const i=+e.dataset.i;sel.has(i)?sel.delete(i):sel.add(i);e.classList.toggle('sel',sel.has(i));upd();});
+  const upd=()=>{const a=[...sel.values()],ns=a.filter(x=>x==='same').length,nv=a.length-ns;$('a1').textContent=a.length?'✓ готово'+(ns?`: тот же — ${ns}`:'')+(nv?`${ns?',':':'} похож — ${nv}`:''):'ни один не тот же';};
+  document.querySelectorAll('.grid.tw .tl').forEach(e=>e.onclick=ev=>{if(ev.target.closest('.zz'))return;const i=+e.dataset.i,c=sel.get(i);
+    if(!c)sel.set(i,'same');else if(c==='same')sel.set(i,'sim');else sel.delete(i);
+    e.classList.toggle('sel',sel.get(i)==='same');e.classList.toggle('v',sel.get(i)==='sim');upd();});
   document.querySelectorAll('.zz').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const x=t.items[+b.dataset.z],o=document.createElement('div');o.className='ovl';
     o.innerHTML=`<img src="${pi(t.rid)}" alt="" style="max-height:44dvh"><img src="${pi(x.id)}" alt="" style="max-height:44dvh"><span class="mut">${esc((x.title||'').slice(0,60))}${x.n?' · общих точек '+x.n:''} · тап — закрыть</span>`;o.onclick=()=>o.remove();document.body.appendChild(o);});
   const ids=t.items.map(x=>x.id);
-  $('a1').onclick=()=>answer(t,'done',null,{ids,same:[...sel].map(i=>ids[i])});$('a4').onclick=()=>answer(t,'skip',null,{ids});zoomable();}
+  $('a1').onclick=()=>answer(t,'done',null,{ids,same:[...sel].filter(x=>x[1]==='same').map(x=>ids[x[0]]),similar:[...sel].filter(x=>x[1]==='sim').map(x=>ids[x[0]])});$('a4').onclick=()=>answer(t,'skip',null,{ids});zoomable();}
 // «двойники»: пара фото, в которой машина не уверена
 function showSame(t){const o={rid:t.other},pi=r=>t.rect?'/rectmid/'+encodeURIComponent(r)+'.jpg':'/rugmid/'+encodeURIComponent(r)+'.jpg';
   $('main').innerHTML=`${qhead('Это один и тот же ковёр?','Один и тот же предмет на двух фото (другой свет, другой музейный снимок) — «тот же». Тот же рисунок, но другой ковёр (другие мелочи, потёртости, размер) — «похожи».'+(t.rect?' Ковры показаны выпрямленными по углам: сравнивайте рисунок и мелочи, а не наклон фото.':'')+(t.inl!=null?' Машина нашла '+t.inl+' общих точек'+(t.inl>=60?' — почти наверняка один ковёр.':' — возможно, один ковёр.'):''))}
