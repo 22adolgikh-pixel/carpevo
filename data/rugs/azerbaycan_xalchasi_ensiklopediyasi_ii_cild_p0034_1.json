@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794929500,
+ "updated": 1795015990,
  "cat": {
   "title": "Çiyi palaz Газах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -59,6 +59,10 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0096_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -71,6 +75,12 @@
    "ok": false,
    "by": "по цепочке: azcm_143 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1",
    "at": 1794982608
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0096_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795015990,
+   "similar": true
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -113,6 +123,15 @@
      "a": "one",
      "w": 2,
      "t": 1794929500
+    }
+   }
+  },
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0096_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795015990
     }
    }
   }

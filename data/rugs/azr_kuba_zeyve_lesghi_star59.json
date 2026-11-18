@@ -18,7 +18,7 @@
  "h": 639,
  "marks": [],
  "created": 1791736137,
- "updated": 1794650251,
+ "updated": 1795015967,
  "cat": {
   "title": "kuba zeyve lesghi star59",
   "museum": "",
@@ -49,6 +49,14 @@
   {
    "id": "azr_kuba_zeyve_lesghi_star163",
    "score": 0
+  },
+  {
+   "id": "cm_76311f4ede",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0134_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +65,16 @@
    "by": "/m: dolgikh",
    "at": 1794982421,
    "similar": true
+  },
+  "cm_76311f4ede": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795015967
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0134_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795015967
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -129,6 +147,22 @@
     "w": 2,
     "t": 1794650251,
     "s": "ref"
+   }
+  },
+  "same": {
+   "cm_76311f4ede": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795015967
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0134_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795015967
+    }
    }
   }
  },

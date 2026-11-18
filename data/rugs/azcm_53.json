@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870043,
- "updated": 1791870043,
+ "updated": 1795015985,
  "cat": {
   "title": "“Bulud” («Булуд»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,20 @@
  },
  "src_id": "cat:azcm_53",
  "lib_img": "img/azcm_53.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_seychour61",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_seychour61": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795015985,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -83,5 +95,16 @@
   "ver": 1,
   "t": 1794783479
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azr_kuba_seychour61": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795015985
+    }
+   }
+  }
+ }
 }
