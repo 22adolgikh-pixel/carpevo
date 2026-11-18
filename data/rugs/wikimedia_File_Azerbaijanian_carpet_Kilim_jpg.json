@@ -48,8 +48,19 @@
  },
  "src_id": "cat:wikimedia_File_Azerbaijanian_carpet_Kilim_jpg",
  "lib_img": "img/wikimedia_File_Azerbaijanian_carpet_Kilim_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_553d1f7b79",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_553d1f7b79": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027609
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

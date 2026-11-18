@@ -18,7 +18,7 @@
  "h": 1209,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1795027604,
  "cat": {
   "title": "kuba shirvan medallion166",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion166",
  "lib_img": "img/azr_kuba_shirvan_medallion166.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_22_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_22_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027604
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": 0.911,
   "ver": 1,
   "t": 1794238356
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_22_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027604
+    }
+   }
+  }
  }
 }

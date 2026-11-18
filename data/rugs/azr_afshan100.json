@@ -45,8 +45,20 @@
  },
  "src_id": "cat:azr_afshan100",
  "lib_img": "img/azr_afshan100.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_afshan88",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_afshan88": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027645,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

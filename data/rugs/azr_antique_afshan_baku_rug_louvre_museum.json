@@ -58,6 +58,10 @@
   {
    "id": "azr_afshan63",
    "score": 0
+  },
+  {
+   "id": "azr_afshan88",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -70,6 +74,11 @@
    "ok": true,
    "by": "по цепочке: azr_afshan63 = azr_antique_afshan_baku_rug_louvre_museum = cm_ca1ad516af",
    "at": 1794976029
+  },
+  "azr_afshan88": {
+   "ok": false,
+   "by": "по цепочке: azr_afshan63 ≠ azr_afshan88",
+   "at": 1795027666
   }
  },
  "_lib_t": "2026-10-12 22:38",

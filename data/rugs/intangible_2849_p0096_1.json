@@ -18,7 +18,7 @@
  "h": 1702,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795027612,
  "cat": {
   "title": "Ковёр «Zeyvə» Губа",
   "museum": "",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2849_p0096_1",
  "lib_img": "img/intangible_2849_p0096_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Antique_Caucasian_Talish_Rug_Rosette_Rug_Symbology_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Antique_Caucasian_Talish_Rug_Rosette_Rug_Symbology_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027612
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +96,16 @@
   "ver": 1,
   "at": 1794547563
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "wikimedia_File_Antique_Caucasian_Talish_Rug_Rosette_Rug_Symbology_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027612
+    }
+   }
+  }
+ }
 }

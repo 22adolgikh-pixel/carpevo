@@ -18,7 +18,7 @@
  "h": 1133,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1795027645,
  "cat": {
   "title": "afshan88",
   "museum": "",
@@ -45,8 +45,58 @@
  },
  "src_id": "cat:azr_afshan88",
  "lib_img": "img/azr_afshan88.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_afshan100",
+   "score": 0
+  },
+  {
+   "id": "azr_afshan63",
+   "score": 0
+  },
+  {
+   "id": "azr_afshan55",
+   "score": 0
+  },
+  {
+   "id": "cm_ca1ad516af",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_afshan_baku_rug_louvre_museum",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_afshan100": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027645,
+   "similar": true
+  },
+  "azr_afshan63": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027645,
+   "similar": true
+  },
+  "azr_afshan55": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027645,
+   "similar": true
+  },
+  "cm_ca1ad516af": {
+   "ok": false,
+   "by": "по цепочке: azr_afshan63 ≠ azr_afshan88",
+   "at": 1795027666
+  },
+  "azr_antique_afshan_baku_rug_louvre_museum": {
+   "ok": false,
+   "by": "по цепочке: azr_afshan63 ≠ azr_afshan88",
+   "at": 1795027666
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +129,30 @@
   "area": 0.852,
   "ver": 1,
   "t": 1794238475
+ },
+ "micro": {
+  "same": {
+   "azr_afshan100": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795027645
+    }
+   },
+   "azr_afshan63": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795027645
+    }
+   },
+   "azr_afshan55": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795027645
+    }
+   }
+  }
  }
 }

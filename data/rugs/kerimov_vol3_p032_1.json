@@ -72,8 +72,19 @@
  },
  "src_id": "cat:kerimov_vol3_p032_1",
  "lib_img": "img/kerimov_vol3_p032_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol3_p021_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol3_p021_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027621
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
