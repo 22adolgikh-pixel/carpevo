@@ -18,7 +18,7 @@
  "h": 1594,
  "marks": [],
  "created": 1791870024,
- "updated": 1791870024,
+ "updated": 1794975970,
  "cat": {
   "title": "The name is all I have now",
   "museum": "Музей турецкого и исламского искусства (Стамбул)",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:cm_29c4cdd740",
  "lib_img": "img/cm_29c4cdd740.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_c2b9d737f7",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_c2b9d737f7": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975970
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -81,5 +92,16 @@
   "ver": 1,
   "t": 1794238302
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "cm_c2b9d737f7": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975970
+    }
+   }
+  }
+ }
 }

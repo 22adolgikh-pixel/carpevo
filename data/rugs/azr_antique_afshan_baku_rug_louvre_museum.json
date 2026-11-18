@@ -2,15 +2,15 @@
  "id": "azr_antique_afshan_baku_rug_louvre_museum",
  "title": "antique-afshan-baku-rug louvre museum",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Лувр",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "19th century",
  "school": "guba-shirvan",
- "composition": "",
- "technique": "",
+ "composition": "xileafshan",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -56,7 +56,13 @@
    "score": 350
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_ca1ad516af": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975987
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -114,5 +120,11 @@
   "area": 0.843,
   "ver": 1,
   "t": 1794938256
+ },
+ "from_twin": {
+  "composition": "cm_ca1ad516af",
+  "technique": "cm_ca1ad516af",
+  "museum": "cm_ca1ad516af",
+  "date": "cm_ca1ad516af"
  }
 }

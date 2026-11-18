@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870024,
- "updated": 1794596958,
+ "updated": 1794975932,
  "cat": {
   "title": "A picture and description of this carpet is in a publication by the Ministry of Culture, Turkish Handwoven Car",
   "museum": "Музей турецкого и исламского искусства (Стамбул)",
@@ -60,9 +60,38 @@
   {
    "id": "cm_a7f4d62972",
    "score": 0
+  },
+  {
+   "id": "cm_a8c3332dec",
+   "score": 0
+  },
+  {
+   "id": "cm_e44bb7b85e",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_978f4e3b74": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975872
+  },
+  "cm_a7f4d62972": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975932
+  },
+  "cm_a8c3332dec": {
+   "ok": false,
+   "by": "по цепочке: cm_978f4e3b74 ≠ cm_a8c3332dec",
+   "at": 1794975895
+  },
+  "cm_e44bb7b85e": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975932
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_a374b37a9e": {
@@ -122,6 +151,22 @@
     "a": "detail",
     "w": 2,
     "t": 1794596958
+   }
+  },
+  "same": {
+   "cm_a7f4d62972": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975932
+    }
+   },
+   "cm_e44bb7b85e": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975932
+    }
    }
   }
  },

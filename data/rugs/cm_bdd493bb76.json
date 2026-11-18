@@ -10,7 +10,7 @@
  "date": "2012-12-02 02:22:04",
  "school": "karabakh",
  "composition": "qasimushagi",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "Azərbaycan xalçaçılıq məktəblərindən olan Qarabağ xalçaçılıq məktəbinin Cəbrayıl qrupuna aid edilən xovlu xalçanın qol adlanan naxış elrmenti.",
  "status": "new",
@@ -259,7 +259,7 @@
   }
  ],
  "created": 1791870027,
- "updated": 1794589087,
+ "updated": 1794975841,
  "cat": {
   "title": "Azərbaycan xalçaçılıq məktəblərindən olan Qarabağ xalçaçılıq məktəbinin Cəbrayıl qrupuna aid edilən xovlu xalç",
   "museum": "",
@@ -301,9 +301,60 @@
   {
    "id": "wikimedia_File_Parts_of_carpets_Kasim_Ushagy_qollar_jpg",
    "score": 373
+  },
+  {
+   "id": "cm_d1f91fb1e4",
+   "score": 0
+  },
+  {
+   "id": "cm_af37d322da",
+   "score": 0
+  },
+  {
+   "id": "cm_89e42f7250",
+   "score": 0
+  },
+  {
+   "id": "cm_2d904d6055",
+   "score": 0
+  },
+  {
+   "id": "cm_d31dec1269",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_b11bd2ee23": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975841
+  },
+  "cm_d1f91fb1e4": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975841
+  },
+  "cm_af37d322da": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975841
+  },
+  "cm_89e42f7250": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975841
+  },
+  "cm_2d904d6055": {
+   "ok": true,
+   "by": "по цепочке: cm_2d904d6055 = cm_af37d322da = cm_b11bd2ee23 = cm_bdd493bb76 = cm_d1f91fb1e4 = cm_d31dec1269",
+   "at": 1794975895
+  },
+  "cm_d31dec1269": {
+   "ok": true,
+   "by": "по цепочке: cm_2d904d6055 = cm_af37d322da = cm_b11bd2ee23 = cm_bdd493bb76 = cm_d1f91fb1e4 = cm_d31dec1269",
+   "at": 1794975895
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_b11bd2ee23": {
@@ -387,6 +438,39 @@
      "t": 1794589087
     }
    }
+  },
+  "same": {
+   "cm_b11bd2ee23": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975841
+    }
+   },
+   "cm_d1f91fb1e4": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975841
+    }
+   },
+   "cm_af37d322da": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975841
+    }
+   },
+   "cm_89e42f7250": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975841
+    }
+   }
   }
+ },
+ "from_twin": {
+  "technique": "cm_b11bd2ee23"
  }
 }

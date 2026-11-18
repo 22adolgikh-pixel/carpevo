@@ -6,19 +6,19 @@
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "Газах",
+ "date": "19 в., начало",
  "school": "ganja-gazakh",
  "composition": "",
- "technique": "",
- "size": "",
+ "technique": "ворсовый",
+ "size": "270x167 см",
  "notes": "",
  "status": "new",
  "w": 535,
  "h": 832,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794975836,
  "cat": {
   "title": "antique kazak akstafa rug5",
   "museum": "",
@@ -45,8 +45,46 @@
  },
  "src_id": "cat:azr_antique_kazak_akstafa_rug5",
  "lib_img": "img/azr_antique_kazak_akstafa_rug5.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0225_1",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Лемберан_jpg",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_moghan_rug54a_christies",
+   "score": 0
+  },
+  {
+   "id": "azr_pinwheel_kazak_rug_franz_bausback",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0225_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975836
+  },
+  "wikimedia_File_Лемберан_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975836
+  },
+  "azr_antique_kazak_moghan_rug54a_christies": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975836
+  },
+  "azr_pinwheel_kazak_rug_franz_bausback": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975836
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +117,43 @@
   "area": 0.839,
   "ver": 1,
   "t": 1794238541
+ },
+ "micro": {
+  "same": {
+   "intangible_2849_p0225_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975836
+    }
+   },
+   "wikimedia_File_Лемберан_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975836
+    }
+   },
+   "azr_antique_kazak_moghan_rug54a_christies": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975836
+    }
+   },
+   "azr_pinwheel_kazak_rug_franz_bausback": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975836
+    }
+   }
+  }
+ },
+ "from_twin": {
+  "technique": "intangible_2849_p0225_1",
+  "place": "intangible_2849_p0225_1",
+  "date": "intangible_2849_p0225_1",
+  "size": "intangible_2849_p0225_1"
  }
 }

@@ -18,7 +18,7 @@
  "h": 1372,
  "marks": [],
  "created": 1791870021,
- "updated": 1791870021,
+ "updated": 1794975982,
  "cat": {
   "title": "Carpet; Textiles-Rugs",
   "museum": "Метрополитен-музей",
@@ -152,6 +152,10 @@
   {
    "id": "met_452312",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Kaukasus1_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -279,6 +283,16 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1794236588
+  },
+  "cm_d4233e0f4f": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975976
+  },
+  "wikimedia_File_Kaukasus1_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975982
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -486,5 +500,16 @@
   "ver": 1,
   "t": 1794238282
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "wikimedia_File_Kaukasus1_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975982
+    }
+   }
+  }
+ }
 }

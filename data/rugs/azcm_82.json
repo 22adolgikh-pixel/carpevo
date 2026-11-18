@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870044,
- "updated": 1794936293,
+ "updated": 1794975941,
  "cat": {
   "title": "“Qasımuşağı” («Гасымушагы»), Джебраил, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -54,9 +54,24 @@
   {
    "id": "wikimedia_File_Касымушагы_jpg",
    "score": 368
+  },
+  {
+   "id": "azcm_61",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Касымушагы_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975942
+  },
+  "azcm_61": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975942
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Касымушагы_jpg": {
@@ -144,6 +159,22 @@
     "w": 2,
     "t": 1794936293,
     "s": "ref"
+   }
+  },
+  "same": {
+   "wikimedia_File_Касымушагы_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975941
+    }
+   },
+   "azcm_61": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975941
+    }
    }
   }
  },

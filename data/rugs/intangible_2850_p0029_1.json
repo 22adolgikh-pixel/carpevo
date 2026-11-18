@@ -2,8 +2,8 @@
  "id": "intangible_2850_p0029_1",
  "title": "Ковёр «Qasımuşağı» Карабах",
  "source": "каталог: book:intangible_2850",
- "museum": "",
- "inv": "",
+ "museum": "Wikimedia Commons",
+ "inv": "716",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Карабах",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2850_p0029_1",
  "lib_img": "img/intangible_2850_p0029_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Касымушагы_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Касымушагы_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975945
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +96,9 @@
   "ver": 1,
   "at": 1794547544
  },
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "museum": "wikimedia_File_Касымушагы_jpg",
+  "inv": "wikimedia_File_Касымушагы_jpg"
+ }
 }

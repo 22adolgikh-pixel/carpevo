@@ -7,7 +7,7 @@
  "url": "https://commons.wikimedia.org/wiki/File:Selgiuchidi_d%27anatolia,_tappeto,_konya_xiii_secolo,_01.jpg",
  "license": "CC BY-SA 4.0 · Francesco Bini",
  "place": "",
- "date": "",
+ "date": "1992",
  "school": "",
  "composition": "",
  "technique": "",
@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870029,
- "updated": 1794597493,
+ "updated": 1794975936,
  "cat": {
   "title": "Rugs and carpets in the Turkish and Islamic Arts Museum",
   "museum": "Музей турецкого и исламского искусства (Стамбул)",
@@ -60,9 +60,47 @@
   {
    "id": "cm_a9d2a004ec",
    "score": 0
+  },
+  {
+   "id": "cm_a8c3332dec",
+   "score": 0
+  },
+  {
+   "id": "cm_e44bb7b85e",
+   "score": 0
+  },
+  {
+   "id": "cm_dca3d7ad50",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_978f4e3b74": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975872
+  },
+  "cm_a9d2a004ec": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975932
+  },
+  "cm_a8c3332dec": {
+   "ok": false,
+   "by": "по цепочке: cm_978f4e3b74 ≠ cm_a8c3332dec",
+   "at": 1794975895
+  },
+  "cm_e44bb7b85e": {
+   "ok": false,
+   "by": "по цепочке: cm_978f4e3b74 ≠ cm_e44bb7b85e",
+   "at": 1794975895
+  },
+  "cm_dca3d7ad50": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975936
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_a374b37a9e": {
@@ -129,10 +167,22 @@
     "w": 2,
     "t": 1794597493
    }
+  },
+  "same": {
+   "cm_dca3d7ad50": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975936
+    }
+   }
   }
  },
  "tri": "review",
  "multi": [],
  "frame": "detail",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "date": "cm_978f4e3b74"
+ }
 }

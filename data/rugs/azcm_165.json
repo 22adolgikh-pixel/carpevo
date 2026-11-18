@@ -11,7 +11,7 @@
  "school": "tabriz",
  "composition": "",
  "technique": "безворсовый: килим",
- "size": "",
+ "size": "120x157 см",
  "notes": "; ",
  "status": "new",
  "w": 1473,
@@ -54,9 +54,24 @@
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0085_1",
    "score": 999,
    "inv": true
+  },
+  {
+   "id": "azcm_14",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0085_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975828
+  },
+  "azcm_14": {
+   "ok": false,
+   "by": "по цепочке: azcm_14 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0085_1",
+   "at": 1794975895
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -346,5 +361,8 @@
   "field": {
    "dolgikh": "0"
   }
+ },
+ "from_twin": {
+  "size": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0085_1"
  }
 }

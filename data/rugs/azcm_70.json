@@ -18,7 +18,7 @@
  "h": 1755,
  "marks": [],
  "created": 1791870042,
- "updated": 1791870042,
+ "updated": 1794975973,
  "cat": {
   "title": "“Əyan məclisi” («Аян-меджлиси»), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,28 @@
  },
  "src_id": "cat:azcm_70",
  "lib_img": "img/azcm_70.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Carpet_Shusha_gallery3_jpg",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0090_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Carpet_Shusha_gallery3_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975973
+  },
+  "intangible_2849_p0090_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975973
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 1,
@@ -65,5 +85,23 @@
   ],
   "ver": 1,
   "at": 1792261881
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Carpet_Shusha_gallery3_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975973
+    }
+   },
+   "intangible_2849_p0090_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975973
+    }
+   }
+  }
  }
 }

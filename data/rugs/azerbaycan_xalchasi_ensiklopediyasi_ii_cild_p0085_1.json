@@ -18,7 +18,7 @@
  "h": 1999,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794975827,
  "cat": {
   "title": "Kilim Тебриз",
   "museum": "Национальный музей азербайджанского ковра",
@@ -57,9 +57,24 @@
    "id": "azcm_165",
    "score": 999,
    "inv": true
+  },
+  {
+   "id": "azcm_14",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azcm_165": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975828
+  },
+  "azcm_14": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975828
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -99,6 +114,24 @@
    "v": "same",
    "at": 1794618045,
    "ver": 2
+  }
+ },
+ "micro": {
+  "same": {
+   "azcm_165": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975827
+    }
+   },
+   "azcm_14": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975827
+    }
+   }
   }
  }
 }

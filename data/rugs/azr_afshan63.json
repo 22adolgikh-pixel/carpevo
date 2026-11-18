@@ -2,15 +2,15 @@
  "id": "azr_afshan63",
  "title": "afshan63",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Лувр",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "19th century",
  "school": "guba-shirvan",
- "composition": "",
- "technique": "",
+ "composition": "xileafshan",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_afshan63",
  "lib_img": "img/azr_afshan63.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_ca1ad516af",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_ca1ad516af": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975987
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -90,5 +101,11 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "composition": "cm_ca1ad516af",
+  "technique": "cm_ca1ad516af",
+  "museum": "cm_ca1ad516af",
+  "date": "cm_ca1ad516af"
+ }
 }

@@ -18,7 +18,7 @@
  "h": 998,
  "marks": [],
  "created": 1791870014,
- "updated": 1794776817,
+ "updated": 1794975987,
  "cat": {
   "title": "19th century \"Xilə-Əfşan\" carpet, Absehron carpet school, 155x333 cm",
   "museum": "Лувр",
@@ -56,9 +56,24 @@
   {
    "id": "azr_antique_afshan_baku_rug_louvre_museum",
    "score": 379
+  },
+  {
+   "id": "azr_afshan63",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_antique_afshan_baku_rug_louvre_museum": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975987
+  },
+  "azr_afshan63": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975987
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "azr_antique_afshan_baku_rug_louvre_museum": {
@@ -112,6 +127,22 @@
     "a": "whole",
     "w": 2,
     "t": 1794776817
+   }
+  },
+  "same": {
+   "azr_antique_afshan_baku_rug_louvre_museum": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975987
+    }
+   },
+   "azr_afshan63": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975987
+    }
    }
   }
  },

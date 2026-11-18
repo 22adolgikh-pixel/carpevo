@@ -18,7 +18,7 @@
  "h": 1416,
  "marks": [],
  "created": 1791870021,
- "updated": 1794509171,
+ "updated": 1794975856,
  "cat": {
   "title": "Carpet; Textiles-Rugs",
   "museum": "Метрополитен-музей",
@@ -92,6 +92,10 @@
   {
    "id": "azr_early_karabagh_rug62",
    "score": 227
+  },
+  {
+   "id": "cm_303e02ef18",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -124,6 +128,31 @@
    "ok": true,
    "by": "/m: dolgikh",
    "at": 1794975819
+  },
+  "cm_37e38ad820": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975856
+  },
+  "cm_d868a6c152": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794975856
+  },
+  "cm_9453a46c77": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975856
+  },
+  "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_1_jpeg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975856
+  },
+  "cm_303e02ef18": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975856
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -240,6 +269,43 @@
     "a": "cropped",
     "w": 2,
     "t": 1794509171
+   }
+  },
+  "same": {
+   "cm_37e38ad820": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975856
+    }
+   },
+   "cm_d868a6c152": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794975856
+    }
+   },
+   "cm_9453a46c77": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975856
+    }
+   },
+   "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_1_jpeg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975856
+    }
+   },
+   "cm_303e02ef18": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794975856
+    }
    }
   }
  },

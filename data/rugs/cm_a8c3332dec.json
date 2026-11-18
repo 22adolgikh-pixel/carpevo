@@ -47,8 +47,37 @@
  },
  "src_id": "cat:cm_a8c3332dec",
  "lib_img": "img/cm_a8c3332dec.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_978f4e3b74",
+   "score": 0
+  },
+  {
+   "id": "cm_a9d2a004ec",
+   "score": 0
+  },
+  {
+   "id": "cm_a7f4d62972",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_978f4e3b74": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794975872
+  },
+  "cm_a9d2a004ec": {
+   "ok": false,
+   "by": "по цепочке: cm_978f4e3b74 ≠ cm_a8c3332dec",
+   "at": 1794975895
+  },
+  "cm_a7f4d62972": {
+   "ok": false,
+   "by": "по цепочке: cm_978f4e3b74 ≠ cm_a8c3332dec",
+   "at": 1794975895
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
