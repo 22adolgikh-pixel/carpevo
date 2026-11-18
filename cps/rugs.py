@@ -15,7 +15,25 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ZONES = {"field": "поле", "medallion": "медальон", "spandrel": "угол поля", "border": "главная кайма",
          "minor": "малая кайма", "guard": "бордюрная полоска", "end": "торцевая полоса", "other": "другое"}
 STATUSES = ("proposed", "confirmed", "rejected")
-SCHOOLS = {"guba-shirvan": "Губа-Ширван", "ganja-gazakh": "Гянджа-Газах", "karabakh": "Карабах", "tabriz": "Тебриз", "nakhchivan": "Нахчыван", "": "—"}
+# v11.90: 7 школ (+ Нахчыван) — главный уровень; 4 типа Керимова — уровень выше (Губа-Ширван = Губа + Ширван + Баку, Гянджа-Газах = Гянджа + Газах).
+# Значения «guba-shirvan» / «ganja-gazakh» остаются допустимыми: школа известна только на уровне типа Керимова, не уточнена.
+SCHOOLS = {"guba": "Губа", "shirvan": "Ширван", "baku": "Баку (Абшерон)", "ganja": "Гянджа", "gazakh": "Газах", "karabakh": "Карабах", "tabriz": "Тебриз",
+           "nakhchivan": "Нахчыван", "guba-shirvan": "Губа-Ширван (не уточнено)", "ganja-gazakh": "Гянджа-Газах (не уточнено)", "": "—"}
+SCHOOL_GROUP = {"guba": "guba-shirvan", "shirvan": "guba-shirvan", "baku": "guba-shirvan", "guba-shirvan": "guba-shirvan",
+                "ganja": "ganja-gazakh", "gazakh": "ganja-gazakh", "ganja-gazakh": "ganja-gazakh", "karabakh": "karabakh", "tabriz": "tabriz", "nakhchivan": "nakhchivan"}
+SCHOOL_GROUPS = {"guba-shirvan": "Губа-Ширван", "ganja-gazakh": "Гянджа-Газах", "karabakh": "Карабах", "tabriz": "Тебриз", "nakhchivan": "Нахчыван"}
+COARSE = ("guba-shirvan", "ganja-gazakh")                                      # школа известна только на уровне типа Керимова
+
+
+def school_group(s):
+    """школа → тип Керимова (уровень выше)"""
+    return SCHOOL_GROUP.get(s or "", s or "")
+
+
+def school_compat(a, b):
+    """не противоречат: одна и та же школа или одна — уточнение другой (Губа и Губа-Ширван)"""
+    if not a or not b or a == b: return True
+    return school_group(a) == school_group(b) and (a in COARSE or b in COARSE)
 MAXSIDE = 4000   # v10.27: хайрез загружается почти без уменьшения (поиск повторов и совмещение всё равно уменьшают фото у себя)
 SAME_FIELDS = ("school", "composition", "technique", "museum", "inv", "place", "date", "size")   # что переносится с двойника в пустые поля
 PASS_FIELDS = SAME_FIELDS + ("url", "license", "notes")   # v10.26: что части разворота наследуют от исходного фото
@@ -133,13 +151,15 @@ def fold(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
-SCHOOL_KEYS = [("karabag", "karabakh"), ("karabak", "karabakh"), ("karabah", "karabakh"), ("shusha", "karabakh"), ("susa", "karabakh"), ("lampa", "karabakh"),
-               ("gazah", "ganja-gazakh"), ("kazak", "ganja-gazakh"), ("kazah", "ganja-gazakh"), ("ganja", "ganja-gazakh"), ("genje", "ganja-gazakh"), ("gence", "ganja-gazakh"),
-               ("gendje", "ganja-gazakh"), ("gyanja", "ganja-gazakh"), ("borcal", "ganja-gazakh"), ("bordjal", "ganja-gazakh"), ("fahral", "ganja-gazakh"), ("celeberd", "ganja-gazakh"),
-               ("kuba", "guba-shirvan"), ("guba", "guba-shirvan"), ("shirvan", "guba-shirvan"), ("sirvan", "guba-shirvan"), ("baku", "guba-shirvan"), ("baki", "guba-shirvan"),
+SCHOOL_KEYS = [("celeberd", "karabakh"), ("celaberd", "karabakh"), ("celebi", "karabakh"),   # v11.90: Çələbi (на рынке «Chelaberd Kazak») у Керимова — Карабах
+               ("karabag", "karabakh"), ("karabak", "karabakh"), ("karabah", "karabakh"), ("shusha", "karabakh"), ("susa", "karabakh"), ("lampa", "karabakh"),
+               ("gazah", "gazakh"), ("kazak", "gazakh"), ("kazah", "gazakh"), ("borcal", "gazakh"), ("bordjal", "gazakh"), ("fahral", "gazakh"),
+               ("ganja", "ganja"), ("genje", "ganja"), ("gence", "ganja"), ("gendje", "ganja"), ("gyanja", "ganja"),
+               ("kuba", "guba"), ("guba", "guba"), ("perepedil", "guba"), ("pirebedil", "guba"), ("seichur", "guba"), ("chichi", "guba"), ("cici", "guba"),
+               ("shirvan", "shirvan"), ("sirvan", "shirvan"), ("marasal", "shirvan"),
+               ("baku", "baku"), ("baki", "baku"), ("absheron", "baku"), ("abseron", "baku"), ("hizi", "baku"), ("khyzy", "baku"),
                ("derbend", "guba-shirvan"), ("dagestan", "guba-shirvan"), ("daghestan", "guba-shirvan"), ("zakatal", "guba-shirvan"), ("talis", "guba-shirvan"),
-               ("lenkoran", "guba-shirvan"), ("mugan", "guba-shirvan"), ("moghan", "guba-shirvan"), ("hizi", "guba-shirvan"), ("khyzy", "guba-shirvan"),
-               ("perepedil", "guba-shirvan"), ("pirebedil", "guba-shirvan"), ("seichur", "guba-shirvan"), ("chichi", "guba-shirvan"), ("cici", "guba-shirvan"), ("marasal", "guba-shirvan"),
+               ("lenkoran", "guba-shirvan"), ("mugan", "guba-shirvan"), ("moghan", "guba-shirvan"),
                ("tabriz", "tabriz"), ("tebriz", "tabriz"), ("heriz", "tabriz"), ("serapi", "tabriz"), ("ardabil", "tabriz"), ("ardebil", "tabriz"), ("karaja", "tabriz"),
                ("sarab", "tabriz"), ("meshkin", "tabriz"), ("nakhchivan", "nakhchivan"), ("nahcivan", "nakhchivan"), ("nahicevan", "nakhchivan")]
 LEG_SCHOOL = {"кар": "karabakh", "к ш": "guba-shirvan", "кш": "guba-shirvan", "г к": "ganja-gazakh", "гк": "ganja-gazakh", "теб": "tabriz"}
@@ -156,6 +176,19 @@ def school_guess(*texts):
     for k, v in SCHOOL_KEYS:
         if k in t: return v, k
     return "", ""
+
+
+def school_fine(*texts):
+    """v11.90: школа уровня 7 (Губа, Ширван, Баку, Гянджа, Газах…) по словам; если названо несколько («Kuba Shirvan») —
+    берётся та, после которой стоит «group / qrupu», иначе неясно → ("", "")."""
+    t = fold(" ".join(x or "" for x in texts))
+    hit = {}
+    for k, v in SCHOOL_KEYS:
+        if v not in COARSE and k in t: hit.setdefault(v, k)
+    if hit.get("karabakh", "").startswith("cel"): hit.pop("gazakh", None)       # «Chelaberd Kazak» — рыночное слово Kazak, у Керимова Çələbi — Карабах
+    if len(hit) == 1: return next(iter(hit.items()))
+    grp = [v for v, k in hit.items() if re.search(re.escape(k) + r"\w*\s+(group|grupu|grubu|qrupu|mektebi|school)", t)]
+    return (grp[0], hit[grp[0]]) if len(grp) == 1 else ("", "")
 
 
 def text_facts(t):
@@ -384,14 +417,19 @@ def install(app, DATA, D_WORK):
     # ---- v11.85: название ковра = его тип (композиция); подпись источника остаётся в title ----
     def comp_school(cid):
         """школа типа по словарю, если она одна (у 168 из 228 типов); иначе пусто"""
-        sc = {{"baku": "guba-shirvan"}.get(x, x) for x in (BYID.get(cid) or {}).get("schools") or []}   # Баку у Керимова — в группе Губа-Ширван
-        return next(iter(sc)) if len(sc) == 1 and next(iter(sc)) in SCHOOLS else ""
+        sc = {x for x in (BYID.get(cid) or {}).get("schools") or [] if x in SCHOOLS and x}
+        if len({school_group(x) for x in sc}) != 1: return ""
+        fine = {x for x in sc if x not in COARSE}                                # v11.90: Баку — уточнение Губа-Ширвана
+        return next(iter(fine)) if len(fine) == 1 else school_group(next(iter(sc)))
 
     def school_by_type(r):
         """пустая школа + тип с одной школой → ставим школу по типу. Заполненную не трогаем (расхождение видно в паспорте)."""
-        if r.get("school") or r.get("composition") not in BYID: return False
+        if r.get("composition") not in BYID: return False
         s = comp_school(r["composition"])
         if not s: return False
+        if r.get("school"):                                                      # v11.90: заполненную трогаем только для уточнения (Губа-Ширван → Баку)
+            if not (r["school"] in COARSE and s != r["school"] and school_group(s) == r["school"]): return False
+            r["school_prev"] = r["school"]
         r["school"] = s; r["school_by"] = f"по типу ковра «{BYID[r['composition']]['az']}»"
         return True
 
@@ -728,7 +766,7 @@ def install(app, DATA, D_WORK):
         out.sort(key=lambda s: (s["status"] == "done", -s["updated"]))
         try: figures_by_concept(); elx = {k: len(v) for k, v in figcache["exp"].items() if v}
         except Exception: elx = {}
-        return {"rugs": out, "import": imp, "zones": ZONES, "schools": SCHOOLS, "elx": elx, "sch_by_type": nsch}
+        return {"rugs": out, "import": imp, "zones": ZONES, "schools": SCHOOLS, "school_group": SCHOOL_GROUP, "school_groups": SCHOOL_GROUPS, "school_coarse": COARSE, "elx": elx, "sch_by_type": nsch}
 
     @app.get("/api/rugs/{rid}")
     def api_rug(rid: str):
@@ -3400,7 +3438,7 @@ def install(app, DATA, D_WORK):
             q = np.mean(vs, 0); q = q / max(np.linalg.norm(q), 1e-8)
             qsize = (float(np.median([s[0] for s in sizes])), float(np.median([s[1] for s in sizes])))
             only = None
-            if b.get("school"): only = {rid for rid, t in A.items() if t.get("school") == b["school"]}
+            if b.get("school"): only = {rid for rid, t in A.items() if t.get("school") == b["school"] or school_group(t.get("school")) == b["school"]}   # v11.90: группа включает свои школы
             res = MS.search(q, qsize, exclude=[r["id"]], only=only, limit=limit)
             L = MS.labels(key); twins = {x.get("id") for x in r.get("same") or []}; grp = r.get("same_group")
             out = []
@@ -4151,6 +4189,44 @@ def install(app, DATA, D_WORK):
         threading.Thread(target=run, daemon=True, name="twins").start()
         return True
 
+    def school_refine(force=False):
+        """v11.90: один раз уточнить «Губа-Ширван» / «Гянджа-Газах» до школы (Губа, Ширван, Баку, Гянджа, Газах):
+        по слову в подписи / месте / заметке, по типу ковра (словарь), по подтверждённому двойнику. Только внутри той же группы; прежнее значение — в school_prev."""
+        mark = os.path.join(DATA, "school_refine_v1.done")
+        if os.path.exists(mark) and not force: return {"skip": True}
+        R = {}
+        for f in os.listdir(D_RUGS):
+            if f.endswith(".json"):
+                r = load(f[:-5])
+                if r: R[r["id"]] = r
+        st = {"text": 0, "type": 0, "twin": 0, "left": 0}
+        def fine_of(r):
+            g = r.get("school")
+            sc, why = school_fine(r.get("title"), r.get("place"), (r.get("notes") or "")[:300])
+            if sc and school_group(sc) == g: return sc, f"уточнено по слову «{why}» в подписи", "text"
+            c = comp_school(r.get("composition") or "")
+            if c and c != g and school_group(c) == g and c not in COARSE: return c, f"уточнено по типу ковра «{BYID[r['composition']]['az']}»", "type"
+            return None
+        todo = [r for r in R.values() if r.get("school") in ("guba-shirvan", "ganja-gazakh")]
+        got = {}
+        for r in todo:
+            x = fine_of(r)
+            if x: got[r["id"]] = x
+        for r in todo:                                                          # двойник уже уточнён (или был точным) → то же
+            if r["id"] in got: continue
+            fs = {(got[o][0] if o in got else (R.get(o) or {}).get("school")) for o, v in (r.get("same_ok") or {}).items() if v and v.get("ok") and o in R}
+            fs = {x for x in fs if x and x not in COARSE and school_group(x) == r["school"]}
+            if len(fs) == 1: got[r["id"]] = (next(iter(fs)), "уточнено по двойнику", "twin")
+        for rid, (sc, why, k) in got.items():
+            with _lock:
+                r = load(rid)
+                if not r or r.get("school") not in ("guba-shirvan", "ganja-gazakh"): continue
+                r["school_prev"] = r["school"]; r["school"] = sc; r["school_by"] = why; save(r)
+            st[k] += 1
+        st["left"] = len(todo) - len(got)
+        open(mark, "w").write(json.dumps(st, ensure_ascii=False)); print("school refine:", st); _ty["t"] = 0
+        return st
+
     def tw_reopen():
         """v11.89: раньше в карточке «двойники» были видны только первые 2 плитки, остальные записывались как «другой ковёр», хотя человек их не видел.
         Один раз: у таких пар снять непоказанный голос «diff» (и решение «разные», если оно держалось только на нём) — пары вернутся в очередь."""
@@ -4189,6 +4265,8 @@ def install(app, DATA, D_WORK):
         _ty["t"] = 0
 
     def _periodic_twins():
+        try: school_refine()
+        except Exception as e: print("school refine:", e)
         try: tw_reopen()
         except Exception as e: print("twins reopen:", e)
         time.sleep(600)
@@ -4206,6 +4284,11 @@ def install(app, DATA, D_WORK):
                 "by_why": {w: sum(1 for v in P.values() if w in (v.get("why") or [])) for w in ("catalog", "size", "inv", "nn", "calib")},
                 "auto": sum(1 for v in P.values() if v.get("auto")), "ctl": sum(1 for v in P.values() if v.get("ctl")),
                 "ctl_answered": [v.get("ctl_ans") for v in P.values() if v.get("ctl") and v.get("ctl_ans")]}
+
+    @app.post("/api/school_refine")
+    def api_school_refine():
+        """v11.90: уточнить Губа-Ширван / Гянджа-Газах до школы (повторно — тоже можно)"""
+        return school_refine(force=True)
 
     @app.post("/api/twins_run")
     async def api_twins_run(request: Request):

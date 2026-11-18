@@ -1864,6 +1864,52 @@ def t44_twins_fast_v1186(pg, ctx):
     errors_ok(ctx, 'двойники')
 
 
+@test
+def t45_schools_7_v1190(pg, ctx):
+    """v11.90: 7 школ — главный уровень, 4 типа Керимова — выше. Губа-Ширван / Гянджа-Газах уточняются по подписи, типу, двойнику;
+    «Kuba Shirvan» — неясно; «Chelaberd Kazak» — Карабах; фильтр по группе включает её школы; Губа и Губа-Ширван не расходятся."""
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    import cv2, numpy as np
+    img = np.full((300, 200, 3), 120, np.uint8)
+    def mk(rid, **kw):
+        cv2.imwrite(f'{D}/rug_img/{rid}.jpg', img)
+        r = {"id": rid, "title": "", "source": "тест", "museum": "", "inv": "", "school": "", "composition": "", "status": "new", "w": 200, "h": 300,
+             "marks": [], "created": now, "updated": now, "cat": {"src": "azerbaijanrugs"}}
+        r.update(kw); json.dump(r, open(f'{D}/rugs/{rid}.json', 'w'), ensure_ascii=False)
+    mk("sc_kuba", title="kuba medallion rug 12", school="guba-shirvan")
+    mk("sc_ks", title="kuba shirvan medallion 3", school="guba-shirvan")
+    mk("sc_baku", title="Qollu chichi carpet, Baku group of Azerbaijani carpets", school="guba-shirvan")
+    mk("sc_kaz", title="Borchaly rug", school="ganja-gazakh")
+    mk("sc_tw1", title="unknown", school="guba-shirvan", same_ok={"sc_kuba": {"ok": True, "by": "/m: t", "at": now}})
+    mk("sc_kar", title="Karabakh rug, Guba-Shirvan per dealer", school="karabakh")
+    st = post(u + 'api/school_refine', {})
+    by = {k: get(u + 'api/rugs/' + k) for k in ("sc_kuba", "sc_ks", "sc_baku", "sc_kaz", "sc_tw1", "sc_kar")}
+    assert by["sc_kuba"]["school"] == "guba" and by["sc_kuba"]["school_prev"] == "guba-shirvan", by["sc_kuba"]["school"]
+    assert by["sc_ks"]["school"] == "guba-shirvan", ("«Kuba Shirvan» — неясно, не уточнять", by["sc_ks"]["school"])
+    assert by["sc_baku"]["school"] == "baku", by["sc_baku"]["school"]
+    assert by["sc_kaz"]["school"] == "gazakh", by["sc_kaz"]["school"]
+    assert by["sc_tw1"]["school"] == "guba" and "двойник" in by["sc_tw1"]["school_by"], by["sc_tw1"]
+    assert by["sc_kar"]["school"] == "karabakh"                                   # другая группа не трогается
+    assert st.get("text", 0) >= 3 and st.get("twin", 0) >= 1, st
+    import sys; sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    import rugs as RG
+    assert RG.school_guess("Chelaberd Kazak")[0] == "karabakh" and RG.school_fine("Chelaberd Kazak")[0] == "karabakh"
+    assert RG.school_compat("guba", "guba-shirvan") and not RG.school_compat("guba", "shirvan") and not RG.school_compat("karabakh", "guba-shirvan")
+    pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(2500)
+    pg.evaluate("()=>{R.fuse='';R.fschs=new Set(['guba-shirvan']);rugList();}"); pg.wait_for_timeout(600)
+    ids = pg.evaluate("()=>[...document.querySelectorAll('.rgcard')].map(e=>e.dataset.id)")
+    assert "sc_kuba" in ids and "sc_baku" in ids and "sc_ks" in ids and "sc_kar" not in ids, ids[:20]
+    pg.evaluate("()=>{R.fschs=new Set(['guba-shirvan!']);rugList();}"); pg.wait_for_timeout(600)
+    ids = pg.evaluate("()=>[...document.querySelectorAll('.rgcard')].map(e=>e.dataset.id)")
+    assert "sc_ks" in ids and "sc_kuba" not in ids, ids[:20]
+    pg.evaluate("()=>{R.fschs=new Set();rugList();}"); pg.wait_for_timeout(400)
+    pg.evaluate("rugOpen('sc_kuba')"); pg.wait_for_timeout(1500); pg.click('#rgPassBtn'); pg.wait_for_timeout(600)
+    html = pg.inner_html('#modal')
+    assert 'optgroup label="Губа-Ширван (тип Керимова)"' in html and 'было: Губа-Ширван' in html, 'паспорт: школы группами, видно прежнее значение'
+    pg.screenshot(path=os.path.join(OUT, 't45_schools.png'))
+    errors_ok(ctx, 'школы 7')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

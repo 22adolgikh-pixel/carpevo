@@ -322,13 +322,18 @@ def pick(ev):
     return max(ev, key=lambda c: ev[c]["recall"] + 0.5 * ev[c]["iou"] - 0.01 * max(0.0, ev[c]["hits"] - 6))
 
 
+def _grp(s):
+    """v11.90: Губа / Ширван / Баку → Губа-Ширван, Гянджа / Газах → Гянджа-Газах (сравнение на уровне типа Керимова)"""
+    return {"guba": "guba-shirvan", "shirvan": "guba-shirvan", "baku": "guba-shirvan", "ganja": "ganja-gazakh", "gazakh": "ganja-gazakh"}.get(s or "", s or "")
+
+
 def targets(e, A):
     """где искать: ковры тех же типов, что у образцов; если у образцов нет типа — той же школы"""
     types = set(e["types"]); schools = set(e["schools"])
     out = []
     for rid, r in A.items():
         if r.get("dup_of") or r.get("split_into") or r.get("hidden") or rid in e["rugs"]: continue
-        if (types and r.get("composition") in types) or (not types and schools and r.get("school") in schools): out.append(rid)
+        if (types and r.get("composition") in types) or (not types and schools and _grp(r.get("school")) in {_grp(x) for x in schools}): out.append(rid)
     return out
 
 
