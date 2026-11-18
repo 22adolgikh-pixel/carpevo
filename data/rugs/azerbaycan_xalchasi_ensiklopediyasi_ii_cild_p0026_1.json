@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794976246,
  "cat": {
   "title": "Çətən",
   "museum": "Национальный музей азербайджанского ковра",
@@ -51,8 +51,37 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0026_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0026_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0236_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_181",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0236_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976243
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976246
+  },
+  "azcm_181": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0026_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1",
+   "at": 1794976280
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "cropped",
@@ -85,5 +114,16 @@
   "ver": 1,
   "at": 1794547500
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976246
+    }
+   }
+  }
+ }
 }

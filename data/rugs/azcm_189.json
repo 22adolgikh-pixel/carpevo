@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870038,
- "updated": 1794783470,
+ "updated": 1794976235,
  "cat": {
   "title": "Cecim (Джеджим), село Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,64 @@
  },
  "src_id": "cat:azcm_189",
  "lib_img": "img/azcm_189.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_182",
+   "score": 0
+  },
+  {
+   "id": "azcm_168",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0114_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0190_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_142",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976231
+  },
+  "azcm_182": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976235
+  },
+  "azcm_168": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976235
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0114_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976235
+  },
+  "intangible_2850_p0190_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976235
+  },
+  "azcm_142": {
+   "ok": false,
+   "by": "по цепочке: azcm_189 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
+   "at": 1794976280
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -126,6 +182,36 @@
  "micro": {
   "field": {
    "dolgikh": "nofield"
+  },
+  "same": {
+   "azcm_182": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976235
+    }
+   },
+   "azcm_168": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976235
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0114_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976235
+    }
+   },
+   "intangible_2850_p0190_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976235
+    }
+   }
   }
  }
 }

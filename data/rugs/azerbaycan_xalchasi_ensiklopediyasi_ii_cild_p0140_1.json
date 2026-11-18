@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794976239,
  "cat": {
   "title": "Zili Газах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -51,8 +51,46 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0140_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0140_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O120781",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0156_1",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Kuba_Boteh_rug_late_19th_century_jpg",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0065_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O120781": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976239
+  },
+  "intangible_2850_p0156_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976239
+  },
+  "wikimedia_File_Kuba_Boteh_rug_late_19th_century_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976239
+  },
+  "intangible_2849_p0065_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976239
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +123,37 @@
   "ver": 1,
   "at": 1794547475
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "vam_O120781": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976239
+    }
+   },
+   "intangible_2850_p0156_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976239
+    }
+   },
+   "wikimedia_File_Kuba_Boteh_rug_late_19th_century_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976239
+    }
+   },
+   "intangible_2849_p0065_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976239
+    }
+   }
+  }
+ }
 }

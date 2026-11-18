@@ -18,7 +18,7 @@
  "h": 960,
  "marks": [],
  "created": 1791736138,
- "updated": 1794642764,
+ "updated": 1794976343,
  "cat": {
   "title": "antique shirvan prayer rug124 nagel1988 kilim",
   "museum": "",
@@ -45,8 +45,55 @@
  },
  "src_id": "cat:azr_antique_shirvan_prayer_rug124_nagel1988_kilim",
  "lib_img": "img/azr_antique_shirvan_prayer_rug124_nagel1988_kilim.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2851_p0018_2",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion51",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba74",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0108_1",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p127_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2851_p0018_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976343
+  },
+  "azr_kuba_shirvan_medallion51": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976343
+  },
+  "azr_kuba74": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976343
+  },
+  "intangible_2849_p0108_1": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_shirvan_prayer_rug124_nagel1988_kilim ≠ intangible_2851_p0018_2",
+   "at": 1794976364
+  },
+  "kerimov_vol2_p127_2": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_shirvan_prayer_rug124_nagel1988_kilim ≠ azr_kuba74",
+   "at": 1794976364
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -86,6 +133,29 @@
     "a": "whole",
     "w": 2,
     "t": 1794642764
+   }
+  },
+  "same": {
+   "intangible_2851_p0018_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976343
+    }
+   },
+   "azr_kuba_shirvan_medallion51": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976343
+    }
+   },
+   "azr_kuba74": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976343
+    }
    }
   }
  },

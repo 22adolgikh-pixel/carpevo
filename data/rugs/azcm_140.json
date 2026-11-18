@@ -49,8 +49,28 @@
  },
  "src_id": "cat:azcm_140",
  "lib_img": "img/azcm_140.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976258
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_140 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
+   "at": 1794976280
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,

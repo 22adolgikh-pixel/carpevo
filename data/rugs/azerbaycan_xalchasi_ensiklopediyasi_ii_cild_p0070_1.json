@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794976258,
  "cat": {
   "title": "Kilim «Qaraqoyunlu» Газах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -52,8 +52,91 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1",
+   "score": 0
+  },
+  {
+   "id": "cm_553d1f7b79",
+   "score": 0
+  },
+  {
+   "id": "azcm_140",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0056_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0064_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_kilim7",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0063_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2851_p0020_3",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0058_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976258
+  },
+  "cm_553d1f7b79": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976258
+  },
+  "azcm_140": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976258
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0056_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976258
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0064_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976258
+  },
+  "azr_kuba_kilim7": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976258
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0063_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976258
+  },
+  "intangible_2851_p0020_3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976258
+  },
+  "azerbaycan_xalchasi_p0058_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0063_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
+   "at": 1794976280
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -86,5 +169,65 @@
   "ver": 1,
   "at": 1794547505
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976258
+    }
+   },
+   "cm_553d1f7b79": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976258
+    }
+   },
+   "azcm_140": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976258
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0056_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976258
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0064_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976258
+    }
+   },
+   "azr_kuba_kilim7": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976258
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0063_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976258
+    }
+   },
+   "intangible_2851_p0020_3": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976258
+    }
+   }
+  }
+ }
 }

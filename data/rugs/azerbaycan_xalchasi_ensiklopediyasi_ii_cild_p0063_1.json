@@ -55,6 +55,14 @@
   {
    "id": "azerbaycan_xalchasi_p0058_1",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -62,6 +70,16 @@
    "ok": true,
    "by": "машина: 1606 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976258
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0063_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
+   "at": 1794976280
   }
  },
  "_lib_t": "2026-11-13 10:08",

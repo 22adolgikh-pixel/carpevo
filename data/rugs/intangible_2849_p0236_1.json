@@ -18,7 +18,7 @@
  "h": 1811,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547829,
+ "updated": 1794976243,
  "cat": {
   "title": "безворсовый «Kilim» Газах",
   "museum": "",
@@ -51,8 +51,37 @@
  },
  "src_id": "cat:intangible_2849_p0236_1",
  "lib_img": "img/intangible_2849_p0236_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0026_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0221_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0033_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0026_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976243
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0221_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976243
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0033_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976243
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "cropped",
@@ -159,6 +188,29 @@
      ]
     ],
     "s": "vlm"
+   }
+  },
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0026_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976243
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0221_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976243
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0033_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976243
+    }
    }
   }
  },
