@@ -8,7 +8,7 @@
  "license": "книга (не публиковать фото)",
  "place": "",
  "date": "",
- "school": "",
+ "school": "guba-shirvan",
  "composition": "",
  "technique": "",
  "size": "",
@@ -45,8 +45,55 @@
  },
  "src_id": "cat:kerimov_vol2_p142_1",
  "lib_img": "img/kerimov_vol2_p142_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_konagkend5",
+   "score": 0
+  },
+  {
+   "id": "cm_38f51693de",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star138",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba138",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_konagkend5": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976824
+  },
+  "cm_38f51693de": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_konagkend5 ≠ cm_38f51693de",
+   "at": 1794976886
+  },
+  "azr_kuba_zeyve_lesghi_star138": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_konagkend5 ≠ azr_kuba_zeyve_lesghi_star138",
+   "at": 1794976886
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1 ≠ azr_kuba_konagkend5",
+   "at": 1794976886
+  },
+  "azr_kuba138": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba138 ≠ azr_kuba_konagkend5",
+   "at": 1794976886
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -172,5 +219,8 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "school": "azr_kuba_konagkend5"
+ }
 }

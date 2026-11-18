@@ -18,7 +18,7 @@
  "h": 166,
  "marks": [],
  "created": 1791736127,
- "updated": 1791736127,
+ "updated": 1794976765,
  "cat": {
   "title": "Shadda carpet.jpg",
   "museum": "Wikimedia Commons",
@@ -48,8 +48,37 @@
  },
  "src_id": "cat:wikimedia_File_Shadda_carpet_jpg",
  "lib_img": "img/wikimedia_File_Shadda_carpet_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_187",
+   "score": 0
+  },
+  {
+   "id": "azcm_197",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_187": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976763
+  },
+  "azcm_197": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976765
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_187 ≠ wikimedia_File_Shadda_carpet_jpg",
+   "at": 1794976793
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -82,5 +111,16 @@
   "area": null,
   "ver": 1,
   "t": 1794238326
+ },
+ "micro": {
+  "same": {
+   "azcm_197": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976765
+    }
+   }
+  }
  }
 }

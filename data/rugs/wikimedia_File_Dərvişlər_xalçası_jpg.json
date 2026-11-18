@@ -8,7 +8,7 @@
  "license": "CC BY-SA 4.0",
  "place": "",
  "date": "2017-02-13 12:37:30",
- "school": "",
+ "school": "tabriz",
  "composition": "",
  "technique": "ворсовый",
  "size": "",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:wikimedia_File_Dərvişlər_xalçası_jpg",
  "lib_img": "img/wikimedia_File_Dərvişlər_xalçası_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Dervishs_rug_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Dervishs_rug_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976744
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -93,5 +104,8 @@
   ],
   "ver": 1,
   "at": 1792261983
+ },
+ "from_twin": {
+  "school": "wikimedia_File_Dervishs_rug_jpg"
  }
 }

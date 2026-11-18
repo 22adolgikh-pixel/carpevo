@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_caucasian_kazak_rug102201",
  "lib_img": "img/azr_antique_caucasian_kazak_rug102201.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_18",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_18": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976914
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

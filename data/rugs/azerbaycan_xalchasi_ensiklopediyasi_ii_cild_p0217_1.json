@@ -57,6 +57,14 @@
    "id": "azcm_187",
    "score": 999,
    "inv": true
+  },
+  {
+   "id": "wikimedia_File_Shadda_carpet_jpg",
+   "score": 0
+  },
+  {
+   "id": "azcm_69",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -64,6 +72,16 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1794784504
+  },
+  "wikimedia_File_Shadda_carpet_jpg": {
+   "ok": false,
+   "by": "по цепочке: azcm_187 ≠ wikimedia_File_Shadda_carpet_jpg",
+   "at": 1794976793
+  },
+  "azcm_69": {
+   "ok": false,
+   "by": "по цепочке: azcm_187 ≠ azcm_69",
+   "at": 1794976793
   }
  },
  "_lib_t": "2026-11-13 10:08",

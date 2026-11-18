@@ -18,7 +18,7 @@
  "h": 883,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794976760,
  "cat": {
   "title": "безворсовый «Şəddə» Карабах",
   "museum": "",
@@ -54,6 +54,18 @@
   {
    "id": "azcm_193",
    "score": 0
+  },
+  {
+   "id": "azcm_182",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_144",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -61,6 +73,21 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794976731
+  },
+  "azcm_182": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976760
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976760
+  },
+  "azcm_144": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1 ≠ intangible_2851_p0020_1",
+   "at": 1794976793
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -95,5 +122,23 @@
   "ver": 1,
   "at": 1794547466
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azcm_182": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976760
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976760
+    }
+   }
+  }
+ }
 }

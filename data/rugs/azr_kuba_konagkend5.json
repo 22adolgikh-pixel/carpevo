@@ -18,7 +18,7 @@
  "h": 1984,
  "marks": [],
  "created": 1791736133,
- "updated": 1794508651,
+ "updated": 1794976824,
  "cat": {
   "title": "kuba konagkend5",
   "museum": "",
@@ -45,8 +45,55 @@
  },
  "src_id": "cat:azr_kuba_konagkend5",
  "lib_img": "img/azr_kuba_konagkend5.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba138",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p142_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1",
+   "score": 0
+  },
+  {
+   "id": "cm_38f51693de",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star138",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba138": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976824
+  },
+  "kerimov_vol2_p142_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976824
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976824
+  },
+  "cm_38f51693de": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976824
+  },
+  "azr_kuba_zeyve_lesghi_star138": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976824
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -152,6 +199,43 @@
      ]
     ],
     "s": "vlm"
+   }
+  },
+  "same": {
+   "azr_kuba138": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976824
+    }
+   },
+   "kerimov_vol2_p142_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976824
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976824
+    }
+   },
+   "cm_38f51693de": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976824
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star138": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976824
+    }
    }
   }
  },

@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_pinwheel_kazak_rug_milanesi",
  "lib_img": "img/azr_pinwheel_kazak_rug_milanesi.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "met_447484",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "met_447484": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976848
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

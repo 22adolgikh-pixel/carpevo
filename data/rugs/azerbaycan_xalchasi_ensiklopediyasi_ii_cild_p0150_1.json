@@ -51,8 +51,28 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_konagkend5",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p142_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_konagkend5": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976824
+  },
+  "kerimov_vol2_p142_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1 ≠ azr_kuba_konagkend5",
+   "at": 1794976886
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

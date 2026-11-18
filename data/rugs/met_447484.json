@@ -18,7 +18,7 @@
  "h": 624,
  "marks": [],
  "created": 1791736122,
- "updated": 1791736122,
+ "updated": 1794976848,
  "cat": {
   "title": "Carpet",
   "museum": "Метрополитен-музей",
@@ -52,6 +52,30 @@
   {
    "id": "cm_68a97b0843",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil71",
+   "score": 0
+  },
+  {
+   "id": "intangible_2851_p0018_2",
+   "score": 0
+  },
+  {
+   "id": "azcm_134",
+   "score": 0
+  },
+  {
+   "id": "azr_pinwheel_kazak_rug_milanesi",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_pinwheel_swastika_rug2_dated",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0108_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -59,6 +83,36 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794976151
+  },
+  "azr_kuba_perepedil71": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976848
+  },
+  "intangible_2851_p0018_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976848
+  },
+  "azcm_134": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976848
+  },
+  "azr_pinwheel_kazak_rug_milanesi": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976848
+  },
+  "azr_antique_kazak_pinwheel_swastika_rug2_dated": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976848
+  },
+  "intangible_2849_p0108_1": {
+   "ok": false,
+   "by": "по цепочке: intangible_2851_p0018_2 ≠ met_447484",
+   "at": 1794976886
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -93,5 +147,44 @@
   "area": 0.918,
   "ver": 1,
   "t": 1794238358
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_perepedil71": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976848
+    }
+   },
+   "intangible_2851_p0018_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976848
+    }
+   },
+   "azcm_134": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976848
+    }
+   },
+   "azr_pinwheel_kazak_rug_milanesi": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976848
+    }
+   },
+   "azr_antique_kazak_pinwheel_swastika_rug2_dated": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976848
+    }
+   }
+  }
  }
 }

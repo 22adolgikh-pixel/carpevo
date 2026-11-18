@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870039,
- "updated": 1794784551,
+ "updated": 1794976763,
  "cat": {
   "title": "Zili (зили), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -53,6 +53,14 @@
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1",
    "score": 999,
    "inv": true
+  },
+  {
+   "id": "wikimedia_File_Shadda_carpet_jpg",
+   "score": 0
+  },
+  {
+   "id": "azcm_69",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -60,6 +68,16 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1794784504
+  },
+  "wikimedia_File_Shadda_carpet_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976763
+  },
+  "azcm_69": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976763
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -146,6 +164,22 @@
  "micro": {
   "field": {
    "dolgikh": "nofield"
+  },
+  "same": {
+   "wikimedia_File_Shadda_carpet_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976763
+    }
+   },
+   "azcm_69": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976763
+    }
+   }
   }
  }
 }

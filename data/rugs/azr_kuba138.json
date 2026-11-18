@@ -18,7 +18,7 @@
  "h": 732,
  "marks": [],
  "created": 1791736136,
- "updated": 1791736136,
+ "updated": 1794976828,
  "cat": {
   "title": "kuba138",
   "museum": "",
@@ -45,8 +45,37 @@
  },
  "src_id": "cat:azr_kuba138",
  "lib_img": "img/azr_kuba138.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_konagkend5",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi52",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p142_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_konagkend5": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976824
+  },
+  "azr_kuba_chichi52": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976828
+  },
+  "kerimov_vol2_p142_1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba138 ≠ azr_kuba_konagkend5",
+   "at": 1794976886
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +108,16 @@
   "area": 0.861,
   "ver": 1,
   "t": 1794238402
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_chichi52": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976828
+    }
+   }
+  }
  }
 }

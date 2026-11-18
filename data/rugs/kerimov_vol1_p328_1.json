@@ -18,7 +18,7 @@
  "h": 1259,
  "marks": [],
  "created": 1791736121,
- "updated": 1794936358,
+ "updated": 1794976819,
  "cat": {
   "title": "Керимов, т. I, Табл. 206. «КОБЫСТАН» (стр. скана 328, печ. ?)",
   "museum": "",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:kerimov_vol1_p328_1",
  "lib_img": "img/kerimov_vol1_p328_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion59",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion59": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976819
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -120,6 +131,15 @@
     "w": 2,
     "t": 1794936358,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_shirvan_medallion59": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976819
+    }
    }
   }
  },

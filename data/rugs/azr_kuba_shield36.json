@@ -2,23 +2,23 @@
  "id": "azr_kuba_shield36",
  "title": "kuba shield36",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
- "inv": "",
+ "museum": "Национальный музей азербайджанского ковра",
+ "inv": "4837",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "Губа, Азербайджан",
+ "date": "конец XIX века",
  "school": "guba-shirvan",
  "composition": "",
- "technique": "",
- "size": "",
+ "technique": "ворсовый",
+ "size": "111x178 sm",
  "notes": "",
  "status": "new",
  "w": 266,
  "h": 400,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1794976918,
  "cat": {
   "title": "kuba shield36",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_shield36",
  "lib_img": "img/azr_kuba_shield36.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_18",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_baku_rug1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_18": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976914
+  },
+  "azr_antique_baku_rug1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976918
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +99,24 @@
   "area": null,
   "ver": 1,
   "t": 1794238204
+ },
+ "from_twin": {
+  "technique": "azcm_18",
+  "museum": "azcm_18",
+  "inv": "azcm_18",
+  "place": "azcm_18",
+  "date": "azcm_18",
+  "size": "azcm_18"
+ },
+ "micro": {
+  "same": {
+   "azr_antique_baku_rug1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976918
+    }
+   }
+  }
  }
 }

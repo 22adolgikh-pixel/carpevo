@@ -18,7 +18,7 @@
  "h": 738,
  "marks": [],
  "created": 1791736135,
- "updated": 1791736135,
+ "updated": 1794976770,
  "cat": {
   "title": "kuba tekye75",
   "museum": "",
@@ -45,8 +45,46 @@
  },
  "src_id": "cat:azr_kuba_tekye75",
  "lib_img": "img/azr_kuba_tekye75.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_tekye71",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye76",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye69",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye72",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_tekye71": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976770
+  },
+  "azr_kuba_tekye76": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976770
+  },
+  "azr_kuba_tekye69": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_tekye69 ≠ azr_kuba_tekye76",
+   "at": 1794976793
+  },
+  "azr_kuba_tekye72": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_tekye71 ≠ azr_kuba_tekye72",
+   "at": 1794976793
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +117,23 @@
   "area": 0.914,
   "ver": 1,
   "t": 1794238412
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_tekye71": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976770
+    }
+   },
+   "azr_kuba_tekye76": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976770
+    }
+   }
+  }
  }
 }

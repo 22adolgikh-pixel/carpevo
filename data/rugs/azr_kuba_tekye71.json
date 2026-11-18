@@ -50,6 +50,18 @@
   {
    "id": "azr_kuba_tekye72",
    "score": 91
+  },
+  {
+   "id": "azr_kuba_tekye75",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye76",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye69",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +69,21 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1791825057
+  },
+  "azr_kuba_tekye75": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976770
+  },
+  "azr_kuba_tekye76": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_tekye71 = azr_kuba_tekye75 = azr_kuba_tekye76",
+   "at": 1794976793
+  },
+  "azr_kuba_tekye69": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_tekye69 ≠ azr_kuba_tekye76",
+   "at": 1794976793
   }
  },
  "_lib_t": "2026-10-12 22:38",

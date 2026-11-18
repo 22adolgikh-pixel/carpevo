@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870040,
- "updated": 1794783470,
+ "updated": 1794976914,
  "cat": {
   "title": "“Orduc” («Ордудж»), Губа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,28 @@
  },
  "src_id": "cat:azcm_18",
  "lib_img": "img/azcm_18.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shield36",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_kazak_rug102201",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shield36": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976914
+  },
+  "azr_antique_caucasian_kazak_rug102201": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976914
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -126,6 +146,22 @@
  "micro": {
   "field": {
    "dolgikh": "nofield"
+  },
+  "same": {
+   "azr_kuba_shield36": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976914
+    }
+   },
+   "azr_antique_caucasian_kazak_rug102201": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976914
+    }
+   }
   }
  }
 }
