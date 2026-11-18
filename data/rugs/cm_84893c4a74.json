@@ -56,6 +56,14 @@
   {
    "id": "azerbaycan_xalchasi_p0020_1",
    "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p022_2",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye87",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -63,6 +71,16 @@
    "ok": true,
    "by": "машина: 2346 общих точек, перекрытие 0.83 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "kerimov_vol2_p022_2": {
+   "ok": true,
+   "by": "по цепочке: azerbaycan_xalchasi_p0020_1 = cm_84893c4a74 = kerimov_vol2_p022_2",
+   "at": 1794977086
+  },
+  "azr_kuba_tekye87": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_p0020_1 ≠ azr_kuba_tekye87",
+   "at": 1794977086
   }
  },
  "_lib_t": "2026-10-12 22:38",

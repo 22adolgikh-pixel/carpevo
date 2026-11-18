@@ -18,7 +18,7 @@
  "h": 1218,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794977101,
  "cat": {
   "title": "Ковёр «Karabulut»",
   "museum": "Seklik Köyü Mosque (Bergama-İzmir)",
@@ -51,8 +51,37 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0059_1",
  "lib_img": "img/azerbaycan_xalchasi_p0059_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_kazak_prayer_rug10",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_nakhchivan_rug9",
+   "score": 0
+  },
+  {
+   "id": "met_447718",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_kazak_prayer_rug10": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977101
+  },
+  "azr_antique_nakhchivan_rug9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977101
+  },
+  "met_447718": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977101
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +114,30 @@
   "ver": 1,
   "at": 1794547529
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azr_antique_kazak_prayer_rug10": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977101
+    }
+   },
+   "azr_antique_nakhchivan_rug9": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977101
+    }
+   },
+   "met_447718": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977101
+    }
+   }
+  }
+ }
 }

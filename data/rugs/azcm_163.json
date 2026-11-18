@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870037,
- "updated": 1794783470,
+ "updated": 1794977053,
  "cat": {
   "title": "Kilim (килим), село Пашалы, Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -48,8 +48,46 @@
  },
  "src_id": "cat:azcm_163",
  "lib_img": "img/azcm_163.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0231_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion6",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shield21",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_kilim14",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0231_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977053
+  },
+  "azr_kuba_shirvan_medallion6": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977053
+  },
+  "azr_kuba_shield21": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977053
+  },
+  "azr_kuba_kilim14": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977053
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -330,6 +368,36 @@
  "micro": {
   "field": {
    "dolgikh": "draw"
+  },
+  "same": {
+   "intangible_2849_p0231_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977053
+    }
+   },
+   "azr_kuba_shirvan_medallion6": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977053
+    }
+   },
+   "azr_kuba_shield21": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977053
+    }
+   },
+   "azr_kuba_kilim14": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977053
+    }
+   }
   }
  }
 }

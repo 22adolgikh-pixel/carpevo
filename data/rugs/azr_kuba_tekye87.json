@@ -45,8 +45,37 @@
  },
  "src_id": "cat:azr_kuba_tekye87",
  "lib_img": "img/azr_kuba_tekye87.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_p0020_1",
+   "score": 0
+  },
+  {
+   "id": "cm_84893c4a74",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p022_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_p0020_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976981
+  },
+  "cm_84893c4a74": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_p0020_1 ≠ azr_kuba_tekye87",
+   "at": 1794977086
+  },
+  "kerimov_vol2_p022_2": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_p0020_1 ≠ azr_kuba_tekye87",
+   "at": 1794977086
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

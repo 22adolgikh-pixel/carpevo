@@ -47,8 +47,28 @@
  },
  "src_id": "cat:cm_a33befaa32",
  "lib_img": "img/cm_a33befaa32.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_4da73d1b40",
+   "score": 0
+  },
+  {
+   "id": "cm_8fcad5da40",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_4da73d1b40": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976959
+  },
+  "cm_8fcad5da40": {
+   "ok": true,
+   "by": "по цепочке: cm_4da73d1b40 = cm_8fcad5da40 = cm_a33befaa32",
+   "at": 1794976980
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,

@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794977013,
  "cat": {
   "title": "Cecim Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -65,6 +65,10 @@
   {
    "id": "azcm_142",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -82,6 +86,11 @@
    "ok": false,
    "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0024_1",
    "at": 1794976280
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_160 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1",
+   "at": 1794977086
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -123,6 +132,38 @@
    "v": "same",
    "at": 1794618036,
    "ver": 2
+  }
+ },
+ "micro": {
+  "same": {
+   "azr_azerbaijan_jajim_dragon_motif_private_collection201": {
+    "dolgikh": {
+     "a": "skip",
+     "w": 0,
+     "t": 1794977013
+    }
+   },
+   "azcm_166": {
+    "dolgikh": {
+     "a": "skip",
+     "w": 0,
+     "t": 1794977013
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1": {
+    "dolgikh": {
+     "a": "skip",
+     "w": 0,
+     "t": 1794977013
+    }
+   },
+   "azcm_164": {
+    "dolgikh": {
+     "a": "skip",
+     "w": 0,
+     "t": 1794977013
+    }
+   }
   }
  }
 }

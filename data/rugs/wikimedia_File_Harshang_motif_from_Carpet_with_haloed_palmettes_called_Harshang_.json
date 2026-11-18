@@ -18,7 +18,7 @@
  "h": 177,
  "marks": [],
  "created": 1791736125,
- "updated": 1791736125,
+ "updated": 1794977060,
  "cat": {
   "title": "Harshang motif, from Carpet with haloed palmettes called \"Harshang\", Karabakh, Azerbaijan, 18th century.jpg",
   "museum": "Wikimedia Commons",
@@ -48,8 +48,37 @@
  },
  "src_id": "cat:wikimedia_File_Harshang_motif_from_Carpet_with_haloed_palmettes_called_Harshang_Karabakh_Azerbaijan_18th_century_jpg",
  "lib_img": "img/wikimedia_File_Harshang_motif_from_Carpet_with_haloed_palmettes_called_Harshang_Karabakh_Azerbaijan_18th_century_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_pre19th28",
+   "score": 0
+  },
+  {
+   "id": "vam_O154357",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_seychour133",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_pre19th28": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977060
+  },
+  "vam_O154357": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977060
+  },
+  "azr_kuba_seychour133": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977060
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -82,5 +111,30 @@
   "area": null,
   "ver": 1,
   "t": 1794238258
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_pre19th28": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977060
+    }
+   },
+   "vam_O154357": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977060
+    }
+   },
+   "azr_kuba_seychour133": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977060
+    }
+   }
+  }
  }
 }

@@ -18,7 +18,7 @@
  "h": 1999,
  "marks": [],
  "created": 1794547278,
- "updated": 1794772603,
+ "updated": 1794976981,
  "cat": {
   "title": "Ковёр «Qazax» Газах",
   "museum": "Türk və İslam Əsərləri Muzeyi, İstanbul / Museum of Turkish and Islamic Art, Istanbul",
@@ -55,6 +55,14 @@
   {
    "id": "cm_84893c4a74",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye87",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p022_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -62,6 +70,16 @@
    "ok": true,
    "by": "машина: 2346 общих точек, перекрытие 0.83 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "azr_kuba_tekye87": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976981
+  },
+  "kerimov_vol2_p022_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976981
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -103,6 +121,22 @@
     "a": "detail",
     "w": 2,
     "t": 1794772603
+   }
+  },
+  "same": {
+   "azr_kuba_tekye87": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976981
+    }
+   },
+   "kerimov_vol2_p022_2": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976981
+    }
    }
   }
  },

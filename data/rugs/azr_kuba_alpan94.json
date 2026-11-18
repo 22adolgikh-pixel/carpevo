@@ -18,7 +18,7 @@
  "h": 1838,
  "marks": [],
  "created": 1791736132,
- "updated": 1794588375,
+ "updated": 1794976927,
  "cat": {
   "title": "kuba alpan94",
   "museum": "",
@@ -45,8 +45,55 @@
  },
  "src_id": "cat:azr_kuba_alpan94",
  "lib_img": "img/azr_kuba_alpan94.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Борчалы_3_jpg",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil63",
+   "score": 0
+  },
+  {
+   "id": "cm_de088aa11d",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil52",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p127_3",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Борчалы_3_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976927
+  },
+  "azr_kuba_perepedil63": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976927
+  },
+  "cm_de088aa11d": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976927
+  },
+  "azr_kuba_perepedil52": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794976927
+  },
+  "kerimov_vol2_p127_3": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_alpan94 ≠ cm_de088aa11d",
+   "at": 1794976955
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -87,6 +134,36 @@
      "a": "skip",
      "w": 0,
      "t": 1794588375
+    }
+   }
+  },
+  "same": {
+   "wikimedia_File_Борчалы_3_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976927
+    }
+   },
+   "azr_kuba_perepedil63": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976927
+    }
+   },
+   "cm_de088aa11d": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976927
+    }
+   },
+   "azr_kuba_perepedil52": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794976927
     }
    }
   }

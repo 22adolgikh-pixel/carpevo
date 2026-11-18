@@ -2,14 +2,14 @@
  "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0130_1",
  "title": "Vərni Карабах",
  "source": "каталог: book:azerbaycan_xalchasi_ensiklopediyasi_ii_cild",
- "museum": "",
+ "museum": "Национальный музей азербайджанского ковра",
  "inv": "6",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Карабах",
- "date": "",
+ "date": "XVIII век",
  "school": "karabakh",
- "composition": "",
+ "composition": "verni",
  "technique": "безворсовый: верни",
  "size": "107x244 см",
  "notes": "Vərni. Qarabağ. Azərbayc 19-cu Material: у Ölçü: 107x244 | Azarbaycan Xalca Muz DDK 6",
@@ -51,8 +51,73 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0130_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0130_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_169",
+   "score": 0
+  },
+  {
+   "id": "azcm_170",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0127_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1",
+   "score": 0
+  },
+  {
+   "id": "cm_ac5b5df52e",
+   "score": 0
+  },
+  {
+   "id": "cm_e645ab9a9e",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol1_p318_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_169": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794977005
+  },
+  "azcm_170": {
+   "ok": true,
+   "by": "по цепочке: azcm_169 = azcm_170 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0127_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0130_1 = cm_ac5b5df52e …",
+   "at": 1794977086
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0127_1": {
+   "ok": true,
+   "by": "по цепочке: azcm_169 = azcm_170 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0127_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0130_1 = cm_ac5b5df52e …",
+   "at": 1794977086
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1": {
+   "ok": true,
+   "by": "по цепочке: azcm_169 = azcm_170 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0127_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0130_1 = cm_ac5b5df52e …",
+   "at": 1794977086
+  },
+  "cm_ac5b5df52e": {
+   "ok": true,
+   "by": "по цепочке: azcm_169 = azcm_170 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0127_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0130_1 = cm_ac5b5df52e …",
+   "at": 1794977086
+  },
+  "cm_e645ab9a9e": {
+   "ok": true,
+   "by": "по цепочке: azcm_169 = azcm_170 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0127_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0130_1 = cm_ac5b5df52e …",
+   "at": 1794977086
+  },
+  "kerimov_vol1_p318_1": {
+   "ok": true,
+   "by": "по цепочке: azcm_169 = azcm_170 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0127_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0130_1 = cm_ac5b5df52e …",
+   "at": 1794977086
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +150,10 @@
   "ver": 1,
   "at": 1794547469
  },
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "composition": "azcm_169",
+  "museum": "azcm_169",
+  "date": "azcm_169"
+ }
 }

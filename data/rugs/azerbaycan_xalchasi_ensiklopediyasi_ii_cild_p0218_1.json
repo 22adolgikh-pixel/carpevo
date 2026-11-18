@@ -10,7 +10,7 @@
  "date": "20 в., середина",
  "school": "guba-shirvan",
  "composition": "",
- "technique": "",
+ "technique": "безворсовый: зили",
  "size": "95x262 см",
  "notes": "218 AZƏRBAYCAN XALÇASI ENSİKLOPEDİYASI Pərdə (qapı örtüyü). Şirvan. Azərbaycan. 20-ci əsrin ortaları. Material: yun. Ölçü: 95x262 sm. Azərbaycan Xalça Muzeyi. DDK 6781. ох",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794776748,
+ "updated": 1794977036,
  "cat": {
   "title": "Pərdə Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -51,8 +51,64 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0218_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0218_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_caucasian_moghan_rug25",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0048_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_187",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Shadda_carpet_jpg",
+   "score": 0
+  },
+  {
+   "id": "azcm_69",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_caucasian_moghan_rug25": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977033
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794977036
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0048_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977036
+  },
+  "azcm_187": {
+   "ok": true,
+   "by": "по цепочке: azcm_187 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0218_1",
+   "at": 1794977086
+  },
+  "wikimedia_File_Shadda_carpet_jpg": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1 ≠ wikimedia_File_Shadda_carpet_jpg",
+   "at": 1794977086
+  },
+  "azcm_69": {
+   "ok": false,
+   "by": "по цепочке: azcm_69 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1",
+   "at": 1794977086
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -124,6 +180,22 @@
     "t": 1794776748,
     "s": "ref"
    }
+  },
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794977036
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0048_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977036
+    }
+   }
   }
  },
  "frame": "whole",
@@ -160,5 +232,8 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "technique": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1"
+ }
 }

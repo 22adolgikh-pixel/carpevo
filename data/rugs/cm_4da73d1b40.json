@@ -18,7 +18,7 @@
  "h": 1600,
  "marks": [],
  "created": 1791870030,
- "updated": 1794509525,
+ "updated": 1794976959,
  "cat": {
   "title": "The Ardabil Carpet in the Jameel Gallery at the Victoria and Albert Museum, South Kensington",
   "museum": "Музей Виктории и Альберта",
@@ -52,9 +52,28 @@
   {
    "id": "cm_f9131d8776",
    "score": 440
+  },
+  {
+   "id": "cm_8fcad5da40",
+   "score": 0
+  },
+  {
+   "id": "cm_a33befaa32",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_8fcad5da40": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976959
+  },
+  "cm_a33befaa32": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794976959
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_f9131d8776": {
@@ -101,6 +120,22 @@
     "a": "cropped",
     "w": 2,
     "t": 1794509525
+   }
+  },
+  "same": {
+   "cm_8fcad5da40": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976959
+    }
+   },
+   "cm_a33befaa32": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794976959
+    }
    }
   }
  },

@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870024,
- "updated": 1794596919,
+ "updated": 1794977064,
  "cat": {
   "title": "The field is composed of elibelinde motifs, women with hands in hips (symbolising fertility)",
   "museum": "Музей турецкого и исламского искусства (Стамбул)",
@@ -47,8 +47,37 @@
  },
  "src_id": "cat:cm_8b261fa548",
  "lib_img": "img/cm_8b261fa548.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_21bd70c998",
+   "score": 0
+  },
+  {
+   "id": "cm_303e02ef18",
+   "score": 0
+  },
+  {
+   "id": "cm_dca3d7ad50",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_21bd70c998": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977064
+  },
+  "cm_303e02ef18": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977064
+  },
+  "cm_dca3d7ad50": {
+   "ok": false,
+   "by": "по цепочке: cm_21bd70c998 ≠ cm_8b261fa548",
+   "at": 1794977086
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -88,6 +117,22 @@
     "a": "detail",
     "w": 2,
     "t": 1794596919
+   }
+  },
+  "same": {
+   "cm_21bd70c998": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977064
+    }
+   },
+   "cm_303e02ef18": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794977064
+    }
    }
   }
  },

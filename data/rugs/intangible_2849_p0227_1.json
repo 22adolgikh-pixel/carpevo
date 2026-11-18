@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2849_p0227_1",
  "lib_img": "img/intangible_2849_p0227_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_caucasian_moghan_rug25",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_caucasian_moghan_rug25": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794977033
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
