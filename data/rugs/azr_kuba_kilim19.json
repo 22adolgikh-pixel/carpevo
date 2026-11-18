@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_kilim19",
  "lib_img": "img/azr_kuba_kilim19.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "aic_214907",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "aic_214907": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019141
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

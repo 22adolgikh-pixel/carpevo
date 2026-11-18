@@ -18,7 +18,7 @@
  "h": 1521,
  "marks": [],
  "created": 1791736122,
- "updated": 1794750732,
+ "updated": 1795019141,
  "cat": {
   "title": "Shirvan Kilim",
   "museum": "Институт искусств Чикаго",
@@ -56,6 +56,10 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0059_1",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_kilim19",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -63,6 +67,17 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794750732
+  },
+  "azr_kuba_kilim19": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019141
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0059_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019141,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -349,6 +364,20 @@
      "a": "diff",
      "w": 2,
      "t": 1794750732
+    }
+   },
+   "azr_kuba_kilim19": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795019141
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0059_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795019141
     }
    }
   },

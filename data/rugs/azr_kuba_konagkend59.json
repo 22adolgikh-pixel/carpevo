@@ -65,6 +65,14 @@
   {
    "id": "azcm_119",
    "score": 0
+  },
+  {
+   "id": "azr_kuba74",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p127_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -92,6 +100,16 @@
    "ok": false,
    "by": "по цепочке: azcm_119 ≠ azcm_31",
    "at": 1794997733
+  },
+  "azr_kuba74": {
+   "ok": false,
+   "by": "по цепочке: azcm_22 ≠ kerimov_vol2_p127_2",
+   "at": 1795019183
+  },
+  "kerimov_vol2_p127_2": {
+   "ok": false,
+   "by": "по цепочке: azcm_22 ≠ kerimov_vol2_p127_2",
+   "at": 1795019183
   }
  },
  "_lib_t": "2026-10-12 22:38",
