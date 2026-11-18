@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791736137,
- "updated": 1791736137,
+ "updated": 1794983175,
  "cat": {
   "title": "afshan109",
   "museum": "",
@@ -45,8 +45,67 @@
  },
  "src_id": "cat:azr_afshan109",
  "lib_img": "img/azr_afshan109.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_afshan117",
+   "score": 0
+  },
+  {
+   "id": "azr_afshan55",
+   "score": 0
+  },
+  {
+   "id": "azr_baku_khila_afshan_rug_state_museum_of_azerbaijan_carpet",
+   "score": 0
+  },
+  {
+   "id": "azcm_32",
+   "score": 0
+  },
+  {
+   "id": "azr_afshan113",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0045_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_afshan117": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983175,
+   "similar": true
+  },
+  "azr_afshan55": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983175,
+   "similar": true
+  },
+  "azr_baku_khila_afshan_rug_state_museum_of_azerbaijan_carpet": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983175,
+   "similar": true
+  },
+  "azcm_32": {
+   "ok": false,
+   "by": "по цепочке: azr_afshan109 ≠ azr_baku_khila_afshan_rug_state_museum_of_azerbaijan_carpet",
+   "at": 1794983196
+  },
+  "azr_afshan113": {
+   "ok": false,
+   "by": "по цепочке: azr_afshan109 ≠ azr_baku_khila_afshan_rug_state_museum_of_azerbaijan_carpet",
+   "at": 1794983196
+  },
+  "azerbaycan_xalchasi_p0045_1": {
+   "ok": false,
+   "by": "по цепочке: azr_afshan109 ≠ azr_baku_khila_afshan_rug_state_museum_of_azerbaijan_carpet",
+   "at": 1794983196
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +138,30 @@
   "area": 0.853,
   "ver": 1,
   "t": 1794238408
+ },
+ "micro": {
+  "same": {
+   "azr_afshan117": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983175
+    }
+   },
+   "azr_afshan55": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983175
+    }
+   },
+   "azr_baku_khila_afshan_rug_state_museum_of_azerbaijan_carpet": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983175
+    }
+   }
+  }
  }
 }

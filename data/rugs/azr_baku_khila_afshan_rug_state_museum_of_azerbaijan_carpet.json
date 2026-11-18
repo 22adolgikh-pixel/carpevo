@@ -1222,6 +1222,10 @@
   {
    "id": "azerbaycan_xalchasi_p0045_1",
    "score": 0
+  },
+  {
+   "id": "azr_afshan109",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -1239,6 +1243,12 @@
    "ok": true,
    "by": "машина: 3282 общих точек, перекрытие 0.86 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "azr_afshan109": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983175,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
