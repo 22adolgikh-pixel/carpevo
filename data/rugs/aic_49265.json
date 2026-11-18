@@ -18,7 +18,7 @@
  "h": 1145,
  "marks": [],
  "created": 1791736122,
- "updated": 1794236886,
+ "updated": 1795008374,
  "cat": {
   "title": "Carpet",
   "museum": "Институт искусств Чикаго",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:aic_49265",
  "lib_img": "img/aic_49265.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0172_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0172_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008374
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -125,6 +136,15 @@
  "micro": {
   "field": {
    "dolgikh": "none"
+  },
+  "same": {
+   "intangible_2850_p0172_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795008374
+    }
+   }
   }
  }
 }

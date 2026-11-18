@@ -3,15 +3,15 @@
  "title": "Azerbaijanian carpet Fakhrali.jpg",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "2456",
  "url": "https://commons.wikimedia.org/wiki/File:Azerbaijanian_carpet_Fakhrali.jpg",
  "license": "Public domain",
- "place": "",
+ "place": "Гянджа",
  "date": "1926",
  "school": "ganja-gazakh",
  "composition": "faxrali",
  "technique": "ворсовый",
- "size": "",
+ "size": "113x170 sm",
  "notes": "",
  "status": "new",
  "w": 250,
@@ -48,8 +48,46 @@
  },
  "src_id": "cat:wikimedia_File_Azerbaijanian_carpet_Fakhrali_jpg",
  "lib_img": "img/wikimedia_File_Azerbaijanian_carpet_Fakhrali_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_p0053_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_113",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_191",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_p0053_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795008380
+  },
+  "azcm_113": {
+   "ok": true,
+   "by": "по цепочке: azcm_113 = azerbaycan_xalchasi_p0053_1 = wikimedia_File_Azerbaijanian_carpet_Fakhrali_jpg",
+   "at": 1795008414
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_p0053_1",
+   "at": 1795008414
+  },
+  "azcm_191": {
+   "ok": false,
+   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_p0053_1",
+   "at": 1795008414
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -82,5 +120,10 @@
   "area": 0.805,
   "ver": 1,
   "t": 1794238531
+ },
+ "from_twin": {
+  "inv": "azerbaycan_xalchasi_p0053_1",
+  "place": "azerbaycan_xalchasi_p0053_1",
+  "size": "azerbaycan_xalchasi_p0053_1"
  }
 }

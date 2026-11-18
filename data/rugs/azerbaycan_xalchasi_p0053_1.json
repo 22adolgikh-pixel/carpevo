@@ -18,7 +18,7 @@
  "h": 1999,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795008380,
  "cat": {
   "title": "молитвенный ковёр «Faxralı» Гянджа",
   "museum": "Azerbaijan Carpet & Applied Art State Museum",
@@ -63,6 +63,10 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Azerbaijanian_carpet_Fakhrali_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -80,6 +84,11 @@
    "ok": false,
    "by": "по цепочке: azcm_113 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1",
    "at": 1794981395
+  },
+  "wikimedia_File_Azerbaijanian_carpet_Fakhrali_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795008380
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -118,5 +127,16 @@
  "from_twin": {
   "inv": "azcm_113",
   "size": "azcm_113"
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Azerbaijanian_carpet_Fakhrali_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795008380
+    }
+   }
+  }
  }
 }

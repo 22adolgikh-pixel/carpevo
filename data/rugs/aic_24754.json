@@ -18,7 +18,7 @@
  "h": 1101,
  "marks": [],
  "created": 1791736122,
- "updated": 1794509656,
+ "updated": 1795008371,
  "cat": {
   "title": "Carpet",
   "museum": "Институт искусств Чикаго",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:aic_24754",
  "lib_img": "img/aic_24754.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_sumakh28",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_sumakh28": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008371
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -405,6 +416,15 @@
   },
   "field": {
    "dolgikh": "1"
+  },
+  "same": {
+   "azr_kuba_sumakh28": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795008371
+    }
+   }
   }
  },
  "frame_by": "micro"

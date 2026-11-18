@@ -18,7 +18,7 @@
  "h": 978,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1795008355,
  "cat": {
   "title": "kuba hajigaib16",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_hajigaib16",
  "lib_img": "img/azr_kuba_hajigaib16.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Antique_Caucasian_Kazak_Rug_Symbology_S_Motif_jpg",
+   "score": 0
+  },
+  {
+   "id": "cm_bee15b98b4",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Antique_Caucasian_Kazak_Rug_Symbology_S_Motif_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008355
+  },
+  "cm_bee15b98b4": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008355
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +99,23 @@
   "area": 0.856,
   "ver": 1,
   "t": 1794238318
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Antique_Caucasian_Kazak_Rug_Symbology_S_Motif_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795008355
+    }
+   },
+   "cm_bee15b98b4": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795008355
+    }
+   }
+  }
  }
 }

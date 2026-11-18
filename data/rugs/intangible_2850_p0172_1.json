@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2850_p0172_1",
  "lib_img": "img/intangible_2850_p0172_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "aic_49265",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "aic_49265": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008374
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

@@ -18,7 +18,7 @@
  "h": 739,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795008385,
  "cat": {
   "title": "Lot 29: Moghan Rug, Southeast Caucasus, last quarter 19th century, 6 ft",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug102",
  "lib_img": "img/azr_antique_caucasian_moghan_rug102.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_caucasian_moghan_rug118_hali_magazine",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_caucasian_moghan_rug118_hali_magazine": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008385
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +92,16 @@
   "area": 0.872,
   "ver": 1,
   "t": 1794238259
+ },
+ "micro": {
+  "same": {
+   "azr_antique_caucasian_moghan_rug118_hali_magazine": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795008385
+    }
+   }
+  }
  }
 }

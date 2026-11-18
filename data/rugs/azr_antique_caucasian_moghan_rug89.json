@@ -18,7 +18,7 @@
  "h": 553,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795008392,
  "cat": {
   "title": "Sale 2136 Lot 109, Moghan Long Rug, Southeast Caucasus, last quarter 19th century, rows of connected",
   "museum": "",
@@ -47,8 +47,28 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug89",
  "lib_img": "img/azr_antique_caucasian_moghan_rug89.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O152843",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol3_p005_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O152843": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008392
+  },
+  "kerimov_vol3_p005_1": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_caucasian_moghan_rug89 ≠ vam_O152843",
+   "at": 1795008414
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +101,16 @@
   "area": 0.936,
   "ver": 1,
   "t": 1794238547
+ },
+ "micro": {
+  "same": {
+   "vam_O152843": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795008392
+    }
+   }
+  }
  }
 }

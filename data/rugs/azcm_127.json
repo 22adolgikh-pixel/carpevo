@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870042,
- "updated": 1794236973,
+ "updated": 1795008376,
  "cat": {
   "title": "“Şıxlı” («Шихлы»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,19 @@
  },
  "src_id": "cat:azcm_127",
  "lib_img": "img/azcm_127.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba70",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba70": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795008376
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -331,6 +342,15 @@
  "micro": {
   "field": {
    "dolgikh": "1"
+  },
+  "same": {
+   "azr_kuba70": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795008376
+    }
+   }
   }
  }
 }
