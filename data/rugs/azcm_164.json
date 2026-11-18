@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870037,
- "updated": 1794978836,
+ "updated": 1794983032,
  "cat": {
   "title": "Kilim (Килим), Баку, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -88,6 +88,14 @@
   {
    "id": "azerbaycan_xalchasi_p0058_1",
    "score": 0
+  },
+  {
+   "id": "kerimov_vol1_p361_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0061_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -117,6 +125,42 @@
    "by": "/m: dolgikh",
    "at": 1794981507,
    "similar": true
+  },
+  "intangible_2849_p0217_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983032
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0068_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983032,
+   "similar": true
+  },
+  "azcm_197": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983032
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0182_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983032
+  },
+  "azr_antique_khyzy_kilim6": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983032
+  },
+  "kerimov_vol1_p361_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983032
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0061_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983032
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -211,11 +255,55 @@
     }
    },
    "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0063_1": {},
-   "intangible_2849_p0217_1": {},
-   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0068_1": {},
-   "azcm_197": {},
-   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0182_1": {},
-   "azr_antique_khyzy_kilim6": {}
+   "intangible_2849_p0217_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983032
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0068_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983032
+    }
+   },
+   "azcm_197": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983032
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0182_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983032
+    }
+   },
+   "azr_antique_khyzy_kilim6": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983032
+    }
+   },
+   "kerimov_vol1_p361_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983032
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0061_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983032
+    }
+   }
   }
  }
 }

@@ -18,7 +18,7 @@
  "h": 1619,
  "marks": [],
  "created": 1791870029,
- "updated": 1791870029,
+ "updated": 1794983129,
  "cat": {
   "title": "Lezgian sumakh from Ktsar/ Gusar region",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:cm_2e0d8ed6b4",
  "lib_img": "img/cm_2e0d8ed6b4.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0103_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0103_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983129
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -81,5 +92,16 @@
   "ver": 1,
   "t": 1794238218
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "intangible_2849_p0103_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983129
+    }
+   }
+  }
+ }
 }

@@ -18,7 +18,7 @@
  "h": 916,
  "marks": [],
  "created": 1791736138,
- "updated": 1794858355,
+ "updated": 1794983062,
  "cat": {
   "title": "antique shirvan prayer rug126 Eberhart20Herrmann",
   "museum": "",
@@ -49,6 +49,22 @@
   {
    "id": "azr_shirvan_akstafa_prayer_rug48",
    "score": 0
+  },
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug17",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion161",
+   "score": 0
+  },
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug30",
+   "score": 0
+  },
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug50",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +73,27 @@
    "by": "/m: dolgikh",
    "at": 1794982901,
    "similar": true
+  },
+  "azr_shirvan_akstafa_prayer_rug17": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983062
+  },
+  "azr_kuba_shirvan_medallion161": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983062
+  },
+  "azr_shirvan_akstafa_prayer_rug30": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983062,
+   "similar": true
+  },
+  "azr_shirvan_akstafa_prayer_rug50": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983062
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -129,6 +166,36 @@
     "w": 2,
     "t": 1794858355,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_shirvan_akstafa_prayer_rug17": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983062
+    }
+   },
+   "azr_kuba_shirvan_medallion161": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983062
+    }
+   },
+   "azr_shirvan_akstafa_prayer_rug30": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983062
+    }
+   },
+   "azr_shirvan_akstafa_prayer_rug50": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983062
+    }
    }
   }
  },

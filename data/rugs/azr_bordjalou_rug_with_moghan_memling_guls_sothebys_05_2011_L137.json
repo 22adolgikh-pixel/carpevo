@@ -18,7 +18,7 @@
  "h": 624,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1794983002,
  "cat": {
   "title": "bordjalou rug with moghan memling guls sothebys 05 2011 L137",
   "museum": "",
@@ -49,9 +49,26 @@
   {
    "id": "azr_bordjalou_rug_with_moghan_guls_rippon_boswell_L62_11_2013",
    "score": 0
+  },
+  {
+   "id": "azr_bordjalou_rug_with_moghan_guls_azadi_p135",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_bordjalou_rug_with_moghan_guls_azadi_p135": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983002,
+   "similar": true
+  },
+  "azr_bordjalou_rug_with_moghan_guls_rippon_boswell_L62_11_2013": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983002,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -84,5 +101,23 @@
   "area": 0.857,
   "ver": 1,
   "t": 1794238458
+ },
+ "micro": {
+  "same": {
+   "azr_bordjalou_rug_with_moghan_guls_azadi_p135": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983002
+    }
+   },
+   "azr_bordjalou_rug_with_moghan_guls_rippon_boswell_L62_11_2013": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983002
+    }
+   }
+  }
  }
 }

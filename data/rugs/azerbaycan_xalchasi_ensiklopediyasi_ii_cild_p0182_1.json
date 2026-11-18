@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794930164,
+ "updated": 1794983094,
  "cat": {
   "title": "Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -60,6 +60,10 @@
   {
    "id": "azcm_143",
    "score": 0
+  },
+  {
+   "id": "azr_antique_khyzy_kilim4",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -72,6 +76,16 @@
    "ok": false,
    "by": "по цепочке: azcm_143 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0182_1",
    "at": 1794981395
+  },
+  "azcm_164": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983032
+  },
+  "azr_antique_khyzy_kilim4": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983094
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -114,6 +128,15 @@
      "a": "one",
      "w": 2,
      "t": 1794930164
+    }
+   }
+  },
+  "same": {
+   "azr_antique_khyzy_kilim4": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983094
     }
    }
   }

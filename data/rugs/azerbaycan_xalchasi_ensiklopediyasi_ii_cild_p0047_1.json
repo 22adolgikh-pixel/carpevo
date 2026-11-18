@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1794982986,
  "cat": {
   "title": "Kilim Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -51,8 +51,29 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0047_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0047_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0050_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0105_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0050_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982986,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0105_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982986
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +106,23 @@
   "ver": 1,
   "at": 1794547491
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0050_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982986
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0105_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982986
+    }
+   }
+  }
+ }
 }

@@ -18,7 +18,7 @@
  "h": 650,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1794982991,
  "cat": {
   "title": "Sale: L04760 | Location: London 28 Apr 04, LOT 7 (of 73): PROPERTY FROM THE CHATEAU DE GOURDON COLLE",
   "museum": "",
@@ -47,8 +47,29 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug78",
  "lib_img": "img/azr_antique_caucasian_moghan_rug78.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug66",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0049_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_shirvan_akstafa_prayer_rug66": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982991
+  },
+  "intangible_2850_p0049_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982991,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +102,23 @@
   "area": 0.8,
   "ver": 1,
   "t": 1794238239
+ },
+ "micro": {
+  "same": {
+   "azr_shirvan_akstafa_prayer_rug66": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982991
+    }
+   },
+   "intangible_2850_p0049_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982991
+    }
+   }
+  }
  }
 }

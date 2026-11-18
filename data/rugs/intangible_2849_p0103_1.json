@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2849_p0103_1",
  "lib_img": "img/intangible_2849_p0103_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_2e0d8ed6b4",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_2e0d8ed6b4": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983129
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

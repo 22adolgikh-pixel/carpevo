@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870025,
- "updated": 1791870025,
+ "updated": 1794983026,
  "cat": {
   "title": "Kuba rug, Caucausus, ca",
   "museum": "",
@@ -47,8 +47,20 @@
  },
  "src_id": "cat:cm_68a21130a8",
  "lib_img": "img/cm_68a21130a8.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Carpet_with_haloed_palmettes_called_Harshang_Karabakh_Azerbaijan_",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Carpet_with_haloed_palmettes_called_Harshang_Karabakh_Azerbaijan_": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983026,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -81,5 +93,16 @@
   "ver": 1,
   "t": 1794238489
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "wikimedia_File_Carpet_with_haloed_palmettes_called_Harshang_Karabakh_Azerbaijan_": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794983026
+    }
+   }
+  }
+ }
 }

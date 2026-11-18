@@ -18,7 +18,7 @@
  "h": 1008,
  "marks": [],
  "created": 1791736136,
- "updated": 1791736136,
+ "updated": 1794983019,
  "cat": {
   "title": "kuba67",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba67",
  "lib_img": "img/azr_kuba67.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_hajigaib2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_hajigaib2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983019
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": 0.919,
   "ver": 1,
   "t": 1794238494
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_hajigaib2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794983019
+    }
+   }
+  }
  }
 }

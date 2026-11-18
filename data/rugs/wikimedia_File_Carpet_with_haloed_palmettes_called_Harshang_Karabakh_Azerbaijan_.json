@@ -48,8 +48,20 @@
  },
  "src_id": "cat:wikimedia_File_Carpet_with_haloed_palmettes_called_Harshang_Karabakh_Azerbaijan_18th_century_jpg",
  "lib_img": "img/wikimedia_File_Carpet_with_haloed_palmettes_called_Harshang_Karabakh_Azerbaijan_18th_century_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_68a21130a8",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_68a21130a8": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794983026,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
