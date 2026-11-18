@@ -18,7 +18,7 @@
  "h": 650,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1794982362,
  "cat": {
   "title": "kuba shirvan medallion127",
   "museum": "",
@@ -49,9 +49,43 @@
   {
    "id": "azr_kuba_karagashli28",
    "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_akstafa_rug9",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_karagashli_rug_hali75_private_collection",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion107",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_antique_kazak_akstafa_rug9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982362
+  },
+  "azr_kuba_karagashli28": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982362
+  },
+  "azr_kuba_karagashli_rug_hali75_private_collection": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982362
+  },
+  "azr_kuba_shirvan_medallion107": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982362,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -84,5 +118,37 @@
   "area": 0.867,
   "ver": 1,
   "t": 1794238269
+ },
+ "micro": {
+  "same": {
+   "azr_antique_kazak_akstafa_rug9": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982362
+    }
+   },
+   "azr_kuba_karagashli28": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982362
+    }
+   },
+   "azr_kuba_karagashli_rug_hali75_private_collection": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982362
+    }
+   },
+   "azr_kuba_shirvan_medallion107": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982362
+    }
+   }
+  }
  }
 }

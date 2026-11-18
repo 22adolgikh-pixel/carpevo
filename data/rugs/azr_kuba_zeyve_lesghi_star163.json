@@ -18,7 +18,7 @@
  "h": 1497,
  "marks": [],
  "created": 1791736137,
- "updated": 1794335921,
+ "updated": 1794982421,
  "cat": {
   "title": "kuba zeyve lesghi star163",
   "museum": "",
@@ -45,8 +45,40 @@
  },
  "src_id": "cat:azr_kuba_zeyve_lesghi_star163",
  "lib_img": "img/azr_kuba_zeyve_lesghi_star163.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_zeyve_lesghi_star56",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star59",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star46",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_zeyve_lesghi_star56": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982421,
+   "similar": true
+  },
+  "azr_kuba_zeyve_lesghi_star59": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982421,
+   "similar": true
+  },
+  "azr_kuba_zeyve_lesghi_star46": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982421,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -111,6 +143,29 @@
       0.95333
      ]
     ]
+   }
+  },
+  "same": {
+   "azr_kuba_zeyve_lesghi_star56": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982421
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star59": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982421
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star46": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982421
+    }
    }
   }
  },

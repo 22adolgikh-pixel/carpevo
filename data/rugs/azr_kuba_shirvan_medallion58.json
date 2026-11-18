@@ -18,7 +18,7 @@
  "h": 1761,
  "marks": [],
  "created": 1791736130,
- "updated": 1794857129,
+ "updated": 1794982376,
  "cat": {
   "title": "kuba shirvan medallion58",
   "museum": "",
@@ -58,6 +58,22 @@
   {
    "id": "wikimedia_File_Кюрдемир_jpg",
    "score": 88
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion28",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion104",
+   "score": 0
+  },
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug40",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion89",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -70,6 +86,29 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792271563
+  },
+  "azr_kuba_shirvan_medallion28": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982376,
+   "similar": true
+  },
+  "azr_kuba_shirvan_medallion104": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982376,
+   "similar": true
+  },
+  "azr_shirvan_akstafa_prayer_rug40": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982376
+  },
+  "azr_kuba_shirvan_medallion89": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982376,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -140,6 +179,36 @@
     "a": "whole",
     "w": 2,
     "t": 1794857129
+   }
+  },
+  "same": {
+   "azr_kuba_shirvan_medallion28": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982376
+    }
+   },
+   "azr_kuba_shirvan_medallion104": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982376
+    }
+   },
+   "azr_shirvan_akstafa_prayer_rug40": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982376
+    }
+   },
+   "azr_kuba_shirvan_medallion89": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982376
+    }
    }
   }
  },
