@@ -18,7 +18,7 @@
  "h": 842,
  "marks": [],
  "created": 1791736129,
- "updated": 1794650257,
+ "updated": 1795007564,
  "cat": {
   "title": "antique-khyzy-pile-rug6",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_khyzy_pile_rug6",
  "lib_img": "img/azr_antique_khyzy_pile_rug6.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_chichi20",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_chichi20": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007564
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -117,6 +128,15 @@
     "w": 2,
     "t": 1794650257,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_chichi20": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007564
+    }
    }
   }
  },

@@ -18,7 +18,7 @@
  "h": 1273,
  "marks": [],
  "created": 1791736131,
- "updated": 1791736131,
+ "updated": 1795007566,
  "cat": {
   "title": "kuba gymyl16",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_gymyl16",
  "lib_img": "img/azr_kuba_gymyl16.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion91",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion91": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007566
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": 0.881,
   "ver": 1,
   "t": 1794238376
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shirvan_medallion91": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007566
+    }
+   }
+  }
  }
 }

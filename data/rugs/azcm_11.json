@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870041,
- "updated": 1794236973,
+ "updated": 1795007678,
  "cat": {
   "title": "“Bico” («Биджо»), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,37 @@
  },
  "src_id": "cat:azcm_11",
  "lib_img": "img/azcm_11.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Kasim_ushak_jpg",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0147_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0041_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Kasim_ushak_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007678
+  },
+  "intangible_2850_p0147_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007678
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0041_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007678
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -331,6 +360,29 @@
  "micro": {
   "field": {
    "dolgikh": "2"
+  },
+  "same": {
+   "wikimedia_File_Kasim_ushak_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007678
+    }
+   },
+   "intangible_2850_p0147_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007678
+    }
+   },
+   "azerbaycan_xalchalari_qarabag_qrupu_p0041_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007678
+    }
+   }
   }
  }
 }

@@ -18,7 +18,7 @@
  "h": 1157,
  "marks": [],
  "created": 1791736122,
- "updated": 1794980067,
+ "updated": 1795007669,
  "cat": {
   "title": "Sewan Kazak Rug",
   "museum": "Институт искусств Чикаго",
@@ -128,6 +128,10 @@
   {
    "id": "azr_antique_kazak_sewan_rug181_sothebys",
    "score": 0
+  },
+  {
+   "id": "vam_O120773",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -220,6 +224,21 @@
    "by": "/m: dolgikh",
    "at": 1794982576,
    "similar": true
+  },
+  "cm_9c5764b767": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007669
+  },
+  "azr_kuba_gymyl33": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007669
+  },
+  "vam_O120773": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007669
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -431,8 +450,27 @@
      "t": 1794980067
     }
    },
-   "cm_9c5764b767": {},
-   "azr_kuba_gymyl33": {}
+   "cm_9c5764b767": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007669
+    }
+   },
+   "azr_kuba_gymyl33": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007669
+    }
+   },
+   "vam_O120773": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007669
+    }
+   }
   },
   "field": {
    "dolgikh": "edges"

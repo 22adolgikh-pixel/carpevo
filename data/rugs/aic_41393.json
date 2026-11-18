@@ -18,7 +18,7 @@
  "h": 787,
  "marks": [],
  "created": 1791736122,
- "updated": 1794645293,
+ "updated": 1795007744,
  "cat": {
   "title": "Carpet (Sileh)",
   "museum": "Институт искусств Чикаго",
@@ -48,8 +48,30 @@
  },
  "src_id": "cat:aic_41393",
  "lib_img": "img/aic_41393.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_170",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol1_p342_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_170": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007744,
+   "similar": true
+  },
+  "kerimov_vol1_p342_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007744,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -90,6 +112,22 @@
     "a": "cropped",
     "w": 2,
     "t": 1794645293
+   }
+  },
+  "same": {
+   "azcm_170": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795007744
+    }
+   },
+   "kerimov_vol1_p342_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795007744
+    }
    }
   }
  },

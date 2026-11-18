@@ -18,7 +18,7 @@
  "h": 695,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1795007572,
  "cat": {
   "title": "kuba perepedil36",
   "museum": "",
@@ -45,8 +45,20 @@
  },
  "src_id": "cat:azr_kuba_perepedil36",
  "lib_img": "img/azr_kuba_perepedil36.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_perepedil61",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_perepedil61": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007572,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +91,16 @@
   "area": 0.941,
   "ver": 1,
   "t": 1794238317
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_perepedil61": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795007572
+    }
+   }
+  }
  }
 }

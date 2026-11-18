@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1795007574,
  "cat": {
   "title": "kuba salmasoyud13",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_salmasoyud13",
  "lib_img": "img/azr_kuba_salmasoyud13.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug53",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_shirvan_akstafa_prayer_rug53": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795007574
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -62,5 +73,16 @@
   ],
   "ver": 1,
   "at": 1792261922
+ },
+ "micro": {
+  "same": {
+   "azr_shirvan_akstafa_prayer_rug53": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795007574
+    }
+   }
+  }
  }
 }
