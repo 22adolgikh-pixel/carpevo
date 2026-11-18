@@ -18,7 +18,7 @@
  "h": 590,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1794997895,
  "cat": {
   "title": "kuba perepedil10",
   "museum": "",
@@ -45,8 +45,58 @@
  },
  "src_id": "cat:azr_kuba_perepedil10",
  "lib_img": "img/azr_kuba_perepedil10.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_perepedil42",
+   "score": 0
+  },
+  {
+   "id": "cm_a6836a71b7",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil64",
+   "score": 0
+  },
+  {
+   "id": "azcm_30",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil16",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_perepedil42": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997895,
+   "similar": true
+  },
+  "cm_a6836a71b7": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997895,
+   "similar": true
+  },
+  "azr_kuba_perepedil64": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997895,
+   "similar": true
+  },
+  "azcm_30": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil10 ≠ cm_a6836a71b7",
+   "at": 1794997916
+  },
+  "azr_kuba_perepedil16": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_perepedil10 ≠ azr_kuba_perepedil64",
+   "at": 1794997916
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +129,30 @@
   "area": 0.918,
   "ver": 1,
   "t": 1794238583
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_perepedil42": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997895
+    }
+   },
+   "cm_a6836a71b7": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997895
+    }
+   },
+   "azr_kuba_perepedil64": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997895
+    }
+   }
+  }
  }
 }

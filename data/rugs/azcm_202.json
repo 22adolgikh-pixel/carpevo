@@ -9,7 +9,7 @@
  "place": "Карабах, Азербайджан",
  "date": "XIX век",
  "school": "karabakh",
- "composition": "",
+ "composition": "zili",
  "technique": "безворсовый: зили",
  "size": "180x221 sm",
  "notes": "основа, уток – шерсть; переплетение, обматывание",
@@ -77,6 +77,18 @@
   {
    "id": "cm_538d7a7026",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Зили_5_jpg",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion120",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba20",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -114,6 +126,21 @@
    "ok": false,
    "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1 ≠ cm_538d7a7026",
    "at": 1794997733
+  },
+  "wikimedia_File_Зили_5_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794997809
+  },
+  "azr_kuba_shirvan_medallion120": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
+   "at": 1794997884
+  },
+  "azr_kuba20": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
+   "at": 1794997884
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -240,5 +267,8 @@
    "at": 1794790860,
    "ver": 2
   }
+ },
+ "from_twin": {
+  "composition": "wikimedia_File_Зили_5_jpg"
  }
 }

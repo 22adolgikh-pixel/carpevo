@@ -50,6 +50,18 @@
   {
    "id": "azr_kuba20",
    "score": 961
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_202",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Зили_5_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +69,21 @@
    "ok": true,
    "by": "машина: 3109 общих точек, перекрытие 0.98 (порог 40 / 0.7)",
    "at": 1794940138
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
+   "at": 1794997884
+  },
+  "azcm_202": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
+   "at": 1794997884
+  },
+  "wikimedia_File_Зили_5_jpg": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
+   "at": 1794997884
   }
  },
  "_lib_t": "2026-10-12 22:38",

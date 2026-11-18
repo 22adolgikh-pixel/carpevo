@@ -3,22 +3,22 @@
  "title": "Зили 5.jpg",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "2995",
  "url": "https://commons.wikimedia.org/wiki/File:%D0%97%D0%B8%D0%BB%D0%B8_5.jpg",
  "license": "CC BY-SA 3.0",
- "place": "",
+ "place": "Карабах, Азербайджан",
  "date": "2010-03-12 16:15:02",
  "school": "tabriz",
  "composition": "zili",
  "technique": "безворсовый",
- "size": "",
+ "size": "180x221 sm",
  "notes": "",
  "status": "new",
  "w": 766,
  "h": 978,
  "marks": [],
  "created": 1791736125,
- "updated": 1794597425,
+ "updated": 1794997809,
  "cat": {
   "title": "Зили 5.jpg",
   "museum": "Wikimedia Commons",
@@ -48,8 +48,100 @@
  },
  "src_id": "cat:wikimedia_File_Зили_5_jpg",
  "lib_img": "img/wikimedia_File_Зили_5_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba20",
+   "score": 0
+  },
+  {
+   "id": "azcm_202",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion120",
+   "score": 0
+  },
+  {
+   "id": "vam_O120765",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0048_1",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Азербайджанський_килим_типу_зілі_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Зили_3_jpg",
+   "score": 0
+  },
+  {
+   "id": "cm_538d7a7026",
+   "score": 0
+  },
+  {
+   "id": "azcm_198",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba20": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997809
+  },
+  "azcm_202": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794997809
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1": {
+   "ok": true,
+   "by": "по цепочке: azcm_202 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1 = wikimedia_File_Зили_5_jpg",
+   "at": 1794997884
+  },
+  "azr_kuba_shirvan_medallion120": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
+   "at": 1794997884
+  },
+  "vam_O120765": {
+   "ok": false,
+   "by": "по цепочке: azcm_202 ≠ vam_O120765",
+   "at": 1794997884
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0048_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_202 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0048_1",
+   "at": 1794997884
+  },
+  "wikimedia_File_Азербайджанський_килим_типу_зілі_jpg": {
+   "ok": false,
+   "by": "по цепочке: azcm_202 ≠ wikimedia_File_Зили_3_jpg",
+   "at": 1794997884
+  },
+  "wikimedia_File_Зили_3_jpg": {
+   "ok": false,
+   "by": "по цепочке: azcm_202 ≠ wikimedia_File_Зили_3_jpg",
+   "at": 1794997884
+  },
+  "cm_538d7a7026": {
+   "ok": false,
+   "by": "по цепочке: azcm_202 ≠ cm_538d7a7026",
+   "at": 1794997884
+  },
+  "azcm_198": {
+   "ok": false,
+   "by": "по цепочке: azcm_198 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1",
+   "at": 1794997884
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -163,6 +255,22 @@
     "t": 1794597425,
     "s": "ref"
    }
+  },
+  "same": {
+   "azr_kuba20": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997809
+    }
+   },
+   "azcm_202": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794997809
+    }
+   }
   }
  },
  "frame": "whole",
@@ -199,5 +307,10 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "inv": "azcm_202",
+  "place": "azcm_202",
+  "size": "azcm_202"
+ }
 }

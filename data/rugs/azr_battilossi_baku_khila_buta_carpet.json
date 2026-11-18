@@ -45,8 +45,29 @@
  },
  "src_id": "cat:azr_battilossi_baku_khila_buta_carpet",
  "lib_img": "img/azr_battilossi_baku_khila_buta_carpet.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_baku_khila_buta_carpet_azerbaijan_carpet_museum",
+   "score": 0
+  },
+  {
+   "id": "azcm_35",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_baku_khila_buta_carpet_azerbaijan_carpet_museum": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997825,
+   "similar": true
+  },
+  "azcm_35": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_baku_khila_buta_carpet_azerbaijan_carpet_museum ≠ azr_battilossi_baku_khila_buta_carpet",
+   "at": 1794997884
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

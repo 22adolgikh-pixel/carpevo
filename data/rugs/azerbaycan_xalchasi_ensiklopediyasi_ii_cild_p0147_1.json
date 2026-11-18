@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "19 в.",
  "school": "karabakh",
- "composition": "",
+ "composition": "zili",
  "technique": "безворсовый: зили",
  "size": "180x221 см",
  "notes": "Zili. Qarabaş. Azərbaycan. 19-cu əsr. Materlal: yun. Ölçü: 180x221 sm. Azərbaycan Xalça Muzeyi. DDK 2995.",
@@ -81,6 +81,18 @@
   {
    "id": "azcm_198",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Зили_5_jpg",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion120",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba20",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -119,6 +131,21 @@
    "by": "/m: dolgikh",
    "at": 1794997609,
    "similar": true
+  },
+  "wikimedia_File_Зили_5_jpg": {
+   "ok": true,
+   "by": "по цепочке: azcm_202 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1 = wikimedia_File_Зили_5_jpg",
+   "at": 1794997884
+  },
+  "azr_kuba_shirvan_medallion120": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
+   "at": 1794997884
+  },
+  "azr_kuba20": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
+   "at": 1794997884
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -185,5 +212,8 @@
     }
    }
   }
+ },
+ "from_twin": {
+  "composition": "wikimedia_File_Зили_5_jpg"
  }
 }

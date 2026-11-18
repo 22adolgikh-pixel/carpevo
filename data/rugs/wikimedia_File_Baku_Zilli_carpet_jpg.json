@@ -18,7 +18,7 @@
  "h": 745,
  "marks": [],
  "created": 1791736123,
- "updated": 1794772628,
+ "updated": 1794997793,
  "cat": {
   "title": "Baku Zilli carpet.jpg",
   "museum": "Wikimedia Commons",
@@ -48,8 +48,29 @@
  },
  "src_id": "cat:wikimedia_File_Baku_Zilli_carpet_jpg",
  "lib_img": "img/wikimedia_File_Baku_Zilli_carpet_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0185_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0115_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0185_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997793
+  },
+  "intangible_2850_p0115_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997793,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -120,6 +141,22 @@
     "w": 2,
     "t": 1794772628,
     "s": "ref"
+   }
+  },
+  "same": {
+   "intangible_2850_p0185_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997793
+    }
+   },
+   "intangible_2850_p0115_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997793
+    }
    }
   }
  },

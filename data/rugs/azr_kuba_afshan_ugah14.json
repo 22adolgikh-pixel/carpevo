@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_afshan_ugah14",
  "lib_img": "img/azr_kuba_afshan_ugah14.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_khyzy_pile_rug3",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion163",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_khyzy_pile_rug3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997834
+  },
+  "azr_kuba_shirvan_medallion163": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_khyzy_pile_rug3 ≠ azr_kuba_afshan_ugah14",
+   "at": 1794997884
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
