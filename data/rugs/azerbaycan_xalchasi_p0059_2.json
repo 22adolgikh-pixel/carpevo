@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0059_2",
  "lib_img": "img/azerbaycan_xalchasi_p0059_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_borchalo_rug_with_memling_guls_bonhams_11_2013_L2043",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_borchalo_rug_with_memling_guls_bonhams_11_2013_L2043": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981513
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

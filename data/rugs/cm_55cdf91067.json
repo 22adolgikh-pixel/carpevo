@@ -6,12 +6,12 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Dragon_Carpet_MET_wb-1971.263.5l.jpeg",
  "license": "CC0",
- "place": "",
+ "place": "Karabakh, present-day Azerbaijan",
  "date": "1971",
- "school": "",
- "composition": "",
- "technique": "",
- "size": "",
+ "school": "karabakh",
+ "composition": "qarabag",
+ "technique": "безворсовый",
+ "size": "L. 90 in. (228.6 cm)\r\nW. 70 3/4 in. (179.7 cm)",
  "notes": "Textiles-Rugs; Carpet",
  "status": "new",
  "w": 2048,
@@ -60,6 +60,10 @@
   {
    "id": "cm_d4233e0f4f",
    "score": 0
+  },
+  {
+   "id": "cm_89e42f7250",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -72,6 +76,11 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1794236580
+  },
+  "cm_89e42f7250": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794981486
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -139,5 +148,12 @@
  },
  "frame": "detail",
  "frame_by": "micro",
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "school": "cm_89e42f7250",
+  "composition": "cm_89e42f7250",
+  "technique": "cm_89e42f7250",
+  "place": "cm_89e42f7250",
+  "size": "cm_89e42f7250"
+ }
 }

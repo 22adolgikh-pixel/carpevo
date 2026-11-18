@@ -18,7 +18,7 @@
  "h": 1536,
  "marks": [],
  "created": 1791870021,
- "updated": 1794858249,
+ "updated": 1794981335,
  "cat": {
   "title": "Carpet; Textiles-Rugs",
   "museum": "Метрополитен-музей",
@@ -92,6 +92,10 @@
   {
    "id": "azr_early_karabagh_rug62",
    "score": 0
+  },
+  {
+   "id": "cm_303e02ef18",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -145,6 +149,16 @@
    "by": "/m: dolgikh",
    "at": 1794552784,
    "similar": true
+  },
+  "cm_76b023d1d2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794981333
+  },
+  "cm_303e02ef18": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794981336
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -277,6 +291,13 @@
      "a": "similar",
      "w": 2,
      "t": 1794552784
+    }
+   },
+   "cm_303e02ef18": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1794981335
     }
    }
   },

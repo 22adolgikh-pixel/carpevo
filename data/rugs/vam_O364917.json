@@ -18,7 +18,7 @@
  "h": 900,
  "marks": [],
  "created": 1791736127,
- "updated": 1794979855,
+ "updated": 1794981466,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -96,6 +96,31 @@
    "ok": false,
    "by": "по цепочке: azcm_194 ≠ vam_O364917",
    "at": 1794979928
+  },
+  "azcm_194": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0076_1 ≠ vam_O364917",
+   "at": 1794981395
+  },
+  "cm_a06c6044a8": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981450
+  },
+  "cm_621dd83fe1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981466
+  },
+  "azcm_57": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981466
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0075_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981466
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -154,9 +179,28 @@
      "t": 1794979855
     }
    },
-   "cm_621dd83fe1": {},
+   "cm_621dd83fe1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794981466
+    }
+   },
    "azcm_194": {},
-   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0075_1": {}
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0075_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794981466
+    }
+   },
+   "azcm_57": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794981466
+    }
+   }
   }
  },
  "frame": "detail",

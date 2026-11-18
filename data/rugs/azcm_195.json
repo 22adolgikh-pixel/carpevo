@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870038,
- "updated": 1791870038,
+ "updated": 1794981459,
  "cat": {
   "title": "Kilim (Килим), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -56,9 +56,38 @@
   {
    "id": "azr_kuba_kilim10",
    "score": 0
+  },
+  {
+   "id": "azr_kazak_pinwheel_rug_nagel_1997",
+   "score": 0
+  },
+  {
+   "id": "azr_early_karabagh_rug247",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_kuba_kilim10": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981459
+  },
+  "azr_kazak_pinwheel_rug_nagel_1997": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981459
+  },
+  "azcm_57": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981459
+  },
+  "azr_early_karabagh_rug247": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794981459
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -91,5 +120,37 @@
   "ver": 1,
   "t": 1794783475
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azr_kuba_kilim10": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794981459
+    }
+   },
+   "azr_kazak_pinwheel_rug_nagel_1997": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794981459
+    }
+   },
+   "azcm_57": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794981459
+    }
+   },
+   "azr_early_karabagh_rug247": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794981459
+    }
+   }
+  }
+ }
 }

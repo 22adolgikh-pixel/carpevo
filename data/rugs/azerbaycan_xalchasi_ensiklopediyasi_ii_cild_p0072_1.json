@@ -88,6 +88,18 @@
   {
    "id": "intangible_2851_p0020_3",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_kilim11",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_141",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -135,6 +147,21 @@
    "ok": false,
    "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1 ≠ intangible_2851_p0020_3",
    "at": 1794976280
+  },
+  "azr_kuba_kilim11": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1 ≠ azr_kuba_kilim11",
+   "at": 1794981429
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_141 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
+   "at": 1794981429
+  },
+  "azcm_141": {
+   "ok": false,
+   "by": "по цепочке: azcm_141 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
+   "at": 1794981429
   }
  },
  "_lib_t": "2026-11-13 10:08",

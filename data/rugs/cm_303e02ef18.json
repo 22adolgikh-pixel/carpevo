@@ -6,12 +6,12 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Dragon_Carpet_MET_wb-22.100.119e.jpeg",
  "license": "CC0",
- "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
- "size": "",
+ "place": "probably Quba, Karabakh, present-day Azerbaijan",
+ "date": "17th century",
+ "school": "karabakh",
+ "composition": "ejdahali",
+ "technique": "ворсовый",
+ "size": "Textile: L. 184 in. (467.4 cm)\r\n             W. 86 in. (218.4 cm)",
  "notes": "Carpet; Textiles-Rugs",
  "status": "new",
  "w": 1968,
@@ -55,6 +55,10 @@
   {
    "id": "cm_8b261fa548",
    "score": 0
+  },
+  {
+   "id": "cm_9453a46c77",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -62,6 +66,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794977064
+  },
+  "cm_76b023d1d2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794981333
+  },
+  "cm_9453a46c77": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1794981336
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -107,5 +121,13 @@
  },
  "frame": "detail",
  "frame_by": "micro",
- "multi": []
+ "multi": [],
+ "from_twin": {
+  "school": "cm_76b023d1d2",
+  "composition": "cm_76b023d1d2",
+  "technique": "cm_76b023d1d2",
+  "place": "cm_76b023d1d2",
+  "date": "cm_76b023d1d2",
+  "size": "cm_76b023d1d2"
+ }
 }
