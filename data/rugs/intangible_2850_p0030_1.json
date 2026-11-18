@@ -18,7 +18,7 @@
  "h": 1731,
  "marks": [],
  "created": 1794547278,
- "updated": 1795030443,
+ "updated": 1795033025,
  "cat": {
   "title": "безворсовый «Zili» Карабах",
   "museum": "",
@@ -116,8 +116,49 @@
     "w": 2,
     "t": 1795030443
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795033025,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0642,
+    0.01097
+   ],
+   [
+    0.94677,
+    0.05734
+   ],
+   [
+    0.97433,
+    0.91693
+   ],
+   [
+    0.03836,
+    0.91467
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
