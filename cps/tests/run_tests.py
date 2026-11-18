@@ -157,6 +157,15 @@ TESTS = []
 def test(fn): TESTS.append(fn); return fn
 
 
+def rg_tools_open(pg):
+    """v11.92: инструменты каталога ковров — в выдвижной панели; открыть, если закрыта"""
+    if not pg.is_visible('#rgTools'): pg.click('#rgToolsBtn'); pg.wait_for_timeout(500)
+
+
+def rgtool(pg, tool_id):
+    rg_tools_open(pg); pg.click('#' + tool_id)
+
+
 def errors_ok(ctx, where):
     errs = [e for e in ctx['errors'] if 'favicon' not in e]
     ctx['errors'].clear()
@@ -495,18 +504,23 @@ def t13_rail_crumbs_keys(pg, ctx):
     ids = pg.evaluate("[...document.querySelectorAll('#rail button')].map(b=>b.id)")
     for t in ('tab-pipe', 'tab-queue', 'tab-rugs', 'tab-dyes', 'railKeys'): assert t in ids, f'в колонке разделов нет {t}'
     assert not pg.is_visible('#tab-sheet'), '«Листы» должны быть внутри «Узоров», а не отдельным разделом'
-    for t, word in (('tab-pipe', 'События'), ('tab-queue', 'Узоры'), ('tab-rugs', 'Ковры'), ('tab-dyes', 'Красители')):
+    for t, word in (('tab-pipe', 'Обзор'), ('tab-queue', 'Узоры'), ('tab-rugs', 'Ковры'), ('tab-dyes', 'Красители')):
         pg.click('#' + t); pg.wait_for_timeout(900)
         assert (pg.text_content('#crumbs') or '').startswith(word), f'«где вы сейчас» не показывает {word}: {pg.text_content("#crumbs")}'
         assert pg.evaluate(f"document.getElementById('{t}').classList.contains('on')"), f'раздел {word} не подсвечен в колонке'
     pg.keyboard.press('Escape'); pg.wait_for_timeout(300)
-    pg.click('#tab-pipe'); pg.wait_for_timeout(600)
+    pg.click('#tab-pipe'); pg.wait_for_timeout(1500)
+    # v11.92: один дашборд на все разделы — в «Узорах» своей сводки нет
+    for h in ('Узоры', 'Ковры', 'Красители'): assert h in (pg.inner_text('#catalog .dash') or ''), f'в общем «Обзоре» нет раздела «{h}»'
+    assert pg.is_visible('#dbNeed'), 'в «Обзоре» нет блока «Ждёт вашего решения»'
+    pg.wait_for_selector('#dbRugs b', timeout=8000); pg.wait_for_selector('#dbDyes b', timeout=8000)
+    assert not pg.is_visible('#tab-edit'), 'кнопка «К рисунку» не должна показываться в «Обзоре»'
     pg.keyboard.press('Shift+Slash'); pg.wait_for_timeout(400)
     assert pg.is_visible('#modal .kbgrid'), '«?» не открывает шпаргалку клавиш'
     pg.keyboard.press('Escape'); pg.wait_for_timeout(300); assert not pg.is_visible('#modal'), 'Esc не закрывает шпаргалку'
     pg.click('#railKeys'); pg.wait_for_timeout(300); assert pg.is_visible('#modal .kbgrid'), 'кнопка «Клавиши» не открывает шпаргалку'
     pg.click('#mClose'); pg.wait_for_timeout(200)
-    pg.keyboard.press('Escape'); pg.wait_for_timeout(300)   # v11.19: «События» — экран из колонки; Esc закрывает
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(300)
     pg.keyboard.press('2'); pg.wait_for_timeout(600); assert pg.evaluate("S.mode") == 'queue', 'клавиша 2 не открывает «Узоры»'
     pg.keyboard.press('1'); pg.wait_for_timeout(600); assert pg.evaluate("S.mode") == 'sheet', 'клавиша 1 не открывает «Листы»'
     assert (pg.text_content('#crumbs') or '').startswith('Узоры') and pg.evaluate("document.getElementById('tab-queue').classList.contains('on')"), 'листы не отмечены как часть «Узоров»'
@@ -519,7 +533,12 @@ def t14_patterns_tree(pg, ctx):
     pg.click('#tab-queue'); pg.wait_for_timeout(800)
     pg.evaluate("setMode('cat')"); pg.wait_for_timeout(600)
     assert pg.is_visible('#left .ptree'), 'у «Узоров» слева нет дерева источников'
-    assert pg.is_visible('#catalog .kpirow'), 'нет цифр сверху'
+    assert not pg.query_selector('#catalog .kpirow'), 'у «Узоров» не должно быть своей сводки: она одна, в «Обзоре»'
+    assert not pg.query_selector('#catalog [data-vs="pipe"]'), 'в «Узорах» не должно быть вкладки «Сводка»'
+    assert pg.is_visible('#catalog [data-upl="pat"]'), 'в «Узорах» нет кнопки «Загрузить»'
+    pg.click('#catalog [data-upl="pat"]'); pg.wait_for_timeout(300)
+    mt = pg.inner_text('#popMenu'); assert all(w in mt for w in ('Сканы листов', 'Готовые вырезанные рисунки', 'Легенда', 'Зарисовки')), f'меню «Загрузить» неполное: {mt}'
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200); assert not pg.query_selector('#popMenu'), 'Esc не закрывает меню «Загрузить»'
     src = pg.evaluate("[...document.querySelectorAll('#left .pn[data-src]')].map(b=>b.dataset.src).filter(Boolean)")
     assert src, 'в дереве нет источников'
     k = src[0]; n_all = pg.evaluate("document.querySelectorAll('#catalog .card').length")
@@ -541,7 +560,22 @@ def t14_patterns_tree(pg, ctx):
 def t15_rugs_overview(pg, ctx):
     pg.click('#tab-rugs'); pg.wait_for_timeout(1500)
     if pg.evaluate("R.view") == 'edit': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
-    assert pg.is_visible('#rgTree .ptree') and pg.is_visible('#rgKpi') and pg.is_visible('#rgPeek'), 'у «Ковров» нет дерева / цифр / карточки справа'
+    assert pg.is_visible('#rgTree .ptree') and pg.is_visible('#rgPeek') and pg.is_visible('#rgChips'), 'у «Ковров» нет фильтров / карточки справа / строки активных фильтров'
+    assert not pg.is_visible('#rgKpi'), 'инструменты каталога должны быть в отдельной панели, а не над плиткой'
+    for b in ('rgTriBtn', 'rgTypesBtn', 'rgEtBtn', 'rgSignsBtn', 'rgDupChk', 'rgSync', 'rgSyncBooks'): assert not pg.is_visible('#' + b), f'кнопка {b} снова над плиткой'
+    rg_tools_open(pg); assert pg.is_visible('#rgKpi') and pg.is_visible('#rgTriBtn'), 'в панели «Инструменты» нет инструментов'
+    pg.click('#rgToolsX'); pg.wait_for_timeout(200); assert not pg.is_visible('#rgTools'), 'панель «Инструменты» не закрывается'
+    pg.click('#rgUpBtn'); pg.wait_for_timeout(300); mt = pg.inner_text('#popMenu')
+    assert all(w in mt for w in ('Фото ковров', 'Архив', 'Каталог музея', 'Отпечатки', 'Обновить каталог', 'Ковры из книг')), f'меню «Загрузить» (ковры) неполное: {mt}'
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+    # размер фото + строка активных фильтров
+    n0 = pg.evaluate("document.querySelectorAll('.rgcard').length"); pg.select_option('#rgFSize', '1500'); pg.wait_for_timeout(400)
+    n1 = pg.evaluate("document.querySelectorAll('.rgcard').length"); assert n1 < n0, f'фильтр «размер фото от 1500 px» ничего не отсёк: {n0} → {n1}'
+    assert 'Фото: от 1500 px' in pg.inner_text('#rgChips'), 'активный фильтр не показан чипом'
+    pg.click('#rgChips [data-clr="size"]'); pg.wait_for_timeout(400); assert pg.evaluate("document.querySelectorAll('.rgcard').length") == n0, 'чип не снимает фильтр'
+    pg.click('#rgViewBtn'); pg.wait_for_timeout(200); pg.click('#popMenu [data-sz="s"]'); pg.wait_for_timeout(300)
+    assert pg.evaluate("getComputedStyle(document.getElementById('rugs')).getPropertyValue('--cw').trim()") == '140px', '«Вид: мелко» не меняет размер плиток'
+    pg.click('#popMenu [data-sz="m"]'); pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
     n_all = pg.evaluate("document.querySelectorAll('.rgcard').length")
     pg.click('#rgTree .pn[data-k="museum"]'); pg.wait_for_timeout(500)
     ids = pg.evaluate("[...document.querySelectorAll('.rgcard')].map(c=>c.dataset.id)")
@@ -637,7 +671,7 @@ def t17_feedback_v115(pg, ctx):
     assert L['border_rep'].get('comp_sug') == 'haciqayib', f'«Hajigayib» не узнан как hacıqayıb: {L["border_rep"].get("comp_sug")}'
     pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
     if pg.evaluate("R.view") == 'edit': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
-    assert pg.is_visible('#rgKpiComp [data-cacc="title"]'), 'в обзоре нет «принять по названию»'
+    rg_tools_open(pg); assert pg.is_visible('#rgKpiComp [data-cacc="title"]'), 'в панели «Инструменты» нет «принять по названию»'
     pg.on('dialog', lambda d: d.accept())
     pg.click('#rgKpiComp [data-cacc="title"]'); pg.wait_for_timeout(1500)
     assert get(u + 'api/rugs/cm_pir')['composition'] == 'pirebedil', '«принять по названию» не поставило тип'
@@ -724,7 +758,7 @@ def t18_feedback_v116(pg, ctx):
     pr = [p for p in j['pairs'] if {p['a'], p['b']} == {'kerimov_vol3_p100_1', 'met_123'}]
     assert pr and pr[0]['chk'] and pr[0]['chk']['v'] == 'same', f'машинная проверка не узнала один и тот же ковёр: {pr}'
     pg.evaluate("rugBack()"); pg.wait_for_timeout(500)
-    pg.click('#rgDupChk'); pg.wait_for_timeout(1200)
+    rgtool(pg, 'rgDupChk'); pg.wait_for_timeout(1200)
     pg.click('#dcBar [data-df="same"]'); pg.wait_for_timeout(300)
     assert pg.evaluate("document.querySelectorAll('.dcrow').length") >= 1, 'в окне проверки нет пары «точно тот же»'
     pg.screenshot(path=f'{OUT}/17_dupcheck.png')
@@ -780,7 +814,7 @@ def t19_type_worksheet(pg, ctx):
     # интерфейс
     pg.click('#tab-rugs'); pg.wait_for_timeout(1000)
     if pg.evaluate("R.view") == 'edit': pg.evaluate("rugBack()"); pg.wait_for_timeout(500)
-    pg.click('#rgTypesBtn'); pg.wait_for_timeout(1500)
+    rgtool(pg, 'rgTypesBtn'); pg.wait_for_timeout(1500)
     pg.click(f'#tyList [data-ty="{t["id"]}"]'); pg.wait_for_timeout(1200)
     assert pg.is_visible('#tySheet .tyel') and pg.is_visible('#tySheet .tyc[data-p="ty_test"]'), 'рабочий лист не показал элементы и фото типа'
     assert pg.evaluate(f"document.querySelector('#tySheet .tyel[data-el=\"{big[0]['id']}\"]').classList.contains('pr')"), 'элемент, найденный машиной, не помечен «ждёт проверки»'
@@ -1014,7 +1048,7 @@ def t26_sign_library_v1120(pg, ctx):
     r = get(u + 'api/rugs/frieze_2'); assert any(m.get('motif_text') == 'тест-знак' for m in r['marks']), 'имя знака не перешло на рамки'
     pg.goto(u); pg.wait_for_timeout(1800); pg.click('#tab-rugs'); pg.wait_for_timeout(1000)
     if pg.evaluate("R.view") != 'grid': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
-    pg.click('#rgSignsBtn'); pg.wait_for_selector('#rgSignsV .sgc', timeout=20000)
+    rgtool(pg, 'rgSignsBtn'); pg.wait_for_selector('#rgSignsV .sgc', timeout=20000)
     assert 'тест-знак' in (pg.text_content('#rgSignsV') or ''), 'названный знак не виден в словаре'
     pg.click('#sgBack'); pg.wait_for_timeout(400); assert pg.evaluate("R.view") == 'grid'
     errors_ok(ctx, 't26')
@@ -1110,7 +1144,7 @@ def t29_etalon_v1124(pg, ctx):
     # экран: тип → элементы и ковры-эталоны; проверка находок клавишами
     pg.goto(u); pg.wait_for_timeout(1800); pg.click('#tab-rugs'); pg.wait_for_timeout(1200)
     if pg.evaluate("R.view") != 'grid': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)
-    pg.click('#rgEtBtn'); pg.wait_for_selector('#etTypes [data-et="pirebedil"]', timeout=15000); pg.click('#etTypes [data-et="pirebedil"]'); pg.wait_for_timeout(400)
+    rgtool(pg, 'rgEtBtn'); pg.wait_for_selector('#etTypes [data-et="pirebedil"]', timeout=15000); pg.click('#etTypes [data-et="pirebedil"]'); pg.wait_for_timeout(400)
     assert 'звезда-эталон' in (pg.text_content('#etMain .etels') or ''), 'элемент не показан у типа'
     assert pg.evaluate("document.querySelectorAll('#etMain .etrug').length") >= 4, 'нет ковров-эталонов этого типа'
     left = sum(1 for f in F if f['mid'] != hit[0]['mid'])
@@ -1195,7 +1229,7 @@ def t32_triage_batch(pg, ctx):
     q = _j.load(urllib.request.urlopen(ctx['url'] + 'api/rugs_triage?limit=5'))
     assert 'ids' in q and 'stats' in q, 'нет очереди этапа 0–1'
     pg.click('#tab-rugs'); pg.wait_for_timeout(800)
-    pg.click('#rgTriBtn'); pg.wait_for_timeout(4000)
+    rgtool(pg, 'rgTriBtn'); pg.wait_for_timeout(4000)
     n = pg.evaluate("document.querySelectorAll('#rgTri .trt').length")
     if n:
         assert pg.evaluate("document.querySelectorAll('#rgTri .trt polygon').length") >= 1, 'на плитках нет контура ковра'
@@ -1860,7 +1894,7 @@ def t44_twins_fast_v1186(pg, ctx):
     pw.click('#hz'); pw.wait_for_timeout(600); assert pw.locator('.grid.tw.hz').count() == 1
     pw.screenshot(path=os.path.join(OUT, 't44_m_tw_wide_hz.png')); wc.close()
     pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(3000)
-    assert 'двойники' in pg.inner_text('#rgKpi'), pg.inner_text('#rgKpi')
+    rg_tools_open(pg); assert 'двойники' in pg.inner_text('#rgKpi'), pg.inner_text('#rgKpi')
     errors_ok(ctx, 'двойники')
 
 
@@ -1969,7 +2003,7 @@ def main():
         else: raise SystemExit('сервер не запустился — см. cps/tests/out/server.log')
         from playwright.sync_api import sync_playwright
         with sync_playwright() as p:
-            br = p.chromium.launch(); pg = br.new_page(viewport={'width': 1600, 'height': 950})
+            br = p.chromium.launch(**({'executable_path': os.environ['CPS_CHROME'], 'args': ['--no-sandbox']} if os.environ.get('CPS_CHROME') else {})); pg = br.new_page(viewport={'width': 1600, 'height': 950})
             ctx = {'url': url, 'errors': [], 'app': app}
             pg.on('pageerror', lambda e: ctx['errors'].append(str(e)))
             pg.goto(url); pg.wait_for_timeout(2000)
