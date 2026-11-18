@@ -18,7 +18,7 @@
  "h": 793,
  "marks": [],
  "created": 1791736139,
- "updated": 1794343321,
+ "updated": 1795027988,
  "cat": {
   "title": "Floral carpet, early19th century, Azerbaijan",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_early_karabagh_rug225",
  "lib_img": "img/azr_early_karabagh_rug225.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0099_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0099_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027988
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -95,6 +106,15 @@
     "a": "ok",
     "w": 2,
     "t": 1794343321
+   }
+  },
+  "same": {
+   "intangible_2849_p0099_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027988
+    }
    }
   }
  },

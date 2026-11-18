@@ -2684,8 +2684,19 @@
  },
  "src_id": "cat:intangible_2849_p0072_1",
  "lib_img": "img/intangible_2849_p0072_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_12",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_12": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027997
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

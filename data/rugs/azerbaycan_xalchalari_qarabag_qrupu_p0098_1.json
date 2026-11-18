@@ -18,7 +18,7 @@
  "h": 1405,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795028036,
  "cat": {
   "title": "Şəddə. Qarabağqrupu . Azərbaycan . Kəlbəcər.",
   "museum": "",
@@ -54,6 +54,10 @@
   {
    "id": "azcm_13",
    "score": 0
+  },
+  {
+   "id": "intangible_2850_p0135_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -61,6 +65,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794982683
+  },
+  "intangible_2850_p0135_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028036
   }
  },
  "_lib_t": "2026-11-12 22:41",
@@ -95,5 +104,16 @@
   "ver": 1,
   "at": 1794547485
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "intangible_2850_p0135_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795028036
+    }
+   }
+  }
+ }
 }

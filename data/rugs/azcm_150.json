@@ -61,6 +61,10 @@
   {
    "id": "azr_kuba_sumakh106",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -78,6 +82,11 @@
    "ok": true,
    "by": "машина: 917 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
    "at": 1794940138
+  },
+  "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0080_1 ≠ wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg",
+   "at": 1795027984
   }
  },
  "_lib_t": "2026-10-12 22:38",

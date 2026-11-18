@@ -18,7 +18,7 @@
  "h": 512,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795027899,
  "cat": {
   "title": "A MOGHAN RUNNER SOUTHEAST CAUCASUS, LAST QUARTER 19TH CENTURY Price Realized $5,736 Christie's Sale ",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug73",
  "lib_img": "img/azr_antique_caucasian_moghan_rug73.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_alpan42",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_alpan42": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027899
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +92,16 @@
   "area": null,
   "ver": 1,
   "t": 1794238379
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_alpan42": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027899
+    }
+   }
+  }
  }
 }

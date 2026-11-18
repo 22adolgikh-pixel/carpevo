@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870038,
- "updated": 1794750492,
+ "updated": 1795028029,
  "cat": {
   "title": "Kilim (Килим), Баку, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -53,6 +53,10 @@
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0052_1",
    "score": 999,
    "inv": true
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0071_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -60,6 +64,11 @@
    "ok": true,
    "by": "машина: 970 общих точек, перекрытие 0.80 (порог 40 / 0.7)",
    "at": 1794940138
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0071_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028029
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -144,6 +153,15 @@
   },
   "field": {
    "dolgikh": "draw"
+  },
+  "same": {
+   "azerbaycan_xalchalari_qarabag_qrupu_p0071_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795028029
+    }
+   }
   }
  },
  "frame": "whole",

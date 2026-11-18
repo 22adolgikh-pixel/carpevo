@@ -18,7 +18,7 @@
  "h": 1850,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795027985,
  "cat": {
   "title": "Мурадов 2010, разворот 63",
   "museum": "",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0063_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0063_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_caucasian_moghan_rug64",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_caucasian_moghan_rug64": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027985
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -82,5 +93,16 @@
   "ver": 1,
   "at": 1794547463
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azr_antique_caucasian_moghan_rug64": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027985
+    }
+   }
+  }
+ }
 }

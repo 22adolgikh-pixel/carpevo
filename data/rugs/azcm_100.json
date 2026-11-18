@@ -18,7 +18,7 @@
  "h": 1095,
  "marks": [],
  "created": 1791870043,
- "updated": 1794236886,
+ "updated": 1795028027,
  "cat": {
   "title": "“Atlı-itli” («Атлы-итли»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,19 @@
  },
  "src_id": "cat:azcm_100",
  "lib_img": "img/azcm_100.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_seychour66",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_seychour66": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028027
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -331,6 +342,15 @@
  "micro": {
   "field": {
    "dolgikh": "1"
+  },
+  "same": {
+   "azr_kuba_seychour66": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795028027
+    }
+   }
   }
  }
 }

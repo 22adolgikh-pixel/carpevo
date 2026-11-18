@@ -18,7 +18,7 @@
  "h": 1031,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795028034,
  "cat": {
   "title": "Xalça. “Atlı - itli”. Qarabağ qrupu. Azərbaycan. Zəngilan. 1910-cu il. Yun. Xovlu.",
   "museum": "",
@@ -57,6 +57,10 @@
   {
    "id": "azcm_13",
    "score": 0
+  },
+  {
+   "id": "intangible_2850_p0067_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -64,6 +68,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794982683
+  },
+  "intangible_2850_p0067_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028034
   }
  },
  "_lib_t": "2026-11-12 22:41",
@@ -98,5 +107,16 @@
   "ver": 1,
   "at": 1794547502
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "intangible_2850_p0067_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795028034
+    }
+   }
+  }
+ }
 }

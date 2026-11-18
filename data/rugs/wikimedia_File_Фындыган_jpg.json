@@ -65,6 +65,14 @@
   {
    "id": "azr_antique_khizi_findigan_rug17",
    "score": 0
+  },
+  {
+   "id": "azr_antique_khizi_findigan_rug7",
+   "score": 0
+  },
+  {
+   "id": "azcm_39",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -87,6 +95,16 @@
    "ok": false,
    "by": "по цепочке: azerbaycan_xalchasi_p0071_1 ≠ azr_antique_khizi_findigan_rug17",
    "at": 1794982794
+  },
+  "azr_antique_khizi_findigan_rug7": {
+   "ok": false,
+   "by": "по цепочке: azcm_33 ≠ azr_antique_khizi_findigan_rug7",
+   "at": 1795027984
+  },
+  "azcm_39": {
+   "ok": false,
+   "by": "по цепочке: azcm_33 ≠ azcm_39",
+   "at": 1795027984
   }
  },
  "_lib_t": "2026-10-12 22:38",

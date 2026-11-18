@@ -18,7 +18,7 @@
  "h": 927,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795028060,
  "cat": {
   "title": "Xalça. Qarabağqrupu . Azərbaycan . Zəngilan . XXəsrinəwəli. Yun. Xovlu.",
   "museum": "",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0068_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0068_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0132_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0132_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028060
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -85,5 +96,16 @@
   "ver": 1,
   "at": 1794547540
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "intangible_2849_p0132_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795028060
+    }
+   }
+  }
+ }
 }

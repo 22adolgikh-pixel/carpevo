@@ -48,8 +48,19 @@
  },
  "src_id": "cat:intangible_2850_p0067_1",
  "lib_img": "img/intangible_2850_p0067_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0088_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchalari_qarabag_qrupu_p0088_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028034
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

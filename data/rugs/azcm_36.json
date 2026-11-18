@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870041,
- "updated": 1791870041,
+ "updated": 1795028054,
  "cat": {
   "title": "“Suraxanı” («Сураханы»), Баку, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -66,6 +66,10 @@
   {
    "id": "intangible_2849_p0158_1",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0086_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -88,6 +92,11 @@
    "ok": false,
    "by": "по цепочке: azr_antique_baku_surahani_rug1 ≠ intangible_2849_p0158_1",
    "at": 1794998130
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0086_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028054
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -133,5 +142,16 @@
  "multi": [],
  "from_twin": {
   "composition": "azerbaycan_xalchasi_p0005_1"
+ },
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0086_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795028054
+    }
+   }
+  }
  }
 }

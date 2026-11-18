@@ -18,7 +18,7 @@
  "h": 1245,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795028017,
  "cat": {
   "title": "Мурадов 2010, разворот 95",
   "museum": "",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0095_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0095_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0320_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0320_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028017
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -82,5 +93,16 @@
   "ver": 1,
   "at": 1794547523
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0320_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795028017
+    }
+   }
+  }
+ }
 }

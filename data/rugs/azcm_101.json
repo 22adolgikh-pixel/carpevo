@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870043,
- "updated": 1794508274,
+ "updated": 1795028042,
  "cat": {
   "title": "“Təkgöl” («Текгель»), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,19 @@
  },
  "src_id": "cat:azcm_101",
  "lib_img": "img/azcm_101.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0024_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0024_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028042
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -403,6 +414,15 @@
   },
   "field": {
    "dolgikh": "1"
+  },
+  "same": {
+   "intangible_2850_p0024_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795028042
+    }
+   }
   }
  },
  "frame_by": "micro",

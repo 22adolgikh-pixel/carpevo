@@ -18,7 +18,7 @@
  "h": 1289,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795028062,
  "cat": {
   "title": "Vərni. Qarabağ qrupu. Azərbaycan, Bərdə.",
   "museum": "",
@@ -50,8 +50,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0074_2",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0074_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0125_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0125_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028062
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -84,5 +95,16 @@
   "ver": 1,
   "at": 1794547522
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "intangible_2850_p0125_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795028062
+    }
+   }
+  }
+ }
 }

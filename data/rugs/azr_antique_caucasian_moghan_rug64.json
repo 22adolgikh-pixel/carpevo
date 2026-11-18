@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug64",
  "lib_img": "img/azr_antique_caucasian_moghan_rug64.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0063_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchalari_qarabag_qrupu_p0063_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027985
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

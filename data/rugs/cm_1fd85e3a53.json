@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870015,
- "updated": 1794428797,
+ "updated": 1795027990,
  "cat": {
   "title": "Azerbaijani carpet from Karabakh in Museum of History of Azerbaijan",
   "museum": "",
@@ -62,7 +62,13 @@
    "score": 197
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_43129a7bb2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027990
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "cm_43129a7bb2": {
@@ -120,6 +126,15 @@
     "a": "cropped",
     "w": 2,
     "t": 1794428797
+   }
+  },
+  "same": {
+   "cm_43129a7bb2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027990
+    }
    }
   }
  },

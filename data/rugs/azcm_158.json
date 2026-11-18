@@ -18,7 +18,7 @@
  "h": 1018,
  "marks": [],
  "created": 1791870039,
- "updated": 1794783470,
+ "updated": 1795028047,
  "cat": {
   "title": "Sumax (Сумах), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -54,6 +54,10 @@
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0103_1",
    "score": 999,
    "inv": true
+  },
+  {
+   "id": "cm_e84b44cc05",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -61,6 +65,11 @@
    "ok": true,
    "by": "машина: 2728 общих точек, перекрытие 0.91 (порог 40 / 0.7)",
    "at": 1794940138
+  },
+  "cm_e84b44cc05": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795028047
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -106,6 +115,15 @@
   },
   "field": {
    "dolgikh": "draw"
+  },
+  "same": {
+   "cm_e84b44cc05": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795028047
+    }
+   }
   }
  },
  "frame": "whole",

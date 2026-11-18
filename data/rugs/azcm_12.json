@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870041,
- "updated": 1794236973,
+ "updated": 1795027997,
  "cat": {
   "title": "“Pirhəsənli” («Пиргасанли»), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -53,9 +53,24 @@
   {
    "id": "intangible_2850_p0155_1",
    "score": 0
+  },
+  {
+   "id": "intangible_2849_p0072_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "intangible_2850_p0155_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027997
+  },
+  "intangible_2849_p0072_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027997
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -336,6 +351,22 @@
  "micro": {
   "field": {
    "dolgikh": "1"
+  },
+  "same": {
+   "intangible_2850_p0155_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027997
+    }
+   },
+   "intangible_2849_p0072_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027997
+    }
+   }
   }
  }
 }

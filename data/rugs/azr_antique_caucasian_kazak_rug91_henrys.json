@@ -18,7 +18,7 @@
  "h": 1024,
  "marks": [],
  "created": 1791736129,
- "updated": 1794766875,
+ "updated": 1795027885,
  "cat": {
   "title": "antique caucasian kazak rug91 henrys",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_caucasian_kazak_rug91_henrys",
  "lib_img": "img/azr_antique_caucasian_kazak_rug91_henrys.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Antique_Caucasian_Baku_Rug_Symbology_Bird_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Antique_Caucasian_Baku_Rug_Symbology_Bird_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027885
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -117,6 +128,15 @@
     "w": 2,
     "t": 1794766875,
     "s": "ref"
+   }
+  },
+  "same": {
+   "wikimedia_File_Antique_Caucasian_Baku_Rug_Symbology_Bird_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027885
+    }
    }
   }
  },

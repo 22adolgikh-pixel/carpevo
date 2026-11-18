@@ -48,8 +48,19 @@
  },
  "src_id": "cat:wikimedia_File_Antique_Caucasian_Baku_Rug_Symbology_Bird_jpg",
  "lib_img": "img/wikimedia_File_Antique_Caucasian_Baku_Rug_Symbology_Bird_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_caucasian_kazak_rug91_henrys",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_caucasian_kazak_rug91_henrys": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027885
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

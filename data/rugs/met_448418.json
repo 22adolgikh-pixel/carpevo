@@ -48,8 +48,28 @@
  },
  "src_id": "cat:met_448418",
  "lib_img": "img/met_448418.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_402707b980",
+   "score": 0
+  },
+  {
+   "id": "azcm_111",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_402707b980": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027955
+  },
+  "azcm_111": {
+   "ok": false,
+   "by": "по цепочке: cm_402707b980 ≠ met_448418",
+   "at": 1795027984
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
