@@ -18,7 +18,7 @@
  "h": 700,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794982564,
  "cat": {
   "title": "antique-kazak-moghan-rug54a christies",
   "museum": "",
@@ -58,6 +58,18 @@
   {
    "id": "intangible_2849_p0225_1",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend57",
+   "score": 0
+  },
+  {
+   "id": "azcm_24",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Caucasian_Fachralo_Kazak_Triple_Medallion_5ft_7in_x_7ft_5in_Circa",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -75,6 +87,21 @@
    "ok": false,
    "by": "по цепочке: azr_antique_kazak_moghan_rug54a_christies ≠ intangible_2849_p0225_1",
    "at": 1794981395
+  },
+  "azr_kuba_konagkend57": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982564
+  },
+  "azcm_24": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982564
+  },
+  "wikimedia_File_Caucasian_Fachralo_Kazak_Triple_Medallion_5ft_7in_x_7ft_5in_Circa": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982564
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -117,5 +144,30 @@
   "area": 0.849,
   "ver": 1,
   "t": 1794238432
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_konagkend57": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982564
+    }
+   },
+   "azcm_24": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982564
+    }
+   },
+   "wikimedia_File_Caucasian_Fachralo_Kazak_Triple_Medallion_5ft_7in_x_7ft_5in_Circa": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982564
+    }
+   }
+  }
  }
 }

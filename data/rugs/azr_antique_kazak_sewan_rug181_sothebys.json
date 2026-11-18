@@ -18,7 +18,7 @@
  "h": 1180,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1794982576,
  "cat": {
   "title": "antique-kazak-sewan-rug181 sothebys",
   "museum": "",
@@ -50,9 +50,34 @@
   {
    "id": "azr_kuba_shield37",
    "score": 44
+  },
+  {
+   "id": "azr_kuba_shield49",
+   "score": 0
+  },
+  {
+   "id": "aic_226150",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_kuba_shield37": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982576
+  },
+  "azr_kuba_shield49": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982576
+  },
+  "aic_226150": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982576,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -93,5 +118,30 @@
   "area": 0.8,
   "ver": 1,
   "t": 1794238298
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shield37": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982576
+    }
+   },
+   "azr_kuba_shield49": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982576
+    }
+   },
+   "aic_226150": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982576
+    }
+   }
+  }
  }
 }

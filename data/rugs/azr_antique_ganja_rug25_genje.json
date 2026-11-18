@@ -45,8 +45,20 @@
  },
  "src_id": "cat:azr_antique_ganja_rug25_genje",
  "lib_img": "img/azr_antique_ganja_rug25_genje.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba147",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba147": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982611,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

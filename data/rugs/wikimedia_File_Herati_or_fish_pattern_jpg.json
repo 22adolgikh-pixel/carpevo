@@ -18,7 +18,7 @@
  "h": 210,
  "marks": [],
  "created": 1791736123,
- "updated": 1791736123,
+ "updated": 1794982447,
  "cat": {
   "title": "Herati or fish pattern.jpg",
   "museum": "Wikimedia Commons",
@@ -48,8 +48,28 @@
  },
  "src_id": "cat:wikimedia_File_Herati_or_fish_pattern_jpg",
  "lib_img": "img/wikimedia_File_Herati_or_fish_pattern_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_3653472d83",
+   "score": 0
+  },
+  {
+   "id": "azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_3653472d83": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982447
+  },
+  "azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982447
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -82,5 +102,23 @@
   "area": null,
   "ver": 1,
   "t": 1794238344
+ },
+ "micro": {
+  "same": {
+   "cm_3653472d83": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982447
+    }
+   },
+   "azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982447
+    }
+   }
+  }
  }
 }

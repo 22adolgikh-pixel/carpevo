@@ -18,7 +18,7 @@
  "h": 1379,
  "marks": [],
  "created": 1791736136,
- "updated": 1791736136,
+ "updated": 1794982611,
  "cat": {
   "title": "kuba147",
   "museum": "",
@@ -45,8 +45,29 @@
  },
  "src_id": "cat:azr_kuba147",
  "lib_img": "img/azr_kuba147.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_ganja_rug25_genje",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba107",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_ganja_rug25_genje": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982611,
+   "similar": true
+  },
+  "azr_kuba107": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982611
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +100,23 @@
   "area": 0.923,
   "ver": 1,
   "t": 1794238231
+ },
+ "micro": {
+  "same": {
+   "azr_antique_ganja_rug25_genje": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794982611
+    }
+   },
+   "azr_kuba107": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982611
+    }
+   }
+  }
  }
 }

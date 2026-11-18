@@ -18,7 +18,7 @@
  "h": 1039,
  "marks": [],
  "created": 1791870037,
- "updated": 1794857630,
+ "updated": 1794982604,
  "cat": {
   "title": "Palaz (Палас), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -82,6 +82,18 @@
   {
    "id": "azr_baku_jejim_XIXc",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_144",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -124,6 +136,21 @@
    "ok": false,
    "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1 ≠ azr_baku_jejim_XIXc",
    "at": 1794981395
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982488
+  },
+  "azcm_144": {
+   "ok": false,
+   "by": "по цепочке: azcm_143 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1",
+   "at": 1794982510
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982604
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -174,6 +201,15 @@
      "a": "one",
      "w": 2,
      "t": 1794857630
+    }
+   }
+  },
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982604
     }
    }
   }

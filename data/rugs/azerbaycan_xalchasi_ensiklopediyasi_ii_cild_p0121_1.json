@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794929744,
+ "updated": 1794982488,
  "cat": {
   "title": "Şəddə Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -61,6 +61,22 @@
   {
    "id": "intangible_2851_p0020_1",
    "score": 0
+  },
+  {
+   "id": "azcm_143",
+   "score": 0
+  },
+  {
+   "id": "azcm_182",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0174_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -73,6 +89,26 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794976760
+  },
+  "azcm_143": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982488
+  },
+  "azcm_182": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982488
+  },
+  "intangible_2849_p0174_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794982488
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_143 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1",
+   "at": 1794982510
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -123,6 +159,29 @@
      "a": "one",
      "w": 2,
      "t": 1794929744
+    }
+   }
+  },
+  "same": {
+   "azcm_143": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982488
+    }
+   },
+   "azcm_182": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982488
+    }
+   },
+   "intangible_2849_p0174_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794982488
     }
    }
   }
