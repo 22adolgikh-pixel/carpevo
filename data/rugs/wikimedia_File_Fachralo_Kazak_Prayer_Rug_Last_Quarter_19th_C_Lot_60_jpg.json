@@ -73,7 +73,7 @@
   }
  ],
  "created": 1791736126,
- "updated": 1794658113,
+ "updated": 1794997504,
  "cat": {
   "title": "Fachralo Kazak Prayer Rug Last Quarter 19th C Lot 60.jpg",
   "museum": "Wikimedia Commons",
@@ -107,6 +107,18 @@
   {
    "id": "azr_borchalo_rug_with_memling_guls_bonhams_11_2013_L2043",
    "score": 0
+  },
+  {
+   "id": "intangible_2850_p0153_1",
+   "score": 0
+  },
+  {
+   "id": "met_447483",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug24",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -114,6 +126,22 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794981513
+  },
+  "intangible_2850_p0153_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997504,
+   "similar": true
+  },
+  "met_447483": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997504
+  },
+  "azr_antique_kazak_prayer_rug24": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997504
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -261,6 +289,29 @@
     "w": 2,
     "t": 1794658113,
     "s": "ref"
+   }
+  },
+  "same": {
+   "intangible_2850_p0153_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997504
+    }
+   },
+   "met_447483": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997504
+    }
+   },
+   "azr_antique_kazak_prayer_rug24": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997504
+    }
    }
   }
  },

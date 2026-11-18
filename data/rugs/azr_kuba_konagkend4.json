@@ -18,7 +18,7 @@
  "h": 720,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1794997476,
  "cat": {
   "title": "kuba konagkend4",
   "museum": "",
@@ -50,6 +50,10 @@
   {
    "id": "azr_kuba_perepedil37",
    "score": 81
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion51",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +61,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792271379
+  },
+  "azr_kuba_shirvan_medallion51": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997476
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -99,5 +108,16 @@
   "area": 0.845,
   "ver": 1,
   "t": 1794238505
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shirvan_medallion51": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997476
+    }
+   }
+  }
  }
 }

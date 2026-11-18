@@ -18,7 +18,7 @@
  "h": 1080,
  "marks": [],
  "created": 1791870024,
- "updated": 1794589147,
+ "updated": 1794997453,
  "cat": {
   "title": "Истинг — традиционный ингушский войлочный ковёр",
   "museum": "",
@@ -47,8 +47,29 @@
  },
  "src_id": "cat:cm_59f0093165",
  "lib_img": "img/cm_59f0093165.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_80c92a2064",
+   "score": 0
+  },
+  {
+   "id": "cm_5fcc30d158",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_80c92a2064": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997453,
+   "similar": true
+  },
+  "cm_5fcc30d158": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997453
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -113,6 +134,22 @@
       0.99496
      ]
     ]
+   }
+  },
+  "same": {
+   "cm_80c92a2064": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1794997453
+    }
+   },
+   "cm_5fcc30d158": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997453
+    }
    }
   }
  },

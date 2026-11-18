@@ -18,7 +18,7 @@
  "h": 608,
  "marks": [],
  "created": 1791736134,
- "updated": 1794597364,
+ "updated": 1794997480,
  "cat": {
   "title": "kuba shield45",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_shield45",
  "lib_img": "img/azr_kuba_shield45.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Antique_Causcasian_Rugs_Symbology_Gazelle_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Antique_Causcasian_Rugs_Symbology_Gazelle_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997480
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -159,6 +170,15 @@
     "w": 2,
     "t": 1794597364,
     "s": "ref"
+   }
+  },
+  "same": {
+   "wikimedia_File_Antique_Causcasian_Rugs_Symbology_Gazelle_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997480
+    }
    }
   }
  },

@@ -51,8 +51,20 @@
  },
  "src_id": "cat:intangible_2850_p0153_1",
  "lib_img": "img/intangible_2850_p0153_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Fachralo_Kazak_Prayer_Rug_Last_Quarter_19th_C_Lot_60_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Fachralo_Kazak_Prayer_Rug_Last_Quarter_19th_C_Lot_60_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997504,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_konagkend64",
  "lib_img": "img/azr_kuba_konagkend64.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba83",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba83": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997439
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

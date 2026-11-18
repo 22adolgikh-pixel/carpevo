@@ -3302,8 +3302,19 @@
  },
  "src_id": "cat:intangible_2850_p0164_1",
  "lib_img": "img/intangible_2850_p0164_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_49bc3753ac",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_49bc3753ac": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997442
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

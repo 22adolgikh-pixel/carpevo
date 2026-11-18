@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870018,
- "updated": 1794935641,
+ "updated": 1794997442,
  "cat": {
   "title": "Carpet of the 19th century from Shemakha in the Palace of Shirvanshahs",
   "museum": "",
@@ -52,9 +52,28 @@
   {
    "id": "wikimedia_File_Carpet_from_Shemakha_in_the_Palace_of_Shirvanshahs_2_jpg",
    "score": 1081
+  },
+  {
+   "id": "intangible_2850_p0164_1",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_24_jpg",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "intangible_2850_p0164_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997442
+  },
+  "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_24_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1794997442
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Carpet_from_Shemakha_in_the_Palace_of_Shirvanshahs_2_jpg": {
@@ -107,6 +126,22 @@
     "a": "cropped",
     "w": 2,
     "t": 1794935641
+   }
+  },
+  "same": {
+   "intangible_2850_p0164_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997442
+    }
+   },
+   "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_24_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1794997442
+    }
    }
   }
  },
