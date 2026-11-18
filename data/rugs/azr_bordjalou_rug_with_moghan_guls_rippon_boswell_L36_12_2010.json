@@ -18,7 +18,7 @@
  "h": 1050,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1795027143,
  "cat": {
   "title": "bordjalou rug with moghan guls rippon boswell L36 12 2010",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_bordjalou_rug_with_moghan_guls_rippon_boswell_L36_12_2010",
  "lib_img": "img/azr_bordjalou_rug_with_moghan_guls_rippon_boswell_L36_12_2010.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_mollakamalli2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_mollakamalli2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027143
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": 0.863,
   "ver": 1,
   "t": 1794238375
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_mollakamalli2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027143
+    }
+   }
+  }
  }
 }

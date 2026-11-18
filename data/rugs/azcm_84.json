@@ -643,7 +643,7 @@
   }
  ],
  "created": 1791870044,
- "updated": 1794588119,
+ "updated": 1795027101,
  "cat": {
   "title": "“Muğan” («Муган»), Джебраил, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -674,8 +674,20 @@
  },
  "src_id": "cat:azcm_84",
  "lib_img": "img/azcm_84.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0147_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0147_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027101,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "layout": null,
  "updated_by": "dolgikh",
@@ -879,6 +891,15 @@
      "a": "ok",
      "w": 2,
      "t": 1794588119
+    }
+   }
+  },
+  "same": {
+   "intangible_2850_p0147_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795027101
     }
    }
   }

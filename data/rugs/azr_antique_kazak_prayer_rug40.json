@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1795027126,
  "cat": {
   "title": "antique kazak prayer rug40",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_kazak_prayer_rug40",
  "lib_img": "img/azr_antique_kazak_prayer_rug40.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shield32",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shield32": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027126
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": null,
   "ver": 1,
   "t": 1794238529
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shield32": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027126
+    }
+   }
+  }
  }
 }
