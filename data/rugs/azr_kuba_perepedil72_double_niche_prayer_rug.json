@@ -18,7 +18,7 @@
  "h": 1107,
  "marks": [],
  "created": 1791736134,
- "updated": 1794650457,
+ "updated": 1795019114,
  "cat": {
   "title": "kuba perepedil72 double niche prayer rug",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_perepedil72_double_niche_prayer_rug",
  "lib_img": "img/azr_kuba_perepedil72_double_niche_prayer_rug.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Бочалы_4_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Бочалы_4_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019114
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -117,6 +128,15 @@
     "w": 2,
     "t": 1794650457,
     "s": "ref"
+   }
+  },
+  "same": {
+   "wikimedia_File_Бочалы_4_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795019114
+    }
    }
   }
  },

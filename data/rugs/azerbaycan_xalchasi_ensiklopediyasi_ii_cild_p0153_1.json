@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795019076,
  "cat": {
   "title": "Энциклопедия, т. II, стр. 153",
   "museum": "Национальный музей азербайджанского ковра",
@@ -52,6 +52,10 @@
   {
    "id": "intangible_2849_p0105_1",
    "score": 0
+  },
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug37",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -59,6 +63,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794984326
+  },
+  "azr_shirvan_akstafa_prayer_rug37": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019076
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -93,5 +102,16 @@
   "ver": 1,
   "at": 1794547478
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "azr_shirvan_akstafa_prayer_rug37": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795019076
+    }
+   }
+  }
+ }
 }

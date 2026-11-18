@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795019057,
  "cat": {
   "title": "Zili Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -56,6 +56,10 @@
    "id": "cm_56c89f425c",
    "score": 999,
    "inv": true
+  },
+  {
+   "id": "azr_antique_ganja_rug13_gendje",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -63,6 +67,11 @@
    "ok": true,
    "by": "машина: 185 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
    "at": 1794973823
+  },
+  "azr_antique_ganja_rug13_gendje": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019057
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -100,5 +109,16 @@
  "multi": [],
  "from_twin": {
   "composition": "cm_56c89f425c"
+ },
+ "micro": {
+  "same": {
+   "azr_antique_ganja_rug13_gendje": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795019057
+    }
+   }
+  }
  }
 }

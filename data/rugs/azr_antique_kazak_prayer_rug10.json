@@ -18,7 +18,7 @@
  "h": 706,
  "marks": [],
  "created": 1791736129,
- "updated": 1794858448,
+ "updated": 1795019094,
  "cat": {
   "title": "antique kazak prayer rug10",
   "museum": "",
@@ -53,6 +53,10 @@
   {
    "id": "azr_antique_kazak_prayer_rug31",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star60",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -65,6 +69,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794983821
+  },
+  "azr_kuba_zeyve_lesghi_star60": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019094
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -137,6 +146,15 @@
     "w": 2,
     "t": 1794858448,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_zeyve_lesghi_star60": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795019094
+    }
    }
   }
  },

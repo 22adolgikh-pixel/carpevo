@@ -18,7 +18,7 @@
  "h": 650,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1795019111,
  "cat": {
   "title": "Sale: N08103 | Location: New York Auction Dates: Session 1: Fri, 03 Jun 05 10:15 AM LOT 49 (of 103) ",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_early_karabagh_rug82",
  "lib_img": "img/azr_early_karabagh_rug82.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba64",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba64": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019111
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +92,16 @@
   "area": 0.9,
   "ver": 1,
   "t": 1794238444
+ },
+ "micro": {
+  "same": {
+   "azr_kuba64": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795019111
+    }
+   }
+  }
  }
 }

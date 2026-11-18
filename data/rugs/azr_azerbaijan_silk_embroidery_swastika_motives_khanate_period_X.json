@@ -18,7 +18,7 @@
  "h": 718,
  "marks": [],
  "created": 1791736140,
- "updated": 1791736140,
+ "updated": 1795019104,
  "cat": {
   "title": "Early Azerbaijan silk embroidery with swastika motives, Khanate Period, 18th century, Private Collec",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_azerbaijan_silk_embroidery_swastika_motives_khanate_period_X",
  "lib_img": "img/azr_azerbaijan_silk_embroidery_swastika_motives_khanate_period_X.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_aa36b255de",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_aa36b255de": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019104
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +92,16 @@
   "area": 0.847,
   "ver": 1,
   "t": 1794238236
+ },
+ "micro": {
+  "same": {
+   "cm_aa36b255de": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795019104
+    }
+   }
+  }
  }
 }

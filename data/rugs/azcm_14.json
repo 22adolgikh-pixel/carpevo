@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870039,
- "updated": 1794256707,
+ "updated": 1795019052,
  "cat": {
   "title": "“Arsalan” («Арсалан»), Губа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -57,6 +57,10 @@
   {
    "id": "azcm_165",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion4",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -69,6 +73,11 @@
    "ok": false,
    "by": "по цепочке: azcm_14 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0085_1",
    "at": 1794975895
+  },
+  "azr_kuba_shirvan_medallion4": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019052
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -138,6 +147,15 @@
   },
   "field": {
    "dolgikh": "2"
+  },
+  "same": {
+   "azr_kuba_shirvan_medallion4": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795019052
+    }
+   }
   }
  },
  "frame": "whole",

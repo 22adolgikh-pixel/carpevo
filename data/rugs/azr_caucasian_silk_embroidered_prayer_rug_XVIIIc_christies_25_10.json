@@ -18,7 +18,7 @@
  "h": 751,
  "marks": [],
  "created": 1791736140,
- "updated": 1791736140,
+ "updated": 1795019109,
  "cat": {
   "title": "A CAUCASIAN SILK EMBROIDERED PRAYER RUG LATE 17TH OR EARLY 18TH CENTURY, AZERBAIJAN Price Realized £",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_caucasian_silk_embroidered_prayer_rug_XVIIIc_christies_25_10",
  "lib_img": "img/azr_caucasian_silk_embroidered_prayer_rug_XVIIIc_christies_25_10.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_chichi10",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_chichi10": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795019109
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +92,16 @@
   "area": 0.92,
   "ver": 1,
   "t": 1794238287
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_chichi10": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795019109
+    }
+   }
+  }
  }
 }

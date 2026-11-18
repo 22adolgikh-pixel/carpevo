@@ -2,15 +2,15 @@
  "id": "azr_antique_ganja_rug31_genje_boteh",
  "title": "antique ganja rug31 genje boteh",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "2007-12-26 15:29:40",
  "school": "ganja-gazakh",
- "composition": "",
- "technique": "",
+ "composition": "gence-carpet",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 1984,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1795018993,
  "cat": {
   "title": "antique ganja rug31 genje boteh",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_antique_ganja_rug31_genje_boteh",
  "lib_img": "img/azr_antique_ganja_rug31_genje_boteh.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Гянджа_1_jpg",
+   "score": 0
+  },
+  {
+   "id": "cm_56c89f425c",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Гянджа_1_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795018993
+  },
+  "cm_56c89f425c": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795018993
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +99,29 @@
   "area": 0.91,
   "ver": 1,
   "t": 1794238325
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Гянджа_1_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795018993
+    }
+   },
+   "cm_56c89f425c": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795018993
+    }
+   }
+  }
+ },
+ "from_twin": {
+  "composition": "wikimedia_File_Гянджа_1_jpg",
+  "technique": "wikimedia_File_Гянджа_1_jpg",
+  "museum": "wikimedia_File_Гянджа_1_jpg",
+  "date": "wikimedia_File_Гянджа_1_jpg"
  }
 }
