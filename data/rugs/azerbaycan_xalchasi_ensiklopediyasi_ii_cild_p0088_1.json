@@ -18,7 +18,7 @@
  "h": 1999,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795027793,
  "cat": {
   "title": "Qədirqə Газах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -69,6 +69,10 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0221_1",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -91,6 +95,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794984463
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027793
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -132,6 +141,17 @@
    "v": "same",
    "at": 1794618076,
    "ver": 2
+  }
+ },
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027793
+    }
+   }
   }
  }
 }

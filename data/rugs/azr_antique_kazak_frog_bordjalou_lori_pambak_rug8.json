@@ -18,7 +18,7 @@
  "h": 636,
  "marks": [],
  "created": 1791736128,
- "updated": 1794509621,
+ "updated": 1795027812,
  "cat": {
   "title": "antique-kazak-frog-bordjalou-lori-pambak-rug8",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_kazak_frog_bordjalou_lori_pambak_rug8",
  "lib_img": "img/azr_antique_kazak_frog_bordjalou_lori_pambak_rug8.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_kazak_prayer_rug32",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_kazak_prayer_rug32": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027812
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -154,6 +165,15 @@
      ]
     ],
     "s": "vlm"
+   }
+  },
+  "same": {
+   "azr_antique_kazak_prayer_rug32": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027812
+    }
    }
   }
  },

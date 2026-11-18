@@ -18,7 +18,7 @@
  "h": 886,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1795027819,
  "cat": {
   "title": "antique kazak prayer rug46",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_kazak_prayer_rug46",
  "lib_img": "img/azr_antique_kazak_prayer_rug46.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion90",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion90": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027819
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": 0.879,
   "ver": 1,
   "t": 1794238520
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shirvan_medallion90": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027819
+    }
+   }
+  }
  }
 }

@@ -18,7 +18,7 @@
  "h": 1141,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1795027830,
  "cat": {
   "title": "kuba karagashli5",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_karagashli5",
  "lib_img": "img/azr_kuba_karagashli5.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_konagkend23",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_konagkend23": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027830
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": 0.903,
   "ver": 1,
   "t": 1794238305
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_konagkend23": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027830
+    }
+   }
+  }
  }
 }

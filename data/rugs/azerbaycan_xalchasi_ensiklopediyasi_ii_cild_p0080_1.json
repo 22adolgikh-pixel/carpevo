@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795027788,
  "cat": {
   "title": "Kilim Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -65,6 +65,10 @@
   {
    "id": "azr_kuba_sumakh106",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -82,6 +86,11 @@
    "ok": false,
    "by": "по цепочке: azcm_150 ≠ azr_kuba_sumakh106",
    "at": 1794940139
+  },
+  "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027788
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -142,6 +151,17 @@
    "v": "diff",
    "at": 1794963685,
    "ver": 2
+  }
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027788
+    }
+   }
   }
  }
 }

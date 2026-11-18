@@ -2252,7 +2252,7 @@
   }
  ],
  "created": 1791736122,
- "updated": 1794693975,
+ "updated": 1795027863,
  "cat": {
   "title": "Керимов, т. II (стр. скана 127, печ. 3)",
   "museum": "",
@@ -2329,6 +2329,10 @@
   {
    "id": "azr_kuba_alpan94",
    "score": 0
+  },
+  {
+   "id": "kerimov_vol3_p030_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -2361,6 +2365,11 @@
    "ok": false,
    "by": "по цепочке: azr_kuba_alpan94 ≠ cm_de088aa11d",
    "at": 1794976955
+  },
+  "kerimov_vol3_p030_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027863
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -2511,6 +2520,15 @@
     "a": "whole",
     "w": 2,
     "t": 1794343376
+   }
+  },
+  "same": {
+   "kerimov_vol3_p030_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027863
+    }
    }
   }
  },

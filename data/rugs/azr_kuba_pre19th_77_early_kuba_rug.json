@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_kuba_pre19th_77_early_kuba_rug",
  "lib_img": "img/azr_kuba_pre19th_77_early_kuba_rug.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_pre19th_73_early_kuba_rug",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_pre19th_73_early_kuba_rug": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027832
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

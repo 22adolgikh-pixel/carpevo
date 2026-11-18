@@ -18,7 +18,7 @@
  "h": 1584,
  "marks": [],
  "created": 1791736138,
- "updated": 1794256720,
+ "updated": 1795027832,
  "cat": {
   "title": "Harshang Pattern floral carpet (red ground), late 18th century, Khanates Period, Azerbaijan",
   "museum": "",
@@ -51,6 +51,10 @@
   {
    "id": "azr_early_karabagh_rug219",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_pre19th_77_early_kuba_rug",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -58,6 +62,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794979592
+  },
+  "azr_kuba_pre19th_77_early_kuba_rug": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027832
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -99,6 +108,15 @@
     "a": "fragment",
     "w": 2,
     "t": 1794256720
+   }
+  },
+  "same": {
+   "azr_kuba_pre19th_77_early_kuba_rug": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027832
+    }
    }
   }
  },

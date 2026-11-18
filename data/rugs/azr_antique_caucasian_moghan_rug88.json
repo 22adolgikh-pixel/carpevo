@@ -18,7 +18,7 @@
  "h": 1584,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795027722,
  "cat": {
   "title": "Antique Moghan (Mughan) rug, 19th century, Azerbaijan 2nd half 19th century 1",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug88",
  "lib_img": "img/azr_antique_caucasian_moghan_rug88.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0197_3",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0197_3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027722
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -81,5 +92,16 @@
   "area": 0.787,
   "ver": 1,
   "t": 1794238378
+ },
+ "micro": {
+  "same": {
+   "intangible_2850_p0197_3": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027722
+    }
+   }
+  }
  }
 }

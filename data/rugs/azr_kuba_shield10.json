@@ -18,7 +18,7 @@
  "h": 1845,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1795027757,
  "cat": {
   "title": "kuba shield10",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_shield10",
  "lib_img": "img/azr_kuba_shield10.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_zeyve_lesghi_star77",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_zeyve_lesghi_star77": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027757
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +90,16 @@
   "area": 0.887,
   "ver": 1,
   "t": 1794238303
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_zeyve_lesghi_star77": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027757
+    }
+   }
+  }
  }
 }

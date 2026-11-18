@@ -18,7 +18,7 @@
  "h": 1803,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795027859,
  "cat": {
   "title": "Ковёр «Ərciman» Ширван",
   "museum": "",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2849_p0144_1",
  "lib_img": "img/intangible_2849_p0144_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O153341",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O153341": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027859
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -85,5 +96,16 @@
   "ver": 1,
   "at": 1794547444
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "same": {
+   "vam_O153341": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795027859
+    }
+   }
+  }
+ }
 }

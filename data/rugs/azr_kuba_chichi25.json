@@ -18,7 +18,7 @@
  "h": 761,
  "marks": [],
  "created": 1791736132,
- "updated": 1791736132,
+ "updated": 1795027740,
  "cat": {
   "title": "kuba chichi25",
   "museum": "",
@@ -45,8 +45,20 @@
  },
  "src_id": "cat:azr_kuba_chichi25",
  "lib_img": "img/azr_kuba_chichi25.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_chichi68",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_chichi68": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027740,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -79,5 +91,16 @@
   "area": 0.889,
   "ver": 1,
   "t": 1794238310
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_chichi68": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795027740
+    }
+   }
+  }
  }
 }

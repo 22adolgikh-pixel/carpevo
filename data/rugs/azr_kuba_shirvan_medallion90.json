@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion90",
  "lib_img": "img/azr_kuba_shirvan_medallion90.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_kazak_prayer_rug46",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_kazak_prayer_rug46": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795027819
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
