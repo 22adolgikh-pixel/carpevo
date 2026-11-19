@@ -18,7 +18,7 @@
  "h": 1984,
  "marks": [],
  "created": 1791736131,
- "updated": 1791736131,
+ "updated": 1795117230,
  "cat": {
   "title": "kuba gymyl1",
   "museum": "",
@@ -123,5 +123,39 @@
   "t": 1795117178
  },
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «kuba» в подписи"
+ "school_by": "уточнено по слову «kuba» в подписи",
+ "layout": {
+  "carpet": [
+   0.02509,
+   0.0,
+   0.92473,
+   0.96667
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02509,
+    0.01333
+   ],
+   [
+    0.94803,
+    0.0
+   ],
+   [
+    0.94982,
+    0.96
+   ],
+   [
+    0.03405,
+    0.96667
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }
