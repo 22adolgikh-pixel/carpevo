@@ -2,15 +2,15 @@
  "id": "azr_afshan69",
  "title": "afshan69",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "2010-03-12 16:20:58",
  "school": "guba-shirvan",
- "composition": "",
- "technique": "",
+ "composition": "xileafshan",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 1984,
  "marks": [],
  "created": 1791736128,
- "updated": 1795062214,
+ "updated": 1795096191,
  "cat": {
   "title": "afshan69",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_afshan69",
  "lib_img": "img/azr_afshan69.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Хила_афшан_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Хила_афшан_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795096191
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -87,6 +98,15 @@
     "w": 2,
     "t": 1795029705
    }
+  },
+  "same": {
+   "wikimedia_File_Хила_афшан_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795096191
+    }
+   }
   }
  },
  "frame": "whole",
@@ -123,5 +143,11 @@
   ],
   "quad_status": "accepted"
  },
- "tri": "auto"
+ "tri": "auto",
+ "from_twin": {
+  "composition": "wikimedia_File_Хила_афшан_jpg",
+  "technique": "wikimedia_File_Хила_афшан_jpg",
+  "museum": "wikimedia_File_Хила_афшан_jpg",
+  "date": "wikimedia_File_Хила_афшан_jpg"
+ }
 }

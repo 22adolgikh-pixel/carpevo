@@ -2,23 +2,23 @@
  "id": "kerimov_vol2_p135_1_1",
  "title": "Керимов, т. II, 18 (стр. скана 135, печ. 18)",
  "source": "каталог: kerimov_vol2",
- "museum": "",
- "inv": "",
+ "museum": "Национальный музей азербайджанского ковра",
+ "inv": "445",
  "url": "",
  "license": "книга (не публиковать фото)",
- "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
- "size": "",
+ "place": "Губа, Азербайджан",
+ "date": "конец XIX века",
+ "school": "guba",
+ "composition": "pirebedil",
+ "technique": "ворсовый",
+ "size": "142x213 sm",
  "notes": "",
  "status": "new",
  "w": 993,
  "h": 571,
  "marks": [],
  "created": 1794776768,
- "updated": 1795033005,
+ "updated": 1795096109,
  "cat": {
   "title": "Керимов, т. II (стр. скана 135, печ. 18)",
   "museum": "",
@@ -143,6 +143,22 @@
     ],
     "s": "ref"
    }
+  },
+  "same": {
+   "cm_a6836a71b7": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795096109
+    }
+   },
+   "azcm_30": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795096109
+    }
+   }
   }
  },
  "frame": "whole",
@@ -179,5 +195,55 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "cm_a6836a71b7": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795096109
+  },
+  "azcm_30": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795096109
+  },
+  "azcm_91": {
+   "ok": false,
+   "by": "по цепочке: azcm_30 ≠ azcm_91",
+   "at": 1795096132
+  },
+  "azr_kuba_perepedil10": {
+   "ok": false,
+   "by": "по цепочке: azcm_30 ≠ azr_kuba_perepedil10",
+   "at": 1795096132
+  }
+ },
+ "same": [
+  {
+   "id": "cm_a6836a71b7",
+   "score": 0
+  },
+  {
+   "id": "azcm_30",
+   "score": 0
+  },
+  {
+   "id": "azcm_91",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil10",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "azcm_30",
+  "composition": "azcm_30",
+  "technique": "azcm_30",
+  "museum": "azcm_30",
+  "inv": "azcm_30",
+  "place": "azcm_30",
+  "date": "azcm_30",
+  "size": "azcm_30"
+ }
 }

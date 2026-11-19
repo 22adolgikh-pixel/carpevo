@@ -65,6 +65,10 @@
   {
    "id": "azr_kuba_perepedil16",
    "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p135_1_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -95,6 +99,11 @@
    "ok": false,
    "by": "по цепочке: azr_kuba_perepedil10 ≠ azr_kuba_perepedil64",
    "at": 1794997916
+  },
+  "kerimov_vol2_p135_1_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_30 ≠ azr_kuba_perepedil10",
+   "at": 1795096132
   }
  },
  "_lib_t": "2026-10-12 22:38",
