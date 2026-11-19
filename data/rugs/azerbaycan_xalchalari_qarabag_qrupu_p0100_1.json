@@ -18,7 +18,7 @@
  "h": 1447,
  "marks": [],
  "created": 1794547278,
- "updated": 1794596990,
+ "updated": 1795062011,
  "cat": {
   "title": "Kilim . Qarabağqrupu . Azərbaycan . Ağdam .",
   "museum": "",
@@ -76,7 +76,7 @@
   "conf": 0.986,
   "area": 0.79,
   "ver": 1,
-  "t": 1794547494
+  "t": 1795061981
  },
  "people": {
   "n": 0,
@@ -95,5 +95,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.06048,
+   0.03333,
+   0.87473,
+   0.9333400000000001
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06048,
+    0.03333
+   ],
+   [
+    0.91145,
+    0.03889
+   ],
+   [
+    0.93521,
+    0.96667
+   ],
+   [
+    0.08855,
+    0.96667
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

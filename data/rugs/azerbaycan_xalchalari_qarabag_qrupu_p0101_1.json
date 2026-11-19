@@ -18,7 +18,7 @@
  "h": 1279,
  "marks": [],
  "created": 1794547278,
- "updated": 1795029586,
+ "updated": 1795062011,
  "cat": {
   "title": "Kilim. Q arabağ qrupu. Azərbaycan. A ğdam .",
   "museum": "",
@@ -78,7 +78,7 @@
   "conf": 0.964,
   "area": 0.788,
   "ver": 1,
-  "t": 1794547489
+  "t": 1795061981
  },
  "people": {
   "n": 0,
@@ -97,5 +97,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.08229,
+   0.03444,
+   0.84973,
+   0.93667
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08229,
+    0.03667
+   ],
+   [
+    0.93202,
+    0.03444
+   ],
+   [
+    0.93023,
+    0.96556
+   ],
+   [
+    0.08945,
+    0.97111
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

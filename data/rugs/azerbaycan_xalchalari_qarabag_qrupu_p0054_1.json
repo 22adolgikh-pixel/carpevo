@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794597164,
+ "updated": 1795061974,
  "cat": {
   "title": "Xalça. “ Balıq “ . Qarabağqrupu . Azərbaycan . Xocalı.",
   "museum": "",
@@ -76,7 +76,7 @@
   "conf": 0.979,
   "area": 0.793,
   "ver": 1,
-  "t": 1794547497
+  "t": 1795061932
  },
  "people": {
   "n": 0,
@@ -95,5 +95,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.07965,
+   0.01667,
+   0.84513,
+   0.96111
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.09735,
+    0.01667
+   ],
+   [
+    0.92478,
+    0.02222
+   ],
+   [
+    0.90708,
+    0.97778
+   ],
+   [
+    0.07965,
+    0.97667
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

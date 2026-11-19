@@ -18,7 +18,7 @@
  "h": 1989,
  "marks": [],
  "created": 1794547278,
- "updated": 1794596978,
+ "updated": 1795062011,
  "cat": {
   "title": "Xalça. “ Ləmpə” . Qarabağ qrupu. Azərbaycan. Şuşa.",
   "museum": "",
@@ -77,7 +77,7 @@
   "conf": 0.988,
   "area": 0.799,
   "ver": 1,
-  "t": 1794547419
+  "t": 1795061979
  },
  "people": {
   "n": 0,
@@ -96,5 +96,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.07339,
+   0.01889,
+   0.83945,
+   0.9577800000000001
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08257,
+    0.01889
+   ],
+   [
+    0.91284,
+    0.02111
+   ],
+   [
+    0.91284,
+    0.97667
+   ],
+   [
+    0.07339,
+    0.97667
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

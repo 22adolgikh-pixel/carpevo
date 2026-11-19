@@ -18,7 +18,7 @@
  "h": 1097,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795062011,
  "cat": {
   "title": "Vərni. Qarabağqrupu . Azərbaycan . Bərdə, Lənbərank.",
   "museum": "",
@@ -76,7 +76,7 @@
   "conf": 0.987,
   "area": 0.785,
   "ver": 1,
-  "t": 1794547468
+  "t": 1795061980
  },
  "people": {
   "n": 0,
@@ -84,5 +84,39 @@
   "ver": 1,
   "at": 1794547525
  },
- "multi": []
+ "multi": [],
+ "layout": {
+  "carpet": [
+   0.06352,
+   0.04111,
+   0.87296,
+   0.91
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06352,
+    0.04111
+   ],
+   [
+    0.93058,
+    0.05222
+   ],
+   [
+    0.93648,
+    0.94889
+   ],
+   [
+    0.06499,
+    0.95111
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

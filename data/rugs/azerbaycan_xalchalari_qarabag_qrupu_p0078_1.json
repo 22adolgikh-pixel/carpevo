@@ -18,7 +18,7 @@
  "h": 1023,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795061974,
  "cat": {
   "title": "Xalça. “ Saxsıda güliər” . Qarabağ qrupu. Azərbaycan, Cəbrayıl. XX əsrin əvvəli. Yun. Xovlu.",
   "museum": "",
@@ -79,7 +79,7 @@
   "conf": 0.957,
   "area": 0.845,
   "ver": 1,
-  "t": 1794547404
+  "t": 1795061934
  },
  "people": {
   "n": 0,
@@ -87,5 +87,39 @@
   "ver": 1,
   "at": 1794547446
  },
- "multi": []
+ "multi": [],
+ "layout": {
+  "carpet": [
+   0.05222,
+   0.0,
+   0.8922199999999999,
+   0.99879
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05444,
+    0.0534
+   ],
+   [
+    0.94222,
+    0.0
+   ],
+   [
+    0.94444,
+    0.95267
+   ],
+   [
+    0.05222,
+    0.99879
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

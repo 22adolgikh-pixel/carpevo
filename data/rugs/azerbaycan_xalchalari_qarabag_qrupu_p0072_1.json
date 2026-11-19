@@ -18,7 +18,7 @@
  "h": 1627,
  "marks": [],
  "created": 1794547278,
- "updated": 1794776682,
+ "updated": 1795061974,
  "cat": {
   "title": "Xalça. “ Ləmpə ” . Qarabağqrupu . Azərbaycan . Xocalı.",
   "museum": "",
@@ -77,7 +77,7 @@
   "conf": 0.984,
   "area": 0.819,
   "ver": 1,
-  "t": 1794547392
+  "t": 1795061933
  },
  "people": {
   "n": 0,
@@ -96,5 +96,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.05618,
+   0.02556,
+   0.88764,
+   0.94888
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06742,
+    0.02556
+   ],
+   [
+    0.94382,
+    0.03556
+   ],
+   [
+    0.9236,
+    0.97444
+   ],
+   [
+    0.05618,
+    0.96556
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

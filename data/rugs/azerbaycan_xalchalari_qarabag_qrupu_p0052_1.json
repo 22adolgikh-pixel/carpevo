@@ -18,7 +18,7 @@
  "h": 1890,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795061974,
  "cat": {
   "title": "Xalça. “B alıq“. Q arabağ qrupu. Azərbaycan. Bərdə.",
   "museum": "",
@@ -76,7 +76,7 @@
   "conf": 0.986,
   "area": 0.84,
   "ver": 1,
-  "t": 1794547464
+  "t": 1795061931
  },
  "people": {
   "n": 0,
@@ -84,5 +84,39 @@
   "ver": 1,
   "at": 1794547520
  },
- "multi": []
+ "multi": [],
+ "layout": {
+  "carpet": [
+   0.05623,
+   0.02444,
+   0.88509,
+   0.95334
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05623,
+    0.02556
+   ],
+   [
+    0.94132,
+    0.02444
+   ],
+   [
+    0.94132,
+    0.97333
+   ],
+   [
+    0.05868,
+    0.97778
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

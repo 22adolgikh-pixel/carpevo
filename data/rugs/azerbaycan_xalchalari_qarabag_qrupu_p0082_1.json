@@ -18,7 +18,7 @@
  "h": 1940,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795061974,
  "cat": {
   "title": "Xalça. Qarabağ qrupu. Azərbaycan. Şuşa.",
   "museum": "",
@@ -76,7 +76,7 @@
   "conf": 0.991,
   "area": 0.82,
   "ver": 1,
-  "t": 1794547453
+  "t": 1795061934
  },
  "people": {
   "n": 0,
@@ -84,5 +84,39 @@
   "ver": 1,
   "at": 1794547506
  },
- "multi": []
+ "multi": [],
+ "layout": {
+  "carpet": [
+   0.05751,
+   0.02,
+   0.8785900000000001,
+   0.95667
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.07668,
+    0.02
+   ],
+   [
+    0.91693,
+    0.02333
+   ],
+   [
+    0.9361,
+    0.97667
+   ],
+   [
+    0.05751,
+    0.97556
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

@@ -18,7 +18,7 @@
  "h": 1018,
  "marks": [],
  "created": 1794547278,
- "updated": 1795029543,
+ "updated": 1795061974,
  "cat": {
   "title": "Xalça. “ Bağçada güllər” . Qarabağ qrupu. Azərbaycan. Cəbrayıl. XIX əsrin sonu. Yun. Xovlu.",
   "museum": "",
@@ -60,12 +60,12 @@
   "frame": "whole",
   "quad": [
    [
-    0.03556,
-    0.04146
+    0.04037,
+    0.06252
    ],
    [
-    0.97222,
-    0.05804
+    0.97324,
+    0.06363
    ],
    [
     0.96444,
@@ -79,7 +79,8 @@
   "conf": 0.992,
   "area": 0.843,
   "ver": 1,
-  "t": 1794547416
+  "t": 1795061933,
+  "hand": true
  },
  "people": {
   "n": 0,
@@ -98,5 +99,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.02889,
+   0.06252,
+   0.94435,
+   0.8926999999999999
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04037,
+    0.06252
+   ],
+   [
+    0.97324,
+    0.06363
+   ],
+   [
+    0.96444,
+    0.95522
+   ],
+   [
+    0.02889,
+    0.94527
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "hand"
 }
