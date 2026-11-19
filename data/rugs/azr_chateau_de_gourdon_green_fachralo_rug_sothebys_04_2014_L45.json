@@ -18,7 +18,7 @@
  "h": 678,
  "marks": [],
  "created": 1791736128,
- "updated": 1794984200,
+ "updated": 1795115958,
  "cat": {
   "title": "chateau de gourdon green fachralo rug sothebys 04 2014 L45",
   "museum": "",
@@ -78,8 +78,8 @@
     0.03024
    ],
    [
-    0.95778,
-    0.99784
+    0.96063,
+    1.0
    ],
    [
     0.03,
@@ -89,7 +89,8 @@
   "conf": 0.963,
   "area": 0.902,
   "ver": 1,
-  "t": 1795115912
+  "t": 1795115912,
+  "hand": true
  },
  "micro": {
   "same": {
@@ -109,5 +110,39 @@
    "at": 1795051513,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.0,
+   0.0,
+   0.99889,
+   1.0
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    0.99889,
+    0.03024
+   ],
+   [
+    0.96063,
+    1.0
+   ],
+   [
+    0.03,
+    0.90497
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "hand"
 }

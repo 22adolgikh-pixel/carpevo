@@ -18,7 +18,7 @@
  "h": 1500,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1795115958,
  "cat": {
   "title": "Lily and Palmette Rug",
   "museum": "",
@@ -101,5 +101,39 @@
   "area": 0.857,
   "ver": 1,
   "t": 1795115913
- }
+ },
+ "layout": {
+  "carpet": [
+   0.0324,
+   0.01333,
+   0.92008,
+   0.98556
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.07775,
+    0.01333
+   ],
+   [
+    0.92657,
+    0.02444
+   ],
+   [
+    0.95248,
+    0.99889
+   ],
+   [
+    0.0324,
+    0.97556
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

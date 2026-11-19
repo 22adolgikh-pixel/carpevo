@@ -18,7 +18,7 @@
  "h": 953,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1795115958,
  "cat": {
   "title": "Floral carpet (dark red ground)",
   "museum": "",
@@ -81,5 +81,39 @@
   "area": 0.876,
   "ver": 1,
   "t": 1795115913
- }
+ },
+ "layout": {
+  "carpet": [
+   0.02419,
+   0.04444,
+   0.97447,
+   0.93112
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03495,
+    0.04444
+   ],
+   [
+    0.99866,
+    0.06222
+   ],
+   [
+    0.97043,
+    0.97556
+   ],
+   [
+    0.02419,
+    0.96556
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

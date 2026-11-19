@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736128,
- "updated": 1795008531,
+ "updated": 1795115958,
  "cat": {
   "title": "bordjalou rug with moghan guls rippon boswell L62 11 2013",
   "museum": "",
@@ -197,14 +197,15 @@
     0.97
    ],
    [
-    0.04589,
-    0.98111
+    0.05243,
+    0.97791
    ]
   ],
   "conf": 0.983,
   "area": 0.894,
   "ver": 1,
-  "t": 1795115912
+  "t": 1795115912,
+  "hand": true
  },
  "micro": {
   "same": {
@@ -233,5 +234,39 @@
   }
  },
  "school_prev": "ganja-gazakh",
- "school_by": "уточнено по слову «borcal» в подписи"
+ "school_by": "уточнено по слову «borcal» в подписи",
+ "layout": {
+  "carpet": [
+   0.03797,
+   0.01778,
+   0.93988,
+   0.9601299999999999
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03797,
+    0.01889
+   ],
+   [
+    0.9731,
+    0.01778
+   ],
+   [
+    0.97785,
+    0.97
+   ],
+   [
+    0.05243,
+    0.97791
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "hand"
 }

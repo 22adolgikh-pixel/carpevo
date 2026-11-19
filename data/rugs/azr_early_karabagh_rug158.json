@@ -18,7 +18,7 @@
  "h": 770,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1795115958,
  "cat": {
   "title": "Floral carpet (blue ground)",
   "museum": "",
@@ -81,5 +81,39 @@
   "area": 0.897,
   "ver": 1,
   "t": 1795115912
- }
+ },
+ "layout": {
+  "carpet": [
+   0.02392,
+   0.02727,
+   0.95102,
+   0.95585
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02847,
+    0.02727
+   ],
+   [
+    0.9738,
+    0.03766
+   ],
+   [
+    0.97494,
+    0.98312
+   ],
+   [
+    0.02392,
+    0.97403
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

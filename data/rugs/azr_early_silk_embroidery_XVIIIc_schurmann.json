@@ -18,7 +18,7 @@
  "h": 726,
  "marks": [],
  "created": 1791736140,
- "updated": 1795096112,
+ "updated": 1795115958,
  "cat": {
   "title": "Early Azerbaijan embroidery, XVIII century",
   "museum": "",
@@ -91,6 +91,39 @@
    }
   }
  },
- "frame": "whole",
- "frame_by": "micro"
+ "frame": "cropped",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.02785,
+   0.0303,
+   0.97088,
+   0.96832
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03797,
+    0.0303
+   ],
+   [
+    0.99873,
+    0.03306
+   ],
+   [
+    0.99873,
+    0.98209
+   ],
+   [
+    0.02785,
+    0.99862
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }
