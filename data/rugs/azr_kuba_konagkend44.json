@@ -18,7 +18,7 @@
  "h": 1201,
  "marks": [],
  "created": 1791736133,
- "updated": 1794979767,
+ "updated": 1795117501,
  "cat": {
   "title": "kuba konagkend44",
   "museum": "",
@@ -125,7 +125,7 @@
    }
   }
  },
- "frame": "whole",
+ "frame": "cropped",
  "frame_by": "micro",
  "school_prev": "guba-shirvan",
  "school_by": "уточнено по слову «kuba» в подписи",
@@ -142,5 +142,38 @@
    "at": 1795051281,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.02826,
+   0.01,
+   0.95133,
+   0.9888899999999999
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0314,
+    0.01222
+   ],
+   [
+    0.97802,
+    0.01
+   ],
+   [
+    0.97959,
+    0.99889
+   ],
+   [
+    0.02826,
+    0.99889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

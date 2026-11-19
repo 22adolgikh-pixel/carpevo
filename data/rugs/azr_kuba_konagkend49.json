@@ -18,7 +18,7 @@
  "h": 1984,
  "marks": [],
  "created": 1791736133,
- "updated": 1794982326,
+ "updated": 1795117501,
  "cat": {
   "title": "kuba konagkend49",
   "museum": "",
@@ -179,5 +179,39 @@
    "at": 1795051009,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.04376,
+   0.0,
+   0.89951,
+   0.99889
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04376,
+    0.0
+   ],
+   [
+    0.94327,
+    0.0
+   ],
+   [
+    0.93679,
+    0.98667
+   ],
+   [
+    0.05835,
+    0.99889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }
