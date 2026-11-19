@@ -18,7 +18,7 @@
  "h": 1999,
  "marks": [],
  "created": 1794547278,
- "updated": 1795008380,
+ "updated": 1795062214,
  "cat": {
   "title": "молитвенный ковёр «Faxralı» Гянджа",
   "museum": "Azerbaijan Carpet & Applied Art State Museum",
@@ -115,7 +115,7 @@
   "conf": 0.963,
   "area": 0.861,
   "ver": 1,
-  "t": 1794547488
+  "t": 1795062163
  },
  "people": {
   "n": 0,
@@ -166,5 +166,39 @@
    "at": 1795051623,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.03596,
+   0.01667,
+   0.93322,
+   0.95777
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03596,
+    0.01667
+   ],
+   [
+    0.93322,
+    0.02111
+   ],
+   [
+    0.96918,
+    0.96111
+   ],
+   [
+    0.05137,
+    0.97444
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

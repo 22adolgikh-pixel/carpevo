@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795062158,
  "cat": {
   "title": "Ковёр «Qimil» Губа",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -121,5 +121,39 @@
    "at": 1795051498,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.05546,
+   0.01889,
+   0.90588,
+   0.9622200000000001
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.07731,
+    0.01889
+   ],
+   [
+    0.96134,
+    0.04222
+   ],
+   [
+    0.88908,
+    0.98111
+   ],
+   [
+    0.05546,
+    0.96444
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

@@ -18,7 +18,7 @@
  "h": 1999,
  "marks": [],
  "created": 1794547278,
- "updated": 1794930525,
+ "updated": 1795062158,
  "cat": {
   "title": "Ковёр «Suraxanı» Баку",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -181,5 +181,39 @@
    "at": 1795051343,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.0311,
+   0.02556,
+   0.92635,
+   0.95666
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0311,
+    0.02556
+   ],
+   [
+    0.95745,
+    0.02667
+   ],
+   [
+    0.95581,
+    0.96444
+   ],
+   [
+    0.07038,
+    0.98222
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

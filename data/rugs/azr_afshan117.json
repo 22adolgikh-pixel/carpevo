@@ -18,7 +18,7 @@
  "h": 1440,
  "marks": [],
  "created": 1791736128,
- "updated": 1794597158,
+ "updated": 1795062214,
  "cat": {
   "title": "afshan117",
   "museum": "",
@@ -90,7 +90,7 @@
   "conf": 0.979,
   "area": 0.901,
   "ver": 1,
-  "t": 1794238549
+  "t": 1795062166
  },
  "micro": {
   "frame": {
@@ -101,7 +101,7 @@
    }
   }
  },
- "frame": "whole",
+ "frame": "cropped",
  "frame_by": "micro",
  "same_chk": {
   "azr_afshan109": {
@@ -110,5 +110,38 @@
    "at": 1795051306,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.0,
+   0.01556,
+   0.96173,
+   0.96333
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02806,
+    0.02222
+   ],
+   [
+    0.95918,
+    0.01556
+   ],
+   [
+    0.96173,
+    0.97889
+   ],
+   [
+    0.0,
+    0.96222
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

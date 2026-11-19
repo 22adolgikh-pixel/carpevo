@@ -18,7 +18,7 @@
  "h": 1999,
  "marks": [],
  "created": 1794547278,
- "updated": 1795029655,
+ "updated": 1795062158,
  "cat": {
   "title": "молитвенный ковёр «Namazlıq» Тебриз",
   "museum": "E. Parovacci's private collection",
@@ -96,5 +96,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.02922,
+   0.01889,
+   0.93507,
+   0.96333
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02922,
+    0.03333
+   ],
+   [
+    0.93994,
+    0.01889
+   ],
+   [
+    0.96429,
+    0.95222
+   ],
+   [
+    0.06818,
+    0.98222
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

@@ -18,7 +18,7 @@
  "h": 1984,
  "marks": [],
  "created": 1791736128,
- "updated": 1795029705,
+ "updated": 1795062214,
  "cat": {
   "title": "afshan69",
   "museum": "",
@@ -78,7 +78,7 @@
   "conf": 0.962,
   "area": 0.73,
   "ver": 1,
-  "t": 1794238372
+  "t": 1795062166
  },
  "micro": {
   "frame": {
@@ -90,5 +90,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.08704,
+   0.04333,
+   0.82979,
+   0.90334
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08704,
+    0.04889
+   ],
+   [
+    0.91683,
+    0.04333
+   ],
+   [
+    0.89942,
+    0.94667
+   ],
+   [
+    0.10058,
+    0.93889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

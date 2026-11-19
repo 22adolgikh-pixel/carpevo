@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795062158,
  "cat": {
   "title": "Ковёр «Qaraqoyunlu» Газах",
   "museum": "Museum of History, Stockholm",
@@ -87,5 +87,39 @@
  },
  "multi": [],
  "school_prev": "ganja-gazakh",
- "school_by": "уточнено по слову «gazah» в подписи"
+ "school_by": "уточнено по слову «gazah» в подписи",
+ "layout": {
+  "carpet": [
+   0.03074,
+   0.01444,
+   0.9676400000000001,
+   0.97334
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06958,
+    0.01444
+   ],
+   [
+    0.99838,
+    0.02556
+   ],
+   [
+    0.93042,
+    0.98778
+   ],
+   [
+    0.03074,
+    0.96778
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

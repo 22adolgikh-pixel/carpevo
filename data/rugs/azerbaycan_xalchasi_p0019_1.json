@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795062158,
  "cat": {
   "title": "Ковёр «Heyvanat» Тебриз",
   "museum": "Joseph Winder's private collection",
@@ -85,5 +85,39 @@
   "ver": 1,
   "at": 1794547561
  },
- "multi": []
+ "multi": [],
+ "layout": {
+  "carpet": [
+   0.02863,
+   0.0,
+   0.96946,
+   0.98
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02863,
+    0.01
+   ],
+   [
+    0.99809,
+    0.0
+   ],
+   [
+    0.96947,
+    0.96556
+   ],
+   [
+    0.06489,
+    0.98
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

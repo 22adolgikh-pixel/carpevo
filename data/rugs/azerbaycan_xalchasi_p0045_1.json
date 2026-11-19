@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794936506,
+ "updated": 1795062158,
  "cat": {
   "title": "Ковёр «Xilə-Afşan» Баку",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -181,5 +181,38 @@
    "at": 1795051455,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.04534,
+   0.02556,
+   0.91184,
+   0.94888
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04534,
+    0.02556
+   ],
+   [
+    0.95214,
+    0.02556
+   ],
+   [
+    0.95718,
+    0.97222
+   ],
+   [
+    0.05793,
+    0.97444
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

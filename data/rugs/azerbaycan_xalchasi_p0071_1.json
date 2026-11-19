@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795062214,
  "cat": {
   "title": "Ковёр «Fındıqan» Баку",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -134,7 +134,7 @@
   "conf": 0.967,
   "area": 0.853,
   "ver": 1,
-  "t": 1794547464
+  "t": 1795062164
  },
  "people": {
   "n": 0,
@@ -186,5 +186,39 @@
    "at": 1795051547,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.03503,
+   0.02444,
+   0.91944,
+   0.94334
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03503,
+    0.02889
+   ],
+   [
+    0.94046,
+    0.02444
+   ],
+   [
+    0.95447,
+    0.96778
+   ],
+   [
+    0.04553,
+    0.96667
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

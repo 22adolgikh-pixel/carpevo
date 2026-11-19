@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794784542,
+ "updated": 1795062158,
  "cat": {
   "title": "Pərdə Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -182,11 +182,44 @@
    "ver": 2
   }
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.05587,
+   0.01444,
+   0.8715,
+   0.96667
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05587,
+    0.02
+   ],
+   [
+    0.90223,
+    0.01444
+   ],
+   [
+    0.92737,
+    0.97667
+   ],
+   [
+    0.05587,
+    0.98111
+   ]
+  ],
+  "quad_status": "accepted"
+ },
  "updated_by": "dolgikh",
  "from_twin": {
   "technique": "azcm_187"
  },
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «sirvan» в подписи"
+ "school_by": "уточнено по слову «sirvan» в подписи",
+ "frame": "whole",
+ "tri": "auto"
 }

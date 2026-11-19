@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795062158,
  "cat": {
   "title": "Ковёр «Şeyx Səfi» Тебриз",
   "museum": "Victoria and Albert Museum, London",
@@ -134,5 +134,39 @@
    "at": 1795050480,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.02648,
+   0.01444,
+   0.9429700000000001,
+   0.96778
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08961,
+    0.01444
+   ],
+   [
+    0.96945,
+    0.02333
+   ],
+   [
+    0.89817,
+    0.98222
+   ],
+   [
+    0.02648,
+    0.96778
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

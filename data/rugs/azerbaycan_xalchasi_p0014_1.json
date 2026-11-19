@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795062158,
  "cat": {
   "title": "Ковёр «Əjdahalı» Карабах",
   "museum": "Tekstil Muzeyi, Vaşinqton / Textile Museum, Washington",
@@ -85,5 +85,39 @@
   "ver": 1,
   "at": 1794547426
  },
- "multi": []
+ "multi": [],
+ "layout": {
+  "carpet": [
+   0.02686,
+   0.0,
+   0.94215,
+   0.98333
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08264,
+    0.0
+   ],
+   [
+    0.96901,
+    0.0
+   ],
+   [
+    0.90702,
+    0.98333
+   ],
+   [
+    0.02686,
+    0.97
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

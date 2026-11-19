@@ -18,7 +18,7 @@
  "h": 939,
  "marks": [],
  "created": 1791736138,
- "updated": 1794997540,
+ "updated": 1795062214,
  "cat": {
   "title": "ah1310 dated shirvan namazlig in a yellow ground",
   "museum": "",
@@ -78,7 +78,7 @@
   "conf": 0.964,
   "area": 0.903,
   "ver": 1,
-  "t": 1794238508
+  "t": 1795062166
  },
  "micro": {
   "same": {
@@ -92,5 +92,39 @@
   }
  },
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «sirvan» в подписи"
+ "school_by": "уточнено по слову «sirvan» в подписи",
+ "layout": {
+  "carpet": [
+   0.02921,
+   0.0,
+   0.9694,
+   0.96444
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02921,
+    0.01667
+   ],
+   [
+    0.99861,
+    0.0
+   ],
+   [
+    0.97357,
+    0.96444
+   ],
+   [
+    0.02921,
+    0.93889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }
