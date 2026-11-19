@@ -4349,6 +4349,20 @@ def install(app, DATA, D_WORK):
         except Exception: pass
         twins_run(only_new=not b.get("all")); return {"state": twr}
 
+    @app.post("/api/corner_refine/upload")
+    async def api_corner_refine_upload(request: Request):
+        """v11.94: загрузить веса сети углов из Colab: файлы corner_refine_vN.pt и corner_refine_vN.json (multipart, поля pt и meta)"""
+        if (getattr(request.state, "role", None) or "admin") not in ("admin", "editor"): return JSONResponse({"error": "только для редактора"}, status_code=403)
+        form = await request.form()
+        pt, mj = form.get("pt"), form.get("meta")
+        if not pt or not mj: return JSONResponse({"error": "нужны оба файла: .pt и .json"}, status_code=400)
+        try:
+            meta = json.loads((await mj.read()).decode("utf-8"))
+            import corner_refine
+            info = corner_refine.install(await pt.read(), meta)
+        except Exception as e: return JSONResponse({"error": str(e)[:300]}, status_code=400)
+        return {"ok": True, "info": info}
+
     @app.post("/api/twins_nn")
     async def api_twins_nn(request: Request):
         """загрузить соседей по отпечаткам из Colab (twin_nn_v1.json) — затем проход двойников"""

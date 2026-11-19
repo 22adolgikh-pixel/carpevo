@@ -24,7 +24,8 @@ def main():
         if r.get("dup_of") or r.get("hidden") or r.get("split_into"): continue
         out.append({"id": r["id"], "img": r.get("lib_img") or ("img/" + r["id"] + ".jpg"), "w": r.get("w"), "h": r.get("h"),
                     "quad": L["quad"], "how": L["quad_status"] + "/" + (r.get("tri") or ""), "src": ((r.get("cat") or {}).get("src") or "").split("_")[0],
-                    "auto": a.get("quad"), "vlm": (a.get("vlm_quad") or {}).get("quad"), "t": first.get(r["id"], 0)})
+                    "auto": a.get("quad"), "vlm": (a.get("vlm_quad") or {}).get("quad"), "ref": (a.get("ref_quad") or {}).get("quad"), "t": first.get(r["id"], 0),
+                    "fix": any((v or {}).get("a") == "fix" for v in ((r.get("micro") or {}).get("quad") or {}).values())})   # v4: человек двигал углы — трудный пример
     p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "labels.json")
     json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False)
     print(len(out), "ковров с подтверждёнными углами →", p)

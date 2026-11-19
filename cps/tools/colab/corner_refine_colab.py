@@ -7,7 +7,8 @@
 # Сеть — MobileNetV3-small (предобучена на ImageNet), выход — сдвиг (dx, dy) в долях окна.
 # Проверка — 20 % ковров, которых сеть не видела (последние по времени правки): ошибка до и после, как в отчёте Claude.
 # Итог: carpet-dna/models/corner_refine_v{VER}.pt (TorchScript, ~6 МБ) и corner_refine_v{VER}.json (замеры).
-# Время: GPU (T4) — 10–20 мин; чтение пакетов с Диска — ещё 2–5 мин. Ключи не нужны.
+# v4 (19.11): 1 201 метка, трудные примеры втрое чаще, окно до 24 % (видно бахрому целиком), MobileNetV3-large, строгие замеры (худший угол, «бахрома наружу»).
+# Время: GPU (T4) — 25–40 мин; чтение пакетов с Диска — ещё 2–5 мин. Ключи не нужны.
 import os, io, json, math, random, time, zipfile, glob
 import numpy as np, cv2, torch, torch.nn as nn, torchvision
 from google.colab import drive
@@ -15,7 +16,7 @@ drive.mount('/content/drive')
 T0 = time.time(); log = lambda *a: print(f'[{time.time() - T0:5.0f} c]', *a, flush=True)
 REPO = '/content/carpevo'
 LAB = json.load(open(f'{REPO}/cps/tools/corners/labels.json', encoding='utf-8'))
-VER = 3                                    # v1 — 13.11 (365 ковров); v2 — 15.11 (488); v3 — 16.11 (≈830 меток). Старые веса не перезаписываются
+VER = 4                                    # v1 — 13.11 (365); v2 — 15.11 (488); v3 — 16.11 (≈830 меток); v4 — 19.11 (1 201 метка, бахрома). Старые веса не перезаписываются
 DEV = 'cuda' if torch.cuda.is_available() else 'cpu'; log('устройство', DEV, '| ковров с метками', len(LAB))
 OUT = '/content/drive/MyDrive/carpet-dna/models'; os.makedirs(OUT, exist_ok=True)
 
@@ -69,9 +70,9 @@ class DS(torch.utils.data.Dataset):
     def __init__(s, items, n): s.it, s.n = items, n
     def __len__(s): return s.n
     def __getitem__(s, i):
-        x = random.choice(s.it); a = IM[x['id']]; k = random.randrange(4)
+        x = random.choice(s.it); a = IM[x['id']]; k = random.randrange(4)   # (в s.it трудные ковры — где человек двигал углы — повторены 3 раза)
         tx, ty = x['quad'][k]; h, w = a.shape[:2]; L = max(h, w)
-        half = math.exp(random.uniform(math.log(0.025), math.log(0.14)))
+        half = math.exp(random.uniform(math.log(0.02), math.log(0.26)))           # v4: и крупное окно 24 % — чтобы видеть, где кончается бахрома и начинается ворс
         r = half * random.uniform(0, 0.75); t = random.uniform(0, 2 * math.pi)       # старт — где-то рядом с верным углом
         cx = tx + r * math.cos(t) * L / w; cy = ty + r * math.sin(t) * L / h
         win = window(a, cx, cy, half, k)
@@ -81,13 +82,15 @@ class DS(torch.utils.data.Dataset):
         return prep(win), torch.from_numpy(offset(a, cx, cy, tx, ty, half, k))
 
 
-net = torchvision.models.mobilenet_v3_small(weights='DEFAULT')
-net.classifier = nn.Sequential(nn.Linear(576, 128), nn.Hardswish(), nn.Linear(128, 2))
+net = torchvision.models.mobilenet_v3_large(weights='DEFAULT')                 # v4: сеть крупнее (≈ 4 млн весов; на сервере ≈ 0,3 с на ковёр)
+net.classifier = nn.Sequential(nn.Linear(960, 256), nn.Hardswish(), nn.Linear(256, 2))
 net = net.to(DEV)
-EP, PER = 14, 6000
+EP, PER = 22, 10000
 opt = torch.optim.AdamW(net.parameters(), lr=2e-3, weight_decay=1e-4)
 sch = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=2e-3, total_steps=EP * (PER // 64 + 1))
-dl = torch.utils.data.DataLoader(DS(TR, PER), batch_size=64, num_workers=2, drop_last=False)
+TRW = TR + [x for x in TR if x.get('fix')] * 2                                   # v4: трудные (правленые людьми) — втрое чаще
+log('трудных (человек двигал углы):', sum(1 for x in TR if x.get('fix')), 'из', len(TR))
+dl = torch.utils.data.DataLoader(DS(TRW, PER), batch_size=64, num_workers=2, drop_last=False)
 for ep in range(EP):
     net.train(); tl = 0; n = 0
     for xb, yb in dl:
@@ -98,7 +101,7 @@ for ep in range(EP):
 
 # ---------- уточнение и проверка ----------
 net.eval()
-HALVES = (0.12, 0.06, 0.03)
+HALVES = (0.24, 0.12, 0.06, 0.03)
 
 
 @torch.no_grad()
@@ -118,8 +121,24 @@ def err(q, t, a):
     return float(np.mean([math.hypot((q[k][0] - t[k][0]) * w / L, (q[k][1] - t[k][1]) * h / L) for k in range(4)]))
 
 
+def maxerr(q, t, a):
+    h, w = a.shape[:2]; L = max(h, w)
+    return float(max(math.hypot((q[k][0] - t[k][0]) * w / L, (q[k][1] - t[k][1]) * h / L) for k in range(4)))
+
+
+def fringe_out(q, t, a):
+    """1, если хоть один угол вынесен НАРУЖУ вдоль длинной оси ковра больше чем на 1 % длинной стороны фото (типичная ошибка «бахрома = край»)"""
+    h, w = a.shape[:2]; L = max(h, w); T = np.array(t) * [w, h]; Q = np.array(q) * [w, h]
+    ax = (T[3] - T[0]) if np.linalg.norm(T[3] - T[0]) >= np.linalg.norm(T[1] - T[0]) else (T[1] - T[0]); ax = ax / np.linalg.norm(ax)
+    c = T.mean(0)
+    for k in range(4):
+        d = np.dot(Q[k] - T[k], ax); s = np.sign(np.dot(T[k] - c, ax))
+        if d * s > 0.01 * L: return 1
+    return 0
+
+
 rep = {}
-for start in ('auto', 'vlm'):
+for start in ('auto', 'vlm', 'ref'):            # ref — углы прежней сети (v3): сравнение «было — стало»
     E0, E1 = [], []
     for x in TE:
         if not x.get(start): continue
@@ -130,6 +149,15 @@ for start in ('auto', 'vlm'):
                   'before_p90': round(float(np.percentile(E0, 90)), 4), 'after_p90': round(float(np.percentile(E1, 90)), 4),
                   'better': int((E1 < E0 - 0.002).sum()), 'worse': int((E1 > E0 + 0.002).sum()),
                   'within_1pct_before': round(float((E0 <= 0.01).mean()), 3), 'within_1pct_after': round(float((E1 <= 0.01).mean()), 3)}
+    # v4: строже — худший из четырёх углов (так смотрит человек) и «бахрома»: угол вынесен наружу по длинной оси ковра больше чем на 1 %
+    M0, M1, F0, F1 = [], [], 0, 0
+    for x in TE:
+        if not x.get(start): continue
+        a = IM[x['id']]; q1 = refine(a, x[start])
+        M0.append(maxerr(x[start], x['quad'], a)); M1.append(maxerr(q1, x['quad'], a)); F0 += fringe_out(x[start], x['quad'], a); F1 += fringe_out(q1, x['quad'], a)
+    M0, M1 = np.array(M0), np.array(M1)
+    rep[start].update({'worst_corner_le_1pct_before': round(float((M0 <= 0.01).mean()), 3), 'worst_corner_le_1pct_after': round(float((M1 <= 0.01).mean()), 3),
+                       'worst_corner_le_2pct_after': round(float((M1 <= 0.02).mean()), 3), 'fringe_out_before': F0, 'fringe_out_after': F1})
     log(start, rep[start])
 
 # ---------- v3: можно ли принимать углы без человека? ----------
@@ -143,11 +171,6 @@ def spread_run(a, quad, n=6, jit=0.015):
     Q = np.array(Q); med = np.median(Q, 0)
     d = np.hypot((Q[..., 0] - med[:, 0]) * w / L, (Q[..., 1] - med[:, 1]) * h / L)      # n × 4
     return med.tolist(), float(d.max())
-
-
-def maxerr(q, t, a):
-    h, w = a.shape[:2]; L = max(h, w)
-    return float(max(math.hypot((q[k][0] - t[k][0]) * w / L, (q[k][1] - t[k][1]) * h / L) for k in range(4)))
 
 
 SP = []
@@ -166,10 +189,10 @@ rep['confidence'] = conf
 
 # ---------- выгрузка ----------
 net.cpu().eval()
-ts = torch.jit.trace(net, torch.zeros(4, 3, W, W))
+ts = torch.jit.trace(net, torch.zeros(4, 3, W, W))   # v4: в студии — «Загрузить» → «Веса сети углов» (оба файла)
 p = f'{OUT}/corner_refine_v{VER}.pt'; ts.save(p)
 meta = {'ver': VER, 'W': W, 'halves': HALVES, 'mag': MAG, 'long': LONG, 'trained': time.strftime('%Y-%m-%d %H:%M'),
         'n_train': len(TR), 'n_test': len(TE), 'test': rep}
 json.dump(meta, open(f'{OUT}/corner_refine_v{VER}.json', 'w'), ensure_ascii=False, indent=1)
 print('\nИТОГ:', json.dumps(meta, ensure_ascii=False))
-print('файлы:', p, f'({os.path.getsize(p) / 1e6:.1f} МБ) и corner_refine_v{VER}.json — Claude заберёт их с Диска')
+print('файлы:', p, f'({os.path.getsize(p) / 1e6:.1f} МБ) и corner_refine_v{VER}.json — скачать оба и загрузить в студии: «Ковры» → «＋ Загрузить» → «Веса сети углов»')

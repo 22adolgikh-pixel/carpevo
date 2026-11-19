@@ -20,7 +20,7 @@ VERSION = 3          # версия загруженных весов (меня�
 
 
 def _path():
-    for v in (3, 2, 1):
+    for v in (6, 5, 4, 3, 2, 1):                                                 # v11.94: v4+ — загружаются из студии («Загрузить» → «веса углов»)
         for p in (os.path.join(DATA, f"corner_refine_v{v}.pt"), os.path.join(HERE, "models", f"corner_refine_v{v}.pt")):
             if os.path.exists(p): return p
     return None
@@ -54,11 +54,11 @@ def _load():
         try:
             import torch
             P = _path()
-            if (P is None or "_v3" not in P) and fetch(): P = _path()
+            if P is None and fetch(): P = _path()
             if P:
                 torch.set_num_threads(2)
                 _S["net"] = torch.jit.load(P, map_location="cpu").eval()
-                global VERSION; VERSION = int(P[-4])
+                global VERSION; VERSION = int(os.path.basename(P).split("_v")[-1].split(".")[0])
                 try: _S["meta"] = json.load(open(P[:-3] + ".json", encoding="utf-8"))
                 except (OSError, ValueError): _S["meta"] = {}
         except Exception as e:
@@ -97,3 +97,19 @@ def refine(img, quad):
                 sx, sy = FLIP[k]; d = np.clip(o[k], -1, 1)
                 q[k][0] += sx * float(d[0]) * half * L / w; q[k][1] += sy * float(d[1]) * half * L / h
     return [[round(min(1.6, max(-0.6, x)), 5), round(min(1.6, max(-0.6, y)), 5)] for x, y in q]
+
+
+def install(pt_bytes, meta):
+    """v11.94: веса из Colab (corner_refine_vN.pt + .json) загружены из студии → проверить, что сеть грузится и считает, и подключить"""
+    import torch, io
+    v = int(meta.get("ver") or 0)
+    if v < 4: raise ValueError("нужна версия 4 или новее (в .json поле ver)")
+    net = torch.jit.load(io.BytesIO(pt_bytes), map_location="cpu").eval()
+    W = int(meta.get("W", 128))
+    with torch.no_grad(): out = net(torch.zeros(4, 3, W, W))
+    if tuple(out.shape) != (4, 2): raise ValueError(f"сеть отвечает не так: {tuple(out.shape)}")
+    dst = os.path.join(DATA, f"corner_refine_v{v}.pt")
+    open(dst + ".part", "wb").write(pt_bytes); os.replace(dst + ".part", dst)
+    json.dump(meta, open(dst[:-3] + ".json", "w", encoding="utf-8"), ensure_ascii=False)
+    with _lock: _S["tried"] = False; _S["net"] = None; _S["err"] = ""
+    _load(); return info()

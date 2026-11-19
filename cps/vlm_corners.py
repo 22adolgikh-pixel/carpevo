@@ -50,7 +50,9 @@ def _ask(images, prompt, max_tokens=300):
         try:
             with urllib.request.urlopen(rq, timeout=90) as r:
                 j = json.load(r)
-            if orouter: return ((j.get("choices") or [{}])[0].get("message") or {}).get("content") or ""
+            if orouter:                                                          # v11.94: пустой ответ — показать причину (обрыв по длине, рассуждения съели лимит)
+                ch = (j.get("choices") or [{}])[0]; txt = (ch.get("message") or {}).get("content") or ""
+                return txt or "[пусто: finish=%s]" % ch.get("finish_reason")
             return "".join(b.get("text", "") for b in j.get("content", []) if b.get("type") == "text")
         except urllib.error.HTTPError as e:
             if e.code in (429, 500, 502, 503, 529) and attempt < 2: time.sleep(3 * (attempt + 1)); continue
@@ -157,7 +159,7 @@ REFINE_PROMPT = ("ОКНА: четыре увеличенных окна 2×2 в
 def two_step(im):
     """im — BGR фото (любого размера). → {"quad": [[x,y]*4] доли кадра, "coarse": [...], "model": ..} или None, если модель не дала внятного ответа"""
     h, w = im.shape[:2]
-    j = _json(_ask([_jpg(_coarse_img(im))], COARSE_PROMPT))
+    j = _json(_ask([_jpg(_coarse_img(im))], COARSE_PROMPT, max_tokens=1500))
     try: q = _pts((j or {}).get("quad") or (j or {}).get("corners"))
     except (TypeError, ValueError, IndexError, KeyError): return None
     if len(q) != 4: return None
@@ -169,7 +171,7 @@ def two_step(im):
     m = np.vstack([np.hstack(tiles[:2]), np.hstack(tiles[2:])])
     out = list(coarse); refine = ""
     try:
-        txt = _ask([_jpg(m)], REFINE_PROMPT); j2 = _json(txt)
+        txt = _ask([_jpg(m)], REFINE_PROMPT, max_tokens=1500); j2 = _json(txt)   # v11.94: было 300 — 2/3 ответов уточнения приходили пустыми
         cs = _pts((j2 or {}).get("corners") or (j2 or {}).get("quad"))
         if len(cs) == 4:
             ref = []; far = 0

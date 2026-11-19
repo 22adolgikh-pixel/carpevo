@@ -2028,6 +2028,32 @@ def t46_frame_auto_v1191(pg, ctx):
     errors_ok(ctx, 'кадр авто')
 
 
+@test
+def t47_corner_upload_v1194(pg, ctx):
+    """v11.94: «Загрузить» → «Веса сети углов»: без одного из файлов — понятная ошибка; плохие веса не подключаются и не ломают сервер."""
+    import urllib.request
+    u = ctx['url']
+    def up(files):
+        bd = 'xxBOUNDxx'; body = b''
+        for name, fn, data in files:
+            body += f'--{bd}\r\nContent-Disposition: form-data; name="{name}"; filename="{fn}"\r\nContent-Type: application/octet-stream\r\n\r\n'.encode() + data + b'\r\n'
+        body += f'--{bd}--\r\n'.encode()
+        rq = urllib.request.Request(u + 'api/corner_refine/upload', data=body, headers={'Content-Type': 'multipart/form-data; boundary=' + bd}, method='POST')
+        try:
+            with urllib.request.urlopen(rq) as r: return r.status, json.loads(r.read())
+        except urllib.error.HTTPError as e: return e.code, json.loads(e.read())
+    c, j = up([('meta', 'corner_refine_v4.json', b'{"ver": 4}')])
+    assert c == 400 and 'оба' in j['error'], (c, j)
+    c, j = up([('pt', 'corner_refine_v4.pt', b'not a net'), ('meta', 'corner_refine_v4.json', b'{"ver": 4, "W": 128}')])
+    assert c == 400 and j.get('error'), (c, j)
+    c, j = up([('pt', 'corner_refine_v3.pt', b'x'), ('meta', 'corner_refine_v3.json', b'{"ver": 3}')])
+    assert c == 400, (c, j)
+    assert not os.path.exists(ctx['app'] + '/data/corner_refine_v4.pt')
+    pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(1500)
+    assert pg.locator('#rgCR').count() == 1 and 'Веса сети углов' in pg.content()
+    errors_ok(ctx, 'веса углов')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
