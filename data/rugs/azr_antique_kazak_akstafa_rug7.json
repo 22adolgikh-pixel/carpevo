@@ -18,7 +18,7 @@
  "h": 1341,
  "marks": [],
  "created": 1791736129,
- "updated": 1794983871,
+ "updated": 1795062314,
  "cat": {
   "title": "antique kazak akstafa rug7",
   "museum": "",
@@ -156,5 +156,39 @@
    "at": 1795051161,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.0,
+   0.0,
+   0.99771,
+   0.99889
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.1078,
+    0.0
+   ],
+   [
+    0.86239,
+    0.0
+   ],
+   [
+    0.99771,
+    0.99889
+   ],
+   [
+    0.0,
+    0.99889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

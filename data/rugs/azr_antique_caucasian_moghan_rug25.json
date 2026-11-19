@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791736138,
- "updated": 1794984261,
+ "updated": 1795062314,
  "cat": {
   "title": "Lot: 202, Moghan Long Rug, an extremely rare carpet in a long format, its field abrashed in several ",
   "museum": "",
@@ -208,5 +208,39 @@
    "at": 1795051650,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.0627,
+   0.01333,
+   0.8840100000000001,
+   0.9733400000000001
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0627,
+    0.01333
+   ],
+   [
+    0.94671,
+    0.02444
+   ],
+   [
+    0.90596,
+    0.98444
+   ],
+   [
+    0.0721,
+    0.98667
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

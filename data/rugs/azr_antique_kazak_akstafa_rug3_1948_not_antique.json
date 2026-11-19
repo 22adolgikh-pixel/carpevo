@@ -18,7 +18,7 @@
  "h": 1984,
  "marks": [],
  "created": 1791736129,
- "updated": 1794771466,
+ "updated": 1795062314,
  "cat": {
   "title": "antique kazak akstafa rug3 1948 not antique",
   "museum": "",
@@ -89,8 +89,41 @@
    }
   }
  },
- "frame": "whole",
+ "frame": "cropped",
  "frame_by": "micro",
  "school_prev": "ganja-gazakh",
- "school_by": "уточнено по слову «kazak» в подписи"
+ "school_by": "уточнено по слову «kazak» в подписи",
+ "layout": {
+  "carpet": [
+   0.0,
+   0.01444,
+   0.97204,
+   0.9844499999999999
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0,
+    0.01444
+   ],
+   [
+    0.91398,
+    0.01778
+   ],
+   [
+    0.97204,
+    0.98333
+   ],
+   [
+    0.07097,
+    0.99889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

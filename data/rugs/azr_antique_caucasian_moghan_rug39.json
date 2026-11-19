@@ -18,7 +18,7 @@
  "h": 1580,
  "marks": [],
  "created": 1791736138,
- "updated": 1794976327,
+ "updated": 1795062314,
  "cat": {
   "title": "A southern Salyan (so called Saliani) rug",
   "museum": "",
@@ -92,5 +92,39 @@
     }
    }
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.04067,
+   0.0,
+   0.93062,
+   0.98222
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05502,
+    0.0
+   ],
+   [
+    0.97129,
+    0.0
+   ],
+   [
+    0.94498,
+    0.98222
+   ],
+   [
+    0.04067,
+    0.98222
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

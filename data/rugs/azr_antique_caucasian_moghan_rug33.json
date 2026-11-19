@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791736138,
- "updated": 1795030365,
+ "updated": 1795062314,
  "cat": {
   "title": "Lot: 159, A rare Moghan with a light blue field that is darker at the top, and densely filled with h",
   "museum": "",
@@ -91,6 +91,39 @@
    }
   }
  },
- "frame": "whole",
- "frame_by": "micro"
+ "frame": "cropped",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.05568,
+   0.0,
+   0.8886400000000001,
+   0.97
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05568,
+    0.01778
+   ],
+   [
+    0.89791,
+    0.0
+   ],
+   [
+    0.94432,
+    0.96111
+   ],
+   [
+    0.06032,
+    0.97
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

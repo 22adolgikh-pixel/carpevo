@@ -18,7 +18,7 @@
  "h": 715,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1795062314,
  "cat": {
   "title": "antique-bordjalou-flatweave-gd",
   "museum": "",
@@ -59,12 +59,12 @@
   "frame": "cropped",
   "quad": [
    [
-    0.065,
-    0.0
+    0.07564,
+    0.00607
    ],
    [
-    0.87667,
-    0.02378
+    0.87954,
+    0.02841
    ],
    [
     0.99833,
@@ -78,8 +78,43 @@
   "conf": 0.964,
   "area": 0.879,
   "ver": 1,
-  "t": 1795062219
+  "t": 1795062219,
+  "hand": true
  },
  "school_prev": "ganja-gazakh",
- "school_by": "уточнено по слову «borcal» в подписи"
+ "school_by": "уточнено по слову «borcal» в подписи",
+ "layout": {
+  "carpet": [
+   0.0,
+   0.00607,
+   0.99833,
+   0.99253
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.07564,
+    0.00607
+   ],
+   [
+    0.87954,
+    0.02841
+   ],
+   [
+    0.99833,
+    0.9986
+   ],
+   [
+    0.0,
+    0.96923
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "hand"
 }
