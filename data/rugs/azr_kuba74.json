@@ -154,7 +154,7 @@
   }
  ],
  "created": 1791736136,
- "updated": 1794588392,
+ "updated": 1795117161,
  "cat": {
   "title": "kuba74",
   "museum": "",
@@ -278,7 +278,38 @@
  },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.0,
+   0.0179,
+   0.99842,
+   0.9521
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05864,
+    0.0179
+   ],
+   [
+    0.99079,
+    0.02459
+   ],
+   [
+    0.99842,
+    0.94889
+   ],
+   [
+    0.0,
+    0.97
+   ]
+  ],
+  "quad_status": "accepted"
+ },
  "updated_by": "dolgikh",
  "same_chk": {
   "wikimedia_File_Caucasian_Fachralo_Kazak_Triple_Medallion_5ft_7in_x_7ft_5in_Circa": {
@@ -352,12 +383,12 @@
   "frame": "cropped",
   "quad": [
    [
-    0.0523,
-    0.0
+    0.05864,
+    0.0179
    ],
    [
-    0.99842,
-    0.01667
+    0.99079,
+    0.02459
    ],
    [
     0.99842,
@@ -371,7 +402,8 @@
   "conf": 0.949,
   "area": 0.925,
   "ver": 1,
-  "t": 1795115964
+  "t": 1795115964,
+  "hand": true
  },
  "micro": {
   "marks": {
@@ -413,5 +445,7 @@
   }
  },
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «kuba» в подписи"
+ "school_by": "уточнено по слову «kuba» в подписи",
+ "frame": "cropped",
+ "tri": "hand"
 }

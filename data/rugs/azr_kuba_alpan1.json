@@ -18,7 +18,7 @@
  "h": 1029,
  "marks": [],
  "created": 1791736131,
- "updated": 1795029676,
+ "updated": 1795117161,
  "cat": {
   "title": "kuba alpan1",
   "museum": "",
@@ -99,8 +99,41 @@
   }
  },
  "composition_by": "/m: dolgikh",
- "frame": "whole",
+ "frame": "cropped",
  "frame_by": "micro",
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «kuba» в подписи"
+ "school_by": "уточнено по слову «kuba» в подписи",
+ "layout": {
+  "carpet": [
+   0.0,
+   0.01556,
+   0.99848,
+   0.96222
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02883,
+    0.01556
+   ],
+   [
+    0.94537,
+    0.03
+   ],
+   [
+    0.99848,
+    0.97778
+   ],
+   [
+    0.0,
+    0.96667
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }
