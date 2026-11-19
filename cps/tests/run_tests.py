@@ -557,6 +557,48 @@ def t14_patterns_tree(pg, ctx):
 
 
 @test
+def t14b_patterns_filters_tools(pg, ctx):
+    """v11.93: «Узоры» устроены как «Ковры»: фильтры слева, чипы, Вид, Инструменты, выбор в очереди."""
+    pg.evaluate("setMode('cat')"); pg.wait_for_timeout(600)
+    for sel in ('#left details.fg', '#patChips', '#patViewBtn', '#patToolsBtn', '#patSort', '#catQ'):
+        assert pg.query_selector(sel), f'в «Всех рисунках» нет {sel}'
+    assert not pg.is_visible('#patTools'), 'панель инструментов открыта по умолчанию'
+    n_all = pg.evaluate("document.querySelectorAll('#catalog .card').length")
+    pg.click('#left [data-ft="bw"]'); pg.wait_for_timeout(400)
+    assert pg.is_visible('#patChips .rgfch'), 'после выбора типа нет чипа активного фильтра'
+    assert pg.evaluate("S.catType") == 'bw'
+    pg.click('#patChips .rgfch button'); pg.wait_for_timeout(400)
+    assert pg.evaluate("document.querySelectorAll('#catalog .card').length") == n_all and not pg.query_selector('#patChips .rgfch'), 'крестик на чипе не снимает фильтр'
+    pg.click('#left [data-fs="rev"]'); pg.wait_for_timeout(300); pg.click('#patChipsAll'); pg.wait_for_timeout(300)
+    assert not pg.evaluate("S.catRev"), '«сбросить всё» не снимает фильтры'
+    pg.click('#patViewBtn'); pg.wait_for_timeout(300)
+    pg.click('#popMenu [data-sz="l"]'); pg.wait_for_timeout(200)
+    assert pg.evaluate("document.getElementById('catalog').style.getPropertyValue('--pcw')") == '250px', '«Вид» не меняет размер карточек'
+    pg.keyboard.press('Escape'); pg.click('#patViewBtn'); pg.wait_for_timeout(200); pg.click('#popMenu [data-sz="m"]'); pg.keyboard.press('Escape')
+    pg.click('#patToolsBtn'); pg.wait_for_timeout(500)
+    assert pg.is_visible('#patTools'), 'панель инструментов не открылась'
+    for i in ('qFast', 'qHard', 'pwGo', 'pwRedo', 'mdTrain', 'rkBack', 'lgDl'):
+        assert pg.query_selector(f'#patTools #{i}'), f'в панели нет инструмента {i}'
+    assert pg.is_visible('#patToolsBtn') and pg.is_visible('[data-upl="pat"]'), 'панель закрыла кнопки сверху'
+    pg.click('#patToolsX'); pg.wait_for_timeout(300); assert not pg.is_visible('#patTools')
+    pg.click('#patToolsBtn'); pg.wait_for_timeout(300)
+    pg.click('[data-vs="queue"]'); pg.wait_for_timeout(700)
+    assert pg.is_visible('#patTools'), 'панель инструментов пропала при переходе в очередь'
+    assert pg.evaluate("document.getElementById('qFast').disabled") == (pg.evaluate("patCounts().q") == 0), 'быстрая проверка: доступность не совпадает с очередью'
+    n = pg.evaluate("document.querySelectorAll('#catalog .card').length")
+    if n:
+        pg.click('#qThr', force=True) if False else None
+        pg.evaluate("document.querySelector('#catalog [data-sel]').click()"); pg.wait_for_timeout(300)
+        assert pg.is_visible('#qAccept'), 'после выбора рисунка нет панели «принять выбранные»'
+        pg.click('#qPickNone'); pg.wait_for_timeout(300); assert not pg.query_selector('#qAccept'), '«снять выбор» не убирает панель'
+    pg.click('#patToolsX'); pg.evaluate("setMode('sheet')"); pg.wait_for_timeout(400)
+    assert not pg.is_visible('#patTools'), 'панель инструментов осталась на листах'
+    pg.evaluate("setMode('cat')"); pg.wait_for_timeout(300)
+    pg.screenshot(path=f'{OUT}/11b_patterns_filters.png')
+    errors_ok(ctx, 'фильтры и инструменты узоров')
+
+
+@test
 def t15_rugs_overview(pg, ctx):
     pg.click('#tab-rugs'); pg.wait_for_timeout(1500)
     if pg.evaluate("R.view") == 'edit': pg.evaluate("rugBack()"); pg.wait_for_timeout(600)

@@ -117,7 +117,7 @@ textarea{width:100%;min-height:60px;resize:vertical}
 @keyframes sp{to{transform:rotate(360deg)}}
 .rgbusy{position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:10px;max-width:70%;padding:9px 16px;border-radius:22px;background:var(--pan);color:var(--tx);border:1px solid var(--acc);box-shadow:0 6px 24px rgba(0,0,0,.45);font-size:13px;pointer-events:none}.rgbusy.done{border-color:var(--ln2)}.rgbusy .spin{width:16px;height:16px;border-width:3px;flex:none}.rgbusy.pulse{animation:rgbp 1.4s ease-in-out infinite}@keyframes rgbp{50%{box-shadow:0 6px 24px rgba(0,0,0,.45),0 0 0 4px var(--ln2)}}@media (prefers-reduced-motion:reduce){.rgbusy.pulse{animation:none}.spin{animation-duration:2s}}
 #catalog{position:absolute;inset:0;overflow:auto;padding:14px;display:none;background:var(--bg)}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--pcw,170px),1fr));gap:10px}
 .pstep{display:flex;gap:12px;padding:12px;margin-bottom:10px;border:1px solid var(--ln);border-radius:10px;background:var(--pan)}.pn{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#1a1405;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}.pb{flex:1;min-width:0}.pt{color:var(--mut);margin-top:4px;line-height:1.45}.mut{color:var(--mut)}
 .qchk{position:absolute;top:10px;left:10px;z-index:2;background:rgba(0,0,0,.55);border-radius:5px;padding:3px 5px;display:flex}
 .card{position:relative;background:var(--pan);border:1px solid var(--ln);border-radius:8px;padding:8px;cursor:pointer}
@@ -394,7 +394,7 @@ label.btn{display:inline-block;border:1px solid var(--ln);border-radius:6px;padd
 #ovbar{justify-self:end;display:flex;gap:4px}#ovbar button{padding:4px 12px}#ovbar button.on{background:var(--acc);color:#111}#tab-close{background:#3a2326}
 .seg{display:inline-flex;border:1px solid var(--ln);border-radius:7px;overflow:hidden}.seg button{border:0;border-radius:0;background:transparent;font-weight:600}.seg button.on{background:var(--acc);color:#111}.seg small{opacity:.7;margin-left:3px}
 .card.kf{outline:2px solid var(--acc);outline-offset:1px}
-.cards.q{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}.cards.q .im{height:210px}
+.cards.q{grid-template-columns:repeat(auto-fill,minmax(var(--pqw,230px),1fr))}.cards.q .im{height:210px}
 .card .im{position:relative}.card.showorig .im::after{content:'оригинал';position:absolute;left:4px;bottom:4px;background:rgba(0,0,0,.65);color:#fff;font-size:10.5px;padding:1px 6px;border-radius:3px}
 .card .im img.orig{image-rendering:auto}
 .rvp .pvl{color:var(--mut);font-size:11px;margin-bottom:4px}.rvp img.px{image-rendering:pixelated}
@@ -423,20 +423,28 @@ label.btn{display:inline-block;border:1px solid var(--ln);border-radius:6px;padd
 .popmenu small{color:var(--mut);font-size:11.5px;font-weight:400;line-height:1.3}.popmenu .ps{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);padding:8px 10px 2px}
 .popmenu .vwsz{display:flex;gap:4px;padding:2px 10px 6px}.popmenu .vwsz .sm{flex:1}.popmenu .vwsz .sm.on{background:var(--acc);color:var(--acc-tx)}
 .popmenu .vwl{display:flex;gap:9px;align-items:flex-start;padding:8px 10px;border-radius:6px;cursor:pointer}.popmenu .vwl:hover{background:var(--sel)}.popmenu .vwl input{margin-top:3px}.popmenu .vwl span{display:flex;flex-direction:column;gap:2px}
+
+/* v11.93: Узоры — фильтры, чипы, панель инструментов (как у ковров) */
+#catalog.pat{padding:0}#catalog.pat .patbar #catQ{width:220px;flex:none}.pcards{padding:12px 14px 24px}.pstat{padding:8px 14px 0;color:var(--mut);font-size:12px}
+#catalog.pat .rgfc{padding:8px 14px 0}.qbar{position:sticky;top:46px;z-index:2;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 14px;background:var(--pan);border-bottom:1px solid var(--ln)}.qbar:empty{display:none}
+#patToolsBody .tl .tlb{align-items:center}.btn.dis{opacity:.45;pointer-events:none}#patToolsBody code{font-size:11px}
+#catalog.vw-nofiles .card .files{display:none}#left .fl-pad{padding:2px 4px 6px;display:flex;flex-direction:column;gap:8px}#left .fl-pad input[type=range]{width:100%}
+#left .fhead{position:sticky;top:0;background:var(--pan);z-index:1}
+body.noright{grid-template-columns:64px 230px 1fr 0}body.noright #right{display:none}
 button.upl{border-color:var(--acc)}#rugs.vw-nopeek #rgTools{top:46px}#rgTree .rguc.on{background:var(--acc);color:var(--acc-tx);outline:none}#rgTree .rguc.on b{color:var(--acc-tx)}
 #rgGridV{position:absolute}#rgTree{padding:10px 10px 24px}
-#rgTree .fhead{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 8px}#rgTree .fhead b{font-size:13px}
+#rgTree .fhead,#left .fhead{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 8px}#rgTree .fhead b,#left .fhead b{font-size:13px}
 #rgTree .rguse{display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:0 0 10px;border-bottom:1px solid var(--ln);margin-bottom:6px}#rgTree .rguse .rguc{justify-content:space-between;text-align:left;display:flex}
-#rgTree details.fg{border-bottom:1px solid var(--ln);padding:6px 0 8px}#rgTree details.fg>summary{cursor:pointer;list-style:none;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);padding:6px 4px;font-weight:600;user-select:none}
-#rgTree details.fg>summary::-webkit-details-marker{display:none}#rgTree details.fg>summary::before{content:'▾';display:inline-block;width:14px;transition:transform .12s}#rgTree details.fg:not([open])>summary::before{transform:rotate(-90deg)}
-#rgTree label.fl{display:flex;flex-direction:column;gap:4px;padding:4px 4px 6px;font-size:12px;color:var(--mut)}#rgTree label.fl select{width:100%;height:30px}
+#rgTree details.fg,#left details.fg{border-bottom:1px solid var(--ln);padding:6px 0 8px}#rgTree details.fg>summary,#left details.fg>summary{cursor:pointer;list-style:none;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);padding:6px 4px;font-weight:600;user-select:none}
+#rgTree details.fg>summary::-webkit-details-marker,#left details.fg>summary::-webkit-details-marker{display:none}#rgTree details.fg>summary::before,#left details.fg>summary::before{content:'▾';display:inline-block;width:14px;transition:transform .12s}#rgTree details.fg:not([open])>summary::before,#left details.fg:not([open])>summary::before{transform:rotate(-90deg)}
+#rgTree label.fl,#left label.fl{display:flex;flex-direction:column;gap:4px;padding:4px 4px 6px;font-size:12px;color:var(--mut)}#rgTree label.fl select,#left label.fl select{width:100%;height:30px}
 .rgbar h2{margin:0 6px 0 0;font-size:16px;font-weight:700;max-width:34%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rgbar .srt{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mut)}.rgbar .srt select{width:auto;height:30px}.rgbar input#rgQ{height:30px;flex:1 1 180px;min-width:150px;max-width:300px;width:auto}
 #rgToolsBtn.on{background:var(--acc);color:var(--acc-tx)}.rgtn{display:inline-grid;place-items:center;min-width:17px;height:17px;border-radius:9px;background:var(--zog);color:#fff;font-size:11px;padding:0 4px;margin-left:4px}
 .rgfc{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 14px 0}.rgfc:empty{display:none}
 .rgfch{display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 4px 0 10px;border:1px solid var(--ln2);border-radius:13px;font-size:12px;background:var(--pan)}.rgfch.def{color:var(--mut);border-style:dashed}
 .rgfch button{border:0;background:none;color:var(--mut);width:20px;height:20px;border-radius:50%;padding:0;font-size:11px;cursor:pointer}.rgfch button:hover{background:var(--sel);color:var(--tx)}
-#rgTools{position:absolute;top:0;right:0;bottom:0;width:300px;z-index:6;background:var(--pan);border-left:1px solid var(--ln2);box-shadow:-10px 0 24px #0006;overflow:auto;padding:12px 14px 24px}#rgTools[hidden]{display:none}
-#rgTools .tlhd{display:flex;gap:8px;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--ln)}#rgTools h4{margin:16px 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+#rgTools,#patTools{position:absolute;top:0;right:0;bottom:0;width:300px;z-index:6;background:var(--pan);border-left:1px solid var(--ln2);box-shadow:-10px 0 24px #0006;overflow:auto;padding:12px 14px 24px}#rgTools[hidden],#patTools[hidden]{display:none}#patTools{top:48px}
+#rgTools .tlhd,#patTools .tlhd{display:flex;gap:8px;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--ln)}#rgTools h4,#patTools h4{margin:16px 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
 .tl{background:var(--bg);border:1px solid var(--ln);border-radius:9px;padding:10px 12px;margin-bottom:8px}.tl.off{opacity:.62}.tl .tlh{display:flex;align-items:center;gap:8px}.tl .tlh b{flex:1}.tl .tlc{font-size:12px;color:var(--mut);font-variant-numeric:tabular-nums}
 .tl p{margin:4px 0 8px;font-size:12px;color:var(--mut);line-height:1.4}.tl .tlb{display:flex;flex-wrap:wrap;gap:6px}.tl .tlw{display:block;margin-top:6px}#rgTools .ro .tl button{display:none}#rgKpiTw{font-size:12px;color:var(--mut);line-height:1.5}
 #rugs .rgcards{grid-template-columns:repeat(auto-fill,minmax(var(--cw,190px),1fr))}#rugs.vw-nobadge .rggr,#rugs.vw-nobadge .rguw,#rugs.vw-nobadge .rgcard .bd{display:none}#rugs.vw-nopeek #rgGridV{grid-template-columns:240px minmax(0,1fr) 0}#rugs.vw-nopeek #rgPeek{display:none}
@@ -480,7 +488,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.92</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.93</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Вернуться к рисунку, который вы правили последним">↩ К рисунку</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -494,6 +502,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
   <div id="toolcol"></div>
   <div class="peek" id="peek">подложка скана · пробел</div>
   <div id="catalog"></div>
+  <aside id="patTools" aria-label="Инструменты узоров" hidden><div class="tlhd"><b>Инструменты</b><span class="mut">обработка узоров</span><span class="sp"></span><button class="sm" id="patToolsX" aria-label="закрыть панель">✕</button></div><div id="patToolsBody"></div></aside>
 </main>
 <aside id="right"></aside>
 <footer id="sbar">
@@ -635,6 +644,7 @@ function setMode(m,opt){
   if(ov&&!wasOv){S.back=opt.back||S.mode||'queue';S.backScroll=$('catalog').scrollTop;}
   if(m!=='sheet'&&m!=='cat'&&m!=='queue'&&m!=='pipe'&&!S.fig){stat('сначала откройте рисунок в «Каталоге» (или нарежьте лист)','err');m=S.fig?m:(S.mode==='sheet'?'sheet':'queue');}
   S.mode=m;S.peek=false;if(typeof pvHide==='function')pvHide();$('peek').style.display='none';
+  document.body.classList.toggle('noright',m==='queue'||m==='cat');$('catalog').classList.toggle('pat',m==='queue'||m==='cat');
   document.body.classList.toggle('noleft',!['sheet','queue','cat'].includes(m));   // v11.3: у «Узоров» слева — дерево источников
   const under=ov?(S.back||'queue'):m;
   ['sheet','queue'].forEach(k=>$('tab-'+k).classList.toggle('on',k===under||(k==='queue'&&under==='cat')));
@@ -1678,76 +1688,154 @@ async function renameFigure(nid){const F=S.fig;if(!nid||nid===F.id)return;if(!/^
 /* ============================ 4. КАТАЛОГ ============================ */
 const TYPEF={'':()=>true,bw:f=>!f.color&&!f.photo,color:f=>!!f.color&&!f.photo,border:f=>!!f.border&&!f.photo,photo:f=>!!f.photo};
 const TYPEL=[['','все'],['bw','узор ЧБ'],['color','узор цветной'],['border','бордюр'],['photo','фото']];
-function viewSwitch(){
+function viewSwitch(noUpl){
   const nq=S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo).length;
-  return `<span class="seg vsw" data-tip="Узоры: листы (сканы страниц и рамки рисунков, клавиша 1), очередь проверки (клавиша 2) и все рисунки"><button data-vs="sheet" class="${S.mode==='sheet'?'on':''}">Листы</button><button data-vs="queue" class="${S.mode==='queue'?'on':''}">✓ Очередь проверки <small>${nq}</small></button><button data-vs="cat" class="${S.mode==='cat'?'on':''}">▦ Все рисунки <small>${S.figures.length}</small></button></span>${rro()?'':'<button class="sm upl" data-upl="pat" data-tip="Всё, что добавляет материал в Узоры: сканы листов, готовые рисунки, легенда, зарисовки">＋ Загрузить ▾</button>'}`;
+  return `<span class="seg vsw" data-tip="Узоры: листы (сканы страниц и рамки рисунков, клавиша 1), очередь проверки (клавиша 2) и все рисунки"><button data-vs="sheet" class="${S.mode==='sheet'?'on':''}">Листы</button><button data-vs="queue" class="${S.mode==='queue'?'on':''}">✓ Очередь проверки <small>${nq}</small></button><button data-vs="cat" class="${S.mode==='cat'?'on':''}">▦ Все рисунки <small>${S.figures.length}</small></button></span>${(rro()||noUpl)?'':'<button class="sm upl" data-upl="pat" data-tip="Всё, что добавляет материал в Узоры: сканы листов, готовые рисунки, легенда, зарисовки">＋ Загрузить ▾</button>'}`;
 }
 function bindViewSwitch(C){C.querySelectorAll('[data-vs]').forEach(b=>b.onclick=()=>{if(S.mode!==b.dataset.vs)setMode(b.dataset.vs);});C.querySelectorAll('[data-upl="pat"]').forEach(b=>b.onclick=()=>patUploadMenu(b));}
+
+/* ---- v11.93: «Все рисунки» и «Очередь проверки» — один каркас, как у ковров:
+   слева фильтры, сверху поиск · порядок · Вид · Инструменты · Загрузить, под ними чипы активных фильтров,
+   справа выдвижная панель «Инструменты» (patTools). Фильтры общие для обоих экранов. ---- */
+const DIFFL=[['','любая'],['simple','простой'],['medium','средний'],['complex','сложный'],['ultra','ультра']];
+const DIFFRU={simple:'простой',medium:'средний',complex:'сложный',ultra:'ультра'};
+const CSORT={'':['как в таблице',()=>0],name:['по названию',(a,b)=>String(dispName(a)||a.id).localeCompare(String(dispName(b)||b.id),'ru')],todo:['сначала не принятые',(a,b)=>(!!a.done)-(!!b.done)]};
+function patOk(f){const q=norm(S.catQ);
+  return srcOk(f)&&(!q||[f.id,f.name_az,f.name,f.translation,f.site_id].some(v=>norm(v).includes(q)))&&TYPEF[S.catType||''](f)&&(!S.catDiff||f.diff_est===S.catDiff)&&(!S.catRev||f.review)&&(!S.catNoSite||!f.site_id);}
+function catList(){return S.figures.filter(f=>patOk(f)&&(!S.catAuto||f.auto)&&(!S.catOnly||f.done)).sort((CSORT[S.catSort||'']||CSORT[''])[1]);}
+function patResetAll(){S.catQ='';S.catType='';S.catDiff='';S.catRev=S.catAuto=S.catNoSite=S.catOnly=false;S.fsrc=null;S.ftab=null;patTree();patRender();}
+function patRender(){S.mode==='queue'?renderQueue():renderCatalog();}
+function patChips(){const C=$('patChips');if(!C)return;const ch=[];
+  const add=(l,k)=>ch.push(`<span class="rgfch">${esc(l)}<button data-pclr="${k}" aria-label="снять: ${esc(l)}">✕</button></span>`);
+  if(S.fsrc)add('Источник: '+srcTitle(S.fsrc)+(S.ftab!=null?' · табл. '+S.ftab:''),'src');
+  if(S.catQ)add('Поиск: «'+S.catQ+'»','q');
+  if(S.catType)add('Тип: '+(TYPEL.find(x=>x[0]===S.catType)||['',S.catType])[1],'type');
+  if(S.catDiff)add('Сложность: '+(DIFFRU[S.catDiff]||S.catDiff),'diff');
+  if(S.catRev)add('⚠ на пересмотр','rev');
+  if(S.mode==='cat'){if(S.catAuto)add('⚡ не проверены','auto');if(S.catOnly)add('только готовые','only');}
+  if(S.catNoSite)add('без привязки к сайту','nosite');
+  C.innerHTML=ch.join('')+(ch.length?'<button class="sm" id="patChipsAll">сбросить всё</button>':'');
+  const A=$('patChipsAll');if(A)A.onclick=patResetAll;
+  C.querySelectorAll('[data-pclr]').forEach(b=>b.onclick=()=>{const k=b.dataset.pclr;
+    if(k==='src'){S.fsrc=null;S.ftab=null;}else if(k==='q')S.catQ='';else if(k==='type')S.catType='';else if(k==='diff')S.catDiff='';
+    else if(k==='rev')S.catRev=false;else if(k==='auto')S.catAuto=false;else if(k==='only')S.catOnly=false;else if(k==='nosite')S.catNoSite=false;
+    patTree();patRender();});}
+/* «Вид»: размер карточек и ссылки на файлы; запоминается в браузере */
+function patViewApply(C){let V;try{V=Object.assign({sz:'m',files:true},JSON.parse(localStorage.getItem('cps.patview')||'{}'));}catch(e){V={sz:'m',files:true};}
+  S.pv=V;C.style.setProperty('--pcw',{s:'130px',m:'170px',l:'250px'}[V.sz]||'170px');C.style.setProperty('--pqw',{s:'180px',m:'230px',l:'320px'}[V.sz]||'230px');C.classList.toggle('vw-nofiles',!V.files);}
+function patViewPop(btn){const V=S.pv||{sz:'m',files:true};
+  popBox(btn,`<div class="ps">Размер карточек</div><div class="seg vwsz">${[['s','мелко'],['m','средне'],['l','крупно']].map(([k,l])=>`<button class="sm ${V.sz===k?'on':''}" data-sz="${k}">${l}</button>`).join('')}</div>
+    <label class="vwl"><input type="checkbox" id="pvFiles" ${V.files?'checked':''}><span><b>Ссылки на файлы</b><small>PNG, ×12, SVG под карточкой в «Всех рисунках»</small></span></label>`,m=>{
+    const save=()=>{try{localStorage.setItem('cps.patview',JSON.stringify(S.pv));}catch(e){}patViewApply($('catalog'));};
+    m.querySelectorAll('[data-sz]').forEach(b=>b.onclick=()=>{S.pv.sz=b.dataset.sz;m.querySelectorAll('[data-sz]').forEach(x=>x.classList.toggle('on',x===b));save();});
+    $('pvFiles').onchange=e=>{S.pv.files=e.target.checked;save();};});}
+function patBar(){const q=S.mode==='queue',so=q?QSORT:CSORT,cur=q?(S.qSort||'risk_asc'):(S.catSort||'');
+  return `<div class="rgbar patbar">${viewSwitch(1)}<input type="text" id="catQ" placeholder="поиск: id, ad, название, site_id…" value="${esc(S.catQ)}" aria-label="поиск по рисункам">
+    <label class="srt">Порядок <select id="patSort" aria-label="порядок рисунков">${Object.entries(so).map(([k,v])=>`<option value="${k}" ${cur===k?'selected':''}>${v[0]}</option>`).join('')}</select></label><span class="sp"></span>
+    <button class="sm" id="patViewBtn" data-tip="Размер карточек и ссылки на файлы">Вид ▾</button>
+    <button class="sm ${S.patTools?'on':''}" id="patToolsBtn" data-tip="Панель инструментов: проверка, выгрузка на сайт, автоматические задачи">Инструменты <span class="rgtn" id="patToolsN" hidden></span></button>
+    ${rro()?'':'<button class="sm upl" data-upl="pat" data-tip="Всё, что добавляет материал в Узоры: сканы листов, готовые рисунки, легенда, зарисовки">＋ Загрузить ▾</button>'}</div><div class="rgfc" id="patChips"></div>`;}
+function patBind(C){
+  bindViewSwitch(C);bindPreview(C);patViewApply(C);patChips();patToolsState();
+  $('patViewBtn').onclick=e=>patViewPop(e.currentTarget);$('patToolsBtn').onclick=()=>patToolsToggle();
+  $('catQ').oninput=e=>{S.catQ=e.target.value;patRender();};
+  $('patSort').onchange=e=>{if(S.mode==='queue')S.qSort=e.target.value;else S.catSort=e.target.value;patRender();};
+  C.querySelectorAll('.card .files a').forEach(a=>a.onclick=e=>e.stopPropagation());
+  C.querySelectorAll('.card').forEach(el=>el.onclick=()=>openFigure(el.dataset.id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail));
+  const er=$('patEmptyReset');if(er)er.onclick=patResetAll;}
 function renderCatalog(){
   pvHide();
-  const C=$('catalog');const q=norm(S.catQ);
+  const C=$('catalog');
   const fq=document.activeElement&&document.activeElement.id==='catQ',cpos=fq?document.activeElement.selectionStart:0;
-  const figs=S.figures.filter(f=>srcOk(f)&&(!q||[f.id,f.name_az,f.name,f.translation,f.site_id].some(v=>norm(v).includes(q)))&&(!S.catRev||f.review)&&(!S.catAuto||f.auto)&&(!S.catNoSite||!f.site_id)&&TYPEF[S.catType||''](f));
-  const done=figs.filter(f=>f.done).length,rev=S.figures.filter(f=>f.review).length;
-  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">${viewSwitch()}<span style="color:var(--mut)">${figs.length}${q?(' из '+S.figures.length):''} · ${done} готово</span><span class="sp"></span>
-    <span class="dfilter" data-tip="тип рисунка">${TYPEL.map(([k,l])=>`<button class="${(S.catType||'')===k?'on':''}" data-ct="${k}">${l} <small>${S.figures.filter(TYPEF[k]).length}</small></button>`).join('')}</span>
-    <label class="flex" style="color:var(--mut)"><input type="checkbox" id="catRev" ${S.catRev?'checked':''}>⚠ на пересмотр (${rev})</label>
-    <label class="flex" style="color:var(--mut)" data-tip="автооцифровка, ещё не проверена человеком"><input type="checkbox" id="catAuto" ${S.catAuto?'checked':''}>⚡ не проверены (${S.figures.filter(f=>f.auto).length})</label>
-    <label class="flex" style="color:var(--mut)"><input type="checkbox" id="catNoSite" ${S.catNoSite?'checked':''}>без привязки к сайту</label>
-    <input type="text" id="catQ" placeholder="поиск: id, ad, название, site_id…" value="${esc(S.catQ)}" style="width:220px;flex:none">
-    <label class="flex" style="color:var(--mut)"><input type="checkbox" id="catOnly" ${S.catOnly?'checked':''}> только готовые</label></div>
-  <div class="cards">${figs.filter(f=>!S.catOnly||f.done).map(f=>`<div class="card" data-id="${esc(f.id)}"><div class="im"><img loading="lazy" src="${f.size?('/out/'+encodeURIComponent(f.id)+'_x12.png'):('/api/crop/'+encodeURIComponent(f.id))}?t=${Math.round(f.t)}"></div>
+  const figs=catList(),done=figs.filter(f=>f.done).length;
+  C.innerHTML=patBar()+`<div class="pstat">${figs.length} из ${S.figures.length} · ${done} готово</div>
+  <div class="pcards"><div class="cards">${figs.map(f=>`<div class="card" data-id="${esc(f.id)}"><div class="im"><img loading="lazy" src="${f.size?('/out/'+encodeURIComponent(f.id)+'_x12.png'):('/api/crop/'+encodeURIComponent(f.id))}?t=${Math.round(f.t)}"></div>
     <div class="t"><span class="dot ${f.done?'done':(f.size?'mid':'')}" style="display:inline-block;margin-right:5px"></span>${esc(dispName(f)||f.id)}${f.name_az_auto?'<small data-tip="черновик из кириллицы — проверьте">черн.</small>':''}${f.auto?` <span class="dchip" style="background:var(--acc)" data-tip="автооцифровка, ещё не проверена · уверенность ${Math.round((f.auto_conf??0)*100)}%">⚡</span>`:''}${f.review?' <span class="dchip rev" data-tip="отмечено на пересмотр">⚠</span>':''}</div>
     <div class="m">${esc(f.id)}${f.translation?' · '+esc(f.translation):''}${f.carpet?' · '+esc(f.carpet):''}${f.size?' · '+f.size[0]+'×'+f.size[1]:''}${f.colors?' · '+f.colors+' цв.':''}</div>
     <div class="m">${f.site_id?'→ '+esc(f.site_id):'<span style="color:var(--bad)">нет привязки к сайту</span>'}</div>
-    ${f.size?`<div class="m files">${[['.png','PNG','1 узел = 1 пиксель, фон прозрачный'],['_x12.png','×12','крупно, фон прозрачный, без сетки'],['_bg.png','×12 фон','крупно, с цветом фона'],['_grid.png','сетка','сетка отдельным прозрачным слоем'],['.svg','SVG','векторный']].map(([suf,l,tp])=>`<a href="/out/${encodeURIComponent(f.id)}${suf}?t=${Math.round(f.t)}" target="_blank" data-tip="${tp}">${l}</a>`).join(' · ')}</div>`:''}</div>`).join('')}</div>`;
-  bindViewSwitch(C);bindPreview(C);
-  $('catOnly').onchange=e=>{S.catOnly=e.target.checked;renderCatalog();};
-  $('catRev').onchange=e=>{S.catRev=e.target.checked;renderCatalog();};
-  $('catAuto').onchange=e=>{S.catAuto=e.target.checked;renderCatalog();};
-  $('catNoSite').onchange=e=>{S.catNoSite=e.target.checked;renderCatalog();};
-  C.querySelectorAll('[data-ct]').forEach(b=>b.onclick=()=>{S.catType=b.dataset.ct;renderCatalog();});
-  C.querySelectorAll('.card .files a').forEach(a=>a.onclick=e=>e.stopPropagation());
-  $('catQ').oninput=e=>{S.catQ=e.target.value;renderCatalog();};
+    ${f.size?`<div class="m files">${[['.png','PNG','1 узел = 1 пиксель, фон прозрачный'],['_x12.png','×12','крупно, фон прозрачный, без сетки'],['_bg.png','×12 фон','крупно, с цветом фона'],['_grid.png','сетка','сетка отдельным прозрачным слоем'],['.svg','SVG','векторный']].map(([suf,l,tp])=>`<a href="/out/${encodeURIComponent(f.id)}${suf}?t=${Math.round(f.t)}" target="_blank" data-tip="${tp}">${l}</a>`).join(' · ')}</div>`:''}</div>`).join('')}</div>${figs.length?'':'<div class="info">Ничего не найдено по этим фильтрам. <button class="sm" id="patEmptyReset">сбросить всё</button></div>'}</div>`;
+  patBind(C);
   if(fq){const el=$('catQ');el.focus();el.setSelectionRange(cpos,cpos);}
-  C.querySelectorAll('.card').forEach(el=>el.onclick=()=>openFigure(el.dataset.id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail));
 }
 
 /* ---- 5 · Очередь проверки: авто-результаты, ещё не принятые человеком, от надёжных к рискованным ---- */
 const QSORT={risk_asc:['надёжные сначала',(a,b)=>qrisk(a)-qrisk(b)],risk_desc:['рискованные сначала',(a,b)=>qrisk(b)-qrisk(a)],id:['по номеру',(a,b)=>0]};
 function qrisk(f){return f.risk!=null?f.risk:(1-(f.auto_conf??0));}
-function qItems(){return S.figures.filter(f=>srcOk(f)&&f.auto&&f.size&&!f.done&&!f.photo&&TYPEF[S.qType||''](f)).sort((QSORT[S.qSort||'risk_asc']||QSORT.risk_asc)[1]);}
+function qItems(){return S.figures.filter(f=>patOk(f)&&f.auto&&f.size&&!f.done&&!f.photo).sort((QSORT[S.qSort||'risk_asc']||QSORT.risk_asc)[1]);}
+function qBarUpd(){const E=$('qBar');if(!E)return;const n=S.qSel.size;
+  E.innerHTML=n?`<b>Выбрано: ${n}</b><button id="qAccept">✓ принять выбранные (${n})</button><button id="qRev" class="sm">⚠ на доработку</button><button id="qPickNone" class="sm">снять выбор</button>`:'';
+  if(!n)return;
+  $('qPickNone').onclick=()=>{S.qSel.clear();renderQueue();};
+  $('qAccept').onclick=async()=>{if(!S.qSel.size)return;if(!confirm('Принять '+S.qSel.size+' рисунков как готовые?'))return;
+    try{const r=await api('/api/accept',{ids:[...S.qSel]});S.qSel.clear();await refreshFigures();stat('принято: '+r.accepted,'ok');}catch(e){fail(e);}};
+  $('qRev').onclick=async()=>{if(!S.qSel.size)return;try{const r=await api('/api/review_mark',{ids:[...S.qSel],value:true});S.qSel.clear();await refreshFigures();stat('отмечено на доработку: '+r.marked+' (фильтр «на пересмотр» в каталоге)','ok');}catch(e){fail(e);}};}
 function renderQueue(){
   pvHide();
   const C=$('catalog');S.qSel=S.qSel||new Set();const thr=S.qThr??0.25;
-  const all=S.figures.filter(f=>srcOk(f)&&f.auto&&f.size&&!f.done&&!f.photo),items=qItems(),sure=items.filter(f=>qrisk(f)<=thr);
+  const fq=document.activeElement&&document.activeElement.id==='catQ',cpos=fq?document.activeElement.selectionStart:0;
+  const all=S.figures.filter(f=>srcOk(f)&&f.auto&&f.size&&!f.done&&!f.photo),items=qItems();
   [...S.qSel].forEach(id=>{if(!items.some(f=>f.id===id))S.qSel.delete(id);});
-  C.innerHTML=`<div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">${viewSwitch()}<span style="color:var(--mut)">${items.length} из ${all.length} ждут проверки</span><button id="qFast" class="sm" ${items.length?'':'disabled'} data-tip="Рисунки по одному: слева оригинал, справа результат. A — принять, X — на доработку, → — пропустить">▶ быстрая проверка</button><button id="qHard" class="sm" ${items.some(f=>!f.color)?'':'disabled'} data-tip="Только спорные куски 10×10, где пороги и модель расходятся (в них ~98% ошибок). Все куски проверены — рисунок принят. Проверенные куски учат модель.">🎯 трудные места</button><span class="sp"></span>
-    <span class="dfilter" data-tip="тип рисунка">${TYPEL.map(([k,l])=>`<button class="${(S.qType||'')===k?'on':''}" data-qt="${k}">${l} <small>${all.filter(TYPEF[k]).length}</small></button>`).join('')}</span>
-    <select id="qSort" style="flex:none">${Object.entries(QSORT).map(([k,v])=>`<option value="${k}" ${(S.qSort||'risk_asc')===k?'selected':''}>${v[0]}</option>`).join('')}</select></div>
-  <div class="flex" style="margin-bottom:12px;flex-wrap:wrap;row-gap:8px">
-    <label class="flex" style="color:var(--mut)" data-tip="Риск = 1 − уверенность + флаги + нарушения симметрии. Ниже порога — рисунок, скорее всего, верен.">порог риска ≤ <b id="qThrV">${thr.toFixed(2)}</b><input type="range" id="qThr" min="0.05" max="0.8" step="0.05" value="${thr}" style="width:140px"></label>
-    <button class="sm" id="qPickSure">выбрать надёжные (${sure.length})</button><button class="sm" id="qPickNone">снять выбор</button><span class="sp"></span>
-    <button id="qRev" class="sm" ${S.qSel.size?'':'disabled'}>⚠ на доработку выбранные</button><button id="qAccept" ${S.qSel.size?'':'disabled'}>✓ принять выбранные (${S.qSel.size})</button></div>
-  <div class="hint" style="margin-bottom:10px">Принять = «готово»: рисунок уйдёт из очереди и попадёт в пакет для сайта. Клик по картинке открывает рисунок для правки; галочка — для массового принятия.</div>
-  <div class="cards q">${items.map(f=>{const r=qrisk(f),col=r<=thr?'var(--ok)':(r<0.55?'var(--warn,#e0a030)':'var(--bad)');
+  C.innerHTML=patBar()+`<div class="pstat">${items.length} из ${all.length} ждут проверки</div><div class="qbar" id="qBar"></div>
+  <div class="hint" style="margin:6px 14px 0">Принять = «готово»: рисунок уйдёт из очереди и попадёт в пакет для сайта. Клик по картинке открывает рисунок для правки; галочка — для массового принятия. «Выбрать надёжные» — в фильтрах слева.</div>
+  <div class="pcards"><div class="cards q">${items.map(f=>{const r=qrisk(f),col=r<=thr?'var(--ok)':(r<0.55?'var(--warn,#e0a030)':'var(--bad)');
     return `<div class="card" data-id="${esc(f.id)}"><label class="qchk" data-tip="выбрать для массового принятия"><input type="checkbox" data-sel="${esc(f.id)}" ${S.qSel.has(f.id)?'checked':''}></label><div class="im"><img loading="lazy" src="/out/${encodeURIComponent(f.id)}_bg.png?t=${Math.round(f.t)}"></div>
     <div class="t"><span class="dot" style="display:inline-block;margin-right:5px;background:${col}"></span>${esc(dispName(f)||f.id)}</div>
-    <div class="m">${esc(f.id)} · ${f.size[0]}×${f.size[1]}${f.colors?' · '+f.colors+' цв.':''} · риск ${r.toFixed(2)}${f.sym&&f.n_sus?` · <span style="color:#ff9f1c" data-tip="клеток нарушает симметрию (${esc(f.sym)})">◇${f.n_sus}</span>`:''}${f.border?' · кайма':''}${f.diff_est?' · '+({simple:'простой',medium:'средний',complex:'сложный',ultra:'ультра'}[f.diff_est]||f.diff_est):''}</div></div>`;}).join('')||'<div class="info">Очередь пуста — все авто-результаты проверены.</div>'}</div>`;
-  bindViewSwitch(C);bindPreview(C);bindQueueKeys(C);$('qFast').onclick=()=>openReview();$('qHard').onclick=()=>openHard();
-  C.querySelectorAll('[data-qt]').forEach(b=>b.onclick=()=>{S.qType=b.dataset.qt;renderQueue();});
-  $('qSort').onchange=e=>{S.qSort=e.target.value;renderQueue();};
-  $('qThr').oninput=e=>{S.qThr=+e.target.value;$('qThrV').textContent=S.qThr.toFixed(2);};
-  $('qThr').onchange=()=>renderQueue();
-  $('qPickSure').onclick=()=>{sure.forEach(f=>S.qSel.add(f.id));renderQueue();};
-  $('qPickNone').onclick=()=>{S.qSel.clear();renderQueue();};
-  C.querySelectorAll('[data-sel]').forEach(cb=>{cb.onclick=e=>e.stopPropagation();cb.onchange=()=>{cb.checked?S.qSel.add(cb.dataset.sel):S.qSel.delete(cb.dataset.sel);const b=$('qAccept');b.disabled=!S.qSel.size;b.textContent='✓ принять выбранные ('+S.qSel.size+')';$('qRev').disabled=!S.qSel.size;};});
+    <div class="m">${esc(f.id)} · ${f.size[0]}×${f.size[1]}${f.colors?' · '+f.colors+' цв.':''} · риск ${r.toFixed(2)}${f.sym&&f.n_sus?` · <span style="color:#ff9f1c" data-tip="клеток нарушает симметрию (${esc(f.sym)})">◇${f.n_sus}</span>`:''}${f.border?' · кайма':''}${f.diff_est?' · '+(DIFFRU[f.diff_est]||f.diff_est):''}</div></div>`;}).join('')}</div>${items.length?'':(all.length?'<div class="info">Ничего не найдено по этим фильтрам. <button class="sm" id="patEmptyReset">сбросить всё</button></div>':'<div class="info">Очередь пуста — все авто-результаты проверены.</div>')}</div>`;
+  patBind(C);bindQueueKeys(C);qBarUpd();
+  C.querySelectorAll('[data-sel]').forEach(cb=>{cb.onclick=e=>e.stopPropagation();cb.onchange=()=>{cb.checked?S.qSel.add(cb.dataset.sel):S.qSel.delete(cb.dataset.sel);qBarUpd();};});
   C.querySelectorAll('.qchk').forEach(l=>l.onclick=e=>e.stopPropagation());
-  $('qAccept').onclick=async()=>{if(!S.qSel.size)return;if(!confirm('Принять '+S.qSel.size+' рисунков как готовые?'))return;
-    try{const r=await api('/api/accept',{ids:[...S.qSel]});S.qSel.clear();await refreshFigures();stat('принято: '+r.accepted,'ok');}catch(e){fail(e);}};
-  $('qRev').onclick=async()=>{if(!S.qSel.size)return;try{const r=await api('/api/review_mark',{ids:[...S.qSel],value:true});S.qSel.clear();await refreshFigures();stat('отмечено на доработку: '+r.marked+' (фильтр «на пересмотр» в каталоге)','ok');}catch(e){fail(e);}};
-  C.querySelectorAll('.card').forEach(el=>el.onclick=()=>openFigure(el.dataset.id).then(()=>setMode(S.fig.M?'pix':'grid')).catch(fail));
+  if(fq){const el=$('catQ');el.focus();el.setSelectionRange(cpos,cpos);}
 }
+
+/* ---- v11.93: панель «Инструменты» для узоров. Новый инструмент = одна запись в PAT_TOOLS.
+   Автоматические инструменты активны, только когда есть что обрабатывать. ---- */
+const PAT_TOOLS=[
+  {g:'Проверка',items:[
+    {id:'qFast',t:'Быстрая проверка',d:'Рисунки по одному: слева оригинал, справа результат. A — принять, X — на доработку, → — пропустить.',b:'▶ Начать',run:()=>openReview(),st:c=>({n:c.q,off:!c.q,why:'очередь пуста — нечего проверять'})},
+    {id:'qHard',t:'Трудные места',d:'Только спорные куски 10×10, где пороги и модель расходятся (в них ~98% ошибок). Все куски проверены — рисунок принят. Проверенные куски учат модель.',b:'🎯 Открыть',run:()=>openHard(),st:c=>({n:c.hard,off:!c.hard,why:'в очереди нет ЧБ-рисунков'})}]},
+  {g:'Выгрузка на сайт',items:[
+    {id:'bnDl',t:'Пакет для сайта',d:'Один JSON со всеми рисунками, отмеченными «готово»: матрица узлов, палитра, подписи и привязка к страницам сайта. Дальше: «Ковровое ДНК» → «Иллюстрации» → «Импорт пакета».',link:[['/api/bundle','⬇ Готовые'],['/api/bundle?all=1','⬇ Все']],st:c=>({n:c.done,off:!c.done,why:'пока нет принятых рисунков'})},
+    {id:'lgDl',t:'Легенда (таблица подписей)',d:'CSV: table, fig, section, name_az, name, translation, carpet, type, note. Загрузить новую — «＋ Загрузить».',b:'⬇ Скачать текущую',run:()=>patLegendDl(),st:c=>({n:c.legend,off:!c.legend,why:'легенда пока пуста'})}]},
+  {g:'Автоматические',auto:1,items:[
+    {id:'pwGo',t:'Ночной прогон',d:'Сервер сам нарезает размеченные листы и запускает «Авто» на рисунках без пикселей — пока вы не смотрите. Утром здесь готова очередь. Уже оцифрованное не трогает.',b:'▶ Запустить',run:()=>patProwlGo({}, 'прогон запущен: ','нечего обрабатывать — все нарезанные рисунки уже оцифрованы'),b2:['pwStop','■ Стоп',async()=>{await api('/api/prowl/stop',{});patProwl();}],info:'pwInfo'},
+    {id:'pwRedo',t:'Перепрогнать непроверенные',d:'Пересчитать новым алгоритмом автоматы, которых вы не касались. Принятые и правленные не изменятся. Лучше после «обучить на готовых».',b:'↻ Перепрогнать',run:async()=>{if(!confirm('Пересчитать непроверенные автоматы новым алгоритмом? Принятые и правленные не изменятся.'))return;patProwlGo({stages:['redo']},'перепрогон: ','нечего пересчитывать');},st:c=>({n:c.q,off:!c.q,why:'нет непроверенных автоматов'})},
+    {id:'pwGray',t:'Вернуть серую заливку',d:'Пакетный прогон какое-то время считал ЧБ без серой заливки. Пересчитать с заливкой непроверенные автоматы, где серого нет.',b:'↺ Пересчитать',run:()=>patProwlGo({stages:['regray']},'пересчёт с серой заливкой: ','нечего пересчитывать'),st:c=>({off:!c.q,why:'нет непроверенных автоматов'})},
+    {id:'mdTrain',t:'Модель клеток (ЧБ)',d:'Небольшая нейросеть учится на ваших готовых ЧБ-рисунках: как вы исправили автомат. Сохраняется, только если ошибается реже порогов — тогда «Авто» использует её сама.',b:'Обучить на готовых',run:async()=>{const e=$('mdInfo');try{await api('/api/model/train',{});if(e)e.textContent='обучение идёт в фоне — ход в строке состояния внизу';stat('обучение модели запущено','busy');pollAct();}catch(x){if(e)e.textContent=String(x.message||x);}},info:'mdInfo',st:c=>({n:c.done,off:!c.done,why:'нужны готовые рисунки'})},
+    {id:'rkBack',t:'Риск и симметрия',d:'Риск считается при автооцифровке. Для старых рисунков его можно досчитать.',b:'Досчитать',run:async()=>{try{const r=await api('/api/risk_backfill',{});await refreshFigures();stat('досчитано: '+r.updated,'ok');}catch(e){fail(e);}},st:c=>({n:c.norisk,off:!c.norisk,why:'у всех автоматов риск уже посчитан'})}]},
+  {g:'Где лежат файлы',items:[{id:'flInfo',t:'Папки приложения',d:'<code>data/out/</code> — PNG (1 узел = 1 px), PNG ×12 без сетки, <code>_grid.png</code> — сетка отдельным слоем, SVG; <code>data/work/</code> — настройки и матрицы; <code>data/crops/</code> — вырезанные рисунки.',none:1}]}];
+async function patProwlGo(body,txt,none){try{const r=await api('/api/prowl/start',body);stat(r.started?txt+r.total+' рис.':none,'ok');patProwl();}catch(e){fail(e);}}
+function patLegendDl(){const cols=['table','fig','section','name_az','name','translation','carpet','type','note'];
+  const q=v=>/[",\n]/.test(v||'')?'"'+String(v).replace(/"/g,'""')+'"':(v||'');
+  const csv=[cols.join(',')].concat(S.legend.map(r=>cols.map(c=>q(r[c])).join(','))).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='legend.csv';a.click();}
+function patCounts(){const A=S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo);
+  return {q:A.length,hard:A.filter(f=>!f.color).length,done:S.figures.filter(f=>f.done).length,legend:(S.legend||[]).length,norisk:A.filter(f=>f.risk==null).length};}
+function patToolsToggle(on){S.patTools=on===undefined?!S.patTools:!!on;try{localStorage.setItem('cps.pattools',S.patTools?'1':'0');}catch(e){}
+  const D=$('patTools');if(D)D.hidden=!(S.patTools&&(S.mode==='cat'||S.mode==='queue'));
+  const b=$('patToolsBtn');if(b)b.classList.toggle('on',!!S.patTools);
+  if(S.patTools){patToolsBuild();patToolsState();patProwl();api('/api/model').then(m=>{const e=$('mdInfo');if(e)e.textContent=m.present?`обучена ${m.trained} · рисунков ${m.n_figures??'?'} · ошибка ${(100*m.cv_model).toFixed(1)}% против ${(100*m.cv_threshold).toFixed(1)}% у порогов`:'модели нет — работают пороги';}).catch(()=>{});}}
+function patToolsBuild(){const B=$('patToolsBody');if(!B||B.dataset.built)return;B.dataset.built='1';
+  B.innerHTML=PAT_TOOLS.map(G=>`<h4>${G.g}</h4>${G.auto?'<p class="hint">Работают сами или по кнопке. Кнопка активна, только когда есть что обрабатывать.</p>':''}`+G.items.map(T=>`<div class="tl" data-tool="${T.id}"><div class="tlh"><b>${T.t}</b><span class="tlc"></span></div><p>${T.d}</p>${T.none?'':`<div class="tlb">${T.link?T.link.map(([h,l],i)=>`<a class="btn sm" href="${h}" download data-lk="${i}">${l}</a>`).join(''):`<button class="sm pri" id="${T.id}">${T.b}</button>`}${T.b2?`<button class="sm" id="${T.b2[0]}">${T.b2[1]}</button>`:''}</div>`}${T.info?`<div class="info" id="${T.info}">…</div>`:''}<small class="mut tlw"></small></div>`).join('')).join('');
+  PAT_TOOLS.forEach(G=>G.items.forEach(T=>{if(T.run)$(T.id).onclick=()=>T.run();if(T.b2)$(T.b2[0]).onclick=T.b2[2];}));
+  $('patToolsX').onclick=()=>patToolsToggle(false);}
+function patToolsState(){
+  const c=patCounts(),nb=(c.q?1:0)+(c.norisk?1:0),bn=$('patToolsN');if(bn){bn.textContent=nb;bn.hidden=!nb;}
+  const bt=$('patToolsBtn');if(bt)bt.classList.toggle('on',!!S.patTools);
+  const B=$('patToolsBody');if(!B||!B.dataset.built)return;
+  B.classList.toggle('ro',!!rro());
+  PAT_TOOLS.forEach(G=>G.items.forEach(T=>{const row=B.querySelector(`[data-tool="${T.id}"]`);if(!row||!T.st)return;const st=T.st(c),off=!!st.off;
+    row.querySelector('.tlc').textContent=st.n!=null?st.n:'';row.classList.toggle('off',off);
+    const b=$(T.id);if(b)b.disabled=off;row.querySelectorAll('a[data-lk]').forEach((a,i)=>a.classList.toggle('dis',off&&i===0));
+    row.querySelector('.tlw').textContent=off?st.why||'':'';}));
+  const p=S.prowl;if(p){const go=$('pwGo'),sp=$('pwStop');
+    if(go){const off=p.running||p.pending===0;go.disabled=off;const row=go.closest('.tl');row.classList.toggle('off',off&&!p.running);row.querySelector('.tlw').textContent=p.running?'':(p.pending===0?'нечего обрабатывать — все нарезанные рисунки уже оцифрованы':'');}
+    if(sp)sp.disabled=!p.running;}}
+async function patProwl(){if(!S.patTools||(S.mode!=='cat'&&S.mode!=='queue'))return;
+  try{const p=await api('/api/prowl');S.prowl=p;const e=$('pwInfo');
+    if(e)e.textContent=p.running?`идёт: ${p.done}/${p.total}${p.current?' · '+p.current:''}${p.errors?' · ошибок '+p.errors:''}`:(p.finished?`завершено ${p.finished}: ${p.done}/${p.total}${p.errors?', ошибок '+p.errors:''}. `:'')+(p.pending!=null?`Ждут авто: ${p.pending}`:'');
+    patToolsState();
+    if(p.running){clearTimeout(S.pwT);S.pwT=setTimeout(()=>{patProwl();refreshFigures();},4000);}}catch(e){}}
+try{S.patTools=localStorage.getItem('cps.pattools')==='1';}catch(e){}
 
 /* ---- предпросмотр: на карточке результат; при наведении картинка меняется на оригинал (клавиша O — то же с клавиатуры) ---- */
 function pvHide(){}
@@ -1954,34 +2042,6 @@ function hvKey(e){
 window.addEventListener('keyup',e=>{if(e.code==='Space'&&S.hv&&S.hv.cur){S.hv.cur.overlay=false;hvDraw();}});
 window.addEventListener('resize',()=>{if(S.hv)hvDraw();});
 window.addEventListener('mouseup',()=>{if(S.hv&&S.hv.cur)S.hv.cur.paint=null;});
-function renderRightQueue(){
-  const R=$('right');
-  R.innerHTML=`<h4>Ночной прогон</h4>
-  <div style="margin:6px 0">${HT('Сервер сам нарезает уже размеченные листы и запускает «Авто» на всех рисунках без пикселей — пока вы не смотрите. Утром здесь готова очередь. Уже оцифрованное не трогает.')}</div>
-  <div class="flex"><button id="pwGo" class="sm">▶ запустить</button><button id="pwStop" class="sm">■ стоп</button></div>
-  <div class="flex" style="margin-top:6px"><button id="pwRedo" class="sm" data-tip="Пересчитать новым алгоритмом все автоматы, которых вы не касались (не принятые, не правленные). Лучше после «обучить на готовых».">↻ перепрогнать непроверенные</button></div>
-  <div class="flex" style="margin-top:6px"><button id="pwGray" class="sm" data-tip="Ночной/пакетный прогон какое-то время считал ЧБ без серой заливки. Пересчитать с заливкой непроверенные автоматы, где серого нет (проверенные и готовые не трогаются)">↺ вернуть серую заливку</button></div>
-  <div class="info" id="pwInfo">…</div>
-  <h4>Модель клеток (ЧБ)</h4>
-  <div style="margin:6px 0">${HT('Небольшая нейросеть учится на ваших готовых ЧБ-рисунках: как вы исправили автомат. Сохраняется, только если в кросс-проверке по рисункам ошибается реже порогов. Тогда «Авто» использует её сам.')}</div>
-  <div class="flex"><button id="mdTrain" class="sm">обучить на готовых</button></div>
-  <div class="info" id="mdInfo">…</div>
-  <h4>Риск</h4>
-  <div style="margin:6px 0">${HT('Риск считается при автооцифровке. Для старых рисунков его можно досчитать.')}</div>
-  <div class="flex"><button id="rkBack" class="sm">досчитать риск и симметрию</button></div>`;
-  const upd=async()=>{if(S.mode!=='queue')return;try{const p=await api('/api/prowl');const e=$('pwInfo');if(!e)return;
-    e.textContent=p.running?`идёт: ${p.done}/${p.total}${p.current?' · '+p.current:''}${p.errors?' · ошибок '+p.errors:''}`:(p.finished?`завершено ${p.finished}: ${p.done}/${p.total}${p.errors?', ошибок '+p.errors:''}. `:'')+(p.pending!=null?`Ждут авто: ${p.pending}`:'');
-    if(p.running){clearTimeout(S.pwT);S.pwT=setTimeout(()=>{upd();refreshFigures();},4000);}}catch(e){}};
-  api('/api/model').then(m=>{const e=$('mdInfo');if(e)e.textContent=m.present?`обучена ${m.trained} · рисунков ${m.n_figures??'?'} · ошибка ${(100*m.cv_model).toFixed(1)}% против ${(100*m.cv_threshold).toFixed(1)}% у порогов`:'модели нет — работают пороги';}).catch(()=>{});
-  $('mdTrain').onclick=async()=>{const e=$('mdInfo');try{await api('/api/model/train',{});e.textContent='обучение идёт в фоне — ход в строке состояния внизу';stat('обучение модели запущено','busy');pollAct();}catch(x){e.textContent=String(x.message||x);}};
-  $('pwRedo').onclick=async()=>{if(!confirm('Пересчитать непроверенные автоматы новым алгоритмом? Принятые и правленные не изменятся.'))return;try{const r=await api('/api/prowl/start',{stages:['redo']});stat(r.started?'перепрогон: '+r.total+' рис.':'нечего пересчитывать','ok');pollAct();}catch(e){fail(e);}};
-  $('pwGray').onclick=async()=>{try{const r=await api('/api/prowl/start',{stages:['regray']});stat(r.started?'пересчёт с серой заливкой: '+r.total+' рис.':'нечего пересчитывать','ok');upd();}catch(e){fail(e);}};
-  $('pwGo').onclick=async()=>{try{const r=await api('/api/prowl/start',{});stat(r.started?'прогон запущен: '+r.total+' рис.':'нечего обрабатывать — все нарезанные рисунки уже оцифрованы','ok');upd();}catch(e){fail(e);}};
-  $('pwStop').onclick=async()=>{await api('/api/prowl/stop',{});upd();};
-  $('rkBack').onclick=async()=>{try{const r=await api('/api/risk_backfill',{});await refreshFigures();stat('досчитано: '+r.updated,'ok');}catch(e){fail(e);}};
-  upd();
-}
-
 /* ---- ◉ Обзор (v10.18): прогресс, шаги по порядку, источники, что нового ---- */
 const STEP_BTN={
   segment:c=>[['▶ Нарезать','sg'],['листы','sgL']],
@@ -2118,32 +2178,15 @@ async function svMark(k){const V=S.sv;if(!V||V.busy)return;const id=V.list[V.i];
   V.busy=false;svRender();}
 function svKey(e){if(e.key==='Escape'){svClose();return true;}const k=kk(e);
   if(k==='s')svMark('scheme');else if(k==='f')svMark('photo');else if(k==='d')svMark('junk');else if(e.key==='ArrowRight'){S.sv.i++;svRender();}else if(e.key==='ArrowLeft'){S.sv.i=Math.max(0,S.sv.i-1);svRender();}return true;}
-function renderRightCat(){
-  const R=$('right');
-  R.innerHTML=`<h4>На сайт</h4>
-  <div style="margin:6px 0">${HT('Пакет — один JSON со всеми рисунками, отмеченными «готово»: матрица узлов, палитра, подписи из таблицы и привязка к страницам сайта (elem_… / motif_…).')}</div>
-  <div class="flex"><a class="btn" href="/api/bundle" download>⬇ Пакет для сайта (готовые)</a><a class="btn" href="/api/bundle?all=1" download>всё</a></div>
-  <div style="margin:6px 0">${HT('Дальше: на сайте «Ковровое ДНК» → «Иллюстрации» → «Импорт пакета» выбрать этот файл (или прислать файл Claude — загрузит сам). Схемы появятся на страницах привязанных элементов/мотивов.')}</div>
-  <h4>Легенда (таблица подписей)</h4>
-  <div style="margin:6px 0">${HT('CSV с колонками: <kbd>table,fig,section,name_az,name,translation,carpet,type,note</kbd>. <kbd>name_az</kbd> — название латиницей (если пусто — черновик из кириллицы <kbd>name</kbd>). При нарезке листа подписи подставляются по номеру таблицы и рисунка.')}</div>
-  <div class="flex"><a class="btn sm" href="#" id="lgDl">скачать текущую</a><span class="mut" style="font-size:12px">загрузить новую — «＋ Загрузить ▾»</span></div>
-  <div class="info" id="lgInfo"></div>
-  <h4>Файлы</h4><div style="margin:6px 0">${HT('Результаты лежат в папке приложения: <kbd>data/out/</kbd> — PNG (1 узел = 1 px), PNG ×12 <b>без сетки</b>, <kbd>_grid.png</kbd> — сетка отдельным прозрачным слоем того же размера, SVG (без сетки); <kbd>data/work/</kbd> — все настройки и матрицы; <kbd>data/crops/</kbd> — вырезанные рисунки.')}</div>`;
-  $('lgInfo').textContent='сейчас строк: '+S.legend.length;
-  $('lgDl').onclick=e=>{e.preventDefault();const cols=['table','fig','section','name_az','name','translation','carpet','type','note'];
-    const q=v=>/[",\n]/.test(v||'')?'"'+String(v).replace(/"/g,'""')+'"':(v||'');
-    const csv=[cols.join(',')].concat(S.legend.map(r=>cols.map(c=>q(r[c])).join(','))).join('\n');
-    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='legend.csv';a.click();};
-}
-
 /* ============================ правая панель: диспетчер ============================ */
 function renderRight(){
+  {const D=$('patTools');if(D)D.hidden=!(S.patTools&&(S.mode==='cat'||S.mode==='queue'));if(S.patTools&&(S.mode==='cat'||S.mode==='queue')){patToolsBuild();patToolsState();patProwl();}}
   if(S.mode==='sheet')renderRightSheet();
   else if(S.mode==='grid')renderRightGrid();
   else if(S.mode==='pix')renderRightPix();
-  else if(S.mode==='queue'){renderRightQueue();renderQueue();}
+  else if(S.mode==='queue'){$('right').innerHTML='';renderQueue();}
   else if(S.mode==='pipe'){$('right').innerHTML='';renderPipe();}
-  else{renderRightCat();renderCatalog();}
+  else{$('right').innerHTML='';renderCatalog();}
 }
 
 /* ============================ клавиатура ============================ */
@@ -3934,19 +3977,38 @@ function rugPeek(id){const E=$('rgPeek');if(!E)return;const r=id&&R.list.find(x=
 function figSrc(f){const p=String(f.sheet||'').replace(/\\/g,'/').split('/');return p.length>1?p[0]:'(загружено)';}
 function srcTitle(k){return (S.srcTitles||{})[k]||k.replace(/_/g,' ');}
 function srcOk(f){return (!S.fsrc||figSrc(f)===S.fsrc)&&(S.ftab==null||String(f.table)===String(S.ftab));}
-function patTree(){const L=$('left');if(!L)return;S.srcOpen=S.srcOpen||new Set();
+function patTree(){const L=$('left');if(!L)return;S.srcOpen=S.srcOpen||new Set();S.fold=S.fold||{};
   const by={};S.figures.forEach(f=>{const k=figSrc(f);const s=by[k]=by[k]||{n:0,done:0,q:0,tabs:{}};s.n++;s.done+=f.done?1:0;s.q+=(f.auto&&f.size&&!f.done&&!f.photo)?1:0;
     const t=f.table??'—';const T=s.tabs[t]=s.tabs[t]||{n:0,done:0,q:0};T.n++;T.done+=f.done?1:0;T.q+=(f.auto&&f.size&&!f.done&&!f.photo)?1:0;});
-  const cnt=x=>S.mode==='queue'?(x.q?`<span class="c zg" title="ждут проверки">${x.q}</span>`:`<span class="c">✓</span>`):`<span class="c" title="принято / всего">${x.done}/${x.n}</span>`;
+  const Q=S.mode==='queue';
+  const cnt=x=>Q?(x.q?`<span class="c zg" title="ждут проверки">${x.q}</span>`:`<span class="c">✓</span>`):`<span class="c" title="принято / всего">${x.done}/${x.n}</span>`;
   const keys=Object.keys(by).sort((a,b)=>srcTitle(a).localeCompare(srcTitle(b),'ru'));
-  L.innerHTML=`<h4>Источники</h4><div class="ptree" role="tree" aria-label="Источники узоров"><button class="pn ${!S.fsrc?'cur':''}" data-src="" role="treeitem"><span class="ch"></span><span class="nm">Все источники</span>${cnt({n:S.figures.length,done:S.figures.filter(f=>f.done).length,q:S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo).length})}</button>`+
+  const srcH=`<div class="ptree" role="tree" aria-label="Источники узоров"><button class="pn ${!S.fsrc?'cur':''}" data-src="" role="treeitem"><span class="ch"></span><span class="nm">Все источники</span>${cnt({n:S.figures.length,done:S.figures.filter(f=>f.done).length,q:S.figures.filter(f=>f.auto&&f.size&&!f.done&&!f.photo).length})}</button>`+
     keys.map(k=>{const s=by[k],op=S.srcOpen.has(k)||S.fsrc===k;const tabs=Object.keys(s.tabs).sort((a,b)=>(+a||0)-(+b||0));
       return `<button class="pn ${S.fsrc===k&&S.ftab==null?'cur':''}" data-src="${esc(k)}" role="treeitem" aria-expanded="${op}"><span class="ch" data-tog="${esc(k)}">${tabs.length>1?(op?'▾':'▸'):''}</span><span class="nm" title="${esc(srcTitle(k))}">${esc(srcTitle(k))}</span>${cnt(s)}</button>`+
         (op&&tabs.length>1?tabs.map(t=>`<button class="pn sub ${S.fsrc===k&&String(S.ftab)===String(t)?'cur':''}" data-src="${esc(k)}" data-tab="${esc(t)}" role="treeitem"><span class="ch"></span><span class="nm">${t==='—'?'без таблицы':'Табл. '+esc(t)}</span>${cnt(s.tabs[t])}</button>`).join(''):'');}).join('')+`</div>`;
-  const re=()=>{patTree();S.mode==='queue'?renderQueue():renderCatalog();};
+  const F=S.figures.filter(srcOk),base=Q?F.filter(f=>f.auto&&f.size&&!f.done&&!f.photo):F;
+  const G=(key,title,body)=>`<details class="fg" data-pfold="${key}" ${S.fold[key]?'':'open'}><summary>${title}</summary>${body}</details>`;
+  const opt=(attr,val,label,n,cur)=>`<button class="pn ${cur?'cur':''}" ${attr}="${val}"><span class="ch"></span><span class="nm">${label}</span><span class="c">${n}</span></button>`;
+  const typeH=`<div class="ptree">${TYPEL.map(([k,l])=>opt('data-ft',k,l,base.filter(TYPEF[k]).length,(S.catType||'')===k)).join('')}</div>`;
+  const diffH=`<div class="ptree">${DIFFL.map(([k,l])=>opt('data-fd',k,l,k?base.filter(f=>f.diff_est===k).length:base.length,(S.catDiff||'')===k)).join('')}</div>`;
+  const stH=`<div class="ptree">${(Q?[]:[opt('data-fs','only','Принято (готово)',F.filter(f=>f.done).length,S.catOnly),opt('data-fs','auto','⚡ Не проверены (автооцифровка)',F.filter(f=>f.auto).length,S.catAuto)]).concat([opt('data-fs','rev','⚠ На пересмотр',base.filter(f=>f.review).length,S.catRev),opt('data-fs','nosite','Без привязки к сайту',base.filter(f=>!f.site_id).length,S.catNoSite)]).join('')}</div>`;
+  const thr=S.qThr??0.25;
+  const massH=Q?G('mass','Массовое принятие',`<div class="fl-pad"><label class="fl" data-tip="Риск = 1 − уверенность + флаги + нарушения симметрии. Ниже порога — рисунок, скорее всего, верен.">Порог риска ≤ <b id="qThrV">${thr.toFixed(2)}</b><input type="range" id="qThr" min="0.05" max="0.8" step="0.05" value="${thr}"></label><button class="sm" id="qPickSure">выбрать надёжные (${qItems().filter(f=>qrisk(f)<=thr).length})</button></div>`):'';
+  const act=!!(S.fsrc||S.catQ||S.catType||S.catDiff||S.catRev||S.catNoSite||(!Q&&(S.catAuto||S.catOnly)));
+  L.innerHTML=`<div class="fhead"><b>Фильтры</b><button class="sm" id="patFReset" ${act?'':'hidden'}>сбросить</button></div>`+
+    G('src','Источник',srcH)+G('type','Тип рисунка',typeH)+G('diff','Сложность',diffH)+G('st','Статус и привязка',stH)+massH;
+  const re=()=>{patTree();patRender();};
   L.querySelectorAll('[data-tog]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();const k=e.dataset.tog;S.srcOpen.has(k)?S.srcOpen.delete(k):S.srcOpen.add(k);patTree();});
-  L.querySelectorAll('.pn').forEach(b=>b.onclick=()=>{const k=b.dataset.src||null,t=b.dataset.tab;
-    if(t!=null){S.fsrc=k;S.ftab=t==='—'?null:t;}else if(S.fsrc===k&&S.ftab==null&&k){S.fsrc=null;}else{S.fsrc=k;S.ftab=null;if(k)S.srcOpen.add(k);}re();});}
+  L.querySelectorAll('.pn[data-src]').forEach(b=>b.onclick=()=>{const k=b.dataset.src||null,t=b.dataset.tab;
+    if(t!=null){S.fsrc=k;S.ftab=t==='—'?null:t;}else if(S.fsrc===k&&S.ftab==null&&k){S.fsrc=null;}else{S.fsrc=k;S.ftab=null;if(k)S.srcOpen.add(k);}re();});
+  L.querySelectorAll('[data-ft]').forEach(b=>b.onclick=()=>{S.catType=b.dataset.ft;re();});
+  L.querySelectorAll('[data-fd]').forEach(b=>b.onclick=()=>{S.catDiff=b.dataset.fd;re();});
+  L.querySelectorAll('[data-fs]').forEach(b=>b.onclick=()=>{const k=b.dataset.fs,m={only:'catOnly',auto:'catAuto',rev:'catRev',nosite:'catNoSite'}[k];S[m]=!S[m];re();});
+  L.querySelectorAll('details[data-pfold]').forEach(d=>d.ontoggle=()=>{S.fold[d.dataset.pfold]=!d.open;});
+  $('patFReset').onclick=patResetAll;
+  if(Q){$('qThr').oninput=e=>{S.qThr=+e.target.value;$('qThrV').textContent=S.qThr.toFixed(2);};$('qThr').onchange=()=>{patTree();renderQueue();};
+    $('qPickSure').onclick=()=>{qItems().filter(f=>qrisk(f)<=(S.qThr??0.25)).forEach(f=>S.qSel.add(f.id));renderQueue();};}}
 api('/api/config').then(c=>{S.srcTitles=c.src_titles||{};if(S.mode==='queue'||S.mode==='cat')patTree();}).catch(()=>{});
 
 /* ---- v11.8: все пояснения (.hint) спрятаны за «i» — по клику раскрываются ---- */
