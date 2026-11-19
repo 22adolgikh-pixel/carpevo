@@ -18,7 +18,7 @@
  "h": 960,
  "marks": [],
  "created": 1791736138,
- "updated": 1794976343,
+ "updated": 1795073152,
  "cat": {
   "title": "antique shirvan prayer rug124 nagel1988 kilim",
   "museum": "",
@@ -153,7 +153,7 @@
    "azr_kuba74": {}
   }
  },
- "frame": "whole",
+ "frame": "cropped",
  "frame_by": "micro",
  "school_prev": "guba-shirvan",
  "school_by": "уточнено по слову «sirvan» в подписи",
@@ -188,5 +188,38 @@
    "at": 1795051601,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.01705,
+   0.0,
+   0.96124,
+   0.99889
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01705,
+    0.0
+   ],
+   [
+    0.97829,
+    0.01556
+   ],
+   [
+    0.96744,
+    0.99889
+   ],
+   [
+    0.02636,
+    0.98
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

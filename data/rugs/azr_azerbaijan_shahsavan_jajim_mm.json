@@ -18,7 +18,7 @@
  "h": 1185,
  "marks": [],
  "created": 1791736138,
- "updated": 1794979582,
+ "updated": 1795073152,
  "cat": {
   "title": "Antique Azerbaijan 'Shahsavan' jajim",
   "museum": "",
@@ -142,5 +142,39 @@
    "at": 1795051590,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0.02778,
+   0.01556,
+   0.92982,
+   0.97111
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02924,
+    0.01667
+   ],
+   [
+    0.9576,
+    0.01556
+   ],
+   [
+    0.9576,
+    0.98667
+   ],
+   [
+    0.02778,
+    0.98222
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

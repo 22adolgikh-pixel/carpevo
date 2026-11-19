@@ -18,7 +18,7 @@
  "h": 960,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795073152,
  "cat": {
   "title": "antique shirvan prayer rug125",
   "museum": "",
@@ -81,5 +81,39 @@
   "t": 1795072849
  },
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «sirvan» в подписи"
+ "school_by": "уточнено по слову «sirvan» в подписи",
+ "layout": {
+  "carpet": [
+   0.02291,
+   0.0,
+   0.92992,
+   0.99889
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05121,
+    0.02222
+   ],
+   [
+    0.94205,
+    0.0
+   ],
+   [
+    0.95283,
+    0.99889
+   ],
+   [
+    0.02291,
+    0.98222
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

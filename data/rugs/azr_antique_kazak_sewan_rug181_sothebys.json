@@ -18,7 +18,7 @@
  "h": 1180,
  "marks": [],
  "created": 1791736129,
- "updated": 1794982576,
+ "updated": 1795073152,
  "cat": {
   "title": "antique-kazak-sewan-rug181 sothebys",
   "museum": "",
@@ -157,5 +157,39 @@
   }
  },
  "school_prev": "ganja-gazakh",
- "school_by": "уточнено по слову «kazak» в подписи"
+ "school_by": "уточнено по слову «kazak» в подписи",
+ "layout": {
+  "carpet": [
+   0.05758,
+   0.02333,
+   0.88343,
+   0.93889
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08146,
+    0.02333
+   ],
+   [
+    0.94101,
+    0.03
+   ],
+   [
+    0.92697,
+    0.96222
+   ],
+   [
+    0.05758,
+    0.94111
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

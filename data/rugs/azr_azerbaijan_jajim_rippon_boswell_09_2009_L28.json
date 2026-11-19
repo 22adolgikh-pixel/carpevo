@@ -18,7 +18,7 @@
  "h": 1004,
  "marks": [],
  "created": 1791736138,
- "updated": 1795029706,
+ "updated": 1795073152,
  "cat": {
   "title": "Antique Azerbaijan jajim",
   "museum": "",
@@ -128,6 +128,39 @@
    }
   }
  },
- "frame": "whole",
- "frame_by": "micro"
+ "frame": "cropped",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.01222,
+   0.0,
+   0.9866699999999999,
+   0.96172
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01222,
+    0.02632
+   ],
+   [
+    0.93667,
+    0.0
+   ],
+   [
+    0.99889,
+    0.94139
+   ],
+   [
+    0.02333,
+    0.96172
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }
