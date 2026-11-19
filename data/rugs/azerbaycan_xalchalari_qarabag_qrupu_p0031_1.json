@@ -18,7 +18,7 @@
  "h": 1346,
  "marks": [],
  "created": 1794547278,
- "updated": 1794597124,
+ "updated": 1795061922,
  "cat": {
   "title": "İpək tikmə. Qarabağ qrupu. Azərbaycan. XVI əsr. Şəxsi kolleksiya",
   "museum": "Şəxsi kolleksiya",
@@ -77,7 +77,7 @@
   "conf": 0.988,
   "area": 0.861,
   "ver": 1,
-  "t": 1794547496
+  "t": 1795061875
  },
  "people": {
   "n": 0,
@@ -96,5 +96,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.03111,
+   0.03281,
+   0.93333,
+   0.93438
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03444,
+    0.03281
+   ],
+   [
+    0.96444,
+    0.03846
+   ],
+   [
+    0.95889,
+    0.96719
+   ],
+   [
+    0.03111,
+    0.95701
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

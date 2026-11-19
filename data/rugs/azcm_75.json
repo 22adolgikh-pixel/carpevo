@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870042,
- "updated": 1795030466,
+ "updated": 1795061922,
  "cat": {
   "title": "“Açma-yumma” («Ачма-юмма»), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -111,7 +111,7 @@
   "conf": 0.967,
   "area": 0.425,
   "ver": 1,
-  "t": 1794238404
+  "t": 1795061872
  },
  "multi": [],
  "micro": {
@@ -141,11 +141,43 @@
    }
   }
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.305,
+   0.01778,
+   0.45166999999999996,
+   0.96333
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.31167,
+    0.01778
+   ],
+   [
+    0.745,
+    0.02222
+   ],
+   [
+    0.75667,
+    0.98111
+   ],
+   [
+    0.305,
+    0.97889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
  "updated_by": "dolgikh",
  "from_twin": {
   "composition": "cm_f6ab1acf67"
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "tri": "auto"
 }

@@ -18,7 +18,7 @@
  "h": 1816,
  "marks": [],
  "created": 1794547278,
- "updated": 1794597339,
+ "updated": 1795061922,
  "cat": {
   "title": "Əjdahalı. Xalça. “Xətai\". Qarabağ qrupu. Azərbaycan. XVII əsr. Yun. Xovlu. Şəxsi kolleksiya",
   "museum": "Private collection",
@@ -79,30 +79,7 @@
   "conf": 0.974,
   "area": 0.84,
   "ver": 1,
-  "t": 1794547389,
-  "ref_quad": {
-   "quad": [
-    [
-     0.05664,
-     0.03151
-    ],
-    [
-     0.95316,
-     0.03444
-    ],
-    [
-     0.95092,
-     0.96515
-    ],
-    [
-     0.05142,
-     0.97025
-    ]
-   ],
-   "v": 3,
-   "from": "auto",
-   "t": 1794936447
-  }
+  "t": 1795061875
  },
  "people": {
   "n": 0,
@@ -121,5 +98,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.05272,
+   0.03111,
+   0.90159,
+   0.9400000000000001
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.058,
+    0.03111
+   ],
+   [
+    0.95431,
+    0.03556
+   ],
+   [
+    0.95255,
+    0.96667
+   ],
+   [
+    0.05272,
+    0.97111
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }
