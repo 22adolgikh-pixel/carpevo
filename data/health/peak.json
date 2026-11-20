@@ -1,7 +1,7 @@
 {
- "at": "2026-11-20 20:21:10",
- "rss_mb": 3814,
- "avail_mb": 2582,
+ "at": "2026-11-20 20:48:11",
+ "rss_mb": 4495,
+ "avail_mb": 1903,
  "heavy": "",
  "ui_heavy": "",
  "up_s": 30,
@@ -18,26 +18,23 @@
   "Thread-7 (loop)",
   "cps-backup",
   "Thread-8 (_loop)",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "vlm-corners"
+  "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-20 20:18:51 rss=1583MB avail=4760/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:19:01 rss=1595MB avail=4787/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:19:11 rss=1595MB avail=4736/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:19:21 rss=1595MB avail=4755/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:19:31 rss=1595MB avail=4750/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:19:41 rss=1595MB avail=4760/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:19:51 rss=1595MB avail=4778/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:20:01 rss=1595MB avail=4756/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:20:11 rss=1595MB avail=4760/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:20:21 rss=1595MB avail=4773/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:20:31 rss=1600MB avail=4685/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:20:40 rss=141MB avail=6164/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:20:50 rss=368MB avail=5975/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:21:00 rss=1893MB avail=4479/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-20 20:21:10 rss=3814MB avail=2582/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-20 20:45:51 rss=3476MB avail=2708/11925MB limit=0MB heavy=новые двойники wait=1",
+  "2026-11-20 20:46:01 rss=3485MB avail=2647/11925MB limit=0MB heavy=двойники wait=1",
+  "2026-11-20 20:46:11 rss=3527MB avail=2675/11925MB limit=0MB heavy=новые двойники wait=1",
+  "2026-11-20 20:46:21 rss=3509MB avail=2721/11925MB limit=0MB heavy=новые двойники wait=1",
+  "2026-11-20 20:46:31 rss=3501MB avail=2707/11925MB limit=0MB heavy=двойники wait=1",
+  "2026-11-20 20:46:41 rss=3615MB avail=2599/11925MB limit=0MB heavy=новые двойники wait=1",
+  "2026-11-20 20:46:51 rss=3509MB avail=2714/11925MB limit=0MB heavy=новые двойники wait=1",
+  "2026-11-20 20:47:01 rss=3480MB avail=2738/11925MB limit=0MB heavy=двойники wait=1",
+  "2026-11-20 20:47:11 rss=3477MB avail=2676/11925MB limit=0MB heavy=новые двойники wait=1",
+  "2026-11-20 20:47:21 rss=3534MB avail=2640/11925MB limit=0MB heavy=новые двойники wait=1",
+  "2026-11-20 20:47:31 rss=3512MB avail=2646/11925MB limit=0MB heavy=двойники wait=1",
+  "2026-11-20 20:47:41 rss=142MB avail=6117/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-20 20:47:51 rss=648MB avail=5673/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-20 20:48:01 rss=2355MB avail=3980/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-20 20:48:11 rss=4494MB avail=1903/11925MB limit=0MB heavy=- wait=0"
  ]
 }
