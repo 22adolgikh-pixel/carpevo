@@ -18,7 +18,7 @@
  "h": 636,
  "marks": [],
  "created": 1791736132,
- "updated": 1791736132,
+ "updated": 1795203904,
  "cat": {
   "title": "kuba lb27",
   "museum": "",
@@ -104,5 +104,49 @@
   }
  },
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «kuba» в подписи"
+ "school_by": "уточнено по слову «kuba» в подписи",
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795203904,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04336,
+    0.04809
+   ],
+   [
+    0.95886,
+    0.04137
+   ],
+   [
+    0.93767,
+    0.91991
+   ],
+   [
+    0.05656,
+    0.95213
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
