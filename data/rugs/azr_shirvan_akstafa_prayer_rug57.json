@@ -18,7 +18,7 @@
  "h": 975,
  "marks": [],
  "created": 1791736138,
- "updated": 1795030440,
+ "updated": 1795205939,
  "cat": {
   "title": "shirvan-akstafa-prayer-rug57",
   "museum": "",
@@ -110,10 +110,51 @@
     "w": 2,
     "t": 1795030440
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795205939,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
  "frame_by": "micro",
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «sirvan» в подписи"
+ "school_by": "уточнено по слову «sirvan» в подписи",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.09249,
+    0.02632
+   ],
+   [
+    0.90465,
+    0.03583
+   ],
+   [
+    0.92427,
+    0.97076
+   ],
+   [
+    0.08152,
+    0.97066
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
