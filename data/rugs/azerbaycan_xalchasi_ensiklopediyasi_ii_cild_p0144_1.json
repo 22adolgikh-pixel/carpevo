@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062089,
+ "updated": 1795204673,
  "cat": {
   "title": "Zili Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -96,6 +96,13 @@
      "t": 1794930067
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "not_rug",
+    "w": 2,
+    "t": 1795204673
+   }
   }
  },
  "layout": {
@@ -130,6 +137,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "whole",
- "tri": "hand"
+ "frame": "not_rug",
+ "tri": "hand",
+ "frame_by": "micro"
 }

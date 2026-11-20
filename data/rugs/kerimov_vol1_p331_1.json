@@ -2201,7 +2201,7 @@
    "scheme": "t53_f04",
    "group": "m6ad54215e572945_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: cincilim",
    "angle": 90,
    "flip": 1,
@@ -2289,8 +2289,8 @@
    ],
    "by": "машина",
    "at": 1794149050,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795204629,
    "box0": [
     0.61882,
     0.15612,
@@ -2314,7 +2314,7 @@
    "scheme": "t53_f04",
    "group": "m6ad54215e572945_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: cincilim",
    "angle": 180,
    "flip": 1,
@@ -2394,8 +2394,8 @@
    ],
    "by": "машина",
    "at": 1794149050,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795204629,
    "box0": [
     0.63176,
     0.75821,
@@ -2419,7 +2419,7 @@
    "scheme": "t53_f04",
    "group": "m6ad54215e572945_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: cincilim",
    "angle": 0,
    "flip": 1,
@@ -2495,8 +2495,8 @@
    ],
    "by": "машина",
    "at": 1794149050,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795204629,
    "box0": [
     0.28588,
     0.16173,
@@ -2520,7 +2520,7 @@
    "scheme": "t166_f04",
    "group": "m6ad54238e558269_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: alma",
    "angle": 270,
    "flip": 1,
@@ -2597,7 +2597,7 @@
    "scheme": "t166_f04",
    "group": "m6ad54238e558269_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: alma",
    "angle": 0,
    "flip": 1,
@@ -3622,7 +3622,7 @@
   }
  ],
  "created": 1791736121,
- "updated": 1795204605,
+ "updated": 1795204677,
  "cat": {
   "title": "Керимов, т. I, Табл. 209. «ЧИРАГЛЫ» (стр. скана 331, печ. ?)",
   "museum": "",
@@ -3973,6 +3973,41 @@
      "a": "ok",
      "w": 2,
      "t": 1795204605
+    }
+   },
+   "m6ad54215e572945_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795204629
+    }
+   },
+   "m6ad54215e572945_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795204629
+    }
+   },
+   "m6ad54215e572945_2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795204629
+    }
+   },
+   "m6ad54238e558269_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204677
+    }
+   },
+   "m6ad54238e558269_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204677
     }
    }
   }

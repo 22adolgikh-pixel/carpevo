@@ -200,9 +200,9 @@
     0.03816
    ],
    "zone": "field",
-   "motif": "",
+   "motif": "pul",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t49_f02",
    "group": "mmv8eij69",
    "certainty": "sure",
    "status": "confirmed",
@@ -218,7 +218,8 @@
    "confirmed_by": "/m: dolgikh",
    "confirmed_at": 1795204351,
    "edited_by": "dolgikh",
-   "edited_at": 1792272295
+   "edited_at": 1792272295,
+   "named_by": "/m"
   },
   {
    "id": "mmv8eim6i0",
@@ -229,9 +230,9 @@
     0.03778
    ],
    "zone": "field",
-   "motif": "",
+   "motif": "pul",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t49_f02",
    "group": "mmv8eij69",
    "certainty": "sure",
    "status": "confirmed",
@@ -247,7 +248,8 @@
    "confirmed_by": "/m: dolgikh",
    "confirmed_at": 1795204351,
    "edited_by": "dolgikh",
-   "edited_at": 1792272295
+   "edited_at": 1792272295,
+   "named_by": "/m"
   },
   {
    "id": "mmv8eim6i1",
@@ -258,9 +260,9 @@
     0.03778
    ],
    "zone": "field",
-   "motif": "",
+   "motif": "pul",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t49_f02",
    "group": "mmv8eij69",
    "certainty": "sure",
    "status": "confirmed",
@@ -276,7 +278,8 @@
    "confirmed_by": "/m: dolgikh",
    "confirmed_at": 1795204351,
    "edited_by": "dolgikh",
-   "edited_at": 1792272295
+   "edited_at": 1792272295,
+   "named_by": "/m"
   },
   {
    "id": "mmv8eim6i2",
@@ -287,9 +290,9 @@
     0.03556
    ],
    "zone": "field",
-   "motif": "",
+   "motif": "pul",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t49_f02",
    "group": "mmv8eij69",
    "certainty": "maybe",
    "status": "confirmed",
@@ -305,7 +308,8 @@
    "confirmed_by": "/m: dolgikh",
    "confirmed_at": 1795204351,
    "edited_by": "dolgikh",
-   "edited_at": 1792272295
+   "edited_at": 1792272295,
+   "named_by": "/m"
   },
   {
    "id": "mmv8eim6i3",
@@ -316,9 +320,9 @@
     0.03222
    ],
    "zone": "field",
-   "motif": "",
+   "motif": "pul",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t49_f02",
    "group": "mmv8eij69",
    "certainty": "maybe",
    "status": "confirmed",
@@ -334,7 +338,8 @@
    "confirmed_by": "/m: dolgikh",
    "confirmed_at": 1795204351,
    "edited_by": "dolgikh",
-   "edited_at": 1792272295
+   "edited_at": 1792272295,
+   "named_by": "/m"
   },
   {
    "id": "mmv8eim6i4",
@@ -345,9 +350,9 @@
     0.03556
    ],
    "zone": "field",
-   "motif": "",
+   "motif": "pul",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t49_f02",
    "group": "mmv8eij69",
    "certainty": "maybe",
    "status": "confirmed",
@@ -363,7 +368,8 @@
    "confirmed_by": "/m: dolgikh",
    "confirmed_at": 1795204351,
    "edited_by": "dolgikh",
-   "edited_at": 1792272295
+   "edited_at": 1792272295,
+   "named_by": "/m"
   },
   {
    "id": "mmv8ejqzj",
@@ -817,7 +823,7 @@
   }
  ],
  "created": 1791736121,
- "updated": 1795204351,
+ "updated": 1795204703,
  "cat": {
   "title": "Керимов, т. I, Табл. 199. «КОХНА КУБА» (стр. скана 320, печ. ?)",
   "museum": "",
@@ -969,6 +975,13 @@
      "a": "t61_f03",
      "w": 2,
      "t": 1794553206
+    }
+   },
+   "mmv8eij69": {
+    "dolgikh": {
+     "a": "t49_f02",
+     "w": 2,
+     "t": 1795204703
     }
    }
   },
