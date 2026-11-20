@@ -110,8 +110,19 @@ def _ip(request):
             or (request.client.host if request.client else ""))
 
 
+def key_user(request: Request):
+    """v11.98: ключ для внешних программ (?key=… или заголовок X-CPS-Key) — только GET /api/open/…, всегда как наблюдатель"""
+    k = request.query_params.get("key") or request.headers.get("x-cps-key") or ""
+    if len(k) < 16 or request.method != "GET" or not request.url.path.startswith("/api/open"): return None
+    for n, r in _load().items():
+        if r.get("api_key") and hmac.compare_digest(r["api_key"], k): return (n, "viewer")
+    return None
+
+
 def current(request: Request):
     """→ (имя, роль) или None."""
+    ku = key_user(request)
+    if ku: return ku
     if not _remote(request): return ("local", "admin")
     n = _check(request.cookies.get(COOKIE, ""))
     if not n: return None
@@ -265,7 +276,7 @@ def install(app):
                     if e.get("do") == "edit": a = act.setdefault(e["user"], {"n": 0, "last": 0}); a["n"] += 1; a["last"] = e["t"]
         except Exception: pass
         return [{"name": k, "role": v["role"], "role_ru": ROLE_RU[v["role"]], "created": v.get("created"),
-                 "last_seen": v.get("last_seen"), "edits": act.get(k, {}).get("n", 0), "last_edit": act.get(k, {}).get("last")}
+                 "last_seen": v.get("last_seen"), "has_key": bool(v.get("api_key")), "edits": act.get(k, {}).get("n", 0), "last_edit": act.get(k, {}).get("last")}
                 for k, v in sorted(_load().items())]
 
     @app.post("/api/users/role")
@@ -281,6 +292,16 @@ def install(app):
             u[name]["role"] = role; _save(u)
         log(request.state.user, "role", f"{name} → {role}")
         return {"ok": True}
+
+    @app.post("/api/users/key")
+    async def _key(request: Request):
+        """v11.98: выдать / заменить / отозвать (off: true) ключ для внешних программ — только чтение /api/open"""
+        if not _admin(request): return JSONResponse({"error": "Только для администратора"}, status_code=403)
+        b = await request.json(); name = b.get("name"); u = _load()
+        if name not in u: return JSONResponse({"error": "Нет такого пользователя"}, status_code=404)
+        if b.get("off"): u[name].pop("api_key", None); _save(u); log(request.state.user, "key_off", name); return {"ok": True}
+        k = secrets.token_urlsafe(24); u[name]["api_key"] = k; _save(u); log(request.state.user, "key", name)
+        return {"ok": True, "key": k}
 
     @app.post("/api/users/reset")
     async def _reset(request: Request):

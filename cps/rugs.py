@@ -726,6 +726,124 @@ def install(app, DATA, D_WORK):
                 save(r); n += 1
         open(mark, "w").write(str(n)); print("comp cleanup:", n); _dcl["t"] = 0
 
+    # ---- v11.98: открытые данные для внешних программ (TouchDesigner и т. п.): только чтение, вход по ключу (?key=…), см. /api/open
+    D_PAL = os.path.join(DATA, "palette"); os.makedirs(D_PAL, exist_ok=True)
+
+    def pal_quad(r):
+        L = r.get("layout") or {}
+        if L.get("quad") and L.get("quad_status") in ("confirmed", "accepted", "edited"): return L["quad"], "углы подтверждены"
+        a = r.get("auto") or {}
+        if (r.get("frame") == "whole" or a.get("frame") == "whole") and a.get("quad"): return a["quad"], "углы машины"
+        return None, "без углов: центр кадра 80 %"
+
+    def pal_colors(rid, k=12, merge=12.0):
+        import palette
+        r = load(rid); p = img_path(rid)
+        if not r or not p: return None
+        q, how = pal_quad(r)
+        key = [palette.VER, int(os.path.getmtime(p)), q, int(k), float(merge)]
+        f = os.path.join(D_PAL, f"{rid}.json")
+        try:
+            c = json.load(open(f, encoding="utf-8"))
+            if c.get("key") == key: return c
+        except Exception: pass
+        img = cv2.imread(p)
+        if img is None: return None
+        c = {"key": key, "id": rid, "how": how, "colors": palette.colors(img, q, k=k, merge=merge)}
+        json.dump(c, open(f, "w", encoding="utf-8"), ensure_ascii=False)
+        return c
+
+    def open_rows(q):
+        """живые ковры с фильтрами: school (школа или тип Керимова), composition, src, q (текст), quad=1 — только с углами"""
+        sc, cp, src, txt = q.get("school", ""), q.get("composition", ""), q.get("src", ""), (q.get("q") or "").lower()
+        out = []
+        for f in sorted(os.listdir(D_RUGS)):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("hidden") or r.get("dup_of") or r.get("split_into") or r.get("frame") in ("multi", "part", "notrug"): continue
+            if sc and r.get("school") != sc and school_group(r.get("school")) != sc: continue
+            if cp and r.get("composition") != cp: continue
+            s = (r.get("cat") or {}).get("src", "")
+            if src and not s.startswith(src): continue
+            if txt and txt not in (r.get("title", "") + " " + r["id"] + " " + ((BYID.get(r.get("composition")) or {}).get("az") or "")).lower(): continue
+            qd, how = pal_quad(r)
+            if q.get("quad") in ("1", "true") and not qd: continue
+            if q.get("bw") not in ("1", "true") and is_bw(r["id"]): continue          # ч/б и сепия — только по bw=1
+            out.append({"id": r["id"], "name": disp_name(r, None)["nm"], "title": r.get("title", ""), "school": r.get("school", ""),
+                        "school_ru": SCHOOLS.get(r.get("school", ""), ""), "composition": r.get("composition", ""),
+                        "composition_az": (BYID.get(r.get("composition")) or {}).get("az", ""), "src": s, "museum": r.get("museum", ""),
+                        "date": r.get("date", ""), "size": r.get("size", ""), "quad": bool(qd)})
+        return out
+
+    def _open_q(request): return {k: v for k, v in request.query_params.items() if k != "key"}
+
+    @app.get("/api/open")
+    def open_help(request: Request):
+        k = request.query_params.get("key", "КЛЮЧ")
+        base = str(request.base_url).rstrip("/")
+        ex = lambda path: f"{base}{path}{'&' if '?' in path else '?'}key={k}"
+        return HTMLResponse(f"""<!doctype html><meta charset=utf-8><title>Ковры — открытые данные</title>
+<style>body{{font:15px/1.5 system-ui,sans-serif;max-width:860px;margin:30px auto;padding:0 16px}}code{{background:#f2f0ec;padding:1px 5px;border-radius:4px;word-break:break-all}}</style>
+<h1>Ковры — открытые данные (только чтение)</h1>
+<p>Каждый адрес — с вашим ключом в конце: <code>key=…</code>. Ключ выдаёт администратор студии.</p>
+<h2>Палитра ковра полоской</h2>
+<p>PNG W×H: цвета ковра по убыванию площади, слева — самый крупный (фон поля), справа — мелкие детали. Ширина цвета = его доля в ковре (30 % → ≈ 307 из 1024 px).</p>
+<p><code>{ex('/api/open/palette/ID.png')}</code><br>параметры: <code>w</code> ширина (1024), <code>h</code> высота (1), <code>k</code> сколько цветов искать (12), <code>merge</code> насколько близкие оттенки сливать (ΔE, 12; меньше — больше оттенков), <code>blend</code> мягкие переходы на стыках, px (0)</p>
+<p>Те же цвета числами: <code>{ex('/api/open/palette/ID.json')}</code> — hex, rgb, Lab, доля, сколько пикселей в полоске.</p>
+<h2>Какие ковры есть</h2>
+<p><code>{ex('/api/open/rugs?school=karabakh&limit=50')}</code><br>фильтры: <code>school</code> (guba, shirvan, baku, ganja, gazakh, karabakh, tabriz, nakhchivan или группа guba-shirvan / ganja-gazakh), <code>composition</code> (id типа, напр. celebi), <code>src</code> (kerimov, azcarpetmuseum, met…), <code>q</code> (текст), <code>quad=1</code> (только выпрямленные — палитра точнее), <code>bw=1</code> (включить ч/б и сепию — по умолчанию их нет), <code>limit</code>, <code>offset</code>.</p>
+<h2>Пачкой</h2>
+<p><code>{ex('/api/open/palettes.zip?school=karabakh&quad=1&limit=200')}</code> — архив: <code>ID.png</code> полоски + <code>index.csv</code> (ковёр, школа, тип, цвета с долями). Те же фильтры и параметры полоски; до 1000 ковров.</p>
+<h2>Фото</h2>
+<p><code>{ex('/api/open/rug/ID.jpg')}</code> — ковёр выпрямленный по углам (если углов нет — фото как есть); <code>side</code> — длинная сторона (1600).</p>
+<p>Как считаются цвета: ковёр выпрямляется по углам (без углов — центр кадра 80 %), фон за краем не считается; ворс сглаживается, цвета группируются в Lab, близкие (ΔE &lt; 12) сливаются, доли меньше 0,3 % отбрасываются. Цвет на фото зависит от света и съёмки — это цвет снимка, не замер красителя.</p>""")
+
+    @app.get("/api/open/rugs")
+    def open_rugs(request: Request, limit: int = 100, offset: int = 0):
+        rows = open_rows(_open_q(request)); limit = max(1, min(int(limit), 5000))
+        return {"total": len(rows), "offset": offset, "rugs": rows[offset:offset + limit]}
+
+    @app.get("/api/open/palette/{rid}.json")
+    def open_pal_json(rid: str, k: int = 12, w: int = 1024, merge: float = 12.0):
+        import palette
+        c = pal_colors(os.path.basename(rid), k, merge)
+        if not c: return JSONResponse({"error": "нет такого ковра или фото"}, 404)
+        px = palette.widths([x["share"] for x in c["colors"]], max(len(c["colors"]), w)) if c["colors"] else []
+        return {"id": c["id"], "how": c["how"], "colors": [{**x, "px": n} for x, n in zip(c["colors"], px)]}
+
+    @app.get("/api/open/palette/{rid}.png")
+    def open_pal_png(rid: str, k: int = 12, w: int = 1024, h: int = 1, blend: int = 0, merge: float = 12.0):
+        import palette
+        c = pal_colors(os.path.basename(rid), k, merge)
+        if not c or not c["colors"]: return JSONResponse({"error": "нет такого ковра или фото"}, 404)
+        return Response(palette.png(c["colors"], min(max(w, 2), 8192), min(max(h, 1), 1024), max(0, blend)), media_type="image/png",
+                        headers={"Cache-Control": "max-age=3600"})
+
+    @app.get("/api/open/palettes.zip")
+    def open_pal_zip(request: Request, k: int = 12, w: int = 1024, h: int = 1, blend: int = 0, merge: float = 12.0, limit: int = 200, offset: int = 0):
+        import palette, zipfile, csv
+        rows = open_rows(_open_q(request))[offset:offset + max(1, min(int(limit), 1000))]
+        buf = io.BytesIO(); idx = io.StringIO(); cw = csv.writer(idx)
+        cw.writerow(["id", "name", "school", "composition", "src", "how", "colors (hex:share)"])
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+            for x in rows:
+                c = pal_colors(x["id"], k, merge)
+                if not c or not c["colors"]: continue
+                z.writestr(f"{x['id']}.png", palette.png(c["colors"], min(max(w, 2), 8192), min(max(h, 1), 1024), max(0, blend)))
+                cw.writerow([x["id"], x["name"], x["school"], x["composition"], x["src"], c["how"], " ".join(f"{y['hex']}:{y['share']}" for y in c["colors"])])
+            z.writestr("index.csv", "\ufeff" + idx.getvalue())
+        return Response(buf.getvalue(), media_type="application/zip", headers={"Content-Disposition": 'attachment; filename="palettes.zip"'})
+
+    @app.get("/api/open/rug/{rid}.jpg")
+    def open_rug_jpg(rid: str, side: int = 1600):
+        import rug_rect
+        rid = os.path.basename(rid); r = load(rid); p = img_path(rid)
+        if not r or not p: return JSONResponse({"error": "нет такого ковра или фото"}, 404)
+        img = cv2.imread(p); q, _ = pal_quad(r)
+        if q: img = rug_rect.rectify(img, q, side=min(max(side, 64), 4000))
+        ok, b = cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, 90])
+        return Response(b.tobytes(), media_type="image/jpeg")
+
     # ---- v11.96: один ковёр = группа снимков (связи «тот же» напрямую; как плитка каталога). Обложка, исключить снимок, перенести в другой ковёр.
     GROUP_MAX = 60
 

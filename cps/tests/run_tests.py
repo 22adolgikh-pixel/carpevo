@@ -2128,6 +2128,49 @@ def t49_versions_v1197(pg, ctx):
     errors_ok(ctx, 'версии')
 
 
+@test
+def t50_open_palette_v1198(pg, ctx):
+    """v11.98: палитра ковра полоской 1024×1 (цвета по убыванию площади), список ковров, архив; ключ для программ — только GET /api/open."""
+    import zipfile, io as _io
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    import cv2, numpy as np
+    img = np.zeros((600, 400, 3), np.uint8); img[:] = (200, 120, 40)            # голубой (BGR) фон ≈ 75 %
+    img[150:450, 100:300] = (30, 30, 180)                                        # красный медальон ≈ 25 %…
+    img[280:320, 180:220] = (40, 200, 230)                                       # …с жёлтой серединой ≈ 0,7 %
+    cv2.imwrite(f'{D}/rug_img/pal_a.jpg', img)
+    json.dump({"id": "pal_a", "title": "тест палитры", "source": "тест", "school": "karabakh", "composition": "", "status": "new", "w": 400, "h": 600,
+               "marks": [], "created": now, "updated": now, "cat": {"src": "kerimov_vol2"}, "frame": "whole", "frame_by": "hand",
+               "layout": {"quad": [[0, 0], [1, 0], [1, 1], [0, 1]], "quad_status": "confirmed"}}, open(f'{D}/rugs/pal_a.json', 'w'), ensure_ascii=False)
+    j = get(u + 'api/open/palette/pal_a.json')
+    hx = [c["hex"] for c in j["colors"]]; sh = [c["share"] for c in j["colors"]]
+    assert len(hx) >= 3 and sh == sorted(sh, reverse=True) and sum(c["px"] for c in j["colors"]) == 1024, j
+    r0, g0, b0 = j["colors"][0]["rgb"]; assert b0 > 150 and r0 < 80 and 0.7 < sh[0] < 0.8, j["colors"][0]
+    assert j["how"] == "углы подтверждены"
+    b = urllib.request.urlopen(u + 'api/open/palette/pal_a.png').read()
+    a = cv2.imdecode(np.frombuffer(b, np.uint8), cv2.IMREAD_COLOR); assert a.shape == (1, 1024, 3), a.shape
+    a = cv2.imdecode(np.frombuffer(urllib.request.urlopen(u + 'api/open/palette/pal_a.png?w=512&h=8&blend=6').read(), np.uint8), cv2.IMREAD_COLOR)
+    assert a.shape == (8, 512, 3)
+    L = get(u + 'api/open/rugs?school=karabakh&quad=1'); assert any(x["id"] == "pal_a" for x in L["rugs"]), L
+    z = zipfile.ZipFile(_io.BytesIO(urllib.request.urlopen(u + 'api/open/palettes.zip?school=karabakh&quad=1').read()))
+    assert "pal_a.png" in z.namelist() and "pal_a" in z.read("index.csv").decode("utf-8-sig")
+    assert 'Палитра ковра полоской' in urllib.request.urlopen(u + 'api/open').read().decode()
+    # ключ: работает только для GET /api/open (запрос «из интернета» — с X-Forwarded-For)
+    try: post(u + 'api/register', {"name": "maks", "password": "maks-pass-123"})
+    except urllib.error.HTTPError: pass
+    k = post(u + 'api/users/key', {"name": "maks"})["key"]
+    def rq(path, key=None, method="GET"):
+        h = {"X-Forwarded-For": "8.8.8.8"}
+        if key: h["X-CPS-Key"] = key
+        r = urllib.request.Request(u + path, headers=h, method=method, data=b"{}" if method == "POST" else None)
+        try: return urllib.request.urlopen(r).status
+        except urllib.error.HTTPError as e: return e.code
+    assert rq('api/open/palette/pal_a.json', k) == 200
+    assert rq('api/open/palette/pal_a.json?key=' + k) == 200
+    assert rq('api/open/palette/pal_a.json') == 401 and rq('api/open/palette/pal_a.json', 'x' * 32) == 401
+    assert rq('api/rugs', k) == 401 and rq('api/rugs/pal_a', k, "POST") == 401
+    post(u + 'api/users/key', {"name": "maks", "off": True}); assert rq('api/open/palette/pal_a.json', k) == 401
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
