@@ -479,11 +479,42 @@
  },
  "m:alma": {
   "name": "alma",
-  "eval": {},
+  "eval": {
+   "A": {
+    "recall": 0.0,
+    "iou": 0.193,
+    "hits": 6.5,
+    "n": 19
+   },
+   "B": {
+    "recall": 0.0,
+    "iou": 0.2,
+    "hits": 6.5,
+    "n": 19
+   },
+   "C": {
+    "recall": 0.632,
+    "iou": 0.488,
+    "hits": 5.0,
+    "n": 19
+   },
+   "D": {
+    "recall": 0.211,
+    "iou": 0.16,
+    "hits": 0.5,
+    "n": 19
+   },
+   "E": {
+    "recall": 0.421,
+    "iou": 0.377,
+    "hits": 5.5,
+    "n": 19
+   }
+  },
   "cfg": "C",
-  "npos": 8,
-  "rugs": 1,
-  "at": 1795126190
+  "npos": 19,
+  "rugs": 2,
+  "at": 1795212682
  },
  "m:tutuqushu": {
   "name": "tutuquşu",
@@ -491,7 +522,7 @@
   "cfg": "C",
   "npos": 6,
   "rugs": 1,
-  "at": 1795126203
+  "at": 1795212685
  },
  "m:alaqapi": {
   "name": "alaqapı",
@@ -499,7 +530,7 @@
   "cfg": "C",
   "npos": 4,
   "rugs": 1,
-  "at": 1795126205
+  "at": 1795212692
  },
  "m:kishi": {
   "name": "kişi",
@@ -507,7 +538,7 @@
   "cfg": "C",
   "npos": 4,
   "rugs": 1,
-  "at": 1795126209
+  "at": 1795212696
  },
  "m:xercheng": {
   "name": "xərçəng",
@@ -515,7 +546,7 @@
   "cfg": "C",
   "npos": 12,
   "rugs": 1,
-  "at": 1795126211
+  "at": 1795212698
  },
  "t:quyrum": {
   "name": "Quyrum",
@@ -642,5 +673,13 @@
   "npos": 6,
   "rugs": 1,
   "at": 1795212647
+ },
+ "m:heyvan": {
+  "name": "heyvan",
+  "eval": {},
+  "cfg": "C",
+  "npos": 12,
+  "rugs": 1,
+  "at": 1795212701
  }
 }
