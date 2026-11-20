@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "XVIII век",
  "school": "karabakh",
- "composition": "verni",
+ "composition": "",
  "technique": "безворсовый: верни",
  "size": "107x244 см",
  "notes": "Vərni. Qarabağ. Azərbayc 19-cu Material: у Ölçü: 107x244 | Azarbaycan Xalca Muz DDK 6",
@@ -263,5 +263,17 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "hist": {
+  "composition": [
+   {
+    "v": "verni",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

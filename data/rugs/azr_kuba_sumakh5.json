@@ -9,7 +9,7 @@
  "place": "Губа, Азербайджан",
  "date": "первая половина XIX века",
  "school": "guba",
- "composition": "sumax",
+ "composition": "",
  "technique": "безворсовый: сумах",
  "size": "214х291 sm",
  "notes": "",
@@ -214,7 +214,7 @@
    }
   }
  },
- "composition_by": "/m: lika",
+ "composition_by": "перенесено: не композиция",
  "layout": {
   "carpet": [
    0.0228,
@@ -272,5 +272,16 @@
  "frame": "whole",
  "frame_by": "micro",
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «kuba» в подписи"
+ "school_by": "уточнено по слову «kuba» в подписи",
+ "hist": {
+  "composition": [
+   {
+    "v": "sumax",
+    "by": "/m: lika",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ }
 }

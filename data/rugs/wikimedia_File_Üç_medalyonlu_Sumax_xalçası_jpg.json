@@ -9,7 +9,7 @@
  "place": "",
  "date": "1921",
  "school": "guba-shirvan",
- "composition": "sumax-object",
+ "composition": "",
  "technique": "безворсовый",
  "size": "",
  "notes": "",
@@ -151,5 +151,17 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "hist": {
+  "composition": [
+   {
+    "v": "sumax-object",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

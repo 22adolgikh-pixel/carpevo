@@ -9,7 +9,7 @@
  "place": "",
  "date": "2010-03-12 16:20:48",
  "school": "guba-shirvan",
- "composition": "zili",
+ "composition": "",
  "technique": "безворсовый",
  "size": "",
  "notes": "",
@@ -199,5 +199,17 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "hist": {
+  "composition": [
+   {
+    "v": "zili",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

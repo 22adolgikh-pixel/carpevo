@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "19 в.",
  "school": "karabakh",
- "composition": "zili",
+ "composition": "",
  "technique": "безворсовый: зили",
  "size": "93x310 см",
  "notes": "Zili. Qarabağ. Azərbaycan. 19-cu əsr. Material: yun. Ölçü: 93x310 sm. Azərbaycan Xalça Muzeyi. DDK 394.",
@@ -198,5 +198,17 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "hist": {
+  "composition": [
+   {
+    "v": "zili",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

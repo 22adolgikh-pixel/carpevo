@@ -9,7 +9,7 @@
  "place": "Карабах, Азербайджан",
  "date": "I четверть XVIII века",
  "school": "karabakh",
- "composition": "qarabag",
+ "composition": "",
  "technique": "ворсовый",
  "size": "235x540 sm",
  "notes": "основа, уток, ворс – шерсть; ",
@@ -131,5 +131,17 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "hist": {
+  "composition": [
+   {
+    "v": "qarabag",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а школа"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

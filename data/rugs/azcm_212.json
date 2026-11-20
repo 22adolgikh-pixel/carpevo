@@ -9,7 +9,7 @@
  "place": "Губа, Азербайджан",
  "date": "начало ХХ века",
  "school": "guba",
- "composition": "sumax",
+ "composition": "",
  "technique": "безворсовый: сумах",
  "size": "200x278 sm",
  "notes": "основа, уток – шерсть; обматывание",
@@ -138,5 +138,17 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "hist": {
+  "composition": [
+   {
+    "v": "sumax",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "19 в.",
  "school": "karabakh",
- "composition": "qarabag-vernisi",
+ "composition": "",
  "technique": "безворсовый: верни",
  "size": "202x284 см",
  "notes": "Vərni. Qarabağ. Azərbaycan. 19-cu əsr. Material: yun. Ölçü: 202x284 sm. Azərbaycan Xalça Muzeyi. DDK 356",
@@ -284,5 +284,17 @@
     }
    }
   }
- }
+ },
+ "hist": {
+  "composition": [
+   {
+    "v": "qarabag-vernisi",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

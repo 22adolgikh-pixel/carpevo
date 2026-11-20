@@ -9,7 +9,7 @@
  "place": "Карабах, Азербайджан",
  "date": "19th centurydate QS:P,+1850-00-00T00:00:00Z/7",
  "school": "karabakh",
- "composition": "verni",
+ "composition": "",
  "technique": "безворсовый",
  "size": "225x283 sm",
  "notes": "",
@@ -110,5 +110,17 @@
   "inv": "azcm_170",
   "place": "azcm_170",
   "size": "azcm_170"
- }
+ },
+ "hist": {
+  "composition": [
+   {
+    "v": "verni",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

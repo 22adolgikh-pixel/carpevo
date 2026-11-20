@@ -9,7 +9,7 @@
  "place": "Карабах, Азербайджан",
  "date": "конец XIX века",
  "school": "karabakh",
- "composition": "qarabag-sheddesi",
+ "composition": "",
  "technique": "безворсовый: шадда",
  "size": "180x380 sm",
  "notes": "основа, уток – шерсть; переплетение, обматывание",
@@ -383,5 +383,17 @@
   "field": {
    "dolgikh": "draw"
   }
- }
+ },
+ "hist": {
+  "composition": [
+   {
+    "v": "qarabag-sheddesi",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

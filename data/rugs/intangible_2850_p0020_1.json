@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "19 в., начало",
  "school": "karabakh",
- "composition": "qarabag",
+ "composition": "",
  "technique": "ворсовый",
  "size": "228x110 см",
  "notes": "\"Qarabağ\" xalçası. Qarabağ məktəbi. Azərbaycan. XIX əsrin əvvəli. Yun, 228 x110 sm\n\"Garabagh\" carpet. Garabagh school. Azerbaijan. Early XIX century. Wool, 228x110 cm\nКовер «Гарабах». Гарабахская школа. Азербайджан. Начало XIX века. Шерсть, 228х110 см",
@@ -85,5 +85,17 @@
   "ver": 1,
   "at": 1794547502
  },
- "multi": []
+ "multi": [],
+ "hist": {
+  "composition": [
+   {
+    "v": "qarabag",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а школа"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "19 в.",
  "school": "karabakh",
- "composition": "verni",
+ "composition": "",
  "technique": "безворсовый: верни",
  "size": "225x283 см",
  "notes": "Vərni. Qarabağ. Azərbaycan. 19-cu əsr. Material: yun. Ölçü: 225x283 sm. Azərbaycan Xalça Muzeyi. DDK 6892.",
@@ -191,7 +191,7 @@
    }
   }
  },
- "composition_by": "/m: dolgikh",
+ "composition_by": "перенесено: не композиция",
  "same_chk": {
   "azcm_170": {
    "inl": 2307,
@@ -281,5 +281,16 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "hist": {
+  "composition": [
+   {
+    "v": "verni",
+    "by": "/m: dolgikh",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ }
 }

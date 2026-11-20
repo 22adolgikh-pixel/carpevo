@@ -9,7 +9,7 @@
  "place": "Губа",
  "date": "21 в., начало",
  "school": "guba",
- "composition": "sumax",
+ "composition": "",
  "technique": "безворсовый",
  "size": "427x313 см",
  "notes": "\"Sumax\" xalçası. Quba məktəbi. Azərbaycan. İpək, 427x313 sm. \"Azər-İlmə\" istehsalı. 2006\n\"Sumakh\" carpet. Guba school. Azerbaijan. Silk, 427x313 cm. Produced by \"Azer-Ilme\" Company. 2006\nКовер «Сумах». Губинская школа. Азербайджан. Шелк, 427х313 см. Производство «Азер-Илмэ». 2006",
@@ -87,5 +87,17 @@
  },
  "multi": [],
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «guba» в подписи"
+ "school_by": "уточнено по слову «guba» в подписи",
+ "hist": {
+  "composition": [
+   {
+    "v": "sumax",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

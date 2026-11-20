@@ -9,7 +9,7 @@
  "place": "Губа",
  "date": "20 в.",
  "school": "guba",
- "composition": "sumax",
+ "composition": "",
  "technique": "безворсовый",
  "size": "190x120 см",
  "notes": "Sumax. Quba məktəbi. Azərbaycan. XX əsr. Yun, 190x120 sm\nSumakh. Guba school. Azerbaijan. XX century. Wool, 190x120 cm\nСумах. Губинская школа. Азербайджан. XX век. Шерсть, 190х120 см",
@@ -151,5 +151,17 @@
    "at": 1795051256,
    "ver": 2
   }
- }
+ },
+ "hist": {
+  "composition": [
+   {
+    "v": "sumax",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

@@ -9,7 +9,7 @@
  "place": "Губа",
  "date": "19 в., начало",
  "school": "guba",
- "composition": "sumax",
+ "composition": "",
  "technique": "безворсовый",
  "size": "",
  "notes": "Sumax. Yun. Xovsuz. 1800-cü il. Quba qrupu. Azərbaycan. Şəxsi kolleksiyadan.",
@@ -86,5 +86,17 @@
  },
  "multi": [],
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «guba» в подписи"
+ "school_by": "уточнено по слову «guba» в подписи",
+ "hist": {
+  "composition": [
+   {
+    "v": "sumax",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

@@ -9,7 +9,7 @@
  "place": "",
  "date": "circa 1900",
  "school": "guba",
- "composition": "kilim",
+ "composition": "",
  "technique": "безворсовый: килим",
  "size": "",
  "notes": "Kuba Kilim, Caucasus, circa 1900",
@@ -272,5 +272,17 @@
   }
  },
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «kuba» в подписи"
+ "school_by": "уточнено по слову «kuba» в подписи",
+ "hist": {
+  "composition": [
+   {
+    "v": "kilim",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

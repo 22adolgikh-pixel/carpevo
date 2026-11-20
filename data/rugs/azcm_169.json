@@ -9,7 +9,7 @@
  "place": "Карабах, Азербайджан",
  "date": "XVIII век",
  "school": "karabakh",
- "composition": "verni",
+ "composition": "",
  "technique": "безворсовый: верни",
  "size": "202x284 sm",
  "notes": "основа, уток – шерсть; обматывание",
@@ -296,5 +296,17 @@
  "from_twin": {
   "composition": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1"
  },
- "frame_by": "micro"
+ "frame_by": "micro",
+ "hist": {
+  "composition": [
+   {
+    "v": "verni",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

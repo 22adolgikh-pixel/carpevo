@@ -9,7 +9,7 @@
  "place": "Karabakh, present-day Azerbaijan",
  "date": "late 18th–early 19th century",
  "school": "karabakh",
- "composition": "qarabag",
+ "composition": "",
  "technique": "безворсовый",
  "size": "L. 90 in. (228.6 cm)\r\nW. 70 3/4 in. (179.7 cm)",
  "notes": "",
@@ -458,5 +458,17 @@
   "ver": 1,
   "at": 1792261838
  },
- "dup_of": "cm_cee1ceaa14"
+ "dup_of": "cm_cee1ceaa14",
+ "hist": {
+  "composition": [
+   {
+    "v": "qarabag",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а школа"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "1875",
  "school": "karabakh",
- "composition": "verni",
+ "composition": "",
  "technique": "безворсовый",
  "size": "225x283 см",
  "notes": "Flatweave rug, Caucasus, 1875-1925. Wool; plain weave, supplementary-weft wrapping; 255 x 245 cm. The Textile Museum Collection 1989.10.92. Bequest of Arthur D. Jenkins. Spanning the mountainous region between the Caspian and Black seas, the Caucasus is home to dozens of ethnic groups, including tri",
@@ -275,5 +275,17 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "hist": {
+  "composition": [
+   {
+    "v": "verni",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

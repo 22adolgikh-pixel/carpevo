@@ -9,7 +9,7 @@
  "place": "Ширван, Азербайджан",
  "date": "конец XIX века",
  "school": "shirvan",
- "composition": "sumax",
+ "composition": "",
  "technique": "безворсовый: сумах",
  "size": "214х291 sm",
  "notes": "основа, уток – шерсть; обматывание",
@@ -431,5 +431,17 @@
  },
  "tri": "auto",
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «sirvan» в подписи"
+ "school_by": "уточнено по слову «sirvan» в подписи",
+ "hist": {
+  "composition": [
+   {
+    "v": "sumax",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а техника"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }

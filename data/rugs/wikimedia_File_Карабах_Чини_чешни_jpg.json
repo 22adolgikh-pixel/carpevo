@@ -9,7 +9,7 @@
  "place": "",
  "date": "2010-03-12 16:15:16",
  "school": "karabakh",
- "composition": "qarabag",
+ "composition": "",
  "technique": "ворсовый",
  "size": "",
  "notes": "",
@@ -151,5 +151,17 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "hist": {
+  "composition": [
+   {
+    "v": "qarabag",
+    "by": "",
+    "at": 1795157963,
+    "repl_by": "машина",
+    "why": "это не композиция, а школа"
+   }
+  ]
+ },
+ "composition_by": "перенесено: не композиция"
 }
