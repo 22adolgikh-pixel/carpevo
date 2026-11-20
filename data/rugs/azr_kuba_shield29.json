@@ -18,7 +18,7 @@
  "h": 1984,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1795154095,
  "cat": {
   "title": "kuba shield29",
   "museum": "",
@@ -81,5 +81,39 @@
   "t": 1795117657
  },
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «kuba» в подписи"
+ "school_by": "уточнено по слову «kuba» в подписи",
+ "layout": {
+  "carpet": [
+   0.0,
+   0.01889,
+   0.9641,
+   0.98
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0,
+    0.02556
+   ],
+   [
+    0.94103,
+    0.01889
+   ],
+   [
+    0.9641,
+    0.99889
+   ],
+   [
+    0.04872,
+    0.99889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

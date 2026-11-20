@@ -18,7 +18,7 @@
  "h": 1652,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795154095,
  "cat": {
   "title": "Harshang Pattern floral carpet (blue ground), 18th century, Khanates Period, Azerbaijan",
   "museum": "",
@@ -69,8 +69,8 @@
     0.01222
    ],
    [
-    0.8435,
-    0.95222
+    0.92642,
+    0.97587
    ],
    [
     0.12467,
@@ -80,6 +80,41 @@
   "conf": 0.916,
   "area": 0.723,
   "ver": 1,
-  "t": 1795117653
- }
+  "t": 1795117653,
+  "hand": true
+ },
+ "layout": {
+  "carpet": [
+   0.04775,
+   0.01222,
+   0.8786700000000001,
+   0.96365
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04775,
+    0.03
+   ],
+   [
+    0.87268,
+    0.01222
+   ],
+   [
+    0.92642,
+    0.97587
+   ],
+   [
+    0.12467,
+    0.96222
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "hand"
 }

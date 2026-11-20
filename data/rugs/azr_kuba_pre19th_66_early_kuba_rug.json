@@ -18,7 +18,7 @@
  "h": 1500,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795154095,
  "cat": {
   "title": "Afshan Pattern floral carpet (dark blue ground), late 18th century, Khanates Period, Azerbaijan",
   "museum": "",
@@ -73,13 +73,48 @@
     0.99889
    ],
    [
-    0.11131,
-    0.97222
+    0.04734,
+    0.97828
    ]
   ],
   "conf": 0.944,
   "area": 0.831,
   "ver": 1,
-  "t": 1795117653
- }
+  "t": 1795117653,
+  "hand": true
+ },
+ "layout": {
+  "carpet": [
+   0.04734,
+   0.0,
+   0.90521,
+   0.99889
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04745,
+    0.0
+   ],
+   [
+    0.89416,
+    0.0
+   ],
+   [
+    0.95255,
+    0.99889
+   ],
+   [
+    0.04734,
+    0.97828
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "hand"
 }

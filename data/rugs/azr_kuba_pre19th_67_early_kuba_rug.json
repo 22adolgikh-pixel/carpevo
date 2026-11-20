@@ -18,7 +18,7 @@
  "h": 1466,
  "marks": [],
  "created": 1791736138,
- "updated": 1794650588,
+ "updated": 1795154095,
  "cat": {
   "title": "Floral carpet (dark blue ground), late 18th century, Khanates Period, Azerbaijan",
   "museum": "",
@@ -112,5 +112,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.02721,
+   0.01556,
+   0.92064,
+   0.96444
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04082,
+    0.01667
+   ],
+   [
+    0.94785,
+    0.01556
+   ],
+   [
+    0.94558,
+    0.97222
+   ],
+   [
+    0.02721,
+    0.98
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }
