@@ -18,7 +18,7 @@
  "h": 1170,
  "marks": [],
  "created": 1791736137,
- "updated": 1794260161,
+ "updated": 1795204234,
  "cat": {
   "title": "Floral Carpet (Afshan Pattern), 19th century Türk ve Islam Eserleri Museum, Istanbul",
   "museum": "",
@@ -135,12 +135,17 @@
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "fragment",
+    "a": "cropped",
     "w": 2,
-    "t": 1794260161
+    "t": 1795204234
    }
   }
  },
- "frame": "fragment",
- "frame_by": "micro"
+ "frame": "cropped",
+ "frame_by": "micro",
+ "edge": {
+  "damaged": [
+   "dolgikh"
+  ]
+ }
 }

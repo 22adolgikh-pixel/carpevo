@@ -18,7 +18,7 @@
  "h": 1500,
  "marks": [],
  "created": 1791870019,
- "updated": 1791997187,
+ "updated": 1795204102,
  "cat": {
   "title": "Carpet with palm leaves, Shamakhi, Azerbaijan, around 1800",
   "museum": "Лувр",
@@ -134,5 +134,49 @@
    "t": 1795203788
   }
  },
- "multi": []
+ "multi": [],
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795204102,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02975,
+    0.01698
+   ],
+   [
+    0.94418,
+    0.01523
+   ],
+   [
+    0.99303,
+    0.96535
+   ],
+   [
+    0.00861,
+    0.99081
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

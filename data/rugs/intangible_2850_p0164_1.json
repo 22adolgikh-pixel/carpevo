@@ -3046,10 +3046,10 @@
   {
    "id": "m6afb7e9ee133027_3",
    "box": [
-    0.37099,
-    0.58008,
-    0.36072,
-    0.07617
+    0.6201,
+    0.53872,
+    0.1284,
+    0.18226
    ],
    "zone": "other",
    "motif": "qeychi",
@@ -3057,7 +3057,7 @@
    "scheme": "t104_f04",
    "group": "m6afb7e9ee133027_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.718,
@@ -3265,11 +3265,15 @@
      0.60254
     ]
    ],
-   "sam": 0.78
+   "sam": 0.78,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795204073,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795204073
   }
  ],
  "created": 1794547278,
- "updated": 1795204007,
+ "updated": 1795204073,
  "cat": {
   "title": "молитвенный ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -3523,6 +3527,13 @@
      "a": "bad",
      "w": 2,
      "t": 1795204007
+    }
+   },
+   "m6afb7e9ee133027_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795204073
     }
    }
   }

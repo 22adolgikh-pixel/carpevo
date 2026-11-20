@@ -31,7 +31,7 @@
    "scheme": "t22_f03",
    "group": "m6af78909e681256_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.694,
@@ -183,7 +183,7 @@
    "scheme": "t22_f03",
    "group": "m6af78909e681256_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.674,
@@ -259,7 +259,7 @@
    "scheme": "t22_f03",
    "group": "m6af78909e681256_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.666,
@@ -351,7 +351,7 @@
    "scheme": "t22_f03",
    "group": "m6af78909e681256_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.645,
@@ -535,7 +535,7 @@
    "scheme": "t22_f03",
    "group": "m6af78909e681256_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.639,
@@ -599,7 +599,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794607374,
+ "updated": 1795204115,
  "cat": {
   "title": "Ковёр «Mollakamallı» Губа",
   "museum": "",
@@ -668,5 +668,44 @@
  },
  "multi": [],
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «guba» в подписи"
+ "school_by": "уточнено по слову «guba» в подписи",
+ "micro": {
+  "marks": {
+   "m6af78909e681256_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204115
+    }
+   },
+   "m6af78909e681256_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204115
+    }
+   },
+   "m6af78909e681256_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204115
+    }
+   },
+   "m6af78909e681256_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204115
+    }
+   },
+   "m6af78909e681256_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204115
+    }
+   }
+  }
+ }
 }
