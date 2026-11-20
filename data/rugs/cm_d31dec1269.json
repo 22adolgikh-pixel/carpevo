@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870025,
- "updated": 1794975782,
+ "updated": 1795204596,
  "cat": {
   "title": "Qasımuşağı xalçası — Azərbaycan xalçaçılıq məktəblərindən olan Qarabağ xalçaçılıq məktəbinin Cəbrayıl qrupuna ",
   "museum": "",
@@ -179,7 +179,30 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238226
+  "t": 1794238226,
+  "ref_quad": {
+   "quad": [
+    [
+     0.1696,
+     0.02747
+    ],
+    [
+     0.81753,
+     0.02756
+    ],
+    [
+     0.8125,
+     0.98206
+    ],
+    [
+     0.1562,
+     0.99229
+    ]
+   ],
+   "v": 4,
+   "from": "auto",
+   "t": 1795204519
+  }
  },
  "multi": [],
  "micro": {
@@ -198,6 +221,56 @@
      "t": 1794975782
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795204501
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795204596,
+    "s": "ref"
+   }
   }
- }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.1696,
+    0.02747
+   ],
+   [
+    0.81753,
+    0.02756
+   ],
+   [
+    0.8125,
+    0.98206
+   ],
+   [
+    0.1562,
+    0.99229
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
