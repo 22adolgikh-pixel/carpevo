@@ -18,7 +18,7 @@
  "h": 2290,
  "marks": [],
  "created": 1791870035,
- "updated": 1791997202,
+ "updated": 1795203461,
  "cat": {
   "title": "Zili rug, Tabriz school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -69,6 +69,10 @@
   {
    "id": "azr_antique_ganja_rug13_gendje",
    "score": 0
+  },
+  {
+   "id": "intangible_2849_p0201_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -91,6 +95,11 @@
    "ok": false,
    "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1 ≠ azr_antique_ganja_rug13_gendje",
    "at": 1795019183
+  },
+  "intangible_2849_p0201_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795203461
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -174,5 +183,16 @@
    }
   ]
  },
- "composition_by": "перенесено: не композиция"
+ "composition_by": "перенесено: не композиция",
+ "micro": {
+  "same": {
+   "intangible_2849_p0201_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795203461
+    }
+   }
+  }
+ }
 }

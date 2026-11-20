@@ -18,7 +18,7 @@
  "h": 1813,
  "marks": [],
  "created": 1794547278,
- "updated": 1795061922,
+ "updated": 1795203453,
  "cat": {
   "title": "İpək tikmə. Qarabağ qrupu. Azərbaycan. XVII əsr. Viktoriya və Albert Muzeyi",
   "museum": "Albert Muzeyi",
@@ -51,8 +51,37 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0032_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0032_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_azerbaijan_silk_embroidery_XVIIIc_burns_collection",
+   "score": 0
+  },
+  {
+   "id": "azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18",
+   "score": 0
+  },
+  {
+   "id": "cm_3653472d83",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_azerbaijan_silk_embroidery_XVIIIc_burns_collection": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795203453
+  },
+  "azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18": {
+   "ok": false,
+   "by": "по цепочке: azr_azerbaijan_silk_embroidery_XVIIIc_burns_collection ≠ azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18",
+   "at": 1795203482
+  },
+  "cm_3653472d83": {
+   "ok": false,
+   "by": "по цепочке: azr_azerbaijan_silk_embroidery_XVIIIc_burns_collection ≠ azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18",
+   "at": 1795203482
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -119,5 +148,16 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "micro": {
+  "same": {
+   "azr_azerbaijan_silk_embroidery_XVIIIc_burns_collection": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795203453
+    }
+   }
+  }
+ }
 }

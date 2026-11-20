@@ -2,16 +2,16 @@
  "id": "azr_azerbaijan_silk_embroidery_XVIIIc_burns_collection",
  "title": "Early Azerbaijan silk embroidery, 17-18th century, Victoria and Albert Museum",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Albert Muzeyi",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
  "date": "18th century",
- "school": "",
+ "school": "karabakh",
  "composition": "",
  "technique": "",
- "size": "",
+ "size": "112x109 см",
  "notes": "Early Azerbaijan silk embroidery, 17-18th century, Victoria and Albert Museum",
  "status": "new",
  "w": 976,
@@ -55,6 +55,10 @@
   {
    "id": "cm_3653472d83",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0032_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -68,6 +72,11 @@
    "ok": false,
    "by": "по цепочке: azr_azerbaijan_silk_embroidery_XVIIIc_burns_collection ≠ azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18",
    "at": 1795018985
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0032_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795203453
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -161,5 +170,10 @@
   "quad_status": "accepted"
  },
  "frame": "cropped",
- "tri": "auto"
+ "tri": "auto",
+ "from_twin": {
+  "school": "azerbaycan_xalchalari_qarabag_qrupu_p0032_1",
+  "museum": "azerbaycan_xalchalari_qarabag_qrupu_p0032_1",
+  "size": "azerbaycan_xalchalari_qarabag_qrupu_p0032_1"
+ }
 }

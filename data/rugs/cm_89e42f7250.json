@@ -18,7 +18,7 @@
  "h": 1536,
  "marks": [],
  "created": 1791870021,
- "updated": 1794981486,
+ "updated": 1795203490,
  "cat": {
   "title": "Textiles-Rugs; Carpet",
   "museum": "Метрополитен-музей",
@@ -107,6 +107,11 @@
    "ok": true,
    "by": "/m: dolgikh",
    "at": 1794981486
+  },
+  "cm_bdd493bb76": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795203490
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -183,6 +188,13 @@
      "a": "same",
      "w": 2,
      "t": 1794981486
+    }
+   },
+   "cm_bdd493bb76": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795203490
     }
    }
   }
