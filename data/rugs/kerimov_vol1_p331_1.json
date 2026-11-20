@@ -31,7 +31,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e847838_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "angle": 270,
    "flip": 0,
@@ -102,7 +102,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e847838_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "angle": 270,
    "flip": 0,
@@ -189,7 +189,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e847838_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "angle": 90,
    "flip": 1,
@@ -368,7 +368,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e847838_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "angle": 270,
    "flip": 1,
@@ -430,8 +430,8 @@
    "box": [
     0.59828,
     0.55371,
-    0.11765,
-    0.07422
+    0.12251,
+    0.0776
    ],
    "zone": "other",
    "motif": "cincilim",
@@ -439,7 +439,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e847838_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: cincilim",
    "angle": 270,
    "flip": 1,
@@ -547,10 +547,18 @@
    ],
    "by": "машина",
    "at": 1794149050,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795204430,
    "refined": 4,
-   "sam": 0.96
+   "sam": 0.96,
+   "box0": [
+    0.59828,
+    0.55371,
+    0.11765,
+    0.07422
+   ],
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795204430
   },
   {
    "id": "m6ad499e9e847838_5",
@@ -566,7 +574,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e847838_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "angle": 270,
    "flip": 0,
@@ -628,8 +636,8 @@
    "box": [
     0.59541,
     0.3418,
-    0.12052,
-    0.07422
+    0.1247,
+    0.07716
    ],
    "zone": "other",
    "motif": "cincilim",
@@ -637,7 +645,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e847838_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: cincilim",
    "angle": 0,
    "flip": 1,
@@ -721,10 +729,18 @@
    ],
    "by": "машина",
    "at": 1794149050,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795204430,
    "refined": 4,
-   "sam": 0.981
+   "sam": 0.981,
+   "box0": [
+    0.59541,
+    0.3418,
+    0.12052,
+    0.07422
+   ],
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795204430
   },
   {
    "id": "m6ad499e9e847838_7",
@@ -740,7 +756,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e847838_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "angle": 180,
    "flip": 1,
@@ -819,7 +835,7 @@
    "scheme": "t53_f04",
    "group": "m6ad499e9e847838_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "angle": 90,
    "flip": 1,
@@ -3580,7 +3596,7 @@
   }
  ],
  "created": 1791736121,
- "updated": 1795029673,
+ "updated": 1795204430,
  "cat": {
   "title": "Керимов, т. I, Табл. 209. «ЧИРАГЛЫ» (стр. скана 331, печ. ?)",
   "museum": "",
@@ -3762,6 +3778,71 @@
     "a": "whole",
     "w": 2,
     "t": 1795029673
+   }
+  },
+  "marks": {
+   "m6ad499e9e847838_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204430
+    }
+   },
+   "m6ad499e9e847838_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204430
+    }
+   },
+   "m6ad499e9e847838_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204430
+    }
+   },
+   "m6ad499e9e847838_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204430
+    }
+   },
+   "m6ad499e9e847838_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204430
+    }
+   },
+   "m6ad499e9e847838_7": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204430
+    }
+   },
+   "m6ad499e9e847838_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795204430
+    }
+   },
+   "m6ad499e9e847838_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795204430
+    }
+   },
+   "m6ad499e9e847838_6": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795204430
+    }
    }
   }
  },
