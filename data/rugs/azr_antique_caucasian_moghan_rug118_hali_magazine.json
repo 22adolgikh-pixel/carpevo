@@ -18,7 +18,7 @@
  "h": 921,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795205600,
  "cat": {
   "title": "Antique Moghan Shahsavan rug, 2nd half 19th century, Azerbaijan",
   "museum": "",
@@ -123,5 +123,49 @@
    "at": 1795050462,
    "ver": 2
   }
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795205600,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06307,
+    0.03054
+   ],
+   [
+    0.94996,
+    0.01851
+   ],
+   [
+    0.95826,
+    0.97083
+   ],
+   [
+    0.03002,
+    0.95689
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

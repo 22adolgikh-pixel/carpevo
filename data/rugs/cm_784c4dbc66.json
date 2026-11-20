@@ -18,7 +18,7 @@
  "h": 1619,
  "marks": [],
  "created": 1791870025,
- "updated": 1795029561,
+ "updated": 1795205572,
  "cat": {
   "title": "Carpet from Derbent with Lezgian pattern named Lezgi Star",
   "museum": "",
@@ -167,6 +167,14 @@
     "w": 2,
     "t": 1795029561
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795205572,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
@@ -196,5 +204,38 @@
    "at": 1795051206,
    "ver": 2
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.13103,
+    0.10305
+   ],
+   [
+    0.8713,
+    0.09652
+   ],
+   [
+    0.87154,
+    0.89128
+   ],
+   [
+    0.13359,
+    0.89481
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

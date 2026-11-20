@@ -127,7 +127,7 @@
   }
  ],
  "created": 1791870017,
- "updated": 1794588819,
+ "updated": 1795205618,
  "cat": {
   "title": "Borchali carpet,Qazakh group of Azerbaijani carpet",
   "museum": "",
@@ -195,7 +195,38 @@
   "ver": 1,
   "at": 1792261985
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    -0.00296,
+    -0.00171
+   ],
+   [
+    1.00098,
+    0.00137
+   ],
+   [
+    1.00121,
+    0.99412
+   ],
+   [
+    -0.00181,
+    0.98905
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "auto": {
   "frame": "unsure",
@@ -220,7 +251,30 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238447
+  "t": 1794238447,
+  "ref_quad": {
+   "quad": [
+    [
+     -0.00296,
+     -0.00171
+    ],
+    [
+     1.00098,
+     0.00137
+    ],
+    [
+     1.00121,
+     0.99412
+    ],
+    [
+     -0.00181,
+     0.98905
+    ]
+   ],
+   "v": 4,
+   "from": "auto",
+   "t": 1795205614
+  }
  },
  "multi": [],
  "micro": {
@@ -253,8 +307,26 @@
      "t": 1794588819
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795205603
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795205618,
+    "s": "ref"
+   }
   }
  },
  "school_prev": "ganja-gazakh",
- "school_by": "уточнено по слову «gazah» в подписи"
+ "school_by": "уточнено по слову «gazah» в подписи",
+ "frame": "whole",
+ "frame_by": "micro",
+ "tri": "micro"
 }

@@ -31,7 +31,7 @@
    "scheme": "t48_f06",
    "group": "m6ad5423fe994673_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: Quyrum",
    "machine": 1,
    "score": 0.699,
@@ -139,7 +139,7 @@
    "scheme": "t48_f06",
    "group": "m6ad5423fe994673_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: Quyrum",
    "machine": 1,
    "score": 0.684,
@@ -219,7 +219,7 @@
    "scheme": "t48_f06",
    "group": "m6afcd09de350231_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: Quyrum",
    "machine": 1,
    "score": 0.688,
@@ -279,7 +279,7 @@
   }
  ],
  "created": 1791736121,
- "updated": 1794953377,
+ "updated": 1795205714,
  "cat": {
   "title": "Керимов, т. I, 2. «ФАХРАЛЫ» (стр. скана 352, печ. 91)",
   "museum": "",
@@ -382,6 +382,29 @@
     "a": "ok",
     "w": 2,
     "t": 1794343374
+   }
+  },
+  "marks": {
+   "m6ad5423fe994673_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205637
+    }
+   },
+   "m6ad5423fe994673_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205637
+    }
+   },
+   "m6afcd09de350231_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205714
+    }
    }
   }
  },

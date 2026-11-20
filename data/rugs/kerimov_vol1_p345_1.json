@@ -470,7 +470,7 @@
    "scheme": "t22_f03",
    "group": "m6af788f2e107120_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.642,
@@ -562,7 +562,7 @@
    "scheme": "t22_f03",
    "group": "m6af788f2e107120_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.638,
@@ -690,7 +690,7 @@
    "scheme": "t22_f03",
    "group": "m6af788f2e107120_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.636,
@@ -862,7 +862,7 @@
    "scheme": "t22_f03",
    "group": "m6af788f2e107120_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.634,
@@ -1018,7 +1018,7 @@
    "scheme": "t22_f03",
    "group": "m6af788f2e107120_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.632,
@@ -1126,7 +1126,7 @@
    "scheme": "t104_f04",
    "group": "m6afccf72e520967_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.734,
@@ -1155,7 +1155,7 @@
    "scheme": "t104_f04",
    "group": "m6afccf72e520967_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.713,
@@ -1184,7 +1184,7 @@
    "scheme": "t104_f04",
    "group": "m6afccf72e520967_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.691,
@@ -1360,7 +1360,7 @@
    "scheme": "t104_f04",
    "group": "m6afccf72e520967_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.682,
@@ -1528,7 +1528,7 @@
   }
  ],
  "created": 1791736121,
- "updated": 1794953079,
+ "updated": 1795205623,
  "cat": {
   "title": "Керимов, т. I, 1. «ПИРЕБЕДИЛЬ» (стр. скана 345, печ. ?)",
   "museum": "",
@@ -1642,6 +1642,71 @@
       0.98764
      ]
     ]
+   }
+  },
+  "marks": {
+   "m6af788f2e107120_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205605
+    }
+   },
+   "m6af788f2e107120_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205605
+    }
+   },
+   "m6af788f2e107120_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205605
+    }
+   },
+   "m6af788f2e107120_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205605
+    }
+   },
+   "m6af788f2e107120_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205605
+    }
+   },
+   "m6afccf72e520967_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205623
+    }
+   },
+   "m6afccf72e520967_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205623
+    }
+   },
+   "m6afccf72e520967_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205623
+    }
+   },
+   "m6afccf72e520967_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205623
+    }
    }
   }
  },
