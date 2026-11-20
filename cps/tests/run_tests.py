@@ -2054,6 +2054,48 @@ def t47_corner_upload_v1194(pg, ctx):
     errors_ok(ctx, 'веса углов')
 
 
+@test
+def t48_one_rug_v1196(pg, ctx):
+    """v11.96: один ковёр = снимки, связанные «тот же». В ленте — снимки ковра; обложка; «не этот ковёр» (связи → «другой», взятые поля снимаются);
+    «в другой ковёр» (переносит связь); плитка каталога показывает обложку и число снимков."""
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    import cv2, numpy as np
+    def mk(rid, col, **kw):
+        cv2.imwrite(f'{D}/rug_img/{rid}.jpg', np.full((300, 200, 3), col, np.uint8))
+        r = {"id": rid, "title": rid, "source": "тест", "museum": "", "inv": "", "school": "", "composition": "", "status": "new", "w": 200, "h": 300,
+             "marks": [], "created": now, "updated": now, "cat": {"src": "azerbaijanrugs"}, "frame": "whole", "frame_by": "hand"}
+        r.update(kw); json.dump(r, open(f'{D}/rugs/{rid}.json', 'w'), ensure_ascii=False)
+    ok = lambda o: {"ok": True, "by": "тест", "at": now}
+    mk("og_a", 60, same=[{"id": "og_b"}, {"id": "og_c"}], same_ok={"og_b": ok(0), "og_c": ok(0)}, school="karabakh")
+    mk("og_b", 90, same=[{"id": "og_a"}], same_ok={"og_a": ok(0)}, school="karabakh", from_twin={"school": "og_a"})
+    mk("og_c", 120, same=[{"id": "og_a"}], same_ok={"og_a": ok(0)})
+    mk("og_x", 150, same=[{"id": "og_c"}], same_ok={"og_c": {"ok": False, "similar": True, "by": "тест", "at": now}})
+    j = get(u + 'api/rugs/og_b'); assert {x["id"] for x in j["group"]} == {"og_a", "og_b", "og_c"}, j["group"]
+    j = post(u + 'api/rugs/og_c/group', {"act": "cover"}); assert any(x["cover"] and x["id"] == "og_c" for x in j["group"])
+    j = post(u + 'api/rugs/og_b/group', {"act": "out"})
+    assert [x["id"] for x in j["group"]] == ["og_b"], j["group"]
+    assert j["same_ok"]["og_a"]["ok"] is False and j["school"] == "" and not j.get("from_twin"), (j["same_ok"], j["school"], j.get("from_twin"))
+    assert {x["id"] for x in get(u + 'api/rugs/og_a')["group"]} == {"og_a", "og_c"}
+    def bad(path, b):
+        try: post(u + path, b); return False
+        except urllib.error.HTTPError as e: return e.code == 400
+    assert bad('api/rugs/og_b/group', {"act": "out"})
+    j = post(u + 'api/rugs/og_c/group', {"act": "move", "to": "og_x"})
+    assert {x["id"] for x in j["group"]} == {"og_c", "og_x"} and j["same_ok"]["og_a"]["ok"] is False and not j.get("cover"), (j["group"], j["same_ok"])
+    assert bad('api/rugs/og_c/group', {"act": "move", "to": "og_x"})
+    # интерфейс: лента ковра и кнопки; перенос через окно
+    post(u + 'api/rugs/og_c/group', {"act": "move", "to": "og_a"})
+    pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(2500)
+    pg.evaluate("rugOpen('og_a')"); pg.wait_for_timeout(1500)
+    st = pg.inner_text('#rgStrip'); assert 'этот ковёр · 2 снимка' in st and '★ обложка' in st and 'не этот ковёр' in st, st
+    pg.click('#rgGMove'); pg.wait_for_timeout(400); pg.fill('#mvQ', 'og_x'); pg.wait_for_timeout(300)
+    pg.click('.rgmv[data-to="og_x"]'); pg.click('#mvGo'); pg.wait_for_timeout(1800)
+    assert {x["id"] for x in get(u + 'api/rugs/og_a')["group"]} == {"og_a", "og_x"}                 # переносится снимок, og_c остаётся сам по себе
+    assert [x["id"] for x in get(u + 'api/rugs/og_c')["group"]] == ["og_c"]
+    pg.screenshot(path=os.path.join(OUT, 't48_one_rug.png'))
+    errors_ok(ctx, 'один ковёр')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

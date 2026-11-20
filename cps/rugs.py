@@ -330,7 +330,7 @@ def install(app, DATA, D_WORK):
                 "w": r.get("w") or 0, "h": r.get("h") or 0,
                 "same_no": [k for k, v in (r.get("same_ok") or {}).items() if v and not v.get("ok")],
                 "same_ids": [x.get("id") for x in (r.get("same") or []) if x.get("id")],
-                "same_link": same_link(r),
+                "same_link": same_link(r), "cover": bool(r.get("cover")),
                 "part": (r.get("cat") or {}).get("part", 0),
                 "obj": obj_guess(r)[0], "obj_set": bool(r.get("obj")), "hidden": r.get("hidden", ""),
                 "people": (r.get("people") or {}).get("n", 0),
@@ -648,6 +648,73 @@ def install(app, DATA, D_WORK):
         _dcl["t"] = 0
         return filled
 
+    # ---- v11.96: один ковёр = группа снимков (связи «тот же» напрямую; как плитка каталога). Обложка, исключить снимок, перенести в другой ковёр.
+    GROUP_MAX = 60
+
+    def rug_group(rid):
+        """id всех снимков этого ковра (включая rid): обход по same_link"""
+        seen, st = {rid}, [rid]
+        while st and len(seen) < GROUP_MAX:
+            r = load(st.pop())
+            if not r: continue
+            for o in same_link(r):
+                if o not in seen:
+                    ro = load(o)
+                    if ro and not ro.get("dup_of") and not ro.get("hidden"): seen.add(o); st.append(o)
+        return seen
+
+    def _unfill(a, b):
+        """поля паспорта, которые a взял у b (from_twin) и не менял, — снять"""
+        if not a or not b: return False
+        ft = a.get("from_twin") or {}; ch = False
+        for k, src in list(ft.items()):
+            if src == b["id"]:
+                if a.get(k) == b.get(k): a[k] = ""
+                ft.pop(k); ch = True
+        return ch
+
+    def group_out(rid, who):
+        """убрать снимок из его ковра: «другой ковёр» со всеми снимками группы, снять взятые друг у друга поля и обложку"""
+        G = rug_group(rid) - {rid}
+        for o in G: same_set(rid, o, False, False, who)
+        with _lock:
+            r = load(rid)
+            for o in G:
+                ro = load(o)
+                if _unfill(r, ro): pass
+                if ro and _unfill(ro, r): save(ro)
+            if r:
+                r.pop("cover", None); save(r)
+        _dcl["t"] = 0
+        return sorted(G)
+
+    @app.post("/api/rugs/{rid}/group")
+    async def api_rug_group(rid: str, request: Request):
+        """v11.96: act=cover — обложка ковра; out — не этот ковёр; move — перенести в ковёр to (тот же ковёр, что снимок to)"""
+        b = await request.json(); act = b.get("act"); me = user(request)
+        if not load(rid): return JSONResponse({"error": "нет такого снимка"}, 404)
+        if act == "cover":
+            with _lock:
+                for o in rug_group(rid):
+                    r = load(o)
+                    if not r: continue
+                    if o == rid: r["cover"] = True
+                    elif r.get("cover"): r.pop("cover")
+                    else: continue
+                    save(r)
+            _dcl["t"] = 0
+        elif act == "out":
+            if len(rug_group(rid)) < 2: return JSONResponse({"error": "этот снимок и так один"}, 400)
+            group_out(rid, f"{me} · исключён из ковра")
+        elif act == "move":
+            to = os.path.basename(str(b.get("to") or ""))
+            if not to or to == rid or not load(to): return JSONResponse({"error": "не выбран ковёр, куда переносить"}, 400)
+            if to in rug_group(rid): return JSONResponse({"error": "это уже тот же ковёр"}, 400)
+            group_out(rid, f"{me} · перенесён в другой ковёр")
+            same_set(rid, to, True, False, f"{me} · перенесён")
+        else: return JSONResponse({"error": "act: cover / out / move"}, 400)
+        return api_rug(rid)
+
     @app.post("/api/rugs/{rid}/same")
     async def api_rug_same(rid: str, request: Request):
         """Подтвердить / отклонить «это тот же ковёр» (отметка ставится у обоих)."""
@@ -798,6 +865,13 @@ def install(app, DATA, D_WORK):
                      wh=img_size(x["id"], o))
         r["wh"] = img_size(rid, r)
         o, w = obj_guess(r); r["_obj"] = {"k": o, "why": w, "set": bool(r.get("obj"))}
+        G = rug_group(rid); r["group"] = []                                     # v11.96: все снимки этого ковра
+        for i in G:
+            g = r if i == rid else (load(i) or {})
+            L = g.get("layout") or {}
+            r["group"].append({"id": i, "title": g.get("title") or i, "src": (g.get("cat") or {}).get("src", ""), "wh": img_size(i, g), "cover": bool(g.get("cover")),
+                               "quad": (L.get("quad_status") or "") if L.get("quad") else "", "n": len([m for m in g.get("marks", []) if m.get("status") != "rejected"]),
+                               "frame": g.get("frame", ""), "school": g.get("school", ""), "museum": g.get("museum", ""), "inv": g.get("inv", "")})
         return r
 
     @app.post("/api/rugs/{rid}")
