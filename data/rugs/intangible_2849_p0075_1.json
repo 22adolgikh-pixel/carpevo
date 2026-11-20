@@ -3582,9 +3582,9 @@
     0.19325
    ],
    "zone": "field",
-   "motif": "",
+   "motif": "qeychi",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t172_f01",
    "group": "",
    "certainty": "sure",
    "status": "confirmed",
@@ -3598,7 +3598,8 @@
    "by": "dolgikh",
    "at": 1794756014,
    "confirmed_by": "/m: dolgikh",
-   "confirmed_at": 1794929762
+   "confirmed_at": 1794929762,
+   "named_by": "/m"
   },
   {
    "id": "m6afa2c01e326874_11",
@@ -5352,7 +5353,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1794930197,
+ "updated": 1795203559,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -5709,6 +5710,15 @@
      "a": "bad",
      "w": 2,
      "t": 1794930197
+    }
+   }
+  },
+  "name": {
+   "mmwhze3d8": {
+    "dolgikh": {
+     "a": "t172_f01",
+     "w": 2,
+     "t": 1795203559
     }
    }
   }
