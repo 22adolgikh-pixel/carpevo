@@ -22,7 +22,28 @@ SCHOOLS = {"guba": "Губа", "shirvan": "Ширван", "baku": "Баку (А�
 SCHOOL_GROUP = {"guba": "guba-shirvan", "shirvan": "guba-shirvan", "baku": "guba-shirvan", "guba-shirvan": "guba-shirvan",
                 "ganja": "ganja-gazakh", "gazakh": "ganja-gazakh", "ganja-gazakh": "ganja-gazakh", "karabakh": "karabakh", "tabriz": "tabriz", "nakhchivan": "nakhchivan"}
 SCHOOL_GROUPS = {"guba-shirvan": "Губа-Ширван", "ganja-gazakh": "Гянджа-Газах", "karabakh": "Карабах", "tabriz": "Тебриз", "nakhchivan": "Нахчыван"}
-COARSE = ("guba-shirvan", "ganja-gazakh")                                      # школа известна только на уровне типа Керимова
+COARSE = ("guba-shirvan", "ganja-gazakh")
+# v11.97: в «тип ковра» попадали техники и школа — это не композиции (рамки классификации 18.11). id словаря → (техника, школа)
+COMP_MOVE = {"sumax": ("безворсовый: сумах", ""), "sumax-object": ("безворсовый: сумах", ""), "zili": ("безворсовый: зили", ""),
+             "verni": ("безворсовый: верни", ""), "kilim": ("безворсовый: килим", ""), "qarabag-sheddesi": ("безворсовый: шадда", "karabakh"),
+             "qarabag-vernisi": ("безворсовый: верни", "karabakh"), "qarabag": ("", "karabakh"), "xan-qarabag": ("", "karabakh")}
+# v11.97: вес источника значения (меньше — главнее): 0 человек, 1 азербайджанский источник, 2 музей, 3 дилер / неизвестно
+SRC_RANK_RU = {0: "решение человека", 1: "азербайджанский источник", 2: "музей", 3: "дилер / сайт"}
+
+
+def src_rank(src):
+    s = (src or "").split("_")[0]
+    if s.startswith(("kerimov", "azcarpetmuseum", "book:")): return 1
+    if s in ("met", "vam", "aic", "cleveland", "commons", "wikimedia", "museum"): return 2
+    return 3
+
+
+def by_kind(by):
+    """кем поставлено значение: human / machine / source (по полю *_by)"""
+    b = str(by or "")
+    if not b: return "source"
+    if b.startswith(("уточнено", "по типу", "машина", "по цепочке", "перенесено")): return "machine"
+    return "human"                                      # школа известна только на уровне типа Керимова
 
 
 def school_group(s):
@@ -408,11 +429,11 @@ def install(app, DATA, D_WORK):
         for i in ids:
             o = (others or {}).get(i) or load(i) or {}
             c = o.get("composition")
-            if c in BYID and c not in cno:
+            if c in BYID and c not in cno and c not in COMP_MOVE:
                 okd = ((r.get("same_ok") or {}).get(i) or {}).get("ok")
                 return {"id": c, "why": f"у двойника{' (проверен ✓)' if okd else ''}: {(o.get('title') or i)[:60]}", "kind": "twin", "from": i}
         g = comp_guess_text(r)
-        return g if g and g["id"] not in cno else None
+        return g if g and g["id"] not in cno and g["id"] not in COMP_MOVE else None
 
     # ---- v11.85: название ковра = его тип (композиция); подпись источника остаётся в title ----
     def comp_school(cid):
@@ -648,6 +669,63 @@ def install(app, DATA, D_WORK):
         _dcl["t"] = 0
         return filled
 
+    # ---- v11.97: значения с источником. Все версии хранятся: у каждого снимка своё значение (источник снимка), прежние — в hist.
+    CLAIM_F = ("school", "composition", "technique")
+
+    def hist_push(r, k, who, now, why=""):
+        if not r.get(k): return
+        h = r.setdefault("hist", {}).setdefault(k, [])
+        h.append({"v": r[k], "by": r.get(k + "_by") or "", "at": now, "repl_by": who, **({"why": why} if why else {})}); del h[:-20]
+
+    def _vname(k, v):
+        if k == "school": return SCHOOLS.get(v, v)
+        if k == "composition": return (BYID.get(v) or {}).get("az") or v
+        return v
+
+    def versions(rid, G=None):
+        """по каждому полю: версии всех снимков ковра (без копий от двойника), главная — у самого весомого источника; спор — если главные расходятся"""
+        out = {}
+        G = G or rug_group(rid)
+        rows = [g for g in (load(i) for i in sorted(G)) if g]
+        for k in CLAIM_F:
+            items = []
+            for g in rows:
+                v = g.get(k)
+                if not v or (g.get("from_twin") or {}).get(k): continue
+                src = (g.get("cat") or {}).get("src", ""); bk = by_kind(g.get(k + "_by") or (g.get("school_by") if k == "school" else ""))
+                rank = 0 if bk == "human" else src_rank(src)
+                items.append({"v": v, "name": _vname(k, v), "rid": g["id"], "src": src, "rank": rank, "how": bk, "by": g.get(k + "_by") or (g.get("school_by") if k == "school" else "") or ""})
+                for hx in (g.get("hist") or {}).get(k, [])[-3:]:
+                    items.append({"v": hx["v"], "name": _vname(k, hx["v"]), "rid": g["id"], "src": src, "rank": 9, "how": "old", "by": hx.get("by", ""), "repl_by": hx.get("repl_by", ""), "why": hx.get("why", "")})
+            if not items: continue
+            live = [x for x in items if x["rank"] < 9]
+            top = min((x["rank"] for x in live), default=9)
+            tv = {x["v"] for x in live if x["rank"] == top}
+            if k == "school": dis = any(not school_compat(a, c) for a in tv for c in tv)
+            else: dis = len(tv) > 1
+            main = None if dis else (sorted(tv, key=lambda v: v in COARSE)[0] if tv else None)
+            out[k] = {"items": sorted(items, key=lambda x: (x["rank"], x["v"])), "main": main, "main_name": _vname(k, main) if main else "", "rank": top,
+                      "rank_ru": SRC_RANK_RU.get(top, ""), "dispute": dis, "differ": len({x["v"] for x in live}) > 1}
+        return out
+
+    def comp_cleanup():
+        """v11.97, один раз: техники и школа из поля «тип» → в технику / школу (прежнее значение — в hist)"""
+        mark = os.path.join(DATA, "comp_cleanup_v1.done")
+        if os.path.exists(mark): return
+        n = 0; now = int(time.time())
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            with _lock:
+                r = load(f[:-5])
+                if not r or r.get("composition") not in COMP_MOVE: continue
+                tech, sch = COMP_MOVE[r["composition"]]
+                hist_push(r, "composition", "машина", now, "это не композиция, а " + ("техника" if tech else "школа"))
+                r["composition"] = ""; r["composition_by"] = "перенесено: не композиция"
+                if tech and not r.get("technique"): r["technique"] = tech; r["technique_by"] = "перенесено из «тип ковра»"
+                if sch and not r.get("school"): r["school"] = sch; r["school_by"] = "перенесено из «тип ковра»"
+                save(r); n += 1
+        open(mark, "w").write(str(n)); print("comp cleanup:", n); _dcl["t"] = 0
+
     # ---- v11.96: один ковёр = группа снимков (связи «тот же» напрямую; как плитка каталога). Обложка, исключить снимок, перенести в другой ковёр.
     GROUP_MAX = 60
 
@@ -866,6 +944,7 @@ def install(app, DATA, D_WORK):
         r["wh"] = img_size(rid, r)
         o, w = obj_guess(r); r["_obj"] = {"k": o, "why": w, "set": bool(r.get("obj"))}
         G = rug_group(rid); r["group"] = []                                     # v11.96: все снимки этого ковра
+        r["versions"] = versions(rid, G)                                        # v11.97
         for i in G:
             g = r if i == rid else (load(i) or {})
             L = g.get("layout") or {}
@@ -881,7 +960,11 @@ def install(app, DATA, D_WORK):
             r = load(rid)
             if not r: return JSONResponse({"error": "нет такого ковра"}, 404)
             for k in ("title", "museum", "inv", "url", "license", "place", "date", "school", "composition", "technique", "size", "notes", "status"):
-                if k in b: r[k] = str(b[k] or "")[:2000]
+                if k in b:
+                    v = str(b[k] or "")[:2000]
+                    if k in CLAIM_F and v != (r.get(k) or ""):                    # v11.97: прежнее значение — в историю, новое — «человек»
+                        hist_push(r, k, who, now); r[k + "_by"] = who; r.get("from_twin", {}).pop(k, None)
+                    r[k] = v
             if "composition" in b and r.get("composition") and r.get("composition") not in BYID: r["composition"] = comp_id(r["composition"]) or r["composition"]
             if school_by_type(r): r["updated_by"] = who                     # v11.85: пустая школа ← школа типа
             if b.get("school_suggest") is None and "school_suggest" in b: r.pop("school_suggest", None); r["school_sim_no"] = 1   # v11.88: подсказку по похожим больше не показывать
@@ -4391,6 +4474,8 @@ def install(app, DATA, D_WORK):
         _ty["t"] = 0
 
     def _periodic_twins():
+        try: comp_cleanup()
+        except Exception as e: print("comp cleanup:", e)
         try: school_refine()
         except Exception as e: print("school refine:", e)
         try: tw_reopen()

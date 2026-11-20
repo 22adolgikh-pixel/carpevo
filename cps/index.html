@@ -359,6 +359,7 @@ aside{min-height:0}
 .rgttl{font-weight:600;margin:8px 0 2px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .rgtl{display:flex;flex-wrap:wrap;gap:4px;align-items:center}.rgtl label{color:var(--mut);font-size:12px;white-space:nowrap}
 #rgStrip{flex:none;display:flex;gap:8px;align-items:center;overflow-x:auto;padding:6px 8px;border-top:1px solid var(--ln);background:var(--pan);height:108px}#rgSide a,#rgLeft a{color:var(--blue)}
+.rgver{margin:6px 0;padding:6px 8px;border:1px solid var(--ln);border-radius:6px}.rgver summary{cursor:pointer}.rgverf{margin-top:6px}.rgveri{font-size:12px;margin-left:8px}.rgveri.old{opacity:.55}.rgveri .rk{display:inline-block;min-width:52px;font-size:10.5px;padding:0 4px;border-radius:3px;background:var(--ln);text-align:center}.rgveri .rk.r0{background:#2d5a3d}.rgveri .rk.r1{background:#2d4a6a}
 #rgStrip .rggact{display:flex;flex-direction:column;gap:4px;flex:none;margin:0 6px}.rgmvl{display:flex;flex-direction:column;gap:4px;max-height:50vh;overflow:auto}.rgmv{display:flex;gap:10px;align-items:center;padding:4px;border-radius:6px;cursor:pointer;border:1px solid transparent}.rgmv:hover{background:var(--bg2,rgba(255,255,255,.04))}.rgmv.on{border-color:var(--blue)}.rgmv img{width:44px;height:44px;object-fit:cover;border-radius:4px;flex:none}
 #rgStrip .lbl{writing-mode:vertical-rl;transform:rotate(180deg);color:var(--mut);font-size:10.5px;text-align:center;flex:none;max-height:96px;line-height:1.15}
 .rgtw{flex:none;width:96px;cursor:pointer;border:2px solid transparent;border-radius:6px;padding:2px;text-align:center;position:relative}.rgtw:hover{border-color:var(--ln)}.rgtw.cur{border-color:var(--acc)}
@@ -489,7 +490,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.96</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v11.97</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Вернуться к рисунку, который вы правили последним">↩ К рисунку</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2694,6 +2695,12 @@ function rugLibAll(){const L=$('rgLibAll');if(!L)return;const q=norm(R.libQ||'')
       else{R.preset={scheme:f.id,motif:'',name:f.name_az||f.name||f.id,_motif:null};R.repeatOf=null;R.sel=null;R.tool='box';rugTools();rugDraw();}};
     e.draggable=true;e.ondragstart=ev=>{ev.dataTransfer.setData('text/plain','scheme:'+f.id);R.dragScheme={scheme:f.id,motif:'',name:f.name_az||f.id};};});}
 // снизу: этот же ковёр в других источниках (и части того же разворота) — переключение одним кликом
+// v11.97: версии школы / типа / техники по всем снимкам ковра: кто что говорит; главное — у самого весомого источника (человек → азерб. → музей → дилер)
+function rugVersions(r){const V=r.versions||{},F={school:'Школа',composition:'Тип ковра',technique:'Техника'},RK={0:'человек',1:'азерб.',2:'музей',3:'дилер',9:'прежнее'};
+  const ks=Object.keys(F).filter(k=>V[k]&&(V[k].differ||V[k].dispute||V[k].items.length>1));if(!ks.length)return '';
+  return `<details class="rgver"${ks.some(k=>V[k].dispute)?' open':''}><summary><b>Версии по источникам</b>${ks.some(k=>V[k].dispute)?' <span style="color:var(--warn)">⚠ спор</span>':''} <small class="mut">— все снимки ковра; главное — человек, затем азербайджанский источник, музей, дилер</small></summary>${ks.map(k=>{const v=V[k];
+    return `<div class="rgverf"><small class="mut">${F[k]}:</small> ${v.dispute?`<b style="color:var(--warn)">спор (${esc(v.rank_ru)})</b>`:`<b>${esc(v.main_name||'')}</b> <small class="mut">— ${esc(v.rank_ru)}</small>`}
+      ${v.items.map(x=>`<div class="rgveri${x.rank===9?' old':''}"><span class="rk r${x.rank}">${RK[x.rank]}</span> ${esc(x.name)} <small class="mut">· ${esc(SRCRU[x.src]||x.src||'источник ?')}${x.how==='human'?' · '+esc(x.by):x.how==='machine'?' · машина: '+esc(x.by):x.how==='old'?' · заменено'+(x.repl_by?' ('+esc(x.repl_by)+')':'')+(x.why?': '+esc(x.why):''):''}${x.rid!==r.id?` · <a href="#" data-open="${esc(x.rid)}">снимок</a>`:''}</small></div>`).join('')}</div>`;}).join('')}</details>`;}
 function rugStrip(){
   const E=$('rgStrip'),r=R.rug;if(!E||!r)return;const byId={};R.list.forEach(x=>byId[x.id]=x);
   const tw=(x,cur,plain)=>{const o=byId[x.id]||{},wh=x.wh||(o.w?[o.w,o.h]:null),ok=x.ok,a=(r.wh?r.wh[0]*r.wh[1]:0),b=wh?wh[0]*wh[1]:0,big=!cur&&!plain&&a&&b>1.4*a;
@@ -3171,6 +3178,7 @@ function rugSideFill(E,side,r){
         ${rro()?'':`<input id="rgCompQ" placeholder="поиск в словаре: челеберд, хила…"><div id="rgCompHits" class="rghits"></div>`}</label>
       ${r.comp_suggest&&!r.composition?`<div class="rgwarn" id="rgCompSug">Предположительно тип: <b>${esc(r.comp_suggest.az)}</b> ${esc(r.comp_suggest.ru||'')} <small class="mut">— ${esc(r.comp_suggest.why)}</small>${rro()?'':' <button class="sm" id="rgCompSugOk">принять</button>'}</div>`:''}
       ${r._composition&&r._composition.school&&r.school&&!schCompat(r.school,r._composition.school)?`<div class="rgwarn">⚠ Тип «${esc(r._composition.az)}» по словарю — школа ${esc(RSCH[r._composition.school]||r._composition.school)}, а здесь стоит ${esc(RSCH[r.school]||r.school)}. Проверьте школу или тип.</div>`:''}
+      ${rugVersions(r)}
       <label>Техника<select data-f="technique" ${dis}>${RTECH.map(t=>`<option ${r.technique===t?'selected':''}>${t}</option>`).join('')}</select></label>
       ${f('museum','Музей / собрание')}${f('inv','Инв. номер')}${f('place','Место (как у музея)')}${f('date','Дата','XIX в., 1880-е…')}${f('size','Размер','150×230 см')}${f('url','Ссылка на источник')}${f('license','Лицензия фото')}
       <label>Заметки<textarea data-f="notes" rows="3" ${dis}>${esc(r.notes||'')}</textarea></label>

@@ -2096,6 +2096,38 @@ def t48_one_rug_v1196(pg, ctx):
     errors_ok(ctx, 'один ковёр')
 
 
+@test
+def t49_versions_v1197(pg, ctx):
+    """v11.97: версии школы / типа / техники по снимкам ковра; главное — по весу источника; спор; правка человека — прежнее в историю;
+    техники и «Карабах» уходят из «типа ковра» (один раз) и не предлагаются как тип."""
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    import cv2, numpy as np, sys
+    def mk(rid, src, **kw):
+        cv2.imwrite(f'{D}/rug_img/{rid}.jpg', np.full((300, 200, 3), 100, np.uint8))
+        r = {"id": rid, "title": rid, "source": "тест", "museum": "", "inv": "", "school": "", "composition": "", "status": "new", "w": 200, "h": 300,
+             "marks": [], "created": now, "updated": now, "cat": {"src": src}}
+        r.update(kw); json.dump(r, open(f'{D}/rugs/{rid}.json', 'w'), ensure_ascii=False)
+    ok = {"ok": True, "by": "тест", "at": now}
+    mk("vr_k", "kerimov_vol2", school="karabakh", same=[{"id": "vr_d"}, {"id": "vr_m"}], same_ok={"vr_d": ok, "vr_m": ok})
+    mk("vr_d", "azerbaijanrugs", school="guba", same=[{"id": "vr_k"}], same_ok={"vr_k": ok})
+    mk("vr_m", "met", school="guba-shirvan", same=[{"id": "vr_k"}], same_ok={"vr_k": ok}, composition="sumax")
+    v = get(u + 'api/rugs/vr_d')["versions"]["school"]
+    assert v["main"] == "karabakh" and v["rank"] == 1 and not v["dispute"] and v["differ"], v
+    post(u + 'api/rugs/vr_d', {"school": "shirvan"})                            # человек решил
+    j = get(u + 'api/rugs/vr_d'); v = j["versions"]["school"]
+    assert v["main"] == "shirvan" and v["rank"] == 0, v
+    assert j["hist"]["school"][-1]["v"] == "guba" and any(x["how"] == "old" and x["v"] == "guba" for x in v["items"]), (j.get("hist"), v)
+    post(u + 'api/rugs/vr_k', {"school": "ganja"})                              # второй человек с другой школой — спор
+    v = get(u + 'api/rugs/vr_k')["versions"]["school"]; assert v["dispute"] and v["main"] is None, v
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import rugs as RG
+    assert "sumax" in RG.COMP_MOVE and "talish" not in RG.COMP_MOVE
+    pg.goto(u); pg.wait_for_timeout(1500); pg.click('#tab-rugs'); pg.wait_for_timeout(2000)
+    pg.evaluate("rugOpen('vr_k')"); pg.wait_for_timeout(1500); pg.click('#rgPassBtn'); pg.wait_for_timeout(600)
+    t = pg.inner_text('#modal'); assert 'Версии по источникам' in t and 'спор' in t, t[:600]
+    pg.screenshot(path=os.path.join(OUT, 't49_versions.png'))
+    errors_ok(ctx, 'версии')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
