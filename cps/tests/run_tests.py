@@ -2171,6 +2171,59 @@ def t50_open_palette_v1198(pg, ctx):
     post(u + 'api/users/key', {"name": "maks", "off": True}); assert rq('api/open/palette/pal_a.json', k) == 401
 
 
+@test
+def t51_school_card_v1199(pg, ctx):
+    """v11.99: /m «школа»: спор источников одного веса, «Губа-Ширван» без уточнения, школа не указана; одна карточка на ковёр (группа);
+    ответ редактора — главное значение (человек), прежнее — в истории; «оставить» и «не знаю» снимают вопрос."""
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    import cv2, numpy as np
+    def mk(rid, src, **kw):
+        cv2.imwrite(f'{D}/rug_img/{rid}.jpg', np.full((300, 200, 3), (60, 90, 160), np.uint8))
+        r = {"id": rid, "title": rid, "source": "тест", "museum": "", "inv": "", "school": "", "composition": "", "status": "new", "w": 200, "h": 300,
+             "marks": [], "created": now, "updated": now, "cat": {"src": src}, "frame": "whole", "frame_by": "hand"}
+        r.update(kw); json.dump(r, open(f'{D}/rugs/{rid}.json', 'w'), ensure_ascii=False)
+    ok = {"ok": True, "by": "тест", "at": now}
+    mk("sk_a", "kerimov_vol2", school="karabakh", same=[{"id": "sk_b"}], same_ok={"sk_b": ok})        # спор двух азербайджанских
+    mk("sk_b", "azcarpetmuseum", school="guba", same=[{"id": "sk_a"}], same_ok={"sk_a": ok})
+    mk("sk_c", "azerbaijanrugs", school="guba-shirvan", composition="pirebedil")                      # не уточнено (тип известен — раньше)
+    mk("sk_d", "met", school="", composition="talish")                                               # не указана (тип известен — раньше остальных без школы)
+    mk("sk_e", "met", school="guba-shirvan", school_by="dolgikh")                                   # человек оставил группу — тоже спрашиваем (не уточнено)
+    def collect():                                                                # очередь отдаётся по 12: чужие карточки пропускаем, свои собираем
+        T, order = {}, []
+        for _ in range(40):
+            ts = [t for t in get(u + 'api/micro/next?k=sch&n=12')["tasks"] if t["type"] == "sch"]
+            other = [t for t in ts if not t["rid"].startswith("sk_")]
+            for t in ts:
+                if t["rid"].startswith("sk_") and t["rid"] not in T: T[t["rid"]] = t; order.append(t["rid"])
+            if not other: break
+            for t in other: post(u + 'api/micro/answer', {"type": "sch", "rid": t["rid"], "a": "skip"})
+        return T, order
+    T, order = collect()
+    assert ("sk_a" in T) != ("sk_b" in T), ("один ковёр — одна карточка", sorted(T))
+    d = T.get("sk_a") or T["sk_b"]; assert d["kind"] == "dispute" and [o["v"] for o in d["opts"]][:2] == ["guba", "karabakh"], d
+    assert T["sk_c"]["kind"] == "coarse" and [o["v"] for o in T["sk_c"]["opts"]] == ["guba", "shirvan", "baku"] and T["sk_c"]["keep"].startswith("Губа-Ширван")
+    assert T["sk_d"]["kind"] == "none" and len(T["sk_d"]["opts"]) == 8
+    assert order[0] in ("sk_a", "sk_b"), order
+    rid = d["rid"]
+    assert post(u + 'api/micro/answer', {"type": "sch", "rid": rid, "a": "karabakh"})["applied"] == "school"
+    r = get(u + 'api/rugs/' + rid); v = r["versions"]["school"]
+    assert r["school"] == "karabakh" and r["school_by"].startswith("/m:") and v["main"] == "karabakh" and v["rank"] == 0, (r["school"], v)
+    assert post(u + 'api/micro/answer', {"type": "sch", "rid": "sk_c", "a": "keep"})["applied"] == "keep"
+    assert post(u + 'api/micro/answer', {"type": "sch", "rid": "sk_d", "a": "unk"})["applied"] == "unk"
+    post(u + 'api/micro/answer', {"type": "sch", "rid": "sk_e", "a": "skip"})
+    left, _ = collect(); assert not left, sorted(left)
+    # интерфейс: карточка показывает источники и кнопки школ
+    mk("sk_f", "azerbaijanrugs", school="ganja-gazakh")
+    post(u + 'api/micro/answer', {"type": "sch", "rid": "sk_e", "a": "skip"})     # любой ответ сбрасывает кэш очереди (2 мин)
+    pg.goto(u + 'm?k=sch'); pg.wait_for_timeout(2500)
+    t = pg.inner_text('main'); assert 'что говорят источники' in t and 'не знаю' in t, t[:500]
+    cur = pg.evaluate("S.tasks[S.i]"); v = cur["opts"][0]["v"]
+    pg.screenshot(path=os.path.join(OUT, 't51_school_card.png'))
+    pg.click(f'.schb [data-s="{v}"]'); pg.wait_for_timeout(1200)
+    assert get(u + 'api/rugs/' + cur["rid"])["school"] == v, (cur["rid"], v)
+    errors_ok(ctx, 'школа /m')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

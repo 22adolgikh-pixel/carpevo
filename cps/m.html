@@ -66,6 +66,7 @@ button:disabled{opacity:.4}
 @media(min-width:820px) and (orientation:landscape){.twl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:12px}.twl .twl-l{justify-content:center;align-items:center;gap:6px}.twl .twl-l .stage{flex:none;max-width:100%}.twl .ph{margin:0;max-width:100%}.twl .ph img{max-width:100%;max-height:calc(100dvh - 300px)}
 .twl .grid.tw{grid-template-columns:repeat(var(--tc,2),minmax(0,1fr));grid-auto-rows:minmax(0,1fr);overflow:hidden;height:100%}.twl .grid.tw .tl{height:100%;padding:0;min-height:0}.twl .grid.tw .tl img{object-fit:contain}.twl .grid.tw .tl b{font-size:12px}}
 .twl .grid.tw.hz{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(0,300px);align-content:start}.twl .grid.tw.hz .tl img.rt{position:absolute;inset:auto;left:50%;top:50%;transform:translate(-50%,-50%) rotate(90deg)}
+.schb{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px;margin:8px 0}.schb button{min-height:44px}.schb small{opacity:.6}
 .zz{position:absolute;left:4px;top:4px;z-index:4;min-height:0;padding:2px 8px;font-size:14px;border-radius:10px;background:#000b}
 .flags{display:flex;gap:8px}.flags label{flex:1;display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--ln);border-radius:10px;font-size:13px;color:var(--mut)}.flags input{width:20px;height:20px;accent-color:var(--acc)}.flags label:has(input:checked){border-color:var(--acc);color:var(--tx)}
 </style></head><body>
@@ -86,7 +87,7 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
 // v11.52: виды карточек. Кнопки вверху включают и выключают вид; выбор помнится на этом телефоне. /m?k=quad,frame — задать выбор ссылкой.
-const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['tw','двойники'],['same','пары (старое)'],['split','развороты'],['rsame','дубли по углам (старое)'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле']];
+const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['tw','двойники'],['sch','школа'],['same','пары (старое)'],['split','развороты'],['rsame','дубли по углам (старое)'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле']];
 function kindsInit(){let k=new URLSearchParams(location.search).get('k');const fromUrl=!!k;
   if(!k){try{k=localStorage.getItem('cps_m_k');}catch(e){}}
   S.k=(k||'').split(',').filter(x=>KINDS.some(a=>a[0]===x));if(!S.k.length)S.k=KINDS.map(a=>a[0]).filter(x=>x!=='same'&&x!=='rsame');
@@ -107,7 +108,7 @@ function show(){head();const t=S.tasks[S.i];
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
     <div class="mut">в очереди: ${KINDS.filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${S.k.includes('field')&&S.ms&&S.ms.running?`<div class="mut">готовлю карточки «поле»: ${S.ms.done} из ${S.ms.total}</div>`:''}${S.k.includes('rsame')&&S.rs?`<div class="mut">поиск новых дублей: ${S.rs.running?`идёт, проверено ${S.rs.done} из ${S.rs.total||'…'} пар`:(S.rs.t?'проход закончен':'ещё не запускался')}${S.rs.err?' · ошибка: '+S.rs.err:''}</div>`:''}${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
     ${S.k.some(k=>L[k])?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
-  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,tw:showTw,split:showSplit,cdup:showCdup,xsame:showXsame,field:showField})[t.type](t);}
+  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,tw:showTw,sch:showSch,split:showSplit,cdup:showCdup,xsame:showXsame,field:showField})[t.type](t);}
 function qhead(q,tip){return `<div class="qrow"><span class="q">${q}</span><button class="ib" id="ib" aria-label="подсказка">i</button></div><div class="tip hint" id="tip">${tip}</div>`;}
 function qtip(){const b=$('ib'),t=$('tip');if(b&&t)b.onclick=()=>{t.classList.toggle('on');b.classList.toggle('on');};}
 function stage(t,extra=''){return `<div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="${img(t)}" alt="">${extra}</div></div>`;}
@@ -235,6 +236,19 @@ function showComp(t){document.documentElement.style.setProperty('--imh','30dvh')
   const rf=$('refs');if(rf)rf.onclick=e=>{const r=e.target.dataset&&e.target.dataset.r;if(!r)return;const o=document.createElement('div');o.className='ovl';
     o.innerHTML=`<img src="/rugmid/${encodeURIComponent(r)}.jpg" alt=""><span class="mut">пример типа «${esc(t.az||t.ru)}» · тап — закрыть</span>`;o.onclick=()=>o.remove();document.body.appendChild(o);};
   S.im=$('im');$('a1').onclick=()=>answer(t,'yes',null,{cid:t.cid});$('a3').onclick=()=>answer(t,'no',null,{cid:t.cid});$('a4').onclick=()=>answer(t,'skip',null,{cid:t.cid});zoomable();}
+// v11.99: «школа»: спор источников / «Губа-Ширван» без уточнения / школа не указана. Ответ человека становится главным для всего ковра.
+function showSch(t){document.documentElement.style.setProperty('--imh','42dvh');
+  const RK={0:'человек',1:'азерб.',2:'музей',3:'дилер'},Q={dispute:'Источники спорят — какая школа?',coarse:'Уточнить школу',none:'Какая школа?'};
+  const H={dispute:'Источники одного веса называют разные школы. Выберите, если видите по ковру; иначе — «не знаю».',coarse:`Сейчас стоит «${t.keep||''}» — тип Керимова, школа внутри не уточнена. Выберите школу, если узнаёте; «оставить» — если по ковру не понять.`,none:'Школа не указана ни в одном источнике. Выберите, если узнаёте ковёр; иначе — «не знаю».'};
+  const sug=new Set((t.vers||[]).map(v=>v.name));
+  $('main').innerHTML=`${qhead(Q[t.kind]||'Школа',H[t.kind]+' Ответ становится главным значением ковра (выше книг и дилеров), прежние значения сохраняются в версиях.')}
+   ${stage(t)}<div class="mut" style="font-size:11px;text-align:center">${esc((t.title||t.rid).slice(0,90))}${t.n>1?` · ковёр, ${t.n} снимк${t.n<5?'а':'ов'}`:''}</div>
+   <div class="typ">${(t.vers||[]).length?`<div class="lb">что говорят источники</div>${t.vers.map(v=>`<div style="font-size:12.5px"><span class="lb" style="display:inline-block;min-width:54px">${RK[v.rank]||''}</span> <b>${esc(v.name)}</b> <span class="lb">· ${esc(v.src||'')}${v.how==='machine'?' · машина: '+esc(v.by):v.how==='human'?' · '+esc(v.by):''}</span></div>`).join('')}`:'<div class="lb">ни один источник школу не называет</div>'}
+    ${t.comp?`<div class="lb" style="margin-top:4px">тип ковра: <b>${esc(t.comp.az||t.comp.ru)}</b>${t.comp.schools.length?' — по словарю: '+esc(t.comp.schools.join(', ')):''}</div>`:''}</div>
+   <div class="schb">${t.opts.map(o=>`<button class="${sug.has(o.name)?'yes':''}" data-s="${esc(o.v)}">${esc(o.name)}${o.grp&&t.kind!=='coarse'&&o.grp!==o.name?`<small> · ${esc(o.grp)}</small>`:''}</button>`).join('')}</div>
+   <div class="btns">${t.kind==='coarse'?`<button id="aK">оставить «${esc(t.keep)}»</button>`:''}<button class="unk" id="aU">не знаю (по фото не определить)</button><button class="sm" id="aS">пропустить</button></div>`;qtip();
+  document.querySelectorAll('.schb [data-s]').forEach(b=>b.onclick=()=>answer(t,b.dataset.s));
+  $('aK')&&($('aK').onclick=()=>answer(t,'keep'));$('aU').onclick=()=>answer(t,'unk');$('aS').onclick=()=>answer(t,'skip');S.im=$('im');zoomable();}
 // v11.86: «двойники ковра»: сверху ковёр, ниже до 8 фото-кандидатов; отметить те, где ТОТ ЖЕ ковёр. Неотмеченные = другой ковёр.
 function showTw(t){document.documentElement.style.setProperty('--imh','28dvh');const sel=new Map();   // i → 'same' | 'sim'
 const pi=r=>'/rugmid/'+encodeURIComponent(r)+'.jpg';

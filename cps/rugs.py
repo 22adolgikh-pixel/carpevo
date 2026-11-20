@@ -2564,7 +2564,7 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw")
+    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch")
     KINDS_OFF = ("same", "rsame")             # v11.86: пары по одной заменены карточкой «двойники ковра» (tw); старые виды — только по выбору
 
     # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
@@ -3476,6 +3476,7 @@ def install(app, DATA, D_WORK):
         rsq = _rsame_queue(me, by) if "rsame" in want else []; Q["rsame"] = rsq[:n]
         fdq = _field_queue(me, rows) if "field" in want else []; Q["field"] = fdq[:n]
         twq = _tw_queue(me, by) if "tw" in want else []; Q["tw"] = twq[:n]
+        schq = [t for t in _sch_queue(me) if t["rid"] in by] if "sch" in want else []; Q["sch"] = schq[:n]
         tasks = []; order = [t for t in want if Q[t]]
         while len(tasks) < n and order:                                           # по кругу: по одной карточке каждого вида
             for t in list(order):
@@ -3498,7 +3499,7 @@ def install(app, DATA, D_WORK):
             if t["type"] == "tw":
                 for it in t["items"]: it.update(w=by[it["id"]]["w"], h=by[it["id"]]["h"])
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "tw": len(twq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]},
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]},
                 "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver(), "rs": {k: rpr[k] for k in ("running", "done", "total", "found", "t", "err")}, "ms": dict(mesh_st)}
 
     @app.post("/api/micro/answer")
@@ -3518,6 +3519,7 @@ def install(app, DATA, D_WORK):
         if typ == "xsame": return _xs_answer(me, role, a, body, rec)
         if typ == "field": return _field_answer(me, role, rid, a, body, rec)
         if typ == "tw": return _tw_answer(me, role, rid, a, body, rec)
+        if typ == "sch": return _sch_answer(me, role, rid, a, body, rec)
         if typ in MORE: return _micro_more(me, role, typ, rid, a, body, rec)
         if typ not in ("frame", "quad") or a == "skip":
             if a == "skip": _mlog(rec)
@@ -4647,6 +4649,88 @@ def install(app, DATA, D_WORK):
         if not isinstance(b.get("nn"), dict): return JSONResponse({"error": "нужен файл twin_nn_v1.json (поле nn)"}, status_code=400)
         with open(os.path.join(DATA, "twin_nn_v1.json"), "w", encoding="utf-8") as f: json.dump(b, f)
         twins_run(); return {"ok": True, "n": len(b["nn"]), "state": twr}
+
+    # ---- v11.99: карточка /m «школа»: спор источников, «Губа-Ширван / Гянджа-Газах» без уточнения, школа не указана.
+    # Один ковёр (группа снимков) — одна карточка на представителе (обложка → азербайджанский источник). Ответ человека — главное значение ковра.
+    _schc = {"t": 0, "v": []}
+    SCH_FINE = [k for k in SCHOOLS if k and k not in COARSE]
+
+    def _sch_build():
+        if time.time() - _schc["t"] < 120: return _schc["v"]
+        R = {}
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("hidden") or r.get("dup_of") or r.get("split_into") or r.get("frame") in ("multi", "notrug", "part"): continue
+            R[r["id"]] = r
+        par = {i: i for i in R}
+        def fd(i):
+            while par[i] != i: par[i] = par[par[i]]; i = par[i]
+            return i
+        for i, r in R.items():
+            for o in same_link(r):
+                if o in R: par[fd(i)] = fd(o)
+        G = {}
+        for i in R: G.setdefault(fd(i), []).append(i)
+        out = []
+        for ids in G.values():
+            rs = [R[i] for i in ids]
+            if any(r.get("sch_keep") or r.get("sch_unk") for r in rs): continue
+            vals = []
+            for r in rs:
+                v = r.get("school")
+                if not v or (r.get("from_twin") or {}).get("school"): continue
+                rank = 0 if by_kind(r.get("school_by")) == "human" else src_rank((r.get("cat") or {}).get("src", ""))
+                vals.append((rank, v))
+            rep = sorted(rs, key=lambda r: (not r.get("cover"), src_rank((r.get("cat") or {}).get("src", "")), r["id"]))[0]
+            comp = next((r.get("composition") for r in rs if r.get("composition") in BYID), "")
+            if not vals: kind, opts, pri = "none", SCH_FINE, 3 + 0.1 * src_rank((rep.get("cat") or {}).get("src", "")) - (0.5 if comp else 0)   # проще: тип известен, источник азербайджанский
+            else:
+                top = min(v[0] for v in vals); tv = sorted({v for k, v in vals if k == top})
+                dis = any(not school_compat(a, b) for a in tv for b in tv)
+                if dis: kind, opts, pri = "dispute", tv + [x for x in SCH_FINE if x not in tv], top * 0.1
+                elif all(v in COARSE for v in tv) and not any(k == 0 and v not in COARSE for k, v in vals):
+                    g = tv[0]; kind, opts, pri = "coarse", [x for x in SCH_FINE if school_group(x) == g], 2 - (0.5 if comp else 0)
+                else: continue
+            out.append({"rid": rep["id"], "kind": kind, "opts": opts, "pri": pri, "cur": rep.get("school", ""), "n": len(ids), "comp": comp,
+                        "ids": ids, "vals": sorted(set(vals))})
+        out.sort(key=lambda x: (x["pri"], x["rid"]))
+        _schc.update(t=time.time(), v=out); return out
+
+    def _sch_queue(me):
+        out = []
+        for x in _sch_build():
+            r = load(x["rid"])
+            if not r or me in ((r.get("micro") or {}).get("sch") or {}).get("s", {}): continue
+            V = versions(x["rid"], set(x["ids"])).get("school") or {}
+            cd = BYID.get(x["comp"]) or {}
+            out.append({"type": "sch", "rid": x["rid"], "kind": x["kind"], "cur": x["cur"], "n": x["n"],
+                        "opts": [{"v": o, "name": SCHOOLS.get(o, o), "grp": SCHOOL_GROUPS.get(school_group(o), "")} for o in x["opts"]],
+                        "keep": SCHOOL_GROUPS.get(x["cur"], "") if x["kind"] == "coarse" else "",
+                        "vers": [{"name": i["name"], "src": i["src"], "rank": i["rank"], "how": i["how"], "by": i["by"]} for i in V.get("items", []) if i["rank"] < 9],
+                        "comp": ({"az": cd.get("az", ""), "ru": cd.get("ru", ""), "schools": [SCHOOLS.get(z, z) for z in cd.get("schools") or []]} if cd else None),
+                        "src": (r.get("cat") or {}).get("src", "")})
+            if len(out) >= 40: break
+        return out
+
+    def _sch_answer(me, role, rid, a, body, rec):
+        """a: школа (ключ SCHOOLS) — так; keep — «не уточнить», оставить группу Керимова; unk — по фото не определить; skip — пропустить (без голоса)"""
+        if a not in SCHOOLS and a not in ("keep", "unk", "skip") or a == "": return JSONResponse({"error": "ответ?"}, status_code=400)
+        now = rec["t"]; w = 0 if a == "skip" else _wt(role); applied = None
+        with _lock:
+            r = load(rid)
+            if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
+            d = r.setdefault("micro", {}).setdefault("sch", {}).setdefault("s", {}); d[me] = {"a": a, "w": w, "t": now}
+            tot = lambda v: sum(y["w"] for y in d.values() if y["a"] == v)
+            if a in SCHOOLS and tot(a) >= 2:
+                who = "/m: " + ", ".join(sorted(u for u, y in d.items() if y["a"] == a))
+                if r.get("school") != a: hist_push(r, "school", who, now)
+                r["school"] = a; r["school_by"] = who; (r.get("from_twin") or {}).pop("school", None); applied = "school"
+            elif a == "keep" and tot("keep") >= 2: r["sch_keep"] = True; applied = "keep"
+            elif a == "unk" and tot("unk") >= 2: r["sch_unk"] = True; applied = "unk"
+            r["updated"] = now; save(r)
+        _mlog(rec); _schc["t"] = 0; _dcl["t"] = 0
+        return {"ok": True, "applied": applied}
 
     def _tw_answer(me, role, rid, a, body, rec):
         """v11.86: «двойники ковра»: same — отмеченные плитки (тот же ковёр), diff — остальные показанные; skip — «не знаю» на всю карточку.
