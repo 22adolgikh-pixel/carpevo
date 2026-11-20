@@ -26,7 +26,7 @@ def label(r):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("rugs"); ap.add_argument("--out", default=FM.PATH)
-    ap.add_argument("--edge", choices=("auto", "yes", "no"), default="auto", help="v12.00: признаки края фото (r.auto_edge)"); a = ap.parse_args()
+    ap.add_argument("--edge", choices=("auto", "yes", "no"), default="no", help="v12.00: признаки края фото (r.auto_edge)"); a = ap.parse_args()
     X, Y, R = [], [], []
     for f in sorted(os.listdir(a.rugs)):
         if not f.endswith(".json"): continue
@@ -37,14 +37,14 @@ def main():
     cov = sum(1 for r in R if FE.get(r) is not FE.EMPTY) / max(1, len(R))
     use_edge = a.edge == "yes" or (a.edge == "auto" and cov >= 0.8)
     print(f"признаки края посчитаны у {cov:.0%} — {'берём' if use_edge else 'не берём'}")
-    names = FM.NAMES + (FE.NAMES if use_edge else [])
+    names = [n for n in FM.NAMES if n not in FM.DRIFT] + (FE.NAMES if use_edge else [])   # v12.00: без «сползающих» признаков
     X = [FM.feat_for(r, names) for r in R]
     X, Y = np.array(X), np.array(Y)
     print(f"примеров {len(Y)}, целых {int(Y.sum())}")
     if len(Y) < 40: sys.exit("мало ответов — нужно хотя бы 40")
     mk = lambda s: GradientBoostingClassifier(n_estimators=150, max_depth=3, learning_rate=0.05, subsample=0.8, random_state=s)   # v11.91: ответов стало 1 200+
     P = np.mean([cross_val_predict(mk(s), X, Y, cv=StratifiedKFold(5, shuffle=True, random_state=s), method="predict_proba")[:, 1] for s in range(5)], 0)
-    acc = float(((P > 0.5) == Y).mean()); rule = float(((X[:, FM.NAMES.index("auto_whole")] > 0.5) == Y).mean())
+    acc = float(((P > 0.5) == Y).mean()); rule = float(((X[:, names.index("auto_whole")] > 0.5) == Y).mean())
     thr = {}
     for t in (0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.93, 0.95, 0.97):
         s = P >= t; thr[str(t)] = {"picked": int(s.sum()), "precision": round(float(Y[s].mean()), 3) if s.any() else None, "missed_whole": int((Y & ~s).sum())}

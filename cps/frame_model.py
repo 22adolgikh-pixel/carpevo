@@ -34,13 +34,18 @@ def feat(r):
            [float(any(k in t for k in ("fragment", "фрагмент", "hissə", "qalıq"))), float(bool(r.get("school"))), float(bool(r.get("composition")))]
 
 
+# v12.00: признаки, которые меняются от работы людей (школу и тип проставляют позже), — модель «сползает»: обучена на одних
+# значениях, считает по другим. 21.11 на уже размеченных коврах точность при пороге 0,95 упала до 95 %. Новые модели — без них.
+DRIFT = ("has_school", "has_comp")
+
+
 def feat_for(r, names):
-    """v12.00: признаки под конкретную модель — у новой к базовым добавлены признаки края фото (frame_edge)"""
-    x = feat(r)
-    if len(names) > len(NAMES):
+    """признаки под конкретную модель — по именам (старая модель — все NAMES; новая — без DRIFT, с признаками края e_*)"""
+    d = dict(zip(NAMES, feat(r)))
+    if any(n.startswith("e_") for n in names):
         import frame_edge
-        x = x + frame_edge.get(r)
-    return x
+        d.update(zip(frame_edge.NAMES, frame_edge.get(r)))
+    return [d.get(n, -1.0) for n in names]
 
 
 def _load():
