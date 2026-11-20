@@ -2920,7 +2920,9 @@ def install(app, DATA, D_WORK):
         if a not in ("same", "similar", "diff", "skip") or "~" not in k: return JSONResponse({"error": "ответ?"}, status_code=400)
         p = next((p for p in _xu["P"] if p["key"] == k), None)
         with _lock:
-            V = _xs_votes(); d = V.setdefault(k, {}); d[me] = {"a": a, "w": 0 if a == "skip" else _wt(role), "t": rec["t"], **({"sim": p["sim"]} if p else {})}
+            V = _xs_votes(); d = V.setdefault(k, {}); d[me] = {"a": a, "w": 0 if a == "skip" else _wt(role), "t": rec["t"], **({"sim": p["sim"]} if p else {}),
+                     **({"var": True} if a == "same" and body.get("var") else {})}   # v12.00: тот же элемент, другое заполнение
+            if a == "same" and body.get("var"): rec["var"] = True
             tmp = F_XS + ".tmp"
             with open(tmp, "w", encoding="utf-8") as f: json.dump(V, f, ensure_ascii=False, indent=1)
             os.replace(tmp, F_XS)
@@ -2940,7 +2942,8 @@ def install(app, DATA, D_WORK):
             b = "%.1f" % (int(sim * 10) / 10); c = bands.setdefault(b, {"same": 0, "similar": 0, "diff": 0}); c[v] += 1
         return {"units": len(_xu["U"]), "pairs": len(_xu["P"]), "built": int(_xu["t"]), "running": _xu["run"], "error": _xu["err"],
                 "answered": sum(1 for d in V.values() if _xs_verdict(d)), "bands": dict(sorted(bands.items(), reverse=True)),
-                "same": [k for k, d in V.items() if _xs_verdict(d) == "same"]}
+                "same": [k for k, d in V.items() if _xs_verdict(d) == "same"],
+                "same_var": [k for k, d in V.items() if _xs_verdict(d) == "same" and any(x.get("var") for x in d.values() if x["a"] == "same")]}
 
     @app.get("/api/element_embed/status")
     def element_embed_status():
@@ -4593,6 +4596,41 @@ def install(app, DATA, D_WORK):
         open(mark, "w").write(f"{n} голосов, {back} решений\n"); print(f"twins reopen: {n} голосов, {back} решений")
         _ty["t"] = 0
 
+    # ---- v12.00: признаки края фото для модели кадра (frame_edge) — для всех ковров, не зависят от ответов людей
+    edge_st = {"running": False, "done": 0, "skip": 0, "t": 0}
+
+    def edge_run(limit=None):
+        import frame_edge
+        if edge_st["running"]: return edge_st
+        edge_st.update(running=True, done=0, skip=0, t=int(time.time()))
+        try:
+            for f in sorted(os.listdir(D_RUGS)):
+                if not f.endswith(".json"): continue
+                rid = f[:-5]; r = load(rid)
+                if not r: continue
+                p = img_path(rid); e = r.get("auto_edge") or {}
+                if e.get("v") == frame_edge.VER and (not p or os.path.getmtime(p) <= e.get("t", 0) + 1): continue
+                v = frame_edge.features(p) if p else None
+                if v is None: edge_st["skip"] += 1; continue
+                with _lock:
+                    r = load(rid)
+                    if r: r["auto_edge"] = {"v": frame_edge.VER, "f": v, "t": int(time.time())}; save(r)
+                edge_st["done"] += 1
+                if limit and edge_st["done"] >= limit: break
+                time.sleep(0.02)
+        finally:
+            edge_st["running"] = False
+        print(f"frame edge: {edge_st['done']} посчитано, {edge_st['skip']} без картинки")
+        return edge_st
+
+    @app.post("/api/frame_edge_run")
+    def api_frame_edge_run():
+        threading.Thread(target=edge_run, daemon=True).start(); return {"ok": True}
+
+    @app.get("/api/frame_edge")
+    def api_frame_edge():
+        return edge_st
+
     def _periodic_twins():
         try: comp_cleanup()
         except Exception as e: print("comp cleanup:", e)
@@ -4600,10 +4638,14 @@ def install(app, DATA, D_WORK):
         except Exception as e: print("school refine:", e)
         try: tw_reopen()
         except Exception as e: print("twins reopen:", e)
+        try: edge_run()
+        except Exception as e: print("frame edge:", e)
         time.sleep(600)
         while True:
             try: twins_run()
             except Exception as e: print("twins:", e)
+            try: edge_run()
+            except Exception as e: print("frame edge:", e)
             time.sleep(6 * 3600)
     if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_twins, daemon=True, name="twins-periodic").start()
 

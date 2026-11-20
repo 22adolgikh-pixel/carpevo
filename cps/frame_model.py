@@ -34,6 +34,15 @@ def feat(r):
            [float(any(k in t for k in ("fragment", "фрагмент", "hissə", "qalıq"))), float(bool(r.get("school"))), float(bool(r.get("composition")))]
 
 
+def feat_for(r, names):
+    """v12.00: признаки под конкретную модель — у новой к базовым добавлены признаки края фото (frame_edge)"""
+    x = feat(r)
+    if len(names) > len(NAMES):
+        import frame_edge
+        x = x + frame_edge.get(r)
+    return x
+
+
 def _load():
     try: mt = os.path.getmtime(PATH)
     except OSError: return None
@@ -54,7 +63,7 @@ def p_whole(r):
     """вероятность «целый ковёр» 0..1 или None (модели нет / машина ещё не смотрела фото)"""
     m = _load()
     if not m or not r.get("auto"): return None
-    x = [struct.unpack("f", struct.pack("f", v))[0] for v in feat(r)]       # как sklearn: признаки во float32
+    x = [struct.unpack("f", struct.pack("f", v))[0] for v in feat_for(r, m.get("names") or NAMES)]       # как sklearn: признаки во float32
     z = m["init"] + m["lr"] * sum(_tree(t, x) for t in m["trees"])
     return 1 / (1 + math.exp(-z))
 

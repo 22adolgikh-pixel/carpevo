@@ -10,6 +10,7 @@ import argparse, json, os, sys, time
 import numpy as np
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 import frame_model as FM
+import frame_edge as FE
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import StratifiedKFold, cross_val_predict
 
@@ -24,7 +25,8 @@ def label(r):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("rugs"); ap.add_argument("--out", default=FM.PATH); a = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("rugs"); ap.add_argument("--out", default=FM.PATH)
+    ap.add_argument("--edge", choices=("auto", "yes", "no"), default="auto", help="v12.00: признаки края фото (r.auto_edge)"); a = ap.parse_args()
     X, Y, R = [], [], []
     for f in sorted(os.listdir(a.rugs)):
         if not f.endswith(".json"): continue
@@ -32,6 +34,11 @@ def main():
         except Exception: continue
         y = label(r)
         if y and r.get("auto"): X.append(FM.feat(r)); Y.append(y == "whole"); R.append(r)
+    cov = sum(1 for r in R if FE.get(r) is not FE.EMPTY) / max(1, len(R))
+    use_edge = a.edge == "yes" or (a.edge == "auto" and cov >= 0.8)
+    print(f"признаки края посчитаны у {cov:.0%} — {'берём' if use_edge else 'не берём'}")
+    names = FM.NAMES + (FE.NAMES if use_edge else [])
+    X = [FM.feat_for(r, names) for r in R]
     X, Y = np.array(X), np.array(Y)
     print(f"примеров {len(Y)}, целых {int(Y.sum())}")
     if len(Y) < 40: sys.exit("мало ответов — нужно хотя бы 40")
@@ -53,7 +60,7 @@ def main():
                       "th": [float(v) for v in t.threshold], "v": [round(float(v[0][0]), 6) for v in t.value]})
     p0 = float(np.clip(Y.mean(), 1e-6, 1 - 1e-6))
     out = {"ver": 2, "auto_thr": auto, "trained": time.strftime("%Y-%m-%d %H:%M"), "n": int(len(Y)), "n_whole": int(Y.sum()), "cv_acc": round(acc, 3), "rule_acc": round(rule, 3),
-           "thr": thr, "names": FM.NAMES, "init": float(np.log(p0 / (1 - p0))), "lr": m.learning_rate, "trees": trees}
+           "thr": thr, "names": names, "edge": bool(use_edge), "init": float(np.log(p0 / (1 - p0))), "lr": m.learning_rate, "trees": trees}
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     json.dump(out, open(a.out, "w", encoding="utf-8"))
     FM._M["m"] = None; FM.PATH = a.out

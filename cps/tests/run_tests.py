@@ -10,6 +10,7 @@
 Правило: каждое изменение интерфейса — сначала (или вместе с ним) тест сюда. Горячие клавиши проверяются здесь же —
 если клавиша перестала работать, тест упадёт с её названием.
 """
+import re
 import os, sys, json, time, shutil, socket, subprocess, tempfile, traceback, urllib.request, urllib.parse, argparse
 HERE = os.path.dirname(os.path.abspath(__file__)); CPS = os.path.dirname(HERE); OUT = os.path.join(HERE, 'out')
 
@@ -1321,7 +1322,7 @@ def t33_micro_phone(pg, ctx):
     errs = []; m.on('pageerror', lambda e: errs.append(str(e)))
     m.goto(ctx['url'] + 'm?k=quad,frame'); m.wait_for_selector('.q', timeout=15000); m.wait_for_timeout(800)   # v11.52: остальные виды карточек — в t36
     m.screenshot(path=f'{OUT}/33_micro_first.png')
-    hv = m.inner_text('#me'); assert 'v11.' in hv, f'в шапке /m нет номера версии: {hv!r}'      # v11.46
+    hv = m.inner_text('#me'); assert re.search(r'v1[1-9]\.', hv), f'в шапке /m нет номера версии: {hv!r}'      # v11.46
     assert m.query_selector('#ib') and not m.is_visible('#tip'), 'подсказка должна быть спрятана под «i»'
     m.click('#ib'); assert m.is_visible('#tip'), '«i» не раскрывает подсказку'; m.click('#ib')
     cdp = mc.new_cdp_session(m); sb = m.query_selector('#stage').bounding_box(); cx, cy = sb['x'] + sb['width'] / 2, sb['y'] + sb['height'] / 2
@@ -2222,6 +2223,34 @@ def t51_school_card_v1199(pg, ctx):
     pg.click(f'.schb [data-s="{v}"]'); pg.wait_for_timeout(1200)
     assert get(u + 'api/rugs/' + cur["rid"])["school"] == v, (cur["rid"], v)
     errors_ok(ctx, 'школа /m')
+
+
+@test
+def t52_frame_edge_v1200(pg, ctx):
+    """v12.00: признаки края фото считаются на сервере для всех ковров (r.auto_edge), модель кадра берёт их, если обучена с ними;
+    в паре элементов — ответ «тот же, другое заполнение» (тот же + пометка var)."""
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    import cv2, numpy as np, sys as _s
+    img = np.full((300, 200, 3), 235, np.uint8); img[30:270, 20:180] = np.random.default_rng(1).integers(0, 255, (240, 160, 3))
+    cv2.imwrite(f'{D}/rug_img/fe_a.jpg', img)
+    json.dump({"id": "fe_a", "title": "fe_a", "source": "тест", "w": 200, "h": 300, "marks": [], "created": now, "updated": now, "status": "new",
+               "auto": {"frame": "whole", "quad": [[0.1, 0.1], [0.9, 0.1], [0.9, 0.9], [0.1, 0.9]], "conf": 0.9, "area": 0.6}}, open(f'{D}/rugs/fe_a.json', 'w'))
+    post(u + 'api/frame_edge_run', {})
+    for _ in range(60):
+        st = get(u + 'api/frame_edge')
+        if not st["running"] and json.load(open(f'{D}/rugs/fe_a.json')).get("auto_edge"): break
+        time.sleep(1)
+    e = json.load(open(f'{D}/rugs/fe_a.json')).get("auto_edge")
+    _s.path.insert(0, ctx['app']); import frame_edge as FE, frame_model as FM
+    assert e and e["v"] == FE.VER and len(e["f"]) == len(FE.NAMES), e
+    assert e["f"][FE.NAMES.index("e_bg_mean")] > 0.9, ("вокруг ковра фон", e["f"])
+    r = json.load(open(f'{D}/rugs/fe_a.json'))
+    assert len(FM.feat_for(r, FM.NAMES)) == len(FM.NAMES) and len(FM.feat_for(r, FM.NAMES + FE.NAMES)) == len(FM.NAMES) + len(FE.NAMES)
+    assert FM.feat_for({"auto": r["auto"]}, FM.NAMES + FE.NAMES)[-1] == -1.0, "нет признаков края — пропуск (-1)"
+    k = "xa|g1~xb|g1"
+    j = post(u + 'api/micro/answer', {"type": "xsame", "rid": "xa", "key": k, "a": "same", "var": 1})
+    assert j.get("ok"), j
+    x = get(u + 'api/xsame'); assert k in x["same"] and k in x["same_var"], x
 
 
 def main():
