@@ -9,7 +9,7 @@
  "place": "",
  "date": "circa 1900",
  "school": "guba",
- "composition": "",
+ "composition": "shedde",
  "technique": "безворсовый: килим",
  "size": "",
  "notes": "Kuba Kilim, Caucasus, circa 1900",
@@ -84,6 +84,10 @@
   {
    "id": "vam_O364917",
    "score": 0
+  },
+  {
+   "id": "cm_621dd83fe1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -127,6 +131,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794981450
+  },
+  "cm_621dd83fe1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795205224
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -284,5 +293,8 @@
    }
   ]
  },
- "composition_by": "перенесено: не композиция"
+ "composition_by": "перенесено: не композиция",
+ "from_twin": {
+  "composition": "cm_621dd83fe1"
+ }
 }

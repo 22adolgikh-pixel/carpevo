@@ -8,7 +8,7 @@
  "license": "Public domain · Unknown artisan. Photo by auctioneer",
  "place": "",
  "date": "Second half 19th century",
- "school": "",
+ "school": "guba",
  "composition": "shedde",
  "technique": "безворсовый: сумах",
  "size": "",
@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870016,
- "updated": 1794767283,
+ "updated": 1795205224,
  "cat": {
   "title": "Collection VOK: Caucasus - Persia 22 The exceptional quality of this red- and blue-ground Azeri cover (shadda)",
   "museum": "",
@@ -56,6 +56,38 @@
   {
    "id": "vam_O364917",
    "score": 0
+  },
+  {
+   "id": "cm_a06c6044a8",
+   "score": 0
+  },
+  {
+   "id": "azcm_122",
+   "score": 0
+  },
+  {
+   "id": "azr_early_shirvan_rug17",
+   "score": 0
+  },
+  {
+   "id": "azcm_4",
+   "score": 0
+  },
+  {
+   "id": "azcm_130",
+   "score": 0
+  },
+  {
+   "id": "azr_lori_pambak_lambali_rug_switzerland_private_collection",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0155_1",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_borchali_flatweave_qapiliq",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -63,6 +95,46 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794981466
+  },
+  "cm_a06c6044a8": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795205224
+  },
+  "azcm_122": {
+   "ok": false,
+   "by": "по цепочке: azcm_122 ≠ cm_a06c6044a8",
+   "at": 1795205245
+  },
+  "azr_early_shirvan_rug17": {
+   "ok": false,
+   "by": "по цепочке: azr_early_shirvan_rug17 ≠ cm_a06c6044a8",
+   "at": 1795205245
+  },
+  "azcm_4": {
+   "ok": false,
+   "by": "по цепочке: azcm_4 ≠ cm_a06c6044a8",
+   "at": 1795205245
+  },
+  "azcm_130": {
+   "ok": false,
+   "by": "по цепочке: azcm_130 ≠ cm_a06c6044a8",
+   "at": 1795205245
+  },
+  "azr_lori_pambak_lambali_rug_switzerland_private_collection": {
+   "ok": false,
+   "by": "по цепочке: azr_lori_pambak_lambali_rug_switzerland_private_collection ≠ cm_a06c6044a8",
+   "at": 1795205245
+  },
+  "intangible_2850_p0155_1": {
+   "ok": false,
+   "by": "по цепочке: cm_a06c6044a8 ≠ intangible_2850_p0155_1",
+   "at": 1795205245
+  },
+  "azr_antique_borchali_flatweave_qapiliq": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_borchali_flatweave_qapiliq ≠ cm_a06c6044a8",
+   "at": 1795205245
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -150,6 +222,15 @@
     "t": 1794767283,
     "s": "ref"
    }
+  },
+  "same": {
+   "cm_a06c6044a8": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795205224
+    }
+   }
   }
  },
  "frame": "whole",
@@ -186,5 +267,8 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "school": "cm_a06c6044a8"
+ }
 }

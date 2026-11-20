@@ -18,7 +18,7 @@
  "h": 900,
  "marks": [],
  "created": 1791736137,
- "updated": 1794258657,
+ "updated": 1795205268,
  "cat": {
   "title": "Early Kuba Medallion rug, Khanate Period",
   "museum": "",
@@ -115,14 +115,19 @@
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "fragment",
+    "a": "cropped",
     "w": 2,
-    "t": 1794258657
+    "t": 1795205268
    }
   }
  },
- "frame": "fragment",
+ "frame": "cropped",
  "frame_by": "micro",
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «kuba» в подписи"
+ "school_by": "уточнено по слову «kuba» в подписи",
+ "edge": {
+  "damaged": [
+   "dolgikh"
+  ]
+ }
 }

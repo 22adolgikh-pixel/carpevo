@@ -31,7 +31,7 @@
    "scheme": "t111_f02",
    "group": "m6ad936cae889575_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: kisə",
    "angle": 180,
    "flip": 1,
@@ -75,8 +75,8 @@
    ],
    "by": "машина",
    "at": 1794149009,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795205241,
    "box0": [
     0.29063,
     0.17195,
@@ -100,7 +100,7 @@
    "scheme": "t111_f02",
    "group": "m6ad936cae889575_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: kisə",
    "angle": 180,
    "flip": 0,
@@ -144,8 +144,8 @@
    ],
    "by": "машина",
    "at": 1794149009,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795205241,
    "box0": [
     0.28788,
     0.52377,
@@ -169,7 +169,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "angle": 270,
    "flip": 1,
@@ -246,7 +246,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "angle": 90,
    "flip": 1,
@@ -323,7 +323,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "angle": 0,
    "flip": 1,
@@ -424,7 +424,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "angle": 180,
    "flip": 0,
@@ -513,7 +513,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "angle": 0,
    "flip": 1,
@@ -594,7 +594,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "angle": 180,
    "flip": 1,
@@ -703,7 +703,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "angle": 90,
    "flip": 1,
@@ -780,7 +780,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "angle": 180,
    "flip": 0,
@@ -853,7 +853,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "angle": 0,
    "flip": 0,
@@ -935,10 +935,10 @@
   {
    "id": "m6af78abae997675_9",
    "box": [
-    0.75722,
+    0.71614,
     0.05078,
-    0.10187,
-    0.0459
+    0.14295,
+    0.04668
    ],
    "zone": "other",
    "motif": "",
@@ -946,7 +946,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: t155_f03",
    "angle": 270,
    "flip": 0,
@@ -1046,8 +1046,8 @@
    ],
    "by": "машина",
    "at": 1794742984,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795205335,
    "box0": [
     0.76171,
     0.0523,
@@ -1055,15 +1055,17 @@
     0.04358
    ],
    "refined": 4,
-   "sam": 0.915
+   "sam": 0.915,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795205335
   },
   {
    "id": "m6af78abae997675_10",
    "box": [
     0.0798,
     0.08691,
-    0.0781,
-    0.05469
+    0.08284,
+    0.08927
    ],
    "zone": "other",
    "motif": "",
@@ -1071,7 +1073,7 @@
    "scheme": "t155_f03",
    "group": "m6af78abae997675_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: t155_f03",
    "angle": 0,
    "flip": 1,
@@ -1143,8 +1145,8 @@
    ],
    "by": "машина",
    "at": 1794742984,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795205335,
    "box0": [
     0.07634,
     0.08446,
@@ -1152,7 +1154,9 @@
     0.05743
    ],
    "refined": 4,
-   "sam": 0.949
+   "sam": 0.949,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795205335
   },
   {
    "id": "mmwhrmtos",
@@ -4302,7 +4306,7 @@
   }
  ],
  "created": 1791736121,
- "updated": 1795204632,
+ "updated": 1795205335,
  "cat": {
   "title": "Керимов, т. I, Табл. 210. «ШИХЛЫ» (стр. скана 332, печ. ?)",
   "museum": "",
@@ -4559,6 +4563,99 @@
      "a": "none",
      "w": 2,
      "t": 1795204632
+    }
+   }
+  },
+  "marks": {
+   "m6ad936cae889575_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795205241
+    }
+   },
+   "m6ad936cae889575_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795205241
+    }
+   },
+   "m6af78abae997675_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205273
+    }
+   },
+   "m6af78abae997675_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205273
+    }
+   },
+   "m6af78abae997675_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205273
+    }
+   },
+   "m6af78abae997675_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205273
+    }
+   },
+   "m6af78abae997675_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205273
+    }
+   },
+   "m6af78abae997675_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205273
+    }
+   },
+   "m6af78abae997675_6": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205273
+    }
+   },
+   "m6af78abae997675_7": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205273
+    }
+   },
+   "m6af78abae997675_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205273
+    }
+   },
+   "m6af78abae997675_9": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795205335
+    }
+   },
+   "m6af78abae997675_10": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795205335
     }
    }
   }

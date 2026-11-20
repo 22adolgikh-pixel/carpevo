@@ -18,7 +18,7 @@
  "h": 1838,
  "marks": [],
  "created": 1791736132,
- "updated": 1795117161,
+ "updated": 1795205351,
  "cat": {
   "title": "kuba alpan94",
   "museum": "",
@@ -65,6 +65,10 @@
   {
    "id": "kerimov_vol2_p127_3",
    "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p128_1_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -92,6 +96,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794997840
+  },
+  "kerimov_vol2_p128_1_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795205351
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -158,6 +167,13 @@
      "a": "diff",
      "w": 2,
      "t": 1794997840
+    }
+   },
+   "kerimov_vol2_p128_1_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795205351
     }
    }
   }

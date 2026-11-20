@@ -18,7 +18,7 @@
  "h": 867,
  "marks": [],
  "created": 1791870035,
- "updated": 1794429772,
+ "updated": 1795205292,
  "cat": {
   "title": "Це найбільш давній і цінний килим азербайджанської колекції з Музею Ханенків",
   "museum": "",
@@ -52,9 +52,30 @@
   {
    "id": "wikimedia_File_Азербайджанський_килим_шедде_датований_початком_18_століття_jpg",
    "score": 784
+  },
+  {
+   "id": "wikimedia_File_Shadda_carpet_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Shadda_jpg",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Shadda_carpet_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795205292,
+   "similar": true
+  },
+  "wikimedia_File_Shadda_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795205292,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Азербайджанський_килим_шедде_датований_початком_18_століття_jpg": {
@@ -167,6 +188,22 @@
      ]
     ],
     "s": "vlm"
+   }
+  },
+  "same": {
+   "wikimedia_File_Shadda_carpet_jpg": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795205292
+    }
+   },
+   "wikimedia_File_Shadda_jpg": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795205292
+    }
    }
   }
  },

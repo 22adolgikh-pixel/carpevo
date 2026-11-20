@@ -18,7 +18,7 @@
  "h": 515,
  "marks": [],
  "created": 1791736136,
- "updated": 1791747228,
+ "updated": 1795205191,
  "cat": {
   "title": "kuba72",
   "museum": "",
@@ -61,7 +61,38 @@
  },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.09828,
+    0.0201
+   ],
+   [
+    0.9417,
+    0.00923
+   ],
+   [
+    0.97231,
+    0.96142
+   ],
+   [
+    0.01922,
+    0.96912
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "same_chk": {
   "azr_kuba_seychour77": {
@@ -126,5 +157,17 @@
   }
  },
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «kuba» в подписи"
+ "school_by": "уточнено по слову «kuba» в подписи",
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795205191,
+    "s": "ref"
+   }
+  }
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

@@ -187,7 +187,7 @@
   }
  ],
  "created": 1791870033,
- "updated": 1794935952,
+ "updated": 1795205186,
  "cat": {
   "title": "Samukh rug, XVIII c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -229,6 +229,10 @@
   {
    "id": "azr_antique_khizi_findigan_rug5",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Зили_1_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -241,6 +245,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792271336
+  },
+  "wikimedia_File_Зили_1_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795205186
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -403,6 +412,15 @@
     "a": "whole",
     "w": 2,
     "t": 1794935952
+   }
+  },
+  "same": {
+   "wikimedia_File_Зили_1_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795205186
+    }
    }
   }
  },
