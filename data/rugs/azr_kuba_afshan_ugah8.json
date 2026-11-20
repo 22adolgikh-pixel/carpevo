@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791736135,
- "updated": 1791736135,
+ "updated": 1795203792,
  "cat": {
   "title": "kuba afshan ugah8",
   "museum": "",
@@ -124,5 +124,49 @@
    "at": 1795050002,
    "ver": 2
   }
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795203792,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04525,
+    0.0362
+   ],
+   [
+    0.9505,
+    0.03921
+   ],
+   [
+    0.88152,
+    0.96382
+   ],
+   [
+    0.06041,
+    0.93004
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

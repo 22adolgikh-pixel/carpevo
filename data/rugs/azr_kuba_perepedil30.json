@@ -758,10 +758,10 @@
   {
    "id": "m6afe20a5e7546_9",
    "box": [
-    0.41005,
+    0.39097,
     0.56203,
-    0.06349,
-    0.02444
+    0.08882,
+    0.0311
    ],
    "zone": "other",
    "motif": "deve",
@@ -769,7 +769,7 @@
    "scheme": "t22_f03",
    "group": "m6afe20a5e7546_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.633,
@@ -836,15 +836,19 @@
    "sam": 0.911,
    "rf": 1,
    "rf_s": 0.82,
-   "rf_moved": 0.946
+   "rf_moved": 0.946,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795203735,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795203735
   },
   {
    "id": "m6afe20a5e7546_10",
    "box": [
-    0.50824,
-    0.29297,
-    0.07967,
-    0.0332
+    0.51267,
+    0.29661,
+    0.09502,
+    0.0323
    ],
    "zone": "other",
    "motif": "deve",
@@ -852,7 +856,7 @@
    "scheme": "t22_f03",
    "group": "m6afe20a5e7546_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.625,
@@ -951,15 +955,19 @@
    "sam": 0.926,
    "rf": 1,
    "rf_s": 0.695,
-   "rf_moved": 0.264
+   "rf_moved": 0.264,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795203735,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795203735
   },
   {
    "id": "m6afe2102e669680_0",
    "box": [
     0.37912,
-    0.78223,
-    0.21291,
-    0.07031
+    0.80931,
+    0.2126,
+    0.04323
    ],
    "zone": "other",
    "motif": "qeychi",
@@ -967,7 +975,7 @@
    "scheme": "t104_f04",
    "group": "m6afe2102e669680_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.761,
@@ -1103,15 +1111,19 @@
      0.80859
     ]
    ],
-   "sam": 0.956
+   "sam": 0.956,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795203855,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795203855
   },
   {
    "id": "m6afe2102e669680_1",
    "box": [
     0.375,
-    0.65527,
-    0.23214,
-    0.05664
+    0.67581,
+    0.23475,
+    0.04865
    ],
    "zone": "other",
    "motif": "qeychi",
@@ -1119,7 +1131,7 @@
    "scheme": "t104_f04",
    "group": "m6afe2102e669680_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.748,
@@ -1199,15 +1211,19 @@
      0.67383
     ]
    ],
-   "sam": 0.969
+   "sam": 0.969,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795203855,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795203855
   },
   {
    "id": "m6afe2102e669680_2",
    "box": [
     0.36951,
     0.52637,
-    0.24725,
-    0.06348
+    0.24853,
+    0.05007
    ],
    "zone": "other",
    "motif": "qeychi",
@@ -1215,7 +1231,7 @@
    "scheme": "t104_f04",
    "group": "m6afe2102e669680_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.712,
@@ -1339,7 +1355,11 @@
      0.55176
     ]
    ],
-   "sam": 0.953
+   "sam": 0.953,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795203855,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795203855
   },
   {
    "id": "m6afe2102e669680_4",
@@ -1355,7 +1375,7 @@
    "scheme": "t104_f04",
    "group": "m6afe2102e669680_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.696,
@@ -1535,7 +1555,7 @@
    "scheme": "t104_f04",
    "group": "m6afe2102e669680_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.696,
@@ -1697,9 +1717,9 @@
    "id": "m6afe2102e669680_6",
    "box": [
     0.38324,
-    0.37598,
-    0.23626,
-    0.08496
+    0.39759,
+    0.23683,
+    0.04658
    ],
    "zone": "other",
    "motif": "qeychi",
@@ -1707,7 +1727,7 @@
    "scheme": "t104_f04",
    "group": "m6afe2102e669680_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.695,
@@ -1847,7 +1867,11 @@
      0.42871
     ]
    ],
-   "sam": 0.959
+   "sam": 0.959,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795203855,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795203855
   },
   {
    "id": "m6afe2140e669680_0",
@@ -2975,7 +2999,7 @@
   }
  ],
  "created": 1791736134,
- "updated": 1795203648,
+ "updated": 1795203855,
  "cat": {
   "title": "kuba perepedil30",
   "museum": "",
@@ -3206,6 +3230,62 @@
      "a": "ok",
      "w": 2,
      "t": 1795203648
+    }
+   },
+   "m6afe20a5e7546_9": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795203735
+    }
+   },
+   "m6afe20a5e7546_10": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795203735
+    }
+   },
+   "m6afe2102e669680_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795203855
+    }
+   },
+   "m6afe2102e669680_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795203855
+    }
+   },
+   "m6afe2102e669680_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795203855
+    }
+   },
+   "m6afe2102e669680_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795203855
+    }
+   },
+   "m6afe2102e669680_2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795203855
+    }
+   },
+   "m6afe2102e669680_6": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795203855
     }
    }
   }
