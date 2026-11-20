@@ -18,7 +18,7 @@
  "h": 957,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062214,
+ "updated": 1795205419,
  "cat": {
   "title": "безворсовый",
   "museum": "Gördes Çarşı Mosque",
@@ -117,6 +117,21 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "whole",
- "tri": "auto"
+ "frame": "cropped",
+ "tri": "auto",
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "cropped",
+    "w": 2,
+    "t": 1795205419
+   }
+  }
+ },
+ "frame_by": "micro"
 }

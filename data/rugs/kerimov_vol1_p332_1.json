@@ -3602,7 +3602,7 @@
    "scheme": "t155_f03",
    "group": "m6afa2e92e174588_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.885,
@@ -3670,7 +3670,7 @@
    "scheme": "t155_f03",
    "group": "m6afa2e92e174588_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.883,
@@ -3762,7 +3762,7 @@
    "scheme": "t155_f03",
    "group": "m6afb7f56e537316_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.836,
@@ -3822,7 +3822,7 @@
    "scheme": "t155_f03",
    "group": "m6afb7f56e537316_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.83,
@@ -3890,7 +3890,7 @@
    "scheme": "t155_f03",
    "group": "m6afb7f56e537316_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.829,
@@ -3974,7 +3974,9 @@
      0.83008
     ]
    ],
-   "sam": 0.93
+   "sam": 0.93,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795205401
   },
   {
    "id": "m6afb7f56e537316_5",
@@ -3990,7 +3992,7 @@
    "scheme": "t155_f03",
    "group": "m6afb7f56e537316_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.829,
@@ -4094,7 +4096,7 @@
    "scheme": "t155_f03",
    "group": "m6afb7f56e537316_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.821,
@@ -4210,7 +4212,9 @@
      0.82129
     ]
    ],
-   "sam": 0.944
+   "sam": 0.944,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795205401
   },
   {
    "id": "m6afb7f56e537316_8",
@@ -4226,7 +4230,7 @@
    "scheme": "t155_f03",
    "group": "m6afb7f56e537316_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: t155_f03",
    "machine": 1,
    "score": 0.82,
@@ -4306,7 +4310,7 @@
   }
  ],
  "created": 1791736121,
- "updated": 1795205335,
+ "updated": 1795205401,
  "cat": {
   "title": "Керимов, т. I, Табл. 210. «ШИХЛЫ» (стр. скана 332, печ. ?)",
   "museum": "",
@@ -4656,6 +4660,62 @@
      "a": "ok",
      "w": 2,
      "t": 1795205335
+    }
+   },
+   "m6afa2e92e174588_7": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205361
+    }
+   },
+   "m6afa2e92e174588_9": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205361
+    }
+   },
+   "m6afb7f56e537316_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795205401
+    }
+   },
+   "m6afb7f56e537316_7": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795205401
+    }
+   },
+   "m6afb7f56e537316_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205401
+    }
+   },
+   "m6afb7f56e537316_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205401
+    }
+   },
+   "m6afb7f56e537316_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205401
+    }
+   },
+   "m6afb7f56e537316_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795205401
     }
    }
   }

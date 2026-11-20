@@ -18,7 +18,7 @@
  "h": 1671,
  "marks": [],
  "created": 1791736130,
- "updated": 1795029688,
+ "updated": 1795205452,
  "cat": {
   "title": "kuba sumakh5",
   "museum": "",
@@ -74,6 +74,10 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0103_1",
    "score": 0
+  },
+  {
+   "id": "intangible_2850_p0117_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -111,6 +115,11 @@
    "ok": false,
    "by": "по цепочке: azcm_158 ≠ cm_e84b44cc05",
    "at": 1795028084
+  },
+  "intangible_2850_p0117_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795205452
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -211,6 +220,15 @@
     "a": "whole",
     "w": 2,
     "t": 1795029688
+   }
+  },
+  "same": {
+   "intangible_2850_p0117_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795205452
+    }
    }
   }
  },

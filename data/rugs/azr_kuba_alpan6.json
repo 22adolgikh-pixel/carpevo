@@ -18,7 +18,7 @@
  "h": 674,
  "marks": [],
  "created": 1791736131,
- "updated": 1795029545,
+ "updated": 1795205457,
  "cat": {
   "title": "kuba alpan6",
   "museum": "",
@@ -110,10 +110,51 @@
     "w": 2,
     "t": 1795029545
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795205457,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
  "frame_by": "micro",
  "school_prev": "guba-shirvan",
- "school_by": "уточнено по слову «kuba» в подписи"
+ "school_by": "уточнено по слову «kuba» в подписи",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.08884,
+    0.04548
+   ],
+   [
+    0.92493,
+    0.01373
+   ],
+   [
+    0.97641,
+    0.96292
+   ],
+   [
+    0.01905,
+    0.92556
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

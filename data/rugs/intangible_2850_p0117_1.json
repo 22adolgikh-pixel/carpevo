@@ -51,8 +51,46 @@
  },
  "src_id": "cat:intangible_2850_p0117_1",
  "lib_img": "img/intangible_2850_p0117_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_sumakh5",
+   "score": 0
+  },
+  {
+   "id": "cm_e84b44cc05",
+   "score": 0
+  },
+  {
+   "id": "azcm_148",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0099_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_sumakh5": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795205452
+  },
+  "cm_e84b44cc05": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_sumakh5 ≠ intangible_2850_p0117_1",
+   "at": 1795205474
+  },
+  "azcm_148": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_sumakh5 ≠ intangible_2850_p0117_1",
+   "at": 1795205474
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0099_1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_sumakh5 ≠ intangible_2850_p0117_1",
+   "at": 1795205474
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
