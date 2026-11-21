@@ -2101,7 +2101,7 @@
    "scheme": "",
    "group": "mmv8epnic",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -2111,12 +2111,14 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792000307,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795289992,
+   "rf": 1,
+   "rf_s": 0.827
   }
  ],
  "created": 1791736122,
- "updated": 1795289955,
+ "updated": 1795290007,
  "cat": {
   "title": "Керимов, т. II (стр. скана 139, печ. 27)",
   "museum": "",
@@ -2793,6 +2795,13 @@
      "w": 2,
      "t": 1795289955
     }
+   },
+   "mmv8eppnq8": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795289992
+    }
    }
   },
   "name": {
@@ -2808,6 +2817,13 @@
      "a": "none",
      "w": 2,
      "t": 1795289940
+    }
+   },
+   "mmv8epnic": {
+    "dolgikh": {
+     "a": "none",
+     "w": 2,
+     "t": 1795290007
     }
    }
   }
@@ -2839,6 +2855,7 @@
  },
  "name_none": [
   "mmv8d36i3",
-  "mmv8dljyx"
+  "mmv8dljyx",
+  "mmv8epnic"
  ]
 }

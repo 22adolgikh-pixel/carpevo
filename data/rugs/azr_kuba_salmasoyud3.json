@@ -18,7 +18,7 @@
  "h": 617,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1795290152,
  "cat": {
   "title": "kuba salmasoyud3",
   "museum": "",
@@ -124,5 +124,49 @@
    42.5896
   ],
   "t": 1795207783
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795290152,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04047,
+    0.03904
+   ],
+   [
+    0.97178,
+    0.02942
+   ],
+   [
+    0.98511,
+    0.95235
+   ],
+   [
+    0.0373,
+    0.95165
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

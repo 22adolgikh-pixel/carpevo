@@ -18,7 +18,7 @@
  "h": 1107,
  "marks": [],
  "created": 1791736134,
- "updated": 1794979875,
+ "updated": 1795290112,
  "cat": {
   "title": "kuba zejwa35",
   "museum": "",
@@ -132,6 +132,14 @@
      "t": 1794979875
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795290112,
+    "s": "ref"
+   }
   }
  },
  "school_prev": "guba-shirvan",
@@ -169,5 +177,39 @@
    53.2856
   ],
   "t": 1795207806
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05084,
+    0.03622
+   ],
+   [
+    0.94369,
+    0.03934
+   ],
+   [
+    0.96552,
+    0.96002
+   ],
+   [
+    0.07142,
+    0.96354
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

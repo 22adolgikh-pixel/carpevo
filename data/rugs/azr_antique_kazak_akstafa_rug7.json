@@ -18,7 +18,7 @@
  "h": 1341,
  "marks": [],
  "created": 1791736129,
- "updated": 1795062314,
+ "updated": 1795290034,
  "cat": {
   "title": "antique kazak akstafa rug7",
   "museum": "",
@@ -133,6 +133,13 @@
      "t": 1794983871
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795290034
+   }
   }
  },
  "school_prev": "ganja-gazakh",
@@ -189,7 +196,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -210,5 +217,11 @@
    50.1279
   ],
   "t": 1795207719
- }
+ },
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "frame_by": "micro"
 }
