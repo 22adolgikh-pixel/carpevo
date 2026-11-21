@@ -18,7 +18,7 @@
  "h": 1231,
  "marks": [],
  "created": 1794547278,
- "updated": 1795261285,
+ "updated": 1795261330,
  "cat": {
   "title": "Ковёр «Çələbi» Карабах",
   "museum": "",
@@ -209,11 +209,30 @@
    0.9340200000000001,
    0.95889
   ],
-  "bounds": [],
+  "bounds": [
+   {
+    "ix": 0.034482758620689655,
+    "iy": 0.02142857142857143,
+    "strength": 5.46
+   },
+   {
+    "ix": 0.0896551724137931,
+    "iy": 0.055714285714285716,
+    "strength": 4.35
+   },
+   {
+    "ix": 0.11724137931034483,
+    "iy": 0.05158810494426547,
+    "strength": 2.22
+   }
+  ],
   "rings": [
+   "minor",
+   "border",
+   "minor",
    "field"
   ],
-  "status": "auto",
+  "status": "edited",
   "quad": [
    [
     0.04514,
@@ -232,7 +251,9 @@
     0.97111
    ]
   ],
-  "quad_status": "edited"
+  "quad_status": "confirmed",
+  "quad_by": "dolgikh"
  },
- "updated_by": "dolgikh"
+ "updated_by": "dolgikh",
+ "cover": true
 }
