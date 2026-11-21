@@ -31,7 +31,7 @@
    "scheme": "t20_f05",
    "group": "mmv428jl9",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -40,8 +40,10 @@
    "xfer": "",
    "by": "dolgikh",
    "at": 1791737486,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279412,
+   "variant": "detail",
+   "variant_by": "/m"
   },
   {
    "id": "mmv428pe1",
@@ -57,7 +59,7 @@
    "scheme": "t20_f05",
    "group": "mmv428jl9",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -66,8 +68,10 @@
    "xfer": "",
    "by": "dolgikh",
    "at": 1791737493,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279412,
+   "variant": "detail",
+   "variant_by": "/m"
   },
   {
    "id": "mmv428x2s",
@@ -83,7 +87,7 @@
    "scheme": "t20_f05",
    "group": "mmv428jl9",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -92,8 +96,8 @@
    "xfer": "",
    "by": "dolgikh",
    "at": 1791737503,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279412
   },
   {
    "id": "mmv4291aa",
@@ -109,7 +113,7 @@
    "scheme": "t20_f05",
    "group": "mmv428jl9",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -118,8 +122,10 @@
    "xfer": "",
    "by": "dolgikh",
    "at": 1791737508,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279412,
+   "variant": "detail",
+   "variant_by": "/m"
   },
   {
    "id": "mmv429oia",
@@ -135,7 +141,7 @@
    "scheme": "t20_f03",
    "group": "mmv428jl9",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -144,8 +150,8 @@
    "xfer": "",
    "by": "dolgikh",
    "at": 1791737539,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279412
   },
   {
    "id": "mmv8dnzxk",
@@ -461,7 +467,7 @@
   }
  ],
  "created": 1791736122,
- "updated": 1791999239,
+ "updated": 1795279412,
  "cat": {
   "title": "Керимов, т. II, Рис. 161. Арсалан (стр. скана 98, печ. 197)",
   "museum": "",
@@ -636,5 +642,44 @@
    8.5963
   ],
   "t": 1795207880
+ },
+ "micro": {
+  "marks": {
+   "mmv428x2s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279412
+    }
+   },
+   "mmv429oia": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279412
+    }
+   },
+   "mmv428jl9": {
+    "dolgikh": {
+     "a": "var",
+     "w": 2,
+     "t": 1795279412
+    }
+   },
+   "mmv428pe1": {
+    "dolgikh": {
+     "a": "var",
+     "w": 2,
+     "t": 1795279412
+    }
+   },
+   "mmv4291aa": {
+    "dolgikh": {
+     "a": "var",
+     "w": 2,
+     "t": 1795279412
+    }
+   }
+  }
  }
 }
