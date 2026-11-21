@@ -2,15 +2,15 @@
  "id": "kerimov_vol2_p134_1_2",
  "title": "Керимов, т. II, 17 (стр. скана 134, печ. 17)",
  "source": "каталог: kerimov_vol2",
- "museum": "",
+ "museum": "Национальный музей азербайджанского ковра",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
+ "date": "XIX c",
+ "school": "guba",
+ "composition": "qaraqashli",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -199,5 +199,25 @@
    51.3068
   ],
   "t": 1795207882
+ },
+ "same_ok": {
+  "cm_423a0b4434": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795292452
+  }
+ },
+ "same": [
+  {
+   "id": "cm_423a0b4434",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "cm_423a0b4434",
+  "composition": "cm_423a0b4434",
+  "technique": "cm_423a0b4434",
+  "museum": "cm_423a0b4434",
+  "date": "cm_423a0b4434"
  }
 }

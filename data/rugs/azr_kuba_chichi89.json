@@ -18,7 +18,7 @@
  "h": 1268,
  "marks": [],
  "created": 1791736132,
- "updated": 1795291491,
+ "updated": 1795292498,
  "cat": {
   "title": "kuba chichi89",
   "museum": "",
@@ -66,6 +66,13 @@
      "t": 1795205441
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795292498
+   }
   }
  },
  "auto": {
@@ -92,7 +99,30 @@
   "area": null,
   "ver": 1,
   "t": 1795291446,
-  "hand": true
+  "hand": true,
+  "ref_quad": {
+   "quad": [
+    [
+     0.15142,
+     0.03596
+    ],
+    [
+     0.86096,
+     0.02975
+    ],
+    [
+     0.96529,
+     0.96857
+    ],
+    [
+     0.01851,
+     0.9597
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795292503
+  }
  },
  "auto_edge": {
   "v": 1,
@@ -146,6 +176,12 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "unsure",
- "tri": "hand"
+ "frame": "whole",
+ "tri": "hand",
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "frame_by": "micro"
 }
