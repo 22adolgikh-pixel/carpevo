@@ -31,7 +31,7 @@
    "scheme": "t22_f03",
    "group": "m6aff7224e376519_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.633,
@@ -203,7 +203,7 @@
    "scheme": "t22_f03",
    "group": "m6aff7224e376519_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.624,
@@ -375,7 +375,7 @@
    "scheme": "t104_f04",
    "group": "m6aff72c8e210389_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.675,
@@ -539,7 +539,7 @@
    "scheme": "t104_f04",
    "group": "m6aff72c8e210389_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.664,
@@ -711,7 +711,7 @@
    "scheme": "t104_f04",
    "group": "m6aff72c8e210389_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.648,
@@ -911,7 +911,7 @@
    "scheme": "t104_f04",
    "group": "m6aff72c8e210389_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: qeyçi · форма 2",
    "machine": 1,
    "score": 0.641,
@@ -1663,7 +1663,7 @@
   }
  ],
  "created": 1794776768,
- "updated": 1795212189,
+ "updated": 1795281033,
  "cat": {
   "title": "Керимов, т. II (стр. скана 135, печ. 18)",
   "museum": "",
@@ -1802,6 +1802,50 @@
      "a": "same",
      "w": 2,
      "t": 1795096109
+    }
+   }
+  },
+  "marks": {
+   "m6aff7224e376519_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795280942
+    }
+   },
+   "m6aff7224e376519_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795280942
+    }
+   },
+   "m6aff72c8e210389_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795281033
+    }
+   },
+   "m6aff72c8e210389_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795281033
+    }
+   },
+   "m6aff72c8e210389_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795281033
+    }
+   },
+   "m6aff72c8e210389_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795281033
     }
    }
   }
