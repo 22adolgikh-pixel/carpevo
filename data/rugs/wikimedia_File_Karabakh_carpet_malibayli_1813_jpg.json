@@ -20,10 +20,10 @@
   {
    "id": "m6b00c559e486554_0",
    "box": [
-    0.27786,
-    0.4248,
-    0.19152,
-    0.0791
+    0.21958,
+    0.34686,
+    0.24984,
+    0.10073
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -31,7 +31,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c559e486554_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.876,
@@ -175,15 +175,19 @@
      0.43359
     ]
    ],
-   "sam": 0.825
+   "sam": 0.825,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795290619,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290619
   },
   {
    "id": "m6b00c559e486554_1",
    "box": [
-    0.55416,
-    0.41211,
-    0.1303,
-    0.06641
+    0.47539,
+    0.3457,
+    0.26103,
+    0.09814
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -191,7 +195,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c559e486554_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.869,
@@ -315,15 +319,19 @@
      0.42676
     ]
    ],
-   "sam": 0.846
+   "sam": 0.846,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795290619,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290619
   },
   {
    "id": "m6b00c559e486554_2",
    "box": [
-    0.55573,
+    0.48109,
     0.77246,
-    0.13815,
-    0.11035
+    0.22635,
+    0.09079
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -331,7 +339,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c559e486554_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.862,
@@ -459,7 +467,11 @@
      0.78906
     ]
    ],
-   "sam": 0.864
+   "sam": 0.864,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795290619,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290619
   },
   {
    "id": "m6b00c559e486554_3",
@@ -475,7 +487,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c559e486554_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.846,
@@ -556,10 +568,10 @@
   {
    "id": "m6b00c559e486554_4",
    "box": [
-    0.62637,
+    0.56581,
     0.71484,
-    0.13344,
-    0.07324
+    0.194,
+    0.07054
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -567,7 +579,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c559e486554_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.845,
@@ -671,7 +683,11 @@
      0.71484
     ]
    ],
-   "sam": 0.909
+   "sam": 0.909,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795290619,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290619
   },
   {
    "id": "m6b00c559e486554_5",
@@ -687,7 +703,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c559e486554_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.84,
@@ -811,15 +827,19 @@
      0.3457
     ]
    ],
-   "sam": 0.964
+   "sam": 0.964,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795290619,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290619
   },
   {
    "id": "m6b00c559e486554_7",
    "box": [
-    0.47881,
+    0.49433,
     0.60645,
-    0.20565,
-    0.07422
+    0.19013,
+    0.08082
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -827,7 +847,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c559e486554_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.837,
@@ -943,11 +963,15 @@
      0.67285
     ]
    ],
-   "sam": 0.91
+   "sam": 0.91,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795290619,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290619
   }
  ],
  "created": 1791736125,
- "updated": 1795212639,
+ "updated": 1795290619,
  "cat": {
   "title": "Karabakh-carpet-malibayli-1813.jpg",
   "museum": "Wikimedia Commons",
@@ -1073,5 +1097,58 @@
    60.0069
   ],
   "t": 1795207905
+ },
+ "micro": {
+  "marks": {
+   "m6b00c559e486554_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290619
+    }
+   },
+   "m6b00c559e486554_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290619
+    }
+   },
+   "m6b00c559e486554_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290619
+    }
+   },
+   "m6b00c559e486554_2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290619
+    }
+   },
+   "m6b00c559e486554_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290619
+    }
+   },
+   "m6b00c559e486554_5": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290619
+    }
+   },
+   "m6b00c559e486554_7": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290619
+    }
+   }
+  }
  }
 }
