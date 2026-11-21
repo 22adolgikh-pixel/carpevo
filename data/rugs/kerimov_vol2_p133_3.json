@@ -31,7 +31,7 @@
    "scheme": "t106_f03",
    "group": "xmmv44a13d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 270,
    "flip": 0,
@@ -41,8 +41,8 @@
    "variant": "",
    "by": "перенесено с двойника → dolgikh",
    "at": 1791744107,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795280126
   },
   {
    "id": "xmmv44b1r40",
@@ -58,7 +58,7 @@
    "scheme": "t106_f03",
    "group": "xmmv44a13d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 90,
    "flip": 0,
@@ -68,8 +68,8 @@
    "variant": "",
    "by": "перенесено с двойника → dolgikh",
    "at": 1791744107,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795280126
   },
   {
    "id": "xmmv44b1r41",
@@ -85,7 +85,7 @@
    "scheme": "t106_f03",
    "group": "xmmv44a13d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 90,
    "flip": 1,
@@ -95,8 +95,8 @@
    "variant": "",
    "by": "перенесено с двойника → dolgikh",
    "at": 1791744107,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795280126
   },
   {
    "id": "xmmv44b1r42",
@@ -112,7 +112,7 @@
    "scheme": "t106_f03",
    "group": "xmmv44a13d",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 270,
    "flip": 1,
@@ -122,8 +122,8 @@
    "variant": "",
    "by": "перенесено с двойника → dolgikh",
    "at": 1791744107,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795280126
   },
   {
    "id": "xmmv44e2fw",
@@ -139,7 +139,7 @@
    "scheme": "t60_f04",
    "group": "xmmv44e2fw",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 90,
    "flip": 1,
@@ -149,8 +149,8 @@
    "variant": "",
    "by": "перенесено с двойника → dolgikh",
    "at": 1791744107,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795280145
   },
   {
    "id": "xmmv44f99k0",
@@ -166,7 +166,7 @@
    "scheme": "t60_f04",
    "group": "xmmv44e2fw",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 270,
    "flip": 1,
@@ -176,8 +176,8 @@
    "variant": "",
    "by": "перенесено с двойника → dolgikh",
    "at": 1791744107,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795280145
   },
   {
    "id": "xmmv44i4xd",
@@ -3675,7 +3675,7 @@
   }
  ],
  "created": 1791736122,
- "updated": 1795212560,
+ "updated": 1795280145,
  "cat": {
   "title": "Керимов, т. II (стр. скана 133, печ. 15)",
   "museum": "",
@@ -3924,6 +3924,50 @@
      "a": "yes",
      "w": 2,
      "t": 1795203621
+    }
+   }
+  },
+  "marks": {
+   "xmmv44a13d": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795280126
+    }
+   },
+   "xmmv44b1r40": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795280126
+    }
+   },
+   "xmmv44b1r41": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795280126
+    }
+   },
+   "xmmv44b1r42": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795280126
+    }
+   },
+   "xmmv44e2fw": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795280145
+    }
+   },
+   "xmmv44f99k0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795280145
     }
    }
   }

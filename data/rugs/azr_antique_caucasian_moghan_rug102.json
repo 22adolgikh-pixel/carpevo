@@ -18,7 +18,7 @@
  "h": 739,
  "marks": [],
  "created": 1791736138,
- "updated": 1795008385,
+ "updated": 1795279975,
  "cat": {
   "title": "Lot 29: Moghan Rug, Southeast Caucasus, last quarter 19th century, 6 ft",
   "museum": "",
@@ -125,6 +125,14 @@
      "t": 1795008385
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279975,
+    "s": "ref"
+   }
   }
  },
  "same_chk": {
@@ -154,5 +162,39 @@
    57.5158
   ],
   "t": 1795207713
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04265,
+    0.02057
+   ],
+   [
+    0.94765,
+    0.01655
+   ],
+   [
+    0.93943,
+    0.97771
+   ],
+   [
+    0.03567,
+    0.96727
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

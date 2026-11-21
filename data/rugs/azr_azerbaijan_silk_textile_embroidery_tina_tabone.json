@@ -18,7 +18,7 @@
  "h": 759,
  "marks": [],
  "created": 1791736140,
- "updated": 1795279783,
+ "updated": 1795279996,
  "cat": {
   "title": "Early Azerbaijan textile, 18th century, 50 x 50 cm",
   "museum": "",
@@ -119,26 +119,26 @@
   "status": "auto",
   "quad": [
    [
-    0.068,
-    0.06456
+    0.0659,
+    0.06565
    ],
    [
-    0.93333,
-    0.06588
+    0.93438,
+    0.06438
    ],
    [
-    0.936,
-    0.94203
+    0.93759,
+    0.94161
    ],
    [
-    0.07733,
-    0.93544
+    0.07794,
+    0.93832
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
  "frame": "whole",
- "tri": "auto",
+ "tri": "micro",
  "auto_edge": {
   "v": 1,
   "f": [
@@ -165,6 +165,14 @@
     "a": "whole",
     "w": 2,
     "t": 1795279783
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279996,
+    "s": "ref"
    }
   }
  },
