@@ -18,7 +18,7 @@
  "h": 1431,
  "marks": [],
  "created": 1794547278,
- "updated": 1795268861,
+ "updated": 1795268917,
  "cat": {
   "title": "Xalça. “ Çələbi” . Qarabağqrupu . Azərbaycan . Xocalı.",
   "museum": "",
@@ -55,13 +55,67 @@
   {
    "id": "intangible_2851_p0123_1",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
+   "score": 0
+  },
+  {
+   "id": "azcm_51",
+   "score": 0
+  },
+  {
+   "id": "cm_c07233e54a",
+   "score": 0
+  },
+  {
+   "id": "cm_3cb8b598f2",
+   "score": 0
+  },
+  {
+   "id": "cm_b59b402cc9",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0135_1",
+   "score": 0
   }
  ],
  "same_ok": {
   "intangible_2851_p0123_1": {
    "ok": true,
    "by": "/m: dolgikh",
-   "at": 1795268861
+   "at": 1795268917
+  },
+  "wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali": {
+   "ok": true,
+   "by": "по цепочке: azerbaycan_xalchalari_qarabag_qrupu_p0047_1 = intangible_2851_p0123_1 = wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
+   "at": 1795268938
+  },
+  "azcm_51": {
+   "ok": false,
+   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
+   "at": 1795268938
+  },
+  "cm_c07233e54a": {
+   "ok": false,
+   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
+   "at": 1795268939
+  },
+  "cm_3cb8b598f2": {
+   "ok": false,
+   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
+   "at": 1795268939
+  },
+  "cm_b59b402cc9": {
+   "ok": false,
+   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
+   "at": 1795268939
+  },
+  "intangible_2850_p0135_1": {
+   "ok": false,
+   "by": "по цепочке: intangible_2850_p0135_1 ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
+   "at": 1795268939
   }
  },
  "_lib_t": "2026-11-12 22:41",
@@ -157,7 +211,7 @@
     "dolgikh": {
      "a": "same",
      "w": 2,
-     "t": 1795268861
+     "t": 1795268917
     }
    }
   }
