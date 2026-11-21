@@ -18,7 +18,7 @@
  "h": 1050,
  "marks": [],
  "created": 1791736140,
- "updated": 1794553369,
+ "updated": 1795279426,
  "cat": {
   "title": "early shirvan rug17",
   "museum": "",
@@ -157,6 +157,14 @@
      "t": 1794553369
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279426,
+    "s": "ref"
+   }
   }
  },
  "school_prev": "guba-shirvan",
@@ -180,5 +188,39 @@
    63.7161
   ],
   "t": 1795207747
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06855,
+    0.01856
+   ],
+   [
+    0.92962,
+    0.01954
+   ],
+   [
+    0.95268,
+    0.97801
+   ],
+   [
+    0.02846,
+    0.96298
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

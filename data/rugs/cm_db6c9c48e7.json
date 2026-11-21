@@ -18,7 +18,7 @@
  "h": 2048,
  "marks": [],
  "created": 1791870029,
- "updated": 1791870029,
+ "updated": 1795279544,
  "cat": {
   "title": "Hand-knotted flat-weave Soumak carpet ca",
   "museum": "",
@@ -124,5 +124,49 @@
    49.8777
   ],
   "t": 1795207846
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279544,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02055,
+    0.03282
+   ],
+   [
+    0.97384,
+    0.03329
+   ],
+   [
+    0.96885,
+    0.97321
+   ],
+   [
+    0.03673,
+    0.96413
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

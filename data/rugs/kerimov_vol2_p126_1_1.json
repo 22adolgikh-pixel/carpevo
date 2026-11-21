@@ -139,7 +139,7 @@
    "scheme": "",
    "group": "mmvcvn2nj",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "перенесено с копии этого же снимка kerimov_vol2_p126_2",
    "angle": 0,
    "flip": 0,
@@ -149,8 +149,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792270601,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279562
   },
   {
    "id": "mmvcvn4jq0",
@@ -166,7 +166,7 @@
    "scheme": "",
    "group": "mmvcvn2nj",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "перенесено с копии этого же снимка kerimov_vol2_p126_2",
    "angle": 0,
    "flip": 0,
@@ -176,8 +176,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792270604,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279562
   },
   {
    "id": "mmvcvn4jq1",
@@ -193,7 +193,7 @@
    "scheme": "",
    "group": "mmvcvn2nj",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "перенесено с копии этого же снимка kerimov_vol2_p126_2",
    "angle": 180,
    "flip": 0,
@@ -203,8 +203,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792270604,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279562
   },
   {
    "id": "mmvcvn4jq2",
@@ -220,7 +220,7 @@
    "scheme": "",
    "group": "mmvcvn2nj",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "перенесено с копии этого же снимка kerimov_vol2_p126_2",
    "angle": 0,
    "flip": 0,
@@ -230,8 +230,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792270604,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279562
   },
   {
    "id": "m6af78ad1e68939_0",
@@ -1579,7 +1579,7 @@
   }
  ],
  "created": 1791744740,
- "updated": 1795212655,
+ "updated": 1795279562,
  "cat": {
   "title": "Керимов, т. II, 1 (стр. скана 126, печ. 1)",
   "museum": "",
@@ -1780,6 +1780,36 @@
      "a": "none",
      "w": 2,
      "t": 1794552977
+    }
+   }
+  },
+  "marks": {
+   "mmvcvn2nj": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279562
+    }
+   },
+   "mmvcvn4jq0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279562
+    }
+   },
+   "mmvcvn4jq1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279562
+    }
+   },
+   "mmvcvn4jq2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279562
     }
    }
   }
