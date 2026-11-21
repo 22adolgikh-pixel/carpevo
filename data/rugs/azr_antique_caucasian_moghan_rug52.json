@@ -18,7 +18,7 @@
  "h": 866,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795280446,
  "cat": {
   "title": "Antique Moghan (Mughan) rug, second half 19th century, Azerbaijan, published at Ian Bennett's \"Orien",
   "museum": "",
@@ -124,5 +124,49 @@
    54.853
   ],
   "t": 1795207716
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795280446,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0378,
+    0.02933
+   ],
+   [
+    0.92075,
+    0.05165
+   ],
+   [
+    0.93274,
+    0.97701
+   ],
+   [
+    0.08494,
+    0.96253
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

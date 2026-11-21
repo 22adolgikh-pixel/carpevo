@@ -18,7 +18,7 @@
  "h": 677,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1795280495,
  "cat": {
   "title": "kuba konagkend84",
   "museum": "",
@@ -135,5 +135,49 @@
    31.4653
   ],
   "t": 1795207775
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795280495,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01646,
+    0.0261
+   ],
+   [
+    0.97162,
+    0.02354
+   ],
+   [
+    0.95218,
+    0.95884
+   ],
+   [
+    0.06313,
+    0.95717
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
