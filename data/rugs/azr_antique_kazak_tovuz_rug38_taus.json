@@ -18,7 +18,7 @@
  "h": 976,
  "marks": [],
  "created": 1791736129,
- "updated": 1795073152,
+ "updated": 1795289929,
  "cat": {
   "title": "antique-kazak-tovuz-rug38-taus",
   "museum": "",
@@ -114,7 +114,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -135,5 +135,15 @@
    38.5657
   ],
   "t": 1795207722
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795289929
+   }
+  }
+ },
+ "frame_by": "micro"
 }
