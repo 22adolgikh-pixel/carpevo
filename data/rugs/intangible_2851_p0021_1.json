@@ -18,7 +18,7 @@
  "h": 760,
  "marks": [],
  "created": 1794547278,
- "updated": 1795279720,
+ "updated": 1795281319,
  "cat": {
   "title": "безворсовый «Vərni» Карабах",
   "museum": "",
@@ -154,8 +154,49 @@
     "w": 2,
     "t": 1795279720
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795281319,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00658,
+    0.02454
+   ],
+   [
+    0.97334,
+    0.03173
+   ],
+   [
+    0.9861,
+    0.95914
+   ],
+   [
+    0.00593,
+    0.9687
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

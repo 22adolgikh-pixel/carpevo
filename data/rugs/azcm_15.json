@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870039,
- "updated": 1794783868,
+ "updated": 1795281278,
  "cat": {
   "title": "“Qaraqaşlı” («Гарагашлы»), Губа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -359,12 +359,19 @@
    "src": "cand0"
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "updated_by": "dolgikh",
  "micro": {
   "field": {
    "dolgikh": "0"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795281278
+   }
   }
  },
  "school_prev": "guba-shirvan",
@@ -388,5 +395,6 @@
    73.6488
   ],
   "t": 1795207672
- }
+ },
+ "frame_by": "micro"
 }
