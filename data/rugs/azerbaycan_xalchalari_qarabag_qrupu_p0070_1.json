@@ -20,10 +20,10 @@
   {
    "id": "m6b00c542e750360_0",
    "box": [
-    0.19531,
-    0.32021,
-    0.09863,
-    0.11815
+    0.18705,
+    0.27051,
+    0.06547,
+    0.14937
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -31,7 +31,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c542e750360_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.783,
@@ -183,7 +183,11 @@
      0.38014
     ]
    ],
-   "sam": 0.893
+   "sam": 0.893,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795269433,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795269433
   },
   {
    "id": "m6b00c542e750360_1",
@@ -199,7 +203,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c542e750360_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.782,
@@ -308,10 +312,10 @@
   {
    "id": "m6b00c542e750360_2",
    "box": [
-    0.58301,
-    0.21918,
-    0.11719,
-    0.22432
+    0.71316,
+    0.27194,
+    0.05615,
+    0.153
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -319,7 +323,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c542e750360_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.769,
@@ -507,15 +511,19 @@
      0.24829
     ]
    ],
-   "sam": 0.887
+   "sam": 0.887,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795269433,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795269433
   },
   {
    "id": "m6b00c542e750360_3",
    "box": [
     0.56348,
     0.54795,
-    0.04297,
-    0.12158
+    0.04259,
+    0.14257
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -523,7 +531,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c542e750360_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.768,
@@ -635,15 +643,19 @@
      0.54795
     ]
    ],
-   "sam": 0.939
+   "sam": 0.939,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795269433,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795269433
   },
   {
    "id": "m6b00c542e750360_4",
    "box": [
-    0.7998,
-    0.56336,
-    0.09277,
-    0.12329
+    0.79914,
+    0.5088,
+    0.04761,
+    0.1572
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -651,7 +663,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c542e750360_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.737,
@@ -831,11 +843,15 @@
      0.61301
     ]
    ],
-   "sam": 0.704
+   "sam": 0.704,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795269433,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795269433
   }
  ],
  "created": 1794547278,
- "updated": 1795212617,
+ "updated": 1795269433,
  "cat": {
   "title": "Xalça. “ Malıbəyli” . Qarabağqrupu . Azərbaycan . Şuşa, Malıbəylik. XIXəsrinortalarıYun. Xovlu.",
   "museum": "",
@@ -958,5 +974,44 @@
    74.5187
   ],
   "t": 1795207688
+ },
+ "micro": {
+  "marks": {
+   "m6b00c542e750360_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795269433
+    }
+   },
+   "m6b00c542e750360_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795269433
+    }
+   },
+   "m6b00c542e750360_2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795269433
+    }
+   },
+   "m6b00c542e750360_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795269433
+    }
+   },
+   "m6b00c542e750360_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795269433
+    }
+   }
+  }
  }
 }

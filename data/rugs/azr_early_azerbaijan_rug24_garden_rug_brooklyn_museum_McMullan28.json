@@ -18,7 +18,7 @@
  "h": 1505,
  "marks": [],
  "created": 1791736140,
- "updated": 1795203786,
+ "updated": 1795269314,
  "cat": {
   "title": "Carpet with \"Garden\" design, 18th century",
   "museum": "",
@@ -47,8 +47,46 @@
  },
  "src_id": "cat:azr_early_azerbaijan_rug24_garden_rug_brooklyn_museum_McMullan28",
  "lib_img": "img/azr_early_azerbaijan_rug24_garden_rug_brooklyn_museum_McMullan28.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0073_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil7",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil41",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend69",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0073_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795269314
+  },
+  "azr_kuba_perepedil7": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795269314
+  },
+  "azr_kuba_perepedil41": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795269314
+  },
+  "azr_kuba_konagkend69": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795269314
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -64,6 +102,36 @@
      "a": "one",
      "w": 2,
      "t": 1795203786
+    }
+   }
+  },
+  "same": {
+   "intangible_2850_p0073_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795269314
+    }
+   },
+   "azr_kuba_perepedil7": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795269314
+    }
+   },
+   "azr_kuba_perepedil41": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795269314
+    }
+   },
+   "azr_kuba_konagkend69": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795269314
     }
    }
   }

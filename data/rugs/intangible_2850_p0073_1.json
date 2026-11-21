@@ -48,8 +48,19 @@
  },
  "src_id": "cat:intangible_2850_p0073_1",
  "lib_img": "img/intangible_2850_p0073_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_early_azerbaijan_rug24_garden_rug_brooklyn_museum_McMullan28",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_early_azerbaijan_rug24_garden_rug_brooklyn_museum_McMullan28": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795269314
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
