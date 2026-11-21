@@ -1123,7 +1123,7 @@
    "scheme": "t22_f03",
    "group": "m6b00c393e205864_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.639,
@@ -1291,7 +1291,7 @@
    "scheme": "t22_f03",
    "group": "m6b00c393e205864_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.632,
@@ -1420,10 +1420,10 @@
   {
    "id": "m6b00c393e205864_7",
    "box": [
-    0.56445,
-    0.37351,
-    0.05762,
-    0.06282
+    0.5711,
+    0.35515,
+    0.02216,
+    0.09189
    ],
    "zone": "other",
    "motif": "deve",
@@ -1431,7 +1431,7 @@
    "scheme": "t22_f03",
    "group": "m6b00c393e205864_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.625,
@@ -1519,7 +1519,11 @@
      0.42105
     ]
    ],
-   "sam": 0.862
+   "sam": 0.862,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795281220,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795281220
   },
   {
    "id": "m6b00c393e205864_8",
@@ -1535,7 +1539,7 @@
    "scheme": "t22_f03",
    "group": "m6b00c393e205864_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.617,
@@ -1663,7 +1667,7 @@
   }
  ],
  "created": 1794776768,
- "updated": 1795281033,
+ "updated": 1795281220,
  "cat": {
   "title": "Керимов, т. II (стр. скана 135, печ. 18)",
   "museum": "",
@@ -1846,6 +1850,34 @@
      "a": "bad",
      "w": 2,
      "t": 1795281033
+    }
+   },
+   "m6b00c393e205864_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795281220
+    }
+   },
+   "m6b00c393e205864_6": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795281220
+    }
+   },
+   "m6b00c393e205864_8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795281220
+    }
+   },
+   "m6b00c393e205864_7": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795281220
     }
    }
   }
