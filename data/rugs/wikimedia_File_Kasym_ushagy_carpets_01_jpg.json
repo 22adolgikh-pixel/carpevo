@@ -325,8 +325,37 @@
  },
  "src_id": "cat:wikimedia_File_Kasym_ushagy_carpets_01_jpg",
  "lib_img": "img/wikimedia_File_Kasym_ushagy_carpets_01_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Касымушагы_jpg",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0029_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_82",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Касымушагы_jpg": {
+   "ok": false,
+   "by": "dolgikh · исключён из ковра",
+   "at": 1795291252
+  },
+  "intangible_2850_p0029_1": {
+   "ok": false,
+   "by": "dolgikh · исключён из ковра",
+   "at": 1795291252
+  },
+  "azcm_82": {
+   "ok": false,
+   "by": "dolgikh · исключён из ковра",
+   "at": 1795291252
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -406,5 +435,6 @@
    54.5304
   ],
   "t": 1795207905
- }
+ },
+ "from_twin": {}
 }
