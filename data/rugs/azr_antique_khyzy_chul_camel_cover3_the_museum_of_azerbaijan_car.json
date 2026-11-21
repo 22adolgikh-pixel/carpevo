@@ -18,7 +18,7 @@
  "h": 681,
  "marks": [],
  "created": 1791736129,
- "updated": 1795073152,
+ "updated": 1795279953,
  "cat": {
   "title": "antique khyzy chul camel cover3 the museum of azerbaijan carpet and appiled art",
   "museum": "",
@@ -79,7 +79,30 @@
   "area": 0.788,
   "ver": 1,
   "t": 1795072848,
-  "hand": true
+  "hand": true,
+  "ref_quad": {
+   "quad": [
+    [
+     0.04186,
+     0.06295
+    ],
+    [
+     0.94576,
+     0.02237
+    ],
+    [
+     0.94083,
+     0.95268
+    ],
+    [
+     0.06842,
+     0.9005
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795279950
+  }
  },
  "layout": {
   "carpet": [
@@ -95,26 +118,26 @@
   "status": "auto",
   "quad": [
    [
-    0.04125,
-    0.06167
+    0.04186,
+    0.06295
    ],
    [
-    0.92221,
-    0.04627
+    0.94576,
+    0.02237
    ],
    [
-    0.95819,
-    0.95713
+    0.94083,
+    0.95268
    ],
    [
-    0.06625,
-    0.90015
+    0.06842,
+    0.9005
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
  "frame": "whole",
- "tri": "hand",
+ "tri": "micro",
  "auto_edge": {
   "v": 1,
   "f": [
@@ -134,5 +157,23 @@
    55.8851
   ],
   "t": 1795207723
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795279933
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279953,
+    "s": "ref"
+   }
+  }
+ },
+ "frame_by": "micro"
 }

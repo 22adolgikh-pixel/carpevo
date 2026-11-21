@@ -18,7 +18,7 @@
  "h": 726,
  "marks": [],
  "created": 1791736134,
- "updated": 1791736134,
+ "updated": 1795279817,
  "cat": {
   "title": "kuba mollakamalli1",
   "museum": "",
@@ -124,5 +124,49 @@
    47.1911
   ],
   "t": 1795207776
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279817,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05251,
+    0.02779
+   ],
+   [
+    0.95462,
+    0.03105
+   ],
+   [
+    0.93992,
+    0.93464
+   ],
+   [
+    0.04284,
+    0.9638
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
