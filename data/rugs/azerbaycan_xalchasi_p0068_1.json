@@ -20,10 +20,10 @@
   {
    "id": "m6b00c54de180530_0",
    "box": [
-    0.54244,
-    0.40527,
-    0.11993,
-    0.03906
+    0.52952,
+    0.36621,
+    0.24909,
+    0.08506
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -31,7 +31,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.885,
@@ -119,15 +119,19 @@
      0.40625
     ]
    ],
-   "sam": 0.841
+   "sam": 0.841,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795279018,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279018
   },
   {
    "id": "m6b00c54de180530_1",
    "box": [
-    0.42989,
-    0.3457,
-    0.17343,
-    0.08691
+    0.26446,
+    0.33863,
+    0.25614,
+    0.1067
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -135,7 +139,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.861,
@@ -251,15 +255,19 @@
      0.3457
     ]
    ],
-   "sam": 0.861
+   "sam": 0.861,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795279018,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279018
   },
   {
    "id": "m6b00c54de180530_2",
    "box": [
     0.23616,
     0.2832,
-    0.10517,
-    0.06543
+    0.20225,
+    0.07361
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -267,7 +275,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.821,
@@ -383,15 +391,19 @@
      0.2832
     ]
    ],
-   "sam": 0.901
+   "sam": 0.901,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795279018,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279018
   },
   {
    "id": "m6b00c54de180530_3",
    "box": [
-    0.26568,
-    0.34863,
-    0.23063,
-    0.08789
+    0.25149,
+    0.34019,
+    0.26611,
+    0.10664
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -399,7 +411,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.819,
@@ -507,15 +519,19 @@
      0.34863
     ]
    ],
-   "sam": 0.952
+   "sam": 0.952,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795279018,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279018
   },
   {
    "id": "m6b00c54de180530_4",
    "box": [
     0.60148,
-    0.19336,
-    0.19004,
-    0.09766
+    0.22495,
+    0.20904,
+    0.06607
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -523,7 +539,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.818,
@@ -655,11 +671,15 @@
      0.19727
     ]
    ],
-   "sam": 0.774
+   "sam": 0.774,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795279018,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279018
   }
  ],
  "created": 1794547278,
- "updated": 1795212626,
+ "updated": 1795279018,
  "cat": {
   "title": "Ковёр «Malıbəyli» Карабах",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -818,5 +838,44 @@
    51.4791
   ],
   "t": 1795207707
+ },
+ "micro": {
+  "marks": {
+   "m6b00c54de180530_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279018
+    }
+   },
+   "m6b00c54de180530_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279018
+    }
+   },
+   "m6b00c54de180530_2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279018
+    }
+   },
+   "m6b00c54de180530_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279018
+    }
+   },
+   "m6b00c54de180530_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279018
+    }
+   }
+  }
  }
 }
