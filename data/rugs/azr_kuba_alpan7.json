@@ -18,7 +18,7 @@
  "h": 1984,
  "marks": [],
  "created": 1791736131,
- "updated": 1795117161,
+ "updated": 1795278760,
  "cat": {
   "title": "kuba alpan7",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_alpan7",
  "lib_img": "img/azr_kuba_alpan7.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_seychour157",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_seychour157": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795278760
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -87,6 +98,15 @@
      "a": "skip",
      "w": 0,
      "t": 1794589065
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_seychour157": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795278760
     }
    }
   }

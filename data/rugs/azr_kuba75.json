@@ -18,7 +18,7 @@
  "h": 1815,
  "marks": [],
  "created": 1791736136,
- "updated": 1795204634,
+ "updated": 1795278743,
  "cat": {
   "title": "kuba75",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba75",
  "lib_img": "img/azr_kuba75.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_pre19th37",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shield10",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_pre19th37": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795278743
+  },
+  "azr_kuba_shield10": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795278743
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -64,6 +84,22 @@
      "a": "one",
      "w": 2,
      "t": 1795204634
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_pre19th37": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795278743
+    }
+   },
+   "azr_kuba_shield10": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795278743
     }
    }
   }
