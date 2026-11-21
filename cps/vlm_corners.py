@@ -79,6 +79,7 @@ def _request(images, prompt, max_tokens):
 
 
 def _mock(prompt):
+    if "КАДР" in prompt: return json.dumps({"frame": "whole", "conf": 0.95, "why": "mock"})
     if "ОКНА" in prompt: return json.dumps({"corners": [[50, 50]] * 4})
     return json.dumps({"quad": [[10, 10], [90, 10], [90, 90], [10, 90]]})
 
@@ -186,3 +187,32 @@ def two_step(im):
         refine = "ошибка: " + str(e)[:120]                       # уточнение не вышло — остаётся грубый ответ
     return {"quad": [[round(x, 5), round(y, 5)] for x, y in out], "coarse": [[round(x, 5), round(y, 5)] for x, y in coarse],
             "refine": refine, "v": VERSION, "model": "mock" if os.environ.get("CPS_VLM_MOCK") else MODEL}
+
+
+# ---------- v12.03: «что на фото» (кадр) моделью по картинке: очевидное решает машина, человеку — спорное ----------
+FRAME_VER = 1
+FRAME_ANS = ("whole", "cropped", "detail", "not_rug", "multi")
+FRAME_PROMPT = ("КАДР. Это фото из каталога азербайджанских ковров. Определи, что на фото, одним из ответов:\n"
+    "whole — один ковёр (или паллас, килим, сумах, дорожка) виден целиком. Сюда же: снят впритык, край ковра совпадает с краем фото, "
+    "но все каймы видны полностью; срезано меньше ~3 % по одному краю (обрез бахромы не считается); ковёр в перспективе, на полу, на стене, "
+    "в музейной витрине; ковёр рваный, с дырами, но края его видны.\n"
+    "cropped — один ковёр, большая часть видна, но заметный кусок ушёл за край фото (срезана кайма, угол, часть поля).\n"
+    "detail — снят только кусок ковра: кайма, медальон, угол, крупный план узора; или музейный фрагмент, обрывок ковра.\n"
+    "not_rug — не ковёр: хурджин, сумка, чувал, торба, попона, одежда, вышивка, ткань в полоску, рисунок или схема узора, "
+    "акварель, книжная страница или обложка, марка, интерьер или сцена, где ковёр не главный, другой предмет.\n"
+    "multi — на фото два ковра или больше (разворот книги, стена с коврами).\n"
+    "Ответь только JSON: {\"frame\": \"…\", \"conf\": 0.0–1.0 (насколько уверен), \"why\": \"до 8 слов\"}")
+
+
+def frame_judge(im):
+    """im — BGR фото. → {"frame", "conf", "why", "v", "model"} или None, если ответ не разобран"""
+    h, w = im.shape[:2]; s = 1100 / max(h, w)
+    a = cv2.resize(im, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else im
+    if os.environ.get("CPS_VLM_MOCK"):                                   # тесты: уверенно «целый» только на тёмном фоне (угол фото), иначе не уверен
+        j = {"frame": "whole", "conf": 0.95 if float(im[:8, :8].mean()) < 40 else 0.5, "why": "mock"}
+    else: j = _json(_ask([_jpg(a, 85)], FRAME_PROMPT, max_tokens=800))
+    if not j or j.get("frame") not in FRAME_ANS: return None
+    try: c = max(0.0, min(1.0, float(j.get("conf", 0))))
+    except (TypeError, ValueError): c = 0.0
+    return {"frame": j["frame"], "conf": round(c, 3), "why": str(j.get("why") or "")[:80], "v": FRAME_VER,
+            "model": "mock" if os.environ.get("CPS_VLM_MOCK") else MODEL}

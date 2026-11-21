@@ -2722,6 +2722,13 @@ def install(app, DATA, D_WORK):
         return {"pairs": [{"id": p["id"], "a": p["a"]["az"], "b": p["b"]["az"], "verdict": _cdup_verdict(V.get(p["id"], {})),
                            "votes": {u: x["a"] for u, x in V.get(p["id"], {}).items()}} for p in _cdup_pairs()]}
 
+    def _rc(r):
+        """v12.03: перепроверка — человек ответил раньше, чем модель по картинке, и модель уверенно с ним не согласна"""
+        v = _vf_of(r)
+        if not v or v["conf"] < VF_THR or r.get("frame_by") not in ("micro", "hand") or r.get("frame") not in FR_ANS or r.get("frame") == v["frame"]: return False
+        ts = [(x or {}).get("t", 0) for x in ((r.get("micro") or {}).get("frame") or {}).values()]
+        return (max(ts) if ts else 0) < v.get("t", 0)
+
     def _mrow(rid):
         """короткая запись для очереди (кэш по времени изменения файла)"""
         f = os.path.join(D_RUGS, rid + ".json")
@@ -2741,6 +2748,7 @@ def install(app, DATA, D_WORK):
                "who": {t: list((m.get(t) or {}).keys()) for t in ("frame", "quad")}, "title": _mtitle(r), "w": r.get("w"), "h": r.get("h"),
                "vquad": ((a.get("vlm_quad") or {}).get("quad")) if ((a.get("vlm_quad") or {}).get("v", 1) >= vlm_corners.VERSION) else None,   # v11.47/v11.50: углы модели (старые v1 — без уточнения — пересчитываются)
                "fr_old": r.get("frame") in FR_OLD,                                # применён снятый ответ — спросить заново
+               "vf": _vf_of(r), "rc": _rc(r),                                     # v12.03: ответ модели по картинке; спор с прежним ответом человека — перепроверка
                "old_who": [u for u, v in (m.get("frame") or {}).items() if (v or {}).get("a") in FR_OLD],
                "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge"),
                "es": r.get("esearch") or {}}                                       # v11.58: группы, где сеть уже искала повторы
@@ -2832,6 +2840,86 @@ def install(app, DATA, D_WORK):
             _vq["thr"] = threading.Thread(target=_vlm_worker, daemon=True, name="vlm-corners"); _vq["thr"].start()
         for rid in rids:
             if rid not in _vq["seen"]: _vq["seen"].add(rid); _vq["q"].put(rid)
+
+    # ---------- v12.03: «что на фото» моделью по картинке (vlm_corners.frame_judge) — фон, своя очередь и дневной лимит ----------
+    _vf = {"q": queue.Queue(), "seen": set(), "thr": None, "done": 0, "day": "", "err": "", "bad": 0, "off": 0, "n": {}}
+    VF_MAX = int(os.environ.get("CPS_VLM_FRAME_MAX", "800"))                    # фото в сутки (1 запрос на фото)
+    VF_THR = float(os.environ.get("CPS_VF_THR", "0.85"))                        # с этой уверенности «целый» решает машина, а спор с человеком — перепроверка
+
+    def _vf_of(r):
+        v = ((r or {}).get("auto") or {}).get("vlm_frame")
+        return v if v and v.get("v", 0) >= vlm_corners.FRAME_VER else None
+
+    def _vf_worker():
+        while True:
+            rid = _vf["q"].get()
+            try:
+                today = time.strftime("%Y-%m-%d")
+                if _vf["day"] != today: _vf["day"] = today; _vf["done"] = 0
+                if _vf["done"] >= VF_MAX or time.time() < _vf["off"]: _vf["seen"].discard(rid); continue
+                r = load(rid); src = img_path(rid)
+                if not r or not src or _vf_of(r): continue
+                a = read_small(src, 1400)
+                if a is None: continue
+                res = vlm_corners.frame_judge(a); _vf["done"] += 1
+                if not res: _vf["seen"].discard(rid); _vf["err"] = "не разобран ответ"; continue
+                with _lock:
+                    r = load(rid)
+                    if not r: continue
+                    r.setdefault("auto", {})["vlm_frame"] = {**res, "t": int(time.time())}; save(r)
+                _vf["bad"] = 0; _vf["err"] = ""; _vf["n"][res["frame"]] = _vf["n"].get(res["frame"], 0) + 1
+            except Exception as e:
+                _vf["seen"].discard(rid); _vf["err"] = str(e)[:160]; _vf["bad"] += 1
+                if _vf["bad"] >= 5: _vf["off"] = time.time() + 600; _vf["bad"] = 0
+            finally:
+                _vf["q"].task_done()
+
+    def _vf_enqueue(rids):
+        if not vlm_corners.available(): return
+        if _vf["thr"] is None:
+            _vf["thr"] = threading.Thread(target=_vf_worker, daemon=True, name="vlm-frame"); _vf["thr"].start()
+        for rid in rids:
+            if rid not in _vf["seen"]: _vf["seen"].add(rid); _vf["q"].put(rid)
+
+    def _vf_ok(): return vlm_corners.available() and not _vf["err"] and time.time() >= _vf["off"] and _vf["done"] < VF_MAX
+
+    def _vf_all():
+        """фон: модель смотрит все фото из очереди «кадр» и все ответы людей (для перепроверки спорных) — по дневному лимиту"""
+        ids = []
+        for f in sorted(os.listdir(D_RUGS)):
+            if not f.endswith(".json"): continue
+            x = _mrow(f[:-5])
+            if not x or x.get("vf") or is_bw(x["id"]) or not x["seen"]: continue
+            if x["frame_by"] in ("micro", "hand") or x["use"] != "skip": ids.append(x["id"])
+        _vf_enqueue(ids); return len(ids)
+
+    def _periodic_vf():
+        time.sleep(240)
+        while True:
+            try:
+                if vlm_corners.available() and _vf["q"].qsize() < 50: _vf_all()
+            except Exception as e: print("vlm frame:", e)
+            time.sleep(1800)
+
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_vf, daemon=True, name="vlm-frame-sched").start()
+
+    @app.post("/api/vlm/frame_all")
+    def api_vf_all(): return {"queued": _vf_all()}
+
+    @app.get("/api/vlm/frame")
+    def api_vf_status():
+        """очередь модели «кадр» и согласие с людьми: по коврам, где ответили и человек, и модель"""
+        agree = {"n": 0, "same": 0, "conf_hi": 0, "same_hi": 0, "pairs": {}}
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            x = _mrow(f[:-5])
+            if not x or not x.get("vf") or x["frame_by"] not in ("micro", "hand") or x["frame"] not in vlm_corners.FRAME_ANS: continue
+            v = x["vf"]; same = v["frame"] == x["frame"]; agree["n"] += 1; agree["same"] += same
+            k = x["frame"] + "→" + v["frame"]; agree["pairs"][k] = agree["pairs"].get(k, 0) + 1
+            if v["conf"] >= VF_THR: agree["conf_hi"] += 1; agree["same_hi"] += same
+        return {"key": vlm_corners.available(), "queued": _vf["q"].qsize(), "done_today": _vf["done"] if _vf["day"] == time.strftime("%Y-%m-%d") else 0,
+                "limit": VF_MAX, "thr": VF_THR, "last_error": _vf["err"], "paused": time.time() < _vf["off"], "answers": _vf["n"],
+                "vs_people": agree, "auto": fr_auto_state()}
 
     def _ref_task(x):
         """v11.57: карточка углов. Если есть сеть уточнения углов (corner_refine, обучена на правках в /m) — показываем её углы,
@@ -3532,7 +3620,18 @@ def install(app, DATA, D_WORK):
         if _frs["v"] and time.time() - _frs["t"] < 60: return _frs["v"]
         m = frame_model._load() or {}
         thr = m.get("auto_thr")
-        st = {"thr": thr, "on": bool(thr), "ctl_n": 0, "ctl_bad": 0, "trained": m.get("trained")}
+        st = {"thr": thr, "on": bool(thr), "ctl_n": 0, "ctl_bad": 0, "trained": m.get("trained"), "vf_on": True, "vf_ctl_n": 0, "vf_ctl_bad": 0}
+        vl = {}
+        try:                                                                     # v12.03: контрольные для «целый» по модели по картинке
+            with open(D_MICRO, encoding="utf-8") as f:
+                for ln in f:
+                    if '"vfa"' not in ln: continue
+                    try: e = json.loads(ln)
+                    except Exception: continue
+                    if e.get("type") == "frame" and e.get("vfa") and e.get("a") in FR_ANS: vl[e["rid"]] = e["a"]
+        except OSError: pass
+        st["vf_ctl_n"] = len(vl); st["vf_ctl_bad"] = sum(1 for v in vl.values() if v != "whole")
+        if st["vf_ctl_n"] >= 20 and st["vf_ctl_bad"] > 0.03 * st["vf_ctl_n"]: st["vf_on"] = False; st["vf_off_why"] = f"люди не согласны с моделью по картинке на {st['vf_ctl_bad']} из {st['vf_ctl_n']} контрольных"
         if thr:
             try: t0 = time.mktime(time.strptime(m.get("trained") or "2000-01-01 00:00", "%Y-%m-%d %H:%M"))
             except ValueError: t0 = 0
@@ -3554,18 +3653,24 @@ def install(app, DATA, D_WORK):
     def fr_auto(x, st=None):
         """решила машина: «целый ковёр» (человек ещё не отвечал, вероятность ≥ порога, авторешение включено)"""
         st = st or fr_auto_state()
-        return bool(st["on"] and st["thr"] and x.get("pw") is not None and x["pw"] >= st["thr"] and x.get("frame_by") not in ("micro", "hand") and not x.get("frame"))
+        if x.get("frame_by") in ("micro", "hand") or x.get("frame"): return False
+        if st["on"] and st["thr"] and x.get("pw") is not None and x["pw"] >= st["thr"]: return True
+        v = x.get("vf")                                                          # v12.03: «целый» по модели по картинке (и вероятностная модель не против)
+        return bool(st.get("vf_on") and v and v["frame"] == "whole" and v["conf"] >= VF_THR and (x.get("pw") is None or x["pw"] >= 0.25))
 
     @app.get("/api/micro/next")
     def micro_next(request: Request, n: int = 6, k: str = ""):
         import random
         me = user(request); n = max(1, min(12, n)); rows = _mrows(); H = _micro_hide()
         # v11.45: ковры с прежним ответом «фрагмент» возвращаются в очередь — в новом наборе ответов такого больше нет
-        fr =[x for x in rows if (x["use"] != "skip" or x["fr_old"]) and x["seen"] and (x["frame_by"] not in ("micro", "hand") or x["fr_old"])
-              and (me not in x["who"]["frame"] or me in x["old_who"]) and x["id"] not in H and not is_bw(x["id"])]
+        fr =[x for x in rows if (x["use"] != "skip" or x["fr_old"] or x.get("rc")) and x["seen"] and (x["frame_by"] not in ("micro", "hand") or x["fr_old"] or x.get("rc"))
+              and (me not in x["who"]["frame"] or me in x["old_who"] or x.get("rc")) and x["id"] not in H and not is_bw(x["id"])]
         fst = fr_auto_state()
         fr = [x for x in fr if not fr_auto(x, fst) or fr_ctl(x["id"])]             # v11.91: очевидные «целый» решает машина; человеку — контрольные
         fr.sort(key=lambda x: (abs((x["pw"] if x["pw"] is not None else 0.5) - 0.5), x["conf"]))   # v11.44: где модель меньше всего уверена — первыми
+        if vlm_corners.available():                                              # v12.03: сначала перепроверки, потом где модель по картинке не уверена или спорит
+            _vf_enqueue([x["id"] for x in fr if not x.get("vf")][:30])
+            fr.sort(key=lambda x: (not x.get("rc"), not x.get("vf"), (x["vf"] or {}).get("conf", 0) if x.get("vf") else 1))
         head, pool = fr[:60], fr[:]; random.shuffle(pool); mix = []                 # половина — сомнительные, половина — случайные (иначе выборка перекошена и точность машины не измерить)
         for a, b in zip(head, pool): mix += [a, b]
         fr = list({x["id"]: x for x in mix + fr}.values())
@@ -3585,7 +3690,7 @@ def install(app, DATA, D_WORK):
         by = {x["id"]: x for x in rows}
         more = _more_queues(me, rows, by, want)
         Q = {"quad": [_ref_task(x) for x in qd[:n]],
-             "frame": [{"type": "frame", "rid": x["id"], **({"ctl": 1} if fr_auto(x, fst) else {})} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
+             "frame": [{"type": "frame", "rid": x["id"], **({"ctl": 1} if fr_auto(x, fst) else {}), **({"rc": 1, "vf": x["vf"]["frame"], "was": x["frame"]} if x.get("rc") else {})} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
         cdq = _cdup_queue(me) if "cdup" in want else []; Q["cdup"] = cdq[:n]
         xsq = _xs_queue(me, rows) if "xsame" in want else []; Q["xsame"] = xsq[:n]
         rsq = _rsame_queue(me, by) if "rsame" in want else []; Q["rsame"] = rsq[:n]
@@ -3664,6 +3769,9 @@ def install(app, DATA, D_WORK):
             M = r.setdefault("micro", {}).setdefault(typ, {})
             if typ == "frame":                                                   # v11.45: снятые ответы не держат ковёр в очереди
                 rec["pw"] = _pw(r)                                               # v11.91: для подсчёта контрольных (машина ≥ порога, что сказал человек)
+                _v = _vf_of(r)
+                if _v and _v["frame"] == "whole" and _v["conf"] >= VF_THR and not r.get("frame") and (rec["pw"] is None or rec["pw"] >= 0.25): rec["vfa"] = 1
+                if _rc(r): rec["rc"] = 1
                 for u in [u for u, v in M.items() if (v or {}).get("a") in FR_OLD]: M.pop(u)
             M[me] = {"a": a, "w": _wt(role), "t": rec["t"], **({"q": q} if q else {}), **({"s": qsrc} if qsrc else {})}
             votes = list(M.values())

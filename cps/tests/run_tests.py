@@ -2286,6 +2286,40 @@ def t53_open_work_v1202(pg, ctx):
     assert rq('api/open/manifest', None)[0] == 401 and rq('api/rugs/ow_a')[0] == 401
 
 
+@test
+def t54_vlm_frame_v1203(pg, ctx):
+    """v12.03: «что на фото» моделью по картинке: уверенный «целый» решает машина (кроме контрольных); прежний ответ человека,
+    с которым модель уверенно не согласна, возвращается на перепроверку с подсказкой."""
+    import hashlib
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    import cv2, numpy as np
+    img = np.full((500, 400, 3), 20, np.uint8); img[40:460, 60:340] = (40, 40, 160)
+    ids = []
+    for n in range(40):                                                        # некотрольный ковёр: md5 % 10 != 0
+        i = 'vf_a%d' % n
+        if int(hashlib.md5(("frctl:" + i).encode()).hexdigest(), 16) % 10: ids.append(i); break
+    A = ids[0]; B = 'vf_b'
+    for i in (A, B): cv2.imwrite(f'{D}/rug_img/{i}.jpg', img)
+    base = {"source": "тест", "w": 400, "h": 500, "marks": [], "created": now, "updated": now, "status": "new",
+            "auto": {"frame": "whole", "quad": [[0.15, 0.08], [0.85, 0.08], [0.85, 0.92], [0.15, 0.92]], "conf": 0.9, "area": 0.6}}
+    json.dump({**base, "id": A, "title": A}, open(f'{D}/rugs/{A}.json', 'w'))
+    json.dump({**base, "id": B, "title": B, "frame": "cropped", "frame_by": "micro", "micro": {"frame": {"zz": {"a": "cropped", "w": 2, "t": now - 100}}}}, open(f'{D}/rugs/{B}.json', 'w'))
+    q = post(u + 'api/vlm/frame_all', {}); assert q["queued"] >= 2, q
+    for _ in range(60):
+        if all((get(u + 'api/rugs/' + i).get('auto') or {}).get('vlm_frame') for i in (A, B)): break
+        time.sleep(0.5)
+    else: raise AssertionError('модель «кадр» не ответила: %s' % get(u + 'api/vlm/frame'))
+    st = get(u + 'api/vlm/frame'); assert st["vs_people"]["n"] >= 1 and "cropped→whole" in st["vs_people"]["pairs"], st
+    T = get(u + 'api/micro/next?n=50&k=frame')
+    fr = {t['rid']: t for t in T['tasks'] if t['type'] == 'frame'}
+    assert A not in fr, 'уверенный «целый» по модели — машина решает сама'
+    assert B in fr and fr[B].get('rc') == 1 and fr[B]['vf'] == 'whole' and fr[B]['was'] == 'cropped', fr.get(B)
+    post(u + 'api/micro/answer', {'type': 'frame', 'rid': B, 'a': 'whole'})
+    r = get(u + 'api/rugs/' + B); assert r['frame'] == 'whole', r.get('frame')
+    T = get(u + 'api/micro/next?n=50&k=frame'); assert B not in [t['rid'] for t in T['tasks']], 'после ответа перепроверка уходит'
+    for i in (A, B): os.remove(f'{D}/rugs/{i}.json')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
