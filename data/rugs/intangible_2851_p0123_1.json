@@ -11,7 +11,7 @@
  "school": "karabakh",
  "composition": "chelebi",
  "technique": "ворсовый",
- "size": "",
+ "size": "246x143 см",
  "notes": "Xalça. “Çələbi”. Yun. Xovlu. 1850-ci il. Qarabağ qrupu. Azərbaycan. Şəxsi kolleksiyadan.",
  "status": "new",
  "w": 788,
@@ -74,6 +74,10 @@
   {
    "id": "intangible_2850_p0135_1",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0047_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -106,6 +110,11 @@
    "ok": false,
    "by": "по цепочке: intangible_2850_p0135_1 ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
    "at": 1794984387
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0047_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795268861
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -142,7 +151,8 @@
  },
  "multi": [],
  "from_twin": {
-  "museum": "wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali"
+  "museum": "wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
+  "size": "azerbaycan_xalchalari_qarabag_qrupu_p0047_1"
  },
  "same_chk": {
   "cm_c07233e54a": {

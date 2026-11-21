@@ -2,11 +2,11 @@
  "id": "azerbaycan_xalchalari_qarabag_qrupu_p0047_1",
  "title": "Xalça. “ Çələbi” . Qarabağqrupu . Azərbaycan . Xocalı.",
  "source": "каталог: book:azerbaycan_xalchalari_qarabag_qrupu",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
- "place": "",
+ "place": "Карабах",
  "date": "XX в.",
  "school": "karabakh",
  "composition": "chelebi",
@@ -18,7 +18,7 @@
  "h": 1431,
  "marks": [],
  "created": 1794547278,
- "updated": 1795061974,
+ "updated": 1795268861,
  "cat": {
   "title": "Xalça. “ Çələbi” . Qarabağqrupu . Azərbaycan . Xocalı.",
   "museum": "",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0047_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0047_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2851_p0123_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2851_p0123_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795268861
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -139,5 +150,20 @@
    63.7062
   ],
   "t": 1795207686
+ },
+ "micro": {
+  "same": {
+   "intangible_2851_p0123_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795268861
+    }
+   }
+  }
+ },
+ "from_twin": {
+  "museum": "intangible_2851_p0123_1",
+  "place": "intangible_2851_p0123_1"
  }
 }
