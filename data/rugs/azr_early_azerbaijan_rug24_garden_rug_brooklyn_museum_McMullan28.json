@@ -18,7 +18,7 @@
  "h": 1505,
  "marks": [],
  "created": 1791736140,
- "updated": 1795269314,
+ "updated": 1795291491,
  "cat": {
   "title": "Carpet with \"Garden\" design, 18th century",
   "museum": "",
@@ -180,5 +180,39 @@
    53.4006
   ],
   "t": 1795207728
- }
+ },
+ "layout": {
+  "carpet": [
+   0.0,
+   0.0,
+   0.98264,
+   0.97667
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    0.98264,
+    0.01
+   ],
+   [
+    0.96701,
+    0.97667
+   ],
+   [
+    0.03125,
+    0.97667
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

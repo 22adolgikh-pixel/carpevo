@@ -18,7 +18,7 @@
  "h": 998,
  "marks": [],
  "created": 1791870015,
- "updated": 1791997202,
+ "updated": 1795291588,
  "cat": {
   "title": "Azerbaijani carpet from Shirvan region with haloed palmettes called \"Harshang\", 18th century, 200",
   "museum": "Лувр",
@@ -93,7 +93,7 @@
   "conf": 0.984,
   "area": 0.566,
   "ver": 1,
-  "t": 1794238420
+  "t": 1795291500
  },
  "multi": [],
  "school_prev": "guba-shirvan",
@@ -117,5 +117,39 @@
    70.1914
   ],
   "t": 1795207822
- }
+ },
+ "layout": {
+  "carpet": [
+   0.01333,
+   0.19366,
+   0.97223,
+   0.5926499999999999
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01667,
+    0.19366
+   ],
+   [
+    0.98556,
+    0.19533
+   ],
+   [
+    0.98,
+    0.78631
+   ],
+   [
+    0.01333,
+    0.77129
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

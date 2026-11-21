@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870018,
- "updated": 1791997199,
+ "updated": 1795291588,
  "cat": {
   "title": "Carpet of Baku group of Azerbaijan carpets in Heydar Aliyev Center",
   "museum": "",
@@ -93,7 +93,7 @@
   "conf": 0.986,
   "area": 0.573,
   "ver": 1,
-  "t": 1794238412
+  "t": 1795291499
  },
  "multi": [],
  "school_prev": "guba-shirvan",
@@ -117,5 +117,39 @@
    71.6749
   ],
   "t": 1795207818
- }
+ },
+ "layout": {
+  "carpet": [
+   0.13185,
+   0.04222,
+   0.70667,
+   0.92111
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.17185,
+    0.04222
+   ],
+   [
+    0.76,
+    0.07444
+   ],
+   [
+    0.83852,
+    0.92444
+   ],
+   [
+    0.13185,
+    0.96333
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

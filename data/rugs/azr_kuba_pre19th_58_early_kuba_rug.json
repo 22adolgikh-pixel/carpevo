@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736137,
- "updated": 1795205843,
+ "updated": 1795291491,
  "cat": {
   "title": "Afshan Pattern floral carpet (dark blue ground), late 18th century, Khanate Period, Kuba or Baku Reg",
   "museum": "",
@@ -80,18 +80,19 @@
     0.02
    ],
    [
-    0.9581,
-    0.66889
+    0.98041,
+    0.9877
    ],
    [
-    0.0419,
-    0.67889
+    0.04535,
+    0.99604
    ]
   ],
   "conf": 0.966,
   "area": 0.596,
   "ver": 1,
-  "t": 1795291446
+  "t": 1795291446,
+  "hand": true
  },
  "auto_edge": {
   "v": 1,
@@ -112,5 +113,39 @@
    61.4994
   ],
   "t": 1795207782
- }
+ },
+ "layout": {
+  "carpet": [
+   0.04535,
+   0.0,
+   0.93506,
+   0.99604
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06095,
+    0.0
+   ],
+   [
+    0.94095,
+    0.02
+   ],
+   [
+    0.98041,
+    0.9877
+   ],
+   [
+    0.04535,
+    0.99604
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "hand"
 }

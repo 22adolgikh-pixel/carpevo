@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870020,
- "updated": 1791870020,
+ "updated": 1795291588,
  "cat": {
   "title": "Exhibit in the Textile Museum, George Washington University, Washington, DC, USA",
   "museum": "",
@@ -144,7 +144,7 @@
   "conf": 0.976,
   "area": 0.857,
   "ver": 1,
-  "t": 1794238259
+  "t": 1795291501
  },
  "multi": [],
  "auto_edge": {
@@ -166,5 +166,39 @@
    43.9824
   ],
   "t": 1795207824
- }
+ },
+ "layout": {
+  "carpet": [
+   0.03444,
+   0.02444,
+   0.92148,
+   0.95445
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03444,
+    0.06556
+   ],
+   [
+    0.95592,
+    0.02444
+   ],
+   [
+    0.95317,
+    0.97556
+   ],
+   [
+    0.03581,
+    0.97889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

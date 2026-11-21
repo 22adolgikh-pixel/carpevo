@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870014,
- "updated": 1791870014,
+ "updated": 1795291588,
  "cat": {
   "title": "1892-ci ildə mahud parçadan Azərbaycanda hazırlanmış süfrə örtüyü, Azərbaycan Xalça Muzeyinin kolleksiyası",
   "museum": "Национальный музей азербайджанского ковра",
@@ -79,7 +79,7 @@
   "conf": 0.985,
   "area": 0.601,
   "ver": 1,
-  "t": 1794238589
+  "t": 1795291501
  },
  "multi": [],
  "auto_edge": {
@@ -101,5 +101,39 @@
    74.8685
   ],
   "t": 1795207826
- }
+ },
+ "layout": {
+  "carpet": [
+   0.18333,
+   0.05667,
+   0.66167,
+   0.91333
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.18333,
+    0.05667
+   ],
+   [
+    0.845,
+    0.05889
+   ],
+   [
+    0.84167,
+    0.96667
+   ],
+   [
+    0.18333,
+    0.97
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

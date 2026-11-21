@@ -18,7 +18,7 @@
  "h": 1760,
  "marks": [],
  "created": 1791870025,
- "updated": 1795030337,
+ "updated": 1795291588,
  "cat": {
   "title": "Kazak Karachoph, Caucasus, mid 19th century, 218 x 163 cm, Nagel Auction, Stuttgart",
   "museum": "",
@@ -125,7 +125,7 @@
   "conf": 0.976,
   "area": 0.923,
   "ver": 1,
-  "t": 1794238268
+  "t": 1795291500
  },
  "multi": [],
  "micro": {
@@ -137,7 +137,7 @@
    }
   }
  },
- "frame": "whole",
+ "frame": "cropped",
  "frame_by": "micro",
  "school_prev": "ganja-gazakh",
  "school_by": "уточнено по слову «kazak» в подписи",
@@ -160,5 +160,38 @@
    48.9507
   ],
   "t": 1795207820
- }
+ },
+ "layout": {
+  "carpet": [
+   0.01815,
+   0.01111,
+   0.98034,
+   0.97333
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01815,
+    0.02889
+   ],
+   [
+    0.9652,
+    0.01111
+   ],
+   [
+    0.99849,
+    0.97889
+   ],
+   [
+    0.02723,
+    0.98444
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

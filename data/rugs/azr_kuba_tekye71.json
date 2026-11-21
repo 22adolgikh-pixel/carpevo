@@ -18,7 +18,7 @@
  "h": 2197,
  "marks": [],
  "created": 1791736135,
- "updated": 1791747051,
+ "updated": 1795291491,
  "cat": {
   "title": "kuba tekye71",
   "museum": "",
@@ -88,7 +88,38 @@
  },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.04181,
+   0.0,
+   0.91115,
+   0.98778
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05401,
+    0.01111
+   ],
+   [
+    0.93031,
+    0.0
+   ],
+   [
+    0.95296,
+    0.98778
+   ],
+   [
+    0.04181,
+    0.97556
+   ]
+  ],
+  "quad_status": "accepted"
+ },
  "updated_by": "dolgikh",
  "same_chk": {
   "azr_kuba_tekye72": {
@@ -168,5 +199,7 @@
    46.5759
   ],
   "t": 1795207804
- }
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }

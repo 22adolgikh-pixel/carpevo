@@ -18,7 +18,7 @@
  "h": 2362,
  "marks": [],
  "created": 1791870032,
- "updated": 1795280090,
+ "updated": 1795291588,
  "cat": {
   "title": "Zili carpet, Baku group of Azerbaijani carpets",
   "museum": "Национальный музей искусств Азербайджана",
@@ -164,7 +164,7 @@
   "conf": 0.974,
   "area": 0.91,
   "ver": 1,
-  "t": 1794238343
+  "t": 1795291500
  },
  "multi": [],
  "micro": {
@@ -220,5 +220,38 @@
   "t": 1795207818
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.0303,
+   0.01,
+   0.94108,
+   0.97
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03199,
+    0.01333
+   ],
+   [
+    0.9697,
+    0.01
+   ],
+   [
+    0.97138,
+    0.98
+   ],
+   [
+    0.0303,
+    0.98
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }
