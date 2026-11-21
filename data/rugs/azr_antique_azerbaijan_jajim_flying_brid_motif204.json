@@ -45,8 +45,47 @@
  },
  "src_id": "cat:azr_antique_azerbaijan_jajim_flying_brid_motif204",
  "lib_img": "img/azr_antique_azerbaijan_jajim_flying_brid_motif204.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_azerbaijan_shahsavan_jajim202",
+   "score": 0
+  },
+  {
+   "id": "azcm_142",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
+   "score": 0
+  },
+  {
+   "id": "azr_azerbaijan_jajim_rippon_boswell_09_2009_L28",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_azerbaijan_shahsavan_jajim202": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795269545,
+   "similar": true
+  },
+  "azcm_142": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_azerbaijan_jajim_flying_brid_motif204 ≠ azr_azerbaijan_shahsavan_jajim202",
+   "at": 1795269566
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_azerbaijan_jajim_flying_brid_motif204 ≠ azr_azerbaijan_shahsavan_jajim202",
+   "at": 1795269566
+  },
+  "azr_azerbaijan_jajim_rippon_boswell_09_2009_L28": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_azerbaijan_jajim_flying_brid_motif204 ≠ azr_azerbaijan_shahsavan_jajim202",
+   "at": 1795269566
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
