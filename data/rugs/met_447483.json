@@ -18,7 +18,7 @@
  "h": 625,
  "marks": [],
  "created": 1791736122,
- "updated": 1791736122,
+ "updated": 1795280206,
  "cat": {
   "title": "Star Kazak Carpet",
   "museum": "Метрополитен-музей",
@@ -146,5 +146,49 @@
    49.9324
   ],
   "t": 1795207887
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795280206,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0329,
+    0.03048
+   ],
+   [
+    0.95367,
+    0.03163
+   ],
+   [
+    0.9709,
+    0.9507
+   ],
+   [
+    0.03215,
+    0.96015
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
