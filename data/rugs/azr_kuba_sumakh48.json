@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791736130,
- "updated": 1795290365,
+ "updated": 1795291922,
  "cat": {
   "title": "kuba sumakh48",
   "museum": "",
@@ -112,5 +112,39 @@
   "area": 0.917,
   "ver": 1,
   "t": 1795291831
- }
+ },
+ "layout": {
+  "carpet": [
+   0.03604,
+   0.0,
+   0.96096,
+   0.99889
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03604,
+    0.0
+   ],
+   [
+    0.96396,
+    0.02
+   ],
+   [
+    0.997,
+    0.99889
+   ],
+   [
+    0.06907,
+    0.99889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }
