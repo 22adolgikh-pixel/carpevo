@@ -796,6 +796,11 @@ def install(app, DATA, D_WORK):
 <p><code>{ex('/api/open/palettes.zip?school=karabakh&quad=1&limit=200')}</code> — архив: <code>ID.png</code> полоски + <code>index.csv</code> (ковёр, школа, тип, цвета с долями). Те же фильтры и параметры полоски; до 1000 ковров.</p>
 <h2>Фото</h2>
 <p><code>{ex('/api/open/rug/ID.jpg')}</code> — ковёр выпрямленный по углам (если углов нет — фото как есть); <code>side</code> — длинная сторона (1600).</p>
+<h2>Рабочие данные целиком (v12.02)</h2>
+<p><code>{ex('/api/open/manifest?since=0')}</code> — все карточки: когда менялись, углы, отметки края, есть ли линия поля и какие картинки готовы (время файла). <code>since</code> — unix-время, <code>live=1</code> — без скрытых и дублей, <code>ids=a,b</code>.</p>
+<p><code>{ex('/api/open/card/ID.json')}</code> — карточка целиком; <code>{ex('/api/open/cards.zip?since=0')}</code> — все карточки + ответы /m.</p>
+<p><code>{ex('/api/open/file/raw/ID.jpg')}</code> — исходное фото; вместо <code>raw</code>: <code>rect</code> (по 4 углам), <code>mesh</code> (ровные края), <code>field</code> (и выровненное поле). <code>{ex('/api/open/part/ID/field.jpg')}</code> — части: field, top, bot, left, right.</p>
+<p><code>{ex('/api/open/files.zip?kind=raw,rect,mesh&offset=0&limit=200')}</code> — пачка уже готовых файлов (ничего не пересчитывает), до 500 ковров; те же <code>since</code>, <code>live</code>, <code>ids</code>; внутри <code>index.json</code>.</p>
 <p>Как считаются цвета: ковёр выпрямляется по углам (без углов — центр кадра 80 %), фон за краем не считается; ворс сглаживается, цвета группируются в Lab, близкие (ΔE &lt; 12) сливаются, доли меньше 0,3 % отбрасываются. Цвет на фото зависит от света и съёмки — это цвет снимка, не замер красителя.</p>""")
 
     @app.get("/api/open/rugs")
@@ -843,6 +848,113 @@ def install(app, DATA, D_WORK):
         if q: img = rug_rect.rectify(img, q, side=min(max(side, 64), 4000))
         ok, b = cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, 90])
         return Response(b.tobytes(), media_type="image/jpeg")
+
+    # ---- v12.02: всё рабочее для внешней обработки (Claude, Colab): карточки, исходные фото, выпрямленные, сетка, поле, части.
+    # Только чтение по ключу. Пачками (zip) и «что изменилось с …» (manifest?since=), чтобы докачивать только новое.
+    OPEN_KINDS = ("raw", "rect", "mesh", "field", "parts")
+
+    def _open_files(rid, r, kind, build=False):
+        """→ [(имя в архиве, путь)] файлов вида kind; build=False — только уже готовые (пачкой ничего не пересчитываем)"""
+        out, M = [], lambda *a: os.path.join(D_MESH, *a)
+        if kind == "raw":
+            p = img_path(rid)
+            if p: out.append((f"raw/{rid}.jpg", p))
+        elif kind == "rect":
+            p = rect_path(rid, r, build=build)
+            if p: out.append((f"rect/{rid}.jpg", p))
+        elif kind == "mesh":
+            if mesh_info(rid, r, build=build) and os.path.exists(M(rid + ".jpg")):
+                out += [(f"mesh/{rid}.jpg", M(rid + ".jpg")), (f"mesh/{rid}.json", M(rid + ".json"))]
+        elif kind == "field":
+            p = mesh_field_img(rid, r) if build else (M(rid + ".f.jpg") if os.path.exists(M(rid + ".f.jpg")) else None)
+            if p: out.append((f"field/{rid}.jpg", p))
+        elif kind == "parts":
+            if build: rug_parts(rid, r)
+            for k in ("field", "top", "bot", "left", "right"):
+                p = M("%s.p.%s.jpg" % (rid, k))
+                if os.path.exists(p): out.append((f"parts/{rid}.{k}.jpg", p))
+            if out and os.path.exists(M(rid + ".p.json")): out.append((f"parts/{rid}.json", M(rid + ".p.json")))
+        return out
+
+    def _open_ids(q):
+        """ids=a,b — эти; иначе все карточки (live=1 — без скрытых, дублей и разрезанных), since — изменённые не раньше (unix-время)"""
+        if q.get("ids"): return [os.path.basename(x.strip()) for x in q["ids"].split(",") if x.strip()]
+        since = int(float(q.get("since") or 0)); live = q.get("live") in ("1", "true"); out = []
+        for f in sorted(os.listdir(D_RUGS)):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or (r.get("updated") or 0) < since: continue
+            if live and (r.get("hidden") or r.get("dup_of") or r.get("split_into")): continue
+            out.append(r["id"])
+        return out
+
+    @app.get("/api/open/manifest")
+    def open_manifest(request: Request):
+        """по каждой карточке: когда менялась, есть ли углы, какие картинки уже готовы на сервере (и когда изменены)"""
+        q = _open_q(request); rows = []
+        def mt(p): return int(os.path.getmtime(p)) if p and os.path.exists(p) else 0
+        for rid in _open_ids(q):
+            r = load(rid)
+            if not r: continue
+            L = r.get("layout") or {}
+            rows.append({"id": rid, "updated": r.get("updated") or 0, "hidden": bool(r.get("hidden")), "dup_of": r.get("dup_of") or "",
+                         "frame": r.get("frame") or "", "quad_status": L.get("quad_status") or "", "edge": r.get("edge") or {},
+                         "field": bool((L.get("field") or {}).get("curves")),
+                         "t": {"raw": mt(img_path(rid)), "rect": mt(os.path.join(D_RECT, rid + ".jpg")), "mesh": mt(os.path.join(D_MESH, rid + ".jpg")),
+                               "field": mt(os.path.join(D_MESH, rid + ".f.jpg")), "parts": mt(os.path.join(D_MESH, rid + ".p.json"))}})
+        return {"now": int(time.time()), "total": len(rows), "rugs": rows}
+
+    @app.get("/api/open/card/{rid}.json")
+    def open_card(rid: str):
+        r = load(os.path.basename(rid))
+        return r if r else JSONResponse({"error": "нет такого ковра"}, 404)
+
+    @app.get("/api/open/cards.zip")
+    def open_cards_zip(request: Request):
+        """карточки целиком (как data/rugs/<id>.json) + micro.jsonl (ответы /m)"""
+        import zipfile
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+            for rid in _open_ids(_open_q(request)):
+                p = os.path.join(D_RUGS, rid + ".json")
+                if os.path.exists(p): z.write(p, f"rugs/{rid}.json")
+            mj = os.path.join(DATA, "micro.jsonl")
+            if os.path.exists(mj): z.write(mj, "micro.jsonl")
+        return Response(buf.getvalue(), media_type="application/zip", headers={"Content-Disposition": 'attachment; filename="cards.zip"'})
+
+    @app.get("/api/open/file/{kind}/{rid}.jpg")
+    def open_file(kind: str, rid: str):
+        """одна картинка: raw (исходное фото), rect (по 4 углам), mesh (ровные края), field (+ выровненное поле); при надобности строится"""
+        rid = os.path.basename(rid); r = load(rid)
+        if kind not in OPEN_KINDS[:4] or not r: return JSONResponse({"error": "kind: raw, rect, mesh, field; или нет такого ковра"}, 404)
+        f = [x for x in _open_files(rid, r, kind, build=True) if x[0].endswith(".jpg")]
+        return FileResponse(f[0][1]) if f else JSONResponse({"error": "нет картинки (нет фото, углов или линии поля)"}, 404)
+
+    @app.get("/api/open/part/{rid}/{part}.jpg")
+    def open_part(rid: str, part: str):
+        rid = os.path.basename(rid); r = load(rid)
+        f = dict(_open_files(rid, r, "parts", build=True)) if r else {}
+        p = f.get(f"parts/{rid}.{part}.jpg")
+        return FileResponse(p) if p else JSONResponse({"error": "нет частей (нужны углы и линия поля)"}, 404)
+
+    @app.get("/api/open/files.zip")
+    def open_files_zip(request: Request, offset: int = 0, limit: int = 200):
+        """пачка готовых файлов: kind=raw,rect,mesh,field,parts (через запятую); ids / since / live — как в manifest; до 500 ковров за раз.
+        Без сжатия (jpg и так сжат), собирается во временный файл, чтобы не держать сотни МБ в памяти."""
+        import zipfile, tempfile
+        from starlette.background import BackgroundTask
+        q = _open_q(request); kinds = [k for k in (q.get("kind") or "raw").split(",") if k in OPEN_KINDS] or ["raw"]
+        ids = _open_ids(q); part = ids[max(0, offset):max(0, offset) + max(1, min(int(limit), 500))]
+        fd, tmp = tempfile.mkstemp(suffix=".zip", dir=DATA); os.close(fd); n = 0
+        with zipfile.ZipFile(tmp, "w", zipfile.ZIP_STORED) as z:
+            for rid in part:
+                r = load(rid)
+                if not r: continue
+                for name, p in (x for k in kinds for x in _open_files(rid, r, k)):
+                    try: z.write(p, name); n += 1
+                    except OSError: pass
+            z.writestr("index.json", json.dumps({"total_ids": len(ids), "offset": offset, "ids": part, "kinds": kinds, "files": n}))
+        return FileResponse(tmp, media_type="application/zip", filename="files.zip", background=BackgroundTask(lambda: os.path.exists(tmp) and os.remove(tmp)))
 
     # ---- v11.96: один ковёр = группа снимков (связи «тот же» напрямую; как плитка каталога). Обложка, исключить снимок, перенести в другой ковёр.
     GROUP_MAX = 60

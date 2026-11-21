@@ -2253,6 +2253,39 @@ def t52_frame_edge_v1200(pg, ctx):
     x = get(u + 'api/xsame'); assert k in x["same"] and k in x["same_var"], x
 
 
+@test
+def t53_open_work_v1202(pg, ctx):
+    """v12.02: рабочие данные по ключу: manifest, карточка, исходное фото, выпрямленное, пачка zip; запись по ключу закрыта."""
+    import zipfile, io as _io
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    import cv2, numpy as np
+    img = np.full((500, 400, 3), 230, np.uint8); img[40:460, 60:340] = (40, 40, 160)
+    cv2.imwrite(f'{D}/rug_img/ow_a.jpg', img)
+    json.dump({"id": "ow_a", "title": "ow_a", "source": "тест", "w": 400, "h": 500, "marks": [], "created": now, "updated": now, "status": "new",
+               "frame": "whole", "edge": {"wavy": ["t"]},
+               "layout": {"quad": [[0.15, 0.08], [0.85, 0.08], [0.85, 0.92], [0.15, 0.92]], "quad_status": "confirmed"}}, open(f'{D}/rugs/ow_a.json', 'w'))
+    try: post(u + 'api/register', {"name": "owk", "password": "owk-pass-123"})
+    except urllib.error.HTTPError: pass
+    k = post(u + 'api/users/key', {"name": "owk"})["key"]
+    def rq(path, key=k):
+        h = {"X-Forwarded-For": "8.8.8.8"}
+        if key: h["X-CPS-Key"] = key
+        try:
+            r = urllib.request.urlopen(urllib.request.Request(u + path, headers=h)); return r.status, r.read()
+        except urllib.error.HTTPError as e: return e.code, b""
+    st, b = rq('api/open/manifest?since=%d' % (now - 5)); assert st == 200, st
+    m = {x["id"]: x for x in json.loads(b)["rugs"]}
+    assert "ow_a" in m and m["ow_a"]["quad_status"] == "confirmed" and m["ow_a"]["edge"] == {"wavy": ["t"]} and m["ow_a"]["t"]["raw"] > 0, m.get("ow_a")
+    st, b = rq('api/open/card/ow_a.json'); assert st == 200 and json.loads(b)["id"] == "ow_a"
+    st, b = rq('api/open/file/raw/ow_a.jpg'); a = cv2.imdecode(np.frombuffer(b, np.uint8), cv2.IMREAD_COLOR); assert st == 200 and a.shape == (500, 400, 3)
+    st, b = rq('api/open/file/rect/ow_a.jpg'); a = cv2.imdecode(np.frombuffer(b, np.uint8), cv2.IMREAD_COLOR)
+    assert st == 200 and a is not None and a[a.shape[0] // 2, a.shape[1] // 2, 2] > 120, "выпрямленный: середина — красный ковёр"
+    st, b = rq('api/open/files.zip?kind=raw,rect&ids=ow_a'); z = zipfile.ZipFile(_io.BytesIO(b))
+    assert st == 200 and {"raw/ow_a.jpg", "rect/ow_a.jpg", "index.json"} <= set(z.namelist()), z.namelist()
+    st, b = rq('api/open/cards.zip?ids=ow_a'); assert st == 200 and "rugs/ow_a.json" in zipfile.ZipFile(_io.BytesIO(b)).namelist()
+    assert rq('api/open/manifest', None)[0] == 401 and rq('api/rugs/ow_a')[0] == 401
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
