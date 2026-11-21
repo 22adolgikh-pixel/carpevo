@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870020,
- "updated": 1795029605,
+ "updated": 1795280700,
  "cat": {
   "title": "Caucasus, Daghestan, 19th century - Prayer Rug - 1945.166 - Cleveland Museum of Art",
   "museum": "",
@@ -156,6 +156,14 @@
     "w": 2,
     "t": 1795029605
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795280700,
+    "s": "ref"
+   }
   }
  },
  "from_twin": {
@@ -186,5 +194,38 @@
    9.3141
   ],
   "t": 1795207819
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05385,
+    0.04746
+   ],
+   [
+    0.93605,
+    0.05007
+   ],
+   [
+    0.96796,
+    0.92936
+   ],
+   [
+    0.0509,
+    0.94637
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
