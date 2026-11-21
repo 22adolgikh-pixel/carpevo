@@ -18,7 +18,7 @@
  "h": 677,
  "marks": [],
  "created": 1791736135,
- "updated": 1794984087,
+ "updated": 1795279060,
  "cat": {
   "title": "kuba seychour143",
   "museum": "",
@@ -141,6 +141,14 @@
      "t": 1794984087
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279060,
+    "s": "ref"
+   }
   }
  },
  "school_prev": "guba-shirvan",
@@ -178,5 +186,39 @@
    60.9852
   ],
   "t": 1795207785
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06134,
+    0.02994
+   ],
+   [
+    0.96063,
+    0.03487
+   ],
+   [
+    0.9406,
+    0.95615
+   ],
+   [
+    0.03216,
+    0.95323
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

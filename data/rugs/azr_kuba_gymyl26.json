@@ -18,7 +18,7 @@
  "h": 684,
  "marks": [],
  "created": 1791736131,
- "updated": 1791736131,
+ "updated": 1795279109,
  "cat": {
   "title": "kuba gymyl26",
   "museum": "",
@@ -124,5 +124,49 @@
    46.7103
   ],
   "t": 1795207768
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279109,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03204,
+    0.05647
+   ],
+   [
+    0.95582,
+    0.04968
+   ],
+   [
+    0.92982,
+    0.95668
+   ],
+   [
+    0.05132,
+    0.95807
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

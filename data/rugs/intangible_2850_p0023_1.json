@@ -20,10 +20,10 @@
   {
    "id": "m6b00c553e569489_0",
    "box": [
-    0.32866,
-    0.27441,
-    0.0919,
-    0.05957
+    0.32725,
+    0.29692,
+    0.16189,
+    0.05383
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -31,7 +31,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c553e569489_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.739,
@@ -167,11 +167,15 @@
      0.28027
     ]
    ],
-   "sam": 0.778
+   "sam": 0.778,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795279134,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795279134
   }
  ],
  "created": 1794547278,
- "updated": 1795212630,
+ "updated": 1795279134,
  "cat": {
   "title": "Ковёр «Malıbəyli» Карабах",
   "museum": "",
@@ -258,5 +262,16 @@
    51.1023
   ],
   "t": 1795207858
+ },
+ "micro": {
+  "marks": {
+   "m6b00c553e569489_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795279134
+    }
+   }
+  }
  }
 }
