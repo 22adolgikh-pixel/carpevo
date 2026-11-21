@@ -7,6 +7,8 @@
 # Сеть — MobileNetV3-small (предобучена на ImageNet), выход — сдвиг (dx, dy) в долях окна.
 # Проверка — 20 % ковров, которых сеть не видела (последние по времени правки): ошибка до и после, как в отчёте Claude.
 # Итог: carpet-dna/models/corner_refine_v{VER}.pt (TorchScript, ~6 МБ) и corner_refine_v{VER}.json (замеры).
+# v5 (21.11): разбор 48 худших ковров показал — в 37 из них начальные углы были РАМКОЙ ВСЕГО ФОТО (find_quad не нашёл ковёр), а верные углы дальше окна сети (до 53 %), бахрома — лишь 7.
+#   Теперь первая ступень с окном 50 %, обучение включает старт из углов кадра, в отчёте отдельная строка 'frame' (старт — рамка фото).
 # v4 (19.11): 1 201 метка, трудные примеры втрое чаще, окно до 24 % (видно бахрому целиком), MobileNetV3-large, строгие замеры (худший угол, «бахрома наружу»).
 # Время: GPU (T4) — 25–40 мин; чтение пакетов с Диска — ещё 2–5 мин. Ключи не нужны.
 import os, io, json, math, random, time, zipfile, glob
@@ -19,7 +21,7 @@ REPO = '/content/carpevo'
 _lp = next((p for p in (f'{REPO}/cps/tools/corners/labels.json', '/content/labels.json') if os.path.exists(p)), None)
 assert _lp, 'нет labels.json: загрузите его в /content (значок папки слева → загрузить) или клонируйте репозиторий в /content/carpevo'
 LAB = json.load(open(_lp, encoding='utf-8'))
-VER = 4                                    # v1 — 13.11 (365); v2 — 15.11 (488); v3 — 16.11 (≈830 меток); v4 — 19.11 (1 201 метка, бахрома). Старые веса не перезаписываются
+VER = 5                                    # v1 — 13.11 (365); v2 — 15.11 (488); v3 — 16.11 (≈830 меток); v4 — 19.11 (1 201 метка, бахрома). Старые веса не перезаписываются
 DEV = 'cuda' if torch.cuda.is_available() else 'cpu'; log('устройство', DEV, '| ковров с метками', len(LAB))
 OUT = '/content/drive/MyDrive/carpet-dna/models'; os.makedirs(OUT, exist_ok=True)
 
@@ -75,14 +77,17 @@ class DS(torch.utils.data.Dataset):
     def __getitem__(s, i):
         x = random.choice(s.it); a = IM[x['id']]; k = random.randrange(4)   # (в s.it трудные ковры — где человек двигал углы — повторены 3 раза)
         tx, ty = x['quad'][k]; h, w = a.shape[:2]; L = max(h, w)
-        half = math.exp(random.uniform(math.log(0.02), math.log(0.26)))           # v4: и крупное окно 24 % — чтобы видеть, где кончается бахрома и начинается ворс
-        r = half * random.uniform(0, 0.75); t = random.uniform(0, 2 * math.pi)       # старт — где-то рядом с верным углом
-        cx = tx + r * math.cos(t) * L / w; cy = ty + r * math.sin(t) * L / h
+        if random.random() < 0.25:                                                 # v5: старт — угол рамки фото (find_quad ковёр не нашёл), окно крупное
+            half = random.uniform(0.35, 0.55); cx, cy = (0.0 if FLIP[k][0] > 0 else 1.0), (0.0 if FLIP[k][1] > 0 else 1.0)
+        else:
+            half = math.exp(random.uniform(math.log(0.02), math.log(0.55)))        # v4: окно 24 %; v5: до 55 % — найти ковёр, если старт далеко
+            r = half * random.uniform(0, 0.9); t = random.uniform(0, 2 * math.pi)  # старт — где-то рядом с верным углом
+            cx = tx + r * math.cos(t) * L / w; cy = ty + r * math.sin(t) * L / h
         win = window(a, cx, cy, half, k)
         if random.random() < 0.8:                                                  # свет и цвет фото разные
             win = cv2.convertScaleAbs(win, alpha=random.uniform(0.7, 1.3), beta=random.uniform(-25, 25))
         if random.random() < 0.3: win = cv2.GaussianBlur(win, (0, 0), random.uniform(0.5, 1.5))
-        return prep(win), torch.from_numpy(offset(a, cx, cy, tx, ty, half, k))
+        return prep(win), torch.from_numpy(np.clip(offset(a, cx, cy, tx, ty, half, k), -1, 1))
 
 
 net = torchvision.models.mobilenet_v3_large(weights='DEFAULT')                 # v4: сеть крупнее (≈ 4 млн весов; на сервере ≈ 0,3 с на ковёр)
@@ -104,7 +109,7 @@ for ep in range(EP):
 
 # ---------- уточнение и проверка ----------
 net.eval()
-HALVES = (0.24, 0.12, 0.06, 0.03)
+HALVES = (0.5, 0.3, 0.16, 0.08, 0.04, 0.02)   # v5: на сервере ≈ 0,45 с на ковёр
 
 
 @torch.no_grad()
@@ -141,7 +146,8 @@ def fringe_out(q, t, a):
 
 
 rep = {}
-for start in ('auto', 'vlm', 'ref'):            # ref — углы прежней сети (v3): сравнение «было — стало»
+for x in TE: x['frame'] = [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0]]   # v5: самый трудный старт — рамка всего фото
+for start in ('frame', 'auto', 'vlm', 'ref'):            # ref — углы прежней сети (v3): сравнение «было — стало»
     E0, E1 = [], []
     for x in TE:
         if not x.get(start): continue
