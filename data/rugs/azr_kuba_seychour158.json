@@ -18,7 +18,7 @@
  "h": 984,
  "marks": [],
  "created": 1791736135,
- "updated": 1795154095,
+ "updated": 1795289182,
  "cat": {
   "title": "kuba seychour158",
   "museum": "",
@@ -79,7 +79,30 @@
   "area": 0.852,
   "ver": 1,
   "t": 1795117655,
-  "hand": true
+  "hand": true,
+  "ref_quad": {
+   "quad": [
+    [
+     0.05151,
+     0.09019
+    ],
+    [
+     0.93181,
+     0.08499
+    ],
+    [
+     0.93197,
+     0.87493
+    ],
+    [
+     0.06776,
+     0.89847
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795289208
+  }
  },
  "school_prev": "guba-shirvan",
  "school_by": "уточнено по слову «kuba» в подписи",
@@ -115,7 +138,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "hand",
  "auto_edge": {
   "v": 1,
@@ -136,5 +159,15 @@
    57.0766
   ],
   "t": 1795207786
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795289182
+   }
+  }
+ },
+ "frame_by": "micro"
 }
