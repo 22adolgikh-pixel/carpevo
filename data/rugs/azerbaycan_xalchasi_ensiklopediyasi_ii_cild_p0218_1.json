@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794977036,
+ "updated": 1795293047,
  "cat": {
   "title": "Pərdə Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -80,33 +80,33 @@
  "same_ok": {
   "azr_antique_caucasian_moghan_rug25": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794977033
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794977036
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0048_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794977036
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_187": {
-   "ok": true,
-   "by": "по цепочке: azcm_187 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0218_1",
-   "at": 1794977086
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Shadda_carpet_jpg": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1 ≠ wikimedia_File_Shadda_carpet_jpg",
-   "at": 1794977086
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_69": {
    "ok": false,
-   "by": "по цепочке: azcm_69 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0217_1",
-   "at": 1794977086
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -295,5 +295,6 @@
    62.3717
   ],
   "t": 1795207703
- }
+ },
+ "fragment": true
 }

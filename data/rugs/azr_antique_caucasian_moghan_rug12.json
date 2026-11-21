@@ -18,7 +18,7 @@
  "h": 1500,
  "marks": [],
  "created": 1791736138,
- "updated": 1795062314,
+ "updated": 1795293047,
  "cat": {
   "title": "Antique Moghan (Mughan) long rug, 19th century, Azerbaijan",
   "museum": "",
@@ -68,25 +68,23 @@
  "same_ok": {
   "azr_kuba_afshan_ugah4": {
    "ok": false,
-   "by": "по цепочке: azr_antique_caucasian_moghan_rug12 ≠ azr_kuba_afshan_ugah3",
-   "at": 1794980242
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_afshan_ugah3": {
    "ok": false,
-   "by": "по цепочке: azr_antique_caucasian_moghan_rug12 ≠ azr_kuba_afshan_ugah4",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_caucasian_moghan_rug4": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794982871,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_caucasian_moghan_rug76": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794997615,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -201,5 +199,6 @@
    54.4846
   ],
   "t": 1795207714
- }
+ },
+ "fragment": true
 }

@@ -18,7 +18,7 @@
  "h": 943,
  "marks": [],
  "created": 1791736125,
- "updated": 1795278771,
+ "updated": 1795293047,
  "cat": {
   "title": "Chelabi carpet from Karabakh (Azerbaijan) 2.jpg",
   "museum": "Wikimedia Commons",
@@ -85,39 +85,39 @@
  ],
  "same_ok": {
   "cm_82a5abb840": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794976008
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_51": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794976008
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Azerbaijani_rug_Chelyabi_jpg": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_p0064_1 ≠ wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_2_jpg",
-   "at": 1794976029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_c07233e54a": {
    "ok": false,
-   "by": "по цепочке: azcm_51 ≠ wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_2_jpg",
-   "at": 1794976029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_3cb8b598f2": {
    "ok": false,
-   "by": "по цепочке: azcm_51 ≠ wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_2_jpg",
-   "at": 1794976029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_b59b402cc9": {
    "ok": false,
-   "by": "по цепочке: azcm_51 ≠ wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_2_jpg",
-   "at": 1794976029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_p0064_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_p0064_1 ≠ cm_82a5abb840",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -314,5 +314,6 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "fragment": true
 }

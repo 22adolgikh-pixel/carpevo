@@ -18,7 +18,7 @@
  "h": 838,
  "marks": [],
  "created": 1794547278,
- "updated": 1795281027,
+ "updated": 1795293047,
  "cat": {
   "title": "безворсовый «Ladı» Карабах",
   "museum": "",
@@ -97,54 +97,54 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1": {
-   "ok": true,
-   "by": "машина: 543 общих точек, перекрытие 0.89 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_139": {
-   "ok": true,
-   "by": "машина: 745 общих точек, перекрытие 0.87 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_176": {
-   "ok": true,
-   "by": "по цепочке: azcm_139 = azcm_176 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1 = intangible_2851_p0023_2",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_186": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ azcm_186",
-   "at": 1794998130
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0133_1": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ azcm_186",
-   "at": 1794998130
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2851_p0018_1": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
-   "at": 1795007276
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2849_p0038_1": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
-   "at": 1795007276
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2849_p0174_1": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0174_1",
-   "at": 1795007276
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_181": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1",
-   "at": 1795027984
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1",
-   "at": 1795027984
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -342,5 +342,6 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "fragment": true
 }

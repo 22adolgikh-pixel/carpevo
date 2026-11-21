@@ -18,7 +18,7 @@
  "h": 1225,
  "marks": [],
  "created": 1791736135,
- "updated": 1795279666,
+ "updated": 1795293047,
  "cat": {
   "title": "kuba afshan ugah3",
   "museum": "",
@@ -72,27 +72,27 @@
   "azr_kuba_hajigaib12": {
    "ok": false,
    "by": "dolgikh",
-   "at": 1792258615
+   "at": 1795293048
   },
   "azr_kuba_shirvan_medallion141": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794980079
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_afshan_ugah4": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794980079
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_shirvan_medallion124": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_afshan_ugah4 ≠ azr_kuba_shirvan_medallion124",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_caucasian_moghan_rug12": {
    "ok": false,
-   "by": "по цепочке: azr_antique_caucasian_moghan_rug12 ≠ azr_kuba_afshan_ugah4",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -210,5 +210,6 @@
   "t": 1795207756
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "fragment": true
 }

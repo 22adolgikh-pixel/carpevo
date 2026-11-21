@@ -18,7 +18,7 @@
  "h": 400,
  "marks": [],
  "created": 1791736134,
- "updated": 1794976918,
+ "updated": 1795293046,
  "cat": {
   "title": "kuba shield36",
   "museum": "",
@@ -61,19 +61,19 @@
  ],
  "same_ok": {
   "azcm_18": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794976914
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_baku_rug1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794976918
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_caucasian_kazak_rug102201": {
    "ok": false,
-   "by": "по цепочке: azcm_18 ≠ azr_antique_caucasian_kazak_rug102201",
-   "at": 1794976955
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -169,5 +169,6 @@
    37.931
   ],
   "t": 1795207790
- }
+ },
+ "fragment": true
 }

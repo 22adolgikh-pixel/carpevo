@@ -3085,7 +3085,7 @@
   }
  ],
  "created": 1791870040,
- "updated": 1795279858,
+ "updated": 1795293047,
  "cat": {
   "title": "“Pirəbədil” («Пиребедиль»), Губа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -3142,24 +3142,24 @@
  ],
  "same_ok": {
   "cm_a6836a71b7": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1792088769
+   "at": 1795293048
   },
   "azcm_91": {
    "ok": false,
-   "by": "по цепочке: azcm_91 ≠ cm_a6836a71b7",
-   "at": 1794979928
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil10": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil10 ≠ cm_a6836a71b7",
-   "at": 1794997916
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol2_p135_1_1": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1795096109
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -3888,5 +3888,6 @@
   "t": 1795207679
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "fragment": true
 }

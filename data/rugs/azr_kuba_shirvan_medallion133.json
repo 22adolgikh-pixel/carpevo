@@ -18,7 +18,7 @@
  "h": 1265,
  "marks": [],
  "created": 1791736130,
- "updated": 1795154786,
+ "updated": 1795293047,
  "cat": {
   "title": "kuba shirvan medallion133",
   "museum": "",
@@ -57,14 +57,14 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_p0066_1": {
-   "ok": true,
-   "by": "машина: 1049 общих точек, перекрытие 0.92 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_16_jpg": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795018957
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -186,5 +186,6 @@
    48.3197
   ],
   "t": 1795207793
- }
+ },
+ "fragment": true
 }

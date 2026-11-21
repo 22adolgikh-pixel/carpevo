@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870021,
- "updated": 1794981349,
+ "updated": 1795293047,
  "cat": {
   "title": "Carpet; Textiles-Rugs",
   "museum": "Метрополитен-музей",
@@ -104,60 +104,69 @@
  ],
  "same_ok": {
   "cm_9453a46c77": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1792258833
+   "at": 1795293048
   },
   "cm_a38c54d791": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794750451,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "aic_226150": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794750589
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "met_447577": {
-   "ok": true,
-   "by": "машина: 905 общих точек, перекрытие 0.86 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_37e38ad820": {
-   "ok": true,
-   "by": "машина: 1367 общих точек, перекрытие 0.96 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_d12ac0d41b": {
-   "ok": true,
-   "by": "машина: 383 общих точек, перекрытие 0.72 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Metropoliten_muzeyində_1600_cü_illərə_aid_Quba_xalçası_1_jpeg": {
-   "ok": true,
-   "by": "машина: 914 общих точек, перекрытие 0.77 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_aa85e7129e": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794975817
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_76b023d1d2": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794975817
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_d868a6c152": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794981349
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_802aff8b0a": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794981349
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
+  },
+  "azr_early_karabagh_rug62": {
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
+  },
+  "cm_ec27c32594": {
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -441,5 +450,6 @@
    41.5383
   ],
   "t": 1795207845
- }
+ },
+ "fragment": true
 }

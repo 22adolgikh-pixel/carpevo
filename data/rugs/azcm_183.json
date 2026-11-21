@@ -18,7 +18,7 @@
  "h": 843,
  "marks": [],
  "created": 1791870038,
- "updated": 1794784393,
+ "updated": 1795293047,
  "cat": {
   "title": "Şəddə (Шадда), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -66,19 +66,19 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0123_1": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1794784353
+   "at": 1795293048
   },
   "azcm_186": {
    "ok": false,
-   "by": "по цепочке: azcm_186 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0123_1",
-   "at": 1794998130
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0133_1": {
    "ok": false,
-   "by": "по цепочке: azcm_186 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0123_1",
-   "at": 1794998130
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -415,5 +415,6 @@
    75.0251
   ],
   "t": 1795207674
- }
+ },
+ "fragment": true
 }

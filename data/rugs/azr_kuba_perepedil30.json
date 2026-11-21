@@ -2999,7 +2999,7 @@
   }
  ],
  "created": 1791736134,
- "updated": 1795203918,
+ "updated": 1795293047,
  "cat": {
   "title": "kuba perepedil30",
   "museum": "",
@@ -3058,43 +3058,39 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_p0007_1": {
-   "ok": true,
-   "by": "машина: 2411 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil60": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794984135,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil53": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794984135,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil61": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794984135,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_6522d62bed": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794984135,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_fcbef7be41": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil30 ≠ cm_6522d62bed",
-   "at": 1794984174
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil67": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_p0007_1 ≠ azr_kuba_perepedil67",
-   "at": 1795016030
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -3431,5 +3427,6 @@
    49.6647
   ],
   "t": 1795207778
- }
+ },
+ "fragment": true
 }

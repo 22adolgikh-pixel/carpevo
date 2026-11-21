@@ -18,7 +18,7 @@
  "h": 605,
  "marks": [],
  "created": 1791736122,
- "updated": 1794260277,
+ "updated": 1795293047,
  "cat": {
   "title": "Керимов, т. II (стр. скана 127, печ. 3)",
   "museum": "",
@@ -115,53 +115,53 @@
  "same_ok": {
   "kerimov_vol2_p127_3": {
    "ok": false,
-   "by": "по цепочке: cm_de088aa11d ≠ kerimov_vol2_p127_2",
-   "at": 1794973823
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_de088aa11d": {
    "ok": false,
-   "by": "по цепочке: kerimov_vol2_p127_2 ≠ kerimov_vol2_p127_3",
-   "at": 1794940139
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba74": {
-   "ok": true,
-   "by": "машина: 175 общих точек, перекрытие 0.86 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Caucasian_Fachralo_Kazak_Triple_Medallion_5ft_7in_x_7ft_5in_Circa": {
    "ok": false,
-   "by": "по цепочке: azr_kuba74 ≠ wikimedia_File_Caucasian_Fachralo_Kazak_Triple_Medallion_5ft_7in_x_7ft_5in_Circa",
-   "at": 1794973823
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_bordjalou_rug_with_moghan_guls_azadi_p135": {
    "ok": false,
-   "by": "по цепочке: azr_bordjalou_rug_with_moghan_guls_azadi_p135 ≠ azr_kuba74",
-   "at": 1794973823
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_shirvan_prayer_rug124_nagel1988_kilim": {
    "ok": false,
-   "by": "по цепочке: azr_antique_shirvan_prayer_rug124_nagel1988_kilim ≠ azr_kuba74",
-   "at": 1794976364
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_115": {
    "ok": false,
-   "by": "по цепочке: azcm_115 ≠ azr_kuba74",
-   "at": 1795007615
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_22": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795019054
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_konagkend59": {
    "ok": false,
-   "by": "по цепочке: azcm_22 ≠ kerimov_vol2_p127_2",
-   "at": 1795019183
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_31": {
    "ok": false,
-   "by": "по цепочке: azcm_22 ≠ kerimov_vol2_p127_2",
-   "at": 1795019183
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -358,5 +358,6 @@
    30.2198
   ],
   "t": 1795207881
- }
+ },
+ "fragment": true
 }

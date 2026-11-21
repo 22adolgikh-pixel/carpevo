@@ -18,7 +18,7 @@
  "h": 1999,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062011,
+ "updated": 1795293046,
  "cat": {
   "title": "Cecim Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -99,59 +99,59 @@
  ],
  "same_ok": {
   "azcm_191": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794980175
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_152": {
    "ok": false,
-   "by": "по цепочке: azcm_152 ≠ azcm_191",
-   "at": 1794980242
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_142": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
-   "at": 1794980242
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
-   "at": 1794980242
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0317_1": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0317_1",
-   "at": 1794980242
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_p0053_1": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_p0053_1",
-   "at": 1794980242
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_113": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_p0053_1",
-   "at": 1794980242
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0018_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794984244
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Azerbaijanian_carpet_Fakhrali_jpg": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_p0053_1",
-   "at": 1795008414
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_azerbaijan_shahsavan_jajim202": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_azerbaijan_jajim_rippon_boswell_09_2009_L28": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -306,5 +306,6 @@
    50.7915
   ],
   "t": 1795207691
- }
+ },
+ "fragment": true
 }

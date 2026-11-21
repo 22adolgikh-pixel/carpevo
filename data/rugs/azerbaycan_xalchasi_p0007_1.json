@@ -3629,7 +3629,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795016008,
+ "updated": 1795293047,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "The R. Mustafayev State Museum of Arts",
@@ -3694,40 +3694,39 @@
  ],
  "same_ok": {
   "azr_kuba_perepedil30": {
-   "ok": true,
-   "by": "машина: 2411 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil60": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil30 ≠ azr_kuba_perepedil60",
-   "at": 1794984174
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil53": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil30 ≠ azr_kuba_perepedil53",
-   "at": 1794984174
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil61": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil30 ≠ azr_kuba_perepedil61",
-   "at": 1794984174
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_fcbef7be41": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil30 ≠ cm_6522d62bed",
-   "at": 1794984174
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_6522d62bed": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil30 ≠ cm_6522d62bed",
-   "at": 1794984174
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil67": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795016008,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -4147,5 +4146,6 @@
    60.4995
   ],
   "t": 1795207704
- }
+ },
+ "fragment": true
 }

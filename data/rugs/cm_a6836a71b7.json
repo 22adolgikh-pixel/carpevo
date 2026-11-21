@@ -3553,7 +3553,7 @@
   }
  ],
  "created": 1791870016,
- "updated": 1794936122,
+ "updated": 1795293047,
  "cat": {
   "title": "Knotted-pile wool carpet “Pirabadil”",
   "museum": "",
@@ -3607,25 +3607,24 @@
  ],
  "same_ok": {
   "azcm_30": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1792088769
+   "at": 1795293048
   },
   "azcm_91": {
    "ok": false,
-   "by": "по цепочке: azcm_30 ≠ azcm_91",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil10": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794997895,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol2_p135_1_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795096109
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -3914,5 +3913,6 @@
    67.3352
   ],
   "t": 1795207838
- }
+ },
+ "fragment": true
 }

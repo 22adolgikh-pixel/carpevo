@@ -259,7 +259,7 @@
   }
  ],
  "created": 1791870027,
- "updated": 1794975841,
+ "updated": 1795293047,
  "cat": {
   "title": "Azərbaycan xalçaçılıq məktəblərindən olan Qarabağ xalçaçılıq məktəbinin Cəbrayıl qrupuna aid edilən xovlu xalç",
   "museum": "",
@@ -325,34 +325,34 @@
  ],
  "same_ok": {
   "cm_b11bd2ee23": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794975841
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_d1f91fb1e4": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794975841
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_2d904d6055": {
-   "ok": true,
-   "by": "по цепочке: cm_2d904d6055 = cm_af37d322da = cm_b11bd2ee23 = cm_bdd493bb76 = cm_d1f91fb1e4 = cm_d31dec1269",
-   "at": 1794975895
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_d31dec1269": {
-   "ok": true,
-   "by": "по цепочке: cm_2d904d6055 = cm_af37d322da = cm_b11bd2ee23 = cm_bdd493bb76 = cm_d1f91fb1e4 = cm_d31dec1269",
-   "at": 1794975895
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_af37d322da": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794981367
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_89e42f7250": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795203490
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -510,5 +510,6 @@
    20.9057
   ],
   "t": 1795207842
- }
+ },
+ "fragment": true
 }

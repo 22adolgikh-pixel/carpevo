@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795289150,
+ "updated": 1795293046,
  "cat": {
   "title": "Cecim Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -115,74 +115,74 @@
  ],
  "same_ok": {
   "azcm_142": {
-   "ok": true,
-   "by": "машина: 570 общих точек, перекрытие 0.84 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_189": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794976231
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2849_p0139_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794976231
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_azerbaijan_shahsavan_jajim_mm": {
    "ok": false,
-   "by": "по цепочке: azcm_142 ≠ azr_azerbaijan_shahsavan_jajim_mm",
-   "at": 1794979664
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_152": {
    "ok": false,
-   "by": "по цепочке: azcm_142 ≠ azcm_152",
-   "at": 1794979789
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_191": {
    "ok": false,
-   "by": "по цепочке: azcm_142 ≠ azcm_191",
-   "at": 1794979789
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
-   "at": 1794980242
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_azerbaijan_jajim1": {
    "ok": false,
-   "by": "по цепочке: azcm_142 ≠ azr_azerbaijan_jajim1",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_160": {
    "ok": false,
-   "by": "по цепочке: azcm_142 ≠ azcm_160",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0024_1": {
    "ok": false,
-   "by": "по цепочке: azcm_142 ≠ azcm_160",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2850_p0188_1": {
    "ok": false,
-   "by": "по цепочке: azcm_142 ≠ intangible_2850_p0188_1",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_azerbaijan_jajim_rippon_boswell_09_2009_L28": {
-   "ok": true,
-   "by": "по цепочке: azcm_142 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1 = azr_azerbaijan_jajim_rippon_boswell_09_2009_L28 = azr_azerbaijan_shahsavan_jajim202",
-   "at": 1795269566
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_azerbaijan_shahsavan_jajim202": {
-   "ok": true,
-   "by": "по цепочке: azcm_142 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1 = azr_azerbaijan_jajim_rippon_boswell_09_2009_L28 = azr_azerbaijan_shahsavan_jajim202",
-   "at": 1795269566
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_azerbaijan_jajim_flying_brid_motif204": {
    "ok": false,
-   "by": "по цепочке: azr_antique_azerbaijan_jajim_flying_brid_motif204 ≠ azr_azerbaijan_shahsavan_jajim202",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -418,5 +418,6 @@
   ],
   "t": 1795207692
  },
- "frame_by": "micro"
+ "frame_by": "micro",
+ "fragment": true
 }

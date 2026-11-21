@@ -18,7 +18,7 @@
  "h": 1717,
  "marks": [],
  "created": 1794547278,
- "updated": 1794750513,
+ "updated": 1795293047,
  "cat": {
   "title": "Ковёр «Akstafa» Газах",
   "museum": "",
@@ -71,24 +71,24 @@
  ],
  "same_ok": {
   "azr_antique_kazak_akstafa_rug5": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794975836
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Лемберан_jpg": {
    "ok": false,
-   "by": "по цепочке: azr_antique_kazak_akstafa_rug5 ≠ wikimedia_File_Лемберан_jpg",
-   "at": 1794975895
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_kazak_moghan_rug54a_christies": {
    "ok": false,
-   "by": "по цепочке: azr_antique_kazak_akstafa_rug5 ≠ azr_antique_kazak_moghan_rug54a_christies",
-   "at": 1794975895
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_pinwheel_kazak_rug_franz_bausback": {
    "ok": false,
-   "by": "по цепочке: azr_antique_kazak_akstafa_rug5 ≠ azr_pinwheel_kazak_rug_franz_bausback",
-   "at": 1794975895
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -182,5 +182,6 @@
    64.323
   ],
   "t": 1795207857
- }
+ },
+ "fragment": true
 }

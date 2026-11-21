@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062027,
+ "updated": 1795293047,
  "cat": {
   "title": "Энциклопедия, т. II, стр. 77",
   "museum": "Национальный музей азербайджанского ковра",
@@ -66,19 +66,19 @@
  ],
  "same_ok": {
   "azcm_177": {
-   "ok": true,
-   "by": "машина: 1502 общих точек, перекрытие 0.87 (порог 40 / 0.7)",
-   "at": 1794940139
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0073_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794983144
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_shirvan_medallion62": {
    "ok": false,
-   "by": "по цепочке: azcm_177 ≠ azr_kuba_shirvan_medallion62",
-   "at": 1794984454
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -194,5 +194,6 @@
    54.4638
   ],
   "t": 1795207694
- }
+ },
+ "fragment": true
 }

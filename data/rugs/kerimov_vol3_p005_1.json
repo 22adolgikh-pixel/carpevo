@@ -18,7 +18,7 @@
  "h": 790,
  "marks": [],
  "created": 1791736122,
- "updated": 1794342961,
+ "updated": 1795293047,
  "cat": {
   "title": "Керимов, т. III, Рис. 3 (стр. скана 5, печ. 10-11)",
   "museum": "",
@@ -92,24 +92,24 @@
  ],
  "same_ok": {
   "vam_O152843": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1791744860
+   "at": 1795293048
   },
   "azr_antique_caucasian_moghan_rug100": {
    "ok": false,
-   "by": "по цепочке: azr_antique_caucasian_moghan_rug100 ≠ vam_O152843",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_caucasian_moghan_rug89": {
    "ok": false,
-   "by": "по цепочке: azr_antique_caucasian_moghan_rug89 ≠ vam_O152843",
-   "at": 1795008414
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_caucasian_moghan_rug99": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795027868
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -207,5 +207,6 @@
    19.0332
   ],
   "t": 1795207884
- }
+ },
+ "fragment": true
 }

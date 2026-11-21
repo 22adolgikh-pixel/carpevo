@@ -18,7 +18,7 @@
  "h": 1131,
  "marks": [],
  "created": 1791870038,
- "updated": 1795289115,
+ "updated": 1795293047,
  "cat": {
   "title": "Zili (зили), Баку, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -81,39 +81,39 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1": {
-   "ok": true,
-   "by": "машина: 1566 общих точек, перекрытие 0.87 (порог 40 / 0.7)",
-   "at": 1794940139
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_gushlu_zili_christies_2060_L124": {
-   "ok": true,
-   "by": "по цепочке: azcm_145 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1 = azr_gushlu_zili_christies_2060_L124",
-   "at": 1794979928
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2850_p0053_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1 ≠ intangible_2850_p0053_1",
-   "at": 1794979928
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2849_p0097_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0135_1 ≠ intangible_2849_p0097_1",
-   "at": 1794979928
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_karagashli20": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794980180
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_p0003_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_p0003_1 ≠ azr_gushlu_zili_christies_2060_L124",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_shirvan_medallion33": {
    "ok": false,
-   "by": "по цепочке: azr_gushlu_zili_christies_2060_L124 ≠ azr_kuba_shirvan_medallion33",
-   "at": 1795008584
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -324,5 +324,6 @@
    69.0648
   ],
   "t": 1795207671
- }
+ },
+ "fragment": true
 }

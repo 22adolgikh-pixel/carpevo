@@ -2819,7 +2819,7 @@
   }
  ],
  "created": 1791870027,
- "updated": 1794929498,
+ "updated": 1795293047,
  "cat": {
   "title": "Pirəbədil xalçası, Quba xalçaçılıq məktəbi",
   "museum": "Национальный музей искусств Азербайджана",
@@ -2877,25 +2877,24 @@
  ],
  "same_ok": {
   "cm_6522d62bed": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1792393409
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_p0007_1": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil30 ≠ cm_6522d62bed",
-   "at": 1794984174
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil30": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil30 ≠ cm_6522d62bed",
-   "at": 1794984174
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil44": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795007253,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -3243,5 +3242,6 @@
    19.7798
   ],
   "t": 1795207850
- }
+ },
+ "fragment": true
 }

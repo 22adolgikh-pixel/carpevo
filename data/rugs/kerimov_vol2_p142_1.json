@@ -18,7 +18,7 @@
  "h": 838,
  "marks": [],
  "created": 1791736122,
- "updated": 1794658042,
+ "updated": 1795293047,
  "cat": {
   "title": "Керимов, т. II, 32 (стр. скана 142, печ. 32)",
   "museum": "",
@@ -69,29 +69,29 @@
  ],
  "same_ok": {
   "azr_kuba_konagkend5": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794976824
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_38f51693de": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_konagkend5 ≠ cm_38f51693de",
-   "at": 1794976886
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_zeyve_lesghi_star138": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_konagkend5 ≠ azr_kuba_zeyve_lesghi_star138",
-   "at": 1794976886
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1 ≠ azr_kuba_konagkend5",
-   "at": 1794976886
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba138": {
    "ok": false,
-   "by": "по цепочке: azr_kuba138 ≠ azr_kuba_konagkend5",
-   "at": 1794976886
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -276,5 +276,6 @@
    42.8025
   ],
   "t": 1795207883
- }
+ },
+ "fragment": true
 }

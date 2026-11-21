@@ -18,7 +18,7 @@
  "h": 225,
  "marks": [],
  "created": 1791736125,
- "updated": 1794984344,
+ "updated": 1795293047,
  "cat": {
   "title": "Azerbaijani \"Chelebi\" carpet (beginning of 19th century) from Khojali town of Azerbaijan. Karabakh group.png",
   "museum": "Wikimedia Commons",
@@ -80,41 +80,39 @@
  ],
  "same_ok": {
   "intangible_2851_p0123_1": {
-   "ok": true,
-   "by": "машина: 1370 общих точек, перекрытие 0.94 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_51": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794984344,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2850_p0135_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794984344,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_c07233e54a": {
    "ok": false,
-   "by": "по цепочке: azcm_51 ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
-   "at": 1794984387
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_3cb8b598f2": {
    "ok": false,
-   "by": "по цепочке: azcm_51 ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
-   "at": 1794984387
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_b59b402cc9": {
    "ok": false,
-   "by": "по цепочке: azcm_51 ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
-   "at": 1794984387
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchalari_qarabag_qrupu_p0047_1": {
-   "ok": true,
-   "by": "по цепочке: azerbaycan_xalchalari_qarabag_qrupu_p0047_1 = intangible_2851_p0123_1 = wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
-   "at": 1795268938
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -229,5 +227,6 @@
    13.8453
   ],
   "t": 1795207895
- }
+ },
+ "fragment": true
 }

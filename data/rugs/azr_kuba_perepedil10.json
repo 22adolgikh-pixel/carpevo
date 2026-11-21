@@ -18,7 +18,7 @@
  "h": 590,
  "marks": [],
  "created": 1791736134,
- "updated": 1794997895,
+ "updated": 1795293047,
  "cat": {
   "title": "kuba perepedil10",
   "museum": "",
@@ -74,36 +74,33 @@
  "same_ok": {
   "azr_kuba_perepedil42": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794997895,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_a6836a71b7": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794997895,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil64": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794997895,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_30": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil10 ≠ cm_a6836a71b7",
-   "at": 1794997916
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil16": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_perepedil10 ≠ azr_kuba_perepedil64",
-   "at": 1794997916
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol2_p135_1_1": {
    "ok": false,
-   "by": "по цепочке: azcm_30 ≠ azr_kuba_perepedil10",
-   "at": 1795096132
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -223,5 +220,6 @@
    33.4079
   ],
   "t": 1795207777
- }
+ },
+ "fragment": true
 }

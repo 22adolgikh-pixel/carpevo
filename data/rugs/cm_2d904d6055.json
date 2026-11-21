@@ -18,7 +18,7 @@
  "h": 1800,
  "marks": [],
  "created": 1791870025,
- "updated": 1794767296,
+ "updated": 1795293047,
  "cat": {
   "title": "\"Kasym ushagy carpets\" - Azerbaijanian fleecy carpet, Karabakh school, Jabrayi (Cəbrayıl) group ",
   "museum": "",
@@ -80,29 +80,29 @@
  ],
  "same_ok": {
   "cm_d31dec1269": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794975782
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_af37d322da": {
-   "ok": true,
-   "by": "по цепочке: cm_2d904d6055 = cm_af37d322da = cm_b11bd2ee23 = cm_bdd493bb76 = cm_d1f91fb1e4 = cm_d31dec1269",
-   "at": 1794975895
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_b11bd2ee23": {
-   "ok": true,
-   "by": "по цепочке: cm_2d904d6055 = cm_af37d322da = cm_b11bd2ee23 = cm_bdd493bb76 = cm_d1f91fb1e4 = cm_d31dec1269",
-   "at": 1794975895
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_bdd493bb76": {
-   "ok": true,
-   "by": "по цепочке: cm_2d904d6055 = cm_af37d322da = cm_b11bd2ee23 = cm_bdd493bb76 = cm_d1f91fb1e4 = cm_d31dec1269",
-   "at": 1794975895
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_d1f91fb1e4": {
-   "ok": true,
-   "by": "по цепочке: cm_2d904d6055 = cm_af37d322da = cm_b11bd2ee23 = cm_bdd493bb76 = cm_d1f91fb1e4 = cm_d31dec1269",
-   "at": 1794975895
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -299,5 +299,6 @@
    35.2775
   ],
   "t": 1795207823
- }
+ },
+ "fragment": true
 }

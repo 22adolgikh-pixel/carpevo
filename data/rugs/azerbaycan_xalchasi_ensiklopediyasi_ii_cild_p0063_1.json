@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062027,
+ "updated": 1795293047,
  "cat": {
   "title": "Kilim Баку",
   "museum": "Национальный музей азербайджанского ковра",
@@ -88,45 +88,44 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_p0058_1": {
-   "ok": true,
-   "by": "машина: 1606 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0072_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0063_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
-   "at": 1794976280
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0064_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0064_1 ≠ azerbaycan_xalchasi_p0058_1",
-   "at": 1794979029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1 ≠ azerbaycan_xalchasi_p0058_1",
-   "at": 1794979029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_141": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1 ≠ azerbaycan_xalchasi_p0058_1",
-   "at": 1794979029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_164": {
    "ok": false,
-   "by": "по цепочке: azcm_164 ≠ azerbaycan_xalchasi_p0058_1",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794981408,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2849_p0154_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795007181
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -278,5 +277,6 @@
    67.4947
   ],
   "t": 1795207693
- }
+ },
+ "fragment": true
 }

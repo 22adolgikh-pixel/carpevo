@@ -18,7 +18,7 @@
  "h": 1984,
  "marks": [],
  "created": 1791736133,
- "updated": 1794976824,
+ "updated": 1795293047,
  "cat": {
   "title": "kuba konagkend5",
   "museum": "",
@@ -70,28 +70,28 @@
  "same_ok": {
   "azr_kuba138": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794976824
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol2_p142_1": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794976824
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_zeyve_lesghi_star138": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_zeyve_lesghi_star138 ≠ kerimov_vol2_p142_1",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_38f51693de": {
    "ok": false,
-   "by": "по цепочке: cm_38f51693de ≠ kerimov_vol2_p142_1",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0150_1 ≠ kerimov_vol2_p142_1",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -309,5 +309,6 @@
    56.3248
   ],
   "t": 1795207774
- }
+ },
+ "fragment": true
 }

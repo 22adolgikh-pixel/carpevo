@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870040,
- "updated": 1795290990,
+ "updated": 1795293047,
  "cat": {
   "title": "“Qonaqkənd” («Гонагкенд»), Губа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -82,39 +82,39 @@
  ],
  "same_ok": {
   "azr_kuba_konagkend59": {
-   "ok": true,
-   "by": "машина: 518 общих точек, перекрытие 0.96 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_31": {
-   "ok": true,
-   "by": "машина: 2077 общих точек, перекрытие 0.71 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_784c4dbc66": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794984093
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol2_p097_2": {
    "ok": false,
-   "by": "по цепочке: azcm_31 ≠ kerimov_vol2_p097_2",
-   "at": 1794997733
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_119": {
    "ok": false,
-   "by": "по цепочке: azcm_119 ≠ azcm_31",
-   "at": 1794997733
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol2_p127_2": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795019054
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba74": {
    "ok": false,
-   "by": "по цепочке: azcm_22 ≠ kerimov_vol2_p127_2",
-   "at": 1795019183
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -481,5 +481,6 @@
   ],
   "t": 1795207676
  },
- "frame_by": "micro"
+ "frame_by": "micro",
+ "fragment": true
 }

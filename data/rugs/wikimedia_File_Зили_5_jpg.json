@@ -18,7 +18,7 @@
  "h": 978,
  "marks": [],
  "created": 1791736125,
- "updated": 1794997809,
+ "updated": 1795293047,
  "cat": {
   "title": "Зили 5.jpg",
   "museum": "Wikimedia Commons",
@@ -93,53 +93,53 @@
  "same_ok": {
   "azr_kuba20": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794997809
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_202": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794997809
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1": {
-   "ok": true,
-   "by": "по цепочке: azcm_202 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1 = wikimedia_File_Зили_5_jpg",
-   "at": 1794997884
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_shirvan_medallion120": {
    "ok": false,
-   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
-   "at": 1794997884
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "vam_O120765": {
    "ok": false,
-   "by": "по цепочке: azcm_202 ≠ vam_O120765",
-   "at": 1794997884
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0048_1": {
    "ok": false,
-   "by": "по цепочке: azcm_202 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0048_1",
-   "at": 1794997884
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Азербайджанський_килим_типу_зілі_jpg": {
    "ok": false,
-   "by": "по цепочке: azcm_202 ≠ wikimedia_File_Зили_3_jpg",
-   "at": 1794997884
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Зили_3_jpg": {
    "ok": false,
-   "by": "по цепочке: azcm_202 ≠ wikimedia_File_Зили_3_jpg",
-   "at": 1794997884
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_538d7a7026": {
    "ok": false,
-   "by": "по цепочке: azcm_202 ≠ cm_538d7a7026",
-   "at": 1794997884
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_198": {
    "ok": false,
-   "by": "по цепочке: azcm_198 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1",
-   "at": 1794997884
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -406,5 +406,6 @@
    62.2134
   ],
   "t": 1795207915
- }
+ },
+ "fragment": true
 }

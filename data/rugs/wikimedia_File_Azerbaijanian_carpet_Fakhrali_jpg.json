@@ -787,7 +787,7 @@
   }
  ],
  "created": 1791736125,
- "updated": 1795290116,
+ "updated": 1795293047,
  "cat": {
   "title": "Azerbaijanian carpet Fakhrali.jpg",
   "museum": "Wikimedia Commons",
@@ -837,24 +837,24 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_p0053_1": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1795008380
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_113": {
-   "ok": true,
-   "by": "по цепочке: azcm_113 = azerbaycan_xalchasi_p0053_1 = wikimedia_File_Azerbaijanian_carpet_Fakhrali_jpg",
-   "at": 1795008414
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_p0053_1",
-   "at": 1795008414
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_191": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_p0053_1",
-   "at": 1795008414
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -995,5 +995,6 @@
     }
    }
   }
- }
+ },
+ "fragment": true
 }

@@ -18,7 +18,7 @@
  "h": 1049,
  "marks": [],
  "created": 1791870041,
- "updated": 1795061866,
+ "updated": 1795293046,
  "cat": {
   "title": "“Fındığan” («Фындыган»), Баку, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -78,35 +78,34 @@
  ],
  "same_ok": {
   "azr_antique_khizi_findigan_rug13": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1792258764
+   "at": 1795293048
   },
   "wikimedia_File_Фындыган_jpg": {
-   "ok": true,
-   "by": "по цепочке: azcm_33 = azr_antique_khizi_findigan_rug13 = wikimedia_File_Фындыган_jpg",
-   "at": 1794940139
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_p0071_1": {
-   "ok": true,
-   "by": "машина: 1597 общих точек, перекрытие 0.79 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_khizi_findigan_rug17": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_p0071_1 ≠ azr_antique_khizi_findigan_rug17",
-   "at": 1794982794
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_khizi_findigan_rug7": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795027776,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_39": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795027776
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -477,5 +476,6 @@
    74.0114
   ],
   "t": 1795207680
- }
+ },
+ "fragment": true
 }

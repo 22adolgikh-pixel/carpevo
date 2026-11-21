@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870038,
- "updated": 1794783470,
+ "updated": 1795293047,
  "cat": {
   "title": "Ladı (Лады), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -100,54 +100,54 @@
  ],
  "same_ok": {
   "azcm_139": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1794783960
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1794783988
+   "at": 1795293048
   },
   "intangible_2851_p0023_2": {
-   "ok": true,
-   "by": "по цепочке: azcm_139 = azcm_176 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1 = intangible_2851_p0023_2",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_186": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ azcm_186",
-   "at": 1794998130
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0133_1": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ azcm_186",
-   "at": 1794998130
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2851_p0018_1": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
-   "at": 1795007276
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2849_p0038_1": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
-   "at": 1795007276
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2849_p0174_1": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0174_1",
-   "at": 1795007276
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_181": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1",
-   "at": 1795027984
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1",
-   "at": 1795027984
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -317,5 +317,6 @@
    66.5357
   ],
   "t": 1795207673
- }
+ },
+ "fragment": true
 }

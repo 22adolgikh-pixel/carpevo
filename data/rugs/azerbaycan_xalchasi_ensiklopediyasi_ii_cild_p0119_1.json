@@ -18,7 +18,7 @@
  "h": 1870,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062089,
+ "updated": 1795293047,
  "cat": {
   "title": "Şəddə Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -75,29 +75,29 @@
  ],
  "same_ok": {
   "azcm_182": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794982655
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_189": {
    "ok": false,
-   "by": "по цепочке: azcm_182 ≠ azcm_189",
-   "at": 1794982712
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2851_p0020_1": {
    "ok": false,
-   "by": "по цепочке: azcm_182 ≠ intangible_2851_p0020_1",
-   "at": 1794982712
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_144": {
    "ok": false,
-   "by": "по цепочке: azcm_182 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1",
-   "at": 1794982712
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1": {
    "ok": false,
-   "by": "по цепочке: azcm_182 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1",
-   "at": 1794982712
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -233,5 +233,6 @@
    76.0421
   ],
   "t": 1795207696
- }
+ },
+ "fragment": true
 }

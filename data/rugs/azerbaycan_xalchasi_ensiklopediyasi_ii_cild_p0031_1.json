@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1794935887,
+ "updated": 1795293047,
  "cat": {
   "title": "Çiyi palaz Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -87,45 +87,44 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0030_1": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794977022
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_166": {
    "ok": false,
-   "by": "по цепочке: azcm_166 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0030_1",
-   "at": 1794977086
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0114_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0030_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0114_1",
-   "at": 1794977086
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_174": {
    "ok": false,
-   "by": "по цепочке: azcm_174 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0030_1",
-   "at": 1794977087
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_143": {
    "ok": false,
-   "by": "по цепочке: azcm_143 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0030_1",
-   "at": 1794977087
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1": {
    "ok": false,
-   "by": "по цепочке: azcm_143 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0030_1",
-   "at": 1794977087
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0030_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_168": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794981439,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -307,5 +306,6 @@
    64.3096
   ],
   "t": 1795207692
- }
+ },
+ "fragment": true
 }

@@ -18,7 +18,7 @@
  "h": 590,
  "marks": [],
  "created": 1791736136,
- "updated": 1795279948,
+ "updated": 1795293047,
  "cat": {
   "title": "kuba20",
   "museum": "",
@@ -70,29 +70,29 @@
  ],
  "same_ok": {
   "azr_kuba_shirvan_medallion120": {
-   "ok": true,
-   "by": "машина: 3109 общих точек, перекрытие 0.98 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Зили_5_jpg": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794997809
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0147_1": {
    "ok": false,
-   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
-   "at": 1794997884
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_202": {
    "ok": false,
-   "by": "по цепочке: azr_kuba20 ≠ wikimedia_File_Зили_5_jpg",
-   "at": 1794997884
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_alpan93": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_alpan93 ≠ azr_kuba_shirvan_medallion120",
-   "at": 1794998130
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -248,5 +248,6 @@
   "quad_status": "confirmed"
  },
  "tri": "micro",
- "frame": "whole"
+ "frame": "whole",
+ "fragment": true
 }

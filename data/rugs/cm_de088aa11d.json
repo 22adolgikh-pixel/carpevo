@@ -2125,7 +2125,7 @@
   }
  ],
  "created": 1791870033,
- "updated": 1794590413,
+ "updated": 1795293047,
  "cat": {
   "title": "Guba rug, Guba school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -2187,9 +2187,9 @@
  ],
  "same_ok": {
   "kerimov_vol2_p127_3": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1795061665
+   "at": 1795293048
   },
   "kerimov_vol2_p127_1": {
    "ok": true,
@@ -2198,23 +2198,23 @@
   },
   "kerimov_vol2_p127_2": {
    "ok": false,
-   "by": "по цепочке: kerimov_vol2_p127_2 ≠ kerimov_vol2_p127_3",
-   "at": 1794940139
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba74": {
    "ok": false,
-   "by": "по цепочке: kerimov_vol2_p127_2 ≠ kerimov_vol2_p127_3",
-   "at": 1794973823
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_alpan94": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_alpan94 ≠ kerimov_vol2_p127_3",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol3_p030_1": {
    "ok": false,
-   "by": "по цепочке: kerimov_vol2_p127_3 ≠ kerimov_vol3_p030_1",
-   "at": 1795027984
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -2823,5 +2823,6 @@
    54.0803
   ],
   "t": 1795207846
- }
+ },
+ "fragment": true
 }

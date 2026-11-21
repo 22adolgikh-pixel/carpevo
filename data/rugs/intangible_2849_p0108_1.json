@@ -18,7 +18,7 @@
  "h": 1797,
  "marks": [],
  "created": 1794547278,
- "updated": 1795292056,
+ "updated": 1795293047,
  "cat": {
   "title": "безворсовый «Sumax» Губа",
   "museum": "",
@@ -83,39 +83,39 @@
  ],
  "same_ok": {
   "intangible_2851_p0018_2": {
-   "ok": true,
-   "by": "машина: 1372 общих точек, перекрытие 0.91 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_shirvan_prayer_rug124_nagel1988_kilim": {
    "ok": false,
-   "by": "по цепочке: azr_antique_shirvan_prayer_rug124_nagel1988_kilim ≠ intangible_2851_p0018_2",
-   "at": 1794976364
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "met_447484": {
    "ok": false,
-   "by": "по цепочке: intangible_2851_p0018_2 ≠ met_447484",
-   "at": 1794976886
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_134": {
    "ok": false,
-   "by": "по цепочке: intangible_2851_p0018_2 ≠ met_447484",
-   "at": 1794984454
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Касымушагы_jpg": {
    "ok": false,
-   "by": "по цепочке: intangible_2850_p0029_1 ≠ intangible_2851_p0018_2",
-   "at": 1795203521
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_82": {
    "ok": false,
-   "by": "по цепочке: intangible_2850_p0029_1 ≠ intangible_2851_p0018_2",
-   "at": 1795203521
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2850_p0029_1": {
    "ok": false,
-   "by": "по цепочке: intangible_2850_p0029_1 ≠ intangible_2851_p0018_2",
-   "at": 1795203521
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -263,5 +263,6 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "hand"
+ "tri": "hand",
+ "fragment": true
 }

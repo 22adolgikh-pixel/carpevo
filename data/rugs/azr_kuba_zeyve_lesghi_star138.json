@@ -18,7 +18,7 @@
  "h": 1401,
  "marks": [],
  "created": 1791736136,
- "updated": 1795291491,
+ "updated": 1795293047,
  "cat": {
   "title": "kuba zeyve lesghi star138",
   "museum": "",
@@ -58,13 +58,13 @@
  "same_ok": {
   "kerimov_vol2_p142_1": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_konagkend5 ≠ azr_kuba_zeyve_lesghi_star138",
-   "at": 1794976886
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_konagkend5": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_zeyve_lesghi_star138 ≠ kerimov_vol2_p142_1",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -169,5 +169,6 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "fragment": true
 }

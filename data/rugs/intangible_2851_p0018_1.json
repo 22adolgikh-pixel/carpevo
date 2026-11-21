@@ -18,7 +18,7 @@
  "h": 611,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795293047,
  "cat": {
   "title": "безворсовый «Sumax» Губа",
   "museum": "",
@@ -74,29 +74,29 @@
  ],
  "same_ok": {
   "intangible_2849_p0038_1": {
-   "ok": true,
-   "by": "машина: 917 общих точек, перекрытие 0.97 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_176": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
-   "at": 1795007276
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_139": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
-   "at": 1795007276
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0091_1": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
-   "at": 1795007276
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2851_p0023_2": {
    "ok": false,
-   "by": "по цепочке: azcm_139 ≠ intangible_2849_p0038_1",
-   "at": 1795007276
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -200,5 +200,6 @@
    16.3328
   ],
   "t": 1795207865
- }
+ },
+ "fragment": true
 }

@@ -18,7 +18,7 @@
  "h": 1039,
  "marks": [],
  "created": 1791870037,
- "updated": 1795061866,
+ "updated": 1795293047,
  "cat": {
   "title": "Palaz (Палас), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -98,59 +98,59 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1": {
-   "ok": true,
-   "by": "машина: 381 общих точек, перекрытие 0.80 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_175": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794976863
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0030_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794977022
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0031_1": {
    "ok": false,
-   "by": "по цепочке: azcm_143 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0030_1",
-   "at": 1794977087
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_khyzy_kilim3": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1 ≠ azr_antique_khyzy_kilim3",
-   "at": 1794979029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_khyzy_kilim8": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1 ≠ azr_antique_khyzy_kilim8",
-   "at": 1794979029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0182_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0182_1",
-   "at": 1794979029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_baku_jejim_XIXc": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1 ≠ azr_baku_jejim_XIXc",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794982488
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_144": {
    "ok": false,
-   "by": "по цепочке: azcm_143 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0121_1",
-   "at": 1794982510
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794982604
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -345,5 +345,6 @@
    73.2345
   ],
   "t": 1795207671
- }
+ },
+ "fragment": true
 }

@@ -7,11 +7,11 @@
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "18th century",
  "school": "karabakh",
  "composition": "",
  "technique": "",
- "size": "",
+ "size": "157×268 см",
  "notes": "Proto \"Pinwheel\" rug, Kazak or Karabagh, Azerbaijan, c 1800. Rippon Boswell Spring 2003. sale, 17th May 2003",
  "status": "new",
  "w": 748,
@@ -54,7 +54,13 @@
    "score": 440
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_early_karabagh_rug50": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1795293069
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -90,5 +96,9 @@
    60.0695
   ],
   "t": 1795207813
+ },
+ "from_twin": {
+  "date": "azr_early_karabagh_rug50",
+  "size": "azr_early_karabagh_rug50"
  }
 }

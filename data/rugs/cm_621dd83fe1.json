@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870016,
- "updated": 1795205224,
+ "updated": 1795293046,
  "cat": {
   "title": "Collection VOK: Caucasus - Persia 22 The exceptional quality of this red- and blue-ground Azeri cover (shadda)",
   "museum": "",
@@ -93,48 +93,48 @@
  "same_ok": {
   "vam_O364917": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794981466
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_a06c6044a8": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1795205224
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_122": {
    "ok": false,
-   "by": "по цепочке: azcm_122 ≠ cm_a06c6044a8",
-   "at": 1795205245
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_early_shirvan_rug17": {
    "ok": false,
-   "by": "по цепочке: azr_early_shirvan_rug17 ≠ cm_a06c6044a8",
-   "at": 1795205245
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_4": {
    "ok": false,
-   "by": "по цепочке: azcm_4 ≠ cm_a06c6044a8",
-   "at": 1795205245
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_130": {
    "ok": false,
-   "by": "по цепочке: azcm_130 ≠ cm_a06c6044a8",
-   "at": 1795205245
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_lori_pambak_lambali_rug_switzerland_private_collection": {
    "ok": false,
-   "by": "по цепочке: azr_lori_pambak_lambali_rug_switzerland_private_collection ≠ cm_a06c6044a8",
-   "at": 1795205245
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2850_p0155_1": {
    "ok": false,
-   "by": "по цепочке: cm_a06c6044a8 ≠ intangible_2850_p0155_1",
-   "at": 1795205245
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_borchali_flatweave_qapiliq": {
    "ok": false,
-   "by": "по цепочке: azr_antique_borchali_flatweave_qapiliq ≠ cm_a06c6044a8",
-   "at": 1795205245
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -338,5 +338,6 @@
    86.5252
   ],
   "t": 1795207829
- }
+ },
+ "fragment": true
 }

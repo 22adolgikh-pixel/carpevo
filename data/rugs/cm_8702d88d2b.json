@@ -8,10 +8,10 @@
  "license": "CC0 · Sefer azeri",
  "place": "",
  "date": "XVIII əsr",
- "school": "",
+ "school": "karabakh",
  "composition": "",
  "technique": "",
- "size": "",
+ "size": "69×118 см",
  "notes": "XVIII əsrdə Qarabağda hazırlanmış bədii tikməli süfrə. Material: ipək, kətan. Ölçü: 68x118 sm. Texnika: xanduz.",
  "status": "new",
  "w": 1441,
@@ -54,7 +54,13 @@
    "score": 111
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_karabagh_silk_embroidery_medallion_and_sickle_leaves_XVIIIc_": {
+   "ok": true,
+   "by": "dolgikh",
+   "at": 1795293056
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "azr_karabagh_silk_embroidery_medallion_and_sickle_leaves_XVIIIc_": {
@@ -149,5 +155,9 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "from_twin": {
+  "school": "azr_karabagh_silk_embroidery_medallion_and_sickle_leaves_XVIIIc_",
+  "size": "azr_karabagh_silk_embroidery_medallion_and_sickle_leaves_XVIIIc_"
+ }
 }

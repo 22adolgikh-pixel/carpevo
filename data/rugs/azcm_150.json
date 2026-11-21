@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870037,
- "updated": 1794976965,
+ "updated": 1795293047,
  "cat": {
   "title": "Kilim (Килим), Карабах, Азербайджан.",
   "museum": "Национальный музей азербайджанского ковра",
@@ -70,23 +70,23 @@
  "same_ok": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794750474
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_sumakh106": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794750654
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0080_1": {
-   "ok": true,
-   "by": "машина: 917 общих точек, перекрытие 0.85 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0080_1 ≠ wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg",
-   "at": 1795027984
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -482,5 +482,6 @@
    63.8163
   ],
   "t": 1795207672
- }
+ },
+ "fragment": true
 }

@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870037,
- "updated": 1794783470,
+ "updated": 1795293047,
  "cat": {
   "title": "Kilim (Килим), село Падар, Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -65,20 +65,19 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0057_1": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1794784152
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0059_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0057_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0059_1",
-   "at": 1794979029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0058_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794981631,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -404,5 +403,6 @@
    64.2253
   ],
   "t": 1795207673
- }
+ },
+ "fragment": true
 }

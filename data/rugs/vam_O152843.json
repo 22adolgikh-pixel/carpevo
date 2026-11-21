@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736127,
- "updated": 1791744860,
+ "updated": 1795293047,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -69,24 +69,24 @@
  ],
  "same_ok": {
   "kerimov_vol3_p005_1": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1791744860
+   "at": 1795293048
   },
   "azr_antique_caucasian_moghan_rug100": {
    "ok": false,
-   "by": "по цепочке: azr_antique_caucasian_moghan_rug100 ≠ kerimov_vol3_p005_1",
-   "at": 1794979029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_caucasian_moghan_rug89": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795008392
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_caucasian_moghan_rug99": {
    "ok": false,
-   "by": "по цепочке: azr_antique_caucasian_moghan_rug99 ≠ kerimov_vol3_p005_1",
-   "at": 1795027984
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -169,5 +169,6 @@
    49.074
   ],
   "t": 1795207891
- }
+ },
+ "fragment": true
 }

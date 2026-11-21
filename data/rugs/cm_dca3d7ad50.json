@@ -18,7 +18,7 @@
  "h": 1284,
  "marks": [],
  "created": 1791870029,
- "updated": 1794430373,
+ "updated": 1795293047,
  "cat": {
   "title": "A picture and description of this carpet is in a publication by the Ministry of Culture, Turkish Handwoven Car",
   "museum": "Музей турецкого и исламского искусства (Стамбул)",
@@ -80,39 +80,39 @@
  ],
  "same_ok": {
   "cm_21bd70c998": {
-   "ok": true,
-   "by": "машина: 3237 общих точек, перекрытие 0.83 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_a7f4d62972": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794975936
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_a9d2a004ec": {
    "ok": false,
-   "by": "по цепочке: cm_a7f4d62972 ≠ cm_dca3d7ad50",
-   "at": 1794976029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_e44bb7b85e": {
    "ok": false,
-   "by": "по цепочке: cm_a7f4d62972 ≠ cm_dca3d7ad50",
-   "at": 1794976029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_978f4e3b74": {
    "ok": false,
-   "by": "по цепочке: cm_a7f4d62972 ≠ cm_dca3d7ad50",
-   "at": 1794976029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_8b261fa548": {
    "ok": false,
-   "by": "по цепочке: cm_21bd70c998 ≠ cm_8b261fa548",
-   "at": 1794977086
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_a8c3332dec": {
    "ok": false,
-   "by": "по цепочке: cm_21bd70c998 ≠ cm_a9d2a004ec",
-   "at": 1794981395
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -227,5 +227,6 @@
    3.8447
   ],
   "t": 1795207846
- }
+ },
+ "fragment": true
 }

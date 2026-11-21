@@ -18,7 +18,7 @@
  "h": 1359,
  "marks": [],
  "created": 1791736130,
- "updated": 1794979984,
+ "updated": 1795293047,
  "cat": {
   "title": "kuba shirvan medallion163",
   "museum": "",
@@ -66,23 +66,23 @@
  "same_ok": {
   "azr_kuba_shirvan_medallion102": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794979984
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_khyzy_pile_rug3": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794979984
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_zeyve_lesghi_star146": {
    "ok": false,
-   "by": "по цепочке: azr_antique_khyzy_pile_rug3 ≠ azr_kuba_zeyve_lesghi_star146",
-   "at": 1794980029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_afshan_ugah14": {
    "ok": false,
-   "by": "по цепочке: azr_antique_khyzy_pile_rug3 ≠ azr_kuba_afshan_ugah14",
-   "at": 1794997884
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -248,5 +248,6 @@
    35.1173
   ],
   "t": 1795207794
- }
+ },
+ "fragment": true
 }

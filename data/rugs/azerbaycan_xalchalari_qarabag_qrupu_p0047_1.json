@@ -18,7 +18,7 @@
  "h": 1431,
  "marks": [],
  "created": 1794547278,
- "updated": 1795268917,
+ "updated": 1795293047,
  "cat": {
   "title": "Xalça. “ Çələbi” . Qarabağqrupu . Azərbaycan . Xocalı.",
   "museum": "",
@@ -83,39 +83,39 @@
  ],
  "same_ok": {
   "intangible_2851_p0123_1": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1795268917
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali": {
-   "ok": true,
-   "by": "по цепочке: azerbaycan_xalchalari_qarabag_qrupu_p0047_1 = intangible_2851_p0123_1 = wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
-   "at": 1795268938
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_51": {
    "ok": false,
-   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
-   "at": 1795268938
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_c07233e54a": {
    "ok": false,
-   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
-   "at": 1795268939
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_3cb8b598f2": {
    "ok": false,
-   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
-   "at": 1795268939
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_b59b402cc9": {
    "ok": false,
-   "by": "по цепочке: cm_c07233e54a ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
-   "at": 1795268939
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2850_p0135_1": {
    "ok": false,
-   "by": "по цепочке: intangible_2850_p0135_1 ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
-   "at": 1795268939
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-11-12 22:41",
@@ -219,5 +219,6 @@
  "from_twin": {
   "museum": "intangible_2851_p0123_1",
   "place": "intangible_2851_p0123_1"
- }
+ },
+ "fragment": true
 }

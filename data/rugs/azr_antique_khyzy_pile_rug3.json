@@ -18,7 +18,7 @@
  "h": 1145,
  "marks": [],
  "created": 1791736129,
- "updated": 1794997834,
+ "updated": 1795293047,
  "cat": {
   "title": "antique-khyzy-pile-rug3",
   "museum": "",
@@ -66,23 +66,23 @@
  "same_ok": {
   "azr_kuba_zeyve_lesghi_star146": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794978952
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_shirvan_medallion163": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794979984
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_shirvan_medallion102": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_shirvan_medallion102 ≠ azr_kuba_shirvan_medallion163",
-   "at": 1794980029
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_afshan_ugah14": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794997834
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -312,5 +312,6 @@
    38.3911
   ],
   "t": 1795207724
- }
+ },
+ "fragment": true
 }

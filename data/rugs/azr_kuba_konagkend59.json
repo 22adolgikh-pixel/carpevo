@@ -18,7 +18,7 @@
  "h": 1024,
  "marks": [],
  "created": 1791736133,
- "updated": 1795117501,
+ "updated": 1795293047,
  "cat": {
   "title": "kuba konagkend59",
   "museum": "",
@@ -77,39 +77,39 @@
  ],
  "same_ok": {
   "azcm_22": {
-   "ok": true,
-   "by": "машина: 518 общих точек, перекрытие 0.96 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_31": {
-   "ok": true,
-   "by": "машина: 488 общих точек, перекрытие 0.72 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_784c4dbc66": {
    "ok": false,
-   "by": "по цепочке: azcm_22 ≠ cm_784c4dbc66",
-   "at": 1794984120
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol2_p097_2": {
    "ok": false,
-   "by": "по цепочке: azcm_31 ≠ kerimov_vol2_p097_2",
-   "at": 1794997733
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_119": {
    "ok": false,
-   "by": "по цепочке: azcm_119 ≠ azcm_31",
-   "at": 1794997733
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba74": {
    "ok": false,
-   "by": "по цепочке: azcm_22 ≠ kerimov_vol2_p127_2",
-   "at": 1795019183
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol2_p127_2": {
    "ok": false,
-   "by": "по цепочке: azcm_22 ≠ kerimov_vol2_p127_2",
-   "at": 1795019183
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -253,5 +253,6 @@
    42.447
   ],
   "t": 1795207774
- }
+ },
+ "fragment": true
 }

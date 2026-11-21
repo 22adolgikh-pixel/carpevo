@@ -1667,7 +1667,7 @@
   }
  ],
  "created": 1794776768,
- "updated": 1795281220,
+ "updated": 1795293047,
  "cat": {
   "title": "Керимов, т. II (стр. скана 135, печ. 18)",
   "museum": "",
@@ -1920,23 +1920,23 @@
  "same_ok": {
   "cm_a6836a71b7": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795096109
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_30": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1795096109
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_91": {
    "ok": false,
-   "by": "по цепочке: azcm_30 ≠ azcm_91",
-   "at": 1795096132
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil10": {
    "ok": false,
-   "by": "по цепочке: azcm_30 ≠ azr_kuba_perepedil10",
-   "at": 1795096132
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "same": [
@@ -2013,5 +2013,6 @@
    40.7401
   ],
   "t": 1795207883
- }
+ },
+ "fragment": true
 }

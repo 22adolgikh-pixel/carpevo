@@ -2648,7 +2648,7 @@
   }
  ],
  "created": 1791736122,
- "updated": 1795290142,
+ "updated": 1795293047,
  "cat": {
   "title": "Керимов, т. II (стр. скана 127, печ. 3)",
   "museum": "",
@@ -2749,28 +2749,28 @@
   },
   "azr_kuba74": {
    "ok": false,
-   "by": "по цепочке: kerimov_vol2_p127_2 ≠ kerimov_vol2_p127_3",
-   "at": 1794973823
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol2_p127_2": {
    "ok": false,
-   "by": "по цепочке: cm_de088aa11d ≠ kerimov_vol2_p127_2",
-   "at": 1794973823
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_alpan94": {
    "ok": false,
-   "by": "по цепочке: azr_kuba_alpan94 ≠ cm_de088aa11d",
-   "at": 1794976955
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "kerimov_vol3_p030_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795027863
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "cm_de088aa11d": {
-   "ok": true,
+   "ok": false,
    "by": "dolgikh",
-   "at": 1795061665
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -3466,5 +3466,6 @@
   "mmv8dqizq",
   "mmvcwola3",
   "xmmv8djy9m"
- ]
+ ],
+ "fragment": true
 }

@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736128,
- "updated": 1794563367,
+ "updated": 1795293047,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -69,23 +69,23 @@
  "same_ok": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794750724
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Azerbaijani_carpet_Gadim_Ganja_in_V_A_jpg": {
-   "ok": true,
-   "by": "машина: 442 общих точек, перекрытие 0.98 (порог 40 / 0.7)",
-   "at": 1794940138
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Gadim_Ganja_carpet_in_V_A_jpg": {
-   "ok": true,
-   "by": "машина: 283 общих точек, перекрытие 0.95 (порог 40 / 0.7)",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "wikimedia_File_Azerbaijani_carpet_Gadim_Ganja_in_V_A_cut_jpg": {
-   "ok": true,
-   "by": "по цепочке: vam_O66936 = wikimedia_File_Azerbaijani_carpet_Gadim_Ganja_in_V_A_cut_jpg = wikimedia_File_Azerbaijani_carpet_Gadim_Ganja_in_V_A_jpg = wikimedia_File_Gadim_Ganja_carpet_in_V_A_jpg",
-   "at": 1794973823
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -251,5 +251,6 @@
    65.0206
   ],
   "t": 1795207892
- }
+ },
+ "fragment": true
 }

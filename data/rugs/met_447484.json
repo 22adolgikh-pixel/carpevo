@@ -18,7 +18,7 @@
  "h": 624,
  "marks": [],
  "created": 1791736122,
- "updated": 1794984453,
+ "updated": 1795293047,
  "cat": {
   "title": "Carpet",
   "museum": "Метрополитен-музей",
@@ -85,45 +85,43 @@
  "same_ok": {
   "cm_68a97b0843": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794976151
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_kuba_perepedil71": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794976848
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2851_p0018_2": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794976848
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2849_p0108_1": {
    "ok": false,
-   "by": "по цепочке: intangible_2851_p0018_2 ≠ met_447484",
-   "at": 1794976886
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_134": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1794984453
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_pinwheel_kazak_rug_milanesi": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794984453,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_kazak_pinwheel_swastika_rug2_dated": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1794984453,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2849_p0230_1": {
    "ok": false,
-   "by": "по цепочке: azcm_134 ≠ intangible_2849_p0230_1",
-   "at": 1794984485
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -272,5 +270,6 @@
    44.3804
   ],
   "t": 1795207887
- }
+ },
+ "fragment": true
 }

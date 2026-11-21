@@ -18,7 +18,7 @@
  "h": 615,
  "marks": [],
  "created": 1791736138,
- "updated": 1795291491,
+ "updated": 1795293046,
  "cat": {
   "title": "azerbaijan shahsavan jajim202",
   "museum": "",
@@ -106,76 +106,74 @@
  ],
  "same_ok": {
   "azcm_142": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1795269545
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_azerbaijan_jajim_rippon_boswell_09_2009_L28": {
-   "ok": true,
-   "by": "/m: dolgikh",
-   "at": 1795269545
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_antique_azerbaijan_jajim_flying_brid_motif204": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795269545,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_152": {
    "ok": false,
-   "by": "/m: dolgikh",
-   "at": 1795269545,
-   "similar": true
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1": {
-   "ok": true,
-   "by": "по цепочке: azcm_142 = azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1 = azr_azerbaijan_jajim_rippon_boswell_09_2009_L28 = azr_azerbaijan_shahsavan_jajim202",
-   "at": 1795269566
+   "ok": false,
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_189": {
    "ok": false,
-   "by": "по цепочке: azcm_189 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_191": {
    "ok": false,
-   "by": "по цепочке: azcm_191 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2849_p0139_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1 ≠ intangible_2849_p0139_1",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_azerbaijan_shahsavan_jajim_mm": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1 ≠ azr_azerbaijan_shahsavan_jajim_mm",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azr_azerbaijan_jajim1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1 ≠ azr_azerbaijan_jajim1",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azcm_160": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0024_1",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0024_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0024_1",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   },
   "intangible_2850_p0188_1": {
    "ok": false,
-   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0023_1 ≠ intangible_2850_p0188_1",
-   "at": 1795269566
+   "by": "dolgikh",
+   "at": 1795293048
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -313,5 +311,6 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "fragment": true
 }
