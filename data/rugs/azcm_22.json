@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870040,
- "updated": 1795061866,
+ "updated": 1795290990,
  "cat": {
   "title": "“Qonaqkənd” («Гонагкенд»), Губа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -206,6 +206,13 @@
   },
   "field": {
    "dolgikh": "1"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795290990
+   }
   }
  },
  "school_prev": "guba-shirvan",
@@ -452,7 +459,7 @@
    "src": "cand1"
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -473,5 +480,6 @@
    78.8164
   ],
   "t": 1795207676
- }
+ },
+ "frame_by": "micro"
 }

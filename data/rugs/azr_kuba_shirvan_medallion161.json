@@ -18,7 +18,7 @@
  "h": 746,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1795290999,
  "cat": {
   "title": "kuba shirvan medallion161",
   "museum": "",
@@ -89,7 +89,30 @@
   "conf": 0.965,
   "area": 0.811,
   "ver": 1,
-  "t": 1794238382
+  "t": 1794238382,
+  "ref_quad": {
+   "quad": [
+    [
+     0.05246,
+     0.05661
+    ],
+    [
+     0.92773,
+     0.0401
+    ],
+    [
+     0.93552,
+     0.96141
+    ],
+    [
+     0.05319,
+     0.9618
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795290931
+  }
  },
  "same_chk": {
   "azr_antique_shirvan_prayer_rug126_Eberhart20Herrmann": {
@@ -118,5 +141,49 @@
    42.6825
   ],
   "t": 1795207794
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795290999,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05246,
+    0.05661
+   ],
+   [
+    0.92773,
+    0.0401
+   ],
+   [
+    0.93552,
+    0.96141
+   ],
+   [
+    0.05319,
+    0.9618
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

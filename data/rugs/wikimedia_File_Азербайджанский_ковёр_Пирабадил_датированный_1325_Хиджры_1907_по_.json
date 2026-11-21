@@ -988,7 +988,7 @@
    "scheme": "t22_f03",
    "group": "m6ad69336e554509_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.679,
@@ -1068,7 +1068,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2cb0e970584_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.679,
@@ -1204,7 +1204,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2cb0e970584_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.671,
@@ -1292,7 +1292,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2cb0e970584_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.667,
@@ -1364,7 +1364,7 @@
    "scheme": "t22_f03",
    "group": "m6afa2cb0e970584_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə · форма 2",
    "machine": 1,
    "score": 0.663,
@@ -1428,7 +1428,7 @@
   }
  ],
  "created": 1791736123,
- "updated": 1794780341,
+ "updated": 1795290974,
  "cat": {
   "title": "Азербайджанский ковёр \"Пирабадил\" датированный 1325 Хиджры (1907 по григорианскому календарю).jpg",
   "museum": "Wikimedia Commons",
@@ -1549,5 +1549,44 @@
    39.6572
   ],
   "t": 1795207913
+ },
+ "micro": {
+  "marks": {
+   "m6ad69336e554509_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290938
+    }
+   },
+   "m6afa2cb0e970584_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290974
+    }
+   },
+   "m6afa2cb0e970584_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290974
+    }
+   },
+   "m6afa2cb0e970584_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290974
+    }
+   },
+   "m6afa2cb0e970584_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290974
+    }
+   }
+  }
  }
 }

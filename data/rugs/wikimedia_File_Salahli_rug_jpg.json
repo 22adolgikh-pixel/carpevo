@@ -895,7 +895,7 @@
    "scheme": "",
    "group": "mmvcsqou2",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -905,8 +905,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792265731,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290924
   },
   {
    "id": "mmvcsqpgi0",
@@ -922,7 +922,7 @@
    "scheme": "",
    "group": "mmvcsqou2",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -932,8 +932,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792265732,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290924
   },
   {
    "id": "mmvcsqpgi1",
@@ -949,7 +949,7 @@
    "scheme": "",
    "group": "mmvcsqou2",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -959,8 +959,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792265732,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290924
   },
   {
    "id": "mmvcsqpgi2",
@@ -976,7 +976,7 @@
    "scheme": "",
    "group": "mmvcsqou2",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 1,
@@ -986,8 +986,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792265732,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290924
   },
   {
    "id": "mmvcsqpgi3",
@@ -1003,7 +1003,7 @@
    "scheme": "",
    "group": "mmvcsqou2",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 180,
    "flip": 0,
@@ -1013,8 +1013,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792265732,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290924
   },
   {
    "id": "mmvcsqpgi4",
@@ -1030,7 +1030,7 @@
    "scheme": "",
    "group": "mmvcsqou2",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -1040,8 +1040,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792265732,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290924
   },
   {
    "id": "m6ad49972e785581_0",
@@ -1114,7 +1114,7 @@
   }
  ],
  "created": 1791736124,
- "updated": 1794552903,
+ "updated": 1795290962,
  "cat": {
   "title": "Salahli rug.jpg",
   "museum": "Wikimedia Commons",
@@ -1295,6 +1295,57 @@
      "w": 2,
      "t": 1794552903
     }
+   },
+   "mmvcsqou2": {
+    "dolgikh": {
+     "a": "none",
+     "w": 2,
+     "t": 1795290962
+    }
+   }
+  },
+  "marks": {
+   "mmvcsqou2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290924
+    }
+   },
+   "mmvcsqpgi0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290924
+    }
+   },
+   "mmvcsqpgi1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290924
+    }
+   },
+   "mmvcsqpgi2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290924
+    }
+   },
+   "mmvcsqpgi3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290924
+    }
+   },
+   "mmvcsqpgi4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290924
+    }
    }
   }
  },
@@ -1304,7 +1355,8 @@
  "name_none": [
   "mmvcsnksc",
   "mmvcsny91",
-  "mmvcspbkx"
+  "mmvcspbkx",
+  "mmvcsqou2"
  ],
  "same_chk": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1": {

@@ -18,7 +18,7 @@
  "h": 850,
  "marks": [],
  "created": 1791736139,
- "updated": 1794256630,
+ "updated": 1795291076,
  "cat": {
   "title": "Early Caucasian rug",
   "museum": "",
@@ -103,9 +103,9 @@
   },
   "frame": {
    "dolgikh": {
-    "a": "fragment",
+    "a": "cropped",
     "w": 2,
-    "t": 1794256630
+    "t": 1795291076
    }
   }
  },
@@ -142,7 +142,7 @@
   "quad_status": "confirmed"
  },
  "tri": "micro",
- "frame": "fragment",
+ "frame": "cropped",
  "frame_by": "micro",
  "same_chk": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0066_1": {
@@ -171,5 +171,10 @@
    52.6751
   ],
   "t": 1795207745
+ },
+ "edge": {
+  "damaged": [
+   "dolgikh"
+  ]
  }
 }
