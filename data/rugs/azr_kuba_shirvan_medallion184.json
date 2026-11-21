@@ -18,7 +18,7 @@
  "h": 1358,
  "marks": [],
  "created": 1791736130,
- "updated": 1795289166,
+ "updated": 1795290253,
  "cat": {
   "title": "kuba shirvan medallion184",
   "museum": "",
@@ -45,8 +45,46 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion184",
  "lib_img": "img/azr_kuba_shirvan_medallion184.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion98",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Jek_rug_jpg",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0050_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion108",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion98": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795290253
+  },
+  "wikimedia_File_Jek_rug_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795290253
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0050_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795290253
+  },
+  "azr_kuba_shirvan_medallion108": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795290253
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -82,6 +120,36 @@
      "a": "one",
      "w": 2,
      "t": 1795289166
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_shirvan_medallion98": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795290253
+    }
+   },
+   "wikimedia_File_Jek_rug_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795290253
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0050_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795290253
+    }
+   },
+   "azr_kuba_shirvan_medallion108": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795290253
     }
    }
   }

@@ -263,10 +263,10 @@
   {
    "id": "mmv8guv7u8",
    "box": [
-    0.69149,
-    0.26489,
-    0.06383,
-    0.05486
+    0.69832,
+    0.26886,
+    0.06331,
+    0.05487
    ],
    "zone": "field",
    "motif": "",
@@ -274,7 +274,7 @@
    "scheme": "",
    "group": "mmv8gupnb",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -285,7 +285,16 @@
    "by": "машина → dolgikh",
    "at": 1792003906,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.606,
+   "box0": [
+    0.69149,
+    0.26489,
+    0.06383,
+    0.05486
+   ],
+   "rf_moved": 0.12
   },
   {
    "id": "m6ad54243e869410_0",
@@ -301,7 +310,7 @@
    "scheme": "t48_f06",
    "group": "m6ad54243e869410_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: Quyrum",
    "angle": 270,
    "flip": 1,
@@ -386,7 +395,7 @@
    "scheme": "",
    "group": "mmvex0cxr",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -434,8 +443,8 @@
    ],
    "by": "dolgikh",
    "at": 1792393833,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290295
   },
   {
    "id": "mmvex30g8",
@@ -451,7 +460,7 @@
    "scheme": "",
    "group": "mmvex30g8",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -495,8 +504,8 @@
    ],
    "by": "dolgikh",
    "at": 1792393957,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290346
   },
   {
    "id": "mmvex493f",
@@ -512,14 +521,14 @@
    "scheme": "",
    "group": "mmvex30g8",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
    "machine": 0,
    "score": 0,
    "xfer": "",
-   "variant": "",
+   "variant": "detail",
    "poly": [
     [
      0.42308,
@@ -576,8 +585,9 @@
    ],
    "by": "dolgikh",
    "at": 1792394015,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290346,
+   "variant_by": "/m"
   },
   {
    "id": "mmw9c92ny",
@@ -1779,7 +1789,7 @@
   }
  ],
  "created": 1791736125,
- "updated": 1795290157,
+ "updated": 1795290346,
  "cat": {
   "title": "Caucasian Fachralo Kazak 'Triple Medallion'. 5ft 7in x 7ft 5in, Circa 1825.jpg",
   "museum": "Wikimedia Commons",
@@ -2105,6 +2115,50 @@
      "w": 2,
      "t": 1795290157
     }
+   },
+   "mmv8guv7u8": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290177
+    }
+   },
+   "m6ad54243e869410_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290238
+    }
+   },
+   "mmvex0cxr": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290295
+    }
+   },
+   "mmvex30g8": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290346
+    }
+   },
+   "mmvex493f": {
+    "dolgikh": {
+     "a": "var",
+     "w": 2,
+     "t": 1795290346
+    }
+   }
+  },
+  "name": {
+   "mmv8gupnb": {
+    "dolgikh": {
+     "a": "none",
+     "w": 2,
+     "t": 1795290225
+    }
    }
   }
  },
@@ -2129,5 +2183,8 @@
    75.3834
   ],
   "t": 1795207902
- }
+ },
+ "name_none": [
+  "mmv8gupnb"
+ ]
 }

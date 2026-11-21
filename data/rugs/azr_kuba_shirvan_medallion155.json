@@ -45,8 +45,20 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion155",
  "lib_img": "img/azr_kuba_shirvan_medallion155.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion108",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion108": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795290321,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
