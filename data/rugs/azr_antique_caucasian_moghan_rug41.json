@@ -18,7 +18,7 @@
  "h": 900,
  "marks": [],
  "created": 1791736138,
- "updated": 1794997828,
+ "updated": 1795279734,
  "cat": {
   "title": "Antique Moghan (Mughan) rug, mid 19th century, Azerbaijan, 83\" x 37\", 251x 110cm",
   "museum": "",
@@ -86,6 +86,14 @@
      "t": 1794997828
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279734,
+    "s": "ref"
+   }
   }
  },
  "auto": {
@@ -111,7 +119,30 @@
   "conf": 0.956,
   "area": 0.758,
   "ver": 1,
-  "t": 1794938255
+  "t": 1794938255,
+  "ref_quad": {
+   "quad": [
+    [
+     0.10999,
+     0.01941
+    ],
+    [
+     0.83562,
+     0.03154
+    ],
+    [
+     0.90553,
+     0.98579
+    ],
+    [
+     0.06611,
+     0.98282
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795279623
+  }
  },
  "same_chk": {
   "azr_antique_caucasian_moghan_rug9": {
@@ -140,5 +171,44 @@
    55.9257
   ],
   "t": 1795207715
- }
+ },
+ "edge": {
+  "wavy": [
+   "dolgikh"
+  ]
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.10999,
+    0.01941
+   ],
+   [
+    0.83562,
+    0.03154
+   ],
+   [
+    0.90553,
+    0.98579
+   ],
+   [
+    0.06611,
+    0.98282
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

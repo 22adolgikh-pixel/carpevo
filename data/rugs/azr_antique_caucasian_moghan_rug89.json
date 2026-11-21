@@ -18,7 +18,7 @@
  "h": 553,
  "marks": [],
  "created": 1791736138,
- "updated": 1795269325,
+ "updated": 1795279716,
  "cat": {
   "title": "Sale 2136 Lot 109, Moghan Long Rug, Southeast Caucasus, last quarter 19th century, rows of connected",
   "museum": "",
@@ -100,7 +100,30 @@
   "conf": 0.955,
   "area": 0.936,
   "ver": 1,
-  "t": 1794238547
+  "t": 1794238547,
+  "ref_quad": {
+   "quad": [
+    [
+     0.04852,
+     0.015
+    ],
+    [
+     0.95399,
+     0.01862
+    ],
+    [
+     0.94964,
+     0.97071
+    ],
+    [
+     0.02895,
+     0.97563
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795279623
+  }
  },
  "micro": {
   "same": {
@@ -117,6 +140,14 @@
     "a": "whole",
     "w": 2,
     "t": 1795269325
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279716,
+    "s": "ref"
    }
   }
  },
@@ -155,5 +186,38 @@
   "t": 1795207717
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04852,
+    0.015
+   ],
+   [
+    0.95399,
+    0.01862
+   ],
+   [
+    0.94964,
+    0.97071
+   ],
+   [
+    0.02895,
+    0.97563
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

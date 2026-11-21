@@ -45,7 +45,7 @@
   }
  ],
  "created": 1791736127,
- "updated": 1791744626,
+ "updated": 1795279622,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -104,7 +104,38 @@
   }
  },
  "_lib_t": "2026-10-12 22:38",
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05548,
+    0.07425
+   ],
+   [
+    0.91908,
+    0.06299
+   ],
+   [
+    0.91083,
+    0.91996
+   ],
+   [
+    0.05134,
+    0.93082
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "multi": [],
  "same_chk": {
@@ -200,5 +231,17 @@
    48.056
   ],
   "t": 1795207892
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795279622,
+    "s": "ref"
+   }
+  }
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

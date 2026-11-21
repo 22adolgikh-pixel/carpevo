@@ -18,7 +18,7 @@
  "h": 990,
  "marks": [],
  "created": 1791736136,
- "updated": 1795278708,
+ "updated": 1795279756,
  "cat": {
   "title": "kuba91",
   "museum": "",
@@ -122,6 +122,13 @@
      "t": 1795278708
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795279756
+   }
   }
  },
  "school_prev": "guba-shirvan",
@@ -158,7 +165,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "hand",
  "auto_edge": {
   "v": 1,
@@ -179,5 +186,6 @@
    30.4214
   ],
   "t": 1795207755
- }
+ },
+ "frame_by": "micro"
 }
