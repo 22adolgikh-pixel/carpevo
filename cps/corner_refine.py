@@ -1,7 +1,7 @@
 # corner_refine.py — уточнение углов ковра сетью, обученной на правках людей в /m (v11.57).
 #
 # Обучение — tools/colab/corner_refine_colab.py (метки — tools/corners/make_labels.py из резервной копии студии).
-# Сеть смотрит на окно фото вокруг угла и говорит, куда его сдвинуть; три прохода: окно 24 %, 12 %, 6 % длинной стороны.
+# Сеть смотрит на окно фото вокруг угла и говорит, куда его сдвинуть; ступени окна берутся из .json весов (v5: 50 / 30 / 16 / 8 / 4 / 2 %; v4: 24 / 12 / 6 / 3 %).
 # Стартовые углы — углы модели по картинке (vlm_quad), иначе find_quad. Все четыре угла приводятся зеркалом к «левому верхнему».
 # Веса — DATA или models/corner_refine_v2.pt (запасные — v1), сервер сам качает их с Диска (TorchScript; нужен только torch, он в образе есть ради cnn.py) и corner_refine_v1.json (замеры).
 # Нет torch или весов — available() = False, карточки углов работают как раньше.
@@ -12,12 +12,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.environ.get("CPS_DATA") or os.path.join(HERE, "data")
 # веса лежат на Диске (carpet-dna/models, доступ «по ссылке»); сервер скачивает их сам в DATA при первом обращении
 # v11.78: v2 (15.11, 610 ковров). Файл v2 на Диске должен быть открыт «по ссылке»; пока его нет — работает v1 (если уже скачан или доступен).
-DRIVES = {4: {"pt": "1UZClNDLRwGwKIoF4lZTuWd3CAY1gi1RL", "json": "1WNzINrCxPfVEcA7o2TbMKCAdVfKBK1oV"},   # v11.95: v4 (19.11, 886 ковров в обучении, 1 201 метка в наборе)
+DRIVES = {5: {"pt": "1DDCUh-R7_6dC9SR0S3LWRCrmC31_hfPU", "json": "16omxlzwwLLjE0r-4OJTHzG8aAIpiuaRk"},   # v12.01: v5 (21.11, 986 ковров в обучении; окна до 50 %, старт из рамки фото)
+          4: {"pt": "1UZClNDLRwGwKIoF4lZTuWd3CAY1gi1RL", "json": "1WNzINrCxPfVEcA7o2TbMKCAdVfKBK1oV"},   # v11.95: v4 (19.11, 886 ковров в обучении, 1 201 метка в наборе)
           3: {"pt": "1Np4KD3-NfaCn6gkGPgminSOlCK3-PefS", "json": "1-kzO7jZoc3W5kdo4o2D5UZQVsJmEvpex"},   # v11.83: v3 (16.11, 610 ковров в обучении)
           2: {"pt": "1WFHexCSUZgnAGKza3Bu-_325-zdXOJQC", "json": "10kmffekFWnX6zqqfg5XnsPi7eFDdd3BH"},
           1: {"pt": "1Rj5r3nPzqGe5qMamkKzyimVkqzj_yW9H", "json": "1-G5e0UXSIz_Ohy2-Z7LwXEnw9BLtl8L1"}}
 DRIVE = DRIVES[1]
-VERSION = 4          # версия загруженных весов (меняется при загрузке: 2, а если v2 недоступна — 1)
+VERSION = 5          # версия загруженных весов (меняется при загрузке: 2, а если v2 недоступна — 1)
 
 
 def _path():
@@ -30,7 +31,7 @@ def _path():
 def fetch(force=False):
     """скачать веса с Диска в DATA (нужен доступ «по ссылке»): сначала v2, при неудаче v1; после успеха сеть перечитывается"""
     from rugs import drive_fetch
-    for v in (4, 3, 2, 1):
+    for v in (5, 4, 3, 2, 1):
         dst = os.path.join(DATA, f"corner_refine_v{v}.pt")
         if os.path.exists(dst) and not force: return True
         try:
@@ -55,7 +56,7 @@ def _load():
         try:
             import torch
             P = _path()
-            if (P is None or "_v4" not in P) and fetch(): P = _path()      # v11.95: пока v4 нет на сервере — один раз пробуем скачать с Диска (нужен доступ «по ссылке»)
+            if (P is None or "_v5" not in P) and fetch(): P = _path()      # v11.95: пока v4 нет на сервере — один раз пробуем скачать с Диска (нужен доступ «по ссылке»)
             if P:
                 torch.set_num_threads(2)
                 _S["net"] = torch.jit.load(P, map_location="cpu").eval()
