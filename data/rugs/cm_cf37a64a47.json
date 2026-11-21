@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870019,
- "updated": 1792272840,
+ "updated": 1795291822,
  "cat": {
   "title": "Carpet, Azerbaijan, dated 1890, depicting a pomegranate tree with two deer",
   "museum": "",
@@ -125,5 +125,39 @@
    52.7752
   ],
   "t": 1795207844
- }
+ },
+ "layout": {
+  "carpet": [
+   0.03068,
+   0.04444,
+   0.9386399999999999,
+   0.91223
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03068,
+    0.04889
+   ],
+   [
+    0.96932,
+    0.04444
+   ],
+   [
+    0.94142,
+    0.95667
+   ],
+   [
+    0.03766,
+    0.93667
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

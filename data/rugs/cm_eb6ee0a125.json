@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870017,
- "updated": 1791997190,
+ "updated": 1795291822,
  "cat": {
   "title": "Carpet Ararum (Creation), second half of the 19th century, Khachen, Askeran region",
   "museum": "Национальный музей азербайджанского ковра",
@@ -94,12 +94,12 @@
   "frame": "unsure",
   "quad": [
    [
-    0.01,
-    0.01
+    0.07271,
+    0.01154
    ],
    [
-    0.99,
-    0.01
+    1.0,
+    0.01665
    ],
    [
     0.99,
@@ -113,7 +113,8 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1795291598
+  "t": 1795291598,
+  "hand": true
  },
  "multi": [],
  "auto_edge": {
@@ -135,5 +136,39 @@
    8.9471
   ],
   "t": 1795207848
- }
+ },
+ "layout": {
+  "carpet": [
+   0.01,
+   0.01154,
+   0.99,
+   0.97846
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.07271,
+    0.01154
+   ],
+   [
+    1.0,
+    0.01665
+   ],
+   [
+    0.99,
+    0.99
+   ],
+   [
+    0.01,
+    0.99
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "unsure",
+ "tri": "hand"
 }

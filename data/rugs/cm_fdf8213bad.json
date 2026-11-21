@@ -18,7 +18,7 @@
  "h": 998,
  "marks": [],
  "created": 1791870023,
- "updated": 1795291034,
+ "updated": 1795291822,
  "cat": {
   "title": "Hərşəng xalçası, 18th century; 1st quarter of the 19th century, 140x348 cm",
   "museum": "Лувр",
@@ -125,6 +125,39 @@
    }
   }
  },
- "frame": "whole",
- "frame_by": "micro"
+ "frame": "cropped",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0.0,
+   0.19199,
+   0.99889,
+   0.59933
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0,
+    0.19533
+   ],
+   [
+    0.97444,
+    0.19199
+   ],
+   [
+    0.99889,
+    0.79132
+   ],
+   [
+    0.01556,
+    0.76795
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

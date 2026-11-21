@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870034,
- "updated": 1794740860,
+ "updated": 1795291822,
  "cat": {
   "title": "Şirvanşahlar sarayında xalça",
   "museum": "",
@@ -105,7 +105,7 @@
    }
   }
  },
- "frame": "whole",
+ "frame": "cropped",
  "frame_by": "micro",
  "school_prev": "guba-shirvan",
  "school_by": "уточнено по слову «sirvan» в подписи",
@@ -128,5 +128,38 @@
    61.7371
   ],
   "t": 1795207836
- }
+ },
+ "layout": {
+  "carpet": [
+   0.0,
+   0.06444,
+   0.98167,
+   0.8044500000000001
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.18833,
+    0.06444
+   ],
+   [
+    0.78333,
+    0.06778
+   ],
+   [
+    0.98167,
+    0.83667
+   ],
+   [
+    0.0,
+    0.86889
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "tri": "auto"
 }

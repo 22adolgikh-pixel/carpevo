@@ -1,10 +1,10 @@
 {
- "at": "2026-11-21 20:07:42",
- "rss_mb": 3635,
- "avail_mb": 2741,
+ "at": "2026-11-21 20:07:52",
+ "rss_mb": 6197,
+ "avail_mb": 121,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 30,
+ "up_s": 40,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -23,7 +23,6 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-21 20:05:24 rss=2349MB avail=3981/11925MB limit=0MB heavy=новые двойники wait=0",
   "2026-11-21 20:05:34 rss=2346MB avail=3980/11925MB limit=0MB heavy=новые двойники wait=0",
   "2026-11-21 20:05:44 rss=2348MB avail=3985/11925MB limit=0MB heavy=новые двойники wait=0",
   "2026-11-21 20:05:54 rss=2350MB avail=3980/11925MB limit=0MB heavy=новые двойники wait=0",
@@ -37,6 +36,7 @@
   "2026-11-21 20:07:12 rss=143MB avail=6136/11925MB limit=0MB heavy=- wait=0",
   "2026-11-21 20:07:22 rss=429MB avail=5898/11925MB limit=0MB heavy=- wait=0",
   "2026-11-21 20:07:32 rss=1622MB avail=4751/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-21 20:07:42 rss=3635MB avail=2741/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-21 20:07:42 rss=3635MB avail=2741/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-21 20:07:52 rss=6195MB avail=121/11925MB limit=0MB heavy=- wait=0"
  ]
 }

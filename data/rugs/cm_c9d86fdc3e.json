@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870019,
- "updated": 1792272840,
+ "updated": 1795291822,
  "cat": {
   "title": "Carpet, Iran, Shirvan, 19th-20th century, Cleveland Museum of Art 1961.390",
   "museum": "",
@@ -143,5 +143,39 @@
    47.6786
   ],
   "t": 1795207843
- }
+ },
+ "layout": {
+  "carpet": [
+   0.04315,
+   0.03444,
+   0.90179,
+   0.9155599999999999
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04613,
+    0.03556
+   ],
+   [
+    0.91815,
+    0.03444
+   ],
+   [
+    0.94494,
+    0.95
+   ],
+   [
+    0.04315,
+    0.95
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

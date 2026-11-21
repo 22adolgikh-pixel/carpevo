@@ -73,7 +73,7 @@
   }
  ],
  "created": 1791870025,
- "updated": 1794588940,
+ "updated": 1795291822,
  "cat": {
   "title": "Konakend carpet, Caucasus, late 19th century",
   "museum": "",
@@ -111,7 +111,38 @@
  ],
  "same_ok": {},
  "_lib_t": "2026-10-12 22:38",
- "layout": null,
+ "layout": {
+  "carpet": [
+   0.02667,
+   0.04425,
+   0.9422200000000001,
+   0.91327
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03333,
+    0.04956
+   ],
+   [
+    0.96333,
+    0.04425
+   ],
+   [
+    0.96889,
+    0.95752
+   ],
+   [
+    0.02667,
+    0.95575
+   ]
+  ],
+  "quad_status": "accepted"
+ },
  "updated_by": "dolgikh",
  "same_chk": {
   "wikimedia_File_Konakend_carpet_Caucasus_late_19th_century_jpg": {
@@ -202,5 +233,7 @@
    56.9196
   ],
   "t": 1795207836
- }
+ },
+ "frame": "whole",
+ "tri": "auto"
 }

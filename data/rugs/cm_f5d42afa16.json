@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870023,
- "updated": 1791997204,
+ "updated": 1795291822,
  "cat": {
   "title": "Feraghan carpet, Tabriz carpet weaving school",
   "museum": "Национальный музей искусств Азербайджана",
@@ -115,5 +115,39 @@
    62.2519
   ],
   "t": 1795207849
- }
+ },
+ "layout": {
+  "carpet": [
+   0.01404,
+   0.02,
+   0.9843999999999999,
+   0.95778
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01404,
+    0.03889
+   ],
+   [
+    0.99844,
+    0.02
+   ],
+   [
+    0.95788,
+    0.97778
+   ],
+   [
+    0.02496,
+    0.96444
+   ]
+  ],
+  "quad_status": "accepted"
+ },
+ "frame": "cropped",
+ "tri": "auto"
 }
