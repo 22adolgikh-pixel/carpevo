@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736128,
- "updated": 1794979877,
+ "updated": 1795290422,
  "cat": {
   "title": "van ham borchalo rug with memling guls L92 10 2012",
   "museum": "",
@@ -162,6 +162,14 @@
      "t": 1794979877
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795290422,
+    "s": "ref"
+   }
   }
  },
  "school_prev": "ganja-gazakh",
@@ -185,5 +193,39 @@
    49.7265
   ],
   "t": 1795207817
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05031,
+    0.0439
+   ],
+   [
+    0.98721,
+    0.04434
+   ],
+   [
+    0.97621,
+    0.95621
+   ],
+   [
+    0.03853,
+    0.96666
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

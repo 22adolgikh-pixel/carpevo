@@ -31,7 +31,7 @@
    "scheme": "",
    "group": "mmv9yr9lo",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -41,8 +41,8 @@
    "variant": "",
    "by": "dolgikh",
    "at": 1792094437,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290460
   },
   {
    "id": "mmv9yrabl0",
@@ -58,7 +58,7 @@
    "scheme": "",
    "group": "mmv9yr9lo",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -68,8 +68,8 @@
    "variant": "",
    "by": "машина → dolgikh",
    "at": 1792094438,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795290460
   },
   {
    "id": "m6b00c5c9e72677_0",
@@ -85,7 +85,7 @@
    "scheme": "t158_f01",
    "group": "m6b00c5c9e72677_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: heyvan",
    "machine": 1,
    "score": 0.91,
@@ -205,7 +205,7 @@
    "scheme": "t158_f01",
    "group": "m6b00c5c9e72677_0",
    "certainty": "sure",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: heyvan",
    "machine": 1,
    "score": 0.904,
@@ -337,7 +337,7 @@
    "scheme": "t158_f01",
    "group": "m6b00c5c9e72677_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: heyvan",
    "machine": 1,
    "score": 0.896,
@@ -469,7 +469,7 @@
    "scheme": "t158_f01",
    "group": "m6b00c5c9e72677_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: heyvan",
    "machine": 1,
    "score": 0.891,
@@ -585,7 +585,7 @@
    "scheme": "t158_f01",
    "group": "m6b00c5c9e72677_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: heyvan",
    "machine": 1,
    "score": 0.887,
@@ -641,7 +641,7 @@
   }
  ],
  "created": 1791736126,
- "updated": 1795212750,
+ "updated": 1795290507,
  "cat": {
   "title": "Fachralo Kazak Prayer Rug Last Quarter 19th C Lot 60.jpg",
   "museum": "Wikimedia Commons",
@@ -881,6 +881,66 @@
      "t": 1794997504
     }
    }
+  },
+  "marks": {
+   "mmv9yr9lo": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290460
+    }
+   },
+   "mmv9yrabl0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795290460
+    }
+   },
+   "m6b00c5c9e72677_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290494
+    }
+   },
+   "m6b00c5c9e72677_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290494
+    }
+   },
+   "m6b00c5c9e72677_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290494
+    }
+   },
+   "m6b00c5c9e72677_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290494
+    }
+   },
+   "m6b00c5c9e72677_4": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795290494
+    }
+   }
+  },
+  "name": {
+   "mmv9yr9lo": {
+    "dolgikh": {
+     "a": "none",
+     "w": 2,
+     "t": 1795290507
+    }
+   }
   }
  },
  "frame": "whole",
@@ -933,5 +993,8 @@
    59.9263
   ],
   "t": 1795207903
- }
+ },
+ "name_none": [
+  "mmv9yr9lo"
+ ]
 }

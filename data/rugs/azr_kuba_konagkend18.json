@@ -18,7 +18,7 @@
  "h": 591,
  "marks": [],
  "created": 1791736133,
- "updated": 1795009128,
+ "updated": 1795290371,
  "cat": {
   "title": "kuba konagkend18",
   "museum": "",
@@ -141,6 +141,14 @@
      "t": 1795009128
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795290371,
+    "s": "ref"
+   }
   }
  },
  "school_prev": "guba-shirvan",
@@ -178,5 +186,39 @@
    54.9157
   ],
   "t": 1795207773
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.12403,
+    0.0365
+   ],
+   [
+    0.90681,
+    0.03301
+   ],
+   [
+    0.9631,
+    0.93357
+   ],
+   [
+    0.04257,
+    0.95461
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

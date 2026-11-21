@@ -18,7 +18,7 @@
  "h": 1008,
  "marks": [],
  "created": 1791736128,
- "updated": 1795062314,
+ "updated": 1795290373,
  "cat": {
   "title": "antique baku shield rug7",
   "museum": "",
@@ -114,7 +114,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -135,5 +135,15 @@
    48.7311
   ],
   "t": 1795207712
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795290373
+   }
+  }
+ },
+ "frame_by": "micro"
 }
