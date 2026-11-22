@@ -38,6 +38,61 @@
   "translation": "Звезда",
   "carpet": "Ханлыг",
   "type": "Кар.",
-  "note": ""
- }
+  "note": "",
+  "site_id": "",
+  "source": ""
+ },
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "grid": {
+  "pw": 4.905,
+  "ph": 4.905,
+  "ox": 0.7,
+  "oy": 1.91,
+  "cols": 27,
+  "rows": 27,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   155
+  ],
+  "centers": [
+   212,
+   97
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_dyes": [
+  null,
+  null
+ ],
+ "palette_link": [
+  false,
+  false
+ ],
+ "palette_scan": [
+  null,
+  null
+ ],
+ "palette_touched": false,
+ "done": false,
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null,
+ "saved_at": "2026-11-22 16:09:47",
+ "palette_v": 1
 }
