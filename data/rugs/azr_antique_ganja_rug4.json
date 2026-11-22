@@ -18,7 +18,7 @@
  "h": 887,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1795354801,
  "cat": {
   "title": "antique ganja rug4",
   "museum": "",
@@ -124,5 +124,49 @@
    52.789
   ],
   "t": 1795207718
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795354801,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.09752,
+    0.03067
+   ],
+   [
+    0.92491,
+    0.03076
+   ],
+   [
+    0.92448,
+    0.96093
+   ],
+   [
+    0.04602,
+    0.94503
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

@@ -3009,10 +3009,10 @@
   {
    "id": "m179535424923e",
    "box": [
-    0.49509,
-    0.31968,
-    0.06023,
-    0.19444
+    0.44087,
+    0.26628,
+    0.06434,
+    0.17395
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -3020,7 +3020,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c542e750360_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -3029,12 +3029,23 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354249,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795354757,
+   "rf": 1,
+   "rf_s": 0.473,
+   "box0": [
+    0.49509,
+    0.31968,
+    0.06023,
+    0.19444
+   ],
+   "rf_moved": 0.473,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795354757
   }
  ],
  "created": 1794547278,
- "updated": 1795354664,
+ "updated": 1795354757,
  "cat": {
   "title": "Xalça. “ Malıbəyli” . Qarabağqrupu . Azərbaycan . Şuşa, Malıbəylik. XIXəsrinortalarıYun. Xovlu.",
   "museum": "",
@@ -3585,6 +3596,13 @@
      "a": "ok",
      "w": 2,
      "t": 1795354664
+    }
+   },
+   "m179535424923e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795354757
     }
    }
   }
