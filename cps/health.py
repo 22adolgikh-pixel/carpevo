@@ -5,6 +5,12 @@
 #    (если память была на пределе — почти наверняка система убила процесс из-за нехватки памяти).
 import os, sys, time, threading, json, faulthandler
 
+# v12.18: glibc по умолчанию подстраивает порог mmap вверх и держит освобождённые страницы (журнал 22.11: RSS 6,9 ГБ → 0,4 ГБ после malloc_trim).
+# Фиксируем пороги: крупные блоки (≥256 КБ) сразу отдаются системе при освобождении.
+try:
+    _libc = __import__("ctypes").CDLL("libc.so.6"); _libc.mallopt(-3, 256 * 1024); _libc.mallopt(-1, 256 * 1024)   # M_MMAP_THRESHOLD, M_TRIM_THRESHOLD
+except Exception: pass
+
 _cfg = {}
 
 
@@ -94,7 +100,7 @@ def install(app, data, heavy_q=None, events=None):
                 line = f'{time.strftime("%Y-%m-%d %H:%M:%S")} rss={_rss_mb()}MB avail={av}/{tot}MB limit={_cg_limit_mb()}MB heavy={hq.get("run") or "-"} wait={hq.get("wait", 0)}\n'
                 with open(mem, "a") as f: f.write(line)
                 r0 = _rss_mb()                                 # v12.16: вернуть системе освобождённую, но удерживаемую аллокатором память
-                if r0 >= 2500 and time.time() - _cfg.get("trim_t", 0) > 60:
+                if r0 >= 1500 and time.time() - _cfg.get("trim_t", 0) > 20:
                     _cfg["trim_t"] = time.time()
                     try:
                         __import__("ctypes").CDLL("libc.so.6").malloc_trim(0); r1 = _rss_mb()
