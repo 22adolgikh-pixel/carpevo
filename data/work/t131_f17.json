@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   6,
-   7
+   12.55,
+   10.0
   ],
   [
-   81,
-   7
+   75.65,
+   10.0
   ],
   [
-   81,
-   103
+   75.65,
+   98.11
   ],
   [
-   6,
-   103
+   12.55,
+   98.11
   ]
  ],
  "book_table": 130,
@@ -41,5 +41,107 @@
   "carpet": "Для всех",
   "type": "",
   "note": "См. табл. № 134, рис. 1."
- }
+ },
+ "grid": {
+  "pw": 4.8462,
+  "ph": 4.8889,
+  "ox": 0,
+  "oy": 0,
+  "cols": 13,
+  "rows": 18,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   146
+  ],
+  "centers": [
+   217,
+   98
+  ]
+ },
+ "matrix": {
+  "w": 1,
+  "h": 1,
+  "origin": [
+   6,
+   6
+  ],
+  "rows": [
+   "1"
+  ]
+ },
+ "auto_matrix": {
+  "w": 1,
+  "h": 1,
+  "origin": [
+   6,
+   6
+  ],
+  "rows": [
+   "1"
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 0.0,
+  "flags": [
+   "рисунок не найден"
+  ],
+  "pitch": [
+   4.854,
+   4.895
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "engine": "cnn",
+  "grid_strength": 7.796,
+  "agree": {
+   "mismatch": 3,
+   "ink": 4,
+   "share": 0.75
+  },
+  "risk": 1.5,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "hard": {
+  "sig": "c218b9b96027",
+  "tiles": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 1,
+    "h": 1,
+    "n": 1,
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "ntiles": 1,
+  "verified": []
+ },
+ "saved_at": "2026-11-22 23:01:01"
 }

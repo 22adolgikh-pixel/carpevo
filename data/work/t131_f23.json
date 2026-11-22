@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   6,
-   7
+   9.26,
+   11.55
   ],
   [
-   84,
-   7
+   77.74,
+   11.55
   ],
   [
-   84,
-   105
+   77.74,
+   100.42
   ],
   [
-   6,
-   105
+   9.26,
+   100.42
   ]
  ],
  "book_table": 130,
@@ -41,5 +41,127 @@
   "carpet": "Ширван и Куба",
   "type": "К.—Ш",
   "note": "См. табл. № 134, рис. 10."
- }
+ },
+ "grid": {
+  "pw": 4.8571,
+  "ph": 4.9444,
+  "ox": 0,
+  "oy": 0,
+  "cols": 14,
+  "rows": 18,
+  "square": true
+ },
+ "classify": {
+  "tones": 1,
+  "inner": 55,
+  "thr": [
+   135
+  ],
+  "centers": [
+   217,
+   81
+  ]
+ },
+ "matrix": {
+  "w": 5,
+  "h": 2,
+  "origin": [
+   5,
+   6
+  ],
+  "rows": [
+   "..111",
+   "111.."
+  ]
+ },
+ "auto_matrix": {
+  "w": 5,
+  "h": 2,
+  "origin": [
+   5,
+   6
+  ],
+  "rows": [
+   "..111",
+   "111.."
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка"
+ ],
+ "palette_touched": false,
+ "auto": {
+  "version": 1,
+  "confidence": 1.0,
+  "flags": [],
+  "pitch": [
+   4.892,
+   4.938
+  ],
+  "angle": 0.0,
+  "reviewed": false,
+  "engine": "cnn",
+  "grid_strength": 6.621,
+  "agree": {
+   "mismatch": 0,
+   "ink": 6,
+   "share": 0.0
+  },
+  "risk": -0.08,
+  "difficulty_est": "simple"
+ },
+ "done": false,
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "rapport": null,
+ "hard": {
+  "sig": "a436bf21eab1",
+  "tiles": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 5,
+    "h": 2,
+    "n": 6,
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ]
+    ]
+   }
+  ],
+  "ntiles": 1,
+  "verified": []
+ },
+ "saved_at": "2026-11-22 23:01:12"
 }
