@@ -18,7 +18,7 @@
  "h": 650,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1795353768,
  "cat": {
   "title": "antique-khyzy-zili-rug3",
   "museum": "",
@@ -122,5 +122,49 @@
    44.2253
   ],
   "t": 1795207724
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795353768,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06658,
+    0.03368
+   ],
+   [
+    0.91949,
+    0.03308
+   ],
+   [
+    0.95572,
+    0.94734
+   ],
+   [
+    0.04879,
+    0.95252
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
