@@ -2,7 +2,7 @@
  "id": "intangible_2849_p0085_1",
  "title": "Ковёр «Pirəbədil» Губа",
  "source": "каталог: book:intangible_2849",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
@@ -2398,6 +2398,10 @@
   {
    "id": "azr_kuba_perepedil66",
    "score": 0
+  },
+  {
+   "id": "cm_1aa09f6f06",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -2406,6 +2410,11 @@
    "by": "/m: dolgikh",
    "at": 1795018952,
    "similar": true
+  },
+  "cm_1aa09f6f06": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795334434
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -2669,5 +2678,8 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "from_twin": {
+  "museum": "cm_1aa09f6f06"
+ }
 }

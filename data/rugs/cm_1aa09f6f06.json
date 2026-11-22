@@ -6,19 +6,19 @@
  "inv": "",
  "url": "https://commons.wikimedia.org/wiki/File:Carpet_of_Guba_group_of_Azerbaijan_carpets_in_Heydar_Aliyev_Center.jpg",
  "license": "Public domain · Interfase",
- "place": "",
+ "place": "Губа",
  "date": "1900",
  "school": "guba",
- "composition": "",
+ "composition": "pirebedil",
  "technique": "ворсовый",
- "size": "",
+ "size": "216x142 см",
  "notes": "Carpet of Guba group of Azerbaijan carpets in Heydar Aliyev Center. Wooled, piled. 1900. 216 x 144 cm.",
  "status": "new",
  "w": 1800,
  "h": 2400,
  "marks": [],
  "created": 1791870018,
- "updated": 1795293047,
+ "updated": 1795334434,
  "cat": {
   "title": "Carpet of Guba group of Azerbaijan carpets in Heydar Aliyev Center",
   "museum": "",
@@ -56,6 +56,10 @@
   {
    "id": "azr_kuba_gollu_chichi31",
    "score": 0
+  },
+  {
+   "id": "intangible_2849_p0085_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -63,6 +67,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "intangible_2849_p0085_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795334434
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -168,6 +177,15 @@
     ],
     "s": "ref"
    }
+  },
+  "same": {
+   "intangible_2849_p0085_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795334434
+    }
+   }
   }
  },
  "frame": "whole",
@@ -227,5 +245,10 @@
   ],
   "t": 1795207821
  },
- "fragment": true
+ "fragment": true,
+ "from_twin": {
+  "composition": "intangible_2849_p0085_1",
+  "place": "intangible_2849_p0085_1",
+  "size": "intangible_2849_p0085_1"
+ }
 }

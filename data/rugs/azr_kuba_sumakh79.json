@@ -18,7 +18,7 @@
  "h": 480,
  "marks": [],
  "created": 1791736131,
- "updated": 1791736131,
+ "updated": 1795334447,
  "cat": {
   "title": "kuba sumakh79",
   "museum": "",
@@ -45,8 +45,30 @@
  },
  "src_id": "cat:azr_kuba_sumakh79",
  "lib_img": "img/azr_kuba_sumakh79.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_sumakh31",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_sumakh85",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_sumakh31": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795334447,
+   "similar": true
+  },
+  "azr_kuba_sumakh85": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795334447,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -101,5 +123,23 @@
    47.5062
   ],
   "t": 1795207800
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_sumakh31": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795334447
+    }
+   },
+   "azr_kuba_sumakh85": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795334447
+    }
+   }
+  }
  }
 }
