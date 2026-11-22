@@ -216,3 +216,40 @@ def frame_judge(im):
     except (TypeError, ValueError): c = 0.0
     return {"frame": j["frame"], "conf": round(c, 3), "why": str(j.get("why") or "")[:80], "v": FRAME_VER,
             "model": "mock" if os.environ.get("CPS_VLM_MOCK") else MODEL}
+
+
+# ---------- v12.06: факты из подписи / описания (только текст): каждое значение — с дословной цитатой из источника ----------
+FACTS_VER = 1
+FACTS_PROMPT = ("ФАКТЫ. Ниже подпись или описание одного предмета из каталога азербайджанских ковров (источник: {src}). "
+    "Выпиши только то, что в тексте сказано прямо, ничего не додумывай. Пустое — null.\n"
+    "Поля: kind (carpet — ворсовый ковёр, palas, kilim, jejim, zili, sumakh, verni, shadda, khurjin, bag, saddle, other), "
+    "type_name (название типа/композиции ковра, как в тексте: «Əjdahalı», «Pirebedil»), group (школа/группа: Qarabağ, Quba, Şirvan…), "
+    "place (селение/город), date (век или год, как в тексте), material, technique, size_cm ([длина, ширина] в см, если есть), "
+    "collection (музей/собрание), inv (инвентарный номер), elements (названия элементов узора, если перечислены).\n"
+    "Для каждого непустого поля дай дословную цитату из текста в quotes: {{поле: цитата}}.\n"
+    "Ответь только JSON: {{\"kind\":…, \"type_name\":…, \"group\":…, \"place\":…, \"date\":…, \"material\":…, \"technique\":…, "
+    "\"size_cm\":…, \"collection\":…, \"inv\":…, \"elements\":[…], \"quotes\":{{…}}}}\n\nТЕКСТ:\n{text}")
+FACT_KEYS = ("kind", "type_name", "group", "place", "date", "material", "technique", "size_cm", "collection", "inv", "elements")
+
+
+def text_facts(text, src=""):
+    """→ {поле: значение, quotes, v, model} или None. Значение без дословной цитаты из текста отбрасывается."""
+    text = (text or "").strip()[:2500]
+    if len(text) < 8: return None
+    if os.environ.get("CPS_VLM_MOCK"):
+        j = {"kind": "carpet", "group": "Qarabağ" if "Qarabağ" in text else None, "date": "XIX əsr" if "XIX" in text else None,
+             "quotes": {"group": "Qarabağ", "date": "XIX əsr"}}
+    else:
+        j = _json(_ask([], FACTS_PROMPT.format(src=src or "?", text=text), max_tokens=900))
+    if not isinstance(j, dict): return None
+    Q = j.get("quotes") if isinstance(j.get("quotes"), dict) else {}
+    low = text.lower(); out = {"quotes": {}}
+    for k in FACT_KEYS:
+        v = j.get(k)
+        if v in (None, "", [], {}): continue
+        q = str(Q.get(k) or "").strip()
+        if k != "kind" and (not q or q.lower() not in low): continue            # без дословной цитаты — не верим
+        out[k] = v
+        if q: out["quotes"][k] = q[:200]
+    out.update(v=FACTS_VER, model="mock" if os.environ.get("CPS_VLM_MOCK") else MODEL)
+    return out

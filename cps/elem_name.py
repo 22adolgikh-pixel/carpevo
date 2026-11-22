@@ -33,8 +33,9 @@ def units(rugs, smeta):
             if m.get("status") == "confirmed": G.setdefault(m.get("group") or m["id"], []).append(m)
         for g, ms in G.items():
             ms.sort(key=lambda m: (bool(m.get("by") == "machine" or m.get("auto")), -m["box"][2] * m["box"][3]))
-            lab = next((label_of(m, smeta) for m in ms if label_of(m, smeta)), "")
-            out.append({"rid": r["id"], "g": g, "box": ms[0]["box"], "lab": lab, "comp": r.get("composition") or "", "n": len(ms)})
+            lm = next((m for m in ms if label_of(m, smeta)), None); lab = label_of(lm, smeta) if lm else ""
+            out.append({"rid": r["id"], "g": g, "box": ms[0]["box"], "lab": lab, "comp": r.get("composition") or "", "n": len(ms),
+                        "sc": (lm or {}).get("scheme") or "", "none": g in (r.get("name_none") or [])})
     return out
 
 
@@ -119,7 +120,7 @@ def evaluate(B, closed=None, shape=None):
         if closed:
             cl = closed(u); res["closed"].append(None if cl is None else (next((n for n, l in enumerate(cl) if l == u["lab"]), None), len(cl)))
     def top(v, k): return round(sum(1 for p in v if p is not None and p < k) / max(1, len(v)), 3)
-    out = {"n": len(idx), "units": len(U), "schemes": len(B["S"]), "rugs_named": len({U[i]["rid"] for i in idx}),
+    out = {"n": len(idx), "units": len(U), "n_schemes": len(B["S"]), "rugs_named": len({U[i]["rid"] for i in idx}),
            "labels": len({U[i]["lab"] for i in idx}), "coverage": {k: round(v / max(1, len(idx)), 3) for k, v in cover.items()}}
     for m in ("rugs", "schemes", "both", "shape"):
         v = res[m]
@@ -129,4 +130,19 @@ def evaluate(B, closed=None, shape=None):
                             "median_list": int(np.median([n for _, n in cl]))}
     from collections import Counter
     out["top_labels"] = Counter(U[i]["lab"] for i in idx).most_common(10)
+    return out
+
+
+def options(B, sug, name_of, k=6):
+    """подсказки → варианты для карточки: [{id, name, src, sim, rid+box (пример с ковра) или img (схема)}]
+    id: «mo:<узор словаря>» или «tx:<название>»; у схемы добавляется «sc» — её номер."""
+    out = []
+    for lab, sim, src, j in sug[:k]:
+        o = {"id": ("tx:" + lab[2:]) if lab.startswith("n:") else ("mo:" + lab), "name": name_of(lab), "src": src, "sim": round(sim, 3)}
+        if src == "rug":
+            u = B["U"][j]; o.update(rid=u["rid"], box=u["box"])
+            if u.get("sc"): o["sc"] = u["sc"]
+        else:
+            x = B["S"][j]; o.update(img=x["img"], sc=x["id"])
+        out.append(o)
     return out

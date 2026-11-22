@@ -216,13 +216,13 @@ function markEdit(t,m,done){const P=1.0,b=m&&((t.fix&&t.fix[m.id])||m.box);if(!b
   $('ec').onclick=()=>ed.remove();
   $('eo').onclick=()=>{const nb=[R[0]+B[0]*R[2],R[1]+B[1]*R[3],B[2]*R[2],B[3]*R[3]].map(v=>Math.round(v*1e5)/1e5);ed.remove();done(nb);};}
 // «имена»: подтверждённый элемент без названия; выбор из схем Керимова для типа этого ковра (закрытый список)
-function showName(t){
-  $('main').innerHTML=`${qhead('Какой это элемент?','Сверху элемент с ковра (жёлтая рамка). Ниже — все схемы Керимова для ковров типа «'+esc(t.comp)+'». Выберите схему и нажмите ✓. Поворот и цвет не важны, важна форма.')}
-   <div class="smp"><img class="big" src="${crop(t.rid,t.sample,260,0.3,1)}" alt="элемент">${(t.also||[]).map(b=>`<img src="${crop(t.rid,b,160,0.15,0)}" alt="">`).join('')}<span>тип: ${esc(t.comp)}</span></div>
-   <div class="grid" id="gr">${t.opts.map(o=>`<button class="tl sch${t.sel===o.id?' sel':''}" data-id="${esc(o.id)}"><img src="${o.img}" alt="">${o.name?`<b>${esc(o.name)}</b>`:''}</button>`).join('')}</div>
+function showName(t){const img=t.by==='img';
+  $('main').innerHTML=`${qhead('Какой это элемент?',img?'Сверху элемент с ковра (жёлтая рамка). Ниже — самые похожие по картинке уже названные элементы с других ковров и схемы (без учёта типа и школы). Выберите и нажмите ✓; нет похожего — «нет в списке».':'Сверху элемент с ковра (жёлтая рамка). Ниже — все схемы Керимова для ковров типа «'+esc(t.comp)+'». Выберите схему и нажмите ✓. Поворот и цвет не важны, важна форма.')}
+   <div class="smp"><img class="big" src="${crop(t.rid,t.sample,260,0.3,1)}" alt="элемент">${(t.also||[]).map(b=>`<img src="${crop(t.rid,b,160,0.15,0)}" alt="">`).join('')}<span>${t.comp?'тип: '+esc(t.comp):''}</span></div>
+   <div class="grid" id="gr">${t.opts.map(o=>`<button class="tl sch${t.sel===o.id?' sel':''}" data-id="${esc(o.id)}"><img src="${o.rid?crop(o.rid,o.box,140,0.15,0):o.img}" alt="">${o.name?`<b>${esc(o.name)}</b>`:''}${img?`<small class="mut">${o.src==='same'?'тот же (ответ людей)':o.src==='rug'?'с ковра':'схема'}</small>`:''}</button>`).join('')}</div>
    <div class="row3"><button class="yes" id="a1" aria-label="это выбранная схема" ${t.sel?'':'disabled'}>✓</button><button class="no" id="a3" style="font-size:13px">нет в списке</button><button class="unk" id="a4" aria-label="не знаю">?</button></div>`;qtip();
   document.querySelectorAll('#gr .tl').forEach(e=>e.onclick=()=>{t.sel=e.dataset.id;document.querySelectorAll('#gr .tl').forEach(x=>x.classList.toggle('sel',x===e));$('a1').disabled=false;});
-  $('a1').onclick=()=>t.sel&&answer(t,t.sel,null,{g:t.g});$('a3').onclick=()=>answer(t,'none',null,{g:t.g});$('a4').onclick=()=>answer(t,'skip',null,{g:t.g});}
+  $('a1').onclick=()=>{if(!t.sel)return;const o=t.opts.find(x=>x.id===t.sel)||{};answer(t,t.sel,null,{g:t.g,...(o.sc?{sc:o.sc}:{})});};$('a3').onclick=()=>answer(t,'none',null,{g:t.g});$('a4').onclick=()=>answer(t,'skip',null,{g:t.g});}
 // «тип»: машина предложила тип ковра по названию или по двойнику
 function showComp(t){document.documentElement.style.setProperty('--imh','30dvh');
   const h=(t.hint||[])[0],refs=t.refs||[],els=t.els||[];

@@ -2358,6 +2358,17 @@ def t55_elem_name_v1204(pg, ctx):
     assert ev['n'] == 6 and ev['rugs']['top1'] == 1.0 and ev['closed']['in_list'] == 0.0, ev
     q = FE.emb_rot(np.full((10, 10, 3), cols['alma'], np.uint8), [0, 0, 1, 1])
     sg = EN.suggest(B, q8=q, k=3); assert sg[0][0] == 'alma' and sg[0][2] == 'scheme', sg
+    op = EN.options(B, sg, lambda l: l.upper()); assert op[0]['id'] == 'mo:alma' and op[0]['sc'] == 't1_f01' and op[0]['img'], op
+    # ответ карточки «имена» вариантом из подсказки по картинке: узор словаря и просто название
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    json.dump({"id": "en_r", "title": "en_r", "source": "тест", "w": 200, "h": 200, "created": now, "updated": now, "status": "new",
+               "marks": [{"id": "m1", "status": "confirmed", "box": [0.1, 0.1, 0.2, 0.2]}, {"id": "m2", "group": "m1", "status": "confirmed", "box": [0.5, 0.5, 0.2, 0.2]},
+                         {"id": "m3", "status": "confirmed", "box": [0.7, 0.1, 0.2, 0.2]}]}, open(f'{D}/rugs/en_r.json', 'w'))
+    post(u + 'api/micro/answer', {'type': 'name', 'rid': 'en_r', 'g': 'm1', 'a': 'mo:deve'})
+    post(u + 'api/micro/answer', {'type': 'name', 'rid': 'en_r', 'g': 'm3', 'a': 'tx:qoşa qarmaq'})
+    mk = {m['id']: m for m in get(u + 'api/rugs/en_r')['marks']}
+    assert mk['m1'].get('motif') == 'deve' and mk['m2'].get('motif') == 'deve' and mk['m3'].get('motif_text') == 'qoşa qarmaq', mk
+    os.remove(f'{D}/rugs/en_r.json')
 
 
 @test
@@ -2381,6 +2392,28 @@ def t56_comp_nn_v1205(pg, ctx):
     assert sg and sg[0][0] == 'pirebedil', ('двойник a3 не должен подсказывать сам себя: ', sg)
     ev = RN.evaluate(B, k=2); assert ev['n'] == 5 and 'rugs' in ev, ev
     q = RN.vec(FE, img((199, 4, 0))); g = RN.suggest(B, q=q, k=1, skip=set()); assert any(c == 'kasimushagi' for c, *_ in g), g
+
+
+@test
+def t57_text_facts_v1206(pg, ctx):
+    """v12.06: факты из подписи: значение берётся только с дословной цитатой; сводка показывает новое и расхождения с карточкой."""
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    json.dump({"id": "tf_a", "title": "Əjdahalı", "source": "тест", "w": 10, "h": 10, "marks": [], "created": now, "updated": now, "status": "new",
+               "school": "guba", "cat": {"src": "book:test", "text": "Əjdahalı. Xalça. Qarabağ qrupu. Şuşa. XIX əsr. Yun."}}, open(f'{D}/rugs/tf_a.json', 'w'))
+    q = post(u + 'api/text_facts/all', {}); assert q['queued'] >= 1, q
+    for _ in range(40):
+        F = (get(u + 'api/rugs/tf_a').get('auto') or {}).get('text_facts')
+        if F: break
+        time.sleep(0.5)
+    else: raise AssertionError('факты не извлечены')
+    assert F.get('group') == 'Qarabağ' and F['quotes']['group'] == 'Qarabağ' and F.get('date') == 'XIX əsr', F
+    try: post(u + 'api/register', {"name": "tfk", "password": "tfk-pass-123"})
+    except urllib.error.HTTPError: pass
+    k = post(u + 'api/users/key', {"name": "tfk"})["key"]
+    st = json.loads(urllib.request.urlopen(urllib.request.Request(u + 'api/open/text_facts', headers={"X-CPS-Key": k, "X-Forwarded-For": "8.8.8.8"})).read())
+    assert st['fields']['school']['conflict'] >= 1 and any(c['id'] == 'tf_a' and c['field'] == 'school' for c in st['conflicts']), st
+    assert st['fields']['date']['new'] >= 1, st['fields']['date']
+    os.remove(f'{D}/rugs/tf_a.json')
 
 
 def main():

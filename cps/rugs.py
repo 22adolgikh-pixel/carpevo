@@ -173,7 +173,8 @@ def fold(s):
 
 
 SCHOOL_KEYS = [("celeberd", "karabakh"), ("celaberd", "karabakh"), ("celebi", "karabakh"),   # v11.90: Çələbi (на рынке «Chelaberd Kazak») у Керимова — Карабах
-               ("karabag", "karabakh"), ("karabak", "karabakh"), ("karabah", "karabakh"), ("shusha", "karabakh"), ("susa", "karabakh"), ("lampa", "karabakh"),
+               ("karabag", "karabakh"), ("garabag", "karabakh"), ("karabak", "karabakh"),   # v12.06: «Qarabağ» после fold — garabag
+               ("gazax", "gazakh"), ("karabah", "karabakh"), ("shusha", "karabakh"), ("susa", "karabakh"), ("lampa", "karabakh"),
                ("gazah", "gazakh"), ("kazak", "gazakh"), ("kazah", "gazakh"), ("borcal", "gazakh"), ("bordjal", "gazakh"), ("fahral", "gazakh"),
                ("ganja", "ganja"), ("genje", "ganja"), ("gence", "ganja"), ("gendje", "ganja"), ("gyanja", "ganja"),
                ("kuba", "guba"), ("guba", "guba"), ("perepedil", "guba"), ("pirebedil", "guba"), ("seichur", "guba"), ("chichi", "guba"), ("cici", "guba"),
@@ -2921,6 +2922,95 @@ def install(app, DATA, D_WORK):
                 "limit": VF_MAX, "thr": VF_THR, "last_error": _vf["err"], "paused": time.time() < _vf["off"], "answers": _vf["n"],
                 "vs_people": agree, "auto": fr_auto_state()}
 
+    # ---------- v12.06: факты из подписи / описания (vlm_corners.text_facts) — фон, своя очередь; только предложения, карточки не меняются ----------
+    _tf = {"q": queue.Queue(), "seen": set(), "thr": None, "done": 0, "day": "", "err": "", "bad": 0, "off": 0}
+    TF_MAX = int(os.environ.get("CPS_FACTS_MAX", "1500"))
+
+    def _tf_text(r):
+        C = r.get("cat") or {}
+        return "\n".join(x for x in (r.get("title") or "", C.get("text") or r.get("notes") or "") if x).strip()
+
+    def _tf_worker():
+        while True:
+            rid = _tf["q"].get()
+            try:
+                today = time.strftime("%Y-%m-%d")
+                if _tf["day"] != today: _tf["day"] = today; _tf["done"] = 0
+                if _tf["done"] >= TF_MAX or time.time() < _tf["off"]: _tf["seen"].discard(rid); continue
+                r = load(rid)
+                if not r or ((r.get("auto") or {}).get("text_facts") or {}).get("v", 0) >= vlm_corners.FACTS_VER: continue
+                res = vlm_corners.text_facts(_tf_text(r), (r.get("cat") or {}).get("src", "")); _tf["done"] += 1
+                with _lock:
+                    r = load(rid)
+                    if not r: continue
+                    r.setdefault("auto", {})["text_facts"] = {**(res or {"v": vlm_corners.FACTS_VER, "empty": True}), "t": int(time.time())}; save(r)
+                _tf["bad"] = 0; _tf["err"] = ""
+            except Exception as e:
+                _tf["seen"].discard(rid); _tf["err"] = str(e)[:160]; _tf["bad"] += 1
+                if _tf["bad"] >= 5: _tf["off"] = time.time() + 600; _tf["bad"] = 0
+            finally:
+                _tf["q"].task_done()
+
+    def _tf_all():
+        if not vlm_corners.available(): return 0
+        if _tf["thr"] is None: _tf["thr"] = threading.Thread(target=_tf_worker, daemon=True, name="text-facts"); _tf["thr"].start()
+        n = 0
+        for f in sorted(os.listdir(D_RUGS)):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("dup_of") or ((r.get("auto") or {}).get("text_facts") or {}).get("v", 0) >= vlm_corners.FACTS_VER: continue
+            if len((r.get("cat") or {}).get("text") or r.get("notes") or "") < 8 or r["id"] in _tf["seen"]: continue
+            _tf["seen"].add(r["id"]); _tf["q"].put(r["id"]); n += 1
+        return n
+
+    def _periodic_tf():
+        time.sleep(420)
+        while True:
+            try:
+                if _tf["q"].qsize() < 50: _tf_all()
+            except Exception as e: print("text facts:", e)
+            time.sleep(3600)
+
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_tf, daemon=True, name="text-facts-sched").start()
+
+    @app.post("/api/text_facts/all")
+    def api_tf_all(): return {"queued": _tf_all()}
+
+    @app.get("/api/open/text_facts")
+    def api_tf_stats(examples: int = 30):
+        """что дали подписи: по полям — сколько найдено, сколько нового (в карточке пусто), сколько расходится с карточкой (с цитатой)"""
+        import twins as TW
+        st = {k: {"found": 0, "new": 0, "agree": 0, "conflict": 0} for k in ("type", "school", "date", "size", "technique", "material", "place", "collection", "elements")}
+        kinds = {}; ex = []; n = 0
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if not r or r.get("dup_of"): continue
+            F = (r.get("auto") or {}).get("text_facts")
+            if not F or F.get("empty"): continue
+            n += 1; Q = F.get("quotes") or {}; kinds[F.get("kind") or "?"] = kinds.get(F.get("kind") or "?", 0) + 1
+            def cmp(k, fv, cv, same, q):
+                if fv in (None, "", []): return
+                st[k]["found"] += 1
+                if not cv: st[k]["new"] += 1
+                elif same: st[k]["agree"] += 1
+                else:
+                    st[k]["conflict"] += 1
+                    if len(ex) < examples: ex.append({"id": r["id"], "field": k, "card": cv, "text": fv, "quote": q, "src": (r.get("cat") or {}).get("src", "")})
+            cid, _ = comp_from_text(str(F.get("type_name") or "")) if F.get("type_name") else ("", "")
+            cmp("type", cid or None, r.get("composition"), cid == r.get("composition"), Q.get("type_name"))
+            sg, _ = school_guess(str(F.get("group") or ""), str(F.get("place") or ""))
+            cmp("school", sg or None, r.get("school"), bool(sg) and school_group(sg) == school_group(r.get("school") or ""), Q.get("group") or Q.get("place"))
+            cmp("date", F.get("date"), r.get("date"), True, Q.get("date"))
+            fs = F.get("size_cm"); fs = tuple(sorted(float(x) for x in fs[:2])) if isinstance(fs, list) and len(fs) >= 2 and all(isinstance(x, (int, float)) for x in fs[:2]) else None
+            cs = TW.size_of(r)
+            cmp("size", fs, cs, bool(fs and cs and abs(fs[0] - cs[0]) <= max(3, 0.05 * cs[0]) and abs(fs[1] - cs[1]) <= max(3, 0.05 * cs[1])), Q.get("size_cm"))
+            for k, ck in (("technique", "technique"), ("material", "material"), ("place", "place"), ("collection", "museum")):
+                cmp(k, F.get(k), r.get(ck), True, Q.get(k))
+            cmp("elements", F.get("elements"), None, True, Q.get("elements"))
+        return {"with_facts": n, "queued": _tf["q"].qsize(), "done_today": _tf["done"], "limit": TF_MAX, "last_error": _tf["err"],
+                "fields": st, "kinds": kinds, "conflicts": ex}
+
     def _ref_task(x):
         """v11.57: карточка углов. Если есть сеть уточнения углов (corner_refine, обучена на правках в /m) — показываем её углы,
         посчитанные от углов модели по картинке (или find_quad). Результат кешируется в r.auto.ref_quad."""
@@ -3399,6 +3489,11 @@ def install(app, DATA, D_WORK):
                 for g, ms in G.items():
                     cf = [m for m in ms if m["st"] == "confirmed"]
                     if not cf or any(m["sc"] or m["nm"] for m in ms if m["st"] != "rejected") or g in x["nn"] or me in x["mv"]["name"].get(g, []): continue
+                    sg = _en["sug"].get(x["id"] + "|" + g)                      # v12.04: похожие по картинке среди всех элементов (без фильтра по типу и школе)
+                    if sg:
+                        cf.sort(key=lambda m: -(m["box"][2] * m["box"][3])); d = BYID.get(x["comp"]) or {}
+                        out["name"].append({"type": "name", "rid": x["id"], "g": g, "sample": cf[0]["box"], "also": [m["box"] for m in cf[1:3]],
+                                            "comp": d.get("az") or d.get("ru") or "", "opts": sg, "by": "img"}); continue
                     if not x["comp"]: out["name_wait"] += 1; continue           # тип ковра не указан — закрытого списка нет
                     if x["comp"] not in opts: opts[x["comp"]] = _exp_opts(x["comp"])
                     if not opts[x["comp"]]: out["name_wait"] += 1; continue
@@ -3560,13 +3655,20 @@ def install(app, DATA, D_WORK):
                 if n: applied = "marks:%d" % n
             elif typ == "name":
                 g = str(body.get("g", "")); ids = {e["id"]: e for e in expected_of(r.get("composition"))} if r.get("composition") in BYID else {}
+                if a.startswith(("mo:", "tx:")):                                 # v12.04: вариант из подсказки по картинке — узор словаря или название; sc — номер схемы
+                    sc = str(body.get("sc") or ""); sm = scheme_meta()
+                    if a.startswith("mo:") and a[3:] not in BYID: return JSONResponse({"error": "нет такого узора"}, status_code=400)
+                    ids[a] = {"motif": a[3:] if a.startswith("mo:") else "", "name": a[3:] if a.startswith("tx:") else "", "sc": sc if sc in sm else ""}
                 if not g or (a not in ("none", "skip") and a not in ids): return JSONResponse({"error": "ответ?"}, status_code=400)
                 d = M.setdefault(g, {}); d[me] = {"a": a, "w": w, "t": now}; rec["g"] = g
                 if a not in ("none", "skip") and sumw(d, a) >= 2:
                     e = ids[a]
                     for m in r.get("marks") or []:
-                        if (m.get("group") or m.get("id")) != g or m.get("status") == "rejected" or m.get("scheme"): continue
-                        m["scheme"] = a; m["named_by"] = "/m"
+                        if (m.get("group") or m.get("id")) != g or m.get("status") == "rejected" or m.get("scheme") or m.get("motif"): continue
+                        if a.startswith(("mo:", "tx:")):
+                            if e.get("sc"): m["scheme"] = e["sc"]
+                        else: m["scheme"] = a
+                        m["named_by"] = "/m"
                         if e.get("motif") in BYID: m["motif"] = m.get("motif") or e["motif"]
                         elif not m.get("motif_text"): m["motif_text"] = e.get("name") or ""
                     applied = "name"
@@ -4090,7 +4192,7 @@ def install(app, DATA, D_WORK):
 
     # ---------------- v12.04: название элемента по картинке среди всех (elem_name) ----------------
     import elem_name as EN
-    _en = {"B": None, "run": False, "err": "", "eval": None, "t": 0}
+    _en = {"B": None, "run": False, "err": "", "eval": None, "t": 0, "sug": {}}
     F_EN = os.path.join(DATA, "elem_name_eval.json")
 
     def _en_build(do_eval=False):
@@ -4124,6 +4226,49 @@ def install(app, DATA, D_WORK):
             import traceback; _en["err"] = str(e)[:200]; traceback.print_exc()
         finally:
             _en["run"] = False
+
+    def _en_name(lab):
+        if lab.startswith("n:"): return lab[2:]
+        d = BYID.get(lab) or {}; return d.get("az") or d.get("ru") or lab
+
+    def _en_sug():
+        """подсказки для всех подтверждённых групп без названия (свой ковёр в банке не участвует)"""
+        B = _en["B"]; out = {}
+        if not B: return out
+        key = {u["rid"] + "|" + u["g"]: i for i, u in enumerate(B["U"])}
+        same = {}                                                                # v12.04: «тот же элемент» из карточки «между коврами» — название соседа первым
+        for k, d in _xs_votes().items():
+            if _xs_verdict(d) != "same" or "~" not in k: continue
+            a, b = k.split("~", 1); same.setdefault(a, []).append(b); same.setdefault(b, []).append(a)
+        for i, u in enumerate(B["U"]):
+            if u["lab"] or u.get("none"): continue
+            k = u["rid"] + "|" + u["g"]; sg = EN.suggest(B, i, exclude_rid=u["rid"], k=6)
+            for o in same.get(k, []):
+                j = key.get(o)
+                if j is not None and B["U"][j]["lab"]:
+                    lab = B["U"][j]["lab"]; sg = [(lab, 1.0, "rug", j)] + [x for x in sg if x[0] != lab]
+            out[k] = EN.options(B, sg[:6], _en_name)
+            for o in out[k]:
+                if o["sim"] == 1.0 and o["src"] == "rug": o["src"] = "same"           # подтверждено людьми: «тот же элемент»
+        return out
+
+    def _periodic_en():
+        time.sleep(300)
+        while True:
+            try:
+                sig = sum(int(os.path.getmtime(os.path.join(D_RUGS, f))) for f in os.listdir(D_RUGS) if f.endswith(".json"))
+                if sig != _en.get("sig") and not _en["run"]:
+                    _en["run"] = True; _en_build(False); _en["sug"] = _en_sug(); _en["sig"] = sig
+            except Exception as e: print("elem_name:", e)
+            time.sleep(1800)
+
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_en, daemon=True, name="elem-name").start()
+
+    @app.post("/api/elem_name/build")
+    def api_en_build():
+        """пересчитать банк и подсказки сейчас (ждёт; для тестов и после большой разметки)"""
+        _en["run"] = True; _en_build(False); _en["sug"] = _en_sug()
+        return {"units": len((_en["B"] or {}).get("U") or []), "sug": len(_en["sug"]), "error": _en["err"]}
 
     @app.get("/api/open/elem_eval")
     def api_en_eval(run: int = 0):
