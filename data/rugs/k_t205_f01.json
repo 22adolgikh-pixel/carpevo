@@ -333,10 +333,36 @@
     0.14105
    ],
    "rf_moved": 0.51
+  },
+  {
+   "id": "m17953544740e",
+   "box": [
+    0.49166,
+    0.3261,
+    0.24583,
+    0.13976
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcy2e5m",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.889,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795354474,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791567610,
- "updated": 1795344519,
+ "updated": 1795354474,
  "src_id": "fig:t205_f01",
  "multi": [],
  "people": {
@@ -472,6 +498,6 @@
   "mmvcy2e5m"
  ],
  "esearch": {
-  "mmvcy2e5m": "1:5"
+  "mmvcy2e5m": "1:8"
  }
 }
