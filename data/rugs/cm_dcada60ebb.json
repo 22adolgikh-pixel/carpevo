@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870020,
- "updated": 1795291822,
+ "updated": 1795357261,
  "cat": {
   "title": "Villa Reale di Milano",
   "museum": "",
@@ -80,7 +80,30 @@
   "area": null,
   "ver": 1,
   "t": 1795291597,
-  "hand": true
+  "hand": true,
+  "ref_quad": {
+   "quad": [
+    [
+     0.05517,
+     0.01916
+    ],
+    [
+     0.92978,
+     0.02285
+    ],
+    [
+     0.93989,
+     0.9735
+    ],
+    [
+     0.06007,
+     0.9635
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795357252
+  }
  },
  "multi": [],
  "auto_edge": {
@@ -117,24 +140,47 @@
   "status": "auto",
   "quad": [
    [
-    0.07056,
-    0.02626
+    0.05517,
+    0.01916
    ],
    [
-    0.94025,
-    0.025
+    0.92978,
+    0.02285
    ],
    [
-    0.94995,
-    0.96795
+    0.93989,
+    0.9735
    ],
    [
-    0.05792,
-    0.97308
+    0.06007,
+    0.9635
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
- "frame": "unsure",
- "tri": "hand"
+ "frame": "whole",
+ "tri": "micro",
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795357233
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795357261,
+    "s": "ref"
+   }
+  }
+ },
+ "frame_by": "micro"
 }
