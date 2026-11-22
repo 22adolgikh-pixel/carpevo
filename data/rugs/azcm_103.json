@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870043,
- "updated": 1794236973,
+ "updated": 1795358156,
  "cat": {
   "title": "“Ləmpə” («Лямпя»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -325,12 +325,19 @@
    "src": "cand0"
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "multi": [],
  "micro": {
   "field": {
    "dolgikh": "0"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795358156
+   }
   }
  },
  "auto_edge": {
@@ -352,5 +359,6 @@
    73.1204
   ],
   "t": 1795207666
- }
+ },
+ "frame_by": "micro"
 }
