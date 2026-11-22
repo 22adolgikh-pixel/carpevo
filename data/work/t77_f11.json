@@ -155,7 +155,8 @@
    "n_suspects": 0
   },
   "risk": 1.19,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "edited": true
  },
  "done": false,
  "adjust": {
@@ -173,13 +174,13 @@
    43
   ]
  },
- "saved_at": "2026-10-07 06:52:11",
+ "saved_at": "2026-11-22 19:45:12",
  "palette_dyes": [
   null,
   null,
   null
  ],
- "review": true,
+ "review": false,
  "transparent_bg": true,
  "auto_matrix": {
   "w": 13,
@@ -1231,5 +1232,16 @@
  },
  "book_table": 77,
  "book_fig": 11,
- "kerimov_fix": "2026-10-31"
+ "kerimov_fix": "2026-10-31",
+ "palette_link": [
+  false,
+  false,
+  false
+ ],
+ "palette_scan": [
+  null,
+  null,
+  null
+ ],
+ "palette_v": 1
 }
