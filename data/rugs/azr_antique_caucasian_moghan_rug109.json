@@ -18,7 +18,7 @@
  "h": 1361,
  "marks": [],
  "created": 1791736138,
- "updated": 1791736138,
+ "updated": 1795356150,
  "cat": {
   "title": "Antique Moghan or Ganja rug, 2nd half 19th century, Azerbaijan, 111 x 291 cm",
   "museum": "",
@@ -80,7 +80,30 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1794238242
+  "t": 1794238242,
+  "ref_quad": {
+   "quad": [
+    [
+     0.01933,
+     0.01925
+    ],
+    [
+     0.95286,
+     0.01154
+    ],
+    [
+     0.98867,
+     1.00133
+    ],
+    [
+     0.01792,
+     1.00189
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795356142
+  }
  },
  "auto_edge": {
   "v": 1,
@@ -101,5 +124,57 @@
    39.2949
   ],
   "t": 1795207714
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795356106
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795356150,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01933,
+    0.01925
+   ],
+   [
+    0.95286,
+    0.01154
+   ],
+   [
+    0.98867,
+    1.00133
+   ],
+   [
+    0.01792,
+    1.00189
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
