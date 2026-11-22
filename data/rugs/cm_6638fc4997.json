@@ -2400,10 +2400,10 @@
   {
    "id": "m179535754820e",
    "box": [
-    0.03199,
-    0.44544,
-    0.09596,
-    0.05798
+    0.05048,
+    0.47752,
+    0.07212,
+    0.04961
    ],
    "zone": "field",
    "motif": "",
@@ -2411,7 +2411,7 @@
    "scheme": "t73_f02",
    "group": "mmvcyng34",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2420,24 +2420,68 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795357548,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795357712,
+   "rf": 1,
+   "rf_s": 0.943,
+   "box0": [
+    0.03199,
+    0.44544,
+    0.09596,
+    0.05798
+   ],
+   "rf_moved": 0.299
   },
   {
    "id": "m179535754821e",
    "box": [
+    0.88581,
+    0.26116,
+    0.0692,
+    0.04129
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "t73_f02",
+   "group": "mmvcyng34",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.962,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795357548,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795357712,
+   "rf": 1,
+   "rf_s": 0.431,
+   "box0": [
     0.88391,
     0.22413,
     0.06468,
     0.04463
    ],
+   "rf_moved": 0.551
+  },
+  {
+   "id": "m179535754822e",
+   "box": [
+    0.87543,
+    0.70424,
+    0.07266,
+    0.05022
+   ],
    "zone": "field",
    "motif": "",
    "motif_text": "",
    "scheme": "t73_f02",
    "group": "mmvcyng34",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2446,42 +2490,25 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795357548,
-   "confirmed_by": "",
-   "confirmed_at": 0
-  },
-  {
-   "id": "m179535754822e",
-   "box": [
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795357712,
+   "rf": 1,
+   "rf_s": 0.859,
+   "box0": [
     0.87555,
     0.68308,
     0.06912,
     0.04176
    ],
-   "zone": "field",
-   "motif": "",
-   "motif_text": "",
-   "scheme": "t73_f02",
-   "group": "mmvcyng34",
-   "certainty": "maybe",
-   "status": "proposed",
-   "note": "",
-   "angle": 0,
-   "flip": 0,
-   "machine": "embed",
-   "score": 0.962,
-   "xfer": "",
-   "by": "машина (поиск по образцу, сеть)",
-   "at": 1795357548,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "rf_moved": 0.368
   },
   {
    "id": "m179535754823e",
    "box": [
-    0.45654,
-    0.03597,
-    0.07609,
-    0.05251
+    0.46029,
+    0.03285,
+    0.08147,
+    0.04862
    ],
    "zone": "field",
    "motif": "",
@@ -2489,7 +2516,7 @@
    "scheme": "t73_f02",
    "group": "mmvcyng34",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2498,12 +2525,21 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795357548,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795357712,
+   "rf": 1,
+   "rf_s": 0.46,
+   "box0": [
+    0.45654,
+    0.03597,
+    0.07609,
+    0.05251
+   ],
+   "rf_moved": 0.108
   }
  ],
  "created": 1791870033,
- "updated": 1795357648,
+ "updated": 1795357712,
  "cat": {
   "title": "Samukh rug, XVIII c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -3186,6 +3222,34 @@
      "a": "ok",
      "w": 2,
      "t": 1795357648
+    }
+   },
+   "m179535754820e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795357712
+    }
+   },
+   "m179535754823e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795357712
+    }
+   },
+   "m179535754822e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795357712
+    }
+   },
+   "m179535754821e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795357712
     }
    }
   },
