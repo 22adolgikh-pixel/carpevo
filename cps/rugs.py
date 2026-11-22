@@ -4388,7 +4388,9 @@ def install(app, DATA, D_WORK):
             out.append({"table": t, "page_guess": pg, "missing": miss, "legend_figs": len(set(figs)),
                         "scan": os.path.exists(os.path.join(scans, rel)), "scan_dir_has_vol1": os.path.isdir(os.path.join(scans, "kerimov_vol1_patterns")),
                         "sheet_meta": None if meta is None else {"boxes": len(meta.get("boxes") or []), "no_figures": bool(meta.get("no_figures")), "auto": bool(meta.get("auto_segmented")), "table": meta.get("table")}})
-        return {"n_tables": len(out), "n_missing": sum(len(o["missing"]) for o in out), "tables": out}
+        try: dp = json.load(open(os.path.join(DATA, "drive_pages.json"), encoding="utf-8"))
+        except Exception: dp = None
+        return {"drive_pages": dp, "n_tables": len(out), "n_missing": sum(len(o["missing"]) for o in out), "tables": out}
 
     @app.get("/api/open/comp_eval")
     def api_rn_eval(run: int = 0):

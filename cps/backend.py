@@ -1849,3 +1849,45 @@ dyes.install(app, DATA, D_WORK, render_outputs, jload, jsave, on_change=autocolo
 
 @app.get("/")
 def index(): return FileResponse(os.path.join(HERE, "index.html"), headers={"Cache-Control": "no-store"})
+
+
+# ---------------- v12.10: недостающие листы Керимова (стр. 183–188) с Google Drive ----------------
+# Файлы открыты «у кого есть ссылка» (папка page_images/kerimov_vol1). Один раз скачиваются в scans/kerimov_vol1_patterns/,
+# размечаются авторазметкой; число рамок сверяется с легендой. Итог — data/drive_pages.json (виден в /api/open/kerimov_gap).
+DRIVE_PAGES = {183: "1-TSZbcSUs9k-ET664JbZLq-e2QT04h2B", 184: "1gLLOIpRoeI9iInv3SiivXbnf8pzp1wUz", 185: "19yMQ4pRwPFG_kjPRfS265KlU7Gpyvd3j",
+               186: "1t5N1E8Dn36GY-sop_JfMpVJEyS03GX5A", 187: "1Qkm6GfBGjqDF3NmkdCiH_7MCg3P3ZvU8", 188: "166j6Qk_CShS22ESW1DgugN-_9BV6-jz8"}
+F_DRIVE_PAGES = os.path.join(DATA, "drive_pages.json")
+
+def _drive_pages_job():
+    import tempfile
+    st = jload(F_DRIVE_PAGES, {}) or {}
+    if st.get("done"): return
+    time.sleep(60)
+    legend = {}
+    try:
+        for r in csv.DictReader(open(os.path.join(HERE, "tools", "kerimov_fix", "legend_book.csv"), encoding="utf-8")):
+            try: legend.setdefault(int(r["table"]), set()).add(int(r["fig"]))
+            except Exception: pass
+    except Exception: pass
+    res = st.get("pages") or {}
+    for pg, did in DRIVE_PAGES.items():
+        rel = f"kerimov_vol1_patterns/page_{pg:03d}.jpg"
+        if res.get(str(pg), {}).get("ok"): continue
+        try:
+            dst = os.path.join(SCANS, rel); os.makedirs(os.path.dirname(dst), exist_ok=True)
+            if not os.path.exists(dst):
+                tmp = tempfile.mktemp(suffix=".jpg"); restore._drive_download(did, tmp)
+                with open(tmp, "rb") as f: head = f.read(3)
+                if head != b"\xff\xd8\xff": raise RuntimeError("скачался не JPEG (проверьте доступ «у кого есть ссылка»)")
+                shutil.move(tmp, dst)
+            if not os.path.exists(os.path.join(D_SHEETS, _sheet_key(rel) + ".json")): _segment_one(rel)
+            m = jload(os.path.join(D_SHEETS, _sheet_key(rel) + ".json"), {}) or {}
+            t = _guess_table(rel); exp = len(legend.get(t, ()))
+            res[str(pg)] = {"ok": True, "table": t, "boxes": len(m.get("boxes") or []), "legend_figs": exp, "match": len(m.get("boxes") or []) == exp}
+        except Exception as e:
+            res[str(pg)] = {"ok": False, "error": str(e)[:200]}
+        jsave(F_DRIVE_PAGES, {"pages": res, "done": False, "t": time.strftime("%Y-%m-%d %H:%M:%S")})
+    jsave(F_DRIVE_PAGES, {"pages": res, "done": all(v.get("ok") for v in res.values()) and len(res) == len(DRIVE_PAGES), "t": time.strftime("%Y-%m-%d %H:%M:%S")})
+
+if not os.environ.get("CPS_NO_SCHED"):
+    threading.Thread(target=_drive_pages_job, daemon=True, name="drive-pages").start()
