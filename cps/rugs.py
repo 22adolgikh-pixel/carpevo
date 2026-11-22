@@ -1860,7 +1860,7 @@ def install(app, DATA, D_WORK):
     # Человек в /m (вид «поле») выбирает верную линию или отвечает «нет нужной» / «края испорчены». По выбранной линии поле выравнивается
     # параллельно краям (rug_mesh.field_warp) — rug_mesh/<id>.f.jpg. Рабочей картинкой (редактор, рамки) пока остаётся простое выпрямление:
     # сетку ещё надо научиться переводить в доли фото (рамки). Ответы — в micro.jsonl (type "field") для обучения выбора линии.
-    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 3     # v11.83: глубина линии поля своя у каждой стороны; v11.84: в .json — geo и кривые краёв (для перевода точек в фото)
+    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 4     # v12.19: сетка только если не хуже перспективы (choice в .json); v11.83: глубина линии поля своя у каждой стороны; v11.84: в .json — geo и кривые краёв (для перевода точек в фото)
     mesh_st = {"running": False, "done": 0, "total": 0, "err": "", "t": 0}
 
     def mesh_info(rid, r=None, build=False):
@@ -1877,14 +1877,17 @@ def install(app, DATA, D_WORK):
         src = img_path(rid); a = cv2.imread(src) if src else None
         if a is None: return None
         def work():
-            img, info = rug_mesh.mesh_rectify(a, q, 1200)
+            img, info = rug_mesh.mesh_rectify_safe(a, q, 1200)
             return img, info, rug_mesh.field_cands(img)
         img, info, cands = heavy(work, "края и поле")
         os.makedirs(D_MESH, exist_ok=True)
         tmp = os.path.join(D_MESH, "%s.%d.tmp.jpg" % (rid, threading.get_ident())); cv2.imwrite(tmp, img, [cv2.IMWRITE_JPEG_QUALITY, 88]); os.replace(tmp, os.path.join(D_MESH, rid + ".jpg"))
         m = {"v": MESH_VER, "quad": [[float(u), float(v)] for u, v in q], "w": int(img.shape[1]), "h": int(img.shape[0]),
              "edge_pct": {k: round(v, 2) for k, v in info["range_pct"].items()}, "cands": cands, "t": int(time.time()),
-             "geo": info["geo"], "edge": {k: [round(float(x), 2) for x in v] for k, v in info["curves"].items()}}
+             "geo": info["geo"], "choice": info.get("choice"), "q_rect": info.get("q_rect"), "q_mesh": info.get("q_mesh"), "edge": {k: [round(float(x), 2) for x in v] for k, v in info["curves"].items()}}
+        alt = os.path.join(D_MESH, rid + ".m.jpg")                              # v12.19: сетка, которую отвергли (для проверки в /m)
+        if info.get("mesh_img") is not None: cv2.imwrite(alt, info["mesh_img"], [cv2.IMWRITE_JPEG_QUALITY, 88]); m["range_mesh"] = {k: round(v, 2) for k, v in info["range_mesh"].items()}
+        elif os.path.exists(alt): os.remove(alt)
         tj = pj + ".%d.tmp" % threading.get_ident(); json.dump(m, open(tj, "w")); os.replace(tj, pj)
         for f in [os.path.join(D_MESH, rid + ".f.jpg"), os.path.join(D_TH, rid + ".mm.jpg")] + [os.path.join(D_MESH, "%s.p.%s.jpg" % (rid, k)) for k in ("field", "top", "bot", "left", "right")]:
             try: os.remove(f)
@@ -1991,12 +1994,12 @@ def install(app, DATA, D_WORK):
         threading.Thread(target=mesh_all, daemon=True).start(); return mesh_st
 
     @app.get("/rugmesh/{rid}.jpg")
-    def rug_mesh_img(rid: str, f: int = 0, s: int = 1400):
+    def rug_mesh_img(rid: str, f: int = 0, s: int = 1400, alt: int = 0):
         """v11.81: ковёр с ровными краями (f=1 — и с выровненным полем, если линия поля выбрана); s — длинная сторона"""
         rid = os.path.basename(rid); r = load(rid)
-        p = mesh_field_img(rid, r) if f else (os.path.join(D_MESH, rid + ".jpg") if mesh_info(rid, r, build=True) else None)
+        p = mesh_field_img(rid, r) if f else (os.path.join(D_MESH, rid + (".m.jpg" if alt else ".jpg")) if mesh_info(rid, r, build=True) else None)
         if not p or not os.path.exists(p): return Response(status_code=404)
-        s = max(200, min(2400, s)); t = os.path.join(D_TH, "%s.mm%s%d.jpg" % (rid, "f" if f else "", s))
+        s = max(200, min(2400, s)); t = os.path.join(D_TH, "%s.mm%s%s%d.jpg" % (rid, "f" if f else "", "a" if alt else "", s))
         if not os.path.exists(t) or os.path.getmtime(t) < os.path.getmtime(p):
             with THUMB:
                 a = read_small(p, s)
@@ -2698,7 +2701,7 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch")
+    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch", "rcmp")
     KINDS_OFF = ("same", "rsame")             # v11.86: пары по одной заменены карточкой «двойники ковра» (tw); старые виды — только по выбору
 
     # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
@@ -3477,6 +3480,40 @@ def install(app, DATA, D_WORK):
         _mlog(rec); _ty["t"] = 0
         return {"ok": True}
 
+    # v12.19: «выпрямление»: перспектива рядом с сеткой краёв. Голоса — DATA/rcmp_votes.json {id: {человек: {a, t, choice}}}; a: mesh / rect / both / bad
+    F_RC = os.path.join(DATA, "rcmp_votes.json")
+
+    def _rc_votes():
+        try: return json.load(open(F_RC))
+        except Exception: return {}
+
+    def _rcmp_queue(me, rows):
+        V = _rc_votes(); out = []
+        for x in rows:
+            if x["dead"] or x["qs"] not in RECT_OK or is_bw(x["id"]) or me in (V.get(x["id"]) or {}): continue
+            m = mesh_info(x["id"])
+            if not m or not m.get("choice"): continue
+            rg = max((m.get("range_mesh") or m.get("edge_pct") or {"a": 0}).values())
+            if rg < 1.0: continue                                              # края и так ровные — сравнивать нечего
+            out.append({"type": "rcmp", "rid": x["id"], "choice": m["choice"], "rg": round(rg, 1), "alt": os.path.exists(os.path.join(D_MESH, x["id"] + ".m.jpg"))})
+        out.sort(key=lambda t: (-t["rg"], t["rid"]))
+        return out
+
+    def _rcmp_answer(me, role, rid, a, body, rec):
+        if a == "skip": _mlog(rec); return {"ok": True}
+        if a not in ("mesh", "rect", "both", "bad"): return JSONResponse({"error": "ответ?"}, status_code=400)
+        m = mesh_info(rid); rec["choice"] = (m or {}).get("choice")
+        with _lock:
+            V = _rc_votes(); V.setdefault(rid, {})[me] = {"a": a, "w": _wt(role), "t": rec["t"], "choice": rec["choice"]}
+            tmp = F_RC + ".tmp"
+            with open(tmp, "w", encoding="utf-8") as f: json.dump(V, f, ensure_ascii=False, indent=1)
+            os.replace(tmp, F_RC)
+        _mlog(rec); return {"ok": True}
+
+    @app.get("/api/open/rcmp_votes")
+    def api_rcmp_votes():
+        return {"votes": _rc_votes()}
+
     def _rsame_queue(me, by):
         """v11.73: пары, найденные по выпрямленным (rect_pairs.json): ≥20 общих точек, нет в «двойниках», ответа нет. «Возможно» (20–59) — первыми."""
         out = []; P = rp_load(); hub = {}
@@ -3829,6 +3866,7 @@ def install(app, DATA, D_WORK):
         xsq = _xs_queue(me, rows) if "xsame" in want else []; Q["xsame"] = xsq[:n]
         rsq = _rsame_queue(me, by) if "rsame" in want else []; Q["rsame"] = rsq[:n]
         fdq = _field_queue(me, rows) if "field" in want else []; Q["field"] = fdq[:n]
+        rcq = _rcmp_queue(me, rows) if "rcmp" in want else []; Q["rcmp"] = rcq[:n]
         twq = _tw_queue(me, by) if "tw" in want else []; Q["tw"] = twq[:n]
         schq = [t for t in _sch_queue(me) if t["rid"] in by] if "sch" in want else []; Q["sch"] = schq[:n]
         tasks = []; order = [t for t in want if Q[t]]
@@ -3853,7 +3891,7 @@ def install(app, DATA, D_WORK):
             if t["type"] == "tw":
                 for it in t["items"]: it.update(w=by[it["id"]]["w"], h=by[it["id"]]["h"])
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]},
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]},
                 "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver(), "rs": {k: rpr[k] for k in ("running", "done", "total", "found", "t", "err")}, "ms": dict(mesh_st)}
 
     @app.post("/api/micro/answer")
@@ -3872,6 +3910,7 @@ def install(app, DATA, D_WORK):
         if typ == "cdup": return _cdup_answer(me, role, a, body, rec)
         if typ == "xsame": return _xs_answer(me, role, a, body, rec)
         if typ == "field": return _field_answer(me, role, rid, a, body, rec)
+        if typ == "rcmp": return _rcmp_answer(me, role, rid, a, body, rec)
         if typ == "tw": return _tw_answer(me, role, rid, a, body, rec)
         if typ == "sch": return _sch_answer(me, role, rid, a, body, rec)
         if typ in MORE: return _micro_more(me, role, typ, rid, a, body, rec)

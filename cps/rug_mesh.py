@@ -129,6 +129,61 @@ def mesh_rectify(img, quad, side=1200):
     return out, {"geo": geo, "curves": {k: v.tolist() for k, v in curves.items()}, "range_pct": rng, "strength": strength}
 
 
+# ---------- v12.19: сетка краёв только там, где она не ухудшает картинку ----------
+# Проба 23.11 на 100 коврах: сетка выпрямляет внутренние линии у трети ковров, но у пятой части принимает за край внутреннюю полосу каймы
+# и ломает край. Поэтому считаем две метрики для «перспектива» и «перспектива + сетка» и берём сетку, только если она не хуже.
+def _gm(img, n=160):
+    g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY); h, w = g.shape
+    k = n / max(h, w); g = cv2.resize(g, None, fx=k, fy=k, interpolation=cv2.INTER_AREA).astype(np.float32)
+    g = cv2.GaussianBlur(g, (0, 0), 1.2)
+    return np.hypot(cv2.Sobel(g, cv2.CV_32F, 1, 0), cv2.Sobel(g, cv2.CV_32F, 0, 1))
+
+
+def _ncc(a, b):
+    a = a - a.mean(); b = b - b.mean()
+    return float((a * b).sum() / (np.sqrt((a * a).sum() * (b * b).sum()) + 1e-9))
+
+
+def quality(img):
+    """→ {sym: зеркальная симметрия (лучшая из лево-право / верх-низ), dev: средний наклон длинных линий к осям (°), n: сколько линий}"""
+    m = _gm(img); h, w = m.shape; c = m[int(h * .05):int(h * .95), int(w * .05):int(w * .95)]
+    sym = max(_ncc(c, c[:, ::-1]), _ncc(c, c[::-1, :]))
+    g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY); h, w = g.shape; k = 800 / max(h, w)
+    g = cv2.resize(g, None, fx=k, fy=k, interpolation=cv2.INTER_AREA); h, w = g.shape
+    e = cv2.Canny(cv2.GaussianBlur(g, (0, 0), 1.5), 40, 110)
+    L = cv2.HoughLinesP(e, 1, np.pi / 720, 60, minLineLength=int(0.22 * min(h, w)), maxLineGap=6)
+    dev, wt = [], []
+    if L is not None:
+        for x1, y1, x2, y2 in L.reshape(-1, 4):
+            a = np.degrees(np.arctan2(y2 - y1, x2 - x1)) % 180; d = min(a, abs(a - 90), abs(a - 180))
+            if d < 8: dev.append(d); wt.append(np.hypot(x2 - x1, y2 - y1))
+    return {"sym": round(sym, 3), "dev": round(float(np.average(dev, weights=wt)), 3) if wt else None, "n": len(wt)}
+
+
+def mesh_better(qr, qm, d_dev=0.15, d_sym=0.05):
+    """сетка принимается, если линии не стали заметно кривее и симметрия не просела"""
+    dr, dm = qr["dev"], qm["dev"]
+    if dr is not None and dm is not None and dm - dr > d_dev: return False
+    return qm["sym"] - qr["sym"] >= -d_sym
+
+
+def mesh_rectify_safe(img, quad, side=1200):
+    """как mesh_rectify, но если сетка ухудшила картинку — возвращает перспективу (кривые краёв = 0, т.е. «край на месте»).
+    → (картинка, сведения; в сведениях choice 'mesh'|'rect', q_rect, q_mesh, curves_mesh — что нашла сетка)"""
+    from rug_rect import rectify
+    out, info = mesh_rectify(img, quad, side)
+    rect = rectify(img, quad, side=side)
+    if rect.shape[:2] != out.shape[:2]: rect = cv2.resize(rect, (out.shape[1], out.shape[0]), interpolation=cv2.INTER_AREA)
+    qr, qm = quality(rect), quality(out)
+    info["q_rect"], info["q_mesh"] = qr, qm
+    if mesh_better(qr, qm): info["choice"] = "mesh"; return out, info
+    n = len(info["curves"]["top"])
+    info["curves_mesh"] = info["curves"]; info["range_mesh"] = info["range_pct"]
+    info["curves"] = {k: [0.0] * n for k in info["curves"]}; info["range_pct"] = {k: 0.0 for k in info["range_pct"]}
+    info["choice"] = "rect"; info["mesh_img"] = out
+    return rect, info
+
+
 # ---------- второй шаг: линия поля (внутренняя рамка) ----------
 def field_curves(rect, nst=64, search=0.035, taper=0.08):
     """rect — ковёр после mesh_rectify (края уже ровные). Линию поля берём из rug_layout.detect(full=True) (самая глубокая граница),
