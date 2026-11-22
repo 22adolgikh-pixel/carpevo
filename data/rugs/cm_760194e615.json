@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870017,
- "updated": 1795356751,
+ "updated": 1795356781,
  "cat": {
   "title": "Carpet Meghu (Honeybee), second half of the 19th century, Shushi",
   "museum": "Национальный музей азербайджанского ковра",
@@ -93,7 +93,30 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1795291502
+  "t": 1795291502,
+  "ref_quad": {
+   "quad": [
+    [
+     0.00638,
+     0.00927
+    ],
+    [
+     0.9809,
+     0.00692
+    ],
+    [
+     1.00834,
+     0.98685
+    ],
+    [
+     0.03425,
+     1.00193
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795356773
+  }
  },
  "multi": [],
  "auto_edge": {
@@ -116,7 +139,7 @@
   ],
   "t": 1795207831
  },
- "tri": "review",
+ "tri": "micro",
  "micro": {
   "frame": {
    "dolgikh": {
@@ -124,8 +147,48 @@
     "w": 2,
     "t": 1795356751
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795356781,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00638,
+    0.00927
+   ],
+   [
+    0.9809,
+    0.00692
+   ],
+   [
+    1.00834,
+    0.98685
+   ],
+   [
+    0.03425,
+    1.00193
+   ]
+  ],
+  "quad_status": "confirmed"
+ }
 }

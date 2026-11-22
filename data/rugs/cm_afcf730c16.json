@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870023,
- "updated": 1795291822,
+ "updated": 1795356915,
  "cat": {
   "title": "Gəncə xalçası, Gəncə xalçaçılıq məktəbi, XIX əsr",
   "museum": "",
@@ -93,7 +93,30 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1795291595
+  "t": 1795291595,
+  "ref_quad": {
+   "quad": [
+    [
+     0.04731,
+     -0.00228
+    ],
+    [
+     1.01271,
+     -0.00083
+    ],
+    [
+     0.99184,
+     0.99193
+    ],
+    [
+     0.05156,
+     0.98908
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795356904
+  }
  },
  "multi": [],
  "school_prev": "ganja-gazakh",
@@ -118,5 +141,56 @@
   ],
   "t": 1795207840
  },
- "tri": "review"
+ "tri": "micro",
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795356789
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795356915,
+    "s": "ref"
+   }
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04731,
+    -0.00228
+   ],
+   [
+    1.01271,
+    -0.00083
+   ],
+   [
+    0.99184,
+    0.99193
+   ],
+   [
+    0.05156,
+    0.98908
+   ]
+  ],
+  "quad_status": "confirmed"
+ }
 }

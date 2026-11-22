@@ -2689,10 +2689,10 @@
   {
    "id": "m17953544704e",
    "box": [
-    0.58729,
-    0.20433,
-    0.03739,
-    0.02514
+    0.59234,
+    0.20553,
+    0.03349,
+    0.02263
    ],
    "zone": "other",
    "motif": "qapi-naxishi",
@@ -2700,7 +2700,7 @@
    "scheme": "t40_f03",
    "group": "m6af789dbe883852_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2710,7 +2710,16 @@
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354470,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.657,
+   "box0": [
+    0.58729,
+    0.20433,
+    0.03739,
+    0.02514
+   ],
+   "rf_moved": 0.083
   },
   {
    "id": "m17953544705e",
@@ -2726,7 +2735,7 @@
    "scheme": "t40_f03",
    "group": "m6af789dbe883852_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2736,11 +2745,13 @@
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354470,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.693
   }
  ],
  "created": 1794547278,
- "updated": 1795356760,
+ "updated": 1795356791,
  "cat": {
   "title": "Ковёр «Hacıqayıb» Губа",
   "museum": "",
@@ -3130,6 +3141,20 @@
      "a": "bad",
      "w": 2,
      "t": 1795356760
+    }
+   },
+   "m17953544705e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795356791
+    }
+   },
+   "m17953544704e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795356791
     }
    }
   }
