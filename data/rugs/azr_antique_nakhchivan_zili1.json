@@ -6,19 +6,19 @@
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "Нахичевань",
+ "date": "19 в., конец",
  "school": "nakhchivan",
  "composition": "",
  "technique": "безворсовый: зили",
- "size": "",
+ "size": "311x190 см",
  "notes": "Antique Nakhchivan zili rug, Azerbaijan",
  "status": "new",
  "w": 720,
  "h": 1208,
  "marks": [],
  "created": 1791736138,
- "updated": 1795279514,
+ "updated": 1795377018,
  "cat": {
   "title": "Antique Nakhchivan zili rug, Azerbaijan",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_antique_nakhchivan_zili1",
  "lib_img": "img/azr_antique_nakhchivan_zili1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0045_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0045_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795377018
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -80,6 +91,15 @@
     "w": 2,
     "t": 1795279514,
     "s": "ref"
+   }
+  },
+  "same": {
+   "intangible_2850_p0045_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795377018
+    }
    }
   }
  },
@@ -185,5 +205,10 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "place": "intangible_2850_p0045_1",
+  "date": "intangible_2850_p0045_1",
+  "size": "intangible_2850_p0045_1"
+ }
 }

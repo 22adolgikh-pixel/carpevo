@@ -8,7 +8,7 @@
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Нахичевань",
  "date": "19 в., конец",
- "school": "",
+ "school": "nakhchivan",
  "composition": "",
  "technique": "безворсовый",
  "size": "311x190 см",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:intangible_2850_p0045_1",
  "lib_img": "img/intangible_2850_p0045_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_nakhchivan_zili1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_nakhchivan_zili1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795377018
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -116,5 +127,8 @@
     }
    }
   }
+ },
+ "from_twin": {
+  "school": "azr_antique_nakhchivan_zili1"
  }
 }

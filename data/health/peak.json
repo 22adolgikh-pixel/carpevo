@@ -1,10 +1,10 @@
 {
- "at": "2026-11-22 19:37:43",
- "rss_mb": 6245,
- "avail_mb": 1394,
+ "at": "2026-11-22 19:51:33",
+ "rss_mb": 4837,
+ "avail_mb": 2834,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 40,
+ "up_s": 30,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -13,6 +13,7 @@
   "vlm-frame-sched",
   "text-facts-sched",
   "tone",
+  "Thread-3 (<lambda>)",
   "elem-name",
   "comp-nn",
   "Thread-4 (_dedupe_bg)",
@@ -21,26 +22,24 @@
   "Thread-7 (loop)",
   "cps-backup",
   "Thread-8 (_loop)",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-22 19:35:30 rss=6924MB avail=599/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:35:40 rss=6924MB avail=582/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:35:50 rss=6924MB avail=597/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:36:00 rss=6967MB avail=540/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:36:10 rss=6968MB avail=553/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:36:20 rss=6965MB avail=578/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:36:30 rss=6965MB avail=582/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:36:40 rss=6921MB avail=600/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:36:50 rss=6920MB avail=580/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:37:03 rss=144MB avail=7413/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:37:13 rss=503MB avail=7103/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:37:23 rss=3583MB avail=4069/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:37:23 malloc_trim: rss 3583MB -> 3520MB",
-  "2026-11-22 19:37:33 rss=5205MB avail=2472/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:37:43 rss=6245MB avail=1394/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-22 19:49:24 rss=1294MB avail=6372/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:49:34 rss=1287MB avail=6373/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:49:44 rss=1317MB avail=6321/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:49:54 rss=1318MB avail=6327/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:50:04 rss=1345MB avail=6317/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:50:14 rss=1345MB avail=6328/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:50:24 rss=1357MB avail=6284/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:50:34 rss=1373MB avail=6293/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:50:44 rss=1401MB avail=6254/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:50:54 rss=1404MB avail=6232/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:51:03 rss=260MB avail=7349/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:51:13 rss=619MB avail=7010/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:51:23 rss=3051MB avail=4561/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:51:23 malloc_trim: rss 3051MB -> 3026MB",
+  "2026-11-22 19:51:33 rss=4837MB avail=2834/11925MB limit=0MB heavy=- wait=0"
  ],
  "stacks": {
   "AnyIO worker thread": [
@@ -57,17 +56,19 @@
    "events.py:148 _loop"
   ],
   "cps-backup": [
-   "threading.py:1002 _bootstrap",
-   "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "backup.py:100 loop"
+   "backup.py:99 loop",
+   "backup.py:64 backup_once",
+   "backup.py:44 _mirror",
+   "shutil.py:448 copy2",
+   "shutil.py:269 copyfile"
   ],
   "Thread-7 (loop)": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "health.py:109 loop",
-   "health.py:86 _stacks"
+   "health.py:115 loop",
+   "health.py:92 _stacks"
   ],
   "Thread-5 (<lambda>)": [
    "threading.py:1002 _bootstrap",
@@ -98,6 +99,14 @@
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
    "rugs.py:4288 _periodic_en"
+  ],
+  "Thread-3 (<lambda>)": [
+   "_format_impl.py:869 read_array",
+   "_format_impl.py:1023 _read_bytes",
+   "zipfile.py:999 read",
+   "zipfile.py:1098 _read1",
+   "zipfile.py:1114 _read2",
+   "zipfile.py:805 read"
   ],
   "tone": [
    "threading.py:1002 _bootstrap",
