@@ -26,9 +26,9 @@
     0.03649
    ],
    "zone": "guard",
-   "motif": "",
+   "motif": "cincilim",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t53_f04",
    "group": "mmv74n3z2",
    "certainty": "sure",
    "status": "confirmed",
@@ -42,7 +42,8 @@
    "by": "dolgikh",
    "at": 1791922922,
    "confirmed_by": "/m: dolgikh",
-   "confirmed_at": 1794589063
+   "confirmed_at": 1794589063,
+   "named_by": "/m"
   },
   {
    "id": "mmv74n5fc0",
@@ -53,9 +54,9 @@
     0.03667
    ],
    "zone": "guard",
-   "motif": "",
+   "motif": "cincilim",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t53_f04",
    "group": "mmv74n3z2",
    "certainty": "sure",
    "status": "confirmed",
@@ -69,7 +70,8 @@
    "by": "машина → dolgikh",
    "at": 1791922925,
    "confirmed_by": "/m: dolgikh",
-   "confirmed_at": 1794589063
+   "confirmed_at": 1794589063,
+   "named_by": "/m"
   },
   {
    "id": "mmv74n5fc1",
@@ -80,9 +82,9 @@
     0.04
    ],
    "zone": "guard",
-   "motif": "",
+   "motif": "cincilim",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t53_f04",
    "group": "mmv74n3z2",
    "certainty": "sure",
    "status": "confirmed",
@@ -96,7 +98,8 @@
    "by": "машина → dolgikh",
    "at": 1791922925,
    "confirmed_by": "/m: dolgikh",
-   "confirmed_at": 1794589063
+   "confirmed_at": 1794589063,
+   "named_by": "/m"
   },
   {
    "id": "mmv74n5fc2",
@@ -107,9 +110,9 @@
     0.04
    ],
    "zone": "guard",
-   "motif": "",
+   "motif": "cincilim",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t53_f04",
    "group": "mmv74n3z2",
    "certainty": "sure",
    "status": "confirmed",
@@ -123,7 +126,8 @@
    "by": "машина → dolgikh",
    "at": 1791922925,
    "confirmed_by": "/m: dolgikh",
-   "confirmed_at": 1794589063
+   "confirmed_at": 1794589063,
+   "named_by": "/m"
   },
   {
    "id": "mmv74n5fc3",
@@ -134,9 +138,9 @@
     0.04
    ],
    "zone": "guard",
-   "motif": "",
+   "motif": "cincilim",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t53_f04",
    "group": "mmv74n3z2",
    "certainty": "maybe",
    "status": "confirmed",
@@ -150,7 +154,8 @@
    "by": "машина → dolgikh",
    "at": 1791922925,
    "confirmed_by": "/m: dolgikh",
-   "confirmed_at": 1794589063
+   "confirmed_at": 1794589063,
+   "named_by": "/m"
   },
   {
    "id": "mmv74n5fc4",
@@ -161,9 +166,9 @@
     0.03667
    ],
    "zone": "guard",
-   "motif": "",
+   "motif": "cincilim",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t53_f04",
    "group": "mmv74n3z2",
    "certainty": "maybe",
    "status": "confirmed",
@@ -177,7 +182,8 @@
    "by": "машина → dolgikh",
    "at": 1791922925,
    "confirmed_by": "/m: dolgikh",
-   "confirmed_at": 1794589063
+   "confirmed_at": 1794589063,
+   "named_by": "/m"
   },
   {
    "id": "mmv8e117w",
@@ -262,7 +268,7 @@
   }
  ],
  "created": 1791870022,
- "updated": 1795293047,
+ "updated": 1795344277,
  "cat": {
   "title": "Eagle carpet, 20th century, Arpi village",
   "museum": "",
@@ -626,6 +632,22 @@
     "t": 1794929904,
     "s": "ref"
    }
+  },
+  "name": {
+   "mmv74n3z2": {
+    "dolgikh": {
+     "a": "mo:cincilim",
+     "w": 2,
+     "t": 1795344250
+    }
+   },
+   "mmv8e117w": {
+    "dolgikh": {
+     "a": "none",
+     "w": 2,
+     "t": 1795344277
+    }
+   }
   }
  },
  "frame": "whole",
@@ -651,5 +673,8 @@
   ],
   "t": 1795207841
  },
- "fragment": true
+ "fragment": true,
+ "name_none": [
+  "mmv8e117w"
+ ]
 }
