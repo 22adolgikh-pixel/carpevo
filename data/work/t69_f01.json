@@ -38,7 +38,9 @@
   "translation": "Звезда",
   "carpet": "Конахкенд",
   "type": "К.—Ш",
-  "note": ""
+  "note": "",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.913,
@@ -168,7 +170,7 @@
    4.919
   ],
   "angle": -0.6,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 7.987,
   "distortion": {
@@ -192,9 +194,10 @@
    "n_suspects": 0
   },
   "risk": 0.095,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -394,5 +397,24 @@
   "ntiles": 16,
   "verified": []
  },
- "saved_at": "2026-11-22 16:15:53"
+ "saved_at": "2026-11-22 16:16:01",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "palette_link": [
+  false,
+  false,
+  false
+ ],
+ "palette_scan": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null,
+ "palette_v": 1
 }

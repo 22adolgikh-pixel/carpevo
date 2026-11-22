@@ -15,20 +15,20 @@
  ],
  "quad": [
   [
-   40,
-   40
+   40.44,
+   39.56
   ],
   [
-   547,
-   40
+   547.44,
+   40.44
   ],
   [
-   547,
-   549
+   546.56,
+   549.44
   ],
   [
-   40,
-   549
+   39.56,
+   548.56
   ]
  ],
  "meta": {
@@ -38,6 +38,68 @@
   "translation": "Звезда",
   "carpet": "Казах",
   "type": "Г.—К",
-  "note": "Встречается и в ковре «Зейва» Дивичинского района (Кубинская группа)"
- }
+  "note": "Встречается и в ковре «Зейва» Дивичинского района (Кубинская группа)",
+  "site_id": "",
+  "source": ""
+ },
+ "adjust": {
+  "brightness": 0,
+  "contrast": 1,
+  "gamma": 1,
+  "invert": false
+ },
+ "grid": {
+  "pw": 4,
+  "ph": 4,
+  "ox": 3.88,
+  "oy": 3.91,
+  "cols": 126,
+  "rows": 36,
+  "square": false
+ },
+ "classify": {
+  "tones": 2,
+  "inner": 55,
+  "thr": [
+   178,
+   131
+  ],
+  "centers": [
+   196,
+   160,
+   103
+  ]
+ },
+ "palette": [
+  "#ffffff",
+  "#1a1a1a",
+  "#b8b8b8"
+ ],
+ "palette_names": [
+  "фон",
+  "обводка",
+  "тело 1"
+ ],
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "palette_link": [
+  false,
+  false,
+  false
+ ],
+ "palette_scan": [
+  null,
+  null,
+  null
+ ],
+ "palette_touched": false,
+ "done": false,
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null,
+ "saved_at": "2026-11-22 16:19:03",
+ "palette_v": 1
 }
