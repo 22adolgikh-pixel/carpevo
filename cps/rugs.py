@@ -4088,6 +4088,54 @@ def install(app, DATA, D_WORK):
             return {"schemes": sch, "marks": near, "n_schemes": len(SH._idx["ids"])}
         return await run_in_threadpool(heavy, work, "подсказка по форме")
 
+    # ---------------- v12.04: название элемента по картинке среди всех (elem_name) ----------------
+    import elem_name as EN
+    _en = {"B": None, "run": False, "err": "", "eval": None, "t": 0}
+    F_EN = os.path.join(DATA, "elem_name_eval.json")
+
+    def _en_build(do_eval=False):
+        try:
+            import element_embed as EE
+            if not EE.available(): _en["err"] = "нет сети element_embed"; return
+            smeta = scheme_meta(); A = list(all_rugs_cached().values())
+            B = EN.build(EE, A, smeta, D_OUT, img_path, read_small)
+            _en.update(B=B, t=time.time(), err="")
+            if do_eval:
+                imgs = {}
+                def crop(u):
+                    if u["rid"] not in imgs:
+                        p = img_path(u["rid"]); imgs.clear(); imgs[u["rid"]] = read_small(p, 1400) if p else None
+                    a = imgs[u["rid"]]
+                    if a is None: return None
+                    H, W = a.shape[:2]; x, y, w, h = u["box"]
+                    return a[max(0, int(y * H)):max(int(y * H) + 4, int((y + h) * H)), max(0, int(x * W)):max(int(x * W) + 4, int((x + w) * W))]
+                def shape(u):
+                    c = crop(u)
+                    if c is None or not c.size: return None
+                    shape_index()
+                    return [c2["motif"] or ("n:" + (c2.get("name") or "").strip().lower()) for c2 in SH.match_schemes(c, limit=10)]
+                def closed(u):
+                    if not u["comp"]: return None
+                    return [EN.scheme_label(o["id"], smeta) for o in _exp_opts(u["comp"])]
+                ev = EN.evaluate(B, closed=closed, shape=shape); ev["t"] = int(time.time())
+                _en["eval"] = ev
+                with open(F_EN, "w", encoding="utf-8") as f: json.dump(ev, f, ensure_ascii=False, indent=1)
+        except Exception as e:
+            import traceback; _en["err"] = str(e)[:200]; traceback.print_exc()
+        finally:
+            _en["run"] = False
+
+    @app.get("/api/open/elem_eval")
+    def api_en_eval(run: int = 0):
+        """замер подсказки названий по картинке (run=1 — пересчитать в фоне; ≈ минуты)"""
+        if run and not _en["run"]:
+            _en["run"] = True; threading.Thread(target=_en_build, args=(True,), daemon=True, name="elem-name-eval").start()
+        ev = _en["eval"]
+        if ev is None and os.path.exists(F_EN):
+            try: ev = json.load(open(F_EN, encoding="utf-8"))
+            except Exception: ev = None
+        return {"running": _en["run"], "error": _en["err"], "eval": ev}
+
     # ---------------- v11.7: рабочий лист типа ковра (элементы Керимова → фото этого типа) ----------------
     _ty = {"t": 0, "rugs": None}
 

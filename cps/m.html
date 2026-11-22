@@ -87,13 +87,14 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
 // v11.52: виды карточек. Кнопки вверху включают и выключают вид; выбор помнится на этом телефоне. /m?k=quad,frame — задать выбор ссылкой.
-const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['tw','двойники'],['sch','школа'],['same','пары (старое)'],['split','развороты'],['rsame','дубли по углам (старое)'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле']];
+const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['tw','двойники'],['sch','школа'],['split','развороты'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле']];
+const KOLD=[['same','пары (старое)'],['rsame','дубли по углам (старое)']];   /* v12.04: старые виды — только по ссылке ?k=same / ?k=rsame */
 function kindsInit(){let k=new URLSearchParams(location.search).get('k');const fromUrl=!!k;
   if(!k){try{k=localStorage.getItem('cps_m_k');}catch(e){}}
-  S.k=(k||'').split(',').filter(x=>KINDS.some(a=>a[0]===x));if(!S.k.length)S.k=KINDS.map(a=>a[0]).filter(x=>x!=='same'&&x!=='rsame');
+  S.k=(k||'').split(',').filter(x=>KINDS.concat(KOLD).some(a=>a[0]===x));if(!S.k.length)S.k=KINDS.map(a=>a[0]).filter(x=>x!=='same'&&x!=='rsame');
   // v11.86: пары по одной заменены карточкой «двойники ковра»: у сохранённого выбора старые виды меняются на новый (один раз)
   try{if(!fromUrl&&!localStorage.getItem('cps_m_tw')){if(S.k.includes('same')||S.k.includes('rsame')||!S.k.includes('tw')){S.k=S.k.filter(x=>x!=='same'&&x!=='rsame');if(!S.k.includes('tw'))S.k.push('tw');localStorage.setItem('cps_m_k',S.k.join(','));}localStorage.setItem('cps_m_tw','1');}}catch(e){}}
-function chips(){const L=S.left||{};$('chips').innerHTML=KINDS.map(([k,n])=>`<button data-k="${k}" class="${S.k.includes(k)?'on':''}">${n}${L[k]!=null?' '+L[k]:''}</button>`).join('');
+function chips(){const L=S.left||{};$('chips').innerHTML=KINDS.concat(KOLD.filter(a=>S.k.includes(a[0]))).map(([k,n])=>`<button data-k="${k}" class="${S.k.includes(k)?'on':''}">${n}${L[k]!=null?' '+L[k]:''}</button>`).join('');
   document.querySelectorAll('#chips button').forEach(b=>b.onclick=()=>{const k=b.dataset.k;
     if(S.k.includes(k)){if(S.k.length===1)return toast('хотя бы один вид карточек');S.k=S.k.filter(x=>x!==k);}else S.k.push(k);
     try{localStorage.setItem('cps_m_k',S.k.join(','));}catch(e){}load();});}
@@ -106,7 +107,7 @@ function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!
   el.style.backgroundImage=`url("${img(t)}")`;el.style.backgroundSize=`${BW}px ${BH}px`;el.style.backgroundPosition=`${r.width/2-x*BW}px ${r.height/2-y*BH}px`;}
 function show(){head();const t=S.tasks[S.i];
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
-    <div class="mut">в очереди: ${KINDS.filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${S.k.includes('field')&&S.ms&&S.ms.running?`<div class="mut">готовлю карточки «поле»: ${S.ms.done} из ${S.ms.total}</div>`:''}${S.k.includes('rsame')&&S.rs?`<div class="mut">поиск новых дублей: ${S.rs.running?`идёт, проверено ${S.rs.done} из ${S.rs.total||'…'} пар`:(S.rs.t?'проход закончен':'ещё не запускался')}${S.rs.err?' · ошибка: '+S.rs.err:''}</div>`:''}${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
+    <div class="mut">в очереди: ${KINDS.concat(KOLD).filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${S.k.includes('field')&&S.ms&&S.ms.running?`<div class="mut">готовлю карточки «поле»: ${S.ms.done} из ${S.ms.total}</div>`:''}${S.k.includes('rsame')&&S.rs?`<div class="mut">поиск новых дублей: ${S.rs.running?`идёт, проверено ${S.rs.done} из ${S.rs.total||'…'} пар`:(S.rs.t?'проход закончен':'ещё не запускался')}${S.rs.err?' · ошибка: '+S.rs.err:''}</div>`:''}${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
     ${S.k.some(k=>L[k])?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
   ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,tw:showTw,sch:showSch,split:showSplit,cdup:showCdup,xsame:showXsame,field:showField})[t.type](t);}
 function qhead(q,tip){return `<div class="qrow"><span class="q">${q}</span><button class="ib" id="ib" aria-label="подсказка">i</button></div><div class="tip hint" id="tip">${tip}</div>`;}

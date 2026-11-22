@@ -164,7 +164,9 @@ def rg_tools_open(pg):
 
 
 def rgtool(pg, tool_id):
-    rg_tools_open(pg); pg.click('#' + tool_id)
+    rg_tools_open(pg)
+    pg.evaluate("id=>{const b=document.getElementById(id),d=b&&b.closest('details');if(d)d.open=true;}", tool_id)   # v12.04: устаревшие — в свёрнутом блоке
+    pg.click('#' + tool_id)
 
 
 def errors_ok(ctx, where):
@@ -259,6 +261,7 @@ def t04b_rug_quad(pg, ctx):
     assert pg.evaluate("getComputedStyle(document.getElementById('rgSvg')).overflow") == 'visible', 'линии за краем фото обрезаются'
     pg.mouse.move(c2['x'] + c2['width'] / 2, c2['y'] + c2['height'] / 2); pg.mouse.down(); pg.mouse.move(x, y, steps=5); pg.mouse.up(); pg.wait_for_timeout(1200)
     pg.click('#rgQOk'); pg.wait_for_timeout(300); assert pg.evaluate("R.rug.layout.quad_status") == 'confirmed', '«✓ углы верны» не подтверждает'
+    pg.evaluate("R.layOld=true;document.querySelectorAll('details.tlold').forEach(d=>d.open=true)")   # v12.04: каймы шагами — в свёрнутом «устарело»
     pg.click('#rgLayAuto'); pg.wait_for_timeout(2500)
     nb = pg.evaluate("R.rug.layout.bounds.length"); assert nb >= 1, 'на выпрямленном ковре не найдено ни одной границы каймы'
     bx = pg.evaluate("R.rug.layout.bounds.map(b=>b.ix)"); by = pg.evaluate("R.rug.layout.bounds.map(b=>b.iy)")
@@ -293,6 +296,7 @@ def t04b_rug_quad(pg, ctx):
         pg.click('#rgLayRm'); pg.wait_for_timeout(300)
         assert pg.evaluate("R.rug.layout.bounds.length") == n0 - 2, 'кнопка не удаляет линию'
     pg.evaluate("R.rug.marks=R.rug.marks.filter(m=>m.id!=='mz1');rugSaveSoon()")
+    pg.evaluate("R.layOld=true;document.querySelectorAll('details.tlold').forEach(d=>d.open=true)")   # v12.04: каймы шагами — в свёрнутом «устарело»
     pg.click('#rgLayAuto'); pg.wait_for_timeout(2500)
     # перетаскивание линии: типы полос едут вместе с линиями
     rg0 = pg.evaluate("R.rug.layout.rings.slice()"); x, y = line_pt(0)
@@ -606,7 +610,7 @@ def t15_rugs_overview(pg, ctx):
     assert pg.is_visible('#rgTree .ptree') and pg.is_visible('#rgPeek') and pg.is_visible('#rgChips'), 'у «Ковров» нет фильтров / карточки справа / строки активных фильтров'
     assert not pg.is_visible('#rgKpi'), 'инструменты каталога должны быть в отдельной панели, а не над плиткой'
     for b in ('rgTriBtn', 'rgTypesBtn', 'rgEtBtn', 'rgSignsBtn', 'rgDupChk', 'rgSync', 'rgSyncBooks'): assert not pg.is_visible('#' + b), f'кнопка {b} снова над плиткой'
-    rg_tools_open(pg); assert pg.is_visible('#rgKpi') and pg.is_visible('#rgTriBtn'), 'в панели «Инструменты» нет инструментов'
+    rg_tools_open(pg); assert pg.is_visible('#rgKpi') and pg.is_visible('#rgTypesBtn'), 'в панели «Инструменты» нет инструментов'
     pg.click('#rgToolsX'); pg.wait_for_timeout(200); assert not pg.is_visible('#rgTools'), 'панель «Инструменты» не закрывается'
     pg.click('#rgUpBtn'); pg.wait_for_timeout(300); mt = pg.inner_text('#popMenu')
     assert all(w in mt for w in ('Фото ковров', 'Архив', 'Каталог музея', 'Отпечатки', 'Обновить каталог', 'Ковры из книг')), f'меню «Загрузить» (ковры) неполное: {mt}'
@@ -2318,6 +2322,42 @@ def t54_vlm_frame_v1203(pg, ctx):
     r = get(u + 'api/rugs/' + B); assert r['frame'] == 'whole', r.get('frame')
     T = get(u + 'api/micro/next?n=50&k=frame'); assert B not in [t['rid'] for t in T['tasks']], 'после ответа перепроверка уходит'
     for i in (A, B): os.remove(f'{D}/rugs/{i}.json')
+
+
+@test
+def t55_elem_name_v1204(pg, ctx):
+    """v12.04: название элемента по картинке среди всех: банк из названных рамок других ковров и схем; замер без своего ковра."""
+    import sys, tempfile, cv2, numpy as np
+    sys.path.insert(0, ctx['app']); import elem_name as EN
+    cols = {'deve': (0, 0, 200), 'qeychi': (0, 200, 0), 'alma': (200, 0, 0)}
+    class FE:                                                                   # «сеть»: вектор = средний цвет рамки
+        @staticmethod
+        def version(m='match'): return 1
+        @staticmethod
+        def small(a): return a
+        @staticmethod
+        def _v(a, b):
+            h, w = a.shape[:2]; x, y, bw, bh = b; c = a[int(y * h):int((y + bh) * h), int(x * w):int((x + bw) * w)].reshape(-1, 3).mean(0) + 1
+            return c / np.linalg.norm(c)
+        @classmethod
+        def emb(cls, a, boxes, m='match'): return np.stack([cls._v(a, b) for b in boxes])
+        @classmethod
+        def emb_rot(cls, a, b, m='match'): return np.stack([cls._v(a, b)] * 8)
+    T = tempfile.mkdtemp(); rugs = []
+    for n in range(3):
+        a = np.full((200, 200, 3), 128, np.uint8); a[10:60, 10:60] = cols['deve']; a[100:150, 100:150] = cols['qeychi']
+        cv2.imwrite(f'{T}/r{n}.jpg', a)
+        rugs.append({'id': f'r{n}', 'composition': 'x', 'marks': [
+            {'id': 'a', 'status': 'confirmed', 'box': [0.05, 0.05, 0.25, 0.25], 'motif': 'deve'},
+            {'id': 'b', 'status': 'confirmed', 'box': [0.5, 0.5, 0.25, 0.25], 'motif': 'qeychi'}]})
+    os.makedirs(f'{T}/out'); s = np.full((40, 40, 3), cols['alma'], np.uint8); cv2.imwrite(f'{T}/out/t1_f01.png', s)
+    smeta = {'t1_f01': {'name': 'Alma', 'motif': 'alma'}}
+    B = EN.build(FE, rugs, smeta, f'{T}/out', lambda rid: f'{T}/{rid}.jpg', lambda p, side: cv2.imread(p), log=lambda *a: None)
+    assert len(B['U']) == 6 and len(B['S']) == 1, (len(B['U']), len(B['S']))
+    ev = EN.evaluate(B, closed=lambda u: ['alma'], shape=None)
+    assert ev['n'] == 6 and ev['rugs']['top1'] == 1.0 and ev['closed']['in_list'] == 0.0, ev
+    q = FE.emb_rot(np.full((10, 10, 3), cols['alma'], np.uint8), [0, 0, 1, 1])
+    sg = EN.suggest(B, q8=q, k=3); assert sg[0][0] == 'alma' and sg[0][2] == 'scheme', sg
 
 
 def main():
