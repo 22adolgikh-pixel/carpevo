@@ -1,10 +1,10 @@
 {
- "at": "2026-11-22 20:17:10",
- "rss_mb": 3996,
- "avail_mb": 3654,
+ "at": "2026-11-22 20:17:20",
+ "rss_mb": 5842,
+ "avail_mb": 1804,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 30,
+ "up_s": 40,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -25,8 +25,6 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-22 20:15:04 rss=939MB avail=6720/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:15:14 rss=938MB avail=6712/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 20:15:24 rss=938MB avail=6723/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 20:15:34 rss=938MB avail=6735/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 20:15:44 rss=939MB avail=6694/11925MB limit=0MB heavy=- wait=0",
@@ -39,7 +37,9 @@
   "2026-11-22 20:16:50 rss=589MB avail=7013/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 20:17:00 rss=2565MB avail=5062/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 20:17:00 malloc_trim: rss 2565MB -> 2539MB",
-  "2026-11-22 20:17:10 rss=3996MB avail=3654/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-22 20:17:10 rss=3996MB avail=3654/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 20:17:20 rss=5842MB avail=1804/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 20:17:20 malloc_trim: rss 5842MB -> 5842MB"
  ],
  "stacks": {
   "AnyIO worker thread": [
@@ -56,12 +56,10 @@
    "events.py:148 _loop"
   ],
   "cps-backup": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "backup.py:99 loop",
-   "backup.py:64 backup_once",
-   "backup.py:44 _mirror",
-   "shutil.py:450 copy2",
-   "shutil.py:407 copystat"
+   "backup.py:100 loop"
   ],
   "Thread-7 (loop)": [
    "threading.py:1002 _bootstrap",
@@ -105,8 +103,8 @@
    "rugs.py:4210 <lambda>",
    "rugs.py:4208 shape_index",
    "shape_hint.py:96 build_index",
-   "_npyio_impl.py:257 __getitem__",
-   "_format_impl.py:870 read_array"
+   "_npyio_impl.py:245 __getitem__",
+   "_format_impl.py:887 read_array"
   ],
   "tone": [
    "threading.py:1002 _bootstrap",
