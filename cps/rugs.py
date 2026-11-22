@@ -4136,6 +4136,57 @@ def install(app, DATA, D_WORK):
             except Exception: ev = None
         return {"running": _en["run"], "error": _en["err"], "eval": ev}
 
+    # ---------------- v12.05: тип ковра по соседям по картинке + рисунки Gans-Ruedin (rug_nn) ----------------
+    import rug_nn as RN
+    _rn = {"B": None, "run": False, "err": "", "eval": None, "t": 0, "gans": []}
+    F_RN = os.path.join(DATA, "comp_nn_eval.json")
+
+    def _rn_gans():
+        """рисунки Gans-Ruedin: [(id, картинка, тип по подписи)]"""
+        out, seen = [], []
+        for f in sorted(os.listdir(D_WORK)):
+            if not f.startswith("gr") or not f.endswith(".json"): continue
+            try: w = json.load(open(os.path.join(D_WORK, f), encoding="utf-8"))
+            except Exception: continue
+            m = w.get("meta") or {}; t = m.get("name") or m.get("name_az") or ""
+            cid, _ = comp_from_text(t) if t else ("", "")
+            p = os.path.join(DATA, "sheets", w.get("sheet") or "")
+            seen.append({"id": w.get("id") or f[:-5], "title": t, "comp": cid or ""})
+            if cid and os.path.exists(p): out.append((w.get("id") or f[:-5], read_small(p, 800), cid))
+        _rn["gans"] = seen
+        return out
+
+    def _rn_build(do_eval=False):
+        try:
+            import element_embed as EE
+            if not EE.available(): _rn["err"] = "нет сети element_embed"; return
+            A = list(all_rugs_cached().values())
+            def get_img(r):
+                p = rect_path(r["id"], r, build=False) or img_path(r["id"])
+                return read_small(p, 600) if p else None
+            B = RN.build(EE, A, get_img, _rn_gans()); _rn.update(B=B, t=time.time(), err="")
+            if do_eval:
+                ev = RN.evaluate(B); ev["t"] = int(time.time())
+                ev["gans_titles"] = {"all": len(_rn["gans"]), "with_type": sum(1 for g in _rn["gans"] if g["comp"]),
+                                     "no_type_examples": [g["title"] for g in _rn["gans"] if g["title"] and not g["comp"]][:25]}
+                _rn["eval"] = ev
+                with open(F_RN, "w", encoding="utf-8") as f: json.dump(ev, f, ensure_ascii=False, indent=1)
+        except Exception as e:
+            import traceback; _rn["err"] = str(e)[:200]; traceback.print_exc()
+        finally:
+            _rn["run"] = False
+
+    @app.get("/api/open/comp_eval")
+    def api_rn_eval(run: int = 0):
+        """замер подсказки типа ковра по соседям по картинке и рисункам Gans-Ruedin (run=1 — пересчитать в фоне)"""
+        if run and not _rn["run"]:
+            _rn["run"] = True; threading.Thread(target=_rn_build, args=(True,), daemon=True, name="comp-nn-eval").start()
+        ev = _rn["eval"]
+        if ev is None and os.path.exists(F_RN):
+            try: ev = json.load(open(F_RN, encoding="utf-8"))
+            except Exception: ev = None
+        return {"running": _rn["run"], "error": _rn["err"], "eval": ev}
+
     # ---------------- v11.7: рабочий лист типа ковра (элементы Керимова → фото этого типа) ----------------
     _ty = {"t": 0, "rugs": None}
 

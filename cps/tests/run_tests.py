@@ -2360,6 +2360,29 @@ def t55_elem_name_v1204(pg, ctx):
     sg = EN.suggest(B, q8=q, k=3); assert sg[0][0] == 'alma' and sg[0][2] == 'scheme', sg
 
 
+@test
+def t56_comp_nn_v1205(pg, ctx):
+    """v12.05: тип ковра по соседям по картинке: ковёр не находит сам себя и своих двойников; рисунок Gans-Ruedin голосует."""
+    import sys, numpy as np
+    sys.path.insert(0, ctx['app']); import rug_nn as RN
+    class FE:
+        @staticmethod
+        def meta(m='match'): return {"S": 8}
+        @staticmethod
+        def _prep(c): return c.astype(np.float32).mean((0, 1))
+        @staticmethod
+        def _run(arr, m): return np.stack(arr)
+    def img(c): return np.full((20, 10, 3), c, np.uint8)
+    rugs = [{'id': 'a1', 'composition': 'pirebedil'}, {'id': 'a2', 'composition': 'pirebedil'}, {'id': 'a3', 'composition': 'pirebedil', 'same': [{'id': 'a4'}]},
+            {'id': 'a4', 'composition': 'kasimushagi', 'same': [{'id': 'a3'}]}, {'id': 'b1', 'composition': 'kasimushagi'}, {'id': 'x', 'composition': ''}]
+    col = {'a1': (0, 0, 200), 'a2': (0, 10, 200), 'a3': (0, 5, 200), 'a4': (0, 5, 201), 'b1': (200, 0, 0), 'x': (0, 3, 199)}
+    B = RN.build(FE, rugs, lambda r: img(col[r['id']]), gans=[('gr1', img((200, 5, 0)), 'kasimushagi')], log=lambda *a: None)
+    i = B['ids'].index('a4'); sg = RN.suggest(B, i, k=2, use_gans=False)
+    assert sg and sg[0][0] == 'pirebedil', ('двойник a3 не должен подсказывать сам себя: ', sg)
+    ev = RN.evaluate(B, k=2); assert ev['n'] == 5 and 'rugs' in ev, ev
+    q = RN.vec(FE, img((199, 4, 0))); g = RN.suggest(B, q=q, k=1, skip=set()); assert any(c == 'kasimushagi' for c, *_ in g), g
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
