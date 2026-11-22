@@ -852,10 +852,10 @@
   {
    "id": "m6b021677e770686_1",
    "box": [
-    0.20312,
-    0.57877,
-    0.10059,
-    0.11815
+    0.191,
+    0.61215,
+    0.06474,
+    0.13498
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -863,7 +863,7 @@
    "scheme": "t32_f04",
    "group": "m6b021677e770686_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 1",
    "machine": 1,
    "score": 0.709,
@@ -999,7 +999,11 @@
      0.60616
     ]
    ],
-   "sam": 0.889
+   "sam": 0.889,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795354135,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795354135
   },
   {
    "id": "m17953436920s",
@@ -1688,7 +1692,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795343925,
+ "updated": 1795354135,
  "cat": {
   "title": "Xalça. “ Malıbəyli” . Qarabağqrupu . Azərbaycan . Şuşa, Malıbəylik. XIXəsrinortalarıYun. Xovlu.",
   "museum": "",
@@ -1980,6 +1984,13 @@
      "a": "ok",
      "w": 2,
      "t": 1795343925
+    }
+   },
+   "m6b021677e770686_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795354135
     }
    }
   }

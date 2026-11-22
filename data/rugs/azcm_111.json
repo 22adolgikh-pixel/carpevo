@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870044,
- "updated": 1794236973,
+ "updated": 1795354086,
  "cat": {
   "title": "“Ləmpə” («Лямпя»), Тебриз",
   "museum": "Национальный музей азербайджанского ковра",
@@ -370,12 +370,19 @@
    "src": "cand2"
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "multi": [],
  "micro": {
   "field": {
    "dolgikh": "2"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795354086
+   }
   }
  },
  "auto_edge": {
@@ -397,5 +404,6 @@
    70.9461
   ],
   "t": 1795207667
- }
+ },
+ "frame_by": "micro"
 }

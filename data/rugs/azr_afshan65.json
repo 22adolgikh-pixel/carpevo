@@ -18,7 +18,7 @@
  "h": 770,
  "marks": [],
  "created": 1791736128,
- "updated": 1794256551,
+ "updated": 1795354126,
  "cat": {
   "title": "afshan65",
   "museum": "",
@@ -83,13 +83,13 @@
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "fragment",
+    "a": "cropped",
     "w": 2,
-    "t": 1794256551
+    "t": 1795354126
    }
   }
  },
- "frame": "fragment",
+ "frame": "cropped",
  "frame_by": "micro",
  "auto_edge": {
   "v": 1,
@@ -110,5 +110,10 @@
    50.4157
   ],
   "t": 1795207709
+ },
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
  }
 }

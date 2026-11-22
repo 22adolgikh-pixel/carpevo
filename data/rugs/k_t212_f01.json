@@ -26,9 +26,9 @@
     0.0578
    ],
    "zone": "field",
-   "motif": "",
+   "motif": "cincilim",
    "motif_text": "",
-   "scheme": "",
+   "scheme": "t53_f04",
    "group": "",
    "certainty": "sure",
    "status": "confirmed",
@@ -39,11 +39,12 @@
    "confirmed_by": "/m: dolgikh",
    "confirmed_at": 1795204239,
    "edited_by": "dolgikh",
-   "edited_at": 1791568133
+   "edited_at": 1791568133,
+   "named_by": "/m"
   }
  ],
  "created": 1791567610,
- "updated": 1795205116,
+ "updated": 1795354047,
  "src_id": "fig:t212_f01",
  "layout": null,
  "updated_by": "dolgikh",
@@ -94,6 +95,15 @@
     "a": "whole",
     "w": 2,
     "t": 1795205116
+   }
+  },
+  "name": {
+   "mmv19bja9": {
+    "dolgikh": {
+     "a": "mo:cincilim",
+     "w": 2,
+     "t": 1795354047
+    }
    }
   }
  },

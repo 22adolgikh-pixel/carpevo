@@ -18,7 +18,7 @@
  "h": 718,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1795354038,
  "cat": {
   "title": "kuba hajigaib11",
   "museum": "",
@@ -124,5 +124,49 @@
    43.7275
   ],
   "t": 1795207769
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795354038,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04737,
+    0.05086
+   ],
+   [
+    0.96436,
+    0.04546
+   ],
+   [
+    0.9703,
+    0.96341
+   ],
+   [
+    0.02612,
+    0.9495
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

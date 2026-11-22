@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870018,
- "updated": 1795291588,
+ "updated": 1795354007,
  "cat": {
   "title": "Carpet of Baku group of Azerbaijan carpets in Heydar Aliyev Center",
   "museum": "",
@@ -151,5 +151,20 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795354007
+   }
+  }
+ },
+ "frame_by": "micro"
 }
