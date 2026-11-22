@@ -2115,10 +2115,36 @@
    "confirmed_at": 1795289992,
    "rf": 1,
    "rf_s": 0.827
+  },
+  {
+   "id": "m17953440900e",
+   "box": [
+    0.34492,
+    0.19436,
+    0.12181,
+    0.18782
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8d36i3",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.876,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795344090,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791736122,
- "updated": 1795290007,
+ "updated": 1795344090,
  "cat": {
   "title": "Керимов, т. II (стр. скана 139, печ. 27)",
   "museum": "",
@@ -2857,5 +2883,8 @@
   "mmv8d36i3",
   "mmv8dljyx",
   "mmv8epnic"
- ]
+ ],
+ "esearch": {
+  "mmv8d36i3": "1:8"
+ }
 }
