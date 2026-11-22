@@ -18,7 +18,7 @@
  "h": 1007,
  "marks": [],
  "created": 1791736140,
- "updated": 1795073152,
+ "updated": 1795358041,
  "cat": {
   "title": "Azerbaijan silk embroidery, XVIII century, Late Safavid or Khanate Period",
   "museum": "",
@@ -80,7 +80,30 @@
   "conf": 0.961,
   "area": 0.887,
   "ver": 1,
-  "t": 1795072850
+  "t": 1795072850,
+  "ref_quad": {
+   "quad": [
+    [
+     0.00995,
+     0.0409
+    ],
+    [
+     0.97904,
+     0.03863
+    ],
+    [
+     0.96031,
+     0.96428
+    ],
+    [
+     0.01826,
+     0.97503
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795358033
+  }
  },
  "layout": {
   "carpet": [
@@ -96,26 +119,26 @@
   "status": "auto",
   "quad": [
    [
-    0.0,
-    0.04889
+    0.00995,
+    0.0409
    ],
    [
-    0.97987,
-    0.04
+    0.97904,
+    0.03863
    ],
    [
-    0.95861,
-    0.96222
+    0.96031,
+    0.96428
    ],
    [
-    0.0179,
-    0.97333
+    0.01826,
+    0.97503
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
- "frame": "cropped",
- "tri": "auto",
+ "frame": "whole",
+ "tri": "micro",
  "auto_edge": {
   "v": 1,
   "f": [
@@ -135,5 +158,23 @@
    40.1687
   ],
   "t": 1795207726
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795358000
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795358041,
+    "s": "ref"
+   }
+  }
+ },
+ "frame_by": "micro"
 }
