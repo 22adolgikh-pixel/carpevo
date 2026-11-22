@@ -1,17 +1,10 @@
 {
- "noticed": "2026-11-22 15:18:36",
+ "noticed": "2026-11-22 15:24:17",
  "prev": {
-  "started": "2026-11-22 15:13:32",
-  "pid": 6
+  "started": "2026-11-22 15:18:36",
+  "pid": 7
  },
  "mem_tail": [
-  "2026-11-22 15:06:45 rss=2091MB avail=4046/11925MB limit=0MB heavy=новые двойники wait=0",
-  "2026-11-22 15:06:55 rss=2095MB avail=4042/11925MB limit=0MB heavy=двойники wait=1",
-  "2026-11-22 15:07:05 rss=2096MB avail=4005/11925MB limit=0MB heavy=двойники wait=1",
-  "2026-11-22 15:07:15 rss=1922MB avail=4201/11925MB limit=0MB heavy=новые двойники wait=0",
-  "2026-11-22 15:07:25 rss=1888MB avail=4239/11925MB limit=0MB heavy=новые двойники wait=0",
-  "2026-11-22 15:07:35 rss=1900MB avail=4237/11925MB limit=0MB heavy=новые двойники wait=0",
-  "2026-11-22 15:07:45 rss=1929MB avail=4197/11925MB limit=0MB heavy=новые двойники wait=0",
   "2026-11-22 15:07:55 rss=1929MB avail=4199/11925MB limit=0MB heavy=новые двойники wait=0",
   "2026-11-22 15:08:05 rss=1929MB avail=4203/11925MB limit=0MB heavy=новые двойники wait=0",
   "2026-11-22 15:08:15 rss=1929MB avail=4249/11925MB limit=0MB heavy=- wait=0",
@@ -34,7 +27,14 @@
   "2026-11-22 15:15:32 rss=6167MB avail=65/11925MB limit=0MB heavy=одинаковые снимки wait=0",
   "2026-11-22 15:15:50 rss=6167MB avail=62/11925MB limit=0MB heavy=одинаковые снимки wait=0",
   "2026-11-22 15:16:12 rss=6168MB avail=63/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 15:16:31 rss=6170MB avail=63/11925MB limit=0MB heavy=одинаковые снимки wait=0"
+  "2026-11-22 15:16:31 rss=6170MB avail=63/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 15:18:36 rss=118MB avail=5788/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 15:18:46 rss=330MB avail=5818/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 15:18:56 rss=2997MB avail=3152/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 15:19:06 rss=5061MB avail=1092/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 15:19:17 rss=6081MB avail=61/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 15:19:38 rss=6088MB avail=56/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 15:19:57 rss=6095MB avail=58/11925MB limit=0MB heavy=одинаковые снимки wait=0"
  ],
  "faults_tail": ""
 }
