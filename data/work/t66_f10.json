@@ -38,7 +38,9 @@
   "translation": "Яблоко",
   "carpet": "Пиргасанлы",
   "type": "К.—Ш",
-  "note": "Элементы № 6, 8, 9, 10 более характерны для ширванской группы ковров (см. табл. 39, рис. 10)."
+  "note": "Элементы № 6, 8, 9, 10 более характерны для ширванской группы ковров (см. табл. 39, рис. 10).",
+  "site_id": "",
+  "source": ""
  },
  "grid": {
   "pw": 4.9524,
@@ -181,7 +183,7 @@
    4.941
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 6.116,
   "distortion": {
@@ -205,9 +207,10 @@
    "n_suspects": 0
   },
   "risk": 0.869,
-  "difficulty_est": "medium"
+  "difficulty_est": "medium",
+  "edited": true
  },
- "done": false,
+ "done": true,
  "adjust": {
   "brightness": 0,
   "contrast": 1,
@@ -274,5 +277,24 @@
   "ntiles": 16,
   "verified": []
  },
- "saved_at": "2026-11-22 15:58:37"
+ "saved_at": "2026-11-22 16:02:06",
+ "palette_dyes": [
+  null,
+  null,
+  null
+ ],
+ "palette_link": [
+  false,
+  false,
+  false
+ ],
+ "palette_scan": [
+  null,
+  null,
+  null
+ ],
+ "review": false,
+ "transparent_bg": true,
+ "difficulty": null,
+ "palette_v": 1
 }
