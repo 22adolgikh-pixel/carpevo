@@ -2392,6 +2392,13 @@ def t56_comp_nn_v1205(pg, ctx):
     assert sg and sg[0][0] == 'pirebedil', ('двойник a3 не должен подсказывать сам себя: ', sg)
     ev = RN.evaluate(B, k=2); assert ev['n'] == 5 and 'rugs' in ev, ev
     q = RN.vec(FE, img((199, 4, 0))); g = RN.suggest(B, q=q, k=1, skip=set()); assert any(c == 'kasimushagi' for c, *_ in g), g
+    # v12.07: английские торговые названия → тип словаря (подписи Gans-Ruedin, дилеры)
+    u = ctx['url']; D = ctx['app'] + '/data'; now = int(time.time())
+    for i, t in (('tr_a', "'DRAGON' RUG, KARABAKH OR SHIRVAN"), ('tr_b', 'SEICHUR SOUMAK')):
+        json.dump({"id": i, "title": t, "source": "тест", "w": 10, "h": 10, "marks": [], "created": now, "updated": now, "status": "new"}, open(f'{D}/rugs/{i}.json', 'w'))
+    L = {r['id']: r for r in get(u + 'api/rugs')['rugs'] if r['id'] in ('tr_a', 'tr_b')}
+    assert L['tr_a'].get('comp_sug') == 'ejdahali' and L['tr_b'].get('comp_sug') == 'zeyve', {k: v.get('comp_sug') for k, v in L.items()}
+    for i in ('tr_a', 'tr_b'): os.remove(f'{D}/rugs/{i}.json')
 
 
 @test

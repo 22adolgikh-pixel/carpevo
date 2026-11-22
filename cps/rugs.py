@@ -383,6 +383,15 @@ def install(app, DATA, D_WORK):
             if not n or n.startswith("motif_") or "?" in n: continue
             k = re.sub(r"[^a-z]", "", fold(n).replace("j", "c"))
             if len(k) >= 4 and k not in NOT_COMP and d["id"] not in CV.setdefault(k, []): CV[k].append(d["id"])
+    # v12.07: английские торговые названия (подписи Gans-Ruedin, дилеры) → тип словаря; только однозначные
+    TRADE = {"perepedil": "pirebedil", "seichur": "zeyve", "seichour": "zeyve", "seychour": "zeyve", "konakhend": "qonaqkend", "konaghkend": "qonaqkend",
+             "marasali": "mereze-carpet", "maraseli": "mereze-carpet", "chelaberd": "chelebi", "shikhly": "shixli", "shikhli": "shixli",
+             "borjalu": "borchali", "borchalo": "borchali", "karachoph": "qarachop", "karachop": "qarachop", "afshan": "efshan-carpet",
+             "surakhany": "suraxani", "gymyl": "qimil", "chayly": "chayli", "chajli": "chayli", "butaly": "butali-carpet",
+             "dragon": "ejdahali", "sevan": "goycheli"}
+    for k, v in TRADE.items():
+        k = re.sub(r"[^a-z]", "", fold(k).replace("j", "c"))                    # тот же ключ, что у словаря
+        if v in BYID and BYID[v]["type"] == "composition" and v not in CV.setdefault(k, []): CV[k].append(v)
     # v11.85: fold сводит q и g, поэтому «qollu çiçi» и «göllü çiçi» дают один ключ. При совпадении ключа выбираем тип,
     # чьё написание (с q/g) стоит в тексте; иначе тот, что чаще уже подтверждён в каталоге (CPOP считает api_rugs).
     CPOP = {}
