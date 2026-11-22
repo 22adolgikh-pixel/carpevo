@@ -18,7 +18,7 @@
  "h": 1278,
  "marks": [],
  "created": 1791736135,
- "updated": 1795154786,
+ "updated": 1795354557,
  "cat": {
   "title": "kuba tekye3",
   "museum": "",
@@ -114,7 +114,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -135,5 +135,15 @@
    45.0358
   ],
   "t": 1795207802
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795354557
+   }
+  }
+ },
+ "frame_by": "micro"
 }
