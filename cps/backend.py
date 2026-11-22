@@ -1891,3 +1891,39 @@ def _drive_pages_job():
 
 if not os.environ.get("CPS_NO_SCHED"):
     threading.Thread(target=_drive_pages_job, daemon=True, name="drive-pages").start()
+
+
+# ---------------- v12.14: недорезанные рисунки Керимова (22 шт. в 9 таблицах) ----------------
+# Рамки подобраны по сканам с контролем числа по легенде (tools/kerimov_fix/cut_spec_v12.json). Существующие рамки листа не меняются,
+# добавляются только недостающие; номера по книге — через book_map.json. Итог — data/kcut_v12.json.
+F_KCUT = os.path.join(DATA, "kcut_v12.json")
+
+def _kcut_job():
+    st = jload(F_KCUT, {}) or {}
+    if st.get("done"): return
+    time.sleep(100)
+    try: spec = json.load(open(os.path.join(HERE, "tools", "kerimov_fix", "cut_spec_v12.json"), encoding="utf-8"))
+    except Exception as e: jsave(F_KCUT, {"done": False, "error": str(e)[:200]}); return
+    res = {}
+    for rel, s in spec.items():
+        try:
+            mp = os.path.join(D_SHEETS, _sheet_key(rel) + ".json"); meta = jload(mp, {}) or {}
+            ex = [dict(b) for b in (meta.get("boxes") or [])]
+            have = {b.get("fig") for b in ex}
+            add = [{"x": b["x"], "y": b["y"], "w": b["w"], "h": b["h"], "fig": b["fig"]} for b in s["new"] if b["fig"] not in have]
+            table = meta.get("table") or s["table"]
+            r = api_sheet_save({"path": rel, "table": table, "boxes": ex + add})
+            if isinstance(r, JSONResponse): raise RuntimeError("sheet_save: ошибка")
+            m2 = jload(mp, {}) or {}
+            for k, v in meta.items():
+                if k not in ("boxes", "figures"): m2[k] = v
+            jsave(mp, m2)
+            for fig, (bt, bf) in (s.get("relabel") or {}).items():
+                wp = os.path.join(D_WORK, fig_id(table, int(fig), _sheet_key(rel)) + ".json"); w = jload(wp, {}) or {}
+                if w: w["book_table"], w["book_fig"] = bt, bf; w["meta"] = meta_from_legend(bt, bf); jsave(wp, w)
+            res[rel] = {"ok": True, "added": [b["fig"] for b in add], "total": len(ex) + len(add)}
+        except Exception as e: res[rel] = {"ok": False, "error": str(e)[:200]}
+    jsave(F_KCUT, {"done": all(v.get("ok") for v in res.values()), "pages": res, "t": time.strftime("%Y-%m-%d %H:%M:%S")})
+
+if not os.environ.get("CPS_NO_SCHED"):
+    threading.Thread(target=_kcut_job, daemon=True, name="kcut").start()

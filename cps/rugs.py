@@ -4398,7 +4398,9 @@ def install(app, DATA, D_WORK):
                         "sheet_meta": None if meta is None else {"boxes": len(meta.get("boxes") or []), "no_figures": bool(meta.get("no_figures")), "auto": bool(meta.get("auto_segmented")), "table": meta.get("table")}})
         try: dp = json.load(open(os.path.join(DATA, "drive_pages.json"), encoding="utf-8"))
         except Exception: dp = None
-        return {"drive_pages": dp, "n_tables": len(out), "n_missing": sum(len(o["missing"]) for o in out), "tables": out}
+        try: kc = json.load(open(os.path.join(DATA, "kcut_v12.json"), encoding="utf-8"))
+        except Exception: kc = None
+        return {"kcut": kc, "drive_pages": dp, "n_tables": len(out), "n_missing": sum(len(o["missing"]) for o in out), "tables": out}
 
     @app.get("/api/open/kscan/{page}.jpg")
     def api_kscan(page: int):
