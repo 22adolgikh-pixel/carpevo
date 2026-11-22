@@ -3,7 +3,7 @@
 #  • data/health/faults.log — аварии на уровне C (OpenCV, torch): faulthandler пишет стек упавшего потока;
 #  • при старте: если предыдущий запуск закончился не штатно — событие «Сервер перезапускался» с последней строкой mem.log
 #    (если память была на пределе — почти наверняка система убила процесс из-за нехватки памяти).
-import os, time, threading, json, faulthandler
+import os, sys, time, threading, json, faulthandler
 
 _cfg = {}
 
@@ -78,6 +78,15 @@ def install(app, data, heavy_q=None, events=None):
         try: os.remove(run)
         except Exception: pass
 
+    def _stacks():
+        """v12.16: где сейчас стоят потоки (последние кадры) — чтобы по скачку памяти увидеть, какая задача её занимает"""
+        import traceback
+        names = {t_.ident: t_.name for t_ in threading.enumerate()}; out = {}
+        for tid, fr in sys._current_frames().items():
+            st = traceback.extract_stack(fr)[-6:]
+            out[names.get(tid, str(tid))] = [f"{os.path.basename(x.filename)}:{x.lineno} {x.name}" for x in st]
+        return out
+
     def loop():
         while True:
             try:
@@ -90,7 +99,7 @@ def install(app, data, heavy_q=None, events=None):
                     try:
                         with open(mem, "rb") as f: f.seek(max(0, os.path.getsize(mem) - 3000)); t = f.read().decode("utf-8", "ignore").strip().splitlines()[-15:]
                         json.dump({"at": time.strftime("%Y-%m-%d %H:%M:%S"), "rss_mb": r, "avail_mb": av, "heavy": hq.get("run") or "", "ui_heavy": hq.get("ui_run") or "", "up_s": int(time.time() - _cfg["t0"]),
-                                   "threads": [t_.name for t_ in threading.enumerate()][:40], "mem_tail": t}, open(os.path.join(d, "peak.json"), "w"), ensure_ascii=False, indent=1)
+                                   "threads": [t_.name for t_ in threading.enumerate()][:40], "mem_tail": t, "stacks": _stacks()}, open(os.path.join(d, "peak.json"), "w"), ensure_ascii=False, indent=1)
                     except Exception: pass
                 if os.path.getsize(mem) > 2_000_000:            # хвост 1 МБ
                     with open(mem, "rb") as f: f.seek(-1_000_000, 2); tail = f.read()
@@ -127,6 +136,8 @@ def install(app, data, heavy_q=None, events=None):
             with open(fp, "rb") as f:
                 f.seek(max(0, os.path.getsize(fp) - 8000)); out["faults"] = f.read().decode("utf-8", "ignore")[-8000:]
         except Exception: out["faults"] = ""
+        try: out["peak"] = json.load(open(os.path.join(d, "peak.json"), encoding="utf-8"))
+        except Exception: out["peak"] = None
         return out
 
 
