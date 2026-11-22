@@ -18,7 +18,7 @@
  "h": 1400,
  "marks": [],
  "created": 1791736138,
- "updated": 1795353771,
+ "updated": 1795353810,
  "cat": {
   "title": "Antique Caucasian rug in a golden-yellow ground with small tree-like motifs, Southern Salyan, 19th c",
   "museum": "",
@@ -72,6 +72,14 @@
     "a": "whole",
     "w": 2,
     "t": 1795353771
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795353810,
+    "s": "ref"
    }
   }
  },
@@ -137,26 +145,26 @@
   "status": "auto",
   "quad": [
    [
-    0.04433,
-    0.01
+    0.04362,
+    0.01426
    ],
    [
-    0.91133,
-    0.0
+    0.91095,
+    0.0144
    ],
    [
-    0.93596,
-    0.98444
+    0.93502,
+    0.98045
    ],
    [
-    0.08867,
-    0.99889
+    0.06729,
+    0.97816
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
  "frame": "whole",
- "tri": "auto",
+ "tri": "micro",
  "auto_edge": {
   "v": 1,
   "f": [
