@@ -93,6 +93,13 @@ def install(app, data, heavy_q=None, events=None):
                 tot, av = _sys_mb(); hq = heavy_q or {}
                 line = f'{time.strftime("%Y-%m-%d %H:%M:%S")} rss={_rss_mb()}MB avail={av}/{tot}MB limit={_cg_limit_mb()}MB heavy={hq.get("run") or "-"} wait={hq.get("wait", 0)}\n'
                 with open(mem, "a") as f: f.write(line)
+                r0 = _rss_mb()                                 # v12.16: вернуть системе освобождённую, но удерживаемую аллокатором память
+                if r0 >= 2500 and time.time() - _cfg.get("trim_t", 0) > 60:
+                    _cfg["trim_t"] = time.time()
+                    try:
+                        __import__("ctypes").CDLL("libc.so.6").malloc_trim(0); r1 = _rss_mb()
+                        with open(mem, "a") as f: f.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")} malloc_trim: rss {r0}MB -> {r1}MB\n')
+                    except Exception: pass
                 r = _rss_mb()                                  # новый рекорд памяти (шаг 750 МБ, от 1,5 ГБ) — снимок для разбора
                 if r >= 1500 and r >= _cfg.get("peak", 0) + 750:
                     _cfg["peak"] = r
