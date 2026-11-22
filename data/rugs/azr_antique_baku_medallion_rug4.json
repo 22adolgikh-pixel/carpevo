@@ -18,7 +18,7 @@
  "h": 722,
  "marks": [],
  "created": 1791736128,
- "updated": 1794944420,
+ "updated": 1795356463,
  "cat": {
   "title": "antique baku medallion rug4",
   "museum": "",
@@ -126,6 +126,14 @@
      "t": 1794944420
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795356463,
+    "s": "ref"
+   }
   }
  },
  "school_prev": "guba-shirvan",
@@ -149,5 +157,39 @@
    53.9559
   ],
   "t": 1795207712
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04057,
+    0.01887
+   ],
+   [
+    0.97098,
+    0.04254
+   ],
+   [
+    0.94431,
+    0.97169
+   ],
+   [
+    0.04821,
+    0.98175
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

@@ -12328,7 +12328,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12363,7 +12363,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12372,8 +12372,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795356416,
    "rf": 1,
    "rf_s": 0.415,
    "box0": [
@@ -12398,7 +12398,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12433,7 +12433,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12468,7 +12468,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12477,8 +12477,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795356416,
    "rf": 1,
    "rf_s": 0.484,
    "box0": [
@@ -12503,7 +12503,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12512,8 +12512,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795356416,
    "rf": 1,
    "rf_s": 0.61,
    "box0": [
@@ -12538,7 +12538,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12547,8 +12547,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795356416,
    "rf": 1,
    "rf_s": 0.731,
    "box0": [
@@ -12562,10 +12562,10 @@
   {
    "id": "m17953548137e",
    "box": [
-    0.34663,
-    0.52436,
-    0.04601,
-    0.07889
+    0.32137,
+    0.52439,
+    0.15118,
+    0.05855
    ],
    "zone": "other",
    "motif": "deve",
@@ -12573,7 +12573,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12582,8 +12582,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795356416,
    "rf": 1,
    "rf_s": 0.361,
    "box0": [
@@ -12592,7 +12592,9 @@
     0.06333,
     0.09271
    ],
-   "rf_moved": 0.818
+   "rf_moved": 0.818,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795356416
   },
   {
    "id": "m17953548138e",
@@ -12608,7 +12610,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12617,8 +12619,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795356416,
    "rf": 1,
    "rf_s": 0.74,
    "box0": [
@@ -12632,10 +12634,10 @@
   {
    "id": "m17953548139e",
    "box": [
-    0.24048,
-    0.73966,
-    0.06333,
-    0.09271
+    0.30061,
+    0.7819,
+    0.05215,
+    0.07193
    ],
    "zone": "other",
    "motif": "deve",
@@ -12643,7 +12645,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12653,15 +12655,24 @@
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.407,
+   "box0": [
+    0.24048,
+    0.73966,
+    0.06333,
+    0.09271
+   ],
+   "rf_moved": 0.681
   },
   {
    "id": "m179535481310e",
    "box": [
-    0.40191,
-    0.17432,
-    0.07451,
-    0.10907
+    0.35018,
+    0.30601,
+    0.13718,
+    0.06011
    ],
    "zone": "other",
    "motif": "deve",
@@ -12669,7 +12680,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12678,24 +12689,68 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795356476,
+   "rf": 1,
+   "rf_s": 0.682,
+   "box0": [
+    0.40191,
+    0.17432,
+    0.07451,
+    0.10907
+   ],
+   "rf_moved": 1.001
   },
   {
    "id": "m179535481311e",
    "box": [
+    0.17485,
+    0.61949,
+    0.11656,
+    0.03944
+   ],
+   "zone": "other",
+   "motif": "deve",
+   "motif_text": "",
+   "scheme": "t22_f03",
+   "group": "m6afb7d98e926517_0",
+   "certainty": "maybe",
+   "status": "rejected",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.881,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795354813,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.365,
+   "box0": [
     0.21937,
     0.55424,
     0.06333,
     0.09271
    ],
+   "rf_moved": 0.459
+  },
+  {
+   "id": "m179535481312e",
+   "box": [
+    0.70397,
+    0.19126,
+    0.11191,
+    0.04645
+   ],
    "zone": "other",
    "motif": "deve",
    "motif_text": "",
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12705,41 +12760,24 @@
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
    "confirmed_by": "",
-   "confirmed_at": 0
-  },
-  {
-   "id": "m179535481312e",
-   "box": [
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.399,
+   "box0": [
     0.65419,
     0.23554,
     0.14419,
     0.05636
    ],
-   "zone": "other",
-   "motif": "deve",
-   "motif_text": "",
-   "scheme": "t22_f03",
-   "group": "m6afb7d98e926517_0",
-   "certainty": "maybe",
-   "status": "proposed",
-   "note": "",
-   "angle": 0,
-   "flip": 0,
-   "machine": "embed",
-   "score": 0.881,
-   "xfer": "",
-   "by": "машина (поиск по образцу, сеть)",
-   "at": 1795354813,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "rf_moved": 0.414
   },
   {
    "id": "m179535481313e",
    "box": [
-    0.39705,
-    0.61973,
-    0.12256,
-    0.04791
+    0.31288,
+    0.63109,
+    0.16258,
+    0.05568
    ],
    "zone": "other",
    "motif": "deve",
@@ -12747,7 +12785,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12756,16 +12794,25 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795356476,
+   "rf": 1,
+   "rf_s": 0.574,
+   "box0": [
+    0.39705,
+    0.61973,
+    0.12256,
+    0.04791
+   ],
+   "rf_moved": 0.538
   },
   {
    "id": "m179535481314e",
    "box": [
-    0.74713,
-    0.21431,
-    0.06333,
-    0.09271
+    0.69939,
+    0.30858,
+    0.11656,
+    0.03944
    ],
    "zone": "other",
    "motif": "deve",
@@ -12773,7 +12820,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12783,15 +12830,24 @@
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.448,
+   "box0": [
+    0.74713,
+    0.21431,
+    0.06333,
+    0.09271
+   ],
+   "rf_moved": 0.764
   },
   {
    "id": "m179535481315e",
    "box": [
-    0.48309,
-    0.60526,
-    0.17014,
-    0.0665
+    0.54468,
+    0.63226,
+    0.14043,
+    0.05161
    ],
    "zone": "other",
    "motif": "deve",
@@ -12799,7 +12855,7 @@
    "scheme": "t22_f03",
    "group": "m6afb7d98e926517_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -12808,12 +12864,21 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795354813,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795356476,
+   "rf": 1,
+   "rf_s": 0.557,
+   "box0": [
+    0.48309,
+    0.60526,
+    0.17014,
+    0.0665
+   ],
+   "rf_moved": 0.298
   }
  ],
  "created": 1794547278,
- "updated": 1795356326,
+ "updated": 1795356476,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -14573,6 +14638,118 @@
      "a": "ok",
      "w": 2,
      "t": 1795356326
+    }
+   },
+   "m17953548138e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795356416
+    }
+   },
+   "m17953548135e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795356416
+    }
+   },
+   "m17953548136e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795356416
+    }
+   },
+   "m17953548131e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795356416
+    }
+   },
+   "m17953548134e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795356416
+    }
+   },
+   "m17953548130e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795356416
+    }
+   },
+   "m17953548133e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795356416
+    }
+   },
+   "m17953548132e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795356416
+    }
+   },
+   "m17953548137e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795356416
+    }
+   },
+   "m179535481310e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795356476
+    }
+   },
+   "m179535481313e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795356476
+    }
+   },
+   "m179535481315e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795356476
+    }
+   },
+   "m179535481312e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795356476
+    }
+   },
+   "m179535481311e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795356476
+    }
+   },
+   "m17953548139e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795356476
+    }
+   },
+   "m179535481314e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795356476
     }
    }
   },
