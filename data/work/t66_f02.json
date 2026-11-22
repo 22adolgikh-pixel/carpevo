@@ -80,22 +80,25 @@
  ],
  "palette_dyes": [
   null,
+  null,
   null
  ],
  "palette_link": [
+  false,
   false,
   false
  ],
  "palette_scan": [
   null,
+  null,
   null
  ],
  "palette_touched": false,
- "done": false,
+ "done": true,
  "review": false,
  "transparent_bg": true,
  "difficulty": null,
- "saved_at": "2026-11-22 15:56:03",
+ "saved_at": "2026-11-22 15:56:17",
  "palette_v": 1,
  "matrix": {
   "w": 23,
@@ -111,8 +114,8 @@
    "....122112212211221....",
    "..1112211221221122111..",
    ".1222122221.1222212221.",
-   "1222221221...1.21222221",
-   "12211221221.12.12211221",
+   "1222221221...1221222221",
+   "12211221221.12212211221",
    "12211222122122122211221",
    "12222212212121221222221",
    ".12221.1221.1221.12221.",
@@ -175,7 +178,7 @@
    4.901
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 6.802,
   "distortion": {
@@ -216,7 +219,8 @@
    "n_suspects": 4
   },
   "risk": 0.333,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "edited": true
  },
  "rapport": null,
  "hard": {
