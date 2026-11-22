@@ -1,8 +1,32 @@
 {
  "path": "kerimov_vol1_patterns/page_360.jpg",
  "table": 241,
- "boxes": [],
- "figures": [],
+ "boxes": [
+  {
+   "x": 172,
+   "y": 848,
+   "w": 768,
+   "h": 614,
+   "fig": 1,
+   "table": null,
+   "id": "t241_f01",
+   "difficulty": null
+  },
+  {
+   "x": 172,
+   "y": 147,
+   "w": 809,
+   "h": 567,
+   "fig": 2,
+   "table": null,
+   "id": "t241_f02",
+   "difficulty": null
+  }
+ ],
+ "figures": [
+  "t241_f01",
+  "t241_f02"
+ ],
  "no_figures": true,
  "auto_segmented": true
 }
