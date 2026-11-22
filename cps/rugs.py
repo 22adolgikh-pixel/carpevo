@@ -95,7 +95,10 @@ def heavy(fn, name="", ui=False):
     heavy_q[w] += 1
     sem.acquire()
     heavy_q[w] -= 1; heavy_q[r] = name
-    if not ui: heavy_q["since"] = int(time.time())
+    if not ui:   # v12.13: фоновый расчёт ждёт свободную память (до 20 мин), иначе система убивает процесс
+        import health as _H; t0 = time.time()
+        while _H._sys_mb()[1] < _H.GATE_MIN_AVAIL_MB and time.time() - t0 < 1200: time.sleep(15)
+        heavy_q["since"] = int(time.time())
     try: return fn()
     finally:
         heavy_q[r] = ""
@@ -1833,7 +1836,7 @@ def install(app, DATA, D_WORK):
     def _periodic_rect():
         time.sleep(200)
         while True:
-            try: rect_all()
+            try: __import__("health").gated(rect_all, "rect_all")()
             except Exception as e: print("rect_all:", e)
             time.sleep(6 * 3600)
 
@@ -1971,7 +1974,7 @@ def install(app, DATA, D_WORK):
     def _periodic_mesh():
         time.sleep(300)
         while True:
-            try: mesh_all()
+            try: __import__("health").gated(mesh_all, "mesh_all")()
             except Exception as e: print("mesh_all:", e)
             time.sleep(3 * 3600)
 
@@ -2193,7 +2196,7 @@ def install(app, DATA, D_WORK):
         return True
 
     app.state.catalog_run = catalog_run
-    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=lambda: (time.sleep(150), catalog_run()), daemon=True).start()
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=lambda: (time.sleep(150), __import__("health").gated(catalog_run, "catalog")()), daemon=True).start()
 
     @app.get("/api/rugs_catalog")
     def api_catalog_state(): return catst
@@ -2911,7 +2914,7 @@ def install(app, DATA, D_WORK):
         time.sleep(240)
         while True:
             try:
-                if vlm_corners.available() and _vf["q"].qsize() < 50: _vf_all()
+                if vlm_corners.available() and _vf["q"].qsize() < 50: __import__("health").gated(_vf_all, "vf_all")()
             except Exception as e: print("vlm frame:", e)
             time.sleep(1800)
 
@@ -2980,7 +2983,7 @@ def install(app, DATA, D_WORK):
         time.sleep(420)
         while True:
             try:
-                if _tf["q"].qsize() < 50: _tf_all()
+                if _tf["q"].qsize() < 50: __import__("health").gated(_tf_all, "tf_all")()
             except Exception as e: print("text facts:", e)
             time.sleep(3600)
 
@@ -3346,7 +3349,7 @@ def install(app, DATA, D_WORK):
     def _periodic_tone():
         time.sleep(60)
         while True:
-            try: tone_all()
+            try: __import__("health").gated(tone_all, "tone_all")()
             except Exception as e: print("tone_all:", e)
             time.sleep(1800)
 
@@ -4282,7 +4285,7 @@ def install(app, DATA, D_WORK):
             try:
                 sig = sum(int(os.path.getmtime(os.path.join(D_RUGS, f))) for f in os.listdir(D_RUGS) if f.endswith(".json"))
                 if sig != _en.get("sig") and not _en["run"]:
-                    _en["run"] = True; _en_build(False); _en["sug"] = _en_sug(); _en["sig"] = sig
+                    _en["run"] = True; __import__("health").gated(_en_build, "en_build")(False); _en["sug"] = _en_sug(); _en["sig"] = sig
             except Exception as e: print("elem_name:", e)
             time.sleep(1800)
 
@@ -4356,7 +4359,7 @@ def install(app, DATA, D_WORK):
         time.sleep(900)
         while True:
             try:
-                if not _rn["run"]: _rn["run"] = True; _rn_build(False)
+                if not _rn["run"]: _rn["run"] = True; __import__("health").gated(_rn_build, "rn_build")(False)
             except Exception as e: print("comp nn:", e)
             time.sleep(6 * 3600)
 
@@ -5182,13 +5185,13 @@ def install(app, DATA, D_WORK):
         return edge_st
 
     def _periodic_twins():
-        try: comp_cleanup()
+        try: __import__("health").gated(comp_cleanup, "comp_cleanup")()
         except Exception as e: print("comp cleanup:", e)
-        try: school_refine()
+        try: __import__("health").gated(school_refine, "school_refine")()
         except Exception as e: print("school refine:", e)
-        try: tw_reopen()
+        try: __import__("health").gated(tw_reopen, "tw_reopen")()
         except Exception as e: print("twins reopen:", e)
-        try: edge_run()
+        try: __import__("health").gated(edge_run, "edge_run")()
         except Exception as e: print("frame edge:", e)
         time.sleep(600)
         while True:
@@ -5489,7 +5492,7 @@ def install(app, DATA, D_WORK):
         return True
 
     app.state.people_run = people_run
-    threading.Thread(target=lambda: (time.sleep(90), people_run()), daemon=True).start()   # непроверенные фото — в фоне после старта (≈0,1 с на фото)
+    threading.Thread(target=lambda: (time.sleep(90), __import__("health").gated(people_run, "people")()), daemon=True).start()   # непроверенные фото — в фоне после старта (≈0,1 с на фото)
 
     @app.get("/api/rugs_people")
     def api_people_state(): return pplst

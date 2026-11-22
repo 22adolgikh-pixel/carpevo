@@ -128,3 +128,22 @@ def install(app, data, heavy_q=None, events=None):
                 f.seek(max(0, os.path.getsize(fp) - 8000)); out["faults"] = f.read().decode("utf-8", "ignore")[-8000:]
         except Exception: out["faults"] = ""
         return out
+
+
+# v12.13: тяжёлые фоновые задачи идут по одной и ждут, пока в системе хватит свободной памяти
+# (журнал 22.11: рост до ~6 ГБ при 60 МБ свободных → система убивала процесс, после перезапуска всё повторялось)
+_gate_lock = threading.Lock()
+GATE_MIN_AVAIL_MB = int(os.environ.get("CPS_GATE_MIN_AVAIL", "3500"))
+GATE_WAIT_S = 45 * 60
+
+
+def gated(fn, name=""):
+    """Обёртка тяжёлой задачи: один запуск за раз; перед стартом ждёт, пока MemAvailable ≥ порога (до 45 мин, потом пропуск)"""
+    def run(*a, **k):
+        t0 = time.time()
+        with _gate_lock:
+            while _sys_mb()[1] < GATE_MIN_AVAIL_MB:
+                if time.time() - t0 > GATE_WAIT_S: print("gate: пропуск", name or getattr(fn, "__name__", "?"), "— мало памяти"); return None
+                time.sleep(20)
+            return fn(*a, **k)
+    return run
