@@ -4351,6 +4351,34 @@ def install(app, DATA, D_WORK):
 
     if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_rn, daemon=True, name="comp-nn").start()
 
+    @app.get("/api/open/kerimov_gap")
+    def api_kerimov_gap():
+        """v12.08: каких рисунков Керимова нет среди вырезок: по таблицам легенды — есть ли скан листа, разметка, сколько рамок"""
+        import csv as _csv
+        scans = os.path.abspath(os.environ.get("CPS_SCANS", os.path.join(os.path.dirname(os.path.abspath(__file__)), "scans")))
+        D_SH = os.path.join(DATA, "sheets")
+        leg = {}
+        try:
+            for r in _csv.DictReader(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "tools", "kerimov_fix", "legend_book.csv"), encoding="utf-8")):
+                try: leg.setdefault(int(r["table"]), []).append(int(r["fig"]))
+                except Exception: pass
+        except Exception as e: return {"error": str(e)}
+        out = []
+        for t, figs in sorted(leg.items()):
+            miss = [f for f in sorted(set(figs)) if not os.path.exists(os.path.join(D_CROPS, f"t{t:02d}_f{f:02d}.png"))]
+            if not miss: continue
+            pg = t + 119
+            rel = f"kerimov_vol1_patterns/page_{pg:03d}.jpg"
+            key = rel.replace("/", "_").replace(".", "_")
+            mp = os.path.join(D_SH, key + ".json"); meta = None
+            if os.path.exists(mp):
+                try: meta = json.load(open(mp, encoding="utf-8"))
+                except Exception: meta = {}
+            out.append({"table": t, "page_guess": pg, "missing": miss, "legend_figs": len(set(figs)),
+                        "scan": os.path.exists(os.path.join(scans, rel)), "scan_dir_has_vol1": os.path.isdir(os.path.join(scans, "kerimov_vol1_patterns")),
+                        "sheet_meta": None if meta is None else {"boxes": len(meta.get("boxes") or []), "no_figures": bool(meta.get("no_figures")), "auto": bool(meta.get("auto_segmented")), "table": meta.get("table")}})
+        return {"n_tables": len(out), "n_missing": sum(len(o["missing"]) for o in out), "tables": out}
+
     @app.get("/api/open/comp_eval")
     def api_rn_eval(run: int = 0):
         """замер подсказки типа ковра по соседям по картинке и рисункам Gans-Ruedin (run=1 — пересчитать в фоне)"""
