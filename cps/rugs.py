@@ -1786,8 +1786,11 @@ def install(app, DATA, D_WORK):
                     if v is not None: sig[i] = v
                 ids = sorted(sig)
                 if len(ids) < 2: return
-                A8 = np.stack([sig[i] for i in ids]); A0 = A8[:, 0]
-                S = np.einsum("irk,jk->ijr", A8, A0).max(2); S = np.maximum(S, S.T); np.fill_diagonal(S, -1)
+                A8 = np.stack([sig[i] for i in ids]).astype(np.float32); A0 = A8[:, 0]
+                # v12.13: кусками по 128 строк — раньше одним einsum (n×n×8 чисел) память раздувалась на гигабайты
+                S = np.empty((len(ids), len(ids)), np.float32)
+                for b0 in range(0, len(ids), 128): S[b0:b0 + 128] = np.einsum("irk,jk->ijr", A8[b0:b0 + 128], A0).max(2)
+                S = np.maximum(S, S.T); np.fill_diagonal(S, -1)
                 done = rp_load(); known = set()
                 for i in ids:
                     for x in rows[i].get("same") or []: known.add(tuple(sorted((i, x.get("id")))))
@@ -1812,6 +1815,8 @@ def install(app, DATA, D_WORK):
                     done["~".join((a, b))] = {"n": int(n), "sim": round(sim, 3), "geo": round(geo, 3), "t": int(time.time())}
                     rpr["done"] += 1; rpr["found"] += n >= RP_MAYBE and geo >= RP_GEO
                     if rpr["done"] % 25 == 0:
+                        try: __import__("ctypes").CDLL("libc.so.6").malloc_trim(0)   # v12.13: вернуть системе освобождённую память
+                        except Exception: pass
                         tmp = F_RP + ".tmp"
                         with open(tmp, "w", encoding="utf-8") as f: json.dump(done, f)
                         os.replace(tmp, F_RP)
