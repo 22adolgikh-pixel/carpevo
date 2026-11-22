@@ -18,7 +18,7 @@
  "h": 943,
  "marks": [],
  "created": 1791736133,
- "updated": 1794979762,
+ "updated": 1795356380,
  "cat": {
   "title": "kuba kilim8",
   "museum": "",
@@ -140,6 +140,14 @@
      "t": 1794979762
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795356380,
+    "s": "ref"
+   }
   }
  },
  "school_prev": "guba-shirvan",
@@ -177,5 +185,39 @@
    41.2784
   ],
   "t": 1795207772
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05933,
+    0.03412
+   ],
+   [
+    0.9063,
+    0.02965
+   ],
+   [
+    0.93505,
+    0.9637
+   ],
+   [
+    0.06336,
+    0.95211
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
