@@ -228,10 +228,115 @@
    ],
    "fixed_by": "dolgikh",
    "fixed_at": 1795204215
+  },
+  {
+   "id": "m17953444200e",
+   "box": [
+    0.51042,
+    0.41916,
+    0.20833,
+    0.11377
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcy2e5m",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.887,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795344420,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 1.0,
+   "box0": [
+    0.46674,
+    0.35859,
+    0.20003,
+    0.11953
+   ],
+   "rf_moved": 0.375
+  },
+  {
+   "id": "m17953444201e",
+   "box": [
+    0.51042,
+    0.17964,
+    0.20833,
+    0.11677
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcy2e5m",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.887,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795344420,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.901,
+   "box0": [
+    0.46674,
+    0.23906,
+    0.20003,
+    0.11953
+   ],
+   "rf_moved": 0.387
+  },
+  {
+   "id": "m17953444202e",
+   "box": [
+    0.50307,
+    0.41696,
+    0.22086,
+    0.12014
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcy2e5m",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.878,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795344420,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.875,
+   "box0": [
+    0.39339,
+    0.47015,
+    0.23604,
+    0.14105
+   ],
+   "rf_moved": 0.51
   }
  ],
  "created": 1791567610,
- "updated": 1795343708,
+ "updated": 1795344420,
  "src_id": "fig:t205_f01",
  "multi": [],
  "people": {
@@ -344,5 +449,8 @@
  },
  "name_none": [
   "mmvcy2e5m"
- ]
+ ],
+ "esearch": {
+  "mmvcy2e5m": "1:5"
+ }
 }

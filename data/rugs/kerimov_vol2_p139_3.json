@@ -2119,10 +2119,10 @@
   {
    "id": "m17953440900e",
    "box": [
-    0.34492,
-    0.19436,
-    0.12181,
-    0.18782
+    0.40614,
+    0.21226,
+    0.12287,
+    0.18868
    ],
    "zone": "field",
    "motif": "",
@@ -2130,7 +2130,7 @@
    "scheme": "",
    "group": "mmv8d36i3",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2139,8 +2139,17 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795344090,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795344471,
+   "rf": 1,
+   "rf_s": 1.0,
+   "box0": [
+    0.34492,
+    0.19436,
+    0.12181,
+    0.18782
+   ],
+   "rf_moved": 0.343
   },
   {
    "id": "m17953442970s",
@@ -2323,10 +2332,244 @@
    "at": 1795344297,
    "confirmed_by": "",
    "confirmed_at": 0
+  },
+  {
+   "id": "m17953444160s",
+   "box": [
+    0.16864,
+    0.44675,
+    0.07246,
+    0.11172
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8epnic",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: слева↔справа",
+   "angle": 0,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.878,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795344416,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17953444161s",
+   "box": [
+    0.17491,
+    0.57804,
+    0.05448,
+    0.08496
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8epnic",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: слева↔справа",
+   "angle": 0,
+   "flip": 0,
+   "machine": "sym",
+   "score": 0.914,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795344416,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17953444162s",
+   "box": [
+    0.17542,
+    0.34471,
+    0.05437,
+    0.0842
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8epnic",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: напротив (180°)",
+   "angle": 180,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.863,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795344416,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17953444163s",
+   "box": [
+    0.17427,
+    0.20815,
+    0.05435,
+    0.0842
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8epnic",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: напротив (180°)",
+   "angle": 180,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.875,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795344416,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17953444164s",
+   "box": [
+    0.77342,
+    0.67965,
+    0.05954,
+    0.09314
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8epnic",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: напротив (180°)",
+   "angle": 180,
+   "flip": 0,
+   "machine": "sym",
+   "score": 0.923,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795344416,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17953444165s",
+   "box": [
+    0.77692,
+    0.47607,
+    0.05954,
+    0.09353
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8epnic",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: слева↔справа",
+   "angle": 180,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.912,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795344416,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17953444166s",
+   "box": [
+    0.77668,
+    0.58255,
+    0.06549,
+    0.10299
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8epnic",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: слева↔справа",
+   "angle": 180,
+   "flip": 0,
+   "machine": "sym",
+   "score": 0.911,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795344416,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17953444167s",
+   "box": [
+    0.77685,
+    0.31032,
+    0.0535,
+    0.0835
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8epnic",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: напротив (180°)",
+   "angle": 0,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.922,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795344416,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17953444168s",
+   "box": [
+    0.77716,
+    0.3548,
+    0.06549,
+    0.10277
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmv8epnic",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: слева↔справа",
+   "angle": 180,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.919,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795344416,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791736122,
- "updated": 1795344297,
+ "updated": 1795344471,
  "cat": {
   "title": "Керимов, т. II (стр. скана 139, печ. 27)",
   "museum": "",
@@ -3010,6 +3253,13 @@
      "w": 2,
      "t": 1795289992
     }
+   },
+   "m17953440900e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795344471
+    }
    }
   },
   "name": {
@@ -3068,6 +3318,7 @@
  ],
  "esearch": {
   "mmv8d36i3": "1:8",
-  "mmv8dljyx": "1:8"
+  "mmv8dljyx": "1:8",
+  "mmv8epnic": "1:8"
  }
 }
