@@ -1,10 +1,10 @@
 {
- "at": "2026-11-22 15:33:43",
- "rss_mb": 5364,
- "avail_mb": 784,
+ "at": "2026-11-22 15:41:37",
+ "rss_mb": 5657,
+ "avail_mb": 2101,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 30,
+ "up_s": 31,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -24,10 +24,6 @@
   "Thread-8 (_loop)"
  ],
  "mem_tail": [
-  "2026-11-22 15:19:17 rss=6081MB avail=61/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 15:19:38 rss=6088MB avail=56/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 15:19:57 rss=6095MB avail=58/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 15:24:17 rss=117MB avail=5902/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 15:24:28 rss=527MB avail=5558/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 15:24:38 rss=3335MB avail=2746/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 15:24:48 rss=5326MB avail=788/11925MB limit=0MB heavy=- wait=0",
@@ -38,6 +34,10 @@
   "2026-11-22 15:33:13 rss=118MB avail=5841/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 15:33:23 rss=398MB avail=5758/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 15:33:33 rss=3286MB avail=2869/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 15:33:43 rss=5363MB avail=784/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-22 15:33:43 rss=5363MB avail=784/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 15:41:07 rss=233MB avail=7738/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 15:41:17 rss=401MB avail=7339/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 15:41:27 rss=3501MB avail=4200/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 15:41:37 rss=5657MB avail=2101/11925MB limit=0MB heavy=- wait=0"
  ]
 }
