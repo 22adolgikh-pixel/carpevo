@@ -4096,7 +4096,7 @@ def install(app, DATA, D_WORK):
     def _en_build(do_eval=False):
         try:
             import element_embed as EE
-            if not EE.available(): _en["err"] = "нет сети element_embed"; return
+            if EE._load("match") is None: _en["err"] = "нет сети element_embed: " + (EE._ST[EE._n("match")].get("err") or ""); return   # ждём загрузку (available() в первый раз не ждёт)
             smeta = scheme_meta(); A = list(all_rugs_cached().values())
             B = EN.build(EE, A, smeta, D_OUT, img_path, read_small)
             _en.update(B=B, t=time.time(), err="")
@@ -4159,7 +4159,7 @@ def install(app, DATA, D_WORK):
     def _rn_build(do_eval=False):
         try:
             import element_embed as EE
-            if not EE.available(): _rn["err"] = "нет сети element_embed"; return
+            if EE._load("match") is None: _rn["err"] = "нет сети element_embed: " + (EE._ST[EE._n("match")].get("err") or ""); return
             A = list(all_rugs_cached().values())
             def get_img(r):
                 p = rect_path(r["id"], r, build=False) or img_path(r["id"])
