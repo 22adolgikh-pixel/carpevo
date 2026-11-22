@@ -2003,7 +2003,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 1,
@@ -2038,7 +2038,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -2073,7 +2073,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: слева↔справа",
    "angle": 0,
    "flip": 1,
@@ -2082,8 +2082,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795358122,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795376918,
    "rf": 1,
    "rf_s": 0.988,
    "box0": [
@@ -2108,7 +2108,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -2143,7 +2143,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: слева↔справа",
    "angle": 0,
    "flip": 1,
@@ -2178,7 +2178,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -2213,7 +2213,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: слева↔справа",
    "angle": 0,
    "flip": 0,
@@ -2248,7 +2248,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 0,
@@ -2283,7 +2283,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2307,10 +2307,10 @@
   {
    "id": "m17953581221e",
    "box": [
-    0.32704,
-    0.42375,
-    0.02461,
-    0.01871
+    0.34915,
+    0.42255,
+    0.02059,
+    0.01404
    ],
    "zone": "field",
    "motif": "",
@@ -2318,7 +2318,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2328,15 +2328,24 @@
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795358122,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.484,
+   "box0": [
+    0.32704,
+    0.42375,
+    0.02461,
+    0.01871
+   ],
+   "rf_moved": 0.829
   },
   {
    "id": "m17953581222e",
    "box": [
-    0.37753,
-    0.50553,
-    0.03578,
-    0.01287
+    0.37601,
+    0.49555,
+    0.04476,
+    0.01591
    ],
    "zone": "field",
    "motif": "",
@@ -2344,7 +2353,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2353,16 +2362,25 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795358122,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795376959,
+   "rf": 1,
+   "rf_s": 0.966,
+   "box0": [
+    0.37753,
+    0.50553,
+    0.03578,
+    0.01287
+   ],
+   "rf_moved": 0.25
   },
   {
    "id": "m17953581223e",
    "box": [
-    0.49933,
-    0.43622,
-    0.02461,
-    0.01871
+    0.5085,
+    0.45484,
+    0.02059,
+    0.01451
    ],
    "zone": "field",
    "motif": "",
@@ -2370,7 +2388,7 @@
    "scheme": "",
    "group": "mmwht10ju",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2380,11 +2398,20 @@
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795358122,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.465,
+   "box0": [
+    0.49933,
+    0.43622,
+    0.02461,
+    0.01871
+   ],
+   "rf_moved": 0.732
   }
  ],
  "created": 1791870043,
- "updated": 1795359558,
+ "updated": 1795376959,
  "cat": {
   "title": "“Malıbəyli” («Малыбейли»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -2781,6 +2808,90 @@
      "a": "ok",
      "w": 2,
      "t": 1795359558
+    }
+   },
+   "m17953581222s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795376918
+    }
+   },
+   "m17953581225s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795376918
+    }
+   },
+   "m17953581224s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795376918
+    }
+   },
+   "m17953581223s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795376918
+    }
+   },
+   "m17953581220e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795376918
+    }
+   },
+   "m17953581226s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795376918
+    }
+   },
+   "m17953581227s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795376918
+    }
+   },
+   "m17953581220s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795376918
+    }
+   },
+   "m17953581221s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795376918
+    }
+   },
+   "m17953581222e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795376959
+    }
+   },
+   "m17953581223e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795376959
+    }
+   },
+   "m17953581221e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795376959
     }
    }
   },

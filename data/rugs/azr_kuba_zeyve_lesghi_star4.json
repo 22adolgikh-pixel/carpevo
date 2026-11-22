@@ -2,15 +2,15 @@
  "id": "azr_kuba_zeyve_lesghi_star4",
  "title": "kuba zeyve lesghi star4",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Национальный музей азербайджанского ковра",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "XVIII c",
  "school": "guba",
- "composition": "",
- "technique": "",
+ "composition": "zeyve",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -54,9 +54,24 @@
   {
    "id": "wikimedia_File_Зейва_jpg",
    "score": 312
+  },
+  {
+   "id": "kerimov_vol1_p324_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "cm_af3a68b0f3": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795376937
+  },
+  "kerimov_vol1_p324_1": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_zeyve_lesghi_star4 = cm_af3a68b0f3 = kerimov_vol1_p324_1",
+   "at": 1795376959
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -136,5 +151,11 @@
   "area": null,
   "ver": 1,
   "t": 1795291788
+ },
+ "from_twin": {
+  "composition": "cm_af3a68b0f3",
+  "technique": "cm_af3a68b0f3",
+  "museum": "cm_af3a68b0f3",
+  "date": "cm_af3a68b0f3"
  }
 }

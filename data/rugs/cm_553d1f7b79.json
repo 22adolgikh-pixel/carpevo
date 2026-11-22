@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870014,
- "updated": 1795293047,
+ "updated": 1795376975,
  "cat": {
   "title": "This photo has been taken in the country: Azerbaijan",
   "museum": "",
@@ -76,6 +76,10 @@
   {
    "id": "wikimedia_File_Azerbaijanian_carpet_Kilim_jpg",
    "score": 0
+  },
+  {
+   "id": "cm_81d71f4fad",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -108,6 +112,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "cm_81d71f4fad": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795376975
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -232,6 +241,13 @@
      "a": "diff",
      "w": 2,
      "t": 1795027609
+    }
+   },
+   "cm_81d71f4fad": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795376975
     }
    }
   }
