@@ -748,7 +748,7 @@
   }
  ],
  "created": 1791870021,
- "updated": 1795354230,
+ "updated": 1795355509,
  "cat": {
   "title": "Textiles-Rugs; Carpet",
   "museum": "Метрополитен-музей",
@@ -882,6 +882,30 @@
   {
    "id": "met_452312",
    "score": 314
+  },
+  {
+   "id": "cm_40ec040cc6",
+   "score": 0
+  },
+  {
+   "id": "cm_9c65f1808b",
+   "score": 0
+  },
+  {
+   "id": "cm_55cdf91067",
+   "score": 0
+  },
+  {
+   "id": "cm_9043bbff78",
+   "score": 0
+  },
+  {
+   "id": "cm_89e42f7250",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Kaukasus1_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -1014,6 +1038,36 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "cm_40ec040cc6": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795355509
+  },
+  "cm_9c65f1808b": {
+   "ok": false,
+   "by": "по цепочке: cm_40ec040cc6 ≠ cm_9c65f1808b",
+   "at": 1795355537
+  },
+  "cm_55cdf91067": {
+   "ok": false,
+   "by": "по цепочке: cm_40ec040cc6 ≠ cm_55cdf91067",
+   "at": 1795355537
+  },
+  "cm_9043bbff78": {
+   "ok": false,
+   "by": "по цепочке: cm_40ec040cc6 ≠ cm_9043bbff78",
+   "at": 1795355537
+  },
+  "cm_89e42f7250": {
+   "ok": false,
+   "by": "по цепочке: cm_40ec040cc6 ≠ cm_89e42f7250",
+   "at": 1795355537
+  },
+  "wikimedia_File_Kaukasus1_jpg": {
+   "ok": false,
+   "by": "по цепочке: cm_40ec040cc6 ≠ wikimedia_File_Kaukasus1_jpg",
+   "at": 1795355537
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -1305,6 +1359,15 @@
      "a": "bad",
      "w": 2,
      "t": 1795354230
+    }
+   }
+  },
+  "same": {
+   "cm_40ec040cc6": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795355509
     }
    }
   }
