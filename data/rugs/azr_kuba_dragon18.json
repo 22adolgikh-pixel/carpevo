@@ -18,7 +18,7 @@
  "h": 1410,
  "marks": [],
  "created": 1791736130,
- "updated": 1795117230,
+ "updated": 1795348730,
  "cat": {
   "title": "kuba dragon18",
   "museum": "",
@@ -114,7 +114,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -135,5 +135,15 @@
    50.9312
   ],
   "t": 1795207765
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795348730
+   }
+  }
+ },
+ "frame_by": "micro"
 }

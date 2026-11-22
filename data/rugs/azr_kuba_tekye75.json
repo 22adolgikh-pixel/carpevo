@@ -18,7 +18,7 @@
  "h": 738,
  "marks": [],
  "created": 1791736135,
- "updated": 1794976770,
+ "updated": 1795348727,
  "cat": {
   "title": "kuba tekye75",
   "museum": "",
@@ -157,6 +157,14 @@
      "t": 1794976770
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795348727,
+    "s": "ref"
+   }
   }
  },
  "school_prev": "guba-shirvan",
@@ -206,5 +214,39 @@
    58.7094
   ],
   "t": 1795207804
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01049,
+    0.0308
+   ],
+   [
+    0.97827,
+    0.0271
+   ],
+   [
+    0.93362,
+    0.96085
+   ],
+   [
+    0.01986,
+    0.96644
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
