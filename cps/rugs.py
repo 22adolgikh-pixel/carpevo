@@ -434,7 +434,11 @@ def install(app, DATA, D_WORK):
                 okd = ((r.get("same_ok") or {}).get(i) or {}).get("ok")
                 return {"id": c, "why": f"у двойника{' (проверен ✓)' if okd else ''}: {(o.get('title') or i)[:60]}", "kind": "twin", "from": i}
         g = comp_guess_text(r)
-        return g if g and g["id"] not in cno and g["id"] not in COMP_MOVE else None
+        if g and g["id"] not in cno and g["id"] not in COMP_MOVE: return g
+        v = (_rn.get("sug") or {}).get(r["id"])                                  # v12.06: соседи по картинке единодушны (замер: ≥ 60 % голосов — верно в 85 %)
+        if v and v[0] in BYID and v[0] not in cno and v[0] not in COMP_MOVE:
+            return {"id": v[0], "why": f"похож по картинке на ковры этого типа ({int(v[1] * 100)} % голосов 10 соседей)", "kind": "img"}
+        return None
 
     # ---- v11.85: название ковра = его тип (композиция); подпись источника остаётся в title ----
     def comp_school(cid):
@@ -2734,7 +2738,7 @@ def install(app, DATA, D_WORK):
         """короткая запись для очереди (кэш по времени изменения файла)"""
         f = os.path.join(D_RUGS, rid + ".json")
         import frame_model
-        try: st = os.stat(f); k = (st.st_mtime_ns, st.st_size, _fm_mtime())     # v11.91: новая модель «кадр» — пересчитать вероятность
+        try: st = os.stat(f); k = (st.st_mtime_ns, st.st_size, _fm_mtime(), _rn.get("t", 0))     # v11.91: новая модель «кадр» — пересчитать вероятность; v12.06: новые соседи по картинке
         except OSError: return None
         c = _mc.get(rid)
         if c and c[0] == k: return c[1]
@@ -4283,7 +4287,8 @@ def install(app, DATA, D_WORK):
 
     # ---------------- v12.05: тип ковра по соседям по картинке + рисунки Gans-Ruedin (rug_nn) ----------------
     import rug_nn as RN
-    _rn = {"B": None, "run": False, "err": "", "eval": None, "t": 0, "gans": []}
+    _rn = {"B": None, "run": False, "err": "", "eval": None, "t": 0, "gans": [], "sug": {}}
+    RN_SHARE = float(os.environ.get("CPS_COMP_NN_SHARE", "0.6"))
     F_RN = os.path.join(DATA, "comp_nn_eval.json")
 
     def _rn_gans():
@@ -4309,7 +4314,13 @@ def install(app, DATA, D_WORK):
             def get_img(r):
                 p = rect_path(r["id"], r, build=False) or img_path(r["id"])
                 return read_small(p, 600) if p else None
-            B = RN.build(EE, A, get_img, _rn_gans()); _rn.update(B=B, t=time.time(), err="")
+            B = RN.build(EE, A, get_img, _rn_gans())
+            sug = {}
+            for i, rid in enumerate(B["ids"]):
+                if B["comp"][i]: continue
+                sg = RN.suggest(B, i, k=10, use_gans=False)
+                if sg and sg[0][1] >= RN_SHARE: sug[rid] = (sg[0][0], round(sg[0][1], 2))
+            _rn.update(B=B, sug=sug, t=time.time(), err="")
             if do_eval:
                 ev = RN.evaluate(B); ev["t"] = int(time.time())
                 ev["gans_titles"] = {"all": len(_rn["gans"]), "with_type": sum(1 for g in _rn["gans"] if g["comp"]),
@@ -4321,6 +4332,16 @@ def install(app, DATA, D_WORK):
         finally:
             _rn["run"] = False
 
+    def _periodic_rn():
+        time.sleep(900)
+        while True:
+            try:
+                if not _rn["run"]: _rn["run"] = True; _rn_build(False)
+            except Exception as e: print("comp nn:", e)
+            time.sleep(6 * 3600)
+
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_rn, daemon=True, name="comp-nn").start()
+
     @app.get("/api/open/comp_eval")
     def api_rn_eval(run: int = 0):
         """замер подсказки типа ковра по соседям по картинке и рисункам Gans-Ruedin (run=1 — пересчитать в фоне)"""
@@ -4330,7 +4351,7 @@ def install(app, DATA, D_WORK):
         if ev is None and os.path.exists(F_RN):
             try: ev = json.load(open(F_RN, encoding="utf-8"))
             except Exception: ev = None
-        return {"running": _rn["run"], "error": _rn["err"], "eval": ev}
+        return {"running": _rn["run"], "error": _rn["err"], "eval": ev, "suggested": len(_rn["sug"]), "built": int(_rn["t"])}
 
     # ---------------- v11.7: рабочий лист типа ковра (элементы Керимова → фото этого типа) ----------------
     _ty = {"t": 0, "rugs": None}
