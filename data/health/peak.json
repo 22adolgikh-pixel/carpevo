@@ -1,10 +1,10 @@
 {
- "at": "2026-11-22 19:25:00",
- "rss_mb": 6969,
- "avail_mb": 628,
+ "at": "2026-11-22 19:37:33",
+ "rss_mb": 5205,
+ "avail_mb": 2472,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 41,
+ "up_s": 30,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -13,6 +13,7 @@
   "vlm-frame-sched",
   "text-facts-sched",
   "tone",
+  "Thread-3 (<lambda>)",
   "elem-name",
   "comp-nn",
   "Thread-4 (_dedupe_bg)",
@@ -26,21 +27,21 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-22 19:22:36 rss=6954MB avail=612/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:22:46 rss=6954MB avail=657/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:22:56 rss=6954MB avail=624/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:23:06 rss=6954MB avail=623/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:23:16 rss=6953MB avail=612/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:23:26 rss=6953MB avail=621/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:23:36 rss=6996MB avail=582/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:23:46 rss=6996MB avail=570/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:23:56 rss=6997MB avail=554/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:24:06 rss=6997MB avail=540/11925MB limit=0MB heavy=одинаковые снимки wait=0",
-  "2026-11-22 19:24:20 rss=258MB avail=7329/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:24:30 rss=698MB avail=6928/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:24:40 rss=2841MB avail=4794/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:24:50 rss=4936MB avail=2727/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:25:00 rss=6969MB avail=628/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-22 19:35:20 rss=6929MB avail=622/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:35:30 rss=6924MB avail=599/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:35:40 rss=6924MB avail=582/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:35:50 rss=6924MB avail=597/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:36:00 rss=6967MB avail=540/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:36:10 rss=6968MB avail=553/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:36:20 rss=6965MB avail=578/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:36:30 rss=6965MB avail=582/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:36:40 rss=6921MB avail=600/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:36:50 rss=6920MB avail=580/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:37:03 rss=144MB avail=7413/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:37:13 rss=503MB avail=7103/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:37:23 rss=3583MB avail=4069/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:37:23 malloc_trim: rss 3583MB -> 3520MB",
+  "2026-11-22 19:37:33 rss=5205MB avail=2472/11925MB limit=0MB heavy=- wait=0"
  ],
  "stacks": {
   "AnyIO worker thread": [
@@ -57,16 +58,18 @@
    "events.py:148 _loop"
   ],
   "cps-backup": [
-   "threading.py:1002 _bootstrap",
-   "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "backup.py:100 loop"
+   "backup.py:99 loop",
+   "backup.py:64 backup_once",
+   "backup.py:44 _mirror",
+   "shutil.py:448 copy2",
+   "shutil.py:258 copyfile"
   ],
   "Thread-7 (loop)": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "health.py:102 loop",
+   "health.py:109 loop",
    "health.py:86 _stacks"
   ],
   "Thread-5 (<lambda>)": [
@@ -98,6 +101,14 @@
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
    "rugs.py:4288 _periodic_en"
+  ],
+  "Thread-3 (<lambda>)": [
+   "threading.py:982 run",
+   "rugs.py:4171 <lambda>",
+   "rugs.py:4169 shape_index",
+   "shape_hint.py:96 build_index",
+   "_npyio_impl.py:257 __getitem__",
+   "_format_impl.py:869 read_array"
   ],
   "tone": [
    "threading.py:1002 _bootstrap",
