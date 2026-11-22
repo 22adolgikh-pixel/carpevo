@@ -1,10 +1,10 @@
 {
- "at": "2026-11-22 19:10:56",
- "rss_mb": 6970,
- "avail_mb": 615,
+ "at": "2026-11-22 19:24:50",
+ "rss_mb": 4936,
+ "avail_mb": 2727,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 40,
+ "up_s": 31,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -13,6 +13,7 @@
   "vlm-frame-sched",
   "text-facts-sched",
   "tone",
+  "Thread-3 (<lambda>)",
   "elem-name",
   "comp-nn",
   "Thread-4 (_dedupe_bg)",
@@ -22,23 +23,136 @@
   "cps-backup",
   "Thread-8 (_loop)",
   "AnyIO worker thread",
+  "AnyIO worker thread",
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-22 19:08:41 rss=1135MB avail=6448/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:08:51 rss=1136MB avail=6467/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:09:01 rss=1136MB avail=6445/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:09:11 rss=1136MB avail=6463/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:09:21 rss=1136MB avail=6442/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:09:31 rss=1136MB avail=6453/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:09:41 rss=1136MB avail=6457/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:09:51 rss=1136MB avail=6447/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:10:01 rss=1136MB avail=6381/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:10:11 rss=1136MB avail=6378/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:10:16 rss=260MB avail=7359/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:10:26 rss=632MB avail=6983/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:10:36 rss=2371MB avail=5301/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:10:46 rss=4373MB avail=3303/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:10:56 rss=6970MB avail=615/11925MB limit=0MB heavy=- wait=0"
- ]
+  "2026-11-22 19:22:26 rss=6954MB avail=619/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:22:36 rss=6954MB avail=612/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:22:46 rss=6954MB avail=657/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:22:56 rss=6954MB avail=624/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:23:06 rss=6954MB avail=623/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:23:16 rss=6953MB avail=612/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:23:26 rss=6953MB avail=621/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:23:36 rss=6996MB avail=582/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:23:46 rss=6996MB avail=570/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:23:56 rss=6997MB avail=554/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:24:06 rss=6997MB avail=540/11925MB limit=0MB heavy=одинаковые снимки wait=0",
+  "2026-11-22 19:24:20 rss=258MB avail=7329/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:24:30 rss=698MB avail=6928/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:24:40 rss=2841MB avail=4794/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:24:50 rss=4936MB avail=2727/11925MB limit=0MB heavy=- wait=0"
+ ],
+ "stacks": {
+  "AnyIO worker thread": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "_asyncio.py:1113 run",
+   "queue.py:171 get",
+   "threading.py:327 wait"
+  ],
+  "Thread-8 (_loop)": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "events.py:148 _loop"
+  ],
+  "cps-backup": [
+   "threading.py:982 run",
+   "backup.py:99 loop",
+   "backup.py:64 backup_once",
+   "backup.py:44 _mirror",
+   "shutil.py:450 copy2",
+   "shutil.py:256 copyfile"
+  ],
+  "Thread-7 (loop)": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "health.py:102 loop",
+   "health.py:86 _stacks"
+  ],
+  "Thread-5 (<lambda>)": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:5507 <lambda>"
+  ],
+  "twins-periodic": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:5208 _periodic_twins"
+  ],
+  "Thread-4 (_dedupe_bg)": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:4884 _dedupe_bg"
+  ],
+  "comp-nn": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:4364 _periodic_rn"
+  ],
+  "elem-name": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:4288 _periodic_en"
+  ],
+  "Thread-3 (<lambda>)": [
+   "_npyio_impl.py:257 __getitem__",
+   "_format_impl.py:870 read_array",
+   "_format_impl.py:1023 _read_bytes",
+   "zipfile.py:999 read",
+   "zipfile.py:1098 _read1",
+   "zipfile.py:1008 _update_crc"
+  ],
+  "tone": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:3355 _periodic_tone"
+  ],
+  "text-facts-sched": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:2988 _periodic_tf"
+  ],
+  "vlm-frame-sched": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:2919 _periodic_vf"
+  ],
+  "Thread-2 (<lambda>)": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:2204 <lambda>"
+  ],
+  "mesh-periodic": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:1980 _periodic_mesh"
+  ],
+  "rect-periodic": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:1842 _periodic_rect"
+  ],
+  "MainThread": [
+   "_compat.py:30 asyncio_run",
+   "runners.py:118 run",
+   "base_events.py:641 run_until_complete",
+   "base_events.py:608 run_forever",
+   "base_events.py:1898 _run_once",
+   "selectors.py:468 select"
+  ]
+ }
 }
