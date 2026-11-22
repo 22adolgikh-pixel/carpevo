@@ -112,3 +112,19 @@ def install(app, data, heavy_q=None, events=None):
                 f.seek(max(0, os.path.getsize(fp) - 4000)); out["faults_tail"] = f.read().decode("utf-8", "ignore")[-4000:]
         except Exception: out["faults_tail"] = ""
         return out
+
+
+    @app.get("/api/open/health_log")
+    def api_open_health_log(lines: int = 600):
+        """v12.12: журнал памяти и аварий (только чтение, по ключу): последние строки mem.log + faults.log + состояние"""
+        out = status(); n = max(10, min(int(lines), 3000))
+        try:
+            with open(mem, "rb") as f:
+                f.seek(max(0, os.path.getsize(mem) - 400000)); out["mem"] = f.read().decode("utf-8", "ignore").splitlines()[-n:]
+        except Exception: out["mem"] = []
+        try:
+            fp = os.path.join(d, "faults.log")
+            with open(fp, "rb") as f:
+                f.seek(max(0, os.path.getsize(fp) - 8000)); out["faults"] = f.read().decode("utf-8", "ignore")[-8000:]
+        except Exception: out["faults"] = ""
+        return out
