@@ -18,7 +18,7 @@
  "h": 1619,
  "marks": [],
  "created": 1791736130,
- "updated": 1795291922,
+ "updated": 1795335411,
  "cat": {
   "title": "kuba sumakh46",
   "museum": "",
@@ -50,6 +50,10 @@
   {
    "id": "azr_kuba_sumakh88",
    "score": 59
+  },
+  {
+   "id": "kerimov_vol1_p343_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +61,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1792271546
+  },
+  "kerimov_vol1_p343_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795335411
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -104,6 +113,15 @@
      "a": "one",
      "w": 2,
      "t": 1795290297
+    }
+   }
+  },
+  "same": {
+   "kerimov_vol1_p343_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795335411
     }
    }
   }

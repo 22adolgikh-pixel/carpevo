@@ -18,7 +18,7 @@
  "h": 660,
  "marks": [],
  "created": 1791736138,
- "updated": 1795291095,
+ "updated": 1795335405,
  "cat": {
   "title": "shirvan-akstafa-prayer-rug47",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_shirvan_akstafa_prayer_rug47",
  "lib_img": "img/azr_shirvan_akstafa_prayer_rug47.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_hajigaib14",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0186_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_hajigaib14": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795335405
+  },
+  "intangible_2850_p0186_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795335405
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -84,6 +104,22 @@
      "a": "one",
      "w": 2,
      "t": 1795291095
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_hajigaib14": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795335405
+    }
+   },
+   "intangible_2850_p0186_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795335405
     }
    }
   }

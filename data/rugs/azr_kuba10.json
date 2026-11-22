@@ -18,7 +18,7 @@
  "h": 738,
  "marks": [],
  "created": 1791736136,
- "updated": 1795290969,
+ "updated": 1795335408,
  "cat": {
   "title": "kuba10",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba10",
  "lib_img": "img/azr_kuba10.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_sumakh105",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_sumakh105": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795335408
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -132,6 +143,15 @@
     "w": 2,
     "t": 1795290969,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_sumakh105": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795335408
+    }
    }
   }
  },
