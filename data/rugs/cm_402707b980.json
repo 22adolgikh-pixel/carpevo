@@ -18,7 +18,7 @@
  "h": 1555,
  "marks": [],
  "created": 1791870025,
- "updated": 1795291588,
+ "updated": 1795344516,
  "cat": {
   "title": "Lempe azeri rug, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -141,6 +141,13 @@
      "t": 1795027955
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795344516
+   }
   }
  },
  "auto_edge": {
@@ -195,6 +202,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
- "tri": "auto"
+ "frame": "whole",
+ "tri": "auto",
+ "frame_by": "micro"
 }

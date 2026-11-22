@@ -18,7 +18,7 @@
  "h": 2246,
  "marks": [],
  "created": 1791870033,
- "updated": 1795344469,
+ "updated": 1795344514,
  "cat": {
   "title": "Sakhsidaguller rug, Karabakh school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -155,8 +155,49 @@
     "w": 2,
     "t": 1795344469
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795344514,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00166,
+    0.00181
+   ],
+   [
+    0.97553,
+    -0.00259
+   ],
+   [
+    0.99462,
+    0.97367
+   ],
+   [
+    0.0009,
+    0.97074
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
