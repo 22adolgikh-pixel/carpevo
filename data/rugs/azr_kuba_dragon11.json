@@ -18,7 +18,7 @@
  "h": 620,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1795349576,
  "cat": {
   "title": "kuba dragon11",
   "museum": "",
@@ -124,5 +124,49 @@
    48.6777
   ],
   "t": 1795207765
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795349576,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.02562,
+    0.02796
+   ],
+   [
+    0.97718,
+    0.02984
+   ],
+   [
+    0.952,
+    0.95644
+   ],
+   [
+    0.0523,
+    0.95961
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
