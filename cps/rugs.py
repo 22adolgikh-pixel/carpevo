@@ -4392,6 +4392,21 @@ def install(app, DATA, D_WORK):
         except Exception: dp = None
         return {"drive_pages": dp, "n_tables": len(out), "n_missing": sum(len(o["missing"]) for o in out), "tables": out}
 
+    @app.get("/api/open/kscan/{page}.jpg")
+    def api_kscan(page: int):
+        """v12.11: скан листа Керимова т. I (только чтение) — для отладки авторазметки"""
+        scans = os.path.abspath(os.environ.get("CPS_SCANS", os.path.join(os.path.dirname(os.path.abspath(__file__)), "scans")))
+        p = os.path.join(scans, "kerimov_vol1_patterns", f"page_{int(page):03d}.jpg")
+        if not os.path.exists(p): return JSONResponse({"error": "нет скана"}, status_code=404)
+        return FileResponse(p, media_type="image/jpeg")
+
+    @app.get("/api/open/ksheet/{page}.json")
+    def api_ksheet(page: int):
+        """v12.11: разметка листа Керимова (рамки, таблица, кем размечено)"""
+        mp = os.path.join(DATA, "sheets", f"kerimov_vol1_patterns_page_{int(page):03d}_jpg.json")
+        if not os.path.exists(mp): return JSONResponse({"error": "нет разметки"}, status_code=404)
+        return json.load(open(mp, encoding="utf-8"))
+
     @app.get("/api/open/comp_eval")
     def api_rn_eval(run: int = 0):
         """замер подсказки типа ковра по соседям по картинке и рисункам Gans-Ruedin (run=1 — пересчитать в фоне)"""
