@@ -3248,6 +3248,17 @@ def install(app, DATA, D_WORK):
                 "same": [k for k, d in V.items() if _xs_verdict(d) == "same"],
                 "same_var": [k for k, d in V.items() if _xs_verdict(d) == "same" and any(x.get("var") for x in d.values() if x["a"] == "same")]}
 
+    @app.get("/api/open/xsame_votes")
+    def api_xsame_votes():
+        """v12.09: все ответы «тот же элемент?» (только чтение): пара, вердикт, «другое заполнение», близость сети"""
+        V = _xs_votes(); out = []; cnt = {"same": 0, "similar": 0, "diff": 0, "open": 0, "var": 0}
+        for k, d in V.items():
+            v = _xs_verdict(d); sim = next((x.get("sim") for x in d.values() if x.get("sim") is not None), None)
+            var = any(x.get("var") for x in d.values() if x.get("a") == "same")
+            cnt[v or "open"] += 1; cnt["var"] += bool(v == "same" and var)
+            out.append({"key": k, "v": v, "var": var, "sim": sim, "votes": {u: x["a"] for u, x in d.items()}})
+        return {"counts": cnt, "pairs": out}
+
     @app.get("/api/element_embed/status")
     def element_embed_status():
         try:
