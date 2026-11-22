@@ -261,17 +261,17 @@
   "name": "qəbir",
   "eval": {},
   "cfg": "C",
-  "npos": 5,
+  "npos": 18,
   "rugs": 1,
-  "at": 1795298950
+  "at": 1795385580
  },
  "m:qabirga": {
   "name": "qabırğa",
   "eval": {},
   "cfg": "C",
-  "npos": 4,
+  "npos": 6,
   "rugs": 1,
-  "at": 1795298952
+  "at": 1795385581
  },
  "m:damga": {
   "name": "damğa",
@@ -279,7 +279,7 @@
   "cfg": "C",
   "npos": 3,
   "rugs": 1,
-  "at": 1795298954
+  "at": 1795385581
  },
  "m:kilim-gulu": {
   "name": "kilimgülü",
@@ -723,11 +723,42 @@
  },
  "m:bulud-carpet#2": {
   "name": "bulud · форма 2",
-  "eval": {},
-  "cfg": "C",
-  "npos": 4,
-  "rugs": 1,
-  "at": 1795298939
+  "eval": {
+   "A": {
+    "recall": 0.172,
+    "iou": 0.252,
+    "hits": 10.5,
+    "n": 29
+   },
+   "B": {
+    "recall": 0.172,
+    "iou": 0.275,
+    "hits": 9.8,
+    "n": 29
+   },
+   "C": {
+    "recall": 0.31,
+    "iou": 0.275,
+    "hits": 3.0,
+    "n": 29
+   },
+   "D": {
+    "recall": 0.207,
+    "iou": 0.173,
+    "hits": 1.0,
+    "n": 29
+   },
+   "E": {
+    "recall": 0.31,
+    "iou": 0.296,
+    "hits": 7.0,
+    "n": 29
+   }
+  },
+  "cfg": "E",
+  "npos": 29,
+  "rugs": 4,
+  "at": 1795385537
  },
  "m:kupe#1": {
   "name": "küpə · форма 1",
