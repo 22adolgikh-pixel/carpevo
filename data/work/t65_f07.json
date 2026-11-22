@@ -94,11 +94,11 @@
   null
  ],
  "palette_touched": false,
- "done": false,
+ "done": true,
  "review": false,
  "transparent_bg": true,
  "difficulty": null,
- "saved_at": "2026-11-22 15:52:52",
+ "saved_at": "2026-11-22 15:52:56",
  "palette_v": 1,
  "matrix": {
   "w": 21,
@@ -173,7 +173,7 @@
    4.971
   ],
   "angle": 0.0,
-  "reviewed": false,
+  "reviewed": true,
   "engine": "cnn",
   "grid_strength": 7.719,
   "distortion": {
@@ -197,7 +197,8 @@
    "n_suspects": 0
   },
   "risk": 0.251,
-  "difficulty_est": "simple"
+  "difficulty_est": "simple",
+  "edited": true
  },
  "rapport": null,
  "hard": {
