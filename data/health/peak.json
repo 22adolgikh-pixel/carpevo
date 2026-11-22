@@ -1,10 +1,10 @@
 {
- "at": "2026-11-22 19:10:46",
- "rss_mb": 4373,
- "avail_mb": 3303,
+ "at": "2026-11-22 19:10:56",
+ "rss_mb": 6970,
+ "avail_mb": 615,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 30,
+ "up_s": 40,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -13,7 +13,6 @@
   "vlm-frame-sched",
   "text-facts-sched",
   "tone",
-  "Thread-3 (<lambda>)",
   "elem-name",
   "comp-nn",
   "Thread-4 (_dedupe_bg)",
@@ -26,7 +25,6 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-22 19:08:31 rss=1094MB avail=6505/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 19:08:41 rss=1135MB avail=6448/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 19:08:51 rss=1136MB avail=6467/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 19:09:01 rss=1136MB avail=6445/11925MB limit=0MB heavy=- wait=0",
@@ -40,6 +38,7 @@
   "2026-11-22 19:10:16 rss=260MB avail=7359/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 19:10:26 rss=632MB avail=6983/11925MB limit=0MB heavy=- wait=0",
   "2026-11-22 19:10:36 rss=2371MB avail=5301/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 19:10:46 rss=4373MB avail=3303/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-22 19:10:46 rss=4373MB avail=3303/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-22 19:10:56 rss=6970MB avail=615/11925MB limit=0MB heavy=- wait=0"
  ]
 }
