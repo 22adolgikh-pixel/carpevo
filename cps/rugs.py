@@ -4372,35 +4372,40 @@ def install(app, DATA, D_WORK):
 
     @app.get("/api/open/kerimov_gap")
     def api_kerimov_gap():
-        """v12.08: каких рисунков Керимова нет среди вырезок: по таблицам легенды — есть ли скан листа, разметка, сколько рамок"""
-        import csv as _csv
-        scans = os.path.abspath(os.environ.get("CPS_SCANS", os.path.join(os.path.dirname(os.path.abspath(__file__)), "scans")))
-        D_SH = os.path.join(DATA, "sheets")
+        """v12.15: каких рисунков Керимова т. I нет среди вырезок. Сверка с легендой по КНИЖНЫМ номерам (через book_map: студийные
+        номера таблиц и рисунков отличаются от книжных). Лист + рамка → (книжная таблица, книжный рисунок)."""
+        import csv as _csv, glob as _glob, re as _re
+        base = os.path.dirname(os.path.abspath(__file__)); kf = os.path.join(base, "tools", "kerimov_fix")
         leg = {}
         try:
-            for r in _csv.DictReader(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "tools", "kerimov_fix", "legend_book.csv"), encoding="utf-8")):
-                try: leg.setdefault(int(r["table"]), []).append(int(r["fig"]))
+            for r in _csv.DictReader(open(os.path.join(kf, "legend_book.csv"), encoding="utf-8")):
+                try: leg.setdefault(int(r["table"]), set()).add(int(r["fig"]))
                 except Exception: pass
+            bm = json.load(open(os.path.join(kf, "book_map.json"), encoding="utf-8")).get("pages", {})
         except Exception as e: return {"error": str(e)}
+        have, pages, extra = {}, {}, []
+        for p in sorted(_glob.glob(os.path.join(DATA, "sheets", "kerimov_vol1_patterns_page_*_jpg.json"))):
+            try: m = json.load(open(p, encoding="utf-8")); pg = int(_re.search(r"page_(\d+)", p).group(1))
+            except Exception: continue
+            info = bm.get(str(pg)) or {}
+            if info.get("drop"): continue
+            for b in (m.get("boxes") or []):
+                f = b.get("fig")
+                if f is None: continue
+                if info: bt = info.get("book_table"); bf = int((info.get("figs") or {}).get(str(f), f))
+                else: bt = m.get("table"); bf = int(f)
+                have.setdefault(bt, set()).add(bf); pages.setdefault(bt, set()).add(pg)
+                if bt in leg and bf not in leg[bt]: extra.append({"page": pg, "table": bt, "fig": bf})
         out = []
-        for t, figs in sorted(leg.items()):
-            miss = [f for f in sorted(set(figs)) if not os.path.exists(os.path.join(D_CROPS, f"t{t:02d}_f{f:02d}.png"))]
-            if not miss: continue
-            pg = t + 119
-            rel = f"kerimov_vol1_patterns/page_{pg:03d}.jpg"
-            key = rel.replace("/", "_").replace(".", "_")
-            mp = os.path.join(D_SH, key + ".json"); meta = None
-            if os.path.exists(mp):
-                try: meta = json.load(open(mp, encoding="utf-8"))
-                except Exception: meta = {}
-            out.append({"table": t, "page_guess": pg, "missing": miss, "legend_figs": len(set(figs)),
-                        "scan": os.path.exists(os.path.join(scans, rel)), "scan_dir_has_vol1": os.path.isdir(os.path.join(scans, "kerimov_vol1_patterns")),
-                        "sheet_meta": None if meta is None else {"boxes": len(meta.get("boxes") or []), "no_figures": bool(meta.get("no_figures")), "auto": bool(meta.get("auto_segmented")), "table": meta.get("table")}})
+        for t in sorted(leg):
+            miss = sorted(leg[t] - have.get(t, set()))
+            if miss: out.append({"table": t, "missing": miss, "legend_figs": len(leg[t]), "found": len(have.get(t, set())), "pages": sorted(pages.get(t, set()))})
         try: dp = json.load(open(os.path.join(DATA, "drive_pages.json"), encoding="utf-8"))
         except Exception: dp = None
         try: kc = json.load(open(os.path.join(DATA, "kcut_v12.json"), encoding="utf-8"))
         except Exception: kc = None
-        return {"kcut": kc, "drive_pages": dp, "n_tables": len(out), "n_missing": sum(len(o["missing"]) for o in out), "tables": out}
+        return {"n_missing": sum(len(o["missing"]) for o in out), "n_tables": len(out), "tables": out, "not_in_legend": extra,
+                "legend_tables": len(leg), "legend_figs": sum(len(v) for v in leg.values()), "kcut": kc, "drive_pages": dp}
 
     @app.get("/api/open/kscan/{page}.jpg")
     def api_kscan(page: int):
