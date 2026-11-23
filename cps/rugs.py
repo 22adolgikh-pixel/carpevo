@@ -1886,7 +1886,7 @@ def install(app, DATA, D_WORK):
              "edge_pct": {k: round(v, 2) for k, v in info["range_pct"].items()}, "cands": cands, "t": int(time.time()),
              "geo": info["geo"], "choice": info.get("choice"), "q_rect": info.get("q_rect"), "q_mesh": info.get("q_mesh"), "edge": {k: [round(float(x), 2) for x in v] for k, v in info["curves"].items()}}
         alt = os.path.join(D_MESH, rid + ".m.jpg")                              # v12.19: сетка, которую отвергли (для проверки в /m)
-        if info.get("mesh_img") is not None: cv2.imwrite(alt, info["mesh_img"], [cv2.IMWRITE_JPEG_QUALITY, 88]); m["range_mesh"] = {k: round(v, 2) for k, v in info["range_mesh"].items()}
+        if info.get("mesh_img") is not None: cv2.imwrite(alt, info["mesh_img"], [cv2.IMWRITE_JPEG_QUALITY, 88]); m["range_mesh"] = {k: round(v, 2) for k, v in info["range_mesh"].items()}; m["edge_mesh"] = {k: [round(float(x), 2) for x in v] for k, v in info["curves_mesh"].items()}
         elif os.path.exists(alt): os.remove(alt)
         tj = pj + ".%d.tmp" % threading.get_ident(); json.dump(m, open(tj, "w")); os.replace(tj, pj)
         for f in [os.path.join(D_MESH, rid + ".f.jpg"), os.path.join(D_TH, rid + ".mm.jpg")] + [os.path.join(D_MESH, "%s.p.%s.jpg" % (rid, k)) for k in ("field", "top", "bot", "left", "right")]:
@@ -2005,6 +2005,34 @@ def install(app, DATA, D_WORK):
                 a = read_small(p, s)
                 if a is None: return Response(status_code=404)
                 os.makedirs(D_TH, exist_ok=True); cv2.imwrite(t, a, [cv2.IMWRITE_JPEG_QUALITY, 85])
+        return FileResponse(t, headers={"Cache-Control": "no-cache"})
+
+    @app.get("/rugpad/{rid}.jpg")
+    def rug_pad_img(rid: str, s: int = 900):
+        """v12.20: перспектива с полями вокруг ковра (12 %): что лежит за краем — бахрома, пол, или за кадром (тёмная штриховка). Жёлтая рамка — ковёр по углам,
+        голубая линия — край, который нашла сетка (где она выходит за рамку, там сетка «загибает» ковёр); цифры — доля рамки за кадром"""
+        import rug_mesh
+        rid = os.path.basename(rid); r = load(rid); q = rect_quad(r); p = img_path(rid)
+        if not q or not p: return Response(status_code=404)
+        m = mesh_info(rid, r, build=False); s = max(400, min(1600, s))
+        t = os.path.join(D_TH, "%s.pad%d.jpg" % (rid, s))
+        if not os.path.exists(t) or os.path.getmtime(t) < os.path.getmtime(p):
+            with THUMB:
+                a = cv2.imread(p)
+                if a is None: return Response(status_code=404)
+                cv, valid, g = rug_mesh.rectify_padded(a, q, s, pad=0.12); W, H, px, py = g["W"], g["H"], g["px"], g["py"]
+                oof = 100 * (1 - float(valid[py:py + H, px:px + W].mean()))
+                inv = ~valid; hatch = ((np.add.outer(np.arange(cv.shape[0]), np.arange(cv.shape[1])) // 6) % 2 == 0)
+                cv[inv] = np.where(hatch[inv][:, None], 40, 90).astype(np.uint8)
+                cv2.rectangle(cv, (px, py), (px + W, py + H), (0, 213, 255), 2)
+                E = (m or {}).get("edge_mesh") or (m or {}).get("edge")
+                if E:
+                    n = len(E["top"]); u = np.linspace(0, 1, n)
+                    pts = {"top": np.c_[px + u * W, py + np.array(E["top"])], "bot": np.c_[px + u * W, py + H - 1 - np.array(E["bot"])],
+                           "left": np.c_[px + np.array(E["left"]), py + u * H], "right": np.c_[px + W - 1 - np.array(E["right"]), py + u * H]}
+                    for k, v in pts.items(): cv2.polylines(cv, [v.astype(np.int32).reshape(-1, 1, 2)], False, (255, 200, 0), 2)
+                cv2.putText(cv, "za kadrom %.1f%%" % oof, (8, 22), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                os.makedirs(D_TH, exist_ok=True); cv2.imwrite(t, cv, [cv2.IMWRITE_JPEG_QUALITY, 85])
         return FileResponse(t, headers={"Cache-Control": "no-cache"})
 
     @app.get("/rugcmp/{rid}.jpg")
