@@ -1,10 +1,10 @@
 {
- "at": "2026-11-23 22:42:14",
- "rss_mb": 4224,
- "avail_mb": 2876,
+ "at": "2026-11-23 22:42:24",
+ "rss_mb": 5982,
+ "avail_mb": 1129,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 30,
+ "up_s": 40,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -25,8 +25,6 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-23 22:40:06 rss=782MB avail=6115/11925MB limit=0MB heavy=двойники wait=0",
-  "2026-11-23 22:40:16 rss=852MB avail=5991/11925MB limit=0MB heavy=двойники wait=0",
   "2026-11-23 22:40:26 rss=821MB avail=6211/11925MB limit=0MB heavy=двойники wait=0",
   "2026-11-23 22:40:36 rss=771MB avail=6162/11925MB limit=0MB heavy=двойники wait=0",
   "2026-11-23 22:40:46 rss=864MB avail=6109/11925MB limit=0MB heavy=двойники wait=0",
@@ -39,15 +37,18 @@
   "2026-11-23 22:41:54 rss=485MB avail=6605/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 22:42:04 rss=2762MB avail=4354/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 22:42:04 malloc_trim: rss 2762MB -> 2737MB",
-  "2026-11-23 22:42:14 rss=4224MB avail=2876/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-23 22:42:14 rss=4224MB avail=2876/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 22:42:24 rss=5983MB avail=1129/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 22:42:24 malloc_trim: rss 5983MB -> 5982MB"
  ],
  "stacks": {
   "AnyIO worker thread": [
-   "threading.py:1002 _bootstrap",
-   "threading.py:1045 _bootstrap_inner",
-   "_asyncio.py:1113 run",
-   "queue.py:171 get",
-   "threading.py:327 wait"
+   "_asyncio.py:1124 run",
+   "_api.py:244 _run_sync_endpoint",
+   "rugs.py:4588 api_frame2",
+   "rugs.py:2856 _mrows",
+   "rugs.py:2813 _mrow",
+   "rugs.py:259 load"
   ],
   "Thread-8 (_loop)": [
    "threading.py:1002 _bootstrap",
@@ -56,12 +57,10 @@
    "events.py:148 _loop"
   ],
   "cps-backup": [
-   "backup.py:99 loop",
-   "backup.py:57 backup_once",
-   "subprocess.py:550 run",
-   "subprocess.py:1209 communicate",
-   "subprocess.py:2115 _communicate",
-   "selectors.py:415 select"
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "backup.py:100 loop"
   ],
   "Thread-7 (loop)": [
    "threading.py:1002 _bootstrap",
@@ -105,8 +104,8 @@
    "rugs.py:4302 <lambda>",
    "rugs.py:4300 shape_index",
    "shape_hint.py:96 build_index",
-   "_npyio_impl.py:245 __getitem__",
-   "_format_impl.py:887 read_array"
+   "_npyio_impl.py:257 __getitem__",
+   "_format_impl.py:869 read_array"
   ],
   "tone": [
    "threading.py:1002 _bootstrap",
