@@ -1,10 +1,10 @@
 {
- "at": "2026-11-23 05:53:32",
- "rss_mb": 5980,
- "avail_mb": 1657,
+ "at": "2026-11-23 06:12:14",
+ "rss_mb": 3834,
+ "avail_mb": 3797,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 40,
+ "up_s": 31,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -25,21 +25,21 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-23 05:51:28 rss=647MB avail=6908/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:51:38 rss=648MB avail=6951/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:51:48 rss=648MB avail=6894/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:51:58 rss=647MB avail=6886/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:52:08 rss=648MB avail=6803/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:52:18 rss=660MB avail=6899/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:52:28 rss=660MB avail=6915/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:52:38 rss=660MB avail=6894/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:52:52 rss=260MB avail=7328/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:53:02 rss=600MB avail=6991/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:53:12 rss=2509MB avail=5108/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:53:12 malloc_trim: rss 2509MB -> 2483MB",
-  "2026-11-23 05:53:22 rss=3821MB avail=3825/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:53:32 rss=5981MB avail=1657/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 05:53:32 malloc_trim: rss 5981MB -> 5980MB"
+  "2026-11-23 06:10:02 rss=812MB avail=6786/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:10:12 rss=811MB avail=6766/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:10:22 rss=812MB avail=6794/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:10:32 rss=813MB avail=6794/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:10:42 rss=813MB avail=6813/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:10:52 rss=813MB avail=6799/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:11:02 rss=813MB avail=6777/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:11:12 rss=814MB avail=6763/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:11:22 rss=812MB avail=6799/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:11:32 rss=814MB avail=6721/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:11:43 rss=260MB avail=7309/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:11:53 rss=600MB avail=6973/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:12:03 rss=2403MB avail=5220/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:12:03 malloc_trim: rss 2403MB -> 2376MB",
+  "2026-11-23 06:12:14 rss=3833MB avail=3797/11925MB limit=0MB heavy=- wait=0"
  ],
  "stacks": {
   "AnyIO worker thread": [
@@ -56,10 +56,12 @@
    "events.py:148 _loop"
   ],
   "cps-backup": [
-   "threading.py:1002 _bootstrap",
-   "threading.py:1045 _bootstrap_inner",
-   "threading.py:982 run",
-   "backup.py:100 loop"
+   "backup.py:99 loop",
+   "backup.py:64 backup_once",
+   "backup.py:44 _mirror",
+   "shutil.py:448 copy2",
+   "shutil.py:269 copyfile",
+   "shutil.py:144 _fastcopy_sendfile"
   ],
   "Thread-7 (loop)": [
    "threading.py:1002 _bootstrap",
@@ -72,34 +74,34 @@
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:5601 <lambda>"
+   "rugs.py:5611 <lambda>"
   ],
   "twins-periodic": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:5302 _periodic_twins"
+   "rugs.py:5312 _periodic_twins"
   ],
   "Thread-4 (_dedupe_bg)": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:4978 _dedupe_bg"
+   "rugs.py:4988 _dedupe_bg"
   ],
   "comp-nn": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:4458 _periodic_rn"
+   "rugs.py:4468 _periodic_rn"
   ],
   "elem-name": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:4382 _periodic_en"
+   "rugs.py:4392 _periodic_en"
   ],
   "Thread-3 (<lambda>)": [
-   "_format_impl.py:869 read_array",
+   "_format_impl.py:870 read_array",
    "_format_impl.py:1023 _read_bytes",
    "zipfile.py:999 read",
    "zipfile.py:1098 _read1",
