@@ -18,7 +18,7 @@
  "h": 1249,
  "marks": [],
  "created": 1795357681,
- "updated": 1795462337,
+ "updated": 1795462690,
  "cat": {
   "title": "безворсовый «Zili» Иреван",
   "museum": "",
@@ -141,8 +141,49 @@
     "w": 2,
     "t": 1795462337
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795462690,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01201,
+    0.07346
+   ],
+   [
+    0.94734,
+    0.08132
+   ],
+   [
+    0.97171,
+    0.97901
+   ],
+   [
+    0.02044,
+    0.98972
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
