@@ -5168,7 +5168,17 @@ def install(app, DATA, D_WORK):
         except (OSError, ValueError): return {}
 
     def tw_nn():
-        """соседи по отпечатку всего фото (Colab twin_embed_colab.py): DATA/twin_nn_v1.json, иначе models/twin_nn_v1.json → (nn, порог)"""
+        """соседи по отпечатку всего фото (Colab twin_embed_colab.py): DATA/twin_nn_v1.json, иначе models/twin_nn_v1.json → (nn, порог).
+        v12.25: сначала models/twin_nn_v2.json — DINOv3-B по выпрямленному ковру (ночь 23–24.11: настоящий двойник среди 8 ближайших
+        у 77 % против 63 % у прежнего DINOv2 по всему фото). На проверку совмещением берём только 3 ближайших с сходством ≥ 0,85
+        и остальных до 8 с ≥ 0,90 — иначе пар 30 тысяч."""
+        try:
+            j = json.load(open(os.path.join(HERE, "models", "twin_nn_v2.json"), encoding="utf-8")); out = {}
+            for a, lst in (j.get("nn") or {}).items():
+                keep = [[o, s] for k, (o, s) in enumerate(lst[:8]) if (k < 3 and s >= 0.85) or s >= 0.90]
+                if keep: out[a] = keep
+            return out, 0.90
+        except (OSError, ValueError): pass
         for p in (os.path.join(DATA, "twin_nn_v1.json"), os.path.join(HERE, "models", "twin_nn_v1.json")):
             try:
                 with open(p, encoding="utf-8") as f: j = json.load(f)
@@ -5582,9 +5592,9 @@ def install(app, DATA, D_WORK):
         контрольные (над порогом, не поставлены), старые пары каталога, где машина не уверена, и «новые дубли» по выпрямленным."""
         P = tw_load(); C = {}
 
-        def add(a, b, ev):
+        def add(a, b, ev, force=False):
             x, y = by.get(a), by.get(b)
-            if not x or not y or x["dead"] or y["dead"] or b in x["sd"] or a in y["sd"]: return
+            if not x or not y or x["dead"] or y["dead"] or (not force and (b in x["sd"] or a in y["sd"])): return
             if me in x["mv"]["same"].get(b, []) or me in y["mv"]["same"].get(a, []): return
             if x["comp"] and y["comp"] and x["comp"] != y["comp"]: return
             for p, q in ((a, b), (b, a)):
@@ -5596,6 +5606,15 @@ def install(app, DATA, D_WORK):
             if not w: continue
             if v.get("ctl") or v["n"] >= 20 or (w & {"inv", "catalog"}) or ("size" in w and v["n"] >= 8):
                 a, b = k.split("~", 1); add(a, b, {"n": v["n"], "cov": v.get("cov", 0), "why": sorted(w), **({"c": 1} if v.get("ctl") else {})})
+        # v12.25: перепроверка пачки «разные» (21.11), где фото почти совпадают; и почти одинаковые по DINOv3 (≥ 0,95) — сразу, не дожидаясь совмещения
+        try: RC = json.load(open(os.path.join(HERE, "models", "twin_recheck_v1.json"), encoding="utf-8")).get("pairs") or {}
+        except (OSError, ValueError): RC = {}
+        for k, v in RC.items():
+            a, b = k.split("~", 1); x = by.get(a)
+            if x and b in x["sd"] and b not in x["sy"]: add(a, b, {"n": v.get("n") or 0, "cov": v.get("cov") or 0, "why": ["recheck"], "re": 1}, force=True)
+        for a, lst in tw_nn()[0].items():
+            for o, s in lst[:3]:
+                if s >= 0.95 and twins.key(a, o) not in P: add(a, o, {"n": 0, "s": s, "why": ["dv3"]})
         for x in by.values():
             for o in x["sm"]:
                 ev = x["sev"].get(o) or {}
@@ -5604,11 +5623,12 @@ def install(app, DATA, D_WORK):
             if v.get("n", 0) >= RP_MAYBE and v.get("geo", 0) >= RP_GEO and "~" in k:
                 a, b = k.split("~", 1); add(a, b, {"n": v["n"], "cov": v.get("geo", 0), "why": ["rect"]})
         out = []; used = set()
-        for a in sorted(C, key=lambda i: (-max(e.get("n") or 0 for e in C[i].values()), -len(C[i]), i)):
-            items = sorted(((b, e) for b, e in C[a].items() if (a, b) not in used), key=lambda t: -(t[1].get("n") or 0))[:8]
+        def sc(e): return 1e6 if e.get("re") else max(e.get("n") or 0, 400 * ((e.get("s") or 0) - 0.9) / 0.05 if e.get("s") else 0)
+        for a in sorted(C, key=lambda i: (-max(sc(e) for e in C[i].values()), -len(C[i]), i)):
+            items = sorted(((b, e) for b, e in C[a].items() if (a, b) not in used), key=lambda t: -sc(t[1]))[:8]
             if not items: continue
             for b, _ in items: used.add((a, b)); used.add((b, a))
-            out.append({"type": "tw", "rid": a, "items": [{"id": b, "title": by[b]["title"], "src": by[b]["src"], "n": e.get("n"), "why": e.get("why"), **({"c": 1} if e.get("c") else {})}
+            out.append({"type": "tw", "rid": a, "items": [{"id": b, "title": by[b]["title"], "src": by[b]["src"], "n": e.get("n"), "why": e.get("why"), **({"c": 1} if e.get("c") else {}), **({"re": 1} if e.get("re") else {})}
                                                           for b, e in items], "src": by[a]["src"]})
         return out
 
