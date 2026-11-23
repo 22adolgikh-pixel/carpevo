@@ -18,7 +18,7 @@
  "h": 852,
  "marks": [],
  "created": 1791736129,
- "updated": 1795062314,
+ "updated": 1795464196,
  "cat": {
   "title": "antique-kazak-moghan-rug-nagel664",
   "museum": "",
@@ -79,7 +79,30 @@
   "area": 0.834,
   "ver": 1,
   "t": 1795062222,
-  "hand": true
+  "hand": true,
+  "ref_quad": {
+   "quad": [
+    [
+     0.06918,
+     0.04278
+    ],
+    [
+     0.94218,
+     0.04598
+    ],
+    [
+     0.95325,
+     0.92779
+    ],
+    [
+     0.05193,
+     0.9237
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795464192
+  }
  },
  "school_prev": "ganja-gazakh",
  "school_by": "уточнено по слову «kazak» в подписи",
@@ -97,26 +120,26 @@
   "status": "auto",
   "quad": [
    [
-    0.07617,
-    0.03182
+    0.06918,
+    0.04278
    ],
    [
-    0.94531,
-    0.04393
+    0.94218,
+    0.04598
    ],
    [
-    0.95596,
-    0.9299
+    0.95325,
+    0.92779
    ],
    [
-    0.05316,
-    0.92642
+    0.05193,
+    0.9237
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
- "frame": "cropped",
- "tri": "hand",
+ "frame": "whole",
+ "tri": "micro",
  "auto_edge": {
   "v": 1,
   "f": [
@@ -136,5 +159,23 @@
    50.1387
   ],
   "t": 1795207720
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795464174
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795464196,
+    "s": "ref"
+   }
+  }
+ },
+ "frame_by": "micro"
 }

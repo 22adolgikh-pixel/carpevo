@@ -3,7 +3,7 @@
  "title": "13th century, Konya, Anatolian Seljuk",
  "source": "каталог: commons",
  "museum": "Музей турецкого и исламского искусства (Стамбул)",
- "inv": "",
+ "inv": "681",
  "url": "https://commons.wikimedia.org/wiki/File:Istanbul_Turkish_and_Islamic_Museum_Seljuk_carpet_13th_century_from_Konya_in_2016_01_1481.jpg",
  "license": "CC BY-SA 4.0 · Dosseman",
  "place": "",
@@ -18,7 +18,7 @@
  "h": 1598,
  "marks": [],
  "created": 1791870024,
- "updated": 1795354050,
+ "updated": 1795464298,
  "cat": {
   "title": "13th century, Konya, Anatolian Seljuk",
   "museum": "Музей турецкого и исламского искусства (Стамбул)",
@@ -52,6 +52,26 @@
   {
    "id": "cm_9043bbff78",
    "score": 308
+  },
+  {
+   "id": "cm_5a34b3c37d",
+   "score": 0
+  },
+  {
+   "id": "cm_b3a915f3d1",
+   "score": 0
+  },
+  {
+   "id": "cm_3b64fa3c2c",
+   "score": 0
+  },
+  {
+   "id": "cm_65ea848668",
+   "score": 0
+  },
+  {
+   "id": "cm_59315564cf",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -59,6 +79,31 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "cm_5a34b3c37d": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795464298
+  },
+  "cm_b3a915f3d1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795464298
+  },
+  "cm_3b64fa3c2c": {
+   "ok": false,
+   "by": "по цепочке: cm_3b64fa3c2c ≠ cm_5a34b3c37d",
+   "at": 1795464320
+  },
+  "cm_65ea848668": {
+   "ok": false,
+   "by": "по цепочке: cm_5a34b3c37d ≠ cm_65ea848668",
+   "at": 1795464320
+  },
+  "cm_59315564cf": {
+   "ok": false,
+   "by": "по цепочке: cm_59315564cf ≠ cm_5a34b3c37d",
+   "at": 1795464320
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -132,6 +177,25 @@
      "t": 1795354050
     }
    }
+  },
+  "same": {
+   "cm_5a34b3c37d": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795464298
+    }
+   },
+   "cm_b3a915f3d1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795464298
+    }
+   }
   }
+ },
+ "from_twin": {
+  "inv": "cm_5a34b3c37d"
  }
 }

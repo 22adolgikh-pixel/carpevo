@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736133,
- "updated": 1791736133,
+ "updated": 1795464275,
  "cat": {
   "title": "kuba kilim4",
   "museum": "",
@@ -144,5 +144,49 @@
    50.8397
   ],
   "t": 1795207772
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795464275,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.12658,
+    0.01675
+   ],
+   [
+    0.8917,
+    0.01564
+   ],
+   [
+    0.92728,
+    0.95926
+   ],
+   [
+    0.08062,
+    0.9544
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
