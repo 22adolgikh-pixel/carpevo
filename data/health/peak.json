@@ -1,10 +1,10 @@
 {
- "at": "2026-11-23 06:12:14",
- "rss_mb": 3834,
- "avail_mb": 3797,
+ "at": "2026-11-23 06:12:24",
+ "rss_mb": 6198,
+ "avail_mb": 1436,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 31,
+ "up_s": 41,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -25,8 +25,6 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-23 06:10:02 rss=812MB avail=6786/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:10:12 rss=811MB avail=6766/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 06:10:22 rss=812MB avail=6794/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 06:10:32 rss=813MB avail=6794/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 06:10:42 rss=813MB avail=6813/11925MB limit=0MB heavy=- wait=0",
@@ -39,7 +37,9 @@
   "2026-11-23 06:11:53 rss=600MB avail=6973/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 06:12:03 rss=2403MB avail=5220/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 06:12:03 malloc_trim: rss 2403MB -> 2376MB",
-  "2026-11-23 06:12:14 rss=3833MB avail=3797/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-23 06:12:14 rss=3833MB avail=3797/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:12:24 rss=6199MB avail=1436/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 06:12:24 malloc_trim: rss 6199MB -> 6198MB"
  ],
  "stacks": {
   "AnyIO worker thread": [
@@ -56,12 +56,10 @@
    "events.py:148 _loop"
   ],
   "cps-backup": [
-   "backup.py:99 loop",
-   "backup.py:64 backup_once",
-   "backup.py:44 _mirror",
-   "shutil.py:448 copy2",
-   "shutil.py:269 copyfile",
-   "shutil.py:144 _fastcopy_sendfile"
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "backup.py:100 loop"
   ],
   "Thread-7 (loop)": [
    "threading.py:1002 _bootstrap",
@@ -101,12 +99,12 @@
    "rugs.py:4392 _periodic_en"
   ],
   "Thread-3 (<lambda>)": [
-   "_format_impl.py:870 read_array",
-   "_format_impl.py:1023 _read_bytes",
-   "zipfile.py:999 read",
-   "zipfile.py:1098 _read1",
-   "zipfile.py:1114 _read2",
-   "zipfile.py:805 read"
+   "threading.py:982 run",
+   "rugs.py:4275 <lambda>",
+   "rugs.py:4273 shape_index",
+   "shape_hint.py:96 build_index",
+   "_npyio_impl.py:257 __getitem__",
+   "_format_impl.py:870 read_array"
   ],
   "tone": [
    "threading.py:1002 _bootstrap",
