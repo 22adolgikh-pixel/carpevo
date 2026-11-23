@@ -1,10 +1,10 @@
 {
- "at": "2026-11-22 20:17:20",
- "rss_mb": 5842,
- "avail_mb": 1804,
+ "at": "2026-11-23 05:43:18",
+ "rss_mb": 3668,
+ "avail_mb": 3970,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 40,
+ "up_s": 31,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -25,21 +25,21 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-22 20:15:24 rss=938MB avail=6723/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:15:34 rss=938MB avail=6735/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:15:44 rss=939MB avail=6694/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:15:54 rss=939MB avail=6710/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:16:04 rss=937MB avail=6668/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:16:14 rss=938MB avail=6732/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:16:24 rss=939MB avail=6705/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:16:34 rss=940MB avail=6688/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:16:40 rss=259MB avail=7320/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:16:50 rss=589MB avail=7013/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:17:00 rss=2565MB avail=5062/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:17:00 malloc_trim: rss 2565MB -> 2539MB",
-  "2026-11-22 20:17:10 rss=3996MB avail=3654/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:17:20 rss=5842MB avail=1804/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-22 20:17:20 malloc_trim: rss 5842MB -> 5842MB"
+  "2026-11-23 05:41:03 rss=1231MB avail=6351/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:41:13 rss=1231MB avail=6393/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:41:23 rss=1230MB avail=6372/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:41:33 rss=1230MB avail=6380/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:41:43 rss=1230MB avail=6390/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:41:53 rss=1230MB avail=6391/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:42:03 rss=1230MB avail=6392/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:42:13 rss=1230MB avail=6342/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:42:23 rss=1230MB avail=6381/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:42:33 rss=1230MB avail=6358/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:42:47 rss=144MB avail=7386/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:42:58 rss=535MB avail=7042/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:43:08 rss=2192MB avail=5440/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 05:43:08 malloc_trim: rss 2192MB -> 2166MB",
+  "2026-11-23 05:43:18 rss=3668MB avail=3970/11925MB limit=0MB heavy=- wait=0"
  ],
  "stacks": {
   "AnyIO worker thread": [
@@ -56,10 +56,12 @@
    "events.py:148 _loop"
   ],
   "cps-backup": [
-   "threading.py:1002 _bootstrap",
-   "threading.py:1045 _bootstrap_inner",
-   "threading.py:982 run",
-   "backup.py:100 loop"
+   "backup.py:99 loop",
+   "backup.py:64 backup_once",
+   "backup.py:44 _mirror",
+   "shutil.py:448 copy2",
+   "shutil.py:269 copyfile",
+   "shutil.py:144 _fastcopy_sendfile"
   ],
   "Thread-7 (loop)": [
    "threading.py:1002 _bootstrap",
@@ -72,63 +74,63 @@
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:5546 <lambda>"
+   "rugs.py:5573 <lambda>"
   ],
   "twins-periodic": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:5247 _periodic_twins"
+   "rugs.py:5274 _periodic_twins"
   ],
   "Thread-4 (_dedupe_bg)": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:4923 _dedupe_bg"
+   "rugs.py:4950 _dedupe_bg"
   ],
   "comp-nn": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:4403 _periodic_rn"
+   "rugs.py:4430 _periodic_rn"
   ],
   "elem-name": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:4327 _periodic_en"
+   "rugs.py:4354 _periodic_en"
   ],
   "Thread-3 (<lambda>)": [
    "threading.py:982 run",
-   "rugs.py:4210 <lambda>",
-   "rugs.py:4208 shape_index",
+   "rugs.py:4237 <lambda>",
+   "rugs.py:4235 shape_index",
    "shape_hint.py:96 build_index",
-   "_npyio_impl.py:245 __getitem__",
-   "_format_impl.py:887 read_array"
+   "_npyio_impl.py:257 __getitem__",
+   "_format_impl.py:870 read_array"
   ],
   "tone": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:3358 _periodic_tone"
+   "rugs.py:3378 _periodic_tone"
   ],
   "text-facts-sched": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:2991 _periodic_tf"
+   "rugs.py:3011 _periodic_tf"
   ],
   "vlm-frame-sched": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:2922 _periodic_vf"
+   "rugs.py:2942 _periodic_vf"
   ],
   "Thread-2 (<lambda>)": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:2207 <lambda>"
+   "rugs.py:2227 <lambda>"
   ],
   "mesh-periodic": [
    "threading.py:1002 _bootstrap",
