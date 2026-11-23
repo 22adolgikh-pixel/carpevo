@@ -680,10 +680,10 @@
   {
    "id": "m6b036841e448018_1",
    "box": [
-    0.33764,
-    0.4209,
-    0.0941,
-    0.05957
+    0.26019,
+    0.36133,
+    0.24804,
+    0.07885
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -691,7 +691,7 @@
    "scheme": "t32_f04",
    "group": "m6b036841e448018_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 1",
    "machine": 1,
    "score": 0.77,
@@ -783,7 +783,11 @@
      0.4209
     ]
    ],
-   "sam": 0.704
+   "sam": 0.704,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795463388,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463388
   },
   {
    "id": "m6b036841e448018_2",
@@ -799,7 +803,7 @@
    "scheme": "t32_f04",
    "group": "m6b036841e448018_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: bulud · форма 1",
    "machine": 1,
    "score": 0.719,
@@ -967,7 +971,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795385415,
+ "updated": 1795463388,
  "cat": {
   "title": "Ковёр «Malıbəyli» Карабах",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -1162,6 +1166,20 @@
      "a": "ok",
      "w": 2,
      "t": 1795279018
+    }
+   },
+   "m6b036841e448018_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795463388
+    }
+   },
+   "m6b036841e448018_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463388
     }
    }
   }

@@ -20,10 +20,10 @@
   {
    "id": "m6b0368dce454710_0",
    "box": [
-    0.48242,
+    0.50299,
     0.37793,
-    0.1744,
-    0.08301
+    0.16546,
+    0.09264
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -31,7 +31,7 @@
    "scheme": "t32_f04",
    "group": "m6b0368dce454710_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 2",
    "machine": 1,
    "score": 0.77,
@@ -159,7 +159,11 @@
      0.38965
     ]
    ],
-   "sam": 0.935
+   "sam": 0.935,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795463264,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463264
   },
   {
    "id": "m6b0368dce454710_2",
@@ -175,7 +179,7 @@
    "scheme": "t32_f04",
    "group": "m6b0368dce454710_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 2",
    "machine": 1,
    "score": 0.757,
@@ -279,7 +283,9 @@
      0.33887
     ]
    ],
-   "sam": 0.965
+   "sam": 0.965,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463264
   },
   {
    "id": "m6b0368dce454710_3",
@@ -295,7 +301,7 @@
    "scheme": "t32_f04",
    "group": "m6b0368dce454710_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 2",
    "machine": 1,
    "score": 0.743,
@@ -399,15 +405,17 @@
      0.36719
     ]
    ],
-   "sam": 0.972
+   "sam": 0.972,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463264
   },
   {
    "id": "m6b0368dce454710_4",
    "box": [
-    0.61041,
-    0.23438,
-    0.1083,
-    0.0918
+    0.57459,
+    0.22803,
+    0.15467,
+    0.11334
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -415,7 +423,7 @@
    "scheme": "t32_f04",
    "group": "m6b0368dce454710_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 2",
    "machine": 1,
    "score": 0.726,
@@ -507,7 +515,11 @@
      0.23926
     ]
    ],
-   "sam": 0.954
+   "sam": 0.954,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795463264,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463264
   },
   {
    "id": "m6b0368dce454710_5",
@@ -523,7 +535,7 @@
    "scheme": "t32_f04",
    "group": "m6b0368dce454710_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 2",
    "machine": 1,
    "score": 0.723,
@@ -623,15 +635,17 @@
      0.63867
     ]
    ],
-   "sam": 0.964
+   "sam": 0.964,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463264
   },
   {
    "id": "m6b0368dce454710_7",
    "box": [
-    0.27848,
-    0.25977,
-    0.10549,
-    0.07812
+    0.26685,
+    0.23483,
+    0.15418,
+    0.11273
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -639,7 +653,7 @@
    "scheme": "t32_f04",
    "group": "m6b0368dce454710_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 2",
    "machine": 1,
    "score": 0.715,
@@ -771,11 +785,15 @@
      0.25977
     ]
    ],
-   "sam": 0.9
+   "sam": 0.9,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795463264,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463264
   }
  ],
  "created": 1794547278,
- "updated": 1795385575,
+ "updated": 1795463264,
  "cat": {
   "title": "Xalça. “ Malıbəyli” . Qarabağ qrupu. Azərbaycan. Yun. Xovlu.",
   "museum": "",
@@ -864,5 +882,51 @@
    57.4696
   ],
   "t": 1795207691
+ },
+ "micro": {
+  "marks": {
+   "m6b0368dce454710_2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463264
+    }
+   },
+   "m6b0368dce454710_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463264
+    }
+   },
+   "m6b0368dce454710_5": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463264
+    }
+   },
+   "m6b0368dce454710_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463264
+    }
+   },
+   "m6b0368dce454710_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463264
+    }
+   },
+   "m6b0368dce454710_7": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463264
+    }
+   }
+  }
  }
 }

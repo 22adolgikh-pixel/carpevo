@@ -31,7 +31,7 @@
    "scheme": "t53_f04",
    "group": "m6b036ad4e781031_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.626,
@@ -147,7 +147,7 @@
    "scheme": "t53_f04",
    "group": "m6b036ad4e781031_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.616,
@@ -303,7 +303,7 @@
   }
  ],
  "created": 1791736127,
- "updated": 1795386075,
+ "updated": 1795463407,
  "cat": {
   "title": "Carpet",
   "museum": "Кливлендский музей искусств",
@@ -456,6 +456,22 @@
      "a": "similar",
      "w": 2,
      "t": 1794983994
+    }
+   }
+  },
+  "marks": {
+   "m6b036ad4e781031_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795463407
+    }
+   },
+   "m6b036ad4e781031_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795463407
     }
    }
   }
