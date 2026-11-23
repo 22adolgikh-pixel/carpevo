@@ -4582,6 +4582,16 @@ def install(app, DATA, D_WORK):
         p = os.path.join(D_WF, os.path.basename(name))
         return FileResponse(p, media_type="application/octet-stream") if name in WF and os.path.exists(p) else JSONResponse({"error": "нет"}, status_code=404)
 
+    @app.get("/api/open/frame2")
+    def api_frame2():
+        """v12.26: как работает модель кадра v2 на сервере: согласие с людьми, перепроверки, авторешения, кандидаты «несколько ковров»"""
+        rows = [x for x in _mrows() if x and x.get("vf")]; st = fr_auto_state()
+        hum = [x for x in rows if x["frame_by"] in ("micro", "hand") and x["frame"] in FR_ANS]
+        multi = sorted((x for x in rows if not x["frame_by"] and (x["vf"].get("multi") or 0) >= 0.9), key=lambda x: -x["vf"]["multi"])
+        return {"model": (_f2() or {}).get("model"), "with_vf": len(rows), "human": len(hum), "agree": sum(1 for x in hum if x["vf"]["frame"] == x["frame"]),
+                "rc": sum(1 for x in rows if x.get("rc")), "auto_whole": sum(1 for x in rows if fr_auto(x, st)), "auto_state": st,
+                "multi_cand": len(multi), "multi_top": [x["id"] for x in multi[:20]]}
+
     @app.get("/api/open/twin_data")
     def api_twin_data():
         """v12.23: пары-кандидаты двойников, состояние прохода и есть ли соседи по отпечатку (для исследования вне сервера)"""
