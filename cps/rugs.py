@@ -2919,9 +2919,33 @@ def install(app, DATA, D_WORK):
     VF_MAX = int(os.environ.get("CPS_VLM_FRAME_MAX", "800"))                    # фото в сутки (1 запрос на фото)
     VF_THR = float(os.environ.get("CPS_VF_THR", "0.85"))                        # с этой уверенности «целый» решает машина, а спор с человеком — перепроверка
 
+    # v12.24: модель кадра по картинке без внешнего API — DINOv3-B + логистическая регрессия на ответах людей (ночь 23–24.11).
+    # Предсказания посчитаны вне сервера: models/frame_v2.json {p: {id: [whole, cropped, detail, not_rug, multi_zs]}, iso: калибровка}.
+    # conf — откалиброванная доля верных при такой уверенности (на ответах людей, вне обучения); multi_zs — CLIP «несколько ковров» (0..1).
+    F2_PATH = os.path.join(HERE, "models", "frame_v2.json"); _f2c = {"m": None, "t": 0}
+    VF2_AUTO = float(os.environ.get("CPS_VF2_AUTO", "0.97"))                     # «целый» решает машина только с этой откалиброванной уверенности
+
+    def _f2():
+        try:
+            mt = os.path.getmtime(F2_PATH)
+            if _f2c["m"] is None or _f2c["t"] != mt: _f2c.update(m=json.load(open(F2_PATH, encoding="utf-8")), t=mt)
+        except (OSError, ValueError): _f2c.update(m={}, t=0)
+        return _f2c["m"]
+
+    def _f2_of(rid):
+        M = _f2(); p = (M.get("p") or {}).get(rid)
+        if not p: return None
+        cl = M["classes"]; k = max(range(len(cl)), key=lambda j: p[j]); X, Y = M["iso"]
+        s = p[k]; j = 0
+        while j < len(X) - 1 and X[j + 1] <= s: j += 1
+        conf = Y[0] if s <= X[0] else (Y[-1] if s >= X[-1] else Y[j] + (Y[j + 1] - Y[j]) * (s - X[j]) / max(1e-9, X[j + 1] - X[j]))
+        return {"frame": cl[k], "conf": round(float(conf), 3), "p": round(float(s), 3), "multi": p[len(cl)] if len(p) > len(cl) else 0.0,
+                "v": vlm_corners.FRAME_VER, "t": M.get("t", 0), "model": M.get("model", "frame_v2")}
+
     def _vf_of(r):
         v = ((r or {}).get("auto") or {}).get("vlm_frame")
-        return v if v and v.get("v", 0) >= vlm_corners.FRAME_VER else None
+        if v and v.get("v", 0) >= vlm_corners.FRAME_VER: return v
+        return _f2_of((r or {}).get("id", "")) if r else None
 
     def _vf_worker():
         while True:
@@ -3892,7 +3916,8 @@ def install(app, DATA, D_WORK):
         if x.get("frame_by") in ("micro", "hand") or x.get("frame"): return False
         if st["on"] and st["thr"] and x.get("pw") is not None and x["pw"] >= st["thr"]: return True
         v = x.get("vf")                                                          # v12.03: «целый» по модели по картинке (и вероятностная модель не против)
-        return bool(st.get("vf_on") and v and v["frame"] == "whole" and v["conf"] >= VF_THR and (x.get("pw") is None or x["pw"] >= 0.25))
+        thr = VF2_AUTO if v and str(v.get("model", "")).startswith("dinov3") else VF_THR
+        return bool(st.get("vf_on") and v and v["frame"] == "whole" and v["conf"] >= thr and (x.get("pw") is None or x["pw"] >= 0.25) and (v.get("multi") or 0) < 0.9)
 
     @app.get("/api/micro/next")
     def micro_next(request: Request, n: int = 6, k: str = ""):
@@ -3904,9 +3929,10 @@ def install(app, DATA, D_WORK):
         fst = fr_auto_state()
         fr = [x for x in fr if not fr_auto(x, fst) or fr_ctl(x["id"])]             # v11.91: очевидные «целый» решает машина; человеку — контрольные
         fr.sort(key=lambda x: (abs((x["pw"] if x["pw"] is not None else 0.5) - 0.5), x["conf"]))   # v11.44: где модель меньше всего уверена — первыми
-        if vlm_corners.available():                                              # v12.03: сначала перепроверки, потом где модель по картинке не уверена или спорит
-            _vf_enqueue([x["id"] for x in fr if not x.get("vf")][:30])
-            fr.sort(key=lambda x: (not x.get("rc"), not x.get("vf"), (x["vf"] or {}).get("conf", 0) if x.get("vf") else 1))
+        if vlm_corners.available(): _vf_enqueue([x["id"] for x in fr if not x.get("vf")][:30])
+        if vlm_corners.available() or _f2():                                     # v12.03: сначала перепроверки, потом где модель по картинке не уверена или спорит
+            # v12.24: и раньше всех — похожие на «несколько ковров» (CLIP), чтобы их быстрее разметить
+            fr.sort(key=lambda x: (not x.get("rc"), not (x.get("vf") and not x["frame_by"] and (x["vf"].get("multi") or 0) >= 0.9), not x.get("vf"), (x["vf"] or {}).get("conf", 0) if x.get("vf") else 1))
         head, pool = fr[:60], fr[:]; random.shuffle(pool); mix = []                 # половина — сомнительные, половина — случайные (иначе выборка перекошена и точность машины не измерить)
         for a, b in zip(head, pool): mix += [a, b]
         fr = list({x["id"]: x for x in mix + fr}.values())
@@ -3926,7 +3952,8 @@ def install(app, DATA, D_WORK):
         by = {x["id"]: x for x in rows}
         more = _more_queues(me, rows, by, want)
         Q = {"quad": [_ref_task(x) for x in qd[:n]],
-             "frame": [{"type": "frame", "rid": x["id"], **({"ctl": 1} if fr_auto(x, fst) else {}), **({"rc": 1, "vf": x["vf"]["frame"], "was": x["frame"]} if x.get("rc") else {})} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
+             "frame": [{"type": "frame", "rid": x["id"], **({"ctl": 1} if fr_auto(x, fst) else {}), **({"rc": 1, "vf": x["vf"]["frame"], "was": x["frame"]} if x.get("rc") else {}),
+                        **({"guess": x["vf"]["frame"], "gconf": x["vf"]["conf"], "gmulti": x["vf"].get("multi") or 0} if x.get("vf") else {})} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
         cdq = _cdup_queue(me) if "cdup" in want else []; Q["cdup"] = cdq[:n]
         xsq = _xs_queue(me, rows) if "xsame" in want else []; Q["xsame"] = xsq[:n]
         rsq = _rsame_queue(me, by) if "rsame" in want else []; Q["rsame"] = rsq[:n]
