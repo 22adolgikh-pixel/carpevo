@@ -18,7 +18,7 @@
  "h": 1945,
  "marks": [],
  "created": 1791736138,
- "updated": 1795062314,
+ "updated": 1795464110,
  "cat": {
   "title": "Antique Moghan (Mughan) long rug, early 20th century, Azerbaijan",
   "museum": "",
@@ -80,7 +80,30 @@
   "conf": 0.953,
   "area": 0.902,
   "ver": 1,
-  "t": 1795062219
+  "t": 1795062219,
+  "ref_quad": {
+   "quad": [
+    [
+     0.05188,
+     0.01452
+    ],
+    [
+     0.94348,
+     0.01485
+    ],
+    [
+     0.98254,
+     0.96396
+    ],
+    [
+     0.01925,
+     0.97749
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795464107
+  }
  },
  "layout": {
   "carpet": [
@@ -96,26 +119,26 @@
   "status": "auto",
   "quad": [
    [
-    0.06077,
-    0.0
+    0.05188,
+    0.01452
    ],
    [
-    0.94199,
-    0.0
+    0.94348,
+    0.01485
    ],
    [
-    0.96409,
-    0.97667
+    0.98254,
+    0.96396
    ],
    [
-    0.0,
-    0.97778
+    0.01925,
+    0.97749
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
- "frame": "cropped",
- "tri": "auto",
+ "frame": "whole",
+ "tri": "micro",
  "auto_edge": {
   "v": 1,
   "f": [
@@ -135,5 +158,23 @@
    39.5598
   ],
   "t": 1795207714
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795464081
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795464110,
+    "s": "ref"
+   }
+  }
+ },
+ "frame_by": "micro"
 }
