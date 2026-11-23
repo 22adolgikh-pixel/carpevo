@@ -7,7 +7,7 @@
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Нахичевань",
- "date": "",
+ "date": "19 в., начало",
  "school": "",
  "composition": "",
  "technique": "безворсовый",
@@ -50,8 +50,46 @@
  },
  "src_id": "cat:intangible_2851_p0022_3",
  "lib_img": "img/intangible_2851_p0022_3.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0042_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0034_1",
+   "score": 0
+  },
+  {
+   "id": "cm_56c89f425c",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0042_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795464401
+  },
+  "intangible_2850_p0034_1": {
+   "ok": false,
+   "by": "по цепочке: intangible_2850_p0034_1 ≠ intangible_2850_p0042_1",
+   "at": 1795464423
+  },
+  "cm_56c89f425c": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1 ≠ intangible_2850_p0042_1",
+   "at": 1795464423
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1 ≠ intangible_2850_p0042_1",
+   "at": 1795464423
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "cropped",
@@ -188,5 +226,8 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "date": "intangible_2850_p0042_1"
+ }
 }

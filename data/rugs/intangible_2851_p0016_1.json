@@ -2,23 +2,23 @@
  "id": "intangible_2851_p0016_1",
  "title": "безворсовый «Palaz» Газах",
  "source": "каталог: book:intangible_2851",
- "museum": "",
- "inv": "",
+ "museum": "Национальный музей азербайджанского ковра",
+ "inv": "7883",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Газах",
- "date": "",
+ "date": "20 в., начало",
  "school": "gazakh",
  "composition": "",
  "technique": "безворсовый",
- "size": "",
+ "size": "168x244 см",
  "notes": "Şəkil 6. Palaz. Qazax-Borçalı qrupu",
  "status": "new",
  "w": 999,
  "h": 700,
  "marks": [],
  "created": 1794547278,
- "updated": 1795357179,
+ "updated": 1795464370,
  "cat": {
   "title": "безворсовый «Palaz» Газах",
   "museum": "",
@@ -50,8 +50,74 @@
  },
  "src_id": "cat:intangible_2851_p0016_1",
  "lib_img": "img/intangible_2851_p0016_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_189",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_166",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_168",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0096_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_143",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_189": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795464370
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795464370
+  },
+  "azcm_166": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795464370
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795464370,
+   "similar": true
+  },
+  "azcm_168": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795464371
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0096_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0096_1",
+   "at": 1795464393
+  },
+  "azcm_143": {
+   "ok": false,
+   "by": "по цепочке: azcm_143 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1",
+   "at": 1795464393
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "cropped",
@@ -154,6 +220,43 @@
     "t": 1795357179,
     "s": "ref"
    }
+  },
+  "same": {
+   "azcm_189": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795464370
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795464370
+    }
+   },
+   "azcm_166": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795464370
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0032_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795464370
+    }
+   },
+   "azcm_168": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795464370
+    }
+   }
   }
  },
  "frame": "whole",
@@ -190,5 +293,11 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "from_twin": {
+  "museum": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1",
+  "inv": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1",
+  "date": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1",
+  "size": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0034_1"
+ }
 }

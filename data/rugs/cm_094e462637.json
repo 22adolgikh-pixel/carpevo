@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870036,
- "updated": 1795344234,
+ "updated": 1795464496,
  "cat": {
   "title": "Открытое хранение фондов музея Востока",
   "museum": "",
@@ -47,8 +47,37 @@
  },
  "src_id": "cat:cm_094e462637",
  "lib_img": "img/cm_094e462637.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0120_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_182",
+   "score": 0
+  },
+  {
+   "id": "azcm_168",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0120_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795464496
+  },
+  "azcm_182": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795464496
+  },
+  "azcm_168": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795464496
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -148,6 +177,29 @@
     "w": 2,
     "t": 1795344234,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0120_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795464496
+    }
+   },
+   "azcm_182": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795464496
+    }
+   },
+   "azcm_168": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795464496
+    }
    }
   }
  },

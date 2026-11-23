@@ -18,7 +18,7 @@
  "h": 1538,
  "marks": [],
  "created": 1794547278,
- "updated": 1795356277,
+ "updated": 1795464401,
  "cat": {
   "title": "безворсовый «Cecim» Нахичевань",
   "museum": "",
@@ -51,8 +51,46 @@
  },
  "src_id": "cat:intangible_2850_p0042_1",
  "lib_img": "img/intangible_2850_p0042_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2851_p0022_3",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0034_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1",
+   "score": 0
+  },
+  {
+   "id": "cm_56c89f425c",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2851_p0022_3": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795464401
+  },
+  "intangible_2850_p0034_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795464401
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795464401
+  },
+  "cm_56c89f425c": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1 ≠ intangible_2850_p0042_1",
+   "at": 1795464423
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -113,6 +151,29 @@
      "a": "one",
      "w": 2,
      "t": 1795356277
+    }
+   }
+  },
+  "same": {
+   "intangible_2851_p0022_3": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795464401
+    }
+   },
+   "intangible_2850_p0034_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795464401
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0143_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795464401
     }
    }
   }
