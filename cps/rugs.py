@@ -2007,6 +2007,26 @@ def install(app, DATA, D_WORK):
                 os.makedirs(D_TH, exist_ok=True); cv2.imwrite(t, a, [cv2.IMWRITE_JPEG_QUALITY, 85])
         return FileResponse(t, headers={"Cache-Control": "no-cache"})
 
+    @app.get("/rugcmp/{rid}.jpg")
+    def rug_cmp_img(rid: str, s: int = 900):
+        """v12.20: где сетка изменила картинку: перспектива, на которой красным закрашено, что сдвинулось (разница с сеткой > порога); без красного — не изменилось"""
+        rid = os.path.basename(rid); r = load(rid); m = mesh_info(rid, r, build=False)
+        pr = rect_path(rid, r, build=False)
+        if not m or not pr: return Response(status_code=404)
+        pm = os.path.join(D_MESH, rid + (".jpg" if m.get("choice") == "mesh" else ".m.jpg"))
+        if not os.path.exists(pm): return Response(status_code=404)
+        s = max(300, min(1600, s)); t = os.path.join(D_TH, "%s.cmp%d.jpg" % (rid, s))
+        if not os.path.exists(t) or os.path.getmtime(t) < max(os.path.getmtime(pm), os.path.getmtime(pr)):
+            with THUMB:
+                a, b = read_small(pr, s), read_small(pm, s)
+                if a is None or b is None: return Response(status_code=404)
+                if b.shape[:2] != a.shape[:2]: b = cv2.resize(b, (a.shape[1], a.shape[0]), interpolation=cv2.INTER_AREA)
+                d = cv2.GaussianBlur(cv2.absdiff(cv2.cvtColor(a, cv2.COLOR_BGR2GRAY), cv2.cvtColor(b, cv2.COLOR_BGR2GRAY)), (0, 0), 3)
+                msk = (d > 22).astype(np.float32)[..., None]; red = np.zeros_like(a); red[..., 2] = 255
+                o = (a * (1 - .55 * msk) + red * .55 * msk).astype(np.uint8)
+                os.makedirs(D_TH, exist_ok=True); cv2.imwrite(t, o, [cv2.IMWRITE_JPEG_QUALITY, 85])
+        return FileResponse(t, headers={"Cache-Control": "no-cache"})
+
     @app.get("/api/rugs/{rid}/mesh")
     def api_rug_mesh(rid: str):
         r = load(rid)
@@ -3495,7 +3515,8 @@ def install(app, DATA, D_WORK):
             if not m or not m.get("choice"): continue
             rg = max((m.get("range_mesh") or m.get("edge_pct") or {"a": 0}).values())
             if rg < 1.0: continue                                              # края и так ровные — сравнивать нечего
-            out.append({"type": "rcmp", "rid": x["id"], "choice": m["choice"], "rg": round(rg, 1), "alt": os.path.exists(os.path.join(D_MESH, x["id"] + ".m.jpg"))})
+            out.append({"type": "rcmp", "rid": x["id"], "choice": m["choice"], "rg": round(rg, 1), "alt": os.path.exists(os.path.join(D_MESH, x["id"] + ".m.jpg")),
+                        "quad": x.get("quad")})
         out.sort(key=lambda t: (-t["rg"], t["rid"]))
         return out
 
@@ -3503,8 +3524,14 @@ def install(app, DATA, D_WORK):
         if a == "skip": _mlog(rec); return {"ok": True}
         if a not in ("mesh", "rect", "both", "bad"): return JSONResponse({"error": "ответ?"}, status_code=400)
         m = mesh_info(rid); rec["choice"] = (m or {}).get("choice")
+        pts = []                                                                # v12.20: метки «здесь неудачно / не изменилось»: s — на какой картинке, x/y — доли картинки
+        for p in (body.get("pts") or [])[:12]:
+            try:
+                if p.get("s") in ("rect", "mesh") and 0 <= float(p["x"]) <= 1 and 0 <= float(p["y"]) <= 1: pts.append({"s": p["s"], "x": round(float(p["x"]), 3), "y": round(float(p["y"]), 3)})
+            except Exception: pass
+        if pts: rec["pts"] = pts
         with _lock:
-            V = _rc_votes(); V.setdefault(rid, {})[me] = {"a": a, "w": _wt(role), "t": rec["t"], "choice": rec["choice"]}
+            V = _rc_votes(); V.setdefault(rid, {})[me] = {"a": a, "w": _wt(role), "t": rec["t"], "choice": rec["choice"], **({"pts": pts} if pts else {})}
             tmp = F_RC + ".tmp"
             with open(tmp, "w", encoding="utf-8") as f: json.dump(V, f, ensure_ascii=False, indent=1)
             os.replace(tmp, F_RC)
