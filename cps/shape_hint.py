@@ -92,8 +92,10 @@ def build_index(d_out, schemes, cache_path=None):
         old = {}
         if cache_path and os.path.exists(cache_path):
             try:
-                z = np.load(cache_path, allow_pickle=False)
-                for i, (fid, mt) in enumerate(zip(z["ids"], z["mt"])): old[(str(fid), float(mt))] = (z["X"][i], z["ar"][i])
+                # v12.28: массивы из .npz читаются ОДИН раз — обращение z["X"] внутри цикла каждый раз заново читало и распаковывало
+                # весь массив: при старте сервера RSS прыгал до 6 ГБ (снимок стеков 23.11 22:42: shape_index → read_array)
+                with np.load(cache_path, allow_pickle=False) as z: zi, zm, zx, za = z["ids"], z["mt"], z["X"], z["ar"]
+                for i, (fid, mt) in enumerate(zip(zi, zm)): old[(str(fid), float(mt))] = (zx[i], za[i])
             except Exception: old = {}
         ids, X, AR, MT = [], [], [], []
         for fid, mt in items:
