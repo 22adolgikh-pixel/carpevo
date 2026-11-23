@@ -1,10 +1,10 @@
 {
- "at": "2026-11-23 22:29:35",
- "rss_mb": 3683,
- "avail_mb": 3394,
+ "at": "2026-11-23 22:29:45",
+ "rss_mb": 5840,
+ "avail_mb": 1292,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 30,
+ "up_s": 40,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -25,8 +25,6 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-23 22:27:27 rss=1344MB avail=5701/11925MB limit=0MB heavy=двойники wait=0",
-  "2026-11-23 22:27:37 rss=1390MB avail=5654/11925MB limit=0MB heavy=двойники wait=0",
   "2026-11-23 22:27:47 rss=1185MB avail=5862/11925MB limit=0MB heavy=двойники wait=0",
   "2026-11-23 22:27:57 rss=1148MB avail=5885/11925MB limit=0MB heavy=двойники wait=0",
   "2026-11-23 22:28:07 rss=1150MB avail=5865/11925MB limit=0MB heavy=двойники wait=0",
@@ -39,7 +37,9 @@
   "2026-11-23 22:29:15 rss=451MB avail=6630/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 22:29:25 rss=2157MB avail=4945/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 22:29:25 malloc_trim: rss 2157MB -> 2131MB",
-  "2026-11-23 22:29:35 rss=3683MB avail=3394/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-23 22:29:35 rss=3683MB avail=3394/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 22:29:45 rss=5841MB avail=1292/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 22:29:45 malloc_trim: rss 5841MB -> 5840MB"
  ],
  "stacks": {
   "AnyIO worker thread": [
@@ -56,12 +56,10 @@
    "events.py:148 _loop"
   ],
   "cps-backup": [
-   "backup.py:99 loop",
-   "backup.py:57 backup_once",
-   "subprocess.py:550 run",
-   "subprocess.py:1209 communicate",
-   "subprocess.py:2115 _communicate",
-   "selectors.py:415 select"
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "backup.py:100 loop"
   ],
   "Thread-7 (loop)": [
    "threading.py:1002 _bootstrap",
@@ -101,12 +99,12 @@
    "rugs.py:4419 _periodic_en"
   ],
   "Thread-3 (<lambda>)": [
-   "threading.py:982 run",
-   "rugs.py:4302 <lambda>",
-   "rugs.py:4300 shape_index",
-   "shape_hint.py:96 build_index",
-   "_npyio_impl.py:257 __getitem__",
-   "_format_impl.py:869 read_array"
+   "_format_impl.py:870 read_array",
+   "_format_impl.py:1023 _read_bytes",
+   "zipfile.py:999 read",
+   "zipfile.py:1098 _read1",
+   "zipfile.py:1114 _read2",
+   "zipfile.py:805 read"
   ],
   "tone": [
    "threading.py:1002 _bootstrap",
