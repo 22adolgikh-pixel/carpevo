@@ -31,7 +31,7 @@
    "scheme": "t22_f03",
    "group": "m6b0366e2e267804_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.668,
@@ -115,7 +115,7 @@
    "scheme": "t22_f03",
    "group": "m6b0366e2e267804_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.653,
@@ -175,7 +175,7 @@
    "scheme": "t22_f03",
    "group": "m6b0366e2e267804_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.638,
@@ -267,7 +267,7 @@
    "scheme": "t22_f03",
    "group": "m6b0366e2e267804_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: dəvə",
    "machine": 1,
    "score": 0.626,
@@ -327,7 +327,7 @@
    "scheme": "t104_f04",
    "group": "m6b036773e604865_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.716,
@@ -515,7 +515,9 @@
      0.59375
     ]
    ],
-   "sam": 0.929
+   "sam": 0.929,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463458
   },
   {
    "id": "m6b036773e604865_1",
@@ -531,7 +533,7 @@
    "scheme": "t104_f04",
    "group": "m6b036773e604865_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.712,
@@ -695,15 +697,17 @@
      0.42285
     ]
    ],
-   "sam": 0.945
+   "sam": 0.945,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463458
   },
   {
    "id": "m6b036773e604865_2",
    "box": [
     0.3138,
     0.68848,
-    0.23307,
-    0.08398
+    0.31375,
+    0.08982
    ],
    "zone": "other",
    "motif": "qeychi",
@@ -711,7 +715,7 @@
    "scheme": "t104_f04",
    "group": "m6b036773e604865_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qeyçi · форма 1",
    "machine": 1,
    "score": 0.707,
@@ -863,11 +867,15 @@
      0.7168
     ]
    ],
-   "sam": 0.829
+   "sam": 0.829,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795463458,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463458
   }
  ],
  "created": 1791870018,
- "updated": 1795385205,
+ "updated": 1795463458,
  "cat": {
   "title": "Carpet of Guba group of Azerbaijan carpets in Heydar Aliyev Center",
   "museum": "",
@@ -1054,6 +1062,57 @@
      "a": "same",
      "w": 2,
      "t": 1795334434
+    }
+   }
+  },
+  "marks": {
+   "m6b0366e2e267804_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795463433
+    }
+   },
+   "m6b0366e2e267804_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795463433
+    }
+   },
+   "m6b0366e2e267804_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795463433
+    }
+   },
+   "m6b0366e2e267804_3": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795463433
+    }
+   },
+   "m6b036773e604865_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463458
+    }
+   },
+   "m6b036773e604865_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463458
+    }
+   },
+   "m6b036773e604865_2": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463458
     }
    }
   }

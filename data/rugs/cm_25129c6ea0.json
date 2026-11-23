@@ -2397,10 +2397,10 @@
   {
    "id": "m6b036b83e649422_0",
    "box": [
-    0.72534,
-    0.33984,
-    0.04552,
-    0.03223
+    0.71764,
+    0.33894,
+    0.06104,
+    0.0368
    ],
    "zone": "other",
    "motif": "kupe",
@@ -2408,7 +2408,7 @@
    "scheme": "t54_f01",
    "group": "m6b036b83e649422_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: küpə · форма 1",
    "machine": 1,
    "score": 0.797,
@@ -2472,7 +2472,11 @@
      0.33984
     ]
    ],
-   "sam": 0.945
+   "sam": 0.945,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795463480,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795463480
   },
   {
    "id": "m6b036b83e649422_1",
@@ -2488,7 +2492,7 @@
    "scheme": "t54_f01",
    "group": "m6b036b83e649422_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: küpə · форма 1",
    "machine": 1,
    "score": 0.787,
@@ -2572,7 +2576,7 @@
   }
  ],
  "created": 1791870033,
- "updated": 1795386248,
+ "updated": 1795463480,
  "cat": {
   "title": "Hajigayib rug, Guba school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -2891,6 +2895,20 @@
      "a": "bad",
      "w": 2,
      "t": 1794857313
+    }
+   },
+   "m6b036b83e649422_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795463480
+    }
+   },
+   "m6b036b83e649422_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795463480
     }
    }
   },
