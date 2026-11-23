@@ -4511,6 +4511,60 @@ def install(app, DATA, D_WORK):
         return {"n_missing": sum(len(o["missing"]) for o in out), "n_tables": len(out), "tables": out, "not_in_legend": extra,
                 "legend_tables": len(leg), "legend_figs": sum(len(v) for v in leg.values()), "kcut": kc, "drive_pages": dp}
 
+    # v12.23: веса открытых сетей для исследований вне сервера (у песочницы Claude нет выхода на huggingface). Только список ниже.
+    WF = {"dinov2_s": "https://huggingface.co/timm/vit_small_patch14_dinov2.lvd142m/resolve/main/model.safetensors",
+          "dinov2_b": "https://huggingface.co/timm/vit_base_patch14_dinov2.lvd142m/resolve/main/model.safetensors",
+          "dinov2_b_reg": "https://huggingface.co/timm/vit_base_patch14_reg4_dinov2.lvd142m/resolve/main/model.safetensors",
+          "dinov3_s": "https://huggingface.co/timm/vit_small_patch16_dinov3.lvd1689m/resolve/main/model.safetensors",
+          "dinov3_b": "https://huggingface.co/timm/vit_base_patch16_dinov3.lvd1689m/resolve/main/model.safetensors",
+          "clip_b16": "https://huggingface.co/timm/vit_base_patch16_clip_224.openai/resolve/main/open_clip_pytorch_model.bin",
+          "clip_l14": "https://huggingface.co/timm/vit_large_patch14_clip_224.openai/resolve/main/open_clip_pytorch_model.bin",
+          "siglip2_b16": "https://huggingface.co/timm/ViT-B-16-SigLIP2/resolve/main/open_clip_pytorch_model.bin",
+          "siglip2_tok": "https://huggingface.co/timm/ViT-B-16-SigLIP2/resolve/main/tokenizer.json",
+          "siglip2_tokcfg": "https://huggingface.co/timm/ViT-B-16-SigLIP2/resolve/main/tokenizer_config.json",
+          "siglip2_spm": "https://huggingface.co/timm/ViT-B-16-SigLIP2/resolve/main/tokenizer.model",
+          "siglip2_cfg": "https://huggingface.co/timm/ViT-B-16-SigLIP2/resolve/main/open_clip_config.json"}
+    D_WF = os.path.join(DATA, "wcache"); _wf = {}
+
+    def _wf_job(n):
+        os.makedirs(D_WF, exist_ok=True); dst = os.path.join(D_WF, n); _wf[n] = {"st": "run", "got": 0}
+        try:
+            with urllib.request.urlopen(urllib.request.Request(WF[n], headers={"User-Agent": "cps-rugs/1.0"}), timeout=120) as r, open(dst + ".part", "wb") as f:
+                while True:
+                    b = r.read(1 << 20)
+                    if not b: break
+                    f.write(b); _wf[n]["got"] += len(b)
+                    if _wf[n]["got"] > 1_200_000_000: raise RuntimeError("слишком большой")
+            os.replace(dst + ".part", dst); _wf[n]["st"] = "ok"
+        except Exception as e:
+            _wf[n] = {"st": "err", "err": str(e)[:200]}
+            try: os.remove(dst + ".part")
+            except OSError: pass
+
+    @app.get("/api/open/wfetch")
+    def api_wfetch(name: str = ""):
+        out = {}
+        for n in ([name] if name else []):
+            if n not in WF: continue
+            if os.path.exists(os.path.join(D_WF, n)): out[n] = {"st": "ok", "size": os.path.getsize(os.path.join(D_WF, n))}
+            elif (_wf.get(n) or {}).get("st") != "run": threading.Thread(target=_wf_job, args=(n,), daemon=True).start(); out[n] = {"st": "start"}
+        return {"started": out, "state": _wf, "have": sorted(os.listdir(D_WF)) if os.path.isdir(D_WF) else []}
+
+    @app.get("/api/open/wfile/{name}")
+    def api_wfile(name: str):
+        p = os.path.join(D_WF, os.path.basename(name))
+        return FileResponse(p, media_type="application/octet-stream") if name in WF and os.path.exists(p) else JSONResponse({"error": "нет"}, status_code=404)
+
+    @app.get("/api/open/twin_data")
+    def api_twin_data():
+        """v12.23: пары-кандидаты двойников, состояние прохода и есть ли соседи по отпечатку (для исследования вне сервера)"""
+        out = {}
+        for k, fn in (("pairs", "twin_pairs.json"), ("state", "twin_state.json"), ("nn", "twin_nn_v1.json")):
+            p = os.path.join(DATA, fn)
+            try: out[k] = json.load(open(p, encoding="utf-8")) if k != "nn" else {"n": len((json.load(open(p, encoding="utf-8")).get("nn") or {})), "t": os.path.getmtime(p)}
+            except Exception as e: out[k] = {"error": str(e)[:100]}
+        return out
+
     @app.get("/api/open/kscan/{page}.jpg")
     def api_kscan(page: int):
         """v12.11: скан листа Керимова т. I (только чтение) — для отладки авторазметки"""
