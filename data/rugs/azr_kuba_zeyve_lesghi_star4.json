@@ -18,7 +18,7 @@
  "h": 512,
  "marks": [],
  "created": 1791736137,
- "updated": 1795291017,
+ "updated": 1795462266,
  "cat": {
   "title": "kuba zeyve lesghi star4",
   "museum": "",
@@ -131,6 +131,21 @@
      "t": 1795291017
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795462234
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795462266,
+    "s": "ref"
+   }
   }
  },
  "auto": {
@@ -156,12 +171,70 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1795291788
+  "t": 1795291788,
+  "ref_quad": {
+   "quad": [
+    [
+     0.00164,
+     -0.00239
+    ],
+    [
+     1.00043,
+     0.00316
+    ],
+    [
+     0.99946,
+     0.99833
+    ],
+    [
+     -0.00292,
+     0.99717
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795462254
+  }
  },
  "from_twin": {
   "composition": "cm_af3a68b0f3",
   "technique": "cm_af3a68b0f3",
   "museum": "cm_af3a68b0f3",
   "date": "cm_af3a68b0f3"
- }
+ },
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00164,
+    -0.00239
+   ],
+   [
+    1.00043,
+    0.00316
+   ],
+   [
+    0.99946,
+    0.99833
+   ],
+   [
+    -0.00292,
+    0.99717
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
