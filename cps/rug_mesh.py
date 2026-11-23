@@ -160,6 +160,15 @@ def quality(img):
     return {"sym": round(sym, 3), "dev": round(float(np.average(dev, weights=wt)), 3) if wt else None, "n": len(wt)}
 
 
+def fringe_score(img, d=0.035):
+    """признак бахромы/полос, упирающихся в край: у бахромы яркость меняется вдоль края (нити поперёк), а поперёк — слабо.
+    Проба 23.11 на 100 коврах: ≥1,3 — у ~5 % (бахрома, но и килимы с полосами до края). Неточный, лишь отсев для очереди проверки"""
+    g = cv2.GaussianBlur(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY).astype(np.float32), (0, 0), 0.8); h, w = g.shape
+    k = max(2, int(round(min(h, w) * d))); gx = np.abs(cv2.Sobel(g, cv2.CV_32F, 1, 0)); gy = np.abs(cv2.Sobel(g, cv2.CV_32F, 0, 1))
+    S = ((gx[:k], gy[:k]), (gx[-k:], gy[-k:]), (gy[:, :k], gx[:, :k]), (gy[:, -k:], gx[:, -k:]))
+    return round(max(float(p.mean() / (q.mean() + 1.0)) for p, q in S), 2)
+
+
 def mesh_better(qr, qm, d_dev=0.15, d_sym=0.05):
     """сетка принимается, если линии не стали заметно кривее и симметрия не просела"""
     dr, dm = qr["dev"], qm["dev"]
@@ -175,7 +184,7 @@ def mesh_rectify_safe(img, quad, side=1200):
     rect = rectify(img, quad, side=side)
     if rect.shape[:2] != out.shape[:2]: rect = cv2.resize(rect, (out.shape[1], out.shape[0]), interpolation=cv2.INTER_AREA)
     qr, qm = quality(rect), quality(out)
-    info["q_rect"], info["q_mesh"] = qr, qm
+    info["q_rect"], info["q_mesh"] = qr, qm; info["fringe"] = fringe_score(rect)
     if mesh_better(qr, qm): info["choice"] = "mesh"; return out, info
     n = len(info["curves"]["top"])
     info["curves_mesh"] = info["curves"]; info["range_mesh"] = info["range_pct"]

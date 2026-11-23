@@ -1860,7 +1860,7 @@ def install(app, DATA, D_WORK):
     # Человек в /m (вид «поле») выбирает верную линию или отвечает «нет нужной» / «края испорчены». По выбранной линии поле выравнивается
     # параллельно краям (rug_mesh.field_warp) — rug_mesh/<id>.f.jpg. Рабочей картинкой (редактор, рамки) пока остаётся простое выпрямление:
     # сетку ещё надо научиться переводить в доли фото (рамки). Ответы — в micro.jsonl (type "field") для обучения выбора линии.
-    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 4     # v12.19: сетка только если не хуже перспективы (choice в .json); v11.83: глубина линии поля своя у каждой стороны; v11.84: в .json — geo и кривые краёв (для перевода точек в фото)
+    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 5     # v12.22: в .json ещё fringe (признак бахромы); v12.19: сетка только если не хуже перспективы (choice в .json); v11.83: глубина линии поля своя у каждой стороны; v11.84: в .json — geo и кривые краёв (для перевода точек в фото)
     mesh_st = {"running": False, "done": 0, "total": 0, "err": "", "t": 0}
 
     def mesh_info(rid, r=None, build=False):
@@ -1884,7 +1884,7 @@ def install(app, DATA, D_WORK):
         tmp = os.path.join(D_MESH, "%s.%d.tmp.jpg" % (rid, threading.get_ident())); cv2.imwrite(tmp, img, [cv2.IMWRITE_JPEG_QUALITY, 88]); os.replace(tmp, os.path.join(D_MESH, rid + ".jpg"))
         m = {"v": MESH_VER, "quad": [[float(u), float(v)] for u, v in q], "w": int(img.shape[1]), "h": int(img.shape[0]),
              "edge_pct": {k: round(v, 2) for k, v in info["range_pct"].items()}, "cands": cands, "t": int(time.time()),
-             "geo": info["geo"], "choice": info.get("choice"), "q_rect": info.get("q_rect"), "q_mesh": info.get("q_mesh"), "edge": {k: [round(float(x), 2) for x in v] for k, v in info["curves"].items()}}
+             "geo": info["geo"], "choice": info.get("choice"), "q_rect": info.get("q_rect"), "q_mesh": info.get("q_mesh"), "fringe": info.get("fringe"), "edge": {k: [round(float(x), 2) for x in v] for k, v in info["curves"].items()}}
         alt = os.path.join(D_MESH, rid + ".m.jpg")                              # v12.19: сетка, которую отвергли (для проверки в /m)
         if info.get("mesh_img") is not None: cv2.imwrite(alt, info["mesh_img"], [cv2.IMWRITE_JPEG_QUALITY, 88]); m["range_mesh"] = {k: round(v, 2) for k, v in info["range_mesh"].items()}; m["edge_mesh"] = {k: [round(float(x), 2) for x in v] for k, v in info["curves_mesh"].items()}
         elif os.path.exists(alt): os.remove(alt)
@@ -2817,7 +2817,7 @@ def install(app, DATA, D_WORK):
         try: pw = frame_model.p_whole(r)
         except Exception: pw = None
         row = {"id": rid, "use": use_of(r)[0], "seen": bool(a), "pw": pw, "conf": a.get("conf", 0), "aframe": a.get("frame"), "frame": r.get("frame", ""),
-               "frame_by": r.get("frame_by", ""), "qs": L.get("quad_status", ""), "quad": L.get("quad"), "aquad": a.get("quad"),
+               "frame_by": r.get("frame_by", ""), "qs": L.get("quad_status", ""), "quad": L.get("quad"), "edge": r.get("edge") or {}, "aquad": a.get("quad"),
                "who": {t: list((m.get(t) or {}).keys()) for t in ("frame", "quad")}, "title": _mtitle(r), "w": r.get("w"), "h": r.get("h"),
                "vquad": ((a.get("vlm_quad") or {}).get("quad")) if ((a.get("vlm_quad") or {}).get("v", 1) >= vlm_corners.VERSION) else None,   # v11.47/v11.50: углы модели (старые v1 — без уточнения — пересчитываются)
                "fr_old": r.get("frame") in FR_OLD,                                # применён снятый ответ — спросить заново
@@ -3535,22 +3535,32 @@ def install(app, DATA, D_WORK):
         try: return json.load(open(F_RC))
         except Exception: return {}
 
+    RC_WHY = ("not_rug", "fragment", "multi", "fringe", "corners", "photo", "other")
+    RC_FRINGE = 1.3
+
     def _rcmp_queue(me, rows):
-        V = _rc_votes(); out = []
+        """v12.22: только ковры с углами, размеченными человеком (confirmed/edited), целые, без «повреждён» и без признака бахромы.
+        Сначала новые, потом те, что этот человек пропускал: у них на втором показе вместо сравнения спрашиваем, что не так"""
+        V = _rc_votes(); fresh, again = [], []
         for x in rows:
-            if x["dead"] or x["qs"] not in RECT_OK or is_bw(x["id"]) or me in (V.get(x["id"]) or {}): continue
+            if x["dead"] or x["qs"] not in ("confirmed", "edited") or x.get("frame") != "whole" or is_bw(x["id"]) or "damaged" in (x.get("edge") or {}): continue
+            mine = (V.get(x["id"]) or {}).get(me)
+            if mine and mine.get("a") != "skip": continue
+            if any(v.get("a") == "issue" and ("not_rug" in v.get("why", []) or "fragment" in v.get("why", []) or "multi" in v.get("why", [])) for v in (V.get(x["id"]) or {}).values()): continue
             m = mesh_info(x["id"])
-            if not m or not m.get("choice"): continue
+            if not m or not m.get("choice") or m.get("fringe") is None or m["fringe"] >= RC_FRINGE: continue
             rg = max((m.get("range_mesh") or m.get("edge_pct") or {"a": 0}).values())
             if rg < 1.0: continue                                              # края и так ровные — сравнивать нечего
-            out.append({"type": "rcmp", "rid": x["id"], "choice": m["choice"], "rg": round(rg, 1), "alt": os.path.exists(os.path.join(D_MESH, x["id"] + ".m.jpg")),
-                        "quad": x.get("quad")})
-        out.sort(key=lambda t: (-t["rg"], t["rid"]))
-        return out
+            t = {"type": "rcmp", "rid": x["id"], "choice": m["choice"], "rg": round(rg, 1), "quad": x.get("quad"), "ask": bool(mine)}
+            (again if mine else fresh).append(t)
+        fresh.sort(key=lambda t: (-t["rg"], t["rid"])); again.sort(key=lambda t: t["rid"])
+        return fresh + again
 
     def _rcmp_answer(me, role, rid, a, body, rec):
-        if a == "skip": _mlog(rec); return {"ok": True}
-        if a not in ("mesh", "rect", "both", "bad"): return JSONResponse({"error": "ответ?"}, status_code=400)
+        if a not in ("mesh", "rect", "both", "bad", "skip", "issue"): return JSONResponse({"error": "ответ?"}, status_code=400)
+        why = [w for w in (body.get("why") or []) if w in RC_WHY][:7]
+        if a == "issue" and not why: return JSONResponse({"error": "что не так?"}, status_code=400)
+        if why: rec["why"] = why
         m = mesh_info(rid); rec["choice"] = (m or {}).get("choice")
         pts = []                                                                # v12.20: метки «здесь неудачно / не изменилось»: s — на какой картинке, x/y — доли картинки
         for p in (body.get("pts") or [])[:12]:
@@ -3559,7 +3569,7 @@ def install(app, DATA, D_WORK):
             except Exception: pass
         if pts: rec["pts"] = pts
         with _lock:
-            V = _rc_votes(); V.setdefault(rid, {})[me] = {"a": a, "w": _wt(role), "t": rec["t"], "choice": rec["choice"], **({"pts": pts} if pts else {})}
+            V = _rc_votes(); V.setdefault(rid, {})[me] = {"a": a, "w": _wt(role), "t": rec["t"], "choice": rec["choice"], **({"pts": pts} if pts else {}), **({"why": why} if why else {})}
             tmp = F_RC + ".tmp"
             with open(tmp, "w", encoding="utf-8") as f: json.dump(V, f, ensure_ascii=False, indent=1)
             os.replace(tmp, F_RC)

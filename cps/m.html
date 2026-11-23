@@ -332,7 +332,17 @@ function showCdup(t){const sd=x=>`<div class="cd"><b>${esc(x.az)}</b>${x.ru.leng
 // v11.59 «между коврами»: два элемента с разных ковров, которые сеть считает похожими. Поворот и зеркало не важны.
 // v12.19/20: выпрямление — перспектива рядом с сеткой краёв. Какую выбрал алгоритм, не показываем (порядок случайный).
 // Вкладки: «две» (сравнение, тап по картинке ставит метку «здесь неудачно»), «оригинал» (фото с рамкой углов), «что изменилось» (красным — где сетка сдвинула картинку).
-function showRcmp(t){document.documentElement.style.setProperty('--imh','46dvh');
+const RC_WHY=[['not_rug','не ковёр'],['fragment','фрагмент / деталь'],['multi','несколько ковров'],['fringe','бахрома'],['corners','углы неверные'],['photo','плохое фото / блики'],['other','другое']];
+// «что не так»: причины (можно несколько). Показывается по кнопке, а на втором показе пропущенного ковра — сразу
+function rcWhy(t,back){const sel=new Set();
+  $('main').innerHTML=`${qhead('Что не так с этим ковром?','Отметьте всё подходящее. Ковры с «не ковёр», «фрагмент», «несколько ковров» больше не попадут в эту очередь.')}
+   <div class="stage" style="flex:1"><img src="/rugthumb/${encodeURIComponent(t.rid)}.jpg?raw=1" alt="" style="max-width:100%;max-height:var(--imh)"></div>
+   <div class="btns" id="rw">${RC_WHY.map(([k,n])=>`<button data-k="${k}">${n}</button>`).join('')}</div>
+   <div class="btns"><button class="yes" id="rwd">готово</button>${back?'<button id="rwb">всё нормально, сравнить</button>':'<button class="sm unk" id="rws">пропустить</button>'}</div>`;
+  qtip();$('rw').querySelectorAll('button').forEach(b=>b.onclick=()=>{const k=b.dataset.k;sel.has(k)?sel.delete(k):sel.add(k);b.classList.toggle('yes',sel.has(k));});
+  $('rwd').onclick=()=>{if(!sel.size){toast('отметьте причину');return;}answer(t,'issue',undefined,{why:[...sel]});};
+  if(back)$('rwb').onclick=back;else $('rws').onclick=()=>answer(t,'skip');}
+function showRcmp(t){if(t.ask&&!t._cmp){return rcWhy(t,()=>{t._cmp=1;showRcmp(t);});}document.documentElement.style.setProperty('--imh','46dvh');
   const id=encodeURIComponent(t.rid),mesh=t.choice==='mesh'?`/rugmesh/${id}.jpg?s=900`:`/rugmesh/${id}.jpg?alt=1&s=900`,rect=`/rugrect/${id}.jpg`;
   const flip=(t.rid.length+t.rid.charCodeAt(t.rid.length-1))%2===1,L=flip?['mesh',mesh]:['rect',rect],R=flip?['rect',rect]:['mesh',mesh];
   const pts=[];let tab='two';
@@ -351,9 +361,9 @@ function showRcmp(t){document.documentElement.style.setProperty('--imh','46dvh')
     const c=$('rclr');if(c)c.onclick=e=>{e.preventDefault();pts.length=0;draw();};};
   $('main').innerHTML=`${qhead('Какая картинка ровнее?','Смотрите на края ковра и прямые линии каймы: они должны быть прямыми, узор без перекоса и изломов. Слева и справа два способа выпрямления, порядок случайный. Вкладки: «оригинал» — исходное фото с рамкой углов, «что изменилось» — красным то, что сдвинула сетка. Тап по картинке ставит метку там, где получилось плохо.')}
    <div id="rtabs" style="display:flex;gap:6px;justify-content:center;margin:4px 0"></div><div id="rbody" style="flex:1;min-height:0;display:flex;flex-direction:column;gap:4px"></div>
-   <div class="btns"><button class="yes" id="rl">◀ слева ровнее</button><button class="yes" id="rr">справа ровнее ▶</button><button id="rb">одинаково хорошо</button><button class="no" id="rx">обе плохие</button><button class="sm unk" id="rs">пропустить</button></div>`;
+   <div class="btns"><button class="yes" id="rl">◀ слева ровнее</button><button class="yes" id="rr">справа ровнее ▶</button><button id="rb">одинаково хорошо</button><button class="no" id="rx">обе плохие</button><button class="sm unk" id="rs">пропустить</button><button id="rq">что-то не так…</button></div>`;
   qtip();draw();const ans=a=>answer(t,a,undefined,pts.length?{pts}:undefined);
-  $('rl').onclick=()=>ans(L[0]);$('rr').onclick=()=>ans(R[0]);$('rb').onclick=()=>ans('both');$('rx').onclick=()=>ans('bad');$('rs').onclick=()=>answer(t,'skip');}
+  $('rl').onclick=()=>ans(L[0]);$('rr').onclick=()=>ans(R[0]);$('rb').onclick=()=>ans('both');$('rx').onclick=()=>ans('bad');$('rs').onclick=()=>answer(t,'skip');$('rq').onclick=()=>rcWhy(t,()=>showRcmp(t));}
 function showXsame(t){const f=(x)=>`<figure><img src="${crop(x.rid,x.box,300,0.3,1)}" alt=""><figcaption>${esc(x.title||x.rid)}${x.n>1?' · повторов '+x.n:''}</figcaption></figure>`;
   $('main').innerHTML=`${qhead('Это один и тот же элемент узора?','Элементы с двух разных ковров (жёлтая рамка). Поворот, зеркало, цвет и размер не важны — важна форма. «Тот же» — один и тот же элемент (как одно слово у Керимова). «Тот же, другое заполнение» — внешний контур тот же, а внутри другое (другой узор, 4 квадрата вместо одного). «Похож» — родственные, но сам контур другой. Сомневаетесь между «тот же» и «похож» — выбирайте «похож». Ответы собирают элементы в группы между коврами; потом группе дадим имя один раз.')}
    <div class="pair">${f(t.a)}${f(t.b)}</div>
