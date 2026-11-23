@@ -1,10 +1,10 @@
 {
- "at": "2026-11-23 06:12:24",
- "rss_mb": 6198,
- "avail_mb": 1436,
+ "at": "2026-11-23 20:13:30",
+ "rss_mb": 5255,
+ "avail_mb": 1868,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 41,
+ "up_s": 40,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -25,21 +25,21 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-23 06:10:22 rss=812MB avail=6794/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:10:32 rss=813MB avail=6794/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:10:42 rss=813MB avail=6813/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:10:52 rss=813MB avail=6799/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:11:02 rss=813MB avail=6777/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:11:12 rss=814MB avail=6763/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:11:22 rss=812MB avail=6799/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:11:32 rss=814MB avail=6721/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:11:43 rss=260MB avail=7309/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:11:53 rss=600MB avail=6973/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:12:03 rss=2403MB avail=5220/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:12:03 malloc_trim: rss 2403MB -> 2376MB",
-  "2026-11-23 06:12:14 rss=3833MB avail=3797/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:12:24 rss=6199MB avail=1436/11925MB limit=0MB heavy=- wait=0",
-  "2026-11-23 06:12:24 malloc_trim: rss 6199MB -> 6198MB"
+  "2026-11-23 20:11:32 rss=941MB avail=6127/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:11:42 rss=941MB avail=6120/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:11:52 rss=941MB avail=6139/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:12:02 rss=941MB avail=6103/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:12:12 rss=942MB avail=6122/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:12:22 rss=942MB avail=6142/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:12:32 rss=940MB avail=6128/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:12:42 rss=940MB avail=6094/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:12:50 rss=146MB avail=6871/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:13:00 rss=528MB avail=6596/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:13:10 rss=2118MB avail=5007/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:13:10 malloc_trim: rss 2119MB -> 2091MB",
+  "2026-11-23 20:13:20 rss=3660MB avail=3453/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:13:30 rss=5256MB avail=1868/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 20:13:30 malloc_trim: rss 5256MB -> 5255MB"
  ],
  "stacks": {
   "AnyIO worker thread": [
@@ -56,10 +56,12 @@
    "events.py:148 _loop"
   ],
   "cps-backup": [
-   "threading.py:1002 _bootstrap",
-   "threading.py:1045 _bootstrap_inner",
-   "threading.py:982 run",
-   "backup.py:100 loop"
+   "backup.py:99 loop",
+   "backup.py:64 backup_once",
+   "backup.py:44 _mirror",
+   "shutil.py:448 copy2",
+   "shutil.py:269 copyfile",
+   "shutil.py:144 _fastcopy_sendfile"
   ],
   "Thread-7 (loop)": [
    "threading.py:1002 _bootstrap",
@@ -72,19 +74,19 @@
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:5611 <lambda>"
+   "rugs.py:5665 <lambda>"
   ],
   "twins-periodic": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:5312 _periodic_twins"
+   "rugs.py:5366 _periodic_twins"
   ],
   "Thread-4 (_dedupe_bg)": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:4988 _dedupe_bg"
+   "rugs.py:5042 _dedupe_bg"
   ],
   "comp-nn": [
    "threading.py:1002 _bootstrap",
