@@ -1,10 +1,10 @@
 {
- "at": "2026-11-23 21:29:35",
- "rss_mb": 3085,
- "avail_mb": 4011,
+ "at": "2026-11-23 21:29:45",
+ "rss_mb": 5027,
+ "avail_mb": 2102,
  "heavy": "",
  "ui_heavy": "",
- "up_s": 30,
+ "up_s": 40,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -25,8 +25,6 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-23 21:27:23 rss=1128MB avail=5872/11925MB limit=0MB heavy=новые двойники wait=0",
-  "2026-11-23 21:27:33 rss=1170MB avail=5744/11925MB limit=0MB heavy=новые двойники wait=0",
   "2026-11-23 21:27:43 rss=1265MB avail=5697/11925MB limit=0MB heavy=новые двойники wait=0",
   "2026-11-23 21:27:53 rss=1171MB avail=5825/11925MB limit=0MB heavy=новые двойники wait=0",
   "2026-11-23 21:28:03 rss=1048MB avail=5902/11925MB limit=0MB heavy=- wait=0",
@@ -39,7 +37,9 @@
   "2026-11-23 21:29:15 rss=367MB avail=6720/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 21:29:25 rss=1664MB avail=5427/11925MB limit=0MB heavy=- wait=0",
   "2026-11-23 21:29:25 malloc_trim: rss 1664MB -> 1641MB",
-  "2026-11-23 21:29:35 rss=3085MB avail=4011/11925MB limit=0MB heavy=- wait=0"
+  "2026-11-23 21:29:35 rss=3085MB avail=4011/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 21:29:45 rss=5027MB avail=2102/11925MB limit=0MB heavy=- wait=0",
+  "2026-11-23 21:29:45 malloc_trim: rss 5028MB -> 5027MB"
  ],
  "stacks": {
   "AnyIO worker thread": [
@@ -56,8 +56,8 @@
    "events.py:148 _loop"
   ],
   "cps-backup": [
-   "backup.py:99 loop",
-   "backup.py:57 backup_once",
+   "backup.py:79 backup_once",
+   "backup.py:22 _git",
    "subprocess.py:550 run",
    "subprocess.py:1209 communicate",
    "subprocess.py:2115 _communicate",
@@ -101,12 +101,12 @@
    "rugs.py:4419 _periodic_en"
   ],
   "Thread-3 (<lambda>)": [
-   "_format_impl.py:869 read_array",
-   "_format_impl.py:1023 _read_bytes",
-   "zipfile.py:999 read",
-   "zipfile.py:1098 _read1",
-   "zipfile.py:1114 _read2",
-   "zipfile.py:805 read"
+   "threading.py:982 run",
+   "rugs.py:4302 <lambda>",
+   "rugs.py:4300 shape_index",
+   "shape_hint.py:96 build_index",
+   "_npyio_impl.py:245 __getitem__",
+   "_format_impl.py:887 read_array"
   ],
   "tone": [
    "threading.py:1002 _bootstrap",
