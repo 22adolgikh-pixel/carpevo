@@ -18,7 +18,7 @@
  "h": 1317,
  "marks": [],
  "created": 1795357984,
- "updated": 1795358961,
+ "updated": 1795462924,
  "cat": {
   "title": "Ковёр Иреван",
   "museum": "",
@@ -139,8 +139,49 @@
     "w": 2,
     "t": 1795358961
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795462924,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00768,
+    0.06073
+   ],
+   [
+    0.94538,
+    0.06864
+   ],
+   [
+    0.97082,
+    0.91989
+   ],
+   [
+    0.02124,
+    0.9315
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
