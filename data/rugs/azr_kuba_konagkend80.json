@@ -18,7 +18,7 @@
  "h": 685,
  "marks": [],
  "created": 1791736133,
- "updated": 1795117501,
+ "updated": 1795463240,
  "cat": {
   "title": "kuba konagkend80",
   "museum": "",
@@ -133,7 +133,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -154,5 +154,15 @@
    46.5189
   ],
   "t": 1795207775
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795463240
+   }
+  }
+ },
+ "frame_by": "micro"
 }
