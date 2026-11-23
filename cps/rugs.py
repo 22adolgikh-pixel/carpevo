@@ -3932,7 +3932,7 @@ def install(app, DATA, D_WORK):
         if vlm_corners.available(): _vf_enqueue([x["id"] for x in fr if not x.get("vf")][:30])
         if vlm_corners.available() or _f2():                                     # v12.03: сначала перепроверки, потом где модель по картинке не уверена или спорит
             # v12.24: и раньше всех — похожие на «несколько ковров» (CLIP), чтобы их быстрее разметить
-            fr.sort(key=lambda x: (not x.get("rc"), not (x.get("vf") and not x["frame_by"] and (x["vf"].get("multi") or 0) >= 0.9), not x.get("vf"), (x["vf"] or {}).get("conf", 0) if x.get("vf") else 1))
+            fr.sort(key=lambda x: (not x.get("rc"), not (x.get("vf") and not x["frame_by"] and (x["vf"].get("multi") or 0) >= 0.97), not x.get("vf"), (x["vf"] or {}).get("conf", 0) if x.get("vf") else 1))
         head, pool = fr[:60], fr[:]; random.shuffle(pool); mix = []                 # половина — сомнительные, половина — случайные (иначе выборка перекошена и точность машины не измерить)
         for a, b in zip(head, pool): mix += [a, b]
         fr = list({x["id"]: x for x in mix + fr}.values())
@@ -4587,7 +4587,7 @@ def install(app, DATA, D_WORK):
         """v12.26: как работает модель кадра v2 на сервере: согласие с людьми, перепроверки, авторешения, кандидаты «несколько ковров»"""
         rows = [x for x in _mrows() if x and x.get("vf")]; st = fr_auto_state()
         hum = [x for x in rows if x["frame_by"] in ("micro", "hand") and x["frame"] in FR_ANS]
-        multi = sorted((x for x in rows if not x["frame_by"] and (x["vf"].get("multi") or 0) >= 0.9), key=lambda x: -x["vf"]["multi"])
+        multi = sorted((x for x in rows if not x["frame_by"] and (x["vf"].get("multi") or 0) >= 0.97), key=lambda x: -x["vf"]["multi"])
         return {"model": (_f2() or {}).get("model"), "with_vf": len(rows), "human": len(hum), "agree": sum(1 for x in hum if x["vf"]["frame"] == x["frame"]),
                 "rc": sum(1 for x in rows if x.get("rc")), "auto_whole": sum(1 for x in rows if fr_auto(x, st)), "auto_state": st,
                 "multi_cand": len(multi), "multi_top": [x["id"] for x in multi[:20]]}
