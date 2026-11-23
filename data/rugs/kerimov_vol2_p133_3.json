@@ -6764,7 +6764,7 @@
    "scheme": "t60_f04",
    "group": "xmmv44e2fw",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6773,8 +6773,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795357433,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795462693,
    "rf": 1,
    "rf_s": 1.0,
    "box0": [
@@ -6799,7 +6799,7 @@
    "scheme": "t60_f04",
    "group": "xmmv44e2fw",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6808,8 +6808,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795357433,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795462693,
    "rf": 1,
    "rf_s": 1.0,
    "box0": [
@@ -6834,7 +6834,7 @@
    "scheme": "t60_f04",
    "group": "xmmv44e2fw",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6843,8 +6843,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795357433,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795462693,
    "rf": 1,
    "rf_s": 1.0,
    "box0": [
@@ -6869,7 +6869,7 @@
    "scheme": "t60_f04",
    "group": "xmmv44e2fw",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6878,8 +6878,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795357433,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795462693,
    "rf": 1,
    "rf_s": 0.96,
    "box0": [
@@ -6893,10 +6893,10 @@
   {
    "id": "m17953574550s",
    "box": [
-    0.49292,
-    0.58165,
-    0.00973,
-    0.03014
+    0.4852,
+    0.58026,
+    0.01067,
+    0.03391
    ],
    "zone": "field",
    "motif": "qaynagi",
@@ -6904,7 +6904,7 @@
    "scheme": "t50_f04",
    "group": "xmmv44qvgd",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: сверху↔снизу",
    "angle": 0,
    "flip": 0,
@@ -6914,15 +6914,24 @@
    "by": "машина (симметрия ковра)",
    "at": 1795357455,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.684,
+   "box0": [
+    0.49292,
+    0.58165,
+    0.00973,
+    0.03014
+   ],
+   "rf_moved": 0.241
   },
   {
    "id": "m17953574551s",
    "box": [
-    0.49428,
-    0.59827,
-    0.01154,
-    0.02017
+    0.48571,
+    0.58296,
+    0.00974,
+    0.03026
    ],
    "zone": "field",
    "motif": "qaynagi",
@@ -6930,7 +6939,7 @@
    "scheme": "t50_f04",
    "group": "xmmv44qvgd",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: слева↔справа",
    "angle": 0,
    "flip": 0,
@@ -6940,15 +6949,24 @@
    "by": "машина (симметрия ковра)",
    "at": 1795357455,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.633,
+   "box0": [
+    0.49428,
+    0.59827,
+    0.01154,
+    0.02017
+   ],
+   "rf_moved": 0.692
   },
   {
    "id": "m17953574552s",
    "box": [
-    0.49842,
-    0.59155,
-    0.01065,
-    0.01755
+    0.50847,
+    0.59368,
+    0.00876,
+    0.0272
    ],
    "zone": "field",
    "motif": "qaynagi",
@@ -6956,7 +6974,7 @@
    "scheme": "t50_f04",
    "group": "xmmv44qvgd",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: слева↔справа",
    "angle": 0,
    "flip": 0,
@@ -6966,11 +6984,20 @@
    "by": "машина (симметрия ковра)",
    "at": 1795357455,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.611,
+   "box0": [
+    0.49842,
+    0.59155,
+    0.01065,
+    0.01755
+   ],
+   "rf_moved": 0.653
   }
  ],
  "created": 1791736122,
- "updated": 1795357455,
+ "updated": 1795462722,
  "cat": {
   "title": "Керимов, т. II (стр. скана 133, печ. 15)",
   "museum": "",
@@ -8264,6 +8291,55 @@
      "a": "bad",
      "w": 2,
      "t": 1795357242
+    }
+   },
+   "m17953574332e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795462693
+    }
+   },
+   "m17953574333e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795462693
+    }
+   },
+   "m17953574330e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795462693
+    }
+   },
+   "m17953574331e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795462693
+    }
+   },
+   "m17953574552s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795462722
+    }
+   },
+   "m17953574550s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795462722
+    }
+   },
+   "m17953574551s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795462722
     }
    }
   }

@@ -18,7 +18,7 @@
  "h": 900,
  "marks": [],
  "created": 1791736139,
- "updated": 1795115958,
+ "updated": 1795462870,
  "cat": {
   "title": "Floral carpet with an 18th century Caucasian design",
   "museum": "",
@@ -114,7 +114,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -135,5 +135,15 @@
    47.4355
   ],
   "t": 1795207739
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795462870
+   }
+  }
+ },
+ "frame_by": "micro"
 }
