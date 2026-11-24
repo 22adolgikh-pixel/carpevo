@@ -15,7 +15,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 # v10.15: torch (только процессор) — для свёрточной сети клеток (cnn.py); без него студия работает как раньше, на порогах и маленькой модели
-RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
+# v12.29: timm — DINOv3-B (отпечатки ковров: кадр v2, двойники); веса в DATA/wcache, качаются /api/open/wfetch
+RUN pip install --no-cache-dir timm safetensors
 
 COPY . .
 

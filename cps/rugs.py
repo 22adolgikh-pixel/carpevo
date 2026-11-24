@@ -1075,7 +1075,7 @@ def install(app, DATA, D_WORK):
                     if ok is not None and o not in have: r.setdefault("same", []).append({"id": o, "score": 0})
                     so = r.setdefault("same_ok", {})
                     if ok is None: so.pop(o, None)
-                    else: so[o] = {"ok": bool(ok), "by": who, "at": int(time.time())}
+                    else: so[o] = {"ok": bool(ok), "by": who, "at": int(time.time()), **({"bulk": len(P)} if len(P) > 4 else {})}   # v12.29: пачка — не в калибровку порога
                     n += 1
                 save(r)
         _dcl["t"] = 0
@@ -2934,6 +2934,12 @@ def install(app, DATA, D_WORK):
 
     def _f2_of(rid):
         M = _f2(); p = (M.get("p") or {}).get(rid)
+        if not p:                                                                # v12.29: новые ковры — посчитано на сервере (dv3_all)
+            try:
+                mt = os.path.getmtime(F2_NEW)
+                if _f2c.get("nt") != mt: _f2c.update(n=json.load(open(F2_NEW, encoding="utf-8")).get("p") or {}, nt=mt)
+            except (OSError, ValueError): _f2c.update(n={}, nt=0)
+            p = (_f2c.get("n") or {}).get(rid)
         if not p: return None
         cl = M["classes"]; k = max(range(len(cl)), key=lambda j: p[j]); X, Y = M["iso"]
         s = p[k]; j = 0
@@ -4501,6 +4507,117 @@ def install(app, DATA, D_WORK):
 
     if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_rn, daemon=True, name="comp-nn").start()
 
+    # ---------- v12.29: DINOv3-B на сервере: отпечатки всех ковров → соседи-двойники (DATA/twin_nn_v2.json) и кадр v2 для новых ковров ----------
+    import dv3 as _dv3
+    D_DV3 = os.path.join(DATA, "dv3"); _dvs = {"run": False, "done": 0, "new": 0, "err": 0, "t": 0, "nn": 0, "f2": 0, "last": ""}
+    F2_NEW = os.path.join(DATA, "frame_v2_new.json")
+
+    def _dv3_rect_src(rid, r, a):
+        """выпрямленный ковёр: готовая рабочая картинка, иначе по любым углам (человек → уточнённые → машина), иначе всё фото"""
+        p = rect_path(rid, r, build=False)
+        if p and os.path.exists(p):
+            x = cv2.imread(p)
+            if x is not None: return x
+        L = r.get("layout") or {}; au = r.get("auto") or {}
+        q = L.get("quad") or (au.get("ref_quad") or {}).get("quad") or au.get("quad")
+        if q and len(q) == 4:
+            try:
+                import rug_rect
+                return rug_rect.rectify(a, q, side=448)
+            except Exception: pass
+        return a
+
+    def _dv3_one(rid):
+        r = load(rid); p = img_path(rid)
+        if not r or not p: return False
+        out = os.path.join(D_DV3, rid + ".npy"); src = [p] + [x for x in [rect_path(rid, r, build=False)] if x]
+        if os.path.exists(out) and os.path.getmtime(out) >= max(os.path.getmtime(x) for x in src if os.path.exists(x)): return False
+        a = cv2.imread(p)
+        if a is None: return False
+        k = 1024 / max(a.shape[:2])
+        if k < 1: a = cv2.resize(a, None, fx=k, fy=k, interpolation=cv2.INTER_AREA)
+        e = _dv3.embed(DATA, [a, _dv3_rect_src(rid, r, a)]).astype(np.float16)
+        os.makedirs(D_DV3, exist_ok=True); tmp = out + ".tmp.npy"; np.save(tmp, e); os.replace(tmp, out)
+        return True
+
+    def _dv3_load_all():
+        ids, E = [], []
+        for f in sorted(os.listdir(D_DV3)) if os.path.isdir(D_DV3) else []:
+            if not f.endswith(".npy") or f.endswith(".tmp.npy"): continue
+            try: E.append(np.load(os.path.join(D_DV3, f))); ids.append(f[:-4])
+            except Exception: pass
+        return ids, (np.stack(E).astype(np.float32) if E else np.zeros((0, 2, 1536), np.float32))
+
+    def _dv3_nn(ids, E):
+        """соседи по выпрямленному ковру (CLS), 12 на ковёр — тот же формат, что models/twin_nn_v2.json"""
+        X = _dv3.nz(E[:, 1, :768]); nn = {}
+        for b0 in range(0, len(ids), 256):
+            S = X[b0:b0 + 256] @ X.T
+            for j in range(S.shape[0]): S[j, b0 + j] = -9
+            top = np.argpartition(-S, 12, axis=1)[:, :12] if len(ids) > 13 else np.argsort(-S, axis=1)[:, :12]
+            for j in range(S.shape[0]):
+                o = sorted(top[j], key=lambda t: -S[j, t]); nn[ids[b0 + j]] = [[ids[t], round(float(S[j, t]), 4)] for t in o]
+        tmp = os.path.join(DATA, "twin_nn_v2.json.tmp")
+        json.dump({"v": 2, "model": "dinov3-b rect cls (сервер)", "t": int(time.time()), "thr": 0.90, "nn": nn}, open(tmp, "w"), separators=(",", ":"))
+        os.replace(tmp, os.path.join(DATA, "twin_nn_v2.json")); return len(nn)
+
+    def _f2_new(ids, E):
+        """кадр v2 для ковров, которых нет в models/frame_v2.json (новые после 24.11): та же регрессия (models/frame_v2_lr.json)"""
+        import frame_model
+        try: LR = json.load(open(os.path.join(HERE, "models", "frame_v2_lr.json"), encoding="utf-8"))
+        except Exception: return 0
+        have = set(((_f2() or {}).get("p") or {}).keys()); out = {}
+        mu, sc, W, b = (np.array(LR[k], np.float32) for k in ("mean", "scale", "coef", "b"))
+        for n, rid in enumerate(ids):
+            if rid in have: continue
+            r = load(rid)
+            if not r: continue
+            try: tab = np.array(frame_model.feat(r)[:-2], np.float32)
+            except Exception: continue
+            x = np.concatenate([_dv3.nz(E[n, 0, :768]), _dv3.nz(E[n, 0, 768:]), tab])
+            if x.shape[0] != mu.shape[0]: continue
+            z = ((x - mu) / sc) @ W.T + b; p = np.exp(z - z.max()); p /= p.sum()
+            out[rid] = [round(float(v), 3) for v in p] + [0.0]
+        tmp = F2_NEW + ".tmp"; json.dump({"t": int(time.time()), "p": out}, open(tmp, "w"), separators=(",", ":")); os.replace(tmp, F2_NEW)
+        return len(out)
+
+    def dv3_all():
+        if _dvs["run"] or not _dv3.available(DATA): return
+        _dvs.update(run=True, t=time.time(), new=0, err=0)
+        try:
+            ids = sorted(f[:-5] for f in os.listdir(D_RUGS) if f.endswith(".json"))
+            for i in range(0, len(ids), 20):                                   # кусками по 20 ковров: между кусками уступаем очередь
+                def chunk(part=ids[i:i + 20]):
+                    for rid in part:
+                        try: _dvs["new"] += bool(_dv3_one(rid))
+                        except Exception as e: _dvs["err"] += 1; _dvs["last"] = f"{rid}: {e}"[:200]
+                heavy(chunk, "отпечатки DINOv3")
+                _dvs["done"] = min(len(ids), i + 20)
+            def fin():
+                I, E = _dv3_load_all()
+                if len(I) >= 50: _dvs["nn"] = _dv3_nn(I, E)
+                _dvs["f2"] = _f2_new(I, E)
+            heavy(fin, "соседи DINOv3")
+        finally:
+            _dvs["run"] = False; _dvs["t"] = time.time(); _dv3._m["model"] = None; import gc; gc.collect()   # сеть (~350 МБ) не держим между проходами
+            try: import ctypes; ctypes.CDLL("libc.so.6").malloc_trim(0)
+            except Exception: pass
+
+    def _periodic_dv3():
+        time.sleep(1200)
+        while True:
+            try: __import__("health").gated(dv3_all, "dv3_all")()
+            except Exception as e: print("dv3:", e)
+            time.sleep(6 * 3600)
+
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_dv3, daemon=True, name="dv3").start()
+
+    @app.get("/api/open/dv3")
+    def api_dv3(run: int = 0):
+        if run and not _dvs["run"]: threading.Thread(target=dv3_all, daemon=True).start()
+        n = len([f for f in os.listdir(D_DV3) if f.endswith(".npy")]) if os.path.isdir(D_DV3) else 0
+        return {"available": _dv3.available(DATA), "files": n, **_dvs}
+
     @app.get("/api/open/kerimov_gap")
     def api_kerimov_gap():
         """v12.15: каких рисунков Керимова т. I нет среди вырезок. Сверка с легендой по КНИЖНЫМ номерам (через book_map: студийные
@@ -5183,7 +5300,8 @@ def install(app, DATA, D_WORK):
         у 77 % против 63 % у прежнего DINOv2 по всему фото). На проверку совмещением берём только 3 ближайших с сходством ≥ 0,85
         и остальных до 8 с ≥ 0,90 — иначе пар 30 тысяч."""
         try:
-            j = json.load(open(os.path.join(HERE, "models", "twin_nn_v2.json"), encoding="utf-8")); out = {}
+            pv = os.path.join(DATA, "twin_nn_v2.json")                         # v12.29: свежие соседи с сервера (новые ковры тоже), иначе ночные 24.11
+            j = json.load(open(pv if os.path.exists(pv) else os.path.join(HERE, "models", "twin_nn_v2.json"), encoding="utf-8")); out = {}
             for a, lst in (j.get("nn") or {}).items():
                 keep = [[o, s] for k, (o, s) in enumerate(lst[:8]) if (k < 3 and s >= 0.85) or s >= 0.90]
                 if keep: out[a] = keep
@@ -5210,6 +5328,8 @@ def install(app, DATA, D_WORK):
         qa, qb = ((ra.get("layout") or {}).get("quad") or None), ((rb.get("layout") or {}).get("quad") or None)
         return {"n": int(n), "cov": round(rug_match.quad_iou(H, qa, qb), 3)}
 
+    TW_BULK_AT = {1795293048}
+
     def tw_rows(R, P):
         """ответы людей с измерениями — для порога"""
         rows = []
@@ -5218,6 +5338,9 @@ def install(app, DATA, D_WORK):
             a, b = k.split("~", 1)
             if a not in R or b not in R: continue
             d = (R[a].get("same_ok") or {}).get(b)
+            # v12.29: отметки пачкой (выбор многих ковров в студии) — не ответ по паре: пачка 21.11 (3 389 «разные», среди них одинаковые фото)
+            # убрала порог совсем (thr=None, машина перестала ставить «тот же»). Без неё порог снова находится: 40 точек / перекрытие 0,7, 45 «тот же», 0 «разные»
+            if d is not None and (d.get("bulk") or d.get("at") in TW_BULK_AT): continue
             if d is not None and twins.human(d): rows.append((v["n"], v.get("cov", 0), twins.decided(R[a], b), k))
         return rows
 
