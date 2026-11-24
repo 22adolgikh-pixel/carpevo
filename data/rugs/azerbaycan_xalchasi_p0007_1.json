@@ -3773,7 +3773,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795463299,
+ "updated": 1795498685,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "The R. Mustafayev State Museum of Arts",
@@ -3838,9 +3838,9 @@
  ],
  "same_ok": {
   "azr_kuba_perepedil30": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795498685
   },
   "azr_kuba_perepedil60": {
    "ok": false,
@@ -4193,6 +4193,13 @@
      "a": "similar",
      "w": 2,
      "t": 1795016008
+    }
+   },
+   "azr_kuba_perepedil30": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795498685
     }
    }
   }

@@ -18,7 +18,7 @@
  "h": 1645,
  "marks": [],
  "created": 1794547278,
- "updated": 1795293047,
+ "updated": 1795498750,
  "cat": {
   "title": "Ковёр «Şahnəzərli» Губа",
   "museum": "",
@@ -63,9 +63,9 @@
  ],
  "same_ok": {
   "azr_kuba_shirvan_medallion133": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795498750
   },
   "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_16_jpg": {
    "ok": false,
@@ -176,5 +176,16 @@
   ],
   "t": 1795207707
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "azr_kuba_shirvan_medallion133": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795498750
+    }
+   }
+  }
+ }
 }
