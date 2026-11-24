@@ -1,10 +1,10 @@
 {
- "at": "2026-11-24 08:21:30",
- "rss_mb": 1527,
- "avail_mb": 5363,
- "heavy": "отпечатки DINOv3",
+ "at": "2026-11-24 15:44:45",
+ "rss_mb": 2342,
+ "avail_mb": 4743,
+ "heavy": "поиск элементов (сеть)",
  "ui_heavy": "",
- "up_s": 2923,
+ "up_s": 29518,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -19,45 +19,51 @@
   "Thread-7 (loop)",
   "cps-backup",
   "Thread-8 (_loop)",
-  "rect-dups",
   "vlm-frame",
   "text-facts",
+  "vlm-corners",
   "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
-  "AnyIO worker thread",
+  "element-search",
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-24 08:19:30 malloc_trim: rss 1508MB -> 1478MB",
-  "2026-11-24 08:19:40 rss=1471MB avail=5606/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:19:50 rss=1469MB avail=5611/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:20:00 rss=1470MB avail=5616/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:20:10 rss=1477MB avail=5593/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:20:20 rss=1474MB avail=5632/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:20:30 rss=1476MB avail=5603/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:20:40 rss=1484MB avail=5612/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:20:50 rss=1506MB avail=5460/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:20:50 malloc_trim: rss 1506MB -> 1478MB",
-  "2026-11-24 08:21:00 rss=1478MB avail=5501/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:21:10 rss=1481MB avail=5456/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:21:20 rss=1479MB avail=5453/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:21:30 rss=1549MB avail=5363/11925MB limit=0MB heavy=отпечатки DINOv3 wait=1",
-  "2026-11-24 08:21:30 malloc_trim: rss 1549MB -> 1527MB"
+  "2026-11-24 15:42:35 rss=1423MB avail=5642/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:42:45 rss=1423MB avail=5668/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:42:55 rss=1423MB avail=5672/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:43:05 rss=1423MB avail=5635/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:43:15 rss=1423MB avail=5629/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:43:25 rss=1423MB avail=5644/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:43:35 rss=1423MB avail=5652/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:43:45 rss=1423MB avail=5653/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:43:55 rss=1423MB avail=5650/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:44:05 rss=1423MB avail=5643/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:44:15 rss=1423MB avail=5638/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:44:25 rss=1423MB avail=5623/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:44:35 rss=1423MB avail=5636/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:44:45 rss=2346MB avail=4743/11925MB limit=0MB heavy=поиск элементов (сеть) wait=0",
+  "2026-11-24 15:44:45 malloc_trim: rss 2346MB -> 2342MB"
  ],
  "stacks": {
   "AnyIO worker thread": [
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "_asyncio.py:1113 run",
+   "queue.py:171 get",
+   "threading.py:327 wait"
+  ],
+  "element-search": [
+   "rugs.py:102 heavy",
+   "rugs.py:3263 <lambda>",
+   "element_embed.py:179 search",
+   "element_embed.py:142 emb",
+   "element_embed.py:142 <listcomp>",
+   "element_embed.py:126 _crop"
+  ],
+  "vlm-corners": [
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:2940 _vlm_worker",
    "queue.py:171 get",
    "threading.py:327 wait"
   ],
@@ -75,14 +81,6 @@
    "threading.py:982 run",
    "rugs.py:3012 _vf_worker",
    "queue.py:171 get",
-   "threading.py:327 wait"
-  ],
-  "rect-dups": [
-   "threading.py:1045 _bootstrap_inner",
-   "threading.py:982 run",
-   "rugs.py:1834 run",
-   "rugs.py:96 heavy",
-   "threading.py:479 acquire",
    "threading.py:327 wait"
   ],
   "Thread-8 (_loop)": [
@@ -111,12 +109,10 @@
    "rugs.py:5596 _periodic_twins"
   ],
   "dv3": [
-   "module.py:1787 _wrapped_call_impl",
-   "module.py:1798 _call_impl",
-   "eva.py:255 forward",
-   "module.py:1787 _wrapped_call_impl",
-   "module.py:1798 _call_impl",
-   "linear.py:134 forward"
+   "threading.py:1002 _bootstrap",
+   "threading.py:1045 _bootstrap_inner",
+   "threading.py:982 run",
+   "rugs.py:4665 _periodic_dv3"
   ],
   "comp-nn": [
    "threading.py:1002 _bootstrap",
@@ -134,8 +130,7 @@
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:3492 _periodic_tone",
-   "health.py:168 run"
+   "rugs.py:3494 _periodic_tone"
   ],
   "text-facts-sched": [
    "threading.py:1002 _bootstrap",
@@ -147,8 +142,7 @@
    "threading.py:1002 _bootstrap",
    "threading.py:1045 _bootstrap_inner",
    "threading.py:982 run",
-   "rugs.py:3057 _periodic_vf",
-   "health.py:168 run"
+   "rugs.py:3059 _periodic_vf"
   ],
   "mesh-periodic": [
    "threading.py:1002 _bootstrap",
@@ -167,8 +161,8 @@
    "runners.py:118 run",
    "base_events.py:641 run_until_complete",
    "base_events.py:608 run_forever",
-   "base_events.py:1937 _run_once",
-   "selectors.py:481 select"
+   "base_events.py:1898 _run_once",
+   "selectors.py:468 select"
   ]
  }
 }
