@@ -3838,7 +3838,7 @@
    "scheme": "t40_f03",
    "group": "m6b036815e408919_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qapı naxışı",
    "machine": 1,
    "score": 0.684,
@@ -3910,7 +3910,9 @@
      0.57617
     ]
    ],
-   "sam": 0.979
+   "sam": 0.979,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795497672
   },
   {
    "id": "m6b036815e408919_9",
@@ -3926,7 +3928,7 @@
    "scheme": "t40_f03",
    "group": "m6b036815e408919_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: qapı naxışı",
    "machine": 1,
    "score": 0.674,
@@ -3978,7 +3980,9 @@
      0.57715
     ]
    ],
-   "sam": 0.981
+   "sam": 0.981,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795497672
   },
   {
    "id": "m6b036bebe417298_0",
@@ -4674,7 +4678,7 @@
   }
  ],
  "created": 1791736121,
- "updated": 1795386359,
+ "updated": 1795497672,
  "cat": {
   "title": "Керимов, т. I, Табл. 209. «ЧИРАГЛЫ» (стр. скана 331, печ. ?)",
   "museum": "",
@@ -5172,6 +5176,20 @@
      "a": "bad",
      "w": 2,
      "t": 1795279210
+    }
+   },
+   "m6b036815e408919_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795497672
+    }
+   },
+   "m6b036815e408919_9": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795497672
     }
    }
   }

@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795293046,
+ "updated": 1795497653,
  "cat": {
   "title": "Ковёр «Fındıqan» Баку",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -84,14 +84,14 @@
    "at": 1795293048
   },
   "wikimedia_File_Фындыган_jpg": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795497653
   },
   "azr_antique_khizi_findigan_rug13": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795497653
   },
   "azr_antique_khizi_findigan_rug17": {
    "ok": false,
@@ -240,5 +240,23 @@
   ],
   "t": 1795207707
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "wikimedia_File_Фындыган_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795497653
+    }
+   },
+   "azr_antique_khizi_findigan_rug13": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795497653
+    }
+   }
+  }
+ }
 }

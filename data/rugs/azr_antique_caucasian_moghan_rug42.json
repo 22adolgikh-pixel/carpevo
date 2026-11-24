@@ -18,7 +18,7 @@
  "h": 880,
  "marks": [],
  "created": 1791736138,
- "updated": 1794258591,
+ "updated": 1795497710,
  "cat": {
   "title": "Antique Moghan (Mughan) rug, Azerbaijan, circa 1875, 82\" x 33\", 262 x 105cm, Richard Purdon",
   "museum": "",
@@ -80,18 +80,49 @@
   "conf": 0.918,
   "area": 0.723,
   "ver": 1,
-  "t": 1794238270
+  "t": 1794238270,
+  "ref_quad": {
+   "quad": [
+    [
+     0.13216,
+     0.03304
+    ],
+    [
+     0.81262,
+     0.0318
+    ],
+    [
+     0.94189,
+     0.96223
+    ],
+    [
+     0.07738,
+     0.9672
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795497682
+  }
  },
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "not_rug",
+    "a": "whole",
     "w": 2,
-    "t": 1794258591
+    "t": 1795497669
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795497710,
+    "s": "ref"
    }
   }
  },
- "frame": "not_rug",
+ "frame": "whole",
  "frame_by": "micro",
  "auto_edge": {
   "v": 1,
@@ -112,5 +143,43 @@
    37.1082
   ],
   "t": 1795207715
- }
+ },
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.13216,
+    0.03304
+   ],
+   [
+    0.81262,
+    0.0318
+   ],
+   [
+    0.94189,
+    0.96223
+   ],
+   [
+    0.07738,
+    0.9672
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
