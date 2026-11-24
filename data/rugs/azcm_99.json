@@ -3044,10 +3044,114 @@
    "at": 1795535656,
    "confirmed_by": "",
    "confirmed_at": 0
+  },
+  {
+   "id": "m17955357810s",
+   "box": [
+    0.17454,
+    0.09123,
+    0.04803,
+    0.02853
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwhtm285",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: слева↔справа",
+   "angle": 0,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.882,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795535781,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17955357811s",
+   "box": [
+    0.7833,
+    0.85505,
+    0.04826,
+    0.02916
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwhtm285",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: сверху↔снизу",
+   "angle": 180,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.855,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795535781,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17955357812s",
+   "box": [
+    0.18061,
+    0.88645,
+    0.04007,
+    0.02516
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwhtm285",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: сверху↔снизу",
+   "angle": 180,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.848,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795535781,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17955357813s",
+   "box": [
+    0.77743,
+    0.88407,
+    0.03979,
+    0.02456
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwhtm285",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: напротив (180°)",
+   "angle": 180,
+   "flip": 0,
+   "machine": "sym",
+   "score": 0.846,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795535781,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791870043,
- "updated": 1795535656,
+ "updated": 1795535781,
  "cat": {
   "title": "“Malıbəyli” («Малыбейли»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -3652,6 +3756,7 @@
   "mmwhst5tk": "1:8",
   "mmwht10ju": "1:8",
   "mmwht7916": "1:2",
-  "mmwhtim06": "1:5"
+  "mmwhtim06": "1:5",
+  "mmwhtm285": "1:4"
  }
 }

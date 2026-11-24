@@ -1,10 +1,10 @@
 {
- "at": "2026-11-24 15:44:45",
- "rss_mb": 2342,
- "avail_mb": 4743,
+ "at": "2026-11-24 15:56:39",
+ "rss_mb": 3192,
+ "avail_mb": 3804,
  "heavy": "поиск элементов (сеть)",
  "ui_heavy": "",
- "up_s": 29518,
+ "up_s": 30231,
  "threads": [
   "MainThread",
   "rect-periodic",
@@ -27,21 +27,21 @@
   "AnyIO worker thread"
  ],
  "mem_tail": [
-  "2026-11-24 15:42:35 rss=1423MB avail=5642/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:42:45 rss=1423MB avail=5668/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:42:55 rss=1423MB avail=5672/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:43:05 rss=1423MB avail=5635/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:43:15 rss=1423MB avail=5629/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:43:25 rss=1423MB avail=5644/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:43:35 rss=1423MB avail=5652/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:43:45 rss=1423MB avail=5653/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:43:55 rss=1423MB avail=5650/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:44:05 rss=1423MB avail=5643/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:44:15 rss=1423MB avail=5638/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:44:25 rss=1423MB avail=5623/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:44:35 rss=1423MB avail=5636/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
-  "2026-11-24 15:44:45 rss=2346MB avail=4743/11925MB limit=0MB heavy=поиск элементов (сеть) wait=0",
-  "2026-11-24 15:44:45 malloc_trim: rss 2346MB -> 2342MB"
+  "2026-11-24 15:54:58 rss=2192MB avail=4827/11925MB limit=0MB heavy=поиск элементов (сеть) wait=0",
+  "2026-11-24 15:54:58 malloc_trim: rss 2192MB -> 1896MB",
+  "2026-11-24 15:55:08 rss=1955MB avail=5016/11925MB limit=0MB heavy=поиск элементов (сеть) wait=0",
+  "2026-11-24 15:55:18 rss=1956MB avail=5045/11925MB limit=0MB heavy=поиск элементов (сеть) wait=0",
+  "2026-11-24 15:55:19 malloc_trim: rss 1956MB -> 1668MB",
+  "2026-11-24 15:55:29 rss=1747MB avail=5238/11925MB limit=0MB heavy=поиск элементов (сеть) wait=0",
+  "2026-11-24 15:55:39 rss=1750MB avail=5261/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:55:39 malloc_trim: rss 1750MB -> 1266MB",
+  "2026-11-24 15:55:49 rss=1344MB avail=5664/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:55:59 rss=1347MB avail=5668/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:56:09 rss=1351MB avail=5675/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:56:19 rss=1351MB avail=5678/11925MB limit=0MB heavy=парные места (симметрия) wait=0",
+  "2026-11-24 15:56:29 rss=2462MB avail=4537/11925MB limit=0MB heavy=поиск элементов (сеть) wait=0",
+  "2026-11-24 15:56:29 malloc_trim: rss 2462MB -> 2461MB",
+  "2026-11-24 15:56:39 rss=3191MB avail=3804/11925MB limit=0MB heavy=поиск элементов (сеть) wait=0"
  ],
  "stacks": {
   "AnyIO worker thread": [
@@ -52,12 +52,12 @@
    "threading.py:327 wait"
   ],
   "element-search": [
-   "rugs.py:102 heavy",
    "rugs.py:3263 <lambda>",
    "element_embed.py:179 search",
    "element_embed.py:142 emb",
-   "element_embed.py:142 <listcomp>",
-   "element_embed.py:126 _crop"
+   "element_embed.py:136 _run",
+   "module.py:1787 _wrapped_call_impl",
+   "module.py:1798 _call_impl"
   ],
   "vlm-corners": [
    "threading.py:1002 _bootstrap",
