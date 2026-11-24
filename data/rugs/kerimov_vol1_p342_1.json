@@ -16,9 +16,34 @@
  "status": "new",
  "w": 455,
  "h": 658,
- "marks": [],
+ "marks": [
+  {
+   "id": "mmv1978wz",
+   "box": [
+    0.0,
+    0.00121,
+    0.46163,
+    0.46088
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "перенесено с таблицы Керимова k_t223_f01",
+   "angle": "",
+   "by": "dolgikh",
+   "at": 1791567784,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795204299,
+   "edited_by": "dolgikh",
+   "edited_at": 1791567794
+  }
+ ],
  "created": 1791736121,
- "updated": 1791736121,
+ "updated": 1795549150,
  "cat": {
   "title": "Керимов, т. I, 1. ВЕРНИ (стр. скана 342, печ. 88*)",
   "museum": "",
@@ -147,5 +172,11 @@
    5.722
   ],
   "t": 1795207873
- }
+ },
+ "book_refs": [
+  "табл. 223, фото 1"
+ ],
+ "merged_from": [
+  "k_t223_f01"
+ ]
 }
