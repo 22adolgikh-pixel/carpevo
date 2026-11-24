@@ -135,7 +135,7 @@
    "scheme": "t53_f04",
    "group": "m6b04ba91e14369_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.604,
@@ -259,7 +259,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795472024,
+ "updated": 1795495995,
  "cat": {
   "title": "Xalça. “ Qasımuşağı” . Qarabağ qrupu. Azərbaycan. Yun. Xovlu.",
   "museum": "",
@@ -336,6 +336,13 @@
      "a": "skip",
      "w": 0,
      "t": 1794857190
+    }
+   },
+   "m6b04ba91e14369_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795495995
     }
    }
   }
