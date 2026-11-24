@@ -18,7 +18,7 @@
  "h": 555,
  "marks": [],
  "created": 1791736126,
- "updated": 1795501440,
+ "updated": 1795534297,
  "cat": {
   "title": "Kazak 01wiki.jpg",
   "museum": "Wikimedia Commons",
@@ -169,8 +169,49 @@
     "w": 2,
     "t": 1795501440
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795534297,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01036,
+    0.02471
+   ],
+   [
+    0.96415,
+    0.02334
+   ],
+   [
+    0.98048,
+    0.96793
+   ],
+   [
+    0.02149,
+    0.96603
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

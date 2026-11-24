@@ -6996,10 +6996,140 @@
     0.01755
    ],
    "rf_moved": 0.653
+  },
+  {
+   "id": "m17955343680s",
+   "box": [
+    0.57573,
+    0.7165,
+    0.05841,
+    0.0807
+   ],
+   "zone": "other",
+   "motif": "kupe",
+   "motif_text": "",
+   "scheme": "t54_f01",
+   "group": "m6b0216eee328871_0",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: слева↔справа",
+   "angle": 90,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.936,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795534368,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17955343681s",
+   "box": [
+    0.33498,
+    0.21006,
+    0.05853,
+    0.08059
+   ],
+   "zone": "other",
+   "motif": "kupe",
+   "motif_text": "",
+   "scheme": "t54_f01",
+   "group": "m6b0216eee328871_0",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: сверху↔снизу",
+   "angle": 270,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.947,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795534368,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17955343682s",
+   "box": [
+    0.57915,
+    0.21599,
+    0.0574,
+    0.07858
+   ],
+   "zone": "other",
+   "motif": "kupe",
+   "motif_text": "",
+   "scheme": "t54_f01",
+   "group": "m6b0216eee328871_0",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: напротив (180°)",
+   "angle": 90,
+   "flip": 0,
+   "machine": "sym",
+   "score": 0.934,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795534368,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17955343680e",
+   "box": [
+    0.58503,
+    0.20977,
+    0.0508,
+    0.0895
+   ],
+   "zone": "other",
+   "motif": "kupe",
+   "motif_text": "",
+   "scheme": "t54_f01",
+   "group": "m6b0216eee328871_0",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.905,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795534368,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17955343681e",
+   "box": [
+    0.58549,
+    0.71112,
+    0.05762,
+    0.07891
+   ],
+   "zone": "other",
+   "motif": "kupe",
+   "motif_text": "",
+   "scheme": "t54_f01",
+   "group": "m6b0216eee328871_0",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.888,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795534368,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791736122,
- "updated": 1795497905,
+ "updated": 1795534368,
  "cat": {
   "title": "Керимов, т. II (стр. скана 133, печ. 15)",
   "museum": "",
@@ -8397,6 +8527,7 @@
   "xmmv44qvgd": "1:4",
   "xmmv47m164": "1:8",
   "xmmv47otq1": "1:4",
-  "m6b00c48ae566435_0": "1:8"
+  "m6b00c48ae566435_0": "1:8",
+  "m6b0216eee328871_0": "1:1"
  }
 }

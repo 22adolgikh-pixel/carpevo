@@ -9,7 +9,7 @@
  "place": "",
  "date": "",
  "school": "",
- "composition": "",
+ "composition": "qobustan",
  "technique": "",
  "size": "",
  "notes": "",
@@ -18,7 +18,7 @@
  "h": 629,
  "marks": [],
  "created": 1791567611,
- "updated": 1791567611,
+ "updated": 1795534306,
  "src_id": "fig:t228_f01",
  "multi": [],
  "people": {
@@ -71,5 +71,50 @@
    39.1284
   ],
   "t": 1795207871
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol1_p347_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795534306
+    }
+   }
+  }
+ },
+ "same_ok": {
+  "kerimov_vol1_p347_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795534306
+  },
+  "kerimov_vol3_p031_1": {
+   "ok": true,
+   "by": "по цепочке: k_t228_f01 = kerimov_vol1_p347_1 = kerimov_vol3_p031_1",
+   "at": 1795534328
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0051_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0051_1 ≠ kerimov_vol1_p347_1",
+   "at": 1795534328
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p347_1",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol3_p031_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0051_1",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "composition": "kerimov_vol1_p347_1"
  }
 }
