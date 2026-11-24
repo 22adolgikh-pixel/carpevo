@@ -18,7 +18,7 @@
  "h": 1150,
  "marks": [],
  "created": 1791736124,
- "updated": 1794256272,
+ "updated": 1795498407,
  "cat": {
   "title": "Rustam kills white div.jpg",
   "museum": "Wikimedia Commons",
@@ -81,18 +81,49 @@
   "conf": 0.785,
   "area": 0.892,
   "ver": 1,
-  "t": 1794238241
+  "t": 1794238241,
+  "ref_quad": {
+   "quad": [
+    [
+     0.01607,
+     0.0067
+    ],
+    [
+     0.97541,
+     0.00662
+    ],
+    [
+     0.98947,
+     0.95242
+    ],
+    [
+     0.04032,
+     0.95828
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795498403
+  }
  },
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "cropped",
+    "a": "whole",
     "w": 2,
-    "t": 1794256272
+    "t": 1795498370
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795498407,
+    "s": "ref"
    }
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "frame_by": "micro",
  "auto_edge": {
   "v": 1,
@@ -113,5 +144,38 @@
    73.5799
   ],
   "t": 1795207909
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01607,
+    0.0067
+   ],
+   [
+    0.97541,
+    0.00662
+   ],
+   [
+    0.98947,
+    0.95242
+   ],
+   [
+    0.04032,
+    0.95828
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

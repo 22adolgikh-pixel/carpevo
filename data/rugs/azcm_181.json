@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870038,
- "updated": 1795293047,
+ "updated": 1795498402,
  "cat": {
   "title": "Qədirqə (гедирге), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -86,9 +86,9 @@
  ],
  "same_ok": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795498402
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0026_1": {
    "ok": false,
@@ -221,6 +221,15 @@
   },
   "field": {
    "dolgikh": "nofield"
+  },
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0088_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795498402
+    }
+   }
   }
  },
  "school_prev": "ganja-gazakh",

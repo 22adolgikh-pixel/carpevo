@@ -974,8 +974,8 @@
    "box": [
     0.19309,
     0.2168,
-    0.10989,
-    0.07031
+    0.18835,
+    0.07168
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -983,7 +983,7 @@
    "scheme": "t32_f04",
    "group": "m6b036851e707095_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 1",
    "machine": 1,
    "score": 0.726,
@@ -1091,15 +1091,19 @@
      0.2168
     ]
    ],
-   "sam": 0.91
+   "sam": 0.91,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795498392,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795498392
   },
   {
    "id": "m6b036851e707095_4",
    "box": [
-    0.52747,
-    0.1875,
-    0.07535,
-    0.07031
+    0.56466,
+    0.21974,
+    0.18896,
+    0.05704
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -1107,7 +1111,7 @@
    "scheme": "t32_f04",
    "group": "m6b036851e707095_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 1",
    "machine": 1,
    "score": 0.714,
@@ -1227,11 +1231,15 @@
      0.18848
     ]
    ],
-   "sam": 0.881
+   "sam": 0.881,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795498392,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795498392
   }
  ],
  "created": 1791736125,
- "updated": 1795385433,
+ "updated": 1795498392,
  "cat": {
   "title": "Karabakh-carpet-malibayli-1813.jpg",
   "museum": "Wikimedia Commons",
@@ -1407,6 +1415,20 @@
      "a": "ok",
      "w": 2,
      "t": 1795290619
+    }
+   },
+   "m6b036851e707095_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795498392
+    }
+   },
+   "m6b036851e707095_4": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795498392
     }
    }
   }

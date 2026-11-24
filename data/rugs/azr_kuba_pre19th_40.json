@@ -18,7 +18,7 @@
  "h": 674,
  "marks": [],
  "created": 1791736137,
- "updated": 1795280123,
+ "updated": 1795498366,
  "cat": {
   "title": "mid 19th century Kuba rug with a controlled riot of flowerheads and palmettes on a chocolate brown f",
   "museum": "",
@@ -121,26 +121,26 @@
   "status": "auto",
   "quad": [
    [
-    0.29427,
-    0.0178
+    0.29517,
+    0.02141
    ],
    [
-    0.71094,
-    0.01632
+    0.70821,
+    0.01577
    ],
    [
-    0.98177,
-    0.94214
+    0.97692,
+    0.9226
    ],
    [
-    0.01823,
-    0.94807
+    0.02677,
+    0.92503
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
  "frame": "whole",
- "tri": "auto",
+ "tri": "micro",
  "auto_edge": {
   "v": 1,
   "f": [
@@ -172,6 +172,14 @@
     "a": "whole",
     "w": 2,
     "t": 1795280123
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795498366,
+    "s": "ref"
    }
   }
  },

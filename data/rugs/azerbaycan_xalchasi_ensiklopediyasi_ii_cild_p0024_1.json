@@ -82,8 +82,8 @@
  "same_ok": {
   "azcm_160": {
    "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "by": "/m: dolgikh",
+   "at": 1795498284
   },
   "azcm_142": {
    "ok": false,
@@ -212,6 +212,9 @@
      "t": 1794977013
     }
    }
+  },
+  "field": {
+   "dolgikh": "nofield"
   }
  },
  "layout": {
@@ -244,7 +247,12 @@
     0.97333
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "accepted",
+  "field": {
+   "none": "nofield",
+   "by": "dolgikh",
+   "t": 1795498418
+  }
  },
  "frame": "whole",
  "tri": "auto",
