@@ -18,7 +18,7 @@
  "h": 514,
  "marks": [],
  "created": 1791567611,
- "updated": 1791567611,
+ "updated": 1795501363,
  "src_id": "fig:t239_f01",
  "multi": [],
  "people": {
@@ -71,5 +71,56 @@
    39.0398
   ],
   "t": 1795207871
- }
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol1_p358_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795501363
+    }
+   }
+  }
+ },
+ "same_ok": {
+  "kerimov_vol1_p358_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795501363
+  },
+  "cm_048c9260eb": {
+   "ok": false,
+   "by": "по цепочке: cm_652559a4c6 ≠ kerimov_vol1_p358_1",
+   "at": 1795501385
+  },
+  "cm_652559a4c6": {
+   "ok": false,
+   "by": "по цепочке: cm_652559a4c6 ≠ kerimov_vol1_p358_1",
+   "at": 1795501385
+  },
+  "kerimov_vol1_p343_2": {
+   "ok": false,
+   "by": "по цепочке: cm_652559a4c6 ≠ kerimov_vol1_p358_1",
+   "at": 1795501385
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p358_1",
+   "score": 0
+  },
+  {
+   "id": "cm_048c9260eb",
+   "score": 0
+  },
+  {
+   "id": "cm_652559a4c6",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol1_p343_2",
+   "score": 0
+  }
+ ]
 }

@@ -9,7 +9,7 @@
  "place": "",
  "date": "",
  "school": "",
- "composition": "",
+ "composition": "qebele",
  "technique": "",
  "size": "",
  "notes": "",
@@ -18,7 +18,7 @@
  "h": 663,
  "marks": [],
  "created": 1791567611,
- "updated": 1791567611,
+ "updated": 1795501256,
  "src_id": "fig:t228_f02",
  "multi": [],
  "people": {
@@ -71,5 +71,32 @@
    44.1086
   ],
   "t": 1795207871
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol1_p347_2": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795501256
+    }
+   }
+  }
+ },
+ "same_ok": {
+  "kerimov_vol1_p347_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795501256
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p347_2",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "composition": "kerimov_vol1_p347_2"
  }
 }

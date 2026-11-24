@@ -119,7 +119,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795353733,
+ "updated": 1795501213,
  "cat": {
   "title": "Ковёр «Faxralı» Газах",
   "museum": "",
@@ -247,8 +247,49 @@
     "w": 2,
     "t": 1795353733
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795501213,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01929,
+    0.01685
+   ],
+   [
+    0.96994,
+    0.02622
+   ],
+   [
+    0.98257,
+    0.97965
+   ],
+   [
+    0.02413,
+    0.97949
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
