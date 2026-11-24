@@ -748,7 +748,7 @@ def install(app, DATA, D_WORK):
 
     def pal_quad(r):
         L = r.get("layout") or {}
-        if L.get("quad") and L.get("quad_status") in ("confirmed", "accepted", "edited"): return L["quad"], "углы подтверждены"
+        if L.get("quad") and L.get("quad_status") in ("confirmed", "accepted", "edited"): return (rect_quad(r) or L["quad"]), "углы подтверждены"
         a = r.get("auto") or {}
         if (r.get("frame") == "whole" or a.get("frame") == "whole") and a.get("quad"): return a["quad"], "углы машины"
         return None, "без углов: центр кадра 80 %"
@@ -1654,9 +1654,31 @@ def install(app, DATA, D_WORK):
     RECT_OK = ("confirmed", "accepted", "edited")
     _rsig = {}; _rlock = threading.RLock()                   # построение одного и того же выпрямления из двух потоков (фон, страница, телефон) не должно мешать друг другу
 
+    # v12.30: ковры — вертикально. Поворот выпрямленного ковра задаётся сдвигом порядка углов (сами углы в карточке не меняются —
+    # их учат сети углов). layout.rot (0/90/180/270) — если человек задал; иначе широкий ковёр (ширина > 1,05 высоты) поворачивается на 90°
+    # по часовой, кроме: явно горизонтальный рисунок (models/rot_keep_v1.json), и ковров с рамками элементов / линией поля (их координаты — на прежней картинке).
+    try: ROT_KEEP = set(json.load(open(os.path.join(HERE, "models", "rot_keep_v1.json"), encoding="utf-8")).get("ids") or [])
+    except Exception: ROT_KEEP = set()
+
+    def rug_rot(r, q=None):
+        L = (r or {}).get("layout") or {}
+        if "rot" in L: return int(L.get("rot") or 0) % 360
+        if r.get("id") in ROT_KEEP or r.get("marks") or L.get("field"): return 0
+        q = q or L.get("quad"); w, h = r.get("w") or 0, r.get("h") or 0
+        if not q or not w or not h: return 0
+        import rug_rect
+        W, H = rug_rect.rect_size(np.array([[x * w, y * h] for x, y in q], np.float32), 1200, (w, h))
+        return 90 if W > 1.05 * H else 0
+
+    def rot_q(q, rot):
+        k = (int(rot) // 90) % 4                                                 # 90° по часовой: левый нижний угол становится левым верхним
+        return [list(p) for p in (q[-k:] + q[:-k] if k else q)]
+
     def rect_quad(r):
         L = (r or {}).get("layout") or {}; q = L.get("quad")
-        return q if q and len(q) == 4 and L.get("quad_status") in RECT_OK else None
+        if not (q and len(q) == 4 and L.get("quad_status") in RECT_OK): return None
+        rot = rug_rot(r, q)
+        return rot_q(q, rot) if rot else q
 
     def _rect_write(rid, a, quad):
         import rug_rect
@@ -2007,31 +2029,63 @@ def install(app, DATA, D_WORK):
                 os.makedirs(D_TH, exist_ok=True); cv2.imwrite(t, a, [cv2.IMWRITE_JPEG_QUALITY, 85])
         return FileResponse(t, headers={"Cache-Control": "no-cache"})
 
+    @app.post("/api/rugs/{rid}/rot")
+    def api_rug_rot(rid: str, request: Request, body: dict = Body(...)):
+        """v12.30: поворот выпрямленного ковра (0/90/180/270 по часовой) или «на 90° ещё» (d=90); углы не меняются"""
+        rid = os.path.basename(rid)
+        with _lock:
+            r = load(rid)
+            if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
+            L = r.setdefault("layout", {}); cur = rug_rot(r)
+            rot = (cur + int(body.get("d") or 0)) % 360 if "d" in body else int(body.get("rot") or 0) % 360
+            if rot % 90: return JSONResponse({"error": "кратно 90"}, status_code=400)
+            L["rot"] = rot; L["rot_by"] = user(request); r["updated"] = int(time.time()); save(r)
+        return {"ok": True, "rot": rot}
+
     @app.get("/rugpad/{rid}.jpg")
-    def rug_pad_img(rid: str, s: int = 900):
-        """v12.20: перспектива с полями вокруг ковра (12 %): что лежит за краем — бахрома, пол, или за кадром (тёмная штриховка). Жёлтая рамка — ковёр по углам,
-        голубая линия — край, который нашла сетка (где она выходит за рамку, там сетка «загибает» ковёр); цифры — доля рамки за кадром"""
+    def rug_pad_img(rid: str, s: int = 900, m: int = 0):
+        """v12.20/v12.30: выпрямление с полями вокруг рамки (12 %). Жёлтая рамка — куда выпрямляли по углам.
+        m=0 — перспектива: голубая линия — край ковра, найденный сеткой; красным — ковёр вылез за рамку, синим — ковёр не дотянулся до рамки
+        (в рамке фон); тёмная штриховка — фото кончилось. m=1 — сетка: ковёр натянут в рамку, вокруг притушено то, что было за рамкой."""
         import rug_mesh
         rid = os.path.basename(rid); r = load(rid); q = rect_quad(r); p = img_path(rid)
         if not q or not p: return Response(status_code=404)
-        m = mesh_info(rid, r, build=False); s = max(400, min(1600, s))
-        t = os.path.join(D_TH, "%s.pad%d.jpg" % (rid, s))
-        if not os.path.exists(t) or os.path.getmtime(t) < os.path.getmtime(p):
+        mi = mesh_info(rid, r, build=True) or {}; s = max(400, min(1600, s))      # после поворота сетку надо перестроить
+        pm = os.path.join(D_MESH, rid + (".jpg" if mi.get("choice") == "mesh" else ".m.jpg"))
+        t = os.path.join(D_TH, "%s.pad%s%d.r%d.jpg" % (rid, "m" if m else "", s, rug_rot(r)))
+        src = [p] + ([pm] if os.path.exists(pm) else [])
+        if not os.path.exists(t) or os.path.getmtime(t) < max(os.path.getmtime(x) for x in src):
             with THUMB:
                 a = cv2.imread(p)
                 if a is None: return Response(status_code=404)
                 cv, valid, g = rug_mesh.rectify_padded(a, q, s, pad=0.12); W, H, px, py = g["W"], g["H"], g["px"], g["py"]
-                oof = 100 * (1 - float(valid[py:py + H, px:px + W].mean()))
                 inv = ~valid; hatch = ((np.add.outer(np.arange(cv.shape[0]), np.arange(cv.shape[1])) // 6) % 2 == 0)
                 cv[inv] = np.where(hatch[inv][:, None], 40, 90).astype(np.uint8)
+                frame = np.zeros(cv.shape[:2], bool); frame[py:py + H, px:px + W] = True
+                E = mi.get("edge_mesh") or mi.get("edge"); G0 = mi.get("geo") or {}
+                k = W / float(G0.get("W") or W)                                     # кривые краёв посчитаны на картинке 1200 — в масштаб этой
+                txt = ""
+                if m:
+                    mesh = cv2.imread(pm) if os.path.exists(pm) else None
+                    cv = (cv * 0.35).astype(np.uint8)
+                    if mesh is not None: cv[py:py + H, px:px + W] = cv2.resize(mesh, (W, H), interpolation=cv2.INTER_AREA)
+                    txt = "setka"
+                elif E:
+                    n = len(E["top"]); u = np.linspace(0, 1, n); f = lambda key: np.array(E[key], np.float32) * k
+                    top = np.c_[px + u * W, py + f("top")]; right = np.c_[px + W - 1 - f("right"), py + u * H]
+                    bot = np.c_[px + (1 - u) * W, py + H - 1 - f("bot")[::-1]]; left = np.c_[px + f("left")[::-1], py + (1 - u) * H]
+                    poly = np.concatenate([top, right, bot, left]).astype(np.int32)
+                    rug = np.zeros(cv.shape[:2], np.uint8); cv2.fillPoly(rug, [poly], 1); rug = rug.astype(bool)
+                    spill = rug & ~frame & valid; gap = frame & ~rug
+                    o = cv.astype(np.float32)
+                    o[spill] = o[spill] * .45 + np.array([40, 40, 255]) * .55       # красный: вылезло за рамку
+                    o[gap] = o[gap] * .45 + np.array([255, 120, 40]) * .55          # синий: не дотянулось до рамки
+                    cv = o.astype(np.uint8)
+                    cv2.polylines(cv, [poly.reshape(-1, 1, 2)], True, (255, 220, 0), 2)
+                    txt = "vylezlo %.1f%%  ne dotyanulos %.1f%%" % (100 * spill.sum() / frame.sum(), 100 * gap.sum() / frame.sum())
                 cv2.rectangle(cv, (px, py), (px + W, py + H), (0, 213, 255), 2)
-                E = (m or {}).get("edge_mesh") or (m or {}).get("edge")
-                if E:
-                    n = len(E["top"]); u = np.linspace(0, 1, n)
-                    pts = {"top": np.c_[px + u * W, py + np.array(E["top"])], "bot": np.c_[px + u * W, py + H - 1 - np.array(E["bot"])],
-                           "left": np.c_[px + np.array(E["left"]), py + u * H], "right": np.c_[px + W - 1 - np.array(E["right"]), py + u * H]}
-                    for k, v in pts.items(): cv2.polylines(cv, [v.astype(np.int32).reshape(-1, 1, 2)], False, (255, 200, 0), 2)
-                cv2.putText(cv, "za kadrom %.1f%%" % oof, (8, 22), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                oof = 100 * (1 - float(valid[py:py + H, px:px + W].mean()))
+                cv2.putText(cv, (txt + ("  za kadrom %.1f%%" % oof if oof > 0.1 else "")).strip(), (8, 22), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 255, 255), 2)
                 os.makedirs(D_TH, exist_ok=True); cv2.imwrite(t, cv, [cv2.IMWRITE_JPEG_QUALITY, 85])
         return FileResponse(t, headers={"Cache-Control": "no-cache"})
 

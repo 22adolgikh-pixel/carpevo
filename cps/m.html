@@ -70,7 +70,7 @@ button:disabled{opacity:.4}
 .zz{position:absolute;left:4px;top:4px;z-index:4;min-height:0;padding:2px 8px;font-size:14px;border-radius:10px;background:#000b}
 .flags{display:flex;gap:8px}.flags label{flex:1;display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--ln);border-radius:10px;font-size:13px;color:var(--mut)}.flags input{width:20px;height:20px;accent-color:var(--acc)}.flags label:has(input:checked){border-color:var(--acc);color:var(--tx)}
 .rpt{position:absolute;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;background:#e53935;color:#fff;font:700 12px/20px system-ui;text-align:center;border:2px solid #fff;font-style:normal;pointer-events:none}</style></head><body>
-<header><b>Проверка ковров</b><span class="sp"></span><small id="me"></small><a href="/">студия</a></header>
+<header><b>Проверка ковров</b><span class="sp"></span><button id="undo" class="sm" style="min-height:30px;padding:2px 10px;margin-right:8px;display:none" title="вернуться к прошлой карточке и ответить заново">↶ назад</button><small id="me"></small><a href="/">студия</a></header>
 <div class="chips" id="chips"></div>
 <div class="dots" id="dots"></div>
 <main id="main"><div class="end"><span class="mut">загружаю…</span></div></main>
@@ -105,7 +105,7 @@ const img=t=>'/rugmid/'+encodeURIComponent(t.rid)+'.jpg';
 function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!im.naturalWidth)return;
   const BW=r.width*Z,BH=BW*im.naturalHeight/im.naturalWidth;
   el.style.backgroundImage=`url("${img(t)}")`;el.style.backgroundSize=`${BW}px ${BH}px`;el.style.backgroundPosition=`${r.width/2-x*BW}px ${r.height/2-y*BH}px`;}
-function show(){head();const t=S.tasks[S.i];
+function show(){head();const t=S.tasks[S.i];const u=$('undo');if(u&&!u.onclick)u.onclick=undo;undoBtn();
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
     <div class="mut">в очереди: ${KINDS.concat(KOLD).filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${S.k.includes('field')&&S.ms&&S.ms.running?`<div class="mut">готовлю карточки «поле»: ${S.ms.done} из ${S.ms.total}</div>`:''}${S.k.includes('rsame')&&S.rs?`<div class="mut">поиск новых дублей: ${S.rs.running?`идёт, проверено ${S.rs.done} из ${S.rs.total||'…'} пар`:(S.rs.t?'проход закончен':'ещё не запускался')}${S.rs.err?' · ошибка: '+S.rs.err:''}</div>`:''}${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
     ${S.k.some(k=>L[k])?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
@@ -129,10 +129,14 @@ function zoomable(){const st=$('stage'),ph=$('ph');if(!st||!ph)return;let k=1,x=
   window.__zoom=()=>k;}
 // v11.45: на каждой карточке свои галочки; отправляем только их, чтобы не стирать отметки с другой карточки
 function rdFlags(t){const o={},m={fw:'wavy',fs:'skew',fd:'damaged'};for(const k in m){const e=$(k);if(e)o[m[k]]=e.checked;}if(Object.keys(o).length)t.fl=o;}
-async function answer(t,a,q,x){rdFlags(t);const k=S.i;S.i++;S.done++;show();
+// v12.30: «↶ назад» — вернуть последнюю отвеченную карточку и ответить заново (новый ответ заменяет прежний: голос человека по ковру один)
+function undoBtn(){const b=$('undo');if(b)b.style.display=(S.hist||[]).length?'':'none';}
+function undo(){const h=S.hist||[];if(!h.length)return;const t=Object.assign({},h.pop());t._again=1;S.tasks.splice(S.i,0,t);S.done=Math.max(0,S.done-1);undoBtn();show();
+  toast('прошлая карточка — ответьте заново, прежний ответ заменится');}
+async function answer(t,a,q,x){rdFlags(t);const k=S.i;S.i++;S.done++;(S.hist=S.hist||[]).push(t);if(S.hist.length>20)S.hist.shift();undoBtn();show();
   try{const j=await api('/api/micro/answer',{type:t.type,rid:t.rid,a,q,c:t.c,flags:t.fl,s:t.qsrc,...(x||{})});S.me.total=(S.me.total||0)+1;if(a!=='skip')S.me.today=(S.me.today||0)+1;
     if(j.ctl===false)toast('контрольная карточка: тут была ошибка — смотрите внимательнее');else if(j.applied)toast('принято ✓');head();}
-  catch(e){toast('не сохранилось: '+e.message);S.i=k;S.done--;show();}}
+  catch(e){toast('не сохранилось: '+e.message);S.i=k;S.done--;S.hist.pop();undoBtn();show();}}
 // v11.45: кадр — три ответа (целый / обрезан / деталь) плюс «не ковёр»; порог «чуть вылез» — 3 % по одному краю.
 // Рваные края и перспектива — отдельные галочки: такой ковёр остаётся целым и в работе.
 function showFrame(t){document.documentElement.style.setProperty('--imh','40dvh');
@@ -344,27 +348,28 @@ function rcWhy(t,back){const sel=new Set();
   $('rwd').onclick=()=>{if(!sel.size){toast('отметьте причину');return;}answer(t,'issue',undefined,{why:[...sel]});};
   if(back)$('rwb').onclick=back;else $('rws').onclick=()=>answer(t,'skip');}
 function showRcmp(t){if(t.ask&&!t._cmp){return rcWhy(t,()=>{t._cmp=1;showRcmp(t);});}document.documentElement.style.setProperty('--imh','46dvh');
-  const id=encodeURIComponent(t.rid),mesh=t.choice==='mesh'?`/rugmesh/${id}.jpg?s=900`:`/rugmesh/${id}.jpg?alt=1&s=900`,rect=`/rugrect/${id}.jpg`;
+  const id=encodeURIComponent(t.rid),mesh=`/rugpad/${id}.jpg?m=1`,rect=`/rugpad/${id}.jpg`;   /* v12.30: обе — с полями вокруг рамки углов */
   const flip=(t.rid.length+t.rid.charCodeAt(t.rid.length-1))%2===1,L=flip?['mesh',mesh]:['rect',rect],R=flip?['rect',rect]:['mesh',mesh];
   const pts=[];let tab='two';
   const dots=s=>pts.map((p,i)=>p.s===s?`<i class="rpt" style="left:${p.x*100}%;top:${p.y*100}%">${i+1}</i>`:'').join('');
   const draw=()=>{
     let body;
     if(tab==='two')body=`<div class="pair">${[L,R].map((v,j)=>`<figure><div class="rw" data-s="${v[0]}" style="position:relative;line-height:0"><img src="${v[1]}" alt="" style="max-width:100%;max-height:var(--imh)">${dots(v[0])}</div><figcaption>${j?'справа':'слева'}</figcaption></figure>`).join('')}</div>
-      <div class="mut" style="text-align:center">тап по картинке — отметить место, где неудачно или кривое${pts.length?` · меток: ${pts.length} <a href="#" id="rclr">очистить</a>`:''}</div>`;
+      <div class="mut" style="text-align:center">жёлтая рамка — куда выпрямляли по углам · <span style="color:#ff6b6b">красное</span> — вылезло за рамку · <span style="color:#6ba8ff">синее</span> — не дотянулось · тап — отметить неудачное место${pts.length?` · меток: ${pts.length} <a href="#" id="rclr">очистить</a>`:''}</div>`;
     else if(tab==='orig'){const q=t.quad||[];body=`<div class="stage" style="position:relative"><div style="position:relative;line-height:0"><img src="/rugthumb/${id}.jpg?raw=1" alt="" style="max-width:100%;max-height:var(--imh)">${q.length===4?`<svg viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><polygon points="${q.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#ffd54a" stroke-width=".004" vector-effect="non-scaling-stroke"/></svg>`:''}</div></div><div class="mut" style="text-align:center">исходное фото; жёлтая рамка — углы, по которым выпрямляли</div>`;}
     else if(tab==='pad')body=`<div class="stage"><img src="/rugpad/${id}.jpg" alt="" style="max-width:100%;max-height:var(--imh)"></div><div class="mut" style="text-align:center">жёлтая рамка — ковёр по углам, голубая линия — край, найденный сеткой; за рамкой видно, что лежит вокруг (бахрома, пол) и сколько ковра за кадром (тёмная штриховка, цифра сверху)</div>`;
     else body=`<div class="stage"><img src="/rugcmp/${id}.jpg" alt="" style="max-width:100%;max-height:var(--imh)"></div><div class="mut" style="text-align:center">красным — где сетка сдвинула картинку относительно перспективы; без красного — не изменилось</div>`;
     $('rbody').innerHTML=body;
-    $('rtabs').innerHTML=[['two','две'],['orig','оригинал'],['diff','что изменилось'],['pad','с полями']].map(([k,n])=>`<button class="sm${k===tab?' yes':''}" data-t="${k}">${n}</button>`).join('');
+    $('rtabs').innerHTML=[['two','две'],['orig','оригинал'],['diff','что изменилось']].map(([k,n])=>`<button class="sm${k===tab?' yes':''}" data-t="${k}">${n}</button>`).join('');
     $('rtabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;draw();});
     document.querySelectorAll('.rw').forEach(w=>w.onclick=e=>{const r=w.getBoundingClientRect();if(pts.length<12){pts.push({s:w.dataset.s,x:+((e.clientX-r.left)/r.width).toFixed(3),y:+((e.clientY-r.top)/r.height).toFixed(3)});draw();}});
     const c=$('rclr');if(c)c.onclick=e=>{e.preventDefault();pts.length=0;draw();};};
   $('main').innerHTML=`${qhead('Какая картинка ровнее?','Смотрите на края ковра и прямые линии каймы: они должны быть прямыми, узор без перекоса и изломов. Слева и справа два способа выпрямления, порядок случайный. Вкладки: «оригинал» — исходное фото с рамкой углов, «что изменилось» — красным то, что сдвинула сетка. Тап по картинке ставит метку там, где получилось плохо.')}
    <div id="rtabs" style="display:flex;gap:6px;justify-content:center;margin:4px 0"></div><div id="rbody" style="flex:1;min-height:0;display:flex;flex-direction:column;gap:4px"></div>
-   <div class="btns"><button class="yes" id="rl">◀ слева ровнее</button><button class="yes" id="rr">справа ровнее ▶</button><button id="rb">одинаково хорошо</button><button class="no" id="rx">обе плохие</button><button class="sm unk" id="rs">пропустить</button><button id="rq">что-то не так…</button></div>`;
-  qtip();draw();const ans=a=>answer(t,a,undefined,pts.length?{pts}:undefined);
-  $('rl').onclick=()=>ans(L[0]);$('rr').onclick=()=>ans(R[0]);$('rb').onclick=()=>ans('both');$('rx').onclick=()=>ans('bad');$('rs').onclick=()=>answer(t,'skip');$('rq').onclick=()=>rcWhy(t,()=>showRcmp(t));}
+   <div class="btns"><button class="yes" id="rl">◀ слева ровнее</button><button class="yes" id="rr">справа ровнее ▶</button><button id="rb">одинаково хорошо</button><button class="no" id="rx">обе плохие</button><button class="sm unk" id="rs">пропустить</button><button id="rq">что-то не так…</button><button class="sm" id="rrot" title="повернуть выпрямленный ковёр на 90° по часовой">↻ повернуть</button></div>`;
+  qtip();draw();const ans=a=>answer(t,a,undefined,pts.length?{pts,pad:1}:{pad:1});
+  $('rl').onclick=()=>ans(L[0]);$('rr').onclick=()=>ans(R[0]);$('rb').onclick=()=>ans('both');$('rx').onclick=()=>ans('bad');$('rs').onclick=()=>answer(t,'skip');$('rq').onclick=()=>rcWhy(t,()=>showRcmp(t));
+  $('rrot').onclick=async()=>{try{await api('/api/rugs/'+encodeURIComponent(t.rid)+'/rot',{d:90});toast('повёрнуто — картинки пересчитываются');setTimeout(()=>{document.querySelectorAll('#rbody img').forEach(i=>{i.src=i.src.split('&_=')[0].split('?_=')[0]+(i.src.includes('?')?'&':'?')+'_='+Date.now();});},1500);}catch(e){toast('не вышло: '+e.message);}};}
 function showXsame(t){const f=(x)=>`<figure><img src="${crop(x.rid,x.box,300,0.3,1)}" alt=""><figcaption>${esc(x.title||x.rid)}${x.n>1?' · повторов '+x.n:''}</figcaption></figure>`;
   $('main').innerHTML=`${qhead('Это один и тот же элемент узора?','Элементы с двух разных ковров (жёлтая рамка). Поворот, зеркало, цвет и размер не важны — важна форма. «Тот же» — один и тот же элемент (как одно слово у Керимова). «Тот же, другое заполнение» — внешний контур тот же, а внутри другое (другой узор, 4 квадрата вместо одного). «Похож» — родственные, но сам контур другой. Сомневаетесь между «тот же» и «похож» — выбирайте «похож». Ответы собирают элементы в группы между коврами; потом группе дадим имя один раз.')}
    <div class="pair">${f(t.a)}${f(t.b)}</div>
