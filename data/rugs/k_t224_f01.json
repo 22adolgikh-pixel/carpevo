@@ -10,7 +10,7 @@
  "date": "",
  "school": "",
  "composition": "",
- "technique": "",
+ "technique": "безворсовый: зили",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 684,
  "marks": [],
  "created": 1791567611,
- "updated": 1791567611,
+ "updated": 1795547642,
  "src_id": "fig:t224_f01",
  "multi": [],
  "people": {
@@ -71,5 +71,41 @@
    33.5353
   ],
   "t": 1795207870
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol1_p343_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795547642
+    }
+   }
+  }
+ },
+ "same_ok": {
+  "kerimov_vol1_p343_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795547642
+  },
+  "azr_kuba_sumakh46": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_sumakh46 ≠ kerimov_vol1_p343_1",
+   "at": 1795547664
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p343_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_sumakh46",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "technique": "kerimov_vol1_p343_1"
  }
 }

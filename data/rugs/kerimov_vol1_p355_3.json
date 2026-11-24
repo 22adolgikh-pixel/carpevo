@@ -85,8 +85,19 @@
  },
  "src_id": "cat:kerimov_vol1_p355_3",
  "lib_img": "img/kerimov_vol1_p355_3.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "k_t236_f03",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "k_t236_f03": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795547574
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

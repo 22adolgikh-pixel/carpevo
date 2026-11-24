@@ -18,7 +18,7 @@
  "h": 726,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1795547593,
  "cat": {
   "title": "antique khizi findigan rug1",
   "museum": "",
@@ -138,5 +138,49 @@
    54.7812
   ],
   "t": 1795207722
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795547593,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.07689,
+    0.01904
+   ],
+   [
+    0.95238,
+    0.0389
+   ],
+   [
+    0.92679,
+    0.96162
+   ],
+   [
+    0.08006,
+    0.97189
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

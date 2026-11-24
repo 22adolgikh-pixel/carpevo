@@ -9,7 +9,7 @@
  "place": "",
  "date": "",
  "school": "",
- "composition": "",
+ "composition": "heris",
  "technique": "",
  "size": "",
  "notes": "",
@@ -18,7 +18,7 @@
  "h": 641,
  "marks": [],
  "created": 1791567611,
- "updated": 1791567611,
+ "updated": 1795547574,
  "src_id": "fig:t236_f03",
  "multi": [],
  "people": {
@@ -71,5 +71,32 @@
    43.9207
   ],
   "t": 1795207871
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol1_p355_3": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795547574
+    }
+   }
+  }
+ },
+ "same_ok": {
+  "kerimov_vol1_p355_3": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795547574
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p355_3",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "composition": "kerimov_vol1_p355_3"
  }
 }
