@@ -344,6 +344,14 @@ def t05_rug_passport_popup(pg, ctx):
     pg.click('#rgPassBtn'); pg.wait_for_timeout(500)
     assert pg.is_visible('#modal') and pg.is_visible('#modal [data-f="title"]'), 'паспорт ковра не открылся во всплывающем окне'
     pg.screenshot(path=f'{OUT}/06_rug_passport.png')
+    # v12.31: ID и кнопки «скачать» в паспорте
+    assert (pg.text_content('#modal #rgIdTxt') or '').strip() == 'kerimov_vol3_p100_1', 'в паспорте не показан ID ковра'
+    assert pg.is_visible('#modal #rgIdCopy'), 'в паспорте нет кнопки «копировать» ID'
+    for sel, frag in (('#rgDlRaw', '/api/open/file/raw/kerimov_vol3_p100_1.jpg'), ('#rgDlRect', '/api/open/file/rect/kerimov_vol3_p100_1.jpg'), ('#rgDlCard', '/api/open/card/kerimov_vol3_p100_1.json')):
+        h = pg.get_attribute('#modal ' + sel, 'href') or ''
+        assert h.endswith(frag), f'кнопка скачивания {sel} ведёт не туда: «{h}»'
+        assert pg.get_attribute('#modal ' + sel, 'download'), f'у кнопки {sel} нет атрибута download'
+    assert get(ctx['url'] + 'api/open/card/kerimov_vol3_p100_1.json')['id'] == 'kerimov_vol3_p100_1', 'карточка по ссылке из паспорта не отдаётся'
     pg.keyboard.press('Escape'); pg.wait_for_timeout(300)
     assert not pg.is_visible('#modal'), 'Esc не закрывает паспорт'
     pg.keyboard.press('i'); pg.wait_for_timeout(400)

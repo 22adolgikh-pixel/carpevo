@@ -234,6 +234,8 @@ aside{min-height:0}
 #um input{padding:5px 8px;margin:2px 4px 2px 0}#um h3{margin:10px 0 4px}
 /* v10.20 «Ковры» */
 .rgsub{padding-left:22px;background:#0001}.rgpass{background:var(--pan2);border-radius:6px;padding:6px 8px;color:var(--tx);margin-bottom:6px}.rgpass div{margin-top:3px}
+.rgdl{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}.rgdl code{font-size:12px;user-select:all;word-break:break-all}.rgdl .rgdlb{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto}
+.rgdl a.sm{display:inline-flex;align-items:center;padding:2px 7px;font-size:12px;border:1px solid var(--ln2);border-radius:5px;color:var(--tx);text-decoration:none;background:var(--pan)}.rgdl a.sm:hover{filter:brightness(1.25)}
 .rgsame{display:flex;flex-direction:column;gap:6px;margin-top:4px}.rgsm{display:flex;gap:8px;color:var(--tx)}.rgsm img{width:64px;height:64px;object-fit:cover;border-radius:4px;cursor:pointer;flex:none}.rgsm small{display:block}
 .rgsug{background:#ffb4541a;border-radius:6px;padding:4px 6px;color:var(--tx);margin:-2px 0 6px}.rgrings{display:flex;flex-wrap:wrap;gap:3px;margin:4px 0}
 .rgring{border:1px solid;border-left-width:4px;border-radius:5px;padding:1px 6px;cursor:pointer;color:var(--tx);font-size:12px}
@@ -490,7 +492,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v12.30</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v12.31</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Вернуться к рисунку, который вы правили последним">↩ К рисунку</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -3158,6 +3160,10 @@ function rugSideFill(E,side,r){
     const sameAll=r.same||[],nRej=sameAll.filter(rugTwinRej).length,same=rugShowRej()?sameAll:sameAll.filter(x=>!rugTwinRej(x));   // v11.80
     body=`<div class="rgform">
       <div class="rgpass"><b>Паспорт</b> <small class="mut">${esc(SRCRU[C.src]||C.src||r.source||'')}</small>
+        <div class="rgdl" id="rgDl"><small class="mut">ID:</small> <code id="rgIdTxt" data-tip="так ковёр называется в API: /api/open/card/ID.json, /api/open/file/raw/ID.jpg">${esc(r.id)}</code> <button class="sm" id="rgIdCopy" data-tip="скопировать ID">копировать</button>
+          <span class="rgdlb"><a class="sm" id="rgDlRaw" href="/api/open/file/raw/${encodeURIComponent(r.id)}.jpg" download="${esc(r.id)}.jpg" data-tip="скачать исходное фото">⬇ фото</a>
+          <a class="sm" id="rgDlRect" href="/api/open/file/rect/${encodeURIComponent(r.id)}.jpg" download="${esc(r.id)}_rect.jpg" data-tip="скачать выпрямленный ковёр (нужны подтверждённые углы; если углов нет — ответ «нет картинки»)">⬇ выпрямленный</a>
+          <a class="sm" id="rgDlCard" href="/api/open/card/${encodeURIComponent(r.id)}.json" download="${esc(r.id)}.json" data-tip="скачать карточку ковра (JSON)">⬇ карточка</a></span></div>
         ${names.length?`<div><small class="mut">другие названия:</small> ${names.map(esc).join(' · ')}</div>`:''}
         ${C.fragment?'<div style="color:var(--warn)">⚠ фрагмент ковра (по подписи)</div>':''}${C.object?`<div style="color:var(--warn)">⚠ ${esc(C.object)}</div>`:''}${C.ambiguous?'<div class="mut">⚠ на странице книги фото и подписи не совпали по числу — проверьте название</div>':''}
         ${C.school_why?`<div><small class="mut">школа по каталогу:</small> ${esc(RSCH[C.school]||C.school||'')} <small class="mut">— ${esc(C.school_why)}</small></div>`:''}
@@ -3272,6 +3278,8 @@ function rugSideFill(E,side,r){
     $('rgSugNo')&&($('rgSugNo').onclick=()=>{r.school_suggest=null;R.dropSug=true;rugSaveSoon();rugSide();});
     $('rgDel').onclick=async()=>{if(!confirm('Удалить ковёр «'+(r.title||r.id)+'» вместе с разметкой?'))return;await api('/api/rugs/'+encodeURIComponent(r.id),undefined,'DELETE');R.rug=null;await rugsLoadList();rugRender();};
   }
+  if(side==='rug')$('rgIdCopy')&&($('rgIdCopy').onclick=async()=>{const t=r.id;let ok=false;try{await navigator.clipboard.writeText(t);ok=true;}catch(e){try{const s=document.createElement('textarea');s.value=t;document.body.appendChild(s);s.select();ok=document.execCommand('copy');s.remove();}catch(e2){}}
+    if(ok)stat('ID скопирован: '+t,'ok');else{const c=$('rgIdTxt');if(c){const g=window.getSelection(),rg=document.createRange();rg.selectNodeContents(c);g.removeAllRanges();g.addRange(rg);}stat('не удалось скопировать — ID выделен, нажмите ⌘C','err');}});
   if(side==='rug'&&rro())$('rgTxt')&&($('rgTxt').onclick=()=>rugTextPopup(r));
   if(side==='mark'&&R.sel&&!rro()){
     const m=R.sel;
