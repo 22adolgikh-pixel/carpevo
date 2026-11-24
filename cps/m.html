@@ -87,10 +87,11 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
 // v11.52: виды карточек. Кнопки вверху включают и выключают вид; выбор помнится на этом телефоне. /m?k=quad,frame — задать выбор ссылкой.
-const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['tw','двойники'],['sch','школа'],['split','развороты'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле'],['rcmp','выпрямление']];
-const KOLD=[['same','пары (старое)'],['rsame','дубли по углам (старое)']];   /* v12.04: старые виды — только по ссылке ?k=same / ?k=rsame */
+const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['tw','двойники'],['sch','школа'],['split','развороты'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле'],['edge','край']];
+const KOLD=[['same','пары (старое)'],['rsame','дубли по углам (старое)'],['rcmp','выпрямление (старое)']];   /* v12.04: старые виды — только по ссылке ?k=same / ?k=rsame */
 function kindsInit(){let k=new URLSearchParams(location.search).get('k');const fromUrl=!!k;
   if(!k){try{k=localStorage.getItem('cps_m_k');}catch(e){}}
+  try{if(!fromUrl&&k&&!localStorage.getItem('cps_m_edge')){k=k.split(',').filter(x=>x!=='rcmp').concat(k.includes('edge')?[]:['edge']).join(',');localStorage.setItem('cps_m_k',k);localStorage.setItem('cps_m_edge','1');}}catch(e){}   /* v12.33: «выпрямление» (сравнение) заменено карточкой «край» */
   S.k=(k||'').split(',').filter(x=>KINDS.concat(KOLD).some(a=>a[0]===x));if(!S.k.length)S.k=KINDS.map(a=>a[0]).filter(x=>x!=='same'&&x!=='rsame');
   // v11.86: пары по одной заменены карточкой «двойники ковра»: у сохранённого выбора старые виды меняются на новый (один раз)
   try{if(!fromUrl&&!localStorage.getItem('cps_m_tw')){if(S.k.includes('same')||S.k.includes('rsame')||!S.k.includes('tw')){S.k=S.k.filter(x=>x!=='same'&&x!=='rsame');if(!S.k.includes('tw'))S.k.push('tw');localStorage.setItem('cps_m_k',S.k.join(','));}localStorage.setItem('cps_m_tw','1');}}catch(e){}}
@@ -109,7 +110,7 @@ function show(){head();const t=S.tasks[S.i];const u=$('undo');if(u&&!u.onclick)u
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
     <div class="mut">в очереди: ${KINDS.concat(KOLD).filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${S.k.includes('field')&&S.ms&&S.ms.running?`<div class="mut">готовлю карточки «поле»: ${S.ms.done} из ${S.ms.total}</div>`:''}${S.k.includes('rsame')&&S.rs?`<div class="mut">поиск новых дублей: ${S.rs.running?`идёт, проверено ${S.rs.done} из ${S.rs.total||'…'} пар`:(S.rs.t?'проход закончен':'ещё не запускался')}${S.rs.err?' · ошибка: '+S.rs.err:''}</div>`:''}${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
     ${S.k.some(k=>L[k])?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
-  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,tw:showTw,sch:showSch,split:showSplit,cdup:showCdup,xsame:showXsame,field:showField,rcmp:showRcmp})[t.type](t);}
+  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,tw:showTw,sch:showSch,split:showSplit,cdup:showCdup,xsame:showXsame,field:showField,rcmp:showRcmp,edge:showEdge})[t.type](t);}
 function qhead(q,tip){return `<div class="qrow"><span class="q">${q}</span><button class="ib" id="ib" aria-label="подсказка">i</button></div><div class="tip hint" id="tip">${tip}</div>`;}
 function qtip(){const b=$('ib'),t=$('tip');if(b&&t)b.onclick=()=>{t.classList.toggle('on');b.classList.toggle('on');};}
 function stage(t,extra=''){return `<div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="${img(t)}" alt="">${extra}</div></div>`;}
@@ -370,6 +371,40 @@ function showRcmp(t){if(t.ask&&!t._cmp){return rcWhy(t,()=>{t._cmp=1;showRcmp(t)
   qtip();draw();const ans=a=>answer(t,a,undefined,pts.length?{pts,pad:1}:{pad:1});
   $('rl').onclick=()=>ans(L[0]);$('rr').onclick=()=>ans(R[0]);$('rb').onclick=()=>ans('both');$('rx').onclick=()=>ans('bad');$('rs').onclick=()=>answer(t,'skip');$('rq').onclick=()=>rcWhy(t,()=>showRcmp(t));
   $('rrot').onclick=async()=>{try{await api('/api/rugs/'+encodeURIComponent(t.rid)+'/rot',{d:90});toast('повёрнуто — картинки пересчитываются');setTimeout(()=>{document.querySelectorAll('#rbody img').forEach(i=>{i.src=i.src.split('&_=')[0].split('?_=')[0]+(i.src.includes('?')?'&':'?')+'_='+Date.now();});},1500);}catch(e){toast('не вышло: '+e.message);}};}
+// v12.33 «край»: на фото с рамкой углов (жёлтая) — по три ручки на каждую сторону. Тянем ручку на настоящий край ковра (ворс; бахрому не включаем).
+// Ручки верха и низа сначала стоят на линии углов, боковых — там, где край нашла машина. Выпрямление строится по этим линиям.
+function showEdge(t){if(t.ask&&!t._ok){return rcWhy(t,()=>{t._ok=1;showEdge(t);});}document.documentElement.style.setProperty('--imh','60dvh');
+  const id=encodeURIComponent(t.rid);let tab='edit',D=null,V=null,prev=null;const SD=['top','bot','left','right'];
+  $('main').innerHTML=`${qhead('Где настоящий край ковра?','Жёлтая рамка — ковёр по вашим углам. Потяните ручки (по три на сторону) на край ворса: туда, где кончается узор. Бахрому, килимную полосу без узора и тени не включайте. Рамку закрывает ковёр — тяните наружу, ковёр не дотягивает — внутрь. Если край и так по рамке — просто «готово». Пунктир — где край нашла машина. «посмотреть результат» — как выпрямится по вашим ручкам.')}
+   <div id="etabs" style="display:flex;gap:6px;justify-content:center;margin:4px 0"></div><div id="ebody" style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:4px"><span class="mut">загружаю…</span></div>
+   <div class="btns"><button class="yes" id="ed">✓ готово</button><button id="ep">посмотреть результат</button><button class="sm" id="er">сбросить</button><button class="sm unk" id="es">пропустить</button><button id="eq">что-то не так…</button><button class="sm" id="erot" title="повернуть ковёр на 90° по часовой">↻ повернуть</button></div>`;qtip();
+  const P=()=>D.pad,f0=()=>P()/(1+2*P()),fw=()=>1/(1+2*P()),f1=()=>f0()+fw();
+  const pos=(k,i)=>{const v=V[k][i],tt=D.st[i],a=f0(),w=fw(),b=f1();return k==='top'?[a+tt*w,a+v*w]:k==='bot'?[a+tt*w,b-v*w]:k==='left'?[a+v*w,a+tt*w]:[b-v*w,a+tt*w];};
+  const gpt=(k,j)=>{const n=D.guide[k].length,tt=j/(n-1),v=D.guide[k][j],a=f0(),w=fw(),b=f1();return k==='top'?[a+tt*w,a+v*w]:k==='bot'?[a+tt*w,b-v*w]:k==='left'?[a+v*w,a+tt*w]:[b-v*w,a+tt*w];};
+  const line=(k)=>{const a=f0(),b=f1(),c={top:[[a,a],[b,a]],bot:[[a,b],[b,b]],left:[[a,a],[a,b]],right:[[b,a],[b,b]]}[k];return [c[0],...[0,1,2].map(i=>pos(k,i)),c[1]];};
+  const paint=()=>{const sv=$('esvg');if(!sv)return;
+    sv.innerHTML=SD.map(k=>`<polyline fill="none" stroke="#6bd6ff" stroke-width="1.2" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" opacity=".8" points="${D.guide[k].map((_,j)=>gpt(k,j).join(',')).join(' ')}"/><polyline fill="none" stroke="#ff9a3c" stroke-width="2" vector-effect="non-scaling-stroke" points="${line(k).map(p=>p.join(',')).join(' ')}"/>`).join('');
+    SD.forEach(k=>[0,1,2].forEach(i=>{const h=document.querySelector(`.eh[data-k="${k}"][data-i="${i}"]`);if(h){const p=pos(k,i);h.style.left=p[0]*100+'%';h.style.top=p[1]*100+'%';}}));};
+  const draw=()=>{let body;
+    if(tab==='edit'){body=`<div id="ew" style="position:relative;line-height:0;touch-action:none"><img src="/rugpad/${id}.jpg?c=1&s=1100" alt="" style="max-width:100%;max-height:var(--imh);display:block"><svg id="esvg" viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></svg>${SD.map(k=>[0,1,2].map(i=>`<div class="eh" data-k="${k}" data-i="${i}" style="position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:#ff9a3c;border:2px solid #fff;box-shadow:0 0 0 1px #000;touch-action:none;cursor:grab"></div>`).join('')).join('')}</div>`;}
+    else if(tab==='orig'){const q=t.quad||[];body=`<div style="position:relative;line-height:0"><img src="/rugthumb/${id}.jpg?raw=1" alt="" style="max-width:100%;max-height:var(--imh)">${q.length===4?`<svg viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><polygon points="${q.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#ffd54a" stroke-width=".004" vector-effect="non-scaling-stroke"/></svg>`:''}</div>`;}
+    else body=prev?`<img src="${prev}" alt="" style="max-width:100%;max-height:var(--imh)"><div class="mut" style="text-align:center">так выпрямится по вашим ручкам; тёмное вокруг — что было за рамкой</div>`:'<span class="mut">строю…</span>';
+    $('ebody').innerHTML=body;
+    $('etabs').innerHTML=[['edit','править'],['orig','оригинал'],['res','результат']].map(([k,n])=>`<button class="sm${k===tab?' yes':''}" data-t="${k}">${n}</button>`).join('');
+    $('etabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;if(tab==='res')preview();else draw();});
+    if(tab==='edit'){paint();const w=$('ew');
+      document.querySelectorAll('.eh').forEach(h=>{h.onpointerdown=e=>{e.preventDefault();h.setPointerCapture(e.pointerId);const k=h.dataset.k,i=+h.dataset.i;
+        h.onpointermove=ev=>{const r=w.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width,y=(ev.clientY-r.top)/r.height,a=f0(),b=f1(),q=fw();
+          let v=k==='top'?(y-a)/q:k==='bot'?(b-y)/q:k==='left'?(x-a)/q:(b-x)/q;v=Math.max(D.lim[0],Math.min(D.lim[1],v));V[k][i]=+v.toFixed(4);prev=null;paint();};
+        h.onpointerup=h.onpointercancel=()=>{h.onpointermove=null;};};});}};
+  const preview=async()=>{tab='res';prev=null;draw();try{const j=await api('/api/rugs/'+id+'/edgefix_preview',{fix:V});prev=j.img;}catch(e){toast('не вышло: '+e.message);}if(tab==='res')draw();};
+  const init=async()=>{try{D=await api('/api/rugs/'+id+'/edgefix');V=JSON.parse(JSON.stringify(D.fix||D.init));draw();}catch(e){$('ebody').innerHTML=`<span class="mut">не загрузилось: ${esc(e.message)}</span>`;}};
+  $('ed').onclick=()=>{if(!V)return;answer(t,'fix',undefined,{fix:V});};
+  $('ep').onclick=()=>{if(V)preview();};
+  $('er').onclick=()=>{if(D){V=JSON.parse(JSON.stringify(D.init));prev=null;tab='edit';draw();}};
+  $('es').onclick=()=>answer(t,'skip');$('eq').onclick=()=>rcWhy(t,()=>showEdge(t));
+  $('erot').onclick=async()=>{try{await api('/api/rugs/'+id+'/rot',{d:90});toast('повёрнуто — картинка пересчитывается');D=null;V=null;prev=null;$('ebody').innerHTML='<span class="mut">пересчитываю…</span>';setTimeout(init,1200);}catch(e){toast('не вышло: '+e.message);}};
+  init();}
 function showXsame(t){const f=(x)=>`<figure><img src="${crop(x.rid,x.box,300,0.3,1)}" alt=""><figcaption>${esc(x.title||x.rid)}${x.n>1?' · повторов '+x.n:''}</figcaption></figure>`;
   $('main').innerHTML=`${qhead('Это один и тот же элемент узора?','Элементы с двух разных ковров (жёлтая рамка). Поворот, зеркало, цвет и размер не важны — важна форма. «Тот же» — один и тот же элемент (как одно слово у Керимова). «Тот же, другое заполнение» — внешний контур тот же, а внутри другое (другой узор, 4 квадрата вместо одного). «Похож» — родственные, но сам контур другой. Сомневаетесь между «тот же» и «похож» — выбирайте «похож». Ответы собирают элементы в группы между коврами; потом группе дадим имя один раз.')}
    <div class="pair">${f(t.a)}${f(t.b)}</div>

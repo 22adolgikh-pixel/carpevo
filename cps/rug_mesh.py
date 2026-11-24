@@ -176,17 +176,42 @@ def mesh_better(qr, qm, d_dev=0.15, d_sym=0.05):
     return qm["sym"] - qr["sym"] >= -d_sym
 
 
-def mesh_rectify_safe(img, quad, side=1200):
-    """как mesh_rectify, но если сетка ухудшила картинку — возвращает перспективу (кривые краёв = 0, т.е. «край на месте»).
-    → (картинка, сведения; в сведениях choice 'mesh'|'rect', q_rect, q_mesh, curves_mesh — что нашла сетка)"""
+EF_ST = (0.2, 0.5, 0.8)            # станции правки края: доли длины стороны, где у человека ручки
+
+
+def curves_from_fix(fix, geo, nst=64):
+    """правка края человеком → кривые краёв (px, внутрь ковра), как у edge_curves. fix[сторона] — три числа: смещение края внутрь от линии углов
+    в долях высоты (верх/низ) или ширины (лево/право); отрицательное — ковёр вылез за линию углов. У углов смещение 0 (углы человек уже поставил)."""
+    tt = np.linspace(0, 1, nst); out = {}
+    for k in ("top", "bot", "left", "right"):
+        L = geo["H"] if k in ("top", "bot") else geo["W"]
+        v = [float(x) for x in (fix.get(k) or [0, 0, 0])][:3]; v += [0.0] * (3 - len(v))
+        out[k] = _smooth(np.interp(tt, [0, *EF_ST, 1], [0.0, *[x * L for x in v], 0.0]), 2.0)
+    return out
+
+
+def mesh_rectify_safe(img, quad, side=1200, fix=None):
+    """v12.33: сетка только по бокам. На торцах (верх/низ) машина цеплялась за кончики бахромы, полосу килима и внутреннюю линию каймы: по пометкам
+    владельца 59 из 66 дефектов сетки — на торцах и 7 — на боках. Поэтому торцы остаются по линии углов, а боковые края сетка выравнивает.
+    fix — правка края человеком (все четыре стороны по ручкам): тогда choice = 'human'.
+    → (картинка, сведения; choice 'mesh'|'rect'|'human', q_rect, q_mesh, curves_full — что нашла сетка на всех сторонах)"""
     from rug_rect import rectify
-    out, info = mesh_rectify(img, quad, side)
+    canvas, valid, geo = rectify_padded(img, quad, side)
+    curves, strength = edge_curves(canvas, valid, geo)
+    n = len(curves["top"]); full = {k: v.tolist() for k, v in curves.items()}
+    if fix: curves = curves_from_fix(fix, geo, n)
+    else: curves = {**curves, "top": np.zeros(n), "bot": np.zeros(n)}
+    out = coons_warp(canvas, geo, curves)
+    sh = min(geo["W"], geo["H"])
+    rng = {k: float((v.max() - v.min()) / sh * 100) for k, v in curves.items()}
+    info = {"geo": geo, "curves": {k: v.tolist() for k, v in curves.items()}, "range_pct": rng, "strength": strength, "curves_full": full}
     rect = rectify(img, quad, side=side)
     if rect.shape[:2] != out.shape[:2]: rect = cv2.resize(rect, (out.shape[1], out.shape[0]), interpolation=cv2.INTER_AREA)
+    info["fringe"] = fringe_score(rect)
+    if fix: info["choice"] = "human"; return out, info
     qr, qm = quality(rect), quality(out)
-    info["q_rect"], info["q_mesh"] = qr, qm; info["fringe"] = fringe_score(rect)
+    info["q_rect"], info["q_mesh"] = qr, qm
     if mesh_better(qr, qm): info["choice"] = "mesh"; return out, info
-    n = len(info["curves"]["top"])
     info["curves_mesh"] = info["curves"]; info["range_mesh"] = info["range_pct"]
     info["curves"] = {k: [0.0] * n for k in info["curves"]}; info["range_pct"] = {k: 0.0 for k in info["range_pct"]}
     info["choice"] = "rect"; info["mesh_img"] = out

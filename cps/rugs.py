@@ -1882,31 +1882,38 @@ def install(app, DATA, D_WORK):
     # Человек в /m (вид «поле») выбирает верную линию или отвечает «нет нужной» / «края испорчены». По выбранной линии поле выравнивается
     # параллельно краям (rug_mesh.field_warp) — rug_mesh/<id>.f.jpg. Рабочей картинкой (редактор, рамки) пока остаётся простое выпрямление:
     # сетку ещё надо научиться переводить в доли фото (рамки). Ответы — в micro.jsonl (type "field") для обучения выбора линии.
-    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 5     # v12.22: в .json ещё fringe (признак бахромы); v12.19: сетка только если не хуже перспективы (choice в .json); v11.83: глубина линии поля своя у каждой стороны; v11.84: в .json — geo и кривые краёв (для перевода точек в фото)
+    D_MESH = os.path.join(DATA, "rug_mesh"); MESH_VER = 6     # v12.33: сетка только по бокам, торцы — по линии углов, правка края человеком (edge_fix); v12.22: в .json ещё fringe (признак бахромы); v12.19: сетка только если не хуже перспективы (choice в .json); v11.83: глубина линии поля своя у каждой стороны; v11.84: в .json — geo и кривые краёв (для перевода точек в фото)
     mesh_st = {"running": False, "done": 0, "total": 0, "err": "", "t": 0}
+
+    def edge_fix_of(r):
+        """правка края человеком (карточка «край»), если она сделана для текущего поворота ковра"""
+        f = (r or {}).get("edge_fix")
+        return f if f and (f.get("rot") or 0) == rug_rot(r) else None
 
     def mesh_info(rid, r=None, build=False):
         """сведения о сетке ковра (кандидаты поля) или None; build — построить, если нет или углы поменялись"""
         rid = os.path.basename(rid); r = r or load(rid); q = rect_quad(r)
         if not q: return None
         pj = os.path.join(D_MESH, rid + ".json")
+        fix = edge_fix_of(r)
         try:
             m = json.load(open(pj))
-            if m.get("v") == MESH_VER and max(abs(float(a) - float(b)) for u, v in zip(m["quad"], q) for a, b in zip(u, v)) < 1e-5: return m
+            if m.get("v") == MESH_VER and (m.get("fix_t") or 0) == ((fix or {}).get("t") or 0) and max(abs(float(a) - float(b)) for u, v in zip(m["quad"], q) for a, b in zip(u, v)) < 1e-5: return m
         except Exception: pass
         if not build: return None
         import rug_mesh
         src = img_path(rid); a = cv2.imread(src) if src else None
         if a is None: return None
         def work():
-            img, info = rug_mesh.mesh_rectify_safe(a, q, 1200)
+            img, info = rug_mesh.mesh_rectify_safe(a, q, 1200, fix)
             return img, info, rug_mesh.field_cands(img)
         img, info, cands = heavy(work, "края и поле")
         os.makedirs(D_MESH, exist_ok=True)
         tmp = os.path.join(D_MESH, "%s.%d.tmp.jpg" % (rid, threading.get_ident())); cv2.imwrite(tmp, img, [cv2.IMWRITE_JPEG_QUALITY, 88]); os.replace(tmp, os.path.join(D_MESH, rid + ".jpg"))
         m = {"v": MESH_VER, "quad": [[float(u), float(v)] for u, v in q], "w": int(img.shape[1]), "h": int(img.shape[0]),
              "edge_pct": {k: round(v, 2) for k, v in info["range_pct"].items()}, "cands": cands, "t": int(time.time()),
-             "geo": info["geo"], "choice": info.get("choice"), "q_rect": info.get("q_rect"), "q_mesh": info.get("q_mesh"), "fringe": info.get("fringe"), "edge": {k: [round(float(x), 2) for x in v] for k, v in info["curves"].items()}}
+             "geo": info["geo"], "choice": info.get("choice"), "q_rect": info.get("q_rect"), "q_mesh": info.get("q_mesh"), "fringe": info.get("fringe"), "fix_t": (fix or {}).get("t") or 0,
+             "edge_full": {k: [round(float(x), 2) for x in v] for k, v in (info.get("curves_full") or {}).items()}, "edge": {k: [round(float(x), 2) for x in v] for k, v in info["curves"].items()}}
         alt = os.path.join(D_MESH, rid + ".m.jpg")                              # v12.19: сетка, которую отвергли (для проверки в /m)
         if info.get("mesh_img") is not None: cv2.imwrite(alt, info["mesh_img"], [cv2.IMWRITE_JPEG_QUALITY, 88]); m["range_mesh"] = {k: round(v, 2) for k, v in info["range_mesh"].items()}; m["edge_mesh"] = {k: [round(float(x), 2) for x in v] for k, v in info["curves_mesh"].items()}
         elif os.path.exists(alt): os.remove(alt)
@@ -2043,16 +2050,16 @@ def install(app, DATA, D_WORK):
         return {"ok": True, "rot": rot}
 
     @app.get("/rugpad/{rid}.jpg")
-    def rug_pad_img(rid: str, s: int = 900, m: int = 0):
+    def rug_pad_img(rid: str, s: int = 900, m: int = 0, c: int = 0):
         """v12.20/v12.30: выпрямление с полями вокруг рамки (12 %). Жёлтая рамка — куда выпрямляли по углам.
         m=0 — перспектива: голубая линия — край ковра, найденный сеткой; красным — ковёр вылез за рамку, синим — ковёр не дотянулся до рамки
         (в рамке фон); тёмная штриховка — фото кончилось. m=1 — сетка: ковёр натянут в рамку, вокруг притушено то, что было за рамкой."""
         import rug_mesh
         rid = os.path.basename(rid); r = load(rid); q = rect_quad(r); p = img_path(rid)
         if not q or not p: return Response(status_code=404)
-        mi = mesh_info(rid, r, build=True) or {}; s = max(400, min(1600, s))      # после поворота сетку надо перестроить
-        pm = os.path.join(D_MESH, rid + (".jpg" if mi.get("choice") == "mesh" else ".m.jpg"))
-        t = os.path.join(D_TH, "%s.pad%s%d.r%d.jpg" % (rid, "m" if m else "", s, rug_rot(r)))
+        mi = (mesh_info(rid, r, build=True) if not c else mesh_info(rid, r)) or {}; s = max(400, min(1600, s))      # после поворота сетку надо перестроить
+        pm = os.path.join(D_MESH, rid + (".jpg" if mi.get("choice") in ("mesh", "human") else ".m.jpg"))
+        t = os.path.join(D_TH, "%s.pad%s%s%d.r%d.jpg" % (rid, "m" if m else "", "c" if c else "", s, rug_rot(r)))
         src = [p] + ([pm] if os.path.exists(pm) else [])
         if not os.path.exists(t) or os.path.getmtime(t) < max(os.path.getmtime(x) for x in src):
             with THUMB:
@@ -2062,10 +2069,10 @@ def install(app, DATA, D_WORK):
                 inv = ~valid; hatch = ((np.add.outer(np.arange(cv.shape[0]), np.arange(cv.shape[1])) // 6) % 2 == 0)
                 cv[inv] = np.where(hatch[inv][:, None], 40, 90).astype(np.uint8)
                 frame = np.zeros(cv.shape[:2], bool); frame[py:py + H, px:px + W] = True
-                E = mi.get("edge_mesh") or mi.get("edge"); G0 = mi.get("geo") or {}
+                E = None if c else (mi.get("edge_mesh") or mi.get("edge")); G0 = mi.get("geo") or {}
                 k = W / float(G0.get("W") or W)                                     # кривые краёв посчитаны на картинке 1200 — в масштаб этой
                 txt = ""
-                if m:
+                if m and not c:
                     mesh = cv2.imread(pm) if os.path.exists(pm) else None
                     cv = (cv * 0.35).astype(np.uint8)
                     if mesh is not None: cv[py:py + H, px:px + W] = cv2.resize(mesh, (W, H), interpolation=cv2.INTER_AREA)
@@ -2085,7 +2092,7 @@ def install(app, DATA, D_WORK):
                     txt = "vylezlo %.1f%%  ne dotyanulos %.1f%%" % (100 * spill.sum() / frame.sum(), 100 * gap.sum() / frame.sum())
                 cv2.rectangle(cv, (px, py), (px + W, py + H), (0, 213, 255), 2)
                 oof = 100 * (1 - float(valid[py:py + H, px:px + W].mean()))
-                cv2.putText(cv, (txt + ("  za kadrom %.1f%%" % oof if oof > 0.1 else "")).strip(), (8, 22), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 255, 255), 2)
+                if not c: cv2.putText(cv, (txt + ("  za kadrom %.1f%%" % oof if oof > 0.1 else "")).strip(), (8, 22), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 255, 255), 2)
                 os.makedirs(D_TH, exist_ok=True); cv2.imwrite(t, cv, [cv2.IMWRITE_JPEG_QUALITY, 85])
         return FileResponse(t, headers={"Cache-Control": "no-cache"})
 
@@ -2095,7 +2102,7 @@ def install(app, DATA, D_WORK):
         rid = os.path.basename(rid); r = load(rid); m = mesh_info(rid, r, build=False)
         pr = rect_path(rid, r, build=False)
         if not m or not pr: return Response(status_code=404)
-        pm = os.path.join(D_MESH, rid + (".jpg" if m.get("choice") == "mesh" else ".m.jpg"))
+        pm = os.path.join(D_MESH, rid + (".jpg" if m.get("choice") in ("mesh", "human") else ".m.jpg"))
         if not os.path.exists(pm): return Response(status_code=404)
         s = max(300, min(1600, s)); t = os.path.join(D_TH, "%s.cmp%d.jpg" % (rid, s))
         if not os.path.exists(t) or os.path.getmtime(t) < max(os.path.getmtime(pm), os.path.getmtime(pr)):
@@ -2803,8 +2810,8 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch", "rcmp")
-    KINDS_OFF = ("same", "rsame")             # v11.86: пары по одной заменены карточкой «двойники ковра» (tw); старые виды — только по выбору
+    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch", "rcmp", "edge")
+    KINDS_OFF = ("same", "rsame", "rcmp")             # v11.86: пары по одной заменены карточкой «двойники ковра» (tw); старые виды — только по выбору
 
     # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
     # ответы лежат отдельно от ковров, в DATA/concept_dups_votes.json; решение (вес ≥2) читает /api/concept_dups, слияние делается в модели вручную.
@@ -2878,6 +2885,7 @@ def install(app, DATA, D_WORK):
                "vf": _vf_of(r), "rc": _rc(r),                                     # v12.03: ответ модели по картинке; спор с прежним ответом человека — перепроверка
                "old_who": [u for u, v in (m.get("frame") or {}).items() if (v or {}).get("a") in FR_OLD],
                "ctl": L.get("quad_status") == "confirmed" and r.get("tri") != "micro" and bool(L.get("quad")) and not r.get("edge"),
+               "ef": bool(edge_fix_of(r)),                                         # v12.33: край поправлен человеком
                "es": r.get("esearch") or {}}                                       # v11.58: группы, где сеть уже искала повторы
         # v11.52: карточки «элементы», «имена», «тип», «двойники» — всё нужное для очередей берём здесь же, чтобы не читать ковры заново
         dead = bool(r.get("dup_of") or r.get("hidden") or r.get("split_into") or r.get("multi") or r.get("frame") == "multi")
@@ -3659,6 +3667,101 @@ def install(app, DATA, D_WORK):
             os.replace(tmp, F_RC)
         _mlog(rec); return {"ok": True}
 
+    # v12.33: карточка «край»: человек перетаскивает ручки (по три на сторону) на настоящий край ковра. Правка лежит в карточке (edge_fix),
+    # выпрямление строится по ней (choice = human). Для обучения поиска края — /api/open/edge_fixes.
+    EF_LIM = (-0.12, 0.25)
+
+    def _edge_queue(me, rows):
+        V = _rc_votes(); fresh, again = [], []
+        for x in rows:
+            if x["dead"] or x["qs"] not in ("confirmed", "edited") or x.get("frame") != "whole" or is_bw(x["id"]) or "damaged" in (x.get("edge") or {}) or x.get("ef"): continue
+            vs = V.get(x["id"]) or {}; mine = vs.get(me)
+            if mine and mine.get("a") != "skip": continue
+            if any(v.get("a") == "issue" and ("not_rug" in v.get("why", []) or "fragment" in v.get("why", []) or "multi" in v.get("why", [])) for v in vs.values()): continue
+            # сначала ковры, где в «выпрямлении» были пометки на торцах или «обе плохие» (там машина ошибалась), потом остальные
+            pr = sum(1 for v in vs.values() for p in (v.get("pts") or []) if min(p["y"], 1 - p["y"]) < min(p["x"], 1 - p["x"])) + 3 * sum(1 for v in vs.values() if v.get("a") == "bad")
+            t = {"type": "edge", "rid": x["id"], "quad": x.get("quad"), "ask": bool(mine), "pr": pr}
+            (again if mine else fresh).append(t)
+        fresh.sort(key=lambda t: (-t["pr"], t["rid"])); again.sort(key=lambda t: t["rid"])
+        return fresh + again
+
+    def _ef_clean(fix):
+        out = {}
+        for k in ("top", "bot", "left", "right"):
+            v = (fix or {}).get(k)
+            if not isinstance(v, (list, tuple)) or len(v) != 3: return None
+            try: v = [round(min(EF_LIM[1], max(EF_LIM[0], float(x))), 4) for x in v]
+            except Exception: return None
+            out[k] = v
+        return out
+
+    def _edge_answer(me, role, rid, a, body, rec):
+        if a == "skip": _mlog(rec); return {"ok": True}
+        if a == "issue":
+            why = [w for w in (body.get("why") or []) if w in RC_WHY][:7]
+            if not why: return JSONResponse({"error": "что не так?"}, status_code=400)
+            rec["why"] = why
+            with _lock:
+                V = _rc_votes(); V.setdefault(rid, {})[me] = {"a": "issue", "w": _wt(role), "t": rec["t"], "why": why}
+                tmp = F_RC + ".tmp"
+                with open(tmp, "w", encoding="utf-8") as f: json.dump(V, f, ensure_ascii=False, indent=1)
+                os.replace(tmp, F_RC)
+            _mlog(rec); return {"ok": True}
+        if a != "fix": return JSONResponse({"error": "ответ?"}, status_code=400)
+        fix = _ef_clean(body.get("fix"))
+        if not fix: return JSONResponse({"error": "fix?"}, status_code=400)
+        with _lock:
+            r = load(rid)
+            if not r: return JSONResponse({"error": "нет ковра"}, status_code=404)
+            r["edge_fix"] = {**fix, "by": me, "t": int(time.time()), "rot": rug_rot(r)}
+            r.setdefault("micro", {}).setdefault("edge", {})[me] = {"a": "fix", "w": _wt(role), "t": rec["t"]}
+            r["updated"] = int(time.time()); save(r)
+        rec["fix"] = fix; _mlog(rec); return {"ok": True}
+
+    @app.get("/api/rugs/{rid}/edgefix")
+    def api_edgefix(rid: str):
+        """данные для карточки «край»: подсказка машины по четырём сторонам (доли), стартовые ручки, прежняя правка"""
+        import rug_mesh
+        rid = os.path.basename(rid); r = load(rid)
+        if not r or not rect_quad(r): return JSONResponse({"error": "нет подтверждённых углов"}, status_code=400)
+        mi = mesh_info(rid, r, build=True)
+        if not mi: return JSONResponse({"error": "сетка не построена"}, status_code=400)
+        geo = mi["geo"]; full = mi.get("edge_full") or mi.get("edge") or {}
+        L = {"top": geo["H"], "bot": geo["H"], "left": geo["W"], "right": geo["W"]}
+        guide = {k: [round(float(x) / L[k], 4) for x in full.get(k, [0] * 64)] for k in L}
+        n = len(guide["top"]); at = lambda v, t: float(np.mean(v[max(0, int(round(t * (n - 1))) - 1):int(round(t * (n - 1))) + 2]))
+        init = {k: [round(at(guide[k], t), 4) if k in ("left", "right") else 0.0 for t in rug_mesh.EF_ST] for k in L}
+        old = edge_fix_of(r)
+        return {"pad": 0.12, "st": list(rug_mesh.EF_ST), "guide": guide, "init": init, "fix": ({k: old[k] for k in L} if old else None), "lim": list(EF_LIM)}
+
+    @app.post("/api/rugs/{rid}/edgefix_preview")
+    def api_edgefix_preview(rid: str, body: dict = Body(...)):
+        """как получится выпрямление по этим ручкам (ничего не сохраняет): картинка с тёмными полями вокруг рамки углов → {img: data-url}"""
+        import rug_mesh, base64
+        rid = os.path.basename(rid); r = load(rid); q = rect_quad(r); p = img_path(rid)
+        fix = _ef_clean(body.get("fix"))
+        if not q or not p or not fix: return JSONResponse({"error": "нет углов или ручек"}, status_code=400)
+        def work():
+            a = cv2.imread(p)
+            cv, valid, g = rug_mesh.rectify_padded(a, q, 900, pad=0.12); W, H, px, py = g["W"], g["H"], g["px"], g["py"]
+            canvas, v2, g2 = rug_mesh.rectify_padded(a, q, 900, pad=0.07)
+            out = rug_mesh.coons_warp(canvas, g2, rug_mesh.curves_from_fix(fix, g2))
+            cv = (cv * 0.35).astype(np.uint8); cv[py:py + H, px:px + W] = cv2.resize(out, (W, H), interpolation=cv2.INTER_AREA)
+            cv2.rectangle(cv, (px, py), (px + W, py + H), (0, 213, 255), 2)
+            return cv2.imencode(".jpg", cv, [cv2.IMWRITE_JPEG_QUALITY, 82])[1].tobytes()
+        jb = heavy(work, "правка края")
+        return {"img": "data:image/jpeg;base64," + base64.b64encode(jb).decode()}
+
+    @app.get("/api/open/edge_fixes")
+    def api_edge_fixes():
+        """правки краёв человеком: id → ручки (доли), для обучения поиска края"""
+        out = {}
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5])
+            if r and r.get("edge_fix"): out[r["id"]] = {**r["edge_fix"], "quad": (r.get("layout") or {}).get("quad")}
+        return {"n": len(out), "fixes": out}
+
     @app.get("/api/open/rcmp_votes")
     def api_rcmp_votes():
         return {"votes": _rc_votes()}
@@ -4019,6 +4122,7 @@ def install(app, DATA, D_WORK):
         rsq = _rsame_queue(me, by) if "rsame" in want else []; Q["rsame"] = rsq[:n]
         fdq = _field_queue(me, rows) if "field" in want else []; Q["field"] = fdq[:n]
         rcq = _rcmp_queue(me, rows) if "rcmp" in want else []; Q["rcmp"] = rcq[:n]
+        edq = _edge_queue(me, rows) if "edge" in want else []; Q["edge"] = edq[:n]
         twq = _tw_queue(me, by) if "tw" in want else []; Q["tw"] = twq[:n]
         schq = [t for t in _sch_queue(me) if t["rid"] in by] if "sch" in want else []; Q["sch"] = schq[:n]
         tasks = []; order = [t for t in want if Q[t]]
@@ -4043,7 +4147,7 @@ def install(app, DATA, D_WORK):
             if t["type"] == "tw":
                 for it in t["items"]: it.update(w=by[it["id"]]["w"], h=by[it["id"]]["h"])
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]},
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "edge": len(edq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]},
                 "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver(), "rs": {k: rpr[k] for k in ("running", "done", "total", "found", "t", "err")}, "ms": dict(mesh_st)}
 
     @app.post("/api/micro/answer")
@@ -4063,6 +4167,7 @@ def install(app, DATA, D_WORK):
         if typ == "xsame": return _xs_answer(me, role, a, body, rec)
         if typ == "field": return _field_answer(me, role, rid, a, body, rec)
         if typ == "rcmp": return _rcmp_answer(me, role, rid, a, body, rec)
+        if typ == "edge": return _edge_answer(me, role, rid, a, body, rec)
         if typ == "tw": return _tw_answer(me, role, rid, a, body, rec)
         if typ == "sch": return _sch_answer(me, role, rid, a, body, rec)
         if typ in MORE: return _micro_more(me, role, typ, rid, a, body, rec)
