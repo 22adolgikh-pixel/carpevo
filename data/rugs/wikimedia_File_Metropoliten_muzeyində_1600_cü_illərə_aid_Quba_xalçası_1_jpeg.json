@@ -93,6 +93,14 @@
   {
    "id": "azr_early_karabagh_rug62",
    "score": 568
+  },
+  {
+   "id": "aic_226150",
+   "score": 0
+  },
+  {
+   "id": "cm_a38c54d791",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -117,9 +125,9 @@
    "at": 1795293048
   },
   "met_447577": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795498029
   },
   "cm_d71221ed77": {
    "ok": false,
@@ -150,6 +158,16 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "aic_226150": {
+   "ok": false,
+   "by": "по цепочке: aic_226150 ≠ cm_d71221ed77",
+   "at": 1795498050
+  },
+  "cm_a38c54d791": {
+   "ok": false,
+   "by": "по цепочке: cm_37e38ad820 ≠ cm_a38c54d791",
+   "at": 1795498050
   }
  },
  "_lib_t": "2026-10-12 22:38",

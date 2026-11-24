@@ -18,7 +18,7 @@
  "h": 465,
  "marks": [],
  "created": 1791736126,
- "updated": 1795353854,
+ "updated": 1795498069,
  "cat": {
   "title": "18th century Azerbaijan carpet with Buta design.jpg",
   "museum": "Wikimedia Commons",
@@ -133,8 +133,49 @@
     "w": 2,
     "t": 1795353854
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795498069,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0467,
+    0.19312
+   ],
+   [
+    0.94356,
+    0.20809
+   ],
+   [
+    0.95531,
+    0.76758
+   ],
+   [
+    0.02947,
+    0.75689
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

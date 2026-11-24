@@ -31,7 +31,7 @@
    "scheme": "t53_f04",
    "group": "m6b036b51e956196_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.693,
@@ -103,7 +103,9 @@
      0.42773
     ]
    ],
-   "sam": 0.989
+   "sam": 0.989,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795498078
   },
   {
    "id": "m6b036b51e956196_1",
@@ -119,7 +121,7 @@
    "scheme": "t53_f04",
    "group": "m6b036b51e956196_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.665,
@@ -199,11 +201,13 @@
      0.81641
     ]
    ],
-   "sam": 0.979
+   "sam": 0.979,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795498078
   }
  ],
  "created": 1791736125,
- "updated": 1795386198,
+ "updated": 1795498078,
  "cat": {
   "title": "Azerbaijani carpet \"Barda\" (\"Chelyabi\") of Karabakh group.png",
   "museum": "Wikimedia Commons",
@@ -307,5 +311,23 @@
    11.3239
   ],
   "t": 1795207896
+ },
+ "micro": {
+  "marks": {
+   "m6b036b51e956196_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795498078
+    }
+   },
+   "m6b036b51e956196_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795498078
+    }
+   }
+  }
  }
 }

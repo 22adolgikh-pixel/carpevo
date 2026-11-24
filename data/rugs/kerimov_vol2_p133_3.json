@@ -3769,7 +3769,7 @@
    "scheme": "t54_f01",
    "group": "m6b0216eee328871_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: küpə · форма 2",
    "machine": 1,
    "score": 0.774,
@@ -3857,7 +3857,9 @@
      0.7132
     ]
    ],
-   "sam": 0.935
+   "sam": 0.935,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795497905
   },
   {
    "id": "m17953446390e",
@@ -6997,7 +6999,7 @@
   }
  ],
  "created": 1791736122,
- "updated": 1795462722,
+ "updated": 1795497905,
  "cat": {
   "title": "Керимов, т. II (стр. скана 133, печ. 15)",
   "museum": "",
@@ -8340,6 +8342,13 @@
      "a": "bad",
      "w": 2,
      "t": 1795462722
+    }
+   },
+   "m6b0216eee328871_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795497905
     }
    }
   }
