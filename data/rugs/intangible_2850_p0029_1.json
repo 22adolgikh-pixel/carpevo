@@ -31,7 +31,7 @@
    "scheme": "t53_f04",
    "group": "m6b036b38e102905_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.643,
@@ -111,7 +111,11 @@
      0.62598
     ]
    ],
-   "sam": 0.954
+   "sam": 0.954,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795497292,
+   "variant": "detail",
+   "variant_by": "/m"
   },
   {
    "id": "m6b036b38e102905_1",
@@ -127,7 +131,7 @@
    "scheme": "t53_f04",
    "group": "m6b036b38e102905_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.617,
@@ -247,7 +251,7 @@
    "scheme": "t53_f04",
    "group": "m6b036b38e102905_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.613,
@@ -359,7 +363,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795386174,
+ "updated": 1795497292,
  "cat": {
   "title": "Ковёр «Qasımuşağı» Карабах",
   "museum": "",
@@ -562,6 +566,29 @@
      "a": "diff",
      "w": 2,
      "t": 1795203493
+    }
+   }
+  },
+  "marks": {
+   "m6b036b38e102905_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497292
+    }
+   },
+   "m6b036b38e102905_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497292
+    }
+   },
+   "m6b036b38e102905_0": {
+    "dolgikh": {
+     "a": "var",
+     "w": 2,
+     "t": 1795497292
     }
    }
   }

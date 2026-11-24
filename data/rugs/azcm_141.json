@@ -18,7 +18,7 @@
  "h": 1117,
  "marks": [],
  "created": 1791870037,
- "updated": 1795293047,
+ "updated": 1795497315,
  "cat": {
   "title": "“Qaraqoyunlu” (килим «Гарагойюнлу»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -118,13 +118,17 @@
   {
    "id": "cm_81d71f4fad",
    "score": 0
+  },
+  {
+   "id": "intangible_2854_p0054_1",
+   "score": 0
   }
  ],
  "same_ok": {
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795497315
   },
   "intangible_2851_p0017_1": {
    "ok": false,
@@ -205,6 +209,11 @@
    "ok": false,
    "by": "по цепочке: azcm_141 ≠ cm_553d1f7b79",
    "at": 1795376997
+  },
+  "intangible_2854_p0054_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795497315
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -274,6 +283,22 @@
   },
   "field": {
    "dolgikh": "nofield"
+  },
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795497315
+    }
+   },
+   "intangible_2854_p0054_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795497315
+    }
+   }
   }
  },
  "frame": "whole",

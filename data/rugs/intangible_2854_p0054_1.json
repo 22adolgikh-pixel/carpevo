@@ -50,8 +50,28 @@
  },
  "src_id": "cat:intangible_2854_p0054_1",
  "lib_img": "img/intangible_2854_p0054_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_141",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_141": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795497315
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_141 ≠ intangible_2854_p0054_1",
+   "at": 1795497336
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
