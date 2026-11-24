@@ -18,7 +18,7 @@
  "h": 1340,
  "marks": [],
  "created": 1791736123,
- "updated": 1795499163,
+ "updated": 1795500812,
  "cat": {
   "title": "Azerbaijan 'In and Out Palmette' design carpet, 18th century.png",
   "museum": "Wikimedia Commons",
@@ -113,6 +113,14 @@
     "w": 2,
     "t": 1795499163
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795500812,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
@@ -136,5 +144,38 @@
    57.0156
   ],
   "t": 1795207895
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01436,
+    0.02466
+   ],
+   [
+    0.99185,
+    0.01047
+   ],
+   [
+    0.94146,
+    0.97078
+   ],
+   [
+    0.02441,
+    0.96178
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
