@@ -50,8 +50,28 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0100_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0100_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0077_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_177",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0077_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795497628
+  },
+  "azcm_177": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchalari_qarabag_qrupu_p0100_1 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0077_1",
+   "at": 1795497649
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",

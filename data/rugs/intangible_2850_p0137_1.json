@@ -31,7 +31,7 @@
    "scheme": "t53_f04",
    "group": "m6b036ae5e532504_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.635,
@@ -135,7 +135,7 @@
    "scheme": "t53_f04",
    "group": "m6b036ae5e532504_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.628,
@@ -263,7 +263,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795386090,
+ "updated": 1795497472,
  "cat": {
   "title": "Ковёр «Çələbi» Карабах",
   "museum": "",
@@ -369,5 +369,23 @@
    66.9475
   ],
   "t": 1795207861
+ },
+ "micro": {
+  "marks": {
+   "m6b036ae5e532504_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497472
+    }
+   },
+   "m6b036ae5e532504_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497472
+    }
+   }
+  }
  }
 }

@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795293046,
+ "updated": 1795497603,
  "cat": {
   "title": "Cecim Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -111,13 +111,21 @@
   {
    "id": "azr_antique_azerbaijan_jajim_flying_brid_motif204",
    "score": 0
+  },
+  {
+   "id": "intangible_2850_p0010_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0034_1",
+   "score": 0
   }
  ],
  "same_ok": {
   "azcm_142": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795497603
   },
   "azcm_189": {
    "ok": false,
@@ -183,6 +191,17 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "intangible_2850_p0010_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795497603,
+   "similar": true
+  },
+  "intangible_2850_p0034_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_142 ≠ intangible_2850_p0034_1",
+   "at": 1795497624
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -346,7 +365,21 @@
    "azr_azerbaijan_jajim1": {},
    "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0024_1": {},
    "azcm_160": {},
-   "intangible_2850_p0188_1": {}
+   "intangible_2850_p0188_1": {},
+   "azcm_142": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795497603
+    }
+   },
+   "intangible_2850_p0010_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795497603
+    }
+   }
   },
   "frame": {
    "dolgikh": {

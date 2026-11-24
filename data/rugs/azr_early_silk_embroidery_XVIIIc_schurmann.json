@@ -18,7 +18,7 @@
  "h": 726,
  "marks": [],
  "created": 1791736140,
- "updated": 1795115958,
+ "updated": 1795497521,
  "cat": {
   "title": "Early Azerbaijan embroidery, XVIII century",
   "museum": "",
@@ -80,18 +80,49 @@
   "conf": 0.969,
   "area": 0.926,
   "ver": 1,
-  "t": 1795115914
+  "t": 1795115914,
+  "ref_quad": {
+   "quad": [
+    [
+     0.03626,
+     0.02982
+    ],
+    [
+     0.98962,
+     0.02252
+    ],
+    [
+     0.98986,
+     0.98463
+    ],
+    [
+     0.01799,
+     0.99306
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795497514
+  }
  },
  "micro": {
   "frame": {
    "dolgikh": {
     "a": "whole",
     "w": 2,
-    "t": 1795096112
+    "t": 1795497500
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795497521,
+    "s": "ref"
    }
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "frame_by": "micro",
  "layout": {
   "carpet": [
@@ -107,25 +138,25 @@
   "status": "auto",
   "quad": [
    [
-    0.03797,
-    0.0303
+    0.03626,
+    0.02982
    ],
    [
-    0.99873,
-    0.03306
+    0.98962,
+    0.02252
    ],
    [
-    0.99873,
-    0.98209
+    0.98986,
+    0.98463
    ],
    [
-    0.02785,
-    0.99862
+    0.01799,
+    0.99306
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
- "tri": "auto",
+ "tri": "micro",
  "auto_edge": {
   "v": 1,
   "f": [

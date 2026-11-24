@@ -63,13 +63,17 @@
   {
    "id": "azerbaycan_xalchalari_qarabag_qrupu_p0086_1",
    "score": 0
+  },
+  {
+   "id": "cm_f19998793f",
+   "score": 0
   }
  ],
  "same_ok": {
   "azcm_81": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795497568
   },
   "azerbaycan_xalchasi_p0003_1": {
    "ok": false,
@@ -85,6 +89,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "cm_f19998793f": {
+   "ok": false,
+   "by": "по цепочке: azcm_81 ≠ cm_f19998793f",
+   "at": 1795497589
   }
  },
  "_lib_t": "2026-10-12 22:38",

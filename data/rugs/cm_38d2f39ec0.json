@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870034,
- "updated": 1794596940,
+ "updated": 1795497556,
  "cat": {
   "title": "İçərişəhərdə Azərbaycan xalçası",
   "museum": "",
@@ -99,13 +99,13 @@
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "not_rug",
+    "a": "cropped",
     "w": 2,
-    "t": 1794596940
+    "t": 1795497556
    }
   }
  },
- "frame": "not_rug",
+ "frame": "cropped",
  "frame_by": "micro",
  "auto_edge": {
   "v": 1,
@@ -126,5 +126,10 @@
    18.5889
   ],
   "t": 1795207824
+ },
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
  }
 }

@@ -18,7 +18,7 @@
  "h": 1524,
  "marks": [],
  "created": 1791870042,
- "updated": 1795293047,
+ "updated": 1795497568,
  "cat": {
   "title": "Süjetli xalça (сюжетный ковер), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -66,13 +66,17 @@
   {
    "id": "intangible_2849_p0155_1",
    "score": 0
+  },
+  {
+   "id": "cm_f19998793f",
+   "score": 0
   }
  ],
  "same_ok": {
   "wikimedia_File_Carpet_Shusha_gallery2_jpg": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795497568
   },
   "azerbaycan_xalchasi_p0003_1": {
    "ok": false,
@@ -88,6 +92,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "cm_f19998793f": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795497568
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -151,5 +160,23 @@
   ],
   "t": 1795207683
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "wikimedia_File_Carpet_Shusha_gallery2_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795497568
+    }
+   },
+   "cm_f19998793f": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795497568
+    }
+   }
+  }
+ }
 }

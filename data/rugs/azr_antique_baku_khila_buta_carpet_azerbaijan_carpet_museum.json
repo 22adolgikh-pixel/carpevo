@@ -18,7 +18,7 @@
  "h": 960,
  "marks": [],
  "created": 1791736128,
- "updated": 1795030336,
+ "updated": 1795497578,
  "cat": {
   "title": "antique-baku-khila-buta-carpet-azerbaijan-carpet-museum",
   "museum": "",
@@ -179,6 +179,14 @@
     "w": 2,
     "t": 1795030336
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795497578,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
@@ -204,5 +212,38 @@
    65.3687
   ],
   "t": 1795207711
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03857,
+    0.01203
+   ],
+   [
+    0.95559,
+    0.03215
+   ],
+   [
+    0.93909,
+    0.98564
+   ],
+   [
+    0.03401,
+    0.99472
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

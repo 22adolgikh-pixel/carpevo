@@ -101,13 +101,17 @@
   {
    "id": "intangible_2851_p0016_1",
    "score": 0
+  },
+  {
+   "id": "azcm_167",
+   "score": 0
   }
  ],
  "same_ok": {
   "azcm_143": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795497485
   },
   "azcm_175": {
    "ok": false,
@@ -164,6 +168,11 @@
    "by": "/m: dolgikh",
    "at": 1795464371,
    "similar": true
+  },
+  "azcm_167": {
+   "ok": false,
+   "by": "по цепочке: azcm_143 ≠ azcm_167",
+   "at": 1795497506
   }
  },
  "_lib_t": "2026-11-13 10:08",

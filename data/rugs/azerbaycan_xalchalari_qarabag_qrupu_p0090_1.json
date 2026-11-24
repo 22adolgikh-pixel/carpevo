@@ -116,7 +116,12 @@
     0.97111
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "accepted",
+  "field": {
+   "none": "nofield",
+   "by": "dolgikh",
+   "t": 1795497595
+  }
  },
  "frame": "whole",
  "tri": "auto",
@@ -139,5 +144,10 @@
    76.1082
   ],
   "t": 1795207689
+ },
+ "micro": {
+  "field": {
+   "dolgikh": "nofield"
+  }
  }
 }

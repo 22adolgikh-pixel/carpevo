@@ -332,6 +332,18 @@
   {
    "id": "cm_82a5abb840",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
+   "score": 0
+  },
+  {
+   "id": "intangible_2851_p0123_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0047_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -341,9 +353,9 @@
    "at": 1795293048
   },
   "azcm_51": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795497546
   },
   "cm_c07233e54a": {
    "ok": false,
@@ -369,6 +381,21 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali": {
+   "ok": false,
+   "by": "по цепочке: azcm_51 ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_beginning_of_19th_century_from_Khojali",
+   "at": 1795497567
+  },
+  "intangible_2851_p0123_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_51 ≠ intangible_2851_p0123_1",
+   "at": 1795497567
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0047_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_51 ≠ azerbaycan_xalchalari_qarabag_qrupu_p0047_1",
+   "at": 1795497567
   }
  },
  "_lib_t": "2026-11-13 10:08",
