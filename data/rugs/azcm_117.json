@@ -2186,10 +2186,10 @@
   {
    "id": "m17955344650e",
    "box": [
-    0.37077,
-    0.49188,
-    0.06175,
-    0.03162
+    0.3694,
+    0.4772,
+    0.05564,
+    0.02837
    ],
    "zone": "field",
    "motif": "",
@@ -2197,7 +2197,7 @@
    "scheme": "",
    "group": "mmvctgbew",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2206,16 +2206,25 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795534465,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795547358,
+   "rf": 1,
+   "rf_s": 0.988,
+   "box0": [
+    0.37077,
+    0.49188,
+    0.06175,
+    0.03162
+   ],
+   "rf_moved": 0.274
   },
   {
    "id": "m17955344651e",
    "box": [
-    0.403,
-    0.47603,
-    0.04094,
-    0.03445
+    0.37188,
+    0.47804,
+    0.05125,
+    0.02756
    ],
    "zone": "field",
    "motif": "",
@@ -2223,7 +2232,7 @@
    "scheme": "",
    "group": "mmvctgbew",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2232,16 +2241,25 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795534465,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795547358,
+   "rf": 1,
+   "rf_s": 0.979,
+   "box0": [
+    0.403,
+    0.47603,
+    0.04094,
+    0.03445
+   ],
+   "rf_moved": 0.635
   },
   {
    "id": "m17955344652e",
    "box": [
-    0.55313,
-    0.48751,
-    0.04094,
-    0.03445
+    0.54402,
+    0.46942,
+    0.0657,
+    0.03359
    ],
    "zone": "field",
    "motif": "",
@@ -2249,7 +2267,7 @@
    "scheme": "",
    "group": "mmvctgbew",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2258,16 +2276,25 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795534465,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795547358,
+   "rf": 1,
+   "rf_s": 0.968,
+   "box0": [
+    0.55313,
+    0.48751,
+    0.04094,
+    0.03445
+   ],
+   "rf_moved": 0.459
   },
   {
    "id": "m17955344653e",
    "box": [
-    0.5186,
-    0.474,
-    0.04817,
-    0.04053
+    0.54869,
+    0.47363,
+    0.05564,
+    0.0284
    ],
    "zone": "field",
    "motif": "",
@@ -2275,7 +2302,7 @@
    "scheme": "",
    "group": "mmvctgbew",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2284,16 +2311,25 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795534465,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795547358,
+   "rf": 1,
+   "rf_s": 0.932,
+   "box0": [
+    0.5186,
+    0.474,
+    0.04817,
+    0.04053
+   ],
+   "rf_moved": 0.715
   },
   {
    "id": "m17955344654e",
    "box": [
-    0.53091,
-    0.45098,
-    0.07286,
-    0.03731
+    0.5438,
+    0.4689,
+    0.06387,
+    0.03469
    ],
    "zone": "field",
    "motif": "",
@@ -2301,7 +2337,7 @@
    "scheme": "",
    "group": "mmvctgbew",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -2310,8 +2346,17 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795534465,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795547358,
+   "rf": 1,
+   "rf_s": 0.967,
+   "box0": [
+    0.53091,
+    0.45098,
+    0.07286,
+    0.03731
+   ],
+   "rf_moved": 0.255
   },
   {
    "id": "m17955345730s",
@@ -3849,7 +3894,7 @@
   }
  ],
  "created": 1791870041,
- "updated": 1795535078,
+ "updated": 1795547358,
  "cat": {
   "title": "“Aşağı Salahlı” («Ашагы Салахлы»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -4464,6 +4509,41 @@
      "a": "ok",
      "w": 2,
      "t": 1795358177
+    }
+   },
+   "m17955344650e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795547358
+    }
+   },
+   "m17955344654e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795547358
+    }
+   },
+   "m17955344652e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795547358
+    }
+   },
+   "m17955344651e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795547358
+    }
+   },
+   "m17955344653e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795547358
     }
    }
   },
