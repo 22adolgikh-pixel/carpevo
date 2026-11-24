@@ -20,10 +20,10 @@
   {
    "id": "m6b0368e8e943955_0",
    "box": [
-    0.43931,
+    0.56504,
     0.22559,
-    0.32659,
-    0.14062
+    0.20086,
+    0.06724
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -31,7 +31,7 @@
    "scheme": "t32_f04",
    "group": "m6b0368e8e943955_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 2",
    "machine": 1,
    "score": 0.719,
@@ -187,7 +187,11 @@
      0.28711
     ]
    ],
-   "sam": 0.893
+   "sam": 0.893,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795498564,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795498564
   },
   {
    "id": "m6b04bb6de522328_0",
@@ -203,7 +207,7 @@
    "scheme": "t32_f04",
    "group": "m6b04bb6de522328_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud",
    "machine": 1,
    "score": 0.715,
@@ -295,11 +299,15 @@
      0.29688
     ]
    ],
-   "sam": 0.911
+   "sam": 0.911,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795498602,
+   "variant": "detail",
+   "variant_by": "/m"
   }
  ],
  "created": 1791736123,
- "updated": 1795472245,
+ "updated": 1795498602,
  "cat": {
   "title": "Malybeyli carpet, Karabakh school of Azerbaijani carpets.gif",
   "museum": "Wikimedia Commons",
@@ -383,5 +391,23 @@
    44.0763
   ],
   "t": 1795207906
+ },
+ "micro": {
+  "marks": {
+   "m6b0368e8e943955_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795498564
+    }
+   },
+   "m6b04bb6de522328_0": {
+    "dolgikh": {
+     "a": "var",
+     "w": 2,
+     "t": 1795498602
+    }
+   }
+  }
  }
 }

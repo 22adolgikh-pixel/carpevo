@@ -18,7 +18,7 @@
  "h": 550,
  "marks": [],
  "created": 1791736127,
- "updated": 1795030502,
+ "updated": 1795498627,
  "cat": {
   "title": "Bijo small rug-XIX century.jpg",
   "museum": "Wikimedia Commons",
@@ -113,6 +113,14 @@
     "w": 2,
     "t": 1795030502
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795498627,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
@@ -136,5 +144,38 @@
    73.4563
   ],
   "t": 1795207899
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.1139,
+    0.04869
+   ],
+   [
+    0.91548,
+    0.04245
+   ],
+   [
+    0.88663,
+    0.97529
+   ],
+   [
+    0.09199,
+    0.94905
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
