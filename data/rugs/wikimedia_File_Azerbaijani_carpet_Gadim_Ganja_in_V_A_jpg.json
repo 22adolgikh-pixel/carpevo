@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791736125,
- "updated": 1795293047,
+ "updated": 1795498088,
  "cat": {
   "title": "Azerbaijani carpet \"Gadim Ganja\" in V&A.jpg",
   "museum": "Wikimedia Commons",
@@ -69,9 +69,9 @@
  ],
  "same_ok": {
   "vam_O66936": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795498088
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0100_1": {
    "ok": false,
@@ -79,9 +79,9 @@
    "at": 1795293048
   },
   "wikimedia_File_Gadim_Ganja_carpet_in_V_A_jpg": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795498088
   },
   "wikimedia_File_Azerbaijani_carpet_Gadim_Ganja_in_V_A_cut_jpg": {
    "ok": true,
@@ -227,6 +227,22 @@
     "w": 2,
     "t": 1794740705,
     "s": "ref"
+   }
+  },
+  "same": {
+   "vam_O66936": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795498088
+    }
+   },
+   "wikimedia_File_Gadim_Ganja_carpet_in_V_A_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795498088
+    }
    }
   }
  },

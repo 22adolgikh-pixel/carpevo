@@ -18,7 +18,7 @@
  "h": 1369,
  "marks": [],
  "created": 1791736134,
- "updated": 1795154095,
+ "updated": 1795498245,
  "cat": {
   "title": "kuba salmasoyud11",
   "museum": "",
@@ -89,7 +89,30 @@
   "conf": 0.944,
   "area": 0.904,
   "ver": 1,
-  "t": 1795117654
+  "t": 1795117654,
+  "ref_quad": {
+   "quad": [
+    [
+     0.02678,
+     0.07185
+    ],
+    [
+     0.96791,
+     0.06724
+    ],
+    [
+     0.95028,
+     0.91922
+    ],
+    [
+     0.01717,
+     0.93165
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795498240
+  }
  },
  "micro": {
   "same": {
@@ -105,14 +128,22 @@
    "dolgikh": {
     "a": "whole",
     "w": 2,
-    "t": 1795029612
+    "t": 1795498225
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795498245,
+    "s": "ref"
    }
   }
  },
  "from_twin": {
   "composition": "kerimov_vol2_p102_1"
  },
- "frame": "cropped",
+ "frame": "whole",
  "frame_by": "micro",
  "school_prev": "guba-shirvan",
  "school_by": "уточнено по слову «kuba» в подписи",
@@ -138,25 +169,25 @@
   "status": "auto",
   "quad": [
    [
-    0.0,
-    0.04444
+    0.02678,
+    0.07185
    ],
    [
-    0.99844,
-    0.01
+    0.96791,
+    0.06724
    ],
    [
-    0.95469,
-    0.96
+    0.95028,
+    0.91922
    ],
    [
-    0.025,
-    0.97
+    0.01717,
+    0.93165
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
- "tri": "auto",
+ "tri": "micro",
  "auto_edge": {
   "v": 1,
   "f": [

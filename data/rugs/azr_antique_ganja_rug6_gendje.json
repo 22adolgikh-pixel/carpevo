@@ -18,7 +18,7 @@
  "h": 759,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1795498172,
  "cat": {
   "title": "antique ganja rug6 gendje",
   "museum": "",
@@ -124,5 +124,49 @@
    61.9348
   ],
   "t": 1795207718
- }
+ },
+ "micro": {
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795498172,
+    "s": "ref"
+   }
+  }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.07323,
+    0.03494
+   ],
+   [
+    0.88922,
+    0.0304
+   ],
+   [
+    0.97089,
+    0.97325
+   ],
+   [
+    0.08279,
+    0.97023
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
