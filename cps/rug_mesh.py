@@ -268,6 +268,21 @@ def field_warp(rect, fc, maps=False):
     return cv2.remap(rect, X.astype(np.float32), Y.astype(np.float32), cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE), med
 
 
+def border_equalize(img, med):
+    """v12.34: кайма одной ширины со всех сторон. Полосы каймы (от края до линии поля) сверху, снизу, слева и справа растягиваются/сжимаются до средней ширины,
+    поле остаётся как есть (оно уже прямоугольник). Так у ковров получаются сравнимые пропорции (поле + равная кайма). med — расстояния линии поля от краёв, px."""
+    H, W = img.shape[:2]
+    l, r, t, b = [float(med[k]) for k in ("left", "right", "top", "bot")]
+    bw = (l + r + t + b) / 4.0
+    Wf, Hf = W - l - r, H - t - b
+    if bw < 2 or Wf < 20 or Hf < 20: return img, bw
+    oW, oH = int(round(Wf + 2 * bw)), int(round(Hf + 2 * bw))
+    xs = np.interp(np.arange(oW) + 0.5, [0, bw, bw + Wf, oW], [0, l, l + Wf, W])
+    ys = np.interp(np.arange(oH) + 0.5, [0, bw, bw + Hf, oH], [0, t, t + Hf, H])
+    X = np.tile(xs.astype(np.float32)[None, :], (oH, 1)); Y = np.tile(ys.astype(np.float32)[:, None], (1, oW))
+    return cv2.remap(img, X, Y, cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE), bw
+
+
 def mesh_rectify2(img, quad, side=1200):
     """край + линия поля. → (картинка, сведения; field — расстояния линии поля от краёв, px)"""
     out, info = mesh_rectify(img, quad, side)

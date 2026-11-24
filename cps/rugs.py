@@ -1923,17 +1923,22 @@ def install(app, DATA, D_WORK):
             except OSError: pass
         return m
 
+    FEQ_T = 1795600000                                       # v12.34: картинки «с полем», собранные раньше, пересобираются (теперь кайма одной ширины)
+
     def mesh_field_img(rid, r=None):
         """выровненный ковёр по выбранной человеком линии поля (rug_mesh/<id>.f.jpg) или None"""
         rid = os.path.basename(rid); r = r or load(rid); F = ((r or {}).get("layout") or {}).get("field") or {}
         m = mesh_info(rid, r)
         if not m or not F.get("curves"): return None
         p = os.path.join(D_MESH, rid + ".f.jpg")
-        if os.path.exists(p) and os.path.getmtime(p) >= max(os.path.getmtime(os.path.join(D_MESH, rid + ".jpg")), F.get("t", 0)): return p
+        if os.path.exists(p) and os.path.getmtime(p) >= max(os.path.getmtime(os.path.join(D_MESH, rid + ".jpg")), F.get("t", 0), FEQ_T): return p
         import rug_mesh
         a = cv2.imread(os.path.join(D_MESH, rid + ".jpg"))
         if a is None: return None
-        out, _ = heavy(lambda: rug_mesh.field_warp(a, {k: np.array(v, float) for k, v in F["curves"].items()}), "поле")
+        def work():                                          # v12.34: поле — прямоугольник, кайма со всех сторон одной ширины
+            o, med = rug_mesh.field_warp(a, {k: np.array(v, float) for k, v in F["curves"].items()})
+            return rug_mesh.border_equalize(o, med)[0], med
+        out, _ = heavy(work, "поле")
         cv2.imwrite(p, out, [cv2.IMWRITE_JPEG_QUALITY, 88]); return p
 
     # ---- v11.84: части ковра — поле и четыре ленты каймы (rug_mesh.cut_parts) ----
