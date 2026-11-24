@@ -11,7 +11,7 @@
  "school": "karabakh",
  "composition": "chelebi",
  "technique": "ворсовый",
- "size": "",
+ "size": "408x152 см",
  "notes": "",
  "status": "new",
  "w": 347,
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Khojali_town_of_Azerbaijan_Karabakh_group_png",
  "lib_img": "img/wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Khojali_town_of_Azerbaijan_Karabakh_group_png.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0048_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchalari_qarabag_qrupu_p0048_1": {
+   "ok": true,
+   "by": "машина: 1291 общих точек, перекрытие 0.97 (порог 40 / 0.9)",
+   "at": 1795506329
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -102,5 +113,8 @@
    16.2247
   ],
   "t": 1795207895
+ },
+ "from_twin": {
+  "size": "azerbaycan_xalchalari_qarabag_qrupu_p0048_1"
  }
 }

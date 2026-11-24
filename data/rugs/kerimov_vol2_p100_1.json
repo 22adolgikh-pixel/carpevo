@@ -6,11 +6,11 @@
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
- "place": "",
- "date": "",
- "school": "",
+ "place": "Губа",
+ "date": "19 в.",
+ "school": "guba",
  "composition": "xan",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "Размер ковра «Хан» бывает от 115x170 до 130x200 см. Плотность узлов — от 50x50 до 60x60.",
  "status": "new",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:kerimov_vol2_p100_1",
  "lib_img": "img/kerimov_vol2_p100_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2885_p0018_1_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2885_p0018_1_2": {
+   "ok": true,
+   "by": "машина: 1422 общих точек, перекрытие 0.96 (порог 40 / 0.9)",
+   "at": 1795506329
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -101,5 +112,11 @@
    17.696
   ],
   "t": 1795207881
+ },
+ "from_twin": {
+  "school": "intangible_2885_p0018_1_2",
+  "technique": "intangible_2885_p0018_1_2",
+  "place": "intangible_2885_p0018_1_2",
+  "date": "intangible_2885_p0018_1_2"
  }
 }

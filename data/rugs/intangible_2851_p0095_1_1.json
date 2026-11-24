@@ -7,11 +7,11 @@
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Иреван",
- "date": "",
+ "date": "19 в., начало",
  "school": "",
  "composition": "",
  "technique": "ворсовый",
- "size": "",
+ "size": "282x142 см",
  "notes": "Şəkil 170. Xalça. İrəvan qrupu\nŞəkil 171. Xalça. İrəvan qrupu",
  "status": "new",
  "w": 613,
@@ -185,5 +185,22 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "intangible_2854_p0038_1_2": {
+   "ok": true,
+   "by": "машина: 1216 общих точек, перекрытие 0.99 (порог 40 / 0.9)",
+   "at": 1795506329
+  }
+ },
+ "same": [
+  {
+   "id": "intangible_2854_p0038_1_2",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "date": "intangible_2854_p0038_1_2",
+  "size": "intangible_2854_p0038_1_2"
+ }
 }

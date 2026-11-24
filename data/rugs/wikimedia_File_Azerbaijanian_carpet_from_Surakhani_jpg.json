@@ -3,15 +3,15 @@
  "title": "Azerbaijanian carpet from Surakhani.jpg",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "847",
  "url": "https://commons.wikimedia.org/wiki/File:Azerbaijanian_carpet_from_Surakhani.jpg",
  "license": "Public domain",
- "place": "",
+ "place": "Баку, Азербайджан",
  "date": "19th centurydate QS:P,+1850-00-00T00:00:00Z/7",
  "school": "baku",
  "composition": "suraxani",
  "technique": "ворсовый",
- "size": "",
+ "size": "130x193 sm",
  "notes": "",
  "status": "new",
  "w": 800,
@@ -48,8 +48,64 @@
  },
  "src_id": "cat:wikimedia_File_Azerbaijanian_carpet_from_Surakhani_jpg",
  "lib_img": "img/wikimedia_File_Azerbaijanian_carpet_from_Surakhani_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_baku_surahani_rug1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0005_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_36",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion46",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0158_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0086_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_baku_surahani_rug1": {
+   "ok": true,
+   "by": "машина: 76 общих точек, перекрытие 0.91 (порог 40 / 0.9)",
+   "at": 1795506329
+  },
+  "azerbaycan_xalchasi_p0005_1": {
+   "ok": true,
+   "by": "машина: 79 общих точек, перекрытие 0.91 (порог 40 / 0.9)",
+   "at": 1795506329
+  },
+  "azcm_36": {
+   "ok": true,
+   "by": "машина: 78 общих точек, перекрытие 0.95 (порог 40 / 0.9)",
+   "at": 1795506329
+  },
+  "azr_kuba_shirvan_medallion46": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_baku_surahani_rug1 ≠ azr_kuba_shirvan_medallion46",
+   "at": 1795506329
+  },
+  "intangible_2849_p0158_1": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_baku_surahani_rug1 ≠ intangible_2849_p0158_1",
+   "at": 1795506329
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0086_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_36 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0086_1",
+   "at": 1795506330
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -115,5 +171,10 @@
   "area": 0.872,
   "ver": 1,
   "t": 1795464921
+ },
+ "from_twin": {
+  "inv": "azr_antique_baku_surahani_rug1",
+  "place": "azr_antique_baku_surahani_rug1",
+  "size": "azr_antique_baku_surahani_rug1"
  }
 }

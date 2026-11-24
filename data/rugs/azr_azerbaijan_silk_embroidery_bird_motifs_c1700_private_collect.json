@@ -2,16 +2,16 @@
  "id": "azr_azerbaijan_silk_embroidery_bird_motifs_c1700_private_collect",
  "title": "Early Azerbaijan silk embroidery, 17th century, Private Collection",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Private collection",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
  "date": "17th century",
- "school": "",
+ "school": "karabakh",
  "composition": "",
  "technique": "",
- "size": "",
+ "size": "56x55 см",
  "notes": "Early Azerbaijan silk embroidery, 17th century, Private Collection",
  "status": "new",
  "w": 670,
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_azerbaijan_silk_embroidery_bird_motifs_c1700_private_collect",
  "lib_img": "img/azr_azerbaijan_silk_embroidery_bird_motifs_c1700_private_collect.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0035_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchalari_qarabag_qrupu_p0035_1": {
+   "ok": true,
+   "by": "машина: 1770 общих точек, перекрытие 0.99 (порог 40 / 0.9)",
+   "at": 1795506329
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -176,5 +187,10 @@
    }
   }
  },
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "school": "azerbaycan_xalchalari_qarabag_qrupu_p0035_1",
+  "museum": "azerbaycan_xalchalari_qarabag_qrupu_p0035_1",
+  "size": "azerbaycan_xalchalari_qarabag_qrupu_p0035_1"
+ }
 }

@@ -9,7 +9,7 @@
  "place": "Губа",
  "date": "19 в.",
  "school": "guba",
- "composition": "",
+ "composition": "xan",
  "technique": "ворсовый",
  "size": "",
  "notes": "70. Переметная сума (ворсовая техника), XIX в.\n71. Ворсовый ковер „Хан чешня“, XIX в. (Куба)",
@@ -186,5 +186,21 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "kerimov_vol2_p100_1": {
+   "ok": true,
+   "by": "машина: 1422 общих точек, перекрытие 0.96 (порог 40 / 0.9)",
+   "at": 1795506329
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol2_p100_1",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "composition": "kerimov_vol2_p100_1"
+ }
 }

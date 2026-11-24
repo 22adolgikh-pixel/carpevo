@@ -183,5 +183,18 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "intangible_2851_p0095_1_1": {
+   "ok": true,
+   "by": "машина: 1216 общих точек, перекрытие 0.99 (порог 40 / 0.9)",
+   "at": 1795506329
+  }
+ },
+ "same": [
+  {
+   "id": "intangible_2851_p0095_1_1",
+   "score": 0
+  }
+ ]
 }

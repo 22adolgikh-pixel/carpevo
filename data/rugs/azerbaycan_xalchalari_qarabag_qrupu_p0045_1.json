@@ -2,7 +2,7 @@
  "id": "azerbaycan_xalchalari_qarabag_qrupu_p0045_1",
  "title": "Xalça. “Çələbi”. Qarabağ qrupu. Azərbaycan. Bərdə.",
  "source": "каталог: book:azerbaycan_xalchalari_qarabag_qrupu",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
@@ -264,8 +264,46 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0045_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0045_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Barda_town_of",
+   "score": 0
+  },
+  {
+   "id": "cleveland_154908",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0135_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Barda_town_of": {
+   "ok": true,
+   "by": "машина: 1824 общих точек, перекрытие 0.94 (порог 40 / 0.9)",
+   "at": 1795506329
+  },
+  "cleveland_154908": {
+   "ok": false,
+   "by": "по цепочке: cleveland_154908 ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Barda_town_of",
+   "at": 1795506330
+  },
+  "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg": {
+   "ok": false,
+   "by": "по цепочке: wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Barda_town_of ≠ wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg",
+   "at": 1795506330
+  },
+  "intangible_2850_p0135_1": {
+   "ok": false,
+   "by": "по цепочке: intangible_2850_p0135_1 ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Barda_town_of",
+   "at": 1795506330
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -576,5 +614,8 @@
     }
    }
   }
+ },
+ "from_twin": {
+  "museum": "wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Barda_town_of"
  }
 }

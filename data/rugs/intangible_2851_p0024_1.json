@@ -7,11 +7,11 @@
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Иреван",
- "date": "",
+ "date": "19 в., начало",
  "school": "",
- "composition": "",
+ "composition": "borchali",
  "technique": "ворсовый",
- "size": "",
+ "size": "231x190 см",
  "notes": "Şəkil 23. Xalça. «Ləmbəli». İrəvan qrupu",
  "status": "new",
  "w": 775,
@@ -50,8 +50,19 @@
  },
  "src_id": "cat:intangible_2851_p0024_1",
  "lib_img": "img/intangible_2851_p0024_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2854_p0040_1_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2854_p0040_1_2": {
+   "ok": true,
+   "by": "машина: 765 общих точек, перекрытие 0.90 (порог 40 / 0.9)",
+   "at": 1795506329
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "cropped",
@@ -115,5 +126,10 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "composition": "intangible_2854_p0040_1_2",
+  "date": "intangible_2854_p0040_1_2",
+  "size": "intangible_2854_p0040_1_2"
+ }
 }

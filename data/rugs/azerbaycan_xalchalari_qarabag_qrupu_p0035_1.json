@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0035_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0035_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_azerbaijan_silk_embroidery_bird_motifs_c1700_private_collect",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_azerbaijan_silk_embroidery_bird_motifs_c1700_private_collect": {
+   "ok": true,
+   "by": "машина: 1770 общих точек, перекрытие 0.99 (порог 40 / 0.9)",
+   "at": 1795506329
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",

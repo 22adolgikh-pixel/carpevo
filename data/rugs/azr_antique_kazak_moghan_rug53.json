@@ -6,12 +6,12 @@
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "Иреван",
+ "date": "18 в., конец",
  "school": "gazakh",
  "composition": "",
- "technique": "",
- "size": "",
+ "technique": "ворсовый",
+ "size": "261x157 см",
  "notes": "",
  "status": "new",
  "w": 635,
@@ -49,6 +49,14 @@
   {
    "id": "intangible_2850_p0130_1",
    "score": 0
+  },
+  {
+   "id": "intangible_2854_p0036_1_2",
+   "score": 0
+  },
+  {
+   "id": "intangible_2851_p0095_1_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +64,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794998098
+  },
+  "intangible_2854_p0036_1_2": {
+   "ok": true,
+   "by": "машина: 1633 общих точек, перекрытие 0.98 (порог 40 / 0.9)",
+   "at": 1795506329
+  },
+  "intangible_2851_p0095_1_2": {
+   "ok": true,
+   "by": "машина: 920 общих точек, перекрытие 0.94 (порог 40 / 0.9)",
+   "at": 1795506329
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -174,5 +192,11 @@
    40.2255
   ],
   "t": 1795207719
+ },
+ "from_twin": {
+  "technique": "intangible_2854_p0036_1_2",
+  "place": "intangible_2854_p0036_1_2",
+  "date": "intangible_2854_p0036_1_2",
+  "size": "intangible_2854_p0036_1_2"
  }
 }

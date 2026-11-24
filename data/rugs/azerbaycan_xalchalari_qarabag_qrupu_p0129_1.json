@@ -2,7 +2,7 @@
  "id": "azerbaycan_xalchalari_qarabag_qrupu_p0129_1",
  "title": "Xalça. “ Qoçbuynuz xanlıq” . Qarabağ qrupu. Azərbaycan. Yun. Xovlu.",
  "source": "каталог: book:azerbaycan_xalchalari_qarabag_qrupu",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
@@ -53,8 +53,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0129_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0129_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Goçbunyuz_Khanliq_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Goçbunyuz_Khanliq_jpg": {
+   "ok": true,
+   "by": "машина: 592 общих точек, перекрытие 0.92 (порог 40 / 0.9)",
+   "at": 1795506329
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -107,5 +118,8 @@
    63.3695
   ],
   "t": 1795207691
+ },
+ "from_twin": {
+  "museum": "wikimedia_File_Goçbunyuz_Khanliq_jpg"
  }
 }

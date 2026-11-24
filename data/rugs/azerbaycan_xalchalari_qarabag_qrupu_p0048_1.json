@@ -2,7 +2,7 @@
  "id": "azerbaycan_xalchalari_qarabag_qrupu_p0048_1",
  "title": "Xalça. “ Çaləbi” . Qarabağqrupu . Azərbaycan . Xocalı.",
  "source": "каталог: book:azerbaycan_xalchalari_qarabag_qrupu",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0048_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0048_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Khojali_town_",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Khojali_town_": {
+   "ok": true,
+   "by": "машина: 1291 общих точек, перекрытие 0.97 (порог 40 / 0.9)",
+   "at": 1795506329
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -362,5 +373,8 @@
    66.7056
   ],
   "t": 1795207686
+ },
+ "from_twin": {
+  "museum": "wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Khojali_town_"
  }
 }
