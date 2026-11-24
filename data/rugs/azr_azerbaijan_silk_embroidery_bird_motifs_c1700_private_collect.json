@@ -18,7 +18,7 @@
  "h": 651,
  "marks": [],
  "created": 1791736140,
- "updated": 1795279824,
+ "updated": 1795498973,
  "cat": {
   "title": "Early Azerbaijan silk embroidery, 17th century, Private Collection",
   "museum": "",
@@ -80,7 +80,30 @@
   "conf": 0.954,
   "area": 0.788,
   "ver": 1,
-  "t": 1795072850
+  "t": 1795072850,
+  "ref_quad": {
+   "quad": [
+    [
+     0.05606,
+     0.0551
+    ],
+    [
+     0.92852,
+     0.03651
+    ],
+    [
+     0.94351,
+     0.93829
+    ],
+    [
+     0.05505,
+     0.94042
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795499003
+  }
  },
  "layout": {
   "carpet": [
@@ -114,7 +137,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "detail",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -139,9 +162,9 @@
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "detail",
+    "a": "whole",
     "w": 2,
-    "t": 1795279824
+    "t": 1795498973
    }
   }
  },

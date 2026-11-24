@@ -18,7 +18,7 @@
  "h": 512,
  "marks": [],
  "created": 1791736130,
- "updated": 1795293047,
+ "updated": 1795498881,
  "cat": {
   "title": "kuba shirvan medallion60",
   "museum": "",
@@ -53,18 +53,54 @@
   {
    "id": "azr_kuba_shirvan_medallion65",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion61",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion62",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_kilim10",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion107",
+   "score": 0
   }
  ],
  "same_ok": {
   "azr_kuba_shirvan_medallion65": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795498881
   },
   "azr_kuba_shirvan_medallion105": {
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_kuba_shirvan_medallion61": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_shirvan_medallion61 ≠ azr_kuba_shirvan_medallion65",
+   "at": 1795498902
+  },
+  "azr_kuba_shirvan_medallion62": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_shirvan_medallion62 ≠ azr_kuba_shirvan_medallion65",
+   "at": 1795498902
+  },
+  "azr_kuba_kilim10": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_kilim10 ≠ azr_kuba_shirvan_medallion65",
+   "at": 1795498902
+  },
+  "azr_kuba_shirvan_medallion107": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_shirvan_medallion107 ≠ azr_kuba_shirvan_medallion65",
+   "at": 1795498902
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -134,5 +170,16 @@
   ],
   "t": 1795207796
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "azr_kuba_shirvan_medallion65": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795498881
+    }
+   }
+  }
+ }
 }
