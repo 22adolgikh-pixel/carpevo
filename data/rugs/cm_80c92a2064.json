@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791870035,
- "updated": 1795280451,
+ "updated": 1795499049,
  "cat": {
   "title": "Istang from collection of the Chechen National Museum",
   "museum": "",
@@ -91,7 +91,30 @@
   "conf": 0.965,
   "area": 0.715,
   "ver": 1,
-  "t": 1794238528
+  "t": 1794238528,
+  "ref_quad": {
+   "quad": [
+    [
+     0.09519,
+     0.04574
+    ],
+    [
+     0.95178,
+     0.074
+    ],
+    [
+     0.90987,
+     0.91306
+    ],
+    [
+     0.08366,
+     0.91547
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795499045
+  }
  },
  "multi": [],
  "same_chk": {
@@ -125,12 +148,53 @@
  "micro": {
   "frame": {
    "dolgikh": {
-    "a": "not_rug",
+    "a": "whole",
     "w": 2,
-    "t": 1795280451
+    "t": 1795499011
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795499049,
+    "s": "ref"
    }
   }
  },
- "frame": "not_rug",
- "frame_by": "micro"
+ "frame": "whole",
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.09519,
+    0.04574
+   ],
+   [
+    0.95178,
+    0.074
+   ],
+   [
+    0.90987,
+    0.91306
+   ],
+   [
+    0.08366,
+    0.91547
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
