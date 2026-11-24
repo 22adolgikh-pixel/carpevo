@@ -18,7 +18,7 @@
  "h": 425,
  "marks": [],
  "created": 1791567611,
- "updated": 1791567611,
+ "updated": 1795501162,
  "src_id": "fig:t231_f02",
  "multi": [],
  "people": {
@@ -71,5 +71,29 @@
    36.7965
   ],
   "t": 1795207871
- }
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol1_p350_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795501162
+    }
+   }
+  }
+ },
+ "same_ok": {
+  "kerimov_vol1_p350_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795501162
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p350_2",
+   "score": 0
+  }
+ ]
 }
