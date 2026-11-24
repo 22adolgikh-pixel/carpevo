@@ -9,8 +9,8 @@
  "place": "Karabakh, present-day Azerbaijan",
  "date": "1971",
  "school": "karabakh",
- "composition": "",
- "technique": "безворсовый",
+ "composition": "ejdahali",
+ "technique": "безворсовый: сумах",
  "size": "L. 90 in. (228.6 cm)\r\nW. 70 3/4 in. (179.7 cm)",
  "notes": "Carpet; Textiles-Rugs",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 2048,
  "marks": [],
  "created": 1791870021,
- "updated": 1795504569,
+ "updated": 1795505226,
  "cat": {
   "title": "Carpet; Textiles-Rugs",
   "museum": "Метрополитен-музей",
@@ -506,9 +506,7 @@
   }
  },
  "from_twin": {
-  "composition": "cm_ba4aeb0a49",
   "school": "met_452312",
-  "technique": "met_452312",
   "place": "met_452312",
   "size": "met_452312"
  },
@@ -555,9 +553,17 @@
     "repl_by": "машина",
     "why": "это не композиция, а школа"
    }
+  ],
+  "technique": [
+   {
+    "v": "безворсовый",
+    "by": "",
+    "at": 1795505201,
+    "repl_by": "dolgikh"
+   }
   ]
  },
- "composition_by": "перенесено: не композиция",
+ "composition_by": "dolgikh",
  "auto_edge": {
   "v": 1,
   "f": [
@@ -598,5 +604,6 @@
     }
    }
   }
- }
+ },
+ "technique_by": "dolgikh"
 }
