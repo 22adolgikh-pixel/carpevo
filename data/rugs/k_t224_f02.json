@@ -2,15 +2,15 @@
  "id": "k_t224_f02",
  "title": "Керимов, т. I, табл. 224, фото 2 (стр. скана 343)",
  "source": "фото из книги: t224_f02",
- "museum": "",
+ "museum": "Национальный музей искусств Азербайджана",
  "inv": "",
  "url": "",
  "license": "",
  "place": "",
- "date": "",
- "school": "",
+ "date": "2017-02-04 14:44:58",
+ "school": "guba-shirvan",
  "composition": "",
- "technique": "",
+ "technique": "безворсовый: сумах",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 669,
  "marks": [],
  "created": 1791567611,
- "updated": 1791567611,
+ "updated": 1795501398,
  "src_id": "fig:t224_f02",
  "multi": [],
  "people": {
@@ -71,5 +71,80 @@
    38.0128
   ],
   "t": 1795207870
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol1_p343_2": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795501398
+    }
+   }
+  }
+ },
+ "same_ok": {
+  "kerimov_vol1_p343_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795501398
+  },
+  "cm_048c9260eb": {
+   "ok": true,
+   "by": "по цепочке: cm_048c9260eb = cm_652559a4c6 = k_t224_f02 = kerimov_vol1_p343_2",
+   "at": 1795501420
+  },
+  "cm_652559a4c6": {
+   "ok": true,
+   "by": "по цепочке: cm_048c9260eb = cm_652559a4c6 = k_t224_f02 = kerimov_vol1_p343_2",
+   "at": 1795501420
+  },
+  "k_t239_f01": {
+   "ok": false,
+   "by": "по цепочке: cm_652559a4c6 ≠ kerimov_vol1_p358_1",
+   "at": 1795501420
+  },
+  "kerimov_vol1_p358_1": {
+   "ok": false,
+   "by": "по цепочке: cm_652559a4c6 ≠ kerimov_vol1_p358_1",
+   "at": 1795501420
+  },
+  "intangible_2851_p0019_2": {
+   "ok": false,
+   "by": "по цепочке: cm_652559a4c6 ≠ intangible_2851_p0019_2",
+   "at": 1795501420
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p343_2",
+   "score": 0
+  },
+  {
+   "id": "cm_048c9260eb",
+   "score": 0
+  },
+  {
+   "id": "cm_652559a4c6",
+   "score": 0
+  },
+  {
+   "id": "k_t239_f01",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol1_p358_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2851_p0019_2",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "kerimov_vol1_p343_2",
+  "technique": "kerimov_vol1_p343_2",
+  "museum": "kerimov_vol1_p343_2",
+  "date": "kerimov_vol1_p343_2"
  }
 }
