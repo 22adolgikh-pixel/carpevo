@@ -8,8 +8,8 @@
  "license": "",
  "place": "",
  "date": "",
- "school": "",
- "composition": "",
+ "school": "tabriz",
+ "composition": "tebriz",
  "technique": "",
  "size": "",
  "notes": "",
@@ -18,7 +18,7 @@
  "h": 620,
  "marks": [],
  "created": 1791567611,
- "updated": 1791567611,
+ "updated": 1795548097,
  "src_id": "fig:t238_f01",
  "multi": [],
  "people": {
@@ -71,5 +71,33 @@
    39.2246
   ],
   "t": 1795207871
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol1_p357_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795548097
+    }
+   }
+  }
+ },
+ "same_ok": {
+  "kerimov_vol1_p357_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795548097
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p357_1",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "kerimov_vol1_p357_1",
+  "composition": "kerimov_vol1_p357_1"
  }
 }
