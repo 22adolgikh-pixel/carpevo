@@ -5174,6 +5174,74 @@ def install(app, DATA, D_WORK):
                 merged += merge_dups(keep, [d["id"] for d in g[1:]], "другого кадра этой же страницы", bm)
         return merged
 
+    # ---- v12.32: Керимов т. I пришёл двумя путями: каталог по страницам скана (kerimov_vol1_pNNN_k, с подписью из книги)
+    # и вырезки из листов таблиц (k_tTTT_fFF, «табл. 231, фото 1 (стр. скана 350)»). Это одни и те же фото — склеиваем без человека.
+    # Проверка 24.11 на 92 вырезках: у 67 один ковёр каталога на той же странице (±1) совмещается 300–5 100 точками, остальные ≤ 24.
+    KT_STATE = {"run": False, "merged": 0, "checked": 0, "nopair": [], "t": 0}
+
+    def dedupe_kt():
+        import rug_match
+        live = {}
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            rid = f[:-5]
+            if not (rid.startswith("k_t") or rid.startswith("kerimov_vol1_p")): continue
+            r = load(rid)
+            if r and not (r.get("dup_of") or r.get("hidden") or r.get("split_into")) and img_path(rid): live[rid] = r
+        byp = {}
+        for rid in live:
+            m = re.match(r"kerimov_vol1_p(\d+)_", rid)
+            if m: byp.setdefault(int(m.group(1)), []).append(rid)
+        ims = {}
+        def im(rid):
+            if rid not in ims: ims[rid] = read_small(img_path(rid), 1000)
+            return ims[rid]
+        merged, nopair, checked = 0, [], 0
+        for rid, r in sorted(live.items()):
+            if not rid.startswith("k_t"): continue
+            m = re.search(r"скана (\d+)", r.get("title") or "")
+            if not m: continue
+            pg = int(m.group(1)); checked += 1
+            cand = [c for p in (pg, pg - 1, pg + 1) for c in byp.get(p, [])]
+            A = im(rid); sc = []
+            for c in cand:
+                B = im(c)
+                if A is None or B is None: continue
+                H, n = rug_match.align(A, B); sc.append((int(n), c, H))
+            sc.sort(key=lambda x: -x[0])
+            sec = sc[1][0] if len(sc) > 1 else 0
+            if not sc or sc[0][0] < 300 or sc[0][0] < 5 * max(sec, 10):
+                nopair.append({"id": rid, "page": pg, "best": [(n, c) for n, c, _ in sc[:2]]}); continue
+            n, keep, H = sc[0]
+            bm = {rid: (lambda H_: lambda box: rug_match.map_box(H_, box)[0])(H)} if H is not None else None
+            if merge_dups(keep, [rid], "таблицы Керимова", bm):
+                merged += 1
+                ref = re.search(r"табл\. \d+, фото \d+", r.get("title") or "")
+                with _lock:
+                    K = load(keep)
+                    if K:
+                        refs = K.setdefault("book_refs", [])
+                        if ref and ref.group(0) not in refs: refs.append(ref.group(0))
+                        K.setdefault("merged_from", [])
+                        if rid not in K["merged_from"]: K["merged_from"].append(rid)
+                        save(K)
+        KT_STATE.update(merged=KT_STATE["merged"] + merged, checked=checked, nopair=nopair, t=int(time.time()))
+        return merged
+
+    def _kt_bg():
+        if KT_STATE["run"]: return
+        KT_STATE["run"] = True
+        try:
+            n = heavy(dedupe_kt, "Керимов: таблицы = каталог")
+            if n: print("dedupe_kt: склеено вырезок таблиц с каталогом:", n)
+        except Exception as e: print("dedupe_kt:", e)
+        finally: KT_STATE["run"] = False
+
+    @app.get("/api/open/kt_dedupe")
+    def api_kt_dedupe(run: int = 0):
+        if run and not KT_STATE["run"]: threading.Thread(target=_kt_bg, daemon=True).start()
+        return KT_STATE
+
     @app.post("/api/rugs_pages_dedupe")
     def api_rugs_pages_dedupe():
         def run():
@@ -5250,6 +5318,7 @@ def install(app, DATA, D_WORK):
             time.sleep(60); _phash_bg()
             n = heavy(dedupe_pages, "листы: повторные кадры")
             if n: print("dedupe_pages: скрыто повторных кадров:", n)
+            _kt_bg()
             k = link_by_inv()
             if k: print("link_by_inv: связано по инв. номеру:", k)
         except Exception as e: print("dedupe_files:", e)
