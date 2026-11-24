@@ -9,7 +9,7 @@
  "place": "",
  "date": "",
  "school": "",
- "composition": "",
+ "composition": "orduc",
  "technique": "",
  "size": "",
  "notes": "",
@@ -18,7 +18,7 @@
  "h": 696,
  "marks": [],
  "created": 1791567611,
- "updated": 1794340339,
+ "updated": 1795547905,
  "src_id": "fig:t227_f01",
  "multi": [],
  "people": {
@@ -84,6 +84,15 @@
      ]
     ]
    }
+  },
+  "same": {
+   "kerimov_vol1_p346_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795547905
+    }
+   }
   }
  },
  "frame": "whole",
@@ -140,5 +149,21 @@
    32.6806
   ],
   "t": 1795207870
+ },
+ "same_ok": {
+  "kerimov_vol1_p346_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795547907
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p346_1",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "composition": "kerimov_vol1_p346_1"
  }
 }

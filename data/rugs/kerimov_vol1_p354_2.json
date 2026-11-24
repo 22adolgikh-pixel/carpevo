@@ -73,8 +73,19 @@
  },
  "src_id": "cat:kerimov_vol1_p354_2",
  "lib_img": "img/kerimov_vol1_p354_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "k_t235_f02",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "k_t235_f02": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795547839
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
