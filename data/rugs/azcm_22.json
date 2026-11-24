@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870040,
- "updated": 1795293047,
+ "updated": 1795495885,
  "cat": {
   "title": "“Qonaqkənd” («Гонагкенд»), Губа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -78,18 +78,30 @@
   {
    "id": "azr_kuba74",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend61",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend57",
+   "score": 0
+  },
+  {
+   "id": "cm_08cb8ca7c9",
+   "score": 0
   }
  ],
  "same_ok": {
   "azr_kuba_konagkend59": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795495885
   },
   "azcm_31": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795495885
   },
   "cm_784c4dbc66": {
    "ok": false,
@@ -115,6 +127,23 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_kuba_konagkend61": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795495885,
+   "similar": true
+  },
+  "azr_kuba_konagkend57": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795495885,
+   "similar": true
+  },
+  "cm_08cb8ca7c9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795495885
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -201,6 +230,41 @@
      "a": "diff",
      "w": 2,
      "t": 1795019054
+    }
+   },
+   "azr_kuba_konagkend59": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795495885
+    }
+   },
+   "azcm_31": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795495885
+    }
+   },
+   "azr_kuba_konagkend61": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795495885
+    }
+   },
+   "azr_kuba_konagkend57": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795495885
+    }
+   },
+   "cm_08cb8ca7c9": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795495885
     }
    }
   },

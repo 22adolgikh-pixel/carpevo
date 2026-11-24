@@ -73,13 +73,25 @@
   {
    "id": "kerimov_vol2_p127_2",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend61",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend57",
+   "score": 0
+  },
+  {
+   "id": "cm_08cb8ca7c9",
+   "score": 0
   }
  ],
  "same_ok": {
   "azcm_22": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795495885
   },
   "azcm_31": {
    "ok": false,
@@ -110,6 +122,21 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_kuba_konagkend61": {
+   "ok": false,
+   "by": "по цепочке: azcm_22 ≠ azr_kuba_konagkend61",
+   "at": 1795495906
+  },
+  "azr_kuba_konagkend57": {
+   "ok": false,
+   "by": "по цепочке: azcm_22 ≠ azr_kuba_konagkend57",
+   "at": 1795495906
+  },
+  "cm_08cb8ca7c9": {
+   "ok": false,
+   "by": "по цепочке: azcm_22 ≠ cm_08cb8ca7c9",
+   "at": 1795495906
   }
  },
  "_lib_t": "2026-10-12 22:38",
