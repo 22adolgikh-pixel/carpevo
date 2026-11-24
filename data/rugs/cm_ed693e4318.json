@@ -31,7 +31,7 @@
    "scheme": "t53_f04",
    "group": "m6b036acce346409_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.634,
@@ -179,7 +179,7 @@
    "scheme": "t53_f04",
    "group": "m6b036acce346409_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.624,
@@ -339,7 +339,7 @@
    "scheme": "t53_f04",
    "group": "m6b036acce346409_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.619,
@@ -447,7 +447,7 @@
    "scheme": "t53_f04",
    "group": "m6b04bac2e595431_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.648,
@@ -523,7 +523,11 @@
      0.47363
     ]
    ],
-   "sam": 0.974
+   "sam": 0.974,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795497041,
+   "variant": "detail",
+   "variant_by": "/m"
   },
   {
    "id": "m6b04bac2e595431_2",
@@ -539,7 +543,7 @@
    "scheme": "t53_f04",
    "group": "m6b04bac2e595431_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.614,
@@ -627,7 +631,7 @@
    "scheme": "t53_f04",
    "group": "m6b04bac2e595431_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: cincilim",
    "machine": 1,
    "score": 0.607,
@@ -691,7 +695,7 @@
   }
  ],
  "created": 1791870036,
- "updated": 1795472078,
+ "updated": 1795497041,
  "cat": {
   "title": "\"Kasym ushagy carpets\" - Azerbaijanian fleecy carpet, Karabakh school, Jabrayi (Cəbrayıl) group ",
   "museum": "",
@@ -868,5 +872,51 @@
   ],
   "t": 1795207849
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "marks": {
+   "m6b036acce346409_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497001
+    }
+   },
+   "m6b036acce346409_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497001
+    }
+   },
+   "m6b036acce346409_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497001
+    }
+   },
+   "m6b04bac2e595431_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497041
+    }
+   },
+   "m6b04bac2e595431_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497041
+    }
+   },
+   "m6b04bac2e595431_1": {
+    "dolgikh": {
+     "a": "var",
+     "w": 2,
+     "t": 1795497041
+    }
+   }
+  }
+ }
 }

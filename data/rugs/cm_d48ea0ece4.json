@@ -31,7 +31,7 @@
    "scheme": "t48_f06",
    "group": "m6afa2edee65554_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: Quyrum",
    "machine": 1,
    "score": 0.704,
@@ -99,7 +99,7 @@
    "scheme": "t158_f01",
    "group": "m6b00c5cfe189079_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: heyvan",
    "machine": 1,
    "score": 0.893,
@@ -179,7 +179,7 @@
    "scheme": "t158_f01",
    "group": "m6b00c5cfe189079_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: heyvan",
    "machine": 1,
    "score": 0.867,
@@ -267,7 +267,7 @@
   }
  ],
  "created": 1791870023,
- "updated": 1795354889,
+ "updated": 1795496995,
  "cat": {
   "title": "Faxralı carpet, Ganja group of Azerbaijani carpets",
   "museum": "Национальный музей искусств Азербайджана",
@@ -413,6 +413,29 @@
     "w": 2,
     "t": 1795354889,
     "s": "ref"
+   }
+  },
+  "marks": {
+   "m6afa2edee65554_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795496985
+    }
+   },
+   "m6b00c5cfe189079_0": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795496995
+    }
+   },
+   "m6b00c5cfe189079_1": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795496995
+    }
    }
   }
  },
