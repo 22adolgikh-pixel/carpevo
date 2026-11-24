@@ -10,7 +10,7 @@
  "date": "",
  "school": "",
  "composition": "",
- "technique": "",
+ "technique": "безворсовый: килим",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 604,
  "marks": [],
  "created": 1791567610,
- "updated": 1791567610,
+ "updated": 1795547442,
  "src_id": "fig:t222_f01",
  "multi": [],
  "people": {
@@ -71,5 +71,41 @@
    39.2581
   ],
   "t": 1795207870
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol1_p341_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795547442
+    }
+   }
+  }
+ },
+ "same_ok": {
+  "kerimov_vol1_p341_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795547442
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1 ≠ kerimov_vol1_p341_1",
+   "at": 1795547463
+  }
+ },
+ "same": [
+  {
+   "id": "kerimov_vol1_p341_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0062_1",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "technique": "kerimov_vol1_p341_1"
  }
 }
