@@ -2,15 +2,15 @@
  "id": "kerimov_vol2_p135_1_2",
  "title": "Керимов, т. II, 19 (стр. скана 135, печ. 18)",
  "source": "каталог: kerimov_vol2",
- "museum": "",
+ "museum": "Национальный музей азербайджанского ковра",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
+ "date": "XVIII c",
+ "school": "guba",
+ "composition": "lecedi",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -181,5 +181,25 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "cm_df902b95ec": {
+   "ok": true,
+   "by": "машина: 2049 общих точек, перекрытие 0.99 (порог 40 / 0.9)",
+   "at": 1795530505
+  }
+ },
+ "same": [
+  {
+   "id": "cm_df902b95ec",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "cm_df902b95ec",
+  "composition": "cm_df902b95ec",
+  "technique": "cm_df902b95ec",
+  "museum": "cm_df902b95ec",
+  "date": "cm_df902b95ec"
+ }
 }

@@ -52,9 +52,19 @@
   {
    "id": "wikimedia_File_Ляджади_jpg",
    "score": 1274
+  },
+  {
+   "id": "kerimov_vol2_p135_1_2",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "kerimov_vol2_p135_1_2": {
+   "ok": true,
+   "by": "машина: 2049 общих точек, перекрытие 0.99 (порог 40 / 0.9)",
+   "at": 1795530505
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Ляджади_jpg": {
