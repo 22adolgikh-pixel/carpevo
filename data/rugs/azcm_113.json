@@ -1388,7 +1388,7 @@
   }
  ],
  "created": 1791870041,
- "updated": 1795354063,
+ "updated": 1795497167,
  "cat": {
   "title": "“Fəxralı” («Фахралы»), Гянджа, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -1435,13 +1435,17 @@
   {
    "id": "wikimedia_File_Azerbaijanian_carpet_Fakhrali_jpg",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_seychour153",
+   "score": 0
   }
  ],
  "same_ok": {
   "azerbaycan_xalchasi_p0053_1": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795497167
   },
   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0020_1": {
    "ok": false,
@@ -1457,6 +1461,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_kuba_seychour153": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795497167
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -1607,6 +1616,22 @@
      "a": "bad",
      "w": 2,
      "t": 1795354063
+    }
+   }
+  },
+  "same": {
+   "azerbaycan_xalchasi_p0053_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795497167
+    }
+   },
+   "azr_kuba_seychour153": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795497167
     }
    }
   }

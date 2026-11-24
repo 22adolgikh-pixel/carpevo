@@ -176,10 +176,10 @@
   {
    "id": "m6b036848e295279_0",
    "box": [
-    0.34735,
-    0.34863,
-    0.06231,
-    0.06836
+    0.28504,
+    0.37866,
+    0.12871,
+    0.0598
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -187,7 +187,7 @@
    "scheme": "t32_f04",
    "group": "m6b036848e295279_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 1",
    "machine": 1,
    "score": 0.803,
@@ -315,15 +315,19 @@
      0.34863
     ]
    ],
-   "sam": 0.896
+   "sam": 0.896,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795497234,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795497234
   },
   {
    "id": "m6b036848e295279_1",
    "box": [
     0.28816,
     0.31641,
-    0.05919,
-    0.05859
+    0.11838,
+    0.06362
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -331,7 +335,7 @@
    "scheme": "t32_f04",
    "group": "m6b036848e295279_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 1",
    "machine": 1,
    "score": 0.799,
@@ -411,7 +415,11 @@
      0.31641
     ]
    ],
-   "sam": 0.925
+   "sam": 0.925,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795497234,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795497234
   },
   {
    "id": "m6b036848e295279_2",
@@ -427,7 +435,7 @@
    "scheme": "t32_f04",
    "group": "m6b036848e295279_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: bulud · форма 1",
    "machine": 1,
    "score": 0.773,
@@ -524,10 +532,10 @@
   {
    "id": "m6b036848e295279_3",
    "box": [
-    0.53894,
-    0.74902,
-    0.16822,
-    0.07422
+    0.4871,
+    0.7315,
+    0.14056,
+    0.05369
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -535,7 +543,7 @@
    "scheme": "t32_f04",
    "group": "m6b036848e295279_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "эталон: bulud · форма 1",
    "machine": 1,
    "score": 0.753,
@@ -731,7 +739,11 @@
      0.75
     ]
    ],
-   "sam": 0.83
+   "sam": 0.83,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795497234,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795497234
   },
   {
    "id": "m6b036848e295279_5",
@@ -747,7 +759,7 @@
    "scheme": "t32_f04",
    "group": "m6b036848e295279_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "эталон: bulud · форма 1",
    "machine": 1,
    "score": 0.706,
@@ -875,7 +887,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795385424,
+ "updated": 1795497234,
  "cat": {
   "title": "Ковёр «Malıbəyli» Карабах",
   "museum": "",
@@ -970,6 +982,41 @@
      "a": "ok",
      "w": 2,
      "t": 1795279134
+    }
+   },
+   "m6b036848e295279_2": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497234
+    }
+   },
+   "m6b036848e295279_5": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795497234
+    }
+   },
+   "m6b036848e295279_0": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795497234
+    }
+   },
+   "m6b036848e295279_1": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795497234
+    }
+   },
+   "m6b036848e295279_3": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795497234
     }
    }
   }

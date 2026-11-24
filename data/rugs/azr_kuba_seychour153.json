@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_seychour153",
  "lib_img": "img/azr_kuba_seychour153.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_113",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0053_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_113": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795497167
+  },
+  "azerbaycan_xalchasi_p0053_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_113 ≠ azr_kuba_seychour153",
+   "at": 1795497189
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

@@ -67,6 +67,10 @@
   {
    "id": "azcm_86",
    "score": 0
+  },
+  {
+   "id": "intangible_2850_p0139_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -76,9 +80,9 @@
    "at": 1795293048
   },
   "azcm_118": {
-   "ok": false,
-   "by": "dolgikh",
-   "at": 1795293048
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795497257
   },
   "aic_226150": {
    "ok": false,
@@ -89,6 +93,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "intangible_2850_p0139_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_118 ≠ intangible_2850_p0139_1",
+   "at": 1795497278
   }
  },
  "_lib_t": "2026-11-13 10:08",
