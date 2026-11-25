@@ -4987,10 +4987,82 @@
     0.0345
    ],
    "rf_moved": 0.858
+  },
+  {
+   "id": "m17956289790s",
+   "box": [
+    0.36788,
+    0.31541,
+    0.22732,
+    0.15619
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcthzk7",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "парное место: сверху↔снизу",
+   "angle": 180,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.883,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795628979,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795629038,
+   "rf": 1,
+   "rf_s": 0.668,
+   "box0": [
+    0.34831,
+    0.17991,
+    0.21788,
+    0.13939
+   ],
+   "rf_moved": 0.567,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795629038
+  },
+  {
+   "id": "m17956289791s",
+   "box": [
+    0.38,
+    0.63158,
+    0.21333,
+    0.13596
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcthzk7",
+   "certainty": "maybe",
+   "status": "confirmed",
+   "note": "парное место: сверху↔снизу",
+   "angle": 180,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.891,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795628979,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795629038,
+   "rf": 1,
+   "rf_s": 0.976,
+   "box0": [
+    0.36001,
+    0.53693,
+    0.26382,
+    0.17498
+   ],
+   "rf_moved": 0.286
   }
  ],
  "created": 1791870041,
- "updated": 1795581628,
+ "updated": 1795629038,
  "cat": {
   "title": "“Aşağı Salahlı” («Ашагы Салахлы»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -6159,6 +6231,20 @@
      "w": 2,
      "t": 1795581628
     }
+   },
+   "m17956289791s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795629038
+    }
+   },
+   "m17956289790s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795629038
+    }
    }
   },
   "name": {
@@ -6293,7 +6379,7 @@
   "mmvctgbew": "1:8",
   "mmvcth6o7": "1:8",
   "mmvcthq6y": "1:8",
-  "mmvcthzk7": "1:4",
+  "mmvcthzk7": "1:5",
   "mmvcti91n": "1:8"
  }
 }
