@@ -5059,10 +5059,62 @@
     0.17498
    ],
    "rf_moved": 0.286
+  },
+  {
+   "id": "m17956312690s",
+   "box": [
+    0.34831,
+    0.17991,
+    0.21788,
+    0.13939
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcthzk7",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: сверху↔снизу",
+   "angle": 180,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.883,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795631269,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  },
+  {
+   "id": "m17956312691s",
+   "box": [
+    0.36001,
+    0.53693,
+    0.26382,
+    0.17498
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcthzk7",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "парное место: сверху↔снизу",
+   "angle": 180,
+   "flip": 1,
+   "machine": "sym",
+   "score": 0.891,
+   "xfer": "",
+   "by": "машина (симметрия ковра)",
+   "at": 1795631269,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791870041,
- "updated": 1795629038,
+ "updated": 1795631269,
  "cat": {
   "title": "“Aşağı Salahlı” («Ашагы Салахлы»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -6379,7 +6431,7 @@
   "mmvctgbew": "1:8",
   "mmvcth6o7": "1:8",
   "mmvcthq6y": "1:8",
-  "mmvcthzk7": "1:5",
+  "mmvcthzk7": "1:8",
   "mmvcti91n": "1:8"
  }
 }
