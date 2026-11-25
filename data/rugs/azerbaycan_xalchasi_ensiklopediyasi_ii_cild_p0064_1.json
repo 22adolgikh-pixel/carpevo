@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795293047,
+ "updated": 1795623027,
  "cat": {
   "title": "Kilim Баку",
   "museum": "Национальный музей азербайджанского ковра",
@@ -103,6 +103,10 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0068_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -170,6 +174,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0068_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795623027,
+   "similar": true
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -249,6 +259,13 @@
      "a": "diff",
      "w": 2,
      "t": 1794982923
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0068_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795623027
     }
    }
   },
