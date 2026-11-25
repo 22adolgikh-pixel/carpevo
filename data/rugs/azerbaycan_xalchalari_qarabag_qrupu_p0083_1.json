@@ -18,7 +18,7 @@
  "h": 1989,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062011,
+ "updated": 1795621094,
  "cat": {
   "title": "Xalça. “ Ləmpə” . Qarabağ qrupu. Azərbaycan. Şuşa.",
   "museum": "",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0083_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0083_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0084_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchalari_qarabag_qrupu_p0084_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795621094
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -96,6 +107,15 @@
   },
   "field": {
    "dolgikh": "draw"
+  },
+  "same": {
+   "azerbaycan_xalchalari_qarabag_qrupu_p0084_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795621094
+    }
+   }
   }
  },
  "frame": "whole",

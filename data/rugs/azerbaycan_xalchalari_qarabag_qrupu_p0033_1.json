@@ -18,7 +18,7 @@
  "h": 1816,
  "marks": [],
  "created": 1794547278,
- "updated": 1795498869,
+ "updated": 1795621073,
  "cat": {
   "title": "Əjdahalı. Xalça. “Xətai\". Qarabağ qrupu. Azərbaycan. XVII əsr. Yun. Xovlu. Şəxsi kolleksiya",
   "museum": "Private collection",
@@ -53,8 +53,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0033_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0033_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_early_karabagh_rug70",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_early_karabagh_rug70": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795621073
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -128,6 +139,15 @@
     "w": 2,
     "t": 1795498869,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_early_karabagh_rug70": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795621073
+    }
    }
   }
  },

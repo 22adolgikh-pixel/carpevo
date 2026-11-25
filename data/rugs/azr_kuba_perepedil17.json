@@ -18,7 +18,7 @@
  "h": 1616,
  "marks": [],
  "created": 1791736134,
- "updated": 1795117640,
+ "updated": 1795621064,
  "cat": {
   "title": "kuba perepedil17",
   "museum": "",
@@ -78,7 +78,30 @@
   "conf": 0.972,
   "area": 0.856,
   "ver": 1,
-  "t": 1795117514
+  "t": 1795117514,
+  "ref_quad": {
+   "quad": [
+    [
+     0.06009,
+     0.02021
+    ],
+    [
+     0.9494,
+     0.01705
+    ],
+    [
+     0.92912,
+     0.96745
+    ],
+    [
+     0.00664,
+     0.93823
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795621075
+  }
  },
  "school_prev": "guba-shirvan",
  "school_by": "уточнено по слову «kuba» в подписи",
@@ -114,7 +137,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -135,5 +158,15 @@
    60.54
   ],
   "t": 1795207777
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795621064
+   }
+  }
+ },
+ "frame_by": "micro"
 }

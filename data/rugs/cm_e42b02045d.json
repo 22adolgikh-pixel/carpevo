@@ -18,7 +18,7 @@
  "h": 1985,
  "marks": [],
  "created": 1791870033,
- "updated": 1795291822,
+ "updated": 1795621108,
  "cat": {
   "title": "\"Old Ganja\" rug, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -150,6 +150,16 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
- "tri": "auto"
+ "frame": "whole",
+ "tri": "auto",
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795621108
+   }
+  }
+ },
+ "frame_by": "micro"
 }

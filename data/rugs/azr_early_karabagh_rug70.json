@@ -2,16 +2,16 @@
  "id": "azr_early_karabagh_rug70",
  "title": "early karabagh rug70",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Private collection",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "XVII в.",
  "school": "karabakh",
  "composition": "",
- "technique": "",
- "size": "",
+ "technique": "ворсовый",
+ "size": "224x132 см",
  "notes": "",
  "status": "new",
  "w": 534,
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_early_karabagh_rug70",
  "lib_img": "img/azr_early_karabagh_rug70.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0033_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchalari_qarabag_qrupu_p0033_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795621073
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -74,5 +85,11 @@
    51.4557
   ],
   "t": 1795207743
+ },
+ "from_twin": {
+  "technique": "azerbaycan_xalchalari_qarabag_qrupu_p0033_1",
+  "museum": "azerbaycan_xalchalari_qarabag_qrupu_p0033_1",
+  "date": "azerbaycan_xalchalari_qarabag_qrupu_p0033_1",
+  "size": "azerbaycan_xalchalari_qarabag_qrupu_p0033_1"
  }
 }

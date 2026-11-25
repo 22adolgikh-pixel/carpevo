@@ -8,7 +8,7 @@
  "license": "CC0",
  "place": "Caucasus",
  "date": "18th century",
- "school": "",
+ "school": "shirvan",
  "composition": "",
  "technique": "ворсовый",
  "size": "Textile: L. 180 in. (457.2 cm)\r\n             W. 80 in. (203.2 cm)",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:met_447576",
  "lib_img": "img/met_447576.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_early_shirvan_rug4a_shield_palmete",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_early_shirvan_rug4a_shield_palmete": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795621036
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -102,5 +113,8 @@
    38.2159
   ],
   "t": 1795207887
+ },
+ "from_twin": {
+  "school": "azr_early_shirvan_rug4a_shield_palmete"
  }
 }
