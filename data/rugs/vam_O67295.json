@@ -8,9 +8,9 @@
  "license": "V&A non-commercial",
  "place": "Azerbaijan",
  "date": "1800-1899",
- "school": "",
+ "school": "guba",
  "composition": "",
- "technique": "",
+ "technique": "безворсовый: сумах",
  "size": "",
  "notes": "",
  "status": "new",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:vam_O67295",
  "lib_img": "img/vam_O67295.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_sumakh112",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_sumakh112": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795621456
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -218,5 +229,9 @@
    15.7546
   ],
   "t": 1795207893
+ },
+ "from_twin": {
+  "school": "azr_kuba_sumakh112",
+  "technique": "azr_kuba_sumakh112"
  }
 }

@@ -2,15 +2,15 @@
  "id": "azr_antique_shirvan_prayer_rug70",
  "title": "antique shirvan prayer rug70",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Национальный музей азербайджанского ковра",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
- "date": "",
+ "date": "XIX c",
  "school": "shirvan",
- "composition": "",
- "technique": "",
+ "composition": "qebele",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 647,
  "marks": [],
  "created": 1791736138,
- "updated": 1795589167,
+ "updated": 1795621425,
  "cat": {
   "title": "antique shirvan prayer rug70",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_shirvan_prayer_rug70",
  "lib_img": "img/azr_antique_shirvan_prayer_rug70.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_0e5364634c",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_0e5364634c": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795621425
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -167,7 +178,22 @@
     "w": 2,
     "t": 1795589167
    }
+  },
+  "same": {
+   "cm_0e5364634c": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795621425
+    }
+   }
   }
  },
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "composition": "cm_0e5364634c",
+  "technique": "cm_0e5364634c",
+  "museum": "cm_0e5364634c",
+  "date": "cm_0e5364634c"
+ }
 }

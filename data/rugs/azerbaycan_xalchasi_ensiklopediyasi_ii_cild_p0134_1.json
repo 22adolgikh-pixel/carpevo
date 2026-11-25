@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795293047,
+ "updated": 1795621494,
  "cat": {
   "title": "Zili Ширван",
   "museum": "Национальный музей азербайджанского ковра",
@@ -59,6 +59,22 @@
   {
    "id": "azcm_116",
    "score": 0
+  },
+  {
+   "id": "azr_bordjalou_rug_with_moghan_guls_rippon_boswell_L36_12_2010",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star60",
+   "score": 0
+  },
+  {
+   "id": "azr_bordjalou_rug_with_moghan_guls_pp",
+   "score": 0
+  },
+  {
+   "id": "intangible_2851_p0095_1_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -71,6 +87,29 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_bordjalou_rug_with_moghan_guls_rippon_boswell_L36_12_2010": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795621494,
+   "similar": true
+  },
+  "azr_kuba_zeyve_lesghi_star60": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795621494
+  },
+  "azr_bordjalou_rug_with_moghan_guls_pp": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795621494,
+   "similar": true
+  },
+  "intangible_2851_p0095_1_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795621494,
+   "similar": true
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -176,5 +215,37 @@
   ],
   "t": 1795207697
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "azr_bordjalou_rug_with_moghan_guls_rippon_boswell_L36_12_2010": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795621494
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star60": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795621494
+    }
+   },
+   "azr_bordjalou_rug_with_moghan_guls_pp": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795621494
+    }
+   },
+   "intangible_2851_p0095_1_2": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795621494
+    }
+   }
+  }
+ }
 }

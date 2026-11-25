@@ -2,12 +2,12 @@
  "id": "azr_kuba_sumakh112",
  "title": "kuba sumakh112",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
- "inv": "",
+ "museum": "V&A",
+ "inv": "T.14-1911",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
- "place": "",
- "date": "",
+ "place": "Azerbaijan",
+ "date": "1800-1899",
  "school": "guba",
  "composition": "",
  "technique": "безворсовый: сумах",
@@ -18,7 +18,7 @@
  "h": 668,
  "marks": [],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1795621456,
  "cat": {
   "title": "kuba sumakh112",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_sumakh112",
  "lib_img": "img/azr_kuba_sumakh112.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O67295",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O67295": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795621456
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -101,5 +112,22 @@
    54.0362
   ],
   "t": 1795207797
+ },
+ "micro": {
+  "same": {
+   "vam_O67295": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795621456
+    }
+   }
+  }
+ },
+ "from_twin": {
+  "museum": "vam_O67295",
+  "inv": "vam_O67295",
+  "place": "vam_O67295",
+  "date": "vam_O67295"
  }
 }
