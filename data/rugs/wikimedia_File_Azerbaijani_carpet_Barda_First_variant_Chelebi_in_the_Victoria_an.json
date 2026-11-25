@@ -3,10 +3,10 @@
  "title": "Azerbaijani carpet \"Barda\" (First variant - \"Chelebi\") in the Victoria and Albert Museum.jpg",
  "source": "каталог: wikimedia",
  "museum": "Wikimedia Commons",
- "inv": "",
+ "inv": "T.264-1927",
  "url": "https://commons.wikimedia.org/wiki/File:Azerbaijani_carpet_%22Barda%22_(First_variant_-_%22Chelebi%22)_in_the_Victoria_and_Albert_Museum.jpg",
  "license": "Public domain",
- "place": "",
+ "place": "Azerbaijan",
  "date": "19th centurydate QS:P,+1850-00-00T00:00:00Z/7",
  "school": "karabakh",
  "composition": "chelebi",
@@ -1212,7 +1212,13 @@
    "score": 806
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "vam_O67286": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795581653
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -1363,5 +1369,9 @@
   "area": null,
   "ver": 1,
   "t": 1795464925
+ },
+ "from_twin": {
+  "inv": "vam_O67286",
+  "place": "vam_O67286"
  }
 }

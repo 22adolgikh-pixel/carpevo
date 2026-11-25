@@ -2,15 +2,15 @@
  "id": "kerimov_vol2_p130_1_2",
  "title": "Керимов, т. II, 9 (стр. скана 130, печ. 8 9)",
  "source": "каталог: kerimov_vol2",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
+ "date": "19th centurydate QS:P,+1850-00-00T00:00:00Z/7",
+ "school": "guba",
+ "composition": "qollu-chichi",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -176,5 +176,34 @@
    25.7778
   ],
   "t": 1795207882
+ },
+ "same_ok": {
+  "wikimedia_File_Голлу_чичи_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795581614
+  },
+  "azr_kuba_zeyve_lesghi_star164": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_zeyve_lesghi_star164 ≠ wikimedia_File_Голлу_чичи_jpg",
+   "at": 1795581641
+  }
+ },
+ "same": [
+  {
+   "id": "wikimedia_File_Голлу_чичи_jpg",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star164",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "wikimedia_File_Голлу_чичи_jpg",
+  "composition": "wikimedia_File_Голлу_чичи_jpg",
+  "technique": "wikimedia_File_Голлу_чичи_jpg",
+  "museum": "wikimedia_File_Голлу_чичи_jpg",
+  "date": "wikimedia_File_Голлу_чичи_jpg"
  }
 }

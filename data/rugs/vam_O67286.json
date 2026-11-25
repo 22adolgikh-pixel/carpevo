@@ -8,9 +8,9 @@
  "license": "V&A non-commercial",
  "place": "Azerbaijan",
  "date": "1800-1900",
- "school": "",
+ "school": "karabakh",
  "composition": "chelebi",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -947,7 +947,7 @@
   }
  ],
  "created": 1791736127,
- "updated": 1795497994,
+ "updated": 1795581653,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -983,7 +983,13 @@
    "score": 806
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Azerbaijani_carpet_Barda_First_variant_Chelebi_in_the_Victoria_an": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795581653
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -1106,6 +1112,15 @@
      "t": 1795497994
     }
    }
+  },
+  "same": {
+   "wikimedia_File_Azerbaijani_carpet_Barda_First_variant_Chelebi_in_the_Victoria_an": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795581653
+    }
+   }
   }
  },
  "composition_by": "/m: dolgikh",
@@ -1130,5 +1145,9 @@
   "t": 1795207893
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "school": "wikimedia_File_Azerbaijani_carpet_Barda_First_variant_Chelebi_in_the_Victoria_an",
+  "technique": "wikimedia_File_Azerbaijani_carpet_Barda_First_variant_Chelebi_in_the_Victoria_an"
+ }
 }

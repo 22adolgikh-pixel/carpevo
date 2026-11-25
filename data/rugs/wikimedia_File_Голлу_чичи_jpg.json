@@ -18,7 +18,7 @@
  "h": 990,
  "marks": [],
  "created": 1791736126,
- "updated": 1791736126,
+ "updated": 1795581614,
  "cat": {
   "title": "«Голлу чичи».jpg",
   "museum": "Wikimedia Commons",
@@ -48,8 +48,28 @@
  },
  "src_id": "cat:wikimedia_File_Голлу_чичи_jpg",
  "lib_img": "img/wikimedia_File_Голлу_чичи_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol2_p130_1_2",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star164",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol2_p130_1_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795581614
+  },
+  "azr_kuba_zeyve_lesghi_star164": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795581614
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -104,5 +124,23 @@
    56.3993
   ],
   "t": 1795207914
+ },
+ "micro": {
+  "same": {
+   "kerimov_vol2_p130_1_2": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795581614
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star164": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795581614
+    }
+   }
+  }
  }
 }

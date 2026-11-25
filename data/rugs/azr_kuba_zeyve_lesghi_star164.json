@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_zeyve_lesghi_star164",
  "lib_img": "img/azr_kuba_zeyve_lesghi_star164.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Голлу_чичи_jpg",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p130_1_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Голлу_чичи_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795581614
+  },
+  "kerimov_vol2_p130_1_2": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_zeyve_lesghi_star164 ≠ wikimedia_File_Голлу_чичи_jpg",
+   "at": 1795581641
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

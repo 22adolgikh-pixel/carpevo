@@ -18,7 +18,7 @@
  "h": 2203,
  "marks": [],
  "created": 1791870033,
- "updated": 1794642803,
+ "updated": 1795581558,
  "cat": {
   "title": "Herar-Pirabadil rug, Guba school, XVIII c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -52,9 +52,19 @@
   {
    "id": "wikimedia_File_Герат_Пиребедиль_jpg",
    "score": 1128
+  },
+  {
+   "id": "kerimov_vol2_p136_1_2",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "kerimov_vol2_p136_1_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795581558
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Герат_Пиребедиль_jpg": {
@@ -175,6 +185,15 @@
     "w": 2,
     "t": 1794642803,
     "s": "ref"
+   }
+  },
+  "same": {
+   "kerimov_vol2_p136_1_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795581558
+    }
    }
   }
  },
