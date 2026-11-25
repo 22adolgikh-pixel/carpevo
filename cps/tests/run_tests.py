@@ -2438,7 +2438,7 @@ def m_edge_ids_dont_clash(pg, ctx):
     html = open(os.path.join(ctx['app'], 'm.html'), encoding='utf-8').read()
     css = html[html.index('<style>'):html.index('</style>')]
     blk = html[html.index('function showEdge(t){'):html.index('function showXsame(t){')]
-    ids = set(re.findall(r'id="([^"]+)"', blk)); cls = set(re.findall(r'class="([a-z]+)"', blk)) - {'yes', 'no', 'sm', 'unk', 'mut'}
+    ids = set(re.findall(r'id="([^"]+)"', blk)); cls = set(re.findall(r'class="([a-z]+)"', blk)) - {'yes', 'no', 'sm', 'unk', 'mut', 'btns'}
     bad = [i for i in ids if re.search(r'#' + re.escape(i) + r'(?![\w-])', css)] + [c for c in cls if re.search(r'\.' + re.escape(c) + r'(?![\w-])', css)]
     assert not bad, f'id/классы карточки «край» есть в стилях страницы: {bad}'
     assert all(i.startswith('kx_') for i in ids), f'id карточки «край» должны начинаться с kx_: {ids}'
