@@ -2444,6 +2444,32 @@ def m_edge_ids_dont_clash(pg, ctx):
     assert all(i.startswith('kx_') for i in ids), f'id карточки «край» должны начинаться с kx_: {ids}'
 
 
+@test
+def t58_repeats_v2_v1231(pg, ctx):
+    """v12.31: быстрый поиск повторов (v2) находит не меньше v1, работает при сотнях повторов (v1 поднимал порог выше 1) и быстрее
+    при многих образцах; замер /api/open/rep_eval отвечает и держит прежний способ, пока замера нет."""
+    import sys, numpy as np, cv2; sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import rug_match as RM
+    rng = np.random.default_rng(3)
+    def rug(el, W=700, H=900):
+        a = np.zeros((H, W, 3), np.uint8); a[:] = (50, 40, 130); pts = (rng.random((8, 2)) * el).astype(np.int32); B = []
+        for y in range(30, H - 2 * el, int(el * 2.3)):
+            for x in range(30, W - 2 * el, int(el * 2.5)):
+                m = np.zeros((el, el, 3), np.uint8); m[:] = (50, 40, 130); cv2.fillPoly(m, [pts], (200, 180, 60)); cv2.circle(m, (el // 3, el // 2), el // 6, (30, 120, 30), -1)
+                m = np.ascontiguousarray(np.rot90(m, int(rng.integers(4)))); a[y:y + el, x:x + el] = m; B.append([x / W, y / H, el / W, el / H])
+        return cv2.GaussianBlur((a + rng.normal(0, 15, a.shape)).clip(0, 255).astype(np.uint8), (0, 0), 1.0), B
+    def hits(c, B): return sum(any(b[0] <= x["box"][0] + x["box"][2] / 2 <= b[0] + b[2] and b[1] <= x["box"][1] + x["box"][3] / 2 <= b[1] + b[3] for b in B) for x in c)
+    a, B = rug(70)
+    t0 = time.time(); c1 = RM.find_repeats(a, B[0], boxes=B[:6], algo="v1"); d1 = time.time() - t0
+    t0 = time.time(); c2 = RM.find_repeats(a, B[0], boxes=B[:6], algo="v2"); d2 = time.time() - t0
+    assert hits(c2, B[6:]) >= hits(c1, B[6:]) - 1 and hits(c2, B[6:]) >= len(B[6:]) - 2, f"v2 нашёл {hits(c2, B[6:])}, v1 {hits(c1, B[6:])} из {len(B) - 6}"
+    assert d2 < d1, f"v2 не быстрее при 6 образцах: {d2:.2f} с против {d1:.2f} с"
+    a, B = rug(20)                                       # сотни мелких повторов
+    c2 = RM.find_repeats(a, B[0], boxes=B[:1], algo="v2")
+    assert hits(c2, B[1:]) >= 50, f"мелкие элементы с сотнями повторов: v2 нашёл {hits(c2, B[1:])}"
+    j = get(ctx['url'] + 'api/open/rep_eval')
+    assert j['algo'] in ('v1', 'v2') and 'running' not in j and 'run' in j, j
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

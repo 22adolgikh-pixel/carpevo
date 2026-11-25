@@ -35,16 +35,20 @@ def _maps(bgr):
 
 
 def _nms(c, iou=0.3, cap=200):
+    """v12.31: то же, что прежний перебор «каждый с каждым», но сравнение с уже взятыми — разом (numpy): на тысячах мест в 20–50 раз быстрее"""
     c = sorted(c, key=lambda t: -t["score"]); keep = []
-    for a in c:
-        if len(keep) >= cap: break
-        ok = True
-        for b in keep:
-            x0, y0 = max(a["px"][0], b["px"][0]), max(a["px"][1], b["px"][1])
-            x1 = min(a["px"][0] + a["px"][2], b["px"][0] + b["px"][2]); y1 = min(a["px"][1] + a["px"][3], b["px"][1] + b["px"][3])
-            inter = max(0, x1 - x0) * max(0, y1 - y0)
-            if inter / min(a["px"][2] * a["px"][3], b["px"][2] * b["px"][3]) > iou: ok = False; break
-        if ok: keep.append(a)
+    if not c: return keep
+    P = np.array([t["px"] for t in c], np.float64)
+    KX0 = np.empty(cap); KY0 = np.empty(cap); KX1 = np.empty(cap); KY1 = np.empty(cap); KA = np.empty(cap); n = 0
+    for i, a in enumerate(c):
+        if n >= cap: break
+        x, y, w, h = P[i]
+        if n:
+            ix = np.minimum(x + w, KX1[:n]) - np.maximum(x, KX0[:n]); iy = np.minimum(y + h, KY1[:n]) - np.maximum(y, KY0[:n])
+            inter = np.maximum(0, ix) * np.maximum(0, iy)
+            if (inter / np.minimum(w * h, KA[:n]) > iou).any(): continue
+        KX0[n], KY0[n], KX1[n], KY1[n], KA[n] = x, y, x + w, y + h, w * h; n += 1
+        keep.append(a)
     return keep
 
 
@@ -81,7 +85,24 @@ def _tf_ori(c, s, ang, fl):
     return c, s
 
 
-def find_repeats(img, box, exclude=(), limit=60, min_score=None, boxes=None, loose=False):
+def find_repeats(img, box, exclude=(), limit=60, min_score=None, boxes=None, loose=False, algo=None):
+    """v12.31: algo — "v2" (быстрый, find_repeats_v2) или "v1" (прежний перебор). По умолчанию — ALGO["repeats"]."""
+    if (algo or ALGO["repeats"]) == "v2":
+        return find_repeats_v2(img, box, exclude, limit, min_score, boxes, loose)
+    return find_repeats_v1(img, box, exclude, limit, min_score, boxes, loose)
+
+
+ALGO = {"repeats": "v1"}
+DBG = {}
+ORI_ALL = False   # уточнять все 8 положений (на пробе: +1 % находок, вдвое дольше) или только найденное грубым проходом
+
+
+def MM(limit, cands):
+    """сколько мест грубого прохода уточнять: все «сильные» (≥ 0,6) + 60, но не меньше 2·limit + 40"""
+    return min(len(cands), max(2 * limit + 40, sum(1 for x in cands if x["score"] >= 0.6) + 60))   # rugs.py переключает по замеру /api/open/rep_eval (DATA/rep_algo.json)
+
+
+def find_repeats_v1(img, box, exclude=(), limit=60, min_score=None, boxes=None, loose=False):
     """img — BGR, box — [x,y,w,h] в долях. → [{box, score, angle, flip, sure}] без пересечений с exclude (уже размеченные).
     boxes — несколько образцов того же элемента (все рамки группы): ищем по каждому, место получает лучший балл —
     так находятся и повторы в других красках. loose — «вижу ещё»: порог ниже, ответ — следующие по сходству места."""
@@ -146,6 +167,144 @@ def find_repeats(img, box, exclude=(), limit=60, min_score=None, boxes=None, loo
                     "angle": c["angle"], "flip": c["flip"], "above": c["score"] >= sure_thr, "tpl": T[c["tpl"]]})
         if len(out) >= limit: break
     return out
+
+
+def _score(G, E, C, S, EN, g, e, c, ss, loose):
+    """балл сходства шаблона (g, e, c, ss) по всем местам карт G, E, C, S (EN = C² + S²) — та же формула, что в find_repeats_v1"""
+    hh, ww = g.shape[:2]; Hh, Ww = G.shape[:2]
+    num = cv2.matchTemplate(C, c, cv2.TM_CCORR) + cv2.matchTemplate(S, ss, cv2.TM_CCORR)
+    en = cv2.boxFilter(EN, -1, (ww, hh), normalize=False, anchor=(0, 0))[:Hh - hh + 1, :Ww - ww + 1]
+    ro = num / np.sqrt(np.maximum(en, 1e-6) * (float((c * c + ss * ss).sum()) + 1e-6))
+    if loose: return 0.4 * cv2.matchTemplate(E, e, cv2.TM_CCOEFF_NORMED) + 0.6 * ro
+    return 0.2 * cv2.matchTemplate(G, g, cv2.TM_CCOEFF_NORMED) + 0.35 * cv2.matchTemplate(E, e, cv2.TM_CCOEFF_NORMED) + 0.45 * ro
+
+
+def _tpl(maps, b, W, H, tw, th):
+    x0, y0 = int(round(b[0] * W)), int(round(b[1] * H))
+    x0, y0 = max(0, min(W - tw, x0)), max(0, min(H - th, y0))
+    return tuple(M[y0:y0 + th, x0:x0 + tw] for M in maps)
+
+
+def _variant(t, ang, fl, sc):
+    tg, te, tc, ts = t
+    g = _tf(tg, ang, fl); e = _tf(te, ang, fl); c, ss = _tf_ori(tc, ts, ang, fl)
+    if sc != 1.0: g, e, c, ss = (cv2.resize(m, None, fx=sc, fy=sc) for m in (g, e, c, ss))
+    return g, e, c, ss
+
+
+def find_repeats_v2(img, box, exclude=(), limit=60, min_score=None, boxes=None, loose=False):
+    """v12.31: быстрый поиск повторов — тот же балл, что у v1, но не перебором «всё × всё».
+    1) Похожие образцы группы (одинаковые по краскам и форме, балл друг к другу ≥ 0,92) сливаются: у групп с 5–8
+       подтверждёнными рамками это обычно 1–3 разных образца вместо 8.
+    2) Грубый проход: фото уменьшено так, что шаблон ≈ 28 px, один масштаб (у «вижу ещё» — три), 8 положений.
+    3) Уточнение: у каждого кандидата — только своё положение, все образцы и масштабы, в окне вокруг места на полном размере.
+    4) Порог шума считается по местам ниже «точных» повторов: у элемента с сотнями повторов (мелкие розетки поля)
+       v1 принимал повторы за шум и поднимал порог выше 1 — не находилось ничего; и не больше 200 мест после NMS."""
+    H0, W0 = img.shape[:2]
+    T = [b for b in (boxes or []) if b] or [box]
+    if box not in T: T = [box] + T
+    T = T[:8]
+    bw = float(np.median([b[2] for b in T])) * W0; bh = float(np.median([b[3] for b in T])) * H0
+    s = min(1.0, 56.0 / max(bw, bh), 900.0 / max(H0, W0))
+    a = cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else img
+    H, W = a.shape[:2]
+    G, E, C, S = _maps(a) + _ori(a); EN = C * C + S * S
+    tw, th = max(6, int(round(bw * s))), max(6, int(round(bh * s)))
+    if th >= H or tw >= W: return []
+    # 1) слить одинаковые образцы
+    tp = [(ti, _tpl((G, E, C, S), b, W, H, tw, th)) for ti, b in enumerate(T)]
+    tp = [(ti, t) for ti, t in tp if t[0].shape[0] >= 5 and t[0].shape[1] >= 5]
+    keep = []
+    for ti, t in tp:
+        dup = False
+        for _, k in keep:
+            kEN = k[2] * k[2] + k[3] * k[3]
+            for ang, fl in TF:
+                v = _variant(t, ang, fl, 1.0)
+                if v[0].shape != k[0].shape: continue
+                if float(_score(k[0], k[1], k[2], k[3], kEN, *v, loose).max()) >= 0.92: dup = True; break
+            if dup: break
+        if not dup: keep.append((ti, t))
+    if not keep: return []
+    # 2) грубый проход
+    k = min(1.0, 28.0 / max(tw, th))
+    if k < 0.8:
+        ac = cv2.resize(a, None, fx=k, fy=k, interpolation=cv2.INTER_AREA)
+        Gc, Ec, Cc, Sc = _maps(ac) + _ori(ac); ENc = Cc * Cc + Sc * Sc
+        Hc, Wc = ac.shape[:2]; twc, thc = max(5, int(round(tw * k))), max(5, int(round(th * k)))
+        kc = (tw / twc + th / thc) / 2
+    else:
+        k = 1.0; Gc, Ec, Cc, Sc, ENc, Hc, Wc, twc, thc, kc = G, E, C, S, EN, H, W, tw, th, 1.0
+    cands = []
+    for ti, _ in keep:
+        tc_ = _tpl((Gc, Ec, Cc, Sc), T[ti], Wc, Hc, twc, thc)
+        for sc in ((0.86, 1.0, 1.15) if loose else (1.0,)):
+            for ang, fl in TF:
+                v = _variant(tc_, ang, fl, sc)
+                if v[0].shape[0] >= Hc or v[0].shape[1] >= Wc: continue
+                r = _score(Gc, Ec, Cc, Sc, ENc, *v, loose)
+                hh, ww = v[0].shape[:2]
+                kk = max(3, int(min(hh, ww) * 0.5) | 1)
+                mx = cv2.dilate(r, np.ones((kk, kk), np.uint8))
+                ys, xs = np.where((r >= mx - 1e-6) & (r > 0.2))
+                if len(ys) > 400:
+                    top = np.argpartition(-r[ys, xs], 400)[:400]; ys, xs = ys[top], xs[top]
+                for yy, xx in zip(ys, xs):
+                    cands.append({"px": (xx * kc, yy * kc, ww * kc, hh * kc), "score": float(r[yy, xx]), "angle": ang, "flip": fl, "tpl": ti})
+    if not cands: return []
+    cands = _nms(sorted(cands, key=lambda t: -t["score"])[:6000], cap=1500)
+    M = MM(limit, cands)
+    # 3) уточнение на полном размере (координаты в пикселях уменьшенного до s фото)
+    SC = (0.82, 0.92, 1.0, 1.08, 1.2) if loose else (0.92, 1.0, 1.08)
+    var = {}
+    out = []
+    mg = int(round(kc)) + max(3, int(0.3 * max(tw, th)))
+    def local(c, ti, t, ang, fl, sc):
+        key = (ti, ang, fl, sc)
+        v = var.get(key)
+        if v is None: v = var[key] = _variant(t, ang, fl, sc)
+        hh, ww = v[0].shape[:2]
+        if hh >= H or ww >= W: return None
+        cx, cy = c["px"][0] + c["px"][2] / 2, c["px"][1] + c["px"][3] / 2       # центр места грубого прохода ± mg
+        X0 = int(max(0, cx - ww / 2 - mg)); Y0 = int(max(0, cy - hh / 2 - mg))
+        X1 = int(min(W, cx + ww / 2 + mg + 1)); Y1 = int(min(H, cy + hh / 2 + mg + 1))
+        if X1 - X0 < ww or Y1 - Y0 < hh: return None
+        r = _score(G[Y0:Y1, X0:X1], E[Y0:Y1, X0:X1], C[Y0:Y1, X0:X1], S[Y0:Y1, X0:X1], EN[Y0:Y1, X0:X1], *v, loose)
+        _, mv, _, ml = cv2.minMaxLoc(r)
+        return (float(mv), X0 + ml[0], Y0 + ml[1], ww, hh, ti, ang, fl)
+    for c in cands[:M]:
+        # положение: 8 вариантов на масштабе 1 (грубый проход на мелкой картинке путает почти симметричные), затем масштабы
+        best = None
+        for ti, t in keep:
+            for ang, fl in (TF if ORI_ALL else [(c["angle"], c["flip"])]):
+                q = local(c, ti, t, ang, fl, 1.0)
+                if q and (best is None or q[0] > best[0]): best = q
+        if best is None: continue
+        for sc in SC:
+            if sc == 1.0: continue
+            q = local(c, best[5], dict(keep)[best[5]], best[6], best[7], sc)
+            if q and q[0] > best[0]: best = q
+        out.append({"px": (best[1] / s, best[2] / s, best[3] / s, best[4] / s), "score": best[0], "angle": best[6], "flip": best[7], "tpl": best[5]})
+    if not out: return []
+    out = _nms(out, cap=1500)
+    ex = list(exclude) + list(T)
+    free = [c for c in out if not _overlaps(c["px"], ex, W0, H0)]
+    # 4) порог: шум — медиана мест после «точных» повторов (≥ 0,62) и не раньше 8-го (как в v1)
+    scores = [c["score"] for c in free]
+    k0 = max(8, sum(1 for v in scores if v >= 0.62))
+    noise = float(np.median(scores[k0:])) if len(scores) > k0 + 2 else 0.3
+    thr = min_score if min_score is not None else max(0.4, noise + 0.1)
+    sure_thr = thr
+    if loose: thr = max(0.28, noise + 0.03)
+    res = []
+    for c in free:
+        if c["score"] < thr: break
+        _pick_orient(c, T, (G, E, C, S), s, W, H)
+        x, y, w, h = c["px"]
+        res.append({"box": [round(x / W0, 5), round(y / H0, 5), round(w / W0, 5), round(h / H0, 5)], "score": round(c["score"], 3),
+                    "angle": c["angle"], "flip": c["flip"], "above": c["score"] >= sure_thr, "tpl": T[c["tpl"]]})
+        if len(res) >= limit: break
+    return res
 
 
 def _pick_orient(c, T, maps, s, W, H):

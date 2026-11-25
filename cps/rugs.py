@@ -2435,6 +2435,108 @@ def install(app, DATA, D_WORK):
             return {"cands": c, "templates": len(boxes)}
         return await job_wait(work, "поиск повторов")
 
+    # ---------- v12.31: быстрый поиск повторов (rug_match.find_repeats_v2) и замер «v1 против v2» на подтверждённых группах ----------
+    F_REP_ALGO = os.path.join(DATA, "rep_algo.json"); F_REP_EVAL = os.path.join(DATA, "rep_eval.json")
+    _rpe = {"run": False, "done": 0, "total": 0, "err": "", "t": 0}
+
+    def _rep_algo_load():
+        a = os.environ.get("CPS_REP_ALGO")
+        if not a:
+            try: a = json.load(open(F_REP_ALGO, encoding="utf-8")).get("repeats")
+            except Exception: a = None
+        rug_match_mod = __import__("rug_match")
+        if a in ("v1", "v2"): rug_match_mod.ALGO["repeats"] = a
+    _rep_algo_load()
+
+    def _rep_eval_groups(max_groups):
+        """группы с ≥ 3 подтверждёнными рамками на одном ковре: [(rid, [рамки по порядку: сначала нарисованные рукой])]"""
+        out = []
+        for rid, r in all_rugs_cached().items():
+            if r.get("hidden"): continue
+            G = {}
+            for m in r.get("marks") or []:
+                if m.get("status") == "confirmed" and isinstance(m.get("box"), list) and len(m["box"]) == 4:
+                    G.setdefault(m.get("group") or m["id"], []).append(m)
+            for g, ms in G.items():
+                if len(ms) >= 3:
+                    ms.sort(key=lambda m: (bool(m.get("machine")), m["id"]))
+                    out.append((rid, ms))
+        out.sort(key=lambda t: (t[0], t[1][0]["id"]))
+        if len(out) > max_groups:                                   # равномерно по списку, чтобы не брать только первые ковры
+            step = len(out) / float(max_groups); out = [out[int(i * step)] for i in range(max_groups)]
+        return out
+
+    def _rep_eval_run(max_groups=80):
+        import rug_match
+        try:
+            groups = _rep_eval_groups(max_groups); _rpe.update(total=len(groups), done=0, err="")
+            rows = []
+            for rid, ms in groups:
+                def one(rid=rid, ms=ms):
+                    r = load(rid); p = img_path(rid); a = cv2.imread(p) if p else None
+                    if not r or a is None: return None
+                    rq = rect_quad(r); rp = rect_path(rid, r) if rq else None; ra = cv2.imread(rp) if rp else None
+                    if ra is not None: fw, _ = rect_boxmap(rq); img = ra
+                    else: fw = lambda b: b; img = a
+                    B = [fw(m["box"]) for m in ms]; hand = [not m.get("machine") for m in ms]
+                    row = {"rug": rid, "n": len(ms), "size_px": round(float(np.sqrt(B[0][2] * img.shape[1] * B[0][3] * img.shape[0])), 1)}
+                    for mode, nt in (("one", 1), ("three", 3)):
+                        if len(B) <= nt: continue
+                        tg = B[nt:]; th = hand[nt:]
+                        for algo in ("v1", "v2"):
+                            t0 = time.time()
+                            c = rug_match.find_repeats(img, B[0], [], boxes=B[:nt], limit=60, algo=algo)
+                            dt = time.time() - t0
+                            def inside(x, b):
+                                cx, cy = x[0] + x[2] / 2, x[1] + x[3] / 2
+                                return b[0] <= cx <= b[0] + b[2] and b[1] <= cy <= b[1] + b[3]
+                            got = [any(inside(x["box"], b) for x in c) for b in tg]
+                            row[f"{mode}_{algo}"] = {"hit": sum(got), "tg": len(tg), "hand_hit": sum(g for g, h in zip(got, th) if h),
+                                                     "hand_tg": sum(th), "ret": len(c), "extra": sum(1 for x in c if not any(inside(x["box"], b) for b in tg)),
+                                                     "sec": round(dt, 2)}
+                    return row
+                try:
+                    x = heavy(one, "замер поиска повторов")
+                    if x: rows.append(x)
+                except Exception as e: _rpe["err"] = f"{rid}: {e}"[:200]
+                _rpe["done"] += 1
+            summ = {}
+            for mode in ("one", "three"):
+                for algo in ("v1", "v2"):
+                    R_ = [x[f"{mode}_{algo}"] for x in rows if f"{mode}_{algo}" in x]
+                    if not R_: continue
+                    sm = lambda k: sum(v[k] for v in R_)
+                    secs = sorted(v["sec"] for v in R_)
+                    summ[f"{mode}_{algo}"] = {"groups": len(R_), "found": f"{sm('hit')}/{sm('tg')}", "recall": round(sm("hit") / max(1, sm("tg")), 3),
+                                              "hand_recall": round(sm("hand_hit") / max(1, sm("hand_tg")), 3), "hand_tg": sm("hand_tg"),
+                                              "extra": sm("extra"), "sec_total": round(sum(secs), 1), "sec_median": secs[len(secs) // 2], "sec_max": secs[-1]}
+            ev = {"t": int(time.time()), "groups": len(rows), "summary": summ, "rows": rows}
+            # переключение: v2 — если находит не меньше (−1 п.) и в «трёх образцах» быстрее
+            a1, a2 = summ.get("three_v1") or summ.get("one_v1"), summ.get("three_v2") or summ.get("one_v2")
+            if a1 and a2 and len(rows) >= 10:
+                pick = "v2" if a2["recall"] >= a1["recall"] - 0.01 and a2["sec_total"] < a1["sec_total"] else "v1"
+                ev["pick"] = pick
+                json.dump({"repeats": pick, "t": ev["t"], "why": {"v1": a1, "v2": a2}}, open(F_REP_ALGO, "w", encoding="utf-8"), ensure_ascii=False)
+                _rep_algo_load()
+            with open(F_REP_EVAL, "w", encoding="utf-8") as f: json.dump(ev, f, ensure_ascii=False, indent=1)
+        except Exception as e:
+            import traceback; traceback.print_exc(); _rpe["err"] = str(e)[:200]
+        finally:
+            _rpe["run"] = False; _rpe["t"] = time.time()
+
+    @app.get("/api/open/rep_eval")
+    def api_rep_eval(run: int = 0, n: int = 80, rows: int = 0):
+        """замер поиска повторов: v1 (перебор) против v2 (грубо → точно). run=1 — пересчитать в фоне (минуты), n — сколько групп;
+        по итогу сервер сам выбирает способ (DATA/rep_algo.json; CPS_REP_ALGO в окружении важнее)"""
+        if run and not _rpe["run"]:
+            _rpe["run"] = True; threading.Thread(target=_rep_eval_run, args=(max(5, min(400, n)),), daemon=True, name="rep-eval").start()
+        ev = None
+        try: ev = json.load(open(F_REP_EVAL, encoding="utf-8"))
+        except Exception: pass
+        if ev and not rows: ev = {k: v for k, v in ev.items() if k != "rows"}
+        import rug_match
+        return {"algo": rug_match.ALGO["repeats"], **_rpe, "eval": ev}
+
     def _sym_find(r, a, g, src_ids=None):
         """v11.69: парные места по симметрии ковра. Каждая подтверждённая рамка группы g (или src_ids) зеркалится относительно
         осей ковра (по 4 углам: слева↔справа, сверху↔снизу, по диагонали = поворот на 180°); вокруг предсказанного места
