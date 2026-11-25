@@ -2470,6 +2470,70 @@ def t58_repeats_v2_v1231(pg, ctx):
     assert j['algo'] in ('v1', 'v2') and 'running' not in j and 'run' in j, j
 
 
+@test
+def t59_edge_card_v1236(pg, ctx):
+    """v12.36: карточка «край» в /m — приходит у целого ковра с подтверждёнными углами, рисует 12 ручек (по 3 на сторону) на картинке,
+    перетаскивание ручки меняет правку, «готово» пишет edge_fix и убирает ковёр из очереди"""
+    import urllib.request as U, json as _j, cv2, numpy as np
+    D = os.path.join(ctx['app'], 'data')
+    img = np.full((900, 700, 3), (60, 60, 60), np.uint8); cv2.rectangle(img, (100, 100), (600, 800), (30, 30, 160), -1); cv2.imwrite(f'{D}/rug_img/edgerug.jpg', img)
+    r = _j.load(open(f'{D}/rugs/frieze_1.json', encoding='utf-8'))
+    r2 = {**r, 'id': 'edgerug', 'title': 'Edge rug', 'w': 700, 'h': 900, 'marks': [], 'same': [], 'same_ok': {}, 'micro': {}, 'frame': 'whole', 'frame_by': 'micro',
+          'layout': {'quad': [[1 / 7, 1 / 9], [6 / 7, 1 / 9], [6 / 7, 8 / 9], [1 / 7, 8 / 9]], 'quad_status': 'confirmed', 'bounds': [], 'rings': [], 'status': 'auto', 'carpet': [.14, .11, .72, .78]}}
+    for k in ('dup_of', 'hidden', 'split_into', 'split_from', 'multi', 'lib_img', 'edge', 'edge_fix'): r2.pop(k, None)
+    _j.dump(r2, open(f'{D}/rugs/edgerug.json', 'w', encoding='utf-8'), ensure_ascii=False); time.sleep(1.5)
+    get = lambda path: _j.load(U.urlopen(ctx['url'] + path))
+    j = get('api/micro/next?n=12&k=edge')
+    assert [t for t in j['tasks'] if t['rid'] == 'edgerug'], f"нет карточки «край»: {[t['rid'] for t in j['tasks']]} left={j['left']}"
+    pg.goto(ctx['url'] + 'm?k=edge'); pg.wait_for_timeout(1500)
+    for _ in range(12):
+        if pg.evaluate("S.tasks[S.i]&&S.tasks[S.i].rid") == 'edgerug': break
+        pg.evaluate("S.i++;show()"); pg.wait_for_timeout(300)
+    pg.wait_for_selector('.kxh', timeout=15000); pg.wait_for_timeout(800)
+    n = pg.evaluate("document.querySelectorAll('.kxh').length"); assert n == 12, f'ручек {n}, ожидалось 12'
+    im = pg.query_selector('#kx_ew img').bounding_box()
+    hs = [pg.query_selector(f'.kxh[data-k="{k}"][data-i="1"]').bounding_box() for k in ('top', 'bot', 'left', 'right')]
+    assert all(im['x'] - 20 <= h['x'] <= im['x'] + im['width'] + 20 and im['y'] - 20 <= h['y'] <= im['y'] + im['height'] + 20 for h in hs), f'ручки вне картинки: {im} {hs}'
+    pg.screenshot(path=os.path.join(OUT, 't59_edge.png'))
+    h = hs[0]; pg.mouse.move(h['x'] + 13, h['y'] + 13); pg.mouse.down(); pg.mouse.move(h['x'] + 13, h['y'] + 13 + im['height'] * 0.04, steps=5)
+    assert pg.evaluate("!$('kx_loupe').hidden && !!$('kx_loupe').querySelector('img')"), 'нет лупы при перетаскивании ручки'
+    pg.screenshot(path=os.path.join(OUT, 't59_edge_loupe.png')); pg.mouse.up()
+    assert pg.evaluate("$('kx_loupe').hidden"), 'лупа не прячется после перетаскивания'
+    pg.click('#kx_ed'); pg.wait_for_timeout(1500)
+    f = get('api/rugs/edgerug').get('edge_fix') or {}
+    assert f.get('top') and f['top'][1] > 0.01, f'правка края не записалась: {f}'
+    assert not [t for t in get('api/micro/next?n=12&k=edge')['tasks'] if t['rid'] == 'edgerug'], 'отвеченный ковёр вернулся в очередь «край»'
+    errors_ok(ctx, '/m край v12.36')
+
+
+@test
+def t60_xfind_card_v1236(pg, ctx):
+    """v12.36: ночной поиск по коврам → карточка /m «на других коврах»: образец + находки; ✓ ставит подтверждённую рамку с названием образца,
+    неотмеченные пишутся «не он», отвеченное не возвращается; /api/open/xfind показывает итог"""
+    import urllib.request as U, json as _j, shutil as _sh
+    D = os.path.join(ctx['app'], 'data'); base = _j.load(open(f'{D}/rugs/frieze_1.json', encoding='utf-8'))
+    for rid in ('xf_q', 'xf_a', 'xf_b'):
+        r = {**base, 'id': rid, 'title': 'XF ' + rid, 'same': [], 'same_ok': {}, 'micro': {}, 'marks': []}
+        for k in ('dup_of', 'hidden', 'split_into', 'split_from', 'multi', 'lib_img', 'same_group'): r.pop(k, None)
+        if rid == 'xf_q': r['marks'] = [{'id': 'mq', 'box': [.3, .3, .1, .1], 'group': 'gq', 'status': 'confirmed', 'motif_text': 'тест-гёль', 'zone': 'field'}]
+        _sh.copy(f'{D}/rug_img/frieze_1.jpg', f'{D}/rug_img/{rid}.jpg'); _j.dump(r, open(f'{D}/rugs/{rid}.json', 'w', encoding='utf-8'), ensure_ascii=False)
+    _j.dump({'t': int(time.time()), 'items': [{'q': {'rid': 'xf_q', 'g': 'gq', 'box': [.3, .3, .1, .1], 'n': 1},
+             'c': [{'rid': 'xf_a', 'box': [.5, .5, .1, .1], 's': 0.9}, {'rid': 'xf_b', 'box': [.2, .6, .1, .1], 's': 0.7}]}]}, open(f'{D}/xfind_night.json', 'w'))
+    time.sleep(1.5)
+    get = lambda path: _j.load(U.urlopen(ctx['url'] + path))
+    j = get('api/micro/next?n=12&k=xfind'); ts = [t for t in j['tasks'] if t['type'] == 'xfind']
+    assert ts and len(ts[0]['items']) == 2, f"нет карточки «на других коврах»: {j['left']}"
+    pg.goto(ctx['url'] + 'm?k=xfind'); pg.wait_for_selector('.grid.tw .tl', timeout=15000); pg.wait_for_timeout(600)
+    pg.screenshot(path=os.path.join(OUT, 't60_xfind.png'))
+    pg.click('.grid.tw .tl[data-i="0"]'); pg.wait_for_timeout(200); pg.click('#a1'); pg.wait_for_timeout(1500)
+    ma = [m for m in get('api/rugs/xf_a')['marks'] if m.get('machine') == 'xfind']
+    assert ma and ma[0]['status'] == 'confirmed' and ma[0]['motif_text'] == 'тест-гёль', f'✓ не поставил рамку с названием: {ma}'
+    assert not [m for m in get('api/rugs/xf_b')['marks'] if m.get('machine') == 'xfind'], 'неотмеченная находка получила рамку'
+    assert not [t for t in get('api/micro/next?n=12&k=xfind')['tasks'] if t['type'] == 'xfind'], 'отвеченная карточка вернулась'
+    o = get('api/open/xfind'); assert o['groups'] == 1 and o['answers'] == {'yes': 1, 'no': 1}, o
+    errors_ok(ctx, '/m на других коврах v12.36')
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')

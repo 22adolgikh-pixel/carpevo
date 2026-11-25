@@ -179,6 +179,14 @@ def mesh_better(qr, qm, d_dev=0.15, d_sym=0.05):
 EF_ST = (0.2, 0.5, 0.8)            # станции правки края: доли длины стороны, где у человека ручки
 
 
+def fix_pad(fix):
+    """v12.36: запас полотна под правку края. Было всегда 0,07: ручку, вытянутую за линию углов дальше 7 %, полотно не покрывало —
+    край «размазывался» повтором крайних пикселей, и казалось, что ничего не меняется (лимит ручки −0,12)."""
+    try: m = min(float(x) for k in ("top", "bot", "left", "right") for x in ((fix or {}).get(k) or [0]))
+    except Exception: m = 0.0
+    return max(0.07, -m + 0.03)
+
+
 def curves_from_fix(fix, geo, nst=64):
     """правка края человеком → кривые краёв (px, внутрь ковра), как у edge_curves. fix[сторона] — три числа: смещение края внутрь от линии углов
     в долях высоты (верх/низ) или ширины (лево/право); отрицательное — ковёр вылез за линию углов. У углов смещение 0 (углы человек уже поставил)."""
@@ -196,7 +204,7 @@ def mesh_rectify_safe(img, quad, side=1200, fix=None):
     fix — правка края человеком (все четыре стороны по ручкам): тогда choice = 'human'.
     → (картинка, сведения; choice 'mesh'|'rect'|'human', q_rect, q_mesh, curves_full — что нашла сетка на всех сторонах)"""
     from rug_rect import rectify
-    canvas, valid, geo = rectify_padded(img, quad, side)
+    canvas, valid, geo = rectify_padded(img, quad, side, pad=fix_pad(fix) if fix else 0.07)
     curves, strength = edge_curves(canvas, valid, geo)
     n = len(curves["top"]); full = {k: v.tolist() for k, v in curves.items()}
     if fix: curves = curves_from_fix(fix, geo, n)

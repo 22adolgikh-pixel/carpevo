@@ -4,7 +4,7 @@
 # Метка (элемент на ковре): рамка в долях фото [x, y, w, h] (0..1), зона (поле / кайма / угол / медальон …), узор из словаря
 # (models/dictionary.json — выгрузка вики-части сайта), схема студии (id рисунка), группа повторов, уверенность, статус проверки,
 # кто отметил и кто подтвердил. Повторы одного элемента — метки с одинаковой group.
-import os, re, json, time, threading, io, urllib.request, urllib.parse, hashlib
+import os, re, json, time, threading, io, math, urllib.request, urllib.parse, hashlib
 import cv2, numpy as np
 import twins
 from fastapi import Request, UploadFile, File, Body, Query
@@ -2917,7 +2917,7 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch", "rcmp", "edge")
+    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch", "rcmp", "edge", "xfind")
     KINDS_OFF = ("same", "rsame", "rcmp")             # v11.86: пары по одной заменены карточкой «двойники ковра» (tw); старые виды — только по выбору
 
     # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
@@ -3825,6 +3825,111 @@ def install(app, DATA, D_WORK):
             r["updated"] = int(time.time()); save(r)
         rec["fix"] = fix; _mlog(rec); return {"ok": True}
 
+    # ---------- v12.36: ночной поиск «где ещё этот элемент» (Colab: tools/colab/xfind_night_colab.py) → карточка /m «на других коврах» ----------
+    # Colab кладёт итог в файл Google Drive (доступ по ссылке, id — CPS_XF_FILE); сервер забирает его раз в час.
+    # Карточка: образец (группа подтверждённых рамок) + до 8 находок на других коврах; ✓ — на тот ковёр ставится подтверждённая рамка
+    # с названием образца (как ✓ в окне «найти на других коврах»), остальные показанные — «не он». Ответы пишутся и в motif/labels.jsonl.
+    XF_ID = os.environ.get("CPS_XF_FILE", "1RE74rNCMa4Y9HwcsA3PtR9psH7TuPGtL")
+    F_XF = os.path.join(DATA, "xfind_night.json"); F_XFV = os.path.join(DATA, "xfind_votes.json")
+    _xf = {"t": 0, "items": [], "mt": 0, "pull": 0, "err": ""}
+
+    def _xf_pull():
+        try:
+            tmp = F_XF + ".dl"; drive_fetch(XF_ID, tmp); j = json.load(open(tmp, encoding="utf-8"))
+            old = 0
+            try: old = json.load(open(F_XF, encoding="utf-8")).get("t") or 0
+            except Exception: pass
+            if j.get("items") is not None and not j.get("partial") and (j.get("t") or 0) > old: os.replace(tmp, F_XF)
+            else: os.remove(tmp)
+            _xf.update(pull=time.time(), err="")
+        except Exception as e: _xf.update(pull=time.time(), err=str(e)[:200])
+
+    def _xf_data():
+        try: mt = os.path.getmtime(F_XF)
+        except OSError: return _xf
+        if mt != _xf["mt"]:
+            try: j = json.load(open(F_XF, encoding="utf-8")); _xf.update(t=j.get("t") or 0, items=j.get("items") or [], mt=mt, info={k: j.get(k) for k in ("model", "nr", "groups", "rugs")})
+            except Exception as e: _xf["err"] = str(e)[:200]
+        return _xf
+
+    def _xf_votes():
+        try: return json.load(open(F_XFV, encoding="utf-8"))
+        except Exception: return {}
+
+    def _xf_ck(rid, box): return rid + "|" + ",".join("%.3f" % v for v in box)
+
+    def _xf_label(r, g):
+        for m in (r or {}).get("marks") or []:
+            if (m.get("group") or m["id"]) == g and m.get("status") == "confirmed" and (m.get("motif") or m.get("scheme") or m.get("motif_text")):
+                return {k: m.get(k) or "" for k in ("motif", "scheme", "motif_text")}
+        return {"motif": "", "scheme": "", "motif_text": ""}
+
+    def _xf_queue(me, by):
+        D_ = _xf_data(); V = _xf_votes(); out = []
+        for it in D_["items"]:
+            q = it.get("q") or {}; rid = q.get("rid")
+            if rid not in by or by[rid]["dead"]: continue
+            if not any(m["g"] == q.get("g") and m["st"] == "confirmed" for m in by[rid]["mk"]): continue       # образец убрали
+            qk = rid + "|" + str(q.get("g")); vq = V.get(qk) or {}; cs = []
+            for c in it.get("c") or []:
+                t = by.get(c.get("rid"))
+                if not t or t["dead"]: continue
+                ck = _xf_ck(c["rid"], c["box"]); d = vq.get(ck) or {}
+                if me in d or sum(x.get("w", 1) for x in d.values() if x.get("a") in ("yes", "no")) >= 2: continue
+                bx = c["box"]; cx, cy = bx[0] + bx[2] / 2, bx[1] + bx[3] / 2
+                if any(m["st"] != "rejected" and m["box"][0] <= cx <= m["box"][0] + m["box"][2] and m["box"][1] <= cy <= m["box"][1] + m["box"][3]
+                       and abs(math.log(max(1e-6, m["box"][2] * m["box"][3]) / max(1e-6, bx[2] * bx[3]))) < 1.2 for m in t["mk"]): continue   # там уже есть рамка того же размера
+                cs.append({"rid": c["rid"], "box": bx, "s": c.get("s"), "title": t["title"], "ck": ck})
+                if len(cs) >= 8: break
+            if cs: out.append({"type": "xfind", "rid": rid, "key": qk, "q": {"rid": rid, "g": q.get("g"), "box": q.get("box"), "n": q.get("n")}, "items": cs, "top": cs[0]["s"] or 0})
+        out.sort(key=lambda t: -t["top"])
+        return out
+
+    def _xf_answer(me, role, rid, a, body, rec):
+        qk = str(body.get("key") or ""); g = qk.split("|", 1)[1] if "|" in qk else ""
+        if a == "skip": _mlog(rec); return {"ok": True}
+        if a != "done": return JSONResponse({"error": "ответ?"}, status_code=400)
+        items = [x for x in (body.get("items") or []) if isinstance(x, dict) and x.get("rid") and isinstance(x.get("box"), list) and len(x["box"]) == 4][:8]
+        yes = {int(i) for i in (body.get("yes") or []) if str(i).isdigit()}
+        lab = _xf_label(load(rid), g); now = int(time.time()); added = 0
+        with _lock:
+            V = _xf_votes(); vq = V.setdefault(qk, {})
+            for i, x in enumerate(items):
+                ok = i in yes; box = [max(0.0, min(1.0, float(v))) for v in x["box"]]
+                vq.setdefault(_xf_ck(x["rid"], x["box"]), {})[me] = {"a": "yes" if ok else "no", "w": _wt(role), "t": now, "s": x.get("s")}
+                if ok:
+                    t = load(x["rid"])
+                    if t:
+                        mid = f"m{int(time.time() * 1000)}x{i}"
+                        t.setdefault("marks", []).append({"id": mid, "box": [round(v, 5) for v in box], "zone": "other", **lab, "group": "g" + mid,
+                                                          "certainty": "sure", "status": "confirmed", "note": "", "angle": 0, "flip": 0, "machine": "xfind",
+                                                          "score": round(float(x.get("s") or 0), 3), "xfer": "", "by": "ночной поиск → " + me, "at": now,
+                                                          "confirmed_by": me, "confirmed_at": now, "found_from": rid})
+                        t["updated"], t["updated_by"] = now, me; save(t); added += 1
+                MS.label_log({"key": "xfind:" + qk, "q_rug": rid, "q_mark": g, "rug": x["rid"], "box": box, "score": x.get("s"), "ok": ok, "who": me, **lab})
+            tmp = F_XFV + ".tmp"
+            with open(tmp, "w", encoding="utf-8") as f: json.dump(V, f, ensure_ascii=False)
+            os.replace(tmp, F_XFV)
+        rec["key"] = qk; rec["yes"] = sorted(yes); rec["n"] = len(items)
+        if added: rec["applied"] = f"xfind:{added}"
+        _mlog(rec); return {"ok": True, "added": added, **({"applied": True} if added else {})}
+
+    def _periodic_xf():
+        time.sleep(300)
+        while True:
+            _xf_pull(); time.sleep(3600)
+
+    if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_xf, daemon=True, name="xfind-pull").start()
+
+    @app.get("/api/open/xfind")
+    def api_xfind(pull: int = 0):
+        """ночной поиск элементов по коврам: когда забран, сколько групп и находок, сколько ответов"""
+        if pull: _xf_pull()
+        D_ = _xf_data(); V = _xf_votes()
+        ans = [x for vq in V.values() for d in vq.values() for x in d.values()]
+        return {"file": XF_ID, "t": D_["t"], "pulled": int(D_["pull"]), "err": D_["err"], "info": D_.get("info"), "groups": len(D_["items"]),
+                "cands": sum(len(i.get("c") or []) for i in D_["items"]), "answers": {"yes": sum(1 for x in ans if x.get("a") == "yes"), "no": sum(1 for x in ans if x.get("a") == "no")}}
+
     @app.get("/api/rugs/{rid}/edgefix")
     def api_edgefix(rid: str):
         """данные для карточки «край»: подсказка машины по четырём сторонам (доли), стартовые ручки, прежняя правка"""
@@ -3851,7 +3956,7 @@ def install(app, DATA, D_WORK):
         def work():
             a = cv2.imread(p)
             cv, valid, g = rug_mesh.rectify_padded(a, q, 900, pad=0.12); W, H, px, py = g["W"], g["H"], g["px"], g["py"]
-            canvas, v2, g2 = rug_mesh.rectify_padded(a, q, 900, pad=0.07)
+            canvas, v2, g2 = rug_mesh.rectify_padded(a, q, 900, pad=rug_mesh.fix_pad(fix))
             out = rug_mesh.coons_warp(canvas, g2, rug_mesh.curves_from_fix(fix, g2))
             cv = (cv * 0.35).astype(np.uint8); cv[py:py + H, px:px + W] = cv2.resize(out, (W, H), interpolation=cv2.INTER_AREA)
             cv2.rectangle(cv, (px, py), (px + W, py + H), (0, 213, 255), 2)
@@ -4230,6 +4335,7 @@ def install(app, DATA, D_WORK):
         fdq = _field_queue(me, rows) if "field" in want else []; Q["field"] = fdq[:n]
         rcq = _rcmp_queue(me, rows) if "rcmp" in want else []; Q["rcmp"] = rcq[:n]
         edq = _edge_queue(me, rows) if "edge" in want else []; Q["edge"] = edq[:n]
+        xfq = _xf_queue(me, by) if "xfind" in want else []; Q["xfind"] = xfq[:n]
         twq = _tw_queue(me, by) if "tw" in want else []; Q["tw"] = twq[:n]
         schq = [t for t in _sch_queue(me) if t["rid"] in by] if "sch" in want else []; Q["sch"] = schq[:n]
         tasks = []; order = [t for t in want if Q[t]]
@@ -4254,7 +4360,7 @@ def install(app, DATA, D_WORK):
             if t["type"] == "tw":
                 for it in t["items"]: it.update(w=by[it["id"]]["w"], h=by[it["id"]]["h"])
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "edge": len(edq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]},
+        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "edge": len(edq), "xfind": len(xfq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]},
                 "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver(), "rs": {k: rpr[k] for k in ("running", "done", "total", "found", "t", "err")}, "ms": dict(mesh_st)}
 
     @app.post("/api/micro/answer")
@@ -4275,6 +4381,7 @@ def install(app, DATA, D_WORK):
         if typ == "field": return _field_answer(me, role, rid, a, body, rec)
         if typ == "rcmp": return _rcmp_answer(me, role, rid, a, body, rec)
         if typ == "edge": return _edge_answer(me, role, rid, a, body, rec)
+        if typ == "xfind": return _xf_answer(me, role, rid, a, body, rec)
         if typ == "tw": return _tw_answer(me, role, rid, a, body, rec)
         if typ == "sch": return _sch_answer(me, role, rid, a, body, rec)
         if typ in MORE: return _micro_more(me, role, typ, rid, a, body, rec)
