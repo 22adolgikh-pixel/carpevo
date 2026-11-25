@@ -817,7 +817,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795497138,
+ "updated": 1795620528,
  "cat": {
   "title": "молитвенный ковёр «Faxralı» Гянджа",
   "museum": "",
@@ -850,8 +850,37 @@
  },
  "src_id": "cat:intangible_2849_p0200_1",
  "lib_img": "img/intangible_2849_p0200_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "az_carpets_magazine_33_patterns_page_039",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol3_p007_2",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0186_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "az_carpets_magazine_33_patterns_page_039": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620528
+  },
+  "kerimov_vol3_p007_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795620528
+  },
+  "intangible_2850_p0186_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795620528
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -977,6 +1006,29 @@
      "a": "bad",
      "w": 2,
      "t": 1795497138
+    }
+   }
+  },
+  "same": {
+   "az_carpets_magazine_33_patterns_page_039": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795620528
+    }
+   },
+   "kerimov_vol3_p007_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795620528
+    }
+   },
+   "intangible_2850_p0186_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795620528
     }
    }
   }

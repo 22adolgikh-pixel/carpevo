@@ -973,9 +973,9 @@
    "id": "m17955481620s",
    "box": [
     0.25,
-    0.59119,
-    0.16667,
-    0.13208
+    0.6375,
+    0.18248,
+    0.08577
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -983,7 +983,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 1,
@@ -992,8 +992,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795548162,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795620446,
    "rf": 1,
    "rf_s": 0.372,
    "box0": [
@@ -1002,15 +1002,17 @@
     0.23773,
     0.09417
    ],
-   "rf_moved": 0.172
+   "rf_moved": 0.172,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795620446
   },
   {
    "id": "m17955481621s",
    "box": [
-    0.52671,
-    0.59447,
-    0.28821,
-    0.11495
+    0.59505,
+    0.63235,
+    0.2036,
+    0.08706
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -1018,7 +1020,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -1027,10 +1029,18 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795548162,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795620446,
    "rf": 1,
-   "rf_s": 0.382
+   "rf_s": 0.382,
+   "box0": [
+    0.52671,
+    0.59447,
+    0.28821,
+    0.11495
+   ],
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795620446
   },
   {
    "id": "m17955481622s",
@@ -1046,7 +1056,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: слева↔справа",
    "angle": 90,
    "flip": 1,
@@ -1055,8 +1065,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795548162,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795620446,
    "rf": 1,
    "rf_s": 0.458,
    "box0": [
@@ -1070,10 +1080,10 @@
   {
    "id": "m17955481623s",
    "box": [
-    0.19283,
-    0.6872,
-    0.16143,
-    0.05924
+    0.03644,
+    0.70513,
+    0.12551,
+    0.09615
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -1081,7 +1091,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: сверху↔снизу",
    "angle": 270,
    "flip": 1,
@@ -1093,14 +1103,16 @@
    "confirmed_by": "",
    "confirmed_at": 0,
    "rf": 1,
-   "rf_s": 0.322,
+   "rf_s": 0.373,
    "box0": [
     0.26175,
     0.68736,
     0.17894,
     0.06403
    ],
-   "rf_moved": 0.434
+   "rf_moved": 0.434,
+   "near_by": "dolgikh",
+   "near_at": 1795620446
   },
   {
    "id": "m17955481624s",
@@ -1116,7 +1128,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: напротив (180°)",
    "angle": 90,
    "flip": 0,
@@ -1125,8 +1137,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795548162,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795620446,
    "rf": 1,
    "rf_s": 0.35,
    "box0": [
@@ -1151,7 +1163,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: слева↔справа",
    "angle": 0,
    "flip": 0,
@@ -1160,8 +1172,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795548162,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795620446,
    "rf": 1,
    "rf_s": 0.944,
    "box0": [
@@ -1186,7 +1198,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 0,
@@ -1195,8 +1207,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795548162,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795620446,
    "rf": 1,
    "rf_s": 0.37,
    "box0": [
@@ -1205,7 +1217,9 @@
     0.18525,
     0.05678
    ],
-   "rf_moved": 0.265
+   "rf_moved": 0.265,
+   "variant": "detail",
+   "variant_by": "/m"
   },
   {
    "id": "m17955481627s",
@@ -1221,7 +1235,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 1,
@@ -1230,8 +1244,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795548162,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795620446,
    "rf": 1,
    "rf_s": 0.351,
    "box0": [
@@ -1240,11 +1254,13 @@
     0.22814,
     0.0711
    ],
-   "rf_moved": 0.362
+   "rf_moved": 0.362,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795620446
   }
  ],
  "created": 1794547278,
- "updated": 1795548166,
+ "updated": 1795620475,
  "cat": {
   "title": "Ковёр «Malıbəyli» Карабах",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -1453,6 +1469,62 @@
      "a": "ok",
      "w": 2,
      "t": 1795463388
+    }
+   },
+   "m17955481625s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795620446
+    }
+   },
+   "m17955481622s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795620446
+    }
+   },
+   "m17955481624s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795620446
+    }
+   },
+   "m17955481626s": {
+    "dolgikh": {
+     "a": "var",
+     "w": 2,
+     "t": 1795620446
+    }
+   },
+   "m17955481621s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795620446
+    }
+   },
+   "m17955481627s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795620446
+    }
+   },
+   "m17955481620s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795620446
+    }
+   },
+   "m17955481623s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795620475
     }
    }
   }

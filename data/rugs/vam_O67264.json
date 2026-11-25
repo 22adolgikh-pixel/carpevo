@@ -8,9 +8,9 @@
  "license": "V&A non-commercial",
  "place": "Azerbaijan",
  "date": "late 19th century",
- "school": "",
- "composition": "",
- "technique": "",
+ "school": "guba-shirvan",
+ "composition": "shamaxi",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -51,6 +51,14 @@
   {
    "id": "vam_O153402",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Azerbaijani_carpet_Shamakhi_in_V_A_jpg",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug83",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -58,6 +66,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794998052
+  },
+  "wikimedia_File_Azerbaijani_carpet_Shamakhi_in_V_A_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620494
+  },
+  "azr_antique_caucasian_moghan_rug83": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_caucasian_moghan_rug83 ≠ wikimedia_File_Azerbaijani_carpet_Shamakhi_in_V_A_jpg",
+   "at": 1795620516
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -232,5 +250,10 @@
    17.7906
   ],
   "t": 1795207892
+ },
+ "from_twin": {
+  "school": "wikimedia_File_Azerbaijani_carpet_Shamakhi_in_V_A_jpg",
+  "composition": "wikimedia_File_Azerbaijani_carpet_Shamakhi_in_V_A_jpg",
+  "technique": "wikimedia_File_Azerbaijani_carpet_Shamakhi_in_V_A_jpg"
  }
 }

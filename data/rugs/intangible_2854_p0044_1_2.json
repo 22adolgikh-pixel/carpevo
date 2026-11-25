@@ -2,13 +2,13 @@
  "id": "intangible_2854_p0044_1_2",
  "title": "Ковёр «Ağbaba» Иреван · ковёр 2 из 2",
  "source": "каталог: book:intangible_2854",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Иреван",
  "date": "19 в., середина",
- "school": "",
+ "school": "ganja-gazakh",
  "composition": "",
  "technique": "ворсовый",
  "size": "244x162 см",
@@ -18,7 +18,7 @@
  "h": 1336,
  "marks": [],
  "created": 1795357826,
- "updated": 1795463124,
+ "updated": 1795620456,
  "cat": {
   "title": "Ковёр «Ağbaba» Иреван",
   "museum": "",
@@ -149,6 +149,15 @@
     "t": 1795463124,
     "s": "ref"
    }
+  },
+  "same": {
+   "wikimedia_File_Damğalı_xalçası_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795620456
+    }
+   }
   }
  },
  "frame": "whole",
@@ -185,5 +194,22 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "wikimedia_File_Damğalı_xalçası_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620456
+  }
+ },
+ "same": [
+  {
+   "id": "wikimedia_File_Damğalı_xalçası_jpg",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "wikimedia_File_Damğalı_xalçası_jpg",
+  "museum": "wikimedia_File_Damğalı_xalçası_jpg"
+ }
 }
