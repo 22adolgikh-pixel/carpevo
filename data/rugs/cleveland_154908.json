@@ -303,7 +303,7 @@
   }
  ],
  "created": 1791736127,
- "updated": 1795463407,
+ "updated": 1795621529,
  "cat": {
   "title": "Carpet",
   "museum": "Кливлендский музей искусств",
@@ -349,6 +349,18 @@
   {
    "id": "azerbaycan_xalchalari_qarabag_qrupu_p0045_1",
    "score": 0
+  },
+  {
+   "id": "cm_b59b402cc9",
+   "score": 0
+  },
+  {
+   "id": "cm_3cb8b598f2",
+   "score": 0
+  },
+  {
+   "id": "cm_c07233e54a",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -371,6 +383,22 @@
    "ok": false,
    "by": "по цепочке: cleveland_154908 ≠ wikimedia_File_Azerbaijani_Chelebi_carpet_end_of_19th_century_from_Barda_town_of",
    "at": 1795506330
+  },
+  "cm_b59b402cc9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795621529,
+   "similar": true
+  },
+  "cm_3cb8b598f2": {
+   "ok": false,
+   "by": "по цепочке: cleveland_154908 ≠ cm_b59b402cc9",
+   "at": 1795621551
+  },
+  "cm_c07233e54a": {
+   "ok": false,
+   "by": "по цепочке: cleveland_154908 ≠ cm_b59b402cc9",
+   "at": 1795621551
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -465,6 +493,13 @@
      "a": "similar",
      "w": 2,
      "t": 1794983994
+    }
+   },
+   "cm_b59b402cc9": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795621529
     }
    }
   },

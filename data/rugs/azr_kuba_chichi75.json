@@ -45,8 +45,163 @@
  },
  "src_id": "cat:azr_kuba_chichi75",
  "lib_img": "img/azr_kuba_chichi75.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_chichi88",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi6",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi51",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi28",
+   "score": 0
+  },
+  {
+   "id": "azcm_27",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi68",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi71",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0127_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0176_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star146",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star150",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye54",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_16_jpg",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil50",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye33",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi11",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi46",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_chichi88": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795621693
+  },
+  "azr_kuba_chichi6": {
+   "ok": true,
+   "by": "по цепочке: azr_kuba_chichi6 = azr_kuba_chichi75 = azr_kuba_chichi88",
+   "at": 1795621715
+  },
+  "azr_kuba_chichi51": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi51 ≠ azr_kuba_chichi6",
+   "at": 1795621715
+  },
+  "azr_kuba_chichi28": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi28 ≠ azr_kuba_chichi6",
+   "at": 1795621715
+  },
+  "azcm_27": {
+   "ok": false,
+   "by": "по цепочке: azcm_27 ≠ azr_kuba_chichi6",
+   "at": 1795621715
+  },
+  "azr_kuba_chichi68": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi6 ≠ azr_kuba_chichi68",
+   "at": 1795621715
+  },
+  "azr_kuba_chichi71": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi6 ≠ azr_kuba_chichi71",
+   "at": 1795621715
+  },
+  "intangible_2850_p0127_1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi6 ≠ intangible_2850_p0127_1",
+   "at": 1795621715
+  },
+  "intangible_2850_p0176_1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi6 ≠ intangible_2850_p0176_1",
+   "at": 1795621715
+  },
+  "azr_kuba_zeyve_lesghi_star146": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi88 ≠ azr_kuba_zeyve_lesghi_star146",
+   "at": 1795621715
+  },
+  "azr_kuba_zeyve_lesghi_star150": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi88 ≠ azr_kuba_zeyve_lesghi_star150",
+   "at": 1795621715
+  },
+  "azr_kuba_tekye54": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi88 ≠ azr_kuba_tekye54",
+   "at": 1795621715
+  },
+  "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_16_jpg": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi88 ≠ wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_16_jpg",
+   "at": 1795621715
+  },
+  "azr_kuba_perepedil50": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi88 ≠ azr_kuba_perepedil50",
+   "at": 1795621715
+  },
+  "azr_kuba_tekye33": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi88 ≠ azr_kuba_tekye33",
+   "at": 1795621715
+  },
+  "azr_kuba_chichi11": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi11 ≠ azr_kuba_chichi88",
+   "at": 1795621715
+  },
+  "azr_kuba_chichi46": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi46 ≠ azr_kuba_chichi6",
+   "at": 1795621715
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

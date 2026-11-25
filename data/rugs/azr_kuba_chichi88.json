@@ -18,7 +18,7 @@
  "h": 1333,
  "marks": [],
  "created": 1791736132,
- "updated": 1795293047,
+ "updated": 1795621693,
  "cat": {
   "title": "kuba chichi88",
   "museum": "",
@@ -65,6 +65,54 @@
   {
    "id": "azr_kuba_perepedil50",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi75",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye33",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi6",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi11",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi51",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi28",
+   "score": 0
+  },
+  {
+   "id": "azcm_27",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi68",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi71",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0127_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0176_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi46",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -92,6 +140,66 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_kuba_chichi75": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795621693
+  },
+  "azr_kuba_tekye33": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795621693
+  },
+  "azr_kuba_chichi6": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795621693
+  },
+  "azr_kuba_chichi11": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795621693
+  },
+  "azr_kuba_chichi51": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi51 ≠ azr_kuba_chichi6",
+   "at": 1795621715
+  },
+  "azr_kuba_chichi28": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi28 ≠ azr_kuba_chichi6",
+   "at": 1795621715
+  },
+  "azcm_27": {
+   "ok": false,
+   "by": "по цепочке: azcm_27 ≠ azr_kuba_chichi6",
+   "at": 1795621715
+  },
+  "azr_kuba_chichi68": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi6 ≠ azr_kuba_chichi68",
+   "at": 1795621715
+  },
+  "azr_kuba_chichi71": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi6 ≠ azr_kuba_chichi71",
+   "at": 1795621715
+  },
+  "intangible_2850_p0127_1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi6 ≠ intangible_2850_p0127_1",
+   "at": 1795621715
+  },
+  "intangible_2850_p0176_1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi6 ≠ intangible_2850_p0176_1",
+   "at": 1795621715
+  },
+  "azr_kuba_chichi46": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_chichi46 ≠ azr_kuba_chichi6",
+   "at": 1795621715
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -237,6 +345,34 @@
      "a": "diff",
      "w": 2,
      "t": 1794983936
+    }
+   },
+   "azr_kuba_chichi75": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795621693
+    }
+   },
+   "azr_kuba_tekye33": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795621693
+    }
+   },
+   "azr_kuba_chichi6": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795621693
+    }
+   },
+   "azr_kuba_chichi11": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795621693
     }
    }
   }
