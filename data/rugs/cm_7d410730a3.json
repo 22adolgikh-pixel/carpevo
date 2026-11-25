@@ -18,7 +18,7 @@
  "h": 1947,
  "marks": [],
  "created": 1791870033,
- "updated": 1794935950,
+ "updated": 1795614127,
  "cat": {
   "title": "Zagli rug, Guba school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -52,9 +52,19 @@
   {
    "id": "wikimedia_File_Заглы_2_jpg",
    "score": 1086
+  },
+  {
+   "id": "kerimov_vol2_p137_1_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "kerimov_vol2_p137_1_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795614127
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Заглы_2_jpg": {
@@ -133,6 +143,15 @@
     "w": 2,
     "t": 1794935950,
     "s": "ref"
+   }
+  },
+  "same": {
+   "kerimov_vol2_p137_1_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795614127
+    }
    }
   }
  },

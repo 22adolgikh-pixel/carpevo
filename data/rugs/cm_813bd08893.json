@@ -10,7 +10,7 @@
  "date": "2014-11-13 13:04:37",
  "school": "karabakh",
  "composition": "",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "carpets2",
  "status": "new",
@@ -64,6 +64,22 @@
   {
    "id": "cm_edcd95d111",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_04_jpg",
+   "score": 0
+  },
+  {
+   "id": "cm_bf99ecb731",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_26_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Ovchulug_Karabakh_school_rug_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -76,6 +92,26 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794978915
+  },
+  "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_04_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795614161
+  },
+  "cm_bf99ecb731": {
+   "ok": true,
+   "by": "по цепочке: cm_813bd08893 = cm_bf99ecb731 = wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_04_jpg = wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_26_jpg",
+   "at": 1795614182
+  },
+  "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_26_jpg": {
+   "ok": true,
+   "by": "по цепочке: cm_813bd08893 = cm_bf99ecb731 = wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_04_jpg = wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_26_jpg",
+   "at": 1795614182
+  },
+  "wikimedia_File_Ovchulug_Karabakh_school_rug_jpg": {
+   "ok": false,
+   "by": "по цепочке: cm_bf99ecb731 ≠ wikimedia_File_Ovchulug_Karabakh_school_rug_jpg",
+   "at": 1795614182
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -167,5 +203,8 @@
    21.7396
   ],
   "t": 1795207833
+ },
+ "from_twin": {
+  "technique": "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_04_jpg"
  }
 }

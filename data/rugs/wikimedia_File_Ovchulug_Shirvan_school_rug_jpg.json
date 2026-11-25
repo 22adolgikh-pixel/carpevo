@@ -18,7 +18,7 @@
  "h": 1054,
  "marks": [],
  "created": 1791736124,
- "updated": 1795581626,
+ "updated": 1795614077,
  "cat": {
   "title": "Ovchulug Shirvan school rug.jpg",
   "museum": "Wikimedia Commons",
@@ -96,6 +96,14 @@
     "w": 2,
     "t": 1795581626
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795614077,
+    "s": "ref"
+   }
   }
  },
  "auto": {
@@ -147,5 +155,38 @@
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00538,
+    0.03834
+   ],
+   [
+    0.9907,
+    0.03262
+   ],
+   [
+    0.98063,
+    0.92892
+   ],
+   [
+    0.00897,
+    0.93082
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

@@ -8,7 +8,7 @@
  "license": "CC BY-SA 4.0",
  "place": "",
  "date": "2018-08-12 12:41:31",
- "school": "",
+ "school": "karabakh",
  "composition": "",
  "technique": "ворсовый",
  "size": "",
@@ -18,7 +18,7 @@
  "h": 720,
  "marks": [],
  "created": 1791736126,
- "updated": 1795464091,
+ "updated": 1795614161,
  "cat": {
   "title": "Շուշիի գորգերի թանգարանի նմուշներ 04.jpg",
   "museum": "Wikimedia Commons",
@@ -61,9 +61,47 @@
   {
    "id": "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_26_jpg",
    "score": 314
+  },
+  {
+   "id": "cm_813bd08893",
+   "score": 0
+  },
+  {
+   "id": "cm_edcd95d111",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Ovchulug_Karabakh_school_rug_jpg",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_26_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795614161
+  },
+  "cm_bf99ecb731": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795614161
+  },
+  "cm_813bd08893": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795614161
+  },
+  "cm_edcd95d111": {
+   "ok": false,
+   "by": "по цепочке: cm_813bd08893 ≠ cm_edcd95d111",
+   "at": 1795614182
+  },
+  "wikimedia_File_Ovchulug_Karabakh_school_rug_jpg": {
+   "ok": false,
+   "by": "по цепочке: cm_bf99ecb731 ≠ wikimedia_File_Ovchulug_Karabakh_school_rug_jpg",
+   "at": 1795614182
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -121,6 +159,29 @@
      "t": 1795464091
     }
    }
+  },
+  "same": {
+   "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_26_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795614161
+    }
+   },
+   "cm_bf99ecb731": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795614161
+    }
+   },
+   "cm_813bd08893": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795614161
+    }
+   }
   }
  },
  "auto": {
@@ -147,5 +208,8 @@
   "area": null,
   "ver": 1,
   "t": 1795464926
+ },
+ "from_twin": {
+  "school": "wikimedia_File_Շուշիի_գորգերի_թանգարանի_նմուշներ_26_jpg"
  }
 }

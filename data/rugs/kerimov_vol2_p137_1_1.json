@@ -2,15 +2,15 @@
  "id": "kerimov_vol2_p137_1_1",
  "title": "Керимов, т. II, 22 (стр. скана 137, печ. 23)",
  "source": "каталог: kerimov_vol2",
- "museum": "",
+ "museum": "Национальный музей азербайджанского ковра",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
- "school": "",
- "composition": "",
- "technique": "",
+ "date": "XIX c",
+ "school": "guba",
+ "composition": "zagli",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -106,5 +106,25 @@
    30.604
   ],
   "t": 1795207883
+ },
+ "same_ok": {
+  "cm_7d410730a3": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795614127
+  }
+ },
+ "same": [
+  {
+   "id": "cm_7d410730a3",
+   "score": 0
+  }
+ ],
+ "from_twin": {
+  "school": "cm_7d410730a3",
+  "composition": "cm_7d410730a3",
+  "technique": "cm_7d410730a3",
+  "museum": "cm_7d410730a3",
+  "date": "cm_7d410730a3"
  }
 }
