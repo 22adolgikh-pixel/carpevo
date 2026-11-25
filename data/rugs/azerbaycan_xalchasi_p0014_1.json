@@ -11,7 +11,7 @@
  "school": "karabakh",
  "composition": "ejdahali",
  "technique": "ворсовый",
- "size": "",
+ "size": "358x175 см",
  "notes": "Xalça \"Əjdahalı\", Qarabağ, Azərbaycan. XVII əsrin sonu - XVIII əsrin əvvəli. Tekstil Muzeyi, Vaşinqton\n\"Dragon\" carpet. Garabagh, Azerbaijan. Late 17th - early 18th cc. Textile Museum, Washington",
  "status": "new",
  "w": 1076,
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_p0014_1",
  "lib_img": "img/azerbaycan_xalchasi_p0014_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0043_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchalari_qarabag_qrupu_p0043_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795589206
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "cropped",
@@ -149,5 +160,8 @@
    }
   }
  },
- "frame_by": "micro"
+ "frame_by": "micro",
+ "from_twin": {
+  "size": "azerbaycan_xalchalari_qarabag_qrupu_p0043_1"
+ }
 }

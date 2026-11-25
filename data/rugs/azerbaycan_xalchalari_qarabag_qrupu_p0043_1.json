@@ -2,14 +2,14 @@
  "id": "azerbaycan_xalchalari_qarabag_qrupu_p0043_1",
  "title": "Əjdahalı. Xalça. “Xətai”. Qarabağ qrupu. Azərbaycan. XVII əsr. Yun. Xovlu. Tekstil muzeyi",
  "source": "каталог: book:azerbaycan_xalchalari_qarabag_qrupu",
- "museum": "",
+ "museum": "Tekstil Muzeyi, Vaşinqton / Textile Museum, Washington",
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
- "place": "",
+ "place": "Карабах",
  "date": "XVII в.",
  "school": "karabakh",
- "composition": "",
+ "composition": "ejdahali",
  "technique": "ворсовый",
  "size": "358x175 см",
  "notes": "Əjdahalı. Xalça. “Xətai”. Qarabağ qrupu. Azərbaycan. XVII əsr. Yun. Xovlu. Tekstil muzeyi",
@@ -18,7 +18,7 @@
  "h": 1853,
  "marks": [],
  "created": 1794547278,
- "updated": 1795498014,
+ "updated": 1795589206,
  "cat": {
   "title": "Əjdahalı. Xalça. “Xətai”. Qarabağ qrupu. Azərbaycan. XVII əsr. Yun. Xovlu. Tekstil muzeyi",
   "museum": "",
@@ -50,8 +50,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0043_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0043_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_p0014_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_p0014_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795589206
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -125,6 +136,15 @@
     "w": 2,
     "t": 1795498014,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azerbaycan_xalchasi_p0014_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795589206
+    }
    }
   }
  },
@@ -392,5 +412,10 @@
    61.0743
   ],
   "t": 1795207685
+ },
+ "from_twin": {
+  "composition": "azerbaycan_xalchasi_p0014_1",
+  "museum": "azerbaycan_xalchasi_p0014_1",
+  "place": "azerbaycan_xalchasi_p0014_1"
  }
 }
