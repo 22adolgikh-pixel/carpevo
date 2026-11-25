@@ -18,7 +18,7 @@
  "h": 650,
  "marks": [],
  "created": 1791736129,
- "updated": 1795293047,
+ "updated": 1795621999,
  "cat": {
   "title": "antique kazak prayer rug24",
   "museum": "",
@@ -53,6 +53,14 @@
   {
    "id": "wikimedia_File_Fachralo_Kazak_Prayer_Rug_Last_Quarter_19th_C_Lot_60_jpg",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend61",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug39",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -65,6 +73,16 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_kuba_konagkend61": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795621999
+  },
+  "azr_antique_kazak_prayer_rug39": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795621999
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -170,5 +188,23 @@
   ],
   "t": 1795207720
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "azr_kuba_konagkend61": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795621999
+    }
+   },
+   "azr_antique_kazak_prayer_rug39": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795621999
+    }
+   }
+  }
+ }
 }

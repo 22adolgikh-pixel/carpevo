@@ -18,7 +18,7 @@
  "h": 1359,
  "marks": [],
  "created": 1791736130,
- "updated": 1795293047,
+ "updated": 1795622062,
  "cat": {
   "title": "kuba shirvan medallion163",
   "museum": "",
@@ -61,6 +61,46 @@
   {
    "id": "azr_kuba_afshan_ugah14",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion62",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion58",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion105",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion65",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion60",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion55",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shirvan_medallion88",
+   "score": 0
+  },
+  {
+   "id": "azcm_177",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0077_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_kilim5",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -83,6 +123,57 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_kuba_shirvan_medallion62": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795622062
+  },
+  "azr_kuba_shirvan_medallion58": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795622062,
+   "similar": true
+  },
+  "azr_kuba_shirvan_medallion105": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_shirvan_medallion105 ≠ azr_kuba_shirvan_medallion62",
+   "at": 1795622083
+  },
+  "azr_kuba_shirvan_medallion65": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_shirvan_medallion60 ≠ azr_kuba_shirvan_medallion62",
+   "at": 1795622083
+  },
+  "azr_kuba_shirvan_medallion60": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_shirvan_medallion60 ≠ azr_kuba_shirvan_medallion62",
+   "at": 1795622083
+  },
+  "azr_kuba_shirvan_medallion55": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_shirvan_medallion55 ≠ azr_kuba_shirvan_medallion62",
+   "at": 1795622083
+  },
+  "azr_kuba_shirvan_medallion88": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_shirvan_medallion62 ≠ azr_kuba_shirvan_medallion88",
+   "at": 1795622083
+  },
+  "azcm_177": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0077_1 ≠ azr_kuba_shirvan_medallion62",
+   "at": 1795622083
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0077_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0077_1 ≠ azr_kuba_shirvan_medallion62",
+   "at": 1795622083
+  },
+  "azr_kuba_kilim5": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_kilim5 ≠ azr_kuba_shirvan_medallion62",
+   "at": 1795622083
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -164,6 +255,20 @@
      "a": "same",
      "w": 2,
      "t": 1794979984
+    }
+   },
+   "azr_kuba_shirvan_medallion62": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795622062
+    }
+   },
+   "azr_kuba_shirvan_medallion58": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795622062
     }
    }
   }
