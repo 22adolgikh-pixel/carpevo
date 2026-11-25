@@ -18,7 +18,7 @@
  "h": 1711,
  "marks": [],
  "created": 1791870027,
- "updated": 1795349542,
+ "updated": 1795634358,
  "cat": {
   "title": "Oguz rug, XIX century, Quba school",
   "museum": "Национальный музей азербайджанского ковра",
@@ -52,9 +52,19 @@
   {
    "id": "wikimedia_File_Oguz_rug_XIX_century_jpg",
    "score": 1324
+  },
+  {
+   "id": "kerimov_vol2_p076_2",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "kerimov_vol2_p076_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795634358
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Oguz_rug_XIX_century_jpg": {
@@ -175,6 +185,15 @@
      "a": "one",
      "w": 2,
      "t": 1795349542
+    }
+   }
+  },
+  "same": {
+   "kerimov_vol2_p076_2": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795634358
     }
    }
   }

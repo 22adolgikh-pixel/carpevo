@@ -3652,7 +3652,7 @@
    "scheme": "",
    "group": "mmwhtozel",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -3676,10 +3676,10 @@
   {
    "id": "m17956293242s",
    "box": [
-    0.29741,
-    0.39567,
-    0.02759,
-    0.01397
+    0.29522,
+    0.39768,
+    0.03099,
+    0.01673
    ],
    "zone": "field",
    "motif": "",
@@ -3687,7 +3687,7 @@
    "scheme": "",
    "group": "mmwhtozel",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 1,
@@ -3696,8 +3696,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795629324,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795634349,
    "rf": 1,
    "rf_s": 0.407,
    "box0": [
@@ -3706,13 +3706,15 @@
     0.03295,
     0.01802
    ],
-   "rf_moved": 0.373
+   "rf_moved": 0.373,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795634349
   },
   {
    "id": "m17956293245s",
    "box": [
-    0.66948,
-    0.41508,
+    0.68012,
+    0.40352,
     0.02903,
     0.01566
    ],
@@ -3722,7 +3724,7 @@
    "scheme": "",
    "group": "mmwhtozel",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 1,
@@ -3731,8 +3733,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795629324,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795634349,
    "rf": 1,
    "rf_s": 0.392,
    "box0": [
@@ -3741,7 +3743,9 @@
     0.03553,
     0.01957
    ],
-   "rf_moved": 0.534
+   "rf_moved": 0.534,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795634349
   },
   {
    "id": "m17956293246s",
@@ -3757,7 +3761,7 @@
    "scheme": "",
    "group": "mmwhtozel",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 1,
@@ -3792,7 +3796,7 @@
    "scheme": "",
    "group": "mmwhtozel",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -3815,7 +3819,7 @@
   }
  ],
  "created": 1791870043,
- "updated": 1795629324,
+ "updated": 1795634349,
  "cat": {
   "title": "“Malıbəyli” («Малыбейли»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -4527,6 +4531,41 @@
      "a": "bad",
      "w": 2,
      "t": 1795620254
+    }
+   },
+   "m17956293246s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795634349
+    }
+   },
+   "m17956293241s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795634349
+    }
+   },
+   "m17956293247s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795634349
+    }
+   },
+   "m17956293242s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795634349
+    }
+   },
+   "m17956293245s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795634349
     }
    }
   },

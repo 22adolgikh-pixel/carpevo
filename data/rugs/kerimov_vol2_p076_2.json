@@ -2,15 +2,15 @@
  "id": "kerimov_vol2_p076_2",
  "title": "Керимов, т. II (стр. скана 76, печ. 153)",
  "source": "каталог: kerimov_vol2",
- "museum": "",
+ "museum": "Национальный музей азербайджанского ковра",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
- "school": "",
+ "date": "XIX century",
+ "school": "guba",
  "composition": "",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -82,8 +82,19 @@
  },
  "src_id": "cat:kerimov_vol2_p076_2",
  "lib_img": "img/kerimov_vol2_p076_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_5634bec83a",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_5634bec83a": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795634359
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -246,5 +257,11 @@
    32.906
   ],
   "t": 1795207878
+ },
+ "from_twin": {
+  "school": "cm_5634bec83a",
+  "technique": "cm_5634bec83a",
+  "museum": "cm_5634bec83a",
+  "date": "cm_5634bec83a"
  }
 }
