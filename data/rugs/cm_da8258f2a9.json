@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870028,
- "updated": 1795621086,
+ "updated": 1795628885,
  "cat": {
   "title": "Qabıstan xalçası, Şirvan xalçaçılıq məktəbi",
   "museum": "Национальный музей искусств Азербайджана",
@@ -173,8 +173,49 @@
     "w": 2,
     "t": 1795621086
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795628885,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00847,
+    0.01932
+   ],
+   [
+    1.00115,
+    0.01849
+   ],
+   [
+    0.98946,
+    0.98212
+   ],
+   [
+    0.03016,
+    0.98034
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

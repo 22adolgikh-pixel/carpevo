@@ -228,10 +228,36 @@
    ],
    "fixed_by": "dolgikh",
    "fixed_at": 1795204215
+  },
+  {
+   "id": "m17956288880e",
+   "box": [
+    0.3708,
+    0.61212,
+    0.27565,
+    0.16476
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmvcy2e5m",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.885,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795628888,
+   "confirmed_by": "",
+   "confirmed_at": 0
   }
  ],
  "created": 1791736121,
- "updated": 1795581552,
+ "updated": 1795628888,
  "cat": {
   "title": "Керимов, т. I, Табл. 202. «ЗЕЙВА» (стр. скана 324, печ. ?)",
   "museum": "",
@@ -503,5 +529,8 @@
  ],
  "name_none": [
   "mmvcy2e5m"
- ]
+ ],
+ "esearch": {
+  "mmvcy2e5m": "1:5"
+ }
 }
