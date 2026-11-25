@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791736140,
- "updated": 1795623289,
+ "updated": 1795628684,
  "cat": {
   "title": "Embroidered Cover, Azerbaijan, 17401790",
   "museum": "",
@@ -132,8 +132,49 @@
     "w": 2,
     "t": 1795623289
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795628684,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01791,
+    0.03688
+   ],
+   [
+    0.98387,
+    0.01117
+   ],
+   [
+    0.99461,
+    0.98144
+   ],
+   [
+    0.01966,
+    0.9876
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
