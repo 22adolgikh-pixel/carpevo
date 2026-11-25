@@ -2431,6 +2431,19 @@ def t57_text_facts_v1206(pg, ctx):
     os.remove(f'{D}/rugs/tf_a.json')
 
 
+@test
+def m_edge_ids_dont_clash(pg, ctx):
+    """v12.35: у карточки «край» были id (ed, ew, eh…), совпавшие с CSS редактора рамок: кнопка «готово» растягивалась на весь экран и закрывала страницу.
+    Проверяем: ни один id и класс карточки не упомянут в стилях страницы."""
+    html = open(os.path.join(ctx['app'], 'm.html'), encoding='utf-8').read()
+    css = html[html.index('<style>'):html.index('</style>')]
+    blk = html[html.index('function showEdge(t){'):html.index('function showXsame(t){')]
+    ids = set(re.findall(r'id="([^"]+)"', blk)); cls = set(re.findall(r'class="([a-z]+)"', blk)) - {'yes', 'no', 'sm', 'unk', 'mut'}
+    bad = [i for i in ids if re.search(r'#' + re.escape(i) + r'(?![\w-])', css)] + [c for c in cls if re.search(r'\.' + re.escape(c) + r'(?![\w-])', css)]
+    assert not bad, f'id/классы карточки «край» есть в стилях страницы: {bad}'
+    assert all(i.startswith('kx_') for i in ids), f'id карточки «край» должны начинаться с kx_: {ids}'
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
