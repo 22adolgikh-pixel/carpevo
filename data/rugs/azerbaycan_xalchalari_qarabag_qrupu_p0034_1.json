@@ -18,7 +18,7 @@
  "h": 1638,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795620389,
  "cat": {
   "title": "İpək tikmə. Fraqment. Qarabağ qrupu. Azərbaycan. XVII əsr. Şəxsi kolleksiya",
   "museum": "Şəxsi kolleksiya",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0034_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0034_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_azerbaijan_silk_embroidery_swastika_motives_khanate_period_X",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_azerbaijan_silk_embroidery_swastika_motives_khanate_period_X": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620389
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -105,5 +116,16 @@
    75.0258
   ],
   "t": 1795207685
+ },
+ "micro": {
+  "same": {
+   "azr_azerbaijan_silk_embroidery_swastika_motives_khanate_period_X": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795620389
+    }
+   }
+  }
  }
 }

@@ -18,7 +18,7 @@
  "h": 943,
  "marks": [],
  "created": 1791736134,
- "updated": 1795154095,
+ "updated": 1795620252,
  "cat": {
   "title": "kuba shield68",
   "museum": "",
@@ -78,7 +78,30 @@
   "conf": 0.974,
   "area": 0.875,
   "ver": 1,
-  "t": 1795117657
+  "t": 1795117657,
+  "ref_quad": {
+   "quad": [
+    [
+     0.01826,
+     0.06943
+    ],
+    [
+     0.95146,
+     0.06756
+    ],
+    [
+     0.97106,
+     0.94863
+    ],
+    [
+     0.04578,
+     0.95742
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795620264
+  }
  },
  "school_prev": "guba-shirvan",
  "school_by": "уточнено по слову «kuba» в подписи",
@@ -114,7 +137,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -135,5 +158,15 @@
    53.3357
   ],
   "t": 1795207791
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795620252
+   }
+  }
+ },
+ "frame_by": "micro"
 }

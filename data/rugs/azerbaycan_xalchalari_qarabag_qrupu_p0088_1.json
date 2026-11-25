@@ -6,7 +6,7 @@
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
- "place": "",
+ "place": "Карабах",
  "date": "1910",
  "school": "karabakh",
  "composition": "atli-itli",
@@ -18,7 +18,7 @@
  "h": 1031,
  "marks": [],
  "created": 1794547278,
- "updated": 1795293047,
+ "updated": 1795620262,
  "cat": {
   "title": "Xalça. “Atlı - itli”. Qarabağ qrupu. Azərbaycan. Zəngilan. 1910-cu il. Yun. Xovlu.",
   "museum": "",
@@ -61,6 +61,10 @@
   {
    "id": "intangible_2850_p0067_1",
    "score": 0
+  },
+  {
+   "id": "intangible_2851_p0024_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -73,6 +77,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "intangible_2851_p0024_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620262
   }
  },
  "_lib_t": "2026-11-12 22:41",
@@ -115,6 +124,13 @@
      "a": "diff",
      "w": 2,
      "t": 1795028034
+    }
+   },
+   "intangible_2851_p0024_2": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795620262
     }
    }
   },
@@ -408,5 +424,8 @@
   ],
   "t": 1795207689
  },
- "fragment": true
+ "fragment": true,
+ "from_twin": {
+  "place": "intangible_2851_p0024_2"
+ }
 }

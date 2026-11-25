@@ -7,11 +7,11 @@
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Иреван",
- "date": "",
+ "date": "19 в., конец",
  "school": "",
  "composition": "",
  "technique": "безворсовый",
- "size": "",
+ "size": "302x193 см",
  "notes": "Şəkil 9. Kilim. İrəvan qrupu",
  "status": "new",
  "w": 771,
@@ -82,6 +82,14 @@
   {
    "id": "cm_81d71f4fad",
    "score": 0
+  },
+  {
+   "id": "intangible_2854_p0051_1_2",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -124,6 +132,16 @@
    "ok": false,
    "by": "по цепочке: cm_553d1f7b79 ≠ intangible_2851_p0017_2",
    "at": 1795376997
+  },
+  "intangible_2854_p0051_1_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620351
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0070_1 ≠ intangible_2854_p0051_1_2",
+   "at": 1795620373
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -275,5 +293,9 @@
   ],
   "t": 1795207865
  },
- "fragment": true
+ "fragment": true,
+ "from_twin": {
+  "date": "intangible_2854_p0051_1_2",
+  "size": "intangible_2854_p0051_1_2"
+ }
 }

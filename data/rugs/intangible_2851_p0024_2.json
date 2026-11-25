@@ -7,11 +7,11 @@
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Карабах",
- "date": "",
+ "date": "1910",
  "school": "karabakh",
  "composition": "atli-itli",
  "technique": "ворсовый",
- "size": "",
+ "size": "200x137 см",
  "notes": "Şəkil 22. Xalça. «Atlı-itli». Qarabağ qrupu",
  "status": "new",
  "w": 968,
@@ -50,8 +50,37 @@
  },
  "src_id": "cat:intangible_2851_p0024_2",
  "lib_img": "img/intangible_2851_p0024_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0088_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_13",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0067_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchalari_qarabag_qrupu_p0088_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620262
+  },
+  "azcm_13": {
+   "ok": false,
+   "by": "по цепочке: azcm_13 ≠ azerbaycan_xalchalari_qarabag_qrupu_p0088_1",
+   "at": 1795620284
+  },
+  "intangible_2850_p0067_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchalari_qarabag_qrupu_p0088_1 ≠ intangible_2850_p0067_1",
+   "at": 1795620284
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -115,5 +144,9 @@
    31.5413
   ],
   "t": 1795207866
+ },
+ "from_twin": {
+  "date": "azerbaycan_xalchalari_qarabag_qrupu_p0088_1",
+  "size": "azerbaycan_xalchalari_qarabag_qrupu_p0088_1"
  }
 }
