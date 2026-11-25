@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870047,
- "updated": 1791870047,
+ "updated": 1795620787,
  "cat": {
   "title": "Duz torbası (Дуз торбасы), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -49,8 +49,19 @@
  },
  "src_id": "cat:azcm_316",
  "lib_img": "img/azcm_316.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0189_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0189_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620787
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -77,5 +88,16 @@
    61.7718
   ],
   "t": 1795207680
+ },
+ "micro": {
+  "same": {
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0189_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795620787
+    }
+   }
+  }
  }
 }

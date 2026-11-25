@@ -3,7 +3,7 @@
  "title": "Duz torbası Карабах",
  "source": "каталог: book:azerbaycan_xalchasi_ensiklopediyasi_ii_cild",
  "museum": "Национальный музей азербайджанского ковра",
- "inv": "",
+ "inv": "3943",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
  "place": "Карабах",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0189_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0189_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_316",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_316": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620787
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "people": {
   "n": 0,
@@ -79,5 +90,8 @@
    62.1845
   ],
   "t": 1795207701
+ },
+ "from_twin": {
+  "inv": "azcm_316"
  }
 }

@@ -8,9 +8,9 @@
  "license": "V&A non-commercial",
  "place": "Azerbaijan",
  "date": "1870-1879",
- "school": "",
- "composition": "",
- "technique": "",
+ "school": "guba-shirvan",
+ "composition": "zeyve",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 1200,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1795620811,
  "cat": {
   "title": "Carpet",
   "museum": "V&A",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:vam_O66938",
  "lib_img": "img/vam_O66938.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Azerbaijani_carpet_Zeyva_in_V_A_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Azerbaijani_carpet_Zeyva_in_V_A_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620811
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -101,5 +112,21 @@
    52.641
   ],
   "t": 1795207892
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Azerbaijani_carpet_Zeyva_in_V_A_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795620811
+    }
+   }
+  }
+ },
+ "from_twin": {
+  "school": "wikimedia_File_Azerbaijani_carpet_Zeyva_in_V_A_jpg",
+  "composition": "wikimedia_File_Azerbaijani_carpet_Zeyva_in_V_A_jpg",
+  "technique": "wikimedia_File_Azerbaijani_carpet_Zeyva_in_V_A_jpg"
  }
 }
