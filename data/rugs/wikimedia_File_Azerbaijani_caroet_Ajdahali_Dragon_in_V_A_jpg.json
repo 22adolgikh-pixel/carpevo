@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791736125,
- "updated": 1795463020,
+ "updated": 1795620663,
  "cat": {
   "title": "Azerbaijani caroet \"Ajdahali\" (Dragon) in V&A.jpg",
   "museum": "Wikimedia Commons",
@@ -53,9 +53,25 @@
   {
    "id": "wikimedia_File_Pileless_Dragon_carpet_from_Azerbaijan_19th_century_wool_cotton_r",
    "score": 351
+  },
+  {
+   "id": "azcm_170",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Pileless_Dragon_carpet_from_Azerbaijan_19th_century_wool_cotton_r": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620663
+  },
+  "azcm_170": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795620663,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "same_chk": {
@@ -99,6 +115,22 @@
      "a": "one",
      "w": 2,
      "t": 1795463020
+    }
+   }
+  },
+  "same": {
+   "wikimedia_File_Pileless_Dragon_carpet_from_Azerbaijan_19th_century_wool_cotton_r": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795620663
+    }
+   },
+   "azcm_170": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795620663
     }
    }
   }

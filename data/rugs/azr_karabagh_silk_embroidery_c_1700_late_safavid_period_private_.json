@@ -2,7 +2,7 @@
  "id": "azr_karabagh_silk_embroidery_c_1700_late_safavid_period_private_",
  "title": "Early Karabagh silk embroidery, 17th century, Safavid Period, Karabagh Province (Beylerbeyi), Azerba",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Private collection",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
@@ -11,7 +11,7 @@
  "school": "karabakh",
  "composition": "",
  "technique": "",
- "size": "",
+ "size": "94x71 см",
  "notes": "Early Karabagh silk embroidery, 17th century, Safavid Period, Karabagh Province (Beylerbeyi), Azerbaijan. Private Collection",
  "status": "new",
  "w": 595,
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_karabagh_silk_embroidery_c_1700_late_safavid_period_private_",
  "lib_img": "img/azr_karabagh_silk_embroidery_c_1700_late_safavid_period_private_.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0039_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchalari_qarabag_qrupu_p0039_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620681
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -76,5 +87,9 @@
    24.4436
   ],
   "t": 1795207748
+ },
+ "from_twin": {
+  "museum": "azerbaycan_xalchalari_qarabag_qrupu_p0039_2",
+  "size": "azerbaycan_xalchalari_qarabag_qrupu_p0039_2"
  }
 }

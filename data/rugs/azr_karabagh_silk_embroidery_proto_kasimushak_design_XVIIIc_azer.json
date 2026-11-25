@@ -2,16 +2,16 @@
  "id": "azr_karabagh_silk_embroidery_proto_kasimushak_design_XVIIIc_azer",
  "title": "Early Karabagh silk embroidery with a proto-Kasimushak design, 18th century, Azerbaijan",
  "source": "каталог: azerbaijanrugs",
- "museum": "",
+ "museum": "Şəxsi kolleksiya",
  "inv": "",
  "url": "",
  "license": "azerbaijanrugs.com (только анализ)",
  "place": "",
  "date": "18th century",
  "school": "karabakh",
- "composition": "",
+ "composition": "qasimushagi",
  "technique": "",
- "size": "",
+ "size": "116x65 см",
  "notes": "Early Karabagh silk embroidery with a proto-Kasimushak design, 18th century, Azerbaijan. Private Collection",
  "status": "new",
  "w": 454,
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_karabagh_silk_embroidery_proto_kasimushak_design_XVIIIc_azer",
  "lib_img": "img/azr_karabagh_silk_embroidery_proto_kasimushak_design_XVIIIc_azer.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0036_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azerbaycan_xalchalari_qarabag_qrupu_p0036_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620746
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -76,5 +87,10 @@
    52.0401
   ],
   "t": 1795207748
+ },
+ "from_twin": {
+  "composition": "azerbaycan_xalchalari_qarabag_qrupu_p0036_1",
+  "museum": "azerbaycan_xalchalari_qarabag_qrupu_p0036_1",
+  "size": "azerbaycan_xalchalari_qarabag_qrupu_p0036_1"
  }
 }

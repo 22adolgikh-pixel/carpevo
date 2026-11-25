@@ -18,7 +18,7 @@
  "h": 1854,
  "marks": [],
  "created": 1794547278,
- "updated": 1795501356,
+ "updated": 1795620681,
  "cat": {
   "title": "İpək tikmə. Qarabağ qrupu. Azərbaycan. XVII əsr. Şəxsi kolleksiya",
   "museum": "Private collection",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0039_2",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0039_2.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_karabagh_silk_embroidery_c_1700_late_safavid_period_private_",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_karabagh_silk_embroidery_c_1700_late_safavid_period_private_": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795620681
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "cropped",
@@ -359,6 +370,15 @@
     "a": "whole",
     "w": 2,
     "t": 1795501356
+   }
+  },
+  "same": {
+   "azr_karabagh_silk_embroidery_c_1700_late_safavid_period_private_": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795620681
+    }
    }
   }
  },
