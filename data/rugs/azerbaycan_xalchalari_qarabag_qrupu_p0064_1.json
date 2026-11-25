@@ -2,7 +2,7 @@
  "id": "azerbaycan_xalchalari_qarabag_qrupu_p0064_1",
  "title": "Xalça. “ Qasımuşağı” . Qarabağqrupu . Azərbaycan . Laçın. XIXəsrinortaları. Yun. Xovlu.",
  "source": "каталог: book:azerbaycan_xalchalari_qarabag_qrupu",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга: только анализ/обучение, не публиковать",
@@ -811,7 +811,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795558389,
+ "updated": 1795623064,
  "cat": {
   "title": "Xalça. “ Qasımuşağı” . Qarabağqrupu . Azərbaycan . Laçın. XIXəsrinortaları. Yun. Xovlu.",
   "museum": "",
@@ -846,8 +846,46 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0064_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0064_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Kasym_ushagy_carpets_01_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Касымушагы_jpg",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0029_1",
+   "score": 0
+  },
+  {
+   "id": "azcm_82",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Kasym_ushagy_carpets_01_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795623064
+  },
+  "wikimedia_File_Касымушагы_jpg": {
+   "ok": false,
+   "by": "по цепочке: wikimedia_File_Kasym_ushagy_carpets_01_jpg ≠ wikimedia_File_Касымушагы_jpg",
+   "at": 1795623086
+  },
+  "intangible_2850_p0029_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_82 ≠ wikimedia_File_Kasym_ushagy_carpets_01_jpg",
+   "at": 1795623086
+  },
+  "azcm_82": {
+   "ok": false,
+   "by": "по цепочке: azcm_82 ≠ wikimedia_File_Kasym_ushagy_carpets_01_jpg",
+   "at": 1795623086
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -964,6 +1002,15 @@
      "a": "bad",
      "w": 2,
      "t": 1795463111
+    }
+   }
+  },
+  "same": {
+   "wikimedia_File_Kasym_ushagy_carpets_01_jpg": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795623064
     }
    }
   }
@@ -1232,5 +1279,8 @@
    65.6497
   ],
   "t": 1795207687
+ },
+ "from_twin": {
+  "museum": "wikimedia_File_Kasym_ushagy_carpets_01_jpg"
  }
 }

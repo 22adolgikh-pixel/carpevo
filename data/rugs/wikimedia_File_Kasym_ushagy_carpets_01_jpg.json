@@ -11,7 +11,7 @@
  "school": "karabakh",
  "composition": "qasimushagi",
  "technique": "ворсовый",
- "size": "",
+ "size": "228x155 см",
  "notes": "",
  "status": "new",
  "w": 960,
@@ -1453,6 +1453,10 @@
   {
    "id": "azcm_82",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0064_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -1470,6 +1474,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0064_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795623064
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -1608,7 +1617,9 @@
   ],
   "t": 1795207905
  },
- "from_twin": {},
+ "from_twin": {
+  "size": "azerbaycan_xalchalari_qarabag_qrupu_p0064_1"
+ },
  "fragment": true,
  "same_chk": {
   "wikimedia_File_Касымушагы_jpg": {
