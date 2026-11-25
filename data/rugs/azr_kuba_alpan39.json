@@ -18,7 +18,7 @@
  "h": 962,
  "marks": [],
  "created": 1791736131,
- "updated": 1795462238,
+ "updated": 1795634666,
  "cat": {
   "title": "kuba alpan39",
   "museum": "",
@@ -79,7 +79,30 @@
   "area": 0.902,
   "ver": 1,
   "t": 1795115967,
-  "hand": true
+  "hand": true,
+  "ref_quad": {
+   "quad": [
+    [
+     0.03131,
+     0.03008
+    ],
+    [
+     0.96091,
+     0.01044
+    ],
+    [
+     0.9714,
+     0.98464
+    ],
+    [
+     0.0246,
+     0.96724
+    ]
+   ],
+   "v": 5,
+   "from": "auto",
+   "t": 1795634790
+  }
  },
  "school_prev": "guba-shirvan",
  "school_by": "уточнено по слову «kuba» в подписи",
@@ -115,7 +138,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "hand",
  "auto_edge": {
   "v": 1,
@@ -146,6 +169,14 @@
      "t": 1795462238
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795634666
+   }
   }
- }
+ },
+ "frame_by": "micro"
 }
