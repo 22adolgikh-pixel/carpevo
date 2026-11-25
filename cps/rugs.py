@@ -4493,6 +4493,43 @@ def install(app, DATA, D_WORK):
         MS.build(limit=body.get("limit"), on_done=done)
         return MS.status()
 
+    # v12.32: второй шаг поиска по коврам — первые ковры сетки (DINOv2) перепроверяются овальной вырезкой DINOv3 (element_embed «match»,
+    # те же 8 положений образца, что в «элементах»). Замер 25.11 на 119 названных элементах (12 названий, 47 ковров + 433 чужих):
+    # верное место на 1-м ковре 15 % → 28 %, среди 5 первых 46 % → 56 %, mAP по местам 0,083 → 0,104. Цена ≈ 6–10 с на запрос.
+    MS_RERANK = int(os.environ.get("CPS_MS_RERANK", "30"))
+
+    def _ms_rerank(res, ex, nr=None):
+        import element_embed as EE
+        nr = MS_RERANK if nr is None else nr
+        if not res or not nr or EE._load("match") is None: return res
+        try:
+            Q = []
+            for rid, bx in ex[:5]:
+                p = img_path(rid); a = read_small(p, 1400) if p else None
+                if a is not None: Q.append(EE.emb_rot(a, bx, "match"))
+            if not Q: return res
+            Q = np.concatenate(Q)
+            def jit(bb):
+                x, y, w, h = bb; cx, cy = x + w / 2, y + h / 2; out = []
+                for sc, dx, dy in ((1, 0, 0), (1, -.25, 0), (1, .25, 0), (1, 0, -.25), (1, 0, .25), (.8, 0, 0), (1.25, 0, 0)):
+                    ww, hh = w * sc, h * sc; out.append([max(0.0, cx + dx * w - ww / 2), max(0.0, cy + dy * h - hh / 2), min(1.0, ww), min(1.0, hh)])
+                return out
+            top = []
+            for h in res[:nr]:
+                p = img_path(h["rid"]); a = read_small(p, 1400) if p else None
+                if a is None: top.append(h); continue
+                bs = [j for bx in h["boxes"] for j in jit(bx["box"])]
+                sc = (EE.emb(a, bs, "match") @ Q.T).max(1)
+                cand = sorted(zip(sc.tolist(), bs), key=lambda t: -t[0]); keep = []
+                for v, bb in cand:
+                    if all(MS._iou(bb, k["box"]) < 0.3 for k in keep): keep.append({"box": [round(t, 4) for t in bb], "score": round(float(v), 4)})
+                    if len(keep) >= max(1, len(h["boxes"])): break
+                top.append({**h, "s1": h["score"], "score": keep[0]["score"], "boxes": keep, "rerank": 1})
+            top.sort(key=lambda t: -t["score"])
+            return top + res[nr:]
+        except Exception as e:
+            print("motif rerank:", e); return res
+
     @app.post("/api/motif/search")
     async def api_motif_search(request: Request):
         """mode=mark — по выбранной рамке; motif / scheme — по всем подтверждённым рамкам с этим узором словаря / схемой (+ выбранная)."""
@@ -4529,6 +4566,7 @@ def install(app, DATA, D_WORK):
             only = None
             if b.get("school"): only = {rid for rid, t in A.items() if t.get("school") == b["school"] or school_group(t.get("school")) == b["school"]}   # v11.90: группа включает свои школы
             res = MS.search(q, qsize, exclude=[r["id"]], only=only, limit=limit)
+            if b.get("rerank", True) and MS_RERANK: res = _ms_rerank(res, ex)
             L = MS.labels(key); twins = {x.get("id") for x in r.get("same") or []}; grp = r.get("same_group")
             out = []
             for h in res:
