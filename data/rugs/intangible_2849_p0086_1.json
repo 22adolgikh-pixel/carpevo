@@ -4870,10 +4870,37 @@
     ]
    ],
    "sam": 0.812
+  },
+  {
+   "id": "m1795717972935x0",
+   "box": [
+    0.5577,
+    0.55,
+    0.0769,
+    0.025
+   ],
+   "zone": "other",
+   "motif": "deve",
+   "scheme": "t22_f03",
+   "motif_text": "",
+   "group": "gm1795717972935x0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.942,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795717972,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795717972,
+   "found_from": "intangible_2849_p0085_1"
   }
  ],
  "created": 1794547278,
- "updated": 1795644512,
+ "updated": 1795717972,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "",
@@ -5296,5 +5323,6 @@
  },
  "frame": "whole",
  "tri": "auto",
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }
