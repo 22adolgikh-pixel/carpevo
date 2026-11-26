@@ -16,9 +16,37 @@
  "status": "new",
  "w": 780,
  "h": 1002,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795719650441x7",
+   "box": [
+    0.3629,
+    0.6937,
+    0.2419,
+    0.0625
+   ],
+   "zone": "other",
+   "motif": "qeychi",
+   "scheme": "t104_f04",
+   "motif_text": "",
+   "group": "gm1795719650441x7",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.923,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795719650,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795719650,
+   "found_from": "wikimedia_File_Азербайджанский_ковёр_Пирабадил_датированный_1325_Хиджры_1907_по_"
+  }
+ ],
  "created": 1791736134,
- "updated": 1795293047,
+ "updated": 1795719650,
  "cat": {
   "title": "kuba perepedil16",
   "museum": "",
@@ -248,5 +276,6 @@
   ],
   "t": 1795207777
  },
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }
