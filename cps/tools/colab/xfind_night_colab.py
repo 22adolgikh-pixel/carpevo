@@ -71,9 +71,17 @@ for i in range(0, len(need), 40):
     if i % 400 == 0: log(f"  фото {i + len(part)}/{len(need)}"); json.dump(IDX, open(idx_f, "w"))
 json.dump(IDX, open(idx_f, "w"))
 
+SMALL = "/content/xf_small"; os.makedirs(SMALL, exist_ok=True)   # v12.39: уменьшенные копии на локальном диске — Drive читается медленно
+
 def img(rid, side=1400):
-    p = os.path.join(RAW, rid + ".jpg"); a = cv2.imread(p)
-    if a is None: return None
+    ps = os.path.join(SMALL, rid + ".jpg")
+    a = cv2.imread(ps) if os.path.exists(ps) else None
+    if a is None:
+        a = cv2.imread(os.path.join(RAW, rid + ".jpg"))
+        if a is None: return None
+        k = 1400 / max(a.shape[:2])
+        if k < 1: a = cv2.resize(a, None, fx=k, fy=k, interpolation=cv2.INTER_AREA)
+        cv2.imwrite(ps, a, [cv2.IMWRITE_JPEG_QUALITY, 92])
     k = side / max(a.shape[:2])
     return cv2.resize(a, None, fx=k, fy=k, interpolation=cv2.INTER_AREA) if k < 1 else a
 
@@ -112,7 +120,7 @@ def crop(a, b): return EE._crop(a, b, 112, 0.15, False, "ellipse")
 log("сетки признаков…")
 G = {}
 for i, rid in enumerate(live):
-    a = img(rid, 1200)
+    a = img(rid, 1200)                                          # заодно кладёт копию 1400 px на локальный диск
     if a is None: continue
     G[rid] = grid(a)
     if i % 500 == 0: log(f"  {i}/{len(live)}")
@@ -120,6 +128,11 @@ S_ = torch.cat([g.reshape(-1, g.shape[-1])[::11] for g in list(G.values())[:600]
 mu = S_.mean(0); U, s, V = torch.linalg.svd(S_ - mu, full_matrices=False); PM = V[:D].T
 G = {k: ((g - mu) @ PM).permute(2, 0, 1).contiguous() for k, g in G.items()}       # (D, gh, gw)
 GM = {k: g.mean((1, 2)) for k, g in G.items()}
+# v12.39: ковры с одинаковой сеткой — одним тензором: шаг 1 считается пачкой (≈ 100 форм вместо 4 300 ковров на запрос)
+SH = {}
+for k, g in G.items(): SH.setdefault(tuple(g.shape[1:]), []).append(k)
+SHT = {sh: (ids, torch.stack([G[i] for i in ids]), torch.stack([GM[i] for i in ids])) for sh, ids in SH.items()}
+log(f"форм сетки {len(SHT)}")
 log(f"сеток {len(G)}")
 
 def wfeat(g, gm, sh, sw):
@@ -156,6 +169,29 @@ def windows(g, gm, q, rw, rh, per=3):
         if all(iou(b, o[1]) < 0.3 for o in out): out.append((s, b))
         if len(out) >= per: break
     return out
+
+def best_all(q, rw, rh, chunk=96):
+    """лучший балл окна (как windows()[0][0]) для всех ковров сразу: пачки ковров одной формы сетки, без нормированных тензоров окон"""
+    qs = q.reshape(5, D); out = {}
+    for (gh, gw), (ids, T, GMs) in SHT.items():
+        bmax = torch.full((len(ids),), -9.0, device=T.device)
+        for k in SCALES:
+            sw, sh = max(1, min(gw, int(round(rw * gw * k)))), max(1, min(gh, int(round(rh * gh * k))))
+            ny, nx = gh - sh + 1, gw - sw + 1
+            ht, wl = max(1, sh // 2), max(1, sw // 2); hb, wr = max(1, sh - ht), max(1, sw - wl)
+            oy, ox = min(ht, sh - hb), min(wl, sw - wr)
+            for c0 in range(0, len(ids), chunk):
+                t = T[c0:c0 + chunk]; gm = GMs[c0:c0 + chunk][:, :, None, None]
+                parts = [(F.avg_pool2d(t, (sh, sw), 1)[:, :, :ny, :nx] - BETA * gm, 1.0)]
+                for hh, ww, dy, dx in ((ht, wl, 0, 0), (ht, wr, 0, ox), (hb, wl, oy, 0), (hb, wr, oy, ox)):
+                    parts.append((F.avg_pool2d(t, (hh, ww), 1)[:, :, dy:dy + ny, dx:dx + nx] - BETA * gm, QW))
+                dot = sum(w * torch.einsum("ndyx,d->nyx", P, qs[i]) for i, (P, w) in enumerate(parts))
+                n2 = sum((w * w) * (P * P).sum(1) for P, w in parts)
+                sc = (dot / torch.sqrt(n2.clamp_min(1e-12))).flatten(1).max(1).values
+                bmax[c0:c0 + chunk] = torch.maximum(bmax[c0:c0 + chunk], sc)
+        for i, v in zip(ids, bmax.tolist()): out[i] = v
+    return out
+
 
 def jit(b):
     x, y, w, h = b; cx, cy = x + w / 2, y + h / 2; out = []
@@ -194,12 +230,10 @@ for qi, u in enumerate(Q):
         q = qvec(g0, gm0, u["boxes"][0])                          # одна рамка-образец: среднее по группе размывает (замер 25.11: 41 % → 59 % в первых 5)
         rw = float(np.median([b[2] for b in u["boxes"]])); rh = float(np.median([b[3] for b in u["boxes"]]))
         ex = twins(R[u["rid"]]) | {u["rid"]}
-        s1 = []
-        for rid, g in G.items():
-            if rid in ex: continue
-            w = windows(g, GM[rid], q, rw, rh)
-            if w: s1.append((w[0][0], rid, w))
-        s1.sort(key=lambda t: -t[0])
+        best = best_all(q, rw, rh)                                    # лучший балл окна по каждому ковру — пачками
+        order = [rid for rid, _ in sorted(best.items(), key=lambda t: -t[1]) if rid not in ex][:NR]
+        s1 = [(best[rid], rid, windows(G[rid], GM[rid], q, rw, rh)) for rid in order]   # окна — только у первых NR
+        s1 = [t for t in s1 if t[2]]
         a0 = img(u["rid"]); qc = []
         for b in u["boxes"]:
             c = crop(a0, b); qc += [np.rot90(c[:, ::-1] if f else c, r) for f in (0, 1) for r in range(4)]
