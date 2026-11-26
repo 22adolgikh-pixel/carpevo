@@ -16,9 +16,37 @@
  "status": "new",
  "w": 407,
  "h": 600,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795718873660x6",
+   "box": [
+    0.2963,
+    0.3156,
+    0.3704,
+    0.0938
+   ],
+   "zone": "other",
+   "motif": "qeychi",
+   "scheme": "t104_f04",
+   "motif_text": "",
+   "group": "gm1795718873660x6",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.9,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795718873,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795718873,
+   "found_from": "intangible_2850_p0164_1"
+  }
+ ],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1795718873,
  "cat": {
   "title": "early baku rug1",
   "museum": "",
@@ -101,5 +129,6 @@
    45.0278
   ],
   "t": 1795207728
- }
+ },
+ "updated_by": "dolgikh"
 }

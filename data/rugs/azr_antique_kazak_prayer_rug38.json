@@ -18,7 +18,7 @@
  "h": 650,
  "marks": [],
  "created": 1791736129,
- "updated": 1795293047,
+ "updated": 1795718889,
  "cat": {
   "title": "antique kazak prayer rug38",
   "museum": "",
@@ -61,6 +61,30 @@
   {
    "id": "azr_kuba_karagashli_rug_hali75_private_collection",
    "score": 0
+  },
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug46",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend59",
+   "score": 0
+  },
+  {
+   "id": "azr_rippon_boswell_05_2013_L168_lori_pambak_rug",
+   "score": 0
+  },
+  {
+   "id": "azcm_135",
+   "score": 0
+  },
+  {
+   "id": "azcm_22",
+   "score": 0
+  },
+  {
+   "id": "azcm_31",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -83,6 +107,36 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_shirvan_akstafa_prayer_rug46": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795718889
+  },
+  "azr_kuba_konagkend59": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795718889
+  },
+  "azr_rippon_boswell_05_2013_L168_lori_pambak_rug": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795718889
+  },
+  "azcm_135": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795718889
+  },
+  "azcm_22": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_kazak_prayer_rug38 ≠ azr_kuba_konagkend59",
+   "at": 1795718911
+  },
+  "azcm_31": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_kazak_prayer_rug38 ≠ azr_kuba_konagkend59",
+   "at": 1795718911
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -155,6 +209,34 @@
      "a": "diff",
      "w": 2,
      "t": 1794984320
+    }
+   },
+   "azr_shirvan_akstafa_prayer_rug46": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795718889
+    }
+   },
+   "azr_kuba_konagkend59": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795718889
+    }
+   },
+   "azr_rippon_boswell_05_2013_L168_lori_pambak_rug": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795718889
+    }
+   },
+   "azcm_135": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795718889
     }
    }
   },
