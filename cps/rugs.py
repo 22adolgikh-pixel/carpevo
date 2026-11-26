@@ -5043,6 +5043,12 @@ def install(app, DATA, D_WORK):
         n = len([f for f in os.listdir(D_DV3) if f.endswith(".npy")]) if os.path.isdir(D_DV3) else 0
         return {"available": _dv3.available(DATA), "files": n, **_dvs}
 
+    @app.get("/api/open/dv3.npz")
+    def api_dv3_npz():
+        """v12.38: все отпечатки DINOv3-B одним файлом (ids, E[n, 2 (фото, выпрямленный), 1536 (CLS + среднее)], float16) — обучать модели вне сервера"""
+        ids, E = _dv3_load_all(); b = io.BytesIO(); np.savez_compressed(b, ids=np.array(ids), E=E.astype(np.float16))
+        return Response(b.getvalue(), media_type="application/octet-stream", headers={"Content-Disposition": "attachment; filename=dv3.npz"})
+
     @app.get("/api/open/kerimov_gap")
     def api_kerimov_gap():
         """v12.15: каких рисунков Керимова т. I нет среди вырезок. Сверка с легендой по КНИЖНЫМ номерам (через book_map: студийные
