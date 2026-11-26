@@ -5,19 +5,20 @@
 #   шаг 2 — первые XF_NR ковров (по 3 окна, у каждого 7 сдвигов/размеров) перепроверяются овальной вырезкой DINOv3-S
 #           (как element_embed «match»), образец — до 4 рамок группы × 8 положений.
 # Замер 25.11 (119 названных элементов, 480 ковров): верное место на 1-м ковре 28 %, среди первых 5 — 56 % (без шага 2 — 15 % / 46 %).
-# Свой ковёр и его двойники не ищутся. Итог — JSON в Google Drive (файл XF_FILE, доступ по ссылке): сервер забирает его сам
+# Свой ковёр и его двойники не ищутся. Итог уходит прямо на сервер (POST /api/open/xfind_upload по ключу), копия — в Drive; сервер
 # и показывает в /m карточкой «на других коврах» (✓ — на тот ковёр ставится подтверждённая рамка с названием образца).
 #
 # Запуск:
 #   !rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
-#   %env CPS_KEY=<ключ из студии: пользователи → «ключ»>
+#   %env CPS_KEY=<ключ из студии: пользователи → «ключ»> (можно и всю ссылку с ?key=…)
 #   %run /content/carpevo/cps/tools/colab/xfind_night_colab.py
 # Фото кэшируются в Drive (carpet-dna/cps_xfind/raw): следующий запуск качает только новые и изменённые.
 import os, sys, io, json, time, zipfile, math, urllib.request, urllib.parse
 import numpy as np, cv2
 
 URL = os.environ.get("CPS_URL", "https://cps.jeyran.az").rstrip("/")
-KEY = os.environ.get("CPS_KEY", "")
+KEY = os.environ.get("CPS_KEY", "").strip()
+if "key=" in KEY: KEY = urllib.parse.parse_qs(urllib.parse.urlparse(KEY).query).get("key", [""])[0] or KEY.split("key=")[-1]   # вставили всю ссылку — берём ключ
 XF_FILE = os.environ.get("XF_FILE", "1RE74rNCMa4Y9HwcsA3PtR9psH7TuPGtL")
 NR = int(os.environ.get("XF_NR", "150"))          # сколько ковров шага 1 перепроверять вырезкой
 TOPK = int(os.environ.get("XF_TOP", "12"))        # сколько находок на группу отдавать
@@ -30,12 +31,12 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 import element_embed as EE                         # та же вырезка (_crop) и подготовка (_prep), что на сервере
 
 # ---------- Drive ----------
+DRV = "/content/cps_xfind"
 try:
-    from google.colab import drive, auth
-    drive.mount("/content/drive"); auth.authenticate_user()
-    DRV = "/content/drive/MyDrive/carpet-dna/cps_xfind"
+    from google.colab import drive
+    drive.mount("/content/drive"); DRV = "/content/drive/MyDrive/carpet-dna/cps_xfind"     # кэш фото между запусками
 except Exception as e:
-    log("Drive недоступен (", e, ") — кэш и итог в /content"); DRV = "/content/cps_xfind"
+    log("Drive не подключён (", e, ") — кэш в /content, фото придётся качать каждый раз")
 RAW = os.path.join(DRV, "raw"); os.makedirs(RAW, exist_ok=True)
 
 def get(path, **q):
@@ -221,13 +222,12 @@ for qi, u in enumerate(Q):
 res = {"t": int(time.time()), "ver": 1, "model": "dinov3_s grid640+pca128 → oval112", "nr": NR, "groups": len(Q), "rugs": len(G), "items": items}
 json.dump(res, open(out_f, "w"), ensure_ascii=False)
 log("итог:", out_f)
-try:
-    from googleapiclient.discovery import build
-    from googleapiclient.http import MediaFileUpload
-    build("drive", "v3").files().update(fileId=XF_FILE, media_body=MediaFileUpload(out_f, mimetype="application/json")).execute()
-    log("отправлено на Drive (файл для сервера", XF_FILE, ") — сервер заберёт в течение часа")
+try:                                                             # итог — прямо на сервер (по ключу)
+    rq = urllib.request.Request(URL + "/api/open/xfind_upload?key=" + urllib.parse.quote(KEY), data=json.dumps(res, ensure_ascii=False).encode("utf-8"),
+                                headers={"Content-Type": "application/json"}, method="POST")
+    with urllib.request.urlopen(rq, timeout=300) as r: log("на сервере:", r.read().decode()[:200])
 except Exception as e:
-    log("!!! не удалось обновить файл для сервера:", e)
+    log("!!! не удалось отправить на сервер:", e, "— итог лежит в", out_f)
 sc = [c["s"] for it in items for c in it["c"][:1]]
 print("\n===== ИТОГ =====")
 print(f"групп {len(items)}, ковров в поиске {len(G)}, время {(time.time() - T0) / 60:.0f} мин")

@@ -2181,6 +2181,8 @@ def t50_open_palette_v1198(pg, ctx):
     assert rq('api/open/palette/pal_a.json?key=' + k) == 200
     assert rq('api/open/palette/pal_a.json') == 401 and rq('api/open/palette/pal_a.json', 'x' * 32) == 401
     assert rq('api/rugs', k) == 401 and rq('api/rugs/pal_a', k, "POST") == 401
+    assert rq('api/open/xfind_upload', k, "POST") == 400 and rq('api/open/xfind_upload', None, "POST") == 401   # v12.37: единственная запись по ключу (пустое тело → 400)
+    assert rq('api/open/rep_eval', k, "POST") == 401
     post(u + 'api/users/key', {"name": "maks", "off": True}); assert rq('api/open/palette/pal_a.json', k) == 401
 
 
@@ -2530,6 +2532,8 @@ def t60_xfind_card_v1236(pg, ctx):
     assert ma and ma[0]['status'] == 'confirmed' and ma[0]['motif_text'] == 'тест-гёль', f'✓ не поставил рамку с названием: {ma}'
     assert not [m for m in get('api/rugs/xf_b')['marks'] if m.get('machine') == 'xfind'], 'неотмеченная находка получила рамку'
     assert not [t for t in get('api/micro/next?n=12&k=xfind')['tasks'] if t['type'] == 'xfind'], 'отвеченная карточка вернулась'
+    up = _j.loads(U.urlopen(U.Request(ctx['url'] + 'api/open/xfind_upload', data=_j.dumps({'t': int(time.time()) + 5, 'items': [{'q': {'rid': 'xf_q', 'g': 'gq', 'box': [.3, .3, .1, .1]}, 'c': [{'rid': 'xf_b', 'box': [.6, .2, .1, .1], 's': .8}]}]}).encode(), headers={'Content-Type': 'application/json'}, method='POST')).read())
+    assert up['groups'] == 1 and [t for t in get('api/micro/next?n=12&k=xfind')['tasks'] if t['type'] == 'xfind'], up
     o = get('api/open/xfind'); assert o['groups'] == 1 and o['answers'] == {'yes': 1, 'no': 1}, o
     errors_ok(ctx, '/m на других коврах v12.36')
 

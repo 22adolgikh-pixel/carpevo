@@ -3921,6 +3921,20 @@ def install(app, DATA, D_WORK):
 
     if not os.environ.get("CPS_NO_SCHED"): threading.Thread(target=_periodic_xf, daemon=True, name="xfind-pull").start()
 
+    @app.post("/api/open/xfind_upload")
+    async def api_xfind_upload(request: Request):
+        """v12.37: Colab отдаёт итог ночного поиска прямо сюда (по ключу); Drive — запасной путь"""
+        try: j = await request.json()
+        except Exception: return JSONResponse({"error": "не JSON"}, status_code=400)
+        items = j.get("items") if isinstance(j, dict) else None
+        if not isinstance(items, list) or j.get("partial"): return JSONResponse({"error": "нет items или итог неполный"}, status_code=400)
+        ok = [it for it in items if isinstance(it, dict) and isinstance(it.get("q"), dict) and isinstance(it.get("c"), list)]
+        j = {**j, "items": ok, "t": int(j.get("t") or time.time()), "via": "upload"}
+        tmp = F_XF + ".up"
+        with open(tmp, "w", encoding="utf-8") as f: json.dump(j, f, ensure_ascii=False)
+        os.replace(tmp, F_XF)
+        return {"ok": True, "groups": len(ok), "cands": sum(len(it["c"]) for it in ok)}
+
     @app.get("/api/open/xfind")
     def api_xfind(pull: int = 0):
         """ночной поиск элементов по коврам: когда забран, сколько групп и находок, сколько ответов"""
