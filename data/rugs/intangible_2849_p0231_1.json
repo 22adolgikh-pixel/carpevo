@@ -16,9 +16,37 @@
  "status": "new",
  "w": 1033,
  "h": 1772,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795697681403x6",
+   "box": [
+    0.3152,
+    0.3781,
+    0.3261,
+    0.2188
+   ],
+   "zone": "other",
+   "motif": "",
+   "scheme": "",
+   "motif_text": "",
+   "group": "gm1795697681403x6",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.929,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795697681,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795697681,
+   "found_from": "wikimedia_File_Caucasian_Fachralo_Kazak_Triple_Medallion_5ft_7in_x_7ft_5in_Circa"
+  }
+ ],
  "created": 1794547278,
- "updated": 1795293047,
+ "updated": 1795697681,
  "cat": {
   "title": "Ковёр «Qazax» Газах",
   "museum": "",
@@ -127,5 +155,6 @@
   ],
   "t": 1795207857
  },
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }

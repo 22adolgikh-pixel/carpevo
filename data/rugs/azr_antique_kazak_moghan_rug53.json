@@ -16,9 +16,37 @@
  "status": "new",
  "w": 635,
  "h": 1024,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795697681401x4",
+   "box": [
+    0.32,
+    0.425,
+    0.32,
+    0.225
+   ],
+   "zone": "other",
+   "motif": "",
+   "scheme": "",
+   "motif_text": "",
+   "group": "gm1795697681401x4",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.936,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795697681,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795697681,
+   "found_from": "wikimedia_File_Caucasian_Fachralo_Kazak_Triple_Medallion_5ft_7in_x_7ft_5in_Circa"
+  }
+ ],
  "created": 1791736129,
- "updated": 1795062314,
+ "updated": 1795697681,
  "cat": {
   "title": "antique-kazak-moghan-rug53",
   "museum": "",
@@ -225,5 +253,6 @@
   "place": "intangible_2854_p0036_1_2",
   "date": "intangible_2854_p0036_1_2",
   "size": "intangible_2854_p0036_1_2"
- }
+ },
+ "updated_by": "dolgikh"
 }

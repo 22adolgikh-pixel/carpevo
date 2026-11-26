@@ -18,7 +18,7 @@
  "h": 283,
  "marks": [],
  "created": 1794547278,
- "updated": 1795357181,
+ "updated": 1795697703,
  "cat": {
   "title": "безворсовый «Palaz» Баку",
   "museum": "",
@@ -54,6 +54,14 @@
   {
    "id": "intangible_2850_p0034_1",
    "score": 0
+  },
+  {
+   "id": "azr_azerbaijan_jajim_rippon_boswell_09_2010_L271",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0061_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -61,6 +69,17 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1795464445
+  },
+  "azr_azerbaijan_jajim_rippon_boswell_09_2010_L271": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795697703
+  },
+  "intangible_2850_p0061_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795697703,
+   "similar": true
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -133,6 +152,22 @@
     "a": "detail",
     "w": 2,
     "t": 1795357181
+   }
+  },
+  "same": {
+   "azr_azerbaijan_jajim_rippon_boswell_09_2010_L271": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795697703
+    }
+   },
+   "intangible_2850_p0061_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795697703
+    }
    }
   }
  },

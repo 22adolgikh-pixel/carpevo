@@ -18,7 +18,7 @@
  "h": 958,
  "marks": [],
  "created": 1791736133,
- "updated": 1795293047,
+ "updated": 1795697687,
  "cat": {
   "title": "kuba kilim10",
   "museum": "",
@@ -73,6 +73,14 @@
   {
    "id": "azr_kuba_shirvan_medallion60",
    "score": 0
+  },
+  {
+   "id": "cm_08cb8ca7c9",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zejwa11",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -110,6 +118,16 @@
    "ok": false,
    "by": "по цепочке: azr_kuba_kilim10 ≠ azr_kuba_shirvan_medallion65",
    "at": 1795498902
+  },
+  "cm_08cb8ca7c9": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795697569
+  },
+  "azr_kuba_zejwa11": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795697687
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -206,6 +224,13 @@
      "a": "diff",
      "w": 2,
      "t": 1794981468
+    }
+   },
+   "azr_kuba_zejwa11": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795697687
     }
    }
   }

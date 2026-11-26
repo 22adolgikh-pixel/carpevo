@@ -16,9 +16,37 @@
  "status": "new",
  "w": 630,
  "h": 900,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795697681395x0",
+   "box": [
+    0.3571,
+    0.4,
+    0.3214,
+    0.225
+   ],
+   "zone": "other",
+   "motif": "",
+   "scheme": "",
+   "motif_text": "",
+   "group": "gm1795697681395x0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.954,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795697681,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795697681,
+   "found_from": "wikimedia_File_Caucasian_Fachralo_Kazak_Triple_Medallion_5ft_7in_x_7ft_5in_Circa"
+  }
+ ],
  "created": 1791736128,
- "updated": 1795293047,
+ "updated": 1795697681,
  "cat": {
   "title": "borchalo rug with memling guls bonhams 11 2013 L2043",
   "museum": "",
@@ -271,5 +299,6 @@
   ],
   "t": 1795207727
  },
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }

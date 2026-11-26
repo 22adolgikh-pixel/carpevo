@@ -18,7 +18,7 @@
  "h": 1596,
  "marks": [],
  "created": 1791870033,
- "updated": 1795343903,
+ "updated": 1795697568,
  "cat": {
   "title": "Ganja rug, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -80,6 +80,18 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0076_1",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_kilim10",
+   "score": 0
+  },
+  {
+   "id": "azcm_195",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug40",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -117,6 +129,21 @@
    "ok": false,
    "by": "по цепочке: azcm_194 ≠ cm_08cb8ca7c9",
    "at": 1795498531
+  },
+  "azr_kuba_kilim10": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795697569
+  },
+  "azcm_195": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795697569
+  },
+  "azr_antique_kazak_prayer_rug40": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795697569
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -223,6 +250,29 @@
      "a": "one",
      "w": 2,
      "t": 1795343903
+    }
+   }
+  },
+  "same": {
+   "azr_kuba_kilim10": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795697568
+    }
+   },
+   "azcm_195": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795697568
+    }
+   },
+   "azr_antique_kazak_prayer_rug40": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795697568
     }
    }
   }

@@ -16,9 +16,37 @@
  "status": "new",
  "w": 450,
  "h": 624,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795697681399x2",
+   "box": [
+    0.3448,
+    0.375,
+    0.3103,
+    0.225
+   ],
+   "zone": "other",
+   "motif": "",
+   "scheme": "",
+   "motif_text": "",
+   "group": "gm1795697681399x2",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.941,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795697681,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795697681,
+   "found_from": "wikimedia_File_Caucasian_Fachralo_Kazak_Triple_Medallion_5ft_7in_x_7ft_5in_Circa"
+  }
+ ],
  "created": 1791736128,
- "updated": 1795293047,
+ "updated": 1795697681,
  "cat": {
   "title": "bordjalou rug with moghan memling guls sothebys 05 2011 L137",
   "museum": "",
@@ -219,5 +247,6 @@
  },
  "tri": "micro",
  "frame": "whole",
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }
