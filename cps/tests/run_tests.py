@@ -1747,7 +1747,10 @@ def t41_mesh_field_v1181(pg, ctx):
         if pg.evaluate("S.tasks[S.i]&&S.tasks[S.i].rid") == 'fieldrug2': break
         pg.evaluate("S.i++;show()"); pg.wait_for_timeout(200)
     pg.click('#fn'); pg.wait_for_selector('#kf_body .kxh', timeout=3000); pg.wait_for_timeout(600)      # v12.41: углы и узлы, как в «крае»
-    ei = pg.query_selector('#kf_body .kxw').bounding_box(); h = pg.query_selector('#kf_body .kxh[data-k="top"][data-i="1"]').bounding_box()
+    ei = pg.query_selector('#kf_body .kxw').bounding_box(); V0 = pg.evaluate("__kf()")
+    assert pg.evaluate("document.querySelectorAll('#kf_body .kxh').length") == 4, 'граница поля: сначала должны быть только 4 угла'
+    pg.mouse.click(ei['x'] + ei['width'] * (V0['c'][0][0] + V0['c'][1][0]) / 2, ei['y'] + ei['height'] * V0['c'][0][1]); pg.wait_for_timeout(300)
+    h = pg.query_selector('#kf_body .kxh[data-k="top"][data-i="0"]').bounding_box()
     pg.mouse.move(h['x'] + h['width'] / 2, h['y'] + h['height'] / 2); pg.mouse.down(); pg.mouse.move(h['x'] + h['width'] / 2, ei['y'] + ei['height'] * 0.30, steps=5); pg.mouse.up()
     pg.screenshot(path=os.path.join(OUT, 't41_field_edit.png')); pg.click('#kf_ok'); pg.wait_for_timeout(1200)
     F2 = (get('api/rugs/fieldrug2').get('layout') or {}).get('field') or {}
@@ -2493,29 +2496,37 @@ def t59_edge_card_v1236(pg, ctx):
         if pg.evaluate("S.tasks[S.i]&&S.tasks[S.i].rid") == 'edgerug': break
         pg.evaluate("S.i++;show()"); pg.wait_for_timeout(300)
     pg.wait_for_selector('.kxh', timeout=15000); pg.wait_for_timeout(800)
-    n = pg.evaluate("document.querySelectorAll('.kxh').length"); assert n == 16, f'ручек {n}, ожидалось 16 (4 угла + по 3 узла)'
+    n = pg.evaluate("document.querySelectorAll('.kxh').length"); assert n == 4, f'ручек {n}, ожидалось 4 (сначала только углы)'
     im = pg.query_selector('#kx_ew img').bounding_box()
-    hs = [pg.query_selector(f'.kxh[data-k="{k}"][data-i="1"]').bounding_box() for k in ('top', 'bot', 'left', 'right')]
-    assert all(im['x'] - 20 <= h['x'] <= im['x'] + im['width'] + 20 and im['y'] - 20 <= h['y'] <= im['y'] + im['height'] + 20 for h in hs), f'ручки вне картинки: {im} {hs}'
+    hs = [pg.query_selector(f'.kxh[data-k="c"][data-i="{i}"]').bounding_box() for i in range(4)]
+    assert all(im['x'] - 20 <= h['x'] <= im['x'] + im['width'] + 20 and im['y'] - 20 <= h['y'] <= im['y'] + im['height'] + 20 for h in hs), f'углы вне картинки: {im} {hs}'
     pg.screenshot(path=os.path.join(OUT, 't59_edge.png'))
-    h = hs[0]; pg.mouse.move(h['x'] + 13, h['y'] + 13); pg.mouse.down(); pg.mouse.move(h['x'] + 13, h['y'] + 13 + im['height'] * 0.04, steps=5)
-    assert pg.evaluate("!$('kx_loupe').hidden && !!$('kx_loupe').querySelector('img')"), 'нет лупы при перетаскивании ручки'
-    pg.screenshot(path=os.path.join(OUT, 't59_edge_loupe.png')); pg.mouse.up()
-    assert pg.evaluate("$('kx_loupe').hidden"), 'лупа не прячется после перетаскивания'
-    # v12.40: тап по линии — новый узел; двойной тап — убрать; угол двигается
+    # v12.42: сначала только углы; тап по линии — узел; тап по узлу — «✕ убрать»; удержание узла без движения его НЕ убирает
     wb = pg.query_selector('#kx_ew').bounding_box(); pad = pg.evaluate("__kx().D.pad"); a0 = pad / (1 + 2 * pad); fw_ = 1 / (1 + 2 * pad)
-    lx, ly = wb['x'] + (a0 + 0.62 * fw_) * wb['width'], wb['y'] + (a0 + 1.0 * fw_) * wb['height']      # низ, 62 % ширины
-    pg.mouse.click(lx, ly); pg.wait_for_timeout(300)
-    assert pg.evaluate("__kx().V.bot.length") == 4, f'узел не добавился: {pg.evaluate("__kx().V.bot")}'
-    pg.dblclick('.kxh[data-k="bot"][data-i="3"]'); pg.wait_for_timeout(300)
-    assert pg.evaluate("__kx().V.bot.length") == 3, 'узел не убрался двойным тапом'
+    P = lambda x, y: (wb['x'] + (a0 + x * fw_) * wb['width'], wb['y'] + (a0 + y * fw_) * wb['height'])
+    pg.mouse.click(*P(0.5, 0.0)); pg.wait_for_timeout(300)
+    assert pg.evaluate("__kx().V.top.length") == 1, f'узел не добавился: {pg.evaluate("__kx().V.top")}'
+    h = pg.query_selector('.kxh[data-k="top"][data-i="0"]').bounding_box()
+    pg.mouse.move(h['x'] + h['width'] / 2, h['y'] + h['height'] / 2); pg.mouse.down(); pg.wait_for_timeout(1000)
+    pg.mouse.move(h['x'] + h['width'] / 2, h['y'] + h['height'] / 2 + im['height'] * 0.04, steps=5)
+    assert pg.evaluate("!$('kx_loupe').hidden && !!$('kx_loupe').querySelector('img')"), 'нет лупы при перетаскивании узла'
+    pg.screenshot(path=os.path.join(OUT, 't59_edge_loupe.png')); pg.mouse.up(); pg.wait_for_timeout(200)
+    assert pg.evaluate("__kx().V.top.length") == 1 and pg.evaluate("__kx().V.top[0][1]") > 0.01, f'узел пропал или не сдвинулся: {pg.evaluate("__kx().V.top")}'
+    assert pg.evaluate("$('kx_loupe').hidden"), 'лупа не прячется после перетаскивания'
+    pg.mouse.click(*P(0.62, 1.0)); pg.wait_for_timeout(300)
+    assert pg.evaluate("__kx().V.bot.length") == 1, 'узел снизу не добавился'
+    pg.click('.kxh[data-k="bot"][data-i="0"]'); pg.wait_for_timeout(300)
+    assert pg.query_selector('.kxdel'), 'после тапа по узлу нет кнопки «убрать»'
+    pg.screenshot(path=os.path.join(OUT, 't59_edge_del.png'))
+    pg.click('.kxdel'); pg.wait_for_timeout(300)
+    assert pg.evaluate("__kx().V.bot.length") == 0, 'узел не убрался кнопкой'
     c = pg.query_selector('.kxh[data-k="c"][data-i="1"]').bounding_box()
-    pg.mouse.move(c['x'] + 13, c['y'] + 13); pg.mouse.down(); pg.mouse.move(c['x'] + 13 + wb['width'] * 0.03, c['y'] + 13, steps=5); pg.mouse.up(); pg.wait_for_timeout(200)
+    pg.mouse.move(c['x'] + c['width'] / 2, c['y'] + c['height'] / 2); pg.mouse.down(); pg.mouse.move(c['x'] + c['width'] / 2 + wb['width'] * 0.03, c['y'] + c['height'] / 2, steps=5); pg.mouse.up(); pg.wait_for_timeout(200)
     assert pg.evaluate("__kx().V.c[1][0]") > 1.01, f'угол не сдвинулся: {pg.evaluate("__kx().V.c")}'
     pg.click('#kx_ep'); pg.wait_for_selector('#kx_ebody img[src^="data:"]', timeout=20000)
     pg.click('#kx_ed'); pg.wait_for_timeout(1500)
     f = get('api/rugs/edgerug').get('edge_fix') or {}
-    assert f.get('v') == 2 and len(f.get('top') or []) == 3 and max(p[1] for p in f['top']) > 0.01 and f['c'][1][0] > 1.01, f'правка края не записалась: {f}'
+    assert f.get('v') == 2 and len(f.get('top') or []) == 1 and f['top'][0][1] > 0.01 and not f.get('bot') and f['c'][1][0] > 1.01, f'правка края не записалась: {f}'
     assert not [t for t in get('api/micro/next?n=12&k=edge')['tasks'] if t['rid'] == 'edgerug'], 'отвеченный ковёр вернулся в очередь «край»'
     errors_ok(ctx, '/m край v12.36')
 

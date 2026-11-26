@@ -2064,7 +2064,7 @@ def install(app, DATA, D_WORK):
         if not q or not p: return Response(status_code=404)
         mi = (mesh_info(rid, r, build=True) if not c else mesh_info(rid, r)) or {}; s = max(400, min(1600, s))      # после поворота сетку надо перестроить
         pm = os.path.join(D_MESH, rid + (".jpg" if mi.get("choice") in ("mesh", "human") else ".m.jpg"))
-        t = os.path.join(D_TH, "%s.pad%s%s%d.r%d.jpg" % (rid, "m" if m else "", "c" if c else "", s, rug_rot(r)))
+        t = os.path.join(D_TH, "%s.pad%s%s%d.r%d.jpg" % (rid, "m" if m else "", "c2" if c else "", s, rug_rot(r)))
         src = [p] + ([pm] if os.path.exists(pm) else [])
         if not os.path.exists(t) or os.path.getmtime(t) < max(os.path.getmtime(x) for x in src):
             with THUMB:
@@ -2095,7 +2095,7 @@ def install(app, DATA, D_WORK):
                     cv = o.astype(np.uint8)
                     cv2.polylines(cv, [poly.reshape(-1, 1, 2)], True, (255, 220, 0), 2)
                     txt = "vylezlo %.1f%%  ne dotyanulos %.1f%%" % (100 * spill.sum() / frame.sum(), 100 * gap.sum() / frame.sum())
-                cv2.rectangle(cv, (px, py), (px + W, py + H), (0, 213, 255), 2)
+                if not c: cv2.rectangle(cv, (px, py), (px + W, py + H), (0, 213, 255), 2)   # v12.42: в карточке «край» (c=1) рамку рисует сама карточка, в 1 px
                 oof = 100 * (1 - float(valid[py:py + H, px:px + W].mean()))
                 if not c: cv2.putText(cv, (txt + ("  za kadrom %.1f%%" % oof if oof > 0.1 else "")).strip(), (8, 22), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 255, 255), 2)
                 os.makedirs(D_TH, exist_ok=True); cv2.imwrite(t, cv, [cv2.IMWRITE_JPEG_QUALITY, 85])
@@ -3990,7 +3990,8 @@ def install(app, DATA, D_WORK):
         n = len(guide["top"]); at = lambda v, t: float(np.mean(v[max(0, int(round(t * (n - 1))) - 1):int(round(t * (n - 1))) + 2]))
         init = {k: [round(at(guide[k], t), 4) if k in ("left", "right") else 0.0 for t in rug_mesh.EF_ST] for k in L}
         old = edge_fix_of(r)
-        return {"pad": 0.12, "st": list(rug_mesh.EF_ST), "guide": guide, "init": rug_mesh.ef_v2(init), "lim2": list(rug_mesh.EF_LIM2), "lim": list(EF_LIM),
+        init2 = {"v": 2, "c": [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0]], "top": [], "bot": [], "left": [], "right": [], "mode": "smooth"}   # v12.42: сначала только 4 угла, узлы — по желанию
+        return {"pad": 0.12, "st": list(rug_mesh.EF_ST), "guide": guide, "init": init2, "lim2": list(rug_mesh.EF_LIM2), "lim": list(EF_LIM),
                 "fix": (_ef_clean({k: v for k, v in old.items() if k not in ("by", "t", "rot")}) if old else None)}
 
     @app.post("/api/rugs/{rid}/edgefix_preview")
