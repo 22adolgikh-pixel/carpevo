@@ -18,7 +18,7 @@
  "h": 728,
  "marks": [],
  "created": 1791736133,
- "updated": 1795355682,
+ "updated": 1795720551,
  "cat": {
   "title": "kuba konagkend26",
   "museum": "",
@@ -57,6 +57,10 @@
   {
    "id": "cm_903f30d3f9",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil67",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -75,6 +79,11 @@
    "by": "/m: dolgikh",
    "at": 1795027516,
    "similar": true
+  },
+  "azr_kuba_perepedil67": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795720551
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -154,6 +163,13 @@
      "a": "similar",
      "w": 2,
      "t": 1795027516
+    }
+   },
+   "azr_kuba_perepedil67": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795720551
     }
    }
   },

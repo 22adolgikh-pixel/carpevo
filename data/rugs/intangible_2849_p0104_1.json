@@ -16,9 +16,37 @@
  "status": "new",
  "w": 1237,
  "h": 1728,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795720532867x6",
+   "box": [
+    0.4138,
+    0.8125,
+    0.3103,
+    0.05
+   ],
+   "zone": "other",
+   "motif": "qeychi",
+   "scheme": "t104_f04",
+   "motif_text": "",
+   "group": "gm1795720532867x6",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.926,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795720532,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795720532,
+   "found_from": "intangible_2849_p0075_1"
+  }
+ ],
  "created": 1794547278,
- "updated": 1795292056,
+ "updated": 1795720532,
  "cat": {
   "title": "молитвенный ковёр «Pirəbədil (Namazlıq)» Губа",
   "museum": "",
@@ -161,5 +189,6 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "hand"
+ "tri": "hand",
+ "updated_by": "dolgikh"
 }

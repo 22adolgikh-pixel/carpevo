@@ -18,7 +18,7 @@
  "h": 1791,
  "marks": [],
  "created": 1794547278,
- "updated": 1795293047,
+ "updated": 1795720625,
  "cat": {
   "title": "Ковёр «Muğan» Карабах",
   "museum": "",
@@ -59,6 +59,10 @@
   {
    "id": "azcm_84",
    "score": 0
+  },
+  {
+   "id": "vam_O152845",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -71,6 +75,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "vam_O152845": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795720625,
+   "similar": true
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -140,5 +150,16 @@
   ],
   "t": 1795207862
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "vam_O152845": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795720625
+    }
+   }
+  }
+ }
 }
