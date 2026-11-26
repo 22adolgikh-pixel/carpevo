@@ -18,7 +18,7 @@
  "h": 935,
  "marks": [],
  "created": 1791870038,
- "updated": 1795027084,
+ "updated": 1795700556,
  "cat": {
   "title": "Zili (зили), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -52,6 +52,14 @@
   {
    "id": "azr_kuba135",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0138_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0139_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -59,6 +67,17 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1795027084
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0138_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795700556,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0139_1": {
+   "ok": false,
+   "by": "по цепочке: azcm_146 ≠ azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0138_1",
+   "at": 1795700579
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -101,6 +120,13 @@
      "a": "diff",
      "w": 2,
      "t": 1795027084
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0138_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795700556
     }
    }
   }
