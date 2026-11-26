@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>carpet.wiki — the open encyclopedia of handmade carpets</title>
+<meta name="description" content="carpet.wiki is a growing open encyclopedia of handmade carpets: regions, schools, compositions, motifs and the people who weave them.">
+<meta property="og:title" content="carpet.wiki">
+<meta property="og:description" content="The open encyclopedia of handmade carpets. Coming soon.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%238c2f24'/%3E%3Cpath d='M16 5l11 11-11 11L5 16z' fill='none' stroke='%23e9d8b4' stroke-width='2.5'/%3E%3Cpath d='M16 11l5 5-5 5-5-5z' fill='%23e9d8b4'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --madder:#8c2f24; --madder-d:#6b2219; --indigo:#1f2a44; --wool:#f4ecdc;
+    --ivory:#fbf7ee; --ochre:#c8923a; --ink:#2a2420; --muted:#7a6d62;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--ivory);color:var(--ink)}
+  body{font:17px/1.6 Georgia,"Iowan Old Style","Palatino Linotype",serif;min-height:100vh;display:flex;flex-direction:column}
+  .border{height:22px;background:
+      repeating-linear-gradient(45deg,transparent 0 7px,var(--ochre) 7px 9px,transparent 9px 16px),
+      repeating-linear-gradient(-45deg,transparent 0 7px,var(--ochre) 7px 9px,transparent 9px 16px),
+      var(--madder)}
+  .guard{height:4px;background:var(--indigo)}
+  main{flex:1;width:100%;max-width:980px;margin:0 auto;padding:64px 28px 48px}
+  header{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center}
+  .gul{width:150px;height:150px}
+  h1{font-size:clamp(40px,7vw,68px);line-height:1;letter-spacing:-.5px;color:var(--madder-d);font-weight:normal}
+  h1 b{color:var(--indigo);font-weight:normal}
+  .tag{margin-top:14px;font-size:clamp(18px,2.4vw,22px);color:var(--ink);max-width:34ch}
+  .langs{margin-top:10px;color:var(--muted);font-size:15px;font-style:italic}
+  .sections{margin-top:64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+  .card{background:var(--wool);border:1px solid #e2d4b8;border-top:4px solid var(--madder);padding:20px 20px 18px;border-radius:2px}
+  .card:nth-child(2){border-top-color:var(--indigo)}
+  .card:nth-child(3){border-top-color:var(--ochre)}
+  .card:nth-child(4){border-top-color:#4d6b45}
+  .card h2{font-size:19px;font-weight:normal;color:var(--ink)}
+  .card .host{font:13px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);margin-top:2px}
+  .card p{margin-top:10px;font-size:15px;color:#4a3f37}
+  .soon{display:inline-block;margin-top:12px;font:12px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--madder)}
+  .note{margin-top:56px;padding-top:24px;border-top:1px solid #e2d4b8;color:var(--muted);font-size:15px;max-width:60ch}
+  footer{padding:18px 28px 26px;text-align:center;color:var(--muted);font-size:13px}
+  @media (max-width:620px){header{grid-template-columns:1fr}.gul{width:110px;height:110px}main{padding-top:40px}}
+</style>
+</head>
+<body>
+<div class="border"></div><div class="guard"></div>
+<main>
+  <header>
+    <svg class="gul" viewBox="0 0 120 120" aria-hidden="true">
+      <rect x="2" y="2" width="116" height="116" fill="#8c2f24"/>
+      <rect x="8" y="8" width="104" height="104" fill="none" stroke="#e9d8b4" stroke-width="2"/>
+      <path d="M60 14 106 60 60 106 14 60Z" fill="#1f2a44"/>
+      <path d="M60 24 96 60 60 96 24 60Z" fill="none" stroke="#c8923a" stroke-width="2"/>
+      <path d="M60 34 86 60 60 86 34 60Z" fill="#e9d8b4"/>
+      <path d="M60 44 76 60 60 76 44 60Z" fill="#8c2f24"/>
+      <path d="M60 52 68 60 60 68 52 60Z" fill="#e9d8b4"/>
+      <g fill="#c8923a"><path d="M14 14h10v10H14z"/><path d="M96 14h10v10H96z"/><path d="M14 96h10v10H14z"/><path d="M96 96h10v10H96z"/></g>
+      <g stroke="#e9d8b4" stroke-width="2"><path d="M60 14v-6M60 106v6M14 60H8M106 60h6"/></g>
+    </svg>
+    <div>
+      <h1>carpet<b>.wiki</b></h1>
+      <p class="tag">The open encyclopedia of handmade carpets: regions, schools, compositions, motifs and the people who weave them.</p>
+      <p class="langs">Əl toxuması xalçaların açıq ensiklopediyası · Открытая энциклопедия ковров ручной работы</p>
+    </div>
+  </header>
+
+  <section class="sections" aria-label="Sections">
+    <div class="card"><h2>Wiki</h2><div class="host">wiki.carpet.wiki</div><p>Weaving schools, compositions, motifs and terms, with sources.</p><span class="soon">coming soon</span></div>
+    <div class="card"><h2>Atlas</h2><div class="host">azerbaijan.carpet.wiki</div><p>Carpets by country and region, starting with Azerbaijan.</p><span class="soon">coming soon</span></div>
+    <div class="card"><h2>Studio</h2><div class="host">studio.carpet.wiki</div><p>Tools for digitizing patterns and cataloguing carpets.</p><span class="soon">by invitation</span></div>
+    <div class="card"><h2>Shop</h2><div class="host">shop.carpet.wiki</div><p>Handmade carpets and pattern prints.</p><span class="soon">later</span></div>
+  </section>
+
+  <p class="note">carpet.wiki is being built now. The first sections will open on the Azerbaijani carpet tradition and grow from there.</p>
+</main>
+<div class="guard"></div><div class="border"></div>
+<footer>© 2026 carpet.wiki</footer>
+</body>
+</html>

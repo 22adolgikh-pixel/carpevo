@@ -22,6 +22,18 @@ services:
         aliases:
           - cps   # так nginx сможет проксировать на http://cps:8000
 
+  # Лендинг carpet.wiki (статичная страница из ./site). Новые файлы в site/ подхватываются
+  # после git pull без пересборки. nginx проксирует на http://carpetwiki-site:80 (см. CARPET_WIKI.md).
+  site:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+    networks:
+      existing_nginx_net:
+        aliases:
+          - carpetwiki-site
+
 networks:
   existing_nginx_net:
     external: true
