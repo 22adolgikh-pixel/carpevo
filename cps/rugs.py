@@ -3721,6 +3721,16 @@ def install(app, DATA, D_WORK):
                 if k >= len(m["cands"]): return JSONResponse({"error": "нет такой линии"}, status_code=400)
                 c = m["cands"][k]
                 L["field"] = {"depth_pct": c["depth_pct"], "curves": c["curves"], "w": m["w"], "h": m["h"], "by": me, "t": int(time.time()), "src": "cand%d" % k}
+            elif a == "draw" and isinstance(body.get("fc"), dict):            # v12.41: граница поля углами и узлами (как в «крае»), доли выпрямленного ковра
+                import rug_mesh
+                fc = _ef_clean(body["fc"])
+                if not fc: return JSONResponse({"error": "fc?"}, status_code=400)
+                cv = rug_mesh.field_from_nodes(fc, m["w"], m["h"])
+                dep = {k: float(np.median(v)) for k, v in cv.items()}
+                if not all(0.01 <= dep[k] / (m["h"] if k in ("top", "bot") else m["w"]) <= 0.48 for k in dep): return JSONResponse({"error": "линия вне ковра"}, status_code=400)
+                L["field"] = {"depth_pct": round(100 * min(dep.values()) / min(m["w"], m["h"]), 1), "curves": cv, "w": m["w"], "h": m["h"],
+                              "by": me, "t": int(time.time()), "src": "hand2", "nodes": fc}
+                rec["fc"] = fc
             elif a == "draw":                                                    # v11.84: границу поля человек поставил сам — четыре стороны, каждая отдельно (доли ширины/высоты)
                 try: d = {k: float((body.get("d") or {})[k]) for k in ("top", "bot", "left", "right")}
                 except Exception: return JSONResponse({"error": "d?"}, status_code=400)

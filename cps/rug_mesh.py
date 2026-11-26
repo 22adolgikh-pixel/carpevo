@@ -230,6 +230,18 @@ def curves2d_from_fix(fix, nst=64):
     return {k: side_curve(_side_pts(f, k), nst, sm) for k in SIDES}
 
 
+def field_from_nodes(fc, w, h, nst=48):
+    """v12.41: граница поля, поставленная углами и узлами (формат как правка края v2, доли выпрямленного ковра) → глубины линии поля
+    от каждого края в px на nst станциях вдоль стороны (формат field_curves / layout.field.curves). За углами поля глубина держится постоянной."""
+    c2 = curves2d_from_fix(fc, 256); tt = np.linspace(0, 1, nst); out = {}
+    for k, v in c2.items():
+        if k in ("top", "bot"):
+            o = np.argsort(v[:, 0]); y = np.interp(tt, v[o, 0], v[o, 1]); out[k] = (y if k == "top" else 1 - y) * h
+        else:
+            o = np.argsort(v[:, 1]); x = np.interp(tt, v[o, 1], v[o, 0]); out[k] = (x if k == "left" else 1 - x) * w
+    return {k: [round(float(a), 1) for a in v] for k, v in out.items()}
+
+
 def fix_pad(fix):
     """v12.36: запас полотна под правку края. Было всегда 0,07: ручку, вытянутую за линию углов дальше 7 %, полотно не покрывало —
     край «размазывался» повтором крайних пикселей, и казалось, что ничего не меняется."""

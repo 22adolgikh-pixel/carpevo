@@ -303,24 +303,24 @@ function showField(t){document.documentElement.style.setProperty('--imh','58dvh'
   qtip();zoomable();t.cands.forEach((c,i)=>$('f'+i).onclick=()=>answer(t,String(i)));
   $('fn').onclick=()=>fieldEdit(t);$('fz').onclick=()=>answer(t,'nofield');$('fe').onclick=()=>answer(t,'edges');$('fs').onclick=()=>answer(t,'skip');}
 // v11.84: границу поля ставит человек — четыре стороны рамки двигаются по отдельности (кайма бывает разной ширины сверху и снизу)
-function fieldEdit(t){const W=t.mw,H=t.mh,c=t.cands.length?t.cands[t.cands.length-1]:null,av=a=>a.reduce((x,y)=>x+y,0)/a.length;
-  let D=c?{top:av(c.curves.top)/H,bot:av(c.curves.bot)/H,left:av(c.curves.left)/W,right:av(c.curves.right)/W}:{top:.15*Math.min(W,H)/H,bot:.15*Math.min(W,H)/H,left:.15*Math.min(W,H)/W,right:.15*Math.min(W,H)/W};
-  const ed=document.createElement('div');ed.id='ed';
-  ed.innerHTML=`<div class="et">Подвиньте каждую сторону рамки на границу поля и каймы: тяните за жёлтую линию или кружок.</div><div class="ew"><div class="ei" id="ei"><img src="/rugmesh/${encodeURIComponent(t.rid)}.jpg" alt=""><div class="eb" id="eb" style="box-shadow:0 0 0 1px #000"></div>${['top','bot','left','right'].map(k=>`<div class="eh" data-k="${k}"></div>`).join('')}</div></div>
-    <div class="er"><button class="no" id="ec">отмена</button><button class="yes" id="eo">готово</button></div>`;
-  document.body.appendChild(ed);const ei=$('ei'),eb=$('eb'),hs=[...ed.querySelectorAll('.eh')];
-  const draw=()=>{eb.style.left=D.left*100+'%';eb.style.top=D.top*100+'%';eb.style.width=(1-D.left-D.right)*100+'%';eb.style.height=(1-D.top-D.bot)*100+'%';
-    const mx=(D.left+1-D.right)/2,my=(D.top+1-D.bot)/2,P={top:[mx,D.top],bot:[mx,1-D.bot],left:[D.left,my],right:[1-D.right,my]};
-    hs.forEach(h=>{h.style.left=P[h.dataset.k][0]*100+'%';h.style.top=P[h.dataset.k][1]*100+'%';});};
-  draw();let k=null;
-  const pos=ev=>{const r=ei.getBoundingClientRect();return [(ev.clientX-r.left)/r.width,(ev.clientY-r.top)/r.height];};
-  ed.addEventListener('pointerdown',ev=>{if(ev.target.closest('.er'))return;const p=pos(ev);   // ближайшая сторона
-    const d={top:Math.abs(p[1]-D.top),bot:Math.abs(p[1]-(1-D.bot)),left:Math.abs(p[0]-D.left),right:Math.abs(p[0]-(1-D.right))};k=Object.keys(d).sort((a,b)=>d[a]-d[b])[0];ev.preventDefault();});
-  ed.addEventListener('pointermove',ev=>{if(!k)return;const p=pos(ev),cl=v=>Math.min(.47,Math.max(.012,v));
-    if(k==='top')D.top=cl(p[1]);else if(k==='bot')D.bot=cl(1-p[1]);else if(k==='left')D.left=cl(p[0]);else D.right=cl(1-p[0]);draw();});
-  ['pointerup','pointercancel'].forEach(e=>ed.addEventListener(e,()=>k=null));
-  $('ec').onclick=()=>ed.remove();
-  $('eo').onclick=()=>{ed.remove();answer(t,'draw',null,{d:Object.fromEntries(Object.entries(D).map(([a,v])=>[a,Math.round(v*1e4)/1e4]))});};}
+function fieldEdit(t){const W=t.mw,H=t.mh,c=t.cands.length?t.cands[t.cands.length-1]:null,id=encodeURIComponent(t.rid);
+  // v12.41: граница поля — те же углы и узлы, что в «крае»; координаты — доли выпрямленного ковра. Старт — линия машины (последняя, самая внутренняя) или рамка 15 %
+  const at=(k,u)=>{const C=c.curves[k],n=C.length;return C[Math.max(0,Math.min(n-1,Math.round(u*(n-1))))];};
+  let V;if(c){const T=u=>at('top',u)/H,B=u=>1-at('bot',u)/H,L=v=>at('left',v)/W,R=v=>1-at('right',v)/W,l0=L(.5),r0=R(.5),t0=T(.5),b0=B(.5);
+    V={v:2,mode:'smooth',c:[[l0,t0],[r0,t0],[r0,b0],[l0,b0]],top:[.3,.5,.7].map(u=>{const x=l0+(r0-l0)*u;return [x,T(x)];}),bot:[.3,.5,.7].map(u=>{const x=l0+(r0-l0)*u;return [x,B(x)];}),
+      left:[.3,.5,.7].map(u=>{const y=t0+(b0-t0)*u;return [L(y),y];}),right:[.3,.5,.7].map(u=>{const y=t0+(b0-t0)*u;return [R(y),y];})};}
+  else{const dx=.15*Math.min(W,H)/W,dy=.15*Math.min(W,H)/H;V={v:2,mode:'smooth',c:[[dx,dy],[1-dx,dy],[1-dx,1-dy],[dx,1-dy]],top:[],bot:[],left:[],right:[]};}
+  V=JSON.parse(JSON.stringify(V,(k,v)=>typeof v==='number'?+v.toFixed(4):v));const V0=JSON.parse(JSON.stringify(V));window.__kf=()=>V;
+  $('main').innerHTML=`${qhead('Поставьте границу поля','Тяните углы (квадратики) и узлы (кружки) на границу поля и каймы — самую внутреннюю линию каймы. Тап по линии — новый узел, двойной тап или долгое нажатие — убрать. Ковёр уже выпрямлен по краям: по этой линии поле станет прямоугольником, а кайма — одной ширины со всех сторон.')}
+    <div id="kf_body" style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:4px"></div>
+    <div class="btns"><button class="yes" id="kf_ok">✓ готово</button><button class="sm" id="kf_m">плавно</button><button class="sm" id="kf_r">сбросить</button><button class="no" id="kf_c">отмена</button></div>`;qtip();
+  document.documentElement.style.setProperty('--imh','56dvh');
+  let ed=nodeEd({host:$('kf_body'),img:`/rugmesh/${id}.jpg`,pad:0,lim:[0.005,0.995],V,color:'#ffd54a'});
+  const mode=()=>{$('kf_m').textContent=V.mode==='line'?'прямо':'плавно';};mode();
+  $('kf_m').onclick=()=>{V.mode=V.mode==='line'?'smooth':'line';ed.paint();mode();};
+  $('kf_r').onclick=()=>{const n=JSON.parse(JSON.stringify(V0));Object.keys(V).forEach(k=>delete V[k]);Object.assign(V,n);ed.paint();mode();};
+  $('kf_c').onclick=()=>showField(t);
+  $('kf_ok').onclick=()=>answer(t,'draw',null,{fc:V});}
 // «развороты»: на фото несколько ковров; показываем, как машина предлагает разрезать
 const PC=['#ffe066','#6cb6ff','#3ecf8e','#ff8fd0','#ffa94d','#b39dff'];
 function showSplit(t){document.documentElement.style.setProperty('--imh','50dvh');
@@ -384,54 +384,55 @@ function edgeCurve(P,smooth,n){n=n||48;if(P.length<2)return P;const Q=[[2*P[0][0
     C.push(smooth?[0,1].map(d=>0.5*(2*p1[d]+(-p0[d]+p2[d])*s+(2*p0[d]-5*p1[d]+4*p2[d]-p3[d])*s*s+(-p0[d]+3*p1[d]-3*p2[d]+p3[d])*s*s*s)):[0,1].map(d=>p1[d]+(p2[d]-p1[d])*s));}}
   C.push(P[P.length-1]);return C;}
 function edgeSide(V,k){const [a,b]=EK[k],h=k==='top'||k==='bot'?0:1;return [V.c[a],...(V[k]||[]).slice().sort((p,q)=>p[h]-q[h]),V.c[b]];}
+// v12.41: общий редактор контура (края ковра и граница поля): 4 угла-квадратика + узлы на сторонах, лупа, тап по линии — узел, двойной тап / долгое нажатие — убрать
+function nodeEd(o){const SD=['top','bot','left','right'],V=o.V,pad=o.pad||0,f0=pad/(1+2*pad),fw=1/(1+2*pad);
+  const dsp=p=>[f0+p[0]*fw,f0+p[1]*fw],nrm=(x,y)=>[(x-f0)/fw,(y-f0)/fw],clamp=v=>+Math.max(o.lim[0],Math.min(o.lim[1],v)).toFixed(4);
+  o.host.innerHTML=`<div class="kxw" style="position:relative;line-height:0;touch-action:none"><img src="${o.img}" alt="" style="max-width:100%;max-height:var(--imh);display:block"><svg class="kxs" viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></svg><div class="kxhs"></div><div class="kxlp" hidden style="position:absolute;width:140px;height:140px;border-radius:50%;overflow:hidden;border:2px solid #fff;box-shadow:0 0 0 1px #000,0 4px 14px #000a;pointer-events:none;z-index:5;background:#111"></div></div>
+    <div class="mut" style="font-size:12px;text-align:center">тап по линии — новый узел · двойной тап / долгое нажатие — убрать</div>`;
+  const w=o.host.querySelector('.kxw'),sv=w.querySelector('.kxs'),hs=w.querySelector('.kxhs'),lp=w.querySelector('.kxlp');
+  const curve=(k,n)=>edgeCurve(edgeSide(V,k),V.mode!=='line',n);
+  const lines=()=>{sv.innerHTML=(o.guide?o.guide(dsp):'')+SD.map(k=>`<polyline class="kxl" data-k="${k}" fill="none" stroke="${o.color||'#ff9a3c'}" stroke-width="2" vector-effect="non-scaling-stroke" points="${curve(k).map(p=>dsp(p).join(',')).join(' ')}"/>`).join('');};
+  const get=(k,i)=>k==='c'?V.c[i]:V[k][i];
+  const loupe=p=>{const im=w.querySelector('img'),r=w.getBoundingClientRect(),d=dsp(p),Z=3,L=140,cx=d[0]*r.width,cy=d[1]*r.height;
+    lp.hidden=false;lp.style.left=Math.max(-20,Math.min(r.width-L+20,cx-L/2))+'px';lp.style.top=(cy-L-40<-r.top+60?cy+40:cy-L-40)+'px';
+    lp.innerHTML=`<div style="position:absolute;left:${L/2-cx*Z}px;top:${L/2-cy*Z}px;width:${r.width*Z}px;height:${r.height*Z}px"><img src="${im.src}" style="width:100%;height:100%;display:block"><svg viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">${sv.innerHTML}</svg></div><div style="position:absolute;left:${L/2-7}px;top:${L/2-7}px;width:14px;height:14px;border:2px solid #ff9a3c;border-radius:50%;box-shadow:0 0 0 1px #000"></div><div style="position:absolute;left:${L/2-0.5}px;top:0;width:1px;height:${L}px;background:#fff6"></div><div style="position:absolute;top:${L/2-0.5}px;left:0;height:1px;width:${L}px;background:#fff6"></div>`;};
+  const unloupe=()=>{lp.hidden=true;lp.innerHTML='';};
+  const paint=()=>{lines();hs.innerHTML=V.c.map((p,i)=>{const d=dsp(p);return `<div class="kxh kxc" data-k="c" data-i="${i}" style="${KXH}left:${d[0]*100}%;top:${d[1]*100}%;border-radius:4px;background:#ffd54a"></div>`;}).join('')+
+      SD.map(k=>(V[k]||[]).map((p,i)=>{const d=dsp(p);return `<div class="kxh" data-k="${k}" data-i="${i}" style="${KXH}left:${d[0]*100}%;top:${d[1]*100}%"></div>`;}).join('')).join('');
+    hs.querySelectorAll('.kxh').forEach(h=>{const k=h.dataset.k,i=+h.dataset.i;h.onpointerdown=e=>drag(e,k,i,h);h.ondblclick=e=>{e.preventDefault();del(k,i);};});};
+  const changed=()=>{o.onChange&&o.onChange();};
+  const del=(k,i)=>{if(k==='c')return;V[k].splice(i,1);unloupe();paint();changed();};
+  const drag=(e,k,i,h)=>{e.preventDefault();h.setPointerCapture&&h.setPointerCapture(e.pointerId);let moved=false;const x0=e.clientX,y0=e.clientY;
+    const lt=setTimeout(()=>{if(!moved)del(k,i);},650);loupe(get(k,i));
+    h.onpointermove=ev=>{if(Math.hypot(ev.clientX-x0,ev.clientY-y0)>4){moved=true;clearTimeout(lt);}if(!moved)return;const r=w.getBoundingClientRect(),q=nrm((ev.clientX-r.left)/r.width,(ev.clientY-r.top)/r.height),p=get(k,i);
+      p[0]=clamp(q[0]);p[1]=clamp(q[1]);const d=dsp(p);h.style.left=d[0]*100+'%';h.style.top=d[1]*100+'%';
+      sv.querySelectorAll('.kxl').forEach(l=>l.setAttribute('points',curve(l.dataset.k).map(p=>dsp(p).join(',')).join(' ')));loupe(p);changed();};
+    h.onpointerup=h.onpointercancel=()=>{clearTimeout(lt);h.onpointermove=null;unloupe();if(moved)paint();};};
+  w.onpointerdown=e=>{if(e.target.closest('.kxh'))return;const r=w.getBoundingClientRect(),q=nrm((e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height);
+    let best=null;SD.forEach(k=>{curve(k,24).forEach(p=>{const d=Math.hypot((p[0]-q[0])*r.width*fw,(p[1]-q[1])*r.height*fw);if(!best||d<best.d)best={k,d};});});
+    if(!best||best.d>28)return;if((V[best.k]||[]).length>=8){toast('на стороне уже 8 узлов');return;}
+    const p=[clamp(q[0]),clamp(q[1])];V[best.k]=[...(V[best.k]||[]),p];paint();changed();const i=V[best.k].indexOf(p),h=hs.querySelector(`.kxh[data-k="${best.k}"][data-i="${i}"]`);if(h)drag(e,best.k,i,h);};
+  paint();return {paint};}
 function showEdge(t){if(t.ask&&!t._ok){return rcWhy(t,()=>{t._ok=1;showEdge(t);});}document.documentElement.style.setProperty('--imh','54dvh');
   const id=encodeURIComponent(t.rid);let tab='edit',D=null,V=null,prev=null;const SD=['top','bot','left','right'];window.__kx=()=>({D,V});
   $('main').innerHTML=`${qhead('Где настоящий край ковра?','Жёлтая рамка — ковёр по вашим углам. Тяните углы (квадратики) и узлы (кружки) на край ворса — туда, где кончается узор; узел можно двигать в любую сторону. Нужен ещё узел — тапните по оранжевой линии; лишний — двойной тап или долгое нажатие. Бахрому, килимную полосу без узора и тени не включайте. «плавно / прямо» — линия между узлами кривой или отрезками. Пунктир — где край нашла машина. «посмотреть результат» — как выпрямится.')}
    <div id="kx_etabs" style="display:flex;gap:6px;justify-content:center;margin:4px 0"></div><div id="kx_ebody" style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:4px"><span class="mut">загружаю…</span></div>
    <div class="btns"><button class="yes" id="kx_ed">✓ готово</button><button id="kx_ep">посмотреть результат</button><button class="sm" id="kx_em">плавно</button><button class="sm" id="kx_er">сбросить</button><button class="sm unk" id="kx_es">пропустить</button><button id="kx_eq">что-то не так…</button><button class="sm" id="kx_erot" title="повернуть ковёр на 90° по часовой">↻ повернуть</button></div>`;qtip();
-  const P=()=>D.pad,f0=()=>P()/(1+2*P()),fw=()=>1/(1+2*P());
-  const dsp=p=>[f0()+p[0]*fw(),f0()+p[1]*fw()],nrm=(x,y)=>[(x-f0())/fw(),(y-f0())/fw()];
-  const clamp=v=>+Math.max(D.lim2[0],Math.min(D.lim2[1],v)).toFixed(4);
-  const gpt=(k,j)=>{const n=D.guide[k].length,tt=j/(n-1),v=D.guide[k][j];return dsp(k==='top'?[tt,v]:k==='bot'?[tt,1-v]:k==='left'?[v,tt]:[1-v,tt]);};
-  const mode=()=>{$('kx_em').textContent=V&&V.mode==='line'?'прямо':'плавно';};
-  const paint=()=>{const sv=$('kx_esvg');if(!sv)return;const sm=V.mode!=='line';
-    sv.innerHTML=SD.map(k=>`<polyline fill="none" stroke="#6bd6ff" stroke-width="1.2" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" opacity=".8" points="${D.guide[k].map((_,j)=>gpt(k,j).join(',')).join(' ')}"/><polyline class="kxl" data-k="${k}" fill="none" stroke="#ff9a3c" stroke-width="2" vector-effect="non-scaling-stroke" points="${edgeCurve(edgeSide(V,k),sm).map(p=>dsp(p).join(',')).join(' ')}"/>`).join('');
-    $('kx_eh').innerHTML=V.c.map((p,i)=>{const d=dsp(p);return `<div class="kxh kxc" data-k="c" data-i="${i}" style="${KXH}left:${d[0]*100}%;top:${d[1]*100}%;border-radius:4px;background:#ffd54a"></div>`;}).join('')+
-      SD.map(k=>(V[k]||[]).map((p,i)=>{const d=dsp(p);return `<div class="kxh" data-k="${k}" data-i="${i}" style="${KXH}left:${d[0]*100}%;top:${d[1]*100}%"></div>`;}).join('')).join('');
-    bind();};
-  const get=(k,i)=>k==='c'?V.c[i]:V[k][i];
-  let w=null;
-  const loupe=(p)=>{const lp=$('kx_loupe'),im=w.querySelector('img'),r=w.getBoundingClientRect(),d=dsp(p),Z=3,L=140,cx=d[0]*r.width,cy=d[1]*r.height;
-    lp.hidden=false;lp.style.left=Math.max(-20,Math.min(r.width-L+20,cx-L/2))+'px';lp.style.top=(cy-L-40<-r.top+60?cy+40:cy-L-40)+'px';
-    lp.innerHTML=`<div style="position:absolute;left:${L/2-cx*Z}px;top:${L/2-cy*Z}px;width:${r.width*Z}px;height:${r.height*Z}px"><img src="${im.src}" style="width:100%;height:100%;display:block"><svg viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">${$('kx_esvg').innerHTML}</svg></div><div style="position:absolute;left:${L/2-7}px;top:${L/2-7}px;width:14px;height:14px;border:2px solid #ff9a3c;border-radius:50%;box-shadow:0 0 0 1px #000"></div><div style="position:absolute;left:${L/2-0.5}px;top:0;width:1px;height:${L}px;background:#fff6"></div><div style="position:absolute;top:${L/2-0.5}px;left:0;height:1px;width:${L}px;background:#fff6"></div>`;};
-  const unloupe=()=>{const lp=$('kx_loupe');lp.hidden=true;lp.innerHTML='';};
-  const del=(k,i)=>{if(k==='c')return;V[k].splice(i,1);prev=null;unloupe();paint();};
-  const drag=(e,k,i,h)=>{e.preventDefault();h.setPointerCapture&&h.setPointerCapture(e.pointerId);let moved=false;const x0=e.clientX,y0=e.clientY;
-    const lt=setTimeout(()=>{if(!moved)del(k,i);},650);loupe(get(k,i));
-    h.onpointermove=ev=>{if(Math.hypot(ev.clientX-x0,ev.clientY-y0)>4){moved=true;clearTimeout(lt);}if(!moved)return;const r=w.getBoundingClientRect(),q=nrm((ev.clientX-r.left)/r.width,(ev.clientY-r.top)/r.height),p=get(k,i);
-      p[0]=clamp(q[0]);p[1]=clamp(q[1]);prev=null;const d=dsp(p);h.style.left=d[0]*100+'%';h.style.top=d[1]*100+'%';
-      const sv=$('kx_esvg'),sm=V.mode!=='line';sv.querySelectorAll('.kxl').forEach(l=>l.setAttribute('points',edgeCurve(edgeSide(V,l.dataset.k),sm).map(p=>dsp(p).join(',')).join(' ')));loupe(p);};
-    h.onpointerup=h.onpointercancel=()=>{clearTimeout(lt);h.onpointermove=null;unloupe();if(moved)paint();};};
-  const bind=()=>{w.querySelectorAll('.kxh').forEach(h=>{const k=h.dataset.k,i=+h.dataset.i;h.onpointerdown=e=>drag(e,k,i,h);h.ondblclick=e=>{e.preventDefault();del(k,i);};});};
-  const addAt=(e)=>{if(e.target.closest('.kxh'))return;const r=w.getBoundingClientRect(),q=nrm((e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height),sm=V.mode!=='line';
-    let best=null;SD.forEach(k=>{edgeCurve(edgeSide(V,k),sm,24).forEach(p=>{const d=Math.hypot((p[0]-q[0])*r.width*fw(),(p[1]-q[1])*r.height*fw());if(!best||d<best.d)best={k,d};});});
-    if(!best||best.d>28)return;if((V[best.k]||[]).length>=8){toast('на стороне уже 8 узлов');return;}
-    const p=[clamp(q[0]),clamp(q[1])];V[best.k]=[...(V[best.k]||[]),p];prev=null;paint();const i=V[best.k].indexOf(p),h=w.querySelector(`.kxh[data-k="${best.k}"][data-i="${i}"]`);if(h)drag(e,best.k,i,h);};
-  const draw=()=>{let body;
-    if(tab==='edit'){body=`<div id="kx_ew" style="position:relative;line-height:0;touch-action:none"><img src="/rugpad/${id}.jpg?c=1&s=1100" alt="" style="max-width:100%;max-height:var(--imh);display:block"><svg id="kx_esvg" viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></svg><div id="kx_eh"></div><div id="kx_loupe" hidden style="position:absolute;width:140px;height:140px;border-radius:50%;overflow:hidden;border:2px solid #fff;box-shadow:0 0 0 1px #000,0 4px 14px #000a;pointer-events:none;z-index:5;background:#111"></div></div>
-      <div class="mut" style="font-size:12px;text-align:center">тап по линии — новый узел · двойной тап / долгое нажатие — убрать</div>`;}
-    else if(tab==='orig'){const q=t.quad||[];body=`<div style="position:relative;line-height:0"><img src="/rugthumb/${id}.jpg?raw=1" alt="" style="max-width:100%;max-height:var(--imh)">${q.length===4?`<svg viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><polygon points="${q.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#ffd54a" stroke-width=".004" vector-effect="non-scaling-stroke"/></svg>`:''}</div>`;}
-    else body=prev?`<img src="${prev}" alt="" style="max-width:100%;max-height:var(--imh)"><div class="mut" style="text-align:center">так выпрямится по вашим узлам; тёмное вокруг — что было за рамкой</div>`:'<span class="mut">строю…</span>';
-    $('kx_ebody').innerHTML=body;
+  const gpt=(dsp,k,j)=>{const n=D.guide[k].length,tt=j/(n-1),v=D.guide[k][j];return dsp(k==='top'?[tt,v]:k==='bot'?[tt,1-v]:k==='left'?[v,tt]:[1-v,tt]);};
+  const guide=dsp=>SD.map(k=>`<polyline fill="none" stroke="#6bd6ff" stroke-width="1.2" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" opacity=".8" points="${D.guide[k].map((_,j)=>gpt(dsp,k,j).join(',')).join(' ')}"/>`).join('');
+  let ed=null;const mode=()=>{$('kx_em').textContent=V&&V.mode==='line'?'прямо':'плавно';};
+  const draw=()=>{const B=$('kx_ebody');ed=null;
+    if(tab==='edit'){ed=nodeEd({host:B,img:`/rugpad/${id}.jpg?c=1&s=1100`,pad:D.pad,lim:D.lim2,V,guide,onChange:()=>{prev=null;}});const w=B.querySelector('.kxw');w.id='kx_ew';w.querySelector('.kxs').id='kx_esvg';w.querySelector('.kxlp').id='kx_loupe';}
+    else if(tab==='orig'){const q=t.quad||[];B.innerHTML=`<div style="position:relative;line-height:0"><img src="/rugthumb/${id}.jpg?raw=1" alt="" style="max-width:100%;max-height:var(--imh)">${q.length===4?`<svg viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><polygon points="${q.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#ffd54a" stroke-width=".004" vector-effect="non-scaling-stroke"/></svg>`:''}</div>`;}
+    else B.innerHTML=prev?`<img src="${prev}" alt="" style="max-width:100%;max-height:var(--imh)"><div class="mut" style="text-align:center">так выпрямится по вашим узлам; тёмное вокруг — что было за рамкой</div>`:'<span class="mut">строю…</span>';
     $('kx_etabs').innerHTML=[['edit','править'],['orig','оригинал'],['res','результат']].map(([k,n])=>`<button class="sm${k===tab?' yes':''}" data-t="${k}">${n}</button>`).join('');
-    $('kx_etabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;if(tab==='res')preview();else draw();});
-    if(tab==='edit'){w=$('kx_ew');w.onpointerdown=addAt;paint();}mode();};
+    $('kx_etabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;if(tab==='res')preview();else draw();});mode();};
   const preview=async()=>{tab='res';prev=null;draw();try{const j=await api('/api/rugs/'+id+'/edgefix_preview',{fix:V});prev=j.img;}catch(e){toast('не вышло: '+e.message);}if(tab==='res')draw();};
   const init=async()=>{try{D=await api('/api/rugs/'+id+'/edgefix');V=JSON.parse(JSON.stringify(D.fix||D.init));draw();}catch(e){$('kx_ebody').innerHTML=`<span class="mut">не загрузилось: ${esc(e.message)}</span>`;}};
   $('kx_ed').onclick=()=>{if(!V)return;answer(t,'fix',undefined,{fix:V});};
   $('kx_ep').onclick=()=>{if(V)preview();};
-  $('kx_em').onclick=()=>{if(!V)return;V.mode=V.mode==='line'?'smooth':'line';prev=null;if(tab==='edit')paint();mode();};
-  $('kx_er').onclick=()=>{if(D){V=JSON.parse(JSON.stringify(D.init));prev=null;tab='edit';draw();}};
+  $('kx_em').onclick=()=>{if(!V)return;V.mode=V.mode==='line'?'smooth':'line';prev=null;if(ed)ed.paint();mode();};
+  $('kx_er').onclick=()=>{if(D){const n=JSON.parse(JSON.stringify(D.init));Object.keys(V).forEach(k=>delete V[k]);Object.assign(V,n);prev=null;tab='edit';draw();}};
   $('kx_es').onclick=()=>answer(t,'skip');$('kx_eq').onclick=()=>rcWhy(t,()=>showEdge(t));
   $('kx_erot').onclick=async()=>{try{await api('/api/rugs/'+id+'/rot',{d:90});toast('повёрнуто — картинка пересчитывается');D=null;V=null;prev=null;$('kx_ebody').innerHTML='<span class="mut">пересчитываю…</span>';setTimeout(init,1200);}catch(e){toast('не вышло: '+e.message);}};
   init();}

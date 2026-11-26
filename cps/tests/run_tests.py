@@ -1746,13 +1746,14 @@ def t41_mesh_field_v1181(pg, ctx):
     for _ in range(12):
         if pg.evaluate("S.tasks[S.i]&&S.tasks[S.i].rid") == 'fieldrug2': break
         pg.evaluate("S.i++;show()"); pg.wait_for_timeout(200)
-    pg.click('#fn'); pg.wait_for_selector('#ed', timeout=3000); pg.wait_for_timeout(600)
-    ei = pg.query_selector('#ei').bounding_box(); h = pg.query_selector('#ed .eh[data-k="top"]').bounding_box()
+    pg.click('#fn'); pg.wait_for_selector('#kf_body .kxh', timeout=3000); pg.wait_for_timeout(600)      # v12.41: углы и узлы, как в «крае»
+    ei = pg.query_selector('#kf_body .kxw').bounding_box(); h = pg.query_selector('#kf_body .kxh[data-k="top"][data-i="1"]').bounding_box()
     pg.mouse.move(h['x'] + h['width'] / 2, h['y'] + h['height'] / 2); pg.mouse.down(); pg.mouse.move(h['x'] + h['width'] / 2, ei['y'] + ei['height'] * 0.30, steps=5); pg.mouse.up()
-    pg.screenshot(path=os.path.join(OUT, 't41_field_edit.png')); pg.click('#eo'); pg.wait_for_timeout(1200)
+    pg.screenshot(path=os.path.join(OUT, 't41_field_edit.png')); pg.click('#kf_ok'); pg.wait_for_timeout(1200)
     F2 = (get('api/rugs/fieldrug2').get('layout') or {}).get('field') or {}
-    assert F2.get('src') == 'hand' and abs(F2['curves']['top'][0] / F2['h'] - 0.30) < 0.03 and abs(F2['curves']['bot'][0] / F2['h'] - 0.30) > 0.05, f'линия вручную не записалась: {F2.get("src")} {F2.get("curves", {}).get("top", [0])[0]}'
-    assert get('api/rugs/fieldrug2/parts')['size']['top'][1] > 200, 'части по ручной линии не построены'
+    n_ = len(F2.get('curves', {}).get('top') or [1]); mid = F2.get('curves', {}).get('top', [0] * n_)[n_ // 2] / max(1, F2.get('h') or 1)
+    assert F2.get('src') == 'hand2' and F2.get('nodes', {}).get('v') == 2 and abs(mid - 0.30) < 0.04 and abs(F2['curves']['bot'][n_ // 2] / F2['h'] - 0.30) > 0.05, f'линия вручную не записалась: {F2.get("src")} {mid}'
+    sz = get('api/rugs/fieldrug2/parts')['size']; assert sz['top'][1] > 60 and sz['field'][0] > 300, f'части по ручной линии не построены: {sz}'
     errors_ok(ctx, '/m поле v11.81')
 
 
