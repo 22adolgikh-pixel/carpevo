@@ -16,9 +16,37 @@
  "status": "new",
  "w": 1095,
  "h": 1645,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795697867914x0",
+   "box": [
+    0.3704,
+    0.4,
+    0.037,
+    0.025
+   ],
+   "zone": "other",
+   "motif": "qapi-naxishi",
+   "scheme": "t40_f03",
+   "motif_text": "",
+   "group": "gm1795697867914x0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.953,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795697867,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795697867,
+   "found_from": "kerimov_vol2_p133_3"
+  }
+ ],
  "created": 1794547278,
- "updated": 1795498750,
+ "updated": 1795697867,
  "cat": {
   "title": "Ковёр «Şahnəzərli» Губа",
   "museum": "",
@@ -187,5 +215,6 @@
     }
    }
   }
- }
+ },
+ "updated_by": "dolgikh"
 }

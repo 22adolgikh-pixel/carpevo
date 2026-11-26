@@ -18,7 +18,7 @@
  "h": 1016,
  "marks": [],
  "created": 1791736132,
- "updated": 1795117501,
+ "updated": 1795697899,
  "cat": {
   "title": "kuba lb30",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_lb30",
  "lib_img": "img/azr_kuba_lb30.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_seychour153",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_seychour153": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795697899
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -136,5 +147,16 @@
    40.1735
   ],
   "t": 1795207776
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_seychour153": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795697899
+    }
+   }
+  }
  }
 }

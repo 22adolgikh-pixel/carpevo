@@ -16,9 +16,37 @@
  "status": "new",
  "w": 938,
  "h": 1086,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795697867918x3",
+   "box": [
+    0.3429,
+    0.3062,
+    0.0286,
+    0.025
+   ],
+   "zone": "other",
+   "motif": "qapi-naxishi",
+   "scheme": "t40_f03",
+   "motif_text": "",
+   "group": "gm1795697867918x3",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.914,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795697867,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795697867,
+   "found_from": "kerimov_vol2_p133_3"
+  }
+ ],
  "created": 1791736130,
- "updated": 1795154786,
+ "updated": 1795697867,
  "cat": {
   "title": "kuba shirvan medallion185",
   "museum": "",
@@ -143,5 +171,6 @@
    36.5746
   ],
   "t": 1795207795
- }
+ },
+ "updated_by": "dolgikh"
 }
