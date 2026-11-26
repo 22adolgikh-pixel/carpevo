@@ -18,7 +18,7 @@
  "h": 1000,
  "marks": [],
  "created": 1791870042,
- "updated": 1795293047,
+ "updated": 1795717850,
  "cat": {
   "title": "“Buynuz” («Буйнуз»), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -78,6 +78,10 @@
   {
    "id": "azcm_100",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchalari_qarabag_qrupu_p0050_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -115,6 +119,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azerbaycan_xalchalari_qarabag_qrupu_p0050_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795717850,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -469,7 +479,14 @@
      "t": 1794978873
     }
    },
-   "azcm_98": {}
+   "azcm_98": {},
+   "azerbaycan_xalchalari_qarabag_qrupu_p0050_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795717850
+    }
+   }
   },
   "field": {
    "dolgikh": "0"
