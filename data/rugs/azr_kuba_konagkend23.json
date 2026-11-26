@@ -18,7 +18,7 @@
  "h": 839,
  "marks": [],
  "created": 1791736133,
- "updated": 1795293047,
+ "updated": 1795721080,
  "cat": {
   "title": "kuba konagkend23",
   "museum": "",
@@ -53,6 +53,14 @@
   {
    "id": "azr_kuba_karagashli5",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye83",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba85",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -65,6 +73,17 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_kuba_tekye83": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721080,
+   "similar": true
+  },
+  "azr_kuba85": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721080
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -129,6 +148,22 @@
     "a": "whole",
     "w": 2,
     "t": 1795030498
+   }
+  },
+  "same": {
+   "azr_kuba_tekye83": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795721080
+    }
+   },
+   "azr_kuba85": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795721080
+    }
    }
   }
  },

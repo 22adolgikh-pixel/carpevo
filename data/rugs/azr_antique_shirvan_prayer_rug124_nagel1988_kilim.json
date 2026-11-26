@@ -18,7 +18,7 @@
  "h": 960,
  "marks": [],
  "created": 1791736138,
- "updated": 1795293047,
+ "updated": 1795721038,
  "cat": {
   "title": "antique shirvan prayer rug124 nagel1988 kilim",
   "museum": "",
@@ -65,6 +65,14 @@
   {
    "id": "kerimov_vol2_p127_2",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0056_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_karagashli_rug_hali75_private_collection",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -92,6 +100,17 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0056_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721036,
+   "similar": true
+  },
+  "azr_kuba_karagashli_rug_hali75_private_collection": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721038
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -150,7 +169,14 @@
      "t": 1794976343
     }
    },
-   "azr_kuba74": {}
+   "azr_kuba74": {},
+   "azr_kuba_karagashli_rug_hali75_private_collection": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795721038
+    }
+   }
   }
  },
  "frame": "cropped",

@@ -18,7 +18,7 @@
  "h": 635,
  "marks": [],
  "created": 1794776643,
- "updated": 1795293047,
+ "updated": 1795721132,
  "cat": {
   "title": "Керимов, т. II (стр. скана 128, печ. ?)",
   "museum": "",
@@ -125,6 +125,15 @@
     "t": 1794857539,
     "s": "ref"
    }
+  },
+  "same": {
+   "kerimov_vol2_p133_3": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795721132
+    }
+   }
   }
  },
  "frame": "whole",
@@ -167,11 +176,20 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "kerimov_vol2_p133_3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721132
   }
  },
  "same": [
   {
    "id": "azr_kuba_alpan94",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol2_p133_3",
    "score": 0
   }
  ],

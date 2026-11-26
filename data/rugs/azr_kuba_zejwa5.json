@@ -18,7 +18,7 @@
  "h": 1300,
  "marks": [],
  "created": 1791736135,
- "updated": 1794740852,
+ "updated": 1795721121,
  "cat": {
   "title": "kuba zejwa5",
   "museum": "",
@@ -45,8 +45,30 @@
  },
  "src_id": "cat:azr_kuba_zejwa5",
  "lib_img": "img/azr_kuba_zejwa5.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_zejwa8",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zejwa26",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_zejwa8": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721121,
+   "similar": true
+  },
+  "azr_kuba_zejwa26": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721121,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -111,6 +133,22 @@
     "a": "whole",
     "w": 2,
     "t": 1794740852
+   }
+  },
+  "same": {
+   "azr_kuba_zejwa8": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795721121
+    }
+   },
+   "azr_kuba_zejwa26": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795721121
+    }
    }
   }
  },

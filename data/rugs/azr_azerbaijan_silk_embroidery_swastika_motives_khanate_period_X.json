@@ -18,7 +18,7 @@
  "h": 718,
  "marks": [],
  "created": 1791736140,
- "updated": 1795620582,
+ "updated": 1795721090,
  "cat": {
   "title": "Early Azerbaijan silk embroidery with swastika motives, Khanate Period, 18th century, Private Collec",
   "museum": "",
@@ -55,6 +55,10 @@
   {
    "id": "azerbaycan_xalchalari_qarabag_qrupu_p0034_1",
    "score": 0
+  },
+  {
+   "id": "met_13965",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -67,6 +71,11 @@
    "ok": true,
    "by": "/m: dolgikh",
    "at": 1795620389
+  },
+  "met_13965": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721090
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -109,6 +118,13 @@
      "a": "diff",
      "w": 2,
      "t": 1795019104
+    }
+   },
+   "met_13965": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795721090
     }
    }
   },

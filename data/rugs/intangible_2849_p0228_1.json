@@ -18,7 +18,7 @@
  "h": 1767,
  "marks": [],
  "created": 1794547278,
- "updated": 1795293047,
+ "updated": 1795721030,
  "cat": {
   "title": "Ковёр «Qaraçöp» Газах",
   "museum": "",
@@ -55,6 +55,10 @@
   {
    "id": "intangible_2850_p0155_1",
    "score": 0
+  },
+  {
+   "id": "intangible_2849_p0230_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -62,6 +66,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "intangible_2849_p0230_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721030
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -127,5 +136,16 @@
   ],
   "t": 1795207857
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "intangible_2849_p0230_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795721030
+    }
+   }
+  }
+ }
 }
