@@ -18,7 +18,7 @@
  "h": 1342,
  "marks": [],
  "created": 1795357540,
- "updated": 1795460213,
+ "updated": 1795700530,
  "cat": {
   "title": "Ковёр Иреван",
   "museum": "",
@@ -147,6 +147,29 @@
     "t": 1795460213,
     "s": "ref"
    }
+  },
+  "same": {
+   "wikimedia_File_Fachralo_Kazak_Prayer_Rug_Last_Quarter_19th_C_Lot_60_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795700530
+    }
+   },
+   "azr_kuba_shield36": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795700530
+    }
+   },
+   "azcm_18": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795700530
+    }
+   }
   }
  },
  "frame": "whole",
@@ -183,5 +206,36 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "wikimedia_File_Fachralo_Kazak_Prayer_Rug_Last_Quarter_19th_C_Lot_60_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795700531
+  },
+  "azr_kuba_shield36": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795700531
+  },
+  "azcm_18": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795700531
+  }
+ },
+ "same": [
+  {
+   "id": "wikimedia_File_Fachralo_Kazak_Prayer_Rug_Last_Quarter_19th_C_Lot_60_jpg",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_shield36",
+   "score": 0
+  },
+  {
+   "id": "azcm_18",
+   "score": 0
+  }
+ ]
 }
