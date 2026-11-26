@@ -18,7 +18,7 @@
  "h": 1600,
  "marks": [],
  "created": 1791567607,
- "updated": 1794236886,
+ "updated": 1795721532,
  "src_id": "fig:az_carpets_magazine_33_patterns_page_042_jpg_f01",
  "multi": [],
  "people": {
@@ -299,6 +299,22 @@
  "micro": {
   "field": {
    "dolgikh": "2"
+  },
+  "same": {
+   "cm_538d7a7026": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795721532
+    }
+   },
+   "azcm_17": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795721532
+    }
+   }
   }
  },
  "auto_edge": {
@@ -320,5 +336,28 @@
    60.873
   ],
   "t": 1795207664
- }
+ },
+ "same_ok": {
+  "cm_538d7a7026": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721532,
+   "similar": true
+  },
+  "azcm_17": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795721532
+  }
+ },
+ "same": [
+  {
+   "id": "cm_538d7a7026",
+   "score": 0
+  },
+  {
+   "id": "azcm_17",
+   "score": 0
+  }
+ ]
 }
