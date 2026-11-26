@@ -18,7 +18,7 @@
  "h": 1866,
  "marks": [],
  "created": 1791736133,
- "updated": 1795117501,
+ "updated": 1795719488,
  "cat": {
   "title": "kuba karagashli27",
   "museum": "",
@@ -45,8 +45,37 @@
  },
  "src_id": "cat:azr_kuba_karagashli27",
  "lib_img": "img/azr_kuba_karagashli27.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0173_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0083_1",
+   "score": 0
+  },
+  {
+   "id": "azr_afshan1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0173_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795719488
+  },
+  "intangible_2849_p0083_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795719488
+  },
+  "azr_afshan1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_karagashli27 ≠ intangible_2849_p0173_1",
+   "at": 1795719511
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -135,5 +164,23 @@
    38.0026
   ],
   "t": 1795207770
+ },
+ "micro": {
+  "same": {
+   "intangible_2849_p0173_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795719488
+    }
+   },
+   "intangible_2849_p0083_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795719488
+    }
+   }
+  }
  }
 }
