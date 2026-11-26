@@ -1,9 +1,9 @@
-# Переезд CPS на carpet.wiki
+# Переезд CPS на carpets.wiki
 
 Цель:
-- `carpet.wiki` (и `www.`) — лендинг-заглушка (`cps/deploy/site/index.html`, контейнер `site`);
-- `studio.carpet.wiki` — CPS (тот же контейнер `cps`, данные и сканы остаются в томах `cps_data` / `cps_scans`);
-- `cps.jeyran.az` — постоянный редирект на `studio.carpet.wiki` с сохранением пути.
+- `carpets.wiki` (и `www.`) — лендинг-заглушка (`cps/deploy/site/index.html`, контейнер `site`);
+- `studio.carpets.wiki` — CPS (тот же контейнер `cps`, данные и сканы остаются в томах `cps_data` / `cps_scans`);
+- `cps.jeyran.az` — постоянный редирект на `studio.carpets.wiki` с сохранением пути.
 
 В коде студии домен нигде не зашит, менять ничего не нужно. Cookie входа привязана к хосту, поэтому на новом адресе пароль (`CPS_PASSWORD`) нужно один раз ввести заново.
 
@@ -11,8 +11,8 @@
 
 ## 1. Cloudflare: добавить домен
 
-1. Cloudflare → Add a domain → `carpet.wiki` → тариф Free.
-2. Cloudflare покажет два nameserver'а (вида `xxx.ns.cloudflare.com`). Прописать их у регистратора carpet.wiki вместо текущих. Активация занимает от нескольких минут до нескольких часов: Cloudflare пришлёт письмо, статус домена станет Active.
+1. Cloudflare → Add a domain → `carpets.wiki` → тариф Free.
+2. Cloudflare покажет два nameserver'а (вида `xxx.ns.cloudflare.com`). Прописать их у регистратора carpets.wiki вместо текущих. Активация занимает от нескольких минут до нескольких часов: Cloudflare пришлёт письмо, статус домена станет Active.
 
 ## 2. Cloudflare: DNS-записи
 
@@ -20,13 +20,13 @@ DNS → Records → Add record, все записи типа **A** на `66.151.
 
 | Name | Content | Proxy status |
 |---|---|---|
-| `@` (carpet.wiki) | 66.151.34.206 | DNS only (серое облако) |
+| `@` (carpets.wiki) | 66.151.34.206 | DNS only (серое облако) |
 | `www` | 66.151.34.206 | DNS only |
 | `studio` | 66.151.34.206 | DNS only |
 
 Пока выпускается сертификат, оставьте **DNS only**. Когда всё заработает, облако можно включить (Proxied), предварительно поставив SSL/TLS → Overview → **Full (strict)**. С режимом Flexible будет бесконечный редирект.
 
-Проверка (с любого компьютера): `dig +short carpet.wiki` и `dig +short studio.carpet.wiki` должны вернуть `66.151.34.206`.
+Проверка (с любого компьютера): `dig +short carpets.wiki` и `dig +short studio.carpets.wiki` должны вернуть `66.151.34.206`.
 
 ## 3. VPS: обновить код и поднять контейнер лендинга
 
@@ -45,10 +45,10 @@ docker exec nginx getent hosts cps                 # и этот тоже
 
 ```bash
 C=/home/vallefor/upriver-server/data/nginx/conf.d
-cat > $C/carpet.wiki.conf <<'EOF'
+cat > $C/carpets.wiki.conf <<'EOF'
 server {
   listen 80;
-  server_name carpet.wiki www.carpet.wiki studio.carpet.wiki;
+  server_name carpets.wiki www.carpets.wiki studio.carpets.wiki;
   location /.well-known/acme-challenge/ { root /var/www/certbot; }
   location / { return 404; }
 }
@@ -59,7 +59,7 @@ docker run --rm \
   -v /home/vallefor/upriver-server/data/certbot/conf:/etc/letsencrypt \
   -v /home/vallefor/upriver-server/data/certbot/www:/var/www/certbot \
   certbot/certbot certonly --webroot -w /var/www/certbot \
-  --cert-name carpet.wiki -d carpet.wiki -d www.carpet.wiki -d studio.carpet.wiki
+  --cert-name carpets.wiki -d carpets.wiki -d www.carpets.wiki -d studio.carpets.wiki
 ```
 
 Ошибка вида `DNS problem` или `Timeout during connect` значит, что DNS ещё не обновился (шаг 2) или включено оранжевое облако.
@@ -68,15 +68,15 @@ docker run --rm \
 
 ```bash
 C=/home/vallefor/upriver-server/data/nginx/conf.d
-cp ~/carpevo/cps/deploy/nginx/carpet.wiki.conf        $C/carpet.wiki.conf
-cp ~/carpevo/cps/deploy/nginx/studio.carpet.wiki.conf $C/studio.carpet.wiki.conf
+cp ~/carpevo/cps/deploy/nginx/carpets.wiki.conf        $C/carpets.wiki.conf
+cp ~/carpevo/cps/deploy/nginx/studio.carpets.wiki.conf $C/studio.carpets.wiki.conf
 docker exec nginx nginx -t && docker exec nginx nginx -s reload
 ```
 
 Проверка:
-- `https://carpet.wiki` — лендинг; `https://www.carpet.wiki` уводит на `carpet.wiki`;
-- `https://studio.carpet.wiki` — студия, спросит пароль; `/m` и `/api/health` работают;
-- `https://studio.carpet.wiki/api/vlm/status` — `key: true`.
+- `https://carpets.wiki` — лендинг; `https://www.carpets.wiki` уводит на `carpets.wiki`;
+- `https://studio.carpets.wiki` — студия, спросит пароль; `/m` и `/api/health` работают;
+- `https://studio.carpets.wiki/api/vlm/status` — `key: true`.
 
 Старый `cps.jeyran.az` на этом шаге продолжает работать как раньше.
 
@@ -95,8 +95,8 @@ docker exec nginx nginx -t && docker exec nginx nginx -s reload
 
 ## Продление сертификата
 
-Как и у `cps.jeyran.az`: если контейнер `upriver-server-certbot` продлевает всё из `/etc/letsencrypt/live`, новый сертификат `carpet.wiki` продлится сам. Если нет — раз в ~80 дней `docker run ... certbot/certbot renew` с теми же томами, затем `nginx -s reload`.
+Как и у `cps.jeyran.az`: если контейнер `upriver-server-certbot` продлевает всё из `/etc/letsencrypt/live`, новый сертификат `carpets.wiki` продлится сам. Если нет — раз в ~80 дней `docker run ... certbot/certbot renew` с теми же томами, затем `nginx -s reload`.
 
 ## Новые поддомены потом
 
-Для `wiki.`, `azerbaijan.`, `shop.` и т.д.: A-запись в Cloudflare, затем `certbot certonly ... --cert-name carpet.wiki --expand` со всеми именами (старые + новое) и отдельный `server`-блок в nginx. Если поддоменов станет много, удобнее перейти на wildcard `*.carpet.wiki`: Cloudflare Origin Certificate (15 лет, при включённом проксировании) или certbot с DNS-проверкой через API Cloudflare.
+Для `wiki.`, `azerbaijan.`, `shop.` и т.д.: A-запись в Cloudflare, затем `certbot certonly ... --cert-name carpets.wiki --expand` со всеми именами (старые + новое) и отдельный `server`-блок в nginx. Если поддоменов станет много, удобнее перейти на wildcard `*.carpets.wiki`: Cloudflare Origin Certificate (15 лет, при включённом проксировании) или certbot с DNS-проверкой через API Cloudflare.
