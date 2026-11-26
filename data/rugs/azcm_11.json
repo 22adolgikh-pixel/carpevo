@@ -16,9 +16,37 @@
  "status": "new",
  "w": 1630,
  "h": 2400,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795698063779x5",
+   "box": [
+    0.3704,
+    0.4625,
+    0.2963,
+    0.05
+   ],
+   "zone": "other",
+   "motif": "qeychi",
+   "scheme": "t104_f04",
+   "motif_text": "",
+   "group": "gm1795698063779x5",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.937,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795698063,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795698063,
+   "found_from": "azr_kuba_perepedil30"
+  }
+ ],
  "created": 1791870041,
- "updated": 1795293047,
+ "updated": 1795698063,
  "cat": {
   "title": "“Bico” («Биджо»), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -427,5 +455,6 @@
   ],
   "t": 1795207667
  },
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }
