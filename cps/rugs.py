@@ -3928,14 +3928,15 @@ def install(app, DATA, D_WORK):
             V = _xf_votes(); vq = V.setdefault(qk, {})
             for i, x in enumerate(items):
                 ok = i in yes; box = [max(0.0, min(1.0, float(v))) for v in x["box"]]
-                vq.setdefault(_xf_ck(x["rid"], x["box"]), {})[me] = {"a": "yes" if ok else "no", "w": _wt(role), "t": now, "s": x.get("s")}
+                b0 = x.get("box0") if isinstance(x.get("box0"), list) and len(x["box0"]) == 4 else x["box"]       # v12.42: рамку могли поправить — голос по исходной находке
+                vq.setdefault(_xf_ck(x["rid"], b0), {})[me] = {"a": "yes" if ok else "no", "w": _wt(role), "t": now, "s": x.get("s"), **({"box": box} if x.get("ed") else {})}
                 if ok:
                     t = load(x["rid"])
                     if t:
                         mid = f"m{int(time.time() * 1000)}x{i}"
                         t.setdefault("marks", []).append({"id": mid, "box": [round(v, 5) for v in box], "zone": "other", **lab, "group": "g" + mid,
                                                           "certainty": "sure", "status": "confirmed", "note": "", "angle": 0, "flip": 0, "machine": "xfind",
-                                                          "score": round(float(x.get("s") or 0), 3), "xfer": "", "by": "ночной поиск → " + me, "at": now,
+                                                          "score": round(float(x.get("s") or 0), 3), "xfer": "", "by": "ночной поиск → " + me, **({"fixed_by": me} if x.get("ed") else {}), "at": now,
                                                           "confirmed_by": me, "confirmed_at": now, "found_from": rid})
                         t["updated"], t["updated_by"] = now, me; save(t); added += 1
                 MS.label_log({"key": "xfind:" + qk, "q_rug": rid, "q_mark": g, "rug": x["rid"], "box": box, "score": x.get("s"), "ok": ok, "who": me, **lab})

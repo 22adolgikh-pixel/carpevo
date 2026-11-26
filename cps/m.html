@@ -446,16 +446,26 @@ function showXsame(t){const f=(x)=>`<figure><img src="${crop(x.rid,x.box,300,0.3
 // v12.36 «на других коврах»: ночной поиск (Colab) нашёл места, похожие на элемент-образец. Тап по плитке — ✓ это он (на тот ковёр ставится
 // подтверждённая рамка с названием образца), неотмеченные — «не он». ⤢ — крупно с соседями.
 function showXfind(t){document.documentElement.style.setProperty('--imh','26dvh');const sel=new Set();
-  const f=(x,i)=>`<div class="tl" data-i="${i}"><img loading="lazy" src="${crop(x.rid,x.box,240,0.35,1)}" alt="" style="width:100%;height:auto;max-height:24dvh;aspect-ratio:1;object-fit:contain;background:#000"><b>${esc((x.title||x.rid).slice(0,34))}</b><button class="zz" data-z="${i}" aria-label="крупно">⤢</button></div>`;
-  $('main').innerHTML=`${qhead('Где тот же элемент?','Сверху — элемент, обведённый на ковре (жёлтая рамка). Ниже — места на других коврах, которые машина ночью сочла похожими. Тап — ✓ это тот же элемент (поворот, зеркало, цвет и размер не важны — важна форма). Неотмеченные запишутся как «не он». На отмеченный ковёр сразу ставится подтверждённая рамка с тем же названием.')}
-   <div class="pair" style="justify-content:center"><figure><img src="${crop(t.q.rid,t.q.box,300,0.35,1)}" alt="" style="max-height:24dvh"><figcaption>${esc(t.title||t.rid)}${t.q.n>1?' · повторов '+t.q.n:''}</figcaption></figure></div>
-   <div class="grid tw xf" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">${t.items.map(f).join('')}</div>
+  t.items.forEach(x=>{if(!x.box0)x.box0=x.box.slice();});
+  const tile=(x,i)=>`<div class="tl${sel.has(i)?' sel':''}" data-i="${i}"><img loading="lazy" src="${crop(x.rid,x.box,240,0.35,1)}" alt="" style="width:100%;height:auto;max-height:24dvh;aspect-ratio:1;object-fit:contain;background:#000"><b>${esc((x.title||x.rid).slice(0,34))}${x.box!==x.box0&&x.ed?' · ✎':''}</b><button class="zz" data-z="${i}" aria-label="крупно">⤢</button></div>`;
+  $('main').innerHTML=`${qhead('Где тот же элемент?','Сверху — образец: элемент, обведённый на другом ковре (жёлтая рамка). Ниже — места на других коврах, которые машина ночью сочла похожими; жёлтая рамка — где именно, размер как у образца. Тап — ✓ это тот же элемент (поворот, зеркало, цвет и размер не важны — важна форма). Рамка великовата или мимо — ⤢ и «✎ поправить рамку». Неотмеченные запишутся как «не он». На отмеченный ковёр сразу ставится подтверждённая рамка с тем же названием.')}
+   <div class="pair" style="justify-content:center"><figure><img src="${crop(t.q.rid,t.q.box,300,0.35,1)}" alt="" style="max-height:24dvh"><figcaption>образец · ${esc(t.title||t.rid)}${t.q.n>1?' · повторов '+t.q.n:''}</figcaption></figure></div>
+   <div class="grid tw xf" id="xfg" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))"></div>
    <div class="btns"><button class="yes" id="a1">ни один не тот</button><button class="sm unk" id="a4">пропустить</button></div>`;qtip();
   const upd=()=>{$('a1').textContent=sel.size?`✓ готово: тот же — ${sel.size}`:'ни один не тот';};
-  document.querySelectorAll('.grid.tw .tl').forEach(e=>e.onclick=ev=>{if(ev.target.closest('.zz'))return;const i=+e.dataset.i;sel.has(i)?sel.delete(i):sel.add(i);e.classList.toggle('sel',sel.has(i));upd();});
-  document.querySelectorAll('.zz').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const x=t.items[+b.dataset.z],o=document.createElement('div');o.className='ovl';
-    o.innerHTML=`<img src="${crop(t.q.rid,t.q.box,420,1.2,1)}" alt="" style="max-height:44dvh"><img src="${crop(x.rid,x.box,420,1.2,1)}" alt="" style="max-height:44dvh"><span class="mut">${esc((x.title||'').slice(0,60))} · тап — закрыть</span>`;o.onclick=()=>o.remove();document.body.appendChild(o);});
-  $('a1').onclick=()=>answer(t,'done',null,{key:t.key,items:t.items.map(x=>({rid:x.rid,box:x.box,s:x.s})),yes:[...sel]});
+  const fix=i=>{const x=t.items[i];markEdit({rid:x.rid},{id:'xf'+i,box:x.box},nb=>{x.box=nb;x.ed=1;sel.add(i);render();});};
+  const zoom=i=>{const x=t.items[i],o=document.createElement('div');o.className='ovl';
+    // v12.42: подписи — что образец, что находка; рамку находки можно поправить
+    o.innerHTML=`<span class="mut">образец · ${esc((t.title||t.rid).slice(0,60))}</span><img src="${crop(t.q.rid,t.q.box,420,1.2,1)}" alt="" style="max-height:40dvh"><span class="mut">находка машины · ${esc((x.title||'').slice(0,60))}</span><img src="${crop(x.rid,x.box,420,1.2,1)}" alt="" style="max-height:40dvh">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><button class="yes" id="xz_y">${sel.has(i)?'✓ это он (снять)':'✓ это он'}</button><button id="xz_e">✎ поправить рамку</button><button class="sm" id="xz_c">закрыть</button></div>`;
+    document.body.appendChild(o);o.onclick=ev=>{if(ev.target===o)o.remove();};
+    o.querySelector('#xz_y').onclick=()=>{sel.has(i)?sel.delete(i):sel.add(i);o.remove();render();};
+    o.querySelector('#xz_e').onclick=()=>{o.remove();fix(i);};o.querySelector('#xz_c').onclick=()=>o.remove();};
+  const render=()=>{$('xfg').innerHTML=t.items.map(tile).join('');upd();
+    document.querySelectorAll('#xfg .tl').forEach(e=>e.onclick=ev=>{if(ev.target.closest('.zz'))return;const i=+e.dataset.i;sel.has(i)?sel.delete(i):sel.add(i);e.classList.toggle('sel',sel.has(i));upd();});
+    document.querySelectorAll('#xfg .zz').forEach(b=>b.onclick=ev=>{ev.stopPropagation();zoom(+b.dataset.z);});};
+  render();
+  $('a1').onclick=()=>answer(t,'done',null,{key:t.key,items:t.items.map(x=>({rid:x.rid,box:x.box,box0:x.box0,s:x.s,ed:x.ed?1:0})),yes:[...sel]});
   $('a4').onclick=()=>answer(t,'skip',null,{key:t.key});}
 kindsInit();load();
 </script></body></html>

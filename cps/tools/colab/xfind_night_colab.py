@@ -218,7 +218,9 @@ for rid in live:
     for m in R[rid].get("marks") or []:
         if m.get("status") == "confirmed" and isinstance(m.get("box"), list) and len(m["box"]) == 4: gr.setdefault(m.get("group") or m["id"], []).append(m)
     for g, ms in gr.items():
-        ms.sort(key=lambda m: (bool(m.get("machine")), -m["box"][2] * m["box"][3]))
+        # v12.42: образец — рамка среднего размера (была самая большая: широкие рамки на 2–3 элемента давали такие же широкие находки)
+        med = float(np.median([m["box"][2] * m["box"][3] for m in ms]))
+        ms.sort(key=lambda m: (bool(m.get("machine")), abs(math.log(max(1e-9, m["box"][2] * m["box"][3]) / max(1e-9, med)))))
         Q.append({"rid": rid, "g": g, "boxes": [m["box"] for m in ms[:4]], "n": len(ms)})
 if os.environ.get("XF_GROUPS"): Q = Q[:int(os.environ["XF_GROUPS"])]   # проба
 log(f"групп {len(Q)}")

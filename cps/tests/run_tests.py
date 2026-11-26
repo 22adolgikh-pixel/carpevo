@@ -2548,11 +2548,19 @@ def t60_xfind_card_v1236(pg, ctx):
     get = lambda path: _j.load(U.urlopen(ctx['url'] + path))
     j = get('api/micro/next?n=12&k=xfind'); ts = [t for t in j['tasks'] if t['type'] == 'xfind']
     assert ts and len(ts[0]['items']) == 2, f"нет карточки «на других коврах»: {j['left']}"
-    pg.goto(ctx['url'] + 'm?k=xfind'); pg.wait_for_selector('.grid.tw .tl', timeout=15000); pg.wait_for_timeout(600)
+    pg.goto(ctx['url'] + 'm?k=xfind'); pg.wait_for_selector('#xfg .tl', timeout=15000); pg.wait_for_timeout(600)
     pg.screenshot(path=os.path.join(OUT, 't60_xfind.png'))
-    pg.click('.grid.tw .tl[data-i="0"]'); pg.wait_for_timeout(200); pg.click('#a1'); pg.wait_for_timeout(1500)
+    # v12.42: ⤢ — подписи «образец» / «находка», «✎ поправить рамку» → правка, плитка отмечается ✓ сама
+    pg.click('.grid.tw .tl[data-i="0"] .zz'); pg.wait_for_selector('#xz_e', timeout=3000)
+    assert 'образец' in pg.inner_text('.ovl') and 'находка' in pg.inner_text('.ovl'), 'в крупном виде нет подписей образец / находка'
+    pg.click('#xz_e'); pg.wait_for_selector('#ed #eb', timeout=3000); pg.wait_for_timeout(300)
+    eb = pg.query_selector('#eb').bounding_box(); ei = pg.query_selector('#ei').bounding_box()
+    pg.mouse.move(eb['x'] + eb['width'] / 2, eb['y'] + eb['height'] / 2); pg.mouse.down(); pg.mouse.move(eb['x'] + eb['width'] / 2 + ei['width'] * 0.1, eb['y'] + eb['height'] / 2, steps=5); pg.mouse.up()
+    pg.click('#eo'); pg.wait_for_timeout(300)
+    assert 'sel' in (pg.get_attribute('#xfg .tl[data-i="0"]', 'class') or ''), 'после правки рамки плитка не отмечена'
+    pg.click('#a1'); pg.wait_for_timeout(1500)
     ma = [m for m in get('api/rugs/xf_a')['marks'] if m.get('machine') == 'xfind']
-    assert ma and ma[0]['status'] == 'confirmed' and ma[0]['motif_text'] == 'тест-гёль', f'✓ не поставил рамку с названием: {ma}'
+    assert ma and ma[0]['status'] == 'confirmed' and ma[0]['motif_text'] == 'тест-гёль' and ma[0].get('fixed_by') and ma[0]['box'][0] > 0.51, f'✓ не поставил поправленную рамку с названием: {ma}'
     assert not [m for m in get('api/rugs/xf_b')['marks'] if m.get('machine') == 'xfind'], 'неотмеченная находка получила рамку'
     assert not [t for t in get('api/micro/next?n=12&k=xfind')['tasks'] if t['type'] == 'xfind'], 'отвеченная карточка вернулась'
     up = _j.loads(U.urlopen(U.Request(ctx['url'] + 'api/open/xfind_upload', data=_j.dumps({'t': int(time.time()) + 5, 'items': [{'q': {'rid': 'xf_q', 'g': 'gq', 'box': [.3, .3, .1, .1]}, 'c': [{'rid': 'xf_b', 'box': [.6, .2, .1, .1], 's': .8}]}]}).encode(), headers={'Content-Type': 'application/json'}, method='POST')).read())
