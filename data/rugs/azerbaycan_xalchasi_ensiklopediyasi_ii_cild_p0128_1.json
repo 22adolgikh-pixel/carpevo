@@ -9,7 +9,7 @@
  "place": "Карабах",
  "date": "19 в.",
  "school": "karabakh",
- "composition": "",
+ "composition": "ejdahali",
  "technique": "безворсовый: верни",
  "size": "225x283 см",
  "notes": "Vərni. Qarabağ. Azərbaycan. 19-cu əsr. Material: yun. Ölçü: 225x283 sm. Azərbaycan Xalça Muzeyi. DDK 6892.",
@@ -89,6 +89,10 @@
   {
    "id": "intangible_2850_p0124_1",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Azerbaijanian_carpet_from_Karabakh_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -136,6 +140,11 @@
    "ok": false,
    "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0127_1 ≠ intangible_2850_p0124_1",
    "at": 1795016030
+  },
+  "wikimedia_File_Azerbaijanian_carpet_from_Karabakh_jpg": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795720278
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -320,5 +329,8 @@
    57.569
   ],
   "t": 1795207697
+ },
+ "from_twin": {
+  "composition": "wikimedia_File_Azerbaijanian_carpet_from_Karabakh_jpg"
  }
 }

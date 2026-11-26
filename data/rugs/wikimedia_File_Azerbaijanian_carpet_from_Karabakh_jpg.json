@@ -9,7 +9,7 @@
  "place": "Карабах, Азербайджан",
  "date": "19th centurydate QS:P,+1850-00-00T00:00:00Z/7",
  "school": "karabakh",
- "composition": "",
+ "composition": "ejdahali",
  "technique": "безворсовый",
  "size": "225x283 sm",
  "notes": "",
@@ -18,7 +18,7 @@
  "h": 1037,
  "marks": [],
  "created": 1791736123,
- "updated": 1795463116,
+ "updated": 1795720278,
  "cat": {
   "title": "Azerbaijanian carpet from Karabakh.jpg",
   "museum": "Wikimedia Commons",
@@ -56,6 +56,18 @@
   {
    "id": "cm_e645ab9a9e",
    "score": 58
+  },
+  {
+   "id": "cm_ac5b5df52e",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol1_p318_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -68,6 +80,22 @@
    "ok": true,
    "by": "dolgikh",
    "at": 1792271614
+  },
+  "cm_ac5b5df52e": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795720278
+  },
+  "kerimov_vol1_p318_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795720278,
+   "similar": true
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795720278
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -96,7 +124,8 @@
  "from_twin": {
   "inv": "azcm_170",
   "place": "azcm_170",
-  "size": "azcm_170"
+  "size": "azcm_170",
+  "composition": "cm_ac5b5df52e"
  },
  "hist": {
   "composition": [
@@ -137,6 +166,29 @@
      "a": "one",
      "w": 2,
      "t": 1795463116
+    }
+   }
+  },
+  "same": {
+   "cm_ac5b5df52e": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795720278
+    }
+   },
+   "kerimov_vol1_p318_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795720278
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0128_1": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795720278
     }
    }
   }
