@@ -3117,6 +3117,14 @@ def install(app, DATA, D_WORK):
         return {"frame": cl[k], "conf": round(float(conf), 3), "p": round(float(s), 3), "multi": p[len(cl)] if len(p) > len(cl) else 0.0,
                 "v": vlm_corners.FRAME_VER, "t": M.get("t", 0), "model": M.get("model", "frame_v2"), "auto_p": M.get("auto_p")}
 
+    def _fl_guess(rid):
+        """v12.39: флажки «снят в перспективе» / «рваные края» по модели (models/frame_v2.json → flags; порог — точность ≥ 60 % на проверке).
+        Только подсказка: в карточке «кадр» галочка ставится заранее, человек снимает, если не так."""
+        F_ = (_f2() or {}).get("flags") or {}; p = (F_.get("p") or {}).get(rid)
+        if not p: return None
+        o = {k: True for k, v, t in (("skew", p[0], F_.get("skew_thr", 1)), ("damaged", p[1], F_.get("damaged_thr", 1))) if v >= t}
+        return o or None
+
     def _vf_of(r):
         v = ((r or {}).get("auto") or {}).get("vlm_frame")
         if v and v.get("v", 0) >= vlm_corners.FRAME_VER: return v
@@ -4344,7 +4352,8 @@ def install(app, DATA, D_WORK):
         more = _more_queues(me, rows, by, want)
         Q = {"quad": [_ref_task(x) for x in qd[:n]],
              "frame": [{"type": "frame", "rid": x["id"], **({"ctl": 1} if fr_auto(x, fst) else {}), **({"rc": 1, "vf": x["vf"]["frame"], "was": x["frame"]} if x.get("rc") else {}),
-                        **({"guess": x["vf"]["frame"], "gconf": x["vf"]["conf"], "gmulti": x["vf"].get("multi") or 0} if x.get("vf") else {})} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
+                        **({"guess": x["vf"]["frame"], "gconf": x["vf"]["conf"], "gmulti": x["vf"].get("multi") or 0} if x.get("vf") else {}),
+                        **({"flg": _fl_guess(x["id"])} if _fl_guess(x["id"]) else {})} for x in fr[:n]], **{t: more[t][:n] for t in MORE}}
         cdq = _cdup_queue(me) if "cdup" in want else []; Q["cdup"] = cdq[:n]
         xsq = _xs_queue(me, rows) if "xsame" in want else []; Q["xsame"] = xsq[:n]
         rsq = _rsame_queue(me, by) if "rsame" in want else []; Q["rsame"] = rsq[:n]

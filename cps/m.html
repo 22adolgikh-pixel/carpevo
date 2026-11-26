@@ -150,6 +150,7 @@ function showFrame(t){document.documentElement.style.setProperty('--imh','40dvh'
    <div class="btns"><button class="yes wide" id="a1">✓ целый ковёр</button><button id="a2">обрезан заметно</button><button id="a3">только деталь</button><button class="no" id="a4">не ковёр</button><button id="a6">несколько ковров</button><button class="sm wide" id="a5">не знаю</button></div>
   `;qtip();
   if(t.fl){$('fs').checked=!!t.fl.skew;$('fd').checked=!!t.fl.damaged;}
+  else if(t.flg){$('fs').checked=!!t.flg.skew;$('fd').checked=!!t.flg.damaged;document.querySelector('.flags').insertAdjacentHTML('afterend','<div class="mut" style="text-align:center;font-size:12px">галочку поставила модель — снимите, если не так</div>');}   /* v12.39 */
   S.im=$('im');$('a1').onclick=()=>answer(t,'whole');$('a2').onclick=()=>answer(t,'cropped');$('a3').onclick=()=>answer(t,'detail');$('a4').onclick=()=>answer(t,'not_rug');$('a6').onclick=()=>answer(t,'multi');$('a5').onclick=()=>answer(t,'skip');
   zoomable();}
 function poly(q){return q.map(p=>p.join(',')).join(' ');}
