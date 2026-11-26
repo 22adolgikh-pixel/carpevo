@@ -99,22 +99,30 @@ def edge_curves(canvas, valid, geo, nst=64, search=0.05, taper=0.06):
     return out, strength
 
 
-def coons_warp(canvas, geo, curves):
-    """4 кривые → ровный прямоугольник W×H. curves — смещения внутрь (px) вдоль каждой стороны."""
+def coons_warp(canvas, geo, curves, c2d=None):
+    """4 кривые → ровный прямоугольник W×H. curves — смещения внутрь (px) вдоль каждой стороны.
+    v12.40: c2d — кривые сторон точками [[x, y]] в долях рамки углов (правка человеком: узлы можно ставить где угодно, углы тоже двигаются)."""
     W, H, px, py = geo["W"], geo["H"], geo["px"], geo["py"]
-    nst = len(curves["top"]); tt = np.linspace(0, 1, nst)
     u = (np.arange(W) + 0.5) / W; v = (np.arange(H) + 0.5) / H
-    fu = lambda k: np.interp(u, tt, curves[k]); fv = lambda k: np.interp(v, tt, curves[k])
-    Tx, Ty = px + u * W, py + fu("top")
-    Bx, By = px + u * W, py + H - fu("bot")
-    Lx, Ly = px + fv("left"), py + v * H
-    Rx, Ry = px + W - fv("right"), py + v * H
+    c00, c10, c01, c11 = (px, py), (px + W, py), (px, py + H), (px + W, py + H)
+    if c2d:
+        C = {k: np.asarray(c, float) for k, c in c2d.items()}; t2 = np.linspace(0, 1, len(C["top"]))
+        ev = lambda k, s: (px + np.interp(s, t2, C[k][:, 0]) * W, py + np.interp(s, t2, C[k][:, 1]) * H)
+        Tx, Ty = ev("top", u); Bx, By = ev("bot", u); Lx, Ly = ev("left", v); Rx, Ry = ev("right", v)
+        c00, c10, c01, c11 = (Tx[0], Ty[0]), (Tx[-1], Ty[-1]), (Bx[0], By[0]), (Bx[-1], By[-1])
+    else:
+        nst = len(curves["top"]); tt = np.linspace(0, 1, nst)
+        fu = lambda k: np.interp(u, tt, curves[k]); fv = lambda k: np.interp(v, tt, curves[k])
+        Tx, Ty = px + u * W, py + fu("top")
+        Bx, By = px + u * W, py + H - fu("bot")
+        Lx, Ly = px + fv("left"), py + v * H
+        Rx, Ry = px + W - fv("right"), py + v * H
     U, V = u[None, :], v[:, None]
     def blend(T, B, L, R, c00, c10, c01, c11, TT, BB, LL, RR):
         return ((1 - V) * TT[None, :] + V * BB[None, :] + (1 - U) * LL[:, None] + U * RR[:, None]
                 - ((1 - U) * (1 - V) * c00 + U * (1 - V) * c10 + (1 - U) * V * c01 + U * V * c11))
-    X = blend(None, None, None, None, px, px + W, px, px + W, Tx, Bx, Lx, Rx)
-    Y = blend(None, None, None, None, py, py, py + H, py + H, Ty, By, Ly, Ry)
+    X = blend(None, None, None, None, c00[0], c10[0], c01[0], c11[0], Tx, Bx, Lx, Rx)
+    Y = blend(None, None, None, None, c00[1], c10[1], c01[1], c11[1], Ty, By, Ly, Ry)
     if canvas is None: return X.astype(np.float32), Y.astype(np.float32)          # v11.84: только карты (точка ровного ковра → точка полотна)
     return cv2.remap(canvas, X.astype(np.float32), Y.astype(np.float32), cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
 
@@ -179,22 +187,68 @@ def mesh_better(qr, qm, d_dev=0.15, d_sym=0.05):
 EF_ST = (0.2, 0.5, 0.8)            # станции правки края: доли длины стороны, где у человека ручки
 
 
+EF_LIM2 = (-0.12, 1.12)            # v12.40: координаты узлов и углов правки — доли рамки углов (0..1), запас ±12 %
+SIDES = {"top": (0, 1), "right": (1, 2), "bot": (3, 2), "left": (0, 3)}   # сторона → (угол-начало, угол-конец); углы TL, TR, BR, BL
+
+
+def ef_v2(fix):
+    """правка края → формат v2: {"v": 2, "c": 4 угла [[x, y]], "top"/"bot"/"left"/"right": узлы [[x, y], …], "mode": "smooth"|"line"},
+    координаты — доли рамки углов (0..1; за рамкой — < 0 или > 1). v1 (по три смещения на сторону на станциях EF_ST) переводится без потерь."""
+    if not fix: return None
+    if fix.get("v") == 2: return fix
+    out = {"v": 2, "c": [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0]], "mode": "smooth"}
+    for k in ("top", "bot", "left", "right"):
+        v = [float(x) for x in (fix.get(k) or [0, 0, 0])][:3]; v += [0.0] * (3 - len(v))
+        out[k] = [[t, d] if k == "top" else [t, 1 - d] if k == "bot" else [d, t] if k == "left" else [1 - d, t] for t, d in zip(EF_ST, v)]
+    return out
+
+
+def _side_pts(f, k):
+    a, b = SIDES[k]; P = [f["c"][a]] + sorted(f.get(k) or [], key=lambda p: p[0] if k in ("top", "bot") else p[1]) + [f["c"][b]]
+    return np.array(P, float)
+
+
+def side_curve(P, nst=64, smooth=True):
+    """узлы стороны (от угла до угла) → nst точек, равномерно по длине. smooth — Кэтмелл-Ром через все узлы, иначе ломаная.
+    Тот же расчёт в /m (edgeCurve), чтобы человек видел ту же линию, по которой выпрямится ковёр."""
+    P = np.asarray(P, float); m = len(P)
+    if m < 2: return np.repeat(P[:1], nst, 0)
+    Q = np.vstack([2 * P[0] - P[1], P, 2 * P[-1] - P[-2]]); s = np.linspace(0, 1, 24, endpoint=False)[:, None]; pts = []
+    for i in range(m - 1):
+        p0, p1, p2, p3 = Q[i], Q[i + 1], Q[i + 2], Q[i + 3]
+        if smooth: pts.append(0.5 * (2 * p1 + (-p0 + p2) * s + (2 * p0 - 5 * p1 + 4 * p2 - p3) * s ** 2 + (-p0 + 3 * p1 - 3 * p2 + p3) * s ** 3))
+        else: pts.append(p1 + (p2 - p1) * s)
+    pts.append(P[-1:]); C = np.vstack(pts)
+    L = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(C, axis=0).T))]); u = np.linspace(0, L[-1], nst)
+    return np.stack([np.interp(u, L, C[:, 0]), np.interp(u, L, C[:, 1])], 1)
+
+
+def curves2d_from_fix(fix, nst=64):
+    f = ef_v2(fix)
+    if not f: return None
+    sm = f.get("mode", "smooth") != "line"
+    return {k: side_curve(_side_pts(f, k), nst, sm) for k in SIDES}
+
+
 def fix_pad(fix):
     """v12.36: запас полотна под правку края. Было всегда 0,07: ручку, вытянутую за линию углов дальше 7 %, полотно не покрывало —
-    край «размазывался» повтором крайних пикселей, и казалось, что ничего не меняется (лимит ручки −0,12)."""
-    try: m = min(float(x) for k in ("top", "bot", "left", "right") for x in ((fix or {}).get(k) or [0]))
-    except Exception: m = 0.0
-    return max(0.07, -m + 0.03)
+    край «размазывался» повтором крайних пикселей, и казалось, что ничего не меняется."""
+    c2 = curves2d_from_fix(fix, 32)
+    if not c2: return 0.07
+    over = max(float(max((-v).max(), (v - 1).max())) for v in c2.values())
+    return max(0.07, over + 0.03)
 
 
 def curves_from_fix(fix, geo, nst=64):
-    """правка края человеком → кривые краёв (px, внутрь ковра), как у edge_curves. fix[сторона] — три числа: смещение края внутрь от линии углов
-    в долях высоты (верх/низ) или ширины (лево/право); отрицательное — ковёр вылез за линию углов. У углов смещение 0 (углы человек уже поставил)."""
-    tt = np.linspace(0, 1, nst); out = {}
-    for k in ("top", "bot", "left", "right"):
-        L = geo["H"] if k in ("top", "bot") else geo["W"]
-        v = [float(x) for x in (fix.get(k) or [0, 0, 0])][:3]; v += [0.0] * (3 - len(v))
-        out[k] = _smooth(np.interp(tt, [0, *EF_ST, 1], [0.0, *[x * L for x in v], 0.0]), 2.0)
+    """правка → смещения краёв внутрь (px) вдоль сторон, как у edge_curves (для размаха и старых потребителей). Само выпрямление — по curves2d_from_fix."""
+    c2 = curves2d_from_fix(fix, nst); tt = np.linspace(0, 1, nst); out = {}
+    for k, v in c2.items():
+        if k in ("top", "bot"):
+            y = np.interp(tt, v[:, 0], v[:, 1]) if np.all(np.diff(v[:, 0]) > 0) else v[:, 1]
+            out[k] = (y if k == "top" else 1 - y) * geo["H"]
+        else:
+            x = np.interp(tt, v[:, 1], v[:, 0]) if np.all(np.diff(v[:, 1]) > 0) else v[:, 0]
+            out[k] = (x if k == "left" else 1 - x) * geo["W"]
     return out
 
 
@@ -207,12 +261,14 @@ def mesh_rectify_safe(img, quad, side=1200, fix=None):
     canvas, valid, geo = rectify_padded(img, quad, side, pad=fix_pad(fix) if fix else 0.07)
     curves, strength = edge_curves(canvas, valid, geo)
     n = len(curves["top"]); full = {k: v.tolist() for k, v in curves.items()}
+    c2d = curves2d_from_fix(fix, n) if fix else None
     if fix: curves = curves_from_fix(fix, geo, n)
     else: curves = {**curves, "top": np.zeros(n), "bot": np.zeros(n)}
-    out = coons_warp(canvas, geo, curves)
+    out = coons_warp(canvas, geo, curves, c2d)
     sh = min(geo["W"], geo["H"])
     rng = {k: float((v.max() - v.min()) / sh * 100) for k, v in curves.items()}
     info = {"geo": geo, "curves": {k: v.tolist() for k, v in curves.items()}, "range_pct": rng, "strength": strength, "curves_full": full}
+    if c2d: info["edge2d"] = {k: [[round(float(a), 5), round(float(b), 5)] for a, b in v] for k, v in c2d.items()}
     rect = rectify(img, quad, side=side)
     if rect.shape[:2] != out.shape[:2]: rect = cv2.resize(rect, (out.shape[1], out.shape[0]), interpolation=cv2.INTER_AREA)
     info["fringe"] = fringe_score(rect)
@@ -462,14 +518,14 @@ def _lookup(X, Y, pts):
     return out
 
 
-def to_photo(part, pts, box, fc, geo, edge, quad):
+def to_photo(part, pts, box, fc, geo, edge, quad, e2d=None):
     """точки части → доли исходного фото. Цепочка: часть → ковёр после выравнивания поля → ковёр с ровными краями (карта field_warp)
     → полотно с запасом (карта coons_warp) → фото (обратная перспектива по 4 углам). geo, edge — из mesh_rectify, quad — углы (доли фото)."""
     W, H = geo["W"], geo["H"]
     p = part_to_mesh(part, pts, box)
     if fc is not None:
         X, Y, _ = field_warp((H, W), fc, maps=True); p = _lookup(X, Y, p)
-    X, Y = coons_warp(None, geo, {k: np.asarray(v, float) for k, v in edge.items()}); p = _lookup(X, Y, p)
+    X, Y = coons_warp(None, geo, {k: np.asarray(v, float) for k, v in edge.items()}, e2d); p = _lookup(X, Y, p)
     px, py = geo["px"], geo["py"]
     T = cv2.getPerspectiveTransform(np.float32([[px, py], [px + W, py], [px + W, py + H], [px, py + H]]), np.float32(quad))
     q = cv2.perspectiveTransform(np.float32(p).reshape(-1, 1, 2), T).reshape(-1, 2)

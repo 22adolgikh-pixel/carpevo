@@ -1913,7 +1913,7 @@ def install(app, DATA, D_WORK):
         m = {"v": MESH_VER, "quad": [[float(u), float(v)] for u, v in q], "w": int(img.shape[1]), "h": int(img.shape[0]),
              "edge_pct": {k: round(v, 2) for k, v in info["range_pct"].items()}, "cands": cands, "t": int(time.time()),
              "geo": info["geo"], "choice": info.get("choice"), "q_rect": info.get("q_rect"), "q_mesh": info.get("q_mesh"), "fringe": info.get("fringe"), "fix_t": (fix or {}).get("t") or 0,
-             "edge_full": {k: [round(float(x), 2) for x in v] for k, v in (info.get("curves_full") or {}).items()}, "edge": {k: [round(float(x), 2) for x in v] for k, v in info["curves"].items()}}
+             "edge_full": {k: [round(float(x), 2) for x in v] for k, v in (info.get("curves_full") or {}).items()}, "edge": {k: [round(float(x), 2) for x in v] for k, v in info["curves"].items()}, **({"edge2d": info["edge2d"]} if info.get("edge2d") else {})}
         alt = os.path.join(D_MESH, rid + ".m.jpg")                              # v12.19: сетка, которую отвергли (для проверки в /m)
         if info.get("mesh_img") is not None: cv2.imwrite(alt, info["mesh_img"], [cv2.IMWRITE_JPEG_QUALITY, 88]); m["range_mesh"] = {k: round(v, 2) for k, v in info["range_mesh"].items()}; m["edge_mesh"] = {k: [round(float(x), 2) for x in v] for k, v in info["curves_mesh"].items()}
         elif os.path.exists(alt): os.remove(alt)
@@ -1981,7 +1981,7 @@ def install(app, DATA, D_WORK):
         try: x, y, w, h = [float(v) for v in b.split(",")]
         except Exception: return JSONResponse({"error": "b=x,y,w,h"}, 400)
         import rug_mesh
-        q = rug_mesh.to_photo(part, [(x, y), (x + w, y), (x + w, y + h), (x, y + h)], pm["boxes"][part], r["layout"]["field"]["curves"], m["geo"], m["edge"], m["quad"])
+        q = rug_mesh.to_photo(part, [(x, y), (x + w, y), (x + w, y + h), (x, y + h)], pm["boxes"][part], r["layout"]["field"]["curves"], m["geo"], m["edge"], m["quad"], m.get("edge2d"))
         xs, ys = [p[0] for p in q], [p[1] for p in q]
         return {"quad": q, "box": [round(min(xs), 5), round(min(ys), 5), round(max(xs) - min(xs), 5), round(max(ys) - min(ys), 5)]}
 
@@ -3801,13 +3801,27 @@ def install(app, DATA, D_WORK):
         return fresh + again
 
     def _ef_clean(fix):
-        out = {}
-        for k in ("top", "bot", "left", "right"):
-            v = (fix or {}).get(k)
-            if not isinstance(v, (list, tuple)) or len(v) != 3: return None
-            try: v = [round(min(EF_LIM[1], max(EF_LIM[0], float(x))), 4) for x in v]
+        """v12.40: правка края в формате v2 (углы + узлы любой стороны, доли рамки углов); v1 (по три числа) переводится в v2"""
+        import rug_mesh
+        if isinstance(fix, dict) and fix.get("v") != 2:
+            for k in ("top", "bot", "left", "right"):
+                v = fix.get(k)
+                if not isinstance(v, (list, tuple)) or len(v) != 3: return None
+            try: fix = rug_mesh.ef_v2({k: [min(EF_LIM[1], max(EF_LIM[0], float(x))) for x in fix[k]] for k in ("top", "bot", "left", "right")})
             except Exception: return None
-            out[k] = v
+        if not isinstance(fix, dict): return None
+        lo, hi = rug_mesh.EF_LIM2
+        def pt(p):
+            x, y = float(p[0]), float(p[1])
+            if not (math.isfinite(x) and math.isfinite(y)): raise ValueError
+            return [round(min(hi, max(lo, x)), 4), round(min(hi, max(lo, y)), 4)]
+        try:
+            c = [pt(p) for p in fix.get("c") or []]
+            if len(c) != 4: return None
+            out = {"v": 2, "c": c, "mode": "line" if fix.get("mode") == "line" else "smooth"}
+            for k in ("top", "bot", "left", "right"):
+                out[k] = sorted([pt(p) for p in (fix.get(k) or [])][:8], key=lambda p: p[0] if k in ("top", "bot") else p[1])
+        except Exception: return None
         return out
 
     def _edge_answer(me, role, rid, a, body, rec):
@@ -3966,7 +3980,8 @@ def install(app, DATA, D_WORK):
         n = len(guide["top"]); at = lambda v, t: float(np.mean(v[max(0, int(round(t * (n - 1))) - 1):int(round(t * (n - 1))) + 2]))
         init = {k: [round(at(guide[k], t), 4) if k in ("left", "right") else 0.0 for t in rug_mesh.EF_ST] for k in L}
         old = edge_fix_of(r)
-        return {"pad": 0.12, "st": list(rug_mesh.EF_ST), "guide": guide, "init": init, "fix": ({k: old[k] for k in L} if old else None), "lim": list(EF_LIM)}
+        return {"pad": 0.12, "st": list(rug_mesh.EF_ST), "guide": guide, "init": rug_mesh.ef_v2(init), "lim2": list(rug_mesh.EF_LIM2), "lim": list(EF_LIM),
+                "fix": (_ef_clean({k: v for k, v in old.items() if k not in ("by", "t", "rot")}) if old else None)}
 
     @app.post("/api/rugs/{rid}/edgefix_preview")
     def api_edgefix_preview(rid: str, body: dict = Body(...)):
@@ -3979,7 +3994,7 @@ def install(app, DATA, D_WORK):
             a = cv2.imread(p)
             cv, valid, g = rug_mesh.rectify_padded(a, q, 900, pad=0.12); W, H, px, py = g["W"], g["H"], g["px"], g["py"]
             canvas, v2, g2 = rug_mesh.rectify_padded(a, q, 900, pad=rug_mesh.fix_pad(fix))
-            out = rug_mesh.coons_warp(canvas, g2, rug_mesh.curves_from_fix(fix, g2))
+            out = rug_mesh.coons_warp(canvas, g2, rug_mesh.curves_from_fix(fix, g2), rug_mesh.curves2d_from_fix(fix))
             cv = (cv * 0.35).astype(np.uint8); cv[py:py + H, px:px + W] = cv2.resize(out, (W, H), interpolation=cv2.INTER_AREA)
             cv2.rectangle(cv, (px, py), (px + W, py + H), (0, 213, 255), 2)
             return cv2.imencode(".jpg", cv, [cv2.IMWRITE_JPEG_QUALITY, 82])[1].tobytes()
