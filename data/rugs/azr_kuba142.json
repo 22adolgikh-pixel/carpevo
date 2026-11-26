@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba142",
  "lib_img": "img/azr_kuba142.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azcm_11",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azcm_11": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795720770
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
