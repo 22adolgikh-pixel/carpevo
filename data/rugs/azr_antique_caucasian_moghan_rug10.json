@@ -18,7 +18,7 @@
  "h": 735,
  "marks": [],
  "created": 1791736138,
- "updated": 1794983899,
+ "updated": 1795718656,
  "cat": {
   "title": "Antique Moghan rug, 105 x 208 cm, 1900s",
   "museum": "",
@@ -55,6 +55,10 @@
   {
    "id": "azr_antique_caucasian_moghan_rug84",
    "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_moghan_rug_nagel664",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -69,6 +73,11 @@
    "by": "/m: dolgikh",
    "at": 1794983899,
    "similar": true
+  },
+  "azr_antique_kazak_moghan_rug_nagel664": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795718656
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -118,6 +127,13 @@
      "a": "similar",
      "w": 2,
      "t": 1794983899
+    }
+   },
+   "azr_antique_kazak_moghan_rug_nagel664": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795718656
     }
    }
   }
