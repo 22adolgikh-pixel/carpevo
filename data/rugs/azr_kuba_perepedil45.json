@@ -16,9 +16,37 @@
  "status": "new",
  "w": 419,
  "h": 581,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795701954986x7",
+   "box": [
+    0.3103,
+    0.5625,
+    0.3448,
+    0.05
+   ],
+   "zone": "other",
+   "motif": "qeychi",
+   "scheme": "t104_f04",
+   "motif_text": "",
+   "group": "gm1795701954986x7",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.933,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795701954,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795701954,
+   "found_from": "intangible_2849_p0085_1"
+  }
+ ],
  "created": 1791736134,
- "updated": 1795205656,
+ "updated": 1795701954,
  "cat": {
   "title": "kuba perepedil45",
   "museum": "",
@@ -188,5 +216,6 @@
    35.5731
   ],
   "t": 1795207779
- }
+ },
+ "updated_by": "dolgikh"
 }
