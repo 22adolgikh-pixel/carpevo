@@ -3115,7 +3115,7 @@ def install(app, DATA, D_WORK):
         while j < len(X) - 1 and X[j + 1] <= s: j += 1
         conf = Y[0] if s <= X[0] else (Y[-1] if s >= X[-1] else Y[j] + (Y[j + 1] - Y[j]) * (s - X[j]) / max(1e-9, X[j + 1] - X[j]))
         return {"frame": cl[k], "conf": round(float(conf), 3), "p": round(float(s), 3), "multi": p[len(cl)] if len(p) > len(cl) else 0.0,
-                "v": vlm_corners.FRAME_VER, "t": M.get("t", 0), "model": M.get("model", "frame_v2")}
+                "v": vlm_corners.FRAME_VER, "t": M.get("t", 0), "model": M.get("model", "frame_v2"), "auto_p": M.get("auto_p")}
 
     def _vf_of(r):
         v = ((r or {}).get("auto") or {}).get("vlm_frame")
@@ -4305,6 +4305,8 @@ def install(app, DATA, D_WORK):
         if x.get("frame_by") in ("micro", "hand") or x.get("frame"): return False
         if st["on"] and st["thr"] and x.get("pw") is not None and x["pw"] >= st["thr"]: return True
         v = x.get("vf")                                                          # v12.03: «целый» по модели по картинке (и вероятностная модель не против)
+        if v and v.get("auto_p") and st.get("vf_on"):                           # v12.38: модель v3 (фото + выпрямленный): порог по P(целый),
+            return bool(v["frame"] == "whole" and v["p"] >= v["auto_p"] and (v.get("multi") or 0) < 0.9)   # подобран на проверке: «целый» верно ≥ 98 %
         thr = VF2_AUTO if v and str(v.get("model", "")).startswith("dinov3") else VF_THR
         return bool(st.get("vf_on") and v and v["frame"] == "whole" and v["conf"] >= thr and (x.get("pw") is None or x["pw"] >= 0.25) and (v.get("multi") or 0) < 0.9)
 
@@ -4999,7 +5001,8 @@ def install(app, DATA, D_WORK):
             if not r: continue
             try: tab = np.array(frame_model.feat(r)[:-2], np.float32)
             except Exception: continue
-            x = np.concatenate([_dv3.nz(E[n, 0, :768]), _dv3.nz(E[n, 0, 768:]), tab])
+            parts = [_dv3.nz(E[n, 0, :768]), _dv3.nz(E[n, 0, 768:])] + ([_dv3.nz(E[n, 1, :768]), _dv3.nz(E[n, 1, 768:])] if LR.get("feat") == "rect" else [])
+            x = np.concatenate(parts + [tab])
             if x.shape[0] != mu.shape[0]: continue
             z = ((x - mu) / sc) @ W.T + b; p = np.exp(z - z.max()); p /= p.sum()
             out[rid] = [round(float(v), 3) for v in p] + [0.0]
