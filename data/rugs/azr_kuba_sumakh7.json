@@ -18861,18 +18861,53 @@
   {
    "id": "m179563192521e",
    "box": [
+    0.61841,
+    0.82504,
+    0.03469,
+    0.02048
+   ],
+   "zone": "field",
+   "motif": "alma",
+   "motif_text": "",
+   "scheme": "t166_f04",
+   "group": "mmwgps27z0",
+   "certainty": "maybe",
+   "status": "rejected",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.901,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795631925,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.508,
+   "box0": [
     0.6368,
     0.82404,
     0.02667,
     0.01692
    ],
+   "rf_moved": 0.549
+  },
+  {
+   "id": "m179563192522e",
+   "box": [
+    0.26151,
+    0.33587,
+    0.02135,
+    0.01346
+   ],
    "zone": "field",
    "motif": "alma",
    "motif_text": "",
    "scheme": "t166_f04",
    "group": "mmwgps27z0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -18881,42 +18916,25 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795631925,
-   "confirmed_by": "",
-   "confirmed_at": 0
-  },
-  {
-   "id": "m179563192522e",
-   "box": [
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795806355,
+   "rf": 1,
+   "rf_s": 0.615,
+   "box0": [
     0.25456,
     0.33896,
     0.02667,
     0.01692
    ],
-   "zone": "field",
-   "motif": "alma",
-   "motif_text": "",
-   "scheme": "t166_f04",
-   "group": "mmwgps27z0",
-   "certainty": "maybe",
-   "status": "proposed",
-   "note": "",
-   "angle": 0,
-   "flip": 0,
-   "machine": "embed",
-   "score": 0.901,
-   "xfer": "",
-   "by": "машина (поиск по образцу, сеть)",
-   "at": 1795631925,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "rf_moved": 0.242
   },
   {
    "id": "m179563192523e",
    "box": [
-    0.23678,
-    0.55894,
-    0.02667,
-    0.01692
+    0.23616,
+    0.56992,
+    0.02201,
+    0.01287
    ],
    "zone": "field",
    "motif": "alma",
@@ -18924,7 +18942,7 @@
    "scheme": "t166_f04",
    "group": "mmwgps27z0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -18933,8 +18951,17 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795631925,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795806355,
+   "rf": 1,
+   "rf_s": 0.719,
+   "box0": [
+    0.23678,
+    0.55894,
+    0.02667,
+    0.01692
+   ],
+   "rf_moved": 0.354
   },
   {
    "id": "m17956323660s",
@@ -23332,7 +23359,7 @@
   }
  ],
  "created": 1791736131,
- "updated": 1795806173,
+ "updated": 1795806355,
  "cat": {
   "title": "kuba sumakh7",
   "museum": "",
@@ -25539,6 +25566,27 @@
      "a": "var",
      "w": 2,
      "t": 1795806173
+    }
+   },
+   "m179563192523e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795806355
+    }
+   },
+   "m179563192522e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795806355
+    }
+   },
+   "m179563192521e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795806355
     }
    }
   },

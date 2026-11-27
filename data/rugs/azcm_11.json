@@ -53,8 +53,8 @@
     0.05
    ],
    "zone": "other",
-   "motif": "",
-   "scheme": "",
+   "motif": "alma",
+   "scheme": "t66_f08",
    "motif_text": "",
    "group": "gm1795791901444x0",
    "certainty": "sure",
@@ -69,11 +69,12 @@
    "at": 1795791901,
    "confirmed_by": "dolgikh",
    "confirmed_at": 1795791901,
-   "found_from": "azcm_113"
+   "found_from": "azcm_113",
+   "named_by": "/m"
   }
  ],
  "created": 1791870041,
- "updated": 1795791901,
+ "updated": 1795806400,
  "cat": {
   "title": "“Bico” («Биджо»), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -484,6 +485,15 @@
      "a": "diff",
      "w": 2,
      "t": 1795720770
+    }
+   }
+  },
+  "name": {
+   "gm1795791901444x0": {
+    "dolgikh": {
+     "a": "mo:alma",
+     "w": 2,
+     "t": 1795806400
     }
    }
   }
