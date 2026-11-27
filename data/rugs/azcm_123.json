@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870041,
- "updated": 1794236973,
+ "updated": 1795807305,
  "cat": {
   "title": "“Göyçə” («Гёйча»), Газах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -131,12 +131,19 @@
    "t": 1794858296
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "multi": [],
  "micro": {
   "field": {
    "dolgikh": "none"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795807305
+   }
   }
  },
  "school_prev": "ganja-gazakh",
@@ -160,5 +167,6 @@
    61.9928
   ],
   "t": 1795207669
- }
+ },
+ "frame_by": "micro"
 }
