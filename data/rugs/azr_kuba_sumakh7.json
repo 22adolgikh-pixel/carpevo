@@ -15513,7 +15513,7 @@
    "scheme": "",
    "group": "mmwgo9bc6",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -15548,7 +15548,7 @@
    "scheme": "",
    "group": "mmwgo9bc6",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -15583,7 +15583,7 @@
    "scheme": "",
    "group": "mmwgo9bc6",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -15592,8 +15592,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795631091,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795799228,
    "rf": 1,
    "rf_s": 0.567,
    "box0": [
@@ -15602,7 +15602,9 @@
     0.02458,
     0.03224
    ],
-   "rf_moved": 0.437
+   "rf_moved": 0.437,
+   "variant": "detail",
+   "variant_by": "/m"
   },
   {
    "id": "m17956311820s",
@@ -22496,7 +22498,7 @@
   }
  ],
  "created": 1791736131,
- "updated": 1795797789,
+ "updated": 1795799228,
  "cat": {
   "title": "kuba sumakh7",
   "museum": "",
@@ -24031,6 +24033,27 @@
      "a": "bad",
      "w": 2,
      "t": 1795797789
+    }
+   },
+   "m179563109121e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795799228
+    }
+   },
+   "m179563109122e": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795799228
+    }
+   },
+   "m179563109123e": {
+    "dolgikh": {
+     "a": "var",
+     "w": 2,
+     "t": 1795799228
     }
    }
   },
