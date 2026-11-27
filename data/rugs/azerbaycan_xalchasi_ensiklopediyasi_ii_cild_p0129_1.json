@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062089,
+ "updated": 1795807689,
  "cat": {
   "title": "Vərni Карабах",
   "museum": "Национальный музей азербайджанского ковра",
@@ -123,7 +123,7 @@
    "t": 1795621525
   }
  },
- "frame": "whole",
+ "frame": "cropped",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -148,6 +148,14 @@
  "micro": {
   "field": {
    "dolgikh": "nofield"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "cropped",
+    "w": 2,
+    "t": 1795807689
+   }
   }
- }
+ },
+ "frame_by": "micro"
 }

@@ -18,7 +18,7 @@
  "h": 567,
  "marks": [],
  "created": 1791736136,
- "updated": 1795279855,
+ "updated": 1795807671,
  "cat": {
   "title": "kuba18",
   "museum": "",
@@ -133,6 +133,13 @@
     "t": 1795279855,
     "s": "ref"
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795807671
+   }
   }
  },
  "layout": {
@@ -168,5 +175,6 @@
   "quad_status": "confirmed"
  },
  "tri": "micro",
- "frame": "whole"
+ "frame": "whole",
+ "frame_by": "micro"
 }

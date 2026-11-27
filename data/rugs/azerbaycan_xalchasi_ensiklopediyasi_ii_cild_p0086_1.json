@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062027,
+ "updated": 1795807663,
  "cat": {
   "title": "Kilim Тебриз",
   "museum": "Национальный музей азербайджанского ковра",
@@ -392,7 +392,7 @@
    "src": "hand"
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -417,6 +417,14 @@
  "micro": {
   "field": {
    "dolgikh": "draw"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795807663
+   }
   }
- }
+ },
+ "frame_by": "micro"
 }

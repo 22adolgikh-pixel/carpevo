@@ -18,7 +18,7 @@
  "h": 868,
  "marks": [],
  "created": 1791736128,
- "updated": 1795062214,
+ "updated": 1795807696,
  "cat": {
   "title": "afshan12",
   "museum": "",
@@ -112,7 +112,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -133,5 +133,15 @@
    51.25
   ],
   "t": 1795207708
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795807696
+   }
+  }
+ },
+ "frame_by": "micro"
 }
