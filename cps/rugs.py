@@ -2997,7 +2997,8 @@ def install(app, DATA, D_WORK):
         # v11.52: карточки «элементы», «имена», «тип», «двойники» — всё нужное для очередей берём здесь же, чтобы не читать ковры заново
         dead = bool(r.get("dup_of") or r.get("hidden") or r.get("split_into") or r.get("multi") or r.get("frame") == "multi")
         mk = [{"id": x["id"], "g": x.get("group") or x["id"], "st": x.get("status"), "box": x["box"], "sc": x.get("scheme") or "",
-               "nm": bool(x.get("motif") or x.get("motif_text")), "mach": bool(x.get("machine")), "nw": bool(x.get("near_wait"))}
+               "nm": bool(x.get("motif") or x.get("motif_text")), "mach": bool(x.get("machine")), "nw": bool(x.get("near_wait")),
+               "et": str(x.get("note") or "")[8:].split(" ·")[0].strip() if x.get("machine") and str(x.get("note") or "").startswith("эталон: ") else ""}
               for x in r.get("marks") or [] if x.get("id") and isinstance(x.get("box"), list) and len(x["box"]) == 4]
         cg = None
         if not dead and r.get("composition") not in BYID:
@@ -4080,6 +4081,13 @@ def install(app, DATA, D_WORK):
         comp  — тип ковра, предложенный по названию или по двойнику: да / нет;
         same  — пара «возможно, тот же ковёр», в которой машина не уверена."""
         out = {t: [] for t in MORE}; out["name_wait"] = 0; opts = {}
+        # v12.47: знаки, по которым «эталон»-детектор на решённых рамках почти всегда неверен (по ответам 27.11: cincilim 5 %, heyvan / güldan / kilimgülü 0 %, qapı naxışı 16 %…),
+        # новые предложения не показываем, пока не набралось подтверждений: решено ≥ 20 рамок, подтверждено < 25 %
+        _ec = {}
+        for x in rows:
+            for m in x["mk"]:
+                if m.get("et") and m["st"] in ("confirmed", "rejected"): c = _ec.setdefault(m["et"], [0, 0]); c[m["st"] == "rejected"] += 1
+        _et_gate = {k for k, (ok, bad) in _ec.items() if ok + bad >= 20 and ok / (ok + bad) < 0.25}
         for x in rows:
             if "split" in want and len(x["mp"]) >= 2 and me not in x["mv"]["split"].get("p", []):
                 out["split"].append({"type": "split", "rid": x["id"], "parts": x["mp"], "cat": x["src"]})
@@ -4088,7 +4096,7 @@ def install(app, DATA, D_WORK):
             for m in x["mk"]: G.setdefault(m["g"], []).append(m)
             if "marks" in want:
                 for g, ms in G.items():
-                    pr = [m for m in ms if m["st"] == "proposed" and me not in x["mv"]["marks"].get(m["id"], [])]
+                    pr = [m for m in ms if m["st"] == "proposed" and me not in x["mv"]["marks"].get(m["id"], []) and not (m.get("et") and m["et"] in _et_gate)]
                     if not pr: continue
                     cf = sorted([m for m in ms if m["st"] == "confirmed"], key=lambda m: m["mach"])     # образец: сначала рамка, нарисованная рукой
                     sc = next((m["sc"] for m in cf + ms if m["sc"]), "")
