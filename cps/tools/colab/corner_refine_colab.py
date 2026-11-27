@@ -21,7 +21,7 @@ REPO = '/content/carpevo'
 _lp = next((p for p in (f'{REPO}/cps/tools/corners/labels.json', '/content/labels.json') if os.path.exists(p)), None)
 assert _lp, 'нет labels.json: загрузите его в /content (значок папки слева → загрузить) или клонируйте репозиторий в /content/carpevo'
 LAB = json.load(open(_lp, encoding='utf-8'))
-VER = 5                                    # v1 — 13.11 (365); v2 — 15.11 (488); v3 — 16.11 (≈830 меток); v4 — 19.11 (1 201 метка, бахрома). Старые веса не перезаписываются
+VER = 6                                    # v1 — 13.11 (365); v2 — 15.11 (488); v3 — 16.11 (≈830 меток); v4 — 19.11 (1 201 метка, бахрома); v5 — 21.11 (986 ковров); v6 — 27.11 (1 856 меток). Старые веса не перезаписываются
 DEV = 'cuda' if torch.cuda.is_available() else 'cpu'; log('устройство', DEV, '| ковров с метками', len(LAB))
 OUT = '/content/drive/MyDrive/carpet-dna/models'; os.makedirs(OUT, exist_ok=True)
 
