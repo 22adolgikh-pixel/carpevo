@@ -93,8 +93,8 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
 // v11.52: виды карточек. Кнопки вверху включают и выключают вид; выбор помнится на этом телефоне. /m?k=quad,frame — задать выбор ссылкой.
-const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['tw','двойники'],['sch','школа'],['split','развороты'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле'],['edge','край'],['xfind','на других коврах'],['ecl','кучи']];
-const KOLD=[['same','пары (старое)'],['rsame','дубли по углам (старое)'],['rcmp','выпрямление (старое)']];   /* v12.04: старые виды — только по ссылке ?k=same / ?k=rsame */
+const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['tw','двойники'],['sch','школа'],['split','развороты'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле'],['edge','край'],['xfind','на других коврах']];
+const KOLD=[['same','пары (старое)'],['rsame','дубли по углам (старое)'],['rcmp','выпрямление (старое)'],['ecl','кучи (пилот)']];   /* v12.04: старые виды — только по ссылке ?k=same / ?k=rsame */
 function kindsInit(){let k=new URLSearchParams(location.search).get('k');const fromUrl=!!k;
   if(!k){try{k=localStorage.getItem('cps_m_k');}catch(e){}}
   try{if(!fromUrl&&k&&!localStorage.getItem('cps_m_edge')){k=k.split(',').filter(x=>x!=='rcmp').concat(k.includes('edge')?[]:['edge']).join(',');localStorage.setItem('cps_m_k',k);localStorage.setItem('cps_m_edge','1');}}catch(e){}   /* v12.33: «выпрямление» (сравнение) заменено карточкой «край» */

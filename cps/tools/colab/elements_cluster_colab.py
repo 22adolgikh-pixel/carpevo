@@ -13,7 +13,7 @@
 #   !rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
 #   %env CPS_KEY=<ключ из студии: пользователи → «ключ»> (можно всю ссылку с ?key=…)
 #   %run /content/carpevo/cps/tools/colab/elements_cluster_colab.py
-# Настройки (env): EC_REUSE=1 — не считать заново, взять ec_cands.npz с Drive (только кластеризация, секунды) · EC_MAXC=120 макс. размер кучи · EC_N=400 ковров в пробе · EC_SEED=1 · EC_EXCL=kerimov (префиксы id, которые пропустить — схемы на бумаге) · EC_TAU=0.70 · EC_MINREP=3 ·
+# Настройки (env): EC_FIELD=0.2 (только поле, отступ от углов ковра; 0 — всё фото) · EC_ALGO=hdbscan|agg · EC_MCS=6 · EC_MS=4 · EC_REUSE=1 — не считать заново, взять ec_cands.npz с Drive (только кластеризация, секунды) · EC_MAXC=120 макс. размер кучи · EC_N=400 ковров в пробе · EC_SEED=1 · EC_EXCL=kerimov (префиксы id, которые пропустить — схемы на бумаге) · EC_TAU=0.70 · EC_MINREP=3 ·
 #   EC_PER=14 · EC_THR=0.22 (расстояние в кластере; меньше — чище и мельче) · EC_MINRUGS=3 · EC_APPEND=0.
 import os, sys, io, json, time, zipfile, math, random, urllib.request, urllib.parse
 import numpy as np, cv2
@@ -58,6 +58,20 @@ pool = [rid for rid, r in R.items() if rid in mt and r.get("frame") == "whole" a
 random.Random(SEED).shuffle(pool)
 live = sorted(pool[:N]) if N > 0 else sorted(pool)
 log(f"целых ковров {len(pool)}, берём {len(live)}")
+FIELD = float(os.environ.get("EC_FIELD", "0.2"))                       # v12.53: только поле — кандидаты внутри углов ковра, отступив FIELD от края (кайма); 0 — всё фото
+def _quad(r):
+    L = r.get("layout") or {}; q = L.get("quad") if L.get("quad_status") in ("confirmed", "accepted") else None
+    return q or (r.get("auto") or {}).get("quad")
+INNER = {}
+for rid in live:
+    q = _quad(R[rid])
+    if not q or len(q) != 4 or FIELD <= 0: continue
+    q = np.array(q, np.float32); m = FIELD
+    bl = lambda u, v: (1 - u) * (1 - v) * q[0] + u * (1 - v) * q[1] + u * v * q[2] + (1 - u) * v * q[3]
+    INNER[rid] = np.array([bl(m, m), bl(1 - m, m), bl(1 - m, 1 - m), bl(m, 1 - m)], np.float32)
+def in_field(rid, b):
+    P = INNER.get(rid)
+    return P is None and FIELD <= 0 or (P is not None and cv2.pointPolygonTest(P, (b[0] + b[2] / 2, b[1] + b[3] / 2), False) >= 0)
 idx_f = os.path.join(RAW, "_index.json")
 try: IDX = json.load(open(idx_f))
 except Exception: IDX = {}
@@ -152,6 +166,7 @@ for i, rid in enumerate([] if REUSE else live):
     if a is None: skipped += 1; continue
     try: cs = candidates(a)
     except Exception as e: log("ковёр", rid, "пропущен:", e); skipped += 1; continue
+    cs = [c for c in cs if in_field(rid, c[0])]
     if not cs: continue
     v = descr([EE._crop(a, b, 112, 0.15, False, "ellipse") for b, s, n in cs])
     for (b, s, n), e in zip(cs, v): rows.append({"rid": rid, "box": [round(float(t), 5) for t in b], "s": round(float(s), 3), "rep": n}); vecs.append(e)
@@ -167,9 +182,16 @@ MAXN = 15000
 if len(rows) > MAXN:
     pick = np.random.RandomState(SEED).choice(len(rows), MAXN, replace=False); pick.sort(); rows = [rows[i] for i in pick]; V = V[pick]; log("кандидатов больше", MAXN, "— взята выборка")
 log("кластеры…")
+ALGO = os.environ.get("EC_ALGO", "hdbscan")                              # v12.53: hdbscan — шум не впихивается в кучи (агломеративная склеивала цепочками)
 def agg(ix, thr): return AgglomerativeClustering(n_clusters=None, metric="cosine", linkage="average", distance_threshold=thr).fit_predict(V[ix])
 MAXC = int(os.environ.get("EC_MAXC", "120"))                              # куча больше этого — смесь форм: делим строже, пока не станет меньше
-lab = np.full(len(rows), -1); nxt = 0; stack = [(np.arange(len(rows)), THR, 0)]
+lab = np.full(len(rows), -1); nxt = 0; stack = [] if ALGO == "hdbscan" else [(np.arange(len(rows)), THR, 0)]
+if ALGO == "hdbscan":
+    from sklearn.cluster import HDBSCAN
+    from sklearn.decomposition import PCA
+    Xh = PCA(n_components=min(64, len(rows) - 1), random_state=SEED).fit_transform(V); Xh /= np.linalg.norm(Xh, axis=1, keepdims=True) + 1e-9
+    lab = HDBSCAN(min_cluster_size=int(os.environ.get("EC_MCS", "6")), min_samples=int(os.environ.get("EC_MS", "4")), cluster_selection_method="leaf").fit_predict(Xh)
+    log(f"hdbscan: кластеров {lab.max() + 1}, шум {(lab < 0).mean():.0%}")
 while stack:
     ix, thr, dep = stack.pop(); l = agg(ix, thr) if len(ix) > 1 else np.zeros(len(ix), int)
     for c in np.unique(l):
@@ -178,6 +200,7 @@ while stack:
         else: lab[sub] = nxt; nxt += 1
 cl = []
 for c in np.unique(lab):
+    if c < 0: continue
     ix = np.where(lab == c)[0]; rugs = {rows[i]["rid"] for i in ix}
     if len(ix) < 4 or len(rugs) < MINRUGS: continue
     cen = V[ix].mean(0); cen /= np.linalg.norm(cen) + 1e-9; d = V[ix] @ cen; order = ix[np.argsort(-d)]
