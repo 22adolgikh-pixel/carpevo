@@ -13,7 +13,7 @@
 #   !rm -rf /content/carpevo && git clone --depth 1 -b cps-v5 https://github.com/22adolgikh-pixel/carpevo.git /content/carpevo
 #   %env CPS_KEY=<ключ из студии: пользователи → «ключ»> (можно всю ссылку с ?key=…)
 #   %run /content/carpevo/cps/tools/colab/elements_cluster_colab.py
-# Настройки (env): EC_N=400 ковров в пробе · EC_SEED=1 · EC_EXCL=kerimov (префиксы id, которые пропустить — схемы на бумаге) · EC_TAU=0.70 · EC_MINREP=3 ·
+# Настройки (env): EC_REUSE=1 — не считать заново, взять ec_cands.npz с Drive (только кластеризация, секунды) · EC_MAXC=120 макс. размер кучи · EC_N=400 ковров в пробе · EC_SEED=1 · EC_EXCL=kerimov (префиксы id, которые пропустить — схемы на бумаге) · EC_TAU=0.70 · EC_MINREP=3 ·
 #   EC_PER=14 · EC_THR=0.22 (расстояние в кластере; меньше — чище и мельче) · EC_MINRUGS=3 · EC_APPEND=0.
 import os, sys, io, json, time, zipfile, math, random, urllib.request, urllib.parse
 import numpy as np, cv2
@@ -143,8 +143,11 @@ def descr(crops):
     return np.stack(outs) if outs else np.zeros((0, 768), np.float32)
 
 # ---------- шаги 1–2: кандидаты и векторы ----------
-rows = []; vecs = []; skipped = 0
-for i, rid in enumerate(live):
+CF = os.path.join(DRV if os.path.isdir(DRV) else ".", "ec_cands.npz")
+rows = []; vecs = []; skipped = 0; REUSE = os.environ.get("EC_REUSE") == "1" and os.path.exists(CF)
+if REUSE:
+    z = np.load(CF, allow_pickle=True); rows = json.loads(str(z["rows"])); vecs = list(z["V"]); live = sorted({r["rid"] for r in rows}); log(f"взяты сохранённые кандидаты: {len(rows)}")
+for i, rid in enumerate([] if REUSE else live):
     a = img(rid, 1400)
     if a is None: skipped += 1; continue
     try: cs = candidates(a)
@@ -154,6 +157,7 @@ for i, rid in enumerate(live):
     for (b, s, n), e in zip(cs, v): rows.append({"rid": rid, "box": [round(float(t), 5) for t in b], "s": round(float(s), 3), "rep": n}); vecs.append(e)
     if i % 25 == 0: log(f"  {i + 1}/{len(live)} ковров, кандидатов {len(rows)}")
 V = np.stack(vecs) if vecs else np.zeros((0, 768), np.float32)
+if not REUSE and len(rows): np.savez(CF, rows=json.dumps(rows), V=V)
 log(f"кандидатов {len(rows)} на {len({r['rid'] for r in rows})} коврах (без фото/с ошибкой: {skipped})")
 assert len(rows) >= 20, "слишком мало кандидатов — понизьте EC_TAU (например 0.6) или проверьте ковры"
 
@@ -163,7 +167,15 @@ MAXN = 15000
 if len(rows) > MAXN:
     pick = np.random.RandomState(SEED).choice(len(rows), MAXN, replace=False); pick.sort(); rows = [rows[i] for i in pick]; V = V[pick]; log("кандидатов больше", MAXN, "— взята выборка")
 log("кластеры…")
-lab = AgglomerativeClustering(n_clusters=None, metric="cosine", linkage="average", distance_threshold=THR).fit_predict(V)
+def agg(ix, thr): return AgglomerativeClustering(n_clusters=None, metric="cosine", linkage="average", distance_threshold=thr).fit_predict(V[ix])
+MAXC = int(os.environ.get("EC_MAXC", "120"))                              # куча больше этого — смесь форм: делим строже, пока не станет меньше
+lab = np.full(len(rows), -1); nxt = 0; stack = [(np.arange(len(rows)), THR, 0)]
+while stack:
+    ix, thr, dep = stack.pop(); l = agg(ix, thr) if len(ix) > 1 else np.zeros(len(ix), int)
+    for c in np.unique(l):
+        sub = ix[l == c]
+        if len(sub) > MAXC and dep < 4 and thr > 0.04: stack.append((sub, thr * 0.7, dep + 1))
+        else: lab[sub] = nxt; nxt += 1
 cl = []
 for c in np.unique(lab):
     ix = np.where(lab == c)[0]; rugs = {rows[i]["rid"] for i in ix}
@@ -177,7 +189,7 @@ for c in np.unique(lab):
     more = [rows[i] for i in order if rows[i] not in reps][:200]
     cl.append({"id": f"c{int(time.time()) % 100000}_{int(c)}", "n": int(len(ix)), "rugs": len(rugs), "coh": round(float(d.mean()), 3),
                "reps": [{"rid": r["rid"], "box": r["box"], "s": r["s"]} for r in reps], "more": [{"rid": r["rid"], "box": r["box"]} for r in more]})
-cl.sort(key=lambda c: (-c["rugs"], -c["n"]))
+cl.sort(key=lambda c: (-c["coh"], -c["rugs"]))      # сначала самые плотные (вероятнее одна форма)
 log(f"куч {len(cl)} (из {len(np.unique(lab))} кластеров); крупнейшие: {[(c['n'], c['rugs']) for c in cl[:8]]}")
 out = {"v": 1, "t": int(time.time()), "append": APPEND, "params": {"n": len(live), "tau": TAU, "minrep": MINREP, "per": PER, "thr": THR, "minrugs": MINRUGS, "cands": len(rows)}, "clusters": cl}
 json.dump(out, open(os.path.join(DRV if os.path.isdir(DRV) else ".", "ec_clusters.json"), "w"), ensure_ascii=False)
