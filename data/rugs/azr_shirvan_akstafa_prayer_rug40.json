@@ -16,9 +16,37 @@
  "status": "new",
  "w": 882,
  "h": 1300,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795801843890x0",
+   "box": [
+    0.287,
+    0.4188,
+    0.0926,
+    0.0625
+   ],
+   "zone": "other",
+   "motif": "cincilim",
+   "scheme": "t53_f04",
+   "motif_text": "",
+   "group": "gm1795801843890x0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.925,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795801843,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795801843,
+   "found_from": "intangible_2850_p0196_1"
+  }
+ ],
  "created": 1791736138,
- "updated": 1795293047,
+ "updated": 1795801843,
  "cat": {
   "title": "shirvan-akstafa-prayer-rug40",
   "museum": "",
@@ -165,5 +193,6 @@
   "quad_status": "accepted"
  },
  "tri": "auto",
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }

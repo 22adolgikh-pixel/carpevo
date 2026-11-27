@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791736135,
- "updated": 1795291491,
+ "updated": 1795801930,
  "cat": {
   "title": "kuba seychour157",
   "museum": "",
@@ -76,6 +76,13 @@
      "w": 2,
      "t": 1795205992
     }
+   }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795801930
    }
   }
  },
@@ -156,7 +163,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "same_chk": {
   "azr_kuba_alpan7": {
@@ -165,5 +172,6 @@
    "at": 1795309269,
    "ver": 2
   }
- }
+ },
+ "frame_by": "micro"
 }
