@@ -55,6 +55,14 @@
   {
    "id": "azerbaycan_xalchalari_qarabag_qrupu_p0043_1",
    "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0063_1",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_p0058_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -62,6 +70,16 @@
    "ok": true,
    "by": "/m: dolgikh",
    "at": 1795589206
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0063_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790403
+  },
+  "azerbaycan_xalchasi_p0058_1": {
+   "ok": false,
+   "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0063_1 ≠ azerbaycan_xalchasi_p0014_1",
+   "at": 1795790429
   }
  },
  "_lib_t": "2026-11-13 10:08",

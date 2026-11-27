@@ -18,7 +18,7 @@
  "h": 1724,
  "marks": [],
  "created": 1794547278,
- "updated": 1795356559,
+ "updated": 1795790406,
  "cat": {
   "title": "Ковёр Карабах",
   "museum": "",
@@ -56,6 +56,10 @@
   {
    "id": "azerbaycan_xalchasi_p0031_1",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Borchali_carpet_gif",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -68,6 +72,11 @@
    "ok": false,
    "by": "по цепочке: azcm_118 ≠ intangible_2850_p0139_1",
    "at": 1795497278
+  },
+  "wikimedia_File_Borchali_carpet_gif": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790406
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -130,6 +139,15 @@
      "a": "one",
      "w": 2,
      "t": 1795356559
+    }
+   }
+  },
+  "same": {
+   "wikimedia_File_Borchali_carpet_gif": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790406
     }
    }
   }

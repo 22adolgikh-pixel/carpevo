@@ -18,7 +18,7 @@
  "h": 884,
  "marks": [],
  "created": 1791736138,
- "updated": 1795293046,
+ "updated": 1795790372,
  "cat": {
   "title": "Antique Azerbaijan jajim, 150 x 170 cm",
   "museum": "",
@@ -80,6 +80,10 @@
   {
    "id": "azr_azerbaijan_jajim_rippon_boswell_09_2009_L28",
    "score": 0
+  },
+  {
+   "id": "intangible_2850_p0010_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -122,6 +126,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "intangible_2850_p0010_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790372,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -304,6 +314,15 @@
      ]
     ],
     "s": "ref"
+   }
+  },
+  "same": {
+   "intangible_2850_p0010_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795790372
+    }
    }
   }
  },

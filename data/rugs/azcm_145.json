@@ -18,7 +18,7 @@
  "h": 1131,
  "marks": [],
  "created": 1791870038,
- "updated": 1795498238,
+ "updated": 1795790352,
  "cat": {
   "title": "Zili (зили), Баку, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -77,6 +77,10 @@
   {
    "id": "azr_kuba_shirvan_medallion33",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Зили_2_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -114,6 +118,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "wikimedia_File_Зили_2_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790352,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -272,6 +282,13 @@
      "a": "diff",
      "w": 2,
      "t": 1795498238
+    }
+   },
+   "wikimedia_File_Зили_2_jpg": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795790352
     }
    }
   },

@@ -18,7 +18,7 @@
  "h": 808,
  "marks": [],
  "created": 1794857165,
- "updated": 1794929420,
+ "updated": 1795790392,
  "cat": {
   "title": "Керимов, т. II (стр. скана 140, печ. 28 29)",
   "museum": "",
@@ -94,6 +94,15 @@
     "w": 2,
     "t": 1794929420
    }
+  },
+  "same": {
+   "wikimedia_File_Şəkil_Bico_xalçası_1_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790392
+    }
+   }
   }
  },
  "frame": "cropped",
@@ -117,5 +126,36 @@
    5.2891
   ],
   "t": 1795207883
- }
+ },
+ "same_ok": {
+  "wikimedia_File_Şəkil_Bico_xalçası_1_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790393
+  },
+  "wikimedia_File_Биджо_jpg": {
+   "ok": false,
+   "by": "по цепочке: kerimov_vol2_p140_1_1 ≠ wikimedia_File_Şəkil_Bico_xalçası_1_jpg",
+   "at": 1795790429
+  },
+  "wikimedia_File_Şəkil_Bico_xalçası_jpg": {
+   "ok": false,
+   "by": "по цепочке: kerimov_vol2_p140_1_1 ≠ wikimedia_File_Şəkil_Bico_xalçası_1_jpg",
+   "at": 1795790429
+  }
+ },
+ "same": [
+  {
+   "id": "wikimedia_File_Şəkil_Bico_xalçası_1_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Биджо_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Şəkil_Bico_xalçası_jpg",
+   "score": 0
+  }
+ ]
 }

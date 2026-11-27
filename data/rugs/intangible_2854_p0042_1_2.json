@@ -183,5 +183,18 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "azcm_120": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790400
+  }
+ },
+ "same": [
+  {
+   "id": "azcm_120",
+   "score": 0
+  }
+ ]
 }

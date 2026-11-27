@@ -18,7 +18,7 @@
  "h": 650,
  "marks": [],
  "created": 1791736138,
- "updated": 1795293047,
+ "updated": 1795790384,
  "cat": {
   "title": "shirvan-akstafa-prayer-rug15",
   "museum": "",
@@ -49,6 +49,10 @@
   {
    "id": "azr_shirvan_akstafa_prayer_rug31",
    "score": 0
+  },
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug30",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +60,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_shirvan_akstafa_prayer_rug30": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790384,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -121,5 +131,16 @@
   ],
   "t": 1795207813
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "azr_shirvan_akstafa_prayer_rug30": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795790384
+    }
+   }
+  }
+ }
 }
