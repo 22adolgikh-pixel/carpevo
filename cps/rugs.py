@@ -6340,12 +6340,15 @@ def install(app, DATA, D_WORK):
         """карточки «двойники этого ковра»: ковёр + до 8 кандидатов. Кандидаты: пары twin_pairs (точек ≥ 20 или общий номер / размер / группа каталога),
         контрольные (над порогом, не поставлены), старые пары каталога, где машина не уверена, и «новые дубли» по выпрямленным."""
         P = tw_load(); C = {}
+        try: TS = json.load(open(os.path.join(HERE, "models", "twin_score_v1.json"), encoding="utf-8")).get("p") or {}   # v12.45: вероятность «тот же» по модели на ответах /m (CV AUC 0,948)
+        except (OSError, ValueError): TS = {}
 
         def add(a, b, ev, force=False):
             x, y = by.get(a), by.get(b)
             if not x or not y or x["dead"] or y["dead"] or (not force and (b in x["sd"] or a in y["sd"])): return
             if me in x["mv"]["same"].get(b, []) or me in y["mv"]["same"].get(a, []): return
             if x["comp"] and y["comp"] and x["comp"] != y["comp"]: return
+            if "p" not in ev and twins.key(a, b) in TS: ev = {**ev, "p": TS[twins.key(a, b)]}
             for p, q in ((a, b), (b, a)):
                 o = C.setdefault(p, {})
                 if q not in o or (ev.get("n") or 0) > (o[q].get("n") or 0): o[q] = ev
@@ -6372,7 +6375,10 @@ def install(app, DATA, D_WORK):
             if v.get("n", 0) >= RP_MAYBE and v.get("geo", 0) >= RP_GEO and "~" in k:
                 a, b = k.split("~", 1); add(a, b, {"n": v["n"], "cov": v.get("geo", 0), "why": ["rect"]})
         out = []; used = set()
-        def sc(e): return 1e6 if e.get("re") else max(e.get("n") or 0, 400 * ((e.get("s") or 0) - 0.9) / 0.05 if e.get("s") else 0)
+        def sc(e):                                                               # v12.45: сначала где модель считает «тот же» вероятнее; нет оценки — по числу точек как раньше
+            if e.get("re"): return 1e6
+            if e.get("p") is not None: return 1000 * e["p"] + min(e.get("n") or 0, 400) / 400
+            return 1000 * min(0.9, max(e.get("n") or 0, 400 * ((e.get("s") or 0) - 0.9) / 0.05 if e.get("s") else 0) / 400)
         for a in sorted(C, key=lambda i: (-max(sc(e) for e in C[i].values()), -len(C[i]), i)):
             items = sorted(((b, e) for b, e in C[a].items() if (a, b) not in used), key=lambda t: -sc(t[1]))[:8]
             if not items: continue
