@@ -51,8 +51,20 @@
  },
  "src_id": "cat:intangible_2849_p0077_1",
  "lib_img": "img/intangible_2849_p0077_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_khyzy_pile_rug3",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_khyzy_pile_rug3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788489,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",

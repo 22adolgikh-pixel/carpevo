@@ -18,7 +18,7 @@
  "h": 1010,
  "marks": [],
  "created": 1791736135,
- "updated": 1795154095,
+ "updated": 1795788362,
  "cat": {
   "title": "kuba seychour168",
   "museum": "",
@@ -45,8 +45,20 @@
  },
  "src_id": "cat:azr_kuba_seychour168",
  "lib_img": "img/azr_kuba_seychour168.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_tekye79",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_tekye79": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788362,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -135,5 +147,16 @@
    68.1479
   ],
   "t": 1795207786
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_tekye79": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795788362
+    }
+   }
+  }
  }
 }

@@ -18,7 +18,7 @@
  "h": 1273,
  "marks": [],
  "created": 1791736124,
- "updated": 1795463831,
+ "updated": 1795788338,
  "cat": {
   "title": "«Борчалы» 5.jpg",
   "museum": "Wikimedia Commons",
@@ -61,6 +61,14 @@
   {
    "id": "azr_kuba_shirvan_medallion58",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Бочалы_4_jpg",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Azerbaijani_carpet_from_Shusha_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -73,6 +81,17 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "wikimedia_File_Бочалы_4_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788338,
+   "similar": true
+  },
+  "wikimedia_File_Azerbaijani_carpet_from_Shusha_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788338
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -133,6 +152,22 @@
      "a": "one",
      "w": 2,
      "t": 1795463831
+    }
+   }
+  },
+  "same": {
+   "wikimedia_File_Бочалы_4_jpg": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795788338
+    }
+   },
+   "wikimedia_File_Azerbaijani_carpet_from_Shusha_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795788338
     }
    }
   }

@@ -18,7 +18,7 @@
  "h": 1438,
  "marks": [],
  "created": 1791736131,
- "updated": 1794772451,
+ "updated": 1795788347,
  "cat": {
   "title": "kuba alpan89",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_alpan89",
  "lib_img": "img/azr_kuba_alpan89.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O152843",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O152843": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788347
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -126,6 +137,15 @@
     "w": 2,
     "t": 1794772451,
     "s": "ref"
+   }
+  },
+  "same": {
+   "vam_O152843": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795788347
+    }
    }
   }
  },
