@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_shirvan_medallion64",
  "lib_img": "img/azr_kuba_shirvan_medallion64.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_early_karabagh_rug239",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_early_karabagh_rug239": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795761322
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

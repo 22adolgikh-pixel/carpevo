@@ -18,7 +18,7 @@
  "h": 571,
  "marks": [],
  "created": 1791736139,
- "updated": 1791736139,
+ "updated": 1795761322,
  "cat": {
   "title": "Early \"Medallion and Sickle leaves\" floral carpet, Eastern Anatolia (?), Price Realized £30,000 ($48",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:azr_early_karabagh_rug239",
  "lib_img": "img/azr_early_karabagh_rug239.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_shirvan_medallion64",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_shirvan_medallion64": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795761322
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -101,5 +112,16 @@
    60.8871
   ],
   "t": 1795207734
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_shirvan_medallion64": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795761322
+    }
+   }
+  }
  }
 }

@@ -16,9 +16,37 @@
  "status": "new",
  "w": 783,
  "h": 1190,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795761418027x0",
+   "box": [
+    0.6538,
+    0.5,
+    0.0385,
+    0.025
+   ],
+   "zone": "other",
+   "motif": "alma",
+   "scheme": "t166_f04",
+   "motif_text": "",
+   "group": "gm1795761418027x0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.935,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795761418,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795761418,
+   "found_from": "cm_ac994f7a66"
+  }
+ ],
  "created": 1791736124,
- "updated": 1794340588,
+ "updated": 1795761418,
  "cat": {
   "title": "«Каймаглы».jpg",
   "museum": "Wikimedia Commons",
@@ -191,5 +219,6 @@
    11.9026
   ],
   "t": 1795207916
- }
+ },
+ "updated_by": "dolgikh"
 }
