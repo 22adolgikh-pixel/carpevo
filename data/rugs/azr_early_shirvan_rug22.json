@@ -18,7 +18,7 @@
  "h": 459,
  "marks": [],
  "created": 1791736140,
- "updated": 1795805864,
+ "updated": 1795807937,
  "cat": {
   "title": "early shirvan rug22",
   "museum": "",
@@ -132,8 +132,49 @@
     "w": 2,
     "t": 1795805864
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795807937,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03485,
+    0.03676
+   ],
+   [
+    0.94997,
+    0.03356
+   ],
+   [
+    0.95984,
+    0.95827
+   ],
+   [
+    0.03934,
+    0.95115
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
