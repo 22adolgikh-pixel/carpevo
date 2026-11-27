@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870043,
- "updated": 1795061866,
+ "updated": 1795792157,
  "cat": {
   "title": "“Nəlbəkigül” (“Nalbakigul”), Shusha, Karabakh, Azerbaijan",
   "museum": "Национальный музей азербайджанского ковра",
@@ -121,7 +121,7 @@
    "t": 1795280200
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -146,6 +146,14 @@
  "micro": {
   "field": {
    "dolgikh": "nofield"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795792157
+   }
   }
- }
+ },
+ "frame_by": "micro"
 }
