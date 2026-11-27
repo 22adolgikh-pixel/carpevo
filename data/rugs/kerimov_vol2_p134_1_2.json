@@ -16,9 +16,66 @@
  "status": "new",
  "w": 1027,
  "h": 595,
- "marks": [],
+ "marks": [
+  {
+   "id": "mmwzhrofc",
+   "box": [
+    0.30695,
+    0.17748,
+    0.11488,
+    0.0652
+   ],
+   "zone": "field",
+   "motif": "gul",
+   "motif_text": "",
+   "scheme": "t106_f01",
+   "group": "mmwzhrofc",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1795814806,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "edited_by": "dolgikh",
+   "edited_at": 1795814835
+  },
+  {
+   "id": "mmwzhsaxp",
+   "box": [
+    0.66439,
+    0.15349,
+    0.10533,
+    0.07942
+   ],
+   "zone": "field",
+   "motif": "gul",
+   "motif_text": "",
+   "scheme": "t106_f01",
+   "group": "mmwzhrofc",
+   "certainty": "sure",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1795814835,
+   "confirmed_by": "",
+   "confirmed_at": 0
+  }
+ ],
  "created": 1794776729,
- "updated": 1794857954,
+ "updated": 1795814835,
  "cat": {
   "title": "Керимов, т. II (стр. скана 134, печ. 17)",
   "museum": "",
@@ -227,5 +284,6 @@
    "at": 1795309275,
    "ver": 2
   }
- }
+ },
+ "updated_by": "dolgikh"
 }
