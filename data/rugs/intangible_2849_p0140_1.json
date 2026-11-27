@@ -16,9 +16,37 @@
  "status": "new",
  "w": 1266,
  "h": 1777,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795791901448x1",
+   "box": [
+    0.2768,
+    0.7688,
+    0.0893,
+    0.0625
+   ],
+   "zone": "other",
+   "motif": "",
+   "scheme": "",
+   "motif_text": "",
+   "group": "gm1795791901448x1",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.933,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795791901,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795791901,
+   "found_from": "azcm_113"
+  }
+ ],
  "created": 1794547278,
- "updated": 1795292056,
+ "updated": 1795791901,
  "cat": {
   "title": "Ковёр «Bico» Ширван",
   "museum": "",
@@ -141,5 +169,6 @@
   "quad_status": "accepted"
  },
  "frame": "whole",
- "tri": "auto"
+ "tri": "auto",
+ "updated_by": "dolgikh"
 }

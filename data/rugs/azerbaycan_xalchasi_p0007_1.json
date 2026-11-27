@@ -3770,10 +3770,37 @@
     ]
    ],
    "sam": 0.773
+  },
+  {
+   "id": "m1795791977026x4",
+   "box": [
+    0.2857,
+    0.75,
+    0.4643,
+    0.1
+   ],
+   "zone": "other",
+   "motif": "qeychi",
+   "scheme": "t104_f04",
+   "motif_text": "",
+   "group": "gm1795791977026x4",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.918,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795791977,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795791977,
+   "found_from": "cm_fcbef7be41"
   }
  ],
  "created": 1794547278,
- "updated": 1795498685,
+ "updated": 1795791977,
  "cat": {
   "title": "Ковёр «Pirəbədil» Губа",
   "museum": "The R. Mustafayev State Museum of Arts",
@@ -4518,5 +4545,6 @@
   ],
   "t": 1795207704
  },
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }

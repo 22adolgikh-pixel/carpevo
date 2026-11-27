@@ -18,7 +18,7 @@
  "h": 625,
  "marks": [],
  "created": 1791736126,
- "updated": 1795463461,
+ "updated": 1795791837,
  "cat": {
   "title": "Shemakha Azerbaijan carpet 52935527 1.jpg",
   "museum": "Wikimedia Commons",
@@ -87,6 +87,14 @@
      "t": 1795463461
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795791837,
+    "s": "ref"
+   }
   }
  },
  "auto": {
@@ -136,5 +144,44 @@
    "from": "auto",
    "t": 1795688152
   }
- }
+ },
+ "edge": {
+  "damaged": [
+   "dolgikh"
+  ]
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03281,
+    -0.00244
+   ],
+   [
+    0.96037,
+    -0.00272
+   ],
+   [
+    0.92953,
+    1.00153
+   ],
+   [
+    -0.007,
+    1.00181
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
