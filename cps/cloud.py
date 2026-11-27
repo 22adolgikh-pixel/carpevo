@@ -27,7 +27,7 @@ INITIAL = (("dolgikh", "admin"), ("lika", "editor"), ("guest1", "viewer"))
 NAME_RE = re.compile(r"^[a-z0-9_.\-]{3,24}$")
 ITER = 200_000
 # изменяющие запросы, которые журналировать не нужно / которые разрешены наблюдателю
-VIEWER_OK = ("/api/dashboard/seen", "/api/logout", "/api/login", "/api/register", "/api/me/password", "/api/micro/answer", "/api/open/xfind_upload")   # v11.39: микрозадачи — любой вошедший; v12.37: + итог ночного поиска по ключу
+VIEWER_OK = ("/api/dashboard/seen", "/api/logout", "/api/login", "/api/register", "/api/me/password", "/api/micro/answer", "/api/open/xfind_upload", "/api/open/cluster_upload")   # v11.39: микрозадачи — любой вошедший; v12.37: + итог ночного поиска по ключу
 NO_LOG = VIEWER_OK + ("/api/users/role", "/api/users/reset")
 _lock = threading.Lock()
 _fails = {}      # ip → [время неудачных входов]
@@ -114,7 +114,7 @@ def key_user(request: Request):
     """v11.98: ключ для внешних программ (?key=… или заголовок X-CPS-Key) — только GET /api/open/…, всегда как наблюдатель"""
     k = request.query_params.get("key") or request.headers.get("x-cps-key") or ""
     # v12.37: единственная запись по ключу — POST /api/open/xfind_upload (итог ночного поиска из Colab: только очередь подсказок /m, карточки не меняет)
-    post_ok = request.method == "POST" and request.url.path == "/api/open/xfind_upload"
+    post_ok = request.method == "POST" and request.url.path in ("/api/open/xfind_upload", "/api/open/cluster_upload")
     if len(k) < 16 or (request.method != "GET" and not post_ok) or not request.url.path.startswith("/api/open"): return None
     for n, r in _load().items():
         if r.get("api_key") and hmac.compare_digest(r["api_key"], k): return (n, "viewer")

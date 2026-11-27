@@ -93,7 +93,7 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 function head(){const m=S.me||{};$('me').textContent=`сегодня ${m.today||0}`+(m.acc!=null?` · точность ${m.acc}%`:'')+(S.ver?` · ${S.ver}`:'');
   $('dots').innerHTML=S.tasks.map((t,k)=>`<i class="${k<S.i?'d':k===S.i?'c':''}"></i>`).join('');}
 // v11.52: виды карточек. Кнопки вверху включают и выключают вид; выбор помнится на этом телефоне. /m?k=quad,frame — задать выбор ссылкой.
-const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['tw','двойники'],['sch','школа'],['split','развороты'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле'],['edge','край'],['xfind','на других коврах']];
+const KINDS=[['quad','углы'],['frame','кадр'],['marks','элементы'],['name','имена'],['comp','тип'],['tw','двойники'],['sch','школа'],['split','развороты'],['cdup','дубли слов'],['xsame','между коврами'],['field','поле'],['edge','край'],['xfind','на других коврах'],['ecl','кучи']];
 const KOLD=[['same','пары (старое)'],['rsame','дубли по углам (старое)'],['rcmp','выпрямление (старое)']];   /* v12.04: старые виды — только по ссылке ?k=same / ?k=rsame */
 function kindsInit(){let k=new URLSearchParams(location.search).get('k');const fromUrl=!!k;
   if(!k){try{k=localStorage.getItem('cps_m_k');}catch(e){}}
@@ -128,7 +128,7 @@ function show(){head();const t=S.tasks[S.i];const u=$('undo');if(u&&!u.onclick)u
   if(!t){const L=S.left||{};$('main').innerHTML=`<div class="end"><div class="big">✓ ${S.done}</div><div>готово! сегодня ${(S.me||{}).today||0}${(S.me||{}).acc!=null?` · точность ${S.me.acc}%`:''}</div>
     <div class="mut">в очереди: ${KINDS.concat(KOLD).filter(a=>S.k.includes(a[0])).map(a=>`${a[1]} — ${L[a[0]]||0}`).join(', ')}</div>${S.k.includes('field')&&S.ms&&S.ms.running?`<div class="mut">готовлю карточки «поле»: ${S.ms.done} из ${S.ms.total}</div>`:''}${S.k.includes('rsame')&&S.rs?`<div class="mut">поиск новых дублей: ${S.rs.running?`идёт, проверено ${S.rs.done} из ${S.rs.total||'…'} пар`:(S.rs.t?'проход закончен':'ещё не запускался')}${S.rs.err?' · ошибка: '+S.rs.err:''}</div>`:''}${L.name_wait&&S.k.includes('name')?`<div class="mut">ещё ${L.name_wait} элементов ждут имени, но у их ковров не указан тип</div>`:''}
     ${S.k.some(k=>L[k])?'<button class="yes" style="min-width:220px" onclick="load()">ещё 6 карточек</button>':'<div>Всё проверено — спасибо!</div>'}</div>`;return;}
-  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,tw:showTw,sch:showSch,split:showSplit,cdup:showCdup,xsame:showXsame,field:showField,rcmp:showRcmp,edge:showEdge,xfind:showXfind})[t.type](t);}
+  ({frame:showFrame,quad:showQuad,marks:showMarks,name:showName,comp:showComp,same:showSame,tw:showTw,sch:showSch,split:showSplit,cdup:showCdup,xsame:showXsame,field:showField,rcmp:showRcmp,edge:showEdge,xfind:showXfind,ecl:showEcl})[t.type](t);}
 function qhead(q,tip){return `<div class="qrow"><span class="q">${q}</span><button class="ib" id="ib" aria-label="подсказка">i</button></div><div class="tip hint" id="tip">${tip}</div>`;}
 function qtip(){const b=$('ib'),t=$('tip');if(b&&t)b.onclick=()=>{t.classList.toggle('on');b.classList.toggle('on');};}
 function stage(t,extra=''){return `<div class="stage" id="stage"><div class="ph" id="ph"><img id="im" src="${img(t)}" alt="">${extra}</div></div>`;}
@@ -492,6 +492,16 @@ function simOvl(key,hist){hist=hist||[];document.querySelectorAll('.ovl.sim').fo
       <div class="grid tw" style="grid-template-columns:repeat(auto-fill,minmax(110px,1fr));width:100%">${j.items.map((x,i)=>`<div class="tl" data-i="${i}"><img loading="lazy" src="${crop(x.rid,x.box,200,0.35,1)}" alt="" style="width:100%;aspect-ratio:1;object-fit:contain;background:#000"><b>${esc((x.title||x.rid).slice(0,26))} · ${x.sim}</b></div>`).join('')}</div>`;
     wire();o.querySelectorAll('.tl').forEach(el=>el.onclick=()=>simOvl(j.items[+el.dataset.i].key,hist.concat(key)));
   }).catch(e=>{o.innerHTML=`<span class="mut">не вышло: ${esc(e.message)}</span>${bar(0)}`;wire();});}
+// v12.49 «кучи»: Colab собрал похожие по форме элементы с разных ковров в кластер. Тап по плитке — ✗ (лишнее); «одна форма» — остальные плитки получают
+// подтверждённые рамки; «разные формы» — в куче смесь (ничего не создаётся); «не элементы» — мусор (фон, кусок ковра).
+function showEcl(t){document.documentElement.style.setProperty('--imh','26dvh');const bad=new Set();
+  const tile=(x,i)=>`<div class="tl${bad.has(i)?' sel':''}" data-i="${i}" style="${bad.has(i)?'outline:3px solid #c0392b;opacity:.45':''}"><img loading="lazy" src="${crop(x.rid,x.box,220,0.3,1)}" alt="" style="width:100%;aspect-ratio:1;object-fit:contain;background:#000"><b>${esc((x.title||x.rid).slice(0,30))}</b></div>`;
+  $('main').innerHTML=`${qhead('Одна и та же форма?','Машина собрала похожие по форме места с разных ковров (всего '+t.n+' на '+t.rugs+' коврах). Тап по плитке — лишняя, убрать. «Одна форма» — остальные плитки станут подтверждёнными рамками (имя — потом, на карточке «имена»). Если форм несколько — «разные формы». Фон, кусок рисунка без повтора — «не элементы».')}
+   <div class="grid tw" id="ecg" style="grid-template-columns:repeat(auto-fill,minmax(112px,1fr))"></div>
+   <div class="btns"><button class="yes" id="a1">✓ одна форма</button><button id="a2">разные формы</button><button class="no" id="a3">не элементы</button><button class="sm unk" id="a4">пропустить</button></div>`;qtip();
+  const g=$('ecg'),upd=()=>{g.innerHTML=t.items.map(tile).join('');g.querySelectorAll('.tl').forEach(el=>el.onclick=()=>{const i=+el.dataset.i;bad.has(i)?bad.delete(i):bad.add(i);upd();});$('a1').textContent=bad.size?`✓ одна форма, без ${bad.size}`:'✓ одна форма';};upd();
+  const x=()=>({key:t.key,bad:[...bad]});
+  $('a1').onclick=()=>answer(t,'ok',null,x());$('a2').onclick=()=>answer(t,'mixed',null,x());$('a3').onclick=()=>answer(t,'junk',null,x());$('a4').onclick=()=>answer(t,'skip',null,{key:t.key});}
 function showXsame(t){const f=(x)=>`<figure><img src="${crop(x.rid,x.box,300,0.3,1)}" alt=""><figcaption>${esc(x.title||x.rid)}${x.n>1?' · повторов '+x.n:''}</figcaption><button class="sm" data-sim="${esc(x.rid+'|'+x.g)}">🔍 похожие</button></figure>`;
   $('main').innerHTML=`${qhead('Это один и тот же элемент узора?','Элементы с двух разных ковров (жёлтая рамка). Поворот, зеркало, цвет и размер не важны — важна форма. «Тот же» — один и тот же элемент (как одно слово у Керимова). «Тот же, другое заполнение» — внешний контур тот же, а внутри другое (другой узор, 4 квадрата вместо одного). «Похож» — родственные, но сам контур другой. Сомневаетесь между «тот же» и «похож» — выбирайте «похож». Ответы собирают элементы в группы между коврами; потом группе дадим имя один раз.')}
    <div class="pair">${f(t.a)}${f(t.b)}</div>

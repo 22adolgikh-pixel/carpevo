@@ -2917,7 +2917,7 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch", "rcmp", "edge", "xfind")
+    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch", "rcmp", "edge", "xfind", "ecl")
     KINDS_OFF = ("same", "rsame", "rcmp")             # v11.86: пары по одной заменены карточкой «двойники ковра» (tw); старые виды — только по выбору
 
     # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
@@ -3996,6 +3996,86 @@ def install(app, DATA, D_WORK):
         os.replace(tmp, F_XF)
         return {"ok": True, "groups": len(ok), "cands": sum(len(it["c"]) for it in ok)}
 
+    # ---------- v12.49: «кучи элементов» — Colab (tools/colab/elements_cluster_colab.py) режет ковры на повторяющиеся элементы и собирает похожие в кластеры;
+    # в /m карточка «кучи»: до 12 представителей, тап по лишнему — ✗; «одна форма» → не отмеченные получают подтверждённые рамки (machine cluster), «разные» / «не элементы» — только метки.
+    F_CL = os.path.join(DATA, "el_clusters.json"); F_CLV = os.path.join(DATA, "el_cluster_votes.json")
+
+    def _cl_data():
+        try: return json.load(open(F_CL, encoding="utf-8"))
+        except (OSError, ValueError): return {"clusters": []}
+
+    def _cl_votes():
+        try: return json.load(open(F_CLV, encoding="utf-8"))
+        except (OSError, ValueError): return {}
+
+    @app.post("/api/open/cluster_upload")
+    async def api_cluster_upload(request: Request):
+        try: j = await request.json()
+        except Exception: return JSONResponse({"error": "не JSON"}, status_code=400)
+        cl = j.get("clusters") if isinstance(j, dict) else None
+        if not isinstance(cl, list): return JSONResponse({"error": "нет clusters"}, status_code=400)
+        ok = []
+        for c in cl:
+            if not isinstance(c, dict) or not c.get("id") or not isinstance(c.get("reps"), list): continue
+            reps = [{"rid": str(x["rid"]), "box": [float(v) for v in x["box"]], "s": x.get("s")} for x in c["reps"][:16] if isinstance(x, dict) and isinstance(x.get("box"), list) and len(x["box"]) == 4]
+            more = [{"rid": str(x["rid"]), "box": [float(v) for v in x["box"]]} for x in (c.get("more") or [])[:200] if isinstance(x, dict) and isinstance(x.get("box"), list) and len(x["box"]) == 4]
+            if reps: ok.append({"id": str(c["id"]), "n": int(c.get("n") or len(reps)), "rugs": int(c.get("rugs") or 0), "reps": reps, "more": more})
+        old = _cl_data(); keep = {c["id"]: c for c in old.get("clusters", [])} if j.get("append") else {}
+        for c in ok: keep[c["id"]] = c
+        out = {"v": 1, "t": int(time.time()), "params": j.get("params") or {}, "clusters": list(keep.values())}
+        tmp = F_CL + ".up"
+        with open(tmp, "w", encoding="utf-8") as f: json.dump(out, f, ensure_ascii=False)
+        os.replace(tmp, F_CL)
+        return {"ok": True, "clusters": len(out["clusters"])}
+
+    @app.get("/api/open/clusters")
+    def api_clusters():
+        D_ = _cl_data(); V = _cl_votes()
+        return {"t": D_.get("t"), "params": D_.get("params"), "n": len(D_["clusters"]), "voted": len(V),
+                "verdicts": {v: sum(1 for d in V.values() for x in d.values() if x.get("a") == v) for v in ("ok", "mixed", "junk")}}
+
+    def _cl_queue(me, by):
+        V = _cl_votes(); out = []
+        for c in _cl_data()["clusters"]:
+            d = V.get(c["id"], {})
+            if me in d or sum(x.get("w", 1) for x in d.values() if x.get("a") in ("ok", "mixed", "junk")) >= 2: continue
+            reps = [x for x in c["reps"] if by.get(x["rid"]) and not by[x["rid"]]["dead"]][:12]
+            if len(reps) < 4: continue
+            out.append({"type": "ecl", "rid": reps[0]["rid"], "key": c["id"], "n": c["n"], "rugs": c["rugs"],
+                        "items": [{"rid": x["rid"], "box": x["box"], "title": by[x["rid"]]["title"]} for x in reps]})
+        out.sort(key=lambda t: (-t["rugs"], -t["n"]))
+        return out
+
+    def _cl_answer(me, role, rid, a, body, rec):
+        key = str(body.get("key") or "")
+        if a == "skip": _mlog(rec); return {"ok": True}
+        if a not in ("ok", "mixed", "junk"): return JSONResponse({"error": "ответ?"}, status_code=400)
+        c = next((c for c in _cl_data()["clusters"] if c["id"] == key), None)
+        if not c: return JSONResponse({"error": "нет такой кучи"}, status_code=404)
+        shown = [x for x in c["reps"]][:12]
+        bad = {int(i) for i in (body.get("bad") or []) if str(i).isdigit()}
+        now = int(time.time()); added = 0; g0 = "gcl" + key
+        with _lock:
+            V = _cl_votes(); V.setdefault(key, {})[me] = {"a": a, "w": _wt(role), "t": now, "bad": sorted(bad)}
+            tmp = F_CLV + ".tmp"
+            with open(tmp, "w", encoding="utf-8") as f: json.dump(V, f, ensure_ascii=False)
+            os.replace(tmp, F_CLV)
+            for i, x in enumerate(shown):
+                ok = a == "ok" and i not in bad
+                MS.label_log({"key": "cluster:" + key, "rug": x["rid"], "box": x["box"], "score": x.get("s"), "ok": ok, "who": me, "verdict": a})
+                if not ok: continue
+                t = load(x["rid"])
+                if not t: continue
+                if any(m.get("status") != "rejected" and abs(m["box"][0] - x["box"][0]) < 0.02 and abs(m["box"][1] - x["box"][1]) < 0.02 and abs(m["box"][2] - x["box"][2]) < 0.04 for m in t.get("marks") or []): continue
+                mid = f"m{int(time.time() * 1000)}c{i}"
+                t.setdefault("marks", []).append({"id": mid, "box": [round(v, 5) for v in x["box"]], "zone": "other", "motif": "", "motif_text": "", "scheme": "", "group": g0 + "_" + x["rid"][:12],
+                                                  "certainty": "sure", "status": "confirmed", "note": "куча элементов", "angle": 0, "flip": 0, "machine": "cluster",
+                                                  "score": round(float(x.get("s") or 0), 3), "xfer": "", "by": "куча → " + me, "at": now, "confirmed_by": me, "confirmed_at": now})
+                t["updated"], t["updated_by"] = now, me; save(t); added += 1
+        rec["key"] = key; rec["bad"] = sorted(bad); rec["n"] = len(shown)
+        if added: rec["applied"] = f"ecl:{added}"
+        _mlog(rec); return {"ok": True, "added": added, **({"applied": True} if added else {})}
+
     @app.get("/api/open/xfind")
     def api_xfind(pull: int = 0):
         """ночной поиск элементов по коврам: когда забран, сколько групп и находок, сколько ответов"""
@@ -4428,6 +4508,7 @@ def install(app, DATA, D_WORK):
         if "field" in off: run("field", lambda: _field_queue(me, rows))
         if "edge" in off: run("edge", lambda: _edge_queue(me, rows))
         if "xfind" in off: run("xfind", lambda: _xf_queue(me, by))
+        if "ecl" in off: run("ecl", lambda: _cl_queue(me, by))
         if "tw" in off: run("tw", lambda: _tw_queue(me, by))
         if "sch" in off: run("sch", lambda: [t for t in _sch_queue(me) if t["rid"] in by])
         for t in off:                                                            # дорогие виды: последнее известное значение (если вид хоть раз был включён)
@@ -4518,6 +4599,7 @@ def install(app, DATA, D_WORK):
         rcq = _rcmp_queue(me, rows) if "rcmp" in want else []; Q["rcmp"] = rcq[:n]
         edq = _edge_queue(me, rows) if "edge" in want else []; Q["edge"] = edq[:n]
         xfq = _xf_queue(me, by) if "xfind" in want else []; Q["xfind"] = xfq[:n]
+        clq = _cl_queue(me, by) if "ecl" in want else []; Q["ecl"] = clq[:n]
         twq = _tw_queue(me, by) if "tw" in want else []; Q["tw"] = twq[:n]
         schq = [t for t in _sch_queue(me) if t["rid"] in by] if "sch" in want else []; Q["sch"] = schq[:n]
         tasks = []; order = [t for t in want if Q[t]]
@@ -4542,7 +4624,7 @@ def install(app, DATA, D_WORK):
             if t["type"] == "tw":
                 for it in t["items"]: it.update(w=by[it["id"]]["w"], h=by[it["id"]]["h"])
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        left = {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "edge": len(edq), "xfind": len(xfq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]}
+        left = {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "edge": len(edq), "xfind": len(xfq), "ecl": len(clq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]}
         if "xsame" in want: _last_cnt[(me, "xsame")] = left["xsame"]
         off = [t for t in KINDS if t not in want and t not in KINDS_OFF]       # старые виды (same / rsame / rcmp) на кнопках не показываются
         if off: left.update(_idle_counts(me, rows, by, off))                  # v12.44: у выключенных кнопок тоже настоящее число, а не 0
@@ -4569,6 +4651,7 @@ def install(app, DATA, D_WORK):
         if typ == "rcmp": return _rcmp_answer(me, role, rid, a, body, rec)
         if typ == "edge": return _edge_answer(me, role, rid, a, body, rec)
         if typ == "xfind": return _xf_answer(me, role, rid, a, body, rec)
+        if typ == "ecl": return _cl_answer(me, role, rid, a, body, rec)
         if typ == "tw": return _tw_answer(me, role, rid, a, body, rec)
         if typ == "sch": return _sch_answer(me, role, rid, a, body, rec)
         if typ in MORE: return _micro_more(me, role, typ, rid, a, body, rec)
