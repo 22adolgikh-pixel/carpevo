@@ -445,17 +445,25 @@ function nodeEd(o){const SD=['top','bot','left','right'],V=o.V,pad=o.pad||0,f0=p
     const p=[clamp(q[0]),clamp(q[1])];V[best.k]=[...(V[best.k]||[]),p];paint();changed();const i=V[best.k].indexOf(p),h=hs.querySelector(`.kxh[data-k="${best.k}"][data-i="${i}"]`);if(h)drag(e,best.k,i,h,true);};
   paint();return {paint,vp};}
 // v12.48 «🔍 похожие»: ближайшие по форме подтверждённые элементы на других коврах; тап по плитке — «провалиться» в неё (кнопка «← назад» возвращает)
-function simOvl(key,hist){hist=hist||[];document.querySelectorAll('.ovl.sim').forEach(e=>e.remove());const o=document.createElement('div');o.className='ovl sim';o.style.cssText='justify-content:flex-start;overflow:auto';
+function simOvl(key,hist,tag){hist=hist||[];tag=tag||'';document.querySelectorAll('.ovl.sim').forEach(e=>e.remove());const o=document.createElement('div');o.className='ovl sim';o.style.cssText='justify-content:flex-start;overflow:auto';
   o.innerHTML='<span class="mut">ищу похожие…</span>';document.body.appendChild(o);
   const bar=(back)=>`<div style="display:flex;gap:8px">${back?'<button class="sm" id="sm_b">← назад</button>':''}<button class="sm" id="sm_x">закрыть</button></div>`;
-  const wire=()=>{const x=o.querySelector('#sm_x');if(x)x.onclick=()=>o.remove();const b=o.querySelector('#sm_b');if(b)b.onclick=()=>simOvl(hist[hist.length-1],hist.slice(0,-1));};
-  api('/api/xsame/similar?key='+encodeURIComponent(key)+'&k=36').then(j=>{
+  const wire=()=>{const x=o.querySelector('#sm_x');if(x)x.onclick=()=>o.remove();const b=o.querySelector('#sm_b');if(b)b.onclick=()=>{const h=hist[hist.length-1];simOvl(h[0],hist.slice(0,-1),h[1]);};};
+  // v12.54: фильтр по форме — чипы; без образца («все такие») — все подтверждённые элементы этой формы
+  const chipsH=j=>`<div style="display:flex;flex-wrap:wrap;gap:6px;margin:4px 0">${key?`<button class="sm${tag?'':' yes'}" data-tg="">любая форма</button>`:''}${(j.tags||[]).map(g=>`<button class="sm${g.k===tag?' yes':''}" data-tg="${g.k}">${esc(g.n)} <span class="mut">${g.c}</span></button>`).join('')}</div>`;
+  api('/api/xsame/similar?key='+encodeURIComponent(key)+'&k='+(key?36:90)+(tag?'&tag='+tag:'')).then(j=>{
     if(j.wait){o.innerHTML=`<span class="mut">индекс элементов строится (до минуты) — нажмите «🔍 похожие» ещё раз</span>${bar(0)}`;wire();return;}
-    if(j.error||!j.q){o.innerHTML=`<span class="mut">${esc(j.error||'не нашлось')}</span>${bar(hist.length)}`;wire();return;}
-    o.innerHTML=`${bar(hist.length)}<span class="mut">похожие на · ${esc((j.q.title||j.q.rid).slice(0,50))}</span><img src="${crop(j.q.rid,j.q.box,260,0.35,1)}" alt="" style="max-height:22dvh">
-      <div class="mut" style="font-size:12px">среди ${j.total} подтверждённых элементов; тап по плитке — искать похожие уже на неё</div>
-      <div class="grid tw" style="grid-template-columns:repeat(auto-fill,minmax(110px,1fr));width:100%">${j.items.map((x,i)=>`<div class="tl" data-i="${i}"><img loading="lazy" src="${crop(x.rid,x.box,200,0.35,1)}" alt="" style="width:100%;aspect-ratio:1;object-fit:contain;background:#000"><b>${esc((x.title||x.rid).slice(0,26))} · ${x.sim}</b></div>`).join('')}</div>`;
-    wire();o.querySelectorAll('.tl').forEach(el=>el.onclick=()=>simOvl(j.items[+el.dataset.i].key,hist.concat(key)));
+    if(j.error||(!j.q&&!j.tag)){o.innerHTML=`<span class="mut">${esc(j.error||'не нашлось')}</span>${bar(hist.length)}`;wire();return;}
+    const nm=k=>((j.tags||[]).find(g=>g.k===k)||{}).n||k;
+    const head=j.q?`<span class="mut">похожие на · ${esc((j.q.title||j.q.rid).slice(0,50))}${(j.q.sh||[]).length?' · форма: '+j.q.sh.map(nm).join(', '):''}</span><img src="${crop(j.q.rid,j.q.box,260,0.35,1)}" alt="" style="max-height:22dvh">`
+      :`<span class="mut">все подтверждённые элементы: ${esc(nm(tag))} — ${j.total}</span>`;
+    o.innerHTML=`${bar(hist.length)}${head}${chipsH(j)}
+      <div class="mut" style="font-size:12px">${j.q?`среди ${j.total} подтверждённых элементов`:'сначала самые выраженные'}; тап по плитке — искать похожие уже на неё. Форма определена машиной приблизительно.</div>
+      ${key&&tag?'<button class="sm" id="sm_all">все такие на всех коврах →</button>':''}
+      ${j.items.length?'':'<span class="mut">такой формы среди похожих нет</span>'}
+      <div class="grid tw" style="grid-template-columns:repeat(auto-fill,minmax(110px,1fr));width:100%">${j.items.map((x,i)=>`<div class="tl" data-i="${i}"><img loading="lazy" src="${crop(x.rid,x.box,200,0.35,1)}" alt="" style="width:100%;aspect-ratio:1;object-fit:contain;background:#000"><b>${esc((x.title||x.rid).slice(0,26))}${x.sim!=null?' · '+x.sim:''}</b></div>`).join('')}</div>`;
+    wire();o.querySelectorAll('.tl').forEach(el=>el.onclick=()=>simOvl(j.items[+el.dataset.i].key,hist.concat([[key,tag]]),''));
+    o.querySelectorAll('[data-tg]').forEach(b=>b.onclick=()=>simOvl(key,hist,b.dataset.tg));const al=o.querySelector('#sm_all');if(al)al.onclick=()=>simOvl('',hist.concat([[key,tag]]),tag);
   }).catch(e=>{o.innerHTML=`<span class="mut">не вышло: ${esc(e.message)}</span>${bar(0)}`;wire();});}
 // v12.49 «кучи»: Colab собрал похожие по форме элементы с разных ковров в кластер. Тап по плитке — ✗ (лишнее); «одна форма» — остальные плитки получают
 // подтверждённые рамки; «разные формы» — в куче смесь (ничего не создаётся); «не элементы» — мусор (фон, кусок ковра).

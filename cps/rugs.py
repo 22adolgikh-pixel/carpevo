@@ -3428,14 +3428,18 @@ def install(app, DATA, D_WORK):
     def _xs_verdict(d): return next((v for v in ("same", "similar", "diff") if sum(x["w"] for x in d.values() if x["a"] == v) >= 2), None)
 
     def _xs_build(units):
-        import element_embed as EE
+        import element_embed as EE, shape_feats
         try:
             V8, V0, keep = [], [], []
             for rid in sorted({u["rid"] for u in units}):
                 src = img_path(rid); a = read_small(src, 1400) if src else None
                 if a is None: continue
+                us = [u for u in units if u["rid"] == rid]
+                for u in us:                                                     # v12.54: форма (круглый / ромб / симметричный …)
+                    try: f = shape_feats.feats(a, u["box"]); u["sh"] = shape_feats.tags(f); u["shf"] = f
+                    except Exception: u["sh"] = []
                 a = EE.small(a)
-                for u in [u for u in units if u["rid"] == rid]:
+                for u in us:
                     e = EE.emb_rot(a, u["box"]); V8.append(e); V0.append(e[0]); keep.append(u)
             P = {}; A8 = A0 = None
             if keep:
@@ -3543,7 +3547,7 @@ def install(app, DATA, D_WORK):
         return {"n": len(cf), "pairs": [{"key": k, "names": c["names"], "rechecked": any(x.get("re") for x in V.get(k, {}).values())} for k, c in cf.items()]}
 
     @app.get("/api/xsame/similar")
-    def api_xsame_similar(request: Request, key: str = "", k: int = 36):
+    def api_xsame_similar(request: Request, key: str = "", k: int = 36, tag: str = ""):
         """v12.48: «🔍 похожие» — ближайшие по форме подтверждённые элементы на других коврах (та же сеть и сравнение в 8 положениях, что у «между коврами»)"""
         if _xu.get("A8") is None:
             if not _xu["run"]:
@@ -3551,18 +3555,30 @@ def install(app, DATA, D_WORK):
                 except Exception: pass
             return {"wait": True, "items": []}
         U = _xu["U"]; i = next((j for j, u in enumerate(U) if u["key"] == key), None)
-        if i is None: return {"items": [], "error": "этого элемента нет среди подтверждённых (рамка не подтверждена или группа новее индекса)"}
+        import shape_feats; tg = [{"k": a_, "n": n_, "c": sum(1 for u in U if a_ in (u.get("sh") or []))} for a_, n_ in shape_feats.TAGS]
+        it = lambda u, sim: {"key": u["key"], "rid": u["rid"], "g": u["g"], "box": u["box"], "title": u["title"], "n": u["n"], "sim": sim, "sh": u.get("sh") or []}
+        if not key and tag:                                                      # v12.54: все подтверждённые элементы с этой формой
+            sc = {"round": "circ", "sharp": "circ", "rhomb": "diag", "square": "diag", "sym": "sym4", "asym": "sym", "simple": "reg", "complex": "reg"}.get(tag, "circ")
+            hi = tag in ("round", "rhomb", "sym", "complex")
+            L = sorted([u for u in U if tag in (u.get("sh") or [])], key=lambda u: -(u.get("shf") or {}).get(sc, 0) * (1 if hi else -1))
+            per = {}; items = []
+            for u in L:
+                if per.get(u["rid"], 0) >= 2: continue
+                per[u["rid"]] = per.get(u["rid"], 0) + 1; items.append(it(u, None))
+                if len(items) >= max(4, min(120, k)): break
+            return {"q": None, "tag": tag, "tags": tg, "items": items, "total": len(L)}
+        if i is None: return {"items": [], "tags": tg, "error": "этого элемента нет среди подтверждённых (рамка не подтверждена или группа новее индекса)"}
         A8, A0 = _xu["A8"], _xu["A0"]
         sm = np.maximum(np.einsum("rk,jk->jr", A8[i], A0).max(1), np.einsum("jrk,k->jr", A8, A0[i]).max(1))
         items = []; per = {}
         for j in np.argsort(-sm):
             u = U[int(j)]
-            if int(j) == i or u["rid"] == U[i]["rid"] or per.get(u["rid"], 0) >= 2: continue
+            if int(j) == i or u["rid"] == U[i]["rid"] or per.get(u["rid"], 0) >= 2 or (tag and tag not in (u.get("sh") or [])): continue
             per[u["rid"]] = per.get(u["rid"], 0) + 1
-            items.append({"key": u["key"], "rid": u["rid"], "g": u["g"], "box": u["box"], "title": u["title"], "n": u["n"], "sim": round(float(sm[int(j)]), 3)})
+            items.append(it(u, round(float(sm[int(j)]), 3)))
             if len(items) >= max(4, min(60, k)): break
         q = U[i]
-        return {"q": {"key": q["key"], "rid": q["rid"], "box": q["box"], "title": q["title"], "n": q["n"]}, "items": items, "total": len(U)}
+        return {"q": {"key": q["key"], "rid": q["rid"], "box": q["box"], "title": q["title"], "n": q["n"], "sh": q.get("sh") or []}, "tag": tag, "tags": tg, "items": items, "total": len(U)}
 
     def _xs_answer(me, role, a, body, rec):
         k = str(body.get("key", ""))
