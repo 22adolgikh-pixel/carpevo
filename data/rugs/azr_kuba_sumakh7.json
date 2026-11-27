@@ -15502,11 +15502,46 @@
   {
    "id": "m179563109121e",
    "box": [
+    0.6977,
+    0.79507,
+    0.04209,
+    0.02352
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmwgo9bc6",
+   "certainty": "maybe",
+   "status": "proposed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "embed",
+   "score": 0.931,
+   "xfer": "",
+   "by": "машина (поиск по образцу, сеть)",
+   "at": 1795631091,
+   "confirmed_by": "",
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.541,
+   "box0": [
     0.69687,
     0.79685,
     0.03412,
     0.04475
    ],
+   "rf_moved": 0.297
+  },
+  {
+   "id": "m179563109122e",
+   "box": [
+    0.41622,
+    0.06072,
+    0.03568,
+    0.01992
+   ],
    "zone": "field",
    "motif": "",
    "motif_text": "",
@@ -15523,41 +15558,24 @@
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795631091,
    "confirmed_by": "",
-   "confirmed_at": 0
-  },
-  {
-   "id": "m179563109122e",
-   "box": [
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.643,
+   "box0": [
     0.40968,
     0.08204,
     0.02891,
     0.03793
    ],
-   "zone": "field",
-   "motif": "",
-   "motif_text": "",
-   "scheme": "",
-   "group": "mmwgo9bc6",
-   "certainty": "maybe",
-   "status": "proposed",
-   "note": "",
-   "angle": 0,
-   "flip": 0,
-   "machine": "embed",
-   "score": 0.931,
-   "xfer": "",
-   "by": "машина (поиск по образцу, сеть)",
-   "at": 1795631091,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "rf_moved": 0.841
   },
   {
    "id": "m179563109123e",
    "box": [
-    0.22754,
-    0.72617,
-    0.02458,
-    0.03224
+    0.2114,
+    0.72581,
+    0.03217,
+    0.01935
    ],
    "zone": "field",
    "motif": "",
@@ -15575,7 +15593,16 @@
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795631091,
    "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_at": 0,
+   "rf": 1,
+   "rf_s": 0.567,
+   "box0": [
+    0.22754,
+    0.72617,
+    0.02458,
+    0.03224
+   ],
+   "rf_moved": 0.437
   },
   {
    "id": "m17956311820s",
