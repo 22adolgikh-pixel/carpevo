@@ -2496,6 +2496,7 @@ def t59_edge_card_v1236(pg, ctx):
         if pg.evaluate("S.tasks[S.i]&&S.tasks[S.i].rid") == 'edgerug': break
         pg.evaluate("S.i++;show()"); pg.wait_for_timeout(300)
     pg.wait_for_selector('.kxh', timeout=15000); pg.wait_for_timeout(800)
+    if pg.evaluate("$('kx_eg').checked"): pg.click('#kx_eg'); pg.wait_for_timeout(300)   # v12.55: край машины ставится сразу; снятая галочка — только углы
     n = pg.evaluate("document.querySelectorAll('.kxh').length"); assert n == 4, f'ручек {n}, ожидалось 4 (сначала только углы)'
     im = pg.query_selector('#kx_ew img').bounding_box()
     hs = [pg.query_selector(f'.kxh[data-k="c"][data-i="{i}"]').bounding_box() for i in range(4)]
