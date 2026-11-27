@@ -18,7 +18,7 @@
  "h": 1951,
  "marks": [],
  "created": 1791736136,
- "updated": 1795117161,
+ "updated": 1795807443,
  "cat": {
   "title": "kuba98",
   "museum": "",
@@ -114,7 +114,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "auto_edge": {
   "v": 1,
@@ -135,5 +135,15 @@
    42.5152
   ],
   "t": 1795207755
- }
+ },
+ "micro": {
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795807443
+   }
+  }
+ },
+ "frame_by": "micro"
 }

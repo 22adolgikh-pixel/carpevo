@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870038,
- "updated": 1794783470,
+ "updated": 1795807513,
  "cat": {
   "title": "Zili (зили), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -345,11 +345,18 @@
    "src": "cand0"
   }
  },
- "frame": "cropped",
+ "frame": "whole",
  "tri": "auto",
  "micro": {
   "field": {
    "dolgikh": "0"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795807513
+   }
   }
  },
  "auto_edge": {
@@ -371,5 +378,6 @@
    57.2272
   ],
   "t": 1795207672
- }
+ },
+ "frame_by": "micro"
 }

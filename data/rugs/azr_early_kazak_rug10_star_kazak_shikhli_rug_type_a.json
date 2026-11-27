@@ -18,7 +18,7 @@
  "h": 610,
  "marks": [],
  "created": 1791736129,
- "updated": 1795278963,
+ "updated": 1795807515,
  "cat": {
   "title": "early kazak rug10 star kazak shikhli rug type a",
   "museum": "",
@@ -133,6 +133,13 @@
     "t": 1795278963,
     "s": "ref"
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795807515
+   }
   }
  },
  "layout": {
@@ -168,5 +175,11 @@
   "quad_status": "confirmed"
  },
  "tri": "micro",
- "frame": "whole"
+ "frame": "whole",
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "frame_by": "micro"
 }
