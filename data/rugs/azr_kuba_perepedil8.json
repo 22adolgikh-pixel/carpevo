@@ -46,7 +46,7 @@
   }
  ],
  "created": 1791736134,
- "updated": 1795807458,
+ "updated": 1795808435,
  "cat": {
   "title": "kuba perepedil8",
   "museum": "",
@@ -180,8 +180,49 @@
     "w": 2,
     "t": 1795807458
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795808435,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.0545,
+    0.02161
+   ],
+   [
+    0.97904,
+    0.01707
+   ],
+   [
+    0.98777,
+    0.967
+   ],
+   [
+    0.01838,
+    0.97366
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
