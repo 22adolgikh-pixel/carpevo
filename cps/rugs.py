@@ -3437,7 +3437,7 @@ def install(app, DATA, D_WORK):
                 a = EE.small(a)
                 for u in [u for u in units if u["rid"] == rid]:
                     e = EE.emb_rot(a, u["box"]); V8.append(e); V0.append(e[0]); keep.append(u)
-            P = {}
+            P = {}; A8 = A0 = None
             if keep:
                 A8 = np.stack(V8); A0 = np.stack(V0)
                 S = np.einsum("irk,jk->ijr", A8, A0).max(2)                      # близость: лучшее из 8 положений
@@ -3448,7 +3448,7 @@ def install(app, DATA, D_WORK):
                         if v < 0.4: continue
                         k = "~".join(sorted((u["key"], keep[j]["key"])))
                         if k not in P or P[k]["sim"] < v: P[k] = {"key": k, "a": u if u["key"] < keep[j]["key"] else keep[j], "b": keep[j] if u["key"] < keep[j]["key"] else u, "sim": round(v, 3)}
-            _xu.update(U=keep, P=sorted(P.values(), key=lambda p: -p["sim"]), t=time.time(), err="", v=EE.version("match"))
+            _xu.update(U=keep, P=sorted(P.values(), key=lambda p: -p["sim"]), t=time.time(), err="", v=EE.version("match"), A8=A8, A0=A0)   # v12.48: векторы остаются — «🔍 похожие» в /m
         except Exception as e:
             _xu["err"] = str(e)[:200]
         finally:
@@ -3489,6 +3489,28 @@ def install(app, DATA, D_WORK):
                 if lo: mixed.append(lo.pop(random.randrange(len(lo))))
             out = mixed
         return out
+
+    @app.get("/api/xsame/similar")
+    def api_xsame_similar(request: Request, key: str = "", k: int = 36):
+        """v12.48: «🔍 похожие» — ближайшие по форме подтверждённые элементы на других коврах (та же сеть и сравнение в 8 положениях, что у «между коврами»)"""
+        if _xu.get("A8") is None:
+            if not _xu["run"]:
+                try: _xs_queue(user(request), _mrows())                                   # запускает построение индекса (раз в 30 минут)
+                except Exception: pass
+            return {"wait": True, "items": []}
+        U = _xu["U"]; i = next((j for j, u in enumerate(U) if u["key"] == key), None)
+        if i is None: return {"items": [], "error": "этого элемента нет среди подтверждённых (рамка не подтверждена или группа новее индекса)"}
+        A8, A0 = _xu["A8"], _xu["A0"]
+        sm = np.maximum(np.einsum("rk,jk->jr", A8[i], A0).max(1), np.einsum("jrk,k->jr", A8, A0[i]).max(1))
+        items = []; per = {}
+        for j in np.argsort(-sm):
+            u = U[int(j)]
+            if int(j) == i or u["rid"] == U[i]["rid"] or per.get(u["rid"], 0) >= 2: continue
+            per[u["rid"]] = per.get(u["rid"], 0) + 1
+            items.append({"key": u["key"], "rid": u["rid"], "g": u["g"], "box": u["box"], "title": u["title"], "n": u["n"], "sim": round(float(sm[int(j)]), 3)})
+            if len(items) >= max(4, min(60, k)): break
+        q = U[i]
+        return {"q": {"key": q["key"], "rid": q["rid"], "box": q["box"], "title": q["title"], "n": q["n"]}, "items": items, "total": len(U)}
 
     def _xs_answer(me, role, a, body, rec):
         k = str(body.get("key", ""))

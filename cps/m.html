@@ -479,20 +479,34 @@ function showEdge(t){if(t.ask&&!t._ok){return rcWhy(t,()=>{t._ok=1;showEdge(t);}
   const ku=e=>{if(e.code==='Space'){sp=false;hideSp();}};
   document.addEventListener('keydown',kd);document.addEventListener('keyup',ku);window.__kxsp=()=>!!(ed&&ed.vp.querySelector('.kxsp img'));
   init();}
-function showXsame(t){const f=(x)=>`<figure><img src="${crop(x.rid,x.box,300,0.3,1)}" alt=""><figcaption>${esc(x.title||x.rid)}${x.n>1?' · повторов '+x.n:''}</figcaption></figure>`;
+// v12.48 «🔍 похожие»: ближайшие по форме подтверждённые элементы на других коврах; тап по плитке — «провалиться» в неё (кнопка «← назад» возвращает)
+function simOvl(key,hist){hist=hist||[];document.querySelectorAll('.ovl.sim').forEach(e=>e.remove());const o=document.createElement('div');o.className='ovl sim';o.style.cssText='justify-content:flex-start;overflow:auto';
+  o.innerHTML='<span class="mut">ищу похожие…</span>';document.body.appendChild(o);
+  const bar=(back)=>`<div style="display:flex;gap:8px">${back?'<button class="sm" id="sm_b">← назад</button>':''}<button class="sm" id="sm_x">закрыть</button></div>`;
+  const wire=()=>{const x=o.querySelector('#sm_x');if(x)x.onclick=()=>o.remove();const b=o.querySelector('#sm_b');if(b)b.onclick=()=>simOvl(hist[hist.length-1],hist.slice(0,-1));};
+  api('/api/xsame/similar?key='+encodeURIComponent(key)+'&k=36').then(j=>{
+    if(j.wait){o.innerHTML=`<span class="mut">индекс элементов строится (до минуты) — нажмите «🔍 похожие» ещё раз</span>${bar(0)}`;wire();return;}
+    if(j.error||!j.q){o.innerHTML=`<span class="mut">${esc(j.error||'не нашлось')}</span>${bar(hist.length)}`;wire();return;}
+    o.innerHTML=`${bar(hist.length)}<span class="mut">похожие на · ${esc((j.q.title||j.q.rid).slice(0,50))}</span><img src="${crop(j.q.rid,j.q.box,260,0.35,1)}" alt="" style="max-height:22dvh">
+      <div class="mut" style="font-size:12px">среди ${j.total} подтверждённых элементов; тап по плитке — искать похожие уже на неё</div>
+      <div class="grid tw" style="grid-template-columns:repeat(auto-fill,minmax(110px,1fr));width:100%">${j.items.map((x,i)=>`<div class="tl" data-i="${i}"><img loading="lazy" src="${crop(x.rid,x.box,200,0.35,1)}" alt="" style="width:100%;aspect-ratio:1;object-fit:contain;background:#000"><b>${esc((x.title||x.rid).slice(0,26))} · ${x.sim}</b></div>`).join('')}</div>`;
+    wire();o.querySelectorAll('.tl').forEach(el=>el.onclick=()=>simOvl(j.items[+el.dataset.i].key,hist.concat(key)));
+  }).catch(e=>{o.innerHTML=`<span class="mut">не вышло: ${esc(e.message)}</span>${bar(0)}`;wire();});}
+function showXsame(t){const f=(x)=>`<figure><img src="${crop(x.rid,x.box,300,0.3,1)}" alt=""><figcaption>${esc(x.title||x.rid)}${x.n>1?' · повторов '+x.n:''}</figcaption><button class="sm" data-sim="${esc(x.rid+'|'+x.g)}">🔍 похожие</button></figure>`;
   $('main').innerHTML=`${qhead('Это один и тот же элемент узора?','Элементы с двух разных ковров (жёлтая рамка). Поворот, зеркало, цвет и размер не важны — важна форма. «Тот же» — один и тот же элемент (как одно слово у Керимова). «Тот же, другое заполнение» — внешний контур тот же, а внутри другое (другой узор, 4 квадрата вместо одного). «Похож» — родственные, но сам контур другой. Сомневаетесь между «тот же» и «похож» — выбирайте «похож». Ответы собирают элементы в группы между коврами; потом группе дадим имя один раз.')}
    <div class="pair">${f(t.a)}${f(t.b)}</div>
    <div class="btns"><button class="yes" id="a1">✓ тот же</button><button id="a5">тот же, другое заполнение</button><button id="a2">похож, но другой</button><button class="no" id="a3">✗ разные</button><button class="sm unk" id="a4">не знаю</button></div>`;qtip();
-  const x={key:t.key};$('a1').onclick=()=>answer(t,'same',null,x);$('a5').onclick=()=>answer(t,'same',null,{...x,var:1});$('a2').onclick=()=>answer(t,'similar',null,x);$('a3').onclick=()=>answer(t,'diff',null,x);$('a4').onclick=()=>answer(t,'skip',null,x);}
+  $('main').querySelectorAll('[data-sim]').forEach(b=>b.onclick=e=>{e.stopPropagation();simOvl(b.dataset.sim);});const x={key:t.key};$('a1').onclick=()=>answer(t,'same',null,x);$('a5').onclick=()=>answer(t,'same',null,{...x,var:1});$('a2').onclick=()=>answer(t,'similar',null,x);$('a3').onclick=()=>answer(t,'diff',null,x);$('a4').onclick=()=>answer(t,'skip',null,x);}
 // v12.36 «на других коврах»: ночной поиск (Colab) нашёл места, похожие на элемент-образец. Тап по плитке — ✓ это он (на тот ковёр ставится
 // подтверждённая рамка с названием образца), неотмеченные — «не он». ⤢ — крупно с соседями.
 function showXfind(t){document.documentElement.style.setProperty('--imh','26dvh');const sel=new Set();
   t.items.forEach(x=>{if(!x.box0)x.box0=x.box.slice();});
   const tile=(x,i)=>`<div class="tl${sel.has(i)?' sel':''}" data-i="${i}"><img loading="lazy" src="${crop(x.rid,x.box,240,0.35,1)}" alt="" style="width:100%;height:auto;max-height:24dvh;aspect-ratio:1;object-fit:contain;background:#000"><b>${esc((x.title||x.rid).slice(0,34))}${x.box!==x.box0&&x.ed?' · ✎':''}</b><button class="zz" data-z="${i}" aria-label="крупно">⤢</button></div>`;
   $('main').innerHTML=`${qhead('Где тот же элемент?','Сверху — образец: элемент, обведённый на другом ковре (жёлтая рамка). Ниже — места на других коврах, которые машина ночью сочла похожими; жёлтая рамка — где именно, размер как у образца. Тап — ✓ это тот же элемент (поворот, зеркало, цвет и размер не важны — важна форма). Рамка великовата или мимо — ⤢ и «✎ поправить рамку». Неотмеченные запишутся как «не он». На отмеченный ковёр сразу ставится подтверждённая рамка с тем же названием.')}
-   <div class="pair" style="justify-content:center"><figure><img src="${crop(t.q.rid,t.q.box,300,0.35,1)}" alt="" style="max-height:24dvh"><figcaption>образец · ${esc(t.title||t.rid)}${t.q.n>1?' · повторов '+t.q.n:''}</figcaption></figure></div>
+   <div class="pair" style="justify-content:center"><figure><img src="${crop(t.q.rid,t.q.box,300,0.35,1)}" alt="" style="max-height:24dvh"><figcaption>образец · ${esc(t.title||t.rid)}${t.q.n>1?' · повторов '+t.q.n:''}</figcaption><button class="sm" id="xf_sim">🔍 похожие на образец</button></figure></div>
    <div class="grid tw xf" id="xfg" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))"></div>
    <div class="btns"><button class="yes" id="a1">ни один не тот</button><button class="sm unk" id="a4">пропустить</button></div>`;qtip();
+  $('xf_sim').onclick=()=>simOvl(t.key);
   const upd=()=>{$('a1').textContent=sel.size?`✓ готово: тот же — ${sel.size}`:'ни один не тот';};
   const fix=i=>{const x=t.items[i];markEdit({rid:x.rid},{id:'xf'+i,box:x.box},nb=>{x.box=nb;x.ed=1;sel.add(i);render();});};
   const zoom=i=>{const x=t.items[i],o=document.createElement('div');o.className='ovl';
