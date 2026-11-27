@@ -16,9 +16,38 @@
  "status": "new",
  "w": 600,
  "h": 693,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795797194947x7",
+   "box": [
+    0.2179,
+    0.3156,
+    0.08409,
+    0.06205
+   ],
+   "zone": "other",
+   "motif": "",
+   "scheme": "t114_f01",
+   "motif_text": "",
+   "group": "gm1795797194947x7",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.901,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "fixed_by": "dolgikh",
+   "at": 1795797194,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795797194,
+   "found_from": "kerimov_vol1_p320_1"
+  }
+ ],
  "created": 1791736130,
- "updated": 1795354554,
+ "updated": 1795797194,
  "cat": {
   "title": "kuba sumakh32",
   "museum": "",
@@ -186,5 +215,6 @@
  },
  "frame": "whole",
  "tri": "micro",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "updated_by": "dolgikh"
 }
