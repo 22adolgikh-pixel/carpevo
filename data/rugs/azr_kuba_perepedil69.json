@@ -18,7 +18,7 @@
  "h": 1343,
  "marks": [],
  "created": 1791736134,
- "updated": 1795117640,
+ "updated": 1795762564,
  "cat": {
   "title": "kuba perepedil69",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_perepedil69",
  "lib_img": "img/azr_kuba_perepedil69.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Chelyabi_carpet_from_Karabakh_Azerbaijan_3_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Chelyabi_carpet_from_Karabakh_Azerbaijan_3_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795762564
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -135,5 +146,16 @@
    64.5495
   ],
   "t": 1795207780
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Chelyabi_carpet_from_Karabakh_Azerbaijan_3_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795762564
+    }
+   }
+  }
  }
 }

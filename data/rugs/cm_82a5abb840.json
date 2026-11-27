@@ -720,10 +720,37 @@
     ]
    ],
    "sam": 0.709
+  },
+  {
+   "id": "m1795762577879x6",
+   "box": [
+    0.1667,
+    0.35,
+    0.6333,
+    0.3
+   ],
+   "zone": "other",
+   "motif": "",
+   "scheme": "",
+   "motif_text": "",
+   "group": "gm1795762577879x6",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.909,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795762577,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795762577,
+   "found_from": "cm_b59b402cc9"
   }
  ],
  "created": 1791870019,
- "updated": 1795464059,
+ "updated": 1795762577,
  "cat": {
   "title": "Carpet",
   "museum": "",
@@ -975,5 +1002,6 @@
   ],
   "t": 1795207833
  },
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }
