@@ -16,9 +16,37 @@
  "status": "new",
  "w": 1035,
  "h": 1600,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795792320505x6",
+   "box": [
+    0.2692,
+    0.1812,
+    0.0769,
+    0.025
+   ],
+   "zone": "other",
+   "motif": "",
+   "scheme": "",
+   "motif_text": "",
+   "group": "gm1795792320505x6",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.899,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795792320,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795792320,
+   "found_from": "azcm_113"
+  }
+ ],
  "created": 1791567607,
- "updated": 1795789714,
+ "updated": 1795792320,
  "src_id": "fig:az_carpets_magazine_33_patterns_page_039_jpg_f01",
  "multi": [],
  "people": {
@@ -200,5 +228,6 @@
    "at": 1795654986,
    "ver": 2
   }
- }
+ },
+ "updated_by": "dolgikh"
 }

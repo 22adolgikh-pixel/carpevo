@@ -26,8 +26,8 @@
     0.0625
    ],
    "zone": "other",
-   "motif": "",
-   "scheme": "",
+   "motif": "alma",
+   "scheme": "t66_f08",
    "motif_text": "",
    "group": "gm1795791901448x1",
    "certainty": "sure",
@@ -42,11 +42,12 @@
    "at": 1795791901,
    "confirmed_by": "dolgikh",
    "confirmed_at": 1795791901,
-   "found_from": "azcm_113"
+   "found_from": "azcm_113",
+   "named_by": "/m"
   }
  ],
  "created": 1794547278,
- "updated": 1795791901,
+ "updated": 1795792178,
  "cat": {
   "title": "Ковёр «Bico» Ширван",
   "museum": "",
@@ -170,5 +171,16 @@
  },
  "frame": "whole",
  "tri": "auto",
- "updated_by": "dolgikh"
+ "updated_by": "dolgikh",
+ "micro": {
+  "name": {
+   "gm1795791901448x1": {
+    "dolgikh": {
+     "a": "t66_f08",
+     "w": 2,
+     "t": 1795792178
+    }
+   }
+  }
+ }
 }
