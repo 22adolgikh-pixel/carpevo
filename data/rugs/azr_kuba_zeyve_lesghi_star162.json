@@ -18,7 +18,7 @@
  "h": 730,
  "marks": [],
  "created": 1791736137,
- "updated": 1795345674,
+ "updated": 1795790069,
  "cat": {
   "title": "kuba zeyve lesghi star162",
   "museum": "",
@@ -57,6 +57,14 @@
   {
    "id": "kerimov_vol2_p070_1",
    "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star154",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -74,6 +82,17 @@
    "ok": false,
    "by": "по цепочке: azr_kuba_zeyve_lesghi_star162 ≠ vam_O117753",
    "at": 1795009093
+  },
+  "azr_antique_kazak_prayer_rug1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790069
+  },
+  "azr_kuba_zeyve_lesghi_star154": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790069,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -139,6 +158,20 @@
      "a": "diff",
      "w": 2,
      "t": 1795009034
+    }
+   },
+   "azr_antique_kazak_prayer_rug1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790069
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star154": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795790069
     }
    }
   },

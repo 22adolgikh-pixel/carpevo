@@ -18,7 +18,7 @@
  "h": 640,
  "marks": [],
  "created": 1791736131,
- "updated": 1795269463,
+ "updated": 1795790004,
  "cat": {
   "title": "kuba alpan15",
   "museum": "",
@@ -53,6 +53,10 @@
   {
    "id": "azr_kuba_zeyve_lesghi_star66",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star53",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -66,6 +70,11 @@
    "by": "/m: dolgikh",
    "at": 1795019157,
    "similar": true
+  },
+  "azr_kuba_zeyve_lesghi_star53": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790004
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -147,6 +156,13 @@
      "a": "similar",
      "w": 2,
      "t": 1795019157
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star53": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790004
     }
    }
   },

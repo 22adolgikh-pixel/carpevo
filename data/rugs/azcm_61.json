@@ -18,7 +18,7 @@
  "h": 2048,
  "marks": [],
  "created": 1791870042,
- "updated": 1795293046,
+ "updated": 1795790049,
  "cat": {
   "title": "“Lənkəran” («Лянкаран»), Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -61,6 +61,14 @@
   {
    "id": "intangible_2850_p0029_1",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Goçbunyuz_Khanliq_jpg",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0196_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -78,6 +86,16 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "wikimedia_File_Goçbunyuz_Khanliq_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790049
+  },
+  "intangible_2850_p0196_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790049
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -141,6 +159,20 @@
      "a": "skip",
      "w": 0,
      "t": 1794977097
+    }
+   },
+   "wikimedia_File_Goçbunyuz_Khanliq_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790049
+    }
+   },
+   "intangible_2850_p0196_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790049
     }
    }
   },

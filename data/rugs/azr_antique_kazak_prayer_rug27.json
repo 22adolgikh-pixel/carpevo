@@ -18,7 +18,7 @@
  "h": 839,
  "marks": [],
  "created": 1791736129,
- "updated": 1795073152,
+ "updated": 1795790092,
  "cat": {
   "title": "antique kazak prayer rug27",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_kazak_prayer_rug27",
  "lib_img": "img/azr_antique_kazak_prayer_rug27.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_rippon_boswell_05_2013_L168_lori_pambak_rug",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_rippon_boswell_05_2013_L168_lori_pambak_rug": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790092
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -135,5 +146,16 @@
    47.7449
   ],
   "t": 1795207721
+ },
+ "micro": {
+  "same": {
+   "azr_rippon_boswell_05_2013_L168_lori_pambak_rug": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790092
+    }
+   }
+  }
  }
 }

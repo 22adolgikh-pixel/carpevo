@@ -47,8 +47,19 @@
  },
  "src_id": "cat:vam_O120778",
  "lib_img": "img/vam_O120778.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba74",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba74": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790058
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

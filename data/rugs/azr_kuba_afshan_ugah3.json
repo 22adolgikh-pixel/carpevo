@@ -18,7 +18,7 @@
  "h": 1225,
  "marks": [],
  "created": 1791736135,
- "updated": 1795293047,
+ "updated": 1795789984,
  "cat": {
   "title": "kuba afshan ugah3",
   "museum": "",
@@ -66,6 +66,10 @@
   {
    "id": "azr_antique_caucasian_moghan_rug12",
    "score": 0
+  },
+  {
+   "id": "intangible_2849_p0100_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -93,6 +97,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "intangible_2849_p0100_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789984,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -177,7 +187,14 @@
     }
    },
    "azr_kuba_shirvan_medallion124": {},
-   "azr_antique_caucasian_moghan_rug12": {}
+   "azr_antique_caucasian_moghan_rug12": {},
+   "intangible_2849_p0100_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795789984
+    }
+   }
   },
   "frame": {
    "dolgikh": {

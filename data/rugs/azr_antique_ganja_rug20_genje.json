@@ -18,7 +18,7 @@
  "h": 640,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1795790085,
  "cat": {
   "title": "antique ganja rug20 genje",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_ganja_rug20_genje",
  "lib_img": "img/azr_antique_ganja_rug20_genje.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba150",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba150": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790085
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -101,5 +112,16 @@
    47.4532
   ],
   "t": 1795207718
+ },
+ "micro": {
+  "same": {
+   "azr_kuba150": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790085
+    }
+   }
+  }
  }
 }

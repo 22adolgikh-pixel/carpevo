@@ -2,15 +2,15 @@
  "id": "kerimov_vol1_p326_1",
  "title": "Керимов, т. I, Табл. 204. «ДЖЕК» (стр. скана 326, печ. ?)",
  "source": "каталог: kerimov_vol1",
- "museum": "",
+ "museum": "Wikimedia Commons",
  "inv": "",
  "url": "",
  "license": "книга (не публиковать фото)",
  "place": "",
- "date": "",
- "school": "",
+ "date": "XIX əsr",
+ "school": "guba-shirvan",
  "composition": "cek",
- "technique": "",
+ "technique": "ворсовый",
  "size": "",
  "notes": "",
  "status": "new",
@@ -18,7 +18,7 @@
  "h": 1266,
  "marks": [],
  "created": 1791736121,
- "updated": 1795549072,
+ "updated": 1795790039,
  "cat": {
   "title": "Керимов, т. I, Табл. 204. «ДЖЕК» (стр. скана 326, печ. ?)",
   "museum": "",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:kerimov_vol1_p326_1",
  "lib_img": "img/kerimov_vol1_p326_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol2_p140_1_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol2_p140_1_2": {
+   "ok": true,
+   "by": "/m: dolgikh",
+   "at": 1795790039
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -121,6 +132,15 @@
     "t": 1794936315,
     "s": "ref"
    }
+  },
+  "same": {
+   "kerimov_vol2_p140_1_2": {
+    "dolgikh": {
+     "a": "same",
+     "w": 2,
+     "t": 1795790039
+    }
+   }
   }
  },
  "frame": "whole",
@@ -183,5 +203,11 @@
  ],
  "merged_from": [
   "k_t207_f01"
- ]
+ ],
+ "from_twin": {
+  "school": "kerimov_vol2_p140_1_2",
+  "technique": "kerimov_vol2_p140_1_2",
+  "museum": "kerimov_vol2_p140_1_2",
+  "date": "kerimov_vol2_p140_1_2"
+ }
 }

@@ -18,7 +18,7 @@
  "h": 1361,
  "marks": [],
  "created": 1794547278,
- "updated": 1795358130,
+ "updated": 1795790074,
  "cat": {
   "title": "безворсовый «Kilim» Иреван",
   "museum": "",
@@ -58,6 +58,14 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0069_1",
    "score": 0
+  },
+  {
+   "id": "azcm_164",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0125_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -70,6 +78,16 @@
    "ok": false,
    "by": "по цепочке: azcm_141 ≠ intangible_2854_p0054_1",
    "at": 1795497336
+  },
+  "azcm_164": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790074
+  },
+  "intangible_2850_p0125_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790074
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -132,6 +150,22 @@
      "a": "one",
      "w": 2,
      "t": 1795358130
+    }
+   }
+  },
+  "same": {
+   "azcm_164": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790074
+    }
+   },
+   "intangible_2850_p0125_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790074
     }
    }
   }

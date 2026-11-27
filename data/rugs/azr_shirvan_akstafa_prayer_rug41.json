@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_shirvan_akstafa_prayer_rug41",
  "lib_img": "img/azr_shirvan_akstafa_prayer_rug41.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_aa6a93132f",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_aa6a93132f": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790127
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

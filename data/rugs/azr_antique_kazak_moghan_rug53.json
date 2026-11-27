@@ -46,7 +46,7 @@
   }
  ],
  "created": 1791736129,
- "updated": 1795697681,
+ "updated": 1795790160,
  "cat": {
   "title": "antique-kazak-moghan-rug53",
   "museum": "",
@@ -89,6 +89,10 @@
   {
    "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0134_1",
    "score": 0
+  },
+  {
+   "id": "intangible_2850_p0144_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -111,6 +115,11 @@
    "ok": false,
    "by": "по цепочке: azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0134_1 ≠ intangible_2851_p0095_1_2",
    "at": 1795621515
+  },
+  "intangible_2850_p0144_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790160
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -137,6 +146,13 @@
      "a": "diff",
      "w": 2,
      "t": 1794998098
+    }
+   },
+   "intangible_2850_p0144_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790160
     }
    }
   }

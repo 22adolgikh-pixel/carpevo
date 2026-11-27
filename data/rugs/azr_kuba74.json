@@ -154,7 +154,7 @@
   }
  ],
  "created": 1791736136,
- "updated": 1795343935,
+ "updated": 1795790058,
  "cat": {
   "title": "kuba74",
   "museum": "",
@@ -222,6 +222,14 @@
   {
    "id": "azcm_31",
    "score": 0
+  },
+  {
+   "id": "vam_O120778",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0118_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -274,6 +282,16 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "vam_O120778": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790058
+  },
+  "intangible_2850_p0118_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790058
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -449,6 +467,22 @@
      "a": "none",
      "w": 2,
      "t": 1795343935
+    }
+   }
+  },
+  "same": {
+   "vam_O120778": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790058
+    }
+   },
+   "intangible_2850_p0118_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790058
     }
    }
   }

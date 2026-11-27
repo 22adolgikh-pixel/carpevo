@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062089,
+ "updated": 1795790144,
  "cat": {
   "title": "Sumax Губа",
   "museum": "Национальный музей азербайджанского ковра",
@@ -51,8 +51,19 @@
  },
  "src_id": "cat:azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0108_1",
  "lib_img": "img/azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0108_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "met_447487",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "met_447487": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790144
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -141,5 +152,16 @@
    70.8629
   ],
   "t": 1795207696
+ },
+ "micro": {
+  "same": {
+   "met_447487": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790144
+    }
+   }
+  }
  }
 }
