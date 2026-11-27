@@ -4027,6 +4027,29 @@ def install(app, DATA, D_WORK):
             if r and r.get("edge_fix"): out[r["id"]] = {**r["edge_fix"], "quad": (r.get("layout") or {}).get("quad")}
         return {"n": len(out), "fixes": out}
 
+    @app.get("/api/open/edge_eval")
+    def api_edge_eval():
+        """v12.45: насколько край, найденный машиной (edge_full в rug_mesh), отличается от правки человека: на каждой стороне среднее и наибольшее
+        расхождение в % от меньшей стороны (положение края поперёк, 64 станции). Для решения, какие ковры можно принимать без ручной правки."""
+        import rug_mesh
+        out = {}
+        for f in os.listdir(D_RUGS):
+            if not f.endswith(".json"): continue
+            r = load(f[:-5]); fix = edge_fix_of(r) if r else None
+            if not fix: continue
+            try:
+                m = json.load(open(os.path.join(D_MESH, r["id"] + ".json"))); geo = m["geo"]; full = m.get("edge_full") or {}
+                hum = rug_mesh.curves_from_fix(fix, geo, len(next(iter(full.values()))))
+                sh = min(geo["W"], geo["H"]); d = {}
+                for k in ("left", "right", "top", "bot"):
+                    if k in full and k in hum:
+                        e = np.abs(np.array(full[k], float) - np.array(hum[k], float)) / sh * 100
+                        d[k] = {"mean": round(float(e.mean()), 2), "max": round(float(e.max()), 2), "human_range": round(float(np.ptp(hum[k])) / sh * 100, 2)}
+                out[r["id"]] = d
+            except Exception as e:
+                out[r["id"]] = {"error": str(e)[:80]}
+        return {"n": len(out), "eval": out}
+
     @app.get("/api/open/rcmp_votes")
     def api_rcmp_votes():
         return {"votes": _rc_votes()}
