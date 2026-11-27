@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870023,
- "updated": 1795353731,
+ "updated": 1795788077,
  "cat": {
   "title": "Fındığan xalçası, Bakı məktəbi Bakı qrupu",
   "museum": "Музей турецкого и исламского искусства (Стамбул)",
@@ -52,9 +52,65 @@
   {
    "id": "wikimedia_File_Fındığan_xalçası_Bakı_məktəbi_Bakı_qrupu_jpg",
    "score": 1056
+  },
+  {
+   "id": "azr_kuba_sumakh92",
+   "score": 0
+  },
+  {
+   "id": "cm_652559a4c6",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_khizi_findigan_rug11",
+   "score": 0
+  },
+  {
+   "id": "cm_048c9260eb",
+   "score": 0
+  },
+  {
+   "id": "kerimov_vol1_p343_2",
+   "score": 0
+  },
+  {
+   "id": "intangible_2849_p0184_1",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "azr_kuba_sumakh92": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788077
+  },
+  "cm_652559a4c6": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788077
+  },
+  "azr_antique_khizi_findigan_rug11": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788077,
+   "similar": true
+  },
+  "cm_048c9260eb": {
+   "ok": false,
+   "by": "по цепочке: cm_652559a4c6 ≠ cm_848505e9e5",
+   "at": 1795788106
+  },
+  "kerimov_vol1_p343_2": {
+   "ok": false,
+   "by": "по цепочке: cm_652559a4c6 ≠ cm_848505e9e5",
+   "at": 1795788106
+  },
+  "intangible_2849_p0184_1": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_khizi_findigan_rug11 ≠ cm_848505e9e5",
+   "at": 1795788106
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Fındığan_xalçası_Bakı_məktəbi_Bakı_qrupu_jpg": {
@@ -164,6 +220,29 @@
     "w": 2,
     "t": 1795353731,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_sumakh92": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795788077
+    }
+   },
+   "cm_652559a4c6": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795788077
+    }
+   },
+   "azr_antique_khizi_findigan_rug11": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795788077
+    }
    }
   }
  },

@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870043,
- "updated": 1795293047,
+ "updated": 1795788009,
  "cat": {
   "title": "“Malıbəyli” («Малыбейли»), Шуша, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -57,6 +57,10 @@
   {
    "id": "azcm_93",
    "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_prayer_rug31",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -69,6 +73,11 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_antique_kazak_prayer_rug31": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788009
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -386,6 +395,15 @@
  "micro": {
   "field": {
    "dolgikh": "draw"
+  },
+  "same": {
+   "azr_antique_kazak_prayer_rug31": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795788009
+    }
+   }
   }
  }
 }

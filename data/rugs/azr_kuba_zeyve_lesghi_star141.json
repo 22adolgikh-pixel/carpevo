@@ -18,7 +18,7 @@
  "h": 1704,
  "marks": [],
  "created": 1791736136,
- "updated": 1794509396,
+ "updated": 1795788043,
  "cat": {
   "title": "kuba zeyve lesghi star141",
   "museum": "",
@@ -45,8 +45,20 @@
  },
  "src_id": "cat:azr_kuba_zeyve_lesghi_star141",
  "lib_img": "img/azr_kuba_zeyve_lesghi_star141.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_zeyve_lesghi_star31",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_zeyve_lesghi_star31": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788043,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -111,6 +123,15 @@
       0.96575
      ]
     ]
+   }
+  },
+  "same": {
+   "azr_kuba_zeyve_lesghi_star31": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795788043
+    }
    }
   }
  },

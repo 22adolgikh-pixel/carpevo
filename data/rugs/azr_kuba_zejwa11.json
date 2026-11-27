@@ -18,7 +18,7 @@
  "h": 1026,
  "marks": [],
  "created": 1791736134,
- "updated": 1795291491,
+ "updated": 1795788036,
  "cat": {
   "title": "kuba zejwa11",
   "museum": "",
@@ -49,6 +49,10 @@
   {
    "id": "azr_kuba_kilim10",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_zejwa8",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +60,12 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1795697687
+  },
+  "azr_kuba_zejwa8": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795788036,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -153,6 +163,17 @@
    "v": "maybe",
    "at": 1795741307,
    "ver": 2
+  }
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_zejwa8": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795788036
+    }
+   }
   }
  }
 }
