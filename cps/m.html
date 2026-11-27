@@ -467,6 +467,44 @@ function showEcl(t){document.documentElement.style.setProperty('--imh','26dvh');
   const g=$('ecg'),upd=()=>{g.innerHTML=t.items.map(tile).join('');g.querySelectorAll('.tl').forEach(el=>el.onclick=()=>{const i=+el.dataset.i;bad.has(i)?bad.delete(i):bad.add(i);upd();});$('a1').textContent=bad.size?`✓ один узор, кроме ${bad.size}`:'✓ один узор';};upd();
   const x=()=>({key:t.key,bad:[...bad]});
   $('a1').onclick=()=>answer(t,'ok',null,x());$('a2').onclick=()=>answer(t,'mixed',null,x());$('a3').onclick=()=>answer(t,'junk',null,x());$('a4').onclick=()=>answer(t,'skip',null,{key:t.key});}
+function showEdge(t){if(t.ask&&!t._ok){return rcWhy(t,()=>{t._ok=1;showEdge(t);});}document.documentElement.style.setProperty('--imh','54dvh');
+  const id=encodeURIComponent(t.rid);let tab='edit',D=null,V=null,prev=null;const SD=['top','bot','left','right'];window.__kx=()=>({D,V});
+  $('main').innerHTML=`${qhead('Где настоящий край ковра?','Жёлтая рамка — ковёр по вашим углам. Тяните углы (квадратики) и узлы (кружки) на край ворса (колесо мыши или «＋» — крупнее, пробел — результат) — туда, где кончается узор; узел можно двигать в любую сторону. Сначала только 4 угла; нужен узел — тапните по оранжевой линии, лишний — тапните по нему и «✕ убрать». Бахрому, килимную полосу без узора и тени не включайте. «плавно / прямо» — линия между узлами кривой или отрезками. Пунктир — где край нашла машина. «посмотреть результат» — как выпрямится.')}
+   <div id="kx_etabs" style="display:flex;gap:6px;justify-content:center;margin:4px 0"></div><div id="kx_ebody" style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:4px"><span class="mut">загружаю…</span></div>
+   <div class="btns"><label class="sm" id="kx_egl" style="display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer" title="поставить узлы по голубому пунктиру машины на все четыре стороны; снять галочку — вернуть как было"><input type="checkbox" id="kx_eg" style="width:20px;height:20px"> как у машины</label><button class="yes" id="kx_ed">✓ готово</button><button class="sm" id="kx_em">плавно</button><button class="sm" id="kx_er">сбросить</button><button class="sm unk" id="kx_es">пропустить</button><button id="kx_eq">что-то не так…</button><button class="sm" id="kx_erot" title="повернуть ковёр на 90° по часовой">↻ повернуть</button></div>`;qtip();
+  const gpt=(dsp,k,j)=>{const n=D.guide[k].length,tt=j/(n-1),v=D.guide[k][j];return dsp(k==='top'?[tt,v]:k==='bot'?[tt,1-v]:k==='left'?[v,tt]:[1-v,tt]);};
+  const guide=dsp=>SD.map(k=>`<polyline fill="none" stroke="#6bd6ff" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" opacity=".8" points="${D.guide[k].map((_,j)=>gpt(dsp,k,j).join(',')).join(' ')}"/>`).join('');
+  let ed=null;const mode=()=>{$('kx_em').textContent=V&&V.mode==='line'?'прямо':'плавно';};
+  const draw=()=>{const B=$('kx_ebody');ed=null;
+    if(tab==='edit'){ed=nodeEd({host:B,img:`/rugpad/${id}.jpg?c=1&s=1600`,pad:D.pad,lim:D.lim2,V,guide,frame:1,spaceHint:1,onChange:()=>{prev=null;}});const w=B.querySelector('.kxw');w.id='kx_ew';w.querySelector('.kxs').id='kx_esvg';w.querySelector('.kxlp').id='kx_loupe';}
+    else if(tab==='orig'){const q=t.quad||[];B.innerHTML=`<div style="position:relative;line-height:0"><img src="/rugthumb/${id}.jpg?raw=1" alt="" style="max-width:100%;max-height:var(--imh)">${q.length===4?`<svg viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><polygon points="${q.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#ffd54a" stroke-width=".004" vector-effect="non-scaling-stroke"/></svg>`:''}</div>`;}
+    else B.innerHTML=prev?`<img src="${prev}" alt="" style="max-width:100%;max-height:var(--imh)"><div class="mut" style="text-align:center">так выпрямится по вашим узлам; тёмное вокруг — что было за рамкой</div>`:'<span class="mut">строю…</span>';
+    $('kx_etabs').innerHTML=[['edit','править'],['orig','оригинал'],['res','результат']].map(([k,n])=>`<button class="sm${k===tab?' yes':''}" data-t="${k}">${n}</button>`).join('');
+    $('kx_etabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;if(tab==='res')preview();else draw();});mode();};
+  const preview=async()=>{tab='res';prev=null;draw();try{const j=await api('/api/rugs/'+id+'/edgefix_preview',{fix:V});prev=j.img;}catch(e){toast('не вышло: '+e.message);}if(tab==='res')draw();};
+  const init=async()=>{try{D=await api('/api/rugs/'+id+'/edgefix');V=JSON.parse(JSON.stringify(D.fix||D.init));draw();}catch(e){$('kx_ebody').innerHTML=`<span class="mut">не загрузилось: ${esc(e.message)}</span>`;}};
+  $('kx_ed').onclick=()=>{if(!V)return;answer(t,'fix',undefined,{fix:V});};
+  let vbk=null;const egOff=()=>{const c=$('kx_eg');if(c)c.checked=false;vbk=null;};
+  $('kx_eg').onchange=()=>{if(!D||!V){$('kx_eg').checked=false;return;}
+    if(!$('kx_eg').checked){if(vbk){Object.keys(V).forEach(k=>delete V[k]);Object.assign(V,vbk);vbk=null;prev=null;tab='edit';draw();toast('вернул как было');}return;}
+    vbk=JSON.parse(JSON.stringify(V));
+    const nodes=k=>{const g=D.guide[k],n=g.length,at=t=>{const j=Math.round(t*(n-1)),a=g.slice(Math.max(0,j-1),j+2);return a.reduce((x,y)=>x+y,0)/a.length;};
+      return [0.1,0.3,0.5,0.7,0.9].map(t=>{const v=+at(t).toFixed(4);return k==='top'?[t,v]:k==='bot'?[t,+(1-v).toFixed(4)]:k==='left'?[v,t]:[+(1-v).toFixed(4),t];});};
+    const n={v:2,c:[[0,0],[1,0],[1,1],[0,1]],top:nodes('top'),bot:nodes('bot'),left:nodes('left'),right:nodes('right'),mode:V.mode||'smooth'};Object.keys(V).forEach(k=>delete V[k]);Object.assign(V,n);prev=null;tab='edit';draw();toast('край машины поставлен на все 4 стороны — поправьте узлы, результат — вкладка или пробел');};
+  $('kx_em').onclick=()=>{if(!V)return;V.mode=V.mode==='line'?'smooth':'line';prev=null;if(ed)ed.paint();mode();};
+  $('kx_er').onclick=()=>{if(D){egOff();const n=JSON.parse(JSON.stringify(D.init));Object.keys(V).forEach(k=>delete V[k]);Object.assign(V,n);prev=null;tab='edit';draw();}};
+  $('kx_es').onclick=()=>answer(t,'skip');$('kx_eq').onclick=()=>rcWhy(t,()=>showEdge(t));
+  $('kx_erot').onclick=async()=>{try{await api('/api/rugs/'+id+'/rot',{d:90});toast('повёрнуто — картинка пересчитывается');D=null;V=null;prev=null;$('kx_ebody').innerHTML='<span class="mut">пересчитываю…</span>';setTimeout(init,1200);}catch(e){toast('не вышло: '+e.message);}};
+  // v12.45: пробел (держать) — результат поверх редактора, отпустить — назад; масштаб и узлы не сбиваются
+  let sp=false;const getPrev=async()=>{if(!prev){const j=await api('/api/rugs/'+id+'/edgefix_preview',{fix:V});prev=j.img;}return prev;};
+  const showSp=async()=>{if(!ed)return;const vp=ed.vp;let ov=vp.querySelector('.kxsp');if(!ov){ov=document.createElement('div');ov.className='kxsp';ov.style.cssText='position:absolute;inset:0;z-index:8;background:#000;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:13px';vp.appendChild(ov);}
+    ov.innerHTML='строю…';try{const u=await getPrev();if(sp&&ov.isConnected)ov.innerHTML=`<img src="${u}" alt="" style="max-width:100%;max-height:100%">`;}catch(e){ov.innerHTML='не вышло';}};
+  const hideSp=()=>{const ov=ed&&ed.vp.querySelector('.kxsp');if(ov)ov.remove();};
+  const kd=e=>{if(!document.getElementById('kx_ebody')){document.removeEventListener('keydown',kd);document.removeEventListener('keyup',ku);return;}
+    if(e.code==='Space'&&!e.repeat&&tab==='edit'&&!/INPUT|TEXTAREA/.test((e.target||{}).tagName||'')){e.preventDefault();sp=true;showSp();}};
+  const ku=e=>{if(e.code==='Space'){sp=false;hideSp();}};
+  document.addEventListener('keydown',kd);document.addEventListener('keyup',ku);window.__kxsp=()=>!!(ed&&ed.vp.querySelector('.kxsp img'));
+  init();}
 function showXsame(t){const f=(x)=>`<figure><img src="${crop(x.rid,x.box,300,0.3,1)}" alt=""><figcaption>${esc(x.title||x.rid)}${x.n>1?' · повторов '+x.n:''}</figcaption><button class="sm" data-sim="${esc(x.rid+'|'+x.g)}">🔍 похожие</button></figure>`;
   $('main').innerHTML=`${t.re?`<div class="mut" style="color:#ffb74a;margin:2px 0">⚠ перепроверка: этот ответ «тот же» связал элементы с разными именами (${esc(t.re.join(' ↔ '))}). Ответьте ещё раз.</div>`:''}${qhead('Это один и тот же элемент узора?','Элементы с двух разных ковров (жёлтая рамка). Поворот, зеркало, цвет и размер не важны — важна форма. «Тот же» — один и тот же элемент (как одно слово у Керимова). «Тот же, другое заполнение» — внешний контур тот же, а внутри другое (другой узор, 4 квадрата вместо одного). «Похож» — родственные, но сам контур другой. Сомневаетесь между «тот же» и «похож» — выбирайте «похож». Ответы собирают элементы в группы между коврами; потом группе дадим имя один раз.')}
    <div class="pair">${f(t.a)}${f(t.b)}</div>
