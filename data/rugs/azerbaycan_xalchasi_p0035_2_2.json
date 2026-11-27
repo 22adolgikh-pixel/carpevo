@@ -18,7 +18,7 @@
  "h": 1476,
  "marks": [],
  "created": 1794930691,
- "updated": 1794935210,
+ "updated": 1795789942,
  "cat": {
   "title": "Ковёр Муган",
   "museum": "",
@@ -130,6 +130,15 @@
   },
   "field": {
    "dolgikh": "draw"
+  },
+  "same": {
+   "azr_antique_caucasian_moghan_rug89": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795789942
+    }
+   }
   }
  },
  "frame": "whole",
@@ -441,5 +450,19 @@
    39.3764
   ],
   "t": 1795207705
- }
+ },
+ "same_ok": {
+  "azr_antique_caucasian_moghan_rug89": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789942,
+   "similar": true
+  }
+ },
+ "same": [
+  {
+   "id": "azr_antique_caucasian_moghan_rug89",
+   "score": 0
+  }
+ ]
 }

@@ -46,7 +46,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795718481,
+ "updated": 1795789959,
  "cat": {
   "title": "Ковёр «Qazax» Газах",
   "museum": "",
@@ -83,6 +83,10 @@
   {
    "id": "azcm_133",
    "score": 0
+  },
+  {
+   "id": "intangible_2854_p0036_1_2",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -90,6 +94,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "intangible_2854_p0036_1_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789959,
+   "similar": true
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -162,6 +172,15 @@
     "w": 2,
     "t": 1795281206,
     "s": "ref"
+   }
+  },
+  "same": {
+   "intangible_2854_p0036_1_2": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795789959
+    }
    }
   }
  },

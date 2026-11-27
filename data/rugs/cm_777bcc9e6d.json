@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870027,
- "updated": 1795353415,
+ "updated": 1795789955,
  "cat": {
   "title": "This photo has been taken in the country: Armenia",
   "museum": "",
@@ -47,8 +47,19 @@
  },
  "src_id": "cat:cm_777bcc9e6d",
  "lib_img": "img/cm_777bcc9e6d.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Казах_5_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Казах_5_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789955
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,
@@ -109,6 +120,15 @@
      "a": "one",
      "w": 2,
      "t": 1795353415
+    }
+   }
+  },
+  "same": {
+   "wikimedia_File_Казах_5_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789955
     }
    }
   }

@@ -73,7 +73,7 @@
   }
  ],
  "created": 1791736134,
- "updated": 1795762400,
+ "updated": 1795789875,
  "cat": {
   "title": "kuba perepedil16",
   "museum": "",
@@ -120,6 +120,10 @@
   {
    "id": "azr_kuba_perepedil10",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil20",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -147,6 +151,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_kuba_perepedil20": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789875,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -211,6 +221,13 @@
      "a": "similar",
      "w": 2,
      "t": 1794979838
+    }
+   },
+   "azr_kuba_perepedil20": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795789875
     }
    }
   }

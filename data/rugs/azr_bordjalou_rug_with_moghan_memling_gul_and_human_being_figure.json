@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_bordjalou_rug_with_moghan_memling_gul_and_human_being_figure",
  "lib_img": "img/azr_bordjalou_rug_with_moghan_memling_gul_and_human_being_figure.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_antique_kazak_prayer_rug35",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_antique_kazak_prayer_rug35": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789904
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

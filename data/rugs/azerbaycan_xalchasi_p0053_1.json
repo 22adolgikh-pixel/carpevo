@@ -676,7 +676,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795354165,
+ "updated": 1795789972,
  "cat": {
   "title": "молитвенный ковёр «Faxralı» Гянджа",
   "museum": "Azerbaijan Carpet & Applied Art State Museum",
@@ -729,6 +729,10 @@
   {
    "id": "azr_kuba_seychour153",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star121",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -756,6 +760,11 @@
    "ok": false,
    "by": "по цепочке: azcm_113 ≠ azr_kuba_seychour153",
    "at": 1795497189
+  },
+  "azr_kuba_zeyve_lesghi_star121": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789972
   }
  },
  "_lib_t": "2026-11-13 10:08",
@@ -802,6 +811,13 @@
      "a": "same",
      "w": 2,
      "t": 1795008380
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star121": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789972
     }
    }
   },

@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_hajigaib17",
  "lib_img": "img/azr_kuba_hajigaib17.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_shirvan_akstafa_prayer_rug31",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_chichi41",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_shirvan_akstafa_prayer_rug31": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789892
+  },
+  "azr_kuba_chichi41": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789950
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

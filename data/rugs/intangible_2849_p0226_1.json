@@ -18,7 +18,7 @@
  "h": 1797,
  "marks": [],
  "created": 1794547278,
- "updated": 1795356083,
+ "updated": 1795789966,
  "cat": {
   "title": "Ковёр «Kəmərli» Газах",
   "museum": "",
@@ -51,8 +51,47 @@
  },
  "src_id": "cat:intangible_2849_p0226_1",
  "lib_img": "img/intangible_2849_p0226_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "vam_O152856",
+   "score": 0
+  },
+  {
+   "id": "vam_O152836",
+   "score": 0
+  },
+  {
+   "id": "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug106",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "vam_O152856": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789966
+  },
+  "vam_O152836": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789966
+  },
+  "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789966
+  },
+  "azr_antique_caucasian_moghan_rug106": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789966,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -115,6 +154,36 @@
      "a": "one",
      "w": 2,
      "t": 1795356083
+    }
+   }
+  },
+  "same": {
+   "vam_O152856": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789966
+    }
+   },
+   "vam_O152836": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789966
+    }
+   },
+   "azerbaycan_xalchasi_ensiklopediyasi_ii_cild_p0082_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789966
+    }
+   },
+   "azr_antique_caucasian_moghan_rug106": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795789966
     }
    }
   }

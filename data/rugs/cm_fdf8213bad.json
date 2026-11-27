@@ -18,7 +18,7 @@
  "h": 998,
  "marks": [],
  "created": 1791870023,
- "updated": 1795291822,
+ "updated": 1795789839,
  "cat": {
   "title": "Hərşəng xalçası, 18th century; 1st quarter of the 19th century, 140x348 cm",
   "museum": "Лувр",
@@ -52,9 +52,20 @@
   {
    "id": "wikimedia_File_Hərşəng_xalçası_18th_century_1st_quarter_of_the_19th_century_jpg",
    "score": 832
+  },
+  {
+   "id": "wikimedia_File_Carpet_with_haloed_palmettes_called_Harshang_Karabakh_Azerbaijan_",
+   "score": 0
   }
  ],
- "same_ok": {},
+ "same_ok": {
+  "wikimedia_File_Carpet_with_haloed_palmettes_called_Harshang_Karabakh_Azerbaijan_": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789839,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "same_chk": {
   "wikimedia_File_Hərşəng_xalçası_18th_century_1st_quarter_of_the_19th_century_jpg": {
@@ -122,6 +133,15 @@
     "a": "whole",
     "w": 2,
     "t": 1795291034
+   }
+  },
+  "same": {
+   "wikimedia_File_Carpet_with_haloed_palmettes_called_Harshang_Karabakh_Azerbaijan_": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795789839
+    }
    }
   }
  },

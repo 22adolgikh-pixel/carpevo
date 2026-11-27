@@ -18,7 +18,7 @@
  "h": 1694,
  "marks": [],
  "created": 1794547278,
- "updated": 1795062011,
+ "updated": 1795789970,
  "cat": {
   "title": "Zili. Qarabağqrupu . Azərbaycan . Kəlbəcər.",
   "museum": "",
@@ -50,8 +50,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0092_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0092_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2850_p0045_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2850_p0045_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789970
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -352,6 +363,15 @@
  "micro": {
   "field": {
    "dolgikh": "draw"
+  },
+  "same": {
+   "intangible_2850_p0045_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789970
+    }
+   }
   }
  }
 }

@@ -49,8 +49,19 @@
  },
  "src_id": "cat:azcm_123",
  "lib_img": "img/azcm_123.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_konagkend58",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_konagkend58": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789882
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "people": {
   "n": 0,

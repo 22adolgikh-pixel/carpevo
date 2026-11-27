@@ -1196,7 +1196,7 @@
   }
  ],
  "created": 1791870044,
- "updated": 1795558362,
+ "updated": 1795789900,
  "cat": {
   "title": "“Qasımuşağı” («Гасымушагы»), Джебраил, Карабах, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -1264,6 +1264,10 @@
   {
    "id": "azerbaycan_xalchalari_qarabag_qrupu_p0064_1",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_konagkend64",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -1311,6 +1315,11 @@
    "ok": false,
    "by": "по цепочке: azcm_82 ≠ wikimedia_File_Kasym_ushagy_carpets_01_jpg",
    "at": 1795623086
+  },
+  "azr_kuba_konagkend64": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789900
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -1470,6 +1479,13 @@
      "a": "similar",
      "w": 2,
      "t": 1795292465
+    }
+   },
+   "azr_kuba_konagkend64": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789900
     }
    }
   },
