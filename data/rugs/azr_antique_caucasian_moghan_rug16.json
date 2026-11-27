@@ -18,7 +18,7 @@
  "h": 986,
  "marks": [],
  "created": 1791736138,
- "updated": 1795807313,
+ "updated": 1795808095,
  "cat": {
   "title": "Antique Caucasian Moghan rug, 19th century, possibly Gendje, Azerbaijan",
   "museum": "",
@@ -80,7 +80,30 @@
   "conf": 0.956,
   "area": 0.885,
   "ver": 1,
-  "t": 1794238577
+  "t": 1794238577,
+  "ref_quad": {
+   "quad": [
+    [
+     0.06596,
+     0.01329
+    ],
+    [
+     0.94027,
+     0.00274
+    ],
+    [
+     0.94764,
+     0.99923
+    ],
+    [
+     0.03412,
+     0.98755
+    ]
+   ],
+   "v": 6,
+   "from": "auto",
+   "t": 1795808084
+  }
  },
  "auto_edge": {
   "v": 1,
@@ -109,8 +132,49 @@
     "w": 2,
     "t": 1795807313
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795808095,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.06596,
+    0.01329
+   ],
+   [
+    0.94027,
+    0.00274
+   ],
+   [
+    0.94764,
+    0.99923
+   ],
+   [
+    0.03412,
+    0.98755
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
