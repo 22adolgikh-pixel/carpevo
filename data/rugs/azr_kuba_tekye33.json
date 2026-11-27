@@ -18,7 +18,7 @@
  "h": 640,
  "marks": [],
  "created": 1791736135,
- "updated": 1791736135,
+ "updated": 1795762485,
  "cat": {
   "title": "kuba tekye33",
   "museum": "",
@@ -57,6 +57,10 @@
   {
    "id": "azr_kuba_chichi75",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_tekye39",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -74,6 +78,11 @@
    "ok": false,
    "by": "по цепочке: azr_kuba_chichi88 ≠ azr_kuba_tekye33",
    "at": 1795621715
+  },
+  "azr_kuba_tekye39": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795762485
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -149,6 +158,17 @@
    "v": "diff",
    "at": 1795654932,
    "ver": 2
+  }
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_tekye39": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795762485
+    }
+   }
   }
  }
 }
