@@ -18,7 +18,7 @@
  "h": 468,
  "marks": [],
  "created": 1791736122,
- "updated": 1794236886,
+ "updated": 1795797476,
  "cat": {
   "title": "Carpet",
   "museum": "Институт искусств Чикаго",
@@ -125,6 +125,13 @@
  "micro": {
   "field": {
    "dolgikh": "none"
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "cropped",
+    "w": 2,
+    "t": 1795797476
+   }
   }
  },
  "auto_edge": {
@@ -146,5 +153,11 @@
    68.2966
   ],
   "t": 1795207663
- }
+ },
+ "edge": {
+  "skew": [
+   "dolgikh"
+  ]
+ },
+ "frame_by": "micro"
 }
