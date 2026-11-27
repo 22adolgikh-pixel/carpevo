@@ -2997,7 +2997,7 @@ def install(app, DATA, D_WORK):
         # v11.52: карточки «элементы», «имена», «тип», «двойники» — всё нужное для очередей берём здесь же, чтобы не читать ковры заново
         dead = bool(r.get("dup_of") or r.get("hidden") or r.get("split_into") or r.get("multi") or r.get("frame") == "multi")
         mk = [{"id": x["id"], "g": x.get("group") or x["id"], "st": x.get("status"), "box": x["box"], "sc": x.get("scheme") or "",
-               "nm": bool(x.get("motif") or x.get("motif_text")), "mach": bool(x.get("machine")), "nw": bool(x.get("near_wait")),
+               "nm": bool(x.get("motif") or x.get("motif_text")), "mo": x.get("motif") or "", "mach": bool(x.get("machine")), "nw": bool(x.get("near_wait")),
                "et": str(x.get("note") or "")[8:].split(" ·")[0].strip() if x.get("machine") and str(x.get("note") or "").startswith("эталон: ") else ""}
               for x in r.get("marks") or [] if x.get("id") and isinstance(x.get("box"), list) and len(x["box"]) == 4]
         cg = None
@@ -3454,6 +3454,43 @@ def install(app, DATA, D_WORK):
         finally:
             _xu["run"] = False
 
+    def _xs_conflicts(rows):
+        """v12.52: ответы «тот же» связывают элементы в группы между коврами; если в одной группе оказались разные имена — ответы
+        на пути между ними возвращаются на перепроверку. → {ключ пары: {"names": [имя1, имя2]}}"""
+        V = _xs_votes(); nm = {}; adj = {}
+        for x in rows:
+            for m in x["mk"]:
+                if m["st"] == "confirmed" and m.get("mo"): nm.setdefault(x["id"] + "|" + m["g"], set()).add(m["mo"])
+        for k, d in V.items():
+            if "~" not in k or _xs_verdict(d) != "same": continue
+            a, b = k.split("~", 1); adj.setdefault(a, []).append((b, k)); adj.setdefault(b, []).append((a, k))
+        out, seen = {}, set()
+        for s0 in adj:
+            if s0 in seen: continue
+            comp, st = [], [s0]; seen.add(s0)
+            while st:
+                u = st.pop(); comp.append(u)
+                for v, _ in adj[u]:
+                    if v not in seen: seen.add(v); st.append(v)
+            named = [u for u in comp if len(nm.get(u, ())) == 1]
+            if len({next(iter(nm[u])) for u in named}) < 2: continue
+            for src in named:                                                    # кратчайший путь до ближайшего элемента с другим именем
+                n0 = next(iter(nm[src])); prev = {src: None}; q = [src]; hit = None
+                while q and not hit:
+                    nq = []
+                    for u in q:
+                        for v, k in adj[u]:
+                            if v in prev: continue
+                            prev[v] = (u, k)
+                            if len(nm.get(v, ())) == 1 and next(iter(nm[v])) != n0: hit = v; break
+                            nq.append(v)
+                        if hit: break
+                    q = nq
+                v = hit
+                while v and prev[v]:
+                    u, k = prev[v]; out.setdefault(k, {"names": sorted({n0, next(iter(nm[hit]))})}); v = u
+        return out
+
     def _xs_queue(me, rows):
         try:
             import element_embed as EE
@@ -3471,6 +3508,15 @@ def install(app, DATA, D_WORK):
                     units.append({"rid": x["id"], "g": g, "box": ms[0]["box"], "key": x["id"] + "|" + g, "title": x["title"], "n": len(ms)})
             _xu["run"] = True; threading.Thread(target=_xs_build, args=(units,), daemon=True, name="xsame-units").start()
         V = _xs_votes(); out = []; ct = {x["id"]: x.get("comp") or "" for x in rows}
+        re_ = []; UK = {u["key"]: u for u in _xu["U"]}
+        try: CF = _xs_conflicts(rows)
+        except Exception: CF = {}
+        for k, c in CF.items():                                                  # v12.52: конфликты имён — первыми, пока владелец не ответит заново
+            if (V.get(k, {}).get(me) or {}).get("re"): continue
+            a, b = k.split("~", 1)
+            if a not in UK or b not in UK: continue
+            re_.append({"type": "xsame", "rid": UK[a]["rid"], "key": k, "sim": None, "p": 1.0, "re": c["names"],
+                        "a": {q: UK[a][q] for q in ("rid", "g", "box", "title", "n")}, "b": {q: UK[b][q] for q in ("rid", "g", "box", "title", "n")}})
         for p in _xu["P"]:
             d = V.get(p["key"], {})
             if me in d or _xs_verdict(d): continue
@@ -3488,7 +3534,13 @@ def install(app, DATA, D_WORK):
                 mixed += hi[:3]; hi = hi[3:]
                 if lo: mixed.append(lo.pop(random.randrange(len(lo))))
             out = mixed
-        return out
+        return re_ + out
+
+    @app.get("/api/open/xsame_conflicts")
+    def api_xsame_conflicts():
+        """v12.52: пары «тот же», которые связывают элементы с разными именами (на перепроверку)"""
+        cf = _xs_conflicts(_mrows()); V = _xs_votes()
+        return {"n": len(cf), "pairs": [{"key": k, "names": c["names"], "rechecked": any(x.get("re") for x in V.get(k, {}).values())} for k, c in cf.items()]}
 
     @app.get("/api/xsame/similar")
     def api_xsame_similar(request: Request, key: str = "", k: int = 36):
@@ -3518,7 +3570,7 @@ def install(app, DATA, D_WORK):
         p = next((p for p in _xu["P"] if p["key"] == k), None)
         with _lock:
             V = _xs_votes(); d = V.setdefault(k, {}); d[me] = {"a": a, "w": 0 if a == "skip" else _wt(role), "t": rec["t"], **({"sim": p["sim"]} if p else {}),
-                     **({"var": True} if a == "same" and body.get("var") else {})}   # v12.00: тот же элемент, другое заполнение
+                     **({"var": True} if a == "same" and body.get("var") else {}), **({"re": True} if body.get("re") else {})}   # v12.00: тот же элемент, другое заполнение
             if a == "same" and body.get("var"): rec["var"] = True
             tmp = F_XS + ".tmp"
             with open(tmp, "w", encoding="utf-8") as f: json.dump(V, f, ensure_ascii=False, indent=1)
