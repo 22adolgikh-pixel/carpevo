@@ -3475,7 +3475,8 @@ def install(app, DATA, D_WORK):
             if me in d or _xs_verdict(d): continue
             # v12.45: вероятность «тот же» — близость + совпадение / несовпадение типа композиции ковров (ответы /m: 437 пар, CV AUC 0,925 против 0,67 у одной близости)
             ca, cb = ct.get(p["a"]["rid"], ""), ct.get(p["b"]["rid"], "")
-            z = 3.526 * (p["sim"] * 10 - 8.8) + 3.983 * bool(ca and ca == cb) - 0.826 * bool(ca and cb and ca != cb) - 1.965
+            ra, rb = p["a"]["rid"], p["b"]["rid"]; bk = lambda i: i.startswith(("azerbaycan", "intangible", "cm_")); kr = ra.startswith("kerimov") or rb.startswith("kerimov")
+            z = 3.929 * (p["sim"] * 10 - 8.8) + 3.649 * bool(ca and ca == cb) - 1.072 * bool(ca and cb and ca != cb) + 1.99 * (bk(ra) and bk(rb)) - 0.714 * kr - 2.084   # + источник: книга–книга «тот же» 80 %, с Керимовым 18–24 %
             out.append({"type": "xsame", "rid": p["a"]["rid"], "key": p["key"], "sim": p["sim"], "p": round(1 / (1 + math.exp(-z)), 2),
                         "a": {k: p["a"][k] for k in ("rid", "g", "box", "title", "n")}, "b": {k: p["b"][k] for k in ("rid", "g", "box", "title", "n")}})
         out.sort(key=lambda c: -c["p"])
