@@ -16,9 +16,37 @@
  "status": "new",
  "w": 439,
  "h": 795,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795800836211x5",
+   "box": [
+    0.2818,
+    0.205,
+    0.0727,
+    0.04
+   ],
+   "zone": "other",
+   "motif": "",
+   "scheme": "",
+   "motif_text": "",
+   "group": "gm1795800836211x5",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.89,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795800836,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795800836,
+   "found_from": "kerimov_vol1_p332_1"
+  }
+ ],
  "created": 1791736129,
- "updated": 1794771568,
+ "updated": 1795800836,
  "cat": {
   "title": "antique kazak prayer rug45",
   "museum": "",
@@ -176,5 +204,6 @@
    53.9861
   ],
   "t": 1795207721
- }
+ },
+ "updated_by": "dolgikh"
 }
