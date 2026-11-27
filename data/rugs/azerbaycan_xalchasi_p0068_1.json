@@ -1262,9 +1262,9 @@
    "id": "m17956297810s",
    "box": [
     0.25166,
-    0.59441,
-    0.17219,
-    0.12937
+    0.63895,
+    0.17572,
+    0.08483
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -1272,7 +1272,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 1,
@@ -1281,8 +1281,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795629781,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795761459,
    "rf": 1,
    "rf_s": 0.401,
    "box0": [
@@ -1291,15 +1291,17 @@
     0.26415,
     0.10463
    ],
-   "rf_moved": 0.428
+   "rf_moved": 0.428,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795761459
   },
   {
    "id": "m17956297811s",
    "box": [
-    0.51875,
-    0.64356,
-    0.2,
-    0.06931
+    0.61772,
+    0.63592,
+    0.18205,
+    0.07286
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -1307,7 +1309,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: сверху↔снизу",
    "angle": 0,
    "flip": 0,
@@ -1316,8 +1318,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795629781,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795761459,
    "rf": 1,
    "rf_s": 0.37,
    "box0": [
@@ -1326,7 +1328,9 @@
     0.24909,
     0.08383
    ],
-   "rf_moved": 0.192
+   "rf_moved": 0.192,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795761459
   },
   {
    "id": "m17956297812s",
@@ -1342,7 +1346,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: сверху↔снизу",
    "angle": 0,
    "flip": 1,
@@ -1351,8 +1355,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795629781,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795761459,
    "rf": 1,
    "rf_s": 0.557,
    "box0": [
@@ -1377,7 +1381,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: слева↔справа",
    "angle": 0,
    "flip": 0,
@@ -1412,7 +1416,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 1,
@@ -1447,7 +1451,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: сверху↔снизу",
    "angle": 0,
    "flip": 0,
@@ -1456,8 +1460,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795629781,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795761459,
    "rf": 1,
    "rf_s": 0.654,
    "box0": [
@@ -1471,10 +1475,10 @@
   {
    "id": "m17956297816s",
    "box": [
-    0.45455,
-    0.15721,
-    0.10744,
-    0.08515
+    0.34711,
+    0.14871,
+    0.181,
+    0.10024
    ],
    "zone": "other",
    "motif": "bulud-carpet",
@@ -1482,7 +1486,7 @@
    "scheme": "t32_f04",
    "group": "m6b00c54de180530_0",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: напротив (180°)",
    "angle": 0,
    "flip": 1,
@@ -1491,8 +1495,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795629781,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795761459,
    "rf": 1,
    "rf_s": 0.414,
    "box0": [
@@ -1501,11 +1505,13 @@
     0.10614,
     0.08729
    ],
-   "rf_moved": 0.744
+   "rf_moved": 0.744,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795761459
   }
  ],
  "created": 1794547278,
- "updated": 1795629781,
+ "updated": 1795761459,
  "cat": {
   "title": "Ковёр «Malıbəyli» Карабах",
   "museum": "Azərbaycan Xalçası və Xalq Tətbiqi Sənəti Dövlət Muzeyi",
@@ -1770,6 +1776,55 @@
      "a": "bad",
      "w": 2,
      "t": 1795620475
+    }
+   },
+   "m17956297815s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795761459
+    }
+   },
+   "m17956297812s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795761459
+    }
+   },
+   "m17956297814s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795761459
+    }
+   },
+   "m17956297813s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795761459
+    }
+   },
+   "m17956297810s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795761459
+    }
+   },
+   "m17956297816s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795761459
+    }
+   },
+   "m17956297811s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795761459
     }
    }
   }
