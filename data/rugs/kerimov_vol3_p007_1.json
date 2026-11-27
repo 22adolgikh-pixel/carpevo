@@ -70,8 +70,20 @@
  },
  "src_id": "cat:kerimov_vol3_p007_1",
  "lib_img": "img/kerimov_vol3_p007_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0143_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0143_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789753,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {

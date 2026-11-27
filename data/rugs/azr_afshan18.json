@@ -18,7 +18,7 @@
  "h": 600,
  "marks": [],
  "created": 1791736128,
- "updated": 1791736128,
+ "updated": 1795789727,
  "cat": {
   "title": "afshan18",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_afshan18",
  "lib_img": "img/azr_afshan18.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_afshan56",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_afshan56": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789727
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -99,5 +110,16 @@
    62.7403
   ],
   "t": 1795207708
+ },
+ "micro": {
+  "same": {
+   "azr_afshan56": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789727
+    }
+   }
+  }
  }
 }

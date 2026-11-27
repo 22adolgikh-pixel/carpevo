@@ -18,7 +18,7 @@
  "h": 1787,
  "marks": [],
  "created": 1794547278,
- "updated": 1795356980,
+ "updated": 1795789739,
  "cat": {
   "title": "Ковёр «Borçalı» Газах",
   "museum": "",
@@ -51,8 +51,29 @@
  },
  "src_id": "cat:intangible_2850_p0181_1",
  "lib_img": "img/intangible_2850_p0181_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2851_p0024_1",
+   "score": 0
+  },
+  {
+   "id": "intangible_2854_p0040_1_2",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2851_p0024_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789739,
+   "similar": true
+  },
+  "intangible_2854_p0040_1_2": {
+   "ok": false,
+   "by": "по цепочке: intangible_2850_p0181_1 ≠ intangible_2851_p0024_1",
+   "at": 1795789775
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -115,6 +136,15 @@
      "a": "one",
      "w": 2,
      "t": 1795356980
+    }
+   }
+  },
+  "same": {
+   "intangible_2851_p0024_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795789739
     }
    }
   }

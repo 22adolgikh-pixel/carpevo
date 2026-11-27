@@ -18,7 +18,7 @@
  "h": 1217,
  "marks": [],
  "created": 1791736128,
- "updated": 1795463854,
+ "updated": 1795789724,
  "cat": {
   "title": "afshan100",
   "museum": "",
@@ -49,6 +49,10 @@
   {
    "id": "azr_afshan88",
    "score": 0
+  },
+  {
+   "id": "azr_afshan117",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +60,12 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1795027645,
+   "similar": true
+  },
+  "azr_afshan117": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789724,
    "similar": true
   }
  },
@@ -127,6 +137,15 @@
      "a": "skip",
      "w": 0,
      "t": 1795463854
+    }
+   }
+  },
+  "same": {
+   "azr_afshan117": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795789724
     }
    }
   }

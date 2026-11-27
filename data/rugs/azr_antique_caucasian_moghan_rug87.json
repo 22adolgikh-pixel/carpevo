@@ -18,7 +18,7 @@
  "h": 1764,
  "marks": [],
  "created": 1791736138,
- "updated": 1795062314,
+ "updated": 1795789776,
  "cat": {
   "title": "antique caucasian moghan rug87",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_antique_caucasian_moghan_rug87",
  "lib_img": "img/azr_antique_caucasian_moghan_rug87.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_kuba_sumakh125",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_kuba_sumakh125": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789776
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -133,5 +144,16 @@
    56.952
   ],
   "t": 1795207717
+ },
+ "micro": {
+  "same": {
+   "azr_kuba_sumakh125": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789776
+    }
+   }
+  }
  }
 }

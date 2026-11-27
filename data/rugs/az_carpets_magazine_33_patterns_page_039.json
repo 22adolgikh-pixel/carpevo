@@ -18,7 +18,7 @@
  "h": 1600,
  "marks": [],
  "created": 1791567607,
- "updated": 1795203794,
+ "updated": 1795789714,
  "src_id": "fig:az_carpets_magazine_33_patterns_page_039_jpg_f01",
  "multi": [],
  "people": {
@@ -101,6 +101,15 @@
     "w": 2,
     "t": 1795203794
    }
+  },
+  "same": {
+   "azr_antique_kazak_akstafa_rug1_farnham_antique_carpets": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789714
+    }
+   }
   }
  },
  "frame_by": "micro",
@@ -139,6 +148,11 @@
    "ok": false,
    "by": "по цепочке: intangible_2849_p0200_1 ≠ intangible_2850_p0186_1",
    "at": 1795620549
+  },
+  "azr_antique_kazak_akstafa_rug1_farnham_antique_carpets": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789714
   }
  },
  "same": [
@@ -152,6 +166,10 @@
   },
   {
    "id": "intangible_2850_p0186_1",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_kazak_akstafa_rug1_farnham_antique_carpets",
    "score": 0
   }
  ],

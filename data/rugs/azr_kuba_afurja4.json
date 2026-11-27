@@ -18,7 +18,7 @@
  "h": 1427,
  "marks": [],
  "created": 1791736131,
- "updated": 1795293047,
+ "updated": 1795789746,
  "cat": {
   "title": "kuba afurja4",
   "museum": "",
@@ -57,6 +57,14 @@
   {
    "id": "azr_antique_baku_shield_rug2",
    "score": 0
+  },
+  {
+   "id": "aic_49265",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug95",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -74,6 +82,17 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "aic_49265": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789746,
+   "similar": true
+  },
+  "azr_antique_caucasian_moghan_rug95": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795789746
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -139,6 +158,20 @@
      "a": "similar",
      "w": 2,
      "t": 1794983780
+    }
+   },
+   "aic_49265": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795789746
+    }
+   },
+   "azr_antique_caucasian_moghan_rug95": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795789746
     }
    }
   }
