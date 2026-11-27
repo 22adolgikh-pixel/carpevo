@@ -18,7 +18,7 @@
  "h": 432,
  "marks": [],
  "created": 1791736125,
- "updated": 1795807537,
+ "updated": 1795808226,
  "cat": {
   "title": "Kilim, Kasimushak oba.jpg",
   "museum": "Wikimedia Commons",
@@ -81,7 +81,30 @@
   "conf": 0.959,
   "area": 0.824,
   "ver": 1,
-  "t": 1794238484
+  "t": 1794238484,
+  "ref_quad": {
+   "quad": [
+    [
+     0.03899,
+     0.04098
+    ],
+    [
+     0.94194,
+     0.07325
+    ],
+    [
+     0.95078,
+     0.94938
+    ],
+    [
+     0.02828,
+     0.96169
+    ]
+   ],
+   "v": 6,
+   "from": "auto",
+   "t": 1795808216
+  }
  },
  "hist": {
   "composition": [
@@ -122,8 +145,49 @@
     "w": 2,
     "t": 1795807537
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795808226,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03899,
+    0.04098
+   ],
+   [
+    0.94194,
+    0.07325
+   ],
+   [
+    0.95078,
+    0.94938
+   ],
+   [
+    0.02828,
+    0.96169
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
