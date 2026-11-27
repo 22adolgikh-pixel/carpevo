@@ -6370,7 +6370,7 @@
    "scheme": "t106_f03",
    "group": "xxmmv44a13d",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6379,8 +6379,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795629786,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795814489,
    "rf": 1,
    "rf_s": 0.931,
    "box0": [
@@ -6405,7 +6405,7 @@
    "scheme": "t106_f03",
    "group": "xxmmv44a13d",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6414,8 +6414,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795629786,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795814489,
    "rf": 1,
    "rf_s": 0.883,
    "box0": [
@@ -6429,10 +6429,10 @@
   {
    "id": "m17956297920e",
    "box": [
-    0.40171,
-    0.20522,
-    0.15064,
-    0.11849
+    0.41935,
+    0.273,
+    0.14747,
+    0.07715
    ],
    "zone": "field",
    "motif": "kilim-gulu",
@@ -6440,7 +6440,7 @@
    "scheme": "t60_f04",
    "group": "xxmmv44e2fw",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6449,16 +6449,25 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795629792,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795814585,
+   "rf": 1,
+   "rf_s": 0.945,
+   "box0": [
+    0.40171,
+    0.20522,
+    0.15064,
+    0.11849
+   ],
+   "rf_moved": 0.33
   },
   {
    "id": "m17956297921e",
    "box": [
-    0.4296,
-    0.65406,
-    0.18412,
-    0.09695
+    0.41014,
+    0.61128,
+    0.1659,
+    0.08902
    ],
    "zone": "field",
    "motif": "kilim-gulu",
@@ -6466,7 +6475,7 @@
    "scheme": "t60_f04",
    "group": "xxmmv44e2fw",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -6475,8 +6484,17 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795629792,
-   "confirmed_by": "",
-   "confirmed_at": 0
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795814585,
+   "rf": 1,
+   "rf_s": 0.938,
+   "box0": [
+    0.4296,
+    0.65406,
+    0.18412,
+    0.09695
+   ],
+   "rf_moved": 0.298
   },
   {
    "id": "m17956297950e",
@@ -7078,7 +7096,7 @@
   }
  ],
  "created": 1791870033,
- "updated": 1795629966,
+ "updated": 1795814585,
  "cat": {
   "title": "Hajigayib rug, Guba school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -8219,6 +8237,34 @@
      "a": "bad",
      "w": 2,
      "t": 1795621663
+    }
+   },
+   "m17956297860e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795814489
+    }
+   },
+   "m17956297861e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795814489
+    }
+   },
+   "m17956297921e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795814585
+    }
+   },
+   "m17956297920e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795814585
     }
    }
   },
