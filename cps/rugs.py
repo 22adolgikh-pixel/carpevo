@@ -2424,6 +2424,13 @@ def install(app, DATA, D_WORK):
                 fw, bk = rect_boxmap(rq); tb = {}
                 def F(b): x = fw(b); tb[tuple(x)] = b; return x
                 c = rug_match.find_repeats(ra, F(box), [fw(b) for b in marks_boxes(r) + rejected], boxes=[F(b) for b in boxes], loose=loose, limit=30 if loose else 60)
+                fb = _field_box(rid, r)                                  # v12.56: образец в поле — повторы только в поле; в кайме — только в кайме
+                if fb and not b.get("anyzone"):
+                    tb0 = F(box); inn = lambda q: fb[0] - 0.01 <= q[0] + q[2] / 2 <= fb[2] + 0.01 and fb[1] - 0.01 <= q[1] + q[3] / 2 <= fb[3] + 0.01
+                    t_in = inn(tb0); n0 = len(c)
+                    if t_in or fb[4]: c = [x for x in c if inn(x["box"]) == t_in]    # по машинной линии — только «образец в поле»
+                    drop = n0 - len(c)
+                else: drop = 0
                 for x in c: x["box"] = bk(x["box"]); x["tpl"] = tb.get(tuple(x["tpl"]), x["tpl"])
             else:
                 c = rug_match.find_repeats(a, box, marks_boxes(r) + rejected, boxes=boxes, loose=loose, limit=30 if loose else 60)
@@ -2432,8 +2439,23 @@ def install(app, DATA, D_WORK):
             for x in c:
                 x["sure"] = x["above"] and x["score"] >= max(0.62, best * 0.8)     # «точно такой же» / «похоже (другой цвет или близкий узор)»
                 x["ref"] = byb.get(tuple(x.pop("tpl")), "")                         # по какой рамке-образцу найдено (её поворот — отсчёт)
-            return {"cands": c, "templates": len(boxes)}
+            return {"cands": c, "templates": len(boxes), "zone_dropped": drop if ra is not None else 0}
         return await job_wait(work, "поиск повторов")
+
+    def _field_box(rid, r):
+        """v12.56: прямоугольник поля в долях выпрямленного ковра [л, в, п, н]: линия поля человека, иначе уверенный кандидат машины"""
+        L = (r.get("layout") or {}).get("field"); cv = W = H = None
+        if L and L.get("curves"): cv, W, H = L["curves"], L["w"], L["h"]
+        else:
+            try: m = mesh_info(rid, r)
+            except Exception: m = None
+            cs = sorted((m or {}).get("cands") or [], key=lambda c: c.get("depth") or 0)
+            if cs: cv, W, H = cs[0]["curves"], m["w"], m["h"]                   # машина: самая наружная линия — поле не урезается (верная граница глубже или там же)
+        if not cv: return None
+        av = lambda k: sum(cv[k]) / max(1, len(cv[k]))
+        fb = [av("left") / W, av("top") / H, 1 - av("right") / W, 1 - av("bot") / H]
+        fb.append(bool(L and L.get("curves")))
+        return fb if 0 < fb[0] < 0.4 and 0 < fb[1] < 0.4 and 0.6 < fb[2] < 1 and 0.6 < fb[3] < 1 else None
 
     # ---------- v12.31: быстрый поиск повторов (rug_match.find_repeats_v2) и замер «v1 против v2» на подтверждённых группах ----------
     F_REP_ALGO = os.path.join(DATA, "rep_algo.json"); F_REP_EVAL = os.path.join(DATA, "rep_eval.json")
