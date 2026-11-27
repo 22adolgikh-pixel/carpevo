@@ -3469,12 +3469,16 @@ def install(app, DATA, D_WORK):
                     ms.sort(key=lambda m: (m["mach"], -m["box"][2] * m["box"][3]))
                     units.append({"rid": x["id"], "g": g, "box": ms[0]["box"], "key": x["id"] + "|" + g, "title": x["title"], "n": len(ms)})
             _xu["run"] = True; threading.Thread(target=_xs_build, args=(units,), daemon=True, name="xsame-units").start()
-        V = _xs_votes(); out = []
+        V = _xs_votes(); out = []; ct = {x["id"]: x.get("comp") or "" for x in rows}
         for p in _xu["P"]:
             d = V.get(p["key"], {})
             if me in d or _xs_verdict(d): continue
-            out.append({"type": "xsame", "rid": p["a"]["rid"], "key": p["key"], "sim": p["sim"],
+            # v12.45: вероятность «тот же» — близость + совпадение / несовпадение типа композиции ковров (ответы /m: 437 пар, CV AUC 0,925 против 0,67 у одной близости)
+            ca, cb = ct.get(p["a"]["rid"], ""), ct.get(p["b"]["rid"], "")
+            z = 3.526 * (p["sim"] * 10 - 8.8) + 3.983 * bool(ca and ca == cb) - 0.826 * bool(ca and cb and ca != cb) - 1.965
+            out.append({"type": "xsame", "rid": p["a"]["rid"], "key": p["key"], "sim": p["sim"], "p": round(1 / (1 + math.exp(-z)), 2),
                         "a": {k: p["a"][k] for k in ("rid", "g", "box", "title", "n")}, "b": {k: p["b"][k] for k in ("rid", "g", "box", "title", "n")}})
+        out.sort(key=lambda c: -c["p"])
         import random  # чтобы замер был честным, каждая четвёртая карточка — из нижней половины по близости
         if len(out) > 8:
             hi, lo = out[:len(out) // 2], out[len(out) // 2:]; mixed = []
