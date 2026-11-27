@@ -18,7 +18,7 @@
  "h": 1056,
  "marks": [],
  "created": 1791736126,
- "updated": 1795463006,
+ "updated": 1795791635,
  "cat": {
   "title": "Antique Shirvan Prayer Rug.png",
   "museum": "Wikimedia Commons",
@@ -140,6 +140,14 @@
      "t": 1795463006
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795791635,
+    "s": "ref"
+   }
   }
  },
  "auto": {
@@ -189,5 +197,39 @@
    "from": "auto",
    "t": 1795688151
   }
- }
+ },
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.00581,
+    0.00667
+   ],
+   [
+    0.98196,
+    0.00167
+   ],
+   [
+    1.00025,
+    0.98718
+   ],
+   [
+    0.00728,
+    0.99917
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro",
+ "frame": "whole"
 }
