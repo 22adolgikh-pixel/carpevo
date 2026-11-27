@@ -1206,6 +1206,8 @@ def install(app, DATA, D_WORK):
         with _lock:
             r = load(rid)
             if not r: return JSONResponse({"error": "нет такого ковра"}, 404)
+            try: rot0 = rug_rot(r)                                               # v12.57: поворот не должен меняться от первой рамки
+            except Exception: rot0 = None
             for k in ("title", "museum", "inv", "url", "license", "place", "date", "school", "composition", "technique", "size", "notes", "status"):
                 if k in b:
                     v = str(b[k] or "")[:2000]
@@ -1255,6 +1257,10 @@ def install(app, DATA, D_WORK):
                     if nm["status"] == "proposed": nm["confirmed_by"], nm["confirmed_at"] = "", 0
                     marks.append(nm)
                 r["marks"] = marks
+            try:
+                L = r.get("layout")
+                if rot0 is not None and isinstance(L, dict) and "rot" not in L and rug_rot(r) != rot0: L["rot"] = rot0; L["rot_by"] = "auto"
+            except Exception: pass
             r["updated"], r["updated_by"] = now, who
             save(r)
         if "marks" in b: _ty["t"] = 0          # элементы/эталоны пересчитаются по свежей разметке
@@ -1660,10 +1666,25 @@ def install(app, DATA, D_WORK):
     try: ROT_KEEP = set(json.load(open(os.path.join(HERE, "models", "rot_keep_v1.json"), encoding="utf-8")).get("ids") or [])
     except Exception: ROT_KEEP = set()
 
+    T_ROT = 1795521600                                                           # v12.57: 24.11.2026 — с v12.30 широкие ковры показываются повёрнутыми
+
+    def _rot_old(r):
+        """рамки или линия поля, поставленные до поворота (v12.30) — ковёр остаётся как был; новые рамки поворот не отменяют (раньше первая же
+        рамка разворачивала ковёр обратно — 28.11 «нашёл элементы Керимова — ковёр перевернулся»)"""
+        L = r.get("layout") or {}
+        if L.get("field"): return True                                      # линия поля — в координатах той картинки, на которой её поставили
+        for m in r.get("marks") or []:
+            t = m.get("at") or m.get("confirmed_at") or 0
+            if not t:
+                d = "".join(ch for ch in str(m.get("id") or "")[1:14] if ch.isdigit())
+                t = int(d[:10]) if len(d) >= 10 else 0
+            if t < T_ROT: return True
+        return False
+
     def rug_rot(r, q=None):
         L = (r or {}).get("layout") or {}
         if "rot" in L: return int(L.get("rot") or 0) % 360
-        if r.get("id") in ROT_KEEP or r.get("marks") or L.get("field"): return 0
+        if r.get("id") in ROT_KEEP or _rot_old(r): return 0
         q = q or L.get("quad"); w, h = r.get("w") or 0, r.get("h") or 0
         if not q or not w or not h: return 0
         import rug_rect
