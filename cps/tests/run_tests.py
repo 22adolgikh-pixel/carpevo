@@ -2523,10 +2523,30 @@ def t59_edge_card_v1236(pg, ctx):
     c = pg.query_selector('.kxh[data-k="c"][data-i="1"]').bounding_box()
     pg.mouse.move(c['x'] + c['width'] / 2, c['y'] + c['height'] / 2); pg.mouse.down(); pg.mouse.move(c['x'] + c['width'] / 2 + wb['width'] * 0.03, c['y'] + c['height'] / 2, steps=5); pg.mouse.up(); pg.wait_for_timeout(200)
     assert pg.evaluate("__kx().V.c[1][0]") > 1.01, f'угол не сдвинулся: {pg.evaluate("__kx().V.c")}'
+    # v12.45: угол тянется далеко за рамку (было не дальше 12 %)
+    c = pg.query_selector('.kxh[data-k="c"][data-i="0"]').bounding_box(); wb = pg.query_selector('#kx_ew').bounding_box()
+    pg.mouse.move(c['x'] + c['width'] / 2, c['y'] + c['height'] / 2); pg.mouse.down(); pg.mouse.move(c['x'] + c['width'] / 2 - wb['width'] * 0.15, c['y'] + c['height'] / 2, steps=6); pg.mouse.up(); pg.wait_for_timeout(200)
+    assert pg.evaluate("__kx().V.c[0][0]") < -0.15, f'угол не тянется дальше 12 %: {pg.evaluate("__kx().V.c[0]")}'
+    pg.click('.kxz button[data-z="0"]')
+    # v12.45: увеличение внутри редактора — узлы того же размера, узел тянется и при увеличении
+    hb0 = pg.query_selector('.kxh[data-k="top"][data-i="0"]').bounding_box()
+    pg.click('.kxz button[data-z="+"]'); pg.wait_for_timeout(100); assert pg.inner_text('.kxzv').strip() == '150%', f'масштаб «＋»: {pg.inner_text(".kxzv")}'
+    pg.click('.kxz button[data-z="0"]'); hb0 = pg.query_selector('.kxh[data-k="top"][data-i="0"]').bounding_box()
+    pg.mouse.move(hb0['x'] + hb0['width'] / 2, hb0['y'] + hb0['height'] / 2); pg.mouse.wheel(0, -540); pg.wait_for_timeout(300)    # колесо — увеличение у курсора
+    zv = pg.inner_text('.kxzv').strip(); assert int(zv.rstrip('%')) >= 200, f'колесо не увеличило: {zv}'
+    hb = pg.query_selector('.kxh[data-k="top"][data-i="0"]').bounding_box(); wb2 = pg.query_selector('#kx_ew').bounding_box()
+    assert abs(hb['width'] - hb0['width']) < 1 and wb2['width'] > wb['width'] * 2, f'при увеличении узел вырос или картинка не увеличилась: {hb} {wb2}'
+    y0 = pg.evaluate("__kx().V.top[0][1]"); pg.mouse.move(hb['x'] + hb['width'] / 2, hb['y'] + hb['height'] / 2); pg.mouse.down(); pg.mouse.move(hb['x'] + hb['width'] / 2, hb['y'] + hb['height'] / 2 + 30, steps=5); pg.mouse.up()
+    y1 = pg.evaluate("__kx().V.top[0][1]"); assert 0 < y1 - y0 < 0.06, f'при увеличении узел сдвинулся неверно: {y0} → {y1}'
+    pg.screenshot(path=os.path.join(OUT, 't59_edge_zoom.png'))
+    # пробел — результат поверх редактора
+    pg.keyboard.down('Space'); pg.wait_for_function("__kxsp()", timeout=20000); pg.screenshot(path=os.path.join(OUT, 't59_edge_space.png')); pg.keyboard.up('Space'); pg.wait_for_timeout(200)
+    assert not pg.evaluate("__kxsp()") and pg.inner_text('.kxzv').strip() == zv, 'после пробела не вернулся редактор с тем же масштабом'
+    pg.click('.kxz button[data-z="0"]')
     pg.click('#kx_ep'); pg.wait_for_selector('#kx_ebody img[src^="data:"]', timeout=20000)
     pg.click('#kx_ed'); pg.wait_for_timeout(1500)
     f = get('api/rugs/edgerug').get('edge_fix') or {}
-    assert f.get('v') == 2 and len(f.get('top') or []) == 1 and f['top'][0][1] > 0.01 and not f.get('bot') and f['c'][1][0] > 1.01, f'правка края не записалась: {f}'
+    assert f.get('v') == 2 and len(f.get('top') or []) == 1 and f['top'][0][1] > 0.01 and not f.get('bot') and f['c'][1][0] > 1.01 and f['c'][0][0] < -0.15, f'правка края не записалась: {f}'
     assert not [t for t in get('api/micro/next?n=12&k=edge')['tasks'] if t['rid'] == 'edgerug'], 'отвеченный ковёр вернулся в очередь «край»'
     errors_ok(ctx, '/m край v12.36')
 

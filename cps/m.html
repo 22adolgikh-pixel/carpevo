@@ -403,9 +403,19 @@ function edgeSide(V,k){const [a,b]=EK[k],h=k==='top'||k==='bot'?0:1;return [V.c[
 // v12.41: общий редактор контура (края ковра и граница поля): 4 угла-квадратика + узлы на сторонах, лупа, тап по линии — узел, двойной тап / долгое нажатие — убрать
 function nodeEd(o){const SD=['top','bot','left','right'],V=o.V,pad=o.pad||0,f0=pad/(1+2*pad),fw=1/(1+2*pad);
   const dsp=p=>[f0+p[0]*fw,f0+p[1]*fw],nrm=(x,y)=>[(x-f0)/fw,(y-f0)/fw],clamp=v=>+Math.max(o.lim[0],Math.min(o.lim[1],v)).toFixed(4);
-  o.host.innerHTML=`<div class="kxw" style="position:relative;line-height:0;touch-action:none"><img src="${o.img}" alt="" style="max-width:100%;max-height:var(--imh);display:block"><svg class="kxs" viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></svg><div class="kxhs"></div><div class="kxlp" hidden style="position:absolute;width:140px;height:140px;border-radius:50%;overflow:hidden;border:2px solid #fff;box-shadow:0 0 0 1px #000,0 4px 14px #000a;pointer-events:none;z-index:5;background:#111"></div></div>
-    <div class="mut" style="font-size:12px;text-align:center">тап по линии — новый узел · тап по узлу — кнопка «убрать»</div>`;
-  const w=o.host.querySelector('.kxw'),sv=w.querySelector('.kxs'),hs=w.querySelector('.kxhs'),lp=w.querySelector('.kxlp');
+  // v12.45: своё увеличение внутри редактора (колесо мыши / «＋ −», тащить фон — сдвиг); узлы и линии при этом не толстеют
+  o.host.innerHTML=`<div class="kxv" style="position:relative;overflow:hidden;max-width:100%;touch-action:none;background:#000"><div class="kxw" style="position:relative;line-height:0;touch-action:none;transform-origin:0 0"><img src="${o.img}" alt="" style="width:100%;height:100%;display:block;user-select:none;-webkit-user-drag:none" draggable="false"><svg class="kxs" viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></svg><div class="kxhs"></div><div class="kxlp" hidden style="position:absolute;width:140px;height:140px;border-radius:50%;overflow:hidden;border:2px solid #fff;box-shadow:0 0 0 1px #000,0 4px 14px #000a;pointer-events:none;z-index:5;background:#111"></div></div></div>
+    <div class="kxz" style="display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;line-height:1.2"><button class="sm" data-z="-">−</button><span class="mut kxzv" style="min-width:42px;text-align:center">100%</span><button class="sm" data-z="+">＋</button><button class="sm" data-z="0">весь</button>
+    <span class="mut" style="font-size:12px">тап по линии — узел · тап по узлу — «убрать» · колесо — масштаб · тащите фон — сдвиг${o.spaceHint?' · пробел — результат':''}</span></div>`;
+  const vp=o.host.querySelector('.kxv'),w=o.host.querySelector('.kxw'),sv=w.querySelector('.kxs'),hs=w.querySelector('.kxhs'),lp=w.querySelector('.kxlp'),im0=w.querySelector('img');
+  let Z=1,BW=0,BH=0,TX=0,TY=0;
+  const fit=()=>{const ar=(im0.naturalWidth||1)/(im0.naturalHeight||1),mw=o.host.clientWidth||600,mh=window.innerHeight*(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--imh'))||54)/100;
+    BW=Math.min(mw,mh*ar);BH=BW/ar;vp.style.width=BW+'px';vp.style.height=BH+'px';apply();};
+  const apply=()=>{TX=Math.min(0,Math.max(BW-BW*Z,TX));TY=Math.min(0,Math.max(BH-BH*Z,TY));w.style.width=BW*Z+'px';w.style.height=BH*Z+'px';w.style.transform=`translate(${TX}px,${TY}px)`;o.host.querySelector('.kxzv').textContent=Math.round(Z*100)+'%';};
+  const zoomAt=(k,mx,my)=>{const z2=Math.max(1,Math.min(8,Z*k));if(z2===Z)return;const cx=(mx-TX)/Z,cy=(my-TY)/Z;Z=z2;TX=mx-cx*Z;TY=my-cy*Z;apply();};
+  if(im0.complete&&im0.naturalWidth)fit();else im0.onload=fit;
+  o.host.querySelectorAll('.kxz button').forEach(b=>b.onclick=()=>{const z=b.dataset.z;if(z==='0'){Z=1;TX=TY=0;apply();}else zoomAt(z==='+'?1.5:1/1.5,BW/2,BH/2);});
+  vp.addEventListener('wheel',e=>{e.preventDefault();const r=vp.getBoundingClientRect();zoomAt(Math.exp(-e.deltaY*0.0015),e.clientX-r.left,e.clientY-r.top);},{passive:false});
   const curve=(k,n)=>edgeCurve(edgeSide(V,k),V.mode!=='line',n);
   const lines=()=>{const a=dsp([0,0]),b=dsp([1,1]);sv.innerHTML=(o.frame?`<rect x="${a[0]}" y="${a[1]}" width="${b[0]-a[0]}" height="${b[1]-a[1]}" fill="none" stroke="#ffd54a" stroke-width="1" vector-effect="non-scaling-stroke"/>`:'')+(o.guide?o.guide(dsp):'')+SD.map(k=>`<polyline class="kxl" data-k="${k}" fill="none" stroke="${o.color||'#ff9a3c'}" stroke-width="1.5" vector-effect="non-scaling-stroke" points="${curve(k).map(p=>dsp(p).join(',')).join(' ')}"/>`).join('');};
   const get=(k,i)=>k==='c'?V.c[i]:V[k][i];
@@ -429,19 +439,21 @@ function nodeEd(o){const SD=['top','bot','left','right'],V=o.V,pad=o.pad||0,f0=p
     h.onpointerup=h.onpointercancel=ev=>{h.onpointermove=null;unloupe();if(moved){sel=null;paint();return;}if(ev.type==='pointerup'&&k!=='c'&&!fresh){sel=sel&&sel.k===k&&sel.i===i?null:{k,i};paint();}};};
   w.onpointerdown=e=>{if(e.target.closest('.kxh')||e.target.closest('.kxdel'))return;if(sel){sel=null;paint();}const r=w.getBoundingClientRect(),q=nrm((e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height);
     let best=null;SD.forEach(k=>{curve(k,24).forEach(p=>{const d=Math.hypot((p[0]-q[0])*r.width*fw,(p[1]-q[1])*r.height*fw);if(!best||d<best.d)best={k,d};});});
-    if(!best||best.d>28)return;if((V[best.k]||[]).length>=8){toast('на стороне уже 8 узлов');return;}
+    if(!best||best.d>14){if(Z>1){e.preventDefault();const x0=e.clientX,y0=e.clientY,t0=TX,u0=TY;w.setPointerCapture&&w.setPointerCapture(e.pointerId);
+      w.onpointermove=ev=>{TX=t0+ev.clientX-x0;TY=u0+ev.clientY-y0;apply();};w.onpointerup=w.onpointercancel=()=>{w.onpointermove=null;};}return;}
+    if((V[best.k]||[]).length>=8){toast('на стороне уже 8 узлов');return;}
     const p=[clamp(q[0]),clamp(q[1])];V[best.k]=[...(V[best.k]||[]),p];paint();changed();const i=V[best.k].indexOf(p),h=hs.querySelector(`.kxh[data-k="${best.k}"][data-i="${i}"]`);if(h)drag(e,best.k,i,h,true);};
-  paint();return {paint};}
+  paint();return {paint,vp};}
 function showEdge(t){if(t.ask&&!t._ok){return rcWhy(t,()=>{t._ok=1;showEdge(t);});}document.documentElement.style.setProperty('--imh','54dvh');
   const id=encodeURIComponent(t.rid);let tab='edit',D=null,V=null,prev=null;const SD=['top','bot','left','right'];window.__kx=()=>({D,V});
-  $('main').innerHTML=`${qhead('Где настоящий край ковра?','Жёлтая рамка — ковёр по вашим углам. Тяните углы (квадратики) и узлы (кружки) на край ворса — туда, где кончается узор; узел можно двигать в любую сторону. Сначала только 4 угла; нужен узел — тапните по оранжевой линии, лишний — тапните по нему и «✕ убрать». Бахрому, килимную полосу без узора и тени не включайте. «плавно / прямо» — линия между узлами кривой или отрезками. Пунктир — где край нашла машина. «посмотреть результат» — как выпрямится.')}
+  $('main').innerHTML=`${qhead('Где настоящий край ковра?','Жёлтая рамка — ковёр по вашим углам. Тяните углы (квадратики) и узлы (кружки) на край ворса (колесо мыши или «＋» — крупнее, пробел — результат) — туда, где кончается узор; узел можно двигать в любую сторону. Сначала только 4 угла; нужен узел — тапните по оранжевой линии, лишний — тапните по нему и «✕ убрать». Бахрому, килимную полосу без узора и тени не включайте. «плавно / прямо» — линия между узлами кривой или отрезками. Пунктир — где край нашла машина. «посмотреть результат» — как выпрямится.')}
    <div id="kx_etabs" style="display:flex;gap:6px;justify-content:center;margin:4px 0"></div><div id="kx_ebody" style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:4px"><span class="mut">загружаю…</span></div>
    <div class="btns"><button class="yes" id="kx_eg" title="принять голубой пунктир машины на боках (верх и низ — прямо по углам)">✓ как у машины</button><button class="yes" id="kx_ed">✓ готово</button><button id="kx_ep">посмотреть результат</button><button class="sm" id="kx_em">плавно</button><button class="sm" id="kx_er">сбросить</button><button class="sm unk" id="kx_es">пропустить</button><button id="kx_eq">что-то не так…</button><button class="sm" id="kx_erot" title="повернуть ковёр на 90° по часовой">↻ повернуть</button></div>`;qtip();
   const gpt=(dsp,k,j)=>{const n=D.guide[k].length,tt=j/(n-1),v=D.guide[k][j];return dsp(k==='top'?[tt,v]:k==='bot'?[tt,1-v]:k==='left'?[v,tt]:[1-v,tt]);};
   const guide=dsp=>SD.map(k=>`<polyline fill="none" stroke="#6bd6ff" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" opacity=".8" points="${D.guide[k].map((_,j)=>gpt(dsp,k,j).join(',')).join(' ')}"/>`).join('');
   let ed=null;const mode=()=>{$('kx_em').textContent=V&&V.mode==='line'?'прямо':'плавно';};
   const draw=()=>{const B=$('kx_ebody');ed=null;
-    if(tab==='edit'){ed=nodeEd({host:B,img:`/rugpad/${id}.jpg?c=1&s=1100`,pad:D.pad,lim:D.lim2,V,guide,frame:1,onChange:()=>{prev=null;}});const w=B.querySelector('.kxw');w.id='kx_ew';w.querySelector('.kxs').id='kx_esvg';w.querySelector('.kxlp').id='kx_loupe';}
+    if(tab==='edit'){ed=nodeEd({host:B,img:`/rugpad/${id}.jpg?c=1&s=1600`,pad:D.pad,lim:D.lim2,V,guide,frame:1,spaceHint:1,onChange:()=>{prev=null;}});const w=B.querySelector('.kxw');w.id='kx_ew';w.querySelector('.kxs').id='kx_esvg';w.querySelector('.kxlp').id='kx_loupe';}
     else if(tab==='orig'){const q=t.quad||[];B.innerHTML=`<div style="position:relative;line-height:0"><img src="/rugthumb/${id}.jpg?raw=1" alt="" style="max-width:100%;max-height:var(--imh)">${q.length===4?`<svg viewBox="0 0 1 1" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><polygon points="${q.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#ffd54a" stroke-width=".004" vector-effect="non-scaling-stroke"/></svg>`:''}</div>`;}
     else B.innerHTML=prev?`<img src="${prev}" alt="" style="max-width:100%;max-height:var(--imh)"><div class="mut" style="text-align:center">так выпрямится по вашим узлам; тёмное вокруг — что было за рамкой</div>`:'<span class="mut">строю…</span>';
     $('kx_etabs').innerHTML=[['edit','править'],['orig','оригинал'],['res','результат']].map(([k,n])=>`<button class="sm${k===tab?' yes':''}" data-t="${k}">${n}</button>`).join('');
@@ -457,6 +469,15 @@ function showEdge(t){if(t.ask&&!t._ok){return rcWhy(t,()=>{t._ok=1;showEdge(t);}
   $('kx_er').onclick=()=>{if(D){const n=JSON.parse(JSON.stringify(D.init));Object.keys(V).forEach(k=>delete V[k]);Object.assign(V,n);prev=null;tab='edit';draw();}};
   $('kx_es').onclick=()=>answer(t,'skip');$('kx_eq').onclick=()=>rcWhy(t,()=>showEdge(t));
   $('kx_erot').onclick=async()=>{try{await api('/api/rugs/'+id+'/rot',{d:90});toast('повёрнуто — картинка пересчитывается');D=null;V=null;prev=null;$('kx_ebody').innerHTML='<span class="mut">пересчитываю…</span>';setTimeout(init,1200);}catch(e){toast('не вышло: '+e.message);}};
+  // v12.45: пробел (держать) — результат поверх редактора, отпустить — назад; масштаб и узлы не сбиваются
+  let sp=false;const getPrev=async()=>{if(!prev){const j=await api('/api/rugs/'+id+'/edgefix_preview',{fix:V});prev=j.img;}return prev;};
+  const showSp=async()=>{if(!ed)return;const vp=ed.vp;let ov=vp.querySelector('.kxsp');if(!ov){ov=document.createElement('div');ov.className='kxsp';ov.style.cssText='position:absolute;inset:0;z-index:8;background:#000;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:13px';vp.appendChild(ov);}
+    ov.innerHTML='строю…';try{const u=await getPrev();if(sp&&ov.isConnected)ov.innerHTML=`<img src="${u}" alt="" style="max-width:100%;max-height:100%">`;}catch(e){ov.innerHTML='не вышло';}};
+  const hideSp=()=>{const ov=ed&&ed.vp.querySelector('.kxsp');if(ov)ov.remove();};
+  const kd=e=>{if(!document.getElementById('kx_ebody')){document.removeEventListener('keydown',kd);document.removeEventListener('keyup',ku);return;}
+    if(e.code==='Space'&&!e.repeat&&tab==='edit'&&!/INPUT|TEXTAREA/.test((e.target||{}).tagName||'')){e.preventDefault();sp=true;showSp();}};
+  const ku=e=>{if(e.code==='Space'){sp=false;hideSp();}};
+  document.addEventListener('keydown',kd);document.addEventListener('keyup',ku);window.__kxsp=()=>!!(ed&&ed.vp.querySelector('.kxsp img'));
   init();}
 function showXsame(t){const f=(x)=>`<figure><img src="${crop(x.rid,x.box,300,0.3,1)}" alt=""><figcaption>${esc(x.title||x.rid)}${x.n>1?' · повторов '+x.n:''}</figcaption></figure>`;
   $('main').innerHTML=`${qhead('Это один и тот же элемент узора?','Элементы с двух разных ковров (жёлтая рамка). Поворот, зеркало, цвет и размер не важны — важна форма. «Тот же» — один и тот же элемент (как одно слово у Керимова). «Тот же, другое заполнение» — внешний контур тот же, а внутри другое (другой узор, 4 квадрата вместо одного). «Похож» — родственные, но сам контур другой. Сомневаетесь между «тот же» и «похож» — выбирайте «похож». Ответы собирают элементы в группы между коврами; потом группе дадим имя один раз.')}

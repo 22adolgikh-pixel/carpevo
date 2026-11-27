@@ -2064,13 +2064,13 @@ def install(app, DATA, D_WORK):
         if not q or not p: return Response(status_code=404)
         mi = (mesh_info(rid, r, build=True) if not c else mesh_info(rid, r)) or {}; s = max(400, min(1600, s))      # после поворота сетку надо перестроить
         pm = os.path.join(D_MESH, rid + (".jpg" if mi.get("choice") in ("mesh", "human") else ".m.jpg"))
-        t = os.path.join(D_TH, "%s.pad%s%s%d.r%d.jpg" % (rid, "m" if m else "", "c2" if c else "", s, rug_rot(r)))
+        t = os.path.join(D_TH, "%s.pad%s%s%d.r%d.jpg" % (rid, "m" if m else "", "c3" if c else "", s, rug_rot(r)))
         src = [p] + ([pm] if os.path.exists(pm) else [])
         if not os.path.exists(t) or os.path.getmtime(t) < max(os.path.getmtime(x) for x in src):
             with THUMB:
                 a = cv2.imread(p)
                 if a is None: return Response(status_code=404)
-                cv, valid, g = rug_mesh.rectify_padded(a, q, s, pad=0.12); W, H, px, py = g["W"], g["H"], g["px"], g["py"]
+                cv, valid, g = rug_mesh.rectify_padded(a, q, s, pad=0.30 if c else 0.12); W, H, px, py = g["W"], g["H"], g["px"], g["py"]   # v12.45: в «крае» поля 30 %
                 inv = ~valid; hatch = ((np.add.outer(np.arange(cv.shape[0]), np.arange(cv.shape[1])) // 6) % 2 == 0)
                 cv[inv] = np.where(hatch[inv][:, None], 40, 90).astype(np.uint8)
                 frame = np.zeros(cv.shape[:2], bool); frame[py:py + H, px:px + W] = True
@@ -3996,7 +3996,7 @@ def install(app, DATA, D_WORK):
         init = {k: [round(at(guide[k], t), 4) if k in ("left", "right") else 0.0 for t in rug_mesh.EF_ST] for k in L}
         old = edge_fix_of(r)
         init2 = {"v": 2, "c": [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0]], "top": [], "bot": [], "left": [], "right": [], "mode": "smooth"}   # v12.42: сначала только 4 угла, узлы — по желанию
-        return {"pad": 0.12, "st": list(rug_mesh.EF_ST), "guide": guide, "init": init2, "lim2": list(rug_mesh.EF_LIM2), "lim": list(EF_LIM),
+        return {"pad": 0.30, "st": list(rug_mesh.EF_ST), "guide": guide, "init": init2, "lim2": list(rug_mesh.EF_LIM2), "lim": list(EF_LIM),
                 "fix": (_ef_clean({k: v for k, v in old.items() if k not in ("by", "t", "rot")}) if old else None)}
 
     @app.post("/api/rugs/{rid}/edgefix_preview")
