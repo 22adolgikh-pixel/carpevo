@@ -18,7 +18,7 @@
  "h": 1400,
  "marks": [],
  "created": 1791736138,
- "updated": 1795807748,
+ "updated": 1795808816,
  "cat": {
   "title": "Antique Moghan (Mughan) rug, late 19th century, Azerbaijan, the red field, contains florettes, boteh",
   "museum": "",
@@ -80,7 +80,30 @@
   "conf": 0.969,
   "area": 0.867,
   "ver": 1,
-  "t": 1795062220
+  "t": 1795062220,
+  "ref_quad": {
+   "quad": [
+    [
+     0.04837,
+     0.01843
+    ],
+    [
+     0.92715,
+     0.01489
+    ],
+    [
+     0.96738,
+     0.96531
+    ],
+    [
+     0.04175,
+     0.95987
+    ]
+   ],
+   "v": 6,
+   "from": "auto",
+   "t": 1795808800
+  }
  },
  "layout": {
   "carpet": [
@@ -96,26 +119,26 @@
   "status": "auto",
   "quad": [
    [
-    0.04642,
-    0.01444
+    0.04837,
+    0.01843
    ],
    [
-    0.9323,
-    0.01222
+    0.92715,
+    0.01489
    ],
    [
-    0.96518,
-    0.97
+    0.96738,
+    0.96531
    ],
    [
-    0.03868,
-    0.97
+    0.04175,
+    0.95987
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
  "frame": "whole",
- "tri": "auto",
+ "tri": "micro",
  "auto_edge": {
   "v": 1,
   "f": [
@@ -142,6 +165,14 @@
     "a": "whole",
     "w": 2,
     "t": 1795807748
+   }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795808816,
+    "s": "ref"
    }
   }
  },

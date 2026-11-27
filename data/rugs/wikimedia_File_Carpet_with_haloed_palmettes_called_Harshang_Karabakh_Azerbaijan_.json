@@ -18,7 +18,7 @@
  "h": 1500,
  "marks": [],
  "created": 1791736125,
- "updated": 1795807672,
+ "updated": 1795808782,
  "cat": {
   "title": "Carpet with haloed palmettes called \"Harshang\", Karabakh, Azerbaijan, 18th century.jpg",
   "museum": "Wikimedia Commons",
@@ -103,7 +103,30 @@
   "conf": 0.967,
   "area": 0.905,
   "ver": 1,
-  "t": 1794238245
+  "t": 1794238245,
+  "ref_quad": {
+   "quad": [
+    [
+     0.04321,
+     0.01665
+    ],
+    [
+     0.96998,
+     0.01952
+    ],
+    [
+     0.97001,
+     0.9741
+    ],
+    [
+     0.01653,
+     0.97321
+    ]
+   ],
+   "v": 6,
+   "from": "auto",
+   "t": 1795808763
+  }
  },
  "same_chk": {
   "cm_68a21130a8": {
@@ -140,8 +163,49 @@
     "w": 2,
     "t": 1795807672
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795808782,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.04321,
+    0.01665
+   ],
+   [
+    0.96998,
+    0.01952
+   ],
+   [
+    0.97001,
+    0.9741
+   ],
+   [
+    0.01653,
+    0.97321
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
