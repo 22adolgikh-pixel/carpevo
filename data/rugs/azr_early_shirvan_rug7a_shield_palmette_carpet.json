@@ -18,7 +18,7 @@
  "h": 800,
  "marks": [],
  "created": 1791736140,
- "updated": 1795807439,
+ "updated": 1795809990,
  "cat": {
   "title": "early shirvan rug7a shield palmette carpet",
   "museum": "",
@@ -132,8 +132,49 @@
     "w": 2,
     "t": 1795807439
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795809990,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.03053,
+    0.01214
+   ],
+   [
+    0.97014,
+    0.01169
+   ],
+   [
+    0.98279,
+    0.97423
+   ],
+   [
+    0.0252,
+    0.98684
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }

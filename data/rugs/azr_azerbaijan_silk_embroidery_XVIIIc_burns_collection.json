@@ -18,7 +18,7 @@
  "h": 1264,
  "marks": [],
  "created": 1791736140,
- "updated": 1795807661,
+ "updated": 1795809980,
  "cat": {
   "title": "Early Azerbaijan silk embroidery, 17-18th century, Victoria and Albert Museum",
   "museum": "",
@@ -151,6 +151,32 @@
     "w": 2,
     "t": 1795807661
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "fix",
+    "w": 2,
+    "t": 1795809980,
+    "q": [
+     [
+      0.04026,
+      0.01202
+     ],
+     [
+      0.98479,
+      0.03218
+     ],
+     [
+      0.98469,
+      0.98687
+     ],
+     [
+      0.03258,
+      0.98349
+     ]
+    ],
+    "s": "ref"
+   }
   }
  },
  "same_chk": {
@@ -187,26 +213,26 @@
   "status": "auto",
   "quad": [
    [
-    0.05324,
-    0.0
+    0.04026,
+    0.01202
    ],
    [
-    0.98561,
-    0.03222
+    0.98479,
+    0.03218
    ],
    [
-    0.99856,
-    0.98222
+    0.98469,
+    0.98687
    ],
    [
-    0.03165,
-    0.98444
+    0.03258,
+    0.98349
    ]
   ],
-  "quad_status": "accepted"
+  "quad_status": "confirmed"
  },
  "frame": "whole",
- "tri": "auto",
+ "tri": "micro",
  "from_twin": {
   "school": "azerbaycan_xalchalari_qarabag_qrupu_p0032_1",
   "museum": "azerbaycan_xalchalari_qarabag_qrupu_p0032_1",
