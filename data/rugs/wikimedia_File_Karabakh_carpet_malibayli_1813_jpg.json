@@ -1239,7 +1239,7 @@
   }
  ],
  "created": 1791736125,
- "updated": 1795498392,
+ "updated": 1795808700,
  "cat": {
   "title": "Karabakh-carpet-malibayli-1813.jpg",
   "museum": "Wikimedia Commons",
@@ -1342,9 +1342,63 @@
   "conf": 0.963,
   "area": 0.924,
   "ver": 1,
-  "t": 1794238564
+  "t": 1794238564,
+  "ref_quad": {
+   "quad": [
+    [
+     0.01854,
+     0.00831
+    ],
+    [
+     0.95018,
+     0.02719
+    ],
+    [
+     0.95354,
+     0.99259
+    ],
+    [
+     0.03766,
+     1.0021
+    ]
+   ],
+   "v": 6,
+   "from": "auto",
+   "t": 1795808693
+  }
  },
- "layout": null,
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.01854,
+    0.00831
+   ],
+   [
+    0.95018,
+    0.02719
+   ],
+   [
+    0.95354,
+    0.99259
+   ],
+   [
+    0.03766,
+    1.0021
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
  "updated_by": "dolgikh",
  "auto_edge": {
   "v": 1,
@@ -1431,6 +1485,16 @@
      "t": 1795498392
     }
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795808700,
+    "s": "ref"
+   }
   }
- }
+ },
+ "tri": "micro",
+ "frame": "whole"
 }

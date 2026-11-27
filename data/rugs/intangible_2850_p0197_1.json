@@ -18,7 +18,7 @@
  "h": 736,
  "marks": [],
  "created": 1794547278,
- "updated": 1795792006,
+ "updated": 1795808650,
  "cat": {
   "title": "Ковёр «Qobustan»",
   "museum": "",
@@ -136,8 +136,49 @@
     "w": 2,
     "t": 1795792006
    }
+  },
+  "quad": {
+   "dolgikh": {
+    "a": "ok",
+    "w": 2,
+    "t": 1795808650,
+    "s": "ref"
+   }
   }
  },
  "frame": "whole",
- "frame_by": "micro"
+ "frame_by": "micro",
+ "layout": {
+  "carpet": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "bounds": [],
+  "rings": [
+   "field"
+  ],
+  "status": "auto",
+  "quad": [
+   [
+    0.05502,
+    0.06752
+   ],
+   [
+    0.95397,
+    0.06382
+   ],
+   [
+    0.95064,
+    0.91164
+   ],
+   [
+    0.05033,
+    0.91223
+   ]
+  ],
+  "quad_status": "confirmed"
+ },
+ "tri": "micro"
 }
