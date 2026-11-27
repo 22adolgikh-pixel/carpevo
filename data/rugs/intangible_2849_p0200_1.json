@@ -824,8 +824,8 @@
     0.05
    ],
    "zone": "other",
-   "motif": "",
-   "scheme": "",
+   "motif": "alma",
+   "scheme": "t66_f08",
    "motif_text": "",
    "group": "gm1795791901449x2",
    "certainty": "sure",
@@ -840,7 +840,8 @@
    "at": 1795791901,
    "confirmed_by": "dolgikh",
    "confirmed_at": 1795791901,
-   "found_from": "azcm_113"
+   "found_from": "azcm_113",
+   "named_by": "/m"
   },
   {
    "id": "m1795792320502x0",
@@ -871,7 +872,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795792320,
+ "updated": 1795794610,
  "cat": {
   "title": "молитвенный ковёр «Faxralı» Гянджа",
   "museum": "",
@@ -1092,6 +1093,15 @@
      "a": "diff",
      "w": 2,
      "t": 1795620528
+    }
+   }
+  },
+  "name": {
+   "gm1795791901449x2": {
+    "dolgikh": {
+     "a": "mo:alma",
+     "w": 2,
+     "t": 1795794610
     }
    }
   }
