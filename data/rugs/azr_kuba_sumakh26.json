@@ -16,9 +16,37 @@
  "status": "new",
  "w": 359,
  "h": 515,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795806293818x4",
+   "box": [
+    0.2393,
+    0.135,
+    0.2,
+    0.08
+   ],
+   "zone": "other",
+   "motif": "",
+   "scheme": "",
+   "motif_text": "",
+   "group": "gm1795806293818x4",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.887,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795806293,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795806293,
+   "found_from": "azr_kuba_sumakh7"
+  }
+ ],
  "created": 1791736130,
- "updated": 1791736130,
+ "updated": 1795806293,
  "cat": {
   "title": "kuba sumakh26",
   "museum": "",
@@ -120,5 +148,6 @@
    20.2296
   ],
   "t": 1795207798
- }
+ },
+ "updated_by": "dolgikh"
 }
