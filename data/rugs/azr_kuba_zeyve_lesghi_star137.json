@@ -18,7 +18,7 @@
  "h": 546,
  "marks": [],
  "created": 1791736136,
- "updated": 1795293047,
+ "updated": 1795787846,
  "cat": {
   "title": "kuba zeyve lesghi star137",
   "museum": "",
@@ -49,6 +49,14 @@
   {
    "id": "azr_kuba_zeyve_lesghi_star56",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star72_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star161",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +64,18 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_kuba_zeyve_lesghi_star72_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795787846,
+   "similar": true
+  },
+  "azr_kuba_zeyve_lesghi_star161": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795787846,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -128,6 +148,22 @@
     "w": 2,
     "t": 1794771529,
     "s": "ref"
+   }
+  },
+  "same": {
+   "azr_kuba_zeyve_lesghi_star72_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795787846
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star161": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795787846
+    }
    }
   }
  },

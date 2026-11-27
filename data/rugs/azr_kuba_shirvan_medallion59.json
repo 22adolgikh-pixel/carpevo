@@ -18,7 +18,7 @@
  "h": 678,
  "marks": [],
  "created": 1791736130,
- "updated": 1795293047,
+ "updated": 1795787823,
  "cat": {
   "title": "kuba shirvan medallion59",
   "museum": "",
@@ -62,6 +62,22 @@
   {
    "id": "azr_kuba28",
    "score": 0
+  },
+  {
+   "id": "vam_O152821",
+   "score": 0
+  },
+  {
+   "id": "cm_6b744b9658",
+   "score": 0
+  },
+  {
+   "id": "cm_f06c8578a1",
+   "score": 0
+  },
+  {
+   "id": "cm_e030a16927",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -84,6 +100,26 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "vam_O152821": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795787823
+  },
+  "cm_6b744b9658": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795787823
+  },
+  "cm_f06c8578a1": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_shirvan_medallion59 ≠ cm_6b744b9658",
+   "at": 1795787914
+  },
+  "cm_e030a16927": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_shirvan_medallion59 ≠ cm_6b744b9658",
+   "at": 1795787914
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -182,6 +218,20 @@
      "a": "diff",
      "w": 2,
      "t": 1794982875
+    }
+   },
+   "vam_O152821": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795787823
+    }
+   },
+   "cm_6b744b9658": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795787823
     }
    }
   },

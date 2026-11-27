@@ -18,7 +18,7 @@
  "h": 1180,
  "marks": [],
  "created": 1791736129,
- "updated": 1795293047,
+ "updated": 1795787838,
  "cat": {
   "title": "antique-kazak-sewan-rug181 sothebys",
   "museum": "",
@@ -58,6 +58,14 @@
   {
    "id": "aic_226150",
    "score": 0
+  },
+  {
+   "id": "azr_antique_khizi_findigan_rug2",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_shield_kazak_rug18_vakiflar_museum_ankara",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -75,6 +83,17 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "azr_antique_khizi_findigan_rug2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795787838
+  },
+  "azr_antique_shield_kazak_rug18_vakiflar_museum_ankara": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795787838,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -151,6 +170,20 @@
      "a": "similar",
      "w": 2,
      "t": 1794982576
+    }
+   },
+   "azr_antique_khizi_findigan_rug2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795787838
+    }
+   },
+   "azr_antique_shield_kazak_rug18_vakiflar_museum_ankara": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795787838
     }
    }
   }

@@ -18,7 +18,7 @@
  "h": 1027,
  "marks": [],
  "created": 1791736129,
- "updated": 1795293047,
+ "updated": 1795787810,
  "cat": {
   "title": "antique khyzy chul camel cover2 baku museum",
   "museum": "",
@@ -49,6 +49,14 @@
   {
    "id": "azcm_153",
    "score": 0
+  },
+  {
+   "id": "wikimedia_File_Pileless_Dragon_carpet_from_Azerbaijan_19th_century_wool_cotton_r",
+   "score": 0
+  },
+  {
+   "id": "wikimedia_File_Azerbaijani_caroet_Ajdahali_Dragon_in_V_A_jpg",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +64,16 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "wikimedia_File_Pileless_Dragon_carpet_from_Azerbaijan_19th_century_wool_cotton_r": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795787810
+  },
+  "wikimedia_File_Azerbaijani_caroet_Ajdahali_Dragon_in_V_A_jpg": {
+   "ok": false,
+   "by": "по цепочке: azr_antique_khyzy_chul_camel_cover2_baku_museum ≠ wikimedia_File_Pileless_Dragon_carpet_from_Azerbaijan_19th_century_wool_cotton_r",
+   "at": 1795787914
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -122,6 +140,15 @@
       0.97669
      ]
     ]
+   }
+  },
+  "same": {
+   "wikimedia_File_Pileless_Dragon_carpet_from_Azerbaijan_19th_century_wool_cotton_r": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795787810
+    }
    }
   }
  },

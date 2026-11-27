@@ -18,7 +18,7 @@
  "h": 647,
  "marks": [],
  "created": 1791736128,
- "updated": 1795293047,
+ "updated": 1795787890,
  "cat": {
   "title": "pinwheel kazak rug franz bausback",
   "museum": "",
@@ -57,6 +57,10 @@
   {
    "id": "azr_antique_kazak_pinwheel_swastika_rug2_dated",
    "score": 0
+  },
+  {
+   "id": "met_447484",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -74,6 +78,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "met_447484": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795787890,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -138,6 +148,15 @@
     "a": "whole",
     "w": 2,
     "t": 1795029533
+   }
+  },
+  "same": {
+   "met_447484": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795787890
+    }
    }
   }
  },

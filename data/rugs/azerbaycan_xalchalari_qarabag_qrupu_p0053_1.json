@@ -18,7 +18,7 @@
  "h": 976,
  "marks": [],
  "created": 1794547278,
- "updated": 1795061974,
+ "updated": 1795787860,
  "cat": {
   "title": "Xalça. “ Balıq “ . Qarabağqrupu . Azərbaycan . Xankəndi. XIXəsrinsonu. Yun. Xovlu.",
   "museum": "",
@@ -53,8 +53,19 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0053_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0053_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Балыг_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Балыг_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795787860
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -355,6 +366,15 @@
  "micro": {
   "field": {
    "dolgikh": "draw"
+  },
+  "same": {
+   "wikimedia_File_Балыг_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795787860
+    }
+   }
   }
  }
 }
