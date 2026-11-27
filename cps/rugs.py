@@ -4345,6 +4345,78 @@ def install(app, DATA, D_WORK):
         thr = VF2_AUTO if v and str(v.get("model", "")).startswith("dinov3") else VF_THR
         return bool(st.get("vf_on") and v and v["frame"] == "whole" and v["conf"] >= thr and (x.get("pw") is None or x["pw"] >= 0.25) and (v.get("multi") or 0) < 0.9)
 
+    # ---------- v12.44: счётчики для всех видов, «проверено» и шкала до переобучения ----------
+    # Раньше очередь строилась только у включённых видов, у выключенных кнопка показывала 0. Теперь число считается и для них
+    # (не чаще раза в минуту), а у «между коврами» (дорогой расчёт) берётся последнее известное значение.
+    _idle = {"t": 0.0, "me": None, "off": (), "d": {}}; _last_cnt = {}
+    RETRAIN_FRAME = int(os.environ.get("CPS_RETRAIN_FRAME", "200"))              # сколько новых ответов «кадр» после обучения модели, чтобы пора было переобучать
+    RETRAIN_QUAD = int(os.environ.get("CPS_RETRAIN_QUAD", "250"))                # то же для сети углов (все ответы на карточках «углы»)
+    _mc = {"sig": None, "d": None}
+
+    def _idle_counts(me, rows, by, off):
+        off = tuple(off)
+        if _idle["me"] == me and _idle["off"] == off and time.time() - _idle["t"] < 60: return _idle["d"]
+        d = {}
+        def run(k, f):
+            try: d[k] = len(f())
+            except Exception: pass
+        mo = [t for t in off if t in MORE]
+        if mo:
+            try:
+                mq = _more_queues(me, rows, by, mo)
+                for t in mo: d[t] = len(mq[t])
+            except Exception: pass
+        if "cdup" in off: run("cdup", lambda: _cdup_queue(me))
+        if "field" in off: run("field", lambda: _field_queue(me, rows))
+        if "edge" in off: run("edge", lambda: _edge_queue(me, rows))
+        if "xfind" in off: run("xfind", lambda: _xf_queue(me, by))
+        if "tw" in off: run("tw", lambda: _tw_queue(me, by))
+        if "sch" in off: run("sch", lambda: [t for t in _sch_queue(me) if t["rid"] in by])
+        for t in off:                                                            # дорогие виды: последнее известное значение (если вид хоть раз был включён)
+            if t == "xsame" and (me, t) in _last_cnt: d[t] = _last_cnt[(me, t)]
+        _idle.update(t=time.time(), me=me, off=off, d=d)
+        return d
+
+    def _mcounts():
+        """ответы по видам карточек из журнала: {"n": {вид: сколько ответов}, "ts": {вид: [время ответа, …]}} (контрольные и «не знаю» не считаются); кэш по размеру файла"""
+        try: st = os.stat(D_MICRO); sig = (st.st_size, int(st.st_mtime))
+        except OSError: return {"n": {}, "ts": {}}
+        if _mc["sig"] == sig and _mc["d"]: return _mc["d"]
+        n, ts = {}, {}
+        try:
+            with open(D_MICRO, encoding="utf-8") as f:
+                for ln in f:
+                    try: e = json.loads(ln)
+                    except ValueError: continue
+                    a, ty = e.get("a"), e.get("type")
+                    if not ty or "ctl" in e or a in ("skip", "unk", "unknown", ""): continue
+                    n[ty] = n.get(ty, 0) + 1; ts.setdefault(ty, []).append(e.get("t", 0))
+        except OSError: pass
+        _mc.update(sig=sig, d={"n": n, "ts": ts}); return _mc["d"]
+
+    def _as_ts(v):
+        """время обучения модели → секунды Unix: число или строка «2026-11-21 01:02» / «2026-11-21»"""
+        if isinstance(v, (int, float)): return float(v)
+        for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M", "%Y-%m-%d"):
+            try: return time.mktime(time.strptime(str(v), fmt))
+            except ValueError: pass
+        return None
+
+    def _retrain_meters(mc):
+        """сколько новых ответов накопилось после последнего обучения моделей; need — порог, когда пора переобучать (CPS_RETRAIN_*)"""
+        out = []
+        def add(k, name, t0, need):
+            if not t0: return
+            new = sum(1 for t in (mc["ts"].get(k) or []) if t > t0)
+            out.append({"k": k, "name": name, "new": new, "need": need, "since": time.strftime("%d.%m", time.localtime(t0)), "ready": new >= need})
+        try: add("frame", "модель «кадр»", _as_ts((_f2() or {}).get("t")), RETRAIN_FRAME)
+        except Exception: pass
+        try:
+            import corner_refine; ci = corner_refine.info() or {}
+            if ci.get("ok"): add("quad", "сеть углов", _as_ts(ci.get("trained")), RETRAIN_QUAD)
+        except Exception: pass
+        return out
+
     @app.get("/api/micro/next")
     def micro_next(request: Request, n: int = 6, k: str = ""):
         import random
@@ -4412,7 +4484,12 @@ def install(app, DATA, D_WORK):
             if t["type"] == "tw":
                 for it in t["items"]: it.update(w=by[it["id"]]["w"], h=by[it["id"]]["h"])
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        return {"tasks": tasks, "left": {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "edge": len(edq), "xfind": len(xfq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]},
+        left = {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "edge": len(edq), "xfind": len(xfq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]}
+        if "xsame" in want: _last_cnt[(me, "xsame")] = left["xsame"]
+        off = [t for t in KINDS if t not in want and t not in KINDS_OFF]       # старые виды (same / rsame / rcmp) на кнопках не показываются
+        if off: left.update(_idle_counts(me, rows, by, off))                  # v12.44: у выключенных кнопок тоже настоящее число, а не 0
+        mc = _mcounts()
+        return {"tasks": tasks, "left": left, "ans": mc["n"], "retrain": _retrain_meters(mc),
                 "kinds": want, "me": {"name": me, **_mstats(me)}, "ver": _app_ver(), "rs": {k: rpr[k] for k in ("running", "done", "total", "found", "t", "err")}, "ms": dict(mesh_st)}
 
     @app.post("/api/micro/answer")

@@ -36,7 +36,12 @@ button.wide{grid-column:1/-1}button.sm{min-height:40px;padding:8px}button:active
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#000d;padding:8px 14px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}.toast.on{opacity:1}
 .mut{color:var(--mut)}
 /* v11.52: карточки «элементы», «имена», «тип», «двойники» и выбор вида карточек */
-.chips{display:flex;gap:6px;padding:6px 14px 0;overflow-x:auto;scrollbar-width:none}.chips button{flex:none;min-height:0;padding:4px 10px;border-radius:14px;font-size:12px;white-space:nowrap;color:var(--mut)}.chips button.on{border-color:var(--acc);color:var(--tx)}
+.chips{display:flex;gap:6px;padding:6px 14px 0;overflow-x:auto;scrollbar-width:none}.chips button{flex:none;min-height:0;padding:4px 10px;border-radius:14px;font-size:12px;white-space:nowrap;color:var(--mut);position:relative;overflow:hidden}.chips button.on{border-color:var(--acc);color:var(--tx)}
+/* v12.44: на кнопке — сколько осталось, «+N» новых с прошлого захода и тонкая полоска «проверено» (сделано / сделано + осталось) */
+.chips button i.pb{position:absolute;left:0;bottom:0;height:3px;width:var(--p,0%);background:var(--ok);opacity:.85;transition:width .4s}.chips button.on i.pb{opacity:1}
+.chips button sup{color:var(--ok);font-size:10px;font-weight:700;margin-left:3px;vertical-align:baseline}.chips button .z0{opacity:.5}
+.rt{display:flex;flex-direction:column;gap:3px;padding:6px 14px 0}.rt:empty{display:none}.rt .r{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut)}.rt .r span:first-child{flex:none;min-width:104px}
+.rt .bar{flex:1;height:6px;border-radius:3px;background:var(--ln);overflow:hidden}.rt .bar i{display:block;height:100%;width:var(--p,0%);background:var(--blu);border-radius:3px;transition:width .4s}.rt .r.ready .bar i{background:var(--ok)}.rt .r.ready{color:var(--ok)}.rt b{color:var(--tx);font-weight:600}
 .smp{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--mut)}.smp img{flex:none;height:76px;width:76px;object-fit:contain;border-radius:8px;border:2px solid var(--acc);background:#000}.smp img.sch{image-rendering:pixelated;background:#fff;border-color:var(--ln)}.smp img.big{height:120px;width:120px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1;min-height:0;overflow-y:auto;align-content:start}
 /* v11.56: квадрат через padding, а не aspect-ratio — в Safari на iPhone ряды сетки схлопывались и плитки наезжали друг на друга */
@@ -72,6 +77,7 @@ button:disabled{opacity:.4}
 .rpt{position:absolute;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;background:#e53935;color:#fff;font:700 12px/20px system-ui;text-align:center;border:2px solid #fff;font-style:normal;pointer-events:none}</style></head><body>
 <header><b>Проверка ковров</b><span class="sp"></span><button id="undo" class="sm" style="min-height:30px;padding:2px 10px;margin-right:8px;display:none" title="вернуться к прошлой карточке и ответить заново">↶ назад</button><small id="me"></small><a href="/">студия</a></header>
 <div class="chips" id="chips"></div>
+<div class="rt" id="rt"></div>
 <div class="dots" id="dots"></div>
 <main id="main"><div class="end"><span class="mut">загружаю…</span></div></main>
 <div class="toast" id="toast"></div>
@@ -96,12 +102,23 @@ function kindsInit(){let k=new URLSearchParams(location.search).get('k');const f
   S.k=(k||'').split(',').filter(x=>KINDS.concat(KOLD).some(a=>a[0]===x));if(!S.k.length)S.k=KINDS.map(a=>a[0]).filter(x=>x!=='same'&&x!=='rsame');
   // v11.86: пары по одной заменены карточкой «двойники ковра»: у сохранённого выбора старые виды меняются на новый (один раз)
   try{if(!fromUrl&&!localStorage.getItem('cps_m_tw')){if(S.k.includes('same')||S.k.includes('rsame')||!S.k.includes('tw')){S.k=S.k.filter(x=>x!=='same'&&x!=='rsame');if(!S.k.includes('tw'))S.k.push('tw');localStorage.setItem('cps_m_k',S.k.join(','));}localStorage.setItem('cps_m_tw','1');}}catch(e){}}
-function chips(){const L=S.left||{};$('chips').innerHTML=KINDS.concat(KOLD.filter(a=>S.k.includes(a[0]))).map(([k,n])=>`<button data-k="${k}" class="${S.k.includes(k)?'on':''}">${n}${L[k]!=null?' '+L[k]:''}</button>`).join('');
+// v12.44: база «+N новых» — счётчики на конец прошлого захода (хранятся на этом телефоне); у выключенных видов число теперь настоящее
+try{S.base=JSON.parse(localStorage.getItem('cps_m_base')||'null')||null;}catch(e){S.base=null;}
+function saveBase(){try{if(S.left)localStorage.setItem('cps_m_base',JSON.stringify(S.left));}catch(e){}}
+addEventListener('pagehide',saveBase);document.addEventListener('visibilitychange',()=>{if(document.hidden)saveBase();});
+function chips(){const L=S.left||{},A=S.ans||{},B=S.base;$('chips').innerHTML=KINDS.concat(KOLD.filter(a=>S.k.includes(a[0]))).map(([k,n])=>{
+    const l=L[k],d=A[k]||0,tot=(l||0)+d,nw=B&&l!=null&&B[k]!=null&&l>B[k]?l-B[k]:0;
+    return `<button data-k="${k}" class="${S.k.includes(k)?'on':''}">${n}${l!=null?` <span class="${l?'':'z0'}">${l}</span>`:''}${nw?`<sup title="новых с прошлого раза">+${nw}</sup>`:''}${tot?`<i class="pb" style="--p:${Math.round(100*d/tot)}%"></i>`:''}</button>`;}).join('');
   document.querySelectorAll('#chips button').forEach(b=>b.onclick=()=>{const k=b.dataset.k;
     if(S.k.includes(k)){if(S.k.length===1)return toast('хотя бы один вид карточек');S.k=S.k.filter(x=>x!==k);}else S.k.push(k);
     try{localStorage.setItem('cps_m_k',S.k.join(','));}catch(e){}load();});}
+// v12.44: шкала «до переобучения»: новые ответы после последнего обучения модели / сколько нужно (порог на сервере, CPS_RETRAIN_*)
+function rtbar(){const R=S.retrain||[];$('rt').innerHTML=R.map(r=>{const p=Math.min(100,Math.round(100*r.new/r.need));
+  return `<div class="r${r.ready?' ready':''}" title="после обучения ${r.since} накоплено ${r.new} новых ответов, для переобучения нужно ${r.need}"><span>${esc(r.name)}</span><div class="bar"><i style="--p:${p}%"></i></div><span><b>${r.new}</b> / ${r.need}${r.ready?' · пора обучать ✓':''}</span></div>`;}).join('');}
+function bump(t){if(!t||t.c)return;const ty=t.type;S.ans=S.ans||{};S.ans[ty]=(S.ans[ty]||0)+1;if(S.left&&S.left[ty]!=null)S.left[ty]=Math.max(0,S.left[ty]-1);
+  (S.retrain||[]).forEach(r=>{if(r.k===ty){r.new++;r.ready=r.new>=r.need;}});chips();rtbar();}
 async function load(){$('main').innerHTML='<div class="end"><span class="mut">загружаю…</span></div>';
-  try{const j=await api('/api/micro/next?n=6&k='+S.k.join(','));S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;S.rs=j.rs;S.ms=j.ms;S.ver=j.ver||S.ver;chips();head();show();}
+  try{const j=await api('/api/micro/next?n=6&k='+S.k.join(','));S.tasks=j.tasks;S.i=0;S.me=j.me;S.left=j.left;S.ans=j.ans||{};S.retrain=j.retrain||[];S.rs=j.rs;S.ms=j.ms;S.ver=j.ver||S.ver;chips();rtbar();head();show();}
   catch(e){$('main').innerHTML=`<div class="end"><span>Не загрузилось: ${esc(e.message)}</span><button onclick="load()">ещё раз</button></div>`;}}
 const img=t=>'/rugmid/'+encodeURIComponent(t.rid)+'.jpg';
 function zoomBg(el,t,x,y,Z){const r=el.getBoundingClientRect(),im=S.im;if(!im||!im.naturalWidth)return;
@@ -136,7 +153,7 @@ function undoBtn(){const b=$('undo');if(b)b.style.display=(S.hist||[]).length?''
 function undo(){const h=S.hist||[];if(!h.length)return;const t=Object.assign({},h.pop());t._again=1;S.tasks.splice(S.i,0,t);S.done=Math.max(0,S.done-1);undoBtn();show();
   toast('прошлая карточка — ответьте заново, прежний ответ заменится');}
 async function answer(t,a,q,x){rdFlags(t);const k=S.i;S.i++;S.done++;(S.hist=S.hist||[]).push(t);if(S.hist.length>20)S.hist.shift();undoBtn();show();
-  try{const j=await api('/api/micro/answer',{type:t.type,rid:t.rid,a,q,c:t.c,flags:t.fl,s:t.qsrc,...(x||{})});S.me.total=(S.me.total||0)+1;if(a!=='skip')S.me.today=(S.me.today||0)+1;
+  try{const j=await api('/api/micro/answer',{type:t.type,rid:t.rid,a,q,c:t.c,flags:t.fl,s:t.qsrc,...(x||{})});S.me.total=(S.me.total||0)+1;if(a!=='skip'){S.me.today=(S.me.today||0)+1;bump(t);}
     if(j.ctl===false)toast('контрольная карточка: тут была ошибка — смотрите внимательнее');else if(j.applied)toast('принято ✓');head();}
   catch(e){toast('не сохранилось: '+e.message);S.i=k;S.done--;S.hist.pop();undoBtn();show();}}
 // v11.45: кадр — три ответа (целый / обрезан / деталь) плюс «не ковёр»; порог «чуть вылез» — 3 % по одному краю.

@@ -2569,6 +2569,29 @@ def t60_xfind_card_v1236(pg, ctx):
     errors_ok(ctx, '/m на других коврах v12.36')
 
 
+@test
+def t61_counts_progress_v1244(pg, ctx):
+    """v12.44: у выключенных видов карточек на кнопке настоящее число (раньше 0), с сервера приходят ответы по видам и шкала до
+    переобучения; в /m кнопка показывает число и полоску «проверено», шкала рисуется"""
+    import urllib.request as U, json as _j
+    get = lambda path: _j.load(U.urlopen(ctx['url'] + path))
+    nx = get('api/micro/next?n=6&k=quad,frame'); L = nx['left']
+    for k in ('marks', 'name', 'comp', 'split', 'cdup', 'field', 'edge', 'xfind', 'tw', 'sch'):
+        assert isinstance(L.get(k), int), f'у выключенного вида {k} нет числа: {L}'
+    assert isinstance(nx['ans'], dict), nx.keys()
+    fr = [r for r in nx['retrain'] if r['k'] == 'frame']
+    assert fr and fr[0]['need'] > 0 and fr[0]['new'] >= 0 and 'ready' in fr[0], f'нет шкалы до переобучения кадра: {nx["retrain"]}'
+    assert get('api/micro/next?n=6&k=edge')['left']['edge'] == L['edge'], 'число у выключенного вида не совпало с числом у включённого'
+    mc = pg.context.browser.new_context(viewport={'width': 390, 'height': 844}, has_touch=True); m = mc.new_page()
+    errs = []; m.on('pageerror', lambda e: errs.append(str(e)))
+    m.goto(ctx['url'] + 'm?k=frame'); m.wait_for_selector('#chips button', timeout=15000); m.wait_for_selector('#rt .r', timeout=15000)
+    off = m.eval_on_selector_all('#chips button:not(.on)', 'e=>e.map(b=>b.textContent)')
+    assert off and all(any(c.isdigit() for c in t) for t in off), f'на выключенных кнопках нет чисел: {off}'
+    assert m.eval_on_selector_all('#rt .bar i', 'e=>e.length') >= 1, 'шкала до переобучения не нарисована'
+    assert not errs, errs
+    mc.close()
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     tmp = tempfile.mkdtemp(prefix='cps_test_'); app = os.path.join(tmp, 'cps')
