@@ -25,7 +25,7 @@ N = int(os.environ.get("EC_N", "400")); SEED = int(os.environ.get("EC_SEED", "1"
 MINREP = int(os.environ.get("EC_MINREP", "3")); PER = int(os.environ.get("EC_PER", "14")); THR = float(os.environ.get("EC_THR", "0.22"))
 MINRUGS = int(os.environ.get("EC_MINRUGS", "3")); EXCL = tuple(x for x in os.environ.get("EC_EXCL", "kerimov").split(",") if x)
 APPEND = os.environ.get("EC_APPEND", "0") == "1"; LONG = 640
-SIZES = ((3, 3), (4, 4), (6, 6), (8, 8), (3, 8), (8, 3))              # окна в клетках сетки 16 px при длинной стороне 640
+SIZES = ((3, 3), (4, 4), (6, 6), (8, 8))                                  # v12.51: только квадратные окна (полосы 3×8 давали куски каймы, а не узоры)
 assert KEY, "задайте ключ: %env CPS_KEY=…"
 T0 = time.time()
 def log(*a): print(f"[{time.time() - T0:6.0f} c]", *a, flush=True)

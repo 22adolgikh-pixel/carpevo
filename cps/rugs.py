@@ -4041,6 +4041,9 @@ def install(app, DATA, D_WORK):
             if me in d or sum(x.get("w", 1) for x in d.values() if x.get("a") in ("ok", "mixed", "junk")) >= 2: continue
             reps = [x for x in c["reps"] if by.get(x["rid"]) and not by[x["rid"]]["dead"]][:12]
             if len(reps) < 4: continue
+            def _asp(x): b = x["box"]; r = by[x["rid"]]; return (b[2] * float(r.get("w") or 1)) / max(1e-6, b[3] * float(r.get("h") or 1))
+            asp = sorted(_asp(x) for x in reps)[len(reps) // 2]
+            if not 0.6 <= asp <= 1.7 or sorted(x["box"][2] * x["box"][3] for x in reps)[len(reps) // 2] > 0.06: continue    # v12.51: полосы (кайма) и «пол-ковра» — не элементы
             out.append({"type": "ecl", "rid": reps[0]["rid"], "key": c["id"], "n": c["n"], "rugs": c["rugs"],
                         "items": [{"rid": x["rid"], "box": x["box"], "title": by[x["rid"]]["title"]} for x in reps]})
         out.sort(key=lambda t: (-t["rugs"], -t["n"]))
