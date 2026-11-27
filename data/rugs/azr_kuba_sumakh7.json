@@ -10687,10 +10687,10 @@
   {
    "id": "m17956304489e",
    "box": [
-    0.62701,
-    0.28249,
-    0.10289,
-    0.0452
+    0.58928,
+    0.25282,
+    0.14774,
+    0.07788
    ],
    "zone": "field",
    "motif": "",
@@ -10698,7 +10698,7 @@
    "scheme": "",
    "group": "mmwgmh26v",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -10707,8 +10707,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795630448,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795787042,
    "rf": 1,
    "rf_s": 0.452,
    "box0": [
@@ -10717,7 +10717,9 @@
     0.06655,
     0.11272
    ],
-   "rf_moved": 0.345
+   "rf_moved": 0.345,
+   "fixed_by": "dolgikh",
+   "fixed_at": 1795787042
   },
   {
    "id": "m179563044810e",
@@ -10733,7 +10735,7 @@
    "scheme": "",
    "group": "mmwgmh26v",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -10742,8 +10744,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795630448,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795787042,
    "rf": 1,
    "rf_s": 0.493,
    "box0": [
@@ -10768,7 +10770,7 @@
    "scheme": "",
    "group": "mmwgmh26v",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "",
    "angle": 0,
    "flip": 0,
@@ -10777,8 +10779,8 @@
    "xfer": "",
    "by": "машина (поиск по образцу, сеть)",
    "at": 1795630448,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795787042,
    "rf": 1,
    "rf_s": 0.645,
    "box0": [
@@ -21324,7 +21326,7 @@
   }
  ],
  "created": 1791736131,
- "updated": 1795762598,
+ "updated": 1795787042,
  "cat": {
   "title": "kuba sumakh7",
   "museum": "",
@@ -21900,6 +21902,27 @@
      "a": "ok",
      "w": 2,
      "t": 1795762598
+    }
+   },
+   "m179563044810e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795787042
+    }
+   },
+   "m179563044811e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795787042
+    }
+   },
+   "m17956304489e": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795787042
     }
    }
   },
