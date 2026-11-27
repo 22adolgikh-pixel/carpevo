@@ -2543,7 +2543,7 @@ def t59_edge_card_v1236(pg, ctx):
     pg.keyboard.down('Space'); pg.wait_for_function("__kxsp()", timeout=20000); pg.screenshot(path=os.path.join(OUT, 't59_edge_space.png')); pg.keyboard.up('Space'); pg.wait_for_timeout(200)
     assert not pg.evaluate("__kxsp()") and pg.inner_text('.kxzv').strip() == zv, 'после пробела не вернулся редактор с тем же масштабом'
     pg.click('.kxz button[data-z="0"]')
-    pg.click('#kx_ep'); pg.wait_for_selector('#kx_ebody img[src^="data:"]', timeout=20000)
+    pg.click('#kx_etabs button[data-t="res"]'); pg.wait_for_selector('#kx_ebody img[src^="data:"]', timeout=20000)
     pg.click('#kx_ed'); pg.wait_for_timeout(1500)
     f = get('api/rugs/edgerug').get('edge_fix') or {}
     assert f.get('v') == 2 and len(f.get('top') or []) == 1 and f['top'][0][1] > 0.01 and not f.get('bot') and f['c'][1][0] > 1.01 and f['c'][0][0] < -0.15, f'правка края не записалась: {f}'
