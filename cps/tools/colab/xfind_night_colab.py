@@ -16,7 +16,7 @@
 import os, sys, io, json, time, zipfile, math, urllib.request, urllib.parse
 import numpy as np, cv2
 
-URL = os.environ.get("CPS_URL", "https://cps.jeyran.az").rstrip("/")
+URL = os.environ.get("CPS_URL", "https://studio.carpets.wiki").rstrip("/")
 KEY = os.environ.get("CPS_KEY", "").strip()
 if "key=" in KEY: KEY = urllib.parse.parse_qs(urllib.parse.urlparse(KEY).query).get("key", [""])[0] or KEY.split("key=")[-1]   # вставили всю ссылку — берём ключ
 XF_FILE = os.environ.get("XF_FILE", "1RE74rNCMa4Y9HwcsA3PtR9psH7TuPGtL")
