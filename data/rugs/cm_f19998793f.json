@@ -18,7 +18,7 @@
  "h": 2400,
  "marks": [],
  "created": 1791870015,
- "updated": 1795355812,
+ "updated": 1795790213,
  "cat": {
   "title": "Azerbaijan modern carpet with rug-making points of Azerbaijan, 1984",
   "museum": "Национальный музей азербайджанского ковра",
@@ -60,6 +60,10 @@
   {
    "id": "wikimedia_File_Carpet_Shusha_gallery2_jpg",
    "score": 0
+  },
+  {
+   "id": "intangible_2850_p0197_3",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -72,6 +76,11 @@
    "ok": false,
    "by": "по цепочке: azcm_81 ≠ cm_f19998793f",
    "at": 1795497589
+  },
+  "intangible_2850_p0197_3": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790213
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -195,6 +204,15 @@
     "w": 2,
     "t": 1795355812,
     "s": "ref"
+   }
+  },
+  "same": {
+   "intangible_2850_p0197_3": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790213
+    }
    }
   }
  },

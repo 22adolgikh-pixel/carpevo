@@ -18,7 +18,7 @@
  "h": 2000,
  "marks": [],
  "created": 1791870040,
- "updated": 1794766912,
+ "updated": 1795790191,
  "cat": {
   "title": "“Salyan xiləsi” («Сальян хиляси»), Ширван, Азербайджан",
   "museum": "Национальный музей азербайджанского ковра",
@@ -53,6 +53,10 @@
   {
    "id": "azr_kuba27",
    "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug121",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -60,6 +64,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1795721527
+  },
+  "azr_antique_caucasian_moghan_rug121": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790191
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -136,6 +145,15 @@
   },
   "field": {
    "dolgikh": "draw"
+  },
+  "same": {
+   "azr_antique_caucasian_moghan_rug121": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790191
+    }
+   }
   }
  },
  "frame": "whole",

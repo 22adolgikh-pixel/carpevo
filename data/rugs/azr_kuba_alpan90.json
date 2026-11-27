@@ -18,7 +18,7 @@
  "h": 1282,
  "marks": [],
  "created": 1791736131,
- "updated": 1795497660,
+ "updated": 1795790165,
  "cat": {
   "title": "kuba alpan90",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_alpan90",
  "lib_img": "img/azr_kuba_alpan90.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Metropoliten_muzeyində_XVII_XVIII_əsrlərə_aid_Quba_xalçası_jpeg",
+   "score": 0
+  },
+  {
+   "id": "met_445363",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Metropoliten_muzeyində_XVII_XVIII_əsrlərə_aid_Quba_xalçası_jpeg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790165
+  },
+  "met_445363": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_alpan90 ≠ wikimedia_File_Metropoliten_muzeyində_XVII_XVIII_əsrlərə_aid_Quba_xalçası_jpeg",
+   "at": 1795790340
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -126,6 +146,15 @@
     "w": 2,
     "t": 1795497660,
     "s": "ref"
+   }
+  },
+  "same": {
+   "wikimedia_File_Metropoliten_muzeyində_XVII_XVIII_əsrlərə_aid_Quba_xalçası_jpeg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790165
+    }
    }
   }
  },

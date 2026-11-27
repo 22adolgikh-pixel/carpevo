@@ -18,7 +18,7 @@
  "h": 952,
  "marks": [],
  "created": 1791736133,
- "updated": 1795293047,
+ "updated": 1795790232,
  "cat": {
   "title": "kuba-karagashli-rug-hali75-private-collection",
   "museum": "",
@@ -69,6 +69,14 @@
   {
    "id": "azr_antique_shirvan_prayer_rug124_nagel1988_kilim",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star134",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_zeyve_lesghi_star8",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -101,6 +109,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1795721038
+  },
+  "azr_kuba_zeyve_lesghi_star134": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790232
+  },
+  "azr_kuba_zeyve_lesghi_star8": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790232
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -231,5 +249,23 @@
   ],
   "t": 1795207772
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "azr_kuba_zeyve_lesghi_star134": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790232
+    }
+   },
+   "azr_kuba_zeyve_lesghi_star8": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790232
+    }
+   }
+  }
+ }
 }

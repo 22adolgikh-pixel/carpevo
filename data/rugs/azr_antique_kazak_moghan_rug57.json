@@ -18,7 +18,7 @@
  "h": 495,
  "marks": [],
  "created": 1791736129,
- "updated": 1791736129,
+ "updated": 1795790234,
  "cat": {
   "title": "antique-kazak-moghan-rug57",
   "museum": "",
@@ -49,6 +49,10 @@
   {
    "id": "azr_antique_caucasian_moghan_rug57",
    "score": 0
+  },
+  {
+   "id": "azr_antique_khizi_findigan_rug1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -57,6 +61,11 @@
    "by": "/m: dolgikh",
    "at": 1795027895,
    "similar": true
+  },
+  "azr_antique_khizi_findigan_rug1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790234
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -121,5 +130,16 @@
    42.2256
   ],
   "t": 1795207720
+ },
+ "micro": {
+  "same": {
+   "azr_antique_khizi_findigan_rug1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790234
+    }
+   }
+  }
  }
 }

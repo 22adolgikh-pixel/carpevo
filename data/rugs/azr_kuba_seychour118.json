@@ -18,7 +18,7 @@
  "h": 1043,
  "marks": [],
  "created": 1791736135,
- "updated": 1794740917,
+ "updated": 1795790262,
  "cat": {
   "title": "kuba seychour118",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_kuba_seychour118",
  "lib_img": "img/azr_kuba_seychour118.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "cm_3653472d83",
+   "score": 0
+  },
+  {
+   "id": "azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "cm_3653472d83": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790262
+  },
+  "azr_caucasian_embroidered_textile_18thc_silkoncotton_TM_2_18": {
+   "ok": false,
+   "by": "по цепочке: azr_kuba_seychour118 ≠ cm_3653472d83",
+   "at": 1795790340
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -117,6 +137,15 @@
     "w": 2,
     "t": 1794740917,
     "s": "ref"
+   }
+  },
+  "same": {
+   "cm_3653472d83": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790262
+    }
    }
   }
  },

@@ -48,8 +48,19 @@
  },
  "src_id": "cat:wikimedia_File_Azerbaijanian_carpet_from_Karabakh_Khanlyg_jpg",
  "lib_img": "img/wikimedia_File_Azerbaijanian_carpet_from_Karabakh_Khanlyg_jpg.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "azr_silk_embroidery_medallion_birds_XVIIIc_christies_07_10_2010",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "azr_silk_embroidery_medallion_birds_XVIIIc_christies_07_10_2010": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790275
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "layout": null,

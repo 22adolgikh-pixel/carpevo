@@ -18,7 +18,7 @@
  "h": 1008,
  "marks": [],
  "created": 1791736132,
- "updated": 1795463002,
+ "updated": 1795790227,
  "cat": {
   "title": "kuba chichi84",
   "museum": "",
@@ -45,8 +45,29 @@
  },
  "src_id": "cat:azr_kuba_chichi84",
  "lib_img": "img/azr_kuba_chichi84.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "intangible_2849_p0089_1",
+   "score": 0
+  },
+  {
+   "id": "azr_kuba_perepedil14",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "intangible_2849_p0089_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790227,
+   "similar": true
+  },
+  "azr_kuba_perepedil14": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790227
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -142,6 +163,22 @@
     "a": "whole",
     "w": 2,
     "t": 1795463002
+   }
+  },
+  "same": {
+   "intangible_2849_p0089_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795790227
+    }
+   },
+   "azr_kuba_perepedil14": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790227
+    }
    }
   }
  },

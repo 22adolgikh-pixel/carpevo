@@ -18,7 +18,7 @@
  "h": 1724,
  "marks": [],
  "created": 1794547278,
- "updated": 1794547278,
+ "updated": 1795790217,
  "cat": {
   "title": "Ковёр Ширван",
   "museum": "",
@@ -48,8 +48,19 @@
  },
  "src_id": "cat:intangible_2850_p0140_1",
  "lib_img": "img/intangible_2850_p0140_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Salahli_rug_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Salahli_rug_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790217
+  }
+ },
  "_lib_t": "2026-11-13 10:08",
  "auto": {
   "frame": "whole",
@@ -104,5 +115,16 @@
    69.4464
   ],
   "t": 1795207861
+ },
+ "micro": {
+  "same": {
+   "wikimedia_File_Salahli_rug_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790217
+    }
+   }
+  }
  }
 }

@@ -18,7 +18,7 @@
  "h": 774,
  "marks": [],
  "created": 1791736135,
- "updated": 1794260489,
+ "updated": 1795790205,
  "cat": {
   "title": "kuba tekye52",
   "museum": "",
@@ -45,8 +45,19 @@
  },
  "src_id": "cat:azr_kuba_tekye52",
  "lib_img": "img/azr_kuba_tekye52.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "kerimov_vol3_p005_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "kerimov_vol3_p005_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790205
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -111,6 +122,15 @@
       0.98555
      ]
     ]
+   }
+  },
+  "same": {
+   "kerimov_vol3_p005_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790205
+    }
    }
   }
  },

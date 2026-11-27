@@ -57,6 +57,10 @@
   {
    "id": "wikimedia_File_Goçbunyuz_Khanliq_jpg",
    "score": 0
+  },
+  {
+   "id": "azcm_61",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -64,6 +68,11 @@
    "ok": true,
    "by": "машина: 592 общих точек, перекрытие 0.92 (порог 40 / 0.9)",
    "at": 1795506329
+  },
+  "azcm_61": {
+   "ok": false,
+   "by": "по цепочке: azcm_61 ≠ wikimedia_File_Goçbunyuz_Khanliq_jpg",
+   "at": 1795790340
   }
  },
  "_lib_t": "2026-11-12 22:41",

@@ -18,7 +18,7 @@
  "h": 1431,
  "marks": [],
  "created": 1791736138,
- "updated": 1794509601,
+ "updated": 1795790182,
  "cat": {
   "title": "Antique Moghan rug with Memling Guls, first half 19th century, 105 x 38 3/4 in",
   "museum": "",
@@ -55,6 +55,14 @@
   {
    "id": "azr_antique_caucasian_moghan_rug41",
    "score": 0
+  },
+  {
+   "id": "azr_kuba_shield21",
+   "score": 0
+  },
+  {
+   "id": "azr_antique_caucasian_moghan_rug63",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -67,6 +75,16 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794997828
+  },
+  "azr_kuba_shield21": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790182
+  },
+  "azr_antique_caucasian_moghan_rug63": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790182
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -176,6 +194,22 @@
      ]
     ],
     "s": "vlm"
+   }
+  },
+  "same": {
+   "azr_kuba_shield21": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790182
+    }
+   },
+   "azr_antique_caucasian_moghan_rug63": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790182
+    }
    }
   }
  },

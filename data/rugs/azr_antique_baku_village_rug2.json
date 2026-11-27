@@ -18,7 +18,7 @@
  "h": 1833,
  "marks": [],
  "created": 1791736128,
- "updated": 1794976934,
+ "updated": 1795790298,
  "cat": {
   "title": "antique baku village rug2",
   "museum": "",
@@ -57,6 +57,10 @@
   {
    "id": "azr_early_shirvan_rug3",
    "score": 0
+  },
+  {
+   "id": "cm_f575c37965",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -74,6 +78,11 @@
    "ok": false,
    "by": "/m: dolgikh",
    "at": 1794984151
+  },
+  "cm_f575c37965": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790298
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -198,7 +207,14 @@
      "t": 1794976934
     }
    },
-   "azr_early_shirvan_rug3": {}
+   "azr_early_shirvan_rug3": {},
+   "cm_f575c37965": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790298
+    }
+   }
   }
  },
  "frame": "whole",

@@ -18,7 +18,7 @@
  "h": 1333,
  "marks": [],
  "created": 1795357764,
- "updated": 1795463105,
+ "updated": 1795790292,
  "cat": {
   "title": "Ковёр «Qəmərli» Иреван",
   "museum": "",
@@ -149,6 +149,15 @@
     "t": 1795463105,
     "s": "ref"
    }
+  },
+  "same": {
+   "intangible_2854_p0055_1_2": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790292
+    }
+   }
   }
  },
  "frame": "whole",
@@ -185,5 +194,18 @@
   ],
   "quad_status": "confirmed"
  },
- "tri": "micro"
+ "tri": "micro",
+ "same_ok": {
+  "intangible_2854_p0055_1_2": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790292
+  }
+ },
+ "same": [
+  {
+   "id": "intangible_2854_p0055_1_2",
+   "score": 0
+  }
+ ]
 }

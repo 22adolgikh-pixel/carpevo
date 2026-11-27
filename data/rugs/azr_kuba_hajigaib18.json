@@ -18,7 +18,7 @@
  "h": 761,
  "marks": [],
  "created": 1791736133,
- "updated": 1795293047,
+ "updated": 1795790317,
  "cat": {
   "title": "kuba hajigaib18",
   "museum": "",
@@ -49,6 +49,10 @@
   {
    "id": "azr_kuba_hajigaib12",
    "score": 0
+  },
+  {
+   "id": "intangible_2849_p0095_1",
+   "score": 0
   }
  ],
  "same_ok": {
@@ -56,6 +60,12 @@
    "ok": false,
    "by": "dolgikh",
    "at": 1795293048
+  },
+  "intangible_2849_p0095_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790317,
+   "similar": true
   }
  },
  "_lib_t": "2026-10-12 22:38",
@@ -155,5 +165,16 @@
   ],
   "t": 1795207769
  },
- "fragment": true
+ "fragment": true,
+ "micro": {
+  "same": {
+   "intangible_2849_p0095_1": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795790317
+    }
+   }
+  }
+ }
 }

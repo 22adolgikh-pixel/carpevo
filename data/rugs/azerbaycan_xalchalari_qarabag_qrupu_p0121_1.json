@@ -187,7 +187,7 @@
   }
  ],
  "created": 1794547278,
- "updated": 1795495963,
+ "updated": 1795790198,
  "cat": {
   "title": "Xalça. “ Çələbi” . Qarabağ qrupu. Azərbaycan. Yun.Xovlu.",
   "museum": "",
@@ -222,8 +222,20 @@
  },
  "src_id": "cat:azerbaycan_xalchalari_qarabag_qrupu_p0121_1",
  "lib_img": "img/azerbaycan_xalchalari_qarabag_qrupu_p0121_1.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790198,
+   "similar": true
+  }
+ },
  "_lib_t": "2026-11-12 22:41",
  "auto": {
   "frame": "whole",
@@ -284,6 +296,15 @@
      "a": "bad",
      "w": 2,
      "t": 1795495963
+    }
+   }
+  },
+  "same": {
+   "wikimedia_File_Chelabi_carpet_from_Karabakh_Azerbaijan_jpg": {
+    "dolgikh": {
+     "a": "similar",
+     "w": 2,
+     "t": 1795790198
     }
    }
   }

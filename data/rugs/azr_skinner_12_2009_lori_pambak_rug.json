@@ -18,7 +18,7 @@
  "h": 1727,
  "marks": [],
  "created": 1791736129,
- "updated": 1795353936,
+ "updated": 1795790185,
  "cat": {
   "title": "skinner 12 2009 lori pambak rug",
   "museum": "",
@@ -45,8 +45,28 @@
  },
  "src_id": "cat:azr_skinner_12_2009_lori_pambak_rug",
  "lib_img": "img/azr_skinner_12_2009_lori_pambak_rug.jpg",
- "same": [],
- "same_ok": {},
+ "same": [
+  {
+   "id": "wikimedia_File_Antique_Caucasian_Kazak_Rug_Symbology_S_Motif_jpg",
+   "score": 0
+  },
+  {
+   "id": "intangible_2850_p0188_1",
+   "score": 0
+  }
+ ],
+ "same_ok": {
+  "wikimedia_File_Antique_Caucasian_Kazak_Rug_Symbology_S_Motif_jpg": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790185
+  },
+  "intangible_2850_p0188_1": {
+   "ok": false,
+   "by": "/m: dolgikh",
+   "at": 1795790185
+  }
+ },
  "_lib_t": "2026-10-12 22:38",
  "multi": [],
  "people": {
@@ -98,6 +118,22 @@
     "w": 2,
     "t": 1795353936,
     "s": "ref"
+   }
+  },
+  "same": {
+   "wikimedia_File_Antique_Caucasian_Kazak_Rug_Symbology_S_Motif_jpg": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790185
+    }
+   },
+   "intangible_2850_p0188_1": {
+    "dolgikh": {
+     "a": "diff",
+     "w": 2,
+     "t": 1795790185
+    }
    }
   }
  },
