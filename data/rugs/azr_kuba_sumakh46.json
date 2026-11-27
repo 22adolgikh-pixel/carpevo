@@ -18,7 +18,7 @@
  "h": 1619,
  "marks": [],
  "created": 1791736130,
- "updated": 1795335411,
+ "updated": 1795796225,
  "cat": {
   "title": "kuba sumakh46",
   "museum": "",
@@ -145,6 +145,13 @@
      "t": 1795335411
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795796225
+   }
   }
  },
  "auto": {
@@ -204,6 +211,7 @@
   ],
   "quad_status": "accepted"
  },
- "frame": "cropped",
- "tri": "auto"
+ "frame": "whole",
+ "tri": "auto",
+ "frame_by": "micro"
 }
