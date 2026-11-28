@@ -2960,7 +2960,7 @@ def install(app, DATA, D_WORK):
     EDGE_FL = ("wavy", "skew", "damaged")
     # v11.52: ещё четыре вида карточек. Голоса: r.micro[вид][ключ][человек] = {a, w, t}; ключ — рамка / группа рамок / тип / второй ковёр пары.
     MORE = ("marks", "name", "comp", "same", "split")
-    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch", "rcmp", "edge", "xfind", "ecl")
+    KINDS = ("quad", "frame") + MORE + ("cdup", "xsame", "rsame", "field", "tw", "sch", "rcmp", "edge", "xfind", "ecl", "fra")
     KINDS_OFF = ("same", "rsame", "rcmp", "ecl")             # v11.86: пары по одной заменены карточкой «двойники ковра» (tw); старые виды — только по выбору
 
     # v11.56: «дубли» — пары понятий Carpet DNA с почти одинаковым названием (cps/concept_dups.json). Это вопрос о словах, не о фото:
@@ -4670,6 +4670,41 @@ def install(app, DATA, D_WORK):
         except Exception: pass
         return out
 
+    # ---- v12.58: разовая проверка автоприёма «целый» — случайные 100 ковров, которые модель кадра приняла сама (человек их не видел).
+    # Карточка та же «кадр», но без подсказки модели (вслепую). Ответ — обычный голос «кадр» плюс пометка aud=1 в журнале;
+    # итог — /api/open/frame_audit: сколько из проверенных люди назвали не «целый».
+    FRA_N = int(os.environ.get("CPS_FRA_N", "100"))
+
+    def _fra_pick(rows, fst):
+        z = [x for x in rows if not x["dead"] and fr_auto(x, fst) and not fr_ctl(x["id"]) and not is_bw(x["id"])]
+        z.sort(key=lambda x: hashlib.md5(("fra:" + x["id"]).encode()).hexdigest())
+        return z[:FRA_N]
+
+    def _fra_queue(me, rows, fst):
+        done = _fra_done()
+        return [{"type": "frame", "rid": x["id"], "aud": 1} for x in _fra_pick(rows, fst) if (me, x["id"]) not in done]
+
+    def _fra_done():
+        out = {}
+        try:
+            with open(D_MICRO, encoding="utf-8") as f:
+                for ln in f:
+                    if '"aud"' not in ln: continue
+                    try: e = json.loads(ln)
+                    except Exception: continue
+                    if e.get("type") == "frame" and e.get("aud"): out[(e["u"], e["rid"])] = e
+        except OSError: pass
+        return out
+
+    @app.get("/api/open/frame_audit")
+    def api_frame_audit():
+        E = list(_fra_done().values()); ans = [e for e in E if e.get("a") not in ("skip", "unk", "")]
+        from collections import Counter
+        c = Counter(e["a"] for e in ans); bad = [e for e in ans if e["a"] != "whole"]
+        return {"answered": len(ans), "skipped": len(E) - len(ans), "by_answer": dict(c), "not_whole": len(bad),
+                "not_whole_share": round(len(bad) / len(ans), 3) if ans else None,
+                "bad": [{"rid": e["rid"], "a": e["a"], "p": e.get("p")} for e in bad]}
+
     @app.get("/api/micro/next")
     def micro_next(request: Request, n: int = 6, k: str = ""):
         import random
@@ -4716,6 +4751,7 @@ def install(app, DATA, D_WORK):
         clq = _cl_queue(me, by) if "ecl" in want else []; Q["ecl"] = clq[:n]
         twq = _tw_queue(me, by) if "tw" in want else []; Q["tw"] = twq[:n]
         schq = [t for t in _sch_queue(me) if t["rid"] in by] if "sch" in want else []; Q["sch"] = schq[:n]
+        faq = _fra_queue(me, rows, fst) if "fra" in want else []; Q["fra"] = faq[:n]
         tasks = []; order = [t for t in want if Q[t]]
         while len(tasks) < n and order:                                           # по кругу: по одной карточке каждого вида
             for t in list(order):
@@ -4738,7 +4774,7 @@ def install(app, DATA, D_WORK):
             if t["type"] == "tw":
                 for it in t["items"]: it.update(w=by[it["id"]]["w"], h=by[it["id"]]["h"])
             x = by[t["rid"]]; t.update(title=x["title"], w=x["w"], h=x["h"])
-        left = {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "edge": len(edq), "xfind": len(xfq), "ecl": len(clq), "tw": len(twq), "sch": len(schq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]}
+        left = {"frame": len(fr), "quad": len(qd) + n_wait, "hidden": len(H), **{t: len(more[t]) for t in MORE}, "cdup": len(cdq), "xsame": len(xsq), "rsame": len(rsq), "field": len(fdq), "rcmp": len(rcq), "edge": len(edq), "xfind": len(xfq), "ecl": len(clq), "tw": len(twq), "sch": len(schq), "fra": len(faq), "name_wait": more["name_wait"], "frame_auto": sum(1 for x in rows if fr_auto(x, fst) and not fr_ctl(x["id"])), "frame_auto_on": fst["on"]}
         if "xsame" in want: _last_cnt[(me, "xsame")] = left["xsame"]
         off = [t for t in KINDS if t not in want and t not in KINDS_OFF]       # старые виды (same / rsame / rcmp) на кнопках не показываются
         if off: left.update(_idle_counts(me, rows, by, off))                  # v12.44: у выключенных кнопок тоже настоящее число, а не 0
@@ -4800,6 +4836,9 @@ def install(app, DATA, D_WORK):
                 _v = _vf_of(r)
                 if _v and _v["frame"] == "whole" and _v["conf"] >= VF_THR and not r.get("frame") and (rec["pw"] is None or rec["pw"] >= 0.25): rec["vfa"] = 1
                 if _rc(r): rec["rc"] = 1
+                if body.get("aud"):                                              # v12.58: разовая проверка автоприёма
+                    rec["aud"] = 1; _v2 = _f2_of(rid)
+                    if _v2: rec["p"] = _v2["p"]; rec["mv"] = _v2.get("model")
                 for u in [u for u, v in M.items() if (v or {}).get("a") in FR_OLD]: M.pop(u)
             M[me] = {"a": a, "w": _wt(role), "t": rec["t"], **({"q": q} if q else {}), **({"s": qsrc} if qsrc else {})}
             votes = list(M.values())
