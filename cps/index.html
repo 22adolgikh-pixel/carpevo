@@ -492,7 +492,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v12.62</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v12.63</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Вернуться к рисунку, который вы правили последним">↩ К рисунку</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2533,6 +2533,26 @@ function rugList(){
   rugTree();rugToolsPanel();rugKpi();if(!R.peekId||!R.list.find(x=>x.id===R.peekId))rugPeek(null);
   const mb=$('rgMore');if(mb){mb.onclick=()=>{R.gridN=N+150;rugList();};try{const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){io.disconnect();R.gridN=N+150;rugList();}},{root:document.querySelector('#rgGridV .rgmid'),rootMargin:'400px'});io.observe(mb);}catch(e){}}
 }
+
+// v12.63: «похожие по форме на других коврах» — те же теги формы, что в /m: у выбранной подтверждённой рамки — ближайшие по виду; без рамки — все подтверждённые элементы нужной формы
+function rugShapeAll(key,tag){document.querySelectorAll('.shapeall').forEach(e=>e.remove());
+  const o=document.createElement('div');o.className='shapeall';o.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.88);overflow:auto;padding:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start';
+  o.innerHTML='<span class="mut"><span class="spin"></span> ищу…</span>';document.body.appendChild(o);
+  const close=()=>o.remove(),onk=e=>{if(e.key==='Escape'){close();document.removeEventListener('keydown',onk);}};document.addEventListener('keydown',onk);
+  api('/api/xsame/similar?key='+encodeURIComponent(key)+'&k='+(key?36:90)+(tag?'&tag='+encodeURIComponent(tag):'')).then(j=>{
+    if(j.wait){o.innerHTML='<span class="mut">индекс элементов строится (до минуты) — нажмите кнопку ещё раз</span><button class="sm" id="saX">закрыть</button>';o.querySelector('#saX').onclick=close;return;}
+    const nm=k=>((j.tags||[]).find(g=>g.k===k)||{}).n||k;
+    const head=j.q?`похожие на · ${esc((j.q.title||j.q.rid).slice(0,60))}${(j.q.sh||[]).length?' · форма: '+j.q.sh.map(nm).join(', '):''}`:(tag?`все подтверждённые элементы формы «${esc(nm(tag))}» — ${j.total}`:'выберите форму');
+    const chips=`<div style="display:flex;flex-wrap:wrap;gap:6px">${key?`<button class="sm${tag?'':' on'}" data-tg="">любая форма</button>`:''}${(j.tags||[]).map(g=>`<button class="sm${g.k===tag?' on':''}" data-tg="${g.k}">${esc(g.n)} · ${g.c}</button>`).join('')}</div>`;
+    const cr=x=>`/api/rugs/${encodeURIComponent(x.rid)}/crop?b=${x.box.join(',')}&s=200&pad=0.35&mark=1`;
+    o.innerHTML=`<div style="display:flex;gap:10px;align-items:center"><button class="sm" id="saX">закрыть (Esc)</button><b>${head}</b></div>${chips}
+      <small class="mut">Форма определена машиной приблизительно. Клик по плитке — открыть этот ковёр.${key&&!j.q?' (выбранная рамка не подтверждена — показаны формы целиком)':''}</small>
+      ${j.items&&j.items.length?'':'<span class="mut">ничего не нашлось</span>'}
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;width:100%">${(j.items||[]).map((x,i)=>`<div class="saT" data-i="${i}" style="cursor:pointer"><img loading="lazy" src="${cr(x)}" alt="" style="width:100%;aspect-ratio:1;object-fit:contain;background:#000;border-radius:4px"><small>${esc((x.title||x.rid).slice(0,28))}${x.sim!=null?' · '+x.sim:''}</small></div>`).join('')}</div>`;
+    o.querySelector('#saX').onclick=close;
+    o.querySelectorAll('[data-tg]').forEach(b=>b.onclick=()=>rugShapeAll(key,b.dataset.tg));
+    o.querySelectorAll('.saT').forEach(el=>el.onclick=()=>{const x=j.items[+el.dataset.i];close();rugOpen(x.rid);});
+  }).catch(e=>{o.innerHTML='<span class="mut">не вышло: '+esc(e.message||e)+'</span><button class="sm" id="saX">закрыть</button>';o.querySelector('#saX').onclick=close;});}
 async function rugOpen(id){const V=$('rgView');if(V&&R.view==='edit'){let o=$('rgLoad');if(!o){o=document.createElement('div');o.id='rgLoad';V.appendChild(o);}o.innerHTML='<span class="spin"></span> открываю ковёр…'+(R.busyHeavy?' <small>(сервер занят: '+esc(R.busyHeavy)+')</small>':'');}
   try{if(R.saveT)await rugSaveNow();R.rug=await api('/api/rugs/'+encodeURIComponent(id));}finally{const o=$('rgLoad');o&&o.remove();}R.sel=null;R.repeatOf=null;R.preset=null;R.split=null;if(R.tool==='split'||R.tool==='zones')R.tool='box';R.rect=rugRectPref()&&!!rugRectReady(R.rug);R.side='rug';R.fitNext=true;R.view='edit';rugView();rugRender();}
 function rugSaveSoon(){if(rro())return;R.ver=(R.ver||0)+1;clearTimeout(R.saveT);$('rgSaved')&&($('rgSaved').textContent='…');R.saveT=setTimeout(rugSaveNow,500);}
@@ -2580,7 +2600,7 @@ function rugRender(){
   C.innerHTML=`<div id="rgView"><div id="rgStage"><img id="rgImg" src="${rugImgSrc(r)}" draggable="false"><svg id="rgSvg"></svg></div>
     <div class="rgtb" role="toolbar" aria-label="Инструменты разметки" aria-orientation="vertical">
       ${tb('rgTBox','box','Рамка: обведите элемент мышью (B). Повтор выбранного элемента — R')}${tb('rgTHand','hand','Двигать фото (H, или держите пробел)')}${tb('rgTRect','rect',layH(r.layout)?'Выпрямленный ковёр (T): ковёр ровным прямоугольником по 4 углам, размечать можно прямо на нём — рамки сохраняются как обычно. Ещё раз — обычное фото':'Выпрямленный ковёр (T): сначала поставьте 4 угла ковра (Z)',R.rect&&layH(r.layout)?'class="ib on"':'')}${ro?'':tb('rgTMagic','magic','Контур по клику (M): кликните по элементу — машина (SAM) обведёт его форму целиком. Можно и рамкой примерно. V — вариант побольше/поменьше')}
-      ${ro?'':`<div class="g" data-need-sel><hr>${tb('rgSamFix','contour','Обвести точно (A): рамка выбранного элемента → контур элемента целиком (SAM). Shift — всю группу повторов')}${tb('rgFindRep','findrep','Найти этот элемент на фото — повторы, в других красках тоже. Нажмите ещё раз — следующие по сходству места, порог ниже (E)')}${tb('rgMotSearch','glob','Где ещё встречается — на других коврах каталога (G)')}</div>`}
+      ${ro?'':`<div class="g" data-need-sel><hr>${tb('rgSamFix','contour','Обвести точно (A): рамка выбранного элемента → контур элемента целиком (SAM). Shift — всю группу повторов')}${tb('rgFindRep','findrep','Найти этот элемент на фото — повторы, в других красках тоже. Нажмите ещё раз — следующие по сходству места, порог ниже (E)')}${tb('rgMotSearch','glob','Где ещё встречается — на других коврах каталога (G)')}${tb('rgShapeAll','contour','Похожие по форме на других коврах: круглые, острые углы, симметричные, ромбы / квадраты, простые / сложные')}</div>`}
     </div>
     <div id="rgHint" class="rgpill" hidden></div></div>
     <div id="rgStrip"></div>`;
@@ -2589,6 +2609,7 @@ function rugRender(){
   $('rgSamFix')&&($('rgSamFix').onclick=e=>{const m=R.sel&&R.rug.marks.includes(R.sel)?R.sel:null;if(m)rugSamFix(e.shiftKey?rugGroup(m):[m]);});
   const sel=()=>R.sel&&R.rug.marks.includes(R.sel)?R.sel:null;
   // v11.19: одна кнопка поиска на фото: первый раз — точные повторы, ещё раз по тому же элементу — следующие по сходству (порог ниже)
+  $('rgShapeAll')&&($('rgShapeAll').onclick=()=>{const m=sel();rugShapeAll(m&&m.status==='confirmed'&&R.rug?R.rug.id+'|'+(m.group||m.id):'','');});
   $('rgFindRep')&&($('rgFindRep').onclick=()=>{const m=sel();if(!m)return;const more=R.findMid===m.id;R.findMid=m.id;rugFindRepeats(m,false,more);});
   $('rgMotSearch')&&($('rgMotSearch').onclick=()=>sel()&&rugMotifSearch(sel(),'mark'));
   const img=$('rgImg');img.onerror=()=>{if(R.rect&&layH(r.layout)&&!img._re){img._re=1;rugRectify().then(()=>{img.src=rugImgSrc(r);});}};img.onload=()=>{R.iw=img.naturalWidth;R.ih=img.naturalHeight;if(R.fitNext){R.fitNext=false;rugFit();}else rugApply();
