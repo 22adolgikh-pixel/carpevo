@@ -26,8 +26,8 @@
     0.08
    ],
    "zone": "other",
-   "motif": "",
-   "scheme": "",
+   "motif": "gol",
+   "scheme": "t126_f03",
    "motif_text": "",
    "group": "gm1795806293815x2",
    "certainty": "sure",
@@ -42,11 +42,12 @@
    "at": 1795806293,
    "confirmed_by": "dolgikh",
    "confirmed_at": 1795806293,
-   "found_from": "azr_kuba_sumakh7"
+   "found_from": "azr_kuba_sumakh7",
+   "named_by": "/m"
   }
  ],
  "created": 1791736131,
- "updated": 1795806293,
+ "updated": 1795840185,
  "cat": {
   "title": "kuba sumakh6",
   "museum": "",
@@ -128,6 +129,15 @@
     "w": 2,
     "t": 1795343843,
     "s": "ref"
+   }
+  },
+  "name": {
+   "gm1795806293815x2": {
+    "dolgikh": {
+     "a": "mo:gol",
+     "w": 2,
+     "t": 1795840185
+    }
    }
   }
  },
