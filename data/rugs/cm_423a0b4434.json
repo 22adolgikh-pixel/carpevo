@@ -1609,10 +1609,118 @@
    "at": 1795872298,
    "confirmed_by": "dolgikh",
    "confirmed_at": 1795872315
+  },
+  {
+   "id": "mmx0plxdy0",
+   "box": [
+    0.37806,
+    0.45682,
+    0.23041,
+    0.05732
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmx0plxdy0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 1,
+   "score": 0.907,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1795888441,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795888485
+  },
+  {
+   "id": "mmx0plxdy1",
+   "box": [
+    0.38001,
+    0.77189,
+    0.22961,
+    0.05715
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmx0plxdy0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 1,
+   "score": 0.895,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1795888441,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795888485
+  },
+  {
+   "id": "mmx0plxdy2",
+   "box": [
+    0.37904,
+    0.61464,
+    0.23001,
+    0.05723
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmx0plxdy0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 1,
+   "machine": 1,
+   "score": 0.856,
+   "xfer": "",
+   "variant": "",
+   "by": "машина → dolgikh",
+   "at": 1795888441,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795888486
+  },
+  {
+   "id": "mmx0pmn4o",
+   "box": [
+    0.37996,
+    0.14028,
+    0.22974,
+    0.05743
+   ],
+   "zone": "field",
+   "motif": "",
+   "motif_text": "",
+   "scheme": "",
+   "group": "mmx0plxdy0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1795888474,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795888484
   }
  ],
  "created": 1791870033,
- "updated": 1795872316,
+ "updated": 1795888486,
  "cat": {
   "title": "Garagashli rug, Guba school, XIX c",
   "museum": "Национальный музей азербайджанского ковра",
@@ -1796,5 +1904,6 @@
   ],
   "t": 1795207826
  },
- "tri": "auto"
+ "tri": "auto",
+ "cover": true
 }
