@@ -18,7 +18,7 @@
  "h": 1037,
  "marks": [],
  "created": 1791736123,
- "updated": 1795720278,
+ "updated": 1795840275,
  "cat": {
   "title": "Azerbaijanian carpet from Karabakh.jpg",
   "museum": "Wikimedia Commons",
@@ -209,6 +209,13 @@
      "t": 1795720278
     }
    }
+  },
+  "frame": {
+   "dolgikh": {
+    "a": "whole",
+    "w": 2,
+    "t": 1795840275
+   }
   }
  },
  "auto": {
@@ -234,6 +241,31 @@
   "conf": 0.0,
   "area": null,
   "ver": 1,
-  "t": 1795464923
- }
+  "t": 1795464923,
+  "ref_quad": {
+   "quad": [
+    [
+     -0.00402,
+     0.00727
+    ],
+    [
+     1.00215,
+     -0.0019
+    ],
+    [
+     1.00241,
+     0.99879
+    ],
+    [
+     -0.00108,
+     1.00039
+    ]
+   ],
+   "v": 6,
+   "from": "auto",
+   "t": 1795840355
+  }
+ },
+ "frame": "whole",
+ "frame_by": "micro"
 }
