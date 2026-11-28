@@ -21,14 +21,14 @@
    "id": "m1795806680728x0",
    "box": [
     0.20638,
-    0.3197,
-    0.21701,
-    0.13272
+    0.32256,
+    0.21978,
+    0.12701
    ],
    "zone": "other",
    "motif": "qeychi",
-   "scheme": "t172_f01",
    "motif_text": "",
+   "scheme": "t172_f01",
    "group": "gm1795806680728x0",
    "certainty": "sure",
    "status": "confirmed",
@@ -38,12 +38,11 @@
    "machine": "xfind",
    "score": 0.923,
    "xfer": "",
+   "variant": "",
    "by": "ночной поиск → dolgikh",
-   "fixed_by": "dolgikh",
    "at": 1795806680,
    "confirmed_by": "dolgikh",
-   "confirmed_at": 1795806680,
-   "found_from": "intangible_2849_p0075_1"
+   "confirmed_at": 1795888750
   },
   {
    "id": "m1795858979493x2",
@@ -55,8 +54,8 @@
    ],
    "zone": "other",
    "motif": "qeychi",
-   "scheme": "t104_f04",
    "motif_text": "",
+   "scheme": "t104_f04",
    "group": "gm1795858979493x2",
    "certainty": "sure",
    "status": "confirmed",
@@ -66,16 +65,69 @@
    "machine": "xfind",
    "score": 0.917,
    "xfer": "",
+   "variant": "",
    "by": "ночной поиск → dolgikh",
-   "fixed_by": "dolgikh",
    "at": 1795858979,
    "confirmed_by": "dolgikh",
-   "confirmed_at": 1795858979,
-   "found_from": "intangible_2849_p0075_1"
+   "confirmed_at": 1795888719
+  },
+  {
+   "id": "mmx0psr50",
+   "box": [
+    0.20358,
+    0.16647,
+    0.20681,
+    0.11742
+   ],
+   "zone": "other",
+   "motif": "qeychi",
+   "motif_text": "",
+   "scheme": "t172_f01",
+   "group": "gm1795806680728x0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1795888759,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795888761
+  },
+  {
+   "id": "mmx0psxi6",
+   "box": [
+    0.57402,
+    0.15998,
+    0.19418,
+    0.11017
+   ],
+   "zone": "other",
+   "motif": "qeychi",
+   "motif_text": "",
+   "scheme": "t172_f01",
+   "group": "gm1795806680728x0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 180,
+   "flip": 0,
+   "machine": 0,
+   "score": 0,
+   "xfer": "",
+   "variant": "",
+   "by": "dolgikh",
+   "at": 1795888767,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795888771
   }
  ],
  "created": 1791736134,
- "updated": 1795858979,
+ "updated": 1795888771,
  "cat": {
   "title": "kuba perepedil26",
   "museum": "",
@@ -240,16 +292,23 @@
  },
  "layout": {
   "carpet": [
-   0.0,
+   0,
    0.02,
    0.98223,
    0.96889
   ],
-  "bounds": [],
+  "bounds": [
+   {
+    "ix": 0.2081235892980121,
+    "iy": 0.1,
+    "strength": 0
+   }
+  ],
   "rings": [
+   "border",
    "field"
   ],
-  "status": "auto",
+  "status": "edited",
   "quad": [
    [
     0.0137,
