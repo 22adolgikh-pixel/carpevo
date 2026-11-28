@@ -492,7 +492,7 @@ details.svc .flex{background:var(--pan);border:1px solid var(--ln);border-radius
 </style></head><body>
 
 <header>
-  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v12.61</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
+  <div class="hl"><b>Carpet Pattern Studio <small id="appVer" data-tip="версия студии (кода на сервере)">v12.62</small></b><span id="userchip"></span><button id="bellBtn" class="bell" aria-label="Центр событий" data-tip="Центр событий: что ждёт вашего решения, что сделала система, кто что правил"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.6L4.3 15.4A1 1 0 0 0 5.2 17h13.6a1 1 0 0 0 .9-1.6L18 12.6V9a6 6 0 0 0-6-6zm-2.5 15.5a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span id="bellN" hidden></span></button></div>
   <nav id="crumbs" aria-label="Где вы сейчас"></nav>
   <span id="ovbar"><button id="rgPassBtn" class="hdpass" hidden data-tip="Паспорт ковра: название, школа, тип, источник, двойники (I)">ⓘ Паспорт ковра</button><button id="tab-edit" data-tip="Вернуться к рисунку, который вы правили последним">↩ К рисунку</button><button id="tab-grid" data-tip="Геометрия и сетка (Tab — переключить с пикселями)">▦ Геометрия</button><button id="tab-pix" data-tip="Пиксели (Tab — переключить с геометрией)">▪ Пиксели</button><button id="tab-close" data-tip="Закрыть редактор и вернуться к списку (Esc)">✕ К списку</button></span>
 </header>
@@ -2694,7 +2694,7 @@ function rugLibAll(){const L=$('rgLibAll');if(!L)return;const q=norm(R.libQ||'')
   $('rgLibMore')&&($('rgLibMore').onclick=()=>{R.libN=lim+300;rugLibAll();});
   if(rro())return;
   L.querySelectorAll('.rgsch').forEach(e=>{const f=fs.find(x=>x.id===e.dataset.f);
-    e.onclick=()=>{const m=R.sel&&R.rug.marks.includes(R.sel)?R.sel:null;
+    e.onclick=()=>{const m=R.sel?(R.rug.marks.includes(R.sel)?R.sel:(R.rug.marks.find(x=>x.id===R.sel.id)||null)):null;if(m)R.sel=m;   /* v12.62: после поиска повторов карточка перечитывается — выбранная рамка могла стать «старым» объектом, и схема не привязывалась */
       if(m){const p={scheme:f.id};if(!m.motif&&!m.motif_text&&(f.name_az||f.name))p.motif_text=f.name_az||f.name;rugSetMark(m,p);stat('схема '+f.id+' назначена','ok');}
       else{R.preset={scheme:f.id,motif:'',name:f.name_az||f.name||f.id,_motif:null};R.repeatOf=null;R.sel=null;R.tool='box';rugTools();rugDraw();}};
     e.draggable=true;e.ondragstart=ev=>{ev.dataTransfer.setData('text/plain','scheme:'+f.id);R.dragScheme={scheme:f.id,motif:'',name:f.name_az||f.id};};});}
@@ -3588,7 +3588,8 @@ async function rugDropScheme(ds,p){
   const c=(j.cands||[])[0],ok=c&&j.scale_known&&c.score>=0.3,box=ok?c.box:j.guess;
   const m={id:'m'+Date.now().toString(36),box,zone:layZoneAt(R.rug.layout,box[0]+box[2]/2,box[1]+box[3]/2)||R.lastZone||'field',motif:ds.motif||'',motif_text:'',scheme:ds.scheme,_motif:mo,group:'',certainty:'sure',status:'proposed',note:'',angle:ok?c.angle:0,flip:ok?c.flip:0,by:(window.ME&&ME.name)||''};
   R.preset=null;R.repeatOf=null;R.rug.marks.push(m);rugSelect(m);R.side='mark';rugSide();rugDraw();rugSaveSoon();
-  stat(ok?'элемент поставлен по схеме (сходство '+Math.round(c.score*100)+'%) — проверьте рамку и положение схемы (⟳ ⇋), затем «🔍 найти повторы»'
+  if(ok&&R.autoRep!==false)rugFindRepeats(m,true);   // v12.62: схему положили на ковёр и машина узнала место — повторы ищутся сразу, как после обычной рамки
+  stat(ok?'элемент поставлен по схеме (сходство '+Math.round(c.score*100)+'%) — ищу повторы; проверьте рамку и положение схемы (⟳ ⇋)'
     :(j.scale_known?'рамка поставлена — подгоните её по элементу (тяните углы), поверните схему ⟳/⇋, затем «🔍 найти повторы»'
     :'рамка поставлена примерно: масштаб ещё неизвестен. Подгоните углы по элементу — по этой рамке машина поймёт масштаб для следующих'),'ok');
 }
