@@ -1735,6 +1735,12 @@ def install(app, DATA, D_WORK):
             if a is None: return None
             _rect_write(rid, a, q); return p
 
+    def _mark_quad(r, rq):
+        """v12.60: рамки хранятся в долях «фото» через ПОВОРОТ-НЕЗАВИСИМЫЙ четырёхугольник (так их ставит студия на выпрямленном ковре); повёрнутый rect_quad
+        годится только для самой картинки выпрямленного ковра. Для повёрнутых ковров (rot 90) прежнее отображение превращало образец в узкую полосу между элементами."""
+        q = ((r or {}).get("layout") or {}).get("quad")
+        return q if q and len(q) == 4 else rq
+
     def rect_boxmap(q):
         """доли исходного фото ↔ доли выпрямленного ковра: (fwd, back), каждая — рамка [x,y,w,h] → рамка (описанный прямоугольник)"""
         U = np.float32([[0, 0], [1, 0], [1, 1], [0, 1]]); Q = np.float32(q)
@@ -2422,7 +2428,7 @@ def install(app, DATA, D_WORK):
         rq = rect_quad(r); rp = rect_path(rid, r) if rq else None; ra = cv2.imread(rp) if rp else None
         _d = {}
         if ra is not None:                                   # v11.72: ищем на выпрямленном ковре (повторы одного размера и наклона), ответ — в долях фото
-            fw, bk = rect_boxmap(rq); tb = {}
+            fw, bk = rect_boxmap(_mark_quad(r, rq)); tb = {}
             def F(b): x = fw(b); tb[tuple(x)] = b; return x
             c = rug_match.find_repeats(ra, F(box), [fw(b) for b in marks_boxes(r) + rejected], boxes=[F(b) for b in boxes], loose=loose, limit=30 if loose else 60)
             fb = _field_box(rid, r)                                  # v12.56: образец в поле — повторы только в поле; в кайме — только в кайме
@@ -2542,7 +2548,7 @@ def install(app, DATA, D_WORK):
                     r = load(rid); p = img_path(rid); a = cv2.imread(p) if p else None
                     if not r or a is None: return None
                     rq = rect_quad(r); rp = rect_path(rid, r) if rq else None; ra = cv2.imread(rp) if rp else None
-                    if ra is not None: fw, _ = rect_boxmap(rq); img = ra
+                    if ra is not None: fw, _ = rect_boxmap(_mark_quad(r, rq)); img = ra
                     else: fw = lambda b: b; img = a
                     B = [fw(m["box"]) for m in ms]; hand = [not m.get("machine") for m in ms]
                     row = {"rug": rid, "n": len(ms), "size_px": round(float(np.sqrt(B[0][2] * img.shape[1] * B[0][3] * img.shape[0])), 1)}
