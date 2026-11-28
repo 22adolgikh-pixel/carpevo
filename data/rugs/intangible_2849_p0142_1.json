@@ -16,9 +16,37 @@
  "status": "new",
  "w": 809,
  "h": 1799,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795858952620x0",
+   "box": [
+    0.5556,
+    0.4188,
+    0.0556,
+    0.025
+   ],
+   "zone": "other",
+   "motif": "qapi-naxishi",
+   "scheme": "t40_f03",
+   "motif_text": "",
+   "group": "gm1795858952620x0",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.922,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795858952,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795858952,
+   "found_from": "cm_25129c6ea0"
+  }
+ ],
  "created": 1794547278,
- "updated": 1795293047,
+ "updated": 1795858952,
  "cat": {
   "title": "Ковёр «Ərciman» Ширван",
   "museum": "",
@@ -186,5 +214,6 @@
   "quad_status": "accepted"
  },
  "tri": "auto",
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }

@@ -16,9 +16,37 @@
  "status": "new",
  "w": 535,
  "h": 832,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795858952641x1",
+   "box": [
+    0.5385,
+    0.525,
+    0.0385,
+    0.025
+   ],
+   "zone": "other",
+   "motif": "qapi-naxishi",
+   "scheme": "t40_f03",
+   "motif_text": "",
+   "group": "gm1795858952641x1",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.91,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795858952,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795858952,
+   "found_from": "cm_25129c6ea0"
+  }
+ ],
  "created": 1791736129,
- "updated": 1795720244,
+ "updated": 1795858952,
  "cat": {
   "title": "antique kazak akstafa rug5",
   "museum": "",
@@ -236,5 +264,6 @@
   ],
   "t": 1795207719
  },
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }

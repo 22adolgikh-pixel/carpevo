@@ -16,9 +16,37 @@
  "status": "new",
  "w": 877,
  "h": 1773,
- "marks": [],
+ "marks": [
+  {
+   "id": "m1795858952643x2",
+   "box": [
+    0.6,
+    0.3188,
+    0.05,
+    0.025
+   ],
+   "zone": "other",
+   "motif": "qapi-naxishi",
+   "scheme": "t40_f03",
+   "motif_text": "",
+   "group": "gm1795858952643x2",
+   "certainty": "sure",
+   "status": "confirmed",
+   "note": "",
+   "angle": 0,
+   "flip": 0,
+   "machine": "xfind",
+   "score": 0.901,
+   "xfer": "",
+   "by": "ночной поиск → dolgikh",
+   "at": 1795858952,
+   "confirmed_by": "dolgikh",
+   "confirmed_at": 1795858952,
+   "found_from": "cm_25129c6ea0"
+  }
+ ],
  "created": 1794547278,
- "updated": 1795293047,
+ "updated": 1795858952,
  "cat": {
   "title": "Ковёр «Salyan» Ширван",
   "museum": "",
@@ -138,5 +166,6 @@
   ],
   "t": 1795207863
  },
- "fragment": true
+ "fragment": true,
+ "updated_by": "dolgikh"
 }
