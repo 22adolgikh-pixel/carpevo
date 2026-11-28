@@ -21142,7 +21142,7 @@
    "scheme": "",
    "group": "mmwgr5p5i",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -21177,7 +21177,7 @@
    "scheme": "",
    "group": "mmwgr5p5i",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 1,
@@ -21212,7 +21212,7 @@
    "scheme": "",
    "group": "mmwgr5p5i",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -21247,7 +21247,7 @@
    "scheme": "",
    "group": "mmwgr5p5i",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "confirmed",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 1,
@@ -21256,8 +21256,8 @@
    "xfer": "",
    "by": "машина (симметрия ковра)",
    "at": 1795632773,
-   "confirmed_by": "",
-   "confirmed_at": 0,
+   "confirmed_by": "/m: dolgikh",
+   "confirmed_at": 1795839720,
    "rf": 1,
    "rf_s": 0.529,
    "box0": [
@@ -21282,7 +21282,7 @@
    "scheme": "",
    "group": "mmwgr5p5i",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -21317,7 +21317,7 @@
    "scheme": "",
    "group": "mmwgr5p5i",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -21352,7 +21352,7 @@
    "scheme": "",
    "group": "mmwgr5p5i",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: слева↔справа",
    "angle": 0,
    "flip": 1,
@@ -21387,7 +21387,7 @@
    "scheme": "",
    "group": "mmwgr5p5i",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: сверху↔снизу",
    "angle": 180,
    "flip": 1,
@@ -21422,7 +21422,7 @@
    "scheme": "",
    "group": "mmwgr5p5i",
    "certainty": "maybe",
-   "status": "proposed",
+   "status": "rejected",
    "note": "парное место: напротив (180°)",
    "angle": 180,
    "flip": 0,
@@ -24773,7 +24773,7 @@
   }
  ],
  "created": 1791736131,
- "updated": 1795814583,
+ "updated": 1795839720,
  "cat": {
   "title": "kuba sumakh7",
   "museum": "",
@@ -27981,6 +27981,69 @@
      "a": "bad",
      "w": 2,
      "t": 1795814583
+    }
+   },
+   "m179563277329s": {
+    "dolgikh": {
+     "a": "ok",
+     "w": 2,
+     "t": 1795839720
+    }
+   },
+   "m179563277328s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795839720
+    }
+   },
+   "m179563277332s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795839720
+    }
+   },
+   "m179563277327s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795839720
+    }
+   },
+   "m179563277326s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795839720
+    }
+   },
+   "m179563277334s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795839720
+    }
+   },
+   "m179563277330s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795839720
+    }
+   },
+   "m179563277331s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795839720
+    }
+   },
+   "m179563277333s": {
+    "dolgikh": {
+     "a": "bad",
+     "w": 2,
+     "t": 1795839720
     }
    }
   },
