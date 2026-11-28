@@ -4268,6 +4268,39 @@ def install(app, DATA, D_WORK):
                 out[r["id"]] = {"error": str(e)[:80]}
         return {"n": len(out), "eval": out}
 
+    @app.get("/api/open/edge_pack.zip")
+    def api_edge_pack(queue: int = 0, limit: int = 2000):
+        """v12.59: для проверки «края» в Colab. Ковры с правкой края человеком (queue=1 — ещё и очередь «край» без правки):
+        edge/<id>.jpg — фото, выпрямленное по 4 углам с запасом 15 % (ковёр W×H лежит со смещением px,py);
+        edge/<id>.json — geo, hum (правка человека) и mach (край машины, edge_full): смещения края внутрь от линии углов, px, 64 станции по стороне."""
+        import zipfile, rug_mesh
+        ids = []
+        for f in sorted(os.listdir(D_RUGS)):
+            if f.endswith(".json"):
+                r = load(f[:-5])
+                if r and edge_fix_of(r): ids.append(r["id"])
+        if queue:
+            try: ids += [t["rid"] for t in _edge_queue("~pack~", _mrows()) if t["rid"] not in ids]
+            except Exception: pass
+        buf = io.BytesIO(); n = 0
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+            for rid in ids[:max(1, limit)]:
+                try:
+                    r = load(rid); q = rect_quad(r); src = img_path(rid); a = cv2.imread(src) if src else None
+                    if not q or a is None: continue
+                    canvas, valid, geo = rug_mesh.rectify_padded(a, q, 1200, pad=0.15)
+                    fix = edge_fix_of(r); d = {"id": rid, "geo": geo, "quad": q}
+                    if fix: d["hum"] = {k: [round(float(x), 2) for x in v] for k, v in rug_mesh.curves_from_fix(fix, geo, 64).items()}
+                    m = mesh_info(rid, r, build=True) or {}
+                    full = m.get("edge_full") or {}; g0 = m.get("geo") or geo
+                    if full:
+                        d["mach"] = {k: [round(float(x) * (geo["H"] / g0["H"] if k in ("top", "bot") else geo["W"] / g0["W"]), 2) for x in np.interp(np.linspace(0, 1, 64), np.linspace(0, 1, len(v)), v)] for k, v in full.items()}
+                    ok, jb = cv2.imencode(".jpg", canvas, [cv2.IMWRITE_JPEG_QUALITY, 90])
+                    z.writestr(f"edge/{rid}.jpg", jb.tobytes()); z.writestr(f"edge/{rid}.json", json.dumps(d)); n += 1
+                except Exception as e:
+                    z.writestr(f"edge/{rid}.err", str(e)[:200])
+        return Response(buf.getvalue(), media_type="application/zip", headers={"Content-Disposition": 'attachment; filename="edge_pack.zip"', "X-N": str(n)})
+
     @app.get("/api/open/rcmp_votes")
     def api_rcmp_votes():
         return {"votes": _rc_votes()}
