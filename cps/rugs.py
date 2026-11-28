@@ -2417,6 +2417,50 @@ def install(app, DATA, D_WORK):
 
     def marks_boxes(r): return [m["box"] for m in r.get("marks", []) if m.get("status") != "rejected"]
 
+    def _repeats_run(rid, r, a, box, boxes, tpl, rejected, loose, b, dbg=None):
+        import rug_match
+        rq = rect_quad(r); rp = rect_path(rid, r) if rq else None; ra = cv2.imread(rp) if rp else None
+        _d = {}
+        if ra is not None:                                   # v11.72: ищем на выпрямленном ковре (повторы одного размера и наклона), ответ — в долях фото
+            fw, bk = rect_boxmap(rq); tb = {}
+            def F(b): x = fw(b); tb[tuple(x)] = b; return x
+            c = rug_match.find_repeats(ra, F(box), [fw(b) for b in marks_boxes(r) + rejected], boxes=[F(b) for b in boxes], loose=loose, limit=30 if loose else 60)
+            fb = _field_box(rid, r)                                  # v12.56: образец в поле — повторы только в поле; в кайме — только в кайме
+            _d = {"rect": [int(ra.shape[1]), int(ra.shape[0])], "algo": rug_match.ALGO["repeats"], "excl": len(marks_boxes(r) + rejected), "rej": len(rejected),
+                  "found": len(c), "fb": fb, "sample": [round(v, 3) for v in F(box)], "tpl": len(boxes), "raw": [[round(v, 3) for v in x["box"]] + [round(x["score"], 3)] for x in c[:40]]}
+            if fb and not b.get("anyzone"):
+                tb0 = F(box); inn = lambda q: fb[0] - 0.01 <= q[0] + q[2] / 2 <= fb[2] + 0.01 and fb[1] - 0.01 <= q[1] + q[3] / 2 <= fb[3] + 0.01
+                t_in = inn(tb0); n0 = len(c)
+                if t_in or fb[4]: c = [x for x in c if inn(x["box"]) == t_in]    # по машинной линии — только «образец в поле»
+                drop = n0 - len(c)
+            else: drop = 0
+            for x in c: x["box"] = bk(x["box"]); x["tpl"] = tb.get(tuple(x["tpl"]), x["tpl"])
+        else:
+            c = rug_match.find_repeats(a, box, marks_boxes(r) + rejected, boxes=boxes, loose=loose, limit=30 if loose else 60)
+        best = max([x["score"] for x in c] or [0])
+        byb = {tuple(m["box"]): m["id"] for m in tpl}
+        for x in c:
+            x["sure"] = x["above"] and x["score"] >= max(0.62, best * 0.8)     # «точно такой же» / «похоже (другой цвет или близкий узор)»
+            x["ref"] = byb.get(tuple(x.pop("tpl")), "")                         # по какой рамке-образцу найдено (её поворот — отсчёт)
+        return {"cands": c, "templates": len(boxes), "zone_dropped": drop if ra is not None else 0, "dbg": _d if ra is not None else {"rect": None}}
+
+
+    @app.get("/api/open/repeats_dbg")
+    def api_repeats_dbg(rid: str, mark: str, loose: int = 0):
+        """v12.60: тот же поиск повторов, что и в студии, но только чтение (ничего не сохраняет): что реально считает сервер на этом ковре."""
+        r = load(rid); p = img_path(rid); a = cv2.imread(p) if p else None
+        if not r or a is None: return JSONResponse({"error": "нет такого ковра"}, 404)
+        me = next((m for m in r.get("marks", []) if m["id"] == mark), None)
+        if not me: return JSONResponse({"error": "нет такой рамки"}, 404)
+        rejected = [m["box"] for m in r.get("marks", []) if m.get("status") == "rejected"]
+        g = me.get("group") or me["id"]
+        tpl = [m for m in r.get("marks", []) if (m.get("group") or m["id"]) == g and m.get("status") != "rejected"]
+        tpl.sort(key=lambda m: (m["id"] != me["id"], m.get("status") != "confirmed", m.get("machine") and m.get("status") != "confirmed"))
+        boxes = [m["box"] for m in tpl[:8]] or [me["box"]]
+        out = _repeats_run(rid, r, a, me["box"], boxes, tpl, rejected, bool(loose), {})
+        out["rot"] = rug_rot(r); out["marks"] = [[m["id"][-5:], m.get("status"), [round(v, 3) for v in m["box"]]] for m in r.get("marks", [])]
+        return out
+
     @app.post("/api/rugs/{rid}/repeats")
     async def api_rug_repeats(rid: str, request: Request):
         """Человек обвёл элемент → ищем такие же на этом фото (с поворотами и отражениями). Ответ — кандидаты, сохраняет клиент."""
@@ -2439,28 +2483,7 @@ def install(app, DATA, D_WORK):
         boxes = [m["box"] for m in tpl[:8]] or [box]
         loose = bool(b.get("loose"))
         # тяжёлый расчёт — в отдельном потоке: иначе, пока он идёт, сервер не отвечает никому (пропадают миниатюры и т. п.)
-        def work():
-            rq = rect_quad(r); rp = rect_path(rid, r) if rq else None; ra = cv2.imread(rp) if rp else None
-            if ra is not None:                                   # v11.72: ищем на выпрямленном ковре (повторы одного размера и наклона), ответ — в долях фото
-                fw, bk = rect_boxmap(rq); tb = {}
-                def F(b): x = fw(b); tb[tuple(x)] = b; return x
-                c = rug_match.find_repeats(ra, F(box), [fw(b) for b in marks_boxes(r) + rejected], boxes=[F(b) for b in boxes], loose=loose, limit=30 if loose else 60)
-                fb = _field_box(rid, r)                                  # v12.56: образец в поле — повторы только в поле; в кайме — только в кайме
-                if fb and not b.get("anyzone"):
-                    tb0 = F(box); inn = lambda q: fb[0] - 0.01 <= q[0] + q[2] / 2 <= fb[2] + 0.01 and fb[1] - 0.01 <= q[1] + q[3] / 2 <= fb[3] + 0.01
-                    t_in = inn(tb0); n0 = len(c)
-                    if t_in or fb[4]: c = [x for x in c if inn(x["box"]) == t_in]    # по машинной линии — только «образец в поле»
-                    drop = n0 - len(c)
-                else: drop = 0
-                for x in c: x["box"] = bk(x["box"]); x["tpl"] = tb.get(tuple(x["tpl"]), x["tpl"])
-            else:
-                c = rug_match.find_repeats(a, box, marks_boxes(r) + rejected, boxes=boxes, loose=loose, limit=30 if loose else 60)
-            best = max([x["score"] for x in c] or [0])
-            byb = {tuple(m["box"]): m["id"] for m in tpl}
-            for x in c:
-                x["sure"] = x["above"] and x["score"] >= max(0.62, best * 0.8)     # «точно такой же» / «похоже (другой цвет или близкий узор)»
-                x["ref"] = byb.get(tuple(x.pop("tpl")), "")                         # по какой рамке-образцу найдено (её поворот — отсчёт)
-            return {"cands": c, "templates": len(boxes), "zone_dropped": drop if ra is not None else 0}
+        def work(): return _repeats_run(rid, r, a, box, boxes, tpl, rejected, loose, b)
         return await job_wait(work, "поиск повторов")
 
     def _field_box(rid, r):
